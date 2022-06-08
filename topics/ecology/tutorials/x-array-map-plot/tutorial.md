@@ -55,7 +55,7 @@ The climate data is mainly represented in these three categories : NetCDF (Netwo
 
 # Plotting air temperature at 2 metres using the ECMWF Reanalysis Data
 
-The data used in this tutorial is ECMWF Reanalysis. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favorite Galaxy Instance) server.
+The data used in this tutorial is ECMWF Reanalysis. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
 
 It will be a fun learning experience for anyone who loves visualization ! 
 
@@ -233,6 +233,7 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 {: .question }
 
 ## Operations on Climate data using **CDO Operations**
+>We have hourly data. In order to plot it, we must first extract the hours from the bigger datadet. This is done using the `seltimestep` and the `splithour` options available in the `CDO Operations` tool. `splithour` is used when we wish to plot more than an hour. Our main aim is to plot the last hour data on the last day present in the dataset.
 
 > ### {% icon hands_on %} Hands-on: Defining a particular time range using seltimestep 
 >
@@ -240,39 +241,31 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >    - In *"CDO Operators"*:
 >        - {% icon param-repeat %} *"Insert CDO Operators"*
 >            - *"Select cdo operator"*: `seltimestep (Select timesteps)`
->                - *"Timesteps for selection"*: `594/595`
+>                - *"Timesteps for selection"*: `595/595`
 >                - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
->
->   Our main aim is to plot the last two hour data on the last day present in the dataset. The data present is in the form of daily hourly time frame. Thus we need to split the dataset into smaller part upto which we want to plot. 
 >
 >
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention is how your data entries are number: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to attain the desired result.
+>    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention is how your data entries are number: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to attain the desired result. 
+> > Although we are not using splihour here, you can find below the syntax for future uses.
+> >
+> >1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
+> >- In *"CDO Operators"*:
+> >- {% icon param-repeat %} *"Insert CDO Operators"*
+> >- *"Select cdo operator"*: `splithour (Split hours)`
+> >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
+> > 
+> > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
+> > Suppose your selected range was `594/595` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
 > {: .comment}
 >
 {: .hands_on}
 
 
 
->### {% icon question %} Splitting the dataset into individual datasets
->
-> 1. How will you plot the last two hours separately?
-> 
->
-> > ### {% icon solution %} Splithour
-> >
-> > 1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
-> >- In *"CDO Operators"*:
-> >       - {% icon param-repeat %} *"Insert CDO Operators"*
-> >  - *"Select cdo operator"*: `splithour (Split hours)`
-> >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
-> >
-> >
-> {: .solution}
->
-{: .question}
+
 
 
 ## Finding the  **NetCDF xarray Metadata Info**
@@ -280,22 +273,22 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > ### {% icon hands_on %} Hands-on: netCDF dataset with Xarray metadata Galaxy Tool for the hourly plots
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `outfile_17.nc`. The meta data generated from this step can be used for second file too due to same meta-data of both the datasets(which is quite obvious).
->
+>    - {% icon param-file %} *"Netcdf file"*: `outfile_18.nc`. .
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
 >    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other Xarray Tools. 
 >    - The second file `info file` provide a summary of the **Xarray Dataset** contained in your netCDF file.
 {: .hands_on}
+
 ## Map Plotting using **NetCDF xarray map plotting**
 
-> ### {% icon hands_on %} Hands-on: Map Plotting
-> The air temperatures in the last two hours of the day are plotted here : 
+> ### {% icon hands_on %} Hands-on: Plotting the data of second-last hour of the day
+> The air temperatures in the last hour of the available data for 25th May 2022 is plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
-*"Netcdf file"*: `outfile_17.nc`
->    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
+*"Netcdf file"*: `outfile_18.nc`
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
 >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 >    - *"Name of latitude coordinate"*: `lat`
 >    - *"Name of longitude coordinate"*: `lon`
@@ -310,7 +303,7 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 >
 >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 17:00:00 UTC](../../images/ECMWF_Reanalysis_17.png)
 >
->    > ### {% icon comment %} Why shifting longitudes?
+>    > ### {% icon comment %} Why sometimes we shift longitudes ?
 >    >
 >    > Longitudes are measured in degrees from 0 to 360. We need to change longitudes so that `NetCDF xarray map plotting` can properly plot our dataset because we don't have worldwide data but only cover Europe.
 >    {: .comment}
@@ -322,41 +315,106 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 
 > ### {% icon question %} Questions
 >
-> 1. What are the different kinds of projections and colormaps that can be used?
+> 1. What are the different kinds of projections that can be used?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Find here a list of valid projections. Different projections have different purposes and need to be carefully chosen. Follow this sheet to [find the syntax for projections](https://github.com/Quickbeasts51429/xarray_projection). 
-> > 
->> When it comes to conveying the correct information, through visualisation, colors play a major role. Suppose you want to display a cold region, its an obvious practice of using cooler tones such as a `blue`. Thus it is important to understand the choices we have. Find the [complete documentation of ColorMaps available here](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md)
+> >
+> >## Plotting different projections using **NetCDF xarray map plotting**
+ > > > ### {% icon hands_on %} Hands-on: Plotting the major projections using the xarray tool.
+> > >
+> > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
+> > >    - {% icon param-file %}
+*"Netcdf file"*: `outfile_18.nc`
+> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+> > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
+> > >    - *"Name of latitude coordinate"*: `lat`
+> > >    - *"Name of longitude coordinate"*: `lon`
+> > >    - *"Datetime selection"*: `No`
+> > >    - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `220,320`
+> > >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
+> > >    - *"Specify which colormap to use for plotting (optional)"*: `bam`
+> > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/colorselect.png)
+> > >
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Mercator.png)
+> > >Some other important color variants of the same map can be found below :
+> > >-*{"proj":"InterruptedGoodeHomolosine" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/InterruptedGoodeHomolosine.png)
+> > >  -*{"proj":"LambertCylindrical"}*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertCylindrical.png)
+> > >  -*{"proj":"Sinusoidal" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Sinusoidal.png)
+> > >-*{"proj":"EquidistantConic", "central_longitude": 20.0, "central_latitude": 70.0 }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/EquidistantConic.png)
+> > >-*{"proj":"LambertConformal" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertConformal.png)
+> > >-*{"proj":"AzimuthalEquidistant" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/AzimuthalEquidistant.png)
+> > >-*{"proj":"Orthographic" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Orthographic.png)
+> > {: .hands_on}
+> >
+> >
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **NetCDF xarray map plotting**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon question %} Questions
 >
-> 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %}
+> 1. What are the different kinds of colormaps that can be used?
+>
+> > ### {% icon solution %} Solution
+> >
+> >When it comes to conveying the correct information, through visualisation, colors play a major role. Suppose you want to display a cold region, its an obvious practice of using cooler tones such as a `blue`. Thus it is important to understand the choices we have. Find the [complete documentation of ColorMaps available here](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md)
+> >
+> >
+> >## Plotting different colormaps using **NetCDF xarray map plotting**
+ > > > ### {% icon hands_on %} Hands-on: Plotting the major colormaps using the xarray tool.
+> > >
+> > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
+> > >    - {% icon param-file %}
 *"Netcdf file"*: `outfile_18.nc`
->    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_17.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
->    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
->    - *"Name of latitude coordinate"*: `lat`
->    - *"Name of longitude coordinate"*: `lon`
->    - *"Datetime selection"*: `No`
->    - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `220,320`
->    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
->    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
->    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
->    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
->    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
->    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
+> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+> > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
+> > >    - *"Name of latitude coordinate"*: `lat`
+> > >    - *"Name of longitude coordinate"*: `lon`
+> > >    - *"Datetime selection"*: `No`
+> > >    - *"Range of values for plotting e.g. minimum value and maximum value (minval,maxval) (optional)"*: `220,320`
+> > >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
+> > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
+> > >    - *"Specify which colormap to use for plotting (optional)"*: `CMRmap`
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/colorselect.png)
+> > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
+> > >
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/CMRmap.png)
+> > >Some other important color variants of the same map can be found below :
+> > >-*colormap : Accent*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Accent.png)
+> > >  -*colormap : bam*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bam.png)
+> > >  -*colormap : bukavu*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bukavu.png)
+> > >-*colormap : coolwarm*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/coolwarm.png)
+> > >-*colormap : jet*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/jet.png)
+> > {: .hands_on}
+> >
+> >
+> >
+> {: .solution}
 >
->![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/ECMWF_Reanalysis_18.png)
->
-{: .hands_on}
+{: .question}
+
 
 
 > ### {% icon question %} Questions
@@ -372,15 +430,16 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > > 2.  You can view as well as download the generated plots to use further. 
 > > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool.Refer to [this tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html) for more info.
 > >
-> > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be dne as shown below. 
+> > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name `Image Montage`.
 > > 
 > > {% tool [Image Montage](toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1) %} with the following parameters:
 > >   - {% icon param-files %} *"Images"*: `Map plots`
-> >   - {% icon param-text %} *"# of images wide"*: `2`
+> >   - {% icon param-text %} *"# of images wide"*: `4`
 > > 
 > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/ECMWF_Reanalysis_Montage.png)
-> >
-> >Not much of changes can be seen in the both plots as they are just an hour apart but one thing can be concluded that African- Saharan regions have high temperatures during the dusk.
+> > Here you can see that all the colormaps we plotted above have been shown in a single image using `Image Montage`.
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/ECMWF_Reanalysis_Montage.png)
+> > Here you can see that all the colormaps we plotted above have been shown in a single image using `Image Montage`.
 > {: .solution}
 >
 {: .question}
