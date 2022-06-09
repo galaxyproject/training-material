@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Data Manipulation Olympics
 tags:
 - workflows
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/6627896'
 questions:
 - How can I do basic data manipulation in Galaxy?
 - Which tools are available to convert, reformat, filter, sort etc my text-based data?
@@ -27,18 +27,16 @@ contributions:
     - erasmusplus
 level: Introductory
 
-subtopic: analyse
+subtopic: next-steps
 ---
 
 
 # Introduction
 {:.no_toc}
 
-Scientific analyses often consist of a number of tools that run one after the other, to go from raw data to biological insight. Between these specialized tools, simple data manipulation steps are often needed as a kind of "glue" between tools. For example, the output of tool A may produce a file that contains all the information needed as input for tool B, but tool B expects the columns in a different order. Or in genomic data analysis, some tools expect chromosome X to be listed as 'chrX', and others simply as 'X'. In these situations, extra data manipulation steps are needed to prepare files for input to analysis tools.
+Scientific analyses often consist of a number of tools that run one after the other, in order to go from the raw data to scientific insight. Between these specialized tools, simple data manipulation steps are often needed as a kind of "glue" between tools. For example, the output of tool A may produce a file that contains all the information needed as input for tool B, but tool B expects the columns in a different order. Or in genomic data analysis, some tools expect chromosome X to be listed as `chrX`, while others simply expect `X`. In these situations, extra data manipulation steps are needed to prepare files for input to analysis tools.
 
 Galaxy has a large collection of tools to perform such basic data manipulation tasks, and becoming familiar with these operations will allow to perform your analysis more easily in Galaxy (and outside).
-
-In this tutorial, we will use a file with historical data about the Olympics, to familiarize you with a large number of the most important data manipulation tools. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) to accomplish the goal. We will show you many of these commenly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
 
 
 > ### Agenda
@@ -51,15 +49,27 @@ In this tutorial, we will use a file with historical data about the Olympics, to
 {: .agenda}
 
 
+# Background
+
+In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1986 until Rio 2016. The objective is to familiarize you with a large number of the most important data manipulation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
+
+
+![image of olympic rings, logo and two atheletes around the words "Data Analysis Olympics"](./images/cover.jpg)
+
+
+We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
+
 
 # Upload Data
+
+Before we can do any manipulation, we will need some data. Let's upload our table with olympics results now.
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
 > 1. {% tool [Import](upload1) %} the file `olympics_sports_almanac.csv` via link
 >
 >    ```
->    https://zenodo.org/record/6611769/files/olympics-sports-almanac.csv
+>    https://zenodo.org/record/6627896/files/olympics-sports-almanac.csv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -84,12 +94,22 @@ In this tutorial, we will use a file with historical data about the Olympics, to
 {: .hands_on}
 
 
+
+# Choose your adventure!
+
+This tutorial is structured a bit differently than most. **You do not have to do the steps in the order they are presented below.** Every section in this tutorial uses the dataset you just uploaded (the `olympics-sports-almanactsv` file) as input, so you can jump to any section in this tutorial right now if you have a particular data manipulation operation in mind you want to learn more about.
+
+
+
+
 # File Format Conversion
 
 Galaxy understands the `csv` format just fine, but most tools work best with tab-separated (tabular) files. This format uses TAB characters to signify where a new column begins instead of commas. Galaxy can do the conversion between these formats for you.
 
 
 Hands-on: CSV to TSV
+
+
 
 
 # Find and Replace
@@ -125,7 +145,7 @@ show only winter olympics
 > 1. {% tool [Import](upload1) %} the file `country-information.tsv` via link
 >
 >    ```
->    https://zenodo.org/record/6611769/files/country-information.tsv
+>    https://zenodo.org/record/6627896/files/country-information.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
