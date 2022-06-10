@@ -230,7 +230,7 @@ Follow the below steps:
 {: .question }
 
 ## Operations on Climate data using **CDO Operations**
->We have hourly data. In order to plot it, we must first extract the hours from the bigger datadet. This is done using the `seltimestep` and the `splithour` options available in the `CDO Operations` tool. `splithour` is used when we wish to plot more than an hour. Our main aim is to plot the last hour data on the last day present in the dataset.
+>We have hourly data. In order to plot it, we must first extract the hours from the bigger dataset. This is done using the `seltimestep` and the `splithour` options available in the `CDO Operations` tool. `splithour` is used when we wish to plot more than an hour. Our main aim is to plot the last hour data on the last day present in the dataset.
 
 > ### {% icon hands_on %} Hands-on: Defining a particular time range using seltimestep 
 >
