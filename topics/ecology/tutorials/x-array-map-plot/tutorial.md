@@ -324,7 +324,7 @@ Follow the below steps:
 > > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 > > >    - {% icon param-file %}
 *"Netcdf file"*: `outfile_18.nc`
-> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 > > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 > > >    - *"Name of latitude coordinate"*: `lat`
 > > >    - *"Name of longitude coordinate"*: `lon`
