@@ -272,7 +272,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > ### {% icon hands_on %} Hands-on: netCDF dataset with xarray metadata Galaxy Tool for the hourly plots
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `outfile_18.nc`. .
+>    - {% icon param-file %} *"Netcdf file"*: `outfile.netcdf`. .
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
 >    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other xarray Tools. 
