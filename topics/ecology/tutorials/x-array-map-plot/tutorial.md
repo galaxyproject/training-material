@@ -300,7 +300,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
->![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 17:00:00 UTC](../../images/ECMWF_Reanalysis_17.png)
+>![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 19:00:00 UTC](../../images/ECMWF_Reanalysis_19.png)
 >
 >    > ### {% icon comment %} Why sometimes we shift longitudes ?
 >    >
