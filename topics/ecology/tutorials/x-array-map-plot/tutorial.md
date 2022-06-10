@@ -399,24 +399,24 @@ This particular netCDF file does not follow the [CF convention](https://cfconven
 > > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
-> > >    - *"Specify which colormap to use for plotting (optional)"*: `CMRmap`
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/colorselect.png)
+> > >    - *"Specify which colormap to use for plotting (optional)"*: `acton`
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : acton](../../images/colorsel.png)
 > > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 > > >
 > > >
 > > > The final plot is shown below: 
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/CMRmap.png)
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/acton.png)
 > > >Some other important color variants of the same map can be found below :
 > > > - *colormap : Accent*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Accent.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/batlow.png)
 > > >  - *colormap : bam*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bam.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bamako.png)
 > > >  - *colormap : bukavu*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bukavu.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/vik.png)
 > > > - *colormap : coolwarm*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/coolwarm.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/tokyo.png)
 > > > - *colormap : jet*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/jet.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/hawaii.png)
 > > {: .hands_on}
 > >
 > >
