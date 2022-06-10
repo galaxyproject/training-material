@@ -52,10 +52,10 @@ module Jekyll
         # I guess these are identical?
         "url": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
         "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
-        "name": contributor.fetch(id, {"name": id})['name'],
+        "name": contributor['name'],
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
-        "description": "A contributor to the GTN project.",
+        "description": contributor.fetch("bio", "A contributor to the GTN project."),
         "memberOf": [GTN],
       }
       if contributor.has_key?('orcid')
@@ -64,6 +64,10 @@ module Jekyll
       end
 
       person
+    end
+
+    def to_person_jsonld(id, contributor, site)
+      JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
     end
 
 
