@@ -282,7 +282,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 ## Map Plotting using **NetCDF xarray map plotting**
 
 > ### {% icon hands_on %} Hands-on: Plotting the data of second-last hour of the day
-> The air temperatures in the last hour of the available data for 25th May 2022 is plotted here : 
+> The air temperatures corresponding to the 595th time step from the original netCDF file, namely `19:00:00` for 25th May 2022 is plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
