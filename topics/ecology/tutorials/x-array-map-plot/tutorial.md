@@ -296,7 +296,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
->    - *"Specify plot title (optional)"*: `Projection :  Mercator 17:00 UTC `
+>    - *"Specify plot title (optional)"*: `Projection :  Mercator 19:00 UTC `
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator', 'central_longitude': 12.0}`
 >
