@@ -245,8 +245,9 @@ Follow the below steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention is how your data entries are number: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to attain the desired result. 
-> > Although we are not using splihour here, you can find below the syntax for future uses.
+>    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention to is how the data entries are numbered: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to achieve the desired result. 
+> > 
+Although we are not using `splihour` here, you can find below the syntax for future uses.
 > >
 > >1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
 > >- In *"CDO Operators"*:
@@ -271,7 +272,7 @@ Follow the below steps:
 > ### {% icon hands_on %} Hands-on: netCDF dataset with xarray metadata Galaxy Tool for the hourly plots
 >
 > 1. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %} with the following parameters:
->    - {% icon param-file %} *"Netcdf file"*: `outfile_18.nc`. .
+>    - {% icon param-file %} *"Netcdf file"*: `outfile.netcdf`. .
 >
 > 2. View {% icon galaxy-eye%} the two generated outputs:
 >    - `Metadata infos` is a `tabular` providing the list of variables, their dimension names and number of elements per dimension. This file is used by other xarray Tools. 
@@ -281,12 +282,12 @@ Follow the below steps:
 ## Map Plotting using **NetCDF xarray map plotting**
 
 > ### {% icon hands_on %} Hands-on: Plotting the data of second-last hour of the day
-> The air temperatures in the last hour of the available data for 25th May 2022 is plotted here : 
+> The air temperatures corresponding to the 595th time step from the original netCDF file, namely `19:00:00` for 25th May 2022 is plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
-*"Netcdf file"*: `outfile_18.nc`
->    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
+*"Netcdf file"*: `outfile.netcdf`
+>    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
 >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 >    - *"Name of latitude coordinate"*: `lat`
 >    - *"Name of longitude coordinate"*: `lon`
@@ -295,11 +296,11 @@ Follow the below steps:
 >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
->    - *"Specify plot title (optional)"*: `Projection :  Mercator 17:00 UTC `
+>    - *"Specify plot title (optional)"*: `Projection :  Mercator 19:00 UTC `
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 >
->![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 17:00:00 UTC](../../images/ECMWF_Reanalysis_17.png)
+>![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 19:00:00 UTC](../../images/ECMWF_Reanalysis_19.png)
 >
 >  
 {: .hands_on}
@@ -319,8 +320,8 @@ Follow the below steps:
 > > >
 > > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 > > >    - {% icon param-file %}
-*"Netcdf file"*: `outfile_18.nc`
-> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+*"Netcdf file"*: `outfile.netcdf`
+> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 > > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 > > >    - *"Name of latitude coordinate"*: `lat`
 > > >    - *"Name of longitude coordinate"*: `lon`
@@ -337,11 +338,15 @@ Follow the below steps:
 > > >
 > > >The final plot is shown below:
 > > >
+<<<<<<< HEAD
 > > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00](../../images/Mercator.png)
+=======
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 19:00:00](../../images/Mercator.png)
+>>>>>>> 92cbf3cf435792b27fead1d906b8fde723ae05b3
 > > >
 > > >
 > > >
-> > >Some other important types of projections can be found below :
+> > >Some other potentially interesting types of projections can be found below :
 > > >
 > > > - *{"proj":"InterruptedGoodeHomolosine" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/InterruptedGoodeHomolosine.png)
