@@ -345,7 +345,7 @@ Follow the below steps:
 > > >
 > > >
 > > >
-> > >Some other important types of projections can be found below :
+> > >Some other potentially interesting types of projections can be found below :
 > > >
 > > > - *{"proj":"InterruptedGoodeHomolosine" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/InterruptedGoodeHomolosine.png)
