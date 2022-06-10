@@ -76,7 +76,6 @@ It will be a fun learning experience for anyone who loves visualization !
 >
 > 3. Check that the datatype of uploaded data is **netCDF**. 
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 >    If it is not `netCDF` make sure to convert it using the Galaxy built-in format converters.
 >
