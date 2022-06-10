@@ -342,7 +342,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >
 > > >The final plot is shown below:
 > > >
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Mercator.png)
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 19:00:00](../../images/Mercator.png)
 > > >
 > > >
 > > >
