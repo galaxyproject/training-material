@@ -15,6 +15,8 @@ key_points:
 - NetCDF xarray climate data visualization
 - NetCDF xarray map plotting projections
 - NetCDF xarray map plotting colormaps
+tags:
+  - pangeo
 contributors:
 - Quickbeasts51429
 
