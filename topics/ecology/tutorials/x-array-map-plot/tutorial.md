@@ -238,7 +238,7 @@ Follow the below steps:
 >    - In *"CDO Operators"*:
 >        - {% icon param-repeat %} *"Insert CDO Operators"*
 >            - *"Select cdo operator"*: `seltimestep (Select timesteps)`
->                - *"Timesteps for selection"*: `595/595`
+>                - *"Timesteps for selection"*: `744/744`
 >                - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
 >
 >{: .hands_on}
@@ -256,7 +256,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
 > > 
 > > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
-> > Suppose your selected range was `594/595` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
+> > Suppose your selected range was `744/744` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
 > > 
 > > {: .comment}
 >
@@ -282,7 +282,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 ## Map Plotting using **NetCDF xarray map plotting**
 
 > ### {% icon hands_on %} Hands-on: Plotting the data of second-last hour of the day
-> The air temperatures corresponding to the 595th time step from the original netCDF file, namely `19:00:00` for 25th May 2022 is plotted here : 
+> The air temperatures corresponding to the 744th time step from the original netCDF file, namely `23:00:00` for 31st May 2022 is plotted here : 
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %}
@@ -296,11 +296,11 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
->    - *"Specify plot title (optional)"*: `Projection :  Mercator 19:00 UTC `
+>    - *"Specify plot title (optional)"*: `Air_temperature_at_2_metres___23:00:00_UTC`
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 >
->![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 19:00:00 UTC](../../images/ECMWF_Reanalysis_19.png)
+>![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 UTC](../../images/plots/plot1.png)
 >
 >  
 {: .hands_on}
@@ -330,38 +330,34 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
-> > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
+> > >    - *"Specify plot title (optional)"*: `Air_temperature_at_2_metres___23:00:00_UTC_InterruptedGoodeHomolosine`
 > > >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
-> > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
+> > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{"proj":"InterruptedGoodeHomolosine" }`
 > > >
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : CMRmap](../../images/projselect.png)
+> > >   
 > > >
 > > >The final plot is shown below:
 > > >
-<<<<<<< HEAD
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00](../../images/Mercator.png)
-=======
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 19:00:00](../../images/Mercator.png)
->>>>>>> 92cbf3cf435792b27fead1d906b8fde723ae05b3
+> > >     ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Interrupted_GoodeHomolosine.png)
 > > >
 > > >
 > > >
 > > >Some other potentially interesting types of projections can be found below :
 > > >
-> > > - *{"proj":"InterruptedGoodeHomolosine" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/InterruptedGoodeHomolosine.png)
-> > >  - *{"proj":"LambertCylindrical"}*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertCylindrical.png)
+> > > - *{"proj":"LambertCylindrical" }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertCylindrical](../../images/plots/Lam.png)
+> > >  - *{"proj":"Orthographic"  }*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Orthographic](../../images/plots/Ortho.png)
 > > >  - *{"proj":"Sinusoidal" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/sinusoidal.png)
-> > > - *{"proj":"EquidistantConic", "central_longitude": 20.0, "central_latitude": 70.0 }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/EquidistantConic.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Sinusoidal](../../images/plots/sinu.png)
+> > > - *{"proj":"EquidistantConic"}*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : EquidistantConic](../../images/plots/Equidi.png)
 > > > - *{"proj":"LambertConformal" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/LambertConformal.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal](../../images/plots/Lamcon.png)
 > > > - *{"proj":"AzimuthalEquidistant" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/AzimuthalEquidistant.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/plots/AzimuthalEquidistant.png)
 > > > - *{"proj":"Orthographic" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/Orthographic.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Interrupted_GoodeHomolosine.png)
 > > {: .hands_on}
 > >
 > >
