@@ -398,18 +398,18 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >
 > > >
 > > > The final plot is shown below: 
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bat.png)
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/bat.png)
 > > >Some other important color variants of the same map can be found below :
 > > > - *colormap : Oslo*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/os.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/os.png)
 > > >  - *colormap : bamako*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bama.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/bama.png)
 > > >  - *colormap : vik*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/vi.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/vi.png)
 > > > - *colormap : tokyo*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/tok.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/tok.png)
 > > > - *colormap : hawaii*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/hawa.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/plots/hawa.png)
 > > {: .hands_on}
 > >
 > >
@@ -439,7 +439,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > >   - {% icon param-files %} *"Images"*: `Map plots`
 > >   - {% icon param-text %} *"# of images wide"*: `4`
 > > Here you can see that all the projections we plotted above have been shown in a single image using `Image Montage`.
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 Monatge for 23:00:00 ](../../images/mont2.png)
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 Monatge for 23:00:00 ](../../images/plots/montage.png)
 > {: .solution}
 >
 {: .question}
