@@ -356,8 +356,6 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal](../../images/plots/Lamcon.png)
 > > > - *{"proj":"AzimuthalEquidistant" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/plots/Azi.png)
-> > > - *{"proj":"Orthographic" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Ortho.png)
 > > {: .hands_on}
 > >
 > >
