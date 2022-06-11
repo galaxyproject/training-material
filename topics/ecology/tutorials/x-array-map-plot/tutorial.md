@@ -355,9 +355,9 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > > - *{"proj":"LambertConformal" }*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal](../../images/plots/Lamcon.png)
 > > > - *{"proj":"AzimuthalEquidistant" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/plots/AzimuthalEquidistant.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/plots/Azi.png)
 > > > - *{"proj":"Orthographic" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Interrupted_GoodeHomolosine.png)
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Ortho.png)
 > > {: .hands_on}
 > >
 > >
@@ -381,8 +381,8 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >
 > > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
 > > >    - {% icon param-file %}
-*"Netcdf file"*: `outfile_18.nc`
-> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile_18.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
+*"Netcdf file"*: `outfile.netcdf`
+> > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 > > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 > > >    - *"Name of latitude coordinate"*: `lat`
 > > >    - *"Name of longitude coordinate"*: `lon`
@@ -391,25 +391,25 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >    - *"Add country borders with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add coastline with alpha value [0-1] (optional)"*: `1.0`
 > > >    - *"Add ocean with alpha value [0-1] (optional)"*: `1.0`
-> > >    - *"Specify plot title (optional)"*: `Projection :  Mercator 18:00 UTC `
-> > >    - *"Specify which colormap to use for plotting (optional)"*: `acton`
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 at 18:00:00 : acton](../../images/colorsel.png)
+> > >    - *"Specify plot title (optional)"*: `Air_temperature_at_2_metres___23:00:00_UTC_batlow`
+> > >    - *"Specify which colormap to use for plotting (optional)"*: `batlow`
+> > >    
 > > >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 > > >
 > > >
 > > > The final plot is shown below: 
-> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/acton.png)
+> > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bat.png)
 > > >Some other important color variants of the same map can be found below :
-> > > - *colormap : Accent*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/batlow.png)
-> > >  - *colormap : bam*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bamako.png)
-> > >  - *colormap : bukavu*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/vik.png)
-> > > - *colormap : coolwarm*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/tokyo.png)
-> > > - *colormap : jet*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/hawaii.png)
+> > > - *colormap : Oslo*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/os.png)
+> > >  - *colormap : bamako*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/bama.png)
+> > >  - *colormap : vik*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/vi.png)
+> > > - *colormap : tokyo*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/tok.png)
+> > > - *colormap : hawaii*
+> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/hawa.png)
 > > {: .hands_on}
 > >
 > >
@@ -439,7 +439,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > >   - {% icon param-files %} *"Images"*: `Map plots`
 > >   - {% icon param-text %} *"# of images wide"*: `4`
 > > Here you can see that all the projections we plotted above have been shown in a single image using `Image Montage`.
-> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 Monatge for 17:00 and 18:00 UTC ](../../images/mont2.png)
+> > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 Monatge for 23:00:00 ](../../images/mont2.png)
 > {: .solution}
 >
 {: .question}
