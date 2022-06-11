@@ -338,7 +338,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 > > >
 > > >The final plot is shown below:
 > > >
-> > >     ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Interrupted_GoodeHomolosine.png)
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/plots/Interrupted_GoodeHomolosine.png)
 > > >
 > > >
 > > >
