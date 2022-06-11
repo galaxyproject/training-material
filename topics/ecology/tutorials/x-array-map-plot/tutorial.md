@@ -81,7 +81,8 @@ It will be a fun learning experience for anyone who loves visualization !
 >    ```
 >    (`Upload Data` -> `Choose remote files` -> `ECMWF ERA5 Reanalysis` >   ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`)
 >    ```
->
+>  or  upload it [from Zenodo](https://doi.org/10.5281/zenodo.6621460).
+>  
 > 3. Check that the datatype of uploaded data is **netCDF**. 
 >
 >
