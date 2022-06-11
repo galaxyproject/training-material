@@ -75,17 +75,25 @@ It will be a fun learning experience for anyone who loves visualization !
 >    ```
 >    (`Upload Data` -> `Choose remote files` -> `ECMWF ERA5 Reanalysis` >   ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`)
 >    ```
+> 3. An another method of getting data is by importing the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
 >
-> 3. Check that the datatype of uploaded data is **netCDF**. 
+>    ```
+>    https://zenodo.org/record/6621460/files/air_temperature_at_2_metres.netcdf
+> 
+>
+>
+> 4. Check that the datatype of uploaded data is **netCDF**. 
 >
 >
 >    If it is not `netCDF` make sure to convert it using the Galaxy built-in format converters.
 >
 >    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert h5 to netCDF" %}
 >
-> 4. Rename Datasets if you find the name to be too long or you have somthing more meaningful in your mind.
+> 5. Rename Datasets if you find the name to be too long or you have somthing more meaningful in your mind.
 >
-> 5. Add to each database a tag corresponding to `ecmwf`
+> 6. Add to each database a tag corresponding to `ecmwf`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
