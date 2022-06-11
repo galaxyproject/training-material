@@ -2,6 +2,12 @@
 layout: tutorial_hands_on
 title: Visualization of Climate Data using  NetCDF xarray Map Plotting
 zenodo_link: "https://doi.org/10.5281/zenodo.6621460"
+requirements:
+  -
+    type: "internal"
+    topic_name: climate
+    tutorials:
+        - climate-101
 questions:
 - What is xarray map plotting?
 - How to plot NetCDF data using xarray map plotting tool?
@@ -47,7 +53,7 @@ contributors:
 >### {% icon comment %} Background
 >
 >According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/tutorial.html) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
-The climate data is mainly represented in these three categories : NetCDF (Network Common Data Form), HDF (Hierarchical Data Format) , GRIB (GRIdded Binary or General Regularly-distributed Information in Binary form).
+The climate data is mainly represented in these three categories : [NetCDF](https://en.wikipedia.org/wiki/NetCDF) (Network Common Data Form), [HDF](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) (Hierarchical Data Format) , [GRIB](https://en.wikipedia.org/wiki/GRIB) (GRIdded Binary or General Regularly-distributed Information in Binary form).
 >
 >The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
 >
@@ -55,13 +61,13 @@ The climate data is mainly represented in these three categories : NetCDF (Netwo
 
 
 
-# Plotting air temperature at 2 metres using the ECMWF Reanalysis Data
+# Introduction
 
-The data used in this tutorial is ECMWF Reanalysis. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
+The data used in this tutorial is [ECMWF Reanalysis 5 hourly data on single levels](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview). We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.
 
 It will be a fun learning experience for anyone who loves visualization ! 
 
-## Get data
+# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -92,11 +98,13 @@ It will be a fun learning experience for anyone who loves visualization !
 {: .hands_on}
 
 # What is xarray?
-xarray, formerly known as xray, is a python package which enables us to play with gridded data. This package shares most of its features from numpy, but in a more convenient manner by keeping track of labels in arrays. The gridded data is mainly available in netCDF data format. Thus **xarray comes very handy while dealing with netCDF files.**
+
+[xarray](https://docs.xarray.dev/en/stable/), formerly known as xray, is a python package which enables us to play with gridded data. This package shares most of its features from [numpy](https://numpy.org/), but in a more convenient manner by keeping track of labels in arrays. The gridded data is mainly available in netCDF data format. Thus **xarray comes very handy while dealing with netCDF files.**
 
 
 ## What is Visualisation in xarray?
-xarray uses **Cartopy** and **Matplotlib** as the two main tools for creating detailed and informative plots.
+
+xarray uses **[Cartopy](https://scitools.org.uk/cartopy/docs/latest/)** and **[Matplotlib](https://matplotlib.org/)** as the two main tools for creating detailed and informative plots.
 Cartopy is a python package used for geospatial data analysis. In the Python library, matplotlib is the most used scientific plotting library.
 For a multidimensional data consisting of latitudes and longitudes along with the other variables, xarray has the capability of appling cartopy map projections.
 
@@ -277,7 +285,7 @@ Although we are not using `splihour` here, you can find below the syntax for fut
 >    - The second file `info file` provide a summary of the **xarray Dataset** contained in your netCDF file.
 {: .hands_on}
 
-## Map Plotting using **NetCDF xarray map plotting**
+# Map Plotting using **NetCDF xarray map plotting**
 
 > ### {% icon hands_on %} Hands-on: Plotting the data of the last hour of the day
 > The air temperatures corresponding to the 744th time step from the original netCDF file, namely `23:00:00` for 31st May 2022 is plotted here : 
