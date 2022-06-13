@@ -309,7 +309,6 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -35,6 +35,8 @@ galaxy_config:
->         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    +    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
@@ -329,7 +328,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    @@ -65,6 +67,12 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->     
+>
 >    +galaxy_config_files:
 >    +  - src: files/galaxy/config/user_preferences_extra_conf.yml
 >    +    dest: "{{ galaxy_config.galaxy.user_preferences_extra_conf_path }}"

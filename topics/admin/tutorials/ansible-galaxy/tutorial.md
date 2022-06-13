@@ -1547,7 +1547,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     admin_users: admin@example.org
 >    >     brand: 🧬🔬🚀
 >    >     builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
->    >     check_migrate_tools: false
 >    >     citation_cache_data_dir: /srv/galaxy/var/cache/citations/data
 >    >     citation_cache_lock_dir: /srv/galaxy/var/cache/citations/locks
 >    >     data_manager_config_file: /srv/galaxy/server/config/data_manager_conf.xml.sample
@@ -1557,7 +1556,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     file_path: /data
 >    >     integrated_tool_panel_config: /srv/galaxy/var/config/integrated_tool_panel.xml
 >    >     job_working_directory: /srv/galaxy/jobs
->    >     migrated_tools_config: /srv/galaxy/var/config/migrated_tools_conf.xml
 >    >     mulled_resolution_cache_data_dir: /srv/galaxy/var/mulled/data
 >    >     mulled_resolution_cache_lock_dir: /srv/galaxy/var/mulled/lock
 >    >     new_file_path: /srv/galaxy/var/tmp
@@ -1732,7 +1730,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -60,3 +60,33 @@ galaxy_config:
->     
+>
 >     # systemd
 >     galaxy_manage_systemd: yes
 >    +
@@ -2114,14 +2112,14 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -59,6 +59,10 @@ galaxy_config:
 >               - job-handler
 >               - workflow-scheduler
->     
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
 >     galaxy_manage_systemd: yes
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job conf to config dir"}
@@ -2343,7 +2341,7 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- 
+
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
 +galaxy_commit_id: 'release_19.09'
