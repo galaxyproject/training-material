@@ -384,26 +384,32 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -1,9 +1,16 @@
->     <job_conf>
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->         </plugins>
->    -    <destinations default="singularity">
->    +    <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="slurm" runner="slurm">
->    +            <param id="singularity_enabled">true</param>
->    +            <env id="LC_ALL">C</env>
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->             <destination id="singularity" runner="local_plugin">
->                 <param id="singularity_enabled">true</param>
->                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -2,11 +2,23 @@ runners:
+>       local_runner:
+>         load: galaxy.jobs.runners.local:LocalJobRunner
+>         workers: 4
+>    +  slurm:
+>    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>     execution:
+>       default: singularity
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    slurm:
+>    +      runner: slurm
+>    +      singularity_enabled: true
+>    +      env:
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}

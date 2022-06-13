@@ -251,27 +251,30 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -2,8 +2,17 @@
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->         </plugins>
->    -    <destinations default="local_destination">
->    +    <destinations default="singularity">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="singularity" runner="local_plugin">
->    +            <param id="singularity_enabled">true</param>
->    +            <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    +            <env id="LC_ALL">C</env>
->    +            <!-- The cache directory holds the docker containers that get converted. -->
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <!-- Singularity uses a temporary directory to build the squashfs filesystem. -->
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->         </destinations>
->         <tools>
->         </tools>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -3,7 +3,20 @@ runners:
+>         load: galaxy.jobs.runners.local:LocalJobRunner
+>         workers: 4
+>     execution:
+>    -  default: local_dest
+>    +  default: singularity
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    singularity:
+>    +      runner: local_runner
+>    +      singularity_enabled: true
+>    +      env:
+>    +      # Ensuring a consistent collation environment is good for reproducibility.
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      # The cache directory holds the docker containers that get converted
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      # Singularity uses a temporary directory to build the squashfs filesystem
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
 >    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.xml with singularity destination"}

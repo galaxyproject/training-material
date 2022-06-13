@@ -2068,18 +2068,17 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -0,0 +1,10 @@
->    +<job_conf>
->    +    <plugins workers="4">
->    +        <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    +    </plugins>
->    +    <destinations default="local_destination">
->    +        <destination id="local_destination" runner="local_plugin"/>
->    +    </destinations>
->    +    <tools>
->    +    </tools>
->    +</job_conf>
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -0,0 +1,9 @@
+>    +runners:
+>    +  local_runner:
+>    +    load: galaxy.jobs.runners.local:LocalJobRunner
+>    +    workers: 4
+>    +execution:
+>    +  default: local_dest
+>    +  environments:
+>    +    local_dest:
+>    +      runner: local_runner
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}

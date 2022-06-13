@@ -147,29 +147,33 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -11,6 +11,13 @@
->                 <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->                 <env id="SINGULARITY_TMPDIR">/tmp</env>
->             </destination>
->    +        <destination id="slurm-2c" runner="slurm">
->    +            <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=2</param>
->    +            <param id="singularity_enabled">true</param>
->    +            <env id="LC_ALL">C</env>
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->             <destination id="singularity" runner="local_plugin">
->                 <param id="singularity_enabled">true</param>
->                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    @@ -22,5 +29,6 @@
->             </destination>
->         </destinations>
->         <tools>
->    +        <tool id="testing" destination="slurm-2c"/>
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -19,6 +19,17 @@ execution:
+>             value: /tmp/singularity
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +    slurm-2c:
+>    +      runner: slurm
+>    +      singularity_enabled: true
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task=2
+>    +      env:
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
+>    @@ -32,3 +43,6 @@ execution:
+>           # Singularity uses a temporary directory to build the squashfs filesystem
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +tools:
+>    +- id: testing
+>    +  destination: slurm-2c
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
@@ -267,19 +271,18 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -27,6 +27,10 @@
->                 <!-- Singularity uses a temporary directory to build the squashfs filesystem. -->
->                 <env id="SINGULARITY_TMPDIR">/tmp</env>
->             </destination>
->    +        <destination id="dynamic_admin_only" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">admin_only</param>
->    +        </destination>
->         </destinations>
->         <tools>
->             <tool id="testing" destination="slurm-2c"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -43,6 +43,9 @@ execution:
+>           # Singularity uses a temporary directory to build the squashfs filesystem
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +    dynamic_admin_only:
+>    +      runner: dynamic
+>    +      function: admin_only
+>     tools:
+>     - id: testing
+>       destination: slurm-2c
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic admin only destination"}
@@ -290,16 +293,14 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -33,6 +33,6 @@
->             </destination>
->         </destinations>
->         <tools>
->    -        <tool id="testing" destination="slurm-2c"/>
->    +        <tool id="testing" destination="dynamic_admin_only" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -48,4 +48,4 @@ execution:
+>           function: admin_only
+>     tools:
+>     - id: testing
+>    -  destination: slurm-2c
+>    +  destination: dynamic_admin_only
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send testing tool to the dynamic admin only destination."}
@@ -390,21 +391,19 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -31,8 +31,11 @@
->                 <param id="type">python</param>
->                 <param id="function">admin_only</param>
->             </destination>
->    +        <destination id="dtd" runner="dynamic">
->    +            <param id="type">dtd</param>
->    +        </destination>
->         </destinations>
->         <tools>
->    -        <tool id="testing" destination="dynamic_admin_only" />
->    +        <tool id="testing" destination="dtd" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -46,6 +46,9 @@ execution:
+>         dynamic_admin_only:
+>           runner: dynamic
+>           function: admin_only
+>    +    dyd:
+>    +      runner: dynamic
+>    +      type: dtd
+>     tools:
+>     - id: testing
+>    -  destination: dynamic_admin_only
+>    +  destination: dtd
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure dtd in job conf"}
@@ -493,18 +492,22 @@ Such form elements can be added to tools without modifying each tool's configura
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -35,6 +35,9 @@
->                 <param id="type">dtd</param>
->             </destination>
->         </destinations>
->    +    <resources>
->    +        <group id="testing">cores,time</group>
->    +    </resources>
->         <tools>
->             <tool id="testing" destination="dtd" />
->         </tools>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -49,6 +49,13 @@ execution:
+>         dyd:
+>           runner: dynamic
+>           type: dtd
+>    +
+>    +resources:
+>    +  default: default
+>    +  groups:
+>    +    default: []
+>    +    testing: [cores, time]
+>    +
+>     tools:
+>     - id: testing
+>       destination: dtd
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -516,16 +519,15 @@ Such form elements can be added to tools without modifying each tool's configura
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -39,6 +39,6 @@
->             <group id="testing">cores,time</group>
->         </resources>
->         <tools>
->    -        <tool id="testing" destination="dtd" />
->    +        <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -58,4 +58,5 @@ resources:
+>     
+>     tools:
+>     - id: testing
+>    -  destination: dtd
+>    +  destination: dynamic_cores_time
+>    +  resources: testing
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -534,19 +536,18 @@ Such form elements can be added to tools without modifying each tool's configura
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -34,6 +34,10 @@
->             <destination id="dtd" runner="dynamic">
->                 <param id="type">dtd</param>
->             </destination>
->    +        <destination id="dynamic_cores_time" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">dynamic_cores_time</param>
->    +        </destination>
->         </destinations>
->         <resources>
->             <group id="testing">cores,time</group>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -49,6 +49,9 @@ execution:
+>         dyd:
+>           runner: dynamic
+>           type: dtd
+>    +    dynamic_cores_time:
+>    +      runner: dynamic
+>    +      function: dynamic_cores_time
+>     
+>     resources:
+>       default: default
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic_cores_time destination"}

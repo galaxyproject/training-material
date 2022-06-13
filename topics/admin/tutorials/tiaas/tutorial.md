@@ -371,36 +371,37 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -13,7 +13,7 @@
->                 <param id="manager">_default_</param>
->             </plugin>
->         </plugins>
->    -    <destinations default="slurm">
->    +    <destinations default="sorting_hat">
->             <destination id="local_destination" runner="local_plugin"/>
->             <destination id="pulsar" runner="pulsar_runner" >
->                 <param id="default_file_action">remote_transfer</param>
->    @@ -25,6 +25,10 @@
->                 <param id="transport">curl</param>
->                 <param id="outputs_to_working_directory">False</param>
->             </destination>
->    +        <destination id="sorting_hat" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">sorting_hat</param>
->    +        </destination>
->             <destination id="slurm" runner="slurm">
->                 <param id="singularity_enabled">true</param>
->                 <env id="LC_ALL">C</env>
->    @@ -63,6 +67,7 @@
->             <group id="testing">cores,time</group>
->         </resources>
->         <tools>
->    +        <tool id="upload1" destination="slurm"/>
->             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -15,7 +15,7 @@ runners:
+>         galaxy_url: "https://{{ inventory_hostname }}"
+>         manager: _default_
+>     execution:
+>    -  default: singularity
+>    +  default: sorting_hat
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    @@ -72,6 +72,10 @@ execution:
+>         dynamic_cores_time:
+>           runner: dynamic
+>           function: dynamic_cores_time
+>    +    # Next year this will be replaced with the TPV.
+>    +    sorting_hat:
+>    +      runner: dynamic
+>    +      function: sorting_hat
+>     
+>     resources:
+>       default: default
+>    @@ -80,6 +84,8 @@ resources:
+>         testing: [cores, time]
+>     
+>     tools:
+>    +- id: upload1
+>    +  destination: slurm
+>     - id: testing
+>       destination: dynamic_cores_time
+>       resources: testing
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}
