@@ -171,7 +171,7 @@ Galaxy is a modern web application that includes both a server (written in Pytho
 
 This process can be lengthy and resource intensive. Future plans for Galaxy include pre-building the client so that the build process is not necessary as long as you run "release" versions of Galaxy.
 
-The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure NGINX to serve in this tutorial.
+The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure a webserver to serve in this tutorial.
 
 ## Handlers
 
@@ -367,7 +367,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 
 ## PostgreSQL
 
-Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
+Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL (/ˈpoʊstɡrɛs ˌkjuː ˈɛl/, POHST-gres kyoo el) is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
@@ -1701,7 +1701,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-Although uWSGI can server HTTP for us directly, by moving to NGINX (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although uWSGI can server HTTP for us directly, by moving to NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
