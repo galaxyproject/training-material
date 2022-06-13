@@ -83,10 +83,10 @@ To allow your user to upload via TUS, you will need to:
 >         outputs_to_working_directory: true
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
->    @@ -122,3 +124,16 @@ nginx_conf_http:
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
+>    @@ -117,3 +119,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem

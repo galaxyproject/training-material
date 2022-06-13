@@ -888,7 +888,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,28 @@ galaxy_config:
+>    @@ -37,3 +37,23 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -1593,10 +1593,10 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -62,3 +62,6 @@ galaxy_config:
->           - lib/galaxy/main.py
->           - lib/galaxy/main.py
->         farm: job-handlers:1,2
+>    @@ -57,3 +57,6 @@ galaxy_config:
+>             pools:
+>               - job-handler
+>               - workflow-scheduler
 >    +
 >    +# systemd
 >    +galaxy_manage_systemd: yes
@@ -1731,7 +1731,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,3 +65,33 @@ galaxy_config:
+>    @@ -60,3 +60,33 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: yes
@@ -2099,9 +2099,9 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Load job conf in galaxy config"}
@@ -2112,9 +2112,9 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -64,6 +64,10 @@ galaxy_config:
->           - lib/galaxy/main.py
->         farm: job-handlers:1,2
+>    @@ -59,6 +59,10 @@ galaxy_config:
+>               - job-handler
+>               - workflow-scheduler
 >     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
@@ -2207,9 +2207,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add production facing vars"}

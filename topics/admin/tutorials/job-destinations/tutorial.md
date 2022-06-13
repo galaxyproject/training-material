@@ -88,7 +88,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,9 @@ galaxy_config_templates:
+>    @@ -96,6 +96,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -250,7 +250,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,8 @@ galaxy_config_templates:
+>    @@ -98,6 +98,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -372,7 +372,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->    @@ -100,6 +101,8 @@ galaxy_config_templates:
+>    @@ -95,6 +96,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -476,8 +476,8 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -95,6 +95,8 @@ galaxy_config:
->         farm: job-handlers:1,2
+>    @@ -90,6 +90,8 @@ galaxy_config:
+>               - workflow-scheduler
 >     
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
@@ -641,7 +641,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->    @@ -110,6 +111,7 @@ galaxy_local_tools:
+>    @@ -105,6 +106,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
