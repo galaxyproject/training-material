@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: CUT & RUN data analysis
+title: CUT&RUN data analysis
 zenodo_link: https://zenodo.org/record/3862793
 questions:
 - Which binding motif has the transcription factor GATA1?
@@ -13,7 +13,7 @@ objectives:
 - Find protein binding motifs
 time_estimation: 3h
 key_points:
-- CUT&RUN can be used to identify binding regions for
+- CUT&RUN can be used to identify binding regions for DNA binding proteins.
 - Several filters are applied to the reads, such as removing those mapped to mitochondria
 - Fragment distribution can help determine whether an CUT&RUN experiment has worked well
 - A robust peak detection removes noise from the data
@@ -25,19 +25,19 @@ contributions:
 abbreviations:
   CUT&RUN: Cleavage Under Targets and Release Using Nuclease
   POI: protein of interest
-  pA-MNase: protein A-micrococcal nuclease
+  pA(G)-MNase: protein A(-protein G hybrid)-micrococcal nuclease
   TF: transcription factors
 
 ---
 
 # Introduction
-In many organism {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
+In many organism, {TF} play an important tole in the regulation of the gene expression. In human, we have up to 2,800 proteins and more than 1,600 are TF ([list of transcription factors](https://en.wikipedia.org/wiki/List_of_human_transcription_factors)), although the number might change over timer. Investigating the role of TFs, such as [GATA1](https://en.wikipedia.org/wiki/GATA1), is a very important task to understand the regulatory mechanisms in the cell and thus ascertain the source of a disease, such as [myelofibrosis](https://en.wikipedia.org/wiki/Primary_myelofibrosis) a type of blood cancer.  
 
-![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png "Zhu et al. 2019 Genome Biology")
+![CUT_and_RUN](../../images/cut_and_run/cut_and_run.png "Skene and Henikoff 2017 eLIFE")
 
-{CUT&RUN} {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the {POI}. The big difference, CUT&RUN couples the antibody with a pA-MNase, which you can see in **Figure 1**. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) is an endo-exonuclease that cleaves and shortens the bound DNA of the selected POI *in-situ*. CUT&RUN allows to fragment the DNA in intact cells and thus allows to study protein-DNA interactions in a more natural state. The added pA-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) fixate and make the nuceli or cells permeable, (2) add selective antibody of the POI, (3) add and activate pA-MNas, (4) release DNA complex and collect the DNA from the supernatant. Afterwards, the DNA can be PCR amplified and prepared for sequencing.
+{CUT&RUN} {% cite Skene2017 %} became the new and advanced method to analyse DNA-associated proteins. CUT&RUN uses an antibody just as [ChIP-Seq](https://en.wikipedia.org/wiki/ChIP_sequencing) to select the {POI}. The big difference, CUT&RUN couples the usage of an antibody with the usage of a pA-MNase, which you can see in **Figure 1**. In the revised version of the protocol {% cite Meers2019 %}, the pA-MNase has been replaced by a {pA(G)-MNase} to expand this technology to mouse primary antibodies. The [enzyme](https://en.wikipedia.org/wiki/Micrococcal_nuclease) fused to the protein A/G is an endo-exonuclease that cleaves and shortens DNA. The fusion will ensure that the MNase comes in close proximity with the POI and thus cleaves DNA *in-situ*, close to POI binding sites. CUT&RUN allows to fragment the DNA in unfixed cells and thus allows to study protein-DNA interactions in a more natural state. The added pA(G)-MNase thus creates shorted fragments that lead to a higher resolution for the mapping in comparison to your standard ChIP-Seq protocol. CUT&RUN follows four fundamental steps: (1) permeabilize the nuclei or cells coated on beads, (2) incubate with selective antibody of the POI, (3) add the pA(G)-MNase and activate the enzyme for a small period of time, (4) release CUT&RUN fragments and collect the DNA from the supernatant. Afterwards, the DNA can be purified, PCR amplified and prepared for sequencing. You can find the CUT&RUN protocol [here](https://www.protocols.io/view/cut-amp-run-targeted-in-situ-genome-wide-profiling-14egnr4ql5dy/v3).
 
-In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we are **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
+In this tutorial, we will use data from the study of {% cite Zhu2019 %}. The article introduces a CUT&RUN pipeline that we will **not** completely follow. It is important to note at this point that a CUT&RUN data analysis is more similar to an ATAC-Seq experiment than a standard ChIP-Seq. We will analyze the two biological replicates from an CUT&RUN experiment for the aforementioned TF GATA1 in human. We downsampled the data to speed up the run times in this tutorial. Our results will be compared to identified binding sites of GATA1 of a ChIP-Seq experiment {% cite Canver2017 %}.
 
 ### When working with real data
 The workflow for this training material can be found [here](https://usegalaxy.eu/u/heylf/w/copy-of-cutandrunlong). When you use your data we suggest using [this workflow](https://usegalaxy.eu/u/heylf/w/cutandrunlong) which includes additional steps for your data analysis. Both worklfows do not support a peak calling with controls as CUT&RUN has a low background. It is often recommended to use a positive or negative control as a comparison. Spike-in controls can be done for CUT&RUN but need then additional steps in the provided workflows to take them into consideration.    
@@ -91,7 +91,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 > 5. Create a dataset collection called `R1` for your R1 and a dataset collection called `R2` for your R2 files.
 >
->
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -245,7 +245,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use **
 
 ## Filter Uninformative Reads
 
-We apply some filters to the reads after the mapping. CUT & RUN datasets can have many reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to the pA-MNase. CUT & RUN inserts adapter more easily in open chromatin regions due to the pA-MNase activity. The mitchondrial genome is uninteresting for CUT&RUN, so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
+We apply some filters to the reads after the mapping. CUT&RUN datasets can have many reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to the pA(G)-MNase. CUT&RUN inserts adapter more easily in open chromatin regions due to the pA(G)-MNase activity. The mitchondrial genome is uninteresting for CUT&RUN, so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.
 
 > ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
 >
@@ -382,13 +382,13 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 >
 > > ### {% icon solution %} Solution
 > >
-> > The first peak (30bp) corresponds to where the cleavage around our POI. Nevertheless, the cutting of our pA-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps in the distribution are an indication for another protein(complex), such as a nucelosome that is located between the two cleavage sites.
+> > The first peak (30bp) corresponds to where the cleavage around our POI. Nevertheless, the cutting of our pA(G)-MNase-antibody-protein complex is not perfect. The arms can actually cut further away from the protein. Little bumps in the distribution are an indication for another protein(complex), such as a nucelosome that is located between the two cleavage sites.
 > >
 > {: .solution}
 >
 {: .question}
 
-This fragment size distribution is a good indication if your experiment worked or not. The CUT & RUN yield can gradually increase over the digestion time {% cite Skene2017 %}, which of course depends on the enzyme used for the cleavage of the DNA.
+This fragment size distribution is a good indication if your experiment worked or not. The CUT&RUN yield can gradually increase over the digestion time {% cite Skene2017 %}, which of course depends on the enzyme used for the cleavage of the DNA.
 
 ![CUT and RUN yield](../../images/cut_and_run/cut_and_run_yield.png "Fragment length distributions of a CUT&RUN experiment with uniform digestion over time. No anti-FLAG primary antibody (No Ab). The track with No_Ab is the control experiment. Data is from two biological replicates. The studied protein showed fragments of size ≤120 bp corresponding to the binding sites, as seen on the left, whereas reads with ≥150 bp fragment size are randomly distributed in the local vicinity. The yield in the example increases from 5s to 10 minutes, which can be seen in the mapped profiles in the right. (Skene and Henikoff 2017 eLife)")
 
@@ -396,11 +396,11 @@ This fragment size distribution is a good indication if your experiment worked o
 
 ## Call Peaks
 
-We have now finished the data preprocessing. Next, to find regions corresponding to potential binding sites, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. [MACS2](https://github.com/taoliu/MACS) is widely used for CUT & RUN.
+We have now finished the data preprocessing. Next, to find regions corresponding to potential binding sites, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. [MACS2](https://github.com/taoliu/MACS) is widely used for CUT&RUN.
 
-At this step, two approaches exists: Like in ATAC-Seq, we have to take a few things into account. The pA-MNase does not need to bind the protein it can create fragments unpsecifically a few bases downtream and upstream away from the true binding site. This is to the *"long"* arms of the proteins. A big jump can happen if a nucelosome is between the protein binding site and the cutting site.
+At this step, two approaches exists: Like in ATAC-Seq, we have to take a few things into account. The pA(G)-MNase does not need to bind the protein it can create fragments unpsecifically a few bases downtream and upstream away from the true binding site. This is to the *"long"* arms of the proteins. A big jump can happen if a nucelosome is between the protein binding site and the cutting site.
 
-It is critical to re-center the signal since the pA-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift. If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse, and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
+It is critical to re-center the signal since the pA(G)-MNase cuts in different distances. Since some read pairs are not symmetric (i.e., the first mate might be further away from the binding site than the second mate) we will turn off the shifting mode of MACS2 and apply a direct shift. If we only assess the coverage of the 5' extremity of the reads, the data would be too sparse, and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.
 
 ### Using MACS2
 
@@ -447,15 +447,48 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 
 ## Prepare the Datasets
 
+
+### Extracting individual replicates from your dataset collection
+
+In the following step we want to apply a tool to identify robust peaks between our two replicates. However, we still have one dataset collection, holding both replicates, which we have to split.
+
+> ### {% icon hands_on %} Hands-on: Extract replicates from a dataset collection:
+>
+> 1. {% tool [Apply rules](https://usegalaxy.eu/root?tool_id=__APPLY_RULES__) %} with the following parameters:
+>    - {% icon param-file %} *"Input Collection"*: Select the output of **MACS2 callpeak** {% icon tool %}
+>    - *"Rules"*: `Edit`
+>        - *"+Rules"*: `Add / Modify Column Definitions`
+>         - *"+Add definiton"*: `List identifiers`
+>           - *"Select a column"*: `A`
+>        - *"+Column"*: `Add Column from Metadata`
+>           - *"For"*: `Tags`
+>        - *"+Filter"*: `Matching a Supplied Value`
+>           - *"For Column"*: `B`
+>           - `name:rep1`
+>
+> 2. {% tool [Apply rules](https://usegalaxy.eu/root?tool_id=__APPLY_RULES__) %} with the following parameters:
+>    - {% icon param-file %} *"Input Collection"*: Select the output of **MACS2 callpeak** {% icon tool %}
+>    - *"Rules"*: `Edit`
+>        - *"+Rules"*: `Add / Modify Column Definitions`
+>         - *"+Add definiton"*: `List identifiers`
+>           - *"Select a column"*: `A`
+>        - *"+Column"*: `Add Column from Metadata`
+>           - *"For"*: `Tags`
+>        - *"+Filter"*: `Matching a Supplied Value`
+>           - *"For Column"*: `B`
+>           - `name:rep2`
+>
+{: .hands_on}
+
 ### Extract Robust Peaks
 MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set will contain false positives because of technical and biological noise. We can first try to reduce some noise using the results for our two biological replicates. Since we applied MACS we have created two peak files. Yet, both replicates have peaks that are only present in one replicate and thus might be a potential false positive due to noise. We can remove such peaks if we simply overlap the two peak files and consequently search for peaks that appear in both replicates.
 
 > ### {% icon hands_on %} Hands-on: Select robust GATA1 peaks:
 >
 > 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"File A to intersect with B"*: Select the **first** output of **MACS2 callpeak** {% icon tool %}
+>    - {% icon param-file %} *"File A to intersect with B"*: Select the **first** output of **Apply rules** {% icon tool %}
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
->        - {% icon param-file %} *"File B to intersect with A"*:  Select the **second** output of **MACS2 callpeak** {% icon tool %}
+>        - {% icon param-file %} *"File B to intersect with A"*:  Select the **second** output of **Apply rules** {% icon tool %}
 >    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
 >    - *"Required overlap"*: `Specify minimum overlap(s)`
 >        - *"Minimum overlap required as a fraction of A"*: `0.5`
@@ -463,9 +496,9 @@ MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set
 >    - *"Write the original A entry _once_ if _any_ overlaps found in B.": `Yes`
 >
 > 2. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"File A to intersect with B"*: Select the **second** output of **MACS2 callpeak** {% icon tool %}
+>    - {% icon param-file %} *"File A to intersect with B"*: Select the **second** output of **Apply rules** {% icon tool %}
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
->        - {% icon param-file %} *"File B to intersect with A"*:  Select the **first** output of **MACS2 callpeak** {% icon tool %}
+>        - {% icon param-file %} *"File B to intersect with A"*:  Select the **first** output of **Apply rules** {% icon tool %}
 >    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
 >    - *"Required overlap"*: `Specify minimum overlap(s)`
 >        - *"Minimum overlap required as a fraction of A"*: `0.5`
@@ -594,6 +627,6 @@ The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)G
 
 # Conclusion    
 
-In this training you have learned the general principles of CUT & RUN data analysis. CUT&RUN is a method to analyse DNA-associated proteins. In contrast to ChIP-seq, CUT&RUN couples the antibody with a pA-MNase to reduce the size of the obtained sequences to increase the accuracy for the detection of the protein interaction. Based on this training material, you gained some insights into the quality control of the data. You should know some pitfalls of CUT & RUN and look for adapter contamination and PCR duplicates, which disrupt the later enrichment analysis. You learned about **Bowtie2** to do the alignment, and how to filter for properly paired, good quality and reads that do not map to the mitochondrial genome. Furthermore, you learned that an indicator for a good CUT & RUN experiment is the fragment size plot and that you optimize your protocol based on this parameter. With **MACS2** we identified enriched regions, but we had to remove some noise. We performed some robust peak analysis with **bedtools intersect** and performed a check with a ChIP-Seq experiment to remove some false positives. Finally, we used **MEME-ChIP** to identify our binding motifs.
+In this training you have learned the general principles of CUT&RUN data analysis. CUT&RUN is a method to analyse DNA-associated proteins. In contrast to ChIP-seq, CUT&RUN couples the antibody with a pA(G)-MNase to reduce the size of the obtained sequences to increase the accuracy for the detection of the protein interaction. Based on this training material, you gained some insights into the quality control of the data. You should know some pitfalls of CUT&RUN and look for adapter contamination and PCR duplicates, which disrupt the later enrichment analysis. You learned about **Bowtie2** to do the alignment, and how to filter for properly paired, good quality and reads that do not map to the mitochondrial genome. Furthermore, you learned that an indicator for a good CUT&RUN experiment is the fragment size plot and that you optimize your protocol based on this parameter. With **MACS2** we identified enriched regions, but we had to remove some noise. We performed some robust peak analysis with **bedtools intersect** and performed a check with a ChIP-Seq experiment to remove some false positives. Finally, we used **MEME-ChIP** to identify our binding motifs.
 
-![CUT & RUN workflow](../../images/cut_and_run/cut_and_run_mindmap.png)
+![CUT&RUN workflow](../../images/cut_and_run/cut_and_run_mindmap.png)
