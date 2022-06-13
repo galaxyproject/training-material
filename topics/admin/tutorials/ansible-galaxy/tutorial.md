@@ -892,34 +892,29 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->    +  uwsgi:
->    +    socket: 127.0.0.1:5000
->    +    buffer-size: 16384
->    +    processes: 1
->    +    threads: 4
->    +    offload-threads: 2
->    +    static-map:
->    +      - /static={{ galaxy_server_dir }}/static
->    +      - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
->    +    static-safe: client/galaxy/images
->    +    master: true
->    +    virtualenv: "{{ galaxy_venv_dir }}"
->    +    pythonpath: "{{ galaxy_server_dir }}/lib"
->    +    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->    +    thunder-lock: true
->    +    die-on-term: true
->    +    hook-master-start:
->    +      - unix_signal:2 gracefully_kill_them_all
->    +      - unix_signal:15 gracefully_kill_them_all
->    +    py-call-osafterfork: true
->    +    enable-threads: true
->    +    mule:
->    +      - lib/galaxy/main.py
->    +      - lib/galaxy/main.py
->    +    farm: job-handlers:1,2
+>    +  gravity:
+>    +    galaxy_root: "{{ galaxy_root }}/server"
+>    +    app_server: gunicorn
+>    +    gunicorn:
+>    +      # listening options
+>    +      bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
+>    +      # performance options
+>    +      workers: 2
+>    +      # Other options that will be passed to gunicorn
+>    +      extra_args: '--forwarded-allow-ips="*"'
+>    +      preload: true
+>    +    celery:
+>    +      concurrency: 2
+>    +      loglevel: DEBUG
+>    +    handlers:
+>    +      handler:
+>    +        processes: 3
+>    +        pools:
+>    +          - job-handler
+>    +          - workflow-scheduler
 >    {% endraw %}
 >    ```
->    {: data-commit="Configure uwsgi"}
+>    {: data-commit="Configure gravity"}
 >
 >    {% snippet topics/admin/faqs/galaxy-how-many-mules.md %}
 >
