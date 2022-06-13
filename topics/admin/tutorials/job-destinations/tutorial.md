@@ -481,7 +481,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >       - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    {% endraw %}

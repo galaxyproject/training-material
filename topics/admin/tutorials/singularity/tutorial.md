@@ -195,7 +195,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    @@ -86,6 +88,10 @@ galaxy_config:
 >     galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"

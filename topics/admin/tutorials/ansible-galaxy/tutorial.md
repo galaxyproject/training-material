@@ -2116,7 +2116,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >               - workflow-scheduler
 >     
 >    +galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_conf.xml.j2
+>    +  - src: templates/galaxy/config/job_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
