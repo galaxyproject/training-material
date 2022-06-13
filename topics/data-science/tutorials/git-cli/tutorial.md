@@ -575,3 +575,11 @@ This is not the only way to undo mistakes, but probably the easiest.
 
 If you check your `git log` you'll see the change was undone in a second commit, reverting the first. So if you just look at the current files it appears we never undid it, but within the logs we can see the undo step.
 
+With that you've got enough skills to track your own data/code/etc with git!
+
+# Further Reading
+
+- [git - the simple guide](https://rogerdudler.github.io/git-guide/index.html)
+- [giteveryday(7) manual page, the most common commands most folks use every day](https://mirrors.edge.kernel.org/pub/software/scm/git/docs/giteveryday.html)
+- [git flight rules, a convenient "how do I do X" guide](https://github.com/k88hudson/git-flight-rules)
+- [do you prefer git tutorials as comics? (cw: language)](https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/)
