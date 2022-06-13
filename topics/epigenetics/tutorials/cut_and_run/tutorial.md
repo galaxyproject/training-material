@@ -22,6 +22,7 @@ contributions:
     - heylf
   editing:
     - hexylena
+    - lldelisle
 abbreviations:
   CUT&RUN: Cleavage Under Targets and Release Using Nuclease
   POI: protein of interest
@@ -89,9 +90,9 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Create a dataset collection called `R1` for your R1 and a dataset collection called `R2` for your R2 files.
+> 5. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
 >
->    {% snippet faqs/galaxy/collections_build_list.md %}
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
@@ -107,11 +108,14 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 
 We first have to check if our data contains adapter sequences that we have to remove. A typical CUT&RUN experiment has a read length of 30-80 nt. We can check the raw data quality with **FastQC**.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Quality Control
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
+> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: `2 PE fastqs`
+>
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
-> 2. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
+> 3. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
 >
 > > ### {% icon question %} Questions
 > >
@@ -408,8 +412,11 @@ We convert the BAM file to BED format because when we set the extension size in 
 
 > ### {% icon hands_on %} Hands-on: Convert the BAM to BED
 >
-> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %}
+> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
+>     - *"Input Collection"*: Select output of **MarkDuplicates**
+>
+> 2. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
+>    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **Flatten collection** {% icon tool %}
 >
 {: .hands_on}
 
