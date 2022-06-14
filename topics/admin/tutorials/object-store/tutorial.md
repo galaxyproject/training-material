@@ -313,9 +313,6 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    +    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
 >    +    user_preferences_extra_conf_path: "{{ galaxy_config_dir }}/user_preferences_extra_conf.yml"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
 >    ```
 >    {% endraw %}
 >

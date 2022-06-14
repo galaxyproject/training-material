@@ -127,7 +127,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    @@ -135,6 +135,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
->     
+>
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
@@ -434,8 +434,8 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    > ### {% icon code-out %} Output
 >    > Your output may look slightly different:
 >    > ```console
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 >    > ```
 >    {: .code-out}
 >

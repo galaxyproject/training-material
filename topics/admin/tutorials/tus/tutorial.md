@@ -134,7 +134,7 @@ To allow your user to upload via TUS, you will need to:
 >    +    }
 >    +
 >         # Static files can be more efficiently served by Nginx. Why send the
->         # request to uWSGI which should be spending its time doing more useful
+>         # request to Gunicorn which should be spending its time doing more useful
 >         # things like serving Galaxy!
 >    {% endraw %}
 >    ```
