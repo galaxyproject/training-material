@@ -127,7 +127,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    @@ -135,6 +135,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
->
+>     
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:

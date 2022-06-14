@@ -1966,7 +1966,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    }
 >    +
 >    +    # Static files can be more efficiently served by Nginx. Why send the
->    +    # request to uWSGI which should be spending its time doing more useful
+>    +    # request to Gunicorn which should be spending its time doing more useful
 >    +    # things like serving Galaxy!
 >    +    location /static {
 >    +        alias {{ galaxy_server_dir }}/static;
