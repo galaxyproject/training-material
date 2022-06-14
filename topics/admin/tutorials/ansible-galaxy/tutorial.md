@@ -2109,7 +2109,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/master/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
+One of the most important configuration files for a large Galaxy server is the `job_conf.yml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, [`job_conf.sample_advanced.yml`](https://github.com/galaxyproject/galaxy/blob/fd8826904be3f3201f7e7a3b6ffbadd27f268896/test/unit/app/jobs/job_conf.sample_advanced.yml).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -2119,35 +2119,37 @@ The job configuration file allows Galaxy to run jobs in multiple locations using
 
 ### The job conf file - basics
 
-The `job_conf.xml` file has three basic sections:
+The `job_conf.yml` file has three basic sections:
 
-* **Plugins** - This section lists the types of job management systems that this Galaxy server is configured to use, and tells Galaxy to load the drivers for each type.
-* **Destinations** - This section lists the different locations, queues, etc. that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
-* **Tools** - This section lists the various tools that you would like to send to a non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Every time Galaxy gets a job for that particular tool, it is always sent to that *destination*.
+* **runners** - This section lists the types of job management systems that this Galaxy server is configured to use, and tells Galaxy to load the drivers for each type.
+* **execution** - This section lists the different locations, queues, etc. that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
+* **tools** - This section lists the various tools that you would like to send to a non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Every time Galaxy gets a job for that particular tool, it is always sent to that *destination*.
 
-The basic `job_conf.xml` file looks like this:
+The basic `job_conf.yml` file looks like this:
 
 {% raw %}
-```xml
-<job_conf>
-    <plugins workers="4">
-        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
-    </plugins>
-    <destinations>
-        <destination id="local" runner="local"/>
-    </destinations>
-    <tools>
-    </tools>
-</job_conf>
+```yml
+runners:
+  local_runner:
+    load: galaxy.jobs.runners.local:LocalJobRunner
+    workers: 4
+execution:
+  default: local_dest
+  environments:
+    local_dest:
+      runner: local_runner
+tools:
+- id: bwa
+  destination: local_dest
 ```
 {% endraw %}
 
-The above `job_conf.xml` file defines a *plugin* and *destination* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
+The above `job_conf.yml` file defines a *runner* and an *execution* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
 
 Firstly, the plugins section contains a plugin called "local" which is of type "runner" and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called "local" using the runner "local". As this is the only destination specified, it is also the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
 
 > ### {% icon tip %} Want to use something else?
-> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration. There is also an advanced sample job conf file located at: `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_advanced`
+> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Job Conf
@@ -2161,7 +2163,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
+> 2. Create `templates/galaxy/config/job_conf.yml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
 >    {% raw %}
 >    ```diff
@@ -2182,10 +2184,10 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    {: data-commit="Add job conf"}
 >
 >    > ### {% icon tip %} workers=4
->    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
 >    {: .tip}
 >
-> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
+> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.yml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
 >    ```diff
@@ -2195,7 +2197,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
 >       gravity:
 >         galaxy_root: "{{ galaxy_root }}/server"
 >         app_server: gunicorn
@@ -2241,26 +2243,25 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > {: .code-out}
 >    {: .code-2col}
 >
-> 5. Checkout the new job_conf.xml file.
+> 5. Checkout the new job_conf.yml file.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > cat /srv/galaxy/config/job_conf.xml
+>    > cat /srv/galaxy/config/job_conf.yml
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
->    > ```xml
->    > <job_conf>
->    >     <plugins workers="4">
->    >         <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    >     </plugins>
->    >     <destinations default="local_destination">
->    >         <destination id="local_destination" runner="local_plugin"/>
->    >     </destinations>
->    >     <tools>
->    >     </tools>
->    > </job_conf>
+>    > ```yml
+>    > runners:
+>    >   local_runner:
+>    >     load: galaxy.jobs.runners.local:LocalJobRunner
+>    >     workers: 4
+>    > execution:
+>    >   default: local_dest
+>    >   environments:
+>    >     local_dest:
+>    >       runner: local_runner
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -2281,7 +2282,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    @@ -38,6 +38,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
 >    +    # SQL Performance
 >    +    database_engine_option_server_side_cursors: true
 >    +    slow_query_log_threshold: 5
