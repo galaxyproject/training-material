@@ -89,10 +89,8 @@ We use **RepeatMasker**
 {% cite RepeatMasker %}, a program that screens DNA sequences for interspersed repeats and low complexity DNA sequences.
 This program has historically made use of [RepBase](https://www.girinst.org/repbase/update/index.html) ({%cite Kohany2006-ks %}), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use [Dfam](https://www.dfam.org/home) ({%cite Storer2021 %}) an open collection of Transposable Element DNA sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.
 
-
-### FASTA pre-process with **Replace Text**
 RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (`BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence`) to leave only the accession number (`>BK006939.2`) by using a regular expression.
-> ### {% icon hands_on %} Hands-on: Replace Text
+> ### {% icon hands_on %} Hands-on: Mask repetitive sequences
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
 >    - {% icon param-collection %} *"File to process"*: `output` (Input dataset collection)
@@ -106,12 +104,7 @@ RepeatMasker will only accept compact fasta headers. Before we can mask repetiti
 >    >`\1` replaces the text in the header with the first matched text in the header, the accession number in this case.
 >    {: .comment}
 >
-{: .hands_on}
-
-
-> ### {% icon hands_on %} Hands-on: Mask repetitive sequences
->
-> 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0) %} with the following parameters:
+> 2. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `outfile` (output of **Replace Text** {% icon tool %})
 >    - *"Repeat library source"*: `DFam (curated only, bundled with RepeatMasker)`
 >        - *"Select species name from a list?"*: `No`
@@ -164,12 +157,23 @@ If you would like to learn about genome annotation in more depth, the GTN has a 
 ## Extract ORFs into FASTA files
 In this step, we extract the protein sequences from the GenBank files into multi-FASTA files. Additionally, we modify the headers to include the accession number of the sample. This creates an unique accession-proteinID header for each predicted protein, and will allow us to retrieve them after we combine all predicted proteins into one multi-FASTA file.
 
+So far, we have kept sequence files in a collection. Now we will combine all predicted proteins from all samples into one big multi-fasta file. Later, we will retrieve ortholog sequences from this file.
+
 > ### {% icon hands_on %} Hands-on: Extract ORFs
 >
 > 1. {% tool [Extract ORF](toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02) %} with the following parameters:
 >    - {% icon param-file %} *"gene bank file"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %} - or the genbank files downloaded from Zenodo)
 >
->
+> 2. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `aa_output` (output of **Extract ORF** {% icon tool %})
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `>([^ ]+).+`
+>            - *"Replacement"*: `>#{input_name}_\1`
+> 
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
+>    - *"Prepend File name"*: `Yes`
 >
 {: .hands_on}
 
@@ -186,31 +190,7 @@ In this step, we extract the protein sequences from the GenBank files into multi
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Replace FASTA headers
->
-> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `aa_output` (output of **Extract ORF** {% icon tool %})
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `>([^ ]+).+`
->            - *"Replacement"*: `>#{input_name}_\1`
->
->
-{: .hands_on}
 
-
-
-## Collapse Collection
-So far, we have kept sequence files in a collection. In this step we will combine all predicted proteins from all samples into one big multi-fasta file. Later, we will retrieve ortholog sequences from this file.
-
-> ### {% icon hands_on %} Hands-on: Collapse collection
->
-> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
->    - *"Prepend File name"*: `Yes`
->
->
-{: .hands_on}
 
 
 
@@ -219,11 +199,18 @@ So far, we have kept sequence files in a collection. In this step we will combin
 
 Orthologs are genes in different species evolved from a common ancestral gene by a speciation (lineage-splitting) event and contain the information needed for building phylogenies. The input for this step is the collection of multi-FASTA extracted from the GenBank file and modified to have unique headers.
 The result file 'orthology-groups' contains one row per orthogroup and one column per sample.
-> ### {% icon hands_on %} Hands-on: find orthologs
+
+Next, we select orthogroups where all the species are represented by only one protein, 1:1 single copy orthologs (a total of 4 proteins per orthogroup for this dataset).
+
+> ### {% icon hands_on %} Hands-on: find and filter orthologs
 >
 > 1. {% tool [Proteinortho](toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input fasta files (>2)"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
 >    - *"Activate synteny feature (POFF)"*: `no`
+>
+> 2. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `proteinortho` (output of **Proteinortho** {% icon tool %})
+>    - *"With following condition"*: `c1==4 and c2==4`
 >
 {: .hands_on}
 
@@ -245,21 +232,9 @@ The result file 'orthology-groups' contains one row per orthogroup and one colum
 {: .question}
 
 
-<!-- ########################################################################################################################### -->
-
-## Filter orthogroups
-Here we select orthogroups where all the species are represented by only one protein, 1:1 single copy orthologs (a total of 4 proteins per orthogroup for this dataset).
-
-> ### {% icon hands_on %} Hands-on: Filter orthogroups
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `proteinortho` (output of **Proteinortho** {% icon tool %})
->    - *"With following condition"*: `c1==4 and c2==4`
->
-{: .hands_on}
-
 > ### {% icon question %} Questions
->
+> 
+>Look at the filtered orthogroups.
 > 1. How many orthogroups are represented once only in all four samples?
 >
 > > ### {% icon solution %} Solution
@@ -336,10 +311,9 @@ The output is a collection of multi-fasta ortholog files. All species are repres
 # Align ortholog sequences
 Alignment of sequences allows cross-species (or other taxonomic level, strain, taxa) comparison. An alignment is a hypothesis of positional homology between bases/amino acids of different sequences. A correct alignment is crucial for phylogenetic inference. Here we use ClustaW, a well-established pairwise sequence aligner.
 
-## Replace fasta headers
-This step modifies the headers of the multi-fasta file, such that only the sample name is retained. This is important for future conatenation of alignment into a supermatrix (see Maximum likelihood GTN training)
+First we modify the headers of the multi-fasta file, such that only the sample name is retained. This is important for future conatenation of alignment into a supermatrix (see Maximum likelihood GTN training)
 
-> ### {% icon hands_on %} Hands-on: Replace fasta headers
+> ### {% icon hands_on %} Hands-on: Align orthologs with ClustalW
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `listproteinorthograbproteins` (output of **Proteinortho grab proteins** {% icon tool %})
@@ -348,13 +322,7 @@ This step modifies the headers of the multi-fasta file, such that only the sampl
 >            - *"Find Regex"*: `(>[^_]+).+`
 >            - *"Replacement"*: `\1`
 >
-{: .hands_on}
-
-
-
-> ### {% icon hands_on %} Hands-on: Align orthologs with ClustalW
->
-> 1. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1) %} with the following parameters:
+> 2. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA file"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
 >    - *"Data type"*: `Protein sequences`
 >    - *"Output alignment format"*: `FASTA format`
