@@ -372,7 +372,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >    @@ -95,6 +96,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml

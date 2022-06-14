@@ -68,10 +68,10 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,7 @@
->       version: 0.1.5
->     - name: galaxyproject.tusd
+>    @@ -16,3 +16,7 @@
 >       version: 0.0.1
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.13
 >    +- src: cyverse-ansible.singularity
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
@@ -97,7 +97,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -120,6 +120,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -121,6 +121,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
@@ -190,10 +190,10 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -86,6 +88,10 @@ galaxy_config:
+>    @@ -87,6 +89,10 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"

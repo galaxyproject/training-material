@@ -75,9 +75,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -20,3 +20,7 @@
+>       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>     - src: gantsign.golang
 >       version: 2.6.3
->     - src: galaxyproject.cvmfs
->       version: 0.2.13
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.2
 >    +- src: galaxyproject.slurm
