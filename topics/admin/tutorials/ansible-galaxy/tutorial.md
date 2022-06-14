@@ -418,6 +418,25 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```
 >    {: data-commit="Add initial group variables file"}
 >
+>    > ### {% icon tip %} Tip: Using postgres via the network
+>    > To use postgres via another machine, or via the network, you can add lines like the following:
+>    >
+>    > ```yaml
+>    > postgresql_pg_hba_conf:
+>    > - host all all 127.0.0.1/32 md5
+>    > ```
+>    >
+>    > Here you should either add multiple lines per IP address that needs access to the Postgres server (with netmask `/32`), or a less specific IP range defined also [via netmask.](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#IPv4_CIDR_blocks)
+>    >
+>    > Additionally you'll need to change the `postgresql_objects_users` statement to include a password (maybe stored in a vault, discussed later!)
+>    >
+>    > ```yaml
+>    > postgresql_objects_users:
+>    >   - name: galaxy
+>    >     password: super-secret-password-that-should-be-in-vault
+>    > ```
+>    {: .tip}
+>
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
 >    - Add a pre-task to install the necessary dependency, `python3-psycopg2`
@@ -882,6 +901,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > postgresql:///galaxy?host=/var/run/postgresql
 >    > ```
 >    >
+>    {: .tip}
+>
+>    > ### {% icon tip %} Tip: Using postgres via the network
+>    > Here you'll need to re-use the connection details you specified during `postgresql_objects_users`. You can reference it like the following, for example. `localhost` may need to change if you're hosting the database on another host.
+>    > ```
+>    > +    database_connection: "postgres://{{ postgresql_objects_users[0].name }}:{{ postgresql_objects_users[0].password }}@localhost:5432/{{ postgresql_objects_databases[0].name }}"
+>    > ```
 >    {: .tip}
 >
 >    > ### {% icon comment %} Ansible Variable Templating
