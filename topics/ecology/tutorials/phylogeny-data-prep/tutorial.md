@@ -2,56 +2,38 @@
 layout: tutorial_hands_on
 
 title: Preparing genomic data for phylogeny reconstruction
-zenodo_link: https://zenodo.org/record/6524847#.YnUycVxByV4
+zenodo_link: https://zenodo.org/record/6610704#.Ypn3FzlBw5k
 questions:
-- Which biological questions are addressed by the tutorial?
-- What is the evolutionary relationship between species or strains of the same species?
 - How do I find a set of common proteins (orthologs) across related species or strains?
 - How do I organize a set of orthologs to infer evolutionary relations between species or strains (phylogenetic reconstruction)?
--
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
 - Mask repetitive elements from a genome
-- Annotate the genomes of the samples to compare
+- Annotate (predict protein-coding genes) the genomes of the samples to compare
 - Find a set of common proteins across the samples (orthologs)
 - Align orthologs across samples
-- Concatenate the aligned set of orthologs  
-time_estimation: 4H
+time_estimation: 3H
 key_points:
 - You now are able to
 - Predict proteins in a nucleotide sequence *de-novo* using **funannotate_predict**
 - Find orthologs across different samples with **orthofinder**
-- Align orthologs with **ClustalW** and concatenate them in preparation for phylogeny reconstruction <!-- link to phylogeny reconstruction training. -->
+- Align orthologs with **ClustalW** in preparation for phylogeny reconstruction <!-- link to phylogeny reconstruction training. -->
 contributors:
 - roncoronimiguel
 - brigidagallone
 
 ---
-
+<!-- Add the references to the tutorials cited -->
 
 # Introduction
 {:.no_toc}
 
 <!-- This is a comment. -->
 
-*General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.*
-
-*Intro to phylogenetics:
-- evolutionary relationship of species
-- the field changed with fast, cheap generation of DNA sequence data (NextGen data)
-
+A robust and well-resolved phylogenetic classification is essential to understand genetic relationships within and between species and the evolution of their phenotypic diversity. In the last decade the genomic revolution has represented a drastic change in the amount of data used for phylogenetic inference. The single-gene approach using universal phylogenetic markers for the different lineages across the tree of life, is now being replaced by the assembly of taxon-rich and genome-scale data matrices, the so called phylogenomic approach.
 
 Molecular sequence data can be used to construct a phylogeny by comparing differences between nucleotide or amino acid sequences across species or strains, a technique called phylogenomics. {% cite Young2019 %} have written a comprehensive review on the topic of phylogenomics.
-Here we will compare protein sequences from chromosome 5 of five strains of the yeast *Saccharomyces cerevisiae*. This requires first the prediction of protein coding genes from the genome. We use Funannotate to predict proteins. Next, we find the proteins that are present in more than one genome, called orthologs, using Proteinortho, and extract a set with orthologs that are present in all samples. Each set of orthologs is aligned using ClustalW. Finally, we concatenate all alignments into one concatenation matrix that can be used by phylogeny reconstruction.
+In this tutorial we prepare genetic sequence data for phylogenetic reconstruction.
+We will use sequences from chromosome 5 of five strains of the yeast *Saccharomyces cerevisiae*. This requires first the prediction of protein coding genes from the genome. We use Funannotate to predict protein-coding genes . Next, we find the proteins that are present in more than one genome, called orthologs, using Proteinortho, and extract a subset with orthologs that are present in all samples. Finally, each set of orthologs is aligned using ClustalW. The resulting dataset is ready to be used for phylogenetic reconstruction.
 
 
 **If you are starting from sequence reads, please follow
@@ -66,63 +48,31 @@ Here we will compare protein sequences from chromosome 5 of five strains of the 
 >
 {: .agenda}
 
-# Annotating a genome
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-In this section you will predict protein-coding genes from genomic sequences and extract the corresponding, translated amino-acid sequences. We will use [Funannotate](https://funannotate.readthedocs.io/){% cite Young2019 %}, which collects evidence from
-
-many ab-initio
-
-
-Genome annotation is a field of study in itself. The GTN has a [section]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html/topics/genome-annotation/) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html)
-The GTN has a
-
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+# Get data
+For this training we will use a subset of the genome (chromosome 5) from four strains of *S. cerevisiae*. The GenBank annotated sequenced were produced using 'funannotate predict annotation' (Galaxy Version 1.8.9+galaxy2) on the nucleotide sequences sequences.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import the files from [Zenodo]({{ https://zenodo.org/record/6610704#.Ypn3FzlBw5k }}) or from
+>    the shared data library (`GTN - Material` -> `{{ ecology }}`
+>     -> `{{ phylogenetic-data-prep }}`):
 >
 >    ```
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/BK006939.2.genome.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/BK006939.2.prot.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM000925.1.genome.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM000925.1.prot.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM005043.2.genome.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM005043.2.prot.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM005299.1.genome.fasta
->    https://zenodo.org/api/files/8e32cfe7-7f9f-4443-9c65-68242f601cc2/CM005299.1.prot.fasta
+>    https://zenodo.org/record/6610704/files/BK006939.2.genbank
+>    https://zenodo.org/record/6610704/files/BK006939.2.genome.fasta
+>    https://zenodo.org/record/6610704/files/CM000925.1.genbank
+>    https://zenodo.org/record/6610704/files/CM000925.1.genome.fasta
+>    https://zenodo.org/record/6610704/files/CM005043.2.genbank
+>    https://zenodo.org/record/6610704/files/CM005043.2.genome.fasta
+>    https://zenodo.org/record/6610704/files/CM005299.1.genbank
+>    https://zenodo.org/record/6610704/files/CM005299.1.genome.fasta
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >
-> 3. Rename each dataset to its accession number followed by .nucleotide or .protein accordingly.
+> 3. Optional: Rename each dataset to its accession number followed by '.genome.fasta' or '.genbank'.
 > 4. Group the datasets into [collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html). These will ease data handling and help minimize the clutter in your history. Make a collection of nucleotide sequences and another of protein sequences.
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
@@ -130,29 +80,19 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Genome annotation
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+## Mask repetitive sequences
+Before we can annotate the genome, we will prepare the data by masking repetitive sequences in the genome.
+Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account ({%cite genome-annotation-repeatmasker %}).
+We use **RepeatMasker**
+{% cite RepeatMasker %}, a program that screens DNA sequences for interspersed repeats and low complexity DNA sequences.
+This program has historically made use of [RepBase](https://www.girinst.org/repbase/update/index.html) ({%cite Kohany2006-ks %}), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use [Dfam](https://www.dfam.org/home) ({%cite Storer2021 %}) an open collection of Transposable Element DNA sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.
 
 
-## Sub-step with **Replace Text**
-
-> ### {% icon hands_on %} Hands-on: Task description
+### FASTA pre-process with **Replace Text**
+RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (*">BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence"*) to leave only the accession number ("*>BK006939.2*") by using a regular expression.
+> ### {% icon hands_on %} Hands-on: Replace Text
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
 >    - {% icon param-collection %} *"File to process"*: `output` (Input dataset collection)
@@ -161,79 +101,44 @@ A big step can have several subsections or sub steps:
 >            - *"Find pattern"*: `(>[^ ]+).+`
 >            - *"Replace with:"*: `\1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    >`\1` replaces the text in the header with the first matched text in the header, the accession number in this case.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RepeatMasker**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Mask repetitive sequences
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `outfile` (output of **Replace Text** {% icon tool %})
 >    - *"Repeat library source"*: `DFam (curated only, bundled with RepeatMasker)`
 >        - *"Select species name from a list?"*: `No`
->            - *"Repeat source species"*: `Saccharomyces cerevisiae`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>            - *"Repeat source species"*: `"Saccharomyces cerevisiae"`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In principal, all unique clade names occurring in [NCBI taxonomy database](https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html) can be used for species. Capitalization is ignored, multiple words need to bound by apostrophes. Not all "common" English names occur in the taxonomy database. Using Latin names is always safest.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Annotate with Funannotate
+We will predict protein-coding genes from genomic sequences using [Funannotate](https://funannotate.readthedocs.io/) ({% cite Young2019 %}), which collects evidence from different ab-initio gene predictors as well as from RNA-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html) ({%cite genome-annotation-funannotate %}).
 
-## Sub-step with **Funannotate predict annotation**
+**Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Annotate genome
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `output_masked_genome` (output of **RepeatMasker** {% icon tool %})
 >    - In *"Organism"*:
 >        - *"Name of the species to annotate"*: `Saccharomyces cerevisiae`
 >        - *"Is it a fungus species?"*: `Yes`
+>        - *"Ploidy of assembly"*: `1`
 >    - In *"Evidences"*:
 >        - *"Select protein evidences"*: `Use UniProtKb/SwissProt (from selected Funannotate database)`
 >    - In *"Busco"*:
@@ -241,74 +146,45 @@ A big step can have several subsections or sub steps:
 >        - *"Initial Augustus species training set for BUSCO alignment"*: `saccharomyces`
 >    - In *"Augustus settings (advanced)"*:
 >        - *"Minimum number of models to train Augustus"*: `15`
->    - In *"EVM settings (advanced)"*:
->        - *"Split contigs into partitions for EVM processing?"*: `Yes`
->    - *"Which outputs should be generated"*: ``
+>    
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>    > ### {% icon tip %} Tip
+>    >
+>    > If available, include mRNA and/or ESTs evidence to increase sensitivity of predictions.
+>    {: .tip}
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    The Galaxy Training Network has a [dedicated tutorial](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html) for Funanotate.{: .comment}
->
+>    > When annotating full genomes, increase the number of *'Minimum number of models to train Augustus'* to an appropriate value. For the small sample dataset used here, values larger than 15 will result in failure.
+>    {: .comment}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Extract ORFs into FASTA files
+In this step, we extract the protein sequences from the GenBank files into multi-FASTA files. Additionally, we modify the headers to include the accession number of the sample. This creates an unique accession-proteinID header for each predicted protein, and will allow us to retrieve them after we combine all predicted proteins into one multi-FASTA file.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Extract ORF**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Extract ORFs
 >
 > 1. {% tool [Extract ORF](toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02) %} with the following parameters:
->    - {% icon param-file %} *"gene bank file"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %})
+>    - {% icon param-file %} *"gene bank file"*: `annot_gbk` (output of **Funannotate predict annotation** {% icon tool %} - or the genbank files downloaded from Zenodo)
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Is the number of predicted ORFs the same across the samples?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. No, the number of predicted ORFs ranges from 193 to 199.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Regex Find And Replace**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Replace FASTA headers
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `aa_output` (output of **Extract ORF** {% icon tool %})
@@ -317,106 +193,93 @@ A big step can have several subsections or sub steps:
 >            - *"Find Regex"*: `>([^ ]+).+`
 >            - *"Replacement"*: `>#{input_name}_\1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Collapse Collection**
+## Collapse Collection
+So far, we have kept sequence files in a collection. In this step we will combine all predicted proteins from all samples into one big multi-fasta file. Later, we will retrieve ortholog sequences from this file.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Collapse collection
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
 >    - *"Prepend File name"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Proteinortho**
 
-> ### {% icon hands_on %} Hands-on: Task description
+# Find orthologs
+
+Orthologs are genes in different species evolved from a common ancestral gene by a speciation (lineage-splitting) event and contain the information needed for building phylogenies. The input for this step is the collection of multi-FASTA extracted from the GenBank file and modified to have unique headers.
+The result file 'orthology-groups' contains one row per orthogroup and one column per sample.
+> ### {% icon hands_on %} Hands-on: find orthologs
 >
 > 1. {% tool [Proteinortho](toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input fasta files (>2)"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
 >    - *"Activate synteny feature (POFF)"*: `no`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+>Look at the 'orthology-groups' tabular file.
+>
+> 1. Do any samples contain more than one gene for any given orthogroup?
+> 2. What is the name given to these homologous genes within the same genome?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, *CM000925.1* contains two genes on the first orthogroup.
+> > 2. Paralogs. These are gene copies created by a duplication event within the same genome.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Busco**
 
-> ### {% icon hands_on %} Hands-on: Task description
+<!-- ########################################################################################################################### -->
+
+## Filter orthogroups
+Here we select orthogroups where all the species are represented by only one protein, 1:1 single copy orthologs (a total of 4 proteins per orthogroup for this dataset).
+
+> ### {% icon hands_on %} Hands-on: Filter orthogroups
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `proteinortho` (output of **Proteinortho** {% icon tool %})
+>    - *"With following condition"*: `c1==4 and c2==4`
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many orthogroups are represented once only in all four samples?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. 173
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+
+## Quality control with **Busco**
+Busco is a dataset of nearl-universal, single-copy orthologs.
+Here we use it for QC of the assembly and annotation produced above.
+It outputs a proxy of completeness, duplication and fragmentation of the annotation (Busco can also be used to assess the completeness of a genome assembly).
+
+
+
+
+> ### {% icon hands_on %} QC with Busco
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
@@ -425,107 +288,56 @@ A big step can have several subsections or sub steps:
 >    - In *"Advanced Options"*:
 >        - *"Augustus species model"*: `Use the default species for selected lineage`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
+>    > ### {% icon tip %} Tip
+>    > Make sure you select the 'lineage' closest to the species(s) you are analyzing.
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    {: .tip}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. The [Complete ('C') metric](https://busco.ezlab.org/busco_userguide.html#complete) stands for complete Busco genes identified. Look at the Busco output file 'Short summary' for sample BK006939.2. What is the 'C' number?
+> 2. Why is it so low?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 4.0%
+> > 2. Our dataset contains only chromosome 5 of the yeast genome.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Filter**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `proteinortho` (output of **Proteinortho** {% icon tool %})
->    - *"With following condition"*: `c1==4 and c2==4`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Proteinortho grab proteins**
+## Extract proteins with Proteinortho
+Next we extract 1:1 single copy orthologs and generate one multi fasta file per ortholog.  
+The output is a collection of multi-fasta ortholog files. All species are represented in each file and are ready to be aligned.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: extract protein sequences
 >
 > 1. {% tool [Proteinortho grab proteins](toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input fasta files"*: `output` (output of **Collapse Collection** {% icon tool %})
 >    - *"Query type"*: `orthology-groups output file`
 >        - {% icon param-file %} *"A orthology-groups file"*: `out_file1` (output of **Filter** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **Regex Find And Replace**
 
-> ### {% icon hands_on %} Hands-on: Task description
+# Align ortholog sequences
+Alignment of sequences allows cross-species (or other taxonomic level, strain, taxa) comparison. An alignment is a hypothesis of positional homology between bases/amino acids of different sequences. A correct alignment is crucial for phylogenetic inference. Here we use ClustaW, a well-established pairwise sequence aligner.
+
+## Replace fasta headers
+This step modifies the headers of the multi-fasta file, such that only the sample name is retained. This is important for future conatenation of alignment into a supermatrix (see Maximum likelihood GTN training)
+
+> ### {% icon hands_on %} Hands-on: Replace fasta headers
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `listproteinorthograbproteins` (output of **Proteinortho grab proteins** {% icon tool %})
@@ -534,36 +346,11 @@ A big step can have several subsections or sub steps:
 >            - *"Find Regex"*: `(>[^_]+).+`
 >            - *"Replacement"*: `\1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **ClustalW**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Align orthologs with ClustalW
 >
 > 1. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA file"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
@@ -571,101 +358,8 @@ A big step can have several subsections or sub steps:
 >    - *"Output alignment format"*: `FASTA format`
 >    - *"Output complete alignment (or specify part to output)"*: `Complete alignment`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **ClipKIT. Alignment trimming software for phylogenetics.**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [ClipKIT. Alignment trimming software for phylogenetics.](toolshed.g2.bx.psu.edu/repos/padge/clipkit/clipkit/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Alignment file"*: `output` (output of **ClustalW** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **PhyKit - Alignment-based functions**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [PhyKit - Alignment-based functions](toolshed.g2.bx.psu.edu/repos/padge/phykit/phykit_alignment_based/0.1.0) %} with the following parameters:
->    - *"Select tool for processing the alignment(s)"*: `Concatenate alignments.`
->        - {% icon param-file %} *"alignment list file. File should contain a single column list of alignment sequence files to concatenate into a single matrix."*: `trimmed_output` (output of **ClipKIT. Alignment trimming software for phylogenetics.** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 
 ## Re-arrange
