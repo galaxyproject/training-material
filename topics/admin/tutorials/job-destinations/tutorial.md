@@ -143,7 +143,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 > ### {% icon hands_on %} Hands-on: Allocating more resources
 >
-> 1. Edit your `templates/galaxy/config/job_conf.xml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
+> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
 >
 >    {% raw %}
 >    ```diff
@@ -178,7 +178,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
 >
-> 3. Run the Galaxy playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
+> 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
@@ -287,9 +287,9 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```
 >    {: data-commit="Add dynamic admin only destination"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.yml`
 >
-> 4. Finally, in `job_conf.xml`, update the `<tool>` definition and point it to this destination:
+> 4. Finally, in `job_conf.yml`, update the `<tool>` definition and point it to this destination:
 >
 >    {% raw %}
 >    ```diff
@@ -386,7 +386,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```
 >    {: data-commit="Deploy tool destinations config file"}
 >
-> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.xml.j2` and add a DTD destination.
+> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.yml.j2` and add a DTD destination.
 >    Also, comment out or remove the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    {% raw %}
@@ -488,7 +488,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```
 >    {: data-commit="Deploy job resource params configuration"}
 >
-> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.xml.j2`:
+> 3. Next, we define a new section in `job_conf.yml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.yml.j2`:
 >
 >    {% raw %}
 >    ```diff
@@ -515,7 +515,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
 >
 >
-> 4. Finally, in `job_conf.xml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
+> 4. Finally, in `job_conf.yml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
 >
 >    {% raw %}
 >    ```diff
@@ -552,7 +552,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```
 >    {: data-commit="Add dynamic_cores_time destination"}
 >
->    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
+>    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.yml`
 >
 {: .hands_on}
 
@@ -614,7 +614,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    +            destination.params['nativeSpecification'] = ''
 >    +        destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
 >    +    except:
->    +        # resource param selector not sent with tool form, job_conf.xml misconfigured
+>    +        # resource param selector not sent with tool form, job_conf.yml misconfigured
 >    +        log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
 >    +        raise JobMappingException(FAILURE_MESSAGE)
 >    +
@@ -720,5 +720,5 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 - The [sample dynamic tool destination config file](https://github.com/galaxyproject/galaxy/blob/dev/config/tool_destinations.yml.sample) fully describes the configuration language
 - [Dynamic destination documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html)
 - Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
-- [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2) is publicly available for reference.
+- [usegalaxy.org's job_conf.yml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/common/templates/galaxy/config/job_conf.yml.j2) is publicly available for reference.
 - [usegalaxy.eu's job_conf.xml](https://github.com/usegalaxy-eu/infrastructure-playbook/search?l=YAML&q=galaxy_jobconf) is likewise (see the `group_vars/galaxy.yml` result)

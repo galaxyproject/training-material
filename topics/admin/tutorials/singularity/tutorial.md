@@ -247,7 +247,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >    {: data-commit="Configure the container resolver"}
 >
-> 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
+> 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.yml.j2`, by adding the `singularity_enabled` parameter:
 >
 >    {% raw %}
 >    ```diff
@@ -277,7 +277,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +        value: /tmp
 >    {% endraw %}
 >    ```
->    {: data-commit="Update the job_conf.xml with singularity destination"}
+>    {: data-commit="Update the job_conf.yml with singularity destination"}
 >
 > 4. Re-run the playbook
 >

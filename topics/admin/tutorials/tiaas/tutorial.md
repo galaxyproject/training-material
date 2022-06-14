@@ -367,7 +367,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
 >
-> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.xml.j2`):
+> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.yml.j2`):
 >
 >    {% raw %}
 >    ```diff
@@ -406,7 +406,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```
 >    {: data-commit="Setup job conf"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
