@@ -664,9 +664,9 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    amqp_publish_retry_max_retries: 60
 >    +    galaxy_url: "https://{{ inventory_hostname }}"
 >    +    manager: _default_
+>     
 >     execution:
 >       default: singularity
->       environments:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
@@ -677,7 +677,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -19,6 +19,16 @@ execution:
+>    @@ -20,6 +20,16 @@ execution:
 >       environments:
 >         local_dest:
 >           runner: local_runner
@@ -714,14 +714,14 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -83,3 +83,7 @@ tools:
+>    @@ -86,3 +86,7 @@ tools:
 >     - id: testing
->       destination: dynamic_cores_time
+>       execution: dynamic_cores_time
 >       resources: testing
 >    +- id: bwa
->    +  destination: pulsar
+>    +  execution: pulsar
 >    +- id: bwa_mem
->    +  destination: pulsar
+>    +  execution: pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}

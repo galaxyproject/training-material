@@ -253,9 +253,9 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -3,7 +3,20 @@ runners:
->         load: galaxy.jobs.runners.local:LocalJobRunner
+>    @@ -4,10 +4,23 @@ runners:
 >         workers: 4
+>     
 >     execution:
 >    -  default: local_dest
 >    +  default: singularity
@@ -275,6 +275,9 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +      # Singularity uses a temporary directory to build the squashfs filesystem
 >    +      - name: SINGULARITY_TMPDIR
 >    +        value: /tmp
+>     
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}

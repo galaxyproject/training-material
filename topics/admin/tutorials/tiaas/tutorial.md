@@ -373,16 +373,16 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -15,7 +15,7 @@ runners:
->         galaxy_url: "https://{{ inventory_hostname }}"
+>    @@ -16,7 +16,7 @@ runners:
 >         manager: _default_
+>     
 >     execution:
 >    -  default: singularity
 >    +  default: sorting_hat
 >       environments:
 >         local_dest:
 >           runner: local_runner
->    @@ -72,6 +72,10 @@ execution:
+>    @@ -73,6 +73,10 @@ execution:
 >         dynamic_cores_time:
 >           runner: dynamic
 >           function: dynamic_cores_time
@@ -393,15 +393,6 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >     
 >     resources:
 >       default: default
->    @@ -80,6 +84,8 @@ resources:
->         testing: [cores, time]
->     
->     tools:
->    +- id: upload1
->    +  destination: slurm
->     - id: testing
->       destination: dynamic_cores_time
->       resources: testing
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}

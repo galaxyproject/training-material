@@ -386,12 +386,13 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -2,11 +2,23 @@ runners:
+>    @@ -2,12 +2,24 @@ runners:
 >       local_runner:
 >         load: galaxy.jobs.runners.local:LocalJobRunner
 >         workers: 4
 >    +  slurm:
 >    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>     
 >     execution:
 >       default: singularity
 >       environments:

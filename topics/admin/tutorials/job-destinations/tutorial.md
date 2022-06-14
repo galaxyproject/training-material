@@ -149,7 +149,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -19,6 +19,17 @@ execution:
+>    @@ -20,6 +20,17 @@ execution:
 >             value: /tmp/singularity
 >           - name: SINGULARITY_TMPDIR
 >             value: /tmp
@@ -167,13 +167,12 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >         singularity:
 >           runner: local_runner
 >           singularity_enabled: true
->    @@ -32,3 +43,6 @@ execution:
->           # Singularity uses a temporary directory to build the squashfs filesystem
->           - name: SINGULARITY_TMPDIR
->             value: /tmp
->    +tools:
+>    @@ -37,3 +48,5 @@ execution:
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       execution: local_dest
 >    +- id: testing
->    +  destination: slurm-2c
+>    +  execution: slurm-2c
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
@@ -273,16 +272,16 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -43,6 +43,9 @@ execution:
+>    @@ -44,6 +44,9 @@ execution:
 >           # Singularity uses a temporary directory to build the squashfs filesystem
 >           - name: SINGULARITY_TMPDIR
 >             value: /tmp
 >    +    dynamic_admin_only:
 >    +      runner: dynamic
 >    +      function: admin_only
+>     
 >     tools:
->     - id: testing
->       destination: slurm-2c
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic admin only destination"}
@@ -295,12 +294,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -48,4 +48,4 @@ execution:
->           function: admin_only
->     tools:
+>    @@ -52,4 +52,4 @@ tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       execution: local_dest
 >     - id: testing
->    -  destination: slurm-2c
->    +  destination: dynamic_admin_only
+>    -  execution: slurm-2c
+>    +  execution: dynamic_admin_only
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send testing tool to the dynamic admin only destination."}
@@ -393,17 +392,20 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -46,6 +46,9 @@ execution:
+>    @@ -47,9 +47,12 @@ execution:
 >         dynamic_admin_only:
 >           runner: dynamic
 >           function: admin_only
->    +    dyd:
+>    +    dtd:
 >    +      runner: dynamic
 >    +      type: dtd
+>     
 >     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       execution: local_dest
 >     - id: testing
->    -  destination: dynamic_admin_only
->    +  destination: dtd
+>    -  execution: dynamic_admin_only
+>    +  execution: dtd
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure dtd in job conf"}
@@ -494,11 +496,10 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -49,6 +49,13 @@ execution:
->         dyd:
+>    @@ -51,6 +51,12 @@ execution:
 >           runner: dynamic
 >           type: dtd
->    +
+>     
 >    +resources:
 >    +  default: default
 >    +  groups:
@@ -506,8 +507,8 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +    testing: [cores, time]
 >    +
 >     tools:
->     - id: testing
->       destination: dtd
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       execution: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -521,12 +522,12 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -58,4 +58,5 @@ resources:
->     
->     tools:
+>    @@ -61,4 +61,5 @@ tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       execution: local_dest
 >     - id: testing
->    -  destination: dtd
->    +  destination: dynamic_cores_time
+>    -  execution: dtd
+>    +  execution: dynamic_cores_time
 >    +  resources: testing
 >    {% endraw %}
 >    ```
@@ -538,8 +539,8 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.yml.j2
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -49,6 +49,9 @@ execution:
->         dyd:
+>    @@ -50,6 +50,9 @@ execution:
+>         dtd:
 >           runner: dynamic
 >           type: dtd
 >    +    dynamic_cores_time:

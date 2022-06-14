@@ -2169,19 +2169,21 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -0,0 +1,9 @@
+>    @@ -0,0 +1,14 @@
 >    +runners:
 >    +  local_runner:
 >    +    load: galaxy.jobs.runners.local:LocalJobRunner
 >    +    workers: 4
+>    +
 >    +execution:
 >    +  default: local_dest
 >    +  environments:
 >    +    local_dest:
 >    +      runner: local_runner
+>    +
 >    +tools:
 >    +- class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->    +  environment: local_dest
+>    +  execution: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
