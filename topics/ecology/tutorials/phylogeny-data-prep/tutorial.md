@@ -84,7 +84,7 @@ For this training we will use a subset of the genome (chromosome 5) from four st
 
 ## Mask repetitive sequences
 Before we can annotate the genome, we will prepare the data by masking repetitive sequences in the genome.
-Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account ({%cite genome-annotation-repeatmasker %}).
+Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account ([see RepeatMasker tutorial for more details]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %})).
 We use **RepeatMasker**
 {% cite RepeatMasker %}, a program that screens DNA sequences for interspersed repeats and low complexity DNA sequences.
 This program has historically made use of [RepBase](https://www.girinst.org/repbase/update/index.html) ({%cite Kohany2006-ks %}), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use [Dfam](https://www.dfam.org/home) ({%cite Storer2021 %}) an open collection of Transposable Element DNA sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.
