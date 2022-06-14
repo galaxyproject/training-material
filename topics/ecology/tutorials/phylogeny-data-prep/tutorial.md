@@ -129,7 +129,9 @@ We will predict protein-coding genes from genomic sequences using [Funannotate](
 
 If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
-**Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.**
+> ### {% icon warning %} Slow Step Ahead!
+> Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.
+{: .warning}
 
 > ### {% icon hands_on %} Hands-on: Annotate genome
 >
