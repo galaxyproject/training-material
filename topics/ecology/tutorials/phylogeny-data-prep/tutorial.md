@@ -91,7 +91,7 @@ This program has historically made use of [RepBase](https://www.girinst.org/repb
 
 
 ### FASTA pre-process with **Replace Text**
-RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (*">BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence"*) to leave only the accession number ("*>BK006939.2*") by using a regular expression.
+RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (`BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence`) to leave only the accession number (`>BK006939.2`) by using a regular expression.
 > ### {% icon hands_on %} Hands-on: Replace Text
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
