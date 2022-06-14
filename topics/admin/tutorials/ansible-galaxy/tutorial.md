@@ -305,6 +305,23 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
+>    > ### {% icon tip %} Tip: Using `git`?
+>    > If you're using git, it can make sense to tell git to ignore the `roles`
+>    > directory, as all of that data can be perfectly recreated from our
+>    > variables in the requirements.yml file.
+>    >
+>    > Simply create a file `.gitignore` with the following content:
+>    >
+>    > ```console
+>    > roles/
+>    > .vault-password.txt
+>    > ```
+>    >
+>    > When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files". We're adding the `.vault-password.txt` file as well, ahead of time, because this should *never* ever be committed to the repository.
+>    >
+>    > Now you can do `git add .` to add all of the files in the current directory, and not worry about committing generated artifacts!
+>    {: .tip}
+>
 > 4. Inspect the contents of the newly created `roles` directory in your working directory.
 {: .hands_on}
 
@@ -983,6 +1000,51 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add id_secret to the vault" data-comment="The password is password"}
+>
+>    > ### {% icon tip %} Tip: Using `git`?
+>    > If you're using git, and storing all of these steps in your git history,
+>    > you'll find that working with Vault secrets can be rather annoying as
+>    > the opaque blobs are impossible to read. There's a way to make this
+>    > *much* easier though:
+>    >
+>    > Create a file `.gitattributes` with the following content:
+>    >
+>    > ```
+>    > group_vars/secret.yml diff=ansible-vault merge=binary
+>    > ```
+>    >
+>    > You can add this file to your repository with `git add .gitattributes`
+>    > to ensure colleagues get a copy of the file too. Just **be sure**
+>    > `.vault-password.txt` is listed in your `.gitignore` file!
+>    >
+>    > If you have more vault secrets, you can adjust this line (or add more,
+>    > wildcards are supported) to list all of your secret files. This tells
+>    > `git` to use `ansible-vault` to diff the two files, as you can see in
+>    > the following real (redacted) snippet from a vault stored in a public
+>    > github project.
+>    >
+>    > ```console
+>    > $ git log -p group_vars/all/secret.yml
+>    > commit a137d7d6aa4ed374c29545ac4728837815c460aa
+>    > Author: Helena Rasche <hxr@hx42.org>
+>    > Date:   Thu Dec 2 12:52:55 2021 +0100
+>    >
+>    >     fix automation password
+>    >
+>    > diff --git a/group_vars/all/secret.yml b/group_vars/all/secret.yml
+>    > index 3fe4444..11831ae 100644
+>    > --- a/group_vars/all/secret.yml
+>    > +++ b/group_vars/all/secret.yml
+>    > @@ -1,6 +1,6 @@
+>    >  ---
+>    >  id_secret: "..."
+>    > -jenkins_password: "old-secret-value"
+>    > +jenkins_password: "new-secret-value"
+>    >  grafana_admin_pass:    "..."
+>    >  secret_tiaas_admin_pw: "..."
+>    >
+>    > ```
+>    {: .tip}
 >
 > 8. Load the secrets in the playbook
 >
