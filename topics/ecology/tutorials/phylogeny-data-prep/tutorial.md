@@ -127,7 +127,7 @@ RepeatMasker will only accept compact fasta headers. Before we can mask repetiti
 ## Annotate with Funannotate
 We will predict protein-coding genes from genomic sequences using [Funannotate](https://funannotate.readthedocs.io/) ({% cite Young2019 %}), which collects evidence from different ab-initio gene predictors as well as from RNA-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.
 
-If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({{ site.baseurl }}/topics/genome-annotation/tutorials/funannotate/tutorial.html) ({%cite genome-annotation-funannotate %}).
+If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
 **Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.**
 
