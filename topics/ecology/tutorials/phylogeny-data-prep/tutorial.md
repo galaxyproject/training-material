@@ -22,12 +22,6 @@ contributors:
 - brigidagallone
 
 ---
-<!-- Add the references to the tutorials cited -->
-
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 A robust and well-resolved phylogenetic classification is essential to understand genetic relationships within and between species and the evolution of their phenotypic diversity. In the last decade the genomic revolution has represented a drastic change in the amount of data used for phylogenetic inference. The single-gene approach using universal phylogenetic markers for the different lineages across the tree of life, is now being replaced by the assembly of taxon-rich and genome-scale data matrices, the so called phylogenomic approach.
 
@@ -340,7 +334,6 @@ To create the template, each step of the workflow had its own subsection.
 Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
-{:.no_toc}
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
