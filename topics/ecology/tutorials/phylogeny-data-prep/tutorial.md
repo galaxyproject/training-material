@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Preparing genomic data for phylogeny reconstruction
-zenodo_link: https://zenodo.org/record/6610704#.Ypn3FzlBw5k
+zenodo_link: https://zenodo.org/record/6610704
 questions:
 - How do I find a set of common proteins (orthologs) across related species or strains?
 - How do I organize a set of orthologs to infer evolutionary relations between species or strains (phylogenetic reconstruction)?
