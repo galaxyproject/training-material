@@ -113,8 +113,8 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -16,6 +16,22 @@ server {
->             include uwsgi_params;
+>    @@ -28,6 +28,22 @@ server {
+>             proxy_set_header Upgrade $http_upgrade;
 >         }
 >     
 >    +    location /api/upload/resumable_upload {

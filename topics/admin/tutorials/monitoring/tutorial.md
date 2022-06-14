@@ -280,7 +280,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -72,4 +72,10 @@ server {
+>    @@ -84,4 +84,10 @@ server {
 >         location /training-material/ {
 >             proxy_pass https://training.galaxyproject.org/training-material/;
 >         }

@@ -1872,7 +1872,15 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- /dev/null
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -0,0 +1,49 @@
+>    @@ -0,0 +1,61 @@
+>    +upstream galaxy {
+>    +    server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +
+>    +    # Or if you serve galaxy at a path like http(s)://fqdn/galaxy
+>    +    # Remember to set galaxy_url_prefix in the galaxy.yml file.
+>    +    # server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +}
+>    +
 >    +server {
 >    +    # Listen on port 443
 >    +    listen        *:443 ssl default_server;
@@ -1883,12 +1891,16 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    access_log  /var/log/nginx/access.log;
 >    +    error_log   /var/log/nginx/error.log;
 >    +
->    +    # The most important location block, by default all requests are sent to uWSGI
+>    +    # The most important location block, by default all requests are sent to gunicorn
+>    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
 >    +    location / {
 >    +        # This is the backend to send the requests to.
->    +        uwsgi_pass {{ galaxy_config.uwsgi.socket }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
+>    +        proxy_pass http://galaxy;
+>    +
+>    +        proxy_set_header Host $http_host;
+>    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +        proxy_set_header X-Forwarded-Proto $scheme;
+>    +        proxy_set_header Upgrade $http_upgrade;
 >    +    }
 >    +
 >    +    # Static files can be more efficiently served by Nginx. Why send the
@@ -2227,7 +2239,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -46,4 +46,14 @@ server {
+>    @@ -58,4 +58,14 @@ server {
 >         location /favicon.ico {
 >             alias {{ galaxy_server_dir }}/static/favicon.ico;
 >         }
