@@ -881,7 +881,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > > 2. The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are : 
 > > > 1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
 > > > 2.  You can view as well as download the generated plots to use further. 
-> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool.Refer to [this tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html) for more info.
+> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to [this tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html) for more info.
 > >
 > > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name `Image Montage`.
 > > 
