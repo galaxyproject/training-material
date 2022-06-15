@@ -254,7 +254,7 @@ Follow the below steps:
 >    >
 >    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention to is how the data entries are numbered: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to achieve the desired result. 
 > > 
-Although we are not using `splihour` here, you can find below the syntax for future uses.
+Although we are not using `splithour` here, you can find below the syntax for future uses.
 > >
 > >1. {% tool [CDO Operations](toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0) %} with the following parameters:
 > >- In *"CDO Operators"*:
