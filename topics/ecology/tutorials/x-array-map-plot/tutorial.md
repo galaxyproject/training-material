@@ -850,7 +850,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > > > The final plot is shown below: 
 > > >    ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/x-array-map-plot/bat.png)
 > > >Some other important color variants of the same map can be found below :
-> > > - *colormap : Oslo*
+> > > - *colormap : oslo*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/x-array-map-plot/os.png)
 > > >  - *colormap : bamako*
 > > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 >at 18:00:00](../../images/x-array-map-plot/bama.png)
