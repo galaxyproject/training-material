@@ -245,8 +245,8 @@ Follow the below steps:
 >    - In *"CDO Operators"*:
 >        - {% icon param-repeat %} *"Insert CDO Operators"*
 >            - *"Select cdo operator"*: `seltimestep (Select timesteps)`
->                - *"Timesteps for selection"*: `744/744`
->                - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
+>            - *"Timesteps for selection"*: `744/744`
+>            - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
 >
 >{: .hands_on}
 >
@@ -260,7 +260,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > >- In *"CDO Operators"*:
 > >- {% icon param-repeat %} *"Insert CDO Operators"*
 > >- *"Select cdo operator"*: `splithour (Split hours)`
-> >               - {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
+> >- {% icon param-file %} *"Additional input file"*: `outfile.netcdf` generated from the previous step.
 > > 
 > > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
 > > Suppose your selected range was `744/744` for the `seltimestep` , then it will generate `2` files which can be plotted further. 
