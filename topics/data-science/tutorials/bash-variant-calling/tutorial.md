@@ -79,7 +79,7 @@ We go to "Tools" and pick the "Shell..." option and we are good to go. Our works
 
 # Alignment to a reference genome
 
-![Simplified workflow that starts with the raw sequence reads and ends up to genome alignment](../../images/variant_calling_workflow_align.png)
+![Simplified workflow that starts with the raw sequence reads and ends up to genome alignment](../../images/bash-variant-calling/variant_calling_workflow_align.png)
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
 We perform read alignment or mapping to determine where in the genome our reads originated from. There are a number of tools to
@@ -234,10 +234,10 @@ that follows corresponds to alignment information for a single read. Each alignm
 mapping information and a variable number of other fields for aligner specific information. An example entry from a SAM file is 
 displayed below with the different fields highlighted.
 
-![sam file example with fields description #1](../../images/sam_bam.png )
+![sam file example with fields description #1](../../images/bash-variant-calling/sam_bam.png)
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
-![sam file example with fields description #2](../../images/sam_bam3.png)
+![sam file example with fields description #2](../../images/bash-variant-calling/sam_bam3.png)
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
 > ## {%icon hands_on%} SAM to BAM
@@ -313,7 +313,7 @@ variant frequency and some measure of confidence. Similar to other steps in this
 variant calling. In this workshop we will be using `bcftools`, but there are a few things we need to do before actually calling the 
 variants.
 
-![Workflow that leads from sequence reads to "variant calling" step](../../images/variant_calling_workflow.png)
+![Workflow that leads from sequence reads to "variant calling" step](../../images/bash-variant-calling/variant_calling_workflow.png)
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
 >## {%icon hands_on%} Step 1: Calculate the read coverage of positions in the genome
@@ -611,7 +611,7 @@ to unzip it, and then drag the program into your Applications folder.
 >
 >Your IGV browser should look like the screenshot below:
 >
->![IGV screenshot](../../images/igv-screenshot.png)
+>![IGV screenshot](../../images/bash-variant-calling/igv-screenshot.png)
 >
 >There should be two tracks: one coresponding to our BAM file and the other for our VCF file. 
 >
