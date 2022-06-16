@@ -179,10 +179,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,5 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -14,3 +14,5 @@
+>       version: 0.1.5
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
 >    +  version: 0.2.13
 >    {% endraw %}
@@ -301,7 +301,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -22,3 +22,4 @@
+>    @@ -20,3 +20,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
@@ -500,9 +500,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
 >         brand: "🧬🔬🚀"
+>         admin_users: admin@example.org
+>         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}

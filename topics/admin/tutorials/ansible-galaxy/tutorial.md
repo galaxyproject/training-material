@@ -171,7 +171,7 @@ Galaxy is a modern web application that includes both a server (written in Pytho
 
 This process can be lengthy and resource intensive. Future plans for Galaxy include pre-building the client so that the build process is not necessary as long as you run "release" versions of Galaxy.
 
-The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure NGINX to serve in this tutorial.
+The client lives in the Galaxy code under the [client/](https://github.com/galaxyproject/galaxy/blob/dev/client/) directory, and the build process deploys it to the [static/](https://github.com/galaxyproject/galaxy/tree/dev/static/) directory, which we will configure a webserver to serve in this tutorial.
 
 ## Handlers
 
@@ -305,6 +305,23 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
+>    > ### {% icon tip %} Tip: Using `git`?
+>    > If you're using git, it can make sense to tell git to ignore the `roles`
+>    > directory, as all of that data can be perfectly recreated from our
+>    > variables in the requirements.yml file.
+>    >
+>    > Simply create a file `.gitignore` with the following content:
+>    >
+>    > ```console
+>    > roles/
+>    > .vault-password.txt
+>    > ```
+>    >
+>    > When you run `git status` you'll notice that the `roles/` folder is not listed among the other "Untracked files". We're adding the `.vault-password.txt` file as well, ahead of time, because this should *never* ever be committed to the repository.
+>    >
+>    > Now you can do `git add .` to add all of the files in the current directory, and not worry about committing generated artifacts!
+>    {: .tip}
+>
 > 4. Inspect the contents of the newly created `roles` directory in your working directory.
 {: .hands_on}
 
@@ -367,7 +384,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 
 ## PostgreSQL
 
-Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
+Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL (/ˈpoʊstɡrɛs ˌkjuː ˈɛl/, POHST-gres kyoo el) is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
@@ -400,6 +417,25 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add initial group variables file"}
+>
+>    > ### {% icon tip %} Tip: Using postgres via the network
+>    > To use postgres via another machine, or via the network, you can add lines like the following:
+>    >
+>    > ```yaml
+>    > postgresql_pg_hba_conf:
+>    > - host all all 127.0.0.1/32 md5
+>    > ```
+>    >
+>    > Here you should either add multiple lines per IP address that needs access to the Postgres server (with netmask `/32`), or a less specific IP range defined also [via netmask.](https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#IPv4_CIDR_blocks)
+>    >
+>    > Additionally you'll need to change the `postgresql_objects_users` statement to include a password (maybe stored in a vault, discussed later!)
+>    >
+>    > ```yaml
+>    > postgresql_objects_users:
+>    >   - name: galaxy
+>    >     password: super-secret-password-that-should-be-in-vault
+>    > ```
+>    {: .tip}
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
@@ -704,7 +740,7 @@ For a normal Galaxy instance there are a few configuration changes you make very
 - Configuring the admin user list
 - Changing the "brand"
 
-Additionally we'll go ahead and set up the production-ready [uWSGI Mules](https://uwsgi-docs.readthedocs.io/en/latest/Mules.html) which will handle processing Galaxy jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
+Additionally we'll go ahead and set up the production-ready Gunicorn which will handle processing Galaxy jobs. Gunicorn launches as many workers as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
 
 Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
 
@@ -867,6 +903,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .tip}
 >
+>    > ### {% icon tip %} Tip: Using postgres via the network
+>    > Here you'll need to re-use the connection details you specified during `postgresql_objects_users`. You can reference it like the following, for example. `localhost` may need to change if you're hosting the database on another host.
+>    > ```
+>    > +    database_connection: "postgres://{{ postgresql_objects_users[0].name }}:{{ postgresql_objects_users[0].password }}@localhost:5432/{{ postgresql_objects_databases[0].name }}"
+>    > ```
+>    {: .tip}
+>
 >    > ### {% icon comment %} Ansible Variable Templating
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
 >    >
@@ -882,44 +925,39 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .comment}
 >
-> 4. In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
+> 4. In order to use mule messaging, we need to edit the Gravity configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,28 @@ galaxy_config:
+>    @@ -37,3 +37,23 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->    +  uwsgi:
->    +    socket: 127.0.0.1:5000
->    +    buffer-size: 16384
->    +    processes: 1
->    +    threads: 4
->    +    offload-threads: 2
->    +    static-map:
->    +      - /static={{ galaxy_server_dir }}/static
->    +      - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
->    +    static-safe: client/galaxy/images
->    +    master: true
->    +    virtualenv: "{{ galaxy_venv_dir }}"
->    +    pythonpath: "{{ galaxy_server_dir }}/lib"
->    +    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->    +    thunder-lock: true
->    +    die-on-term: true
->    +    hook-master-start:
->    +      - unix_signal:2 gracefully_kill_them_all
->    +      - unix_signal:15 gracefully_kill_them_all
->    +    py-call-osafterfork: true
->    +    enable-threads: true
->    +    mule:
->    +      - lib/galaxy/main.py
->    +      - lib/galaxy/main.py
->    +    farm: job-handlers:1,2
+>    +  gravity:
+>    +    galaxy_root: "{{ galaxy_root }}/server"
+>    +    app_server: gunicorn
+>    +    gunicorn:
+>    +      # listening options
+>    +      bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
+>    +      # performance options
+>    +      workers: 2
+>    +      # Other options that will be passed to gunicorn
+>    +      extra_args: '--forwarded-allow-ips="*"'
+>    +      preload: true
+>    +    celery:
+>    +      concurrency: 2
+>    +      loglevel: DEBUG
+>    +    handlers:
+>    +      handler:
+>    +        processes: 3
+>    +        pools:
+>    +          - job-handler
+>    +          - workflow-scheduler
 >    {% endraw %}
 >    ```
->    {: data-commit="Configure uwsgi"}
+>    {: data-commit="Configure gravity"}
 >
 >    {% snippet topics/admin/faqs/galaxy-how-many-mules.md %}
 >
@@ -988,6 +1026,51 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add id_secret to the vault" data-comment="The password is password"}
+>
+>    > ### {% icon tip %} Tip: Using `git`?
+>    > If you're using git, and storing all of these steps in your git history,
+>    > you'll find that working with Vault secrets can be rather annoying as
+>    > the opaque blobs are impossible to read. There's a way to make this
+>    > *much* easier though:
+>    >
+>    > Create a file `.gitattributes` with the following content:
+>    >
+>    > ```
+>    > group_vars/secret.yml diff=ansible-vault merge=binary
+>    > ```
+>    >
+>    > You can add this file to your repository with `git add .gitattributes`
+>    > to ensure colleagues get a copy of the file too. Just **be sure**
+>    > `.vault-password.txt` is listed in your `.gitignore` file!
+>    >
+>    > If you have more vault secrets, you can adjust this line (or add more,
+>    > wildcards are supported) to list all of your secret files. This tells
+>    > `git` to use `ansible-vault` to diff the two files, as you can see in
+>    > the following real (redacted) snippet from a vault stored in a public
+>    > github project.
+>    >
+>    > ```console
+>    > $ git log -p group_vars/all/secret.yml
+>    > commit a137d7d6aa4ed374c29545ac4728837815c460aa
+>    > Author: Helena Rasche <hxr@hx42.org>
+>    > Date:   Thu Dec 2 12:52:55 2021 +0100
+>    >
+>    >     fix automation password
+>    >
+>    > diff --git a/group_vars/all/secret.yml b/group_vars/all/secret.yml
+>    > index 3fe4444..11831ae 100644
+>    > --- a/group_vars/all/secret.yml
+>    > +++ b/group_vars/all/secret.yml
+>    > @@ -1,6 +1,6 @@
+>    >  ---
+>    >  id_secret: "..."
+>    > -jenkins_password: "old-secret-value"
+>    > +jenkins_password: "new-secret-value"
+>    >  grafana_admin_pass:    "..."
+>    >  secret_tiaas_admin_pw: "..."
+>    >
+>    > ```
+>    {: .tip}
 >
 > 8. Load the secrets in the playbook
 >
@@ -1552,7 +1635,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     admin_users: admin@example.org
 >    >     brand: 🧬🔬🚀
 >    >     builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
->    >     check_migrate_tools: false
 >    >     citation_cache_data_dir: /srv/galaxy/var/cache/citations/data
 >    >     citation_cache_lock_dir: /srv/galaxy/var/cache/citations/locks
 >    >     data_manager_config_file: /srv/galaxy/server/config/data_manager_conf.xml.sample
@@ -1562,7 +1644,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     file_path: /data
 >    >     integrated_tool_panel_config: /srv/galaxy/var/config/integrated_tool_panel.xml
 >    >     job_working_directory: /srv/galaxy/jobs
->    >     migrated_tools_config: /srv/galaxy/var/config/migrated_tools_conf.xml
 >    >     mulled_resolution_cache_data_dir: /srv/galaxy/var/mulled/data
 >    >     mulled_resolution_cache_lock_dir: /srv/galaxy/var/mulled/lock
 >    >     new_file_path: /srv/galaxy/var/tmp
@@ -1598,10 +1679,10 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -62,3 +62,6 @@ galaxy_config:
->           - lib/galaxy/main.py
->           - lib/galaxy/main.py
->         farm: job-handlers:1,2
+>    @@ -57,3 +57,6 @@ galaxy_config:
+>             pools:
+>               - job-handler
+>               - workflow-scheduler
 >    +
 >    +# systemd
 >    +galaxy_manage_systemd: yes
@@ -1708,7 +1789,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-Although uWSGI can server HTTP for us directly, by moving to NGINX (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although uWSGI can server HTTP for us directly, by moving to NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
@@ -1736,7 +1817,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -65,3 +65,33 @@ galaxy_config:
+>    @@ -60,3 +60,33 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: yes
@@ -1879,7 +1960,15 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- /dev/null
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -0,0 +1,49 @@
+>    @@ -0,0 +1,61 @@
+>    +upstream galaxy {
+>    +    server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock;
+>    +
+>    +    # Or if you serve galaxy at a path like http(s)://fqdn/galaxy
+>    +    # Remember to set galaxy_url_prefix in the galaxy.yml file.
+>    +    # server unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock:/galaxy;
+>    +}
+>    +
 >    +server {
 >    +    # Listen on port 443
 >    +    listen        *:443 ssl default_server;
@@ -1890,16 +1979,20 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    access_log  /var/log/nginx/access.log;
 >    +    error_log   /var/log/nginx/error.log;
 >    +
->    +    # The most important location block, by default all requests are sent to uWSGI
+>    +    # The most important location block, by default all requests are sent to gunicorn
+>    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
 >    +    location / {
 >    +        # This is the backend to send the requests to.
->    +        uwsgi_pass {{ galaxy_config.uwsgi.socket }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
+>    +        proxy_pass http://galaxy;
+>    +
+>    +        proxy_set_header Host $http_host;
+>    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+>    +        proxy_set_header X-Forwarded-Proto $scheme;
+>    +        proxy_set_header Upgrade $http_upgrade;
 >    +    }
 >    +
 >    +    # Static files can be more efficiently served by Nginx. Why send the
->    +    # request to uWSGI which should be spending its time doing more useful
+>    +    # request to Gunicorn which should be spending its time doing more useful
 >    +    # things like serving Galaxy!
 >    +    location /static {
 >    +        alias {{ galaxy_server_dir }}/static;
@@ -2016,7 +2109,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/master/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
+One of the most important configuration files for a large Galaxy server is the `job_conf.yml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, [`job_conf.sample_advanced.yml`](https://github.com/galaxyproject/galaxy/blob/fd8826904be3f3201f7e7a3b6ffbadd27f268896/test/unit/app/jobs/job_conf.sample_advanced.yml).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -2026,35 +2119,37 @@ The job configuration file allows Galaxy to run jobs in multiple locations using
 
 ### The job conf file - basics
 
-The `job_conf.xml` file has three basic sections:
+The `job_conf.yml` file has three basic sections:
 
-* **Plugins** - This section lists the types of job management systems that this Galaxy server is configured to use, and tells Galaxy to load the drivers for each type.
-* **Destinations** - This section lists the different locations, queues, etc. that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
-* **Tools** - This section lists the various tools that you would like to send to a non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Every time Galaxy gets a job for that particular tool, it is always sent to that *destination*.
+* **runners** - This section lists the types of job management systems that this Galaxy server is configured to use, and tells Galaxy to load the drivers for each type.
+* **execution** - This section lists the different locations, queues, etc. that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.
+* **tools** - This section lists the various tools that you would like to send to a non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Every time Galaxy gets a job for that particular tool, it is always sent to that *destination*.
 
-The basic `job_conf.xml` file looks like this:
+The basic `job_conf.yml` file looks like this:
 
 {% raw %}
-```xml
-<job_conf>
-    <plugins workers="4">
-        <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
-    </plugins>
-    <destinations>
-        <destination id="local" runner="local"/>
-    </destinations>
-    <tools>
-    </tools>
-</job_conf>
+```yml
+runners:
+  local_runner:
+    load: galaxy.jobs.runners.local:LocalJobRunner
+    workers: 4
+execution:
+  default: local_dest
+  environments:
+    local_dest:
+      runner: local_runner
+tools:
+- id: bwa
+  destination: local_dest
 ```
 {% endraw %}
 
-The above `job_conf.xml` file defines a *plugin* and *destination* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
+The above `job_conf.yml` file defines a *runner* and an *execution* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
 
 Firstly, the plugins section contains a plugin called "local" which is of type "runner" and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called "local" using the runner "local". As this is the only destination specified, it is also the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
 
 > ### {% icon tip %} Want to use something else?
-> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration. There is also an advanced sample job conf file located at: `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_advanced`
+> There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Job Conf
@@ -2068,32 +2163,36 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
+> 2. Create `templates/galaxy/config/job_conf.yml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -0,0 +1,10 @@
->    +<job_conf>
->    +    <plugins workers="4">
->    +        <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    +    </plugins>
->    +    <destinations default="local_destination">
->    +        <destination id="local_destination" runner="local_plugin"/>
->    +    </destinations>
->    +    <tools>
->    +    </tools>
->    +</job_conf>
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -0,0 +1,14 @@
+>    +runners:
+>    +  local_runner:
+>    +    load: galaxy.jobs.runners.local:LocalJobRunner
+>    +    workers: 4
+>    +
+>    +execution:
+>    +  default: local_dest
+>    +  environments:
+>    +    local_dest:
+>    +      runner: local_runner
+>    +
+>    +tools:
+>    +- class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>    +  execution: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
 >
 >    > ### {% icon tip %} workers=4
->    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
 >    {: .tip}
 >
-> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
+> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.yml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
 >    ```diff
@@ -2103,10 +2202,10 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Load job conf in galaxy config"}
@@ -2117,12 +2216,12 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -64,6 +64,10 @@ galaxy_config:
->           - lib/galaxy/main.py
->         farm: job-handlers:1,2
+>    @@ -59,6 +59,10 @@ galaxy_config:
+>               - job-handler
+>               - workflow-scheduler
 >     
 >    +galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_conf.xml.j2
+>    +  - src: templates/galaxy/config/job_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
@@ -2149,26 +2248,25 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > {: .code-out}
 >    {: .code-2col}
 >
-> 5. Checkout the new job_conf.xml file.
+> 5. Checkout the new job_conf.yml file.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > cat /srv/galaxy/config/job_conf.xml
+>    > cat /srv/galaxy/config/job_conf.yml
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
->    > ```xml
->    > <job_conf>
->    >     <plugins workers="4">
->    >         <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    >     </plugins>
->    >     <destinations default="local_destination">
->    >         <destination id="local_destination" runner="local_plugin"/>
->    >     </destinations>
->    >     <tools>
->    >     </tools>
->    > </job_conf>
+>    > ```yml
+>    > runners:
+>    >   local_runner:
+>    >     load: galaxy.jobs.runners.local:LocalJobRunner
+>    >     workers: 4
+>    > execution:
+>    >   default: local_dest
+>    >   environments:
+>    >     local_dest:
+>    >       runner: local_runner
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -2189,7 +2287,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    @@ -38,6 +38,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
 >    +    # SQL Performance
 >    +    database_engine_option_server_side_cursors: true
 >    +    slow_query_log_threshold: 5
@@ -2212,9 +2310,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add production facing vars"}
@@ -2235,7 +2333,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -46,4 +46,14 @@ server {
+>    @@ -58,4 +58,14 @@ server {
 >         location /favicon.ico {
 >             alias {{ galaxy_server_dir }}/static/favicon.ico;
 >         }
