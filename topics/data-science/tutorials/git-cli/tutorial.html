@@ -1,0 +1,1364 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Basics of using Git from the Command Line</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Basics of using Git from the Command Line" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Basics of using Git from the Command Line" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/git-cli/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/git-cli/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/git-cli/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/data-science/tutorials/git-cli/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/data-science/tutorials/git-cli/tutorial.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/data-science/tutorials/git-cli/tutorial.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Basics of using Git from the Command Line",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Basics of using Git from the Command Line' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/git-cli/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "data-science",
+  "description": "The questions this  addresses are:\n - How can I start tracking my changes with git?\n - How do I commit changes?\n - How can I undo a mistake?\n\n\\nThe objectives are:\n - Create a repository\n - Commit a file\n - Make some changes\n - Use the log to view the diff\n - Undo a bad change\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/cli-basics/tutorial.html",
+      "name": "CLI basics",
+      "description": "Hands-on for 'CLI basics' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Basics of using Git from the Command Line</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		</td>
+	</tr>
+	
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I start tracking my changes with git?</p>
+</li>
+        
+        <li><p>How do I commit changes?</p>
+</li>
+        
+        <li><p>How can I undo a mistake?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Create a repository</p>
+</li>
+        
+        <li><p>Commit a file</p>
+</li>
+        
+        <li><p>Make some changes</p>
+</li>
+        
+        <li><p>Use the log to view the diff</p>
+</li>
+        
+        <li><p>Undo a bad change</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/data-science">Foundations of Data Science</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> CLI basics:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/data-science/tutorials/cli-basics/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <blockquote class="tip">
+  <h3 id="comment-source"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Source</h3>
+  <p>This tutorial contains text from <a href="https://github.com/rdadolf/git-tutorial/">this tutorial</a> by Robert Adolf (<a href="https://github.com/rdadolf">@rdadolf</a>), which is licensed CC-BY.</p>
+</blockquote>
+
+<p>Version control is a way of tracking the change history of a project. Even if you have never used a version control tool, you’ve probably already done it manually: copying and renaming project folders (“paper-1.doc”, “paper-2.doc”, etc.) is a form of version control. Within bioinformatics (from research, to development, to sysadmin) a lot of us are using <code class="language-plaintext highlighter-rouge">git</code> as our primary method of source control for everything we do: notes, slides, tutorials, code, notebooks, ansible, system configuration, and more.</p>
+
+<p>Git is a tool that automates and enhances a lot of the tasks that arise when dealing with larger, longer-living, and collaborative projects. It’s also become the common underpinning to many popular online code repositories, GitHub being the most popular.</p>
+
+<p>While it can be used collaboratively, this tutorial focuses on a single-user git repository for the most basic operations.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to create a git repo, and begin working with it.</p>
+
+<ol id="markdown-toc">
+  <li><a href="#why-should-you-use-version-control" id="markdown-toc-why-should-you-use-version-control">Why should you use version control?</a></li>
+  <li><a href="#pre-requisites" id="markdown-toc-pre-requisites">Pre-requisites</a></li>
+  <li><a href="#setting-up-a-repository" id="markdown-toc-setting-up-a-repository">Setting up a Repository</a></li>
+  <li><a href="#adding-files" id="markdown-toc-adding-files">Adding Files</a></li>
+  <li><a href="#logs" id="markdown-toc-logs">Logs</a></li>
+  <li><a href="#branching" id="markdown-toc-branching">Branching</a></li>
+  <li><a href="#undo-revert" id="markdown-toc-undo-revert">Undo! Revert!</a></li>
+  <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="why-should-you-use-version-control">Why should you use version control?</h2>
+
+<p>If you ask 10 people, you’ll get 10 different answers, but one of the commonalities is that most people don’t realize how integral it is to their development process until they’ve started using it. Still, for the sake of argument, here are some highlights:</p>
+
+<ul>
+  <li><strong>You can undo anything</strong>: Git provides a complete history of every change that has ever been made to your project, timestamped, commented, and attributed. If something breaks, you always have the choice of going back to a previous tate.</li>
+  <li><strong>You won’t need to keep undo-ing things</strong>: One of the advantages of using git properly is that by keeping new changes separate from a stable base, you tend to avoid the massive rollbacks associated with constantly tinkering with a single code.</li>
+  <li><strong>You can identify exactly when and where changes were made</strong> (and by whom!): Git allows you to pinpoint when a particular piece of code was changed, so finding what other pieces of code a bug might affect or figuring out why a certain <span class="notranslate">expression</span> was added is easy.</li>
+  <li><strong>Git forces teams to face conflicts directly</strong>: On a team-based project, many people are often working with the same code. By having a tool which understands when and where files were changed, it’s easy to see when changes might conflict with each other. While it might seem troublesome sometimes to have to deal with conflicts, the alte<span class="notranslate">rna</span>tive—not knowing there’s a conflict—is much more insidious.</li>
+</ul>
+
+<h2 id="pre-requisites">Pre-requisites</h2>
+
+<p><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">You will need to install git, if you have not done so already.</a></p>
+
+<h2 id="setting-up-a-repository">Setting up a Repository</h2>
+
+<p>Let’s create a new repository.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-repository"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a Repository</h3>
+  <ol>
+    <li>
+      <p>Make a new directory where you will store your files, and navigate into it.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>git-tutorial<span class="p">;</span> <span class="nb">cd </span>git-tutorial<span class="p">;</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create or “initialise” the <code class="language-plaintext highlighter-rouge">git</code> repository with the <code class="language-plaintext highlighter-rouge">git init</code> command.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initialized empty Git repository <span class="k">in</span> /tmp/project/.git/
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This has created a folder <code class="language-plaintext highlighter-rouge">.git</code> in your project directory, here is where <code class="language-plaintext highlighter-rouge">git</code> stores all of it’s data that it needs to track repository changes over time. It’s not terribly interesting yet though!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-whats-the-status"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: What’s the status</h3>
+  <ol>
+    <li>
+      <p>You can always check the status of a repository with <code class="language-plaintext highlighter-rouge">git status</code></p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+nothing to commit <span class="o">(</span>create/copy files and use <span class="s2">"git add"</span> to track<span class="o">)</span>
+
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="adding-files">Adding Files</h2>
+
+<p>Let’s add our first file, often a (pretty empty) readme file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-whats-the-status-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: What’s the status</h3>
+  <ol>
+    <li>
+      <p>Create a new file, <code class="language-plaintext highlighter-rouge">readme.md</code> with some basic content</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"My Project"</span> <span class="o">&gt;</span> readme.md
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add a file with <code class="language-plaintext highlighter-rouge">git add</code>. This adds it to git’s staging area to be committed.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add readme.md
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Commit the file! This will add it to git’s log.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-what-makes-a-good-commit-message"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What makes a good commit message?</h3>
+        <p>It depends a lot on the community, some have specific style guides they enforce, some don’t, but in general</p>
+        <ul>
+          <li>Keep the description short (&lt;72 chars) and descriptive.</li>
+          <li>If you need, provide a long description as well, explaining your changes. (Use <code class="language-plaintext highlighter-rouge">git commit</code> without the <code class="language-plaintext highlighter-rouge">-m</code> flag!)
+<a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">A lot has been written</a> about good commit messages, search the internet and find ideas for what you think makes a good commit message!</li>
+        </ul>
+
+        <p>And beware of the trap we all fall into sometimes, <a href="https://xkcd.com/1296/">unhelpful commit messages</a>
+<img src="https://imgs.xkcd.com/comics/git_commit.png" alt="xkcd comic with commits in a table from 14h to 2h ago, starting with extremely useful commits like &quot;created main loop &amp; timing control&quot;, and becoming extremely unhelpful messages for the latest commits, like 'AAAAAA' or &quot;asdfasdf&quot;." loading="lazy" />
+Even your author is <a href="https://github.com/galaxyproject/gxadmin/commit/568adb703189d98da701e35c3414be35ea106184">very</a>, <a href="https://github.com/galaxyproject/training-material/commit/611f82d267f1426aa09863c2ac9c9006f38e3c4c">very</a> guilty of this, but you can do better!</p>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Add readme"</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>main <span class="o">(</span>root-commit<span class="o">)</span> f5ec14f] Add readme
+ 1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
+ create mode 100644 readme.md
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-question-is-there-anything-left-to-do-check-the-status"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Is there anything left to do? Check the status</h3>
+    <p>Check <code class="language-plaintext highlighter-rouge">git status</code> to see if there’s anything else left to resolve.</p>
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git status
+<span class="go">On branch main
+nothing to commit, working tree clean
+</span></code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<p>Congratulations! You’ve made your first commit. The output of the commit command lists everything you’ve just done:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main (root-commit) f5ec14f] Add readme
+ 1 file changed, 1 insertion(+)
+ create mode 100644 readme.md
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">f5ec14f</code> is the <strong>commit id</strong>, every commit you make is given a hash which uniquely refers to that specific commit. Next we see our commit message <code class="language-plaintext highlighter-rouge">Add readme</code>, a brief mention of how many files we’ve changed, and how many insertions or deletions we’ve made to the text, and lastly which files we’ve added.</p>
+
+<h3 id="exercise-make-some-more-commits">Exercise: Make some more commits</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-make-some-more-commits"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Make some more commits</h3>
+
+  <ol>
+    <li>
+      <p>Add your name to the <code class="language-plaintext highlighter-rouge">readme.md</code> and commit your changes.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"Author: hexylena"</span> <span class="o">&gt;&gt;</span> readme.md
+git add readme.md
+git commit <span class="nt">-m</span> <span class="s1">'Add author name'</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Make up a project description, add it to the readme, and commit.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"This project enables stakeholders to experience synergistic effects and increase link up opportunities to improve quarterly and YOY ROI.</span><span class="se">\n</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> readme.md
+git add readme.md
+git commit <span class="nt">-m</span> <span class="s1">'Add project description'</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p><a href="https://spdx.org/licenses/">Pick a license</a> for your project, and mention it in the <code class="language-plaintext highlighter-rouge">readme.md</code>, and commit.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"# License</span><span class="se">\n</span><span class="s2">AGPL-3.0"</span> <span class="o">&gt;&gt;</span> readme.md
+git add readme.md
+git commit <span class="nt">-m</span> <span class="s1">'Add project license'</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>After this step you should have ~3 commits to work with!</p>
+
+<h2 id="logs">Logs</h2>
+
+<p>One of the most helpful things about git is that, if you have written good commit messages, you can tell what you did and when!</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-the-receipts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check the Receipts</h3>
+  <ol>
+    <li>
+      <p>Check the <code class="language-plaintext highlighter-rouge">log</code> with <code class="language-plaintext highlighter-rouge">git log</code>. Notice that you can see each commit in reverse chronological order (newest at top), who made the commit, when, and what the commit message was.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 5d05eb3ec22fd49282b585c60ef8f983d68c2fd7
+Author: Helena Rasche &lt;hxr@hx42.org&gt;
+Date:   Mon Jun 13 12:13:21 2022 +0200
+
+    Add project license
+
+commit 62f974ec5f538232f65b016cf073815349364efa
+Author: Helena Rasche &lt;hxr@hx42.org&gt;
+Date:   Mon Jun 13 12:13:16 2022 +0200
+
+    Add project description
+
+commit 10355c019c04052c15a95a817de04f9ea0ec336c
+Author: Helena Rasche &lt;hxr@hx42.org&gt;
+Date:   Mon Jun 13 12:13:11 2022 +0200
+
+    Add author name
+
+commit f5ec14f05384d76812fc0576df5e4af79336f4e6
+Author: Helena Rasche &lt;hxr@hx42.org&gt;
+Date:   Mon Jun 13 11:59:23 2022 +0200
+
+    Add readme
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of <code class="language-plaintext highlighter-rouge">git log</code> is a great way to help you remember what you were doing.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-git-log--p"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: <code class="language-plaintext highlighter-rouge">git log -p</code></h3>
+  <ol>
+    <li>Use <code class="language-plaintext highlighter-rouge">git log -p</code> to see the log, along with which lines were changed in each commit.</li>
+  </ol>
+</blockquote>
+
+<p>But currently this log is pretty boring, so let’s replace a line and see how that looks.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-replace-a-line"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Replace a line</h3>
+  <ol>
+    <li>
+      <p>Update your project description in the <code class="language-plaintext highlighter-rouge">readme.md</code>, you’ve been told you need to support completely different features.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> s<span class="s1">'/enables.*ROI/creates baking recipes/g'</span> readme.md
+git add readme.md
+git commit <span class="nt">-m</span> <span class="s1">'Update project description'</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check what happened with the <code class="language-plaintext highlighter-rouge">git log -p</code>:</p>
+
+      <blockquote class="code-out">
+        <h3 id="code-in-output-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-p</span>
+commit 416a121dfcda14de0c2cb181f298b2c08950475f <span class="o">(</span>HEAD -&gt; main<span class="o">)</span>
+Author: Helena Rasche &lt;hxr@hx42.org&gt;
+Date:   Mon Jun 13 12:18:00 2022 +0200
+
+    Update project description
+
+diff <span class="nt">--git</span> a/readme.md b/readme.md
+index befc0c9..3b8899e 100644
+<span class="nt">---</span> a/readme.md
++++ b/readme.md
+@@ <span class="nt">-1</span>,6 +1,6 @@
+ My Project
+ Author: hexylena
+<span class="nt">-This</span> project enables stakeholders to experience synergistic effects and increase <span class="nb">link </span>up opportunities to improve quarterly and YOY ROI.
++This project creates baking recipes.
+
+ <span class="c"># License</span>
+ AGPL-3.0
+
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>This is a diff, a comparison between two versions of a file.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-to-read-a-diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff</h3>  <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>  <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>  <blockquote class="code-2col">  <blockquote class="code-in">    <h3 data-toc-skip="" id="code-in-old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Old</h3>    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>  </blockquote>  <blockquote class="code-out">    <h3 data-toc-skip="" id="code-out-new"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> New</h3>    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>  </blockquote></blockquote>  <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>  <p>Diff lets us compare these files</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>  <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>  <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>  <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>  <ul>  <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>  <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>  <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>  <li>Lines starting with a - are removed from our ‘new’ file</li>  <li>Lines with a + have been added.</li></ul>  <p>So when you go to apply these diffs to your files in the training:</p>  <ol>  <li>Ignore the header</li>  <li>Remove lines starting with - from your file</li>  <li>Add lines starting with + to your file</li></ol>  <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>  <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>  <p>Removals are very easy to spot, we just have removed lines</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>  <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>  <h4 id="completely-new-files">Completely new files</h4>  <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>  <p>And removed files are similar, except with the new file being /dev/null</p>  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="who-did-that-git-blame-to-the-rescue">Who did that? <code class="language-plaintext highlighter-rouge">git blame</code> to the rescue</h3>
+
+<p>If you want to know who changed a specific line of a file, you can use <code class="language-plaintext highlighter-rouge">git blame</code> to find out it was probably your fault (as most of us experience when we check the logs.)</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git blame readme.md
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-output-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^f5ec14f <span class="o">(</span>Helena Rasche 2022-06-13 11:59:23 +0200 1<span class="o">)</span> My Project
+10355c01 <span class="o">(</span>Helena Rasche 2022-06-13 12:13:11 +0200 2<span class="o">)</span> Author: hexylena
+416a121d <span class="o">(</span>Helena Rasche 2022-06-13 12:18:00 +0200 3<span class="o">)</span> This project creates baking recipes.
+62f974ec <span class="o">(</span>Helena Rasche 2022-06-13 12:13:16 +0200 4<span class="o">)</span>
+5d05eb3e <span class="o">(</span>Helena Rasche 2022-06-13 12:13:21 +0200 5<span class="o">)</span> <span class="c"># License</span>
+5d05eb3e <span class="o">(</span>Helena Rasche 2022-06-13 12:13:21 +0200 6<span class="o">)</span> AGPL-3.0
+</code></pre></div>  </div>
+  <p>here we can see for every line: which commit last affected it, who made that commit, and when.</p>
+</blockquote>
+
+<h2 id="branching">Branching</h2>
+
+<p>Git has the concept of branches which are most often used to manage development over time, before it’s considered final. Until now you’ve seen <code class="language-plaintext highlighter-rouge">main</code> in your commits and commit logs (or maybe <code class="language-plaintext highlighter-rouge">master</code> if your git installation is a bit older.)</p>
+
+<p>Oftentimes you’ll see this pattern:</p>
+
+<ol>
+  <li>There is a main branch with a lot of history</li>
+  <li>You want to test out a new option, new configuration, new script you’re working on
+    <ol>
+      <li>So you make a branch</li>
+      <li>Work on that branch</li>
+    </ol>
+  </li>
+  <li>And merge it back into the <code class="language-plaintext highlighter-rouge">main</code> branch, once it’s done.</li>
+</ol>
+
+<p>This is especially relevant for any project that is shared with others, has a public view, or a deployed version of the code. There you don’t want to affect anyone else using the project, or you don’t want to affect the production deployment, until you’re done making your changes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-new-branch"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a new branch</h3>
+
+  <ol>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">git switch -c &lt;branch&gt;</code> is the command used to create a new branch and switch to it.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch <span class="nt">-c</span> <span class="nb">test</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Switched to a new branch <span class="s1">'test'</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If you look around, you’ll notice everything looks exactly the same! But in fact we are now on a different branch:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-see-available-branches"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: See available branches</h3>
+
+  <ol>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">git branch</code> lists our available branches, and puts an asterisk next to the one we’re currently on.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-13"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <p>```bash
+  main</p>
+        <ul>
+          <li>test
+  ```</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We’re now on the <code class="language-plaintext highlighter-rouge">test</code> branch, so let’s make a commit.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-a-new-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add a new file</h3>
+  <ol>
+    <li>
+      <p>Add a new file, let’s call it <code class="language-plaintext highlighter-rouge">docs.md</code>. Write something into it, it doesn’t matter much what.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-14"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"# Project Documentation"</span> <span class="o">&gt;</span> docs.md
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add it, commit it.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-15"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add docs.md
+git commit <span class="nt">-m</span> <span class="s2">"Added documentation"</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This file now only exists on the testing branch.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-try-switching-branches"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Try Switching Branches</h3>
+  <ol>
+    <li>
+      <p>Try switching back and forth between the <code class="language-plaintext highlighter-rouge">main</code> and <code class="language-plaintext highlighter-rouge">test</code> branches, and check what’s available on each!</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-16"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-17"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch main
+<span class="nb">ls</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">readme.md
+</span></code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-18"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch <span class="nb">test
+ls</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docs.md   readme.md
+</span></code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Each branch has a different view of the repository, and might have different changes on it. Branches are really useful to keep track of work in progress, until it’s done. In a single user environment however, most people often don’t use them, but once you’re collaborating with other’s they’re incredibly important!</p>
+
+<h3 id="merging">Merging</h3>
+
+<p>Once you’re done with a branch, you can merge it into the main branch. This will take all of the work you did on that branch, and make it part of the main branch.</p>
+
+<p>First, let’s compare the two branches, to see what changed.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-replacing-argv"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Replacing argv.</h3>
+
+  <ol>
+    <li>
+      <p>Compare your current branch against the <code class="language-plaintext highlighter-rouge">main</code> branch with <code class="language-plaintext highlighter-rouge">git diff main</code></p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-19"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff main
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff <span class="nt">--git</span> a/docs.md b/docs.md
+new file mode 100644
+index 0000000..384aaaa
+<span class="nt">---</span> /dev/null
++++ b/docs.md
+@@ <span class="nt">-0</span>,0 +1 @@
++# Project Documentation
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We can see the output shows all of our changes compared to the main branch and it looks like what we want, so, let’s merge it in.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-merge-the-test-branch-into-main"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merge the <code class="language-plaintext highlighter-rouge">test</code> branch into <code class="language-plaintext highlighter-rouge">main</code></h3>
+  <ol>
+    <li>
+      <p>Switch to the main branch</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-20"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch main
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Merge in the test branch</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-21"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge <span class="nb">test</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-output-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Updating 416a121..9a3387d
+Fast-forward
+ docs.md | 1 +
+ 1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
+ create mode 100644 docs.md
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This has merged all of the changes you made on the <code class="language-plaintext highlighter-rouge">test</code> branch into the <code class="language-plaintext highlighter-rouge">main</code> branch.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-the-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check the history</h3>
+  <ol>
+    <li>Check <code class="language-plaintext highlighter-rouge">git log -p</code> again to see the history.</li>
+  </ol>
+</blockquote>
+
+<h2 id="undo-revert">Undo! Revert!</h2>
+
+<p>Oh no, you’ve decided you liked your original project description better. Let’s find that commit and revert it.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-find-and-revert-the-bad-commit"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Find and revert the bad commit</h3>
+
+  <ol>
+    <li>
+      <p>Find the commit you want to revert, e.g. with <code class="language-plaintext highlighter-rouge">git log</code>, find the one named “Update project description” (or similar.)</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-22"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>We can use the <code class="language-plaintext highlighter-rouge">git revert</code> command to undo this commit.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-23"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git revert 416a121dfcda14de0c2cb181f298b2c08950475f
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This generates a <em>new</em> commit, which reverts the older commit (and probably puts you in a text editor to edit the commit message).
+This is not the only way to undo mistakes, but probably the easiest.</p>
+
+<p>If you check your <code class="language-plaintext highlighter-rouge">git log</code> you’ll see the change was undone in a second commit, reverting the first. So if you just look at the current files it appears we never undid it, but within the logs we can see the undo step.</p>
+
+<p>With that you’ve got enough skills to track your own data/code/etc with git!</p>
+
+<h1 id="further-reading">Further Reading</h1>
+
+<ul>
+  <li><a href="https://rogerdudler.github.io/git-guide/index.html">git - the simple guide</a></li>
+  <li><a href="https://mirrors.edge.kernel.org/pub/software/scm/git/docs/giteveryday.html">giteveryday(7) manual page, the most common commands most folks use every day</a></li>
+  <li><a href="https://github.com/k88hudson/git-flight-rules">git flight rules, a convenient “how do I do X” guide</a></li>
+  <li><a href="https://jvns.ca/blog/2018/10/27/new-zine--oh-shit--git-/">do you prefer git tutorials as comics? (cw: language)</a></li>
+</ul>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>While git is extremely powerful, just using it for tracking changes is quite easy!</p>
+</li>
+                        
+                        <li><p>This does not take advantage of any advanced features, nor collaboration, but it is easy to expand into doing that.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Basics of using Git from the Command Line (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Basics of using Git from the Command Line (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/git-cli/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/git-cli/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-git-cli,
+author = "",
+title = "Basics of using Git from the Command Line (Galaxy Training Materials)",
+year = "2022",
+month = "06",
+day = "14"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/git-cli/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

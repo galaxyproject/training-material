@@ -927,7 +927,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -996,10 +996,10 @@
 
       <div data-commit="Add golang and singulary ansible roles" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -14,3 +14,7 @@</span>
-   version: 0.1.5
- - name: <span class="notranslate">galaxy</span>project.tusd
+</span><span class="p">@@ -16,3 +16,7 @@</span>
    version: 0.0.1
+ - src: <span class="notranslate">galaxy</span>project.cvmfs
+   version: 0.2.13
 <span class="gi">+- src: cyverse-ansible.singularity
 +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 +- src: gantsign.golang
@@ -1024,7 +1024,7 @@
 
       <div data-commit="Configure golang and singularity" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -125,6 +125,12 @@</span> nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
+</span><span class="p">@@ -121,6 +121,12 @@</span> nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
     
@@ -1118,12 +1118,12 @@ This message shows that your installation appears to be working correctly.
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
 +    containers_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/container_resolvers_conf.xml"
-</span>     brand: "🧬🔬🚀"
+</span>     tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
+     brand: "🧬🔬🚀"
      admin_users: admin@example.org
-     database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
-<span class="p">@@ -91,6 +93,10 @@</span> <span class="notranslate">galaxy</span>_config:
+<span class="p">@@ -87,6 +89,10 @@</span> <span class="notranslate">galaxy</span>_config:
  <span class="notranslate">galaxy</span>_config_templates:
-   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
      dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
 <span class="gi">+  - src: templates/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml.j2
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.containers_resolvers_config_file }}"
@@ -1171,29 +1171,35 @@ This message shows that your installation appears to be working correctly.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now, we want to make <span class="notranslate">Galaxy</span> run jobs using Singularity. Modify the file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>, by adding the <code class="language-plaintext highlighter-rouge">singularity_enabled</code> parameter:</p>
+      <p>Now, we want to make <span class="notranslate">Galaxy</span> run jobs using Singularity. Modify the file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2</code>, by adding the <code class="language-plaintext highlighter-rouge">singularity_enabled</code> parameter:</p>
 
-      <div data-commit="Update the job_conf.xml with singularity destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -2,8 +2,17 @@</span>
-     &lt;plugins workers="4"&gt;
-         &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
-     &lt;/plugins&gt;
-<span class="gd">-    &lt;destinations default="local_destination"&gt;
-</span><span class="gi">+    &lt;destinations default="singularity"&gt;
-</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
-<span class="gi">+        &lt;destination id="singularity" runner="local_plugin"&gt;
-+            &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
-+            &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
-+            &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
-+            &lt;!-- The cache directory holds the docker containers that get converted. --&gt;
-+            &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
-+            &lt;!-- Singularity uses a temporary directory to build the squashfs filesystem. --&gt;
-+            &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
-+        &lt;/destination&gt;
-</span>     &lt;/destinations&gt;
-     &lt;tools&gt;
-     &lt;/tools&gt;
+      <div data-commit="Update the job_conf.yml with singularity destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -4,10 +4,23 @@</span> runners:
+     workers: 4
+    
+ execution:
+<span class="gd">-  default: local_dest
+</span><span class="gi">+  default: singularity
+</span>   environments:
+     local_dest:
+       runner: local_runner
+<span class="gi">+    singularity:
++      runner: local_runner
++      singularity_enabled: true
++      env:
++      # Ensuring a consistent collation environment is good for reproducibility.
++      - name: LC_ALL
++        value: C
++      # The cache directory holds the docker containers that get converted
++      - name: SINGULARITY_CACHEDIR
++        value: /tmp/singularity
++      # Singularity uses a temporary directory to build the squashfs filesystem
++      - name: SINGULARITY_TMPDIR
++        value: /tmp
+</span>    
+ tools:
+ - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
    
 </code></pre></div>      </div>
     </li>
@@ -1247,15 +1253,15 @@ GATTACAGATHISISJUSTATESTGATTACA
 
       <blockquote class="code-out code-max-300">
         <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uwsgi[1190010]: <span class="notranslate">galaxy</span>.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
-uwsgi[1190010]: <span class="notranslate">galaxy</span>.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh] for tool command [minimap2 --version &gt; /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs/COMMAND_VERSION 2&gt;&amp;1; ln -f -s '/data/000/dataset_22.dat' reference.fa &amp;&amp; minimap2           -t ${<span class="notranslate">GALAXY</span>_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${<span class="notranslate">GALAXY</span>_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' &gt; '/data/000/dataset_23.dat']
-uwsgi[1190010]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
-uwsgi[1190010]: if [ -d _working ]; then
-uwsgi[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
-uwsgi[1190010]: else
-uwsgi[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
-uwsgi[1190010]: fi
-uwsgi[1190010]: cd working; SINGULARITYENV_<span class="notranslate">GALAXY</span>_SLOTS=$<span class="notranslate">GALAXY</span>_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_HOME_DIR=$_<span class="notranslate">GALAXY</span>_JOB_HOME_DIR SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_TMP_DIR=$_<span class="notranslate">GALAXY</span>_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/<span class="notranslate">galaxy</span>/server:/srv/<span class="notranslate">galaxy</span>/server:ro -B /srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23:/srv/<span class="notranslate">galaxy</span>/jobs/000/23 -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/working:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/working -B /data:/data -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh &gt; ../outputs/tool_stdout 2&gt; ../outputs/tool_stderr; return_code=$?; cd '/srv/<span class="notranslate">galaxy</span>/jobs/000/23';
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunicorn[1190010]: <span class="notranslate">galaxy</span>.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
+gunicorn[1190010]: <span class="notranslate">galaxy</span>.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh] for tool command [minimap2 --version &gt; /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs/COMMAND_VERSION 2&gt;&amp;1; ln -f -s '/data/000/dataset_22.dat' reference.fa &amp;&amp; minimap2           -t ${<span class="notranslate">GALAXY</span>_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${<span class="notranslate">GALAXY</span>_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' &gt; '/data/000/dataset_23.dat']
+gunicorn[1190010]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
+gunicorn[1190010]: if [ -d _working ]; then
+gunicorn[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
+gunicorn[1190010]: else
+gunicorn[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
+gunicorn[1190010]: fi
+gunicorn[1190010]: cd working; SINGULARITYENV_<span class="notranslate">GALAXY</span>_SLOTS=$<span class="notranslate">GALAXY</span>_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_HOME_DIR=$_<span class="notranslate">GALAXY</span>_JOB_HOME_DIR SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_TMP_DIR=$_<span class="notranslate">GALAXY</span>_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/<span class="notranslate">galaxy</span>/server:/srv/<span class="notranslate">galaxy</span>/server:ro -B /srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23:/srv/<span class="notranslate">galaxy</span>/jobs/000/23 -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/working:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/working -B /data:/data -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh &gt; ../outputs/tool_stdout 2&gt; ../outputs/tool_stderr; return_code=$?; cd '/srv/<span class="notranslate">galaxy</span>/jobs/000/23';
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1360,7 +1366,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 -->
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-3">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-2...step-3#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-3">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-2...step-3#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 
                 
@@ -1433,8 +1439,8 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 author = "Torfinn Nome and Marius van den Beek and Matthias Bernt and Helena Rasche",
 title = "Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/singularity/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

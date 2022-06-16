@@ -884,7 +884,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -959,9 +959,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <div data-commit="Add requirements" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
 </span><span class="p">@@ -20,3 +20,7 @@</span>
+   version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+ - src: gantsign.golang
    version: 2.6.3
- - src: <span class="notranslate">galaxy</span>project.cvmfs
-   version: 0.2.13
 <span class="gi">+- src: <span class="notranslate">galaxy</span>project.repos
 +  version: 0.0.2
 +- src: <span class="notranslate">galaxy</span>project.slurm
@@ -1005,7 +1005,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -140,6 +140,16 @@</span> golang_gopath: '/opt/workspace-go'
+</span><span class="p">@@ -135,6 +135,16 @@</span> golang_gopath: '/opt/workspace-go'
  singularity_version: "3.7.4"
  singularity_go_path: "{{ golang_install_dir }}"
     
@@ -1264,7 +1264,7 @@ sleep </span>30
 
       <div data-commit="Configure DRMAA_LIBRARY_PATH" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -103,6 +103,7 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+</span><span class="p">@@ -98,6 +98,7 @@</span> <span class="notranslate">galaxy</span>_config_templates:
     
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -1280,26 +1280,33 @@ sleep </span>30
     <li>
       <p>Next, we need to configure the Slurm job runner. First, we instruct <span class="notranslate">Galaxy</span>’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">type</code>, and <code class="language-plaintext highlighter-rouge">load</code> attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. <span class="notranslate">Galaxy</span> will do the equivalent of submitting a job as <code class="language-plaintext highlighter-rouge">sbatch /path/to/job_script.sh</code>. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a <code class="language-plaintext highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="language-plaintext highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="language-plaintext highlighter-rouge">runner</code> attribute must match the <code class="language-plaintext highlighter-rouge">id</code> of a defined plugin:</p>
 
-      <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -1,9 +1,16 @@</span>
- &lt;job_conf&gt;
-     &lt;plugins workers="4"&gt;
-         &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
-<span class="gi">+        &lt;plugin id="slurm" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner"/&gt;
-</span>     &lt;/plugins&gt;
-<span class="gd">-    &lt;destinations default="singularity"&gt;
-</span><span class="gi">+    &lt;destinations default="slurm"&gt;
-</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
-<span class="gi">+        &lt;destination id="slurm" runner="slurm"&gt;
-+            &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
-+            &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
-+            &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
-+            &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
-+        &lt;/destination&gt;
-</span>         &lt;destination id="singularity" runner="local_plugin"&gt;
-             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
-             &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
+      <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -2,12 +2,24 @@</span> runners:
+   local_runner:
+     load: <span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner
+     workers: 4
+<span class="gi">+  slurm:
++    load: <span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner
+</span>    
+ execution:
+   default: singularity
+   environments:
+     local_dest:
+       runner: local_runner
+<span class="gi">+    slurm:
++      runner: slurm
++      singularity_enabled: true
++      env:
++      - name: LC_ALL
++        value: C
++      - name: SINGULARITY_CACHEDIR
++        value: /tmp/singularity
++      - name: SINGULARITY_TMPDIR
++        value: /tmp
+</span>     singularity:
+       runner: local_runner
+       singularity_enabled: true
    
 </code></pre></div>      </div>
     </li>
@@ -1324,8 +1331,8 @@ sleep </span>30
       <blockquote class="code-out">
         <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
         <p>Your output may look slightly different:</p>
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu uwsgi[1821134]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
-Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu uwsgi[1821134]: <span class="notranslate">galaxy</span>.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner '<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu gunicorn[1821134]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
+Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu gunicorn[1821134]: <span class="notranslate">galaxy</span>.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner '<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 </span></code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1586,7 +1593,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>You can access the data via BioBlend (<a href="https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics"><code class="language-plaintext highlighter-rouge">JobsClient.get_metrics</code></a>), or via SQL with <a href="https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics"><code class="language-plaintext highlighter-rouge">gxadmin</code></a>.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-7">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-6...step-7#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-7">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-6...step-7#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 <h2 id="further-reading">Further Reading</h2>
 
@@ -1687,8 +1694,8 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 author = "Nate Coraor and Björn Grüning and Helena Rasche",
 title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

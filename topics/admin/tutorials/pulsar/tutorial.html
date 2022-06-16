@@ -1363,7 +1363,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1395,7 +1395,7 @@
 
 <p>Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.</p>
 
-<p>At the <span class="notranslate">Galaxy</span> end, it is configured within the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file and uses one of two special <span class="notranslate">Galaxy</span> job runners.</p>
+<p>At the <span class="notranslate">Galaxy</span> end, it is configured within the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file and uses one of two special <span class="notranslate">Galaxy</span> job runners.</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
@@ -1641,7 +1641,7 @@
 
       <div data-commit="Configure RabbitMQ" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -128,8 +128,10 @@</span> certbot_environment: staging
+</span><span class="p">@@ -123,8 +123,10 @@</span> certbot_environment: staging
  certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
@@ -1652,7 +1652,7 @@
 </span> certbot_domains:
   - "{{ inventory_hostname }}"
  certbot_agree_tos: --agree-tos
-<span class="p">@@ -163,6 +165,34 @@</span> slurm_config:
+<span class="p">@@ -158,6 +160,34 @@</span> slurm_config:
    SelectType: select/cons_res
    SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
     
@@ -2093,7 +2093,7 @@ curl <span class="nt">-k</span> https://localhost:5671
 
 <p>Now we have a Pulsar server up and running, we need to tell our <span class="notranslate">Galaxy</span> about it.</p>
 
-<p><span class="notranslate">Galaxy</span> talks to the Pulsar server via it’s <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. We need to let <span class="notranslate">Galaxy</span> know about Pulsar there and make sure <span class="notranslate">Galaxy</span> has loaded the requisite job runner, and has a destination set up.</p>
+<p><span class="notranslate">Galaxy</span> talks to the Pulsar server via it’s <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file. We need to let <span class="notranslate">Galaxy</span> know about Pulsar there and make sure <span class="notranslate">Galaxy</span> has loaded the requisite job runner, and has a destination set up.</p>
 
 <p>There are three things we need to do here:</p>
 
@@ -2110,51 +2110,51 @@ curl <span class="nt">-k</span> https://localhost:5671
 
   <ol>
     <li>
-      <p>In your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
-      <div data-commit="Add pulsar plugin" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -2,6 +2,16 @@</span>
-     &lt;plugins workers="4"&gt;
-         &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
-         &lt;plugin id="slurm" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner"/&gt;
-<span class="gi">+        &lt;plugin id="pulsar_runner" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner" &gt;
-+            &lt;param id="amqp_url"&gt;pyamqp://<span class="notranslate">galaxy</span>_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1&lt;/param&gt;
-+            &lt;param id="amqp_ack_republish_time"&gt;1200&lt;/param&gt;
-+            &lt;param id="amqp_acknowledge"&gt;True&lt;/param&gt;
-+            &lt;param id="amqp_consumer_timeout"&gt;2.0&lt;/param&gt;
-+            &lt;param id="amqp_publish_retry"&gt;True&lt;/param&gt;
-+            &lt;param id="amqp_publish_retry_max_retries"&gt;60&lt;/param&gt;
-+            &lt;param id="<span class="notranslate">galaxy</span>_url"&gt;https://{{ inventory_hostname }}&lt;/param&gt;
-+            &lt;param id="manager"&gt;_default_&lt;/param&gt;
-+        &lt;/plugin&gt;
-</span>     &lt;/plugins&gt;
-     &lt;destinations default="slurm"&gt;
-         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+      <div data-commit="Add pulsar plugin" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -4,6 +4,16 @@</span> runners:
+     workers: 4
+   slurm:
+     load: <span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner
+<span class="gi">+  pulsar_runner:
++    load: <span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner
++    amqp_url: "pyamqp://<span class="notranslate">galaxy</span>_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
++    amqp_acknowledge: true
++    amqp_ack_republish_time: 1200
++    amqp_consumer_timeout: 2
++    amqp_publish_retry: true
++    amqp_publish_retry_max_retries: 60
++    <span class="notranslate">galaxy</span>_url: "https://{{ inventory_hostname }}"
++    manager: _default_
+</span>    
+ execution:
+   default: singularity
    
 </code></pre></div>      </div>
 
-      <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file:</p>
+      <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file:</p>
 
-      <div data-commit="Add pulsar destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -15,6 +15,16 @@</span>
-     &lt;/plugins&gt;
-     &lt;destinations default="slurm"&gt;
-         &lt;destination id="local_destination" runner="local_plugin"/&gt;
-<span class="gi">+        &lt;destination id="pulsar" runner="pulsar_runner" &gt;
-+            &lt;param id="default_file_action"&gt;remote_transfer&lt;/param&gt;
-+            &lt;param id="dependency_resolution"&gt;remote&lt;/param&gt;
-+            &lt;param id="jobs_directory"&gt;/mnt/pulsar/files/staging&lt;/param&gt;
-+            &lt;param id="persistence_directory"&gt;/mnt/pulsar/files/persisted_data&lt;/param&gt;
-+            &lt;param id="remote_metadata"&gt;False&lt;/param&gt;
-+            &lt;param id="rewrite_parameters"&gt;True&lt;/param&gt;
-+            &lt;param id="transport"&gt;curl&lt;/param&gt;
-+            &lt;param id="outputs_to_working_directory"&gt;False&lt;/param&gt;
-+        &lt;/destination&gt;
-</span>         &lt;destination id="slurm" runner="slurm"&gt;
-             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
-             &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
+      <div data-commit="Add pulsar destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -20,6 +20,16 @@</span> execution:
+   environments:
+     local_dest:
+       runner: local_runner
+<span class="gi">+    pulsar:
++      runner: pulsar_runner
++      default_file_action: remote_transfer
++      dependency_resolution: remote
++      jobs_directory: /mnt/pulsar/files/staging
++      persistence_directory: /mnt/pulsar/files/persisted_data
++      remote_metadata: false
++      rewrite_parameters: true
++      transport: curl
++      outputs_to_working_directory: false
+</span>     slurm:
+       runner: slurm
+       singularity_enabled: true
    
 </code></pre></div>      </div>
 
@@ -2169,21 +2169,21 @@ curl <span class="nt">-k</span> https://localhost:5671
       <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-install-tools-via-the-admin-ui"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install tools via the Admin UI</h3>  <ol>  <li>Open <span class="notranslate">Galaxy</span> in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA-MEM” is among the search results, you can skip the following steps.</li>  <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>  <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>  <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>  <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>  <li>Click the “Install” button for the latest revision</li>  <li>Enter “<span class="notranslate">Mapping</span>” as the target section and click “OK”.</li></ol></blockquote>
     </li>
     <li>
-      <p>We now need to tell <span class="notranslate">Galaxy</span> to send BWA and BWA-MEM jobs to the <code class="language-plaintext highlighter-rouge">pulsar</code> destination. We specify this in the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file.</p>
+      <p>We now need to tell <span class="notranslate">Galaxy</span> to send BWA and BWA-MEM jobs to the <code class="language-plaintext highlighter-rouge">pulsar</code> destination. We specify this in the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file.</p>
 
-      <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
+      <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
-      <div data-commit="Send bwa and bwa-mem to pulsar" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -64,5 +64,7 @@</span>
-     &lt;/resources&gt;
-     &lt;tools&gt;
-         &lt;tool id="testing" destination="dynamic_cores_time" resources="testing" /&gt;
-<span class="gi">+        &lt;tool id="bwa" destination="pulsar"/&gt;
-+        &lt;tool id="bwa_mem" destination="pulsar"/&gt;
-</span>     &lt;/tools&gt;
- &lt;/job_conf&gt;
-   
+      <div data-commit="Send bwa and bwa-mem to pulsar" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -86,3 +86,7 @@</span> tools:
+ - id: testing
+   execution: dynamic_cores_time
+   resources: testing
+<span class="gi">+- id: bwa
++  execution: pulsar
++- id: bwa_mem
++  execution: pulsar
+</span>   
 </code></pre></div>      </div>
 
       <p>Note that here we are using the short tool IDs. If you want to run only a specific version of a tool in Pulsar, you have to use the full tool ID (e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4</code>) instead. The full tool ID can be found inside the <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="language-plaintext highlighter-rouge">mutable-config</code> directory.</p>
@@ -2255,7 +2255,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-9">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-8...step-9#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-9">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-8...step-9#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 <h1 id="retries-of-the-staging-actions">Retries of the staging actions</h1>
 
@@ -2298,7 +2298,7 @@ The aim of these parameters is to control the retrying of staging actions in the
       <li>A user - configured with a password and the new vhost</li>
     </ul>
   </li>
-  <li>In the <span class="notranslate">Galaxy</span> job_conf.xml:
+  <li>In the <span class="notranslate">Galaxy</span> job_conf.yml:
     <ul>
       <li>A new job runner with the new connection string</li>
       <li>A new destination or multiple destinations for the new runner.</li>
@@ -2306,7 +2306,7 @@ The aim of these parameters is to control the retrying of staging actions in the
   </li>
 </ol>
 
-<p>Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your <span class="notranslate">Galaxy</span> job_conf.xml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.</p>
+<p>Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your <span class="notranslate">Galaxy</span> job_conf.yml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.</p>
 
 <h2 id="australia">Australia</h2>
 
@@ -2410,8 +2410,8 @@ The aim of these parameters is to control the retrying of staging actions in the
 author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasche and Gianmauro Cuccuru",
 title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

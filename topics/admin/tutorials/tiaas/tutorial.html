@@ -1203,7 +1203,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1280,7 +1280,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -217,6 +217,15 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -212,6 +212,15 @@</span> telegraf_plugins_extra:
        - data_format = "influx"
        - interval = "15s"
     
@@ -1373,7 +1373,7 @@ to perform this process every night at midnight. You can control when this runs 
 
       <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -78,4 +78,19 @@</span> server {
+</span><span class="p">@@ -90,4 +90,19 @@</span> server {
          proxy_set_header Host $http_host;
      }
     
@@ -1598,7 +1598,7 @@ to perform this process every night at midnight. You can control when this runs 
 
       <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -142,6 +142,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
+</span><span class="p">@@ -137,6 +137,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
  <span class="notranslate">galaxy</span>_dynamic_job_rules:
  - my_rules.py
  - map_resources.py
@@ -1610,42 +1610,34 @@ to perform this process every night at midnight. You can control when this runs 
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>):</p>
+      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2</code>):</p>
 
-      <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -13,7 +13,7 @@</span>
-             &lt;param id="manager"&gt;_default_&lt;/param&gt;
-         &lt;/plugin&gt;
-     &lt;/plugins&gt;
-<span class="gd">-    &lt;destinations default="slurm"&gt;
-</span><span class="gi">+    &lt;destinations default="sorting_hat"&gt;
-</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
-         &lt;destination id="pulsar" runner="pulsar_runner" &gt;
-             &lt;param id="default_file_action"&gt;remote_transfer&lt;/param&gt;
-<span class="p">@@ -25,6 +25,10 @@</span>
-             &lt;param id="transport"&gt;curl&lt;/param&gt;
-             &lt;param id="outputs_to_working_directory"&gt;False&lt;/param&gt;
-         &lt;/destination&gt;
-<span class="gi">+        &lt;destination id="sorting_hat" runner="dynamic"&gt;
-+            &lt;param id="type"&gt;python&lt;/param&gt;
-+            &lt;param id="function"&gt;sorting_hat&lt;/param&gt;
-+        &lt;/destination&gt;
-</span>         &lt;destination id="slurm" runner="slurm"&gt;
-             &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
-             &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
-<span class="p">@@ -63,6 +67,7 @@</span>
-         &lt;group id="testing"&gt;cores,time&lt;/group&gt;
-     &lt;/resources&gt;
-     &lt;tools&gt;
-<span class="gi">+        &lt;tool id="upload1" destination="slurm"/&gt;
-</span>         &lt;tool id="testing" destination="dynamic_cores_time" resources="testing" /&gt;
-         &lt;tool id="bwa" destination="pulsar"/&gt;
-         &lt;tool id="bwa_mem" destination="pulsar"/&gt;
+      <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -16,7 +16,7 @@</span> runners:
+     manager: _default_
+    
+ execution:
+<span class="gd">-  default: singularity
+</span><span class="gi">+  default: sorting_hat
+</span>   environments:
+     local_dest:
+       runner: local_runner
+<span class="p">@@ -73,6 +73,10 @@</span> execution:
+     dynamic_cores_time:
+       runner: dynamic
+       function: dynamic_cores_time
+<span class="gi">+    # Next year this will be replaced with the TPV.
++    sorting_hat:
++      runner: dynamic
++      function: sorting_hat
+</span>    
+ resources:
+   default: default
    
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code>. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.</p>
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.yml.j2</code>. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.</p>
     </li>
     <li>
       <p>Run the playbook</p>
@@ -1674,7 +1666,7 @@ to perform this process every night at midnight. You can control when this runs 
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-12">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-11...step-12#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-12">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-11...step-12#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 
                 
@@ -1757,8 +1749,8 @@ to perform this process every night at midnight. You can control when this runs 
 author = "Helena Rasche and Saskia Hiltemann",
 title = "Training Infrastructure as a Service (TIaaS) (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

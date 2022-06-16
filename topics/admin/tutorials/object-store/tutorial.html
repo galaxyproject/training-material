@@ -862,7 +862,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1196,15 +1196,11 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -35,6 +35,8 @@</span> <span class="notranslate">galaxy</span>_config:
-     check_migrate_tools: false
      tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
-     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.xml"
+     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.yml"
 <span class="gi">+    file_sources_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/file_sources_conf.yml"
 +    user_preferences_extra_conf_path: "{{ <span class="notranslate">galaxy</span>_config_dir }}/user_preferences_extra_conf.yml"
-</span>   uwsgi:
-     socket: 127.0.0.1:5000
-     buffer-size: 16384
-</code></pre></div>      </div>
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Deploy the new config files using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var (also from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role) in your group vars:</p>
@@ -1212,7 +1208,7 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -65,6 +67,12 @@</span> <span class="notranslate">galaxy</span>_config_templates:
-   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
      dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
     
 <span class="gi">+<span class="notranslate">galaxy</span>_config_files:
@@ -1352,8 +1348,8 @@ You will have a new “Choose remote files” button that will open the remote f
 author = "Nate Coraor and Helena Rasche and Gianmauro Cuccuru",
 title = "Distributed Object Storage (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

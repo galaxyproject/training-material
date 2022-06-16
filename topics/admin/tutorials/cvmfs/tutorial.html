@@ -852,7 +852,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1076,10 +1076,10 @@ terminal.</p>
 
       <div data-commit="Add requirement" data-ref="add-req" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
-</span><span class="p">@@ -18,3 +18,5 @@</span>
-   version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
- - src: gantsign.golang
-   version: 2.6.3
+</span><span class="p">@@ -14,3 +14,5 @@</span>
+   version: 0.1.5
+ - name: <span class="notranslate">galaxy</span>project.tusd
+   version: 0.0.1
 <span class="gi">+- src: <span class="notranslate">galaxy</span>project.cvmfs
 +  version: 0.2.13
 </span>   
@@ -1232,7 +1232,7 @@ disk of these machines. So I’ll save that.</p>
 
       <div data-commit="Add role to playbook" data-ref="pb" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -22,3 +22,4 @@</span>
+</span><span class="p">@@ -20,3 +20,4 @@</span>
        become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
      - <span class="notranslate">galaxy</span>project.nginx
      - <span class="notranslate">galaxy</span>project.tusd
@@ -1474,9 +1474,9 @@ able to use all of the data contained within this repository.</p>
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    tool_data_table_config_path: /cvmfs/data.<span class="notranslate">galaxy</span>project.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.<span class="notranslate">galaxy</span>project.org/managed/location/tool_data_table_conf.xml
-</span>     dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
-     containers_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/container_resolvers_conf.xml"
-     brand: "🧬🔬🚀"
+</span>     brand: "🧬🔬🚀"
+     admin_users: admin@example.org
+     database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
    
 </code></pre></div>      </div>
 
@@ -1575,7 +1575,7 @@ having no options available, you can see here we’ve got the Bee genome.</p>
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-5">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-4...step-5#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-5">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-4...step-5#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 <h1 id="common-production-questions">Common Production Questions</h1>
 
@@ -1724,8 +1724,8 @@ day soon at a <span class="notranslate">Galaxy</span> conference. Thank you and 
 author = "Simon Gladman and Helena Rasche",
 title = "Reference Data with CVMFS (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

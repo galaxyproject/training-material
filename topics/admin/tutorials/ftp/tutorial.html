@@ -771,7 +771,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 10, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 13, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -881,7 +881,7 @@
 
       <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -164,9 +164,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
+</span><span class="p">@@ -159,9 +159,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
    - rabbitmq
@@ -910,9 +910,9 @@
 <span class="gi">+    # FTP
 +    ftp_upload_dir: /data/uploads
 +    ftp_upload_site: "{{ inventory_hostname }}"
-</span>   uwsgi:
-     socket: 127.0.0.1:5000
-     buffer-size: 16384
+</span>   gravity:
+     <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
+     app_server: gunicorn
    
 </code></pre></div>      </div>
     </li>
@@ -926,7 +926,7 @@
 
       <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -233,6 +233,27 @@</span> rabbitmq_users:
+</span><span class="p">@@ -228,6 +228,27 @@</span> rabbitmq_users:
      password: "{{ vault_rabbitmq_password_vhost }}"
      vhost: /pulsar/<span class="notranslate">galaxy</span>_au
     
@@ -1255,7 +1255,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 <p>Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-14">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-13...step-14#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-14">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-13...step-14#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 
                 
@@ -1356,8 +1356,8 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 author = "Lucille Delisle",
 title = "Enable upload via FTP (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "10"
+month = "06",
+day = "13"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

@@ -873,7 +873,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1069,7 +1069,7 @@
 
 <p>This process can be lengthy and resource intensive. Future plans for <span class="notranslate">Galaxy</span> include pre-building the client so that the build process is not necessary as long as you run “release” versions of <span class="notranslate">Galaxy</span>.</p>
 
-<p>The client lives in the <span class="notranslate">Galaxy</span> code under the <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/">client/</a> directory, and the build process deploys it to the <a href="https://github.com/galaxyproject/galaxy/tree/dev/static/">static/</a> directory, which we will configure NGINX to serve in this tutorial.</p>
+<p>The client lives in the <span class="notranslate">Galaxy</span> code under the <a href="https://github.com/galaxyproject/galaxy/blob/dev/client/">client/</a> directory, and the build process deploys it to the <a href="https://github.com/galaxyproject/galaxy/tree/dev/static/">static/</a> directory, which we will configure a webserver to serve in this tutorial.</p>
 
 <h2 id="handlers">Handlers</h2>
 
@@ -1247,6 +1247,23 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
       </blockquote>
 
       <p>This will install all of the required modules for this training into the <code class="language-plaintext highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-using-git"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using <code class="language-plaintext highlighter-rouge">git</code>?</h3>
+        <p>If you’re using git, it can make sense to tell git to ignore the <code class="language-plaintext highlighter-rouge">roles</code>
+directory, as all of that data can be perfectly recreated from our
+variables in the requirements.yml file.</p>
+
+        <p>Simply create a file <code class="language-plaintext highlighter-rouge">.gitignore</code> with the following content:</p>
+
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">roles/
+.vault-password.txt
+</span></code></pre></div>        </div>
+
+        <p>When you run <code class="language-plaintext highlighter-rouge">git status</code> you’ll notice that the <code class="language-plaintext highlighter-rouge">roles/</code> folder is not listed among the other “Untracked files”. We’re adding the <code class="language-plaintext highlighter-rouge">.vault-password.txt</code> file as well, ahead of time, because this should <em>never</em> ever be committed to the repository.</p>
+
+        <p>Now you can do <code class="language-plaintext highlighter-rouge">git add .</code> to add all of the files in the current directory, and not worry about committing generated artifacts!</p>
+      </blockquote>
     </li>
     <li>
       <p>Inspect the contents of the newly created <code class="language-plaintext highlighter-rouge">roles</code> directory in your working directory.</p>
@@ -1315,7 +1332,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 
 <h2 id="postgresql">PostgreSQL</h2>
 
-<p><span class="notranslate">Galaxy</span> is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.</p>
+<p><span class="notranslate">Galaxy</span> is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL (/ˈpoʊstɡrɛs ˌkjuː ˈɛl/, POHST-gres kyoo el) is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.</p>
 
 <p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL use<span class="notranslate">rna</span>mes (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
 
@@ -1348,6 +1365,24 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 </span>   
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-using-postgres-via-the-network"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using postgres via the network</h3>
+        <p>To use postgres via another machine, or via the network, you can add lines like the following:</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">postgresql_pg_hba_conf</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="s">host all all 127.0.0.1/32 md5</span>
+</code></pre></div>        </div>
+
+        <p>Here you should either add multiple lines per IP address that needs access to the Postgres server (with netmask <code class="language-plaintext highlighter-rouge">/32</code>), or a less specific IP range defined also <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#IPv4_CIDR_blocks">via netmask.</a></p>
+
+        <p>Additionally you’ll need to change the <code class="language-plaintext highlighter-rouge">postgresql_objects_users</code> statement to include a password (maybe stored in a vault, discussed later!)</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">postgresql_objects_users</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
+    <span class="na">password</span><span class="pi">:</span> <span class="s">super-secret-password-that-should-be-in-vault</span>
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Create and open <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> which will be our playbook. Add the following:</p>
@@ -1668,7 +1703,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
   <li>Changing the “brand”</li>
 </ul>
 
-<p>Additionally we’ll go ahead and set up the production-ready <a href="https://uwsgi-docs.readthedocs.io/en/latest/Mules.html">uWSGI Mules</a> which will handle processing <span class="notranslate">Galaxy</span> jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.</p>
+<p>Additionally we’ll go ahead and set up the production-ready Gunicorn which will handle processing <span class="notranslate">Galaxy</span> jobs. Gunicorn launches as many workers as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.</p>
 
 <p>Finally, best admin practices are to not run <span class="notranslate">Galaxy</span> as a user with <code class="language-plaintext highlighter-rouge">sudo</code> access, like your login user probably has. Additionally, it is best to install the <span class="notranslate">Galaxy</span> code and configs as a separate user, for security purposes. So we will instruct the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role to create a new user account specifically to run <span class="notranslate">Galaxy</span> under.</p>
 
@@ -1795,7 +1830,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2022-05-31), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2022-06-14), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -1888,6 +1923,13 @@ postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql
 
       </blockquote>
 
+      <blockquote class="tip">
+        <h3 id="tip-tip-using-postgres-via-the-network-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using postgres via the network</h3>
+        <p>Here you’ll need to re-use the connection details you specified during <code class="language-plaintext highlighter-rouge">postgresql_objects_users</code>. You can reference it like the following, for example. <code class="language-plaintext highlighter-rouge">localhost</code> may need to change if you’re hosting the database on another host.</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+    database_connection: "postgres://:@localhost:5432/"
+</code></pre></div>        </div>
+      </blockquote>
+
       <blockquote class="comment">
         <h3 id="comment-ansible-variable-templating"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
         <p>In this step we use some templated variables. These are seen in our group variables, among other places, and look like <code class="language-plaintext highlighter-rouge">miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir  }}/_conda"</code>.</p>
@@ -1910,39 +1952,34 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
     </li>
     <li>
-      <p>In order to use mule messaging, we need to edit the uWSGI configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
+      <p>In order to use mule messaging, we need to edit the Gravity configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
 
-      <div data-commit="Configure uwsgi" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Configure gravity" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -37,3 +37,28 @@</span> <span class="notranslate">galaxy</span>_config:
+</span><span class="p">@@ -37,3 +37,23 @@</span> <span class="notranslate">galaxy</span>_config:
      tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
-<span class="gi">+  uwsgi:
-+    socket: 127.0.0.1:5000
-+    buffer-size: 16384
-+    processes: 1
-+    th<span class="notranslate">reads</span>: 4
-+    offload-th<span class="notranslate">reads</span>: 2
-+    static-map:
-+      - /static={{ <span class="notranslate">galaxy</span>_server_dir }}/static
-+      - /favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico
-+    static-safe: client/<span class="notranslate">galaxy</span>/images
-+    master: true
-+    virtualenv: "{{ <span class="notranslate">galaxy</span>_venv_dir }}"
-+    pythonpath: "{{ <span class="notranslate">galaxy</span>_server_dir }}/lib"
-+    module: <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()
-+    thunder-lock: true
-+    die-on-term: true
-+    hook-master-start:
-+      - unix_signal:2 gracefully_kill_them_all
-+      - unix_signal:15 gracefully_kill_them_all
-+    py-call-osafterfork: true
-+    enable-th<span class="notranslate">reads</span>: true
-+    mule:
-+      - lib/<span class="notranslate">galaxy</span>/main.py
-+      - lib/<span class="notranslate">galaxy</span>/main.py
-+    farm: job-handlers:1,2
+<span class="gi">+  gravity:
++    <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
++    app_server: gunicorn
++    gunicorn:
++      # listening options
++      bind: "unix:{{ <span class="notranslate">galaxy</span>_mutable_config_dir }}/gunicorn.sock"
++      # performance options
++      workers: 2
++      # Other options that will be passed to gunicorn
++      extra_args: '--forwarded-allow-ips="*"'
++      preload: true
++    celery:
++      concurrency: 2
++      loglevel: DEBUG
++    handlers:
++      handler:
++        processes: 3
++        pools:
++          - job-handler
++          - <span class="notranslate">workflow</span>-scheduler
 </span>   
 </code></pre></div>      </div>
 
@@ -2013,6 +2050,50 @@ So it is not always easy to tell what variables will be set, or what their final
 +3636313438626533633831323239373461373538646635613637
 </span>   
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-using-git-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Using <code class="language-plaintext highlighter-rouge">git</code>?</h3>
+        <p>If you’re using git, and storing all of these steps in your git history,
+you’ll find that working with Vault secrets can be rather annoying as
+the opaque blobs are impossible to read. There’s a way to make this
+<em>much</em> easier though:</p>
+
+        <p>Create a file <code class="language-plaintext highlighter-rouge">.gitattributes</code> with the following content:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>group_vars/secret.yml diff=ansible-vault merge=binary
+</code></pre></div>        </div>
+
+        <p>You can add this file to your repository with <code class="language-plaintext highlighter-rouge">git add .gitattributes</code>
+to ensure colleagues get a copy of the file too. Just <strong>be sure</strong>
+<code class="language-plaintext highlighter-rouge">.vault-password.txt</code> is listed in your <code class="language-plaintext highlighter-rouge">.gitignore</code> file!</p>
+
+        <p>If you have more vault secrets, you can adjust this line (or add more,
+wildcards are supported) to list all of your secret files. This tells
+<code class="language-plaintext highlighter-rouge">git</code> to use <code class="language-plaintext highlighter-rouge">ansible-vault</code> to diff the two files, as you can see in
+the following real (redacted) snippet from a vault stored in a public
+github project.</p>
+
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git log <span class="nt">-p</span> group_vars/all/secret.yml
+<span class="go">commit a137d7d6aa4ed374c29545ac4728837815c460aa
+</span><span class="gp">Author: Helena Rasche &lt;hxr@hx42.org&gt;</span><span class="w">
+</span><span class="go">Date:   Thu Dec 2 12:52:55 2021 +0100
+
+    fix automation password
+
+diff --git a/group_vars/all/secret.yml b/group_vars/all/secret.yml
+index 3fe4444..11831ae 100644
+--- a/group_vars/all/secret.yml
++++ b/group_vars/all/secret.yml
+@@ -1,6 +1,6 @@
+ ---
+ id_secret: "..."
+-jenkins_password: "old-secret-value"
++jenkins_password: "new-secret-value"
+ grafana_admin_pass:    "..."
+ secret_tiaas_admin_pw: "..."
+
+</span></code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Load the secrets in the playbook</p>
@@ -2583,7 +2664,6 @@ The client is only re-built when there are changes in the files needed for the <
     <span class="err">admin_users:</span> <span class="err">admin@example.org</span>
     <span class="err">brand:</span> <span class="err">🧬🔬🚀</span>
     <span class="err">builds_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/builds.txt.sample</span>
-    <span class="err">check_migrate_tools:</span> <span class="err">false</span>
     <span class="err">citation_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/data</span>
     <span class="err">citation_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/locks</span>
     <span class="err">data_manager_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/data_manager_conf.xml.sample</span>
@@ -2593,7 +2673,6 @@ The client is only re-built when there are changes in the files needed for the <
     <span class="err">file_path:</span> <span class="err">/data</span>
     <span class="err">integrated_tool_panel_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/integrated_tool_panel.xml</span>
     <span class="err">job_working_directory:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/jobs</span>
-    <span class="err">migrated_tools_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/migrated_tools_conf.xml</span>
     <span class="err">mulled_resolution_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/data</span>
     <span class="err">mulled_resolution_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/lock</span>
     <span class="err">new_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/tmp</span>
@@ -2632,10 +2711,10 @@ The client is only re-built when there are changes in the files needed for the <
 
       <div data-commit="Setup systemd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -62,3 +62,6 @@</span> <span class="notranslate">galaxy</span>_config:
-       - lib/<span class="notranslate">galaxy</span>/main.py
-       - lib/<span class="notranslate">galaxy</span>/main.py
-     farm: job-handlers:1,2
+</span><span class="p">@@ -57,3 +57,6 @@</span> <span class="notranslate">galaxy</span>_config:
+         pools:
+           - job-handler
+           - <span class="notranslate">workflow</span>-scheduler
 <span class="gi">+
 +# systemd
 +<span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -2749,7 +2828,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
   <li><span class="notranslate">Galaxy</span> running (managed by systemd)</li>
 </ul>
 
-<p>Although uWSGI can server HTTP for us directly, by moving to NGINX (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
+<p>Although uWSGI can server HTTP for us directly, by moving to NGINX (pronounced “engine X” /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
 
 <p>For this, we will use NGINX. It is possible to configure <span class="notranslate">Galaxy</span> with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.</p>
 
@@ -2777,7 +2856,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 
       <div data-commit="Configure nginx, certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -65,3 +65,33 @@</span> <span class="notranslate">galaxy</span>_config:
+</span><span class="p">@@ -60,3 +60,33 @@</span> <span class="notranslate">galaxy</span>_config:
     
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: yes
@@ -2922,8 +3001,16 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 
       <div data-commit="Configure nginx vhost for galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -0,0 +1,49 @@</span>
-<span class="gi">+server {
+</span><span class="p">@@ -0,0 +1,61 @@</span>
+<span class="gi">+<span class="notranslate">upstream</span> <span class="notranslate">galaxy</span> {
++    server unix:{{ <span class="notranslate">galaxy</span>_mutable_config_dir }}/gunicorn.sock;
++
++    # Or if you serve <span class="notranslate">galaxy</span> at a path like http(s)://fqdn/<span class="notranslate">galaxy</span>
++    # Remember to set <span class="notranslate">galaxy</span>_url_prefix in the <span class="notranslate">galaxy</span>.yml file.
++    # server unix:{{ <span class="notranslate">galaxy</span>_mutable_config_dir }}/gunicorn.sock:/<span class="notranslate">galaxy</span>;
++}
++
++server {
 +    # Listen on port 443
 +    listen        *:443 ssl default_server;
 +    # The virtualhost is our domain name
@@ -2933,16 +3020,20 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 +    access_log  /var/log/nginx/access.log;
 +    error_log   /var/log/nginx/error.log;
 +
-+    # The most important location block, by default all requests are sent to uWSGI
++    # The most important location block, by default all requests are sent to gunicorn
++    # If you serve <span class="notranslate">galaxy</span> at a path like /<span class="notranslate">galaxy</span>, change that below (and all other locations!)
 +    location / {
 +        # This is the backend to send the requests to.
-+        uwsgi_pass {{ <span class="notranslate">galaxy</span>_config.uwsgi.socket }};
-+        uwsgi_param UWSGI_SCHEME $scheme;
-+        include uwsgi_params;
++        proxy_pass http://<span class="notranslate">galaxy</span>;
++
++        proxy_set_header Host $http_host;
++        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++        proxy_set_header X-Forwarded-Proto $scheme;
++        proxy_set_header Upgrade $http_upgrade;
 +    }
 +
 +    # Static files can be more efficiently served by Nginx. Why send the
-+    # request to uWSGI which should be spending its time doing more useful
++    # request to Gunicorn which should be spending its time doing more useful
 +    # things like serving <span class="notranslate">Galaxy</span>!
 +    location /static {
 +        alias {{ <span class="notranslate">galaxy</span>_server_dir }}/static;
@@ -2991,7 +3082,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
       </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-customising-the-welcome-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Customising the welcome page</h3>  <p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>  <ol>  <li>    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> with whatever content you want, e.g.</p>    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span><br />  <span class="nt">&lt;body&gt;</span><br />    <span class="nt">&lt;h1&gt;</span>Welcome to <span class="notranslate">Galaxy</span><span class="nt">&lt;/h1&gt;</span><br />    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://<span class="notranslate">galaxy</span>project.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span><br />  <span class="nt">&lt;/body&gt;</span><br /><span class="nt">&lt;/html&gt;</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Add it to your deployed configuration</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span><br /> <span class="notranslate">galaxy</span>_config_templates:<br /> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"</span><br /> - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_reports_path }}"</span><br />+- src: templates/<span class="notranslate">galaxy</span>/config/welcome.html<br />+  dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config_dir }}"</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to point to the new location</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />@@ <span class="nt">-83</span>,12 +83,7 @@<br /> location config/welcome.html <span class="o">{</span><br />-    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span><br />+    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span><br />     expires 24h<span class="p">;</span><br /> <span class="o">}</span><br /></code></pre></div>    </div>  </li>  <li>Run the playbook</li>  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li></ol></blockquote>
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-customising-the-welcome-page"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Customising the welcome page</h3>  <p>Customising the <code class="language-plaintext highlighter-rouge">welcome.html</code> page is very easy!</p>  <ol>  <li>    <p>Create a custom <code class="language-plaintext highlighter-rouge">welcome.html</code> in <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> with whatever content you want, e.g.</p>    <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span><br />  <span class="nt">&lt;body&gt;</span><br />    <span class="nt">&lt;h1&gt;</span>Welcome to <span class="notranslate">Galaxy</span><span class="nt">&lt;/h1&gt;</span><br />    <span class="nt">&lt;iframe</span> <span class="na">src=</span><span class="s">"https://<span class="notranslate">galaxy</span>project.org/#"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"500px"</span> <span class="nt">/&gt;</span><br />  <span class="nt">&lt;/body&gt;</span><br /><span class="nt">&lt;/html&gt;</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Add it to your deployed configuration</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml<br />@@ <span class="nt">-83</span>,12 +83,7 @@ certbot_agree_tos: <span class="nt">--agree-tos</span><br /> <span class="notranslate">galaxy</span>_config_templates:<br /> - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"</span><br /> - src: templates/<span class="notranslate">galaxy</span>/config/reports.yml<br />   dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_reports_path }}"</span><br />+- src: templates/<span class="notranslate">galaxy</span>/config/welcome.html<br />+  dest: <span class="s2">"{{ <span class="notranslate">galaxy</span>_config_dir }}"</span><br /></code></pre></div>    </div>  </li>  <li>    <p>Update the <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to point to the new location</p>    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> a/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2<br />@@ <span class="nt">-83</span>,12 +83,7 @@<br /> location config/welcome.html <span class="o">{</span><br />-    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_server_dir <span class="o">}}</span>/static/welcome.html.sample<span class="p">;</span><br />+    <span class="nb">alias</span> <span class="o">{{</span> <span class="notranslate">galaxy</span>_config_dir <span class="o">}}</span>/welcome.html<span class="p">;</span><br />     expires 24h<span class="p">;</span><br /> <span class="o">}</span><br /></code></pre></div>    </div>  </li>  <li>Run the playbook</li>  <li>Done! You might need to refresh / clear your cache before the changes are visible.</li></ol></blockquote>
     </li>
     <li>
       <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
@@ -3089,7 +3180,7 @@ In a training setting there is no need to request certificates that will be trus
 
 <h2 id="job-configuration">Job Configuration</h2>
 
-<p>One of the most important configuration files for a large <span class="notranslate">Galaxy</span> server is the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. This file tells <span class="notranslate">Galaxy</span> where to run all of the jobs that users execute. If <span class="notranslate">Galaxy</span> can’t find a job conf file or none has been specified in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file, it will use a default configuration, <code class="language-plaintext highlighter-rouge">job_conf.xml.sample_basic</code> file. This file is deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_basic</code> (or see it <a href="https://github.com/galaxyproject/galaxy/blob/master/lib/galaxy/config/sample/job_conf.xml.sample_basic">in the codebase</a>).</p>
+<p>One of the most important configuration files for a large <span class="notranslate">Galaxy</span> server is the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file. This file tells <span class="notranslate">Galaxy</span> where to run all of the jobs that users execute. If <span class="notranslate">Galaxy</span> can’t find a job conf file or none has been specified in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file, it will use a default configuration, <a href="https://github.com/galaxyproject/galaxy/blob/fd8826904be3f3201f7e7a3b6ffbadd27f268896/test/unit/app/jobs/job_conf.sample_advanced.yml"><code class="language-plaintext highlighter-rouge">job_conf.sample_advanced.yml</code></a>.</p>
 
 <p>The job configuration file allows <span class="notranslate">Galaxy</span> to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:</p>
 
@@ -3101,35 +3192,37 @@ In a training setting there is no need to request certificates that will be trus
 
 <h3 id="the-job-conf-file---basics">The job conf file - basics</h3>
 
-<p>The <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file has three basic sections:</p>
+<p>The <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file has three basic sections:</p>
 
 <ul>
-  <li><strong>Plugins</strong> - This section lists the types of job management systems that this <span class="notranslate">Galaxy</span> server is configured to use, and tells <span class="notranslate">Galaxy</span> to load the drivers for each type.</li>
-  <li><strong>Destinations</strong> - This section lists the different locations, queues, etc. that <span class="notranslate">Galaxy</span> can send jobs to. Each one has a name and uses a <em>plugin</em> to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.</li>
-  <li><strong>Tools</strong> - This section lists the various tools that you would like to send to a non-default <em>destination</em>. Each line in this section pairs up a tool in <span class="notranslate">Galaxy</span> with a particular job <em>destination</em>. Every time <span class="notranslate">Galaxy</span> gets a job for that particular tool, it is always sent to that <em>destination</em>.</li>
+  <li><strong>runners</strong> - This section lists the types of job management systems that this <span class="notranslate">Galaxy</span> server is configured to use, and tells <span class="notranslate">Galaxy</span> to load the drivers for each type.</li>
+  <li><strong>execution</strong> - This section lists the different locations, queues, etc. that <span class="notranslate">Galaxy</span> can send jobs to. Each one has a name and uses a <em>plugin</em> to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.</li>
+  <li><strong>tools</strong> - This section lists the various tools that you would like to send to a non-default <em>destination</em>. Each line in this section pairs up a tool in <span class="notranslate">Galaxy</span> with a particular job <em>destination</em>. Every time <span class="notranslate">Galaxy</span> gets a job for that particular tool, it is always sent to that <em>destination</em>.</li>
 </ul>
 
-<p>The basic <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file looks like this:</p>
+<p>The basic <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file looks like this:</p>
 
-<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
-    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;destinations&gt;</span>
-        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/destinations&gt;</span>
-    <span class="nt">&lt;tools&gt;</span>
-    <span class="nt">&lt;/tools&gt;</span>
-<span class="nt">&lt;/job_conf&gt;</span>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runners</span><span class="pi">:</span>
+  <span class="na">local_runner</span><span class="pi">:</span>
+    <span class="na">load</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner</span>
+    <span class="na">workers</span><span class="pi">:</span> <span class="m">4</span>
+<span class="na">execution</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="s">local_dest</span>
+  <span class="na">environments</span><span class="pi">:</span>
+    <span class="na">local_dest</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">local_runner</span>
+<span class="na">tools</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">bwa</span>
+  <span class="na">destination</span><span class="pi">:</span> <span class="s">local_dest</span>
 </code></pre></div></div>
 
-<p>The above <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file defines a <em>plugin</em> and <em>destination</em> to allow <span class="notranslate">Galaxy</span> to run user jobs on the local computer (i.e. The computer that <span class="notranslate">Galaxy</span> is running on.)</p>
+<p>The above <code class="language-plaintext highlighter-rouge">job_conf.yml</code> file defines a <em>runner</em> and an <em>execution</em> to allow <span class="notranslate">Galaxy</span> to run user jobs on the local computer (i.e. The computer that <span class="notranslate">Galaxy</span> is running on.)</p>
 
 <p>Firstly, the plugins section contains a plugin called “local” which is of type “runner” and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called “local” using the runner “local”. As this is the only destination specified, it is also the default. So now everytime a user clicks “Execute” on a tool form, <span class="notranslate">Galaxy</span> will run the corresponding job locally using the python code specified.</p>
 
 <blockquote class="tip">
   <h3 id="tip-want-to-use-something-else"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Want to use something else?</h3>
-  <p>There are a lot of other plugins available for <span class="notranslate">Galaxy</span> for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the <span class="notranslate">Galaxy</span> documentation on <a href="https://docs.galaxyproject.org/en/master/admin/jobs.html">job configuration</a> for more details on these plugins and their configuration. There is also an advanced sample job conf file located at: <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_advanced</code></p>
+  <p>There are a lot of other plugins available for <span class="notranslate">Galaxy</span> for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the <span class="notranslate">Galaxy</span> documentation on <a href="https://docs.galaxyproject.org/en/master/admin/jobs.html">job configuration</a> for more details on these plugins and their configuration.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -3146,31 +3239,35 @@ In a training setting there is no need to request certificates that will be trus
       </blockquote>
     </li>
     <li>
-      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2</code> with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):</p>
 
       <div data-commit="Add job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
-</span><span class="p">@@ -0,0 +1,10 @@</span>
-<span class="gi">+&lt;job_conf&gt;
-+    &lt;plugins workers="4"&gt;
-+        &lt;plugin id="local_plugin" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
-+    &lt;/plugins&gt;
-+    &lt;destinations default="local_destination"&gt;
-+        &lt;destination id="local_destination" runner="local_plugin"/&gt;
-+    &lt;/destinations&gt;
-+    &lt;tools&gt;
-+    &lt;/tools&gt;
-+&lt;/job_conf&gt;
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+</span><span class="p">@@ -0,0 +1,14 @@</span>
+<span class="gi">+runners:
++  local_runner:
++    load: <span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner
++    workers: 4
++
++execution:
++  default: local_dest
++  environments:
++    local_dest:
++      runner: local_runner
++
++tools:
++- class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
++  execution: local_dest
 </span>   
 </code></pre></div>      </div>
 
       <blockquote class="tip">
         <h3 id="tip-workers4"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> workers=4</h3>
-        <p>In the local runner, <code class="language-plaintext highlighter-rouge">workers="4"</code> means “number of jobs that can be running at one time”. For every other job runner, it means the number of th<span class="notranslate">reads</span> that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four th<span class="notranslate">reads</span> that can handle these jobs at once. But additional job handlers can be more useful as well.</p>
+        <p>In the local runner, <code class="language-plaintext highlighter-rouge">workers: 4</code> means “number of jobs that can be running at one time”. For every other job runner, it means the number of th<span class="notranslate">reads</span> that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four th<span class="notranslate">reads</span> that can handle these jobs at once. But additional job handlers can be more useful as well.</p>
       </blockquote>
     </li>
     <li>
-      <p>Inform the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Inform the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.yml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
       <div data-commit="Load job conf in galaxy config" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
@@ -3178,10 +3275,10 @@ In a training setting there is no need to request certificates that will be trus
      tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
-<span class="gi">+    job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.xml"
-</span>   uwsgi:
-     socket: 127.0.0.1:5000
-     buffer-size: 16384
+<span class="gi">+    job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.yml"
+</span>   gravity:
+     <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
+     app_server: gunicorn
    
 </code></pre></div>      </div>
 
@@ -3189,12 +3286,12 @@ In a training setting there is no need to request certificates that will be trus
 
       <div data-commit="Deploy job conf to config dir" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -64,6 +64,10 @@</span> <span class="notranslate">galaxy</span>_config:
-       - lib/<span class="notranslate">galaxy</span>/main.py
-     farm: job-handlers:1,2
+</span><span class="p">@@ -59,6 +59,10 @@</span> <span class="notranslate">galaxy</span>_config:
+           - job-handler
+           - <span class="notranslate">workflow</span>-scheduler
     
 <span class="gi">+<span class="notranslate">galaxy</span>_config_templates:
-+  - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
++  - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
 +
 </span> # systemd
@@ -3222,26 +3319,25 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
       </blockquote>
     </li>
     <li>
-      <p>Checkout the new job_conf.xml file.</p>
+      <p>Checkout the new job_conf.yml file.</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-17"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_conf.xml
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_conf.yml
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
         <h3 id="code-out-output-bash-10"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
-        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
-    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local_plugin"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/plugins&gt;</span>
-    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"local_destination"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local_destination"</span> <span class="na">runner=</span><span class="s">"local_plugin"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;/destinations&gt;</span>
-    <span class="nt">&lt;tools&gt;</span>
-    <span class="nt">&lt;/tools&gt;</span>
-<span class="nt">&lt;/job_conf&gt;</span>
+        <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">runners</span><span class="pi">:</span>
+  <span class="na">local_runner</span><span class="pi">:</span>
+    <span class="na">load</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner</span>
+    <span class="na">workers</span><span class="pi">:</span> <span class="m">4</span>
+<span class="na">execution</span><span class="pi">:</span>
+  <span class="na">default</span><span class="pi">:</span> <span class="s">local_dest</span>
+  <span class="na">environments</span><span class="pi">:</span>
+    <span class="na">local_dest</span><span class="pi">:</span>
+      <span class="na">runner</span><span class="pi">:</span> <span class="s">local_runner</span>
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -3265,7 +3361,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 </span><span class="p">@@ -38,6 +38,28 @@</span> <span class="notranslate">galaxy</span>_config:
      object_store_store_by: uuid
      id_secret: "{{ vault_id_secret }}"
-     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.xml"
+     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.yml"
 <span class="gi">+    # SQL Performance
 +    database_engine_option_server_side_cursors: true
 +    slow_query_log_threshold: 5
@@ -3288,9 +3384,9 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 +    allow_user_impersonation: true
 +    # Tool security
 +    outputs_to_working_directory: true
-</span>   uwsgi:
-     socket: 127.0.0.1:5000
-     buffer-size: 16384
+</span>   gravity:
+     <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
+     app_server: gunicorn
    
 </code></pre></div>      </div>
 
@@ -3312,7 +3408,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 
       <div data-commit="Add nginx x-accel-redir and g-i-g webhook config to nginx" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -46,4 +46,14 @@</span> server {
+</span><span class="p">@@ -58,4 +58,14 @@</span> server {
      location /favicon.ico {
          alias {{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico;
      }
@@ -3523,7 +3619,7 @@ Additionally you can automatically send failing job error reports, even if users
 <p>If you’ve been following along you should have a production-ready <span class="notranslate">Galaxy</span>, secured, everything ready to go.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-1">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-0...step-1#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-1">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-0...step-1#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 <figure id="figure-4"><img src="../../images/ansible-galaxy-intro-2.png" alt="diagram of galaxy setup with postgres, galaxy, nginx, uwsgi, storage, and compute shown attached to each other." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> This approximately represents what you have setup today, NGINX proxies requests to uWSGI which runs the <span class="notranslate">Galaxy</span> App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.</figcaption></figure>
 
@@ -3611,8 +3707,8 @@ Additionally you can automatically send failing job error reports, even if users
 author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
 title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
 year = "2022",
-month = "05",
-day = "31"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

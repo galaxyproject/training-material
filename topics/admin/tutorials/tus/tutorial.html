@@ -879,7 +879,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -965,10 +965,10 @@
      outputs_to_working_directory: true
 <span class="gi">+    # TUS
 +    tus_upload_store: /data/tus
-</span>   uwsgi:
-     socket: 127.0.0.1:5000
-     buffer-size: 16384
-<span class="p">@@ -122,3 +124,16 @@</span> nginx_conf_http:
+</span>   gravity:
+     <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
+     app_server: gunicorn
+<span class="p">@@ -117,3 +119,16 @@</span> nginx_conf_http:
  nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -993,8 +993,8 @@
 
       <div data-commit="Proxy it via NGINX" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -16,6 +16,22 @@</span> server {
-         include uwsgi_params;
+</span><span class="p">@@ -28,6 +28,22 @@</span> server {
+         proxy_set_header Upgrade $http_upgrade;
      }
     
 <span class="gi">+    location /api/upload/resumable_upload {
@@ -1014,7 +1014,7 @@
 +    }
 +
 </span>     # Static files can be more efficiently served by Nginx. Why send the
-     # request to uWSGI which should be spending its time doing more useful
+     # request to Gunicorn which should be spending its time doing more useful
      # things like serving <span class="notranslate">Galaxy</span>!
    
 </code></pre></div>      </div>
@@ -1084,7 +1084,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-2">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-1...step-2#files_bucket">the previous tutorial</a>.</p></blockquote>
+<blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-2">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-1...step-2#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
 
                 
@@ -1167,8 +1167,8 @@
 author = "Marius van den Beek and Helena Rasche and Lucille Delisle",
 title = "Performant Uploads with TUS (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

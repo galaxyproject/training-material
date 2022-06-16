@@ -866,7 +866,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -910,20 +910,17 @@
       <ul>
         <li><code class="language-plaintext highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
         <li><code class="language-plaintext highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
-        <li><code class="language-plaintext highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $remote_user;</code></li>
-        <li><code class="language-plaintext highlighter-rouge">uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">proxy_set_header HTTP_REMOTE_USER $remote_user;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">proxy_set_header HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
       </ul>
 
       <p>It should look like:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -14,6 +14,10 @@</span>
-         uwsgi_pass 127.0.0.1:5000;
-         uwsgi_param UWSGI_SCHEME $scheme;
-         include uwsgi_params;
 <span class="gi">+        auth_basic           <span class="notranslate">galaxy</span>;
 +        auth_basic_user_file /etc/nginx/passwd;
-+        uwsgi_param          HTTP_REMOTE_USER $remote_user;
-+        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
++        proxy_set_header          HTTP_REMOTE_USER $remote_user;
++        proxy_set_header          HTTP_GX_SECRET SOME_SECRET_STRING;
 </span>     }
     
      # Static files can be more efficiently served by Nginx. Why send the
@@ -939,13 +936,13 @@
 
       <p><code class="language-plaintext highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
 <code class="language-plaintext highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
-<code class="language-plaintext highlighter-rouge">uwsgi_param</code> adds <code class="language-plaintext highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="language-plaintext highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
+<code class="language-plaintext highlighter-rouge">proxy_set_header</code> adds <code class="language-plaintext highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to <span class="notranslate">Galaxy</span>, with value <code class="language-plaintext highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
 
       <p><code class="language-plaintext highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="language-plaintext highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. <code class="language-plaintext highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="language-plaintext highlighter-rouge">remote_user_secret</code> in your <span class="notranslate">galaxy</span> configutation.</p>
 
       <blockquote class="tip">
         <h3 id="tip-proxy-bypass"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Proxy bypass</h3>
-        <p>Users can bypass the authentication only if they can talk directly to the uWSGI processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving <span class="notranslate">galaxy</span>, and there is no proxy.)
+        <p>Users can bypass the authentication only if they can talk directly to the gunicorn processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving <span class="notranslate">galaxy</span>, and there is no proxy.)
 This can happen mostly when some users have command line access to the <span class="notranslate">Galaxy</span> server, which is considered a bad practice.</p>
       </blockquote>
     </li>
@@ -1157,8 +1154,8 @@ This can happen mostly when some users have command line access to the <span cla
 author = "Nate Coraor and Nicola Soranzo and Helena Rasche",
 title = "External Authentication (Galaxy Training Materials)",
 year = "2022",
-month = "03",
-day = "30"
+month = "06",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
