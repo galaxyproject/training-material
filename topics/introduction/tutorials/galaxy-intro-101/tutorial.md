@@ -338,7 +338,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 >
 > 1. {% tool [Sort](sort1) %} data in ascending or descending order:
 >
->    - *"Sort Dataset"*: Output from **Group** {% icon tool %}
+>    - *"Sort Dataset"*: Output from **Datamash** {% icon tool %}
 >    - *"on column"*: `Column: 2`
 >    - *"with flavor"*: `Numerical sort`
 >    - *"everything in"*: `Descending order`
@@ -372,7 +372,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 >    - *"File to select"*: The output from **Sort** {% icon tool %}
 >    - "*Operation*": `Keep first lines`
->    - *"Number of libes"*: `5`
+>    - *"Number of lines"*: `5`
 >
 > 2. Click **Execute**
 >
