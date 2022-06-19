@@ -303,6 +303,18 @@ These playbooks are used to maintain Galaxy main, cloud and Docker images, virtu
 
 class: enlarge150
 
+[galaxyproject/**gravity** ](https://github.com/galaxyproject/gravity)
+
+A process manager (supervisor) and management tools for Galaxy servers.
+
+`galaxyctl` which is used to manage the starting, stopping, and logging of Galaxy's various processes.
+
+`galaxy` which can be used to run a Galaxy server in the foreground.
+
+---
+
+class: enlarge150
+
 [galaxyproject/**galaxy-helm** ](https://github.com/galaxyproject/galaxy-helm)
 
 Kubernetes helm chart for deploying Galaxy. Leveraged by cloudlaunch and CloudMan but usable standalone.
@@ -348,6 +360,16 @@ class: enlarge150
 ### ephemeris vs gxadmin
 
 Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmin talks directly to the Galaxy database and relevant files.
+
+---
+
+### Total Perspective Vortex
+
+[galaxyproject/total-perspective-vortex **](https://github.com/galaxyproject/total-perspective-vortex)
+
+![TPV Logo](https://raw.githubusercontent.com/galaxyproject/total-perspective-vortex/main/docs/images/tpv-logo-wide.png)
+
+TotalPerspectiveVortex (TPV) provides an installable set of dynamic rules for the Galaxy application that can route entities (Tools, Users, Roles) to appropriate job destinations based on a configurable yaml file.
 
 ---
 
@@ -500,20 +522,22 @@ If you get Red Xs - take a second to ponder whether they make sense and don't be
 
 ### Linting and Code Formatting
 
-Part of the Galaxy CI process includes linting both the backend Python and frontend ES 6 code.
+Part of the Galaxy CI process includes linting and checking the format of both the backend Python and frontend ES 6 code.
 This linting process captures many common problems as well as enforcing a common code style.
 
 The output reports from the CI process are relatively straightforward, but it is a good process
-to lint changes before opening pull requests for them. The Python linter can be run using `tox`
-as follows.
+to lint changes and formatting your code before opening pull requests for them. 
+
+Execute the `format` make command to format the backend code and then use `tox`
+to lint the formatted code.
 
 ```
+$ make format
 $ tox -e lint
 ```
 
-The client code formatting guidelines are much more strict but as a result can be applied
-automatically for very consistent code. Execute the `client-format` make command to format
-the code and then the `client-lint` command to check the result.
+Execute the `client-format` make command to format the code and then the `client-lint` command
+to lint the formatted code.
 
 ```
 $ make client-format
