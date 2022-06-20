@@ -3,23 +3,25 @@ require 'yaml'
 require 'find'
 require 'pathname'
 require 'kwalify'
+require './bin/gtn.rb'
 
 # Schemas
-TOPIC_SCHEMA = YAML.load_file('bin/schema-topic.yaml')
-TUTORIAL_SCHEMA = YAML.load_file('bin/schema-tutorial.yaml')
-SLIDES_SCHEMA = YAML.load_file('bin/schema-slides.yaml')
-FAQ_SCHEMA = YAML.load_file('bin/schema-faq.yaml')
+TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
+TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
+FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
 requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
 requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
-# Contributors
-CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
-
 # Update the existing schemas to have enums with values. Then we get validation *for free*!
-TUTORIAL_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-SLIDES_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-TOPIC_SCHEMA['mapping']['maintainers']['sequence'][0]['enum'] = CONTRIBUTORS.keys
-FAQ_SCHEMA['mapping']['contributors']['sequence'][0]['enum'] = CONTRIBUTORS.keys
+TUTORIAL_SCHEMA = automagic_loading(TUTORIAL_SCHEMA_UNSAFE)
+SLIDES_SCHEMA = automagic_loading(SLIDES_SCHEMA_UNSAFE)
+TOPIC_SCHEMA = automagic_loading(TOPIC_SCHEMA_UNSAFE)
+FAQ_SCHEMA = automagic_loading(FAQ_SCHEMA_UNSAFE)
+
+TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
+SLIDES_SCHEMA['mapping']['contributions']['required'] = false
+
 
 # Build validators now that we've filled out the subtopic enum
 $topic_validator = Kwalify::Validator.new(TOPIC_SCHEMA)

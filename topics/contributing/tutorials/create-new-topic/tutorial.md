@@ -10,8 +10,11 @@ objectives:
 time_estimation: "30m"
 key_points:
   - "A new topic can be easily added for new tutorials"
-contributors:
+contributions:
+  authorship:
   - bebatut
+  editing:
+  - hexylena
 ---
 
 # Introduction
@@ -148,23 +151,9 @@ Once the topic name has been chosen, we can create it.
 
 Several metadata are defined in `metadata.yaml` file in your topic folder to :
 
-- `name`: name of the topic (name of the folder)
-- `title`: title of the topic (the one displayed on the webpage)
-- `type`: target for the topic ('use', 'admin-dev', 'instructors')
-- `summary`: summary of the focus of the topic
-- `requirements`: list of resources that the reader of the material should be familiar with before starting any tutorial in this topic:
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-
-- `docker_image`: name of the Docker image for the topic
-    If no Docker image exists for this topic, let this information empty
+{% assign kid_key = "Topic Schema" %}
+{% assign kid_val = site.data['schema-topic'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 - `subtopics`: for large topics, we can define subtopics and create multiple tutorial lists:
   ```
@@ -177,9 +166,6 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
       description: "These Tutorial"
   ```
   tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
-
-- `maintainers`: GitHub username of people maintaining the topic
-- `gitter`: The name of the chatroom on Gitter, if enabled, it will be embedded on the topic and tutorial pages. Should be formatted like `../..`, without the `https://gitter.im`, e.g. `galaxyproject/dev`
 
 > ### {% icon hands_on %} Hands-on: Update the new topic to the website
 >

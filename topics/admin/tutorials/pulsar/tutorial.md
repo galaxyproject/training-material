@@ -54,7 +54,7 @@ More details on Pulsar can be found at:
 
 Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.
 
-At the Galaxy end, it is configured within the `job_conf.xml` file and uses one of two special Galaxy job runners.
+At the Galaxy end, it is configured within the `job_conf.yml` file and uses one of two special Galaxy job runners.
 * `galaxy.jobs.runners.pulsar:PulsarRESTJobRunner` for the RESTful interface
 * `galaxy.jobs.runners.pulsar:PulsarMQJobRunner` for the message passing interface.
 
@@ -257,7 +257,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -128,8 +128,10 @@ certbot_environment: staging
+>    @@ -123,8 +123,10 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
@@ -268,7 +268,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -163,6 +165,34 @@ slurm_config:
+>    @@ -158,6 +160,34 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -632,7 +632,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 Now we have a Pulsar server up and running, we need to tell our Galaxy about it.
 
-Galaxy talks to the Pulsar server via it's `job_conf.xml` file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.
+Galaxy talks to the Pulsar server via it's `job_conf.yml` file. We need to let Galaxy know about Pulsar there and make sure Galaxy has loaded the requisite job runner, and has a destination set up.
 
 There are three things we need to do here:
 
@@ -644,56 +644,56 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
-> 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
+> 1. In your `templates/galaxy/config/job_conf.yml.j2` file add the following job runner to the `<plugins>` section:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -2,6 +2,16 @@
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->             <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->    +        <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->    +            <param id="amqp_url">pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
->    +            <param id="amqp_ack_republish_time">1200</param>
->    +            <param id="amqp_acknowledge">True</param>
->    +            <param id="amqp_consumer_timeout">2.0</param>
->    +            <param id="amqp_publish_retry">True</param>
->    +            <param id="amqp_publish_retry_max_retries">60</param>
->    +            <param id="galaxy_url">https://{{ inventory_hostname }}</param>
->    +            <param id="manager">_default_</param>
->    +        </plugin>
->         </plugins>
->         <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -4,6 +4,16 @@ runners:
+>         workers: 4
+>       slurm:
+>         load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>    +  pulsar_runner:
+>    +    load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+>    +    amqp_url: "pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+>    +    amqp_acknowledge: true
+>    +    amqp_ack_republish_time: 1200
+>    +    amqp_consumer_timeout: 2
+>    +    amqp_publish_retry: true
+>    +    amqp_publish_retry_max_retries: 60
+>    +    galaxy_url: "https://{{ inventory_hostname }}"
+>    +    manager: _default_
+>     
+>     execution:
+>       default: singularity
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
 >
->    Add the following to the `<destinations>` section of your `job_conf.xml` file:
+>    Add the following to the `<destinations>` section of your `job_conf.yml` file:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -15,6 +15,16 @@
->         </plugins>
->         <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="pulsar" runner="pulsar_runner" >
->    +            <param id="default_file_action">remote_transfer</param>
->    +            <param id="dependency_resolution">remote</param>
->    +            <param id="jobs_directory">/mnt/pulsar/files/staging</param>
->    +            <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
->    +            <param id="remote_metadata">False</param>
->    +            <param id="rewrite_parameters">True</param>
->    +            <param id="transport">curl</param>
->    +            <param id="outputs_to_working_directory">False</param>
->    +        </destination>
->             <destination id="slurm" runner="slurm">
->                 <param id="singularity_enabled">true</param>
->                 <env id="LC_ALL">C</env>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -20,6 +20,16 @@ execution:
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    pulsar:
+>    +      runner: pulsar_runner
+>    +      default_file_action: remote_transfer
+>    +      dependency_resolution: remote
+>    +      jobs_directory: /mnt/pulsar/files/staging
+>    +      persistence_directory: /mnt/pulsar/files/persisted_data
+>    +      remote_metadata: false
+>    +      rewrite_parameters: true
+>    +      transport: curl
+>    +      outputs_to_working_directory: false
+>         slurm:
+>           runner: slurm
+>           singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
@@ -706,22 +706,22 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
-> 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.xml` file.
+> 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.yml` file.
 >
->    Add the following to the end of the `job_conf.xml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
+>    Add the following to the end of the `job_conf.yml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -64,5 +64,7 @@
->         </resources>
->         <tools>
->             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->    +        <tool id="bwa" destination="pulsar"/>
->    +        <tool id="bwa_mem" destination="pulsar"/>
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -86,3 +86,7 @@ tools:
+>     - id: testing
+>       execution: dynamic_cores_time
+>       resources: testing
+>    +- id: bwa
+>    +  execution: pulsar
+>    +- id: bwa_mem
+>    +  execution: pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
@@ -831,11 +831,11 @@ For each new Pulsar server, you will need to add:
   1. In the RabbitMQ config:
       * A vhost
       * A user - configured with a password and the new vhost
-  2. In the Galaxy job_conf.xml:
+  2. In the Galaxy job_conf.yml:
       * A new job runner with the new connection string
       * A new destination or multiple destinations for the new runner.
 
-Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.xml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
+Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.yml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
 
 ## Australia
 
