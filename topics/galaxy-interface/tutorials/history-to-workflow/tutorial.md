@@ -22,7 +22,7 @@ key_points:
   - "Workflows can be edited or created from scratch using the workflow editor"
 contributors:
   - tnabtaf
-subtopic: interface
+subtopic: workflows
 ---
 
 # Create a reusable workflow from a history

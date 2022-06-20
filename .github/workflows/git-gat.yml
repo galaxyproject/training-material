@@ -90,4 +90,4 @@ jobs:
             git checkout -b $today
             git push -f --set-upstream origin $today
             git push -f --tags
-        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material'
+        if: github.event.pull_request.head.repo.full_name == 'galaxyproject/training-material' && github.event.pull_request.base.repo.full_name == 'galaxyproject/training-material' && github.event_name != 'pull_request'

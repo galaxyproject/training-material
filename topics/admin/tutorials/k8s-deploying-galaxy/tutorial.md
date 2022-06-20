@@ -18,7 +18,7 @@ contributors:
   - afgane
   - nuwang
   - almahmoud
-  - ic4f
+  - jdavcs
 tags:
   - kubernetes
 subtopic: cloud

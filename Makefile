@@ -156,7 +156,7 @@ check-yaml: ## lint yaml files
 .PHONY: check-yaml
 
 check-diffs: ## lint diffs in tutorials
-	find ./topics/admin/ -name '*.md' -type f -print0 | xargs -0 python bin/lint-diffs.py
+	find ./topics/admin/ -name '*.md' -type f -print0 | xargs -n 1 -0 python3 bin/lint-diffs.py
 .PHONY: check-diffs
 
 check-tool-links: ## lint tool links
