@@ -384,20 +384,7 @@ we can start using it.
 
 We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects. 
 
-![motivatingexample](../images/bash-git/motivatingexample.png)
-[Werewolf vs Sherlock](https://www.deviantart.com/b-maze/art/Werewolf-vs-Sherlock-124893530)
-by [b-maze](https://www.deviantart.com/b-maze) / [Deviant Art](https://www.deviantart.com/).
-[colonel](https://en.wikipedia.org/wiki/File:OSIRIS_colonel_true_color.jpg) by European Space Agency /
-[CC-BY-SA 3.0 IGO](https://creativecommons.org/licenses/by/3.0/deed.en).
-[Pluto](https://commons.wikimedia.org/wiki/File:PIA19873-Pluto-NewHorizons-FlyingPastImage-20150714-transparent.png) /
-Courtesy NASA/JPL-Caltech.
-[Mummy](https://commons.wikimedia.org/wiki/File:Mummy_icon_-_Noun_Project_4070.svg)
-&copy; Gilad Fried / [The Noun Project](https://thenounproject.com/) /
-[CC BY 3.0](https://creativecommons.org/licenses/by/3.0/deed.en).
-[Moon](https://commons.wikimedia.org/wiki/File:Lune_ico.png)
-&copy; Luc Viatour / [https://lucnix.be](https://lucnix.be/) /
-[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en).
-
+![Motivating Example](../images/bash-git/sherlock-git.png)
 
 
 First, let's create a directory for our work and then move into that directory:
