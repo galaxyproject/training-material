@@ -29,7 +29,6 @@ contributions:
 
 notebook:
   language: python
-  pyolite: true
 ---
 
 
