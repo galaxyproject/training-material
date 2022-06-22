@@ -26,6 +26,7 @@ contributions:
   editing:
   - claresloggett
   - nturaga
+  - hexylena
 
 notebook:
   language: python
