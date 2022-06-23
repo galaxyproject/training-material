@@ -46,7 +46,7 @@ notebook:
 
 # Interacting with histories in Galaxy API
 
-We are going to use the [requests](http://python-requests.org/) Python library to communicate via HTTP with the Galaxy server. To start, let's define the connection parameters.
+We are going to use the [requests](https://requests.readthedocs.io/) Python library to communicate via HTTP with the Galaxy server. To start, let's define the connection parameters.
 
 **You need to insert the API key for your Galaxy server in the cell below**:
 1. Open the Galaxy server in another browser tab
@@ -55,12 +55,11 @@ We are going to use the [requests](http://python-requests.org/) Python library t
 4. Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the `api_key` variable below.
 
 ```python
-from pprint import pprint
-
 import json
+from pprint import pprint
+from urllib.parse import urljoin
 
 import requests
-from six.moves.urllib.parse import urljoin
 
 server = 'https://usegalaxy.eu/'
 api_key = ''
@@ -71,8 +70,8 @@ base_url
 We now make a GET request to retrieve all histories owned by a user:
 
 ```python
-params = {'key': api_key}
-r = requests.get(base_url + '/histories', params)
+headers = {"Content-Type": "application/json", "x-api-key": api_key}
+r = requests.get(base_url + "/histories", headers=headers)
 print(r.text)
 hists = r.json()
 pprint(hists)
@@ -84,7 +83,6 @@ Each dictionary returned when GETting a resource collection gives basic info abo
 - `id`: the unique **identifier** of the history, needed for all specific requests about this resource
 - `name`: the name of this history as given by the user
 - `deleted`: whether the history has been deleted
-- `url`: the relative URL to get all info about this resource.
 
 There is no readily-available filtering capability, but it's not difficult to filter histories **by name**:
 
@@ -97,8 +95,7 @@ If you are interested in more **details** about a given resource, you just need 
 ```python
 hist0_id = hists[0]['id']
 print(hist0_id)
-params = {'key': api_key}
-r = requests.get(base_url + '/histories/' + hist0_id, params)
+r = requests.get(base_url + "/histories/" + hist0_id, headers=headers)
 pprint(r.json())
 ```
 
@@ -110,8 +107,7 @@ As you can see, there are much more entries in the returned dictionary, e.g.:
 To get the list of **datasets contained** in a history, simply append `/contents` to the previous resource request.
 
 ```python
-params = {'key': api_key}
-r = requests.get(base_url + '/histories/' + hist0_id + '/contents', params)
+r = requests.get(base_url + "/histories/" + hist0_id + "/contents", headers=headers)
 hdas = r.json()
 pprint(hdas)
 ```
@@ -123,8 +119,7 @@ To get the details about a specific dataset, you can use the `datasets` controll
 ```python
 hda0_id = hdas[0]['id']
 print(hda0_id)
-params = {'key': api_key}
-r = requests.get(base_url + '/datasets/' + hda0_id, params)
+r = requests.get(base_url + "/datasets/" + hda0_id, headers=headers)
 pprint(r.json())
 ```
 
@@ -139,9 +134,8 @@ Some of the interesting additional dictionary entries are:
 **New resources** are created with POST requests. The uploaded **data needs to be serialized** in a JSON string. For example, to create a new history:
 
 ```python
-params = {'key': api_key}
 data = {'name': 'New history'}
-r = requests.post(base_url + '/histories', data=json.dumps(data), params=params, headers={'Content-Type': 'application/json'})
+r = requests.post(base_url + "/histories", data=json.dumps(data), headers=headers)
 new_hist = r.json()
 pprint(new_hist)
 ```
@@ -151,9 +145,8 @@ The return value of a POST request is a dictionary with detailed info about the 
 To **update** a resource, make a PUT request, e.g. to change the history name:
 
 ```python
-params = {'key': api_key}
 data = {'name': 'Updated history'}
-r = requests.put(base_url + '/histories/' + new_hist['id'], json.dumps(data), params=params, headers={'Content-Type': 'application/json'})
+r = requests.put(base_url + "/histories/" + new_hist["id"], json.dumps(data), headers=headers)
 print(r.status_code)
 pprint(r.json())
 ```
@@ -163,8 +156,7 @@ The return value of a PUT request is usually a dictionary with detailed info abo
 Finally to **delete** a resource, make a DELETE request, e.g.:
 
 ```python
-params = {'key': api_key}
-r = requests.delete(base_url + '/histories/' + new_hist['id'], params=params)
+r = requests.delete(base_url + "/histories/" + new_hist["id"], headers=headers)
 print(r.status_code)
 ```
 
@@ -177,12 +169,11 @@ print(r.status_code)
 > First, define the connection parameters. What variables do you need?
 > > ### {% icon solution %} Solution
 > > ```python
-> > from pprint import pprint
-> >
 > > import json
+> > from pprint import pprint
+> > from urllib.parse import urljoin
 > >
 > > import requests
-> > from six.moves.urllib.parse import urljoin
 > >
 > > server = 'https://usegalaxy.eu/'
 > > api_key = ''
@@ -202,9 +193,10 @@ print(r.status_code)
 > Next, create a new Galaxy history via POST to the correct API.
 > > ### {% icon solution %} Solution
 > > ```python
-> > params = {'key': api_key}
+> > headers = {"Content-Type": "application/json", "x-api-key": api_key}
+
 > > data = {'name': 'New history'}
-> > r = requests.post(base_url + '/histories', json.dumps(data), params=params, headers={'Content-Type': 'application/json'})
+> > r = requests.post(base_url + "/histories", json.dumps(data), headers=headers)
 > > new_hist = r.json()
 > > pprint(new_hist)
 > > ```
@@ -276,11 +268,10 @@ print(r.status_code)
 > > ### {% icon solution %} Solution
 > >
 > > ```python
-> > params = {'key': api_key}
 > > with open('test-data/convert_to_tab.ga', 'r') as f:
 > >     workflow_json = json.load(f)
 > > data = {'workflow': workflow_json}
-> > r = requests.post(base_url + '/workflows', json.dumps(data), params=params, headers={'Content-Type': 'application/json'})
+> > r = requests.post(base_url + "/workflows", json.dumps(data), headers=headers)
 > > wf = r.json()
 > > pprint(wf)
 > > ```
@@ -296,8 +287,7 @@ print(r.status_code)
 > View the details of the imported workflow by making a GET request to `/api/workflows`.
 > > ### {% icon solution %} Solution
 > > ```python
-> > params = {'key': api_key}
-> > r = requests.get(base_url + '/workflows/' + wf['id'], params)
+> > r = requests.get(base_url + "/workflows/" + wf["id"], headers=headers)
 > > wf = r.json()
 > > pprint(wf)
 > > ```
@@ -316,12 +306,11 @@ print(r.status_code)
 > > ### {% icon solution %} Solution
 > >
 > > ```python
-> > params = {'key': api_key}
 > > inputs = {0: {'id': hda['id'], 'src': 'hda'}}
 > > data = {
 > >     'history': 'hist_id=' + new_hist['id'],
 > >     'inputs': inputs}
-> > r = requests.post(base_url + '/workflows/' + wf['id'] + '/invocations', json.dumps(data), params=params, headers={'Content-Type': 'application/json'})
+> > r = requests.post(base_url + "/workflows/" + wf["id"] + "/invocations", json.dumps(data), headers=headers)
 > > pprint(r.json())
 > > ```
 > {: .solution}
