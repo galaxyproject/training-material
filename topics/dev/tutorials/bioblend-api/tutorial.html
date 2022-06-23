@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Scripting Galaxy using the API and BioBlend</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Scripting Galaxy using the API and BioBlend" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
+<meta name="DC.creator" content="Nicola Soranzo" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Scripting Galaxy using the API and BioBlend" />
+        <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/dev" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Development in Galaxy
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/dev/tutorials/bioblend-api/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/dev/faqs/" title="Check our FAQs for the Development in Galaxy topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/dev/tutorials/bioblend-api/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/dev/tutorials/bioblend-api/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/dev/tutorials/bioblend-api/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/dev/tutorials/bioblend-api/tutorial.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-04-01/topics/dev/tutorials/bioblend-api/tutorial.html" title="Version 2022-04-01">2022-04-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/dev'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:23 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Scripting Galaxy using the API and BioBlend",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Development in Galaxy",
+    "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+    "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Scripting Galaxy using the API and BioBlend' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/bioblend-api/tutorial.html",
+  "timeRequired": "PT2H",
+  "keywords": "dev, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - What is a REST API?\n - How to interact with Galaxy programmatically?\n - Why and when should I use BioBlend?\n\n\\nThe objectives are:\n - Interact with Galaxy via BioBlend.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Development in Galaxy",
+      "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
+      "url": "https://training.galaxyproject.org//training-material/topics/dev/"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+</script>
+
+<section class="tutorial topic-dev">
+    <h1 data-toc-skip>Scripting Galaxy using the API and BioBlend</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge contributor-nsoranzo"><img src="https://avatars.githubusercontent.com/nsoranzo?s=27" alt="Avatar">Nicola Soranzo</a>
+
+
+
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/claresloggett/" class="contributor-badge contributor-claresloggett"><img src="https://avatars.githubusercontent.com/claresloggett?s=27" alt="Avatar">Clare Sloggett</a>
+
+
+
+<a href="/training-material/hall-of-fame/nturaga/" class="contributor-badge contributor-nturaga"><img src="https://avatars.githubusercontent.com/nturaga?s=27" alt="Avatar">Nitesh Turaga</a>
+
+
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is a REST API?</p>
+</li>
+        
+        <li><p>How to interact with Galaxy programmatically?</p>
+</li>
+        
+        <li><p>Why and when should I use BioBlend?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Interact with Galaxy via BioBlend.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/dev/tutorials/bioblend-api/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/dev/tutorials/bioblend-api/dev-bioblend-api.ipynb" title="Jupyter Notebook" alt="Scripting Galaxy using the API and BioBlend Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+                 <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/dev/tutorials/bioblend-api/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+  </li>
+
+
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 23, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdev%2Ftutorials%2Fbioblend-api%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/dev-bioblend-api.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/dev-bioblend-api.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/dev-bioblend-api-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                 
+
+                <blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#interacting-with-histories-in-galaxy-api" id="markdown-toc-interacting-with-histories-in-galaxy-api">Interacting with histories in <span class="notranslate">Galaxy</span> API</a>    <ol>
+      <li><a href="#exercise-galaxy-api" id="markdown-toc-exercise-galaxy-api">Exercise: <span class="notranslate">Galaxy</span> API</a></li>
+    </ol>
+  </li>
+  <li><a href="#interacting-with-histories-in-bioblend" id="markdown-toc-interacting-with-histories-in-bioblend">Interacting with histories in BioBlend</a>    <ol>
+      <li><a href="#exercise-bioblend" id="markdown-toc-exercise-bioblend">Exercise: BioBlend</a></li>
+    </ol>
+  </li>
+  <li><a href="#interacting-with-histories-in-bioblendobjects" id="markdown-toc-interacting-with-histories-in-bioblendobjects">Interacting with histories in BioBlend.objects</a>    <ol>
+      <li><a href="#exercise-bioblendobjects" id="markdown-toc-exercise-bioblendobjects">Exercise: BioBlend.objects</a></li>
+    </ol>
+  </li>
+  <li><a href="#optional-extra-exercises" id="markdown-toc-optional-extra-exercises">Optional Extra Exercises</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="interacting-with-histories-in-galaxy-api">Interacting with histories in <span class="notranslate">Galaxy</span> API</h1>
+
+<p>We are going to use the <a href="https://requests.readthedocs.io/">requests</a> Python library to communicate via HTTP with the <span class="notranslate">Galaxy</span> server. To start, let’s define the connection parameters.</p>
+
+<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+<ol>
+  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Click on “User” on the top menu, then “Preferences”</li>
+  <li>Click on “Manage API key”</li>
+  <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
+</ol>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
+<span class="n">base_url</span>
+</code></pre></div></div>
+
+<p>We now make a GET request to retrieve all histories owned by a user:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">hists</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As you can see, GET requests in <span class="notranslate">Galaxy</span> API return JSON strings, which need to be <strong>deserialized</strong> into Python data structures. In particular, GETting a resource collection returns a list of dictionaries.</p>
+
+<p>Each dictionary returned when GETting a resource collection gives basic info about a resource, e.g. for a history you have:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: the unique <strong>identifier</strong> of the history, needed for all specific requests about this resource</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: the name of this history as given by the user</li>
+  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted</li>
+</ul>
+
+<p>There is no readily-available filtering capability, but it’s not difficult to filter histories <strong>by name</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">hists</span> <span class="k">if</span> <span class="n">_</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'Unnamed history'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>If you are interested in more <strong>details</strong> about a given resource, you just need to append its <code class="language-plaintext highlighter-rouge">id</code> to the previous collection request, e.g. to the get more info for a history:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist0_id</span> <span class="o">=</span> <span class="n">hists</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>As you can see, there are much more entries in the returned dictionary, e.g.:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: total disk space used by the history</li>
+  <li><code class="language-plaintext highlighter-rouge">state_ids</code>: ids of history datasets for each possible state.</li>
+</ul>
+
+<p>To get the list of <strong>datasets contained</strong> in a history, simply append <code class="language-plaintext highlighter-rouge">/contents</code> to the previous resource request.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">hist0_id</span> <span class="o">+</span> <span class="s">"/contents"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">hdas</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The dictionaries returned when GETting the history content give basic info about each dataset, e.g.: <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">deleted</code>, <code class="language-plaintext highlighter-rouge">state</code>, <code class="language-plaintext highlighter-rouge">url</code>…</p>
+
+<p>To get the details about a specific dataset, you can use the <code class="language-plaintext highlighter-rouge">datasets</code> controller:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/datasets/"</span> <span class="o">+</span> <span class="n">hda0_id</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Some of the interesting additional dictionary entries are:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
+  <li><code class="language-plaintext highlighter-rouge">creating job</code>: id of the job which created this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">download_url</code>: URL to download the dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the <span class="notranslate">Galaxy</span> data type of this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_size</code></li>
+  <li><code class="language-plaintext highlighter-rouge">genome_build</code>: the genome build (dbkey) associated to this dataset.</li>
+</ul>
+
+<p><strong>New resources</strong> are created with POST requests. The uploaded <strong>data needs to be serialized</strong> in a JSON string. For example, to create a new history:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'New history'</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The return value of a POST request is a dictionary with detailed info about the created resource.</p>
+
+<p>To <strong>update</strong> a resource, make a PUT request, e.g. to change the history name:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Updated history'</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">put</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>The return value of a PUT request is usually a dictionary with detailed info about the updated resource.</p>
+
+<p>Finally to <strong>delete</strong> a resource, make a DELETE request, e.g.:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories/"</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="exercise-galaxy-api">Exercise: <span class="notranslate">Galaxy</span> API</h2>
+
+<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Initialise</h3>
+  <p>First, define the connection parameters. What variables do you need?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote>
+  <h3 id="question-question-new-history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: New History</h3>
+  <p>Next, create a new <span class="notranslate">Galaxy</span> history via POST to the correct API.</p>
+  <blockquote>
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>```python
+headers = {“Content-Type”: “application/json”, “x-api-key”: api_key}</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <blockquote class="solution">
+    <p>data = {‘name’: ‘New history’}
+r = requests.post(base_url + “/histories”, json.dumps(data), headers=headers)
+new_hist = r.json()
+pprint(new_hist)
+```</p>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-upload-a-dataset"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
+  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history. You need to run the special ‘upload1’ tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as ‘files_0|file_data’.</p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
+</code></pre></div>  </div>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'history_id'</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
+    <span class="s">'tool_id'</span><span class="p">:</span> <span class="s">'upload1'</span><span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">'files_0|file_data'</span><span class="p">:</span> <span class="n">f</span><span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">'/tools'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-find-the-dataset-in-your-history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Find the dataset in your history</h3>
+  <p>Find the new uploaded dataset, either from the dict returned by the POST request or from the history contents.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-import-a-workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is ‘<span class="notranslate">workflow</span>’, which must be a deserialized JSON representation of the <span class="notranslate">workflow</span>.</p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'<span class="notranslate">workflow</span>'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-wf-details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF details</h3>
+  <p>View the details of the imported <span class="notranslate">workflow</span> by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-run-the-wf"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
+  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/&lt;id&gt;/invocations</code>. The only needed data are ‘history’ and ‘inputs’.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'history'</span><span class="p">:</span> <span class="s">'hist_id='</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
+    <span class="s">'inputs'</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="o">+</span> <span class="s">"/invocations"</span><span class="p">,</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-results"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the results</h3>
+  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+</blockquote>
+
+<h1 id="interacting-with-histories-in-bioblend">Interacting with histories in BioBlend</h1>
+
+<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+<ol>
+  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Click on “User” on the top menu, then “Preferences”</li>
+  <li>Click on “Manage API key”</li>
+  <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
+</ol>
+
+<p>The user interacts with a <span class="notranslate">Galaxy</span> server through a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object gives you access to the various controllers, i.e. the resources you are dealing with, like <code class="language-plaintext highlighter-rouge">histories</code>, <code class="language-plaintext highlighter-rouge">tools</code> and <code class="language-plaintext highlighter-rouge">workflows</code>.
+Therefore, method calls will have the format <code class="language-plaintext highlighter-rouge">gi.controller.method()</code>. For example, the call to retrieve all histories owned by the current user is:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>As you can see, methods in BioBlend do not return JSON strings, but <strong>deserialize</strong> them into Python data structures. In particular, <code class="language-plaintext highlighter-rouge">get_</code> methods return a list of dictionaries.</p>
+
+<p>Each dictionary gives basic info about a resource, e.g. for a history you have:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">id</code>: the unique <strong>identifier</strong> of the history, needed for all specific requests about this resource</li>
+  <li><code class="language-plaintext highlighter-rouge">name</code>: the name of this history as given by the user</li>
+  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted</li>
+  <li><code class="language-plaintext highlighter-rouge">url</code>: the relative URL to get all info about this resource.</li>
+</ul>
+
+<p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create_</code> methods, e.g. the call to create a new history is:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>As you can see, to make POST requests in BioBlend it is <strong>not necessary to serialize data</strong>, you just pass them explicitly as parameters. The return value is a dictionary with detailed info about the created resource.</p>
+
+<p><code class="language-plaintext highlighter-rouge">get_</code> methods usually have <strong>filtering</strong> capabilities, e.g. it is possible to filter histories <strong>by name</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>It is also possible to specify the unique <strong>id</strong> of the resource to retrieve, e.g. to get back the history we created before:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist_id</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Please note that independently of which parameters are passed to the <code class="language-plaintext highlighter-rouge">get_</code> method, it always returns a list.</p>
+
+<p>To <strong>upload</strong> files to the new history, run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">tools</code> controller:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">'test-data/1.txt'</span><span class="p">,</span> <span class="n">hist_id</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>If you are interested in more <strong>details</strong> about a given resource, you can use the corresponding <code class="language-plaintext highlighter-rouge">show_</code> method. For example, to the get more info for the history we have just populated:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>As you can see, there are much more entries in the returned dictionary, e.g.:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
+  <li><code class="language-plaintext highlighter-rouge">size</code>: total disk space used by the history</li>
+  <li><code class="language-plaintext highlighter-rouge">state_ids</code>: ids of history datasets for each possible state.</li>
+</ul>
+
+<p>To get the list of <strong>datasets contained</strong> in a history, simply add <code class="language-plaintext highlighter-rouge">contents=True</code> to the previous call.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hdas</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">,</span> <span class="n">contents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The dictionaries returned when showing the history content give basic info about each dataset, e.g.: <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">deleted</code>, <code class="language-plaintext highlighter-rouge">state</code>, <code class="language-plaintext highlighter-rouge">url</code>…</p>
+
+<p>To get the details about a specific dataset, you can use the <code class="language-plaintext highlighter-rouge">datasets</code> controller:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">datasets</span><span class="p">.</span><span class="n">show_dataset</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Some of the interesting additional dictionary entries are:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
+  <li><code class="language-plaintext highlighter-rouge">creating job</code>: id of the job which created this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">download_url</code>: URL to download the dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the <span class="notranslate">Galaxy</span> data type of this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_size</code></li>
+  <li><code class="language-plaintext highlighter-rouge">genome_build</code>: the genome build (dbkey) associated to this dataset.</li>
+</ul>
+
+<p>To <strong>update</strong> a resource, use the <code class="language-plaintext highlighter-rouge">update_</code> method, e.g. to change the name of the new history:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">update_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The return value of <code class="language-plaintext highlighter-rouge">update_</code> methods is usually a dictionary with detailed info about the updated resource.</p>
+
+<p>Finally to <strong>delete</strong> a resource, use the <code class="language-plaintext highlighter-rouge">delete_</code> method, e.g.:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">delete_history</span><span class="p">(</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<h2 id="exercise-bioblend">Exercise: BioBlend</h2>
+
+<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-initialise-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Initialise</h3>
+  <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-new-history-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: New History</h3>
+  <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-upload-a-dataset-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
+  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history using <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> .</p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-find-the-dataset-in-your-history-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Find the dataset in your history</h3>
+  <p>Find the new uploaded dataset, either from the dict returned by <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> or from the history contents.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-import-a-workflow-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_workflow_from_local_path</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-wf-details-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF details</h3>
+  <p>View the details of the imported <span class="notranslate">workflow</span> using <code class="language-plaintext highlighter-rouge">workflows.show_<span class="notranslate">workflow</span>()</code></p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">show_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-run-the-wf-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
+  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_<span class="notranslate">workflow</span>()</code> .</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">invoke_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-results-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the results</h3>
+  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+</blockquote>
+
+<h1 id="interacting-with-histories-in-bioblendobjects">Interacting with histories in BioBlend.objects</h1>
+
+<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+
+<ol>
+  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Click on “User” on the top menu, then “Preferences”</li>
+  <li>Click on “Manage API key”</li>
+  <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
+</ol>
+
+<p>The user interacts with a <span class="notranslate">Galaxy</span> server through a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span>.objects</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>All <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> method calls have the <code class="language-plaintext highlighter-rouge">client.method()</code> format, where <code class="language-plaintext highlighter-rouge">client</code> is the name of the resources you dealing with. There are 2 methods to get the list of resources:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">get_previews()</code>: lightweight (one GET request), retrieves basic resources’ info, returns a list of <strong>preview</strong> objects</li>
+  <li><code class="language-plaintext highlighter-rouge">list()</code>: one GET request for each resource, retrieves full resources’ info, returns a list of <strong>full</strong> objects.</li>
+</ul>
+
+<p>For example, the call to retrieve previews of all histories owned by the current user is:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_previews</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create()</code> methods, e.g. to create a new history:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
+<span class="n">new_hist</span>
+</code></pre></div></div>
+
+<p>As you can see, the <code class="language-plaintext highlighter-rouge">create()</code> methods in BioBlend.objects returns an object, not a dictionary.</p>
+
+<p>Both <code class="language-plaintext highlighter-rouge">get_previews()</code> and <code class="language-plaintext highlighter-rouge">list()</code> methods usually have <strong>filtering</strong> capabilities, e.g. it is possible to filter histories <strong>by name</strong>:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hists</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Both <code class="language-plaintext highlighter-rouge">HistoryPreview</code> and <code class="language-plaintext highlighter-rouge">History</code> objects have many of their properties available as <strong>attributes</strong>, e.g. the id.</p>
+
+<p>If you need to specify the unique <strong>id</strong> of the resource to retrieve, you can use the <code class="language-plaintext highlighter-rouge">get()</code> method, e.g. to get back the history we created before:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist0_id</span> <span class="o">=</span> <span class="n">hists</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
+<span class="n">h</span>
+</code></pre></div></div>
+
+<p>To <strong>upload</strong> files to the new history, run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">h</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">'test-data/1.txt'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To get the list of <strong>datasets contained</strong> in a history, simply look at the <code class="language-plaintext highlighter-rouge">content_infos</code> attribute of the <code class="language-plaintext highlighter-rouge">History</code> object.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hdas</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">content_infos</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To get the details about one dataset, you can use the <code class="language-plaintext highlighter-rouge">get_dataset()</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nb">id</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<span class="n">h</span><span class="p">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You can also filter history datasets by name using the <code class="language-plaintext highlighter-rouge">get_datasets()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
+
+<p>To <strong>update</strong> a resource, use the <code class="language-plaintext highlighter-rouge">update()</code> method of its object, e.g. to change the history name:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'Updated history'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The return value of <code class="language-plaintext highlighter-rouge">update()</code> methods is the updated object.</p>
+
+<p>Finally to <strong>delete</strong> a resource, you can use the <code class="language-plaintext highlighter-rouge">delete()</code> method of the object, e.g.:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">delete</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="exercise-bioblendobjects">Exercise: BioBlend.objects</h2>
+
+<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-initialise-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Initialise</h3>
+  <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-new-history-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: New History</h3>
+  <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
+<span class="n">new_hist</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-upload-a-dataset-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
+  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history using the <code class="language-plaintext highlighter-rouge">upload_file()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">)</span>
+<span class="n">hda</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<p>Please note that with BioBlend.objects there is no need to find the upload dataset, since <code class="language-plaintext highlighter-rouge">upload_file()</code> already returns a <code class="language-plaintext highlighter-rouge">HistoryDatasetAssociation</code> object.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-import-a-workflow-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
+
+  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
+</code></pre></div>  </div>
+  <blockquote class="solution">
+    <h3 id="solution-solution-17"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
+<span class="n">wf</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-wf-inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF inputs</h3>
+  <blockquote class="solution">
+    <h3 id="solution-solution-18"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-run-the-wf-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
+  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge"><span class="notranslate">Workflow</span></code> objects.</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">hda</span><span class="p">.</span><span class="n">SRC</span><span class="p">}}</span>
+<span class="n">wf</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
+<blockquote class="question">
+  <h3 id="question-question-view-the-results-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the results</h3>
+  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+</blockquote>
+
+<h1 id="optional-extra-exercises">Optional Extra Exercises</h1>
+
+<p>If you have completed the exercise, you can try to perform these extra tasks with the help of the online documentation:</p>
+
+<ol>
+  <li>Download the <span class="notranslate">workflow</span> result to your computer</li>
+  <li>Publish your history</li>
+</ol>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>The API allows you to use Galaxy’s capabilities programmatically.</p>
+</li>
+                        
+                        <li><p>BioBlend makes using the Galaxy API from Python easier.</p>
+</li>
+                        
+                        <li><p>BioBlend objects is an object-oriented interface for interacting with Galaxy.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/dev/faqs/">FAQ page for the Development in Galaxy topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Scripting Galaxy using the API and BioBlend (Development in Galaxy)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Scripting Galaxy using the API and BioBlend (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{dev-bioblend-api,
+author = "",
+title = "Scripting Galaxy using the API and BioBlend (Galaxy Training Materials)",
+year = "2022",
+month = "06",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
