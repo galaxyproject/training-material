@@ -280,7 +280,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -72,4 +72,10 @@ server {
+>    @@ -84,4 +84,10 @@ server {
 >         location /training-material/ {
 >             proxy_pass https://training.galaxyproject.org/training-material/;
 >         }
@@ -499,7 +499,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -193,6 +193,15 @@ rabbitmq_users:
+>    @@ -188,6 +188,15 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -792,7 +792,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -209,6 +209,13 @@ telegraf_plugins_extra:
+>    @@ -204,6 +204,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

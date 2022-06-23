@@ -27,7 +27,7 @@ Customising the `welcome.html` page is very easy!
    +++ b/group_vars/galaxyservers.yml
    @@ -83,12 +83,7 @@ certbot_agree_tos: --agree-tos
     galaxy_config_templates:
-    - src: templates/galaxy/config/job_conf.xml.j2
+    - src: templates/galaxy/config/job_conf.yml.j2
       dest: "{{ galaxy_config.galaxy.job_config_file }}"
     - src: templates/galaxy/config/reports.yml
       dest: "{{ galaxy_reports_path }}"

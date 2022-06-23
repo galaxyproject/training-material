@@ -22,6 +22,9 @@ contributors:
 - wm75
 - hexylena
 - shiltemann
+tags:
+- cancer
+- cyoa
 
 ---
 
