@@ -24,9 +24,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals of interest such as [Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). 
-
-Galaxy-SynBioCAD portal provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
+[Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
 
 Retrosynthesis is a concept originally proposed for synthetic chemistry where chemists have to work backwards, starting from a target product to reach precursors that are endogenous to the chassis (host organism).
 
@@ -34,11 +32,12 @@ Typically, the target compound, also named “source compound” is the compound
 
 <center><img src="../../images/chassis_target.png" width="500" alt="Chassis - target"/></center>
 
-In this tutorial, we want to obtain the reactions producing the lycopene (source) into the iML1515 Escherichia Coli strain (chassis).
+In this tutorial, we want to obtain the reactions producing the lycopene (source) into the iML1515 _Escherichia Coli_ strain (chassis).
 
 To do that, we will use the following RetroSynthetis Workflow composed of 3 key steps.
 
 First, we aggregate the metabolites present in the chassis and download reaction rules.
+
 Then, RetroPath2.0 generates feasible metabolic routes between a collection of chemical species contained within a GEM SBML (Systems Biology Markup Language) file of the selected organism, a target molecule that the user wishes to produce, and reaction rules extracted from RetroRules.
 
 Lastly, the metabolic network is then deconstructed into individual pathways using RP2paths and rpCompletion takes those individual metabolic pathways to filter them (duplicated pathways are removed), splits them into sub-pathways by adding the appropriate cofactors, and finally converted them to SBML files.
@@ -142,7 +141,7 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 > ### {% icon question %} Questions
 >
-> 1. A low diameter selects specific rules?
+> 1. Does a low diameter select specific rules?
 > 2. How many rows are in the file?
 >
 > > ### {% icon solution %} Solution
