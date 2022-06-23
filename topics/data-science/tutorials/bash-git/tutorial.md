@@ -40,8 +40,14 @@ keypoints:
 - "`git diff` displays differences between commits."
 - "`git checkout` recovers old versions of files."
 contributors:
-  - Sofokli5
-  - fpsom
+  authorship:
+    - Sofokli5
+  editing:
+    - fpsom    
+    - shiltemann
+    - hexylena
+  funding:
+    - carpentries
 notebook:
   language: bash
 
@@ -244,10 +250,8 @@ For this lesson, we will be interacting with [GitHub](https://github.com/) and s
 > >
 > >```bash
 > >$ git config --global core.autocrlf true
-> >```
-> 
+> >``` 
 > {: .code-in}
-
 {: .tip}
 
 Sherlock also has to set his favorite text editor, following this table:
