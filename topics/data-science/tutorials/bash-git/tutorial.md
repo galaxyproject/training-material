@@ -95,9 +95,9 @@ incorporate two sets of changes into the same base document.
 A version control system is a tool that keeps track of these changes for us,
 effectively creating different versions of our files. It allows us to decide
 which changes will be made to the next version (each record of these changes is
-called a [commit]({{ page.root }}{% link reference.md %}#commit)), and keeps useful metadata
+called a [commit](https://git-scm.com/docs/gitglossary#def_commit), and keeps useful metadata
 about them. The complete history of commits for a particular project and their
-metadata make up a [repository]({{ page.root }}{% link reference.md %}#repository).
+metadata make up a [repository](https://git-scm.com/docs/gitglossary#def_repository).
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
@@ -400,7 +400,7 @@ First, let's create a directory for our work and then move into that directory:
 > ```
 {: .code-in}
 
-Then we tell Git to make `suspects` a [repository]({{ page.root }}{% link reference.md %}#repository)
+Then we tell Git to make `suspects` a [repository](https://git-scm.com/docs/gitglossary#def_repository)
 -- a place where Git can store versions of our files:
 
 > ## {% icon code-in %} Turn our workspace into directory
@@ -690,8 +690,8 @@ Git now knows that it's supposed to keep track of `colonel.txt`, but it hasn't r
 When we run `git commit`,
 Git takes everything we have told it to save by using `git add`
 and stores a copy permanently inside the special `.git` directory.
-This permanent copy is called a [commit]({{ page.root }}{% link reference.md %}#commit)
-(or [revision]({{ page.root }}{% link reference.md %}#revision)) and its short identifier is `f22b25e`. Your commit may have another identifier.
+This permanent copy is called a [commit](https://git-scm.com/docs/gitglossary#def_commit)
+(or [revision](https://git-scm.com/docs/gitglossary#def_revision)) and its short identifier is `f22b25e`. Your commit may have another identifier.
 
 We use the `-m` flag (for "message")
 to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
@@ -893,7 +893,7 @@ but *not* commit some of our work drafting the conclusion
 To allow for this,
 Git has a special *staging area*
 where it keeps track of things that have been added to
-the current [changeset]({{ page.root }}{% link reference.md %}#changeset)
+the current [changeset](https://git-scm.com/docs/gitglossary#def_changeset)
 but not yet committed.
 
 > ## {% icon tip %} Staging Area
