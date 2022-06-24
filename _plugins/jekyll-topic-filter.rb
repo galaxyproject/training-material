@@ -326,6 +326,11 @@ module Jekyll
       ELIXIR_NODES[name]
     end
 
+    def slugify_unsafe(text)
+      # Gets rid of *most* things without making it completely unusable?
+      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+    end
+
     def humanize_types(type)
       data = {
         "seq" => "List of Items",
