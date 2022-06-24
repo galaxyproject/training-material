@@ -311,7 +311,7 @@ The tool allow extracting datasets based on position (**The first dataset** and 
 
 This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when downstream tools require datasets to have content.
 
-.. image:: ${static_path}/images/tools/collection_ops/filter_empty.svg
+.. image:: ${static_path}/images/tools/collection_ops/filter_empty.svg 
   :width: 500
   :alt: Filtering empty datasets
 
@@ -578,7 +578,7 @@ Here if two collection have identical dataset names, a dataset is chosen from th
 
 -----
 
-**Keep first instance**
+**Keep last instance**
 
 Input:
 
