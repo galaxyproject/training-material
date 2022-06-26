@@ -15,7 +15,7 @@ time_estimation: 1H
 key_points:
 - TO REPHRASE
 - Galaxy provides various tools for data analysis, dataset alteration, and visualization
-- Inputing correct values for the parameters of proper tools is important
+- Inputting correct values for the parameters of proper tools is important
 tags:
 - nanopore
 - beer
@@ -34,26 +34,26 @@ contributors:
 
 What is a microbiome? There are collections of small living creatures.
 These small creatures are called bacteria and they are everywhere. In our gut,
-in the soil, even on vending machines and the beer. Most of these bacteria are
-actually very good for us. And some others can make us very ill.
+in the soil, on vending machines, and even inside the beer. Most of these bacteria are
+actually very good for us, but some can make us very ill.
 
-Bacteria come in different shapes and sizes but they have the same components.
+Bacteria come in different shapes and sizes, but they have the same components.
 One crucial component is the DNA, the blueprint of life. The DNA encodes the
-shape and size and many other things unique for a bacterial species. Because of
+shape and size and many other characteristics unique to a bacterial species. Because of
 the encoding information the DNA can be used to identify what kind of bacteria
-the DNA is from. Therefore, within a sample form soil, our gut or beer one can
+the DNA is from. Therefore, within a metagenomic sample, e.g. form soil, gut, or beer, one can
 specify what kind of species are inside the sample.
 
 In this tutorial, we will use data generated via the [BeerDEcoded project](https://streetscience.community/projects/beerdecoded/).
 
 > ### {% icon comment %} The BeerDEcoded project
 >
-> In the BeerDEcoded project, workshops are organized with schools and general
-> audience to introduce biology and genomic science and make people aware about
-> DNA, sequencing technologies, bioinformatics, open science and their
-> applications and their impact on their daily life.
+> The BeerDEcoded project are workshops organized with and for schools and general
+> audience, to introduce biology and genomic science. People will learn about
+> DNA, sequencing technologies, bioinformatics, open science, how these technologies and concepts are
+> applied and how they are impacting their daily life.
 >
-> The workshops 1-2 days continuous (or divided over several days) practical workshop on beer decoding, where participants:
+> The 1-2 days continuous (or divided over several days) workshops include the following steps:
 > 1. Extract yeasts and their DNA from beer bottle,
 > 2. Sequence the extracted DNA using a MinION sequencer to obtain the sequence of bases/nucleotides (A, T, C and G) for each DNA fragment in the sample,
 > 3. Analyze the sequenced data in order to know which organisms this DNA is from
@@ -63,9 +63,8 @@ In this tutorial, we will use data generated via the [BeerDEcoded project](https
 {: .comment}
 
 DNA of yeasts in a bottle of La Trappe beer has been extracted and sequenced using a
-MinION to obtain sequences of DNA of the extracted yeasts. Now, we would like using
-these sequences to identify to which yeast species they belong and then getting an idea
-about the diversity of organisms in the beer, also called microbiome community.
+MinION to obtain sequences of DNA of the extracted yeasts. Now, we would like to identify
+for each sequence to which yeast species they belong, and hereby outline the diversity of organisms (the microbiome community) in the beer sample.
 
 To get this information, we need to process the sequence data in few steps:
 1. Check the quality of the data
@@ -73,7 +72,7 @@ To get this information, we need to process the sequence data in few steps:
 3. Visualize the species distribution
 
 This type of data analysis requires running several bioinformatics tools and
-usually require informatics background. [Galaxy](https://galaxyproject.org/) is
+usually require a computer science background. [Galaxy](https://galaxyproject.org/) is
 an open-source platform for data analysis that enables users to use bioinformatics
 tools through its graphical web interface, accessible via any Web browser.
 
@@ -92,9 +91,9 @@ of yeasts from a beer bottle.
 
 # Prepare Galaxy and data
 
-First of all, this turorial will get you hands on the basic Galaxy tasks, including creating a history and importing data.
+First of all, this tutorial will get you hands on the basic Galaxy tasks, including creating a history and importing data.
 
-## Get familier with Galaxy
+## Get familiar with Galaxy
 
 > ### {% icon hands_on %} Hands-on: Open Galaxy
 > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
@@ -155,11 +154,11 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 
 The contents of the file will be displayed in the central Galaxy panel.
 
-This file contains the sequences, also called **reads**, of DNA, *i.e.* sucession of nucleotides, for all fragments from the yeasts in the beer, in FASTQ format.
+This file contains the sequences, also called **reads**, of DNA, *i.e.* succession of nucleotides, for all fragments from the yeasts in the beer, in FASTQ format.
 
 > ### {% icon details %} FASTQ format
 >
-> Although it looks complicated (and maybe it is), the FASTQ format is easy to > understand with a little decoding. Each read, representing a fragment of DNA, is > encoded by 4 lines:
+> Although it looks complicated (and maybe it is), the FASTQ format is easy to > understand with a little decoding. Each read, representing a fragment of DNA, is encoded by 4 lines:
 >
 > Line  | Description
 > --- | ---
@@ -177,13 +176,13 @@ This file contains the sequences, also called **reads**, of DNA, *i.e.* sucessio
 > $'())#$$%#$%%'-$&$%'%#$%('+;<>>>18.?ACLJM7E:CFIMK<=@0/.4<9<&$007:,3<IIN<3%+&$(+#$%'$#$.2@401/5=49IEE=CH.20355>-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:<?9B522.(&%%(9:3E99<BIL?:>RB--**5,3(/.-8B>F@@=?,9'36;:87+/19BAD@=8*''&''7752'$%&,5)AM<99$%;EE;BD:=9<@=9+%$
 > ```
 >
-> It means that the fragment named `@03dd2268-71ef-4635-8bce-a42a0439ba9a` corresponds to:
-> - the DNA sequence`AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA` and
-> - this sequence has been sequenced with a quality `$'())#$$%#$%%'-$&$%'%#$%('+;<>>>18.?ACLJM7E:CFIMK<=@0/.4<9<&$007:,3<IIN<3%+&$(+#$%'$#$.2@401/5=49IEE=CH.20355>-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:<?9B522.(&%%(9:3E99<BIL?:>RB--**5,3(/.-8B>F@@=?,9'36;:87+/19BAD@=8*''&''7752'$%&,5)AM<99$%;EE;BD:=9<@=9+%$`.
+> It means that the fragment named `@03dd2268-71ef-4635-8bce-a42a0439ba9a` (ID given in line1) corresponds to:
+> - the DNA sequence `AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA` (line2)
+> - this sequence has been sequenced with a quality `$'())#$$%#$%%'-$&$%'%#$%('+;<>>>18.?ACLJM7E:CFIMK<=@0/.4<9<&$007:,3<IIN<3%+&$(+#$%'$#$.2@401/5=49IEE=CH.20355>-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:<?9B522.(&%%(9:3E99<BIL?:>RB--**5,3(/.-8B>F@@=?,9'36;:87+/19BAD@=8*''&''7752'$%&,5)AM<99$%;EE;BD:=9<@=9+%$` (line 4).
 >
 > But what does this quality score mean?
 >
-> The quality score for each sequence is a string of characters, one for each base of the nucleic sequence, used to characterize the probability of mis-identification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
+> The quality score for each sequence is a string of characters, one for each base of the nucleotide sequence, used to characterize the probability of misidentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
 >
 > ![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](./images/fastq-quality-encoding.png)
 >
