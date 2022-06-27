@@ -30,12 +30,24 @@
         {% if topic.summary %}
           {% assign og_desc = topic.summary %}
         {% endif %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        {% assign og_image = "/assets/images/GTNLogo1000.png" | prepend: site.baseurl %}
+        {% if page.contributors or page.contributions %}
+            {% capture og_page_desc %}{{ page.content }}{% endcapture %}
+            {% assign og_desc = og_page_desc %}
 
+            {% capture og_image_tmp %}{{ page.content | markdownify | first_image:page.url }}{% endcapture %}
+
+            {% if og_image_tmp %}
+                {% assign og_image = og_image_tmp %}
+            {% endif %}
+        {% endif %}
+
+        <meta name="description" content="{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines |truncate: 300}}" />
+        <meta property="og:description" content="{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines | truncate: 300}}" />
+
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 100}}{% endif %}" />
+        <meta property="og:image" content="{{ og_image }}" />
     </head>
     <body data-spy="scroll" data-target="#toc">
         {% include _includes/default-header.html %}
