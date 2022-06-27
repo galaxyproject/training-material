@@ -1,5 +1,6 @@
 require 'json'
 require 'yaml'
+require 'nokogiri'
 
 
 module TopicFilter
@@ -326,6 +327,36 @@ module Jekyll
       ELIXIR_NODES[name]
     end
 
+    def first_image(text, page_url)
+      results = text.scan(/<img[^>]*>/)
+      results.select!{|x| ! x.match(/avatars.githubusercontent.com/)}
+      if results.length > 0
+        url = results[0].scan(/src="([^"]*)"/)[0][0]
+        if url.downcase.end_with?(".gif")
+          nil
+        end
+
+        # Replace baseurls.
+        url = url.gsub(/{{\s*site.baseurl\s*}}/, '/training-material/')
+        # Re-implement link lookup, lazily.
+        url = url.gsub(/{% link (.*) %}/, '/training-material/\1')
+
+        if url.match(/\.\./) or not (url.start_with?("/training-material") or url.start_with?("http"))then
+          # Replace ../../
+            # Remove the trailing filename.
+          parts = page_url.split('/')[0..-2] + url.split('/')
+            # Resolve `..`
+          url = '/training-material' + File.expand_path(parts.join('/'))
+        end
+
+        if not url.start_with?("http") then
+          url = "https://training.galaxyproject.org" + url
+        end
+
+        url
+      end
+    end
+
     def humanize_types(type)
       data = {
         "seq" => "List of Items",
@@ -341,6 +372,11 @@ module Jekyll
     def replace_newline_doublespace(text)
       text.gsub(/\n/, "\n  ")
     end
+
+    def remove_newlines(text)
+      text.gsub(/\n/, " ")
+    end
+
   end
 end
 
