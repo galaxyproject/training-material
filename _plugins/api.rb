@@ -21,8 +21,30 @@ module Jekyll
       page3.data["layout"] = nil
       site.pages << page3
 
+      def markdownify(site, text)
+        site.find_converter_instance(
+          Jekyll::Converters::Markdown
+        ).convert(text.to_s)
+      end
+
+      def visitAndMarkdownify(site, f)
+          if f.is_a?(Array)
+              f.map!{|x| visitAndMarkdownify(site, x)}
+          elsif f.is_a?(Hash)
+              f = f.map{|k, v|
+                  [k, visitAndMarkdownify(site, v)]
+              }.to_h
+          elsif f.is_a?(String)
+              f = markdownify(site, f).strip().gsub(/<p>/, "").gsub(/<\/p>/, "")
+          end
+          f
+      end
+
       def mapContributor(site, c)
-        site.data['contributors'].fetch(c, {}).merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+        x = site.data['contributors']
+          .fetch(c, {})
+          .merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+        visitAndMarkdownify(site, x)
       end
 
       # Contributors
