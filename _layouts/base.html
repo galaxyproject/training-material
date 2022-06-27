@@ -34,12 +34,6 @@
         {% if page.contributors or page.contributions %}
             {% capture og_page_desc %}{{ page.content }}{% endcapture %}
             {% assign og_desc = og_page_desc %}
-
-            {% capture og_image_tmp %}{{ page.content | markdownify | first_image:page.url }}{% endcapture %}
-
-            {% if og_image_tmp %}
-                {% assign og_image = og_image_tmp %}
-            {% endif %}
         {% endif %}
         {% capture og_description %}{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines |truncate: 300}}{% endcapture %}
 
@@ -51,7 +45,7 @@
 
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="training.galaxyproject.org">
-        <meta property="twitter:url" content="{{ page.url }}">
+        <meta property="twitter:url" content="{{ page.url | prepend: site.baseurl | prepend: site.url }}">
         <meta name="twitter:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 100}}{% endif %}">
         <meta name="twitter:description" content="{{ og_description }}">
         <meta name="twitter:image" content="{{ og_image }}">
