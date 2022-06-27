@@ -41,13 +41,20 @@
                 {% assign og_image = og_image_tmp %}
             {% endif %}
         {% endif %}
+        {% capture og_description %}{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines |truncate: 300}}{% endcapture %}
 
-        <meta name="description" content="{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines |truncate: 300}}" />
-        <meta property="og:description" content="{{ og_desc | truncate:600 | markdownify | strip_html | remove_newlines | truncate: 300}}" />
-
+        <meta name="description" content="{{ og_description }}" />
+        <meta property="og:description" content="{{ og_description }}" />
         <meta property="og:site_name" content="Galaxy Training Network" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 100}}{% endif %}" />
         <meta property="og:image" content="{{ og_image }}" />
+
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="training.galaxyproject.org">
+        <meta property="twitter:url" content="{{ page.url }}">
+        <meta name="twitter:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 100}}{% endif %}">
+        <meta name="twitter:description" content="{{ og_description }}">
+        <meta name="twitter:image" content="{{ og_image }}">
     </head>
     <body data-spy="scroll" data-target="#toc">
         {% include _includes/default-header.html %}
