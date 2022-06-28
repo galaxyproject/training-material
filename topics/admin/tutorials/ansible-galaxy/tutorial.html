@@ -22,7 +22,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Installation with Ansible" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -293,7 +293,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:23 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -873,7 +873,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 23, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1168,7 +1168,7 @@ best practices and knowledge from previous admins codified for you.</p>
 </span><span class="gi">+++ b/requirements.yml
 </span><span class="p">@@ -0,0 +1,14 @@</span>
 <span class="gi">+- src: <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>
-+  version: 0.9.16
++  version: 0.10.1
 +- src: <span class="notranslate">galaxy</span>project.nginx
 +  version: 0.7.0
 +- src: <span class="notranslate">galaxy</span>project.postgresql
@@ -1802,8 +1802,8 @@ variables in the requirements.yml file.</p>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
-            <td><code class="language-plaintext highlighter-rouge">release_22.01</code></td>
-            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 22.01</td>
+            <td><code class="language-plaintext highlighter-rouge">release_22.05</code></td>
+            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 22.05</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_force_checkout</code></td>
@@ -1830,7 +1830,7 @@ variables in the requirements.yml file.</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2022-06-23), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2022-06-28), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -1851,7 +1851,7 @@ variables in the requirements.yml file.</p>
 +<span class="notranslate">galaxy</span>_layout: root-dir
 +<span class="notranslate">galaxy</span>_root: /srv/<span class="notranslate">galaxy</span>
 +<span class="notranslate">galaxy</span>_user: {name: <span class="notranslate">galaxy</span>, shell: /bin/bash}
-+<span class="notranslate">galaxy</span>_commit_id: release_22.01
++<span class="notranslate">galaxy</span>_commit_id: release_22.05
 +<span class="notranslate">galaxy</span>_force_checkout: true
 +miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"
 +miniconda_version: 4.7.12
@@ -1952,7 +1952,7 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
     </li>
     <li>
-      <p>In order to use mule messaging, we need to edit the Gravity configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
+      <p>In order to enable the Gunicorn + Webless strategy, we need to edit the Gravity configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
 
       <div data-commit="Configure gravity" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
@@ -1983,17 +1983,10 @@ So it is not always easy to tell what variables will be set, or what their final
 </span>   
 </code></pre></div>      </div>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How many mules?</h3>  <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p></blockquote>
-
       <blockquote class="tip">
-        <h3 id="tip-uwsgi-threads-offload-threads-mules-etc"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> uWSGI th<span class="notranslate">reads</span>, offload th<span class="notranslate">reads</span>, mules, etc.</h3>
-        <ol>
-          <li>uWSGI th<span class="notranslate">reads</span> = number of th<span class="notranslate">reads</span> per uWSGI web worker (the value of processes in uWSGI config)</li>
-          <li>offload th<span class="notranslate">reads</span> (you only need 1 or 2) helps prevent blocking when uWSGI <span class="notranslate">reads</span> from the <span class="notranslate">Galaxy</span> app</li>
-          <li>the number of mules is the number of <span class="notranslate">Galaxy</span> job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)</li>
-          <li><code class="language-plaintext highlighter-rouge">workers</code> in job_conf (covered later) is the number of th<span class="notranslate">reads</span> in an inte<span class="notranslate">rna</span>l <span class="notranslate">Galaxy</span> thread pool that are available in each job handler for preparing and finishing jobs (more th<span class="notranslate">reads</span> increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).</li>
-        </ol>
+        <h3 id="tip-options-explanations"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Options explanations.</h3>
+        <p>1<code class="language-plaintext highlighter-rouge">workers</code>: Controls the number of <span class="notranslate">Galaxy</span> application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
+2 <code class="language-plaintext highlighter-rouge">extra_args</code>: You can specify additional arguments to pass to gunicorn here.</p>
       </blockquote>
     </li>
     <li>
@@ -2603,7 +2596,7 @@ The client is only re-built when there are changes in the files needed for the <
             <li><code class="language-plaintext highlighter-rouge">local_tools</code> is a directory for custom, non-<span class="notranslate">ToolShed</span> tools managed by the Ansible playbook</li>
             <li><code class="language-plaintext highlighter-rouge">server</code> contains all of the <span class="notranslate">Galaxy</span> server code</li>
             <li><code class="language-plaintext highlighter-rouge">var</code> is a directory for all files created by <span class="notranslate">Galaxy</span>, e.g. whenever tools are installed from the <span class="notranslate">ToolShed</span>, the <span class="notranslate">Galaxy</span>-managed cache, and the integrated tool panel file.</li>
-            <li><code class="language-plaintext highlighter-rouge">venv</code> contains the <span class="notranslate">Galaxy</span> virtual environment and all dependencies, like uwsgi.</li>
+            <li><code class="language-plaintext highlighter-rouge">venv</code> contains the <span class="notranslate">Galaxy</span> virtual environment and all dependencies, like Gunicorn.</li>
           </ul>
         </blockquote>
 
@@ -2632,67 +2625,84 @@ The client is only re-built when there are changes in the files needed for the <
       <blockquote class="code-out code-max-300">
         <h3 id="code-out-output-bash-8"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
         <p>You’ll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.</p>
-        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">---</span>
-<span class="c">##
-## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
-##
-</span>
-<span class="err">uwsgi:</span>
-    <span class="err">buffer-size:</span> <span class="err">16384</span>
-    <span class="err">die-on-term:</span> <span class="err">true</span>
-    <span class="err">enable-th<span class="notranslate">reads</span>:</span> <span class="err">true</span>
-    <span class="err">farm:</span> <span class="err">job-handlers:1,2</span>
-    <span class="err">hook-master-start:</span> <span class="err">unix_signal:2</span> <span class="err">gracefully_kill_them_all</span>
-    <span class="err">hook-master-start:</span> <span class="err">unix_signal:15</span> <span class="err">gracefully_kill_them_all</span>
-    <span class="err">socket:</span> <span class="err">127.0.0.1:5000</span>
-    <span class="err">master:</span> <span class="err">true</span>
-    <span class="err">module:</span> <span class="err"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
-    <span class="err">mule:</span> <span class="err">lib/<span class="notranslate">galaxy</span>/main.py</span>
-    <span class="err">mule:</span> <span class="err">lib/<span class="notranslate">galaxy</span>/main.py</span>
-    <span class="err">offload-th<span class="notranslate">reads</span>:</span> <span class="err">2</span>
-    <span class="err">processes:</span> <span class="err">1</span>
-    <span class="err">py-call-osafterfork:</span> <span class="err">true</span>
-    <span class="err">pythonpath:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/lib</span>
-    <span class="err">static-map:</span> <span class="err">/</span><span class="py">static</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/server/static</span>
-    <span class="err">static-map:</span> <span class="err">/</span><span class="py">favicon.ico</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/server/static/favicon.ico</span>
-    <span class="err">static-safe:</span> <span class="err">client/<span class="notranslate">galaxy</span>/images</span>
-    <span class="err">th<span class="notranslate">reads</span>:</span> <span class="err">4</span>
-    <span class="err">thunder-lock:</span> <span class="err">true</span>
-    <span class="err">virtualenv:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="c1">##</span>
+<span class="c1">## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.</span>
+<span class="c1">##</span>
+<span class="na">gravity</span><span class="pi">:</span>
+    <span class="na">app_server</span><span class="pi">:</span> <span class="s">gunicorn</span>
+    <span class="na">celery</span><span class="pi">:</span>
+        <span class="na">concurrency</span><span class="pi">:</span> <span class="m">2</span>
+        <span class="na">loglevel</span><span class="pi">:</span> <span class="s">DEBUG</span>
+    <span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server</span>
+    <span class="na">gunicorn</span><span class="pi">:</span>
+        <span class="na">bind</span><span class="pi">:</span> <span class="s">unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock</span>
+        <span class="na">extra_args</span><span class="pi">:</span> <span class="s">--forwarded-allow-ips="*"</span>
+        <span class="na">preload</span><span class="pi">:</span> <span class="no">true</span>
+        <span class="na">workers</span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">handlers</span><span class="pi">:</span>
+        <span class="na">handler</span><span class="pi">:</span>
+            <span class="na">pools</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">job-handler</span>
+            <span class="pi">-</span> <span class="s"><span class="notranslate">workflow</span>-scheduler</span>
+            <span class="na">processes</span><span class="pi">:</span> <span class="m">3</span>
 
-<span class="err"><span class="notranslate">galaxy</span>:</span>
-    <span class="err">admin_users:</span> <span class="err">admin@example.org</span>
-    <span class="err">brand:</span> <span class="err">🧬🔬🚀</span>
-    <span class="err">builds_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/builds.txt.sample</span>
-    <span class="err">citation_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/data</span>
-    <span class="err">citation_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/locks</span>
-    <span class="err">data_manager_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/data_manager_conf.xml.sample</span>
-    <span class="err">database_connection:</span> <span class="err">postgresql:///<span class="notranslate">galaxy</span>?</span><span class="py">host</span><span class="p">=</span><span class="s">/var/run/postgresql</span>
-    <span class="err">datatypes_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/datatypes_conf.xml.sample</span>
-    <span class="err">exte<span class="notranslate">rna</span>l_service_type_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/exte<span class="notranslate">rna</span>l_service_types_conf.xml.sample</span>
-    <span class="err">file_path:</span> <span class="err">/data</span>
-    <span class="err">integrated_tool_panel_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/integrated_tool_panel.xml</span>
-    <span class="err">job_working_directory:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/jobs</span>
-    <span class="err">mulled_resolution_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/data</span>
-    <span class="err">mulled_resolution_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/lock</span>
-    <span class="err">new_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/tmp</span>
-    <span class="err">object_store_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/object_store_cache</span>
-    <span class="err">openid_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/openid_conf.xml.sample</span>
-    <span class="err">openid_consumer_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/openid_consumer_cache</span>
-    <span class="err">shed_data_manager_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_data_manager_conf.xml</span>
-    <span class="err">shed_tool_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_conf.xml</span>
-    <span class="err">shed_tool_data_table_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_data_table_conf.xml</span>
-    <span class="err">template_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/template_cache</span>
-    <span class="err">tool_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_cache</span>
-    <span class="err">tool_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_conf.xml.sample</span>
-    <span class="err">tool_data_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/tool-data</span>
-    <span class="err">tool_data_table_config_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_data_table_conf.xml.sample</span>
-    <span class="err">tool_dependency_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/dependencies</span>
-    <span class="err">tool_search_index_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_search_index</span>
-    <span class="err">tool_sheds_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_sheds_conf.xml.sample</span>
-    <span class="err">ucsc_build_sites:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample</span>
-    <span class="err">visualization_plugins_directory:</span> <span class="err">config/plugins/visualizations</span>
-    <span class="err">whoosh_index_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/whoosh_cache</span>
+<span class="na">uwsgi</span><span class="pi">:</span>
+    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
+    <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+    <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
+    <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
+    <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:5000</span>
+    <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">module</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
+    <span class="na">mule</span><span class="pi">:</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
+    <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
+    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
+    <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/lib</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/srv/<span class="notranslate">galaxy</span>/server/static</span>
+    <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=/srv/<span class="notranslate">galaxy</span>/server/static/favicon.ico</span>
+    <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
+    <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
+    <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/venv</span>
+
+<span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.org</span>
+    <span class="na">brand</span><span class="pi">:</span> <span class="s">🧬🔬🚀</span>
+    <span class="na">builds_file_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/builds.txt.sample</span>
+    <span class="na">citation_cache_data_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/data</span>
+    <span class="na">citation_cache_lock_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/locks</span>
+    <span class="na">data_manager_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/data_manager_conf.xml.sample</span>
+    <span class="na">database_connection</span><span class="pi">:</span> <span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</span>
+    <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/datatypes_conf.xml.sample</span>
+    <span class="na">exte<span class="notranslate">rna</span>l_service_type_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/exte<span class="notranslate">rna</span>l_service_types_conf.xml.sample</span>
+    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
+    <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/config/integrated_tool_panel.xml</span>
+    <span class="na">job_working_directory</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/jobs</span>
+    <span class="na">mulled_resolution_cache_data_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/mulled/data</span>
+    <span class="na">mulled_resolution_cache_lock_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/mulled/lock</span>
+    <span class="na">new_file_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/tmp</span>
+    <span class="na">object_store_cache_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/object_store_cache</span>
+    <span class="na">openid_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/openid_conf.xml.sample</span>
+    <span class="na">openid_consumer_cache_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/openid_consumer_cache</span>
+    <span class="na">shed_data_manager_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/config/shed_data_manager_conf.xml</span>
+    <span class="na">shed_tool_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_conf.xml</span>
+    <span class="na">shed_tool_data_table_config</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_data_table_conf.xml</span>
+    <span class="na">template_cache_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/template_cache</span>
+    <span class="na">tool_cache_data_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_cache</span>
+    <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/tool_conf.xml.sample</span>
+    <span class="na">tool_data_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/tool-data</span>
+    <span class="na">tool_data_table_config_path</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/tool_data_table_conf.xml.sample</span>
+    <span class="na">tool_dependency_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/dependencies</span>
+    <span class="na">tool_search_index_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_search_index</span>
+    <span class="na">tool_sheds_config_file</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/config/tool_sheds_conf.xml.sample</span>
+    <span class="na">ucsc_build_sites</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample</span>
+    <span class="na">visualization_plugins_directory</span><span class="pi">:</span> <span class="s">config/plugins/visualizations</span>
+    <span class="na">whoosh_index_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache/whoosh_cache</span>
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -2717,9 +2727,18 @@ The client is only re-built when there are changes in the files needed for the <
            - <span class="notranslate">workflow</span>-scheduler
 <span class="gi">+
 +# systemd
-+<span class="notranslate">galaxy</span>_manage_systemd: yes
++<span class="notranslate">galaxy</span>_manage_systemd: true
 </span>   
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-using-galaxy-2101"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Using <span class="notranslate">Galaxy</span> 21.01?</h3>
+        <p>For versions of <span class="notranslate">Galaxy</span> older than 22.05, using <code class="language-plaintext highlighter-rouge">gravity</code> was not the default. There you’ll need to set these additional variables:</p>
+
+        <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gi">+<span class="notranslate">galaxy</span>_manage_gravity: "false"
++<span class="notranslate">galaxy</span>_systemd_mode: "mule"
+</span></code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Run the playbook</p>
@@ -2743,29 +2762,30 @@ The client is only re-built when there are changes in the files needed for the <
         <h3 id="code-out-output-bash-9"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">●</span> <span class="err"><span class="notranslate">galaxy</span>.service</span> <span class="err">-</span> <span class="err"><span class="notranslate">Galaxy</span></span>
-   <span class="err">Loaded:</span> <span class="err">loaded</span> <span class="err">(/etc/systemd/system/<span class="notranslate">galaxy</span>.service</span><span class="c">; enabled; vendor preset: enabled)
-</span>   <span class="err">Active:</span> <span class="err">active</span> <span class="err">(running)</span> <span class="err">since</span> <span class="err">Wed</span> <span class="err">2020-07-08</span> <span class="err">12:55:02</span> <span class="err">UTC</span><span class="c">; 1min 25s ago
-</span> <span class="err">Main</span> <span class="err">PID:</span> <span class="err">30426</span> <span class="err">(uwsgi)</span>
-    <span class="err">Tasks:</span> <span class="err">33</span> <span class="err">(limit:</span> <span class="err">4915)</span>
-   <span class="err">Memory:</span> <span class="err">502.3M</span> <span class="err">(limit:</span> <span class="err">32.0G)</span>
-      <span class="err">CPU:</span> <span class="err">22.122s</span>
-   <span class="err">CGroup:</span> <span class="err">/system.slice/<span class="notranslate">galaxy</span>.service</span>
-           <span class="err">├─30426</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
-           <span class="err">├─30735</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
-           <span class="err">├─30740</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
-           <span class="err">├─30741</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
-           <span class="err">└─30742</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
+    <span class="err">Loaded:</span> <span class="err">loaded</span> <span class="err">(/etc/systemd/system/<span class="notranslate">galaxy</span>.service</span><span class="c">; enabled; vendor preset: enabled)
+</span>    <span class="err">Active:</span> <span class="err">active</span> <span class="err">(running)</span> <span class="err">since</span> <span class="err">Mon</span> <span class="err">2022-06-27</span> <span class="err">03:46:49</span> <span class="err">UTC</span><span class="c">; 11h ago
+</span>  <span class="err">Main</span> <span class="err">PID:</span> <span class="err">11778</span> <span class="err">(<span class="notranslate">galaxy</span>ctl)</span>
+     <span class="err">Tasks:</span> <span class="err">73</span> <span class="err">(limit:</span> <span class="err">9495)</span>
+    <span class="err">Memory:</span> <span class="err">1.7G</span> <span class="err">(limit:</span> <span class="err">16.0G)</span>
+       <span class="err">CPU:</span> <span class="err">1h</span> <span class="err">11min</span> <span class="err">33.684s</span>
+    <span class="err">CGroup:</span> <span class="err">/system.slice/<span class="notranslate">galaxy</span>.service</span>
+            <span class="err">├─11778</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/<span class="notranslate">galaxy</span>ctl</span> <span class="err">start</span> <span class="err">--foreground</span> <span class="err">--quiet</span>
+            <span class="err">├─11791</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/supervisord</span> <span class="err">-c</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.conf</span> <span class="err">--nodaemon</span>
+            <span class="err">├─11801</span> <span class="err">/bin/tail</span> <span class="err">-f</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.log</span>
+            <span class="err">├─11802</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/celery</span> <span class="err">--app</span> <span class="err"><span class="notranslate">galaxy</span>.celery</span> <span class="err">worker</span> <span class="err">--concurrency</span> <span class="err">2</span> <span class="err">--loglevel</span> <span class="err">DEBUG</span> <span class="err">--pool</span> <span class="err">th<span class="notranslate">reads</span></span> <span class="err">--queues</span> <span class="err">celery,<span class="notranslate">galaxy</span>.inte<span class="notranslate">rna</span>l,<span class="notranslate">galaxy</span>.exte<span class="notranslate">rna</span>l</span>
+            <span class="err">├─11827</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/celery</span> <span class="err">--app</span> <span class="err"><span class="notranslate">galaxy</span>.celery</span> <span class="err">beat</span> <span class="err">--loglevel</span> <span class="err">DEBUG</span> <span class="err">--schedule</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/gravity/celery-beat-schedule</span>
+            <span class="err">├─11840</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn</span> <span class="err">"<span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory()"</span> <span class="err">--timeout</span> <span class="err">300</span> <span class="err">--pythonpath</span> <span class="err">lib</span> <span class="err">-k</span> <span class="err"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker</span> <span class="err">-b</span> <span class="err">unix:/srv/&gt;</span>
+            <span class="err">├─11891</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn</span> <span class="err">"<span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory()"</span> <span class="err">--timeout</span> <span class="err">300</span> <span class="err">--pythonpath</span> <span class="err">lib</span> <span class="err">-k</span> <span class="err"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker</span> <span class="err">-b</span> <span class="err">unix:/srv/&gt;</span>
+            <span class="err">├─11898</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn</span> <span class="err">"<span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory()"</span> <span class="err">--timeout</span> <span class="err">300</span> <span class="err">--pythonpath</span> <span class="err">lib</span> <span class="err">-k</span> <span class="err"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker</span> <span class="err">-b</span> <span class="err">unix:/srv/&gt;</span>
+            <span class="err">├─11929</span> <span class="err">python</span> <span class="err">./lib/<span class="notranslate">galaxy</span>/main.py</span> <span class="err">-c</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="py">--server-name</span><span class="p">=</span><span class="s">handler_0 --attach-to-pool=job-handler --attach-to-pool=<span class="notranslate">workflow</span>-scheduler --pid-file=/srv/<span class="notranslate">galaxy</span>/var/gravity/supe&gt;</span>
+            <span class="err">├─11949</span> <span class="err">python</span> <span class="err">./lib/<span class="notranslate">galaxy</span>/main.py</span> <span class="err">-c</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="py">--server-name</span><span class="p">=</span><span class="s">handler_1 --attach-to-pool=job-handler --attach-to-pool=<span class="notranslate">workflow</span>-scheduler --pid-file=/srv/<span class="notranslate">galaxy</span>/var/gravity/supe&gt;</span>
+            <span class="err">└─11968</span> <span class="err">python</span> <span class="err">./lib/<span class="notranslate">galaxy</span>/main.py</span> <span class="err">-c</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="py">--server-name</span><span class="p">=</span><span class="s">handler_2 --attach-to-pool=job-handler --attach-to-pool=<span class="notranslate">workflow</span>-scheduler --pid-file=/srv/<span class="notranslate">galaxy</span>/var/gravity/supe&gt;</span>
 
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.text:Paf</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">paf.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.text:Gfa1</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">gfa1.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.interval:Gtf</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">gtf.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.data:GenericAsn1</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">asn1.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Binary</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err"><span class="notranslate">toolshed</span>.gz.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:H5</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:GenericAsn1Binary</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">asn1-bi</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Loom</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">loom.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.sequence:Axt</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">axt.</span>
-<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Anndata</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5ad.</span>
+<span class="err">Jun</span> <span class="err">27</span> <span class="err">03:47:58</span> <span class="err">training-test</span> <span class="err"><span class="notranslate">galaxy</span>ctl</span><span class="nn">[11791]</span><span class="err">:</span> <span class="err">2022-06-27</span> <span class="err">03:47:58,960</span> <span class="err">INFO</span> <span class="err">success:</span> <span class="err">handler_1</span> <span class="err">entered</span> <span class="err">RUNNING</span> <span class="err">state,</span> <span class="err">process</span> <span class="err">has</span> <span class="err">stayed</span> <span class="err">up</span> <span class="err">for</span> <span class="err">&gt;</span> <span class="err">than</span> <span class="err">20</span> <span class="err">seconds</span> <span class="err">(startsecs)</span>
+<span class="err">Jun</span> <span class="err">27</span>  <span class="err">03:47:58</span> <span class="err">training-test</span> <span class="err"><span class="notranslate">galaxy</span>ctl</span><span class="nn">[11801]</span><span class="err">:</span> <span class="err">2022-06-27</span> <span class="err">03:47:58,960</span> <span class="err">INFO</span> <span class="err">success:</span> <span class="err">handler_1</span> <span class="err">entered</span> <span class="err">RUNNING</span> <span class="err">state,</span> <span class="err">process</span> <span class="err">has</span> <span class="err">stayed</span> <span class="err">up</span> <span class="err">for</span> <span class="err">&gt;</span> <span class="err">than</span> <span class="err">20</span> <span class="err">seconds</span> <span class="err">(startsecs)</span>
+<span class="err">Jun</span> <span class="err">27</span> <span class="err">03:47:58</span> <span class="err">training-test</span> <span class="err"><span class="notranslate">galaxy</span>ctl</span><span class="nn">[11791]</span><span class="err">:</span> <span class="err">2022-06-27</span> <span class="err">03:47:58,975</span> <span class="err">INFO</span> <span class="err">waiting</span> <span class="err">for</span> <span class="err">handler_2</span> <span class="err">to</span> <span class="err">stop</span>
+<span class="err">Jun</span> <span class="err">27</span> <span class="err">03:47:58</span> <span class="err">training-test</span> <span class="err"><span class="notranslate">galaxy</span>ctl</span><span class="nn">[11801]</span><span class="err">:</span> <span class="err">2022-06-27</span> <span class="err">03:47:58,975</span> <span class="err">INFO</span> <span class="err">waiting</span> <span class="err">for</span> <span class="err">handler_2</span> <span class="err">to</span> <span class="err">stop</span>
+<span class="err">Jun</span> <span class="err">27</span> <span class="err">03:48:00</span> <span class="err">training-test</span> <span class="err"><span class="notranslate">galaxy</span>ctl</span><span class="nn">[11791]</span><span class="err">:</span> <span class="err">2022-06-27</span> <span class="err">03:48:00,264</span> <span class="err">INFO</span> <span class="err">stopped:</span> <span class="err">handler_2</span> <span class="err">(exit</span> <span class="err">status</span> <span class="err">0)</span>
 </code></pre></div>        </div>
       </blockquote>
 
@@ -2784,14 +2804,13 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>project.eu systemd[1]: Failed to start <span class="notranslate">Galaxy</span>.
 </code></pre></div>        </div>
 
-        <p>Check your /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml and ensure that it lines up exactly with what you expect. One possible cause here is the <code class="language-plaintext highlighter-rouge">uwsgi</code> subsection of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> was omitted and instead it used the default port and failed.</p>
+        <p>Check your /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml and ensure that it lines up exactly with what you expect.</p>
       </blockquote>
     </li>
     <li>
       <p>Some things to note:</p>
 
       <ol>
-        <li>Later, after NGINX is set up and we’re ready to connect to <span class="notranslate">Galaxy</span>, refreshing the page while <span class="notranslate">Galaxy</span> is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI</li>
         <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="language-plaintext highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
         <li>You can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -fu <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
         <li>You may have noticed after setting up <span class="notranslate">Galaxy</span> in the previous section, that Ansible printed the message “RESTARTER NOT IMPLEMENTED - Please restart <span class="notranslate">Galaxy</span> manually. You can define your own handler and enable it with <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>.” You should no longer see this message on future playbook runs, as enabling systemd has automatically set <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code> for us - the role now knows how to restart <span class="notranslate">Galaxy</span>!</li>
@@ -2828,7 +2847,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
   <li><span class="notranslate">Galaxy</span> running (managed by systemd)</li>
 </ul>
 
-<p>Although uWSGI can server HTTP for us directly, by moving to NGINX (pronounced “engine X” /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
+<p>Although Gunicorn can server HTTP for us directly, by moving to NGINX (pronounced “engine X” /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
 
 <p>For this, we will use NGINX. It is possible to configure <span class="notranslate">Galaxy</span> with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.</p>
 
@@ -2859,7 +2878,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 </span><span class="p">@@ -60,3 +60,33 @@</span> <span class="notranslate">galaxy</span>_config:
     
  # systemd
- <span class="notranslate">galaxy</span>_manage_systemd: yes
+ <span class="notranslate">galaxy</span>_manage_systemd: true
 <span class="gi">+
 +# Certbot
 +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -3295,7 +3314,7 @@ In a training setting there is no need to request certificates that will be trus
 +    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
 +
 </span> # systemd
- <span class="notranslate">galaxy</span>_manage_systemd: yes
+ <span class="notranslate">galaxy</span>_manage_systemd: true
     
    
 </code></pre></div>      </div>
@@ -3527,7 +3546,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 
 <h2 id="keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</h2>
 
-<p>If you have set your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_22.01</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
+<p>If you have set your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_22.05</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
 
 <h2 id="upgrading-galaxy-optional">Upgrading <span class="notranslate">Galaxy</span> (Optional)</h2>
 
@@ -3621,7 +3640,7 @@ Additionally you can automatically send failing job error reports, even if users
 <!--SNIPPET-->
 <blockquote class="comment">  <h3 data-toc-skip="" id="-got-lost-along-the-way"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Got lost along the way?</h3>  <p>If you missed any steps, you can compare against the <a href="https://github.com/hexylena/git-gat/tree/step-1">reference files</a>, or see what changed since <a href="https://github.com/hexylena/git-gat/compare/step-0...step-1#files_bucket">the previous tutorial</a>.</p>  <p>If you’re using <code class="language-plaintext highlighter-rouge">git</code> to track your progress, remember to add your changes and commit with a good commit message!</p></blockquote>
 
-<figure id="figure-4"><img src="../../images/ansible-galaxy-intro-2.png" alt="diagram of galaxy setup with postgres, galaxy, nginx, uwsgi, storage, and compute shown attached to each other." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> This approximately represents what you have setup today, NGINX proxies requests to uWSGI which runs the <span class="notranslate">Galaxy</span> App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.</figcaption></figure>
+<figure id="figure-4"><img src="../../images/ansible-galaxy-intro-2.png" alt="diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, storage, and compute shown attached to each other." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the <span class="notranslate">Galaxy</span> App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.</figcaption></figure>
 
 
                 
@@ -3708,7 +3727,7 @@ author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann a
 title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
 year = "2022",
 month = "06",
-day = "23"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
