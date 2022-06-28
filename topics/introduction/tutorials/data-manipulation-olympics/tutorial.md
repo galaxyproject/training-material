@@ -2,9 +2,9 @@
 layout: tutorial_hands_on
 
 title: Data Manipulation Olympics
+zenodo_link: 'https://zenodo.org/record/6772556'
 tags:
-- workflows
-zenodo_link: 'https://zenodo.org/record/6638036'
+- cyoa
 questions:
 - How can I do basic data manipulation in Galaxy?
 - Which tools are available to convert, reformat, filter, sort etc my text-based data?
@@ -12,7 +12,7 @@ objectives:
 - Familiarize yourself with data manipulation tools in Galaxy
 - Perform basic text manipulation tasks in Galaxy
 - Become comfortable converting text-based files in a variety of ways.
-time_estimation: 30m
+time_estimation: 1h
 key_points:
 - There are a lot of tools available in Galaxy for performing basic data manipulation tasks
 - Bacis data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
@@ -29,6 +29,9 @@ level: Introductory
 
 subtopic: next-steps
 ---
+
+
+<!-- Note to contributors: feel free to add sections here to include additional visualisation options. Make sure each section is independent of each other, i.e. each section should start with the olympics.tsv file. Also make sure to include many exercises (with answers) for your section -->
 
 
 # Introduction
@@ -49,15 +52,47 @@ Galaxy has a large collection of tools to perform such basic data manipulation t
 {: .agenda}
 
 
+# Cheatsheet
+
+Here is an overview table of the different data manipulations in this tutorial, with links to the tools in Galaxy.
+
+If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu bar), you can click on the tool names in the last column to quickly open them in Galaxy and start using them on your own!
+
+
+| Operation              | Description            | Galaxy Tool    |
+|------------------------|------------------------|----------------|
+| Convert format         | Change the file format | {% icon galaxy-pencil%} Edit attributes |
+| Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
+| Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
+| Filter                 | Remove rows from a file based on values in one or more columns | {% tool [Filter](Filter1) %} |
+| Replace Text | in a specific column | {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}|
+
+TIP: If you find yourself frequently using the same tool often but struggle to find it in the long list of tools, you can **star** your favourite tools in Galaxy!
+
+{% snippet faqs/galaxy/tools_favorite.md %}
+
+
+In this tutorial, these tools are explained in more detail, and we provide some exercises for you to practice.
+
+
 # Background
 
-In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1896 until Rio 2016. The objective is to familiarize you with a large number of the most important data manipulation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
+In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1896 until Tokyo in 2020. The objective is to familiarize you with a large number of the most important data manipulation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
 
 
 ![image of olympic rings, logo and two atheletes around the words "Data Analysis Olympics"](./images/cover.jpg)
 
 
 We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
+
+
+> ### {% icon tip %} Also check out the Data Visualisation Olympics tutorial!
+>
+> There is a related tutorial that uses this dataset to perform a range of different visualisations in Galaxy.
+>
+> Interested? Check it out [here]({% link topics/introduction/tutorials/data-visualisation-olympics/tutorial.md %})
+>
+{: .comment}
 
 
 # Upload Data
@@ -69,7 +104,7 @@ Before we can do any manipulation, we will need some data. Let's upload our tabl
 > 1. {% tool [Import](upload1) %} the file `olympics.tsv` via link
 >
 >    ```
->    https://zenodo.org/record/6638036/files/olympics.tsv
+>    {{page.zenodo_link}}/files/olympics.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -82,15 +117,15 @@ Before we can do any manipulation, we will need some data. Let's upload our tabl
 >    >
 >    > 1. What is the format of the file?
 >    > 2. What does each row represent?
->    > 3. How many lines are in the file?
+>    > 3. How many lines are in the file? (Hint: {% tool [Line/Word/Character count](wc_gnu) %})
 >    > 4. How many columns?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. When you expand the dataset, you will see `format: tabular`, this is another term for a tsv file.
+>    > > 1. When you expand the dataset, you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
 >    > > 2. Each row represents an athlete's participation in an event. If an athlete competes in multiple events, there is a line for each event.
->    > > 3. Look at the expanded view in the history, there are ~270,000 rows in the dataset
->    > > 4. There are 14 columns in this file. There are multiple ways to find this answer:
+>    > > 3. 234,523. Look at the expanded view in the history, this tells us there are ~250,000 rows in the dataset. We can get the exact number using the  {% tool [Line/Word/Character count](wc_gnu) %} tool.
+>    > > 4. There are 17 columns in this file. There are multiple ways to find this answer:
 >    > >    - Count the columns (only doable for small files)
 >    > >    - In the expanded view, scroll sideways on the dataset preview, at the top the columns are numbered
 >    > >    - Click on the {% icon galaxy-info %} i icon on the dataset, here you will find more detailed information about the file and the job that created it.
@@ -104,6 +139,31 @@ Before we can do any manipulation, we will need some data. Let's upload our tabl
 >
 {: .hands_on}
 
+
+## About this dataset
+
+The data was [obtained](https://github.com/UOSCS/Olympic_Athletes) from [Olympedia](https://www.olympedia.org/). The file `olympics.tsv` contains
+234,522 rows and 17 columns. Each row corresponds to an individual athlete competing in an individual Olympic event. The columns are:
+
+- **athlete_id** - Unique number for each athlete
+- **name** - Athlete's name
+- **sex** - M or F
+- **birth_year** - 4-digit number
+- **birth_day** - e.g. 24 July
+- **birth_place** - town and/or country
+- **height** - In centimeters
+- **weight** - In kilograms
+- **team** - Team name
+- **noc** - National Olympic Committee 3-letter code
+- **games** - Year and season
+- **year** - Integer
+- **season** - Summer or Winter
+- **city** - Host city
+- **sport** - Sport
+- **event** - Event
+- **medal** - Gold, Silver, Bronze, or NA
+
+We will use this dataset to practice our data manipulation skills in Galaxy.
 
 
 # Choose your adventure!
@@ -133,14 +193,16 @@ Galaxy can convert these two formats into each other.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. Where are the commas?
+>    > 1. What do you notice?
 >    > 2. Why are some values in quotes?
+>    > 3. Scroll down a bit. Why are some rows displayed differently than others?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. Galaxy understands this fomat to be a table with rows and columns, so when you view the file, Galaxy hides the commas separating the columns, to make the file easier to read. If you download the file and view it in a text editor, you will see that there are 13 commas on each line, separating the 14 columns of the file.
->    > >
+>    > > 1. Galaxy does not display the table as nicely as before.
+>    > >    This is because Galaxy is optimized to work with `tsv` files. For most rows you now see commas separating the different columns.
 >    > > 2. If the data in a column contains a comma (e.g. in this file we have events such as `swimming 5,000 meters`), we put the value in quotes to signifiy that that comma is part of the data, not a column delimiter.
+>    > > 3. This is a bit of a quirk in Galaxy, but when no columns contain a `,` as part of the value, Galaxy displays it as a table, but when columns contain a comma (and are in quotation marks), it displays it as text. Galaxy is optimized for `tsv` files, so if you have `csv` data, it is best to convert the datatype to `tabular` before you start your analysis.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -178,7 +240,7 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 >    > > ### {% icon solution %} Answer
 >    > >
 >    > > 1. Since Galaxy now no longer know that this is a tabular file with rows and columns,
->    > > it displays the data as-is, no longer hiding the commas.
+>    > > it displays the data as-is, no longer hiding any commas.
 >    > >
 >    > > 2. The file itself did not change, only the metadata. We simply told Galaxy that this file is not a `csv` file, but just a file containing text.
 >    > >
@@ -197,11 +259,9 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 # Summary Statistics
 
 
-
 # Sort by column
 
-We have a lot of data in this file, but it isn't really ordered in any logical way. Let's change that.
-
+We have a lot of data in this file, but it is ordered by the athlete ID number, which is a somewhat arbitrary and meaningless number. But we can sort the rows in this file to something more convenient, for example alphabetically by name of the athelete, or chronologically by year of the Olympics.
 
 > ### {% icon hands_on %} Hands-on: Sort table based on a column
 >
@@ -211,11 +271,13 @@ We have a lot of data in this file, but it isn't really ordered in any logical w
 >    >
 >    > 1. Which column contains the year?
 >    > 2. Do we want ascending or descending order if we want the oldest games at the top?
+>    > 3. What should we do with the very first row (the one with the header names?)
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. Column 9
+>    > > 1. Column 12
 >    > > 2. The file should be sorted in ascending (increasing) order
+>    > > 3. The header line should always stay on top, so we want to ignore it when we sort the file.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -223,7 +285,7 @@ We have a lot of data in this file, but it isn't really ordered in any logical w
 >
 > 2. {% tool [Sort](sort1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort dataset"*: `olympics.tsv`
->    - {% icon param-select %} *"on column"*: `Column 9`
+>    - {% icon param-select %} *"on column"*: `Column 12`
 >    - {% icon param-select %} *"with flavor"*: `Numerical sort`
 >    - {% icon param-select %} *"everything in"*: `Ascending order`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
@@ -236,7 +298,7 @@ We have a lot of data in this file, but it isn't really ordered in any logical w
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. Giuseppe Rivabella
+>    > > 1. Karakatsanis. Who competed in a Shooting event 1896 Summer Olympics in Athens.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -268,7 +330,7 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    {: .question}
 >
 >
-> 2. {% icon rerun %} **Rerun** the sort tool with the following parameters:
+> 2. {% icon galaxy-refresh %} **Rerun** the sort tool with the following parameters:
 >    - All parameter from the first step should already be set for you, and should remain the same
 >    - {% icon param-repeat %} Insert Column Selection
 >      - {% icon param-select %} *"on column"*: `Column 2`
@@ -283,14 +345,14 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. A. Tryfiatis-Trypiapis, who competed in the [Cycling Men's 12-Hours Race](https://en.wikipedia.org/wiki/Cycling_at_the_1896_Summer_Olympics_%E2%80%93_Men%27s_12_hour_race)
+>    > > 1. A. Grigoriadis. He competed in the 500 meters freestyle swiming event.
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
 {: .hands_on}
 
-## Exercise
+## Exercises
 
 Ok, time to train! let's see if you can use the sort tool to answer the following questions:
 
@@ -300,20 +362,32 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 >
 > > ### {% icon solution %} Answer
 > >
-> >  . We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
+> > `Žolt Peto` who competed in tabletennis at the 2020 Summer Olympics in Tokyo.
+> > We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
 > >
 > {: .solution}
 {: .question}
 
 
-> ### {% icon question %} Exercise: Sorting by age
+> ### {% icon question %} Exercise: sort by height
 >
-> 1. What is the oldest age of a competing athelete?
-> 2. Of all athletes of this age, which comes first alphabeticall?
+> 1. What is the height of the tallest competing athelete? Which athlete(s) are of this height?
+> 2. What is the shortest?
+> 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
-> > ### {% icon solution %} Answer
+> > ### {% icon solution %} Hints
 > >
-> >  . We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
+> > 1. Height is listed in column 7. Since this is a number, we need *numerical sort*, and becaue we want the tallest on top, we will need to sort in *descending* (decreasing) order.
+> > 2. Rerun the tool for step 1, but change the order to *ascending*
+> > 3. First sort by year (descending), then by height (descending)
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. Adam Sandurski from poland is the tallest athlete in the file, at 214 cm tall.
+> >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields are being sorted to the top. We can filter out rows with empty values to get our anwer (see Filter section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-with-answers) has many exercises that require a combination of different tools.
+> >  3. Gennaro Di Mauro, 210 cm.
 > >
 > {: .solution}
 {: .question}
@@ -322,15 +396,87 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 
 # Filter by column
 
-show only winter olympics
+This file contains a lot of data, we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will remove any rows that are not of interest to us (i.e. that don't meet certain criteria).
+
+
+> ### {% icon hands_on %} Hands-on: Filter table based on a column
+>
+> We will filter the file to show only winter Olympics
+>
+> 1. Look at the `olympics.tsv` file and answer the following questions
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Which column contains this information?
+>    > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. Column 13, the column with the *season* header
+>    > > 2. The values can be `Summer` or `Winter`
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>
+> 2. {% tool [**Filter** data on any column using simple expressions](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+>    - {% icon param-select %} *"With the following condition"*: `c13=='Winter'`
+>    - {% icon param-text %} *"Number of header lines to skip"*: `1`
+>
+> 3. {% icon galaxy-eye %} **View** the filtered file.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How many lines are in this file? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count](wc_gnu) %} )
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. 44,681 (this is including the header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. Repeat the step for the Summer olympics
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How many lines do you expect in the this file?
+>    > 2. How many lines are in this file? Were you right?
+>    >
+>    > > ### {% icon solution %} Hints
+>    > >
+>    > > 1. Use the {% tool [Line/Word/Character count](wc_gnu) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter olympics file
+>    > > 2. Be careful to consider whether these counts include the header line of the file or not
+>    > >
+>    > {: .solution}
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. The original file has 234,523 lines, and the Winter olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer olypmics file to have 1 more line that this, so 189,843 total lines.
+>    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
+>    > >
+>    > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+## Exercises
+
+Ok, time to train! let's see if you can use the filter tool to answer the following questions:
+
+
+
+
+
+# Unique
+
 
 
 # Find and Replace
 
-
-
-
-Tip: Star your favorite tools
 
 # Transpose
 
@@ -343,7 +489,7 @@ Tip: Star your favorite tools
 > 1. {% tool [Import](upload1) %} the file `country-information.tsv` via link
 >
 >    ```
->    https://zenodo.org/record/6638036/files/country-information.tsv
+>    {{page.zenodo_link}}/files/country-information.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -395,3 +541,29 @@ sport with the tallest athletes
 # Exercises (with answers)
 
 This section provides a number of exercises that require you to combine one or more of the techniques you learned in this tutorial. This is a great place to start if you want to practice your data manipulation skills!
+
+- TODO: shortest athlete (couldnt ansswer with only sort tool)
+
+
+> ### {% icon question %} Exercise: sort by height
+>
+> 1.
+> 2.
+> 3.
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1.
+> > 2.
+> > 3.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1.
+> >  2.
+> >  3.
+> {: .solution}
+{: .question}
+
