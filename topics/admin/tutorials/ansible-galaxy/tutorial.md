@@ -1700,11 +1700,18 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    +
 >    +# systemd
 >    +galaxy_manage_systemd: true
->    +galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
->    +galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup systemd variables"}
+>
+>    > ### {% icon tip %} Using Galaxy 21.01?
+>    > For versions of Galaxy older than 22.05, using `gravity` was not the default. There you'll need to set these additional variables:
+>    >
+>    >```diff
+>    >+galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
+>    >+galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
+>    >```
+>    {: .tip}
 >
 > 2. Run the playbook
 >
