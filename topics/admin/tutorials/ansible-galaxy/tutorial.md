@@ -256,7 +256,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.9.16
+>    +  version: 0.10.1
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
@@ -801,7 +801,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_22.01`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.01
+>    `galaxy_commit_id`              | `release_22.05`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.05
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
@@ -831,7 +831,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_22.01
+>    +galaxy_commit_id: release_22.05
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    +miniconda_version: 4.7.12
@@ -925,7 +925,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .comment}
 >
-> 4. In order to use mule messaging, we need to edit the Gravity configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
+> 4. In order to enable the Gunicorn + Webless strategy, we need to edit the Gravity configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
 >    ```diff
@@ -959,13 +959,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure gravity"}
 >
->    {% snippet topics/admin/faqs/galaxy-how-many-mules.md %}
 >
->    > ### {% icon tip %} uWSGI threads, offload threads, mules, etc.
->    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
->    > 2. offload threads (you only need 1 or 2) helps prevent blocking when uWSGI reads from the Galaxy app
->    > 3. the number of mules is the number of Galaxy job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)
->    > 4. `workers` in job_conf (covered later) is the number of threads in an internal Galaxy thread pool that are available in each job handler for preparing and finishing jobs (more threads increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).
+>    > ### {% icon tip %} Options explanations.
+>    > 1`workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
+>    > 2 `extra_args`: You can specify additional arguments to pass to gunicorn here.
 >    {: .tip}
 >
 > 5. Let's set up our vault to store the secrets for these tutorials.
@@ -1575,7 +1572,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > - `local_tools` is a directory for custom, non-ToolShed tools managed by the Ansible playbook
 >    > > - `server` contains all of the Galaxy server code
 >    > > - `var` is a directory for all files created by Galaxy, e.g. whenever tools are installed from the ToolShed, the Galaxy-managed cache, and the integrated tool panel file.
->    > > - `venv` contains the Galaxy virtual environment and all dependencies, like uwsgi.
+>    > > - `venv` contains the Galaxy virtual environment and all dependencies, like Gunicorn.
 >    > {: .code-in}
 >    >
 >    > > ### {% icon code-out %} Output: Bash
@@ -1602,11 +1599,28 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    > ### {% icon code-out %} Output: Bash
 >    > You'll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.
->    > ```ini
+>    > ```yaml
 >    > ---
 >    > ##
 >    > ## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
 >    > ##
+>    > gravity:
+>    >     app_server: gunicorn
+>    >     celery:
+>    >         concurrency: 2
+>    >         loglevel: DEBUG
+>    >     galaxy_root: /srv/galaxy/server
+>    >     gunicorn:
+>    >         bind: unix:/srv/galaxy/var/config/gunicorn.sock
+>    >         extra_args: --forwarded-allow-ips="*"
+>    >         preload: true
+>    >         workers: 2
+>    >     handlers:
+>    >         handler:
+>    >             pools:
+>    >             - job-handler
+>    >             - workflow-scheduler
+>    >             processes: 3
 >    >
 >    > uwsgi:
 >    >     buffer-size: 16384
@@ -1685,10 +1699,19 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >               - workflow-scheduler
 >    +
 >    +# systemd
->    +galaxy_manage_systemd: yes
+>    +galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup systemd variables"}
+>
+>    > ### {% icon tip %} Using Galaxy 21.01?
+>    > For versions of Galaxy older than 22.05, using `gravity` was not the default. There you'll need to set these additional variables:
+>    >
+>    >```diff
+>    >+galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
+>    >+galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
+>    >```
+>    {: .tip}
 >
 > 2. Run the playbook
 >
@@ -1711,29 +1734,30 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    >
 >    > ```ini
 >    > ● galaxy.service - Galaxy
->    >    Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
->    >    Active: active (running) since Wed 2020-07-08 12:55:02 UTC; 1min 25s ago
->    >  Main PID: 30426 (uwsgi)
->    >     Tasks: 33 (limit: 4915)
->    >    Memory: 502.3M (limit: 32.0G)
->    >       CPU: 22.122s
->    >    CGroup: /system.slice/galaxy.service
->    >            ├─30426 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
->    >            ├─30735 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
->    >            ├─30740 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
->    >            ├─30741 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
->    >            └─30742 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+>    >     Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
+>    >     Active: active (running) since Mon 2022-06-27 03:46:49 UTC; 11h ago
+>    >   Main PID: 11778 (galaxyctl)
+>    >      Tasks: 73 (limit: 9495)
+>    >     Memory: 1.7G (limit: 16.0G)
+>    >        CPU: 1h 11min 33.684s
+>    >     CGroup: /system.slice/galaxy.service
+>    >             ├─11778 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/galaxyctl start --foreground --quiet
+>    >             ├─11791 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/supervisord -c /srv/galaxy/var/gravity/supervisor/supervisord.conf --nodaemon
+>    >             ├─11801 /bin/tail -f /srv/galaxy/var/gravity/supervisor/supervisord.log
+>    >             ├─11802 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery --app galaxy.celery worker --concurrency 2 --loglevel DEBUG --pool threads --queues celery,galaxy.internal,galaxy.external
+>    >             ├─11827 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery --app galaxy.celery beat --loglevel DEBUG --schedule /srv/galaxy/var/gravity/celery-beat-schedule
+>    >             ├─11840 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
+>    >             ├─11891 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
+>    >             ├─11898 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn "galaxy.webapps.galaxy.fast_factory:factory()" --timeout 300 --pythonpath lib -k galaxy.webapps.galaxy.workers.Worker -b unix:/srv/>
+>    >             ├─11929 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_0 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
+>    >             ├─11949 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_1 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
+>    >             └─11968 python ./lib/galaxy/main.py -c /srv/galaxy/config/galaxy.yml --server-name=handler_2 --attach-to-pool=job-handler --attach-to-pool=workflow-scheduler --pid-file=/srv/galaxy/var/gravity/supe>
 >    >
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,681 [p:30740,w:0,m:1] [MainThread] Retrieved datatype module galaxy.datatypes.text:Paf from the datatype registry for extension paf.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,681 [p:30740,w:0,m:1] [MainThread] Retrieved datatype module galaxy.datatypes.text:Gfa1 from the datatype registry for extension gfa1.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,681 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.interval:Gtf from the datatype registry for extension gtf.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,681 [p:30740,w:0,m:1] [MainThread] Retrieved datatype module galaxy.datatypes.data:GenericAsn1 from the datatype registry for extension asn1.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,681 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.binary:Binary from the datatype registry for extension toolshed.gz.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.binary:H5 from the datatype registry for extension h5.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30740,w:0,m:1] [MainThread] Retrieved datatype module galaxy.datatypes.binary:GenericAsn1Binary from the datatype registry for extension asn1-bi
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.binary:Loom from the datatype registry for extension loom.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30740,w:0,m:1] [MainThread] Retrieved datatype module galaxy.datatypes.sequence:Axt from the datatype registry for extension axt.
->    > Jul 08 12:55:22 gat-0 uwsgi[30426]: galaxy.datatypes.registry DEBUG 2020-07-08 12:55:22,682 [p:30741,w:0,m:2] [MainThread] Retrieved datatype module galaxy.datatypes.binary:Anndata from the datatype registry for extension h5ad.
+>    > Jun 27 03:47:58 training-test galaxyctl[11791]: 2022-06-27 03:47:58,960 INFO success: handler_1 entered RUNNING state, process has stayed up for > than 20 seconds (startsecs)
+>    > Jun 27  03:47:58 training-test galaxyctl[11801]: 2022-06-27 03:47:58,960 INFO success: handler_1 entered RUNNING state, process has stayed up for > than 20 seconds (startsecs)
+>    > Jun 27 03:47:58 training-test galaxyctl[11791]: 2022-06-27 03:47:58,975 INFO waiting for handler_2 to stop
+>    > Jun 27 03:47:58 training-test galaxyctl[11801]: 2022-06-27 03:47:58,975 INFO waiting for handler_2 to stop
+>    > Jun 27 03:48:00 training-test galaxyctl[11791]: 2022-06-27 03:48:00,264 INFO stopped: handler_2 (exit status 0)
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -1752,15 +1776,14 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy.
 >    > ```
 >    >
->    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect. One possible cause here is the `uwsgi` subsection of `galaxy_config` was omitted and instead it used the default port and failed.
+>    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.
 >    {: .tip}
 >
 > 6. Some things to note:
 >
->    1. Later, after NGINX is set up and we're ready to connect to Galaxy, refreshing the page while Galaxy is restarting will wait (spin) until the process is ready rather than produce an error message, a nice feature of uWSGI
->    2. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `systemctl restart galaxy`
->    3. You can use `journalctl -fu galaxy` to see the logs of Galaxy
->    4. You may have noticed after setting up Galaxy in the previous section, that Ansible printed the message "RESTARTER NOT IMPLEMENTED - Please restart Galaxy manually. You can define your own handler and enable it with `galaxy_restart_handler_name`." You should no longer see this message on future playbook runs, as enabling systemd has automatically set `galaxy_restart_handler_name` for us - the role now knows how to restart Galaxy!
+>    1. Although the playbook will restart Galaxy upon config changes, you will sometimes need to restart it by hand, which can be done with `systemctl restart galaxy`
+>    2. You can use `journalctl -fu galaxy` to see the logs of Galaxy
+>    3. You may have noticed after setting up Galaxy in the previous section, that Ansible printed the message "RESTARTER NOT IMPLEMENTED - Please restart Galaxy manually. You can define your own handler and enable it with `galaxy_restart_handler_name`." You should no longer see this message on future playbook runs, as enabling systemd has automatically set `galaxy_restart_handler_name` for us - the role now knows how to restart Galaxy!
 >
 {: .hands_on}
 
@@ -1789,7 +1812,7 @@ With this we have:
 - PostgreSQL running
 - Galaxy running (managed by systemd)
 
-Although uWSGI can server HTTP for us directly, by moving to NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
+Although Gunicorn can server HTTP for us directly, by moving to NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EKS) (or another reverse proxy), it can automatically compress selected content, and we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at `/` and Galaxy at `/galaxy`. Lastly, it can provide authentication as well, as noted in the [External Authentication]({{ site.baseurl }}/topics/admin/tutorials/external-auth/tutorial.html) tutorial.
 
 For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
@@ -1820,7 +1843,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    @@ -60,3 +60,33 @@ galaxy_config:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -2225,7 +2248,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     
 >    {% endraw %}
 >    ```
@@ -2437,7 +2460,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.01`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.05`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 
@@ -2525,4 +2548,4 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 
-![diagram of galaxy setup with postgres, galaxy, nginx, uwsgi, storage, and compute shown attached to each other.](../../images/ansible-galaxy-intro-2.png "This approximately represents what you have setup today, NGINX proxies requests to uWSGI which runs the Galaxy App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.")
+![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, storage, and compute shown attached to each other.](../../images/ansible-galaxy-intro-2.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.")
