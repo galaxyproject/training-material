@@ -203,7 +203,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}

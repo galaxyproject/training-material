@@ -1843,7 +1843,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    @@ -60,3 +60,33 @@ galaxy_config:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -2248,7 +2248,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     
 >    {% endraw %}
 >    ```

@@ -362,7 +362,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +- hogwarts.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}

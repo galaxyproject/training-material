@@ -369,7 +369,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    @@ -98,6 +98,7 @@ galaxy_config_templates:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
 >     # Certbot
