@@ -301,15 +301,15 @@ But you would be wrong! This code has a subtle bug that you might not see until 
 Patient | Location | Disease Indications
 --- | --- | ---
 Helena | Den Haag, the Netherlands | Z87.890
-Bob | Little Rock, Arkansas, USA | I11.0
+Bob | Little Rock, Arkansas, USA | Z72.53
 Jane | London, UK | Z86.16
 
 This would probably be exported as a CSV file from Excel that looks like:
 
 ```
 Patient,Location,Disease Indications
-Helena "Den Haag, the Netherlands",Z87.890
-Bob,"Little Rock, Arkansas", USA,I11.0
+Helena,"Den Haag, the Netherlands",Z87.890
+Bob,"Little Rock, Arkansas, USA",Z72.53
 Jane,"London, UK",Z86.16
 ```
 
@@ -318,8 +318,8 @@ Note that some columns are quoted. What do you think will happen with the follow
 ```python
 csv_data = """
 Patient,Location,Disease Indications
-Helena "Den Haag, the Netherlands",Z87.890
-Bob,"Little Rock, Arkansas", USA,I11.0
+Helena,"Den Haag, the Netherlands",Z87.890
+Bob,"Little Rock, Arkansas, USA",Z72.53
 Jane,"London, UK",Z86.16
 """.strip().split('\n')
 
@@ -336,7 +336,7 @@ import csv
 csv_data = """
 Patient,Location,Disease Indications
 Helena,"Den Haag, the Netherlands",Z87.890
-Bob,"Little Rock, Arkansas, USA",I11.0
+Bob,"Little Rock, Arkansas, USA",Z72.53
 Jane,"London, UK",Z86.16
 """.strip().split('\n')
 
