@@ -97,6 +97,7 @@ First of all, this tutorial will get you hands on the basic Galaxy tasks, includ
 
 > ### {% icon hands_on %} Hands-on: Open Galaxy
 > At fisrt, Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+> 
 >    {% snippet faqs/galaxy/galaxy_creating_an_account.md %}
 
 {: .hands_on}
