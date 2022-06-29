@@ -12,6 +12,13 @@ objectives:
 - Find a set of common proteins across the samples (orthologs)
 - Align orthologs across samples
 time_estimation: 3H
+requirements:
+  -
+    type: "internal"
+    topic_name: assembly
+    tutorials:
+      - general-introduction
+
 key_points:
 - You now are able to
 - Predict proteins in a nucleotide sequence *de-novo* using **funannotate_predict**
