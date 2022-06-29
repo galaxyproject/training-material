@@ -16,7 +16,7 @@ key_points:
   - "Galaxy allows to re-run a published Galaxy workflow!"
   - "Galaxy provides ways to inspect and re-use Galaxy histories"
   - "Galaxy provides an easy way to re-run tasks from histories"
-subtopic: core
+subtopic: next-steps
 contributors:
   - foellmelanie
   - annefou
@@ -285,7 +285,7 @@ Often not only workflows and raw data are published, but also the full Galaxy hi
 
 The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.
 The original dataset consists of 53940 specimen of diamonds, for which it lists the prices and various properties.
-For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained. The same workflow as before was used to re-analysis this second dataset and create the analysis history, which highlights the re-usability of workflows across inputs. 
+For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained. The same workflow as before was used to re-analysis this second dataset and create the analysis history, which highlights the re-usability of workflows across inputs.
 
 > ### {% icon comment %} The 4 Cs of diamond grading
 > According to the [GIA's (Gemological Institute of America) diamond grading system](https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg)
