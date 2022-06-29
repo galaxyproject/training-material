@@ -21,9 +21,7 @@ layout: page
 {% endif %}
 
 <div class="newsitem">
-{% if page.contributors %}
-<div class="contributors-line">By: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
 {% for tag in page.tags %}
 <button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="{{tag}}">{{ tag  }}</button>
@@ -48,6 +46,10 @@ layout: page
     {% if page.cited %}
     <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
     {% bibliography --cited %}
+    {% endif %}
+
+    {% if page.contributions %}
+    {% include _includes/funding-statement.md contributions=page.contributions %}
     {% endif %}
   </div>
 

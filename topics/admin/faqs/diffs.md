@@ -10,6 +10,7 @@ If you haven't worked with diffs before, this can be something quite new or diff
 
 If we have two files, let's say a grocery list, in two files. We'll call them 'a' and 'b'.
 
+
 > > ### {% icon code-in %} Old
 > > ```
 > > $ cat old
@@ -39,7 +40,7 @@ We can see that they have some different entries. We've removed 🍒 because the
 
 Diff lets us compare these files
 
-```diff
+```bash
 $ diff old new
 5c5
 < 🍒
@@ -47,11 +48,11 @@ $ diff old new
 > 🍍
 ```
 
-Here we see that 'pears' is only in a, and 'ananas' is only in b. But otherwise the files are identical.
+Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.
 
 There are a couple different formats to diffs, one is the 'unified diff'
 
-```diff
+```bash
 $ diff -U2 old new
 --- old	2022-02-16 14:06:19.697132568 +0100
 +++ new	2022-02-16 14:06:36.340962616 +0100
@@ -83,7 +84,7 @@ The other lines (🍊/🍋 and 🥑) above just provide "context", they help you
 
 Removals are very easy to spot, we just have removed lines
 
-```diff
+```bash
 --- old	2022-02-16 14:06:19.697132568 +0100
 +++ new	2022-02-16 14:10:14.370722802 +0100
 @@ -4,3 +4,2 @@
@@ -94,7 +95,7 @@ Removals are very easy to spot, we just have removed lines
 
 And additions likewise are very easy, just add a new line, between the other lines in your file.
 
-```diff
+```bash
 --- old	2022-02-16 14:06:19.697132568 +0100
 +++ new	2022-02-16 14:11:11.422135393 +0100
 @@ -1,3 +1,4 @@
@@ -108,7 +109,7 @@ And additions likewise are very easy, just add a new line, between the other lin
 
 Completely new files look a bit different, there the "old" file is `/dev/null`, the empty file in a Linux machine.
 
-```
+```bash
 $ diff -U2 /dev/null old
 --- /dev/null	2022-02-15 11:47:16.100000270 +0100
 +++ old	2022-02-16 14:06:19.697132568 +0100
@@ -121,9 +122,9 @@ $ diff -U2 /dev/null old
 +🥑
 ```
 
-And removed files are similar, except with the the new file being /dev/null
+And removed files are similar, except with the new file being /dev/null
 
-```
+```bash
 --- old	2022-02-16 14:06:19.697132568 +0100
 +++ /dev/null	2022-02-15 11:47:16.100000270 +0100
 @@ -1,6 +0,0 @@

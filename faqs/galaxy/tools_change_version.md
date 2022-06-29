@@ -1,5 +1,5 @@
 ---
-title: changing the tool version
+title: Changing the tool version
 area: tools
 box_type: tip
 layout: faq

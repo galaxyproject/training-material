@@ -84,13 +84,15 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. In your `galaxyservers` group variables file, add the following:
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -215,6 +215,15 @@ telegraf_plugins_extra:
+>    @@ -212,6 +212,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -172,7 +174,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -34,3 +34,4 @@
+>    @@ -35,3 +35,4 @@
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
 >         - dj-wasabi.telegraf
@@ -187,8 +189,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -77,4 +77,19 @@ server {
->             proxy_pass http://127.0.0.1:3000/;
+>    @@ -90,4 +90,19 @@ server {
+>             proxy_set_header Host $http_host;
 >         }
 >     
 >    +    location /tiaas {
@@ -353,57 +355,49 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,6 +140,7 @@ galaxy_local_tools:
+>    @@ -137,6 +137,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
 >    +- hogwarts.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
 >
-> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.xml.j2`):
+> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.yml.j2`):
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -13,7 +13,7 @@
->                 <param id="manager">_default_</param>
->             </plugin>
->         </plugins>
->    -    <destinations default="slurm">
->    +    <destinations default="sorting_hat">
->             <destination id="local_destination" runner="local_plugin"/>
->             <destination id="pulsar" runner="pulsar_runner" >
->                 <param id="default_file_action">remote_transfer</param>
->    @@ -25,6 +25,10 @@
->                 <param id="transport">curl</param>
->                 <param id="outputs_to_working_directory">False</param>
->             </destination>
->    +        <destination id="sorting_hat" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">sorting_hat</param>
->    +        </destination>
->             <destination id="slurm" runner="slurm">
->                 <param id="singularity_enabled">true</param>
->                 <env id="LC_ALL">C</env>
->    @@ -63,6 +67,7 @@
->             <group id="testing">cores,time</group>
->         </resources>
->         <tools>
->    +        <tool id="upload1" destination="slurm"/>
->             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -16,7 +16,7 @@ runners:
+>         manager: _default_
+>     
+>     execution:
+>    -  default: singularity
+>    +  default: sorting_hat
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    @@ -73,6 +73,10 @@ execution:
+>         dynamic_cores_time:
+>           runner: dynamic
+>           function: dynamic_cores_time
+>    +    # Next year this will be replaced with the TPV.
+>    +    sorting_hat:
+>    +      runner: dynamic
+>    +      function: sorting_hat
+>     
+>     resources:
+>       default: default
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
@@ -427,3 +421,5 @@ Congratulations! you have now set up TIaaS on your Galaxy server.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=12 %}

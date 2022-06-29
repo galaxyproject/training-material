@@ -14,8 +14,10 @@ key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
 subtopic: writing
-contributors:
+contributions:
+  authorship:
   - bebatut
+  editing:
   - bgruening
   - shiltemann
   - hexylena
@@ -98,8 +100,8 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `layout: tutorial_hands_on`: keep the default
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
 - `level`: `Introductory`, `Intermediate` or `Advanced`
-- `enable`: `false` to hide your tutorial from the topic page (optional)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
+- `contributions`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
@@ -116,40 +118,9 @@ This information is used to display the data from the topic and tutorial page. T
 
 We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
-- `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-- `time_estimation`: an estimation of the time needed to complete the hands-on
-- `questions`: list of questions that will be addressed in the tutorial
-- `objectives`: list of learning objectives for the tutorial
-
-    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
-
-- `key_points`: list of take-home messages
-
-    This information will appear at the end of the tutorial
-
-- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
-
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-
-    They will be displayed at the end of the tutorial.
-- `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
+{% assign kid_key = "Tutorial Schema" %}
+{% assign kid_val = site.data['schema-tutorial'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -165,6 +136,82 @@ For this category of metadata, we have taken inspiration from what Software Carp
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 {: .comment}
 
+
+## Listing contributors
+
+All tutorials and slides must give credit to all contributors. This can be any type of contribution, adding them in GitHub, creating images for it, etc.
+
+1. Make sure all contributors are listed in the [`CONTRIBUTORS.yaml`](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTORS.yaml) file.
+   Each contributor is defined in this file like:
+
+   ```yaml
+   contributor-username:                 # GitHub username (if the contributor has one)
+     name: Full Name                     # mandatory
+     joined: 2020-06                     # mandatory
+     email: saskia.hiltemann@gmail.com   # optional
+     twitter: shiltemann                 # optional
+     linkedin: shiltemann                # optional
+     gitter: shiltemann                  # optional
+     orcid: 0000-0003-3803-468X          # optional
+     bio: Researcher at EMC              # optional
+   ```
+
+2. Add all contributors to the metadata of the tutorial or slide deck:
+
+   ```yaml
+   contributors:
+     - contributor-username
+     - shiltemann
+     - hexylena
+   ```
+
+   Make sure these names match the usernames you used in the `CONTRIBUTORS.yaml` file.
+
+3. **Optional:** Specifying types of contributions. If you want to give more detailed credit for conributions, you can do the following (instead of step 2 above)
+
+   ```yaml
+   contributions:
+     authorship:
+       - shiltemann
+     editing:
+       - bebatut
+       - hexylena
+     funding:
+       - carpentries
+     testing:
+       - userX
+     ux:
+       - userY
+     infrastructure:
+       - userZ
+   ```
+
+   To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
+
+   ```yaml
+   erasmusplus:
+     name: Erasmus+ Programme
+     joined: 2020-09
+     avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
+     github: false
+     funder: true
+     funding_id: 2020-1-NL01-KA203-064717
+     funding_statement: |
+        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
+   ```
+
+   Funding bodies will be credited at the bottom of the tutorial with the appropriate funding statement, and will get a page in the hall of fame listing all tutorials that list them as a funder.
+
+   For an example of how this all looks, see the [R basics tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) (top and bottom of the tutorial).
+
+{% assign kid_key = "Contributions Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['contributions'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "CONTRIBUTORS Schema" %}
+{% assign kid_val = site.data['schema-contributors'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 # Content
 
@@ -866,7 +913,7 @@ Each snippet (question) is a separate file, with some metadata, residing in one 
 ---
 title: How do I run a workflow?
 area: workflows      # FAQs will be grouped by these areas on the FAQ page
-box_type: tip        # tip/comment/hands_on; optional, if you want the content to be in a box
+box_type: tip        # tip/comment/hands_on/question; optional, if you want the content to be in a box
 layout: faq          # if you set this the snippet will get its own page and be included in the FAQs page
 contributors: [annefou,nomadscientist] # anybody who has contributed to the FAQ over time
 ---
@@ -878,6 +925,10 @@ Here you can write the snippet / answer to the FAQ in Markdown
 - ..
 
 ```
+
+{% assign kid_key = "FAQ Schema" %}
+{% assign kid_val = site.data['schema-faq'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 ### FAQ pages
 
@@ -969,6 +1020,74 @@ And in your text you can use braces to refer to the term
 > {: .code-out}
 {: .code-2col}
 
+{% assign kid_key = "Abbreviations Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['abbreviations'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+## Choose Your Own Tutorial
+
+Sometimes you're writing a large tutorial and at one small step there are multiple paths or multiple ways to get the data you want, and you'd like to showcase them all! You could write them all out in order, Option 1...2...etc, however maybe you want it to be a bit more interactive and focus only on one option at a time, so a user doesn't get distracted by the other options.
+
+Include this markdown where you want your user to choose between the multiple paths:
+
+> ### {% icon code-in %} Input: Markdown
+> {% raw %}
+> ```
+> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+>        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
+> ```
+{: .code-in}
+
+{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+
+And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+
+**NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
+
+> > ### {% icon code-in %} Input: Markdown
+> > ```
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > ```
+> >
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> >
+> {: .code-out}
+{: .code-2col}
+
+This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+
+### URL Parameter
+
+The branch can be selected via URL parameter e.g. for courses, to prevent users selecting the wrong path. Just supply `?gtn-cyoa=Ananas` (or your preferred value) on the tutorial URL.
+
+- [See this page with Ananas](?gtn-cyoa=Ananas#choose-your-own-tutorial)
+- [See this page with Avocados](?gtn-cyoa=Avocados#choose-your-own-tutorial)
 
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
@@ -1033,6 +1152,12 @@ If your tutorial is primarily focused on teaching students how to write code (Ba
     some_code += f"that students {should execute}"
     ```
 
+## Notebook Schema
+
+{% assign kid_key = "Notebook Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['notebook'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
 ## Currently Supported Languages
 
 Language | Jupyter | RMarkdown
@@ -1068,6 +1193,25 @@ notebook:
 
 Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.
 
+## JupyterLite & Pyodide
+
+The GTN has support for JupyterLite and the Pyodide kernel which runs [Python in the browser via webassembly/javascript](https://pyodide.org/en/stable/). This comes with some restrictions:
+
+- Python only[^pyonly]
+- No filesystem access (so no `wget` prep steps)
+- Little to no cell magic
+
+However, it means we can run a lot of our Python training directly in the GTN! And in the future, hopefully, we will be able to embed individual cells of the notebook directly in the Python training, so the user doesn't even need to switch pages.
+
+To enable this feature, set:
+
+```
+notebook:
+  language: python
+  pyolite: true
+```
+
+[^pyonly]: Not entirely true, other kernels are supported, see their [demo repo](https://github.com/jupyterlite/demo), but e.g. the SQLite kernel comes with severe restrictions like no downloading databases or connecting to ones online.
 
 # Spanish Translation Project
 
