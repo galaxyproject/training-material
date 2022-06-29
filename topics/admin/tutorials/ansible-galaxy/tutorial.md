@@ -931,7 +931,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,23 @@ galaxy_config:
+>    @@ -37,3 +37,22 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -945,7 +945,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      workers: 2
 >    +      # Other options that will be passed to gunicorn
 >    +      extra_args: '--forwarded-allow-ips="*"'
->    +      preload: true
 >    +    celery:
 >    +      concurrency: 2
 >    +      loglevel: DEBUG
@@ -1613,7 +1612,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     gunicorn:
 >    >         bind: unix:/srv/galaxy/var/config/gunicorn.sock
 >    >         extra_args: --forwarded-allow-ips="*"
->    >         preload: true
 >    >         workers: 2
 >    >     handlers:
 >    >         handler:
@@ -1693,7 +1691,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -57,3 +57,6 @@ galaxy_config:
+>    @@ -56,3 +56,6 @@ galaxy_config:
 >             pools:
 >               - job-handler
 >               - workflow-scheduler
@@ -1840,7 +1838,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,3 +60,33 @@ galaxy_config:
+>    @@ -59,3 +59,33 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true
@@ -2239,7 +2237,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -59,6 +59,10 @@ galaxy_config:
+>    @@ -58,6 +58,10 @@ galaxy_config:
 >               - job-handler
 >               - workflow-scheduler
 >     
