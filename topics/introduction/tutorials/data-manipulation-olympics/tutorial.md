@@ -410,10 +410,44 @@ This file contains a lot of data, we may only be interested in a subset of this 
 >    > 1. Which column contains this information?
 >    > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
 >    >
->    > > ### {% icon solution %} Answer
+>    > > ### {% icon solution %} Answers
 >    > >
 >    > > 1. Column 13, the column with the *season* header
 >    > > 2. The values can be `Summer` or `Winter`
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. Open the tool {% tool [**Filter** data on any column using simple expressions](Filter1) %}
+>    - read the help text at the bottom of the tool carefully
+>    - get familiar with how to indicate columns and write expressions for filtering
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How would you write the expressions for the following conditions:
+>    >    1. column 6 must be contain 'Yes'
+>    >    2. column 13 must be smaller than 75
+>    >    3. column 7 cannot be 'NA'
+>    >    4. column 2 cannot be empty
+>    >
+>    > 2. It is also possible to combine multiple conditions, using `and`, `or`, `not` and parentheses
+>    >    How would you write expressions for the following filtering conditions:
+>    >    1. column 5 is larger than 2 or smaller than -2
+>    >    2. column 5 is larger than 2 and smaller than 10
+>    >    3. the sum of columns 4 and 6 is greater than or equal to 25,000
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. The answers are:
+>    > >    1. `c6=='Yes'`
+>    > >    2. `c13<75`
+>    > >    3. `c7!='NA'`
+>    > >    4. `c2!=''`
+>    > >
+>    > > 2. The answers are:
+>    > >    1. `c5>2 or c5<-2`
+>    > >    2. `c5>2 and c5<10`
+>    > >    3. `c4+c6 >= 25000`
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -432,14 +466,14 @@ This file contains a lot of data, we may only be interested in a subset of this 
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. 44,681 (this is including the header line)
+>    > > 44,681 (this is including the header line)
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
 > 4. Repeat the step for the Summer olympics
 >
->    > ### {% icon question %} Question
+>    > ### {% icon question %} Questions
 >    >
 >    > 1. How many lines do you expect in the this file?
 >    > 2. How many lines are in this file? Were you right?
@@ -451,11 +485,11 @@ This file contains a lot of data, we may only be interested in a subset of this 
 >    > >
 >    > {: .solution}
 >    >
->    > > ### {% icon solution %} Answer
+>    > > ### {% icon solution %} Answers
 >    > >
 >    > > 1. The original file has 234,523 lines, and the Winter olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer olypmics file to have 1 more line that this, so 189,843 total lines.
 >    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
->    > >
+>    > > <br>
 >    > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
 >    > >
 >    > {: .solution}
@@ -468,12 +502,41 @@ This file contains a lot of data, we may only be interested in a subset of this 
 Ok, time to train! let's see if you can use the filter tool to answer the following questions:
 
 
+> ### {% icon question %} Exercise: Medal winners
+>
+> 1. How many gold medals were handed out?
+> 2. How many total medals?
+> 3. How many medals were handed out during the 2018 Olympics?
+> 4. How many medals were won by individuals with a height between 170 and 180 cm?
+> 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
+>
+> > ### {% icon solution %} Hints
+> >
+> > - Column 17 contains information about medels
+> > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
+> > - Expand the output or use the tool {% tool [Line/Word/Character count](wc_gnu) %} to see the number of lines in the file
+> > - Don't forget that the output (and line count) may include the header line
+> > - Do not use quotes on number columns (e.g. year)
+> > - You may need parentheses for complex conditions
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. 8,110.  Expression: `c17=='Gold'`
+> >  2. 24,633. Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!=''`
+> >  3. 131.    Expression: `c17=='Gold' and c12==2018` (note: do not use quotes around `2018`, as it is a numerical value)
+> >  4. 8,086   Expression: `c17!='' and c7>=170 and c7<=180`
+> >  5. 812     Expression: `c17=='Gold' and (c7<160 or c7>190)` (note: parentheses are important here)
+> >
+> {: .solution}
+{: .question}
 
 
 
-# Unique
+# Counting
 
-
+Often we may want to count how many times a value appears in a certain column. Using the filter tool from the previous section we can create a new file based on values in a column, and then count the number of lines in that file. But if we are only interested in knowing this number, not creating a new file, we can use the Count tool
 
 # Find and Replace
 
@@ -493,7 +556,7 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->>
+>
 {: .hands_on}
 
 IOC ID to country name
@@ -542,8 +605,8 @@ sport with the tallest athletes
 
 This section provides a number of exercises that require you to combine one or more of the techniques you learned in this tutorial. This is a great place to start if you want to practice your data manipulation skills!
 
-- TODO: shortest athlete (couldnt ansswer with only sort tool)
-
+- TODO: shortest athlete (couldnt answer with only sort tool, also need to filter out empty lines)
+  TODO: number of unique athletes who received silver medals during the 2018 olympics
 
 > ### {% icon question %} Exercise: sort by height
 >
