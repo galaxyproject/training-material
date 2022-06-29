@@ -96,11 +96,9 @@ First of all, this tutorial will get you hands on the basic Galaxy tasks, includ
 ## Get familiar with Galaxy
 
 > ### {% icon hands_on %} Hands-on: Open Galaxy
-> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
-> 2. Browse to a Galaxy instance: the one recommended by your instructor or one in the list **Galaxy instance** on the head of this page
-> 3. Log in or register (top panel)
->
->    ![Login or Register on the top panel](./images/login_register.png)
+> At fisrt, Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+>    {% snippet faqs/galaxy/galaxy_creating_an_account.md %}
+
 {: .hands_on}
 
 The Galaxy homepage is divided into three panels:
