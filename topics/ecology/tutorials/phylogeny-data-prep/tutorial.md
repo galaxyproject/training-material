@@ -31,7 +31,7 @@ We will use sequences from chromosome 5 of five strains of the yeast *Saccharomy
 
 
 **If you are starting from sequence reads, please follow
-[An Introduction to Genome Assembly]({{ site.baseurl }}/topics/assembly/tutorials/general-introduction/tutorial.html), and the appropriate genome assembly training for your sequencing technology from GTN's [Assembly]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html) section**
+[An Introduction to Genome Assembly]({% link topics/assembly/tutorials/general-introduction/tutorial.md %}), and the appropriate genome assembly training for your sequencing technology from GTN's [Assembly]({% link topics/assembly/index.md %}) section**
 
 > ### Agenda
 >
@@ -326,12 +326,6 @@ First we modify the headers of the multi-fasta file, such that only the sample n
 
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
