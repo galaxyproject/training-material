@@ -329,5 +329,4 @@ First we modify the headers of the multi-fasta file, such that only the sample n
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+
