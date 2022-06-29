@@ -19,6 +19,7 @@ key_points:
 tags:
 - nanopore
 - beer
+- citizen science
 - metagenomics
 contributors:
 - PlushZ
@@ -58,7 +59,7 @@ In this tutorial, we will use data generated via the [BeerDEcoded project](https
 > 2. Sequence the extracted DNA using a MinION sequencer to obtain the sequence of bases/nucleotides (A, T, C and G) for each DNA fragment in the sample,
 > 3. Analyze the sequenced data in order to know which organisms this DNA is from
 >
-> ![The image represents a BeerDEcoded workshop. On the left, there is a beer tool. An arrow goes from the bottle to DNA with "Extraction" written on the below. An arrow goes from DNA to DNA sequences with "Sequencing" written on the below. An arrow goes from the DNA sequences to Yeasts with "Data analysis" written on the below](./images/beerprocess.png)
+> ![The image represents a BeerDEcoded workshop. On the left, there is a beer glass. An arrow goes from the bottle to DNA with "Extraction" written on the below. An arrow goes from DNA to DNA sequences with "Sequencing" written on the below. An arrow goes from the DNA sequences to Yeasts with "Data analysis" written on the below](./images/beerprocess.png)
 >
 {: .comment}
 
@@ -68,7 +69,7 @@ for each sequence to which yeast species they belong, and hereby outline the div
 
 To get this information, we need to process the sequence data in few steps:
 1. Check the quality of the data
-2. Assign taxonomic label, i.e. species, to the sequences
+2. Assign taxonomic label, i.e. assigh 'species' to the sequences
 3. Visualize the species distribution
 
 This type of data analysis requires running several bioinformatics tools and
@@ -272,7 +273,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 > Genus | *Felis*
 > Species |	*F. catus*
 >
-> A taxon is a then group of organisms or of population(s) of organisms that form a taxonomic unit. A taxon is usually assigned a rank when it is given its formal, Latin name.
+> A taxon is a group of organisms and/ or populations(s) of organisms that together form a taxonomic unit. A taxon is usually assigned a rank when it is given its formal, Latin name.
 >
 > ![Example of taxonomy. It starts, top to bottom, with Kingdom "Animalia", Phylum "Chordata", Class "Mammalia", and Order "Carnivora". Then it splits in 3. On the left, Family "Felidae", with 2 genus "Felis" and "Panthera" and below 3 species "F. catus" and "F. pardalis" below "Felis", "P. pardus" below "Panthera". In the middle, Family "Canidae", genus "Canis" and 2 species "C. familiaris" and "C. lupus". On the right, Family "Ursidae", Genus "Ursus" and 2 species "U. arctos" and "U. horribilus". Below each species is a illustration of the species](./images/taxonomy.png)
 >
