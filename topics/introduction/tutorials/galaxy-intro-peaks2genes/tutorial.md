@@ -396,7 +396,7 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
 > 2. Switch to the **Convert** tab
 > 3. Select `Convert Genomic Intervals to BED`
-> 4. Press **Convert datatype**
+> 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
 {: .hands_on}
@@ -438,7 +438,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -451,7 +451,8 @@ Since we have some nice data, let's draw a barchart out of it!
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
-> 2. Select `Bar diagram`
+> 2. Select `Bar diagram (NVD3)`
+> 3. Click on the **<<** in the upper right corner
 > 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
 > 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
 > 5. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
