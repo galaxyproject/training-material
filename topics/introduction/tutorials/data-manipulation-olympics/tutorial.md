@@ -64,7 +64,9 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Convert format         | Change the file format | {% icon galaxy-pencil%} Edit attributes |
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
-| Filter                 | Remove rows from a file based on values in one or more columns | {% tool [Filter](Filter1) %} |
+| Filter                 | Remove rows from a file based on values in one or more columns | {% tool [Filter](Filter1) %}|
+| Counting               | occurences of values in a column | {% tool [**Count** occurrences of each record](Count1) %}, {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}|
+| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group** data by a column and perform aggregate operation on other columns](Grouping1) %}|
 | Replace Text | in a specific column | {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}|
 
 TIP: If you find yourself frequently using the same tool often but struggle to find it in the long list of tools, you can **star** your favourite tools in Galaxy!
@@ -161,7 +163,7 @@ The data was [obtained](https://github.com/UOSCS/Olympic_Athletes) from [Olymped
 - **city** - Host city
 - **sport** - Sport
 - **event** - Event
-- **medal** - Gold, Silver, Bronze, or NA
+- **medal** - Gold, Silver, Bronze, or empty
 
 We will use this dataset to practice our data manipulation skills in Galaxy.
 
@@ -255,11 +257,7 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 
 
 
-
-# Summary Statistics
-
-
-# Sort by column
+# Sorting
 
 We have a lot of data in this file, but it is ordered by the athlete ID number, which is a somewhat arbitrary and meaningless number. But we can sort the rows in this file to something more convenient, for example alphabetically by name of the athelete, or chronologically by year of the Olympics.
 
@@ -393,10 +391,193 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 {: .question}
 
 
+# Counting
 
-# Filter by column
+A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool {% tool [**Count** occurrences of each record](Count1) %} does exactly this.
 
-This file contains a lot of data, we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will remove any rows that are not of interest to us (i.e. that don't meet certain criteria).
+
+> ### {% icon hands_on %} Hands-on: Count occurrences of values in columns
+>
+> Let's start by simply counting how many different Olympic Games we have in our dataset, and how many times it appears (so how many participations there were each year)
+>
+> 1. {% tool [**Count** occurrences of each record](Count1)%} with the following parameters
+>    - *"from dataset"*: `olympics.tsv`
+>    - *"Count occurrences of values in column(s)"*: `Column 11`
+>
+> 2. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How many different Olympic games are in our file?
+>    > 2. Which Olympic games had the most participations? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. 52. there are 53 lines in the resulting file, with one line containing the value of the column header (`games`).
+>    > > 2. 1996 Summer Olympics. (10501 participations)
+>    > >
+>    > > The resulting file looks somtthing like:
+>    > >
+>    > > ```
+>    > > 615	1896 Summer Olympics
+>    > > 2503	1900 Summer Olympics
+>    > > 2643	1904 Summer Olympics
+>    > > 3213	1908 Summer Olympics
+>    > > 4610	1912 Summer Olympics
+>    > > 3448	1920 Summer Olympics
+>    > > 5242	1924 Summer Olympics
+>    > > 358	1924 Winter Olympics
+>    > > 4493	1928 Summer Olympics
+>    > > ...
+>    > > ```
+>    > {: .solution}
+>    {: .question}
+>
+> You may have noticed that we could have selected multiple columns in this tool. This lets us count on combinations of columns.
+> Let's try counting the number of men and women in each olympic games.
+>
+> 3. {% tool [**Count** occurrences of each record](Count1)%} with the following parameters
+>    - *"from dataset"*: `olympics.tsv`
+>    - *"Count occurrences of values in column(s)"*: `Column 11, Column 3`
+>
+> 4. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > You see the resulting file has a line for every combination of the two columns (games and sex), providing the count for each.
+>    >
+>    > 1. How many women were in the first Olympic games?
+>    > 2. Which Olympic games had the most women participants? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. 2. (note that we cannot be sure if this is two different women, or 1 woman participating twice).
+>    > > 2. 2020 Summer Olympics (4652)
+>    > >
+>    > > The resulting file looks somtthing like:
+>    > >
+>    > > ```
+>    > > 615	1896 Summer Olympics
+>    > > 2503	1900 Summer Olympics
+>    > > 2643	1904 Summer Olympics
+>    > > 3213	1908 Summer Olympics
+>    > > 4610	1912 Summer Olympics
+>    > > 3448	1920 Summer Olympics
+>    > > 5242	1924 Summer Olympics
+>    > > 358	1924 Winter Olympics
+>    > > 4493	1928 Summer Olympics
+>    > > ...
+>    > > ```
+>    > {: .solution}
+>    {: .question}
+>
+>
+{: .hands_on}
+
+
+Let's say we wanted to know how many different sports there were in each Olympics. If we used the counting tool above, we would get a results file for each combination of sport and olympics, with the number of lines (participations) of each. But we don't really care about the number of lines that have this combination, just the total number of unique sports in each games.
+
+To answer these types of questions we can use a slightly more advanced tool, called {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}. This tool can do a lot more than counting, but here we will show you how to use it to count in this way.
+
+
+> ### {% icon hands_on %} Hands-on: Counting number of different sports per Olympic Games
+>
+> We will now determine how many different sport there were in each of the different Olympics
+>
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
+>    - *"Input tabular dataset"*: `olympics.tsv`
+>    - *"Group by fields"*: `11` (the `games` column)
+>    - *"Input file has a header line"*: `yes`
+>    - *"Sort Input"*: `yes`
+>    - *"Operation to perform on each group"*: `Count Unique values`
+>      - *"On Column"*: `Column: 15` (the `sport` column)
+>
+> 2. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. Why did we tell the tool to sort the file?
+>    > 2. How many sport were in the first Olympics? How many in the latest?
+>    > 3. Which Olympics had the most different sports?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. This is for technical reasons, the tool assumes a sorted file, so it will restart the counter every time it encounters a value in a column that is different from the previous one.
+>    > > 2. 10 and 38.
+>    > > 3. The 2020 Summer Olympics had the most different sports (38)
+>    >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+## Exercises
+
+Ok, let's practice!
+
+> ### {% icon question %} Exercise: Number of participatioins per country
+>
+> 1. Which country has had the most participations in the Olympics?
+> 2. How many countries participated in the first Olympics? How many in the last?
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1. Since we are counting participations (rows), we can use the simple {% tool [Count](Count1)%} tool
+> > 2. Since we are counting a bit more complex question, we need the {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} tool
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. The United States with 17,286 participations
+> >  2. 15 and 250.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Full Solutions
+> >
+> >  1. {% tool [Count](Count1) %} with the following parameters:
+> >     - *"from dataset"*: `olympics.tsv`
+> >     - *"Count occurrences of values in column(s)"*: `Column 9` (the `team` column)
+> >     - *"How should the results be sorted?"*: `With the most common values first`
+> >
+> >     This gives an output like:
+> >     ```
+> >     17286	United States
+> >     11700	France
+> >     10230	Great Britain
+> >     8898	Italy
+> >     7988	Canada
+> >     ```
+> >
+> >  2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
+> >   - *"Input tabular dataset"*: `olympics.tsv`
+> >   - *"Group by fields"*: `11` (the `games` column)
+> >   - *"Input file has a header line"*: `yes`
+> >   - *"Sort Input"*: `yes`
+> >   - *"Operation to perform on each group"*: `Count Unique values`
+> >     - *"On Column"*: `Column: 9` (the `sport` column)
+> >
+> >   This gives an output like:
+> >   ```
+> >   1896 Summer Olympics	15
+> >   1900 Summer Olympics	29
+> >   1904 Summer Olympics	13
+> >   ...
+> >   2016 Summer Olympics	280
+> >   2018 Winter Olympics	108
+> >   2020 Summer Olympics	250
+> >   ```
+> >
+> {: .solution}
+{: .question}
+
+
+
+# Filtering
+
+This file contains a lot of data, we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will create a new dataset, removing any rows that are not of interest to us (i.e. that don't meet the criteria we provide).
 
 
 > ### {% icon hands_on %} Hands-on: Filter table based on a column
@@ -534,9 +715,42 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 
 
 
-# Counting
 
-Often we may want to count how many times a value appears in a certain column. Using the filter tool from the previous section we can create a new file based on values in a column, and then count the number of lines in that file. But if we are only interested in knowing this number, not creating a new file, we can use the Count tool
+
+# Grouping
+
+Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of atheletes,
+
+r group the data by country, and count how many gold medals were won by each country, or the average height of athletes per sport, etc.
+
+For simple such questions, we can use the tool {% tool [**Group** data by a column and perform aggregate operation on other columns](Grouping1) %}. For more advanced/complicated queries, there are other tools that can go a bit further (but may also be a bit more complex to use). We will show you examples of both in this section
+
+Let's start with counting the number of athletes per olympics games. It would be interesting to see how this has changed over time.
+
+
+> ### {% icon hands_on %} Hands-on: Number of athletes per Olympics
+>
+> 1.
+> 1. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    >
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+## More advanced examples
+
+
+
 
 # Find and Replace
 
@@ -546,6 +760,7 @@ Often we may want to count how many times a value appears in a certain column. U
 
 # Join columns from two different files
 
+This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc(, we could join that information with our olympics data, to get a single file with all information.
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
@@ -629,4 +844,24 @@ This section provides a number of exercises that require you to combine one or m
 > >  3.
 > {: .solution}
 {: .question}
+
+
+
+> ### {% icon hands_on %} Hands-on: Sort table based on a column
+>
+>
+> 1. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    >
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > >
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
