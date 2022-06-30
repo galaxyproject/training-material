@@ -65,12 +65,12 @@ Effective training
 >
 {: .hands_on}
 
-Training / teaching is effective if
+**Training / teaching is effective** if
 - brings learners to Learning Objectives (LO)
 - is engaging
 - is well designed
 
-A trainer / teacher is effective when they
+A **trainer / teacher is effective** when they
 - facilitates learning
 - sets clear LOs
 - identifies appropriate LEs
@@ -79,17 +79,17 @@ A trainer / teacher is effective when they
 - is empathetic
 - is accessible
 
-GOBLET ([Global Organisation for _Bioinformatics_ Learning, Education & Training (GOBLET)](https://www.mygoblet.org/)) developed the skill matrix for a trainer / teacher:
+To help trainers, GOBLET ([Global Organisation for _Bioinformatics_ Learning, Education & Training (GOBLET)](https://www.mygoblet.org/)) developed this skill matrix:
 
 ![Skill matrix with 2 rows and 2 columns. Top-left - Communication: Verbal communication skills, Written communication skills, Presentation Skill. Top-right - Planning & management: Session planning, Curriculum planning, Event management. Bottom-left: Expertise & knowledge: Subject area knowledge, User application awareness, Knowledge of training methodology. Bottom-right - Trainee engagement: Flexibility in delivery, Empathy with trainees, Understanding & knowledge of trainees. ](images/goblet_matrix.png "Skills matrix for a good trainer. Source: <a href="https://www.mygoblet.org/sites/default/files/goblet_events/GOBLET-TTT-061113.pdf">Global Organisation for Bioinformatics Learning, Education and Training (GOBLET)</a>")
 
-The idea is that there are four areas in which a good trainer should be or become skilled. In many cases, trainers focus on the area of communication and are less aware about their "level" in the other areas.
+The idea is that there are **four areas in which a good trainer should be or become skilled**. In many cases, trainers focus on the area of communication and are less aware about their "level" in the other areas.
 
-This matrix is then a tool for self evaluation:
+This matrix is then a **tool for self evaluation**:
 - In which area(s) do you feel you would need improvement?
 - In which area(s) do you feel you are ok?
 
-> ### {% icon hands_on %} What makes training effective and a good trainer? (5 min - Silent reflection)
+> ### {% icon hands_on %} Reflect on your skills as a trainer? (5 min - Silent reflection)
 >
 > - Look at the GOBLET Skill Matrix
 > - Reflect on which areas do you need to develop in
@@ -108,9 +108,11 @@ This matrix is then a tool for self evaluation:
 
 # Effective training practices for effective learning
 
-We are now going to watch a short video (13 min) in which Eric Mazur, professor at the Harvard University, will discuss some of these teaching practices and a paradigm change: from the traditional lecture to active learning-based approaches. Can you recognise the main features of this change of paradigm?
+We are now going to watch a short video (13 min) from Eric Mazur, professor at the Harvard University,
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Z9orbxoRofI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+In this video, Eric Mazur discusses some of these teaching practices and a **paradigm change: from the traditional lecture to active learning-based approaches**. Can you recognise the main features of this change of paradigm?
 
 > ### {% icon hands_on %} Reflect on Mazur's interview (5 min - Silent reflection)
 >
@@ -118,24 +120,18 @@ We are now going to watch a short video (13 min) in which Eric Mazur, professor 
 >
 {: .hands_on}
 
-From the Eric Mazur's interview, learners who actively interact with the material, the teacher, and other learners:
-- They will learn better and more
-- They will better remember what they learn
-- They will be more able to apply their knowledge to different fields
+From the Eric Mazur's interview but also as Mitchell Waldrop pointed out in {% cite waldrop2015we %}, learners who **actively interact with the material, the teacher, and other learners**:
+- will **learn better and more**
+- will **better remember** what they learn
+- will be **more able to apply** their knowledge to different fields
 
-In other words, for learning to actually occur, you should select teaching practices (learning experiences) that promote active, interactive and collaborative learning, what Mazur expresses as "learning by doing".
+In other words, for learning to actually occur, instructors should select **teaching practices (learning experiences)** that **promote active, interactive and collaborative learning**, what Mazur expresses as **"learning by doing"**.
+
 Let's discuss a few more insights about active learning and stress the main differences between the most used technique worldwide (Lecturing) and the active learning approach. You will see that we are talking about an actual change of paradigm.
 
 ## Active, interactive and collaborative learning
 
-As Mitchell Waldrop pointed out in {% cite waldrop2015we %}, learners who **actively engage with course materials** will end up:
-- retaining it for much longer
-- being better able to apply their knowledge broadly
-
-Active Learning is anything course-related that all students in a class session are called upon to do other than simply watching, listening and taking notes ({% cite felder2009active %}).
-
-![On the left, a teacher/trainer (in red) in a front of a board facing people. "Sage on stage" written. On the right, a coach (in red) is aside people talking to each oother. "Guide on the side" written.](images/traditional_vs_active_teaching.png "Tradition vs Active teaching")
-
+From {% cite felder2009active %}, **Active Learning** (also called "Guide on the side") is anything course-related that all students in a class session are called upon to do other than simply watching, listening and taking notes (aka typical teachning practice or "Sage on stage" approach):
 
 Typical teaching practice: lecturing | Active learning
 --- | ---
@@ -148,9 +144,7 @@ The same few students engaged | All students engaged
 
 Do you recognise the paradigm change proposed by Eric Mazur?
 
-With the help of Mazur, you hopefully started believing that active, interactive and collaborative learning is worth considering and deserves you give it a go in one of your future training courses.
-
-Should this be the case, you may have questions like:
+With the help of Mazur, you hopefully started believing that active, interactive and collaborative learning is worth considering and deserves you give it a go in one of your future training courses.Should this be the case, you may have questions like:
 - how do I choose the active learning techniques for my lessons?
 - what "active learning" means in terms of "teaching / training practices"?
 - which is the most effective technique I can incorporate in my teaching?
@@ -158,16 +152,16 @@ Should this be the case, you may have questions like:
 
 **There is not "the" ideal teaching technique nor the "most effective" teaching technique.**
 
-You may remember from the Nichols' steps of curriculum design, that it is essential that you align learning experiences to the learning outcomes of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
+You may remember from the [Nichols' steps of curriculum design](), that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
 
-More in general, to decide how to teach and choose the most appropriate learning experience(s), you may use three criteria:
-- What is your purpose / goal (is it to inspire learners? is it to ensure they will remember a concept?)
-- The Bloom's level at which you intend to teach (a specific topic; this may change from topic to topic)
-- The learning outcome(s) the learning experience is designed for
+More generally, to decide how to teach and choose the **most appropriate learning experience(s)**, you may use **three criteria**:
+- What is your **purpose / goal** (is it to inspire learners? is it to ensure they will remember a concept?)
+- The **Bloom's level** at which you intend to teach (a specific topic; this may change from topic to topic)
+- The **learning outcome(s)** the learning experience is designed for
 
-   A lecture is not suitable to teach learners implement an algorithm. It may show how to do it, so that they may be able to describe how to do it, but if you want them to be able to do it, you will have to choose a learning experience where learners will have the chance to practice algorithm implementation.
+   For example, a lecture is not suitable to teach learners implement an algorithm. It may show how to do it, so that they may be able to describe how to do it, but if you want them to be able to do it, you will have to choose a learning experience where learners will have the chance to practice algorithm implementation.
 
-Inspired by Eric Mazur and the idea of active learning, {% cite via2020course %} summarized some teaching practices that you may wish to implement in your lessons:
+Inspired by Eric Mazur and the idea of active learning, {% cite via2020course %} created this useful table to reinforce the concepts discussed in previously and provide with criteria to choose the **most suitable learning experience(s) for the Bloom's level, TG(s) and LO(s)**:
 
 | Learning experience | Highest Bloom's levels supported | Example TG(s) _"This LE will allow me to..."_                                                                                                                       | Example LO(s) _"Learners will be able to..."_                                                                                 |
 | ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -179,16 +173,19 @@ Inspired by Eric Mazur and the idea of active learning, {% cite via2020course %}
 | Group work          | Synthesise, Evaluate             | Promote collaborative work & peer instruction, provide opportunities for giving/receiving feedback, & digesting course materials                                  | _provide_ feedback on their peers' work, _share_ ideas, _explain_ the advantages of team-work                               |
 | Problem-solving     | Synthesise, Evaluate             | Promote learner abilities to identify & evaluate solutions, develop new ideas, make decisions, evaluate decision effectiveness, troubleshoot                      | _diagnose_ faulty reasoning or an underperforming result, _correct_ errors                                                  |
 
-In the table, Learning experience (from the learner point of view) is the Teaching practice (from the teacher point of view).
+> ### {% icon comment %} Learning experience vs Teaching practice
+>
+> In the table, Learning experience (from the learner point of view) is the Teaching practice (from the teacher point of view).
+>
+{: .comment}
 
-This table is useful to reinforce the concepts discussed in previously and provides you with criteria to choose the most suitable learning experience(s) for the Bloom's level, TG(s) and LO(s).
+You should be kind of familiar with some of the learning experiences listed in the table, e.g., lecture/webinar, group discussion, work in groups, problem solving. Some of you might not be familiar with the techniques of "peer instruction" and "flipped classroom".
 
-You should be kind of familiar  with some of the learning experiences listed in the table, e.g., lecture/webinar, group discussion, work in groups, problem solving. Some of you might not be familiar with the techniques of "peer instruction" and "flipped classroom".
-These two techniques can be implemented in many different ways and incorporated into your course in a "light way or very extensively. This will depend on your familiarity with the technique. At the beginning, our suggestion is that you try with something "minima" test it, see how you feel and how learners receive it, and then you increase the amount of learning experiences involving peer instruction and flipped classroom.
+These two techniques can be implemented in many different ways and incorporated into your course in a "light way" or very extensively. This will depend on your familiarity with the technique. At the beginning, our suggestion is that you try with something "minima", test it, see how you feel and how learners receive it, and then you increase the amount of learning experiences involving peer instruction and flipped classroom.
 
 ## Peer instruction
 
-It is a 1-to-1 instruction in a scalable way by interleaving formative assessment with learner discussion.
+Peer instruction is a 1-to-1 instruction done in a scalable way by **interleaving formative assessment with learner discussion**.
 
 > ### {% icon details %} Peer-to-peer or peer-learning: what is it? (2-min video)
 >
@@ -230,13 +227,13 @@ In its standard approach,
 2. During the course in the class, students practice applying key concepts with feedback
 3. After the course, out of class, students check their understanding and extend their learning
 
-Flipping class requires a lot of preparation. The teacher need to explain the method to learners and make an "agreement" with them: they have to commit to work on the materials you will give them prior the flipped class and you will commit to give them "manageable" materials.
+Flipping class requires a **lot of preparation**. The teacher need to explain the method to learners and make an "agreement" with them: they have to commit to work on the materials you will give them prior the flipped class and you will commit to give them "manageable" materials.
 
-Don’t start by flipping an entire course. Start small. Test. Add up.
+Don't start by flipping an entire course. Start small. Test. Add up.
 
 # Other teaching practices for active learning
 
-- Brief question-and-answer sessions: a classic to distribute attention
+- **Brief question-and-answer sessions**: a classic to distribute attention
 
     > ### {% icon details %} Recommendation for brief question-and-answer sessions
     >
@@ -252,7 +249,7 @@ Don’t start by flipping an entire course. Start small. Test. Add up.
     >
     {: .details}
 
-- Think, pair, share: a lightweight technique that helps people improve ideas through discussion with their peers
+- **Think, pair, share**: a lightweight technique that helps people improve ideas through discussion with their peers
 
     > ### {% icon details %} Think, pair, share
     >
@@ -271,7 +268,7 @@ Don’t start by flipping an entire course. Start small. Test. Add up.
     > It forces people to externalize their cognition and gives a chance to spot and resolve gaps or contradictions in their ideas _before_ exposing them to a larger group
     {: .details}
 
-- Take notes together / shared notes
+- **Take notes together / shared notes**
 
     > ### {% icon details %} Shared notes
     >
@@ -286,9 +283,9 @@ Don’t start by flipping an entire course. Start small. Test. Add up.
     > Finally, it provides the notes that are usually more helpful *to learners* than those the teacher would prepare in advance. Learners are more likely to write down what they actually found new rather than what the teacher predicted would be new.
     {: .details}
 
-- Work in groups, e.g. with projects
+- **Work in groups**, e.g. with projects
 
-- Pair programming
+- **Pair programming**
 
     > ### {% icon details %} Pair programming
     >
@@ -304,15 +301,11 @@ Don’t start by flipping an entire course. Start small. Test. Add up.
     > It is a good way to teach. It increases success rate in introductory courses, leads better software, higher learner confidence in their solutions and more benefits for learners from underrepresented groups
     {: .details}
 
-- Discussions / debate with all learners
+- **Discussions / debate** with all learners (as for brief Q&A session, teachers should make sure that everybody has a voice)
 
-    As for brief Q&A session, teachers should make sure that everybody has a voice.
+- **Brainstorming** with all learners (as for brief Q&A session, teachers should make sure that everybody has a voice)
 
-- Brainstorming with all learners
-
-    As for brief Q&A session, teachers should make sure that everybody has a voice.
-
-- Hands-on activities, e.g. running tools on their own, commands, analysis
+- **Hands-on activities**, e.g. running tools on their own, commands, analysis
 
     Galaxy is a great tool for that. That is why tutorials from the GTN are developed around that ideas.
 
@@ -329,15 +322,19 @@ Don’t start by flipping an entire course. Start small. Test. Add up.
     >
     {: .details}
 
-- Have learners make predictions
+- Have learners **make predictions**
 
     Research has shown that people learn more from demonstrations if they are asked to predict what's going to happen. It fits naturally into live coding / analysis: after adding or changing a few lines of a program, the teacher asks the class what is going to happen when it runs.
 
     If the example is even moderately complex, prediction can serve as a motivating question for a round of peer instruction.
 
-- Build an artefact (e.g. concept map)
+- **Build an artefact**, e.g. concept map
 
-What have we learned about teaching practices / learning experiences?
+{% include _includes/quiz.html id="active_learning_strategies.yaml" %}
+
+# Practices and behaviors to improve delivery and learning
+
+About teaching practices / learning experiences, we learned to
 1. **Select learning experiences according to the criteria discussed earlier**
     - reflect on your TG(s)
     - write LOs AND identify the corresponding Bloom's level
@@ -350,76 +347,60 @@ What have we learned about teaching practices / learning experiences?
     - stimulating lessons
     - frequent feedback
 
-# Practices and behaviors to improve delivery and learning
-
 Other teaching practices that can improve content delivery. Specially supporting
-- interactivity
-- a positive and engaging learning environment
-- active and collaborative learning
-- stimulating lessons
-- frequent feedback
+- **interactivity**
+- a **positive and engaging learning environment**
+- **active and collaborative** learning
+- **stimulating** lessons
+- **frequent feedback**
 
-Here are some examples. None of the practices described here are essential
+Here are some examples of practices to achieve goals above. None of the practices described here are essential
 
-- Start with introductions
-    - Begin by introducing yourself
+- **Start with introductions**
+    - **Begin by introducing yourself**: If you're an expert, tell them a bit about how you got to where you are. If you're only two steps ahead of them, emphasize what you and they have in common. Whatever you say, the goals are to make yourself more approachable and encourage their belief that they can succeed.
 
-        If you're an expert, tell them a bit about how you got to where you are. If you're only two steps ahead of them, emphasize what you and they have in common.
+    - **Introduction of learners to each other**
+        - In a class of a dozen, it can be done verbally
+        - In a larger class or if they are strangers to one another, you can have them each write a line or two about themselves in the shared notes or split into small groups or breakout rooms.
 
-        Whatever you say, the goals are to make yourself more approachable and encourage their belief that they can succeed.
+- **Pay attention on how you set up the learning environment** (both in presence and online)
 
-    - Introduction of learners to each other
+    - **Learners environment**: Send setup instructions per email before and have everyone run some tests at the beginning to check
+    - **Yours**: Same as learners and food / drinks
 
-        In a class of a dozen, it can be done verbally. In a larger class or if they are strangers to one another, you can have them each write a line or two about themselves in the shared notes or split into small groups or breakout rooms.
+    > ### {% icon tip %} Check our dedicated tutorials to set up Galaxy for teaching
+    >
+    > - [Organizing a workshop]({% link topics/teaching/tutorials/organize-workshop/tutorial.md %})
+    > - [Running a workshop as instructor]({% link topics/teaching/tutorials/running-workshop/tutorial.md %})
+    > - [Set up a Galaxy for Training]({% link topics/teaching/tutorials/setup-galaxy-for-training/tutorial.md %})
+    > - [UseGalaxy.eu's Training Infrastructure as a Service]({% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %})
+    >
+    {: .tip }
 
-- Pay attention on how you set up the learning environment (both in presence and online)
+- **Introduce blended multimedia materials to create engaging activities**
+- **Collect instant feedback** (see [dedicated tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %}))
+- **Let learners do recaps**: Organise recap sessions at the end of lessons or at the beginning of the following ones where learners are actively involved. You may ask them to do the recaps.
 
-    - Learners environment
-        - Send setup instructions per email before
+- **Repeat each questions** aloud back to them before answering  to ensure you and all the other learners understood the question and gives you a a chance to redirect the question to something you're more comfortable answering
 
-            > ### {% icon tip %} Check our dedicated tutorials to set up Galaxy for teaching
-            >
-            > - [Organizing a workshop]({% link topics/teaching/tutorials/organize-workshop/tutorial.md %})
-            > - [Running a workshop as instructor]({% link topics/teaching/tutorials/running-workshop/tutorial.md %})
-            > - [Set up a Galaxy for Training]({% link topics/teaching/tutorials/setup-galaxy-for-training/tutorial.md %})
-            > - [UseGalaxy.eu's Training Infrastructure as a Service]({% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %})
-            >
-            {: .tip }
+- **Introduce physical exercises, short, relaxing breaks**: In day-long training courses, you may introduce very short sessions of stretching (or even one moment meditation and then doing 1 minute meditation together). You might feel ridiculous, but you have no idea of how learners appreciate these types of activities and how these create a relaxed climate in the class.
 
-        - Have everyone run some tests at the beginning to check
-    - Yours
-        - Same as learners
-        - Food + drinks
-- Introduce blended multimedia materials to create engaging activities
-- Collect instant feedback (see [dedicated tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %}))
-- Let learners do recaps
+- **Introduce challenges or games**: Gamification can be a very powerful and engaging technique.   Before using gamification, it is though better to learn how to do it.
 
-    Organise recap sessions at the end of lessons or at the beginning of the following ones where learners are actively involved. You may ask them to do the recaps.
+- **Never teach alone. Teach together**. Whenever possible: With two or more trainers in the classroom, the class can be observed from different angles, it is easier to detect learners who are not comfortable or struggling or lagging behind. It is possible to provide one-to-one support without stopping the lesson flow. It is also important that trainers teaching together provide feedback to each other.
 
-- Repeat each questions aloud back to them before answering to to ensure you and all the other learners understood the question and gives you a a chance to redirect the question to something you're more comfortable answering
+    > ### {% icon details %} Different models to teach together or **[co-teaching](https://teachtogether.tech/en/index.html#g:co-teaching)**
+    >
+    > - **Team teaching**: Both teachers deliver a single stream of content in tandem, taking turns like musicians taking solos.
+    > - **Teach and assist**: Teacher A teaches while Teacher B moves around the classroom to help struggling learners.
+    > - **Alternative teaching**: Teacher A provides a small set of learners with more intensive or specialized instruction while Teacher B delivers a general lesson to the main group.
+    > - **Teach and observe**: Teacher A teaches while Teacher B observes the learners, collecting data on their understanding to help plan future lessons.
+    > - **Parallel teaching**: The class is divided in two and the teachers present the same material simultaneously to each.
+    > - **Station teaching**: The learners are divided into small groups that rotate from one station or activity to the next while teachers supervise where needed.
+    >
+    {: .details }
 
-- Introduce physical exercises, short, relaxing breaks
-
-    In day-long training courses, you may introduce very short sessions of stretching (or even one moment meditation and then doing 1 minute meditation together). You might feel ridiculous, but you have no idea of how learners appreciate these types of activities and how these create a relaxed climate in the class.
-
-- Introduce challenges or games
-
-    Before using gamification, it is though better to learn how to do it. Gamification can be a very powerful and engaging technique.
-
-- Never teach alone. Teach together. Whenever possible...
-
-
-    There are different models to teach together or **[co-teaching](https://teachtogether.tech/en/index.html#g:co-teaching)**>
-    - Team teaching: Both teachers deliver a single stream of content in tandem, taking turns like musicians taking solos.
-    - Teach and assist: Teacher A teaches while Teacher B moves around the classroom to help struggling learners.
-    - Alternative teaching: Teacher A provides a small set of learners with more intensive or specialized instruction while Teacher B delivers a general lesson to the main group.
-    - Teach and observe: Teacher A teaches while Teacher B observes the learners, collecting data on their understanding to help plan future lessons.
-    - Parallel teaching: The class is divided in two and the teachers present the same material simultaneously to each.
-    - Station teaching: The learners are divided into small groups that rotate from one station or activity to the next while teachers supervise where needed.
-
-    With two or more trainers in the classroom, the class can be observed from different angles, it is easier to detect learners who are not comfortable or struggling or lagging behind. It is possible to provide one-to-one support without stopping the lesson flow.  It is also important that trainers teaching together provide feedback to each other.
-
-    > ### {% icon details %} Recommendations for co-teaching
+    > ### {% icon tip %} Recommendations for co-teaching
     >
     > If you and a partner are co-teaching:
     > - Take 2–3 minutes before the start of each class to confirm who’s teaching what. If you have time, try drawing or reviewing a concept map together.
@@ -429,19 +410,17 @@ Here are some examples. None of the practices described here are essential
     > - Each person should take a couple of minutes before they start teaching to see what their partner is going to teach after they’re done, and then *not* present any of that material.
     > - The person who isn't teaching should stay engaged with the class, not catch up on their email. Monitoring the shared notes, keeping an eye on the learners to see who’s struggling, jotting down some feedback to give your teaching partner at the next break—anything that contributes to the lesson is better than anything that doesn’t.
     > - Take a few minutes when the class is over to congratulate or commiserate with each other
-    {: .details}
+    {: .tip }
 
-- Assess prior knowledge and mental models to tailor the lesson on learners' actual needs, to address misconceptions, to learn about your learners (see [dedicated tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %}))
+- **Assess prior knowledge and mental models** to tailor the lesson on learners' actual needs, to address misconceptions, to learn about your learners (see [dedicated tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %})). The more you know about your learners before you start teaching, the more you will be able to help them.
 
-    The more you know about your learners before you start teaching, the more you will be able to help them.
+- **Learn learners names and use them**
 
-- Learn learners names and use them.
+- **Avoid homework in All-day formats**: Learners who have spent an entire day programming will be tired. If you give them homework to do after hours, they'll start the next day tired as well.
 
-- Avoid homework in All-day formats
-
-    Learners who have spent an entire day programming will be tired. If you give them homework to do after hours, they'll start the next day tired as well.
-
-Each of the techniques presented here will make your classes better, but you shouldn't try to adopt them all at once. The reason is that every new practice increases *your* cognitive load as well as your learners', since you are all now trying to learn a new way to learn as well as the lesson's subject matter. If you are working with a group repeatedly, you can introduce one new technique every few lessons; if you only have them for a one-day workshop, it's best to pick just one method they haven't seen before and get them comfortable with that.
+Each of the techniques presented here will make your classes better, but **you shouldn't try to adopt them all at once**. The reason is that every new practice increases *your* cognitive load as well as your learners', since you are all now trying to learn a new way to learn as well as the lesson's subject matter. If you are working with a group repeatedly, you can introduce one new technique every few lessons; if you only have them for a one-day workshop, it's best to pick just one method they haven't seen before and get them comfortable with that.
 
 # Conclusion
 {:.no_toc}
+
+{% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}
