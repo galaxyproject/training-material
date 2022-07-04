@@ -33,8 +33,15 @@ contributors:
 A robust and well-resolved phylogenetic classification is essential to understand genetic relationships within and between species and the evolution of their phenotypic diversity. In the last decade the genomic revolution has represented a drastic change in the amount of data used for phylogenetic inference. The single-gene approach using universal phylogenetic markers for the different lineages across the tree of life, is now being replaced by the assembly of taxon-rich and genome-scale data matrices, the so called phylogenomic approach.
 
 Molecular sequence data can be used to construct a phylogeny by comparing differences between nucleotide or amino acid sequences across species or strains, a technique called phylogenomics. {% cite Young2019 %} have written a comprehensive review on the topic of phylogenomics.
-In this tutorial we prepare genetic sequence data for phylogenetic reconstruction.
-We will use sequences from chromosome 5 of five strains of the yeast *Saccharomyces cerevisiae*. This requires first the prediction of protein coding genes from the genome. We use Funannotate to predict protein-coding genes . Next, we find the proteins that are present in more than one genome, called orthologs, using Proteinortho, and extract a subset with orthologs that are present in all samples. Finally, each set of orthologs is aligned using ClustalW. The resulting dataset is ready to be used for phylogenetic reconstruction.
+
+In this tutorial we prepare genetic sequence data for phylogenetic reconstruction, using sequences from chromosome 5 of five strains of the yeast *Saccharomyces cerevisiae*. 
+
+To prepare the data, we will:
+1. Predict protein coding genes from the genome using Funannotate
+2. Find the proteins that are present in more than one genome, called orthologs, using Proteinortho and extract a subset with orthologs that are present in all samples. 
+4. Align each set of orthologs using ClustalW.
+
+The resulting dataset is ready to be used for phylogenetic reconstruction.
 
 
 **If you are starting from sequence reads, please follow
