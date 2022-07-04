@@ -767,7 +767,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >       pre_tasks:
 >         - name: Install Dependencies
 >           package:
->    -        name: 'python3-psycopg2'
+>    -        name: ['acl', 'python3-psycopg2']
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
