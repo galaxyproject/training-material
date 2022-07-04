@@ -115,16 +115,20 @@ RepeatMasker will only accept compact fasta headers. Before we can mask repetiti
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In principal, all unique clade names occurring in [NCBI taxonomy database](https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html) can be used for species. Capitalization is ignored, multiple words need to bound by apostrophes. Not all "common" English names occur in the taxonomy database. Using Latin names is always safest.
+>    > If you don't select the species from the list, you must provide a species name ("Saccharomyces cerevisiae" in this example). In principal, all unique clade names occurring in [NCBI taxonomy database](https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html) can be used for species. Capitalization is ignored, multiple words need to bound by apostrophes. Not all "common" English names occur in the taxonomy database. Using Latin names is always safest.
 >    {: .comment}
 >
+>3. Inspect the 'RepeatMasker masked sequence on data' output file. Scroll down and you will find stretches of 'N' on the location of repetitive sequences. The file is now ready for annotation with Funannotate.
 {: .hands_on}
 
 ## Annotate with Funannotate
 
 We will predict protein-coding genes from genomic sequences using [Funannotate](https://funannotate.readthedocs.io/) ({% cite Young2019 %}), which collects evidence from different ab-initio gene predictors as well as from RNA-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.
 
-If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
+> ### {% icon comment %} Comment
+>
+>If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
+{: .comment}
 
 > ### {% icon warning %} Slow Step Ahead!
 > Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.
@@ -140,6 +144,10 @@ If you would like to learn about genome annotation in more depth, the GTN has a 
 >        - *"Ploidy of assembly"*: `1`
 >    - In *"Evidences"*:
 >        - *"Select protein evidences"*: `Use UniProtKb/SwissProt (from selected Funannotate database)`
+>    > ### {% icon tip %} Tip
+>    >
+>    > If available, include mRNA and/or ESTs in this evidence section to increase sensitivity of predictions.
+>    {: .tip}
 >    - In *"Busco"*:
 >        - *"BUSCO models to align"*: `saccharomycetes`
 >        - *"Initial Augustus species training set for BUSCO alignment"*: `saccharomyces`
@@ -147,15 +155,12 @@ If you would like to learn about genome annotation in more depth, the GTN has a 
 >        - *"Minimum number of models to train Augustus"*: `15`
 >    
 >
->    > ### {% icon tip %} Tip
->    >
->    > If available, include mRNA and/or ESTs evidence to increase sensitivity of predictions.
->    {: .tip}
 >
 >    > ### {% icon comment %} Comment
 >    >
 >    > When annotating full genomes, increase the number of *'Minimum number of models to train Augustus'* to an appropriate value. For the small sample dataset used here, values larger than 15 will result in failure.
 >    {: .comment}
+> 2. Inspect the output GenBank file. The FEATURES section contains the genome annotation of protein predictions, their location and their translation. Each predicted protein is given a unique ID, which will become the FASTA header in the next step.
 {: .hands_on}
 
 ## Extract ORFs into FASTA files
@@ -284,7 +289,6 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
 ## Extract proteins with Proteinortho
 
 Next we extract 1:1 single copy orthologs and generate one multi fasta file per ortholog.  
-The output is a collection of multi-fasta ortholog files. All species are represented in each file and are ready to be aligned.
 
 > ### {% icon hands_on %} Hands-on: extract protein sequences
 >
@@ -295,6 +299,8 @@ The output is a collection of multi-fasta ortholog files. All species are repres
 >
 >
 {: .hands_on}
+
+The output is a collection of multi-fasta ortholog files. All species are represented in each file and are ready to be aligned.
 
 # Align ortholog sequences
 
@@ -319,9 +325,20 @@ First we modify the headers of the multi-fasta file, such that only the sample n
 >
 {: .hands_on}
 
+> ### {% icon question %} Questions
+>
+> 1. Open the ClustalW output 'queryOrthoGroup121.fasta' and its corresponding multifasta input. You can compare them side by side activating the 'Scratchbook' on the top panel. What is the main difference between the sequences in the unaligned multifasta (input) and the ClustalW output multifasta?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Two of the sequences from this orthogroup are truncated (early stop codon). The alignment program inserts '-' to represent indels in the alignment.
+> >
+> {: .solution}
+>
+{: .question}
 
 
 
 # Conclusion
-
+In this tutorial, you have prepared genome sequence data for phylogenetic analysis. First, you have extracted information from these in the form of predicted protein sequences. You then grouped the predicted proteins into orthogroups and aligned them. These aligned sequences can now be used for reconstructing a phylogeny and building a phylogenetic tree.
 
