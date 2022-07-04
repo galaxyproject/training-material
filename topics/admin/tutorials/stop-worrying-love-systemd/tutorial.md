@@ -194,6 +194,16 @@ ubuntu@gat-1:~$ systemd-analyze security galaxy
 
 Here we see a lot of low hanging fruit for restricting the abilities of Galaxy's processes. This can also be applied to e.g. the job runner, or your webserver for additional security.
 
+## Testing with systemd-run
+
+Would you like to test some of these limits manually? Or just to run a one-off process in a very sandboxed environment? Enter `systemd-run`, which allows just that. Here you can set a lot of the capabilities or restrictions:
+
+```bash
+systemd-run -p IOAccounting=yes -p CPUAccounting=true -p MemoryAccounting=true -p TasksAccounting=true -p ProtectSystem=strict -p PrivateDevices=yes -t -S
+```
+
+And `-S` puts you in an interactive terminal, allowing you to play around with this environment. You get a cleaned out environment, working inside of a cgroup (visible in `systemd-cgtop`, and `systemctl status`) and when you exit it tells how you many resources you've used. This is both an easy way to test processes, and an option to sandbox rarely run processes, by setting an extremely restrictive environment.
+
 ## Optimising Slow Boots
 
 systemd features an analyze command to check why your booting is slow
