@@ -6,7 +6,7 @@ layout: hands_on
 contributors: [hexylena]
 ---
 
-Sometimes you find yourself with a `list:list:paired`, i.e. a collection of collection of paired end data. This format is well supported by Galaxy, but doesn't always work with tools. This is easy to resolve with {% tool [Apply rules](__APPLY_RULES__) %}:
+Sometimes you find yourself with a `list:list:paired`, i.e. a collection of collection of paired end data, and you really want a `list:paired`, a flatter collection of paired end data. This is easy to resolve with {% tool [Apply rules](__APPLY_RULES__) %}:
 
 1. Open {% tool [Apply rules](__APPLY_RULES__) %} 
 2. Select your collection
@@ -34,4 +34,3 @@ Flattening this top level list, so it's just a `list:paired` requires a few chan
 4. Click **Execute**
 
 The tool will execute and reshape your list, congratulations!
-
