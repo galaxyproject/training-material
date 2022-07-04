@@ -439,7 +439,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
->    - Add a pre-task to install the necessary dependency, `python3-psycopg2`
+>    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
@@ -455,7 +455,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +  pre_tasks:
 >    +    - name: Install Dependencies
 >    +      package:
->    +        name: 'python3-psycopg2'
+>    +        name: ['acl', 'python3-psycopg2']
 >    +  roles:
 >    +    - galaxyproject.postgresql
 >    +    - role: natefoo.postgresql_objects
@@ -756,7 +756,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `acl`, `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
@@ -767,7 +767,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >       pre_tasks:
 >         - name: Install Dependencies
 >           package:
->    -        name: 'python3-psycopg2'
+>    -        name: ['acl', 'python3-psycopg2']
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
