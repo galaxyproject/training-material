@@ -81,9 +81,10 @@ For this training we will use a subset of the genome (chromosome 5) from four st
 >
 {: .hands_on}
 
-# Genome annotation
+# Protein coding gene prediction
 
 ## Mask repetitive sequences
+
 Before we can annotate the genome, we will prepare the data by masking repetitive sequences in the genome.
 Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account ([see RepeatMasker tutorial for more details]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %})).
 We use **RepeatMasker**
@@ -91,6 +92,7 @@ We use **RepeatMasker**
 This program has historically made use of [RepBase](https://www.girinst.org/repbase/update/index.html) ({%cite Kohany2006-ks %}), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use [Dfam](https://www.dfam.org/home) ({%cite Storer2021 %}) an open collection of Transposable Element DNA sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.
 
 RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (`BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence`) to leave only the accession number (`>BK006939.2`) by using a regular expression.
+
 > ### {% icon hands_on %} Hands-on: Mask repetitive sequences
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
@@ -100,10 +102,10 @@ RepeatMasker will only accept compact fasta headers. Before we can mask repetiti
 >            - *"Find pattern"*: `(>[^ ]+).+`
 >            - *"Replace with:"*: `\1`
 >
->    > ### {% icon comment %} Comment
->    >
->    >`\1` replaces the text in the header with the first matched text in the header, the accession number in this case.
->    {: .comment}
+>               > ### {% icon comment %} Comment
+>               >
+>               >`\1` replaces the text in the header with the first matched text in the header, the accession number in this case.
+>               {: .comment}
 >
 > 2. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `outfile` (output of **Replace Text** {% icon tool %})
@@ -119,6 +121,7 @@ RepeatMasker will only accept compact fasta headers. Before we can mask repetiti
 {: .hands_on}
 
 ## Annotate with Funannotate
+
 We will predict protein-coding genes from genomic sequences using [Funannotate](https://funannotate.readthedocs.io/) ({% cite Young2019 %}), which collects evidence from different ab-initio gene predictors as well as from RNA-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.
 
 If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
@@ -156,6 +159,7 @@ If you would like to learn about genome annotation in more depth, the GTN has a 
 {: .hands_on}
 
 ## Extract ORFs into FASTA files
+
 In this step, we extract the protein sequences from the GenBank files into multi-FASTA files. Additionally, we modify the headers to include the accession number of the sample. This creates an unique accession-proteinID header for each predicted protein, and will allow us to retrieve them after we combine all predicted proteins into one multi-FASTA file.
 
 So far, we have kept sequence files in a collection. Now we will combine all predicted proteins from all samples into one big multi-fasta file. Later, we will retrieve ortholog sequences from this file.
@@ -191,11 +195,6 @@ So far, we have kept sequence files in a collection. Now we will combine all pre
 >
 {: .question}
 
-
-
-
-
-
 # Find orthologs
 
 Orthologs are genes in different species evolved from a common ancestral gene by a speciation (lineage-splitting) event and contain the information needed for building phylogenies. The input for this step is the collection of multi-FASTA extracted from the GenBank file and modified to have unique headers.
@@ -213,36 +212,32 @@ Next, we select orthogroups where all the species are represented by only one pr
 >    - {% icon param-file %} *"Filter"*: `proteinortho` (output of **Proteinortho** {% icon tool %})
 >    - *"With following condition"*: `c1==4 and c2==4`
 >
+> 3. Inspect the 'orthology-groups' tabular file.
 {: .hands_on}
 
 
 > ### {% icon question %} Questions
 >
->Look at the 'orthology-groups' tabular file.
+>1. Inspect the the 'orthology-groups' tabular file.
 >
-> 1. Do any samples contain more than one gene for any given orthogroup?
-> 2. What is the name given to these homologous genes within the same genome?
+>    1. Do any samples contain more than one gene for any given orthogroup?
+>    2. What is the name given to these homologous genes within the same genome?
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Yes, *CM000925.1* contains two genes on the first orthogroup.
-> > 2. Paralogs. These are gene copies created by a duplication event within the same genome.
-> >
-> {: .solution}
+>    > ### {% icon solution %} Solution
+>    >
+>    > 1. Yes, *CM000925.1* contains two genes on the first orthogroup.
+>    > 2. Paralogs. These are gene copies created by a duplication event within the same genome.
+>    >
+>    {: .solution}
 >
-{: .question}
-
-
-> ### {% icon question %} Questions
-> 
->Look at the filtered orthogroups.
-> 1. How many orthogroups are represented once only in all four samples?
+> 2. Look at the filtered orthogroups.
+>     1. How many orthogroups are represented once only in all four samples?
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. 173
-> >
-> {: .solution}
+>     > ### {% icon solution %} Solution
+>     >
+>     > 1. 173
+>     >
+>     {: .solution}
 >
 {: .question}
 
@@ -250,12 +245,10 @@ Next, we select orthogroups where all the species are represented by only one pr
 
 
 ## Quality control with **Busco**
+
 Busco is a dataset of nearl-universal, single-copy orthologs.
-Here we use it for QC of the assembly and annotation produced above.
+Here we use it for quality control of the assembly and annotation produced above.
 It outputs a proxy of completeness, duplication and fragmentation of the annotation (Busco can also be used to assess the completeness of a genome assembly).
-
-
-
 
 > ### {% icon hands_on %} QC with Busco
 >
@@ -288,11 +281,8 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
 >
 {: .question}
 
-
-
-
-
 ## Extract proteins with Proteinortho
+
 Next we extract 1:1 single copy orthologs and generate one multi fasta file per ortholog.  
 The output is a collection of multi-fasta ortholog files. All species are represented in each file and are ready to be aligned.
 
@@ -306,10 +296,8 @@ The output is a collection of multi-fasta ortholog files. All species are repres
 >
 {: .hands_on}
 
-
-
-
 # Align ortholog sequences
+
 Alignment of sequences allows cross-species (or other taxonomic level, strain, taxa) comparison. An alignment is a hypothesis of positional homology between bases/amino acids of different sequences. A correct alignment is crucial for phylogenetic inference. Here we use ClustaW, a well-established pairwise sequence aligner.
 
 First we modify the headers of the multi-fasta file, such that only the sample name is retained. This is important for future conatenation of alignment into a supermatrix (see Maximum likelihood GTN training)
