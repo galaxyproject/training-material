@@ -439,7 +439,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
->    - Add a pre-task to install the necessary dependency, `python3-psycopg2`
+>    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
