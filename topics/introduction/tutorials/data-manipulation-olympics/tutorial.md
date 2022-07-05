@@ -33,6 +33,11 @@ subtopic: next-steps
 
 <!-- Note to contributors: feel free to add sections here to include additional visualisation options. Make sure each section is independent of each other, i.e. each section should start with the olympics.tsv file. Also make sure to include many exercises (with answers) for your section -->
 
+<!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
+{% assign version_datamash="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" %}
+{% assign version_column_maker="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
+
+
 
 # Introduction
 {:.no_toc}
@@ -65,8 +70,9 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
 | Filter                 | Remove rows from a file based on values in one or more columns | {% tool [Filter](Filter1) %}|
-| Counting               | occurences of values in a column | {% tool [**Count** occurrences of each record](Count1) %}, {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}|
-| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group** data by a column and perform aggregate operation on other columns](Grouping1) %}|
+| Counting               | occurences of values in a column | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
+| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
+| Compute an expression  | Over each row           | {% tool [Compute]({{version_column_maker}}) %} |
 | Replace Text | in a specific column | {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}|
 
 TIP: If you find yourself frequently using the same tool often but struggle to find it in the long list of tools, you can **star** your favourite tools in Galaxy!
@@ -153,8 +159,8 @@ The data was [obtained](https://github.com/UOSCS/Olympic_Athletes) from [Olymped
 - **birth_year** - 4-digit number
 - **birth_day** - e.g. 24 July
 - **birth_place** - town and/or country
-- **height** - In centimeters
-- **weight** - In kilograms
+- **height** - In centimeters (or `NA` if data not known)
+- **weight** - In kilograms (or `NA` if data not known)
 - **team** - Team name
 - **noc** - National Olympic Committee 3-letter code
 - **games** - Year and season
@@ -477,14 +483,14 @@ A common operation we might want to perform on tables of data, is simple countin
 
 Let's say we wanted to know how many different sports there were in each Olympics. If we used the counting tool above, we would get a results file for each combination of sport and olympics, with the number of lines (participations) of each. But we don't really care about the number of lines that have this combination, just the total number of unique sports in each games.
 
-To answer these types of questions we can use a slightly more advanced tool, called {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}. This tool can do a lot more than counting, but here we will show you how to use it to count in this way.
+To answer these types of questions we can use a slightly more advanced tool, called {% tool [Datamash]({{version_datamash}}) %}. This tool can do a lot more than counting, but here we will show you how to use it to count in this way.
 
 
 > ### {% icon hands_on %} Hands-on: Counting number of different sports per Olympic Games
 >
 > We will now determine how many different sport there were in each of the different Olympics
 >
-> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
+> 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
 >    - *"Input tabular dataset"*: `olympics.tsv`
 >    - *"Group by fields"*: `11` (the `games` column)
 >    - *"Input file has a header line"*: `yes`
@@ -512,6 +518,8 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 {: .hands_on}
 
 
+Datamash can do a lot more than counting,  and we will showcase some of these other operatins in the [Grouping](#grouping) section.
+
 ## Exercises
 
 Ok, let's practice!
@@ -524,7 +532,7 @@ Ok, let's practice!
 > > ### {% icon solution %} Hints
 > >
 > > 1. Since we are counting participations (rows), we can use the simple {% tool [Count](Count1)%} tool
-> > 2. Since we are counting a bit more complex question, we need the {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} tool
+> > 2. Since we are counting a bit more complex question, we need the {% tool [Datamash]({{version_datamash}}) %} tool
 > >
 > {: .solution}
 >
@@ -551,7 +559,7 @@ Ok, let's practice!
 > >     7988	Canada
 > >     ```
 > >
-> >  2. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
+> >  2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
 > >   - *"Input tabular dataset"*: `olympics.tsv`
 > >   - *"Group by fields"*: `11` (the `games` column)
 > >   - *"Input file has a header line"*: `yes`
@@ -577,7 +585,7 @@ Ok, let's practice!
 
 # Filtering
 
-This file contains a lot of data, we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will create a new dataset, removing any rows that are not of interest to us (i.e. that don't meet the criteria we provide).
+This file contains a lot of data, but we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will create a new dataset, removing any rows that are not of interest to us (i.e. that don't meet the criteria we provide).
 
 
 > ### {% icon hands_on %} Hands-on: Filter table based on a column
@@ -719,43 +727,284 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 
 # Grouping
 
-Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of atheletes,
+Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of atheletes, etc).
 
-r group the data by country, and count how many gold medals were won by each country, or the average height of athletes per sport, etc.
+In the [counting](#counting) section of this tutorial we show how to get answers that require a count (e.g. number of medals won), but sometimes we want to do something more complex, like calculating the average height of athletes in a group, say per country or per sport. This section will show some example of these types of questions.
 
-For simple such questions, we can use the tool {% tool [**Group** data by a column and perform aggregate operation on other columns](Grouping1) %}. For more advanced/complicated queries, there are other tools that can go a bit further (but may also be a bit more complex to use). We will show you examples of both in this section
-
-Let's start with counting the number of athletes per olympics games. It would be interesting to see how this has changed over time.
-
+We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose.
 
 > ### {% icon hands_on %} Hands-on: Number of athletes per Olympics
 >
-> 1.
-> 1. {% icon galaxy-eye %} **View** the results.
+> We would like to answer the following question: *How tall was the tallest athlete of each sport?*
+>
+> 1. Open the {% tool [Datamash]({{version_datamash}}) %} tool and read the help section at the bottom
 >
 >    > ### {% icon question %} Question
 >    >
->    >
+>    > Which settings do you think we need to provide to answer our question?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
+>    > > - *"Group by fields"*: We want to group by team (Column 15).
+>    > > - *"Sort"*: `Yes`. This may not be obvious, but because our file is currently not sorted by our chosen group (sport), we need to tell the tool to do this.
+>    > > - *"Skip NA or NaN values"*: since we do have NA values for athletes for whom height data is unknown, we should set this to `Yes`
+>    > > - Our file has a header line, so we should indicate this as well
+>    > > - *"Operation"*: we want to determine the **Maximum** height (Column 7)
 >    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
+>    - *"Input tabular dataset"*: `olympics.tsv`
+>    - *"Group by fields"*: `15`
+>    - *"Sort input"*: `yes`
+>    - *"Input file has a header line"*: `yes`
+>    - *"Skip NA or NaN values"*: `yes`
+>    - *"Operation to perform on each group"*: `Maxiumum`
+>      - *"On Column"*: `Column: 7`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How tall was the tallest athelete in basketball? And what about karate?
+>    > 2. Why do some sports have a value of `inf`?
+>    >
+>    > > ### {% icon solution %} Answer
 >    > >
+>    > > 1. Basketball's tallest athelete was 192cm. For Karate it is 163.
+>    > > 2. Our dataset had quite a number of `NA` (unknown) values in the height column, especially for the earlier Olympics. For sports that had only NA values, there is no maximum so the tool outputs `inf` instead.
 >    > {: .solution}
 >    {: .question}
 >
 {: .hands_on}
 
 
-## More advanced examples
+## Grouping on multiple columns
 
+You may have noticed that we could also provide multiple columns to group on. If we do this, we can compute values for combinations of groups, such as sex and sport, to find e.g. the tallest woman in basketball or the shortest man per Olympics. There are also many more options for the computation we perform, so perhaps we are more interested not in the tallest athlete, but the average height. Let's perform some of these slightly more advanced queries now.
+
+
+> ### {% icon hands_on %} Hands-on: Tallest man and woman per sport
+>
+> The question we would like to answer here, is what is the average height for men and women per sport?
+>
+> 1.  Open the {% tool [Datamash]({{version_datamash}}) %} tool
+>     - Which parameters do you think we need?
+>     - Refer to the help section at the bottom of the tool page if you need more information
+>
+> 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
+>    - *"Input tabular dataset"*: `olympics.tsv`
+>    - *"Group by fields"*: `15,3` (The sports column, and the sex column)
+>    - *"Sort input"*: `yes`
+>    - *"Input file has a header line"*: `yes`
+>    - *"Print header line"*: `yes`
+>    - *"Skip NA or NaN values"*: `yes`
+>    - *"Operation to perform on each group"*: `Mean`
+>      - *"On Column"*: `Column: 7`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>    - Notice the header line in this output that we requested with the *"Print header line parameter"*. Adding this line will help you remember which columns you grouped on and which computation you performed. In our case it was obvious, but if you have a dataset with multiple columns with similar values, this can be useful
+>    - See if you can answer the following questions based on the output file.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. What is the average height of women participating in archery?
+>    > 2. What is the average height of men participating in [ballooning](https://en.wikipedia.org/wiki/Ballooning_at_the_1900_Summer_Olympics)?
+>    > 3. Why do some values have `nan` instead of a height?
+>    > 4. Why do some sports not have a value for one of the sexes?
+>    > 5. Can you find a sport where women were taller than the men? (Hint: it starts with the letter A)
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. 167.25677031093 cm
+>    > > 2. 170 cm
+>    > > 3. If none of the rows in the group had height data available, it will output `nan` (not a number) instead. This is most common for sports that were only featured a few times in the early years of the Olympics.
+>    > > 4. Sports such as artistic swimming only exist for women, so no M appears in the data for that group, so there simply is no row for the mean height of men doing artistic swimming in our output.
+>    > > 5. [Art Competitions](https://en.wikipedia.org/wiki/Art_competitions_at_the_Summer_Olympics)
+>    > >
+>    > > If all went well, your output file should look something like:
+>    > >
+>    > > ```
+>    > > GroupBy(sport)	     GroupBy(sex)  mean(height)
+>    > > Aeronautics         M             nan
+>    > > Alpine Skiing       F             167.38324708926
+>    > > Alpine Skiing       M             178.18747142204
+>    > > Alpinism            M             nan
+>    > > Archery             F             167.25677031093
+>    > > Archery             M             178.5865470852
+>    > > Art Competitions    F             175.33333333333
+>    > > Art Competitions    M             173.97260273973
+>    > > Artistic Gymnastics F             156.15316901408
+>    > > ```
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+# Exercises
+
+> ### {% icon question %} Exercise: Grouping and computing
+>
+> 1. How tall is the shortest woman Badminton player to win a gold medal?
+> 2. What is the average weight of athletes from Denmark (DEN) in the 2020 Olympics?
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1. We need to group on 3 columns: medals, sport and sex (note: the order you provide the columns determines the order they are listed in in the output)
+> > 2. We need to group on 2 columns: country and year, then compute the average (mean) over column 8 (weight)
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. 161 cm.
+> >  2.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Full Solutions
+> >
+> > 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
+> >    - *"Input tabular dataset"*: `olympics.tsv`
+> >    - *"Group by fields"*: `17,15,3` (The medal, sports, and the sex columns)
+> >    - *"Sort input"*: `yes`
+> >    - *"Input file has a header line"*: `yes`
+> >    - *"Print header line"*: `yes`
+> >    - *"Skip NA or NaN values"*: `yes`
+> >    - *"Operation to perform on each group"*: `Minimum`
+> >      - *"On Column"*: `Column: 7`
+> >
+> >    This will give an output like below, scroll down to find the gold medalists, then badminton, then F (if you used a different order in the Group by fields parameter, this file may look a bit different, but will still provide the same information)
+> >
+> >    ```
+> >    GroupBy(medal)	GroupBy(sport)	GroupBy(sex)	min(height)
+> >    Bronze	Alpine Skiing	F	156
+> >    Bronze	Alpine Skiing	M	167
+> >    Bronze	Archery	F	155
+> >    Bronze	Archery	M	166
+> >    Bronze	Art Competitions	F	-inf
+> >    Bronze	Art Competitions	M	172
+> >    Bronze	Artistic Gymnastics	F	136
+> >    ```
+> >
+> > 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
+> >    - *"Input tabular dataset"*: `olympics.tsv`
+> >    - *"Group by fields"*: `12,9` (year and team columns)
+> >    - *"Sort input"*: `yes`
+> >    - *"Input file has a header line"*: `yes`
+> >    - *"Print header line"*: `yes`
+> >    - *"Skip NA or NaN values"*: `yes`
+> >    - *"Operation to perform on each group"*: `Minimum`
+> >      - *"On Column"*: `Column: 8`
+> >
+> >    This will give an output like below:
+> >
+> >    ```
+> >    GroupBy(medal)	GroupBy(sport)	GroupBy(sex)	min(height)
+> >    Bronze	Alpine Skiing	F	156
+> >    Bronze	Alpine Skiing	M	167
+> >    Bronze	Archery	F	155
+> >    Bronze	Archery	M	166
+> >    Bronze	Art Competitions	F	-inf
+> >    Bronze	Art Competitions	M	172
+> >    Bronze	Artistic Gymnastics	F	136
+> >    ```
+> {: .solution}
+>
+{: .question}
+
+
+# Computing
+
+Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columnts), or their age at time of participations (fromyear of birth and year of the olymics). This will enable us to more easily query the dataset for values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_column_maker}}) %} tool.
+
+As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
+
+
+> ### {% icon hands_on %} Hands-on: Compute age of atheletes
+>
+> 1. Open the {% tool [Compute an expression on every row]({{version_column_maker}}) %} tool.
+>    - read the help text at the bottom of the tool
+>    - what parameters do you think we need to use?
+>
+> 2. {% tool [Compute an expression on every row]({{version_column_maker}}) %} with the following parameters:.
+>    - *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
+>    - *"As a new column to"*: `olympics.tsv`
+>    - *"Round result?"*: `Yes`
+>    - *"Input has a header line with column names?"*: `Yes`
+>    - *"The new column name"*: `age`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What changed in our file?
+>    > 2. How old was Arnaud Boetsch during his Olympic tennis participation?
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. A new `age` column was added to the end of our file, the value is the age of the athlete in years at time of the olympics.
+>    > > 2. Arnaud Boetsch is listed on the first two lines, they turned 27 the year of their olympics.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+This was a simple computation, but much more complex mathematical expressions can be computed with this tool. See the help section at the bottom of the tool for a list of all supported operations. In the exercise below, we will compute the BMI for each athlete as an example.
+
+
+## Exercises
+
+BMI stands for Body Mass Index, is a metric to provide a very crude measure of how healthy your weight is. The formula to compute BMI is:
+
+$$ BMI = weight / (height^2) $$
+
+with weight in kilograms and height in meters.
+
+
+Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute this data for all athletes and add it as a new column.
+
+
+
+
+> ### {% icon question %} Exercise: calculating BMI
+>
+> 1. How would you express this calculation in the tool?
+>    - Remember that our height is in cm, and the formula expects height in meters
+>       - Remember that we have a lot of "NA" values in our column, we will have to tell the tool the column are numeric,
+>       - using e.g. `int(c7)` (`int` stands for integer, if you had a column with decimal numbers, you would say `float()`)
+>
+> 2. What is the BMI for Arnaud Boetsch?
+>
+> 3. Why does the output have fewer lines than the input?
+>
+> > ### {% icon solution %} Hints
+> >
+> > - division is `/` and multiplication is `*`.
+> > - The tool does not recognize the `^` operation as exponentiation. You can use `height * height` or `pow(height,2)`
+> > - Parentheses may be required.
+> > - Use `int(column)` to tell the tool the columns contain numbers
+> >   - e.g. for column 3 + column you would use `int(c3) + int(c4)` in the expression
+> >   - this is only needed because some of our rows have "NA" in this columns, so Galaxy is not sure if it is a number column, a string (word) column, or a mixed column.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
+> >  2. 22.69
+> >  3. The tool only outpus lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the join tool to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> {: .solution}
+>
+{: .question}
 
 
 
 # Find and Replace
 
-
-# Transpose
 
 
 # Join columns from two different files
@@ -821,7 +1070,11 @@ sport with the tallest athletes
 This section provides a number of exercises that require you to combine one or more of the techniques you learned in this tutorial. This is a great place to start if you want to practice your data manipulation skills!
 
 - TODO: shortest athlete (couldnt answer with only sort tool, also need to filter out empty lines)
-  TODO: number of unique athletes who received silver medals during the 2018 olympics
+-  TODO: number of unique athletes who received silver medals during the 2018 olympics
+
+- TODO: first find and replace in weight column to replace values such as "68-70" with just one number (or median) orso (or use compute to add new weight column), then can use datamash to find mean weight of athletes per country or sport orso
+
+- TODO: calculate BMI, lines with NA will be missing from output, join back with original file.
 
 > ### {% icon question %} Exercise: sort by height
 >
@@ -843,6 +1096,14 @@ This section provides a number of exercises that require you to combine one or m
 > >  2.
 > >  3.
 > {: .solution}
+>
+> > ### {% icon solution %} Full solution
+> >
+> >  1.
+> >  2.
+> >  3.
+> {: .solution}
+>
 {: .question}
 
 
