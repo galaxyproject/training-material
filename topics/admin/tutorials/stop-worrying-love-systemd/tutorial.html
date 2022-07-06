@@ -1,0 +1,1461 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>How I learned to stop worrying and love the systemd</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="How I learned to stop worrying and love the systemd" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:00:04 +0000" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: How I learned to stop worrying and love the systemd" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:04 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "How I learned to stop worrying and love the systemd",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'How I learned to stop worrying and love the systemd' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "admin, ansible, systemd",
+  "description": "The questions this  addresses are:\n - Unix is supposed to be about FILES™\n - What is this systemd stuff?\n - Why should I love it?\n - I have so many worries!\n\n\\nThe objectives are:\n - Have an objective understanding of systemd allowing the user to obtain the benefits of this new system\n - Realise the joys of journald, and how it makes logging easier and simpler\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-admin">
+    <h1 data-toc-skip>How I learned to stop worrying and love the systemd</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+
+
+</td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Unix is supposed to be about FILES™</p>
+</li>
+        
+        <li><p>What is this systemd stuff?</p>
+</li>
+        
+        <li><p>Why should I love it?</p>
+</li>
+        
+        <li><p>I have so many worries!</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Have an objective understanding of systemd allowing the user to obtain the benefits of this new system</p>
+</li>
+        
+        <li><p>Realise the joys of journald, and how it makes logging easier and simpler</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 4, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <p>Many linux sysadmins with years and years of experience bemoan systemd (“it’s infecting everything! Now it wants to mess with time? And DNS???”) and jou<span class="notranslate">rna</span>lctl (“unix was supposed to be about files!”) and while those are fair complaints and make systemd and friends wildly more opaque than traditional SysV and logging to files, there are some benefits that can be obtained, and may be interesting even to the wise old admins. There is a lot of convenience in systemd that can make the tradeoffs worth it.</p>
+
+<p>This tutorial assumes a working knowledge of unix systems (files, directories, services, logging, <code class="language-plaintext highlighter-rouge">/var/log</code>, etc.).</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#systemd" id="markdown-toc-systemd">systemd</a>    <ol>
+      <li><a href="#why-systemd-units-and-not-service-shell-scripts" id="markdown-toc-why-systemd-units-and-not-service-shell-scripts">Why systemd units, and not service shell scripts?</a></li>
+      <li><a href="#unit-files" id="markdown-toc-unit-files">Unit Files</a></li>
+      <li><a href="#status" id="markdown-toc-status">Status</a></li>
+      <li><a href="#restarting" id="markdown-toc-restarting">Restarting</a></li>
+      <li><a href="#failed-units" id="markdown-toc-failed-units">Failed Units</a></li>
+      <li><a href="#editing-units-or-overriding" id="markdown-toc-editing-units-or-overriding">Editing Units or Overriding</a></li>
+      <li><a href="#masking-units" id="markdown-toc-masking-units">Masking Units</a></li>
+      <li><a href="#unit-security-optimisation" id="markdown-toc-unit-security-optimisation">Unit Security Optimisation</a></li>
+      <li><a href="#testing-with-systemd-run" id="markdown-toc-testing-with-systemd-run">Testing with systemd-run</a></li>
+      <li><a href="#optimising-slow-boots" id="markdown-toc-optimising-slow-boots">Optimising Slow Boots</a></li>
+      <li><a href="#procons-of-systemd" id="markdown-toc-procons-of-systemd">Pro/Cons of systemd</a></li>
+      <li><a href="#further-reading" id="markdown-toc-further-reading">Further Reading</a></li>
+    </ol>
+  </li>
+  <li><a href="#timers" id="markdown-toc-timers">timers</a>    <ol>
+      <li><a href="#listing-timers" id="markdown-toc-listing-timers">Listing Timers</a></li>
+      <li><a href="#fixing-those-cron-issues" id="markdown-toc-fixing-those-cron-issues">Fixing those Cron Issues</a></li>
+      <li><a href="#notifying-you" id="markdown-toc-notifying-you">Notifying you</a></li>
+      <li><a href="#further-reading-1" id="markdown-toc-further-reading-1">Further Reading</a></li>
+    </ol>
+  </li>
+  <li><a href="#journald" id="markdown-toc-journald">jou<span class="notranslate">rna</span>ld</a>    <ol>
+      <li><a href="#per-unit-logs" id="markdown-toc-per-unit-logs">Per Unit Logs</a></li>
+      <li><a href="#logs-for-a-group-of-units" id="markdown-toc-logs-for-a-group-of-units">Logs for a Group of Units</a></li>
+      <li><a href="#dropping-logs" id="markdown-toc-dropping-logs">Dropping Logs</a></li>
+      <li><a href="#logs-during-a-specific-time-period" id="markdown-toc-logs-during-a-specific-time-period">Logs during a specific time period</a></li>
+      <li><a href="#logs-during-a-specific-time-period-relatively" id="markdown-toc-logs-during-a-specific-time-period-relatively">Logs during a specific time period, relatively</a></li>
+      <li><a href="#previous-boot-logs" id="markdown-toc-previous-boot-logs">Previous Boot Logs</a></li>
+      <li><a href="#advanced-log-filtering" id="markdown-toc-advanced-log-filtering">Advanced Log Filtering</a></li>
+      <li><a href="#cleaning-logs" id="markdown-toc-cleaning-logs">Cleaning Logs</a></li>
+      <li><a href="#log-verification" id="markdown-toc-log-verification">Log Verification</a></li>
+      <li><a href="#further-reading-2" id="markdown-toc-further-reading-2">Further Reading</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="systemd">systemd</h1>
+
+<h2 id="why-systemd-units-and-not-service-shell-scripts">Why systemd units, and not service shell scripts?</h2>
+
+<ul>
+  <li>CGroups</li>
+  <li>Hard Memory Limits that include all children (also CPU, disk.)</li>
+  <li>Dependencies (is your database up, before your service that needs it?)</li>
+  <li>Fancy restarting (always/n times, delays, timeouts.)</li>
+  <li><a href="https://github.com/influxdata/telegraf/tree/master/plugins/inputs/systemd_units">Monitor it with Telegraf</a></li>
+</ul>
+
+<h2 id="unit-files">Unit Files</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+Description=<span class="notranslate">Galaxy</span>
+After=network.target
+After=time-sync.target
+
+[Service]
+UMask=022
+Type=simple
+User=<span class="notranslate">galaxy</span>
+Group=<span class="notranslate">galaxy</span>
+WorkingDirectory=/srv/<span class="notranslate">galaxy</span>/server
+TimeoutStartSec=60
+ExecStart=/srv/<span class="notranslate">galaxy</span>/venv/bin/<span class="notranslate">galaxy</span>ctl start --foreground --quiet
+
+Environment=HOME=/srv/<span class="notranslate">galaxy</span>
+Environment=VIRTUAL_ENV=/srv/<span class="notranslate">galaxy</span>/venv
+
+MemoryAccounting=yes
+MemoryLimit=16G
+CPUAccounting=yes
+IOAccounting=yes
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div></div>
+
+<p>Here’s a simple unit file. It has a name, and some targets that must be up before it should be started, then the service definition featuring all of the common fields like:</p>
+
+<ul>
+  <li>User/group and umask restriction</li>
+  <li>Working directory</li>
+  <li>Process to start (and optionally reload/stop commands.)</li>
+  <li>Some environment variables</li>
+  <li>Enabling of CPU and Mmeory accounting</li>
+  <li>As well as limiting the memory to 16GB, at which time the child will be killed and restarted.</li>
+</ul>
+
+<p>Unit files are very easy to create, be sure to see the <a href="https://man.archlinux.org/man/systemd.service.5#EXAMPLES">examples section</a> of the documentation, and stick with <code class="language-plaintext highlighter-rouge">Type=simple</code> services which stay in the foreground for maximum convenience.</p>
+
+<h2 id="status">Status</h2>
+
+<p>Status is generally your first step looking at any unit file.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl <span class="notranslate">galaxy</span>
+● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
+     Loaded: loaded <span class="o">(</span>/etc/systemd/system/<span class="notranslate">galaxy</span>.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+     Active: active <span class="o">(</span>running<span class="o">)</span> since Tue 2022-06-28 15:17:04 CEST<span class="p">;</span> 5 days ago
+   Main PID: 217446
+      Tasks: 73 <span class="o">(</span>limit: 9521<span class="o">)</span>
+     Memory: 1.7G <span class="o">(</span>limit: 16.0G<span class="o">)</span>
+        CPU: 18h 16min 20.685s
+     CGroup: /system.slice/<span class="notranslate">galaxy</span>.service
+             ├─217446 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/<span class="notranslate">galaxy</span>ctl start <span class="nt">--foreground</span> <span class="nt">--quiet</span>
+             ├─217467 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/supervisord <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.conf <span class="nt">--nodaemon</span>
+             ├─217484 /bin/tail <span class="nt">-f</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.log
+             ├─217487 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245320 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245322 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245334 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/celery <span class="nt">--app</span> <span class="notranslate">galaxy</span>.celery worker <span class="nt">--concurrency</span> 2 <span class="nt">--loglevel</span> DEBUG <span class="nt">--pool</span> th<span class="notranslate">reads</span> <span class="nt">--queues</span> celery,<span class="notranslate">galaxy</span>.inte<span class="notranslate">rna</span>l,<span class="notranslate">galaxy</span>.exte<span class="notranslate">rna</span>l
+             ├─245401 /srv/<span class="notranslate">galaxy</span>/venv/bin/python <span class="nt">-c</span> from multiprocessing.resource_tracker import main<span class="p">;</span>main<span class="o">(</span>7<span class="o">)</span>
+             ├─245582 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/celery <span class="nt">--app</span> <span class="notranslate">galaxy</span>.celery beat <span class="nt">--loglevel</span> DEBUG <span class="nt">--schedule</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/celery-beat-schedule
+             ├─245806 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_0 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_0.pid
+             ├─246274 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_1 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_1.pid
+             └─246737 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_2 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_2.pid
+</code></pre></div></div>
+
+<p>Helpful things to note:</p>
+
+<ul>
+  <li>the file defining the service is listed after <code class="language-plaintext highlighter-rouge">Loaded</code>, if you want to see what it does or how it’s configured, or to edit that configuration</li>
+  <li>You can see how long it’s been running</li>
+  <li>How many tasks (children) there are</li>
+  <li>Memory and the limit, if memory limiting is configured.</li>
+  <li>CPU time used</li>
+  <li>And then many of the children.</li>
+</ul>
+
+<h2 id="restarting">Restarting</h2>
+
+<p>Here’s one of the nice new things you can do, once you’ve moved away from SysV, and to the joyous world of systemd, restart multiple processes at once! If you have multiple <span class="notranslate">Galaxy</span> processes, use a wildcard to restart them all.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart nginx <span class="notranslate">galaxy</span>-<span class="k">*</span>
+</code></pre></div></div>
+
+<h2 id="failed-units">Failed Units</h2>
+
+<p>Easily check if any service has failed with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--failed</span>
+</code></pre></div></div>
+
+<h2 id="editing-units-or-overriding">Editing Units or Overriding</h2>
+
+<p>Sometimes one of the system units provided will have some weird behaviour that you need to override (or your ansible role doesn’t expose it), then you can use <code class="language-plaintext highlighter-rouge">systemctl edit unit</code> to override some settings.</p>
+
+<p>Additional directives can be supplied, e.g. making your service start after another service is started, if you need to sequence their starts.</p>
+
+<p>Note that if it was defined in the base unit file, then you need to set it to an empty value first, before overriding. E.g. <code class="language-plaintext highlighter-rouge">ExecStart=\nExecStart=command...</code></p>
+
+<h2 id="masking-units">Masking Units</h2>
+
+<p>I never needed this until one day I did. Masking a unit makes it impossible to start, but if someone’s gone and installed a GUI on your server, inclusive of power management systems that trigger hibe<span class="notranslate">rna</span>tion when not in use, then this might be a useful trick. You can mask anything, service, or even targets like I had to in that case.</p>
+
+<p>This command will prevent the device from reaching or activating any of those targets. Useful for servers when you’re in a bind and don’t know how to remove power management:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">systemctl mask sleep.target suspend.target hibe<span class="notranslate">rna</span>te.target hybrid-sleep.target
+</span></code></pre></div></div>
+
+<h2 id="unit-security-optimisation">Unit Security Optimisation</h2>
+
+<p>Because systemd uses cgroups, it can also give us a nice overview of any security issues that might be worth looking into. Here we see the <span class="notranslate">Galaxy</span> unit has a lot of</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@gat-1:~$</span><span class="w"> </span>systemd-analyze security <span class="notranslate">galaxy</span>
+<span class="go">  NAME                                       DESCRIPTION                                         EXPOSURE
+✗ PrivateNetwork=                            Service has access to the host's network            0.5
+✓ User=/DynamicUser=                         Service runs under a static non-root user identity  
+</span><span class="c">....
+</span><span class="go">✗ CapabilityBoundingSet=~CAP_SYS_CHROOT      Service may issue chroot()                          0.1
+✗ ProtectHostname=                           Service may change system host/domainname           0.1
+✗ CapabilityBoundingSet=~CAP_BLOCK_SUSPEND   Service may establish wake locks                    0.1
+✗ CapabilityBoundingSet=~CAP_LEASE           Service may create file leases                      0.1
+✗ CapabilityBoundingSet=~CAP_SYS_PACCT       Service may use acct()                              0.1
+✗ CapabilityBoundingSet=~CAP_SYS_TTY_CONFIG  Service may issue vhangup()                         0.1
+✗ CapabilityBoundingSet=~CAP_WAKE_ALARM      Service may program timers that wake up the system  0.1
+✗ RestrictAddressFamilies=~AF_UNIX           Service may allocate local sockets                  0.1
+
+→ Overall exposure level for <span class="notranslate">galaxy</span>.service: 9.2 UNSAFE 😨
+</span></code></pre></div></div>
+
+<p>Here we see a lot of low hanging fruit for restricting the abilities of <span class="notranslate">Galaxy</span>’s processes. This can also be applied to e.g. the job runner, or your webserver for additional security.</p>
+
+<h2 id="testing-with-systemd-run">Testing with systemd-run</h2>
+
+<p>Would you like to test some of these limits manually? Or just to run a one-off process in a very sandboxed environment? Enter <code class="language-plaintext highlighter-rouge">systemd-run</code>, which allows just that. Here you can set a lot of the capabilities or restrictions:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemd-run <span class="nt">-p</span> <span class="nv">IOAccounting</span><span class="o">=</span><span class="nb">yes</span> <span class="nt">-p</span> <span class="nv">CPUAccounting</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-p</span> <span class="nv">MemoryAccounting</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-p</span> <span class="nv">TasksAccounting</span><span class="o">=</span><span class="nb">true</span> <span class="nt">-p</span> <span class="nv">ProtectSystem</span><span class="o">=</span>strict <span class="nt">-p</span> <span class="nv">PrivateDevices</span><span class="o">=</span><span class="nb">yes</span> <span class="nt">-t</span> <span class="nt">-S</span>
+</code></pre></div></div>
+
+<p>And <code class="language-plaintext highlighter-rouge">-S</code> puts you in an interactive terminal, allowing you to play around with this environment. You get a cleaned out environment, working inside of a cgroup (visible in <code class="language-plaintext highlighter-rouge">systemd-cgtop</code>, and <code class="language-plaintext highlighter-rouge">systemctl status</code>) and when you exit it tells how you many resources you’ve used. This is both an easy way to test processes, and an option to sandbox rarely run processes, by setting an extremely restrictive environment.</p>
+
+<h2 id="optimising-slow-boots">Optimising Slow Boots</h2>
+
+<p>systemd features an analyze command to check why your booting is slow</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemd-analyze
+<span class="go">Startup finished in 3.841s (firmware) + 3.925s (loader) + 11.104s (kernel) + 1min 5.331s (userspace) = 1min 24.203s
+graphical.target reached after 11.547s in userspace
+</span></code></pre></div></div>
+
+<p>You can even have it generate a fancy plot for you!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemd-analyze plot <span class="o">&gt;</span> plot.svg
+</code></pre></div></div>
+
+<figure id="figure-1"><img src="images/plot.svg" alt="waterfall graphic of systemd boot time, cloud-init has the most, largest red bars. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Notice how many units wait for network to finish being ready, and are stuck until that is ready. This image was generated from a training VM. Can you spot <span class="notranslate">Galaxy</span>? It doesn't show the red bars, because it does not currently notify systemd when it's done starting up.</figcaption></figure>
+
+<h2 id="procons-of-systemd">Pro/Cons of systemd</h2>
+
+<blockquote class="code-2col">
+  <blockquote class="code-out">
+    <h3 id="code-out-pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <ul>
+      <li>CGroups, to reap children!</li>
+      <li>CGroups, for hard memory/cpu limits</li>
+      <li>CGroups, for security benefits, and dropping capabilities!</li>
+      <li>Service dependencies and simultaneously booting multiple units.</li>
+      <li>Easily override tasks</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <ul>
+      <li>It’s new and requires time to learn
+        <ul>
+          <li>But all the distros have mostly switched so, might be time to learn.</li>
+        </ul>
+      </li>
+      <li>It is significantly more complicated</li>
+      <li>Even if that complexity does have a lot of benefits</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<ul>
+  <li><a href="https://wiki.archlinux.org/title/Systemd">Archi wiki page</a></li>
+  <li><a href="https://man.archlinux.org/man/systemctl.1">man 1 systemctl</a></li>
+  <li><a href="https://man.archlinux.org/man/systemd.service.5">man 5 systemd.service</a></li>
+</ul>
+
+<h1 id="timers">timers</h1>
+
+<p>Do you use cron aggressively, like any other sysadmin? It’s an amazing part of the system, no? Doing things periodically, and repeatably. But you’ve probably had to learn a lot of hard lessons along the way, right?</p>
+
+<ul>
+  <li>Doing things idempotently</li>
+  <li>Checking that you don’t have a period cron job running, before starting this one, if it’s a long one.</li>
+  <li>What if there was a reboot?</li>
+</ul>
+
+<p>Would you like to worry less about those issues? Try systemd timers today!</p>
+
+<p><a href="https://wiki.archlinux.org/title/Systemd/Timers">The arch page</a> is an excellent reference on why they’re interesting and useful. We’ll reproduce their pro/con list below:</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-out">
+    <h3 id="code-out-pros-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <ul>
+      <li>Easier testing, you can trigger units any time</li>
+      <li>Cgroups!</li>
+      <li>dependencies (e.g. network!)</li>
+      <li>automatic logging!!</li>
+      <li>two flavours of timers: clock time based, and monotonic (e.g. time since last execution)</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-cons-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <ul>
+      <li>Two files, instead of a single line. It <em>is</em> annoying, you’re not wrong. Maybe write an ansible role that translates it.</li>
+      <li>No <code class="language-plaintext highlighter-rouge">MALITO</code> functionality built in.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<h2 id="listing-timers">Listing Timers</h2>
+
+<p>We have a lovely timer listing, which tells you when it’ll next run, how much time is left, when it last ran, how much time since that passed.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl list-timers
+NEXT                         LEFT          LAST                         PASSED       UNIT                         ACTIVATES
+Mon 2022-07-04 12:32:45 CEST 6min left     Mon 2022-07-04 11:34:59 CEST 51min ago    anacron.timer                anacron.service
+Mon 2022-07-04 14:07:08 CEST 1h 40min left Fri 2022-07-01 13:38:20 CEST 2 days ago   motd-news.timer              motd-news.service
+Mon 2022-07-04 17:12:05 CEST 4h 45min left Mon 2022-07-04 10:20:49 CEST 2h 5min ago  ua-timer.timer               ua-timer.service
+Mon 2022-07-04 17:14:33 CEST 4h 48min left Fri 2022-07-01 19:22:14 CEST 2 days ago   apt-daily.timer              apt-daily.service
+Tue 2022-07-05 00:00:00 CEST 11h left      Mon 2022-07-04 09:32:16 CEST 2h 54min ago logrotate.timer              logrotate.service
+Tue 2022-07-05 00:00:00 CEST 11h left      Mon 2022-07-04 09:32:16 CEST 2h 54min ago man-db.timer                 man-db.service
+Tue 2022-07-05 01:44:11 CEST 13h left      Mon 2022-07-04 11:07:49 CEST 1h 18min ago fwupd-refresh.timer          fwupd-refresh.service
+Tue 2022-07-05 06:28:44 CEST 18h left      Mon 2022-07-04 09:33:59 CEST 2h 52min ago apt-daily-upgrade.timer      apt-daily-upgrade.service
+Tue 2022-07-05 10:12:36 CEST 21h left      Mon 2022-07-04 09:47:01 CEST 2h 39min ago systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Sun 2022-07-10 03:10:47 CEST 5 days left   Mon 2022-07-04 09:32:52 CEST 2h 53min ago e2scrub_all.timer            e2scrub_all.service
+Mon 2022-07-11 00:00:00 CEST 6 days left   Mon 2022-07-04 09:32:16 CEST 2h 54min ago fstrim.timer                 fstrim.service
+</code></pre></div></div>
+
+<p>In the last column we can see the timer units, and the services which they activate. In systemd everything is a unit, and hopefully by this point in the tutorial you’ve seen some of the benefits of that.</p>
+
+<p>Let’s look at the <code class="language-plaintext highlighter-rouge">motd-news</code> timer:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>systemctl <span class="nb">cat </span>motd-news.timer
+<span class="go">[Unit]
+Description=Message of the Day
+
+[Timer]
+OnCalendar=00,12:00:00
+RandomizedDelaySec=12h
+Persistent=true
+OnStartupSec=1min
+
+[Install]
+WantedBy=timers.target
+</span></code></pre></div></div>
+
+<p>It has a description, an <code class="language-plaintext highlighter-rouge">OnCalendar</code> time since it’s a clock based timer, potentially a random delay as well (despite being <code class="language-plaintext highlighter-rouge">Sec</code>, can be expressed in any unit). The associated <code class="language-plaintext highlighter-rouge">motd-news.service</code> does not need to be mentioned, it will be started by default based on the name of the timer.</p>
+
+<p>What about logs? They’re in jou<span class="notranslate">rna</span>lctl now! Let’s take advantage of some of the things we learned earlier, like, wildcards!</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">jou<span class="notranslate">rna</span>lctl -u motd-news.* --since '5 days ago'
+</span></code></pre></div></div>
+
+<p>You’ll see the timer unit start mostly around reboots, usually it doesn’t have much useful in it. The service unit has what we’re more interested in, any logged output.</p>
+
+<h2 id="fixing-those-cron-issues">Fixing those Cron Issues</h2>
+
+<p>Before we mentioned a few issues that admins dealt with with cron</p>
+
+<ul>
+  <li>Doing things idempotently</li>
+  <li>Checking that you don’t have a period cron job running, before starting this one, if it’s a long one.</li>
+  <li>What if there was a reboot?</li>
+</ul>
+
+<p>While we can’t help with the first, the second is taken care of by having systemd services be state machines, if there’s an already running copy of the <code class="language-plaintext highlighter-rouge">.service</code>, then the <code class="language-plaintext highlighter-rouge">.timer</code> won’t do anything. No more <code class="language-plaintext highlighter-rouge">pgrep</code> to check for specific processes. And as for reboots, <code class="language-plaintext highlighter-rouge">Persistent=true</code> can cause a timer to trigger immediately, if it missed the last start time.</p>
+
+<h2 id="notifying-you">Notifying you</h2>
+
+<p>As mentioned in the Arch wiki, you can setup a “notification” service. This is a service, typically a simple bash script, that, when run, sends a notification to a channel of your choice (Slack, XMPP, Email, etc.) This can be a really simple service:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/systemd/system/failure-notification@.service
+
+[Unit]
+Description=Send a notification
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/path/to/failure-notification.sh %i
+</code></pre></div></div>
+
+<p>And then for any unit (timer’s associated service, normal units, etc) where you’d like to be informed of the failure, simply update or override that to do the notification:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+OnFailure=failure-notification@%n
+</code></pre></div></div>
+
+<p>Here it will be templated out with <code class="language-plaintext highlighter-rouge">%n</code> meaning the unit name, which will replace the <code class="language-plaintext highlighter-rouge">%i</code> in the notification unit, and be included in the notification to you.</p>
+
+<h2 id="further-reading-1">Further Reading</h2>
+
+<ul>
+  <li><a href="https://wiki.archlinux.org/title/Systemd/Timers">The arch page</a></li>
+  <li><a href="https://man.archlinux.org/man/systemd.timer.5">man 5 systemd.timer</a></li>
+  <li><a href="https://man.archlinux.org/man/systemd.time.7">man 7 systemd.time</a></li>
+</ul>
+
+<h1 id="journald">jou<span class="notranslate">rna</span>ld</h1>
+
+<blockquote class="quote">
+  <p>Where did my files go?</p>
+</blockquote>
+
+<p>In a number of systems they’re still there, to be honest, you’ve still got all of your old log files.</p>
+
+<p>But now instead of search N different log files, or memorising which files have what contents, there’s one firehose for you to watch instead: jou<span class="notranslate">rna</span>lctl. So we need to make this manageable with filters!</p>
+
+<h2 id="per-unit-logs">Per Unit Logs</h2>
+
+<blockquote class="code-out">
+  <h3 id="code-out-the-journalctl-way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-u</span> <span class="notranslate">galaxy</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>returns all of the logs for <span class="notranslate">Galaxy</span>.  The first line even tells us how far back our logs go:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-u</span> <span class="notranslate">galaxy</span> | <span class="nb">head</span> <span class="nt">-n1</span>
+<span class="go">-- Logs begin at Tue 2022-06-28 08:31:06 UTC, end at Mon 2022-07-04 09:30:01 UTC. --
+</span></code></pre></div></div>
+
+<blockquote class="code-2col">
+  <blockquote class="code-out">
+    <h3 id="code-out-pros-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <p>You did not need to know or remember:</p>
+
+    <ul>
+      <li>Where the log files were (<code class="language-plaintext highlighter-rouge">/var/log</code>? <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/log</code>? somewhere else?)</li>
+      <li>If any of the old logs were compressed (or use <code class="language-plaintext highlighter-rouge">zless</code>/<code class="language-plaintext highlighter-rouge">zcat</code>/<code class="language-plaintext highlighter-rouge">zgrep</code>)</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-cons-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <ul>
+      <li>Can’t just <code class="language-plaintext highlighter-rouge">cat</code> it.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<h2 id="logs-for-a-group-of-units">Logs for a Group of Units</h2>
+
+<p>Sometimes you want to tail the logs of multiple proceses as once. Have you ever been debugging an issue, and wanted to see the logs of <code class="language-plaintext highlighter-rouge">nginx</code>, <strong>all</strong> <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> processes, and <code class="language-plaintext highlighter-rouge">postgres</code>? Well you can’t because <code class="language-plaintext highlighter-rouge">nginx</code> needs special configuration to write to jou<span class="notranslate">rna</span>lctl (see, your files are still there, and it makes things extra confusing.)</p>
+
+<p>Adding these two lines to your <code class="language-plaintext highlighter-rouge">nginx</code> configuration will place logs in jou<span class="notranslate">rna</span>ld</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">error_log</span> <span class="s">syslog:server=unix:/dev/log</span><span class="p">;</span>
+<span class="k">access_log</span> <span class="s">syslog:server=unix:/dev/log</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>And then you can simply</p>
+
+<blockquote class="code-out">
+  <h3 id="code-out-the-journalctl-way-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-f</span> <span class="nt">-u</span> <span class="notranslate">galaxy</span><span class="k">*</span> <span class="nt">-u</span> nginx <span class="nt">-u</span> postgresql
+</code></pre></div>  </div>
+</blockquote>
+
+<p>If you have multiple similarly named units, the wildcard feature is incredibly helpful. Use<span class="notranslate">Galaxy</span>.eu had multiple named processes for: web handlers, <span class="notranslate">workflow</span> schedulers, job handlers. We could see logs simultaneously across all of these units.</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-out">
+    <h3 id="code-out-pros-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <ul>
+      <li>Tail multiple units at once</li>
+      <li>Again don’t have to know where the files are</li>
+      <li>Or switch tools if you want to look at older logs</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-cons-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <p>?</p>
+  </blockquote>
+</blockquote>
+
+<h2 id="dropping-logs">Dropping Logs</h2>
+
+<p>jou<span class="notranslate">rna</span>ld has the habit of throwing away logs if it gets too many messages simultaneously, to prevent {DOS} and denial-of-storage attacks. To disable that behaviour, you can tune</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RateLimitBurst=0
+</code></pre></div></div>
+
+<p>(see <code class="language-plaintext highlighter-rouge">man 5 jou<span class="notranslate">rna</span>ld.conf</code>)</p>
+
+<h2 id="logs-during-a-specific-time-period">Logs during a specific time period</h2>
+
+<p>This is my absolute favourite feature of jou<span class="notranslate">rna</span>lctl, and I’ve regularly used it to narrow down logs from dozens of processes, especially when I don’t know the root cause of an issue and need to watch all of the logs.</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-in">
+    <h3 id="code-in-the-old-way"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> The Old Way</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zcat /var/log/<span class="k">*</span> | egrep <span class="s2">"(Jul</span><span class="se">\s</span><span class="s2">*1 11:4.:..|2022-07-01 11:4.:..)"</span>
+</code></pre></div>    </div>
+    <p>Hope everything logs in the same timezone! And no one uses UTC when there’s a different system time configured.</p>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-the-journalctl-way-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s2">"2022-07-01 11:40 CEST"</span> <span class="nt">--until</span> <span class="s2">"2022-07-01 11:50 CEST"</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>This is very useful if you know when an error is, easily pull out entire system logs from around a specific timepoint. Everything is forced through jou<span class="notranslate">rna</span>ld’s logging format, so you can be sure the timestamps are all correct, and <code class="language-plaintext highlighter-rouge">--since</code> and <code class="language-plaintext highlighter-rouge">--when</code> can be made timezone aware if you have reason to use that (e.g. a user reporting an issue in their current local time.) You can mix and match explicit time zone locales for even more fun:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s2">"2022-06-21 14:24 Pacific/Auckland"</span> <span class="nt">--until</span> <span class="s2">"2022-06-21 14:30 Europe/Amsterdam"</span>
+</code></pre></div></div>
+
+<p>The logs will be displayed in the last mentioned TZ.</p>
+
+<h2 id="logs-during-a-specific-time-period-relatively">Logs during a specific time period, relatively</h2>
+
+<p>This is another flag that I use literally every day:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s1">'1 hour ago'</span>
+</code></pre></div></div>
+
+<p>If you know relatively when an issue started happening, it’s a great way to filter on the logs that are interesting, without having to do clock math.</p>
+
+<h2 id="previous-boot-logs">Previous Boot Logs</h2>
+
+<p>Want to see what happened during a previous run of the system, during a previous boot? Use <code class="language-plaintext highlighter-rouge">--list-boots</code> to list all of the previous system restarts</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">--list-boots</span>
+<span class="go">-14 143fdb7ac7a54370b41196c02affc3e8 Wed 2022-04-06 20:03:38 CEST—Mon 2022-04-11 08:26:00 CEST
+-13 45801d31b0654fe3a4a7d5541e6ff71a Mon 2022-04-11 09:06:07 CEST—Wed 2022-04-20 13:37:31 CEST
+-12 661e959635954aa0bbd6b800433e5097 Wed 2022-04-20 13:37:53 CEST—Thu 2022-04-28 17:26:32 CEST
+-11 cedaef23e95849c39cfcdb1611b616a2 Thu 2022-04-28 17:40:33 CEST—Thu 2022-04-28 17:43:23 CEST
+-10 6ac084d5256d4134bd6e395b490e99f2 Thu 2022-04-28 18:44:57 CEST—Mon 2022-05-09 11:21:33 CEST
+ -9 680c9440c75d4699b6de48a56891d835 Mon 2022-05-09 11:21:54 CEST—Tue 2022-05-17 15:21:36 CEST
+ -8 b8581fd6394144a9abc59b2832056037 Wed 2022-05-18 09:08:54 CEST—Fri 2022-05-20 17:33:36 CEST
+ -7 8bb5c9d7d4ef4117ad8181d0314de7e1 Sun 2022-05-22 17:45:23 CEST—Thu 2022-06-02 16:35:45 CEST
+ -6 5325407857054a828dbba6bb104efc80 Fri 2022-06-03 12:04:28 CEST—Thu 2022-06-09 10:15:40 CEST
+ -5 0428cc6d11bc4aa9bd8e3999f9bd2c7f Thu 2022-06-09 10:20:05 CEST—Fri 2022-06-17 12:26:06 CEST
+ -4 990910c70e79458394f5d9a97ae724ab Sat 2022-06-18 11:21:16 CEST—Tue 2022-06-21 12:14:47 CEST
+ -3 d9a9088afacd4c6c9f85db49e9b321ce Tue 2022-06-21 14:29:20 CEST—Tue 2022-06-21 15:07:26 CEST
+ -2 c3f0ec4fbc93410280f1e086d6533286 Tue 2022-06-21 15:07:45 CEST—Thu 2022-06-23 12:58:11 CEST
+ -1 5d4d9c039daf4e5795a13211de4d6fd4 Thu 2022-06-23 12:58:31 CEST—Fri 2022-07-01 20:10:15 CEST
+  0 490a1609fb5d422cad1e7135db88efe7 Mon 2022-07-04 09:32:12 CEST—Mon 2022-07-04 11:56:09 CEST
+</span></code></pre></div></div>
+
+<p>You can then see logs for those specific timeperiods with</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl -b -3 | head
+-- Logs begin at Wed 2022-04-06 20:03:38 CEST, end at Mon 2022-07-04 11:59:13 CEST. --
+jun 21 14:29:20 cosima kernel: microcode: microcode updated early to revision 0x88, date = 2021-03-31
+jun 21 14:29:20 cosima kernel: Linux version 5.13.0-44-generic (buildd@lcy02-amd64-107) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 (Ubuntu 5.13.0-44.49~20.04.1-generic 5.13.19)
+</code></pre></div></div>
+
+<p>All of the other filtering commands (<code class="language-plaintext highlighter-rouge">--since</code>, <code class="language-plaintext highlighter-rouge">--when</code>) natively search across boots so there’s generally no need to supply this flag unless you want to restrict to a specific time period based on restarting.</p>
+
+<h2 id="advanced-log-filtering">Advanced Log Filtering</h2>
+
+<p>There’s a lot of additional information jou<span class="notranslate">rna</span>ld tracks with your logs, you can read them in the <code class="language-plaintext highlighter-rouge">verbose</code> format to see</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-o</span> verbose
+<span class="gp">Wed 2022-04-06 20:03:38.281794 CEST [s=1b57c151fb2e49ad98a84ac45ed2e245;</span><span class="nv">i</span><span class="o">=</span>a310796<span class="p">;</span><span class="nv">b</span><span class="o">=</span>143fdb7ac7a54370b41196c02affc3e8<span class="p">;</span><span class="nv">m</span><span class="o">=</span>51917bf226<span class="p">;</span><span class="nv">t</span><span class="o">=</span>5dc002e4a3f42<span class="p">;</span><span class="nv">x</span><span class="o">=</span>4ae28fb4218f3691]
+<span class="go">    _TRANSPORT=stdout
+    _STREAM_ID=45b0adde513f46348564e6f9ce85e4b2
+    PRIORITY=6
+    SYSLOG_FACILITY=3
+    SYSLOG_IDENTIFIER=influxd-systemd-start.sh
+</span><span class="gp">    MESSAGE=[httpd] 127.0.0.1 - - [06/Apr/2022:20:03:38 +0200] "POST /write?db=telegraf HTTP/1.1 " 204 0 "-" "Telegraf/1.21.4 Go/1.17.7" e265a273-b5d3-11ec-88d5-80fa5b94d68a&gt;</span><span class="w">
+</span><span class="go">    _PID=2491
+    _UID=1001
+    _GID=1001
+    _COMM=influxd
+    _EXE=/usr/bin/influxd
+    _CMDLINE=/usr/bin/influxd -config /etc/influxdb/influxdb.conf
+    _CAP_EFFECTIVE=0
+    _SELINUX_CONTEXT=unconfined
+    _SYSTEMD_CGROUP=/system.slice/influxdb.service
+    _SYSTEMD_UNIT=influxdb.service
+    _SYSTEMD_SLICE=system.slice
+    _SYSTEMD_INVOCATION_ID=0ba7986947854acc938a93f020f96cee
+    _BOOT_ID=143fdb7ac7a54370b41196c02affc3e8
+    _MACHINE_ID=08854338f5f046d5a0d73f81ca5c2d79
+    _HOSTNAME=cosima
+</span></code></pre></div></div>
+
+<p>All of these attributes can be used to filter your logs, just add them to your <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code> command like so:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_GID</span><span class="o">=</span>1001
+</code></pre></div></div>
+
+<p>Or, for example, to get every log, by any process that logged, running under a specific user, like the <span class="notranslate">Galaxy</span> user:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_UID</span><span class="o">=</span><span class="si">$(</span>getent passwd | <span class="nb">grep </span><span class="notranslate">galaxy</span> | <span class="nb">cut</span> <span class="nt">-f</span> 3 <span class="nt">-d</span> : <span class="si">)</span>
+</code></pre></div></div>
+
+<p>Or to see every log from a python program?</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_COMM</span><span class="o">=</span>python3
+</code></pre></div></div>
+
+<h2 id="cleaning-logs">Cleaning Logs</h2>
+
+<p>Jou<span class="notranslate">rna</span>ld comes with a nice tool for cleaning up logs, <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl --vacuum-...</code>. There are a couple different ways to invoke this. It’s very useful if you left <span class="notranslate">Galaxy</span> poorly configured, reading bad XML files and crashing every minute, logging endlessly until you checked it again. That sort of behaviour generates an incredible number of logs.</p>
+
+<p>First we can check how much disk space our logs are using:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl --disk-usage
+Archived and active jou<span class="notranslate">rna</span>ls take up 120.0M in the file system.
+</code></pre></div></div>
+
+<p>And then we can clean it!</p>
+
+<p>Based on <strong>size</strong>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-size</span><span class="o">=</span>4GB
+</code></pre></div></div>
+
+<p>Based on <strong>age</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-time</span><span class="o">=</span><span class="s2">"2 days"</span>
+</code></pre></div></div>
+
+<p>Or based on number of <strong>files</strong></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-files</span><span class="o">=</span>3 <span class="c"># I've never used this one.</span>
+</code></pre></div></div>
+
+<p>Note that this only applies to “archived” logs, not “active” ones, but you can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl --rotate</code> to force them to archived, before cleaning..</p>
+
+<h2 id="log-verification">Log Verification</h2>
+
+<p>Want to check if they’ve been tampered with (and someone forgot to recalculate checksums?). The <code class="language-plaintext highlighter-rouge">--verify</code> flag can be used to do that.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl --verify
+PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/user-1001@0005df9b9d17faa5-c4276c13359e16e1.jou<span class="notranslate">rna</span>l~
+File corruption detected at /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.jou<span class="notranslate">rna</span>l~:3f070f8 (of 67108864 bytes, 98%).
+FAIL: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.jou<span class="notranslate">rna</span>l~ (Bad message)
+PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@ede9cabbb3874bd98bcb0b16ada49d8f-000000000a6ce684-0005de680b29a077.jou<span class="notranslate">rna</span>l
+7e5abf8: Unused data (entry_offset==0)
+..  94%
+</code></pre></div></div>
+
+<h2 id="further-reading-2">Further Reading</h2>
+
+<ul>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man5/journald.conf.5.html">man 5 jou<span class="notranslate">rna</span>ld.conf</a></li>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man1/journalctl.1.html">man 1 jou<span class="notranslate">rna</span>lctl</a></li>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man7/systemd.journal-fields.7.html">man 7 systemd.jou<span class="notranslate">rna</span>l-fields</a></li>
+</ul>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>systemd units are actually kinda nice</p>
+</li>
+                        
+                        <li><p>In most versions you even can limit memory, cpu usage of process groups. In recent versions, disk usage!</p>
+</li>
+                        
+                        <li><p>No more PID files! Cgroups mean the processes are actually cleaned up!</p>
+</li>
+                        
+                        <li><p>journalctl makes accessing logs incredibly easy; view multiple logs simultaneously, properly interlaced.</p>
+</li>
+                        
+                        <li><p>journalctl-vacuum replaces onerous cleaning processes and even can clean by relative timestamps</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=How I learned to stop worrying and love the systemd (Galaxy Server administration)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>How I learned to stop worrying and love the systemd (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-stop-worrying-love-systemd,
+author = "",
+title = "How I learned to stop worrying and love the systemd (Galaxy Training Materials)",
+year = "2022",
+month = "07",
+day = "04"
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
