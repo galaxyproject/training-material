@@ -1,0 +1,2754 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Version Control with Git</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Version Control with Git" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:00:06 +0000" />
+<meta name="DC.creator" content="Sofoklis Keisaris" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Version Control with Git" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/bash-git/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/bash-git/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/bash-git/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/data-science/tutorials/bash-git/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/data-science/tutorials/bash-git/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-05-01/topics/data-science/tutorials/bash-git/tutorial.html" title="Version 2022-05-01">2022-05-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:06 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Version Control with Git",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Version Control with Git' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/data-science/tutorials/bash-git/tutorial.html",
+  "timeRequired": "PT65M",
+  "keywords": "data-science",
+  "description": "The questions this  addresses are:\n - What is version control and why should I use it?\n - How do I get set up to use Git?\n - Where does Git store information?\n - How do I record changes in Git?\n - How do I check the status of my version control repository?\n - How do I record notes about what changes I made and why?\n - How can I identify old versions of files?\n - How do I review my changes?\n - How can I recover old versions of files?\n\n\\nThe objectives are:\n - Understand the benefits of an automated version control system.\n - Understand the basics of how automated version control systems work.\n - Configure `git` the first time it is used on a computer.\n - Understand the meaning of the `--global` configuration flag.\n - Create a local Git repository.\n - Describe the purpose of the `.git` directory.\n - Go through the modify-add-commit cycle for one or more files.\n - Explain where information is stored at each stage of that cycle.\n - Distinguish between descriptive and non-descriptive commit messages.\n - Explain what the HEAD of a repository is and how to use it.\n - Identify and use Git commit numbers.\n - Compare various versions of tracked files.\n - Restore old versions of files.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org//training-material/topics/data-science/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Version Control with Git</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/Sofokli5/" class="contributor-badge contributor-Sofokli5"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/Sofokli5?s=27" alt="Avatar">Sofoklis Keisaris</a>
+
+
+
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/fpsom?s=27" alt="Avatar">Fotis E. Psomopoulos</a>
+
+
+
+<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+
+
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is version control and why should I use it?</p>
+</li>
+        
+        <li><p>How do I get set up to use Git?</p>
+</li>
+        
+        <li><p>Where does Git store information?</p>
+</li>
+        
+        <li><p>How do I record changes in Git?</p>
+</li>
+        
+        <li><p>How do I check the status of my version control repository?</p>
+</li>
+        
+        <li><p>How do I record notes about what changes I made and why?</p>
+</li>
+        
+        <li><p>How can I identify old versions of files?</p>
+</li>
+        
+        <li><p>How do I review my changes?</p>
+</li>
+        
+        <li><p>How can I recover old versions of files?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the benefits of an automated version control system.</p>
+</li>
+        
+        <li><p>Understand the basics of how automated version control systems work.</p>
+</li>
+        
+        <li><p>Configure <code class="language-plaintext highlighter-rouge">git</code> the first time it is used on a computer.</p>
+</li>
+        
+        <li><p>Understand the meaning of the <code class="language-plaintext highlighter-rouge">--global</code> configuration flag.</p>
+</li>
+        
+        <li><p>Create a local Git repository.</p>
+</li>
+        
+        <li><p>Describe the purpose of the <code class="language-plaintext highlighter-rouge">.git</code> directory.</p>
+</li>
+        
+        <li><p>Go through the modify-add-commit cycle for one or more files.</p>
+</li>
+        
+        <li><p>Explain where information is stored at each stage of that cycle.</p>
+</li>
+        
+        <li><p>Distinguish between descriptive and non-descriptive commit messages.</p>
+</li>
+        
+        <li><p>Explain what the HEAD of a repository is and how to use it.</p>
+</li>
+        
+        <li><p>Identify and use Git commit numbers.</p>
+</li>
+        
+        <li><p>Compare various versions of tracked files.</p>
+</li>
+        
+        <li><p>Restore old versions of files.</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 65 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 6, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <p>Version control is a way of tracking the change history of a project, and <code class="language-plaintext highlighter-rouge">git</code> is one of the most popular systems for doing that! This tutorial will guide you through the basics of using git for version control.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, you will learn how to create a git repo, and begin working with it.</p>
+
+<ol id="markdown-toc">
+  <li><a href="#basics" id="markdown-toc-basics">Basics</a></li>
+  <li><a href="#setting-up-git" id="markdown-toc-setting-up-git">Setting up git</a></li>
+  <li><a href="#create-a-repo" id="markdown-toc-create-a-repo">Create a Repo</a>    <ol>
+      <li><a href="#places-to-create-git-repositories" id="markdown-toc-places-to-create-git-repositories">Places to Create Git Repositories</a></li>
+      <li><a href="#correcting-git-init-mistakes" id="markdown-toc-correcting-git-init-mistakes">Correcting <code class="language-plaintext highlighter-rouge">git init</code> Mistakes</a></li>
+    </ol>
+  </li>
+  <li><a href="#tracking-changes" id="markdown-toc-tracking-changes">Tracking Changes</a></li>
+  <li><a href="#lets-put-us-to-the-test" id="markdown-toc-lets-put-us-to-the-test">Let’s put us to the test</a></li>
+  <li><a href="#history-exploring" id="markdown-toc-history-exploring">History Exploring</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="basics">Basics</h1>
+
+<p>We’ll start by exploring how version control can be used
+to keep track of what one person did and when.
+Even if you aren’t collaborating with other people,
+automated version control is much better than this situation:</p>
+
+<figure id="figure-1"><img src="../../images/bash-git/phd101212s.png" alt="Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com</figcaption></figure>
+
+<p>We’ve all been in this situation before: it seems unnecessary to have
+multiple nearly-identical versions of the same document. Some word
+processors let us deal with this a little better, such as Microsoft
+Word’s 
+<a href="https://support.office.com/en-us/article/Track-changes-in-Word-197ba630-0f5f-4a8e-9a77-3712475e806a">Track Changes</a>, 
+Google Docs’ <a href="https://support.google.com/docs/answer/190843?hl=en">version history</a>, or 
+LibreOffice’s <a href="https://help.libreoffice.org/Common/Recording_and_Displaying_Changes">Recording and Displaying Changes</a>.</p>
+
+<p>Version control systems start with a base version of the document and
+then record changes you make each step of the way. You can
+think of it as a recording of your progress: you can rewind to start at the base
+document and play back each change you made, eventually arriving at your
+more recent version.</p>
+
+<p><img src="../../images/bash-git/play-changes.svg" alt="Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision." loading="lazy" /></p>
+
+<p>Once you think of changes as separate from the document itself, you
+can then think about “playing back” different sets of changes on the base document, ultimately
+resulting in different versions of that document. For example, two users can make independent
+sets of changes on the same document.</p>
+
+<p><img src="../../images/bash-git/versions.svg" alt="Different Versions Can be Saved, showing a document splitting into two, with different changes." loading="lazy" /></p>
+
+<p>Unless multiple users make changes to the same section of the document - a conflict - you can 
+incorporate two sets of changes into the same base document.</p>
+
+<p><img src="../../images/bash-git/merge.svg" alt="Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes." loading="lazy" /></p>
+
+<p>A version control system is a tool that keeps track of these changes for us,
+effectively creating different versions of our files. It allows us to decide
+which changes will be made to the next version (each record of these changes is
+called a <a href="https://git-scm.com/docs/gitglossary#def_commit">commit</a>, and keeps useful metadata
+about them. The complete history of commits for a particular project and their
+metadata make up a <a href="https://git-scm.com/docs/gitglossary#def_repository">repository</a>.
+Repositories can be kept in sync across different computers, facilitating
+collaboration among different people.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-the-long-history-of-version-control-systems"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> The Long History of Version Control Systems</h3>
+
+  <p>Automated version control systems are nothing new.
+Tools like <a href="https://en.wikipedia.org/wiki/Revision_Control_System">RCS</a>, <a href="https://en.wikipedia.org/wiki/Concurrent_Versions_System">CVS</a>, or <a href="https://en.wikipedia.org/wiki/Apache_Subversion">Subversion</a> have been around since the early 1980s and are used by 
+many large companies.
+However, many of these are now considered legacy systems (i.e., outdated) due to various 
+limitations in their capabilities.
+More modern systems, such as Git and <a href="https://swcarpentry.github.io/hg-novice/">Mercurial</a>,
+are <em>distributed</em>, meaning that they do not need a centralized server to host the repository.
+These modern systems also include powerful merging tools that make it possible for 
+multiple authors to work on
+the same files concurrently.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-paper-writing"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Paper Writing</h3>
+
+  <ul>
+    <li>
+      <p>Imagine you drafted an excellent paragraph for a paper you are writing, but later ruin 
+it. How would you retrieve the <em>excellent</em> version of your conclusion? Is it even possible?</p>
+    </li>
+    <li>
+      <p>Imagine you have 5 co-authors. How would you manage the changes and comments 
+they make to your paper?  If you use LibreOffice Writer or Microsoft Word, what happens if 
+you accept changes made using the <code class="language-plaintext highlighter-rouge">Track Changes</code> option? Do you have a 
+history of those changes?</p>
+    </li>
+  </ul>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ul>
+      <li>
+        <p>Recovering the excellent version is only possible if you created a copy
+of the old version of the paper. The danger of losing good versions
+often leads to the problematic <span class="notranslate">workflow</span> illustrated in the PhD Comics
+cartoon at the top of this page.</p>
+      </li>
+      <li>
+        <p>Collaborative writing with traditional word processors is cumbersome.
+Either every collaborator has to work on a document sequentially
+(slowing down the process of writing), or you have to send out a
+version to all collaborators and manually merge their comments into
+your document. The ‘track changes’ or ‘record changes’ option can
+highlight changes for you and simplifies merging, but as soon as you
+accept changes you will lose their history. You will then no longer
+know who suggested that change, why it was suggested, or when it was
+merged into the rest of the document. Even online word processors like
+Google Docs or Microsoft Office Online do not fully resolve these
+problems.</p>
+      </li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p>Before diving in the tutorial, we need to open <span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span> . If you do not know how or never interacted with RStudio, please follow the <a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html">dedicated tutorial</a>.</p>
+
+<!--SNIPPET-->
+<blockquote class="notranslate hands_on">  <h3 data-toc-skip="" id="-hands-on-launch-rstudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</h3>  <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>  <blockquote class="tip">  <h3 data-toc-skip="" id="tip-tip-launch-rstudio-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio in <span class="notranslate">Galaxy</span></h3>  <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>  <ol>    <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here</a></li>    <li>Click Execute</li>    <li>The tool will start running and will stay running permanently</li>    <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>  </ol></blockquote>  <blockquote class="tip">  <h3 data-toc-skip="" id="tip-tip-launch-rstudio-cloud-if-not-available-on-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch RStudio Cloud if not available on <span class="notranslate">Galaxy</span></h3>  <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>  <ol>    <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>    <li>Create a new project</li>  </ol></blockquote></blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-git"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing git</h3>
+  <p>The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself. 
+We go to “Tools” and pick the “Shell…” option and we are good to go. Our workspace is the left, terminal window that just opened.</p>
+
+  <p>Fortunately, <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Environment and Packages</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> name_of_your_env nano git
+<span class="nv">$ </span>conda activate name_of_your_env
+</code></pre></div>    </div>
+  </blockquote>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Software</th>
+        <th>Version</th>
+        <th>Manual</th>
+        <th>Available for</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="https://git-scm.com/">git</a></td>
+        <td>2.35.3</td>
+        <td><a href="https://git-scm.com/book/en/v2">Link</a></td>
+        <td>Linux, MacOS</td>
+        <td>Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</td>
+      </tr>
+      <tr>
+        <td><a href="https://www.nano-editor.org/">GNU nano</a></td>
+        <td>2.9.8</td>
+        <td><a href="https://www.nano-editor.org/dist/latest/nano.html">Link</a></td>
+        <td>Linux, MacOS</td>
+        <td>GNU nano is a small and friendly text editor.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</blockquote>
+
+<h1 id="setting-up-git">Setting up git</h1>
+
+<p>When we use Git on a new computer for the first time,
+we need to configure a few things. Below are a few examples
+of configurations we will set as we get started with Git:</p>
+
+<ul>
+  <li>our name and email address,</li>
+  <li>what our preferred text editor is,</li>
+  <li>and that we want to use these settings globally (i.e. for every project).</li>
+</ul>
+
+<p>On a command line, Git commands are written as <code class="language-plaintext highlighter-rouge">git verb options</code>,
+where <code class="language-plaintext highlighter-rouge">verb</code> is what we actually want to do and <code class="language-plaintext highlighter-rouge">options</code> is additional optional information which may be needed for the <code class="language-plaintext highlighter-rouge">verb</code>. So here is how
+Sherlock sets up his new laptop:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-setting-up-with-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Setting up with bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"Sherlock Holmes"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email <span class="s2">"sherlock@baker.street"</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Please use your own name and email address instead of Sherlocks’s. This user name and email will be associated with your subsequent Git activity,
+which means that any changes pushed to
+<a href="https://github.com/">GitHub</a>,
+<a href="https://bitbucket.org/">BitBucket</a>,
+<a href="https://gitlab.com/">GitLab</a> or
+another Git host server
+after this lesson will include this information.</p>
+
+<p>For this lesson, we will be interacting with <a href="https://github.com/">GitHub</a> and so the email address used should be the same as the one used when setting up your GitHub account. If you are concerned about privacy, please review <a href="https://help.github.com/articles/keeping-your-email-address-private/">GitHub’s instructions for keeping your email address private</a>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-keeping-your-email-private"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Keeping your email private</h3>
+
+  <p>If you choose to use a private email address with GitHub, then use that same email address for the <code class="language-plaintext highlighter-rouge">user.email</code> value, e.g. <code class="language-plaintext highlighter-rouge">use<span class="notranslate">rna</span>me@users.noreply.github.com</code> replacing <code class="language-plaintext highlighter-rouge">use<span class="notranslate">rna</span>me</code> with your GitHub one.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-line-endings"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Line Endings</h3>
+
+  <p>As with other keys, when you hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>, on your keyboard,
+your computer encodes this input as a character.
+Different operating systems use different character(s) to represent the end of a line.
+(You may also hear these referred to as newlines or line breaks.)
+Because Git uses these characters to compare files,
+it may cause unexpected issues when editing a file on different machines. 
+Though it is beyond the scope of this lesson, you can read more about this issue 
+<a href="https://www.git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_core_autocrlf">in the Pro Git book</a>.</p>
+
+  <p>You can change the way Git recognizes and encodes line endings
+using the <code class="language-plaintext highlighter-rouge">core.autocrlf</code> command to <code class="language-plaintext highlighter-rouge">git config</code>.
+The following settings are recommended:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-settings-with-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Settings with bash</h3>
+    <p>On macOS and Linux:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> core.autocrlf input
+</code></pre></div>    </div>
+
+    <p>And on Windows:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> core.autocrlf <span class="nb">true</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>Sherlock also has to set his favorite text editor, following this table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Editor</th>
+      <th style="text-align: left">Configuration command</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Atom</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "atom --wait"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nano</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "nano -w"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">BBEdit (Mac, with command line tools)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "bbedit -w"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sublime Text (Mac)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl -n -w"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sublime Text (Win, 32-bit install)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "'c:/program files (x86)/sublime text 3/sublime_text.exe' -w"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Sublime Text (Win, 64-bit install)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "'c:/program files/sublime text 3/sublime_text.exe' -w"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Notepad (Win)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "c:/Windows/System32/notepad.exe"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Notepad++ (Win, 32-bit install)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "'c:/program files (x86)/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Notepad++ (Win, 64-bit install)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "'c:/program files/Notepad++/notepad++.exe' -multiInst -notabbar -nosession -noPlugin"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Kate (Linux)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "kate"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Gedit (Linux)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "gedit --wait --new-window"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Scratch (Linux)</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "scratch-text-editor"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Emacs</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "emacs"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Vim</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "vim"</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VS Code</td>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">$ git config --global core.editor "code --wait"</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>It is possible to reconfigure the text editor for Git whenever you want to change it.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-exiting-vim"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Exiting Vim</h3>
+  <p>Note that Vim is the default editor for many programs. If you haven’t used Vim before and wish to exit a session without saving
+your changes, press <kbd>Esc</kbd> then type <code class="language-plaintext highlighter-rouge">:q!</code> and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
+If you want to save your changes and quit, press <kbd>Esc</kbd> then type <code class="language-plaintext highlighter-rouge">:wq</code> and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.</p>
+</blockquote>
+
+<p>Git (2.28+) allows configuration of the name of the branch created when you
+initialize any new repository.  Sherlock decides to use that feature to set it to <code class="language-plaintext highlighter-rouge">main</code> so 
+it matches the cloud service he will eventually use.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-configure-the-name-of-the-created-branch"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Configure the name of the created branch</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> init.defaultBranch main
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-default-git-branch-naming"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Default Git branch naming</h3>
+
+  <p>Source file changes are associated with a “branch.” 
+For new learners in this lesson, it’s enough to know that branches exist, and this lesson uses one branch.<br />
+By default, Git will create a branch called <code class="language-plaintext highlighter-rouge">master</code> 
+when you create a new repository with <code class="language-plaintext highlighter-rouge">git init</code> (as explained in the next Episode). This term evokes 
+the racist practice of human slavery and the 
+<a href="https://github.com/github/renaming">software development community</a>  has moved to adopt 
+more inclusive language.</p>
+
+  <p>In 2020, most Git code hosting services transitioned to using <code class="language-plaintext highlighter-rouge">main</code> as the default 
+branch. As an example, any new repository that is opened in GitHub and GitLab default 
+to <code class="language-plaintext highlighter-rouge">main</code>.  However, Git has not yet made the same change.  As a result, local repositories 
+must be manually configured have the same main branch name as most cloud services.</p>
+
+  <p>For versions of Git prior to 2.28, the change can be made on an individual repository level.  The 
+command for this is in the next episode.  Note that if this value is unset in your local Git 
+configuration, the <code class="language-plaintext highlighter-rouge">init.defaultBranch</code> value defaults to <code class="language-plaintext highlighter-rouge">master</code>.</p>
+
+</blockquote>
+
+<p>The five commands we just ran above only need to be run once: the flag <code class="language-plaintext highlighter-rouge">--global</code> tells Git
+to use the settings for every project, in your user account, on this computer.</p>
+
+<p>You can check your settings at any time:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-checking-your-settings"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Checking your settings</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--list</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>You can change your configuration as many times as you want: use the
+same commands to choose another editor or update your email address.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-proxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Proxy</h3>
+
+  <p>In some networks you need to use a
+<a href="https://en.wikipedia.org/wiki/Proxy_server">proxy</a>. If this is the case, you
+may also need to tell Git about the proxy:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-git-and-proxy"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Git and proxy</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> http.proxy proxy-url
+<span class="nv">$ </span>git config <span class="nt">--global</span> https.proxy proxy-url
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-to-disable-the-proxy-use"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> To disable the proxy, use</h3>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> <span class="nt">--unset</span> http.proxy
+<span class="nv">$ </span>git config <span class="nt">--global</span> <span class="nt">--unset</span> https.proxy
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-git-help-and-manual"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Git Help and Manual</h3>
+
+  <p>Always remember that if you forget the subcommands or options of a <code class="language-plaintext highlighter-rouge">git</code> command, you can access the relevant list of options typing <code class="language-plaintext highlighter-rouge">git &lt;command&gt; -h</code> or access the corresponding Git manual by typing
+<code class="language-plaintext highlighter-rouge">git &lt;command&gt; --help</code>, e.g.:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-access-help"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Access help</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">-h</span>
+<span class="nv">$ </span>git config <span class="nt">--help</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>While viewing the manual, remember the <code class="language-plaintext highlighter-rouge">:</code> is a prompt waiting for commands and you can press <kbd>Q</kbd> to exit the manual.</p>
+
+  <p>More generally, you can get the list of available <code class="language-plaintext highlighter-rouge">git</code> commands and further resources of the Git manual typing:</p>
+
+  <blockquote>
+    <h3 id="code-in-access-available-commands"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Access available commands</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="create-a-repo">Create a Repo</h1>
+
+<p>Once Git is configured,
+we can start using it.</p>
+
+<p>We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects.</p>
+
+<p><img src="../../images/bash-git/sherlock_git.png" alt="Cartoon of sherlock examining the git logo with his magnifying glass." loading="lazy" /></p>
+
+<p>First, let’s create a directory for our work and then move into that directory:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-create-a-workspace"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Create a workspace</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>suspects
+<span class="nv">$ </span><span class="nb">cd </span>suspects
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Then we tell Git to make <code class="language-plaintext highlighter-rouge">suspects</code> a <a href="https://git-scm.com/docs/gitglossary#def_repository">repository</a>
+– a place where Git can store versions of our files:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-turn-our-workspace-into-directory"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Turn our workspace into directory</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div>  </div>
+</blockquote>
+
+<p>It is important to note that <code class="language-plaintext highlighter-rouge">git init</code> will create a repository that
+includes subdirectories and their files—there is no need to create
+separate repositories nested within the <code class="language-plaintext highlighter-rouge">suspects</code> repository, whether
+subdirectories are present from the beginning or added later. Also, note
+that the creation of the <code class="language-plaintext highlighter-rouge">suspects</code> directory and its initialization as a
+repository are completely separate processes.</p>
+
+<p>If we use <code class="language-plaintext highlighter-rouge">ls</code> to show the directory’s contents,
+it appears that nothing has changed:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-show-directory-content"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Show directory content</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>But if we add the <code class="language-plaintext highlighter-rouge">-a</code> flag to show everything,
+we can see that Git has created a hidden directory within <code class="language-plaintext highlighter-rouge">suspects</code> called <code class="language-plaintext highlighter-rouge">.git</code>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-show-everything-in-our-directory"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Show everything in our directory</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.	..	.git
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Git uses this special subdirectory to store all the information about the project, 
+including all files and sub-directories located within the project’s directory.
+If we ever delete the <code class="language-plaintext highlighter-rouge">.git</code> subdirectory, we will lose the project’s history.</p>
+
+<p>Next, we will change the default branch to be called <code class="language-plaintext highlighter-rouge">main</code>.
+This might be the default branch depending on your settings and version
+of git.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-rename-the-branch"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Rename the branch</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> main
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Switched to a new branch 'main'
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We can check that everything is set up correctly
+by asking Git to tell us the status of our project:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+</code></pre></div>  </div>
+</blockquote>
+
+<p>If you are using a different version of <code class="language-plaintext highlighter-rouge">git</code>, the exact
+wording of the output might be slightly different.</p>
+
+<h2 id="places-to-create-git-repositories">Places to Create Git Repositories</h2>
+
+<p>Along with tracking information about suspects (the project we have already created), Sherlock would also like to track information specific clues. So, Sherlock creates a <code class="language-plaintext highlighter-rouge">clues</code> project inside his <code class="language-plaintext highlighter-rouge">suspects</code> project with the following sequence of commands:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-create-a-project-within-a-project"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Create a project within a project</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/Desktop   <span class="c"># return to Desktop directory</span>
+<span class="nv">$ </span><span class="nb">cd </span>suspects     <span class="c"># go into suspects directory, which is already a Git repository</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>          <span class="c"># ensure the .git subdirectory is still present in the suspects directory</span>
+<span class="nv">$ </span><span class="nb">mkdir </span>clues    <span class="c"># make a subdirectory suspects/clues</span>
+<span class="nv">$ </span><span class="nb">cd </span>clues       <span class="c"># go into clues subdirectory</span>
+<span class="nv">$ </span>git init       <span class="c"># make the clues subdirectory a Git repository</span>
+<span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-a</span>          <span class="c"># ensure the .git subdirectory is present indicating we have created a new Git repository</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote>
+  <h3 id="question-tracking-in-a-subdirectory"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Tracking in a subdirectory</h3>
+  <p>Is the <code class="language-plaintext highlighter-rouge">git init</code> command, run inside the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory, required for tracking files stored in the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>No. Sherlock does not need to make the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory a Git repository 
+because the <code class="language-plaintext highlighter-rouge">suspects</code> repository will track all files, sub-directories, and 
+subdirectory files under the <code class="language-plaintext highlighter-rouge">suspects</code> directory.  Thus, in order to track 
+all information about clues, Sherlock only needed to add the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory
+to the <code class="language-plaintext highlighter-rouge">suspects</code> directory.</p>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="question tip">
+  <h3 id="tip-nested-repositories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> “Nested” repositories</h3>
+  <p>Additionally, Git repositories can interfere with each other if they are “nested”:
+the outer repository will try to version-control
+the inner repository. Therefore, it’s best to create each new Git
+repository in a separate directory. To be sure that there is no conflicting
+repository in the directory, check the output of <code class="language-plaintext highlighter-rouge">git status</code>. If it looks
+like the following, you are good to go to create a new repository as shown
+above:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-before-creating-a-new-repository"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Before creating a new repository</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>    </div>
+  </blockquote>
+  <blockquote class="code-out">
+    <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: Not a git repository (or any of the parent directories): .git
+</code></pre></div>    </div>
+  </blockquote>
+
+</blockquote>
+
+<h2 id="correcting-git-init-mistakes">Correcting <code class="language-plaintext highlighter-rouge">git init</code> Mistakes</h2>
+<p>Dr. Watson explains to Sherlock how a nested repository is redundant and may cause confusion down the road. Sherlock would like to remove the nested repository. How can Sherlock undo his last <code class="language-plaintext highlighter-rouge">git init</code> in the <code class="language-plaintext highlighter-rouge">clues</code> subdirectory?</p>
+
+<h3 id="use-rm-with-caution">USE <code class="language-plaintext highlighter-rouge">rm</code> WITH CAUTION!</h3>
+
+<p>Removing files from a Git repository needs to be done with caution. But we have not learned yet how to tell Git to track a particular file; we will learn this in the next episode. Files that are not tracked by Git can easily be removed like any other “ordinary” files with</p>
+<blockquote class="code-in">
+  <h3 id="code-in-remove-files"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Remove files</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm </span>filename
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Similarly a directory can be removed using <code class="language-plaintext highlighter-rouge">rm -r di<span class="notranslate">rna</span>me</code> or <code class="language-plaintext highlighter-rouge">rm -rf di<span class="notranslate">rna</span>me</code>. If the files or folder being removed in this fashion are tracked by Git, then their removal becomes another change that we will need to track, as we will see later.</p>
+
+<p>Git keeps all of its files in the <code class="language-plaintext highlighter-rouge">.git</code> directory. To recover from this little mistake, Sherlock can just remove the <code class="language-plaintext highlighter-rouge">.git</code> folder in the clues subdirectory by running the following command from inside the <code class="language-plaintext highlighter-rouge">suspects</code> directory:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-remove-the-git-folder"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Remove the <code class="language-plaintext highlighter-rouge">.git</code> folder</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-rf</span> clues/.git
+</code></pre></div>  </div>
+</blockquote>
+
+<p>But be careful! Running this command in the wrong directory will remove the entire Git history of a project you might want to keep. Therefore, always check your current directory using the command <code class="language-plaintext highlighter-rouge">pwd</code>.</p>
+
+<h1 id="tracking-changes">Tracking Changes</h1>
+
+<p>First let’s make sure we’re still in the right directory.
+You should be in the <code class="language-plaintext highlighter-rouge">suspects</code> directory.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-directory"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check directory</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ~/suspects
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Let’s create a file called <code class="language-plaintext highlighter-rouge">colonel.txt</code> that contains some notes about the colonel Smith’s connection to the case.
+We’ll use <code class="language-plaintext highlighter-rouge">nano</code> to edit the file;
+you can use whatever editor you like.
+In particular, this does not have to be the <code class="language-plaintext highlighter-rouge">core.editor</code> you set globally earlier. But remember, the bash command to create or edit a new file will depend on the editor you choose (it might not be <code class="language-plaintext highlighter-rouge">nano</code>). For a refresher on text editors, check out <a href="https://swcarpentry.github.io/shell-novice/03-create/">“Which Editor?”</a> in <a href="https://swcarpentry.github.io/shell-novice/">The Unix Shell</a> lesson.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-edit-file-with-nano-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Edit file with nano in bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Type the text below into the <code class="language-plaintext highlighter-rouge">colonel.txt</code> file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+</code></pre></div></div>
+
+<p>Let’s first verify that the file was properly created by running the list command (<code class="language-plaintext highlighter-rouge">ls</code>):</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-new-file"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check new file</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">ls</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">colonel.txt</code> contains a single line, which we can see by running:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-inspect-the-new-file"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Inspect the new file</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>If we check the status of our project again,
+Git tells us that it’s noticed the new file:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-6"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add &lt;file&gt;..." to include in what will be committed)
+
+colonel.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The “untracked files” message means that there’s a file in the directory that Git isn’t keeping track of. We can tell Git to track a file using <code class="language-plaintext highlighter-rouge">git add</code>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-track-file"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Track file</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<p>and then check that the right thing happened:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-7"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached &lt;file&gt;..." to unstage)
+
+	new file:   colonel.txt
+
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Git now knows that it’s supposed to keep track of <code class="language-plaintext highlighter-rouge">colonel.txt</code>, but it hasn’t recorded these changes as a commit yet. To get it to do that, we need to run one more command:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-record-changes-as-a-commit-with-a-descriptive-title"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Record changes as a commit with a descriptive title</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Start notes for colonel Smith as a suspect"</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-8"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main (root-commit) f22b25e] Start notes on colonel Smith as a suspect 
+1 file changed, 1 insertion(+)
+create mode 100644 colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<p>When we run <code class="language-plaintext highlighter-rouge">git commit</code>,
+Git takes everything we have told it to save by using <code class="language-plaintext highlighter-rouge">git add</code>
+and stores a copy permanently inside the special <code class="language-plaintext highlighter-rouge">.git</code> directory.
+This permanent copy is called a <a href="https://git-scm.com/docs/gitglossary#def_commit">commit</a>
+(or <a href="https://git-scm.com/docs/gitglossary#def_revision">revision</a>) and its short identifier is <code class="language-plaintext highlighter-rouge">f22b25e</code>. Your commit may have another identifier.</p>
+
+<p>We use the <code class="language-plaintext highlighter-rouge">-m</code> flag (for “message”)
+to record a short, descriptive, and specific comment that will help us remember later on what we did and why.
+If we just run <code class="language-plaintext highlighter-rouge">git commit</code> without the <code class="language-plaintext highlighter-rouge">-m</code> option,
+Git will launch <code class="language-plaintext highlighter-rouge">nano</code> (or whatever other editor we configured as <code class="language-plaintext highlighter-rouge">core.editor</code>)
+so that we can write a longer message.</p>
+
+<p><a href="https://chris.beams.io/posts/git-commit/">Good commit messages</a> start with a brief (&lt;50 characters) statement about the
+changes made in the commit. Generally, the message should complete the sentence “If applied, this commit will” <commit message="" here="">.
+If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.</commit></p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-if-we-run-git-status-now"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> If we run <code class="language-plaintext highlighter-rouge">git status</code> now:</h3>
+
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-9"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+nothing to commit, working directory clean
+</code></pre></div>  </div>
+</blockquote>
+
+<p>it tells us everything is up to date.
+If we want to know what we’ve done recently,
+we can ask Git to show us the project’s history using <code class="language-plaintext highlighter-rouge">git log</code>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-access-projects-history"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Access project’s history</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-10"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+Author: Sherlock Holmes &lt;sherlock@baker.street&gt;
+Date:   Thu Aug 22 09:51:46 2013 -0400
+
+  Start notes on colonel as a suspect
+</code></pre></div>  </div>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">git log</code> lists all commits  made to a repository in reverse chronological order.
+The listing for each commit includes
+the commit’s full identifier
+(which starts with the same characters as
+the short identifier printed by the <code class="language-plaintext highlighter-rouge">git commit</code> command earlier),
+the commit’s author,
+when it was created,
+and the log message Git was given when the commit was created.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-where-are-my-changes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Where Are My Changes?</h3>
+
+  <p>If we run <code class="language-plaintext highlighter-rouge">ls</code> at this point, we will still see just one file called <code class="language-plaintext highlighter-rouge">colonel.txt</code>.
+That’s because Git saves information about files’ history
+in the special <code class="language-plaintext highlighter-rouge">.git</code> directory mentioned earlier
+so that our filesystem doesn’t become cluttered
+(and so that we can’t accidentally edit or delete an old version).</p>
+</blockquote>
+
+<p>Now suppose Sherlock adds more information to the file.
+(Again, we’ll edit with <code class="language-plaintext highlighter-rouge">nano</code> and then <code class="language-plaintext highlighter-rouge">cat</code> the file to show its contents;
+you may use a different editor, and don’t need to <code class="language-plaintext highlighter-rouge">cat</code>.)</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-edit-with-nano"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Edit with nano</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano colonel.txt
+<span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-11"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+No clear motive. Seems high unlikely.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>When we run <code class="language-plaintext highlighter-rouge">git status</code> now,
+it tells us that a file, it already knows about, has been modified:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-find-about-current-status"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Find about current status</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-12"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+Changes not staged for commit:
+ (use "git add &lt;file&gt;..." to update what will be committed)
+ (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+	modified:   colonel.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The last line is the key phrase:
+“no changes added to commit”.
+We have changed this file,
+but we haven’t told Git we will want to save those changes
+(which we do with <code class="language-plaintext highlighter-rouge">git add</code>)
+nor have we saved them (which we do with <code class="language-plaintext highlighter-rouge">git commit</code>).
+So let’s do that now. It is good practice to always review
+our changes before saving them. We do this using <code class="language-plaintext highlighter-rouge">git diff</code>.
+This shows us the differences between the current state
+of the file and the most recently saved version:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-review-the-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Review the changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-13"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index df0654a..315bf3a 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1 +1,2 @@
+ No alibi for the night of murder.
++No clear motive. Seems high unlikely.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The output is cryptic because
+it is actually a series of commands for tools like editors and <code class="language-plaintext highlighter-rouge">patch</code>
+telling them how to reconstruct one file given the other.
+If we break it down into pieces:</p>
+
+<ol>
+  <li>The first line tells us that Git is producing output similar to the Unix <code class="language-plaintext highlighter-rouge">diff</code> command
+comparing the old and new versions of the file.</li>
+  <li>The second line tells exactly which versions of the file
+Git is comparing;
+<code class="language-plaintext highlighter-rouge">df0654a</code> and <code class="language-plaintext highlighter-rouge">315bf3a</code> are unique computer-generated labels for those versions.</li>
+  <li>The third and fourth lines once again show the name of the file being changed.</li>
+  <li>The remaining lines are the most interesting, they show us the actual differences
+and the lines on which they occur.
+In particular,
+the <code class="language-plaintext highlighter-rouge">+</code> marker in the first column shows where we added a line.</li>
+</ol>
+
+<p>After reviewing our change, it’s time to commit it:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-commit-after-checking-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Commit after checking changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Add concerns about existence of motive for colonel"</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-14"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+	modified:   colonel.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Whoops:
+Git won’t commit because we didn’t use <code class="language-plaintext highlighter-rouge">git add</code> first.
+Let’s fix that:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-first-add-then-commit"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> First <code class="language-plaintext highlighter-rouge">add</code> then <code class="language-plaintext highlighter-rouge">commit</code></h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add colonel.txt
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Add concerns about existence of motive for colonel"</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-15"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main 34961b1] Add concerns about existence of motive for colonel
+ 1 file changed, 1 insertion(+)
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Git insists that we add files to the set we want to commit
+before actually committing anything. This allows us to commit our
+changes in stages and capture changes in logical portions rather than
+only large batches.
+For example,
+suppose we’re adding a few citations to relevant research to our thesis.
+We might want to commit those additions,
+and the corresponding bibliography entries,
+but <em>not</em> commit some of our work drafting the conclusion
+(which we haven’t finished yet).</p>
+
+<p>To allow for this,
+Git has a special <em>staging area</em>
+where it keeps track of things that have been added to
+the current <a href="https://git-scm.com/docs/gitglossary#def_changeset">changeset</a>
+but not yet committed.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-staging-area"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Staging Area</h3>
+
+  <p>If you think of Git as taking snapshots of changes over the life of a project,
+<code class="language-plaintext highlighter-rouge">git add</code> specifies <em>what</em> will go in a snapshot
+(putting things in the staging area),
+and <code class="language-plaintext highlighter-rouge">git commit</code> then <em>actually takes</em> the snapshot, and
+makes a permanent record of it (as a commit).
+If you don’t have anything staged when you type <code class="language-plaintext highlighter-rouge">git commit</code>,
+Git will prompt you to use <code class="language-plaintext highlighter-rouge">git commit -a</code> or <code class="language-plaintext highlighter-rouge">git commit --all</code>,
+which is kind of like gathering <em>everyone</em> to take a group photo!
+However, it’s almost always better to
+explicitly add things to the staging area, because you might
+commit changes you forgot you made. (Going back to the group photo simile,
+you might get an extra with incomplete makeup walking on
+the stage for the picture because you used <code class="language-plaintext highlighter-rouge">-a</code>!)
+Try to stage things manually,
+or you might find yourself searching for “git undo commit” more
+than you would like!</p>
+</blockquote>
+
+<p><img src="../../images/bash-git/git-staging-area.svg" alt="The Git Staging Area cartoon, a document is shown going into the staging area via &quot;git add&quot;, and then into the repository via &quot;git commit&quot;." loading="lazy" /></p>
+
+<p>Let’s watch as our changes to a file move from our editor
+to the staging area
+and into long-term storage.
+First,
+we’ll add another line to the file:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-add-and-review-new-line-with-nano-and-cat"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Add and review new line with <code class="language-plaintext highlighter-rouge">nano</code> and <code class="language-plaintext highlighter-rouge">cat</code></h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano colonel.txt
+<span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-16"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+No clear motive. Seems high unlikely.
+Fingerprints on victims glasses.
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-review-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Review changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-17"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index 315bf3a..b36abfd 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1,2 +1,3 @@
+ No alibi for the night of murder.
+ No clear motive. Seems high unlikely.
++Fingerprints on victims glasses.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>So far, so good:
+we’ve added one line to the end of the file
+(shown with a <code class="language-plaintext highlighter-rouge">+</code> in the first column).
+Now let’s put that change in the staging area
+and see what <code class="language-plaintext highlighter-rouge">git diff</code> reports:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-see-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> See changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add colonel.txt
+<span class="nv">$ </span>git diff
+</code></pre></div>  </div>
+</blockquote>
+
+<p>But, there is no output:
+as far as Git can tell,
+there’s no difference between what it’s been asked to save permanently
+and what’s currently in the directory.
+However,
+if we do this:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-see-what-is-in-the-staging-area"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> See what is in the staging area</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff <span class="nt">--staged</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-18"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index 315bf3a..b36abfd 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1,2 +1,3 @@
+ No alibi for the night of murder.
+ No clear motive. Seems high unlikely.
++Fingerprints on victims glasses.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>it shows us the difference between
+the last committed change
+and what’s in the staging area.
+Let’s save our changes:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-save-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Save changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Make notes about colonel's fingerprints"</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-19"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main 005937f] Make notes about colonel's fingerprints
+ 1 file changed, 1 insertion(+)
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-new-status"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check new status</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-20"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+nothing to commit, working directory clean
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-and-look-at-the-history-of-what-weve-done-so-far"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> and look at the history of what we’ve done so far:</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-21"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -&gt; main)
+Author: Holmes Sherlock &lt;Holmes@tran.sylvan.ia&gt;
+Date:   Thu Aug 22 10:14:07 2013 -0400
+
+    Make notes about colonel's fingerprints
+
+commit 34961b159c27df3b475cfe4415d94a6d1fcd064d
+Author: Sherlock Holmes &lt;sherlock@baker.street&gt;
+Date:   Thu Aug 22 10:07:21 2013 -0400
+
+    Add concerns about existence of motive for colonel
+
+commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+Author: Sherlock Holmes &lt;sherlock@baker.street&gt;
+Date:   Thu Aug 22 09:51:46 2013 -0400
+
+    Start notes on colonel as a suspect
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-word-based-diffing"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Word-based diffing</h3>
+
+  <p>Sometimes, e.g. in the case of the text documents a line-wise
+diff is too coarse. That is where the <code class="language-plaintext highlighter-rouge">--color-words</code> option of
+<code class="language-plaintext highlighter-rouge">git diff</code> comes in very useful as it highlights the changed
+words using colors.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-paging-the-log"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Paging the Log</h3>
+
+  <p>When the output of <code class="language-plaintext highlighter-rouge">git log</code> is too long to fit in your screen,
+<code class="language-plaintext highlighter-rouge">git</code> uses a program to split it into pages of the size of your screen.
+When this “pager” is called, you will notice that the last line in your
+screen is a <code class="language-plaintext highlighter-rouge">:</code>, instead of your usual prompt.</p>
+
+  <ul>
+    <li>To get out of the pager, press <kbd>Q</kbd>.</li>
+    <li>To move to the next page, press <kbd>Spacebar</kbd>.</li>
+    <li>To search for <code class="language-plaintext highlighter-rouge">some_word</code> in all pages,
+press <kbd>/</kbd>
+and type <code class="language-plaintext highlighter-rouge">some_word</code>.
+Navigate through matches pressing <kbd>N</kbd>.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-limit-log-size"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Limit Log Size</h3>
+
+  <p>To avoid having <code class="language-plaintext highlighter-rouge">git log</code> cover your entire terminal screen, you can limit the
+number of commits that Git lists by using <code class="language-plaintext highlighter-rouge">-N</code>, where <code class="language-plaintext highlighter-rouge">N</code> is the number of
+commits that you want to view. For example, if you only want information from
+the last commit you can use:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-see-specific-number-of-commits"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> See specific number of commits</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-1</span>
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-22"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -&gt; main)
+Author: Sherlock Holmes &lt;sherlock@baker.street&gt;
+Date:   Thu Aug 22 10:14:07 2013 -0400
+
+   Make notes about colonel's fingerprints
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>You can also reduce the quantity of information using the
+<code class="language-plaintext highlighter-rouge">--oneline</code> option:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-see-only-basic-information"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> See only basic information</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-23"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>005937f (HEAD -&gt; main) Make notes about colonel's fingerprints
+34961b1 Add concerns about existence of motive for colonel
+f22b25e Start notes on colonel as a base
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>You can also combine the <code class="language-plaintext highlighter-rouge">--oneline</code> option with others. One useful
+combination adds <code class="language-plaintext highlighter-rouge">--graph</code> to display the commit history as a text-based
+graph and to indicate which commits are associated with the
+current <code class="language-plaintext highlighter-rouge">HEAD</code>, the current branch <code class="language-plaintext highlighter-rouge">main</code>, or
+<a href="https://git-scm.com/book/en/v2/Git-Internals-Git-References">other Git references</a>:</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-extra-options"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Extra options</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--oneline</span> <span class="nt">--graph</span>
+</code></pre></div>    </div>
+  </blockquote>
+  <blockquote class="code-out">
+    <h3 id="code-out-output-24"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 005937f (HEAD -&gt; main) Make notes about colonel's fingerprints
+* 34961b1 Add concerns about existence of motive for colonel
+* f22b25e Start notes on colonel as a base
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-directories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Directories</h3>
+
+  <p>Two important facts you should know about directories in Git.</p>
+
+  <ol>
+    <li>
+      <p>Git does not track directories on their own, only files within them.
+Try it for yourself:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-test-directory-tracking"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Test directory tracking</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>mysteries
+<span class="nv">$ </span>git status
+<span class="nv">$ </span>git add mysteries
+<span class="nv">$ </span>git status
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote>
+        <p>Note, our newly created empty directory <code class="language-plaintext highlighter-rouge">mysteries</code> does not appear in
+the list of untracked files even if we explicitly add it (<em>via</em> <code class="language-plaintext highlighter-rouge">git add</code>) to our
+repository. This is the reason why you will sometimes see <code class="language-plaintext highlighter-rouge">.gitkeep</code> files
+in otherwise empty directories. Unlike <code class="language-plaintext highlighter-rouge">.gitignore</code>, these files are not special
+and their sole purpose is to populate a directory so that Git adds it to
+the repository. In fact, you can name such files anything you like.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>If you create a directory in your Git repository and populate it with files,
+you can add all files in the directory at once by:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> git add &lt;directory-with-files&gt;
+</code></pre></div>      </div>
+
+      <p>Try it for yourself:</p>
+      <blockquote class="code-in">
+        <h3 id="code-in-add-multiple-files"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Add multiple files</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">touch </span>mysteries/belgravia mysteries/reichenbachfall
+<span class="nv">$ </span>git status
+<span class="nv">$ </span>git add mysteries
+<span class="nv">$ </span>git status
+</code></pre></div>        </div>
+      </blockquote>
+
+      <p>Before moving on, we will commit these changes.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-commit-the-new-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Commit the new changes</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m "Add some initial thoughts on mysteries"
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>To recap, when we want to add changes to our repository,
+we first need to add the changed files to the staging area
+(<code class="language-plaintext highlighter-rouge">git add</code>) and then commit the staged changes to the
+repository (<code class="language-plaintext highlighter-rouge">git commit</code>):</p>
+
+<p><img src="../../images/bash-git/git-committing.svg" alt="The Git Commit Workflow. " loading="lazy" /></p>
+
+<h1 id="lets-put-us-to-the-test">Let’s put us to the test</h1>
+
+<blockquote class="question">
+  <h3 id="question-choosing-a-commit-message"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Choosing a Commit Message</h3>
+
+  <p>Which of the following commit messages would be most appropriate for the
+last commit made to <code class="language-plaintext highlighter-rouge">colonel.txt</code>?</p>
+
+  <ol>
+    <li>“Changes”</li>
+    <li>“Added line ‘Fingerprints on victims glasses.’ to colonel.txt”</li>
+    <li>“Make notes about colonel’s fingerprints”</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Answer 1 is not descriptive enough, and the purpose of the commit is unclear;
+and answer 2 is redundant to using “git diff” to see what changed in this commit;
+but answer 3 is good: short, descriptive, and imperative.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-committing-changes-to-git"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Committing Changes to Git</h3>
+
+  <p>Which command(s) below would save the changes of <code class="language-plaintext highlighter-rouge">myfile.txt</code>
+to my local Git repository?</p>
+
+  <ol>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m "my recent changes"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git init myfile.txt
+$ git commit -m "my recent changes"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git add myfile.txt
+$ git commit -m "my recent changes"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit -m myfile.txt "my recent changes"
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Would only create a commit if files have already been staged.</li>
+      <li>Would try to create a new repository.</li>
+      <li>Is correct: first add the file to the staging area, then commit.</li>
+      <li>Would try to commit a file “my recent changes” with the message myfile.txt.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-committing-multiple-files"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Committing Multiple Files</h3>
+
+  <p>The staging area can hold changes from any number of files
+that you want to commit as a single snapshot.</p>
+
+  <ol>
+    <li>Add some text to <code class="language-plaintext highlighter-rouge">colonel.txt</code> noting your suspicion on judge Brown.</li>
+    <li>Create a new file <code class="language-plaintext highlighter-rouge">judge.txt</code> with your initial thoughts
+about the judge as a suspect.</li>
+    <li>Add changes from both files to the staging area,
+and commit those changes.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The output below from <code class="language-plaintext highlighter-rouge">cat colonel.txt</code> reflects only content added during 
+this exercise. Your output may vary.</p>
+
+    <p>First we make our changes to the <code class="language-plaintext highlighter-rouge">colonel.txt</code> and <code class="language-plaintext highlighter-rouge">judge.txt</code> files:</p>
+    <blockquote class="code-in">
+      <h3 id="code-in-edit-coloneltxt"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Edit <code class="language-plaintext highlighter-rouge">colonel.txt</code></h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano colonel.txt
+<span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>      </div>
+    </blockquote>
+    <blockquote class="code-out">
+      <h3 id="code-out-output-25"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>      </div>
+    </blockquote>
+    <blockquote class="code-in">
+      <h3 id="code-in-create-and-edit-judgetxt"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Create and edit <code class="language-plaintext highlighter-rouge">judge.txt</code></h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano judge.txt
+<span class="nv">$ </span><span class="nb">cat </span>judge.txt
+</code></pre></div>      </div>
+    </blockquote>
+    <blockquote class="code-out">
+      <h3 id="code-out-output-26"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Judge seems like a nice guy, but has a shady past.
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p>Now you can add both files to the staging area. We can do that in one line:</p>
+    <blockquote class="code-in">
+      <h3 id="code-in-add-both-files"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Add both files</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add colonel.txt judge.txt
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-or-with-multiple-commands"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Or with multiple commands:</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add colonel.txt
+<span class="nv">$ </span>git add judge.txt
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p>Now the files are ready to commit. You can check that using <code class="language-plaintext highlighter-rouge">git status</code>. If you are ready to commit use:</p>
+    <blockquote class="code-in">
+      <h3 id="code-in-commit-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Commit changes</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Write plans to start a base on judge"</span>
+</code></pre></div>      </div>
+    </blockquote>
+    <blockquote class="code-out">
+      <h3 id="code-out-output-27"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[main cc127c2]
+ Write plans to start a base on judge
+ 2 files changed, 2 insertions(+)
+ create mode 100644 judge.txt
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-bio-repository"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> <code class="language-plaintext highlighter-rouge">bio</code> Repository</h3>
+
+  <ol>
+    <li>Create a new Git repository on your computer called <code class="language-plaintext highlighter-rouge">bio</code>.</li>
+    <li>Write a three-line biography for yourself in a file called <code class="language-plaintext highlighter-rouge">me.txt</code>,
+commit your changes</li>
+    <li>Modify one line, add a fourth line</li>
+    <li>Display the differences
+between its updated state and its original state.</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>If needed, move out of the <code class="language-plaintext highlighter-rouge">suspects</code> folder:</p>
+    <blockquote class="code-in">
+      <h3 id="code-in-change-directory"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Change directory</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> ..
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p>Create a new folder called <code class="language-plaintext highlighter-rouge">bio</code> and ‘move’ into it:</p>
+    <blockquote class="code-in">
+      <h3 id="create-folder">Create folder</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>bio
+<span class="nv">$ </span><span class="nb">cd </span>bio
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-initialise-git"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Initialise git:</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p>Create your biography file <code class="language-plaintext highlighter-rouge">me.txt</code> using <code class="language-plaintext highlighter-rouge">nano</code> or another text editor.
+Once in place, add and commit it to the repository:</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-create-file-and-edit-it"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Create file and edit it</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add me.txt
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"Add biography file"</span> 
+</code></pre></div>      </div>
+    </blockquote>
+
+    <p>Modify the file as described (modify one line, add a fourth line).
+To display the differences
+between its updated state and its original state, use <code class="language-plaintext highlighter-rouge">git diff</code>:</p>
+
+    <blockquote class="code-in">
+      <h3 id="code-in-display-the-differences"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Display the differences</h3>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff me.txt
+</code></pre></div>      </div>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="history-exploring">History Exploring</h1>
+
+<p>As we saw in the previous episode, we can refer to commits by their
+identifiers.  You can refer to the <em>most recent commit</em> of the working
+directory by using the identifier <code class="language-plaintext highlighter-rouge">HEAD</code>.</p>
+
+<p>We’ve been adding one line at a time to <code class="language-plaintext highlighter-rouge">colonel.txt</code>, so it’s easy to track our
+progress by looking, so let’s do that using our <code class="language-plaintext highlighter-rouge">HEAD</code>s.  Before we start,
+let’s make a change to <code class="language-plaintext highlighter-rouge">colonel.txt</code>, adding yet another line.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-edit-coloneltxt-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Edit <code class="language-plaintext highlighter-rouge">colonel.txt</code></h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nano colonel.txt
+<span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-28"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+No clear motive. Seems high unlikely.
+Fingerprints on victims glasses.
+Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Now, let’s see what we get.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-display-the-changes"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Display the changes</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff HEAD colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-29"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index b36abfd..0848c8d 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1,3 +1,4 @@
+ No alibi for the night of murder.
+ No clear motive. Seems high unlikely.
+ Fingerprints on victims glasses.
++Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>which is the same as what you would get if you leave out <code class="language-plaintext highlighter-rouge">HEAD</code> (try it).  The
+real goodness in all this is when you can refer to previous commits.  We do
+that by adding <code class="language-plaintext highlighter-rouge">~1</code> 
+(where “~” is “tilde”, pronounced [<strong>til</strong>-d<em>uh</em>]) 
+to refer to the commit one before <code class="language-plaintext highlighter-rouge">HEAD</code>.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-refer-to-previous-commits"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Refer to previous commits</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff HEAD~1 colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<p>If we want to see the differences between older commits we can use <code class="language-plaintext highlighter-rouge">git diff</code>
+again, but with the notation <code class="language-plaintext highlighter-rouge">HEAD~1</code>, <code class="language-plaintext highlighter-rouge">HEAD~2</code>, and so on, to refer to them:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-refer-to-previous-commits-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Refer to previous commits</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff HEAD~3 colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-30"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index df0654a..b36abfd 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1 +1,4 @@
+ No alibi for the night of murder.
++No clear motive. Seems high unlikely.
++Fingerprints on victims glasses.
++Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We could also use <code class="language-plaintext highlighter-rouge">git show</code> which shows us what changes we made at an older commit as 
+well as the commit message, rather than the <em>differences</em> between a commit and our 
+working directory that we see by using <code class="language-plaintext highlighter-rouge">git diff</code>.</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-git-show-and-git-diff-differences"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> <code class="language-plaintext highlighter-rouge">git show</code> and <code class="language-plaintext highlighter-rouge">git diff</code> differences</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show HEAD~3 colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-31"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
+Author: Sherlock Holmes &lt;sherlock@baker.street&gt;
+Date:   Thu Aug 22 09:51:46 2013 -0400
+
+    Start notes on colonel as a base
+
+diff --git a/colonel.txt b/colonel.txt
+new file mode 100644
+index 0000000..df0654a
+--- /dev/null
++++ b/colonel.txt
+@@ -0,0 +1 @@
++No alibi for the night of murder.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>In this way,
+we can build up a chain of commits.
+The most recent end of the chain is referred to as <code class="language-plaintext highlighter-rouge">HEAD</code>;
+we can refer to previous commits using the <code class="language-plaintext highlighter-rouge">~</code> notation,
+so <code class="language-plaintext highlighter-rouge">HEAD~1</code>
+means “the previous commit”,
+while <code class="language-plaintext highlighter-rouge">HEAD~123</code> goes back 123 commits from where we are now.</p>
+
+<p>We can also refer to commits using
+those long strings of digits and letters
+that <code class="language-plaintext highlighter-rouge">git log</code> displays.
+These are unique IDs for the changes,
+and “unique” really does mean unique:
+every change to any set of files on any computer
+has a unique 40-character identifier.
+Our first commit was given the ID
+<code class="language-plaintext highlighter-rouge">f22b25e3233b4645dabd0d81e651fe074bd8e73b</code>,
+so let’s try this:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-display-specific-commit"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Display specific commit</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-32"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index df0654a..93a3e13 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1 +1,4 @@
+ No alibi for the night of murder.
++No clear motive. Seems high unlikely.
++Fingerprints on victims glasses.
++Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>That’s the right answer,
+but typing out random 40-character strings is annoying,
+so Git lets us use just the first few characters (typically seven for normal size projects):</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-shorter-alternative"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Shorter alte<span class="notranslate">rna</span>tive</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git diff f22b25e colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-33"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff --git a/colonel.txt b/colonel.txt
+index df0654a..93a3e13 100644
+--- a/colonel.txt
++++ b/colonel.txt
+@@ -1 +1,4 @@
+ No alibi for the night of murder.
++No clear motive. Seems high unlikely.
++Fingerprints on victims glasses.
++Maybe judge Brown should also be considerable as a suspect.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>All right! So
+we can save changes to files and see what we’ve changed. Now, how
+can we restore older versions of things?
+Let’s suppose we change our mind about the last update to
+<code class="language-plaintext highlighter-rouge">colonel.txt</code> (the “ill-considered change”).</p>
+
+<p><code class="language-plaintext highlighter-rouge">git status</code> now tells us that the file has been changed,
+but those changes haven’t been staged:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-34"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+Changes not staged for commit:
+  (use "git add &lt;file&gt;..." to update what will be committed)
+  (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+
+    modified:   colonel.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+</code></pre></div>  </div>
+</blockquote>
+
+<p>We can put things back the way they were
+by using <code class="language-plaintext highlighter-rouge">git checkout</code>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-restore-with-git-checkout"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Restore with <code class="language-plaintext highlighter-rouge">git checkout</code></h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout HEAD colonel.txt
+<span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-35"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+No clear motive. Seems high unlikely.
+Fingerprints on victims glasses.
+</code></pre></div>  </div>
+</blockquote>
+
+<p>As you might guess from its name,
+<code class="language-plaintext highlighter-rouge">git checkout</code> checks out (i.e., restores) an old version of a file.
+In this case,
+we’re telling Git that we want to recover the version of the file recorded in <code class="language-plaintext highlighter-rouge">HEAD</code>,
+which is the last saved commit.
+If we want to go back even further,
+we can use a commit identifier instead:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-restrore-specific-commit"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Restrore specific commit</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout f22b25e colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat </span>colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-36"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>No alibi for the night of murder.
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-in">
+  <h3 id="code-in-check-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Check</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-37"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
+Changes to be committed:
+  (use "git reset HEAD &lt;file&gt;..." to unstage)
+
+    modified:   colonel.txt
+
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Notice that the changes are currently in the staging area.
+Again, we can put things back the way they were
+by using <code class="language-plaintext highlighter-rouge">git checkout</code>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-restore"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Restore</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout HEAD colonel.txt
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="warning-dont-lose-your-head"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Don’t Lose Your HEAD</h3>
+
+  <p>Above we used</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git checkout f22b25e colonel.txt
+</code></pre></div>  </div>
+
+  <p>to revert <code class="language-plaintext highlighter-rouge">colonel.txt</code> to its state after the commit <code class="language-plaintext highlighter-rouge">f22b25e</code>. But be careful! 
+The command <code class="language-plaintext highlighter-rouge">checkout</code> has other important functionalities and Git will misunderstand
+your intentions if you are not accurate with the typing. For example, 
+if you forget <code class="language-plaintext highlighter-rouge">colonel.txt</code> in the previous command.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-error-recipe"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Error recipe</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout f22b25e
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-38"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Note: checking out 'f22b25e'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+git checkout -b &lt;new-branch-name&gt;
+
+HEAD is now at f22b25e Start notes on colonel as a base
+</code></pre></div>    </div>
+  </blockquote>
+
+  <p>The “detached HEAD” is like “look, but don’t touch” here,
+so you shouldn’t make any changes in this state.
+After investigating your repo’s past state, reattach your <code class="language-plaintext highlighter-rouge">HEAD</code> with <code class="language-plaintext highlighter-rouge">git checkout main</code>.</p>
+</blockquote>
+
+<p>It’s important to remember that
+we must use the commit number that identifies the state of the repository
+<em>before</em> the change we’re trying to undo.
+A common mistake is to use the number of
+the commit in which we made the change we’re trying to discard.
+In the example below, we want to retrieve the state from before the most
+recent commit (<code class="language-plaintext highlighter-rouge">HEAD~1</code>), which is commit <code class="language-plaintext highlighter-rouge">f22b25e</code>:</p>
+
+<p><img src="../../images/bash-git/git-checkout.svg" alt="Git Checkout. " loading="lazy" /></p>
+
+<p>So, to put it all together,
+here’s how Git works in cartoon form:</p>
+
+<p><img src="../../images/bash-git/git_staging.svg" alt="https://figshare.com/articles/How_Git_works_a_cartoon/1328266. " loading="lazy" /></p>
+
+<blockquote class="tip">
+  <h3 id="tip-simplifying-the-common-case"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Simplifying the Common Case</h3>
+
+  <p>If you read the output of <code class="language-plaintext highlighter-rouge">git status</code> carefully,
+you’ll see that it includes this hint:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+</code></pre></div>  </div>
+
+  <p>As it says,
+<code class="language-plaintext highlighter-rouge">git checkout</code> without a version identifier restores files to the state saved in <code class="language-plaintext highlighter-rouge">HEAD</code>.
+The double dash <code class="language-plaintext highlighter-rouge">--</code> is needed to separate the names of the files being recovered
+from the command itself:
+without it,
+Git would try to use the name of the file as the commit identifier.</p>
+</blockquote>
+
+<p>The fact that files can be reverted one by one
+tends to change the way people organize their work.
+If everything is in one large document,
+it’s hard (but not impossible) to undo changes to the introduction
+without also undoing changes made later to the conclusion.
+If the introduction and conclusion are stored in separate files,
+on the other hand,
+moving backward and forward in time becomes much easier.</p>
+
+<blockquote class="question">
+  <h3 id="question-recovering-older-versions-of-a-file"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Recovering Older Versions of a File</h3>
+
+  <p>Jennifer has made changes to the Python script that she has been working on for weeks, and the
+modifications she made this morning “broke” the script and it no longer runs. She has spent
+~ 1hr trying to fix it, with no luck…</p>
+
+  <p>Luckily, she has been keeping track of her project’s versions using Git! Which commands below will
+let her recover the last committed version of her Python script called
+<code class="language-plaintext highlighter-rouge">data_cruncher.py</code>?</p>
+
+  <ol>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">$ git checkout HEAD</code></p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">$ git checkout HEAD data_cruncher.py</code></p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">$ git checkout HEAD~1 data_cruncher.py</code></p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">$ git checkout &lt;unique ID of last commit&gt; data_cruncher.py</code></p>
+    </li>
+    <li>
+      <p>Both 2 and 4</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The answer is (5)-Both 2 and 4.</p>
+
+    <p>The <code class="language-plaintext highlighter-rouge">checkout</code> command restores files from the repository, overwriting the files in your working 
+directory. Answers 2 and 4 both restore the <em>latest</em> version <em>in the repository</em> of the file 
+<code class="language-plaintext highlighter-rouge">data_cruncher.py</code>. Answer 2 uses <code class="language-plaintext highlighter-rouge">HEAD</code> to indicate the <em>latest</em>, whereas answer 4 uses the 
+unique ID of the last commit, which is what <code class="language-plaintext highlighter-rouge">HEAD</code> means.</p>
+
+    <p>Answer 3 gets the version of <code class="language-plaintext highlighter-rouge">data_cruncher.py</code> from the commit <em>before</em> <code class="language-plaintext highlighter-rouge">HEAD</code>, which is NOT 
+what we wanted.</p>
+
+    <p>Answer 1 can be dangerous! Without a filename, <code class="language-plaintext highlighter-rouge">git checkout</code> will restore <strong>all files</strong> 
+in the current directory (and all directories below it) to their state at the commit specified. 
+This command will restore <code class="language-plaintext highlighter-rouge">data_cruncher.py</code> to the latest commit version, but it will also 
+restore <em>any other files that are changed</em> to that version, erasing any changes you may 
+have made to those files!
+As discussed above, you are left in a <em>detached</em> <code class="language-plaintext highlighter-rouge">HEAD</code> state, and you don’t want to be there.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-reverting-a-commit"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Reverting a Commit</h3>
+
+  <p>Jennifer is collaborating with colleagues on her Python script.  She
+realizes her last commit to the project’s repository contained an error, and 
+wants to undo it.  Jennifer wants to undo correctly so everyone in the project’s
+repository gets the correct change. The command <code class="language-plaintext highlighter-rouge">git revert [erroneous commit ID]</code> will create a 
+new commit that reverses the erroneous commit.</p>
+
+  <p>The command <code class="language-plaintext highlighter-rouge">git revert</code> is
+different from <code class="language-plaintext highlighter-rouge">git checkout [commit ID]</code> because <code class="language-plaintext highlighter-rouge">git checkout</code> returns the
+files not yet committed within the local repository to a previous state, whereas <code class="language-plaintext highlighter-rouge">git revert</code>
+reverses changes committed to the local and project repositories.</p>
+
+  <p>Below are the right steps and explanations for Jennifer to use <code class="language-plaintext highlighter-rouge">git revert</code>,
+what is the missing command?</p>
+  <ol>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">________ # Look at the git history of the project to find the commit ID</code></p>
+    </li>
+    <li>
+      <p>Copy the ID (the first few characters of the ID, e.g. 0b1d055).</p>
+    </li>
+    <li>
+      <p><code class="language-plaintext highlighter-rouge">git revert [commit ID]</code></p>
+    </li>
+    <li>
+      <p>Type in the new commit message.</p>
+    </li>
+    <li>
+      <p>Save and close</p>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The command <code class="language-plaintext highlighter-rouge">git log</code> lists project history with commit IDs.</p>
+
+    <p>The command <code class="language-plaintext highlighter-rouge">git show HEAD</code> shows changes made at the latest commit, and lists
+the commit ID; however, Jennifer should double-check it is the correct commit, and no one
+else has committed changes to the repository.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-understanding-workflow-and-history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Understanding <span class="notranslate">Workflow</span> and History</h3>
+
+  <p>What is the output of the last command in</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cd suspects
+$ echo "judge has unresolved military issues" &gt; judge.txt
+$ git add judge.txt
+$ echo "judge has enemies in the city" &gt;&gt; judge.txt
+$ git commit -m "Comment on judge as a suspect"
+$ git checkout HEAD judge.txt
+$ cat judge.txt #this will print the contents of judge.txt to the screen
+</code></pre></div>  </div>
+
+  <ol>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>judge has enemies in the city
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>judge has unresolved military issues
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>judge has unresolved military issues
+judge has enemies in the city
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error because you have changed judge.txt without committing the changes
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>The answer is 2.</p>
+
+    <p>The command <code class="language-plaintext highlighter-rouge">git add judge.txt</code> places the current version of <code class="language-plaintext highlighter-rouge">judge.txt</code> into the staging area. 
+The changes to the file from the second <code class="language-plaintext highlighter-rouge">echo</code> command are only applied to the working copy, 
+not the version in the staging area.</p>
+
+    <p>So, when <code class="language-plaintext highlighter-rouge">git commit -m "Comment on judge as an unsuitable base"</code> is executed, 
+the version of <code class="language-plaintext highlighter-rouge">judge.txt</code> committed to the repository is the one from the staging area and
+has only one line.</p>
+
+    <p>At this time, the working copy still has the second line (and 
+ <code class="language-plaintext highlighter-rouge">git status</code> will show that the file is modified). However, <code class="language-plaintext highlighter-rouge">git checkout HEAD judge.txt</code> 
+ replaces the working copy with the most recently committed version of <code class="language-plaintext highlighter-rouge">judge.txt</code>.</p>
+
+    <p>So, <code class="language-plaintext highlighter-rouge">cat judge.txt</code> will output</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> judge has unresolved military issues.
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-checking-understanding-of-git-diff"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Checking Understanding of <code class="language-plaintext highlighter-rouge">git diff</code></h3>
+
+  <p>Consider this command: <code class="language-plaintext highlighter-rouge">git diff HEAD~9 colonel.txt</code>. What do you predict this command
+will do if you execute it? What happens when you do execute it? Why?</p>
+
+  <p>Try another command, <code class="language-plaintext highlighter-rouge">git diff [ID] colonel.txt</code>, where [ID] is replaced with
+the unique identifier for your most recent commit. What do you think will happen,
+and what does happen?</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-getting-rid-of-staged-changes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Getting Rid of Staged Changes</h3>
+
+  <p><code class="language-plaintext highlighter-rouge">git checkout</code> can be used to restore a previous commit when unstaged changes have
+been made, but will it also work for changes that have been staged but not committed?
+Make a change to <code class="language-plaintext highlighter-rouge">colonel.txt</code>, add that change, and use <code class="language-plaintext highlighter-rouge">git checkout</code> to see if
+you can remove your change.</p>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-explore-and-summarize-histories"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Explore and Summarize Histories</h3>
+
+  <p>Exploring history is an important part of Git, and often it is a challenge to find
+the right commit ID, especially if the commit is from several months ago.</p>
+
+  <p>Imagine the <code class="language-plaintext highlighter-rouge">suspects</code> project has more than 50 files.
+You would like to find a commit that modifies some specific text in <code class="language-plaintext highlighter-rouge">colonel.txt</code>.
+When you type <code class="language-plaintext highlighter-rouge">git log</code>, a very long list appeared.
+How can you narrow down the search?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Recall that the <code class="language-plaintext highlighter-rouge">git diff</code> command allows us to explore one specific file,
+e.g., <code class="language-plaintext highlighter-rouge">git diff colonel.txt</code>. We can apply a similar idea here.</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log colonel.txt
+</code></pre></div>    </div>
+
+    <p>Unfortunately some of these commit messages are very ambiguous, e.g., <code class="language-plaintext highlighter-rouge">update files</code>.
+How can you search through these files?</p>
+
+    <p>Both <code class="language-plaintext highlighter-rouge">git diff</code> and <code class="language-plaintext highlighter-rouge">git log</code> are very useful and they summarize a different part of the history 
+for you.
+Is it possible to combine both? Let’s try the following:</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --patch colonel.txt
+</code></pre></div>    </div>
+
+    <p>You should get a long list of output, and you should be able to see both commit messages and 
+the difference between each commit.</p>
+
+    <p>Question: What does the following command do?</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --patch HEAD~9 *.txt
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Version control is like an unlimited ‘undo’.</p>
+</li>
+                        
+                        <li><p>Version control also allows many people to work in parallel.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">git config</code> with the <code class="language-plaintext highlighter-rouge">--global</code> option to configure a user name, email address, editor, and other preferences once per machine.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git init</code> initializes a repository.</p>
+</li>
+                        
+                        <li><p>Git stores all of its repository data in the <code class="language-plaintext highlighter-rouge">.git</code> directory.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git status</code> shows the status of a repository.</p>
+</li>
+                        
+                        <li><p>Files can be stored in a project’s working directory (which users see), the staging area (where the next commit is being built up) and the local repository (where commits are permanently recorded).</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git add</code> puts files in the staging area.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git commit</code> saves the staged content as a new commit in the local repository.</p>
+</li>
+                        
+                        <li><p>Write a commit message that accurately describes your changes.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git diff</code> displays differences between commits.</p>
+</li>
+                        
+                        <li><p><code class="language-plaintext highlighter-rouge">git checkout</code> recovers old versions of files.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Version Control with Git (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Version Control with Git (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{data-science-bash-git,
+author = "",
+title = "Version Control with Git (Galaxy Training Materials)",
+year = "2022",
+month = "07",
+day = "06"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/bash-git/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/carpentries" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/carpentries/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/erasmusplus/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" /></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
