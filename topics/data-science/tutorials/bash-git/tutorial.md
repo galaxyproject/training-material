@@ -155,30 +155,16 @@ collaboration among different people.
 > {: .solution}
 {: .question }
 
-> ## {% icon hands_on %} Software to use
->
-> First, we need to get our hands on RStudio.
->
-> > ### {% icon tip %} Tip: Launch RStudio in Galaxy
-> > Currently RStudio in Galaxy is only available on [UseGalaxy.eu](https://usegalaxy.eu) and [UseGalaxy.org](https://usegalaxy.org)
-> >
-> > 1. Open the Rstudio tool {% icon tool %} by clicking [here](https://usegalaxy.eu/?tool_id=interactive_tool_rstudio)
-> > 2. Click Execute
-> > 3. The tool will start running and will stay running permanently
-> > 4. Click on the "User" menu at the top and go to "Active InteractiveTools" and locate the RStudio instance you started.
-{: .tip}
-> >
-> > ### {% icon tip %} Tip: Launch RStudio Cloud if not available on Galaxy
-> >
-> > If RStudio is not available on the Galaxy instance:
-> > 1. Register for [RStudio Cloud](https://client.login.rstudio.cloud/oauth/login?show_auth=0&show_login=1&show_setup=1), or login if you already have an account
-> > 2. Create a new project
-{: .tip}
->
->The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself. 
+
+Before diving in the tutorial, we need to open {% tool [RStudio](interactive_tool_rstudio) %}. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+
+> ### {% icon hands_on %} Hands-on: Installing git
+> The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself. 
 We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
->Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
+> Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
 > > ### {% icon code-in %} Environment and Packages
 > > ```bash
