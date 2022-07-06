@@ -195,7 +195,7 @@ On a command line, Git commands are written as `git verb options`,
 where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
 Sherlock sets up his new laptop:
 
-> ## {% icon code-in} Setting up with bash
+> ## {% icon code-in %} Setting up with bash
 > ```bash
 > $ git config --global user.name "Sherlock Holmes"
 > $ git config --global user.email "sherlock@baker.street"
