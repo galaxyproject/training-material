@@ -97,7 +97,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -121,6 +121,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -143,6 +143,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     

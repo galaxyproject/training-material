@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -135,6 +135,16 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >     
