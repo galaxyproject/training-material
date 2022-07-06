@@ -214,8 +214,7 @@ For this lesson, we will be interacting with [GitHub](https://github.com/) and s
 
 > ## {% icon tip %} Keeping your email private
 >
-> If you elect to use a private email address with GitHub, then use that same email address for the `user.email` value, e.g. `username@users.noreply.github.com` replacing `username` with your GitHub one.
-
+> If you choose to use a private email address with GitHub, then use that same email address for the `user.email` value, e.g. `username@users.noreply.github.com` replacing `username` with your GitHub one.
 {: .tip}
 
 
@@ -272,7 +271,6 @@ Sherlock also has to set his favorite text editor, following this table:
 It is possible to reconfigure the text editor for Git whenever you want to change it.
 
 > ## {% icon tip %} Exiting Vim
->
 > Note that Vim is the default editor for many programs. If you haven't used Vim before and wish to exit a session without saving
 your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
 > If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
@@ -345,7 +343,6 @@ same commands to choose another editor or update your email address.
 > >```
 > 
 > {: .code-in}
-
 {: .tip}
 
 > ## {% icon tip %} Git Help and Manual
@@ -1367,8 +1364,6 @@ repository (`git commit`):
 
 [commit-messages]: https://chris.beams.io/posts/git-commit/
 [git-references]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
-
-{% include links.md %}
 
 # History Exploring
 
