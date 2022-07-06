@@ -32,9 +32,6 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 ---
 
-# Overview
-{:.no_toc}
-
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -1840,7 +1837,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,3 +60,33 @@ galaxy_config:
+>    @@ -60,3 +60,55 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true
@@ -1871,6 +1868,28 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
+>    +  gzip: "on"
+>    +  gzip_proxied: "any"
+>    +  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
+>    +  gzip_vary: "on"
+>    +  gzip_min_length: 128
+>    +  gzip_comp_level: 6  # Tradeoff of better compression for slightly more CPU time.
+>    +  gzip_types: |
+>    +      text/plain
+>    +      text/css
+>    +      text/xml
+>    +      text/javascript
+>    +      application/javascript
+>    +      application/x-javascript
+>    +      application/json
+>    +      application/xml
+>    +      application/xml+rss
+>    +      application/xhtml+xml
+>    +      application/x-font-ttf
+>    +      application/x-font-opentype
+>    +      image/png
+>    +      image/svg+xml
+>    +      image/x-icon
 >    +nginx_ssl_role: usegalaxy_eu.certbot
 >    +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
