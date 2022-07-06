@@ -27,18 +27,17 @@ contributors:
 # Introduction
 {:.no_toc}
 
+> ### {% icon comment %} Where to find Galaxy-MTI
+>
+> Galaxy-MTI tools are currently only available on [cancer.usegalaxy.org](https://cancer.usegalaxy.org/). This is subject to change in the near future and this tutorial will be updated accordingly. 
+>
+{: .comment}
+
 Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for downstream processing and analysis. The MCMICRO ({% cite Schapiro2021 %}) pipeline was developed to process multiplex images into single-cell data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for single-cell analysis, spatial analysis, and interactive visualization are available in Galaxy to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in Galaxy are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the Galaxy multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).
 
 Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma)
 
 ![exemplar viv](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Exemplar-002 TMA from MCMICRO displayed in Avivator.")
-
-
-> ### {% icon warning %} **Important Notice: Working on the cancer.usegalaxy.org instance**
-> 
->  
-> 
-{: .warning}
 
 
 > ### Agenda
@@ -56,7 +55,7 @@ Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtn
 Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this workflow have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.
 
 
-The raw files for each round (10 in total) of the exemplar-002 data are available on https://cancer.usegalaxy.org under [Data Libraries](https://cancer.usegalaxy.org/libraries) (Figure 2.). Import the raw files into a new history as a **list collection**.
+The raw files for each round (10 in total) of the exemplar-002 data are available on [cancer.usegalaxy.org](https://cancer.usegalaxy.org) under **Data Libraries** (Figure 2.). Import the raw files into a new history as a **list collection**.
 
 
 ![getData](../../images/multiplex-tissue-imaging-TMA/ex2_getData.png "Finding the Exemplar-002 data on cancer.usegalaxy.org Data Libraries.")
@@ -83,7 +82,7 @@ The raw files for each round (10 in total) of the exemplar-002 data are availabl
 
 # Tile illumination correction with **BaSiC Illumination**
 
-Commonly, microscopes output one image per round of imaging. These individual round images were imaged in tiles, and there can be slight variations in how each tile was illuminated across the course of imaging. Prior to tile stitching and image registration, the tiles have to undergo illumination correction with **BaSiC Illumination** ({% cite Peng2017 %}) to account for this. Unlike many of the other tools in this workflow, BaSiC has no extra parameters to think about: Just input the collection of raw images and press *go*!
+Commonly, raw MTI data will consist of one image per round of imaging. These individual round images are frequently captured in tiles, and there can be slight variations in how each tile was illuminated across the course of imaging. Prior to tile stitching and image registration, the tiles have to undergo illumination correction with **BaSiC Illumination** ({% cite Peng2017 %}) to account for this. Unlike many of the other tools in this workflow, BaSiC has no extra parameters to think about: Just input the collection of raw images and press *go*!
 
 Two new list collections will appear in the history upon completion: 
 
@@ -109,7 +108,7 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 >
 > ![markers](../../images/multiplex-tissue-imaging-TMA/ex2_markersFile.png "Markers file, used both in ASHLAR and downstream steps. Critically, the marker_names are in the third column.")
 >
-{: .details}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Image stitching and registration
 >
@@ -143,14 +142,14 @@ parameter to *Yes*
 > 
 > ASHLAR will work for most imaging modalities; however, certain modalities require different tools to be registered. For example,
 multiplex immunohistochemistry (mIHC) images must use an aligner that registers each moving image to a reference Hematoxylin image. 
-For this, Galaxy-MTI inlcudes the alternative registration tool **PALOM**. 
+For this, Galaxy-MTI includes the alternative registration tool {% tool **PALOM** %}. 
 >
 {: .warning}
 
 
 # TMA dearray with **UNetCoreograph**
 
-Many downstream processing and analysis steps require each individual core from the TMA to be in a separate image file. To accomplish this from our now ASHLAR-registered ome.tiff image, we can use **UNetCoreograph** to detect and crop each core into separate files.
+Many downstream processing and analysis steps require each individual core from the TMA to be in a separate image file. To accomplish this from our registered ome.tiff image, we can use **UNetCoreograph** to detect and crop each core into separate files.
 
 UNetCoreograph will output images (used for downstream steps), masks, and a preview image (Figure 4.).
 
@@ -187,13 +186,13 @@ Available segmentation tools in Galaxy-MTI:
   - Cellpose ({% cite Stringer2020 %})
   - ilastik ({% cite Berg2019 %})
 
-In this tutorial, we use Mesmer because it tends to perform generally well on a diverse range of image types, and has a limited number of parameters to understand. 
+In this tutorial, we use **Mesmer** because it tends to perform generally well on a diverse range of image types, and has a limited number of parameters to understand. 
 
-> ### {% icon comment %} Important detail: Batch mode
+> ### {% icon comment %} Important detail: Running images in batches
 >
-> Now that each image has been split into individual core images, downstream tools must be run on the images separately. Luckily, Galaxy makes this easy by including the option to run each tool in batch mode. Next to the input for the tool, select {% icon param-collection %} (**Dataset collection**) as the input type, and pass the collection output by UNetCoreograph as input. 
+> Now that each image has been split into individual core images, downstream tools must be run on the images separately. Luckily, Galaxy makes this easy by including the option to run each tool in batch across a collection of inputs. Next to the input for the tool, select {% icon param-collection %} (**Dataset collection**) as the input type, and pass the collection output by UNetCoreograph as input. 
 >
-{: .details}
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Nuclear segmentation
 >
@@ -247,7 +246,9 @@ The quantification step will produce a CSV cell feature table for every image in
 
 # **Convert McMicro Output to Anndata**
 
-Anndata ({% cite Virshup2021 %}) is a Python package and file format schema for working with annotated data matrices that has gained popularity in the single-cell analysis community. Many downstream analysis tools, including SciMap from MCMICRO, Scanpy ({% cite Wolf2018 %}), and Squidpy ({% cite Palla2022 %}) are built around anndata format files (h5ad). This tool splits the marker intensity data into a separate dataframe (`X`), and places all observational data (spatial coordinates, morphological features, etc.) in the cell feature table into a separate dataframe (`obs`) that shares the same indices as `X`. In downstream analyses, new categorical variables, such as phenotype assignments for each cell, are stored in the `obs` dataframe. 
+Anndata ({% cite Virshup2021 %}) is a Python package and file format schema for working with annotated data matrices that has gained popularity in the single-cell analysis community. Many downstream analysis tools, including Scimap from MCMICRO, Scanpy ({% cite Wolf2018 %}), and Squidpy ({% cite Palla2022 %}) are built around anndata format files (h5ad). This tool splits the marker intensity data into a separate dataframe (`X`), and places all observational data (spatial coordinates, morphological features, etc.) in the cell feature table into a separate dataframe (`obs`) that shares the same indices as `X`. In downstream analyses, new categorical variables, such as phenotype assignments for each cell, are stored in the `obs` dataframe. 
+
+Learn more about this file format at the [anndata documentation](https://anndata.readthedocs.io/en/latest/index.html).
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -269,12 +270,12 @@ Anndata ({% cite Virshup2021 %}) is a Python package and file format schema for 
 {: .hands_on}
 
 
-# SciMap: **Single Cell Phenotyping**
+# Scimap: **Single Cell Phenotyping**
 
-There are several ways to classify cells available in Galaxy-MTI. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO's SciMap. SciMap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the **GateFinder** tool in Galaxy-MTI), or by default, SciMap will fit a Gaussian Mixture Model (GMM) to the `log(intensity)` data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. SciMap uses a 'Phenotype workflow' to guide the classification of cells. For more on how to construct a SciMap workflow, see the [SciMap documentation](https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/). An example phenotype workflow used for Exemplar-002 can be seen below (Figure 5.).
+There are several ways to classify cells available in Galaxy-MTI. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO's Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the **GateFinder** tool in Galaxy-MTI), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the `log(intensity)` data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a 'Phenotype workflow' to guide the classification of cells (Figure 5.). For more on how to construct a Scimap workflow, see the [Scimap documentation](https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/).
 
 
-![phenoWF](../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png "Example of a phenotype workflow compatible with SciMap. 'Pos' means that single marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.")
+![phenoWF](../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png "Example of a phenotype workflow compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.")
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -288,9 +289,9 @@ There are several ways to classify cells available in Galaxy-MTI. Unsupervised a
 >
 >    > ### {% icon comment %} Limitations of GMM automated phenotyping
 >    >
->    > When manual gates are not provided, SciMap fits a GMM to determine a threshold between positive and negative cells. This automated gating works well when markers are highly expressed within the tissue, and the data shows a bimodal distribution (Figure 6A.). GMM gating can lead to spurious thresholds, however, when the data does not appear to be bimodal (Figure 6B.). This tends to happen when the marker is not highly expressed in the tissue, so there isn't a large positive population. Markers that have a highly continuous range of expressiion, like certain functional markers, can also be problematic with GMM gating. It is recommended to always look at the GMM plots output by SciMap (Figure 5.), and validate any potentially spurious gates manually. 
+>    > When manual gates are not provided, Scimap fits a GMM to determine a threshold between positive and negative cells. This automated gating works well when markers are highly abundant within the tissue, and the data shows a bimodal distribution (Figure 6A.). GMM gating can lead to spurious thresholds, however, when the data does not appear to be bimodal (Figure 6B.). This tends to happen when the marker is not highly abundant in the tissue, so there isn't a large positive population. Markers that have a highly continuous range of intensity, like certain functional markers, can also be problematic with GMM gating. It is recommended to always look at the GMM plots output by Scimap, and validate any potentially spurious gates manually. 
 >    >
->    > ![GMM](../../images/multiplex-tissue-imaging-TMA/ex2_example_GMMs.png "SciMap automatic gating GMMs for two markers.")
+>    > ![GMM](../../images/multiplex-tissue-imaging-TMA/ex2_example_GMMs.png "Scimap automatic gating GMMs for two markers. (A) An example of a marker with a bimodal distribution and a reasonable looking gate. (B) An example of a marker with a unimodal distribution that is not ideal for fitting with a GMM, and would be a candidate for manual validation and gating.")
 >    > 
 >    {: .comment}
 >
@@ -345,11 +346,11 @@ For any `OME-TIFF` image in a Galaxy-MTI history, there will be an option to vie
 
 ## Generating an interactive visualization dashboard with **Vitessce**
 
-**Vitessce** is a powerful visualization tool that creates interactive dashboards (Figure 8.) to look at a multiplex `OME-TIFF` image in conjunction with data generated during analysis and stored in an anndata file. The segmentation mask can be overlaid onto the image to qualitatively assess the segmentation performance. The mask can then be colored with associated observational data (Figure 9B.), such as `phenotype`, with the same colors appearing in barplots (Figure 9A.), UMAP representations, and heatmaps for comrehensive data exploration. 
+**Vitessce** is a powerful visualization tool that creates interactive dashboards (Figure 8.) to look at a multiplex `OME-TIFF` images in conjunction with data generated during analysis and stored in an anndata file. The segmentation mask can be overlaid onto the image to qualitatively assess the segmentation performance. The mask can then be colored with associated observational data (Figure 9A.), such as `phenotype`, with the same colors appearing in barplots (Figure 9B.), UMAP representations, heatmaps, and marker intensity violin plots for comrehensive data exploration. 
 
 ![vitessce](../../images/multiplex-tissue-imaging-TMA/ex2_fullVitessce.png "A Full view of a vitesse dashboard for one core from Exemplar-002.")
 
-![vitessce](../../images/multiplex-tissue-imaging-TMA/ex2_vitessce_zoomed.png "A closer look at the phenotype barplot (A) and the phenotype-labeled mask overlaid on the actual image (B) generated by Vitessce.")
+![vitessce](../../images/multiplex-tissue-imaging-TMA/ex2_vitessce_zoomed.png "Each window in the dashboard can be resized to view the components in more detail. A closer look at the phenotype-labeled mask overlaid on the actual image (A), and the phenotype barplot (B).")
 
 > ### {% icon hands_on %} Hands-on: Vitessce visualization
 >
@@ -366,7 +367,7 @@ For any `OME-TIFF` image in a Galaxy-MTI history, there will be an option to vie
 
 # Next steps: Compositional and spatial analyses
 
-Galaxy-MTI includes additional tools from **SciMap** and tools from the **Squidpy** package ({% cite Palla2022 %}) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, **Squidpy** has several methods for understanding the spatial organization of the tissue. Using **Squidpy**, a spatial neighborhood is first generated, from which the organization of specific phenotype groups and their interactions can be quantified. 
+Galaxy-MTI includes additional tools from **Scimap** and tools from the **Squidpy** package ({% cite Palla2022 %}) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, **Squidpy** has several methods for understanding the spatial organization of the tissue. Using **Squidpy**, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified. 
 
 > ### {% icon hands_on %} Hands-on: Spatial analysis with **Squidpy**
 >
@@ -401,7 +402,7 @@ Galaxy-MTI includes additional tools from **SciMap** and tools from the **Squidp
 >
 >    > ### {% icon comment %} Ripley's L plot
 >    >
->    > **Squidpy** was used to calculate Ripley's L curves for each phenotype in core 2 of exemplar 2 (Figure 11.). This shows the overall organization of each phenotype in the tissue. If the curve for a given phenotype lies above the light grey null line, the phenotype is statistically significantly clustered. If the curve lies on the null line, it's spatial distribution within the tissue is random. If the curve is underneath the null line, it's spatial distribution is statistically significantly dispersed. 
+>    > **Squidpy** was used to calculate Ripley's L curves for each phenotype in core 2 of exemplar 2 (Figure 11.). This shows the overall organization of each phenotype in the tissue. If the curve for a given phenotype lies above the light grey null line (Example: Epithelial cells in Figure 11.), the phenotype is statistically significantly clustered. If the curve lies on the null line (Example: Myeloid lineage in Figure 11.), it's spatial distribution within the tissue is random. If the curve is underneath the null line (Example: T cells in Figure 11.), it's spatial distribution is statistically significantly dispersed. 
 >    >
 >    > ![enrichment](../../images/multiplex-tissue-imaging-TMA/ex2_squidpy_ripleys.png "The output of Squidpy's Ripley's L curve on core 2 from Exemplar-002.")
 >    >
@@ -416,7 +417,7 @@ Galaxy-MTI includes additional tools from **SciMap** and tools from the **Squidp
 In this tutorial, we demonstrated a complete multiplex tissue imaging analysis workflow performed entirely in a web browser using Galaxy-MTI. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we...
 
   - Corrected illumination between imaging tiles
-  - stitched and registered input images to produce a single, pyramidal OME-TIFF image that is viewable in multiple built-in interactive viewing tools (Avivator, Vitessce)
+  - Stitched and registered input images to produce a single, pyramidal OME-TIFF image that is viewable in multiple built-in interactive viewing tools (Avivator, Vitessce)
   - Split the TMA into separate images for each core
   - Processed each core in parallel, beginning with nuclear segmentation
   - Quantified the mean marker intensities, morphological features, and spatial coordinates of each cell in each core
