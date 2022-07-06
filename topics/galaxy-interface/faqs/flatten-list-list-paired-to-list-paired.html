@@ -1,0 +1,46 @@
+<p>Sometimes you find yourself with a <code class="language-plaintext highlighter-rouge">list:list:paired</code>, i.e. a collection of collection of paired end data, and you really want a <code class="language-plaintext highlighter-rouge">list:paired</code>, a flatter collection of paired end data. This is easy to resolve with <span class="tool" data-tool="__APPLY_RULES__" title="Tested with __APPLY_RULES__"><strong>Apply rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>APPLY_RULES</strong></span></span> :</p>
+
+<ol>
+  <li>Open <span class="tool" data-tool="__APPLY_RULES__" title="Tested with __APPLY_RULES__"><strong>Apply rules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>APPLY_RULES</strong></span></span></li>
+  <li>Select your collection</li>
+  <li>Click <strong>Edit</strong></li>
+</ol>
+
+<p>You’ll now be in the Apply rules editing interface. There are three columns (if it’s a <code class="language-plaintext highlighter-rouge">list:list:paired</code>)</p>
+
+<ol>
+  <li>The outermost <code class="language-plaintext highlighter-rouge">list</code> identifier(s)</li>
+  <li>The next <code class="language-plaintext highlighter-rouge">list</code> identifier(s)</li>
+  <li>The paired-end indicator</li>
+</ol>
+
+<p>Flattening this top level list, so it’s just a <code class="language-plaintext highlighter-rouge">list:paired</code> requires a few changes:</p>
+
+<ol>
+  <li>From <strong>Column</strong> menu select <code class="language-plaintext highlighter-rouge">Concatenate Columns</code>
+    <ul>
+      <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+      <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">B</code>
+This creates a column with the top list identifier, and the inner list identifier, which will be our new list identifier for the flattened list.</li>
+    </ul>
+  </li>
+  <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+    <ul>
+      <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Paired-end Indicator</code>
+        <ul>
+          <li><em>“Paired-end Indicator”</em>: <code class="language-plaintext highlighter-rouge">C</code></li>
+        </ul>
+      </li>
+      <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>
+        <ul>
+          <li><em>“List Identifier(s)”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        </ul>
+      </li>
+      <li>Click Apply</li>
+    </ul>
+  </li>
+  <li>Click <strong>Save</strong></li>
+  <li>Click <strong>Execute</strong></li>
+</ol>
+
+<p>The tool will execute and reshape your list, congratulations!</p>
