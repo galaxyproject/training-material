@@ -53,6 +53,17 @@ notebook:
 
 ---
 
+Version control is a way of tracking the change history of a project, and `git` is one of the most popular systems for doing that! This tutorial will guide you through the basics of using git for version control.
+
+> ### Agenda
+>
+> In this tutorial, you will learn how to create a git repo, and begin working with it.
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 # Basics
 
 We'll start by exploring how version control can be used
