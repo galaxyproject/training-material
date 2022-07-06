@@ -7,7 +7,7 @@ objectives:
   - "Understand the steps involved in variant calling."
   - "Describe the types of data formats encountered during variant calling."
   - "Use command line tools to perform variant calling."
-time_estimation: "50Μ"
+time_estimation: "50M"
 key_points:
   - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
   - "To use most powerful bioinformatic tools, you will need to use the command line."
