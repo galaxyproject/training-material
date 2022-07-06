@@ -52,7 +52,7 @@ module Jekyll
         # I guess these are identical?
         "url": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
         "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
-        "name": contributor['name'],
+        "name": contributor.fetch('name', id),
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
         "description": contributor.fetch("bio", "A contributor to the GTN project."),

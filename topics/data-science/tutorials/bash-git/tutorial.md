@@ -1,5 +1,5 @@
 ---
-layout: tutorial hands-on
+layout: tutorial_hands_on
 title: "Version Control with Git"
 time_estimation: "65M"
 questions:
@@ -26,7 +26,7 @@ objectives:
 - "Identify and use Git commit numbers."
 - "Compare various versions of tracked files."
 - "Restore old versions of files."
-keypoints:
+key_points:
 - "Version control is like an unlimited 'undo'."
 - "Version control also allows many people to work in parallel."
 - "Use `git config` with the `--global` option to configure a user name, email address, editor, and other preferences once per machine."
@@ -39,7 +39,7 @@ keypoints:
 - "Write a commit message that accurately describes your changes."
 - "`git diff` displays differences between commits."
 - "`git checkout` recovers old versions of files."
-contributors:
+contributions:
   authorship:
     - Sofokli5
   editing:
@@ -48,10 +48,20 @@ contributors:
     - hexylena
   funding:
     - carpentries
-notebook:
-  language: bash
+    - erasmusplus 
 
 ---
+
+Version control is a way of tracking the change history of a project, and `git` is one of the most popular systems for doing that! This tutorial will guide you through the basics of using git for version control.
+
+> ### Agenda
+>
+> In this tutorial, you will learn how to create a git repo, and begin working with it.
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Basics
 
@@ -60,9 +70,7 @@ to keep track of what one person did and when.
 Even if you aren't collaborating with other people,
 automated version control is much better than this situation:
 
-!["Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com](../images/bash-git/phd101212s.png)
-
-"Piled Higher and Deeper" by Jorge Cham, http://www.phdcomics.com
+![Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'.](../../images/bash-git/phd101212s.png "Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com")
 
 We've all been in this situation before: it seems unnecessary to have
 multiple nearly-identical versions of the same document. Some word
@@ -78,19 +86,19 @@ think of it as a recording of your progress: you can rewind to start at the base
 document and play back each change you made, eventually arriving at your
 more recent version.
 
-![Changes Are Saved Sequentially](../images/bash-git/play-changes.svg)
+![Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision.](../../images/bash-git/play-changes.svg)
 
 Once you think of changes as separate from the document itself, you
 can then think about "playing back" different sets of changes on the base document, ultimately
 resulting in different versions of that document. For example, two users can make independent
 sets of changes on the same document. 
 
-![Different Versions Can be Saved](../images/bash-git/versions.svg)
+![Different Versions Can be Saved, showing a document splitting into two, with different changes.](../../images/bash-git/versions.svg)
 
 Unless multiple users make changes to the same section of the document - a conflict - you can 
 incorporate two sets of changes into the same base document.
 
-![Multiple Versions Can be Merged](../images/bash-git/merge.svg)
+![Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes.](../../images/bash-git/merge.svg)
 
 A version control system is a tool that keeps track of these changes for us,
 effectively creating different versions of our files. It allows us to decide
@@ -101,7 +109,7 @@ metadata make up a [repository](https://git-scm.com/docs/gitglossary#def_reposit
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
-> ## {% icon tip %} The Long History of Version Control Systems
+> ### {% icon tip %} The Long History of Version Control Systems
 >
 > Automated version control systems are nothing new.
 > Tools like [RCS](https://en.wikipedia.org/wiki/Revision_Control_System), [CVS](https://en.wikipedia.org/wiki/Concurrent_Versions_System), or [Subversion](https://en.wikipedia.org/wiki/Apache_Subversion) have been around since the early 1980s and are used by 
@@ -115,7 +123,7 @@ collaboration among different people.
 > the same files concurrently.
 {: .tip}
 
-> ## {%icon question%} Paper Writing
+> ### {%icon question%} Paper Writing
 >
 > *   Imagine you drafted an excellent paragraph for a paper you are writing, but later ruin 
 >     it. How would you retrieve the *excellent* version of your conclusion? Is it even possible?
@@ -125,7 +133,7 @@ collaboration among different people.
 >     you accept changes made using the `Track Changes` option? Do you have a 
 >     history of those changes?
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > *   Recovering the excellent version is only possible if you created a copy
 > >     of the old version of the paper. The danger of losing good versions
@@ -146,30 +154,16 @@ collaboration among different people.
 > {: .solution}
 {: .question }
 
-> ## {% icon hands_on %} Software to use
->
-> First, we need to get our hands on RStudio.
->
-> > ### {% icon tip %} Tip: Launch RStudio in Galaxy
-> > Currently RStudio in Galaxy is only available on [UseGalaxy.eu](https://usegalaxy.eu) and [UseGalaxy.org](https://usegalaxy.org)
-> >
-> > 1. Open the Rstudio tool {% icon tool %} by clicking [here](https://usegalaxy.eu/?tool_id=interactive_tool_rstudio)
-> > 2. Click Execute
-> > 3. The tool will start running and will stay running permanently
-> > 4. Click on the "User" menu at the top and go to "Active InteractiveTools" and locate the RStudio instance you started.
-{: .tip}
-> >
-> > ### {% icon tip %} Tip: Launch RStudio Cloud if not available on Galaxy
-> >
-> > If RStudio is not available on the Galaxy instance:
-> > 1. Register for [RStudio Cloud](https://client.login.rstudio.cloud/oauth/login?show_auth=0&show_login=1&show_setup=1), or login if you already have an account
-> > 2. Create a new project
-{: .tip}
->
->The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself. 
+
+Before diving in the tutorial, we need to open {% tool [RStudio](interactive_tool_rstudio) %}. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+
+> ### {% icon hands_on %} Hands-on: Installing git
+> The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself. 
 We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
->Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
+> Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
 > > ### {% icon code-in %} Environment and Packages
 > > ```bash
@@ -200,7 +194,7 @@ On a command line, Git commands are written as `git verb options`,
 where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
 Sherlock sets up his new laptop:
 
-> ## {% icon code-in} Setting up with bash
+> ### {% icon code-in %} Setting up with bash
 > ```bash
 > $ git config --global user.name "Sherlock Holmes"
 > $ git config --global user.email "sherlock@baker.street"
@@ -217,14 +211,13 @@ after this lesson will include this information.
 
 For this lesson, we will be interacting with [GitHub](https://github.com/) and so the email address used should be the same as the one used when setting up your GitHub account. If you are concerned about privacy, please review [GitHub's instructions for keeping your email address private][git-privacy]. 
 
-> ## {% icon tip %} Keeping your email private
+> ### {% icon tip %} Keeping your email private
 >
-> If you elect to use a private email address with GitHub, then use that same email address for the `user.email` value, e.g. `username@users.noreply.github.com` replacing `username` with your GitHub one.
-
+> If you choose to use a private email address with GitHub, then use that same email address for the `user.email` value, e.g. `username@users.noreply.github.com` replacing `username` with your GitHub one.
 {: .tip}
 
 
-> ## {% icon tip %} Line Endings
+> ### {% icon tip %} Line Endings
 >
 > As with other keys, when you hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>, on your keyboard,
 > your computer encodes this input as a character.
@@ -276,8 +269,7 @@ Sherlock also has to set his favorite text editor, following this table:
 
 It is possible to reconfigure the text editor for Git whenever you want to change it.
 
-> ## {% icon tip %} Exiting Vim
->
+> ### {% icon tip %} Exiting Vim
 > Note that Vim is the default editor for many programs. If you haven't used Vim before and wish to exit a session without saving
 your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
 > If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
@@ -287,13 +279,13 @@ Git (2.28+) allows configuration of the name of the branch created when you
 initialize any new repository.  Sherlock decides to use that feature to set it to `main` so 
 it matches the cloud service he will eventually use. 
 
-> ## {% icon code-in%} Configure the name of the created branch
+> ### {% icon code-in%} Configure the name of the created branch
 > ```bash
 > $ git config --global init.defaultBranch main
 > ```
 {: .code-in}
 
-> ## {% icon tip %} Default Git branch naming
+> ### {% icon tip %} Default Git branch naming
 >
 > Source file changes are associated with a "branch." 
 > For new learners in this lesson, it's enough to know that branches exist, and this lesson uses one branch.  
@@ -319,7 +311,7 @@ to use the settings for every project, in your user account, on this computer.
 
 You can check your settings at any time:
 
-> ## {% icon code-in%} Checking your settings
+> ### {% icon code-in%} Checking your settings
 > ```bash
 > $ git config --list
 > ```
@@ -328,32 +320,29 @@ You can check your settings at any time:
 You can change your configuration as many times as you want: use the
 same commands to choose another editor or update your email address.
 
-> ## {% icon tip %} Proxy
+> ### {% icon tip %} Proxy
 >
 > In some networks you need to use a
 > [proxy](https://en.wikipedia.org/wiki/Proxy_server). If this is the case, you
 > may also need to tell Git about the proxy:
 >
 > > ### {% icon code-in%} Git and proxy
-> >```bash
-> >$ git config --global http.proxy proxy-url
-> >$ git config --global https.proxy proxy-url
-> >```
-> 
+> > ```bash
+> > $ git config --global http.proxy proxy-url
+> > $ git config --global https.proxy proxy-url
+> > ```
 > {: .code-in}
 >
 > > ### {% icon code-in%} To disable the proxy, use
 > >
-> >```bash
-> >$ git config --global --unset http.proxy
-> >$ git config --global --unset https.proxy
-> >```
-> 
+> > ```bash
+> > $ git config --global --unset http.proxy
+> > $ git config --global --unset https.proxy
+> > ```
 > {: .code-in}
-
 {: .tip}
 
-> ## {% icon tip %} Git Help and Manual
+> ### {% icon tip %} Git Help and Manual
 >
 > Always remember that if you forget the subcommands or options of a `git` command, you can access the relevant list of options typing `git <command> -h` or access the corresponding Git manual by typing
 > `git <command> --help`, e.g.:
@@ -363,7 +352,6 @@ same commands to choose another editor or update your email address.
 > >$ git config -h
 > >$ git config --help
 > >```
-> 
 > {: .code-in}
 >
 > While viewing the manual, remember the `:` is a prompt waiting for commands and you can press <kbd>Q</kbd> to exit the manual.
@@ -388,12 +376,12 @@ we can start using it.
 
 We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects. 
 
-![Motivating Example](../images/bash-git/sherlock-git.png)
+![Cartoon of sherlock examining the git logo with his magnifying glass.](../../images/bash-git/sherlock_git.png)
 
 
 First, let's create a directory for our work and then move into that directory:
 
-> ## {% icon code-in %} Create a workspace
+> ### {% icon code-in %} Create a workspace
 > ```bash
 > $ mkdir suspects
 > $ cd suspects
@@ -403,7 +391,7 @@ First, let's create a directory for our work and then move into that directory:
 Then we tell Git to make `suspects` a [repository](https://git-scm.com/docs/gitglossary#def_repository)
 -- a place where Git can store versions of our files:
 
-> ## {% icon code-in %} Turn our workspace into directory
+> ### {% icon code-in %} Turn our workspace into directory
 > ```bash
 > $ git init
 > ```
@@ -419,7 +407,7 @@ repository are completely separate processes.
 If we use `ls` to show the directory's contents,
 it appears that nothing has changed:
 
-> ## {% icon code-in %} Show directory content
+> ### {% icon code-in %} Show directory content
 > ```bash
 > $ ls
 > ```
@@ -428,16 +416,16 @@ it appears that nothing has changed:
 But if we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory within `suspects` called `.git`:
 
-> ## {% icon code-in %} Show everything in our directory
+> ### {% icon code-in %} Show everything in our directory
 > ```bash
 > $ ls -a
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > .	..	.git
-> ~~~
+> ```
 {: .code-out}
 
 Git uses this special subdirectory to store all the information about the project, 
@@ -448,36 +436,36 @@ Next, we will change the default branch to be called `main`.
 This might be the default branch depending on your settings and version
 of git.
 
-> ## {% icon code-in %} Rename the branch
+> ### {% icon code-in %} Rename the branch
 > ```bash
 > $ git checkout -b main
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > Switched to a new branch 'main'
-> ~~~
+> ```
 {: .code-out}
 
 
 We can check that everything is set up correctly
 by asking Git to tell us the status of our project:
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 >
 > No commits yet
 >
 > nothing to commit (create/copy files and use "git add" to track)
-> ~~~
+> ```
 {: .code-out}
 
 If you are using a different version of `git`, the exact
@@ -487,7 +475,7 @@ wording of the output might be slightly different.
 
  Along with tracking information about suspects (the project we have already created), Sherlock would also like to track information specific clues. So, Sherlock creates a `clues` project inside his `suspects` project with the following sequence of commands:
 
-> ## {% icon code-in %} Create a project within a project
+> ### {% icon code-in %} Create a project within a project
 > ```bash
 > $ cd ~/Desktop   # return to Desktop directory
 > $ cd suspects     # go into suspects directory, which is already a Git repository
@@ -499,10 +487,10 @@ wording of the output might be slightly different.
 > ```
 {: .code-in}
 
-> ## {% icon question %} Tracking in a subdirectory
+> ### {% icon question %} Tracking in a subdirectory
 > Is the `git init` command, run inside the `clues` subdirectory, required for tracking files stored in the `clues` subdirectory?
 > 
-> > ## {% icon solution %} Solution
+> > ### {% icon solution %} Solution
 > >
 > > No. Sherlock does not need to make the `clues` subdirectory a Git repository 
 > > because the `suspects` repository will track all files, sub-directories, and 
@@ -514,7 +502,7 @@ wording of the output might be slightly different.
 
 {: .question}
 
-> ## {% icon tip %} "Nested" repositories
+> ### {% icon tip %} "Nested" repositories
 > Additionally, Git repositories can interfere with each other if they are "nested":
 > the outer repository will try to version-control
 > the inner repository. Therefore, it's best to create each new Git
@@ -529,9 +517,9 @@ wording of the output might be slightly different.
 > > ```
 > {: .code-in}
 > > ### {% icon code-out %} Output
-> >~~~
+> >```
 > >fatal: Not a git repository (or any of the parent directories): .git
-> >~~~
+> >```
 > {: .code-out}
 > 
 {: .tip}
@@ -565,7 +553,7 @@ But be careful! Running this command in the wrong directory will remove the enti
 First let's make sure we're still in the right directory.
 You should be in the `suspects` directory.
 
-> ## {% icon code-in %} Check directory
+> ### {% icon code-in %} Check directory
 > ```bash
 > $ cd ~/suspects
 > ```
@@ -576,7 +564,7 @@ We'll use `nano` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the `core.editor` you set globally earlier. But remember, the bash command to create or edit a new file will depend on the editor you choose (it might not be `nano`). For a refresher on text editors, check out ["Which Editor?"](https://swcarpentry.github.io/shell-novice/03-create/) in [The Unix Shell](https://swcarpentry.github.io/shell-novice/) lesson.
 
-> ## {% icon code-in %} Edit file with nano in bash
+> ### {% icon code-in %} Edit file with nano in bash
 > ```bash
 > $ nano colonel.txt
 > ```
@@ -584,34 +572,34 @@ In particular, this does not have to be the `core.editor` you set globally earli
 
 Type the text below into the `colonel.txt` file:
 
-~~~
+```
 No alibi for the night of murder.
-~~~
+```
 
 
 Let's first verify that the file was properly created by running the list command (`ls`):
 
-> ## {% icon code-in %} Check new file
+> ### {% icon code-in %} Check new file
 > ```bash
 > $ ls
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > colonel.txt
-> ~~~
+> ```
 {: .code-out}
 
 `colonel.txt` contains a single line, which we can see by running:
 
-> ## {% icon code-in %} Inspect the new file
+> ### {% icon code-in %} Inspect the new file
 > ```bash
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
+> ### {% icon code-out %} Output
 > ```
 > No alibi for the night of murder.
 > ```
@@ -620,14 +608,14 @@ Let's first verify that the file was properly created by running the list comman
 If we check the status of our project again,
 Git tells us that it's noticed the new file:
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 >
 > No commits yet
@@ -638,12 +626,12 @@ Git tells us that it's noticed the new file:
 > colonel.txt
 >
 > nothing added to commit but untracked files present (use "git add" to track)
-> ~~~
+> ```
 {: .code-out}
 
 The "untracked files" message means that there's a file in the directory that Git isn't keeping track of. We can tell Git to track a file using `git add`:
 
-> ## {% icon code-in %} Track file
+> ### {% icon code-in %} Track file
 > ```bash
 > $ git add colonel.txt
 > ```
@@ -651,14 +639,14 @@ The "untracked files" message means that there's a file in the directory that Gi
 
 and then check that the right thing happened:
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 >
 > No commits yet
@@ -668,23 +656,23 @@ and then check that the right thing happened:
 >
 >	new file:   colonel.txt
 >
-> ~~~
+> ```
 {: .code-out}
 
 Git now knows that it's supposed to keep track of `colonel.txt`, but it hasn't recorded these changes as a commit yet. To get it to do that, we need to run one more command:
 
-> ## {% icon code-in %} Record changes as a commit with a descriptive title
+> ### {% icon code-in %} Record changes as a commit with a descriptive title
 > ```bash
 > $ git commit -m "Start notes for colonel Smith as a suspect"
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 >[main (root-commit) f22b25e] Start notes on colonel Smith as a suspect 
 > 1 file changed, 1 insertion(+)
 > create mode 100644 colonel.txt
-> ~~~
+> ```
 {: .code-out}
 
 When we run `git commit`,
@@ -703,38 +691,38 @@ so that we can write a longer message.
 changes made in the commit. Generally, the message should complete the sentence "If applied, this commit will" <commit message here>.
 If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.
 
-> ## {% icon code-in %} If we run `git status` now:
+> ### {% icon code-in %} If we run `git status` now:
 >
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 > nothing to commit, working directory clean
-> ~~~
+> ```
 {: .code-out}
 
 it tells us everything is up to date.
 If we want to know what we've done recently,
 we can ask Git to show us the project's history using `git log`:
 
-> ## {% icon code-in %} Access project's history
+> ### {% icon code-in %} Access project's history
 > ```bash
 > $ git log
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
 > Author: Sherlock Holmes <sherlock@baker.street>
 > Date:   Thu Aug 22 09:51:46 2013 -0400
 >
 >   Start notes on colonel as a suspect
-> ~~~
+> ```
 {: .code-out}
 
 `git log` lists all commits  made to a repository in reverse chronological order.
@@ -746,7 +734,7 @@ the commit's author,
 when it was created,
 and the log message Git was given when the commit was created.
 
-> ## {% icon tip %} Where Are My Changes?
+> ### {% icon tip %} Where Are My Changes?
 >
 > If we run `ls` at this point, we will still see just one file called `colonel.txt`.
 > That's because Git saves information about files' history
@@ -759,31 +747,31 @@ Now suppose Sherlock adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
-> ## {% icon code-in %} Edit with nano
+> ### {% icon code-in %} Edit with nano
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > No alibi for the night of murder.
 > No clear motive. Seems high unlikely.
-> ~~~
+> ```
 {: .code-out}
 
 When we run `git status` now,
 it tells us that a file, it already knows about, has been modified:
 
-> ## {% icon code-in %} Find about current status
+> ### {% icon code-in %} Find about current status
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 > Changes not staged for commit:
 >  (use "git add <file>..." to update what will be committed)
@@ -792,7 +780,7 @@ it tells us that a file, it already knows about, has been modified:
 >	modified:   colonel.txt
 >
 > no changes added to commit (use "git add" and/or "git commit -a")
-> ~~~
+> ```
 {: .code-out}
 
 The last line is the key phrase:
@@ -806,14 +794,14 @@ our changes before saving them. We do this using `git diff`.
 This shows us the differences between the current state
 of the file and the most recently saved version:
 
-> ## {% icon code-in %} Review the changes 
+> ### {% icon code-in %} Review the changes 
 > ```bash
 > $ git diff
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output 
-> ~~~
+> ### {% icon code-out %} Output 
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index df0654a..315bf3a 100644
 > --- a/colonel.txt
@@ -842,14 +830,14 @@ If we break it down into pieces:
 
 After reviewing our change, it's time to commit it:
 
-> ## {% icon code-in %} Commit after checking changes
+> ### {% icon code-in %} Commit after checking changes
 > ```bash
 > $ git commit -m "Add concerns about existence of motive for colonel"
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 > Changes not staged for commit:
 >   (use "git add <file>..." to update what will be committed)
@@ -858,25 +846,25 @@ After reviewing our change, it's time to commit it:
 > 	modified:   colonel.txt
 > 
 > no changes added to commit (use "git add" and/or "git commit -a")
-> ~~~
+> ```
 {: .code-out}
 
 Whoops:
 Git won't commit because we didn't use `git add` first.
 Let's fix that:
 
-> ## {% icon code-in %} First `add` then `commit`
+> ### {% icon code-in %} First `add` then `commit`
 > ```bash
 > $ git add colonel.txt
 > $ git commit -m "Add concerns about existence of motive for colonel"
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > [main 34961b1] Add concerns about existence of motive for colonel
 >  1 file changed, 1 insertion(+)
-> ~~~
+> ```
 {: .code-out}
 
 Git insists that we add files to the set we want to commit
@@ -896,7 +884,7 @@ where it keeps track of things that have been added to
 the current [changeset](https://git-scm.com/docs/gitglossary#def_changeset)
 but not yet committed.
 
-> ## {% icon tip %} Staging Area
+> ### {% icon tip %} Staging Area
 >
 > If you think of Git as taking snapshots of changes over the life of a project,
 > `git add` specifies *what* will go in a snapshot
@@ -916,7 +904,7 @@ but not yet committed.
 > than you would like!
 {: .tip}
 
-![The Git Staging Area](../images/bash-git/git-staging-area.svg)
+![The Git Staging Area cartoon, a document is shown going into the staging area via "git add", and then into the repository via "git commit".](../../images/bash-git/git-staging-area.svg)
 
 Let's watch as our changes to a file move from our editor
 to the staging area
@@ -924,29 +912,29 @@ and into long-term storage.
 First,
 we'll add another line to the file:
 
-> ## {% icon code-in %} Add and review new line with `nano` and `cat`
+> ### {% icon code-in %} Add and review new line with `nano` and `cat`
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > No alibi for the night of murder.
 > No clear motive. Seems high unlikely.
 > Fingerprints on victims glasses.
-> ~~~
+> ```
 {: .code-out}
 
-> ## {% icon code-in %} Review changes
+> ### {% icon code-in %} Review changes
 > ```bash
 > $ git diff
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index 315bf3a..b36abfd 100644
 > --- a/colonel.txt
@@ -955,7 +943,7 @@ we'll add another line to the file:
 >  No alibi for the night of murder.
 >  No clear motive. Seems high unlikely.
 > +Fingerprints on victims glasses.
-> ~~~
+> ```
 {: .code-out}
 
 So far, so good:
@@ -964,7 +952,7 @@ we've added one line to the end of the file
 Now let's put that change in the staging area
 and see what `git diff` reports:
 
-> ## {% icon code-in %} See changes
+> ### {% icon code-in %} See changes
 > ```bash
 > $ git add colonel.txt
 > $ git diff
@@ -978,14 +966,14 @@ and what's currently in the directory.
 However,
 if we do this:
 
-> ## {% icon code-in %} See what is in the staging area
+> ### {% icon code-in %} See what is in the staging area
 > ```bash
 > $ git diff --staged
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output 
-> ~~~
+> ### {% icon code-out %} Output 
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index 315bf3a..b36abfd 100644
 > --- a/colonel.txt
@@ -994,7 +982,7 @@ if we do this:
 >  No alibi for the night of murder.
 >  No clear motive. Seems high unlikely.
 > +Fingerprints on victims glasses.
-> ~~~
+> ```
 {: .code-out}
 
 it shows us the difference between
@@ -1002,40 +990,40 @@ the last committed change
 and what's in the staging area.
 Let's save our changes:
 
-> ## {% icon code-in %} Save changes
+> ### {% icon code-in %} Save changes
 > ```bash
 > $ git commit -m "Make notes about colonel's fingerprints"
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > [main 005937f] Make notes about colonel's fingerprints
 >  1 file changed, 1 insertion(+)
-> ~~~
+> ```
 {: .code-out}
 
-> ## {% icon code-in %} Check new status
+> ### {% icon code-in %} Check new status
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~ 
+> ### {% icon code-out %} Output
+> ``` 
 > On branch main
 > nothing to commit, working directory clean
-> ~~~
+> ```
 {: .code-out}
 
-> ## {% icon code-in %} and look at the history of what we've done so far: 
+> ### {% icon code-in %} and look at the history of what we've done so far: 
 > ```bash
 > $ git log
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output 
-> ~~~
+> ### {% icon code-out %} Output 
+> ```
 > commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -> main)
 > Author: Holmes Sherlock <Holmes@tran.sylvan.ia>
 > Date:   Thu Aug 22 10:14:07 2013 -0400
@@ -1053,10 +1041,10 @@ Let's save our changes:
 > Date:   Thu Aug 22 09:51:46 2013 -0400
 >
 >     Start notes on colonel as a suspect
-> ~~~
+> ```
 {: .code-out}
 
-> ## {% icon tip %} Word-based diffing
+> ### {% icon tip %} Word-based diffing
 >
 > Sometimes, e.g. in the case of the text documents a line-wise
 > diff is too coarse. That is where the `--color-words` option of
@@ -1064,7 +1052,7 @@ Let's save our changes:
 > words using colors.
 {: .tip}
 
-> ## {% icon tip %} Paging the Log
+> ### {% icon tip %} Paging the Log
 >
 > When the output of `git log` is too long to fit in your screen,
 > `git` uses a program to split it into pages of the size of your screen.
@@ -1079,7 +1067,7 @@ Let's save our changes:
 >     Navigate through matches pressing <kbd>N</kbd>.
 {: .tip}
 
-> ## {% icon tip %} Limit Log Size
+> ### {% icon tip %} Limit Log Size
 >
 > To avoid having `git log` cover your entire terminal screen, you can limit the
 > number of commits that Git lists by using `-N`, where `N` is the number of
@@ -1093,13 +1081,13 @@ Let's save our changes:
 > {: .code-in}
 >
 > > ### {% icon code-out %} Output
-> > ~~~
+> > ```
 > > commit 005937fbe2a98fb83f0ade869025dc2636b4dad5 (HEAD -> main)
 > > Author: Sherlock Holmes <sherlock@baker.street>
 > > Date:   Thu Aug 22 10:14:07 2013 -0400
 > >
 > >    Make notes about colonel's fingerprints
-> > ~~~
+> > ```
 > {: .code-out}
 >
 > You can also reduce the quantity of information using the
@@ -1112,11 +1100,11 @@ Let's save our changes:
 > {: .code-in}
 > 
 > > ### {% icon code-out %} Output
-> > ~~~
+> > ```
 > > 005937f (HEAD -> main) Make notes about colonel's fingerprints
 > > 34961b1 Add concerns about existence of motive for colonel
 > > f22b25e Start notes on colonel as a base
-> > ~~~
+> > ```
 > {: .code-out}
 >
 > You can also combine the `--oneline` option with others. One useful
@@ -1131,15 +1119,15 @@ Let's save our changes:
 > > ```
 > {: .code-in}
 > > ### {% icon code-out %} Output
-> > ~~~
+> > ```
 > > * 005937f (HEAD -> main) Make notes about colonel's fingerprints
 > > * 34961b1 Add concerns about existence of motive for colonel
 > > * f22b25e Start notes on colonel as a base
-> > ~~~
+> > ```
 > {: .code-out}
 {: .tip}
 
-> ## {% icon tip %} Directories 
+> ### {% icon tip %} Directories 
 >
 > Two important facts you should know about directories in Git.
 >
@@ -1165,9 +1153,9 @@ Let's save our changes:
 > 2. If you create a directory in your Git repository and populate it with files,
 >    you can add all files in the directory at once by:
 >  
->     ~~~
+>     ```
 >     git add <directory-with-files>
->     ~~~
+>     ```
 >
 >    Try it for yourself:
 >    > ### {% icon code-in %} Add multiple files
@@ -1194,11 +1182,11 @@ we first need to add the changed files to the staging area
 (`git add`) and then commit the staged changes to the
 repository (`git commit`):
 
-![The Git Commit Workflow](../images/bash-git/git-committing.svg)
+![The Git Commit Workflow](../../images/bash-git/git-committing.svg)
 
 # Let's put us to the test
 
-> ## {%icon question%} Choosing a Commit Message
+> ### {%icon question%} Choosing a Commit Message
 >
 > Which of the following commit messages would be most appropriate for the
 > last commit made to `colonel.txt`?
@@ -1207,35 +1195,35 @@ repository (`git commit`):
 > 2. "Added line 'Fingerprints on victims glasses.' to colonel.txt"
 > 3. "Make notes about colonel's fingerprints"
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > > Answer 1 is not descriptive enough, and the purpose of the commit is unclear;
 > > and answer 2 is redundant to using "git diff" to see what changed in this commit;
 > > but answer 3 is good: short, descriptive, and imperative.
 > {: .solution}
 {: .question }
 
-> ## {%icon question%} Committing Changes to Git
+> ### {%icon question%} Committing Changes to Git
 >
 > Which command(s) below would save the changes of `myfile.txt`
 > to my local Git repository?
 >
-> 1. ~~~
+> 1. ```
 >    $ git commit -m "my recent changes"
->    ~~~
+>    ```
 >    
-> 2. ~~~
+> 2. ```
 >    $ git init myfile.txt
 >    $ git commit -m "my recent changes"
->    ~~~
-> 3. ~~~
+>    ```
+> 3. ```
 >    $ git add myfile.txt
 >    $ git commit -m "my recent changes"
->    ~~~
-> 4. ~~~
+>    ```
+> 4. ```
 >    $ git commit -m myfile.txt "my recent changes"
->    ~~~
+>    ```
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > 1. Would only create a commit if files have already been staged.
 > > 2. Would try to create a new repository.
@@ -1244,7 +1232,7 @@ repository (`git commit`):
 > {: .solution}
 {: .question }
 
-> ## {%icon question%} Committing Multiple Files
+> ### {%icon question%} Committing Multiple Files
 >
 > The staging area can hold changes from any number of files
 > that you want to commit as a single snapshot.
@@ -1255,66 +1243,67 @@ repository (`git commit`):
 > 3. Add changes from both files to the staging area,
 > and commit those changes.
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > The output below from `cat colonel.txt` reflects only content added during 
 > > this exercise. Your output may vary.
 > > 
 > > First we make our changes to the `colonel.txt` and `judge.txt` files:
-> > ### {% icon code-in %} Edit `colonel.txt`
-> > ```bash
-> > $ nano colonel.txt
-> > $ cat colonel.txt
-> > ```
-> {: .code-in}
-> > ### {% icon code-out %} Output
-> > ~~~
-> > Maybe judge Brown should also be considerable as a suspect.
-> > ~~~
-> {: .code-out}
-> > ### {% icon code-in %} Create and edit `judge.txt`
-> > ```bash
-> > $ nano judge.txt
-> > $ cat judge.txt
-> > ```
-> {: .code-in}
-> > ### {% icon code-out %} Output
-> > ~~~
-> > Judge seems like a nice guy, but has a shady past.
-> > ~~~
-> {: .code-out}
+> > > ### {% icon code-in %} Edit `colonel.txt`
+> > > ```bash
+> > > $ nano colonel.txt
+> > > $ cat colonel.txt
+> > > ```
+> > {: .code-in}
+> > > ### {% icon code-out %} Output
+> > > ```
+> > > Maybe judge Brown should also be considerable as a suspect.
+> > > ```
+> > {: .code-out}
+> > > ### {% icon code-in %} Create and edit `judge.txt`
+> > > ```bash
+> > > $ nano judge.txt
+> > > $ cat judge.txt
+> > > ```
+> > {: .code-in}
+> > > ### {% icon code-out %} Output
+> > > ```
+> > > Judge seems like a nice guy, but has a shady past.
+> > > ```
+> > {: .code-out}
+> >
 > > Now you can add both files to the staging area. We can do that in one line:
-> > ### {% icon code-in %} Add both files
-> > ```bash
-> > $ git add colonel.txt judge.txt
-> > ```
-> {: .code-in}
-> > ### {% icon code-in %} Or with multiple commands: 
-> > ```bash
-> > $ git add colonel.txt
-> > $ git add judge.txt
-> > ```
-> {: .code-in}
+> > > ### {% icon code-in %} Add both files
+> > > ```bash
+> > > $ git add colonel.txt judge.txt
+> > > ```
+> > {: .code-in}
+> >
+> > > ### {% icon code-in %} Or with multiple commands: 
+> > > ```bash
+> > > $ git add colonel.txt
+> > > $ git add judge.txt
+> > > ```
+> > {: .code-in}
+> > 
 > > Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
-> > ### {% icon code-in %} Commit changes
-> > ```bash
-> > $ git commit -m "Write plans to start a base on judge"
-> > ```
-> {: .code-in}
-> > ### {% icon code-out %} Output
-> > ~~~
-> > [main cc127c2]
-> >  Write plans to start a base on judge
-> >  2 files changed, 2 insertions(+)
-> >  create mode 100644 judge.txt
-> > ~~~
-> {: .code-out}
->
+> > > ### {% icon code-in %} Commit changes
+> > > ```bash
+> > > $ git commit -m "Write plans to start a base on judge"
+> > > ```
+> > {: .code-in}
+> > > ### {% icon code-out %} Output
+> > > ```
+> > > [main cc127c2]
+> > >  Write plans to start a base on judge
+> > >  2 files changed, 2 insertions(+)
+> > >  create mode 100644 judge.txt
+> > > ```
+> > {: .code-out}
 > {: .solution}
-
 {: .question }
 
-> ## {%icon question%} `bio` Repository
+> ### {%icon question%} `bio` Repository
 >
 > 1. Create a new Git repository on your computer called `bio`.
 > 2. Write a three-line biography for yourself in a file called `me.txt`,
@@ -1323,57 +1312,53 @@ repository (`git commit`):
 > 4. Display the differences
 > between its updated state and its original state.
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > If needed, move out of the `suspects` folder:
-> > ### {% icon code-in %} Change directory
-> > ```bash
-> > $ cd ..
-> > ```
-> {: .code-in}
+> > > ### {% icon code-in %} Change directory
+> > > ```bash
+> > > $ cd ..
+> > > ```
+> > {: .code-in}
 > >
 > > Create a new folder called `bio` and 'move' into it:
-> > ### Create folder
-> > ```bash
-> > $ mkdir bio
-> > $ cd bio
-> > ```
-> {: .code-in}
+> > > ### Create folder
+> > > ```bash
+> > > $ mkdir bio
+> > > $ cd bio
+> > > ```
+> > {: .code-in}
 > >
-> > ### {% icon code-in %} Initialise git:
-> >
-> > ```bash
-> > $ git init
-> > ```
-> {: .code-in}
+> > > ### {% icon code-in %} Initialise git:
+> > > ```bash
+> > > $ git init
+> > > ```
+> > {: .code-in}
 > >
 > > Create your biography file `me.txt` using `nano` or another text editor.
 > > Once in place, add and commit it to the repository:
 > >
-> > ### {% icon code-in %} Create file and edit it
-> > ```bash
-> > $ git add me.txt
-> > $ git commit -m "Add biography file" 
-> > ```
-> {: .code-in}
+> > > ### {% icon code-in %} Create file and edit it
+> > > ```bash
+> > > $ git add me.txt
+> > > $ git commit -m "Add biography file" 
+> > > ```
+> > {: .code-in}
 > >
 > > Modify the file as described (modify one line, add a fourth line).
 > > To display the differences
 > > between its updated state and its original state, use `git diff`:
 > >
-> > ### {% icon code-in %} Display the differences
-> > ```bash
-> > $ git diff me.txt
-> > ```
-> {: .code-in}
-> >
+> > > ### {% icon code-in %} Display the differences
+> > > ```bash
+> > > $ git diff me.txt
+> > > ```
+> > {: .code-in}
 > {: .solution}
 {: .question }
 
 [commit-messages]: https://chris.beams.io/posts/git-commit/
 [git-references]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
-
-{% include links.md %}
 
 # History Exploring
 
@@ -1385,32 +1370,32 @@ We've been adding one line at a time to `colonel.txt`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
 let's make a change to `colonel.txt`, adding yet another line.
 
-> ## {% icon code-in %} Edit `colonel.txt`
+> ### {% icon code-in %} Edit `colonel.txt`
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > No alibi for the night of murder.
 > No clear motive. Seems high unlikely.
 > Fingerprints on victims glasses.
 > Maybe judge Brown should also be considerable as a suspect.
-> ~~~
+> ```
 {: .code-out}
 
 Now, let's see what we get.
 
-> ## {% icon code-in %} Display the changes
+> ### {% icon code-in %} Display the changes
 > ```bash
 > $ git diff HEAD colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index b36abfd..0848c8d 100644
 > --- a/colonel.txt
@@ -1420,7 +1405,7 @@ Now, let's see what we get.
 >  No clear motive. Seems high unlikely.
 >  Fingerprints on victims glasses.
 > +Maybe judge Brown should also be considerable as a suspect.
-> ~~~
+> ```
 {: .code-out}
 
 which is the same as what you would get if you leave out `HEAD` (try it).  The
@@ -1429,7 +1414,7 @@ that by adding `~1`
 (where "~" is "tilde", pronounced [**til**-d*uh*]) 
 to refer to the commit one before `HEAD`.
 
-> ## {% icon code-in %} Refer to previous commits
+> ### {% icon code-in %} Refer to previous commits
 > ```bash
 > $ git diff HEAD~1 colonel.txt
 > ```
@@ -1438,14 +1423,14 @@ to refer to the commit one before `HEAD`.
 If we want to see the differences between older commits we can use `git diff`
 again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to them:
 
-> ## {% icon code-in %} Refer to previous commits
+> ### {% icon code-in %} Refer to previous commits
 > ```bash
 > $ git diff HEAD~3 colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index df0654a..b36abfd 100644
 > --- a/colonel.txt
@@ -1455,21 +1440,21 @@ again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to them:
 > +No clear motive. Seems high unlikely.
 > +Fingerprints on victims glasses.
 > +Maybe judge Brown should also be considerable as a suspect.
-> ~~~
+> ```
 {: .code-out}
 
 We could also use `git show` which shows us what changes we made at an older commit as 
 well as the commit message, rather than the _differences_ between a commit and our 
 working directory that we see by using `git diff`.
 
-> ## {% icon code-in %} `git show` and `git diff` differences 
+> ### {% icon code-in %} `git show` and `git diff` differences 
 > ```bash
 > $ git show HEAD~3 colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > commit f22b25e3233b4645dabd0d81e651fe074bd8e73b
 > Author: Sherlock Holmes <sherlock@baker.street>
 > Date:   Thu Aug 22 09:51:46 2013 -0400
@@ -1483,7 +1468,7 @@ working directory that we see by using `git diff`.
 > +++ b/colonel.txt
 > @@ -0,0 +1 @@
 > +No alibi for the night of murder.
-> ~~~
+> ```
 {: .code-out}
 
 In this way,
@@ -1505,14 +1490,14 @@ Our first commit was given the ID
 `f22b25e3233b4645dabd0d81e651fe074bd8e73b`,
 so let's try this:
 
-> ## {% icon code-in %} Display specific commit
+> ### {% icon code-in %} Display specific commit
 > ```bash
 > $ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index df0654a..93a3e13 100644
 > --- a/colonel.txt
@@ -1522,21 +1507,21 @@ so let's try this:
 > +No clear motive. Seems high unlikely.
 > +Fingerprints on victims glasses.
 > +Maybe judge Brown should also be considerable as a suspect.
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
 That's the right answer,
 but typing out random 40-character strings is annoying,
 so Git lets us use just the first few characters (typically seven for normal size projects):
 
-> ## {% icon code-in %} Shorter alternative
+> ### {% icon code-in %} Shorter alternative
 > ```bash
 > $ git diff f22b25e colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > diff --git a/colonel.txt b/colonel.txt
 > index df0654a..93a3e13 100644
 > --- a/colonel.txt
@@ -1546,8 +1531,8 @@ so Git lets us use just the first few characters (typically seven for normal siz
 > +No clear motive. Seems high unlikely.
 > +Fingerprints on victims glasses.
 > +Maybe judge Brown should also be considerable as a suspect.
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
 All right! So
 we can save changes to files and see what we've changed. Now, how
@@ -1558,14 +1543,14 @@ Let's suppose we change our mind about the last update to
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 > Changes not staged for commit:
 >   (use "git add <file>..." to update what will be committed)
@@ -1574,26 +1559,26 @@ but those changes haven't been staged:
 >     modified:   colonel.txt
 > 
 > no changes added to commit (use "git add" and/or "git commit -a")
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
 We can put things back the way they were
 by using `git checkout`:
 
-> ## {% icon code-in %} Restore with `git checkout`
+> ### {% icon code-in %} Restore with `git checkout`
 > ```bash
 > $ git checkout HEAD colonel.txt
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > No alibi for the night of murder.
 > No clear motive. Seems high unlikely.
 > Fingerprints on victims glasses.
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
 As you might guess from its name,
 `git checkout` checks out (i.e., restores) an old version of a file.
@@ -1603,72 +1588,72 @@ which is the last saved commit.
 If we want to go back even further,
 we can use a commit identifier instead:
 
-> ## {% icon code-in %} Restrore specific commit
+> ### {% icon code-in %} Restrore specific commit
 > ```bash
 > $ git checkout f22b25e colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ cat colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > No alibi for the night of murder.
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
-> ## {% icon code-in %} Check
+> ### {% icon code-in %} Check
 > ```bash
 > $ git status
 > ```
 {: .code-in}
 
-> ## {% icon code-out %} Output
-> ~~~
+> ### {% icon code-out %} Output
+> ```
 > On branch main
 > Changes to be committed:
 >   (use "git reset HEAD <file>..." to unstage)
 > 
 >     modified:   colonel.txt
 > 
-> ~~~
-{: . code-out}
+> ```
+{: .code-out}
 
 Notice that the changes are currently in the staging area.
 Again, we can put things back the way they were
 by using `git checkout`:
 
-> ## {% icon code-in %} Restore 
+> ### {% icon code-in %} Restore 
 > ```bash
 > $ git checkout HEAD colonel.txt
 > ```
 {: .code-in}
 
-> ## {% icon warning %} Don't Lose Your HEAD
+> ### {% icon warning %} Don't Lose Your HEAD
 >
 > Above we used
 >
-> ~~~
+> ```
 > $ git checkout f22b25e colonel.txt
-> ~~~
+> ```
 >
 > to revert `colonel.txt` to its state after the commit `f22b25e`. But be careful! 
 > The command `checkout` has other important functionalities and Git will misunderstand
 > your intentions if you are not accurate with the typing. For example, 
 > if you forget `colonel.txt` in the previous command.
 >
-> > ## {% icon code-in %} Error recipe
+> > ### {% icon code-in %} Error recipe
 > > ```bash
 > > $ git checkout f22b25e
 > > ```
 > {: .code-in}
 > 
-> > ## {% icon code-out %} Output
-> > ~~~
+> > ### {% icon code-out %} Output
+> > ```
 > > Note: checking out 'f22b25e'.
 > > 
 > > You are in 'detached HEAD' state. You can look around, make experimental
@@ -1681,8 +1666,8 @@ by using `git checkout`:
 > > git checkout -b <new-branch-name>
 > >
 > > HEAD is now at f22b25e Start notes on colonel as a base
-> > ~~~
-> {: . code-out}
+> > ```
+> {: .code-out}
 >
 > The "detached HEAD" is like "look, but don't touch" here,
 > so you shouldn't make any changes in this state.
@@ -1697,21 +1682,21 @@ the commit in which we made the change we're trying to discard.
 In the example below, we want to retrieve the state from before the most
 recent commit (`HEAD~1`), which is commit `f22b25e`:
 
-![Git Checkout](../images/bash-git/git-checkout.svg)
+![Git Checkout](../../images/bash-git/git-checkout.svg)
 
 So, to put it all together,
 here's how Git works in cartoon form:
 
-![https://figshare.com/articles/How_Git_works_a_cartoon/1328266](../images/bash-git/git_staging.svg)
+![https://figshare.com/articles/How_Git_works_a_cartoon/1328266](../../images/bash-git/git_staging.svg)
 
-> ## {% icon tip %} Simplifying the Common Case
+> ### {% icon tip %} Simplifying the Common Case
 >
 > If you read the output of `git status` carefully,
 > you'll see that it includes this hint:
 >
-> ~~~
+> ```
 > (use "git checkout -- <file>..." to discard changes in working directory)
-> ~~~
+> ```
 >
 > As it says,
 > `git checkout` without a version identifier restores files to the state saved in `HEAD`.
@@ -1730,7 +1715,7 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
-> ## {%icon question%} Recovering Older Versions of a File
+> ### {%icon question%} Recovering Older Versions of a File
 >
 > Jennifer has made changes to the Python script that she has been working on for weeks, and the
 > modifications she made this morning "broke" the script and it no longer runs. She has spent
@@ -1751,7 +1736,7 @@ moving backward and forward in time becomes much easier.
 > 5. Both 2 and 4
 >
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > The answer is (5)-Both 2 and 4. 
 > > 
@@ -1772,7 +1757,7 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> ## {%icon question%} Reverting a Commit
+> ### {%icon question%} Reverting a Commit
 >
 > Jennifer is collaborating with colleagues on her Python script.  She
 > realizes her last commit to the project's repository contained an error, and 
@@ -1798,7 +1783,7 @@ moving backward and forward in time becomes much easier.
 > 5. Save and close
 > 
 > 
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > > 
 > > The command `git log` lists project history with commit IDs.  
 > > 
@@ -1808,11 +1793,11 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> ## {%icon question%} Understanding Workflow and History
+> ### {%icon question%} Understanding Workflow and History
 >
 > What is the output of the last command in
 >
-> ~~~
+> ```
 > $ cd suspects
 > $ echo "judge has unresolved military issues" > judge.txt
 > $ git add judge.txt
@@ -1820,23 +1805,23 @@ moving backward and forward in time becomes much easier.
 > $ git commit -m "Comment on judge as a suspect"
 > $ git checkout HEAD judge.txt
 > $ cat judge.txt #this will print the contents of judge.txt to the screen
-> ~~~
+> ```
 >
-> 1. ~~~
+> 1. ```
 >    judge has enemies in the city
->    ~~~
-> 2. ~~~
+>    ```
+> 2. ```
 >    judge has unresolved military issues
->    ~~~
-> 3. ~~~
+>    ```
+> 3. ```
 >    judge has unresolved military issues
 >    judge has enemies in the city
->    ~~~
-> 4. ~~~
+>    ```
+> 4. ```
 >    Error because you have changed judge.txt without committing the changes
->    ~~~
+>    ```
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > >
 > > The answer is 2. 
 > > 
@@ -1853,13 +1838,13 @@ moving backward and forward in time becomes much easier.
 > >  replaces the working copy with the most recently committed version of `judge.txt`.
 > >  
 > >  So, `cat judge.txt` will output 
-> >  ~~~
+> >  ```
 > >  judge has unresolved military issues.
-> >  ~~~
+> >  ```
 > {: .solution}
 {: .question }
 
-> ## {%icon question%} Checking Understanding of `git diff`
+> ### {%icon question%} Checking Understanding of `git diff`
 >
 > Consider this command: `git diff HEAD~9 colonel.txt`. What do you predict this command
 > will do if you execute it? What happens when you do execute it? Why?
@@ -1869,7 +1854,7 @@ moving backward and forward in time becomes much easier.
 > and what does happen?
 {: .question }
 
-> ## {%icon question%} Getting Rid of Staged Changes
+> ### {%icon question%} Getting Rid of Staged Changes
 >
 > `git checkout` can be used to restore a previous commit when unstaged changes have
 > been made, but will it also work for changes that have been staged but not committed?
@@ -1877,7 +1862,7 @@ moving backward and forward in time becomes much easier.
 > you can remove your change.
 {: .question }
 
-> ## {%icon question%} Explore and Summarize Histories
+> ### {%icon question%} Explore and Summarize Histories
 >
 > Exploring history is an important part of Git, and often it is a challenge to find
 > the right commit ID, especially if the commit is from several months ago.
@@ -1887,13 +1872,13 @@ moving backward and forward in time becomes much easier.
 > When you type `git log`, a very long list appeared.
 > How can you narrow down the search?
 >
-> > ## {%icon solution%} Solution
+> > ### {%icon solution%} Solution
 > > Recall that the `git diff` command allows us to explore one specific file,
 > > e.g., `git diff colonel.txt`. We can apply a similar idea here.
 > >
-> > ~~~
+> > ```
 > > $ git log colonel.txt
-> > ~~~
+> > ```
 > >
 > >
 > > Unfortunately some of these commit messages are very ambiguous, e.g., `update files`.
@@ -1903,17 +1888,17 @@ moving backward and forward in time becomes much easier.
 > > for you.
 > > Is it possible to combine both? Let's try the following:
 > > 
-> > ~~~
+> > ```
 > > $ git log --patch colonel.txt
-> > ~~~
+> > ```
 > >
 > >You should get a long list of output, and you should be able to see both commit messages and 
 > >the difference between each commit.
 > >
 > >Question: What does the following command do?
 > >
-> > ~~~
+> > ```
 > > $ git log --patch HEAD~9 *.txt
-> > ~~~
+> > ```
 > {: .solution}
 {: .question }
