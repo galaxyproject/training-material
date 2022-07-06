@@ -22,7 +22,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Code Architecture" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:24 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:30 +0000" />
 <meta name="DC.creator" content="John Chilton" />
 <meta name="DC.creator" content="Björn Grüning" />
 
@@ -275,7 +275,7 @@
 
 		
 
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 24, 2021 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 30, 2022 </div>
 
 	<hr />
 
@@ -2158,10 +2158,11 @@ in a manager instead of in the model.</p>
 <ul>
   <li>Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.</li>
   <li>Galaxy doesn’t think in terms of “rows” but “objects”.</li>
-  <li>Classes for Galaxy model objects in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/__init__.py</code>.</li>
-  <li>Classes mapped to tables in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/mapping.py</code>
+  <li>Classes for Galaxy model objects defined in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/__init__.py</code>.</li>
+  <li>Classes mapped to database objects in same module via “declarative mapping”.
     <ul>
-      <li>Describes table definitions and relationships.</li>
+      <li>Classes/attributes mapped to tables/columns</li>
+      <li>Associations between classes mapped to relationships between tables</li>
     </ul>
   </li>
 </ul>
@@ -2172,18 +2173,26 @@ in a manager instead of in the model.</p>
 
 <hr />
 
-<h3 id="galaxy-model-migrations">Galaxy Model Migrations</h3>
+<h3 id="galaxy-database-schema-migrations">Galaxy Database Schema Migrations</h3>
 
 <ul>
-  <li>A migration describes a linear list of database “diff”s to
-end up with the current Galaxy model.</li>
-  <li>Allow the schema to be migrated forward automatically.</li>
-  <li>Powered by sqlalchemy-migrate - https://sqlalchemy-migrate.readthedocs.io/en/latest/.</li>
-  <li>Each file in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrate/versions/</code>
+  <li>Automated execution of incremental, reversible changes to the database schema.</li>
+  <li>Performed to update or revert the database schema to a newer or older version.</li>
+  <li>Powered by Alembic - https://alembic.sqlalchemy.org/.
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">0124_job_state_history.py</code></li>
-      <li><code class="language-plaintext highlighter-rouge">0125_workflow_step_tracking.py</code></li>
-      <li><code class="language-plaintext highlighter-rouge">0126_password_reset.py</code></li>
+      <li>(as of 22.05; prior to that by SQLAlchemy Migrate)</li>
+    </ul>
+  </li>
+  <li>Galaxy’s data model is split into the galaxy model and the install model:
+    <ul>
+      <li>Persisted in one combined database or two separate databases</li>
+      <li>Represented by 2 migration branches: “gxy” and “tsi”</li>
+    </ul>
+  </li>
+  <li>Schema changes defined in revision modules:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrations/alembic/versions_gxy</code> (gxy branch: galaxy model)</li>
+      <li><code class="language-plaintext highlighter-rouge">lib/galaxy/model/migrations/alembic/versions_tsi</code> (tsi branch: install model)</li>
     </ul>
   </li>
 </ul>
@@ -3485,7 +3494,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/6ff62ed3c82d26569d1b740af88cd4ec360f7f0b">6ff62ed3c82d26569d1b740af88cd4ec360f7f0b</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/3c7bb38ea4e7493881af24aab51ca441fa09e8c1">3c7bb38ea4e7493881af24aab51ca441fa09e8c1</a></p>
     </div>
 </footer>
 

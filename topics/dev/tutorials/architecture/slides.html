@@ -74,7 +74,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:24 +0000",
+  "dateModified": "1970-01-01 00:00:30 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Code Architecture",
   "interactivityType": "mixed",
@@ -266,7 +266,7 @@ class: center, middle, inverse
 </div>
 
 
-<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Sep 24, 2021</div>
+<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Jun 30, 2022</div>
 
 <div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
 <div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
@@ -2166,9 +2166,11 @@ in a manager instead of in the model.
 
 - Database interactions powered by SQLAlchemy - https://www.sqlalchemy.org/.
 - Galaxy doesn't think in terms of &quot;rows&quot; but &quot;objects&quot;.
-- Classes for Galaxy model objects in `lib/galaxy/model/__init__.py`.
-- Classes mapped to tables in `lib/galaxy/model/mapping.py`
-  - Describes table definitions and relationships.
+- Classes for Galaxy model objects defined in `lib/galaxy/model/__init__.py`.
+- Classes mapped to database objects in same module via &quot;declarative mapping&quot;.
+  - Classes/attributes mapped to tables/columns
+  - Associations between classes mapped to relationships between tables
+
 
 ---
 
@@ -2176,16 +2178,19 @@ in a manager instead of in the model.
 
 ---
 
-### Galaxy Model Migrations
+### Galaxy Database Schema Migrations
 
-- A migration describes a linear list of database &quot;diff&quot;s to
-  end up with the current Galaxy model.
-- Allow the schema to be migrated forward automatically.
-- Powered by sqlalchemy-migrate - https://sqlalchemy-migrate.readthedocs.io/en/latest/.
-- Each file in `lib/galaxy/model/migrate/versions/`
-  - `0124_job_state_history.py`
-  - `0125_workflow_step_tracking.py`
-  - `0126_password_reset.py`
+- Automated execution of incremental, reversible changes to the database schema.
+- Performed to update or revert the database schema to a newer or older version.
+- Powered by Alembic - https://alembic.sqlalchemy.org/.
+  - (as of 22.05; prior to that by SQLAlchemy Migrate)
+- Galaxy's data model is split into the galaxy model and the install model:
+  - Persisted in one combined database or two separate databases
+  - Represented by 2 migration branches: &quot;gxy&quot; and &quot;tsi&quot;
+- Schema changes defined in revision modules:
+  - `lib/galaxy/model/migrations/alembic/versions_gxy` (gxy branch: galaxy model)
+  - `lib/galaxy/model/migrations/alembic/versions_tsi` (tsi branch: install model)
+
 
 ---
 
