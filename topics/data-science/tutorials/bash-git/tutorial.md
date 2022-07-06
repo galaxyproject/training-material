@@ -1,5 +1,5 @@
 ---
-layout: tutorial hands-on
+layout: tutorial_hands_on
 title: "Version Control with Git"
 time_estimation: "65M"
 questions:
@@ -48,8 +48,7 @@ contributors:
     - hexylena
   funding:
     - carpentries
-notebook:
-  language: bash
+    - gallantries
 
 ---
 
@@ -71,7 +70,7 @@ to keep track of what one person did and when.
 Even if you aren't collaborating with other people,
 automated version control is much better than this situation:
 
-![Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'.](../images/bash-git/phd101212s.png  "Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com")
+![Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'.](../../images/bash-git/phd101212s.png "Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com")
 
 We've all been in this situation before: it seems unnecessary to have
 multiple nearly-identical versions of the same document. Some word
@@ -87,19 +86,19 @@ think of it as a recording of your progress: you can rewind to start at the base
 document and play back each change you made, eventually arriving at your
 more recent version.
 
-![Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision.](../images/bash-git/play-changes.svg)
+![Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision.](../../images/bash-git/play-changes.svg)
 
 Once you think of changes as separate from the document itself, you
 can then think about "playing back" different sets of changes on the base document, ultimately
 resulting in different versions of that document. For example, two users can make independent
 sets of changes on the same document. 
 
-![Different Versions Can be Saved, showing a document splitting into two, with different changes.](../images/bash-git/versions.svg)
+![Different Versions Can be Saved, showing a document splitting into two, with different changes.](../../images/bash-git/versions.svg)
 
 Unless multiple users make changes to the same section of the document - a conflict - you can 
 incorporate two sets of changes into the same base document.
 
-![Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes.](../images/bash-git/merge.svg)
+![Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes.](../../images/bash-git/merge.svg)
 
 A version control system is a tool that keeps track of these changes for us,
 effectively creating different versions of our files. It allows us to decide
@@ -380,7 +379,7 @@ we can start using it.
 
 We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects. 
 
-![Motivating Example](../images/bash-git/sherlock-git.png)
+![Motivating Example](../../images/bash-git/sherlock_git.png)
 
 
 First, let's create a directory for our work and then move into that directory:
@@ -908,7 +907,7 @@ but not yet committed.
 > than you would like!
 {: .tip}
 
-![The Git Staging Area](../images/bash-git/git-staging-area.svg)
+![The Git Staging Area](../../images/bash-git/git-staging-area.svg)
 
 Let's watch as our changes to a file move from our editor
 to the staging area
@@ -1186,7 +1185,7 @@ we first need to add the changed files to the staging area
 (`git add`) and then commit the staged changes to the
 repository (`git commit`):
 
-![The Git Commit Workflow](../images/bash-git/git-committing.svg)
+![The Git Commit Workflow](../../images/bash-git/git-committing.svg)
 
 # Let's put us to the test
 
@@ -1687,12 +1686,12 @@ the commit in which we made the change we're trying to discard.
 In the example below, we want to retrieve the state from before the most
 recent commit (`HEAD~1`), which is commit `f22b25e`:
 
-![Git Checkout](../images/bash-git/git-checkout.svg)
+![Git Checkout](../../images/bash-git/git-checkout.svg)
 
 So, to put it all together,
 here's how Git works in cartoon form:
 
-![https://figshare.com/articles/How_Git_works_a_cartoon/1328266](../images/bash-git/git_staging.svg)
+![https://figshare.com/articles/How_Git_works_a_cartoon/1328266](../../images/bash-git/git_staging.svg)
 
 > ## {% icon tip %} Simplifying the Common Case
 >
