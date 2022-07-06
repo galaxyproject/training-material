@@ -26,7 +26,7 @@ objectives:
 - "Identify and use Git commit numbers."
 - "Compare various versions of tracked files."
 - "Restore old versions of files."
-keypoints:
+key_points:
 - "Version control is like an unlimited 'undo'."
 - "Version control also allows many people to work in parallel."
 - "Use `git config` with the `--global` option to configure a user name, email address, editor, and other preferences once per machine."
@@ -48,7 +48,7 @@ contributions:
     - hexylena
   funding:
     - carpentries
-    - gallantries
+    - erasmusplus 
 
 ---
 
