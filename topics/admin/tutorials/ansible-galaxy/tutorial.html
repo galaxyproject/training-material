@@ -22,7 +22,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Installation with Ansible" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:04 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:06 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -293,7 +293,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:04 +0000",
+  "dateModified": "1970-01-01 00:00:06 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -856,7 +856,7 @@
 
         <li>
             <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/admin/ansible-galaxy/tutorial" title="View GTN Video Library for this Tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (June 2021)
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (March 2022)
             </a>
         </li>
         
@@ -873,7 +873,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 4, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 6, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -891,9 +891,7 @@
             <div class="col-sm-10">
                  
 
-                <h1 class="no_toc" id="overview">Overview</h1>
-
-<p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks. Here we’ll see how to install a <span class="notranslate">Galaxy</span> server using an Ansible playbook. The <span class="notranslate">Galaxy</span> Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
+                <p>This tutorial assumes you have some familiarity with <a href="https://www.ansible.com/resources/get-started">Ansible</a> and are comfortable with writing and running playbooks. Here we’ll see how to install a <span class="notranslate">Galaxy</span> server using an Ansible playbook. The <span class="notranslate">Galaxy</span> Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:</p>
 
 <blockquote class="quote">
   <p>An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: <a href="https://en.wikipedia.org/wiki/Ansible">Wikipedia</a>)</p>
@@ -1830,7 +1828,7 @@ variables in the requirements.yml file.</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2022-07-04), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2022-07-06), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2875,7 +2873,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 
       <div data-commit="Configure nginx, certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -60,3 +60,33 @@</span> <span class="notranslate">galaxy</span>_config:
+</span><span class="p">@@ -60,3 +60,55 @@</span> <span class="notranslate">galaxy</span>_config:
     
  # systemd
  <span class="notranslate">galaxy</span>_manage_systemd: true
@@ -2906,6 +2904,28 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 +nginx_enable_default_server: false
 +nginx_conf_http:
 +  client_max_body_size: 1g
++  gzip: "on"
++  gzip_proxied: "any"
++  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
++  gzip_vary: "on"
++  gzip_min_length: 128
++  gzip_comp_level: 6  # Tradeoff of better compression for slightly more CPU time.
++  gzip_types: |
++      text/plain
++      text/css
++      text/xml
++      text/javascript
++      application/javascript
++      application/x-javascript
++      application/json
++      application/xml
++      application/xml+rss
++      application/xhtml+xml
++      application/x-font-ttf
++      application/x-font-opentype
++      image/png
++      image/svg+xml
++      image/x-icon
 +nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
 +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -3727,7 +3747,7 @@ author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann a
 title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
 year = "2022",
 month = "07",
-day = "04"
+day = "06"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
