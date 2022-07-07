@@ -27,17 +27,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-> ### {% icon comment %} Where to find Galaxy-MTI
->
-> Galaxy-MTI tools are currently only available on [cancer.usegalaxy.org](https://cancer.usegalaxy.org/). This is subject to change in the near future and this tutorial will be updated accordingly. 
->
-{: .comment}
-
 Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for downstream processing and analysis. The MCMICRO ({% cite Schapiro2021 %}) pipeline was developed to process multiplex images into single-cell data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for single-cell analysis, spatial analysis, and interactive visualization are available in Galaxy to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in Galaxy are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the Galaxy multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).
 
 Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma)
 
-![exemplar viv](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Exemplar-002 TMA from MCMICRO displayed in Avivator.")
+![exemplar viv](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.")
 
 
 > ### Agenda
@@ -412,7 +406,6 @@ Galaxy-MTI includes additional tools from **Scimap** and tools from the **Squidp
 
 
 # Conclusion
-{:.no_toc}
 
 In this tutorial, we demonstrated a complete multiplex tissue imaging analysis workflow performed entirely in a web browser using Galaxy-MTI. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we...
 
