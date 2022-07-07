@@ -1,8 +1,8 @@
 ---
 title: Flatten a list of list of paired datasets into a list of paired datasets
-area: rule-builder 
+area: rule-builder
 box_type: tip
-layout: hands_on
+layout: faq
 contributors: [hexylena]
 ---
 
