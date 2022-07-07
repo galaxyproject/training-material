@@ -1,1 +1,750 @@
-{"a_galaxy_workflow": "true", "annotation": "", "format-version": "0.1", "name": "GTN_Exemplar_002_TMA_workflow", "steps": {"0": {"annotation": "", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "", "name": "markers.csv"}], "label": "markers.csv", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 10}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "aa13fc5e-85a4-4d9d-a947-1efc2d784d12", "workflow_outputs": []}, "1": {"annotation": "", "content_id": null, "errors": null, "id": 1, "input_connections": {}, "inputs": [{"description": "", "name": "exemplar_002_phenotypes.csv"}], "label": "exemplar_002_phenotypes.csv", "name": "Input dataset", "outputs": [], "position": {"left": 10, "top": 130}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "19b0929a-ec46-4cb0-a709-e712e35d99d2", "workflow_outputs": []}, "2": {"annotation": "", "content_id": null, "errors": null, "id": 2, "input_connections": {}, "inputs": [{"description": "", "name": "Input Dataset Collection"}], "label": "Input Dataset Collection", "name": "Input dataset collection", "outputs": [], "position": {"left": 10, "top": 250}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}", "tool_version": null, "type": "data_collection_input", "uuid": "5800178e-460f-40b7-b7fe-e97ff631c4e8", "workflow_outputs": []}, "3": {"annotation": "", "content_id": "quantification", "errors": null, "id": 3, "input_connections": {"channel_names": {"id": 0, "output_name": "output"}}, "inputs": [], "label": null, "name": "Quantification", "outputs": [{"name": "quantification", "type": "input"}, {"name": "cellmask", "type": "csv"}], "position": {"left": 230, "top": 130}, "post_job_actions": {}, "tool_id": "quantification", "tool_state": "{\"__input_ext\": \"input\", \"channel_names\": null, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"image\": null, \"image|__identifier__\": \"3\", \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": null, \"primary_mask|__identifier__\": \"3\", \"supp_masks\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.5.1.6", "type": "tool", "uuid": "1a8af5b9-1e7c-4e19-87e2-7687d18309b9", "workflow_outputs": []}, "4": {"annotation": "", "content_id": "quantification", "errors": null, "id": 4, "input_connections": {"channel_names": {"id": 0, "output_name": "output"}}, "inputs": [], "label": null, "name": "Quantification", "outputs": [{"name": "quantification", "type": "input"}, {"name": "cellmask", "type": "csv"}], "position": {"left": 230, "top": 250}, "post_job_actions": {}, "tool_id": "quantification", "tool_state": "{\"__input_ext\": \"input\", \"channel_names\": null, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"image\": null, \"image|__identifier__\": \"2\", \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": null, \"primary_mask|__identifier__\": \"2\", \"supp_masks\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.5.1.6", "type": "tool", "uuid": "2708f2e9-4f41-4c2b-899f-6e51aca5c8d7", "workflow_outputs": []}, "5": {"annotation": "", "content_id": "quantification", "errors": null, "id": 5, "input_connections": {"channel_names": {"id": 0, "output_name": "output"}}, "inputs": [], "label": null, "name": "Quantification", "outputs": [{"name": "quantification", "type": "input"}, {"name": "cellmask", "type": "csv"}], "position": {"left": 230, "top": 370}, "post_job_actions": {}, "tool_id": "quantification", "tool_state": "{\"__input_ext\": \"input\", \"channel_names\": null, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"image\": null, \"image|__identifier__\": \"4\", \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": null, \"primary_mask|__identifier__\": \"4\", \"supp_masks\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.5.1.6", "type": "tool", "uuid": "ed66306b-0eab-4653-9a61-4c6db7cd4b4d", "workflow_outputs": []}, "6": {"annotation": "", "content_id": "basic_illumination", "errors": null, "id": 6, "input_connections": {"in_files": {"id": 2, "output_name": "output"}}, "inputs": [], "label": null, "name": "BaSiC Illumination", "outputs": [{"name": "output_dfp", "type": "tiff"}, {"name": "output_ffp", "type": "tiff"}], "position": {"left": 230, "top": 10}, "post_job_actions": {}, "tool_id": "basic_illumination", "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"in_files\": null, \"in_files|__identifier__\": \"exemplar-002-cycle-01.ome.tiff\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.0.2.3", "type": "tool", "uuid": "21eb3c11-1f5a-4950-831f-a18b714d4b37", "workflow_outputs": []}, "7": {"annotation": "", "content_id": "scimap_mcmicro_to_anndata", "errors": null, "id": 7, "input_connections": {"image_path": {"id": 5, "output_name": "cellmask"}}, "inputs": [], "label": null, "name": "Convert McMicro Output to Anndata", "outputs": [{"name": "outfile", "type": "h5ad"}], "position": {"left": 450, "top": 130}, "post_job_actions": {}, "tool_id": "scimap_mcmicro_to_anndata", "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"drop_markers\": \"\", \"image_path\": null, \"image_path|__identifier__\": \"1\", \"options\": {\"remove_dna\": \"true\", \"remove_string_from_name\": \"\", \"log\": \"true\", \"random_sample\": null, \"CellId\": \"CellID\", \"unique_CellId\": \"false\", \"split\": \"X_centroid\", \"custom_imageid\": \"\", \"min_cells\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1", "type": "tool", "uuid": "6f7673d6-8bad-4613-83b0-740efe14f183", "workflow_outputs": []}, "8": {"annotation": "", "content_id": "ashlar", "errors": null, "id": 8, "input_connections": {"ldfp": {"id": 6, "output_name": "output_dfp"}, "lffp": {"id": 6, "output_name": "output_ffp"}, "lraw": {"id": 2, "output_name": "output"}, "upgrade|markers_file": {"id": 0, "output_name": "output"}}, "inputs": [], "label": null, "name": "ASHLAR", "outputs": [{"name": "output", "type": "ome.tiff"}], "position": {"left": 450, "top": 10}, "post_job_actions": {}, "tool_id": "ashlar", "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"align_channel\": \"0\", \"filter_sigma\": null, \"tile_size\": null, \"flip_mosaic_x\": \"false\", \"flip_mosaic_y\": \"false\", \"pyramid\": \"true\"}, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"flip_x\": \"false\", \"flip_y\": \"false\", \"ldfp\": null, \"lffp\": null, \"lraw\": null, \"max_shift\": \"30\", \"upgrade\": {\"decide\": \"do_upgrade\", \"__current_case__\": 0, \"markers_file\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.14.0.1", "type": "tool", "uuid": "4d58a8d4-e745-4be1-aee9-e8323ad04d69", "workflow_outputs": []}, "9": {"annotation": "", "content_id": "scimap_phenotyping", "errors": null, "id": 9, "input_connections": {"anndata": {"id": 7, "output_name": "outfile"}, "gating_workflow": {"id": 1, "output_name": "output"}}, "inputs": [], "label": null, "name": "Single Cell Phenotyping", "outputs": [{"name": "gmm_plots", "type": "input"}, {"name": "output", "type": "h5ad"}], "position": {"left": 670, "top": 130}, "post_job_actions": {}, "tool_id": "scimap_phenotyping", "tool_state": "{\"__input_ext\": \"input\", \"anndata\": null, \"anndata|__identifier__\": \"1\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"gating_workflow\": null, \"manual_gates\": null, \"rescale_plots\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1", "type": "tool", "uuid": "90a8d494-553d-4b05-ac41-76e8c7f85d3b", "workflow_outputs": []}, "10": {"annotation": "", "content_id": "unet_coreograph", "errors": null, "id": 10, "input_connections": {"source_image": {"id": 8, "output_name": "output"}}, "inputs": [], "label": null, "name": "UNetCoreograph", "outputs": [{"name": "tma_sections", "type": "input"}, {"name": "masks", "type": "input"}, {"name": "TMA_MAP", "type": "tiff"}], "position": {"left": 670, "top": 10}, "post_job_actions": {}, "tool_id": "unet_coreograph", "tool_state": "{\"__input_ext\": \"input\", \"buffer\": \"2.0\", \"channel\": \"0\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"cluster\": \"false\", \"downsamplefactor\": \"5\", \"sensitivity\": \"0.3\", \"source_image\": null, \"tissue\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "2.2.8.3", "type": "tool", "uuid": "65b0d544-5bd1-4e0f-9ec0-8c7571104ed6", "workflow_outputs": []}, "11": {"annotation": "", "content_id": "mesmer", "errors": null, "id": 11, "input_connections": {"nuclear_image": {"id": 10, "output_name": "tma_sections"}}, "inputs": [], "label": null, "name": "Mesmer", "outputs": [{"name": "mask", "type": "tiff"}], "position": {"left": 890, "top": 10}, "post_job_actions": {}, "tool_id": "mesmer", "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"compartment\": \"nuclear\", \"image_mpp\": \"0.65\", \"membrane_select\": {\"membrane_segment\": \"False\", \"__current_case__\": 1}, \"nuclear_channel\": \"0\", \"nuclear_image\": null, \"nuclear_image|__identifier__\": \"1\", \"squeeze\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.3.1.no_ep.0", "type": "tool", "uuid": "7c3cfc2c-4da6-43b4-aded-1d86647a5fb9", "workflow_outputs": []}, "12": {"annotation": "", "content_id": "ip_convertimage", "errors": null, "id": 12, "input_connections": {"input_file": {"id": 10, "output_name": "tma_sections"}}, "inputs": [], "label": null, "name": "Convert image", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 890, "top": 130}, "post_job_actions": {}, "tool_id": "ip_convertimage", "tool_state": "{\"__input_ext\": \"tiff\", \"bigtiff\": \"false\", \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": null, \"input_file|__identifier__\": \"1\", \"noflat\": \"true\", \"out_format\": \"ome.tiff\", \"pyramid_options\": {\"generate\": \"True\", \"__current_case__\": 0, \"pyramid_resolutions\": \"4\", \"pyramid_scale\": \"2\"}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"tile_x\": \"512\", \"tile_y\": \"512\"}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "6.7.0.5", "type": "tool", "uuid": "e8c5140b-e001-4b31-94f0-f48f44f79f1b", "workflow_outputs": []}, "13": {"annotation": "", "content_id": "quantification", "errors": null, "id": 13, "input_connections": {"channel_names": {"id": 0, "output_name": "output"}, "image": {"id": 10, "output_name": "tma_sections"}, "primary_mask": {"id": 11, "output_name": "mask"}}, "inputs": [], "label": null, "name": "Quantification", "outputs": [{"name": "quantification", "type": "input"}, {"name": "cellmask", "type": "csv"}], "position": {"left": 1110, "top": 10}, "post_job_actions": {}, "tool_id": "quantification", "tool_state": "{\"__input_ext\": \"input\", \"channel_names\": null, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"image\": null, \"image|__identifier__\": \"1\", \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": null, \"primary_mask|__identifier__\": \"1\", \"supp_masks\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.5.1.6", "type": "tool", "uuid": "83693faf-de90-48ac-b5c5-5a1e7e87d373", "workflow_outputs": []}, "14": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2", "errors": null, "id": 14, "input_connections": {"channel_csv": {"id": 0, "output_name": "output"}, "image": {"id": 12, "output_name": "output"}}, "inputs": [], "label": null, "name": "Rename OME-TIFF Channels", "outputs": [{"name": "renamed_image", "type": "ome.tiff"}], "position": {"left": 1110, "top": 130}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2", "tool_shed_repository": {"changeset_revision": "75f8fcef3e96", "name": "rename_tiff_channels", "owner": "watsocam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"__input_ext\": \"input\", \"channel_csv\": null, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"image\": null, \"image|__identifier__\": \"1\", \"input_type\": \"ome.tiff\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1.2", "type": "tool", "uuid": "b60c8d63-c25e-4e9d-8f53-b55fff4a2402", "workflow_outputs": []}, "15": {"annotation": "", "content_id": "vitessce_spatial", "errors": null, "id": 15, "input_connections": {"do_phenotyping|anndata": {"id": 9, "output_name": "output"}, "image": {"id": 14, "output_name": "renamed_image"}, "masks": {"id": 11, "output_name": "mask"}}, "inputs": [], "label": null, "name": "Vitessce Visualization", "outputs": [{"name": "output", "type": "html"}], "position": {"left": 1330, "top": 10}, "post_job_actions": {}, "tool_id": "vitessce_spatial", "tool_state": "{\"__input_ext\": \"input\", \"anndata|__identifier__\": \"1\", \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"do_phenotyping\": {\"phenotyping_choice\": \"true\", \"__current_case__\": 0, \"anndata\": null, \"scatterplot_embeddings\": {\"embedding\": \"umap\", \"__current_case__\": 0, \"options\": {\"n_neighbors\": \"30\", \"n_pcs\": \"10\", \"knn\": \"true\", \"random_state\": \"0\"}}, \"phenotype_factory\": {\"phenotype_mode\": \"choices\", \"__current_case__\": 0, \"phenotypes\": [\"phenotype\"]}}, \"image\": null, \"image|__identifier__\": \"1\", \"masks\": null, \"masks|__identifier__\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1", "type": "tool", "uuid": "ac803576-f207-4ac6-b880-5527c7f0202d", "workflow_outputs": []}}, "tags": [], "uuid": "b4e3ef66-e091-4fb4-9364-423607cf08be", "version": 0}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "End-to-End Tissue Microarray Analysis with Galaxy-MTI",
+    "format-version": "0.1",
+    "name": "GTN_Exemplar_002_TMA_workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Input Dataset Collection"
+                }
+            ],
+            "label": "Input Dataset Collection",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 451.18359375,
+                "height": 41.09765625,
+                "left": 64.421875,
+                "right": 164.421875,
+                "top": 410.0859375,
+                "width": 100,
+                "x": 64.421875,
+                "y": 410.0859375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "5800178e-460f-40b7-b7fe-e97ff631c4e8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "8c42ffb8-f149-417b-9afd-2f6f1e789631"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "markers.csv"
+                }
+            ],
+            "label": "markers.csv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 641.984375,
+                "height": 30.8984375,
+                "left": 342.421875,
+                "right": 442.421875,
+                "top": 611.0859375,
+                "width": 100,
+                "x": 342.421875,
+                "y": 611.0859375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "aa13fc5e-85a4-4d9d-a947-1efc2d784d12",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "bfff404d-f4c1-4bc9-9813-2120f0d89c75"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "PhenotypeWorkflow"
+                }
+            ],
+            "label": "PhenotypeWorkflow",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 664.18359375,
+                "height": 41.09765625,
+                "left": 1742.421875,
+                "right": 1842.421875,
+                "top": 623.0859375,
+                "width": 100,
+                "x": 1742.421875,
+                "y": 623.0859375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"csv\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d687a3c5-414f-4c7e-a83b-10097caadbf5",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "a7582eb3-8573-4af8-8565-ee4d851b53cb"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "basic_illumination",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "in_files": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool BaSiC Illumination",
+                    "name": "in_files"
+                }
+            ],
+            "label": null,
+            "name": "BaSiC Illumination",
+            "outputs": [
+                {
+                    "name": "output_dfp",
+                    "type": "tiff"
+                },
+                {
+                    "name": "output_ffp",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 339.48046875,
+                "height": 92.39453125,
+                "left": 342.421875,
+                "right": 442.421875,
+                "top": 247.0859375,
+                "width": 100,
+                "x": 342.421875,
+                "y": 247.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "galaxy2.ohsu.edu/toolshed/repos/perssond/basic_illumination/basic_illumination/1.0.2.3",
+            "tool_shed_repository": {
+                "changeset_revision": "fd8dfd64f25e",
+                "name": "basic_illumination",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_files\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2.3",
+            "type": "tool",
+            "uuid": "21eb3c11-1f5a-4950-831f-a18b714d4b37",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_dfp",
+                    "uuid": "eb6efdfa-4314-441a-ab69-1f5cfa20fddb"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_ffp",
+                    "uuid": "85cb35df-f075-483b-a15e-03fdde43bb35"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "ashlar",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "ldfp": {
+                    "id": 3,
+                    "output_name": "output_dfp"
+                },
+                "lffp": {
+                    "id": 3,
+                    "output_name": "output_ffp"
+                },
+                "lraw": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "upgrade|markers_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ASHLAR",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "ome.tiff"
+                }
+            ],
+            "position": {
+                "bottom": 395.48046875,
+                "height": 102.39453125,
+                "left": 620.421875,
+                "right": 720.421875,
+                "top": 293.0859375,
+                "width": 100,
+                "x": 620.421875,
+                "y": 293.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "galaxy2.ohsu.edu/toolshed/repos/perssond/ashlar/ashlar/1.14.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "b3054f3d42b2",
+                "name": "ashlar",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"align_channel\": \"0\", \"filter_sigma\": null, \"tile_size\": null, \"flip_mosaic_x\": \"false\", \"flip_mosaic_y\": \"false\", \"pyramid\": \"true\"}, \"chromInfo\": \"/srv/galaxy/galaxy/config/len/?.len\", \"flip_x\": \"false\", \"flip_y\": \"false\", \"ldfp\": {\"__class__\": \"ConnectedValue\"}, \"lffp\": {\"__class__\": \"ConnectedValue\"}, \"lraw\": {\"__class__\": \"ConnectedValue\"}, \"max_shift\": \"30\", \"upgrade\": {\"decide\": \"do_upgrade\", \"__current_case__\": 0, \"markers_file\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.14.0.1",
+            "type": "tool",
+            "uuid": "4d58a8d4-e745-4be1-aee9-e8323ad04d69",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "dfee3113-48b6-40d4-b426-f1c18aef5e01"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "unet_coreograph",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "source_image": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool UNetCoreograph",
+                    "name": "source_image"
+                }
+            ],
+            "label": null,
+            "name": "UNetCoreograph",
+            "outputs": [
+                {
+                    "name": "tma_sections",
+                    "type": "input"
+                },
+                {
+                    "name": "masks",
+                    "type": "input"
+                },
+                {
+                    "name": "TMA_MAP",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 474.4765625,
+                "height": 148.390625,
+                "left": 898.421875,
+                "right": 998.421875,
+                "top": 326.0859375,
+                "width": 100,
+                "x": 898.421875,
+                "y": 326.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8.3",
+            "tool_shed_repository": {
+                "changeset_revision": "57f1260ca94e",
+                "name": "coreograph",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"buffer\": \"2.0\", \"channel\": \"0\", \"cluster\": \"false\", \"downsamplefactor\": \"5\", \"sensitivity\": \"0.3\", \"source_image\": {\"__class__\": \"RuntimeValue\"}, \"tissue\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.2.8.3",
+            "type": "tool",
+            "uuid": "65b0d544-5bd1-4e0f-9ec0-8c7571104ed6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "tma_sections",
+                    "uuid": "299f14e2-b9e5-4410-bbe5-e38ce8c8248a"
+                },
+                {
+                    "label": null,
+                    "output_name": "masks",
+                    "uuid": "41977747-f192-4fcd-8f0c-677cdf793e0e"
+                },
+                {
+                    "label": null,
+                    "output_name": "TMA_MAP",
+                    "uuid": "a468b839-a4a1-41a1-9e4e-c96b69833348"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "mesmer",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "nuclear_image": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Mesmer",
+                    "name": "nuclear_image"
+                }
+            ],
+            "label": null,
+            "name": "Mesmer",
+            "outputs": [
+                {
+                    "name": "mask",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 348.08203125,
+                "height": 66.99609375,
+                "left": 1180.421875,
+                "right": 1280.421875,
+                "top": 281.0859375,
+                "width": 100,
+                "x": 1180.421875,
+                "y": 281.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "mesmer",
+            "tool_state": "{\"compartment\": \"nuclear\", \"image_mpp\": \"0.65\", \"membrane_select\": {\"membrane_segment\": \"False\", \"__current_case__\": 1}, \"nuclear_channel\": \"0\", \"nuclear_image\": {\"__class__\": \"RuntimeValue\"}, \"squeeze\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.1.no_ep.0",
+            "type": "tool",
+            "uuid": "7c3cfc2c-4da6-43b4-aded-1d86647a5fb9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "mask",
+                    "uuid": "fc842634-275d-45ab-b167-007c38d859c8"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "ip_convertimage",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert image",
+                    "name": "input_file"
+                }
+            ],
+            "label": null,
+            "name": "Convert image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "bottom": 594.8828125,
+                "height": 56.796875,
+                "left": 1186.421875,
+                "right": 1286.421875,
+                "top": 538.0859375,
+                "width": 100,
+                "x": 1186.421875,
+                "y": 538.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "convertimage",
+            "tool_shed_repository": {
+                "changeset_revision": "b07f4839ca77",
+                "name": "bfconvert",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bigtiff\": \"false\", \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"noflat\": \"true\", \"out_format\": \"ome.tiff\", \"pyramid_options\": {\"generate\": \"True\", \"__current_case__\": 0, \"pyramid_resolutions\": \"4\", \"pyramid_scale\": \"2\"}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"tile_x\": \"512\", \"tile_y\": \"512\"}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.7.0.5",
+            "type": "tool",
+            "uuid": "e8c5140b-e001-4b31-94f0-f48f44f79f1b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f538d811-9e35-45b3-8994-20746fb73c65"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "quantification",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "channel_names": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 5,
+                    "output_name": "tma_sections"
+                },
+                "primary_mask": {
+                    "id": 6,
+                    "output_name": "mask"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Quantification",
+                    "name": "channel_names"
+                },
+                {
+                    "description": "runtime parameter for tool Quantification",
+                    "name": "image"
+                },
+                {
+                    "description": "runtime parameter for tool Quantification",
+                    "name": "primary_mask"
+                },
+                {
+                    "description": "runtime parameter for tool Quantification",
+                    "name": "supp_masks"
+                }
+            ],
+            "label": null,
+            "name": "Quantification",
+            "outputs": [
+                {
+                    "name": "quantification",
+                    "type": "input"
+                },
+                {
+                    "name": "cellmask",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "bottom": 517.6796875,
+                "height": 117.59375,
+                "left": 1464.421875,
+                "right": 1564.421875,
+                "top": 400.0859375,
+                "width": 100,
+                "x": 1464.421875,
+                "y": 400.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.1.7",
+            "tool_shed_repository": {
+                "changeset_revision": "c09e444635d9",
+                "name": "quantification",
+                "owner": "perssond",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"channel_names\": {\"__class__\": \"RuntimeValue\"}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"intensity_props\": \"\", \"mask_props\": \"\", \"primary_mask\": {\"__class__\": \"RuntimeValue\"}, \"supp_masks\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.1.6",
+            "type": "tool",
+            "uuid": "83693faf-de90-48ac-b5c5-5a1e7e87d373",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "cellmask",
+                    "uuid": "042ce303-55da-4112-a729-26d60d2fb6e4"
+                },
+                {
+                    "label": null,
+                    "output_name": "quantification",
+                    "uuid": "382b9a3d-daac-44f3-9609-42eaa656bfdc"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "channel_csv": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Rename OME-TIFF Channels",
+                    "name": "channel_csv"
+                },
+                {
+                    "description": "runtime parameter for tool Rename OME-TIFF Channels",
+                    "name": "image"
+                }
+            ],
+            "label": null,
+            "name": "Rename OME-TIFF Channels",
+            "outputs": [
+                {
+                    "name": "renamed_image",
+                    "type": "ome.tiff"
+                }
+            ],
+            "position": {
+                "bottom": 775.6796875,
+                "height": 102.59375,
+                "left": 1464.421875,
+                "right": 1564.421875,
+                "top": 673.0859375,
+                "width": 100,
+                "x": 1464.421875,
+                "y": 673.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "75f8fcef3e96",
+                "name": "rename_tiff_channels",
+                "owner": "watsocam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"channel_csv\": {\"__class__\": \"RuntimeValue\"}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"input_type\": \"ome.tiff\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1.2",
+            "type": "tool",
+            "uuid": "b60c8d63-c25e-4e9d-8f53-b55fff4a2402",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "renamed_image",
+                    "uuid": "ccce4c43-bd32-4b2b-99c1-8cc9cd0d6f4f"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "scimap_mcmicro_to_anndata",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "image_path": {
+                    "id": 8,
+                    "output_name": "cellmask"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert McMicro Output to Anndata",
+                    "name": "image_path"
+                }
+            ],
+            "label": null,
+            "name": "Convert McMicro Output to Anndata",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "bottom": 518.08203125,
+                "height": 66.99609375,
+                "left": 1742.421875,
+                "right": 1842.421875,
+                "top": 451.0859375,
+                "width": 100,
+                "x": 1742.421875,
+                "y": 451.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "scimap_mcmicro_to_anndata",
+            "tool_state": "{\"drop_markers\": \"\", \"image_path\": {\"__class__\": \"RuntimeValue\"}, \"options\": {\"remove_dna\": \"true\", \"remove_string_from_name\": \"\", \"log\": \"true\", \"random_sample\": null, \"CellId\": \"CellID\", \"unique_CellId\": \"false\", \"split\": \"X_centroid\", \"custom_imageid\": \"\", \"min_cells\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "6f7673d6-8bad-4613-83b0-740efe14f183",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "e49918bd-7326-4eca-aa63-b6d1fb2c14c2"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "scimap_phenotyping",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "anndata": {
+                    "id": 10,
+                    "output_name": "outfile"
+                },
+                "gating_workflow": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "anndata"
+                },
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "gating_workflow"
+                },
+                {
+                    "description": "runtime parameter for tool Single Cell Phenotyping",
+                    "name": "manual_gates"
+                }
+            ],
+            "label": null,
+            "name": "Single Cell Phenotyping",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "h5ad"
+                }
+            ],
+            "position": {
+                "bottom": 580.87890625,
+                "height": 117.79296875,
+                "left": 2020.421875,
+                "right": 2120.421875,
+                "top": 463.0859375,
+                "width": 100,
+                "x": 2020.421875,
+                "y": 463.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "scimap_phenotyping",
+            "tool_state": "{\"anndata\": {\"__class__\": \"RuntimeValue\"}, \"gating_workflow\": {\"__class__\": \"RuntimeValue\"}, \"manual_gates\": {\"__class__\": \"RuntimeValue\"}, \"rescale_plots\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "34f16b75-f74d-4eac-99a7-6980bb65bf80",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "0e6e168e-5263-47d6-acd2-a23f04da7c76"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "vitessce_spatial",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "do_phenotyping|anndata": {
+                    "id": 11,
+                    "output_name": "output"
+                },
+                "image": {
+                    "id": 9,
+                    "output_name": "renamed_image"
+                },
+                "masks": {
+                    "id": 6,
+                    "output_name": "mask"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Vitessce Visualization",
+                    "name": "do_phenotyping"
+                },
+                {
+                    "description": "runtime parameter for tool Vitessce Visualization",
+                    "name": "image"
+                },
+                {
+                    "description": "runtime parameter for tool Vitessce Visualization",
+                    "name": "masks"
+                }
+            ],
+            "label": null,
+            "name": "Vitessce Visualization",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "bottom": 605.87890625,
+                "height": 117.79296875,
+                "left": 2298.421875,
+                "right": 2398.421875,
+                "top": 488.0859375,
+                "width": 100,
+                "x": 2298.421875,
+                "y": 488.0859375
+            },
+            "post_job_actions": {},
+            "tool_id": "vitessce_spatial",
+            "tool_state": "{\"do_phenotyping\": {\"phenotyping_choice\": \"true\", \"__current_case__\": 0, \"anndata\": {\"__class__\": \"RuntimeValue\"}, \"scatterplot_embeddings\": {\"embedding\": \"umap\", \"__current_case__\": 0, \"options\": {\"n_neighbors\": \"30\", \"n_pcs\": \"10\", \"knn\": \"true\", \"random_state\": \"0\"}}, \"phenotype_factory\": {\"phenotype_mode\": \"choices\", \"__current_case__\": 0, \"phenotypes\": [\"phenotype\"]}}, \"image\": {\"__class__\": \"RuntimeValue\"}, \"masks\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "ac803576-f207-4ac6-b880-5527c7f0202d",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "1c167ed7-1ab1-4bb9-a14b-c5f4c9517177"
+                }
+            ]
+        }
+    },
+    "tags": ["imaging"],
+    "uuid": "42eeb5d7-25f8-4a43-bd75-0c671f31592f",
+    "version": 1
+}
