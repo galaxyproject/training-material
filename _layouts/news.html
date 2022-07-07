@@ -19,48 +19,6 @@ layout: page
  {% assign coverimage = "/assets/images/GTN.png" %}
  {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
 {% endif %}
-<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "url": "{{ site.url }}{{ site.baseurl }}{{ page.url }}",
-      "name": {{ page.title | jsonify }},
-      "headline": {{ page.title | jsonify }},
-      "keywords": {{ page.tags | join: ',' | jsonify }},
-      "description": {{ page.excerpt | strip_newlines | strip | jsonify }},
-      "articleBody": {{ page.content | strip_html | jsonify }},
-      "datePublished": {{ page.date | jsonify }},
-      "dateModified": {{ page.last_modified_at | default: page.date | jsonify }},
-      "author": {
-        "@type": "Person",
-        "name": {{ site.author_name | jsonify }},
-        "givenName": {{ site.author_first_name | jsonify }},
-        "familyName": {{ site.author_last_name | jsonify }},
-        "email": {{ site.email | jsonify }}
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": {{ site.title | jsonify }},
-        "url": "{{ site.url }}",
-        "logo": {
-          "@type": "ImageObject",
-          "width": 60,
-          "height": 60,
-          "url": "{{ site.url }}/{{ site.baseurl }}{{ site.small_logo }}"
-        }
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
-      },
-      "image": {
-        "@type": "ImageObject",
-        "width": {{ page.img_width | default: site.img_width }},
-        "height": {{ page.img_height | default: site.img_height }},
-        "url": "{{ site.url }}{{ page.img_url | default: site.small_logo }}"
-      }
-    }
-    </script>
 <div class="newsitem">
 {% include _includes/contributors-line.html page=page %}
 
@@ -100,3 +58,6 @@ layout: page
 </div>
 </div>
 
+<script type="application/ld+json">
+{{ page | generate_news_jsonld: site }}
+</script>

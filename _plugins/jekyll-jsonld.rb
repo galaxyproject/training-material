@@ -9,36 +9,52 @@ module Jekyll
       "url": "https://galaxyproject.org/teach/gtn/"
     }
 
+    A11Y = {
+      "accessMode": ["textual", "visual"],
+      "accessModeSufficient": ["textual", "visual"],
+      #"accessibilityAPI": ,
+      "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
+      "accessibilityFeature": ["alternativeText", "tableOfContents"],
+      #"accessibilityHazard": [],
+      "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+    }
+
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return
       end
 
       attributes = [
-        ["DC.identifier", "https://github.com/galaxyproject/training-material"],
+        ["DC.identifier", site['github_repository']],
         ["DC.type", "text"],
         ["DC.title", material['title']],
         ["DC.publisher", "Galaxy Training Network"]
       ]
 
+      material['last_modified_at'].format = '%s'
       begin
+        puts "#{material['last_modified_at']} #{Time.at(material['last_modified_at'].to_s.to_i)} #{material.fetch('path')}"
         attributes += [
           ["DC.date", Time.at(material['last_modified_at'].to_s.to_i)],
         ]
       rescue
       end
 
-      if material.key?('contributors') then
-        attributes += material['contributors'].map{|user|
-          ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
-        }
-      elsif material.key?('contributions') then
-        attributes += material['contributions']['authorship'].map{|user|
-          ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
-        }
-      end
+      attributes += get_authors(material).map{|user|
+        ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
+      }
 
       return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\" />" }.join("\n")
+    end
+
+    def get_authors(material)
+      if material.key?('contributors') then
+        material['contributors']
+      elsif material.key?('contributions') then
+        material['contributions']['authorship']
+      else
+        []
+      end
     end
 
     def generate_person_jsonld(id, contributor, site)
@@ -50,8 +66,8 @@ module Jekyll
             "@type": "Person"
         },
         # I guess these are identical?
-        "url": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
-        "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/",
+        "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
+        "mainEntityOfPage": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         "name": contributor.fetch('name', id),
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
@@ -70,6 +86,38 @@ module Jekyll
       JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
     end
 
+    def generate_news_jsonld(page, site)
+      authors = get_authors(page.to_h).map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+
+      page['last_modified_at'].format = '%s'
+      data = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "#{site['url']}#{site['baseurl']}#{page['url']}",
+        "name": page['title'],
+        "headline": page.excerpt[0..100].gsub(/\n/, ' '), # todo remove html tags.
+        "keywords": page.fetch('tags', []),
+        "description": page.excerpt[0..100].gsub(/\n/, ' '), # todo remove html tags
+        "articleBody": page.content, # todo remove html tags
+        "datePublished": page.date,
+        "dateModified": Time.at(page['last_modified_at'].to_s.to_i),
+        "author": authors,
+        "publisher": GTN,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "#{site['url']}#{page['url']}"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "width": 60,
+          "height": 60,
+          "url": "#{site['baseurl']}/assets/images/GTN-60px.png"
+        }
+      }
+      data.update(A11Y)
+
+      JSON.pretty_generate(data)
+    end
 
     def to_jsonld(material, topic, site)
       langCodeMap = {
@@ -91,10 +139,11 @@ module Jekyll
         "@type": "CreativeWork",
         "name": "#{topic['title']}",
         "description": "#{topic['summary']}",
-        "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{topic['name']}/"
+        "url": "#{site['url']}#{site['baseurl']}/topics/#{topic['name']}/"
       }
 
       # aggregate everything
+      material['last_modified_at'].format = '%s'
       data = {
         # Properties from Course
         "@context": "http://schema.org",
@@ -108,13 +157,7 @@ module Jekyll
 
         # Properties from CreativeWork
         #"about" described below
-        "accessMode": ["textual", "visual"],
-        "accessModeSufficient": ["textual", "visual"],
-        #"accessibilityAPI": ,
-        "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
-        "accessibilityFeature": ["alternativeText", "tableOfContents"],
-        #"accessibilityHazard": [],
-        "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+        #
         #"accountablePerson":,
         #"aggregateRating":,
         #"alternativeHeadline":,
@@ -205,7 +248,7 @@ module Jekyll
         #"alternateName":,
         #"description" described below
         #"disambiguatingDescription":,
-        "identifier": "https://github.com/galaxyproject/training-material",
+        "identifier": site['github_repository'],
         #"image":,
         #"mainEntityOfPage":,
         #"name" described below
@@ -214,6 +257,7 @@ module Jekyll
         #"subjectOf":,
         # "url" described below
       }
+      data.update(A11Y)
 
       #info depending if tutorial, hands-on or slide level
       parts = []
@@ -227,7 +271,7 @@ module Jekyll
       if material['type'] == 'introduction' then
         data['learningResourceType'] = "slides"
         data['name'] = "Introduction to '#{topic['title']}'"
-        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
         description.push("Slides for #{topic['title']}")
       elsif material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
         if material['name'] == 'tutorial.md' then
@@ -237,7 +281,7 @@ module Jekyll
           data['learningResourceType'] = "slides"
           data['name'] = "Slides for '#{material['title']}' tutorial"
         end
-        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
         # Time required
         if material.key?('time_estimation') and not material['time_estimation'].nil? then
@@ -308,7 +352,7 @@ module Jekyll
                         coursePrerequisites.push({
                           "@context": "http://schema.org",
                           "@type": "LearningResource",
-                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
                           "name": "#{page['title']}",
                           "description": "Slides for '#{page['title']}' tutorial",
                           "learningResourceType": "slides",
@@ -330,7 +374,7 @@ module Jekyll
                         coursePrerequisites.push({
                           "@context": "http://schema.org",
                           "@type": "LearningResource",
-                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
                           "name": "#{page['title']}",
                           "description": "Hands-on for '#{page['title']}' tutorial",
                           "learningResourceType": "hands-on tutorial",
@@ -346,7 +390,7 @@ module Jekyll
               coursePrerequisites.push({
                 "@context": "http://schema.org",
                 "@type": "LearningResource",
-                "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/",
+                "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
                 "name": "#{site['data'][req['topic_name']]['title']}",
                 "description": "#{site['data'][req['topic_name']]['title']}",
                 "provider": GTN
