@@ -46,7 +46,7 @@ The whole proccess is designed to be run in RStudio as an Interactive Tool, dire
 > ### {% icon hands_on %} Software to use
 >
 > The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
-We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
+> We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
 > Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
@@ -563,29 +563,17 @@ to learn more about the VCF file format.
 >
 > [IGV](http://www.broadinstitute.org/igv/) is a stand-alone browser, which has the advantage of being installed locally and providing fast access. Web-based genome browsers, like [Ensembl](http://www.ensembl.org/index.html) or the [UCSC browser](https://genome.ucsc.edu/), are slower, but provide more functionality. They not only allow for more polished and flexible visualization, but also provide easy access to a wealth of annotations and external data sources. This makes it straightforward to relate your data with information about repeat regions, known genes, epigenetic features or areas of cross-species conservation, to name just a few.
 >
-> In order to use IGV, we will need to transfer some files to our local machine. We know how to do this with `scp`.
-> Open a new tab in your terminal window and create a new folder. We will put this folder on our Desktop for
-> demonstration purposes, but in general you should avoide proliferating folders and files on your Desktop and
-> instead organize files within a directory structure like we have been using in our `dc_workshop` directory.
+>In order to use IGV, we will need to download the files, that we are going to use as input, to our local machine. We can do this easily via the Galaxy RStudio interface, in which we were working all along. 
+>We will work on the lower right panel in the RStudio, on the "Files" tab, wehre we simply need to select the desired files by checking the boxes left to their name.
+>Then, we click on the option "Export", which we can find on the said panel in the "More" dropdown tab. After assigning a name for the file to be downloaded we hit "Download" and our selection are localy downloaded. 
+>The files we are going to use are listed below:
 >
-> ```bash
-> $ mkdir ~/Desktop/files_for_igv
-> $ cd ~/Desktop/files_for_igv
-> ```
->
-> Now we will transfer our files to that new directory. Remember to replace the text between the `@` and the `:`
-> with your AWS instance number. The commands to `scp` always go in the terminal window that is connected to your
-> local computer (not your AWS instance).
->
-> ```
-> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/Desktop/files_for_igv
-> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai ~/Desktop/files_for_igv
-> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/data/ref_genome/ecoli_rel606.fasta ~/Desktop/files_for_igv
-> $ scp dcuser@ec2-34-203-203-131.compute-1.amazonaws.com:~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf ~/Desktop/files_for_igv
-> ```
->
->
-> You will need to type the password for your AWS instance each time you call `scp`.
+>~~~
+>~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam 
+>~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam.bai 
+>~/dc_workshop/data/ref_genome/ecoli_rel606.fasta 
+>~/dc_workshop/results/vcf/SRR2584866_final_variants.vcf 
+>~~~
 >
 > Next, we need to open the IGV software. If you have not done so already, you can download IGV from the [Broad Institute's software page](https://www.broadinstitute.org/software/igv/download), double-click the `.zip` file
 > to unzip it, and then drag the program into your Applications folder.
