@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Data Manipulation Olympics
-zenodo_link: 'https://zenodo.org/record/6772556'
+zenodo_link: 'https://zenodo.org/record/6803028'
 tags:
 - cyoa
 questions:
@@ -36,7 +36,7 @@ subtopic: next-steps
 <!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
 {% assign version_datamash="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" %}
 {% assign version_column_maker="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
-
+{% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" %}
 
 
 # Introduction
@@ -73,7 +73,8 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Counting               | occurences of values in a column | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row           | {% tool [Compute]({{version_column_maker}}) %} |
-| Replace Text | in a specific column | {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}|
+| Replace Text | in a specific column | {% tool [Replace Text]({{version_replace_text_column}}) %}|
+| Join two Datasets | side by side on a specified field | {% tool [Join two Datasets](join1) %} |
 
 TIP: If you find yourself frequently using the same tool often but struggle to find it in the long list of tools, you can **star** your favourite tools in Galaxy!
 
@@ -93,7 +94,7 @@ In this tutorial, we will use as our dataset a table with results from the Olymp
 
 We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
 
-
+<!-- not ready yet
 > ### {% icon tip %} Also check out the Data Visualisation Olympics tutorial!
 >
 > There is a related tutorial that uses this dataset to perform a range of different visualisations in Galaxy.
@@ -101,7 +102,7 @@ We will show you many of these commonly needed data manipulation operations, and
 > Interested? Check it out [here]({% link topics/introduction/tutorials/data-visualisation-olympics/tutorial.md %})
 >
 {: .comment}
-
+-->
 
 # Upload Data
 
@@ -970,12 +971,12 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 
 
 
-> ### {% icon question %} Exercise: calculating BMI
+> ### {% icon question %} Exercise: Calculating BMI
 >
 > 1. How would you express this calculation in the tool?
 >    - Remember that our height is in cm, and the formula expects height in meters
->       - Remember that we have a lot of "NA" values in our column, we will have to tell the tool the column are numeric,
->       - using e.g. `int(c7)` (`int` stands for integer, if you had a column with decimal numbers, you would say `float()`)
+>    - Remember that we have a lot of "NA" values in our column, we will have to tell the tool the column are numeric,
+>      - do this using e.g. `int(c3)` (`int` stands for integer, if you had a column with decimal numbers, you would say `float(c3)`)
 >
 > 2. What is the BMI for Arnaud Boetsch?
 >
@@ -996,7 +997,7 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 > >
 > >  1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
 > >  2. 22.69
-> >  3. The tool only outpus lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the join tool to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> >  3. The tool only outpus lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
 > {: .solution}
 >
 {: .question}
@@ -1005,11 +1006,15 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 
 # Find and Replace
 
+TODO: Add NA to place of birth columns
+TODO: change Athina to Athens
 
+# Joining Files
 
-# Join columns from two different files
+This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc), we could join that information with our olympics data, to get a single file with all information in every row.
 
-This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc(, we could join that information with our olympics data, to get a single file with all information.
+For example, if we would like to be able to group by continent, to e.g. count atheletes, medals etc per continent, we will have to add a `continent` columnn to our file. To do this we would need a second file that maps each country to the corresponding continent. This is what we will do in the next hands-on section.
+
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
@@ -1035,35 +1040,11 @@ add years 2016 and onwards?
 
 # Remove columns
 
-# Group on column
-
-# Search in file
-
-grep?
 
 # Split file
 
 Winter and Summer
 
-# Concatenate file
-
-Join winter and summer again
-
-# Compute expressions
-
-datamash, group
-
-count number of countries
-
-get number of athletes per country
-
-average number of medals per athlete per country
-
-country with highest numer of medals
-
-sport with the tallest athletes
-
-# Visualisation
 
 # Exercises (with answers)
 
