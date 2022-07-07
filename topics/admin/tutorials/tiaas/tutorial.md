@@ -92,7 +92,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -212,6 +212,15 @@ telegraf_plugins_extra:
+>    @@ -234,6 +234,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -362,7 +362,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +- hogwarts.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}

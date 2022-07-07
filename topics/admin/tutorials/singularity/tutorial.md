@@ -97,7 +97,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -121,6 +121,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -143,6 +143,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
@@ -203,7 +203,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}

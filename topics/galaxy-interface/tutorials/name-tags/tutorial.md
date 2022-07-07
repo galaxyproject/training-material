@@ -155,7 +155,7 @@ The datasets now have two types of tags: name tags and general purpose tags. Gen
 
 > ### {% icon question %} Questions
 >
-> 1. How many tags does the dataset named `GSM461176` have? Which ones?
+> 1. How many tags does the dataset named `GSM461177` have? Which ones?
 > 2. How many of those tags are propagating name tags?
 >
 > > ### {% icon solution %} Solution

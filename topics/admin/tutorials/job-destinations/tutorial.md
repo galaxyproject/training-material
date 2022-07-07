@@ -96,7 +96,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +- testing.xml
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >    {% endraw %}
 >    ```
@@ -261,7 +261,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +- my_rules.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy my_rules dynamic rule"}
@@ -650,7 +650,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    +- map_resources.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy map_resources.py"}
