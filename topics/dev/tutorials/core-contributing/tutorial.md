@@ -233,17 +233,15 @@ For this tutorial, you'll need to do the following:
 2. Edit the revision template, filling in the body of the upgrade and downgrade functions. 
 3. Run the migration.
 
-> ### {% icon question %} Generating the revision template
+> ### {% icon question %} Question about generating a revision template
 >
 > What command should you run to generate a revision template?
 >
 > > ### {% icon solution %} Solution
-> > > ### {% icon code-in %} Input: Bash
-> > > ```bash
-> > > sh run_alembic.sh revision --head=gxy@head -m "Add user_favorite_extentions table"
-> > > ```
-> > {: .code-in}
->
+> > ```bash
+> > sh run_alembic.sh revision --head=gxy@head -m "Add user_favorite_extentions table"
+> > ```
+> > The title of the revision is an example only.
 > {: .solution }
 {: .question }
 
@@ -256,32 +254,27 @@ it is not the same. Here, the `Column` definitions are arguments to the `create_
 Also, while you didn't have to specify the datatype of the `user_id` column in the model, you must
 do that here.
 
-> ### {% icon question %} Filling in the revision template
-
 {% include topics/dev/tutorials/core-contributing/revisionid_add_user_favorite_extensions.py_diff.md %}
-{: .question }
 
-> ### {% icon question %} Running the migration
+> ### {% icon question %} Question about running the migration
 >
 > What command should you run to upgrade your database to include the new table? 
 >
 > > ### {% icon solution %} Solution
-> > > ### {% icon code-in %} Input: Bash
-> > > ```bash
-> > > sh manage_db.sh upgrade
-> > > ```
-> > {: .code-in}
->
+> > ```bash
+> > sh manage_db.sh upgrade
+> > ```
 > {: .solution }
->
-> To verify that the table has been added to your database, you may use the SQLite CLI tool. First,
-> you login to your database; then you display the schema of the new table; and, finally, you verify
-> that the database version has been updated (the first record stored in the `alembic_version` table
-> is the revision identifier that corresponds to the revision identifier in the revision file you
-> added in a previous step.
+{: .question }
+
+
+To verify that the table has been added to your database, you may use the SQLite CLI tool. First,
+you login to your database; then you display the schema of the new table; and, finally, you verify
+that the database version has been updated (the first record stored in the `alembic_version` table
+is the revision identifier that corresponds to the revision identifier in the revision file you
+added in a previous step.
 
 {% include topics/dev/tutorials/core-contributing/sqlite_cli.md %}
-{: .question }
 
 # Test Driven Development
 
