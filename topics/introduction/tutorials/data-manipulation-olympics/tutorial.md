@@ -1004,7 +1004,7 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 > >
 > >  1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
 > >  2. 22.69
-> >  3. The tool only outpus lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> >  3. The tool only outputs lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
 > {: .solution}
 >
 {: .question}
