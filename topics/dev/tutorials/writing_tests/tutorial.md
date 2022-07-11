@@ -107,11 +107,25 @@ TODO
 {: .hands_on}
 
 
+## Testing in Galaxy
 
+TODO
+- types of tests (ref to docs)
+- how to choose which type to use (ref to docs)
+- how to run 
+    - ref to ducumentation in run_tests.sh
+    - pytest selectors
+    - ref to debugging tutorial 
+    - uvicorn command for local debugging (vs. run.sh)
+- hands-on:
+    - choose appropriate tests based on given testing requirements
+    - find selected tests and run them
 
 ## Unit tests
 
-There are numerous unit tests in the Galaxy code code base. However, existing unit tests do not cover the entire code, nor do they verify all the relevant logic. In this tutorial, we will be writing unit tests for such code.
+Unit tests are best suited for testing well-defined, isolated functionality and, with rare exceptions, should not require a running Galaxy instance, a database, or any other external infrastructure. Unit tests are located in the `test/unit` directory.
+
+There are numerous unit tests in the Galaxy code base. However, existing unit tests do not cover the entire code base and do not verify all the relevant logic (so there is plenty of space for improvement, and new contributions are always welcomed!) In this tutorial, we will be writing unit tests for such code.
 
 #### Testing simple functions
 
@@ -257,9 +271,29 @@ And we are done! Here's the final version of the code we added to this testing m
 
 {% include topics/dev/tutorials/writing_tests/unit16.md %}
 
-## API tests
+## API and integration tests
 
-TODO
+We turn to API tests when we need to test some feature that requires a running Galaxy instance and, in many cases, the Galaxy database. These tests use the Galaxy API to drive the test. Galaxy's testing infrastructure takes care of all the heavy lifting, such as creating a test database, configuring and starting up a Galaxy instance, and tearing down the setup upon test completion. The testing infrastructure also provides a wealth of convenient abstractions that simplify pre-populating the database with the necessary state for each test, interacting with the API, as well as expressing expectations about the outcomes of a test.
+
+TODO: how-to goes here...
+
+#### TODO: Basic API test
+
+{% include topics/dev/tutorials/writing_tests/api1.md %}
+
+#### TODO: Test retrieving a list of objects
+
+{% include topics/dev/tutorials/writing_tests/api2.md %}
+
+#### TODO: Test creating a simple object
+
+{% include topics/dev/tutorials/writing_tests/api3.md %}
+
+#### TODO: Use Galaxy's populators for setting up database state
+
+{% include topics/dev/tutorials/writing_tests/api4.md %}
+
+
 
 ## End-to-end tests
 
