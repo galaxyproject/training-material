@@ -512,7 +512,7 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 >    > > 1. This is for technical reasons, the tool assumes a sorted file, so it will restart the counter every time it encounters a value in a column that is different from the previous one.
 >    > > 2. 10 and 38.
 >    > > 3. The 2020 Summer Olympics had the most different sports (38)
->    >
+>    > >
 >    > {: .solution}
 >    {: .question}
 >
@@ -844,7 +844,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 {: .hands_on}
 
 
-# Exercises
+## Exercises
 
 > ### {% icon question %} Exercise: Grouping and computing
 >
@@ -1032,9 +1032,9 @@ IOC ID to country name
 
 Add Continent column
 
-# Concatenating files
+# Concatenating
 
-add years 2016 and onwards?
+Concatenation of two files simple means putting the contents of the two files together, one after the other. Our dataset was created in 2021, but since then we've had another Olympic event, the 2022 Winter Olympics in Beijing. If we have the same data for this latest Olympics, we could simply add the rows from the 2022 games to our current file with data, in order to
 
 # Rearrange columns
 
