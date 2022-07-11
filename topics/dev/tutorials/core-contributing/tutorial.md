@@ -410,5 +410,3 @@ component from the analysis router above by importing it from
 ``FavoriteExtensions``.
 
 {% include topics/dev/tutorials/core-contributing/index.js_diff.md %}
-
-# Conclusion
