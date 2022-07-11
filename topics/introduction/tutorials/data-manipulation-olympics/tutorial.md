@@ -31,12 +31,23 @@ subtopic: next-steps
 ---
 
 
-<!-- Note to contributors: feel free to add sections here to include additional visualisation options. Make sure each section is independent of each other, i.e. each section should start with the olympics.tsv file. Also make sure to include many exercises (with answers) for your section -->
+<!--
+Note to contributors: feel free to add sections here to include additional data manipulation options.
+Make sure each section is independent of each other, i.e. each section should start with the olympics.tsv file.
+Also make sure to include many exercises (with answers) for your section!
+-->
+
 
 <!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
 {% assign version_datamash="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" %}
 {% assign version_column_maker="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
 {% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" %}
+{% assign version_cat="cat1" %}
+{% assign version_remove_beginning="Remove beginning1" %}
+{% assign version_join="join1" %}
+{% assign version_remove_columns_by_header="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" %}
+{% assign version_cut_columns="Cut1" %}
+{% assign version_paste="Paste1" %}
 
 
 # Introduction
@@ -69,14 +80,19 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Convert format         | Change the file format | {% icon galaxy-pencil%} Edit attributes |
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
-| Filter                 | Remove rows from a file based on values in one or more columns | {% tool [Filter](Filter1) %}|
+| Filter                 | Remove rows based on values in one or more columns | {% tool [Filter](Filter1) %}|
 | Counting               | occurences of values in a column | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row           | {% tool [Compute]({{version_column_maker}}) %} |
-| Replace Text | in a specific column | {% tool [Replace Text]({{version_replace_text_column}}) %}|
-| Join two Datasets | side by side on a specified field | {% tool [Join two Datasets](join1) %} |
+| Replace Text           | in a specific column | {% tool [Replace Text]({{version_replace_text_column}}) %}|
+| Join two Datasets      | side by side on a specified field | {% tool [Join two Datasets]({{version_join}}) %} |
+| Concatenate datasets   | one after the other | {% tool [Concatenate datasets]({{version_cat}}) %} |
+| Remove Beginning       | Good for removing header lines | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %}
+| Remove Columns         | By header name                 | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
+| Cut Columns            | By column number               | {% tool [Cut columns from a table]({{version_cut_columns}}) %}|
+| Paste                  | Two files side by side         | {% tool [Paste]({{version_paste}}) %} |
 
-TIP: If you find yourself frequently using the same tool often but struggle to find it in the long list of tools, you can **star** your favourite tools in Galaxy!
+TIP: If you find yourself frequently using the same tool often but struggle to find it back in the long list of tools, you can **star** your favourite tools in Galaxy!
 
 {% snippet faqs/galaxy/tools_favorite.md %}
 
@@ -94,15 +110,6 @@ In this tutorial, we will use as our dataset a table with results from the Olymp
 
 We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
 
-<!-- not ready yet
-> ### {% icon tip %} Also check out the Data Visualisation Olympics tutorial!
->
-> There is a related tutorial that uses this dataset to perform a range of different visualisations in Galaxy.
->
-> Interested? Check it out [here]({% link topics/introduction/tutorials/data-visualisation-olympics/tutorial.md %})
->
-{: .comment}
--->
 
 # Upload Data
 
@@ -1009,12 +1016,26 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 TODO: Add NA to place of birth columns
 TODO: change Athina to Athens
 
+
+
+# Remove/Add Columns
+
+We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number).
+
+To do the reverse, adding a column, we can use the {% tool [Paste]({{version_paste}}) %} tool (assuming we have the same number of rows in both files, already in the correct order.
+
+
+
+
+
+
 # Joining Files
 
 This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc), we could join that information with our olympics data, to get a single file with all information in every row.
 
 For example, if we would like to be able to group by continent, to e.g. count atheletes, medals etc per continent, we will have to add a `continent` columnn to our file. To do this we would need a second file that maps each country to the corresponding continent. This is what we will do in the next hands-on section.
 
+We obtained country information data from [DataHub](https://datahub.io/core/country-codes). More information about this file can be found in the description here. It has 56 columns with a wide variety of data about each country (from country codes, to capital city, languages spoken, etc)
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
@@ -1026,15 +1047,128 @@ For example, if we would like to be able to group by continent, to e.g. count at
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
+> 2. {% icon galaxy-eye %} **View** file.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How many columns does this file have?
+>    > 2. Which column(s) in this file are the same as in the `olympics.tsv` file?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. The country information file has 50 columns.
+>    > > 2. Both files have a `NOC` column with the 3-letter country code (`NOC` stands for National Olympic Committee). We can use this column to join the appropriate country data to each row in our `olympics.tsv` file.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
 {: .hands_on}
 
-IOC ID to country name
 
-Add Continent column
+
+> ### {% icon hands_on %} Hands-on: Joining country information to the Olympics data.
+>
+> 1. Open {% tool [Join two Datasets side by side on a specified field]({{version_join}}) %}, and read the help text at the bottom
+>    - Which settings do you think we need to use?
+>
+> 2. {% tool [Join two Datasets side by side on a specified field]({{version_join}}) %} with the following parameters:
+>    - *"Join"*: `olympics.tsv`
+>    - *"using column"*: `Column 10` (the `noc` column)
+>    - *"with"*: `country-information.tsv`
+>    - *"and column"*: `Column 2` (the `NOC` column)
+>    - *"Keep the header lines?"*: `Yes`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. What do you expect the output to look like? Were you right?
+>    > 2. How many columns are in the resulting file?
+>    > 3. What is a possible downside to this approach?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. All the columns from the country information file are added to the end of each row of our olympics dataset
+>    > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file.
+>    > > 3. There is a lot of data duplication in this file now. The exact same country information is added to every line of every athelete from a certain country.
+>    > >    This means much larger file size, and more usage of your quota.
+>    > >    If you do not need all these columns, it could save you a lot of space to remove unneeded columns from the `country-information.tsv` file, before joining.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
 
 # Concatenating
 
-Concatenation of two files simple means putting the contents of the two files together, one after the other. Our dataset was created in 2021, but since then we've had another Olympic event, the 2022 Winter Olympics in Beijing. If we have the same data for this latest Olympics, we could simply add the rows from the 2022 games to our current file with data, in order to
+Concatenation of two files simple means putting the contents of the two files together, one after the other. Our dataset was created in 2021, but since then we've had another Olympic event, the 2022 Winter Olympics in Beijing. If we have the same data for this latest Olympics, we could simply add the rows from the 2022 games to our current file with data, in order to create a single file with all data from 1896 to 2022.
+
+First, let's get this data for the 2022 Olympics
+
+> ### {% icon hands_on %} Hands-on: Get 2022 Olympics data
+>
+> 1. {% tool [Import](upload1) %} the file `country-information.tsv` via link
+>
+>    ```
+>    {{page.zenodo_link}}/files/olympics_2022.tsv
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 2. View {% icon galaxy-eye %} the new dataset, does it have the same structure as our original `olympics.tsv` file?
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. Does the new file have the same structure?
+>    > 2. Can we simply add the lines of the new files to the end of our existing olympics dataset?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. Yes, this file has all the same columns, in the same order, so concatenation should be relatively straightforward.
+>    > > 2. If we simply put the contents of this file after our existing dataset, we will have a second header line in the middle of our data rows. It is best to remove the header line from the second dataset after we have verified it is compatible. This way we will only add the real data rows to our dataset.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+Since this new dataset has the exact same structure (number and order of columns), we can simple add the lines from this file to the end of our existing `olympics.tsv` file.
+
+
+> ### {% icon hands_on %} Hands-on: Concatenate the two files
+>
+> First we need to remove the header line from the 2022 file
+>
+> 1. {% tool [Remove beginning of a file]({{version_remove_beginning}}) with the following parameters:
+>    - *"Remove first"*: `1`
+>    - *"from"*: `olympics_2022.tsv`
+>
+> Now we can perform the concatenation:
+>
+> 2. {% tool [Concatenate datasets tail-to-head]({{version_cat}}) %} with the following parameters:
+>    - *"Concatenate Datasets"*: `olympics.tsv` (this file will be first)
+>    - {% icon param-repeat%} *"Insert Dataset"*: `olympics_2022.tsv`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How many lines do you expect in the new file? Were you correct? (Hint: use {% tool [Line/Word/Character count](wc_gnu) %} to count lines)
+>    > 2. Where are the lines of the 2022 Olympics?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. The `olympics.tsv` file had 234,523 lines, and the `olympics_2022.tsv` file had 4076 lines. Both of these numbers include a header line, which we removed for the second file, so we expect our concatenated file to contain 234,523 + 4076 - 1 = 238,598 lines (which it does).
+>    > > 2. The new file has the entire contents of `olympics.tsv` at the beginning of the file, followed by the contents of the `olympics_2022.tsv` file at the end.
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+Now this only works so simply because our two datasets had the same structure; the same number of columns, in the same order. If your data comes from different sources, you may have to do some additional data manipulation before you can concatenate, e.g. to make sure the columns match, or how each file deals with missing data (empty cells, `NA`, `NaN` or something else).
 
 # Rearrange columns
 
