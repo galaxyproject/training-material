@@ -92,13 +92,13 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -51,6 +51,7 @@ galaxy_root: /srv/galaxy
 >     galaxy_user: {name: galaxy, shell: /bin/bash}
->     galaxy_commit_id: release_22.01
+>     galaxy_commit_id: release_22.05
 >     galaxy_force_checkout: true
 >    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
 >     miniconda_manage_dependencies: false
->    @@ -136,6 +137,8 @@ galaxy_config_templates:
+>    @@ -131,6 +132,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/tool_destinations.yml
 >         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
@@ -118,10 +118,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -149,6 +149,7 @@ galaxy_dynamic_job_rules:
+>    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_manage_systemd_reports: yes
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
@@ -136,7 +136,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -93,4 +93,10 @@ server {
+>    @@ -105,4 +105,10 @@ server {
 >             uwsgi_param UWSGI_SCHEME $scheme;
 >             include uwsgi_params;
 >         }

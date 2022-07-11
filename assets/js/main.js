@@ -96,30 +96,19 @@ function cyoaDefault(defaultOption){
 })(window, document);
 
 
-<!--  For admin training -->
-document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => {
+function fixDiffPresentation(codeBlock){
 	codeBlock.childNodes.forEach(x => {
 		if(x.nodeName == '#text'){
-			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
+			x.textContent = x.textContent.split('\n').map(q => { return q.startsWith(" ") ? q.slice(1) : q }).join('\n')
 		} else {
-			console.log(x.nodeName, x.classList[0])
 			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
 				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
 				$(x).text(fixed);
 			}
 		}
 	})
-})
+}
 
-document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => {
-	codeBlock.childNodes.forEach(x => {
-		if(x.nodeName == '#text'){
-			x.textContent = x.textContent.split('\n').map(q => { return q.slice(1) }).join('\n')
-		} else {
-			if(!(x.nodeName === 'span' && x.classList[0] === 'notranslate')){
-				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-				$(x).text(fixed);
-			}
-		}
-	})
-})
+<!--  For admin training -->
+document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))

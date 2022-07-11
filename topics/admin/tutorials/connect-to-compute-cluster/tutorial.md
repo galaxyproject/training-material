@@ -75,9 +75,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -20,3 +20,7 @@
+>       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>     - src: gantsign.golang
 >       version: 2.6.3
->     - src: galaxyproject.cvmfs
->       version: 0.2.13
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.2
 >    +- src: galaxyproject.slurm
@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,6 +140,16 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >     
@@ -366,10 +366,10 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,7 @@ galaxy_config_templates:
+>    @@ -98,6 +98,7 @@ galaxy_config_templates:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
 >     # Certbot
@@ -384,26 +384,33 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -1,9 +1,16 @@
->     <job_conf>
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->         </plugins>
->    -    <destinations default="singularity">
->    +    <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="slurm" runner="slurm">
->    +            <param id="singularity_enabled">true</param>
->    +            <env id="LC_ALL">C</env>
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->             <destination id="singularity" runner="local_plugin">
->                 <param id="singularity_enabled">true</param>
->                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -2,12 +2,24 @@ runners:
+>       local_runner:
+>         load: galaxy.jobs.runners.local:LocalJobRunner
+>         workers: 4
+>    +  slurm:
+>    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>     
+>     execution:
+>       default: singularity
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    slurm:
+>    +      runner: slurm
+>    +      singularity_enabled: true
+>    +      env:
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}
@@ -428,8 +435,8 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    > ### {% icon code-out %} Output
 >    > Your output may look slightly different:
 >    > ```console
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 >    > ```
 >    {: .code-out}
 >
