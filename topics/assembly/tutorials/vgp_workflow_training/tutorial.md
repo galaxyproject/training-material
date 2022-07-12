@@ -207,9 +207,6 @@ After genome profiling, the next step is to run the **VGP HiFi phased assembly w
 >   - {% icon param-file %} "*HiC forward reads*": `3: Hi-C_dataset_F`
 >   - {% icon param-file %} "*HiC reverse reads*": `2: Hi-C_dataset_R`
 >   - {% icon param-file %} "*Genomescope summary dataset*": `19: Genomescope on data 13 Summary`
->   - "*K-mer length*": `31`
->   - "*Ploidy*": `2`
->   - "*Is genome large (>100Mb)?*": `No`
 > 4. Click on the <kbd>Run workflow</kbd> button
 >
 > > <comment-title>Input option order</comment-title>
