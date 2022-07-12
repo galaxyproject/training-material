@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Identification of yeasts in a beer'
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.6620778'
 questions:
 - How can yeast strains in a beer sample be identified?
 - How can we process metagenomic data sequenced using Nanopore?
