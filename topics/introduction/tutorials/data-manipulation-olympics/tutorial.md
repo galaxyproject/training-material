@@ -12,12 +12,15 @@ objectives:
 - Familiarize yourself with data manipulation tools in Galaxy
 - Perform basic text manipulation tasks in Galaxy
 - Become comfortable converting text-based files in a variety of ways.
+- Reason about the expected outcome of tools
 time_estimation: 1h
 key_points:
 - There are a lot of tools available in Galaxy for performing basic data manipulation tasks
 - Bacis data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
 - There are often multiple ways/tools to achieve the same end result
 - Having a basic understanding of data manipulation tools will make it easier to do exploratory data analysis
+- Always read the help text of the tool before using it to get a full understanding of its workings
+- Always try to formulate the output you are expecting from a tool. This will make it easier to spot mistakes as soon as possible.
 contributions:
   authorship:
     - shiltemann
@@ -48,7 +51,7 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_remove_columns_by_header="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" %}
 {% assign version_cut_columns="Cut1" %}
 {% assign version_paste="Paste1" %}
-
+{% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
 
 # Introduction
 {:.no_toc}
@@ -91,8 +94,9 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Remove Columns         | By header name                 | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
 | Cut Columns            | By column number               | {% tool [Cut columns from a table]({{version_cut_columns}}) %}|
 | Paste                  | Two files side by side         | {% tool [Paste]({{version_paste}}) %} |
+| Split file             | Based on values of a column  | {% tool [Split]({{version_split}}) %} |
 
-TIP: If you find yourself frequently using the same tool often but struggle to find it back in the long list of tools, you can **star** your favourite tools in Galaxy!
+**TIP: Adding tools to your Favourites:** If you find yourself frequently using the same tool often but struggle to find it back in the long list of tools, you can **star** your favourite tools in Galaxy!
 
 {% snippet faqs/galaxy/tools_favorite.md %}
 
@@ -105,7 +109,7 @@ In this tutorial, these tools are explained in more detail, and we provide some 
 In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1896 until Tokyo in 2020. The objective is to familiarize you with a large number of the most important data manipulation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
 
 
-![image of olympic rings, logo and two atheletes around the words "Data Analysis Olympics"](./images/cover.jpg)
+![image of olympic rings, logo and two athletes around the words "Data Analysis Olympics"](./images/cover.jpg)
 
 
 We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
@@ -113,7 +117,7 @@ We will show you many of these commonly needed data manipulation operations, and
 
 # Upload Data
 
-Before we can do any manipulation, we will need some data. Let's upload our table with olympics results now.
+Before we can do any manipulation, we will need some data. Let's upload our table with Olympics results now.
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
@@ -177,7 +181,7 @@ The data was [obtained](https://github.com/UOSCS/Olympic_Athletes) from [Olymped
 - **city** - Host city
 - **sport** - Sport
 - **event** - Event
-- **medal** - Gold, Silver, Bronze, or empty
+- **medal** - Gold, Silver, Bronze (or `NA` if no medal was won)
 
 We will use this dataset to practice our data manipulation skills in Galaxy.
 
@@ -273,7 +277,7 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 
 # Sorting
 
-We have a lot of data in this file, but it is ordered by the athlete ID number, which is a somewhat arbitrary and meaningless number. But we can sort the rows in this file to something more convenient, for example alphabetically by name of the athelete, or chronologically by year of the Olympics.
+We have a lot of data in this file, but it is ordered by the athlete ID number, which is a somewhat arbitrary and meaningless number. But we can sort the rows in this file to something more convenient, for example alphabetically by name of the athlete, or chronologically by year of the Olympics.
 
 > ### {% icon hands_on %} Hands-on: Sort table based on a column
 >
@@ -366,7 +370,7 @@ So we want to sort twice, first by year, an then within each year, we sort again
 
 ## Exercises
 
-Ok, time to train! let's see if you can use the sort tool to answer the following questions:
+Ok, time to train! Let's see if you can use the sort tool to answer the following questions:
 
 > ### {% icon question %} Exercise: Reverse the sort
 >
@@ -374,7 +378,7 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 >
 > > ### {% icon solution %} Answer
 > >
-> > `Žolt Peto` who competed in tabletennis at the 2020 Summer Olympics in Tokyo.
+> > `Žolt Peto` who competed in table tennis at the 2020 Summer Olympics in Tokyo.
 > > We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
 > >
 > {: .solution}
@@ -383,13 +387,13 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 
 > ### {% icon question %} Exercise: sort by height
 >
-> 1. What is the height of the tallest competing athelete? Which athlete(s) are of this height?
+> 1. What is the height of the tallest competing athlete? Which athlete(s) are of this height?
 > 2. What is the shortest?
 > 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
 > > ### {% icon solution %} Hints
 > >
-> > 1. Height is listed in column 7. Since this is a number, we need *numerical sort*, and becaue we want the tallest on top, we will need to sort in *descending* (decreasing) order.
+> > 1. Height is listed in column 7. Since this is a number, we need *numerical sort*, and because we want the tallest on top, we will need to sort in *descending* (decreasing) order.
 > > 2. Rerun the tool for step 1, but change the order to *ascending*
 > > 3. First sort by year (descending), then by height (descending)
 > >
@@ -397,8 +401,8 @@ Ok, time to train! let's see if you can use the sort tool to answer the followin
 >
 > > ### {% icon solution %} Answers
 > >
-> >  1. Adam Sandurski from poland is the tallest athlete in the file, at 214 cm tall.
-> >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields are being sorted to the top. We can filter out rows with empty values to get our anwer (see Filter section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-with-answers) has many exercises that require a combination of different tools.
+> >  1. Adam Sandurski from Poland is the tallest athlete in the file, at 214 cm tall.
+> >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields are being sorted to the top. We can filter out rows with empty values to get our answer (see Filter section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-with-answers) has many exercises that require a combination of different tools.
 > >  3. Gennaro Di Mauro, 210 cm.
 > >
 > {: .solution}
@@ -430,7 +434,7 @@ A common operation we might want to perform on tables of data, is simple countin
 >    > > 1. 52. there are 53 lines in the resulting file, with one line containing the value of the column header (`games`).
 >    > > 2. 1996 Summer Olympics. (10501 participations)
 >    > >
->    > > The resulting file looks somtthing like:
+>    > > The resulting file looks something like:
 >    > >
 >    > > ```
 >    > > 615	1896 Summer Olympics
@@ -532,7 +536,7 @@ Datamash can do a lot more than counting,  and we will showcase some of these ot
 
 Ok, let's practice!
 
-> ### {% icon question %} Exercise: Number of participatioins per country
+> ### {% icon question %} Exercise: Number of participations per country
 >
 > 1. Which country has had the most participations in the Olympics?
 > 2. How many countries participated in the first Olympics? How many in the last?
@@ -709,7 +713,7 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 >
 > > ### {% icon solution %} Hints
 > >
-> > - Column 17 contains information about medels
+> > - Column 17 contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
 > > - Expand the output or use the tool {% tool [Line/Word/Character count](wc_gnu) %} to see the number of lines in the file
 > > - Don't forget that the output (and line count) may include the header line
@@ -735,7 +739,7 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 
 # Grouping
 
-Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of atheletes, etc).
+Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of athletes, etc).
 
 In the [counting](#counting) section of this tutorial we show how to get answers that require a count (e.g. number of medals won), but sometimes we want to do something more complex, like calculating the average height of athletes in a group, say per country or per sport. This section will show some example of these types of questions.
 
@@ -768,19 +772,19 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 >    - *"Sort input"*: `yes`
 >    - *"Input file has a header line"*: `yes`
 >    - *"Skip NA or NaN values"*: `yes`
->    - *"Operation to perform on each group"*: `Maxiumum`
+>    - *"Operation to perform on each group"*: `Maximum`
 >      - *"On Column"*: `Column: 7`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. How tall was the tallest athelete in basketball? And what about karate?
+>    > 1. How tall was the tallest athlete in basketball? And what about karate?
 >    > 2. Why do some sports have a value of `inf`?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. Basketball's tallest athelete was 192cm. For Karate it is 163.
+>    > > 1. Basketball's tallest athlete was 192cm. For Karate it is 163.
 >    > > 2. Our dataset had quite a number of `NA` (unknown) values in the height column, especially for the earlier Olympics. For sports that had only NA values, there is no maximum so the tool outputs `inf` instead.
 >    > {: .solution}
 >    {: .question}
@@ -931,7 +935,7 @@ Sometimes we want to use the data in our column to compute a new value, and add 
 As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
 
 
-> ### {% icon hands_on %} Hands-on: Compute age of atheletes
+> ### {% icon hands_on %} Hands-on: Compute age of athletes
 >
 > 1. Open the {% tool [Compute an expression on every row]({{version_column_maker}}) %} tool.
 >    - read the help text at the bottom of the tool
@@ -991,7 +995,7 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 >
 > > ### {% icon solution %} Hints
 > >
-> > - division is `/` and multiplication is `*`.
+> > - division is `/` and multiplication is ` * ` .
 > > - The tool does not recognize the `^` operation as exponentiation. You can use `height * height` or `pow(height,2)`
 > > - Parentheses may be required.
 > > - Use `int(column)` to tell the tool the columns contain numbers
@@ -1016,15 +1020,96 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 TODO: Add NA to place of birth columns
 TODO: change Athina to Athens
 
+TODO: show tools for non-tabular data
+
+TODO: Regex 101
+
+# Removing Columns
+
+We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file
+
+To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{version_paste}}) %} tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very "dumb" tool that simple combines the two files next to each other.
 
 
-# Remove/Add Columns
+> ### {% icon hands_on %} Hands-on: Remove columns
+>
+> Suppose we want to simplify our file a bit. All we want is file with 4 columns: athlete name, sport, olympic games, and medals.
+>
+> 1. Open the {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} tool and read the help text at the bottom.
+>    - Which settings do you think we need?
+>
+> 2. {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} with the following parameters:
+>    - *"Tabular File"*: `olympics.tsv`
+>    - *"Header name"*: `name`
+>    - {% icon param-repeat %} *"Header name"*: `sport`
+>    - {% icon param-repeat %} *"Header name"*: `games`
+>    - {% icon param-repeat %} *"Header name"*: `medals`
+>    - *"Keep named columns"*: `Yes`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. How many rows and columns do you expect the output to have?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. We expect the same number of rows as the original dataset, but now only the 4 columns we requested to keep.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
-We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number).
 
-To do the reverse, adding a column, we can use the {% tool [Paste]({{version_paste}}) %} tool (assuming we have the same number of rows in both files, already in the correct order.
+Notice that during this step, we also changed the order of the columns. This tool can also be used to re-arrange columns, if you supply all column names but in a different order.
 
 
+
+## Exercises
+
+
+> ### {% icon question %} Exercise: Removing Columns
+>
+> 1. Create a file with 4 columns: name, sport, games, medal (same task as the previous hands-on), but use the {% tool [Cut columns from a table]({{version_cut_columns}}) %} tool instead.
+> 2. Create a file that is similar to `olympics.tsv`, but without the first column (athlete_id column)
+> 3. You want to keep all the columns of `olympics.tsv`, but change the order so that `sport` and `event` come right after the athlete's name.
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1. We need to determine the column numbers and provide these to the tool, rather than the column headers
+> > 2. Think about what the *"Keep named colums"* parameter does to simplify the settings here
+> > 3. Which of the two tools would be easier to use? (this can be a personal preference, but think about whether you would rather provide column names or numbers)
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Full Solutions
+> >
+> > 1. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
+> >    - *"Cut Columns"*: `c2,c15,c11,c17`
+> >    - *"Delimited By"*: `TAB`
+> >    - *"From"*: `olympics.tsv`
+> >
+> > 2. {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} with the following parameters:
+> >    - *"Tabular File"*: `olympics.tsv`
+> >    - *"Header name"*: `athlete_id`
+> >    - *"Keep named columns"*: `No`
+> >
+> >    **Note:** the *"Keep named columns"* parameter determines wheter we keep or remove the columns we specified.
+> >    You could have obtained the same result by supplying all column names except the first one, and selecting
+> >    *"Keep named columns"*: `No`, but that would have been a lot more work.
+> >
+> > 3. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
+> >    - *"Cut Columns"*: `c1,c2,c15,c16,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c17`
+> >    - *"Delimited By"*: `TAB`
+> >    - *"From"*: `olympics.tsv`
+> >
+> >    **Note:** you can also use the {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}, it just requires a bit more typing,
+> >    but on the other hand it is also a bit less error-prone (i.e. it is easier to mix up column numbers than column names).
+> >
+> {: .solution}
+>
+{: .question}
 
 
 
@@ -1033,9 +1118,9 @@ To do the reverse, adding a column, we can use the {% tool [Paste]({{version_pas
 
 This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc), we could join that information with our olympics data, to get a single file with all information in every row.
 
-For example, if we would like to be able to group by continent, to e.g. count atheletes, medals etc per continent, we will have to add a `continent` columnn to our file. To do this we would need a second file that maps each country to the corresponding continent. This is what we will do in the next hands-on section.
+For example, if we would like to be able to group by continent, to e.g. count athletes, medals etc per continent, we will have to add a `continent` column to our file. To do this we would need a second file that maps each country to the corresponding continent. This is what we will do in the next hands-on section.
 
-We obtained country information data from [DataHub](https://datahub.io/core/country-codes). More information about this file can be found in the description here. It has 56 columns with a wide variety of data about each country (from country codes, to capital city, languages spoken, etc)
+We obtained country information data from [DataHub](https://datahub.io/core/country-codes). More information about this file can be found in the description there. It has 56 columns with a wide variety of data about each country (from country codes, to capital city, languages spoken, etc)
 
 > ### {% icon hands_on %} Hands-on: Get data
 >
@@ -1056,7 +1141,7 @@ We obtained country information data from [DataHub](https://datahub.io/core/coun
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. The country information file has 50 columns.
+>    > > 1. The country information file has 56 columns (see [DataHub](https://datahub.io/core/country-codes) for more details).
 >    > > 2. Both files have a `NOC` column with the 3-letter country code (`NOC` stands for National Olympic Committee). We can use this column to join the appropriate country data to each row in our `olympics.tsv` file.
 >    > >
 >    > {: .solution}
@@ -1064,7 +1149,7 @@ We obtained country information data from [DataHub](https://datahub.io/core/coun
 >
 {: .hands_on}
 
-
+We would now like to take our Olympics dataset as the basis, and add columns to every row of this file with some information about the country. In order to join, we will need to have one column that is shared between the two files, on which we can match. The `NOC` column is perfect for this because it is a defined standard. Both files also contain a column with the country name in it, which is also a possible candidate to use for joining, but because it is less standardised, it is safer to use the NOC column. For example, if one file uses "Netherlands", while the other uses "The Netherlands" to indicate the same country, the joining will fail for these rows. So always make sure the columns you join on are compatible!
 
 > ### {% icon hands_on %} Hands-on: Joining country information to the Olympics data.
 >
@@ -1090,7 +1175,7 @@ We obtained country information data from [DataHub](https://datahub.io/core/coun
 >    > >
 >    > > 1. All the columns from the country information file are added to the end of each row of our olympics dataset
 >    > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file.
->    > > 3. There is a lot of data duplication in this file now. The exact same country information is added to every line of every athelete from a certain country.
+>    > > 3. There is a lot of data duplication in this file now. The exact same country information is added to every line of every athlete from a certain country.
 >    > >    This means much larger file size, and more usage of your quota.
 >    > >    If you do not need all these columns, it could save you a lot of space to remove unneeded columns from the `country-information.tsv` file, before joining.
 >    > >
@@ -1170,19 +1255,88 @@ Since this new dataset has the exact same structure (number and order of columns
 
 Now this only works so simply because our two datasets had the same structure; the same number of columns, in the same order. If your data comes from different sources, you may have to do some additional data manipulation before you can concatenate, e.g. to make sure the columns match, or how each file deals with missing data (empty cells, `NA`, `NaN` or something else).
 
-# Rearrange columns
 
-# Remove columns
+# Splitting Files
 
+This dataset contains a lot of data, we might want to split the data into one file per Olympic games, or have one file for all the winter games, and another file for all the summer games. In these situtations, where we want to create new, smaller files, based on the values in a column, we can use the tool {% tool [Split file according to the values of a column]({{version_split}}) %}.
 
-# Split file
-
-Winter and Summer
+Tip: use this tool only if you want a separate file for **all values** in a column. For example, if you want a file for each Olympic games, use the split tool, but if you just want a file for one particular Olympics (say Tokyo 2020), you could simply use the [Filter](#filtering) tools to extract the data from the full dataset, without making files for all the other Olympics as well.
 
 
-# Exercises (with answers)
+> ### {% icon hands_on %} Hands-on: Splitting the dataset by Olympics
+>
+> We would like to create a separate file for each Olympic event.
+>
+> 1. Open the tool {% tool [Split file according to the values of a column]({{version_split}}) %}, and read the help text at the bottom
+>    - which settings do you think we need to use?
+>
+> 2. {% tool [Split file according to the values of a column]({{version_split}}) %} with the following parameters:
+>    - *"File to select"*: `olympics.tsv`
+>    - *"on column"*: `Column 11` (the `games` column)
+>    - *"Include the header in all splitted files?"*: `Yes`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many different files do we get?
+>    > 2. How many lines are in the file for the 1908 Summer Olympics?
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. We get 1 collection with 52 files in it, one per Olympic games:
+>    > >    ![screenshot of the output collection of the split tool](./images/split-file.png)
+>    > > 2. 3214 lines
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
-This section provides a number of exercises that require you to combine one or more of the techniques you learned in this tutorial. This is a great place to start if you want to practice your data manipulation skills!
+
+## Exercises
+
+Let's practice this a bit more
+
+> ### {% icon question %} Exercise: sort by height
+>
+> 1. Create two files, one for Summer Olympics, one for Winter Olympics. Which has more lines?
+> 2. Split the file by sport, how many sports have there been at the Olympics?
+> 3. Split the file by medal, are the files equal sizes?
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1.
+> > 2.
+> > 3.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1.
+> >  2.
+> >  3.
+> {: .solution}
+>
+> > ### {% icon solution %} Full solution
+> >
+> >  1.
+> >  2.
+> >  3.
+> {: .solution}
+>
+{: .question}
+
+
+
+# Conclusion
+
+These tools and operations covered in the tutorial are just a few examples of some of the most common operations. There are many more tools available in Galaxy that perform other data manipulations. We encourage you to look around the `General Text Tools` section in the Galaxy toolbox (left panel) to find and explore more data manipulation tools. The more comfortable you are performing these kinds of steps, the more you can get out of Galaxy!
+
+
+# Exercises: Putting it all together!
+
+This section provides a number of exercises that require you to combine two or more of the techniques you learned in this tutorial. This is a great way to practice your data manipulation skills. Full solutions are provided for every exercise (i.e. all tools and settings), but for many of these exercises there will be multiple solutions, so if you obtained the same results in a different way, that is correct too!
 
 - TODO: shortest athlete (couldnt answer with only sort tool, also need to filter out empty lines)
 -  TODO: number of unique athletes who received silver medals during the 2018 olympics
