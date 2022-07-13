@@ -44,7 +44,8 @@ Also make sure to include many exercises (with answers) for your section!
 <!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
 {% assign version_datamash="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" %}
 {% assign version_column_maker="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
-{% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" %}
+{% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" %}
+{% assign version_replace_text_line="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" %}}
 {% assign version_cat="cat1" %}
 {% assign version_remove_beginning="Remove beginning1" %}
 {% assign version_join="join1" %}
@@ -52,6 +53,7 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_cut_columns="Cut1" %}
 {% assign version_paste="Paste1" %}
 {% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
+
 
 # Introduction
 {:.no_toc}
@@ -87,7 +89,8 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Counting               | occurences of values in a column | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row           | {% tool [Compute]({{version_column_maker}}) %} |
-| Replace Text           | in a specific column | {% tool [Replace Text]({{version_replace_text_column}}) %}|
+| Find and Replace       | in a specific column | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
+| Find and Replace       | on every line        | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
 | Join two Datasets      | side by side on a specified field | {% tool [Join two Datasets]({{version_join}}) %} |
 | Concatenate datasets   | one after the other | {% tool [Concatenate datasets]({{version_cat}}) %} |
 | Remove Beginning       | Good for removing header lines | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %}
@@ -972,11 +975,9 @@ This was a simple computation, but much more complex mathematical expressions ca
 
 BMI stands for Body Mass Index, is a metric to provide a very crude measure of how healthy your weight is. The formula to compute BMI is:
 
-$$
-BMI = weight / (height^2)
-$$
+$$ BMI = weight / (height^2) $$
 
-with weight in kilograms and height in meters.
+(with weight in kilograms and height in meters).
 
 
 Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute this data for all athletes and add it as a new column.
@@ -1019,12 +1020,156 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 
 # Find and Replace
 
-TODO: Add NA to place of birth columns
-TODO: change Athina to Athens
+Often you may need to change the contents of a file a bit to fit the expectations of an analysis tool. For instance, our file uses `NA` for missing values, but other conventions included leaving the cell empty, or using `NaN` (not a number) instead. Or, when working with chromosomal data, you may need to add or remove the `chr` prefix from a column before using it as input to a certain tool. In such situations, we can find all occurrences of a certain pattern in our file, and replace it with another value.
 
-TODO: show tools for non-tabular data
+If we want to perform such a replacement on a single column in our data, we can use the {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} tool, or if we want to do a replacement on a line by line basis (e.g. if our data isn't tabular and therefore doesn't have columns), we can use the {% tool [Regex Find and Replace]({{version_replace_text_line}}) %} tool. Both of these tools are similar, in that they use *regular expressions* (or *regex*) to define a pattern to search for. Regular expressions are a standardized way to describe patterns, and while they can seem quite complex at first, with just a few of the basics and a bit of practice, you can perform powerful operations on large datasets with ease.
 
-TODO: Regex 101
+A few of the basics of regular expression, plus some links to further resources are given in the box below:
+
+{% snippet faqs/galaxy/analysis_regular_expressions.md %}
+
+Let's start with a simple example:
+
+> ### {% icon hands_on %} Hands-on: Find and Replace
+>
+> Our file uses a mix of `Athina` and `Athens` to indicate the Capital City of Greece in the `city` column.
+> Let's standardize this by replacing occurrences of `Athina` with `Athens`.
+>
+> 1. Open {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}
+>    - Read the help text at the bottom, what settings do you think we need to use?
+>    - Read the Regular expressions 101 FAQ below
+>
+>      {% snippet faqs/galaxy/analysis_regular_expressions.md %}
+>
+> 2. {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
+>    - {% icon param-select %}*"using column"*: `Column 14`
+>    - {% icon param-repeat %} *"Check"*
+>      - *"Find Regex"*: `Athina`
+>      - *"Replacement"*: `Athens`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>    - Look at the file before and after. Athlete 7 (Patrick Chila) near the top of the `olympics.tsv` file, had a value of Athina in the city column. Verify that it has been changed to Athens.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > Why did we use the column replace tool, and not the general replace tool?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > It is safer to use the column replace tool in our case. We know the city name only occurs in one of the columns.
+>    > > If we had used the line replace tool, it would have replaced all occurrences of `Athina`, which may have unforeseen consequences (e.g. maybe somebody was named Athina, in that case we don't want to replace it)
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+This was rather simple example, so let's try a few more examples with slightly more complex expressions.
+
+
+## Exercises
+
+You may have noticed that our file has a lot of missing data. Especially for the earlier years, things like height, weight and birthday of athletes was not registered, or simply not known. In some columns you see these missing values have been replaced with an `NA` (not available) value. In other columns (for example birth place), the cells have simply been left empty.
+
+Different tools may expect different ways of handling missing data. So you may have to change your missing data from empty to `NA`, `NaN`, or something else, between analysis steps
+
+
+> ### {% icon hands_on %} Hands-on: Fill empty cells
+>
+> We will now replace empty cells in the `birth_place` column, do use `NA` instead
+>
+> 1. Open {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}
+>    - Read the help text at the bottom, what settings do you think we need to use?
+>    - Read the Regular expressions 101 FAQ below
+>
+>      {% snippet faqs/galaxy/analysis_regular_expressions.md %}
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. Should we use the column or line replace tool?
+>    > 2. What is the expression for an empty line? (hint: see regular expressions 101 box above)
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. Since we only want to replace in one column, we will use the column replace tool
+>    > > 2. `^$` indicates an empty line (`^` indicated the beginning, and `$` the end). The value in the column is treated as the line, since we are looking only in 1 column.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
+>    - {% icon param-select %}*"using column"*: `Column 6`
+>    - {% icon param-repeat %} *"Check"*
+>      - *"Find Regex"*: `^$`
+>      - *"Replacement"*: `NA`
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>    - Look at the file before replacement, find a line without a value in the `birth_place` column. Verify that it has been replaced in the resulting file.
+>
+{: .hands_on}
+
+Let's do another example, this one using capture groups.
+
+Look at the `birth_day` column. It has values in a format like `12 December`. Suppose we have a tool that expects this data to be in the reverse format, `December 12`. The file is too big to change this manually in every column. But with regular expression tools we can make this replacement easily
+
+> ### {% icon hands_on %} Hands-on: Reverse Birthday Format
+>
+> We will now change the format in birthday column from `day month` to `month day`
+>
+> 1. Open {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}
+>    - Read the help text at the bottom, what settings do you think we need to use?
+>    - Read the Regular expressions 101 FAQ below
+>
+>      {% snippet faqs/galaxy/analysis_regular_expressions.md %}
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How do we match on the birthday format? How strict/exact shoule we be here?
+>    > 2. How do we captures both the day and the month?
+>    > 3. How do we refer to the values we captured (for the replacement value)
+>    >
+>    > > ### {% icon solution %} Hints
+>    > >
+>    > > 1. Birthday is one or more digits, followed by a space, followed by one or more letters.
+>    > > 2. Remember that you can capture values using parentheses `(..)`
+>    > > 3. `\1` will be the variable containing the value in the first capture, `\2` the second, etc
+>    > >
+>    > {: .solution}
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. There are multiple solutions here, depending on how strict you want to be
+>    > >    - `\d+ ([a-zA-Z]+)` (not strict, would also match on `142 Septober`
+>    > >    - `[0-9]{1,2} (January|February|March|April|May|June|July|August|September|October|November|December)` (this is much more strict, only matches on 1 or 2 digits, followed by a space, followed by one of the months. But this would still match on 42 April, and may miss it if one month names didn't start with a capital letter)
+>    > >    - `[123]?[0-9] [a-zA-Z]+` this will only allow dates below 40
+>    > >
+>    > >    There are different ways to express this, and there is no one perfect solution. If you know your data is clean, and you do not have to worry about values like 42 Septober,
+>    > >    then you can be less strict. If your data is less clean, you may be more worried about capturing things that aren't valid birthdays and might want to be a bit stricter.
+>    > >    It all depends on your data and use case.
+>    > >
+>    > > 2. `([\d]{1,2}) ([a-zA-Z]+)` captures both the day and the month
+>    > > 3. We can use `\1` to refer to the day we captured, and `\2` for the month in our replacement.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. {% tool [Column Regex Finda and Replace]({{version_replace_text_column}}) %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
+>    - {% icon param-select %}*"using column"*: `Column 5`
+>    - {% icon param-repeat %} *"Check"*
+>      - *"Find Regex"*: `(\d{1,2}) ([a-zA-Z]+)` (or your own variation)
+>      - *"Replacement"*: `\2 \1` (first month, then space, then day)
+>
+> 3. {% icon galaxy-eye %} **View** the results.
+>    - Did it work? If not, no shame, it often takes some trial and error to get your expression right. Click the rerun {% icon galaxy-refresh %} button on the tool,
+>      and tweak your expression until it works.
+>
+{: .hands_on}
+
+
+
 
 # Removing Columns
 
