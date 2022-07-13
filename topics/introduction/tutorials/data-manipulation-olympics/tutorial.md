@@ -930,7 +930,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 
 # Computing
 
-Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columnts), or their age at time of participations (fromyear of birth and year of the olymics). This will enable us to more easily query the dataset for values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_column_maker}}) %} tool.
+Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participations (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_column_maker}}) %} tool.
 
 As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
 
@@ -972,7 +972,9 @@ This was a simple computation, but much more complex mathematical expressions ca
 
 BMI stands for Body Mass Index, is a metric to provide a very crude measure of how healthy your weight is. The formula to compute BMI is:
 
-$$ BMI = weight / (height^2) $$
+$$
+BMI = weight / (height^2)
+$$
 
 with weight in kilograms and height in meters.
 
@@ -986,7 +988,7 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 >
 > 1. How would you express this calculation in the tool?
 >    - Remember that our height is in cm, and the formula expects height in meters
->    - Remember that we have a lot of "NA" values in our column, we will have to tell the tool the column are numeric,
+>    - For each tabular file, Galaxy will try to determine whether a row is numerical or not. While height and weight are numbers, we also have a lot of "NA" values here, which Galaxy sees as a word, and may not automatically interpret the column as numerical, so to be safe, we will manually tell the tool the column are numeric,
 >      - do this using e.g. `int(c3)` (`int` stands for integer, if you had a column with decimal numbers, you would say `float(c3)`)
 >
 > 2. What is the BMI for Arnaud Boetsch?
@@ -1295,34 +1297,27 @@ Tip: use this tool only if you want a separate file for **all values** in a colu
 
 ## Exercises
 
-Let's practice this a bit more
+Let's practice this a bit more, see if you can use the split file to answer the following questions:
 
 > ### {% icon question %} Exercise: sort by height
 >
 > 1. Create two files, one for Summer Olympics, one for Winter Olympics. Which has more lines?
 > 2. Split the file by sport, how many sports have there been at the Olympics?
-> 3. Split the file by medal, are the files equal sizes?
+> 3. Split the file by medal, would you expect the output files to be equal sizes?
 >
 > > ### {% icon solution %} Hints
 > >
-> > 1.
-> > 2.
-> > 3.
+> > 1. Split on the `season` column (Column 13)
+> > 2. Split on the `sport` column (Column 15)
+> > 3. Split on the `medal` column (Column 17)
 > >
 > {: .solution}
 >
 > > ### {% icon solution %} Answers
 > >
-> >  1.
-> >  2.
-> >  3.
-> {: .solution}
->
-> > ### {% icon solution %} Full solution
-> >
-> >  1.
-> >  2.
-> >  3.
+> >  1. The summer olympics file has more lines (~180,000) than the winter olympics file (~45,000) (the first winter Olympics wasn't held until 1924)
+> >  2. Each file in the resulting collection represents a sport, there are 91 datasets in the collection, representing 91 different sports in the history of the Olympics.
+> >  3. The files for gold silver and bronze are roughly equal, but not exactly (think of situations like shared second place, then 2 silver medals are handed out and no bronze medal)
 > {: .solution}
 >
 {: .question}
