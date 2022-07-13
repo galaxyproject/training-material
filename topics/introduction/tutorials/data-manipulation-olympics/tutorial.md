@@ -80,24 +80,24 @@ Here is an overview table of the different data manipulations in this tutorial, 
 If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu bar), you can click on the tool names in the last column to quickly open them in Galaxy and start using them on your own!
 
 
-| Operation              | Description            | Galaxy Tool    |
-|------------------------|------------------------|----------------|
-| Convert format         | Change the file format | {% icon galaxy-pencil%} Edit attributes |
+| Operation              | Description                        | Galaxy Tool    |
+|------------------------|------------------------------------|----------------|
+| Convert format         | Change the file format             | {% icon galaxy-pencil%} Edit attributes |
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
 | Filter                 | Remove rows based on values in one or more columns | {% tool [Filter](Filter1) %}|
-| Counting               | occurences of values in a column | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
+| Counting               | Count occurrences of values in a column   | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
-| Compute an expression  | Over each row           | {% tool [Compute]({{version_column_maker}}) %} |
-| Find and Replace       | in a specific column | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
-| Find and Replace       | on every line        | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
-| Join two Datasets      | side by side on a specified field | {% tool [Join two Datasets]({{version_join}}) %} |
-| Concatenate datasets   | one after the other | {% tool [Concatenate datasets]({{version_cat}}) %} |
-| Remove Beginning       | Good for removing header lines | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %}
-| Remove Columns         | By header name                 | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
-| Cut Columns            | By column number               | {% tool [Cut columns from a table]({{version_cut_columns}}) %}|
-| Paste                  | Two files side by side         | {% tool [Paste]({{version_paste}}) %} |
-| Split file             | Based on values of a column  | {% tool [Split]({{version_split}}) %} |
+| Compute an expression  | Over each row                      | {% tool [Compute]({{version_column_maker}}) %} |
+| Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
+| Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
+| Join two Datasets      | side by side on a specified field  | {% tool [Join two Datasets]({{version_join}}) %} |
+| Concatenate datasets   | one after the other                | {% tool [Concatenate datasets]({{version_cat}}) %} |
+| Remove Beginning       | Good for removing header lines     | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %}
+| Cut Columns            | By header name                     | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
+| Cut Columns            | By column number                   | {% tool [Cut columns from a table]({{version_cut_columns}}) %}|
+| Paste                  | Two files side by side             | {% tool [Paste]({{version_paste}}) %} |
+| Split file             | Based on values of a column        | {% tool [Split]({{version_split}}) %} |
 
 **TIP: Adding tools to your Favourites:** If you find yourself frequently using the same tool often but struggle to find it back in the long list of tools, you can **star** your favourite tools in Galaxy!
 
@@ -675,7 +675,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > {: .solution}
 >    {: .question}
 >
-> 4. Repeat the step for the Summer olympics
+> 4. Repeat the step for the Summer Olympics
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -684,14 +684,14 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    >
 >    > > ### {% icon solution %} Hints
 >    > >
->    > > 1. Use the {% tool [Line/Word/Character count](wc_gnu) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter olympics file
+>    > > 1. Use the {% tool [Line/Word/Character count](wc_gnu) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter Olympics file
 >    > > 2. Be careful to consider whether these counts include the header line of the file or not
 >    > >
 >    > {: .solution}
 >    >
 >    > > ### {% icon solution %} Answers
 >    > >
->    > > 1. The original file has 234,523 lines, and the Winter olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer olypmics file to have 1 more line that this, so 189,843 total lines.
+>    > > 1. The original file has 234,523 lines, and the Winter Olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer Olympics file to have 1 more line that this, so 189,843 total lines.
 >    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
 >    > > <br>
 >    > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
