@@ -72,11 +72,11 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
->    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
->    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
->    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
->    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
+>    https://zenodo.org/record/6823059/files/chip_seq_peaks.bed
+>    https://zenodo.org/record/6823059/files/Rep1_R1.fastq
+>    https://zenodo.org/record/6823059/files/Rep1_R2.fastq
+>    https://zenodo.org/record/6823059/files/Rep2_R1.fastq
+>    https://zenodo.org/record/6823059/files/Rep2_R2.fastq
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -129,7 +129,7 @@ We first have to check if our data contains adapter sequences that we have to re
 > > >
 > > >    1. **Per base sequence content**
 > > >
-> > >       CUT&RUN has some base biases at the start of every read {% cite Skene2017 %}.
+> > >       CUT&RUN has sometimes base biases like ChIP-Seq.
 > > >
 > > >    2. **Sequence Duplication Levels**
 > > >
