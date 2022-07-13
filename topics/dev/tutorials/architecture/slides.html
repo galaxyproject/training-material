@@ -1840,13 +1840,13 @@ def set_metadata(hda_manager: HDAManager, ldda_manager: LDDAManager, dataset_id,
 
 ---
 
-## Application Components - Models and Managers
+## Application Components - Models, Managers, and Services
 
 *The architecture surrounding Galaxy components.*
 
 ---
 
-![This section will talk about that manager layer and what lies below](../../images/wsgi_app.plantuml.svg)
+![This section will talk about that manager layer and what lies below](../../images/asgi_app.plantuml.svg)
 
 ---
 
@@ -1864,6 +1864,21 @@ framework) while the model layer is meant to mediate all database interactions
 ![Models and Managers](../../images/core_models_managers.plantuml.svg)
 
 ---
+
+class: enlarge150
+
+### Services
+
+Handle API and web processing details of requests and responses at a high-level.
+
+Thin layer below the controllers to shield applciation logic from FastAPI internals.
+
+In practice, it is totally fine to skip this layer and have FastAPI controllers talk directly
+to managers.
+
+---
+
+class: enlarge150
 
 ### Managers
 
@@ -1910,13 +1925,24 @@ in a manager instead of in the model.
 - Performed to update or revert the database schema to a newer or older version.
 - Powered by Alembic - https://alembic.sqlalchemy.org/.
   - (as of 22.05; prior to that by SQLAlchemy Migrate)
-- Galaxy's data model is split into the galaxy model and the install model:
+- Each file in `lib/galaxy/model/migrations/alembic/versions_gxy` represents a migration description
+  - `e7b6dcb09efd_create_gxy_branch.py`
+  - `6a67bf27e6a6_deferred_data_tables.py`
+  - `b182f655505f_add_workflow_source_metadata_column.py`
+
+---
+
+### More on Schema Migrations
+
+- Great documentation in code README - `lib/galaxy/model/migrations/README.md`
+  - Admin perspective on how to migrate databases forward and revert on problems.
+  - Developer persepctive on how to add new revisions.
+- Galaxy's data model is split into the galaxy model and the legacy install model:
   - Persisted in one combined database or two separate databases
   - Represented by 2 migration branches: "gxy" and "tsi"
 - Schema changes defined in revision modules:
   - `lib/galaxy/model/migrations/alembic/versions_gxy` (gxy branch: galaxy model)
-  - `lib/galaxy/model/migrations/alembic/versions_tsi` (tsi branch: install model)
-
+  - `lib/galaxy/model/migrations/alembic/versions_tsi` (tsi branch: legacy install model)
 
 ---
 
