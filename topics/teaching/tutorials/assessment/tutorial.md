@@ -266,28 +266,3 @@ Trainees feedback should be considered along other forms of quality evidence:
 
 ToDo
 
-
-% # Move to a dedicated tutorial
-
-# Combining the 4 sessions
-
-## Six strategies for effective learning
-
-1. Spaced practice: Creating a study schedule that spreads study activities out over time
-2. Interleaving: Switching between topics while studying
-3. Elaboration: Asking and explaining why and how things work
-4. Concrete examples: When studying abstract concepts, illustrating them with specific examples
-5. Dual coding: Combining words with visuals
-6. Retrieval practice: Bringing learned information to mind from long term memory
-
-
-## 7 evidence-based learning principles
-
-* **Principle P1: **Students' **prior knowledge** can help or hinder learning.
-* **Principle P2: **How students **organise knowledge** influences how they learn and apply what they know.
-* **Principle P3: **Students **motivation** determines, directs and sustains what they do learn.
-* **Principle P4: **To develop mastery, students must acquire **component skills**, practice **integrating** them, and  know when to **apply** what they have learned
-* **Principle P5: Goal-directed** practice coupled with **targeted feedback** enhances the quality of students' learning
-* **Principle P6: **Students' current level of development interacts with the **social, emotional, and intellectual climate** of the course to impact learning
-* **Principle P7: **To become self-directed learners, students must learn to **monitor and adjust **their approaches to learning.
-
