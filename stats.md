@@ -137,7 +137,7 @@ layout: base
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Analytics Data</h5>
-   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org" target="_blank">Visit plausible.galaxyproject.eu</a>.</p>
+   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org">Visit plausible.galaxyproject.eu</a>.</p>
    <iframe src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameBorder="0"></iframe>
    </div>
  </div>
