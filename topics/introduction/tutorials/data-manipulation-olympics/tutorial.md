@@ -42,19 +42,25 @@ Also make sure to include many exercises (with answers) for your section!
 
 
 <!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
+{% assign version_cat="cat1" %}
+{% assign version_compute="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
+{% assign version_count="Count1" %}
+{% assign version_cut_columns="Cut1" %}
+{% assign version_cut_advanced="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" %}
 {% assign version_datamash="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0+galaxy2" %}
-{% assign version_column_maker="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
+{% assign version_filter="Filter1" %}
+{% assign version_join="join1" %}
+
+{% assign version_remove_beginning="Remove beginning1" %}
+{% assign version_remove_columns_by_header="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" %}
 {% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" %}
 {% assign version_replace_text_line="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" %}}
-{% assign version_cat="cat1" %}
-{% assign version_remove_beginning="Remove beginning1" %}
-{% assign version_join="join1" %}
-{% assign version_remove_columns_by_header="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" %}
-{% assign version_cut_columns="Cut1" %}
 {% assign version_paste="Paste1" %}
-{% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
+
+{% assign version_select_first="Show beginning1" %}
 {% assign version_sort="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" %}
-{% assign version_filter="Filter1" %}
+{% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
+{% assign version_unique="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" %}
 
 # Introduction
 {:.no_toc}
@@ -89,16 +95,18 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Filter                 | Remove rows based on values in one or more columns | {% tool [Filter](Filter1) %}|
 | Counting               | Count occurrences of values in a column   | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
-| Compute an expression  | Over each row                      | {% tool [Compute]({{version_column_maker}}) %} |
+| Compute an expression  | Over each row, add it as a new column | {% tool [Compute]({{version_compute}}) %} |
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
 | Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
 | Join two Datasets      | side by side on a specified field  | {% tool [Join two Datasets]({{version_join}}) %} |
 | Concatenate datasets   | one after the other                | {% tool [Concatenate datasets]({{version_cat}}) %} |
-| Remove Beginning       | Good for removing header lines     | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %}
+| Remove Beginning       | Good for removing header lines     | {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} |
+| Select First lines     | Good for finding top 10s or saving header lines | {% tool [Select first lines]({{version_select_first}}) %} |
 | Cut Columns            | By header name                     | {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}|
-| Cut Columns            | By column number                   | {% tool [Cut columns from a table]({{version_cut_columns}}) %}|
+| Cut Columns            | By column number                   | {% tool [Cut columns from a table]({{version_cut_columns}}) %}, {% tool [Advanced Cut columns from a table]({{version_cut_advanced}}) %}|
 | Paste                  | Two files side by side             | {% tool [Paste]({{version_paste}}) %} |
 | Split file             | Based on values of a column        | {% tool [Split]({{version_split}}) %} |
+| Unique                 | Remove duplicate rows              | {% tool [Unique]({{version_unique}}) %} |
 
 **TIP: Adding tools to your Favourites:** If you find yourself frequently using the same tool often but struggle to find it back in the long list of tools, you can **star** your favourite tools in Galaxy!
 
@@ -325,6 +333,10 @@ We have a lot of data in this file, but it is ordered by the athlete ID number, 
 >    > {: .solution}
 >    {: .question}
 >
+> 5. **Rename** {% icon galaxy-pencil %} the resulting file to somthing meaningful (e.g. `Olympics in chronological order`)
+>    - It can be easy to lose track of what steps you have performed and what each output contains, especially if you are doing many
+>      data manipulation steps. Do future-you a favour and give datasets good names!
+>
 {: .hands_on}
 
 This is great, but maybe it would make more sense to sort alphabetically by athlete name *within each year*.
@@ -371,6 +383,8 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    > >
 >    > {: .solution}
 >    {: .question}
+>
+> 4. **Rename** {% icon galaxy-pencil %} the resulting file to somthing meaningful
 >
 {: .hands_on}
 
@@ -459,9 +473,9 @@ A common operation we might want to perform on tables of data, is simple countin
 >
 > Let's start by simply counting how many different Olympic Games we have in our dataset, and how many times it appears (so how many participations there were each year)
 >
-> 1. {% tool [**Count** occurrences of each record](Count1)%} with the following parameters
->    - *"from dataset"*: `olympics.tsv`
->    - *"Count occurrences of values in column(s)"*: `Column 11`
+> 1. {% tool [**Count** occurrences of each record]({{version_count}})%} with the following parameters
+>    - {% icon param-file %} *"from dataset"*: `olympics.tsv`
+>    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column 11`
 >
 > 2. {% icon galaxy-eye %} **View** the results.
 >
@@ -472,32 +486,34 @@ A common operation we might want to perform on tables of data, is simple countin
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. 52. there are 53 lines in the resulting file, with one line containing the value of the column header (`games`).
+>    > > 1. 52; there are 53 lines in the resulting file, with one line containing the value of the column header (`games`).
+>    > >
+>    > >    The resulting file looks something like:
+>    > >
+>    > >     ```
+>    > >     615	1896 Summer Olympics
+>    > >     2503	1900 Summer Olympics
+>    > >     2643	1904 Summer Olympics
+>    > >     3213	1908 Summer Olympics
+>    > >     4610	1912 Summer Olympics
+>    > >     3448	1920 Summer Olympics
+>    > >     5242	1924 Summer Olympics
+>    > >     358	1924 Winter Olympics
+>    > >     4493	1928 Summer Olympics
+>    > >     ...
+>    > >     ```
+>    > >
 >    > > 2. 1996 Summer Olympics. (10501 participations)
 >    > >
->    > > The resulting file looks something like:
->    > >
->    > > ```
->    > > 615	1896 Summer Olympics
->    > > 2503	1900 Summer Olympics
->    > > 2643	1904 Summer Olympics
->    > > 3213	1908 Summer Olympics
->    > > 4610	1912 Summer Olympics
->    > > 3448	1920 Summer Olympics
->    > > 5242	1924 Summer Olympics
->    > > 358	1924 Winter Olympics
->    > > 4493	1928 Summer Olympics
->    > > ...
->    > > ```
 >    > {: .solution}
 >    {: .question}
 >
-> You may have noticed that we could have selected multiple columns in this tool. This lets us count on combinations of columns.
-> Let's try counting the number of men and women in each olympic games.
+>    You may have noticed that we could have selected multiple columns in this tool. This lets us count on combinations of columns.
+>    Let's try counting the number of men and women in each olympic games.
 >
-> 3. {% tool [**Count** occurrences of each record](Count1)%} with the following parameters
->    - *"from dataset"*: `olympics.tsv`
->    - *"Count occurrences of values in column(s)"*: `Column 11, Column 3`
+> 3. {% tool [**Count** occurrences of each record]({{version_count}})%} with the following parameters
+>    - {% icon param-file %} *"from dataset"*: `olympics.tsv`
+>    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column 11, Column 3`
 >
 > 4. {% icon galaxy-eye %} **View** the results.
 >
@@ -506,27 +522,25 @@ A common operation we might want to perform on tables of data, is simple countin
 >    > You see the resulting file has a line for every combination of the two columns (games and sex), providing the count for each.
 >    >
 >    > 1. How many women were in the first Olympic games?
+>    >
 >    > 2. Which Olympic games had the most women participants? (Tip: set the parameter *"How should the results be sorted?"* to `most common values first`)
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. 2. (note that we cannot be sure if this is two different women, or 1 woman participating twice).
+>    > > 1. 2 women participated in the 1896 Olympics. (note that we cannot be sure if this is two different women, or 1 woman participating twice).
+>    > >    The file looks something like this:
+>    > >    ```
+>    > >    2	F	1896 Summer Olympics
+>    > >    43	F	1900 Summer Olympics
+>    > >    17	F	1904 Summer Olympics
+>    > >    55	F	1908 Summer Olympics
+>    > >    97	F	1912 Summer Olympics
+>    > >    132	F	1920 Summer Olympics
+>    > >    269	F	1924 Summer Olympics
+>    > >    ```
+>    > >
 >    > > 2. 2020 Summer Olympics (4652)
 >    > >
->    > > The resulting file looks somtthing like:
->    > >
->    > > ```
->    > > 615	1896 Summer Olympics
->    > > 2503	1900 Summer Olympics
->    > > 2643	1904 Summer Olympics
->    > > 3213	1908 Summer Olympics
->    > > 4610	1912 Summer Olympics
->    > > 3448	1920 Summer Olympics
->    > > 5242	1924 Summer Olympics
->    > > 358	1924 Winter Olympics
->    > > 4493	1928 Summer Olympics
->    > > ...
->    > > ```
 >    > {: .solution}
 >    {: .question}
 >
@@ -544,12 +558,13 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 > We will now determine how many different sport there were in each of the different Olympics
 >
 > 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
->    - *"Input tabular dataset"*: `olympics.tsv`
->    - *"Group by fields"*: `11` (the `games` column)
->    - *"Input file has a header line"*: `yes`
->    - *"Sort Input"*: `yes`
->    - *"Operation to perform on each group"*: `Count Unique values`
->      - *"On Column"*: `Column: 15` (the `sport` column)
+>    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+>    - {% icon param-text %} *"Group by fields"*: `11` (the `games` column)
+>    - {% icon param-toggle %} *"Input file has a header line"*: `Yes`
+>    - {% icon param-toggle %} *"Sort Input"*: `Yes`
+>    - *"Operation to perform on each group"*:
+>      - {% icon param-select %} *"Type"*: `Count Unique values`
+>      - {% icon param-select %} *"On Column"*: `Column: 15` (the `sport` column)
 >
 > 2. {% icon galaxy-eye %} **View** the results.
 >
@@ -568,10 +583,12 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 >    > {: .solution}
 >    {: .question}
 >
+> 3. **Rename** {% icon galaxy-pencil %} the output to something descriptive
+>
 {: .hands_on}
 
 
-Datamash can do a lot more than counting,  and we will showcase some of these other operatins in the [Grouping](#grouping) section.
+Note: Datamash can do a lot more than counting,  and we will showcase some of these other operatins in the [Grouping](#grouping) section.
 
 ## Exercises
 
@@ -584,7 +601,7 @@ Ok, let's practice!
 >
 > > ### {% icon solution %} Hints
 > >
-> > 1. Since we are counting participations (rows), we can use the simple {% tool [Count](Count1)%} tool
+> > 1. Since we are counting participations (rows), we can use the simple {% tool [Count]({{version_count}})%} tool
 > > 2. Since we are counting a bit more complex question, we need the {% tool [Datamash]({{version_datamash}}) %} tool
 > >
 > {: .solution}
@@ -599,9 +616,9 @@ Ok, let's practice!
 > > ### {% icon solution %} Full Solutions
 > >
 > >  1. {% tool [Count](Count1) %} with the following parameters:
-> >     - *"from dataset"*: `olympics.tsv`
-> >     - *"Count occurrences of values in column(s)"*: `Column 9` (the `team` column)
-> >     - *"How should the results be sorted?"*: `With the most common values first`
+> >     - {% icon param-file %} *"from dataset"*: `olympics.tsv`
+> >     - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column 9` (the `team` column)
+> >     - {% icon param-select %} *"How should the results be sorted?"*: `With the most common values first`
 > >
 > >     This gives an output like:
 > >     ```
@@ -613,12 +630,13 @@ Ok, let's practice!
 > >     ```
 > >
 > >  2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
-> >   - *"Input tabular dataset"*: `olympics.tsv`
-> >   - *"Group by fields"*: `11` (the `games` column)
-> >   - *"Input file has a header line"*: `yes`
-> >   - *"Sort Input"*: `yes`
-> >   - *"Operation to perform on each group"*: `Count Unique values`
-> >     - *"On Column"*: `Column: 9` (the `sport` column)
+> >   - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+> >   - {% icon param-text %} *"Group by fields"*: `11` (the `games` column)
+> >   - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+> >   - {% icon param-toggle %} *"Sort Input"*: `yes`
+> >   - *"Operation to perform on each group"*:
+> >       - {% icon param-select %} *"Type"*: `Count Unique values`
+> >       - {% icon param-select %} *"On Column"*: `Column: 9` (the `team` column)
 > >
 > >   This gives an output like:
 > >   ```
@@ -667,7 +685,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How would you write the expressions for the following conditions:
->    >    1. column 6 must be contain 'Yes'
+>    >    1. column 6 must be 'Yes'
 >    >    2. column 13 must be smaller than 75
 >    >    3. column 7 cannot be 'NA'
 >    >    4. column 2 cannot be empty
@@ -694,13 +712,14 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > {: .solution}
 >    {: .question}
 >
+>    Ok, great, now that you've got the hang of writing expressions for this tool, let's create a file with only Winter Olympics:
 >
-> 2. {% tool [**Filter** data on any column using simple expressions](Filter1) %} with the following parameters:
+> 3. {% tool [**Filter** data on any column using simple expressions](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `olympics.tsv`
->    - {% icon param-select %} *"With the following condition"*: `c13=='Winter'`
+>    - {% icon param-text %} *"With the following condition"*: `c13=='Winter'`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
-> 3. {% icon galaxy-eye %} **View** the filtered file.
+> 4. {% icon galaxy-eye %} **View** the filtered file.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -713,7 +732,7 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > {: .solution}
 >    {: .question}
 >
-> 4. Repeat the step for the Summer Olympics
+> 5. **Repeat** the step for the Summer Olympics
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -736,6 +755,9 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >    > >
 >    > {: .solution}
 >    {: .question}
+>
+> 6. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive (e.g. `Filter: Winter Olympics only` etc)
+>    - This is primarily to get you into the habit. If this is a file you might want to view or use again later, it will be hard to find back again unless you name it well.
 >
 {: .hands_on}
 
@@ -765,11 +787,13 @@ Ok, time to train! let's see if you can use the filter tool to answer the follow
 >
 > > ### {% icon solution %} Answers
 > >
-> >  1. 8,110.  Expression: `c17=='Gold'`
-> >  2. 24,633. Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!=''`
-> >  3. 131.    Expression: `c17=='Gold' and c12==2018` (note: do not use quotes around `2018`, as it is a numerical value)
-> >  4. 8,086   Expression: `c17!='' and c7>=170 and c7<=180`
-> >  5. 812     Expression: `c17=='Gold' and (c7<160 or c7>190)` (note: parentheses are important here)
+> >  1. 8,110   (Expression: `c17=='Gold'`)
+> >  2. 24,633  (Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!='NA'`)
+> >  3. 131     (Expression: `c17=='Gold' and c12==2018` (note: do not use quotes around `2018`, as it is a numerical value))
+> >  4. 8,086   (Expression: `c17!='NA' and c7>=170 and c7<=180`)
+> >  5. 812     (Expression: `c17=='Gold' and (c7<160 or c7>190)` (note: parentheses are important here))
+> >
+> > Note: these numbers are found by determining the number of lines in the file after each filtering step, and subtracting 1 for the header line.
 > >
 > {: .solution}
 {: .question}
@@ -971,18 +995,18 @@ You may have noticed that we could also provide multiple columns to group on. If
 
 # Computing
 
-Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participations (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_column_maker}}) %} tool.
+Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participation (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_compute}}) %} tool.
 
 As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
 
 
 > ### {% icon hands_on %} Hands-on: Compute age of athletes
 >
-> 1. Open the {% tool [Compute an expression on every row]({{version_column_maker}}) %} tool.
+> 1. Open the {% tool [Compute an expression on every row]({{version_compute}}) %} tool.
 >    - read the help text at the bottom of the tool
 >    - what parameters do you think we need to use?
 >
-> 2. {% tool [Compute an expression on every row]({{version_column_maker}}) %} with the following parameters:.
+> 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
 >    - *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
 >    - *"As a new column to"*: `olympics.tsv`
 >    - *"Round result?"*: `Yes`
@@ -999,11 +1023,12 @@ As an example, let's calculate the age of each athlete at the time of participat
 >    > > ### {% icon solution %} Answers
 >    > >
 >    > > 1. A new `age` column was added to the end of our file, the value is the age of the athlete in years at time of the olympics.
->    > > 2. Arnaud Boetsch is listed on the first two lines, they turned 27 the year of their olympics.
+>    > > 2. Arnaud Boetsch is listed on the first two lines, who turned 27 the year of their Olympics.
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
+> 4. **Rename** {% icon galaxy-pencil %} the output to something descriptive (e.g. `Compute: add age column`)
 {: .hands_on}
 
 This was a simple computation, but much more complex mathematical expressions can be computed with this tool. See the help section at the bottom of the tool for a list of all supported operations. In the exercise below, we will compute the BMI for each athlete as an example.
@@ -1047,9 +1072,20 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 >
 > > ### {% icon solution %} Answers
 > >
-> >  1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
-> >  2. 22.69
-> >  3. The tool only outputs lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> > 1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
+> > 2. 22.69
+> > 3. The tool only outputs lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> > 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:
+> >    - *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
+> >    - *"As a new column to"*: `olympics.tsv`
+> >    - *"Round result?"*: `No`
+> >    - *"Input has a header line with column names?"*: `Yes`
+> >    - *"The new column name"*: `BMI`
+> >
 > {: .solution}
 >
 {: .question}
@@ -1211,7 +1247,7 @@ Look at the `birth_day` column. It has values in a format like `12 December`. Su
 
 # Removing Columns
 
-We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file
+We can remove columns from a table using either {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} if your table has a header line, or {% tool [Cut columns from a table]({{version_cut_columns}}) %} if it does not (in this case we just indicate columns by their number). These tools can also be used to change the order of columns in your file. There is also the tool {% tool [Advanced Cut columns from a table]({{version_cut_advanced}}) %} that offers a few more options.
 
 To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{version_paste}}) %} tool. This assumes we have the same number of rows in both files, already in the correct order. It is a very "dumb" tool that simple combines the two files next to each other.
 
@@ -1224,12 +1260,12 @@ To do the reverse, adding one or more columns, we can use the {% tool [Paste]({{
 >    - Which settings do you think we need?
 >
 > 2. {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} with the following parameters:
->    - *"Tabular File"*: `olympics.tsv`
->    - *"Header name"*: `name`
+>    - {% icon param-file %} *"Tabular File"*: `olympics.tsv`
+>    - {% icon param-text %} *"Header name"*: `name`
 >    - {% icon param-repeat %} *"Header name"*: `sport`
 >    - {% icon param-repeat %} *"Header name"*: `games`
 >    - {% icon param-repeat %} *"Header name"*: `medals`
->    - *"Keep named columns"*: `Yes`
+>    - {% icon param-toggle %} *"Keep named columns"*: `Yes`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -1271,23 +1307,23 @@ Notice that during this step, we also changed the order of the columns. This too
 > > ### {% icon solution %} Full Solutions
 > >
 > > 1. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
-> >    - *"Cut Columns"*: `c2,c15,c11,c17`
-> >    - *"Delimited By"*: `TAB`
-> >    - *"From"*: `olympics.tsv`
+> >    - {% icon param-text %} *"Cut Columns"*: `c2,c15,c11,c17`
+> >    - {% icon param-select %} *"Delimited By"*: `TAB`
+> >    - {% icon param-file %} *"From"*: `olympics.tsv`
 > >
 > > 2. {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %} with the following parameters:
-> >    - *"Tabular File"*: `olympics.tsv`
-> >    - *"Header name"*: `athlete_id`
-> >    - *"Keep named columns"*: `No`
+> >    - {% icon param-file %} *"Tabular File"*: `olympics.tsv`
+> >    - {% icon param-text %} *"Header name"*: `athlete_id`
+> >    - {% icon param-toggle %} *"Keep named columns"*: `No`
 > >
 > >    **Note:** the *"Keep named columns"* parameter determines wheter we keep or remove the columns we specified.
 > >    You could have obtained the same result by supplying all column names except the first one, and selecting
 > >    *"Keep named columns"*: `No`, but that would have been a lot more work.
 > >
 > > 3. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
-> >    - *"Cut Columns"*: `c1,c2,c15,c16,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c17`
-> >    - *"Delimited By"*: `TAB`
-> >    - *"From"*: `olympics.tsv`
+> >    - {% icon param-text %} *"Cut Columns"*: `c1,c2,c15,c16,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c17`
+> >    - {% icon param-select %}*"Delimited By"*: `TAB`
+> >    - {% icon param-file %} *"From"*: `olympics.tsv`
 > >
 > >    **Note:** you can also use the {% tool [Remove columns by heading]({{version_remove_columns_by_header}}) %}, it just requires a bit more typing,
 > >    but on the other hand it is also a bit less error-prone (i.e. it is easier to mix up column numbers than column names).
@@ -1297,11 +1333,62 @@ Notice that during this step, we also changed the order of the columns. This too
 {: .question}
 
 
+# Unique
+
+Sometimes, in the course of our data manipulations, we may end up with a file that has duplicate rows. In order to filter these out, we can use the {% tool [Unique occurrences of each record]({{version_unique}}) %} tool.
+
+Let's say we would like to create a list of all unique athletes (id and name).
+
+
+> ### {% icon hands_on %} Hands-on: Obtaining list of unique athletes
+>
+> First we will cut just the `athlete_id` and `name` columns from our dataset
+> (please see the [Removing Columns](#removing-columns) section for more info on this step)
+>
+> 1. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
+>    - *"Cut Columns"*: `c1,c2`
+>    - *"Delimited By"*: `TAB`
+>    - *"From"*: `olympics.tsv`
+>
+> 2. **View** {% icon galaxy-eye %} the resulting dataset
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. Do you see duplication? Why is that?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. Yes. For all athletes who participated more than once, the row will be identical.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 3. {% tool [Unique - occurrences of each record]({{version_unique}}) %} with the following parameters:
+>    - *"File to scan for unique values"*: `output from the first step`
+>
+> 4. **View** {% icon galaxy-eye %} the resulting dataset
+>
+>    > ### {% icon question %} Question
+>    >
+>    > 1. What happened to our header line? How could we fix that?
+>    > 2. How many unique athletes do we have?
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 1. The unique tool has done some sorting internally, so our header line is not longer at the top. We could fix this in several ways:
+>    > >    - sort the file again to get it back to the top (using natural sort in descending order will work).
+>    > >    - or, we could have removed the header line before running **Unique** (with **remove beginning** tool), then add it back afterwards (with **concatenate** tool).
+>    > > 2. 94,733; The resulting file has 94,734 lines (one of which is our header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
 
 # Joining Files
 
-This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc), we could join that information with our olympics data, to get a single file with all information in every row.
+This file contains a lot of information, but we may want to add more information. For example if we had a file with information about each country (population, capital city, etc), we could join that information with our Olympics data, to get a single file with all information in every row.
 
 For example, if we would like to be able to group by continent, to e.g. count athletes, medals etc per continent, we will have to add a `continent` column to our file. To do this we would need a second file that maps each country to the corresponding continent. This is what we will do in the next hands-on section.
 
@@ -1607,59 +1694,129 @@ This section provides a number of exercises that require you to combine two or m
 {: .question}
 
 
--  TODO: number of unique athletes who received silver medals during the 2018 olympics
-
-- TODO: first find and replace in weight column to replace values such as "68-70" with just one number (or median) orso (or use compute to add new weight column), then can use datamash to find mean weight of athletes per country or sport orso
-
-- TODO: calculate BMI, lines with NA will be missing from output, join back with original file.
+Ok, let's try another one. We will calculate BMI again (see [Computing](#computing) section), but this time also include athletes for which we couldn't
+compute a BMI due to missing data. Sounds simple? Not all tools work exactly the way we would like them to for our question, so we will have to get a bit
+creative.
 
 
-
-> ### {% icon question %} Exercise:
+> ### {% icon question %} Exercise 2: Calculate BMI, handle missing values
 >
-> 1.
-> 2.
+> If you did the exercises in the [Computing](#computing) section, you will have noticed that the computation cannot be performed for all rows due to missing data.
+> The resultig table will only contain rows for which the computation was successful. But we want:
+>
+> 1. Create a file which is the same as olympics.tsv file, but with a new `BMI` column after the `height` and `weight` columns
+>
+> Checklist for your solution; your file:
+>  - Has a column containing the BMI of athletes
+>  - Uses `NA` for athletes for which we could not compute BMI
+>  - Has the same number of rows as `olympics.tsv` (234,523 lines including the header)
+>  - Has 18 columns (the original 17 columns, plus a BMI column)
+>  - The BMI column should appear 9th (after the height and weight columns)
+>  - Has a valid header line
+>
+> **TIP:** this is a lot. Do one step at a time, and make sure the file is as you expect after every step, before continuing. Always think about
+> what you expect from your output, how many lines? how many columns? with or without header line, etc. Did you get what you expected?
+> If not, go back and tweak some settings. The sooner you spot a mistake, the easier it is to find where you went wrong!
 >
 > > ### {% icon solution %} Hints
 > >
-> > 1.
-> > 2.
+> > 1. We will need to:
+> >    - **Compute** the BMI first,
+> >    - **Join** the resulting file back with the original to recover rows without BMI, making sure the rows without BMI use `NA`.
+> >    - **Cut column** BMI and move it, from the end of the table to the 9th column (just after the `height` and `weight` columns)
 > >
-> {: .solution}
->
-> > ### {% icon solution %} Answers
+> > 2. For the **Join** step: if we join the `olympics.tsv` file with our table with BMI column, what columns will be in the resulting table?
+> >    What can we do to avoid duplicate columns here?
 > >
-> >  1.
-> >  2.
+> > 3. Did you get too many lines after joining? If there are multiple matches, join will make an entry for each combination. So make sure you only
+> >    have each athlete and their BMI in the file you will join with once
+> >
+> > 4. Did your header line get lost somewhere along the line? Use {% tool [Select First]({{version_select_first}}) %} tool to store your header line
+> >    in a separate file. Then use {% tool [Concatenate]({{version_cat}}) %} to restore it later.
+> >
+> > 5. Remember that there are always multiple ways to reach the same goal. Don't worry if your solution is different that the one provided here!
 > >
 > {: .solution}
 >
 > > ### {% icon solution %} Full solution
 > >
-> >  1.
-> >  2.
+> > First, we compute BMI, this will be added as a new column at the end of the table.
+> >
+> > **TIP:** If you've done the exercise in the [Computing](#computing) section, you can skip this first step and reuse the file
+> > with the BMI column added (I hope you gave it a descriptive name and can find it back easily! ;) )
+> >
+> > 1. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
+> >    - {% icon param-text %} *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
+> >    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
+> >    - {% icon param-toggle %} *"Round result?"*: `No`
+> >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
+> >    - {% icon param-text %} *"The new column name"*: `BMI`
+> >
+> >    Since we now lost any lines for which we were unable to calculate the BMI, we will join this data back with the original
+> >    `olympics.tsv` file. However, the **Join** tool will add all columns from both files, and we only want the BMI column added.
+> >
+> >    Let's first cut only the columns we need for joining from the BMI table (only `athlete_id` and `BMI`)
+> >
+> > 2. {% tool [Cut columns from a table]({{version_cut}}) %}
+> >    - {% icon param-text %} *"Cut Columns"*: `c1,c18`
+> >    - {% icon param-select %} *"Delimited by"*: `TAB`
+> >    - {% icon param-file %} *"From"*: `output from step 1` (table with BMI column)
+> >
+> >    We have a lot of duplication in this row now, and the join tool will create a line for each match, that's not what we want
+> >    So we get the unique values of this file first. Since the Unique tool is not aware of header lines, we will remove the header line first,
+> >    And restore it later:
+> >
+> > 3. {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} with the following parameters:
+> >    - *"Remove first"*: `1` lines
+> >    - *"From"*: output from previous step (Cut)
+> >
+> >    This gets us the file without a header, but we also want the header in a separate file, so that we can join back later
+> >
+> > 4. {% tool [Select First lines from a dataset]({{version_select_first}}) %}
+> >    - *"Select First"*: `1` lines
+> >    - *"from"*: output from cut step
+> >
+> > 5. **Rename** the last two files so you can find them back later (e.g. `header line` and `athlete BMI without header`)
+> >
+> > 6. {% tool [Unique - occurrences of each record]({{version_unique}}) %} with the following parameters:
+> >     - *"File to scan for unique values"*: `athlete BMI without header`
+> >
+> >    Now we add the header line back to the start of this file
+> >
+> > 7. {% tool [Concatenate datasets]({{version_cat}}) %} with the following parameters:
+> >    - *"Concatenate Datasets"*: `header line`
+> >    - {% icon param-repeat%} *"Insert Dataset"*: `output from Unique`
+> >
+> >    Now we are finally ready to perform our join operation
+> >
+> > 8. {% tool [Join two Datasets side by side on a specified field]({{version_join}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Join"*: `olympics.tsv`
+> >    - {% icon param-select %} *"using column"*: `Column 1` (the `athlete_id` column)
+> >    - {% icon param-file %} *"with"*: `the output from Concatenate`
+> >    - {% icon param-select %} *"and column"*: `Column 1` (the `athlete_id` column)
+> >    - {% icon param-toggle %} *"Keep lines of first input that do not join with second input"*: `Yes`
+> >    - {% icon param-toggle %} *"Fill empty columns?"*: `Yes`
+> >      - {% icon param-text %} *"Fill value"*: `NA`
+> >    - {% icon param-toggle %} *"Keep the header lines?"*: `Yes`
+> >
+> >    Almost there! Our final step is to rearrange the columns so that BMI appears 9th. Notice that our
+> >    file now has 19 columns (c18=`athlete_id` again, c19=`BMI`)
+> >
+> > 9. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
+> >    - *"Cut Columns"*: `c1,c2,c3,c4,c5,c6,c7,c8,c19,c9,c10,c11,c12,c13,c14,c15,c16,c17`
+> >    - *"Delimited By"*: `TAB`
+> >    - *"From"*: `output from join tool`
 > >
 > {: .solution}
+>
+> This was a lot of steps for something seemingly simple (compute BMI over all rows, put `NA` if not possible). If the **Compute** tool worked a bit differently, it
+> could have done everything for us. We could adapt this tool to handle missing data better, but in reality, you will often encounter situations like this in
+> bioinformatics, and are not always in a position where you can change how tools operate. Knowing how to perform these basic steps (join, unique, removing and
+> adding a header line), will help you deal with situations like this more easily.
 >
 {: .question}
 
 
 
-> ### {% icon hands_on %} Hands-on: Sort table based on a column
->
->
-> 1. {% icon galaxy-eye %} **View** the results.
->
->    > ### {% icon question %} Question
->    >
->    >
->    >
->    > > ### {% icon solution %} Answer
->    > >
->    > >
->    > >
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
-
+Congratulations! You have now mastered the basics of data manipulation! There are a lot more data manipulation operations available in Galaxy that you may need.
+Please explore the tools for yourself, and check back with this tutorial often, we plan to add more sections and exercises over time!
