@@ -207,7 +207,7 @@ To proceed from here it is expected that:
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
 >    {: .comment}
 >
-> 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
+> 2. Your `ansible` version is `>=2.10`, you can check this by running `ansible --version`
 > 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 > 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
 > 5. Your VM has `python3` installed.
