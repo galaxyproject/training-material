@@ -12,12 +12,24 @@ time_estimation: "2h30m"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
-contributors:
+contributions:
+  authorship:
   - hexylena
   - natefoo
   - slugger70
+  editing:
   - shiltemann
   - nsoranzo
+  - gmauro
+  - mvdbeek
+  - martenson
+  - jmchilton
+  - davebx
+  - nsoranzo
+  - lecorguille
+  - abretaud
+  testing:
+  - mira-miracoli
 tags:
   - ansible
   - deploying
