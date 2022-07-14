@@ -1346,9 +1346,9 @@ Let's say we would like to create a list of all unique athletes (id and name).
 > (please see the [Removing Columns](#removing-columns) section for more info on this step)
 >
 > 1. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
->    - *"Cut Columns"*: `c1,c2`
->    - *"Delimited By"*: `TAB`
->    - *"From"*: `olympics.tsv`
+>    - {% icon param-text %} *"Cut Columns"*: `c1,c2`
+>    - {% icon param-select %} *"Delimited By"*: `TAB`
+>    - {% icon param-file %} *"From"*: `olympics.tsv`
 >
 > 2. **View** {% icon galaxy-eye %} the resulting dataset
 >
@@ -1440,13 +1440,14 @@ We would now like to take our Olympics dataset as the basis, and add columns to 
 >    > ### {% icon question %} Question
 >    >
 >    > 1. What do you expect the output to look like? Were you right?
->    > 2. How many columns are in the resulting file?
+>    > 2. How many columns are in the resulting file? What about the NOC column?
 >    > 3. What is a possible downside to this approach?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
 >    > > 1. All the columns from the country information file are added to the end of each row of our olympics dataset
->    > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file.
+>    > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file. This also means the NOC column
+>    > >    we joined on appears twice in our output.
 >    > > 3. There is a lot of data duplication in this file now. The exact same country information is added to every line of every athlete from a certain country.
 >    > >    This means much larger file size, and more usage of your quota.
 >    > >    If you do not need all these columns, it could save you a lot of space to remove unneeded columns from the `country-information.tsv` file, before joining.
@@ -1495,19 +1496,19 @@ First, let's get this data for the 2022 Olympics
 Since this new dataset has the exact same structure (number and order of columns), we can simple add the lines from this file to the end of our existing `olympics.tsv` file.
 
 
-> ### {% icon hands_on %} Hands-on: Concatenate the two files
+> ### {% icon hands_on %} Hands-on: Adding 2022 Olympics to our dataset
 >
 > First we need to remove the header line from the 2022 file
 >
-> 1. {% tool [Remove beginning of a file]({{version_remove_beginning}}) with the following parameters:
+> 1. {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} with the following parameters:
 >    - *"Remove first"*: `1`
 >    - *"from"*: `olympics_2022.tsv`
 >
-> Now we can perform the concatenation:
+>    Now we can perform the concatenation:
 >
 > 2. {% tool [Concatenate datasets tail-to-head]({{version_cat}}) %} with the following parameters:
 >    - *"Concatenate Datasets"*: `olympics.tsv` (this file will be first)
->    - {% icon param-repeat%} *"Insert Dataset"*: `olympics_2022.tsv`
+>    - {% icon param-repeat%} *"Insert Dataset"*: `output from step 1` (2022 data without the header)
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -1702,9 +1703,11 @@ creative.
 > ### {% icon question %} Exercise 2: Calculate BMI, handle missing values
 >
 > If you did the exercises in the [Computing](#computing) section, you will have noticed that the computation cannot be performed for all rows due to missing data.
-> The resultig table will only contain rows for which the computation was successful. But we want:
+> The resulting table will only contain rows for which the computation was successful.
 >
-> 1. Create a file which is the same as olympics.tsv file, but with a new `BMI` column after the `height` and `weight` columns
+> **Your mission, should you choose to accept it:**
+>
+> *Create a file which is the same as olympics.tsv file, but with a new `BMI` column after the `height` and `weight` columns*
 >
 > Checklist for your solution; your file:
 >  - Has a column containing the BMI of athletes
