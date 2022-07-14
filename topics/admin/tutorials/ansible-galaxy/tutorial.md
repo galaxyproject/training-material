@@ -1869,7 +1869,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
->    +  gzip: "on"
+>    +  # gzip: "on" # This is enabled by default in Ubuntu, and the duplicate directive will cause a crash.
 >    +  gzip_proxied: "any"
 >    +  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
 >    +  gzip_vary: "on"
