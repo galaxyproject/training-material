@@ -53,7 +53,8 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_cut_columns="Cut1" %}
 {% assign version_paste="Paste1" %}
 {% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
-
+{% assign version_sort="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" %}
+{% assign version_filter="Filter1" %}
 
 # Introduction
 {:.no_toc}
@@ -145,11 +146,11 @@ Before we can do any manipulation, we will need some data. Let's upload our tabl
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. When you expand the dataset, you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
+>    > > 1. When you expand the `olympics.tsv` dataset in your history (see also screenshot below), you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
 >    > > 2. Each row represents an athlete's participation in an event. If an athlete competes in multiple events, there is a line for each event.
->    > > 3. 234,523. Look at the expanded view in the history, this tells us there are ~250,000 rows in the dataset. We can get the exact number using the  {% tool [Line/Word/Character count](wc_gnu) %} tool.
+>    > > 3. 234,523. Look at the expanded view in your history, this tells us there are ~250,000 rows in the dataset. We can get the exact number using the  {% tool [Line/Word/Character count](wc_gnu) %} tool.
 >    > > 4. There are 17 columns in this file. There are multiple ways to find this answer:
->    > >    - Count the columns (only doable for small files)
+>    > >    - Count the columns manually (only doable for small files)
 >    > >    - In the expanded view, scroll sideways on the dataset preview, at the top the columns are numbered
 >    > >    - Click on the {% icon galaxy-info %} i icon on the dataset, here you will find more detailed information about the file and the job that created it.
 >    > >      At the bottom is also a preview (peek) of the dataset, and numbered columns
@@ -206,9 +207,9 @@ Galaxy can convert these two formats into each other.
 
 
 
-> ### {% icon hands_on %} Hands-on: Convert TSV to CSV
+> ### {% icon hands_on %} Hands-on: Convert Tabular to CSV
 >
-> 1. Convert the TSV file into a CSV file
+> 1. Convert the `olympics.tsv` file into a CSV file
 >
 >    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="csv (using 'Convert tabular to CSV')" %}
 >
@@ -218,14 +219,12 @@ Galaxy can convert these two formats into each other.
 >    >
 >    > 1. What do you notice?
 >    > 2. Why are some values in quotes?
->    > 3. Scroll down a bit. Why are some rows displayed differently than others?
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
 >    > > 1. Galaxy does not display the table as nicely as before.
 >    > >    This is because Galaxy is optimized to work with `tsv` files. For most rows you now see commas separating the different columns.
 >    > > 2. If the data in a column contains a comma (e.g. in this file we have events such as `swimming 5,000 meters`), we put the value in quotes to signifiy that that comma is part of the data, not a column delimiter.
->    > > 3. This is a bit of a quirk in Galaxy, but when no columns contain a `,` as part of the value, Galaxy displays it as a table, but when columns contain a comma (and are in quotation marks), it displays it as text. Galaxy is optimized for `tsv` files, so if you have `csv` data, it is best to convert the datatype to `tabular` before you start your analysis.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -237,19 +236,19 @@ Galaxy can convert these two formats into each other.
 ## Converting vs Changing the datatype
 
 The **file format conversion** step changed the dataset itself (by changing TABs to commas), and therefore created another dataset in your history. It is also possible to **change the datatype**; this does not change the underlying file/data, but just tells Galaxy what type of file it is. Galaxy uses this information in a variety of ways, such as:
-  - how to display the data when you click the {% icon galaxy-eye %} **View** button
-  - which visualization options to offer
-  - filtering the possible inputs in a tool form to only those of the correct datatype
-  - which file format conversions to make available
-  - etc
+  - How to display the data when you click the {% icon galaxy-eye %} **View** button
+  - Which visualization options to offer
+  - Filtering the list of possible inputs for tools (to only allow those of the correct datatype and protect you from mistakes)
+  - Which file format conversions to make available
+  - etc..
 
 
 When you upload a file to Galaxy, by default it will attempt to auto-detect the file format. This is very often correct, but some times you may need to manually set the datatype to the correct value.
 
 
-> ### {% icon hands_on %} Hands-on: Change datatype from CSV to TXT
+> ### {% icon hands_on %} Hands-on: Change datatype from Tabular to TXT
 >
-> 1. **Change** the `csv` file into a `txt` file
+> 1. **Change** the datatype of the `olympics.tsv` file to `txt`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="txt" %}
 >
@@ -263,9 +262,9 @@ When you upload a file to Galaxy, by default it will attempt to auto-detect the 
 >    > > ### {% icon solution %} Answer
 >    > >
 >    > > 1. Since Galaxy now no longer know that this is a tabular file with rows and columns,
->    > > it displays the data as-is, no longer hiding any commas.
+>    > > it displays the data as-is, no longer arranging the view into neat columns.
 >    > >
->    > > 2. The file itself did not change, only the metadata. We simply told Galaxy that this file is not a `csv` file, but just a file containing text.
+>    > > 2. The file itself did not change, only the metadata. We simply told Galaxy to treat this file as a plain text file, instead of a tabular file.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -301,15 +300,19 @@ We have a lot of data in this file, but it is ordered by the athlete ID number, 
 >    > {: .solution}
 >    {: .question}
 >
+> 2. Open the {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} tool
+>    - Read the help text at the bottom of the tool form
+>    - Which settings do you think we need to use?
 >
-> 2. {% tool [Sort](sort1) %} with the following parameters:
->    - {% icon param-file %} *"Sort dataset"*: `olympics.tsv`
->    - {% icon param-select %} *"on column"*: `Column 12`
->    - {% icon param-select %} *"with flavor"*: `Numerical sort`
->    - {% icon param-select %} *"everything in"*: `Ascending order`
->    - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> 3. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+>    - {% icon param-file %} *"Sort Query"*: `olympics.tsv`
+>    - {% icon param-text %} *"Number of header lines"*: `1``
+>    - Column selections
+>      - {% icon param-select %} *"on column"*: `Column 12`
+>      - {% icon param-select %} *"in"*: `Ascending order`
+>      - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
 >
-> 3. {% icon galaxy-eye %} **View** the sorted file.
+> 4. {% icon galaxy-eye %} **View** the sorted file.
 >
 >    > ### {% icon question %} Question
 >    >
@@ -317,7 +320,7 @@ We have a lot of data in this file, but it is ordered by the athlete ID number, 
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. Karakatsanis. Who competed in a Shooting event 1896 Summer Olympics in Athens.
+>    > > 1. J. Defert. Who competed in a Tennis event 1896 Summer Olympics in Athens.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -351,10 +354,10 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >
 > 2. {% icon galaxy-refresh %} **Rerun** the sort tool with the following parameters:
 >    - All parameter from the first step should already be set for you, and should remain the same
->    - {% icon param-repeat %} Insert Column Selection
+>    - {% icon param-repeat %} Insert Column selections
 >      - {% icon param-select %} *"on column"*: `Column 2`
->      - {% icon param-select %} *"with flavor"*: `Alphabetical sort`
->      - {% icon param-select %} *"everything in"*: `Ascending order`
+>      - {% icon param-select %} *"in"*: `Ascending order`
+>      - {% icon param-select %} *"Flavor"*: `Alphabetical sort`
 >
 > 3. {% icon galaxy-eye %} **View** the sorted file.
 >
@@ -364,7 +367,7 @@ So we want to sort twice, first by year, an then within each year, we sort again
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. A. Grigoriadis. He competed in the 500 meters freestyle swiming event.
+>    > > 1. A. Grigoriadis. He competed in the 500 meters freestyle swimming event.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -382,6 +385,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > > ### {% icon solution %} Answer
 > >
 > > `Žolt Peto` who competed in table tennis at the 2020 Summer Olympics in Tokyo.
+> > <br>
 > > We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
 > >
 > {: .solution}
@@ -396,7 +400,8 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 >
 > > ### {% icon solution %} Hints
 > >
-> > 1. Height is listed in column 7. Since this is a number, we need *numerical sort*, and because we want the tallest on top, we will need to sort in *descending* (decreasing) order.
+> > 1. Height is listed in column 7. Since this is a simple number (no scientific notation), we can use *fast numerical sort*,
+> >    and because we want the tallest on top, we will need to sort in *descending* (decreasing) order.
 > > 2. Rerun the tool for step 1, but change the order to *ascending*
 > > 3. First sort by year (descending), then by height (descending)
 > >
@@ -405,10 +410,43 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > > ### {% icon solution %} Answers
 > >
 > >  1. Adam Sandurski from Poland is the tallest athlete in the file, at 214 cm tall.
-> >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields are being sorted to the top. We can filter out rows with empty values to get our answer (see Filter section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-with-answers) has many exercises that require a combination of different tools.
-> >  3. Gennaro Di Mauro, 210 cm.
+> >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields (`NA`) are being sorted to the top. We can filter out rows with missing data to get our answer (see [Filter](#filtering) section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-putting-it-all-together) has many exercises that require a combination of different tools.
+> >  3. Gennaro Di Mauro, 210 cm. (2020 Summer Olympics in Tokyo)
 > >
 > {: .solution}
+>
+> > ### {% icon solution %} Full Solutions
+> >
+> > 1. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+> >   - {% icon param-file %} *"Sort Query"*: `olympics.tsv`
+> >   - {% icon param-text %} *"Number of header lines"*: `1``
+> >   - Column selections
+> >     - {% icon param-select %} *"on column"*: `Column 7`
+> >     - {% icon param-select %} *"in"*: `Descending order`
+> >     - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >
+> > 2. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+> >   - {% icon param-file %} *"Sort Query"*: `olympics.tsv`
+> >   - {% icon param-text %} *"Number of header lines"*: `1``
+> >   - Column selections
+> >     - {% icon param-select %} *"on column"*: `Column 7`
+> >     - {% icon param-select %} *"in"*: `Ascending order`
+> >     - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >
+> > 3. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+> >   - {% icon param-file %} *"Sort Query"*: `olympics.tsv`
+> >   - {% icon param-text %} *"Number of header lines"*: `1``
+> >   - Column selections
+> >     - {% icon param-select %} *"on column"*: `Column 12` (year column)
+> >     - {% icon param-select %} *"in"*: `Descending order` (most recent on top)
+> >     - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >   - {% icon param-repeat %} Insert Column selections
+> >     - {% icon param-select %} *"on column"*: `Column 7` (height column)
+> >     - {% icon param-select %} *"in"*: `Descending order` (tallest first)
+> >     - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >
+> {: .solution}
+>
 {: .question}
 
 
@@ -1478,24 +1516,114 @@ These tools and operations covered in the tutorial are just a few examples of so
 
 This section provides a number of exercises that require you to combine two or more of the techniques you learned in this tutorial. This is a great way to practice your data manipulation skills. Full solutions are provided for every exercise (i.e. all tools and settings), but for many of these exercises there will be multiple solutions, so if you obtained the same results in a different way, that is correct too!
 
-- TODO: shortest athlete (couldnt answer with only sort tool, also need to filter out empty lines)
+
+
+> ### {% icon question %} Exercise 1: Finding shortest/lightest athlete
+>
+> If you have done exercises in the [sorting](#sorting) section, you noticed that finding the shortest athlete ever to compete was not easy,
+> because all the rows with missing height data (`NA`) in the column were sorted to the top. We need to filter out these values first, then
+> perform our sort, so that our answer is on top.
+>
+> 1. Find the shortest athlete ever to compete in the Olympics
+> 2. Find the shortest athlete of the Winter Olympics
+> 2. Find the lightest athlete of the *most recent* Summer Olympics
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1. You will need to filter out the columns with (`NA`) in the height column first
+> > 2. You will need to filter by season as well
+> > 3. You will need to filter out missing data in the weight column, filter out Summer Olympics, then sort (by 2 columns)
+> > 4. Does the order in which you perform these steps matter?
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. Lyton Mphande and  Rosario Briones were both 127 cm tall, competing in boxing and gymnastics respectively
+> >  2. Carolyn Krau was a 137 cm tall figure skater.
+> >  3. Flávia Saraiva was the lightest athlete (31kg), she was a Artistic Gymnast from Brazil.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Full solution
+> >
+> > 1. First we filter out the NA values from the height column:
+> >
+> >    {% tool [Filter - data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+> >    - {% icon param-text %} *"With following expression"*: `c7!='NA'`
+> >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> >
+> >    Then we can sort by height, in ascending order to get the shortest athletes on top:
+> >
+> >    {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Sort Query"*: `output from the previous step (filter)`
+> >    - {% icon param-text %} *"Number of header lines"*: `1``
+> >    - Column selections
+> >      - {% icon param-select %} *"on column"*: `Column 7`
+> >      - {% icon param-select %} *"in"*: `Ascending order`
+> >      - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >
+> > 2. We can take the output from the first exercise, and filter for only Winter Olympics:
+> >
+> >    {% tool [Filter - data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+> >     - {% icon param-file %} *"Filter"*:  `output from previous exercise`
+> >     - {% icon param-text %} *"With following expression"*: `c13='Winter'`
+> >     - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> >
+> > 3. First we filter out the NA values from the weight column:
+> >
+> >    {% tool [Filter - data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+> >    - {% icon param-text %} *"With following expression"*: `c8!='NA'`
+> >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> >
+> >    Then we can filter out only Summer Olympics:
+> >
+> >    {% tool [Filter - data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+> >     - {% icon param-file %} *"Filter"*:  `output from previous step`
+> >     - {% icon param-text %} *"With following expression"*: `c13='Summer'`
+> >     - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> >
+> >    Then we can sort by weigth, in ascending order to get the shortest athletes on top:
+> >
+> >    {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Sort Query"*: `output from the previous step`
+> >    - {% icon param-text %} *"Number of header lines"*: `1``
+> >    - Column selections
+> >      - {% icon param-select %} *"on column"*: `Column 12` (year column)
+> >      - {% icon param-select %} *"in"*: `Descending order` (most recent on top)
+> >      - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >    - {% icon param-repeat %} Insert Column selections
+> >      - {% icon param-select %} *"on column"*: `Column 8` (weight column)
+> >      - {% icon param-select %} *"in"*: `Ascending order` (lightest on top)
+> >      - {% icon param-select %} *"Flavor"*: `Fast numeric sort`
+> >
+> > 4. In this case, changing the order of these operations will still have led to the same answer. However, sorting takes more time than filtering,
+> >    so it is usually faster to filter first, then do the sorting on a smaller file. Especially noticeable if you have large dataset.
+> >
+> {: .solution}
+>
+{: .question}
+
+
 -  TODO: number of unique athletes who received silver medals during the 2018 olympics
 
 - TODO: first find and replace in weight column to replace values such as "68-70" with just one number (or median) orso (or use compute to add new weight column), then can use datamash to find mean weight of athletes per country or sport orso
 
 - TODO: calculate BMI, lines with NA will be missing from output, join back with original file.
 
-> ### {% icon question %} Exercise: sort by height
+
+
+> ### {% icon question %} Exercise:
 >
 > 1.
 > 2.
-> 3.
 >
 > > ### {% icon solution %} Hints
 > >
 > > 1.
 > > 2.
-> > 3.
 > >
 > {: .solution}
 >
@@ -1503,14 +1631,14 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > >  1.
 > >  2.
-> >  3.
+> >
 > {: .solution}
 >
 > > ### {% icon solution %} Full solution
 > >
 > >  1.
 > >  2.
-> >  3.
+> >
 > {: .solution}
 >
 {: .question}
