@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Scripting Galaxy using the API and BioBlend" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:14 +0000" />
 <meta name="DC.creator" content="Nicola Soranzo" />
 
         
@@ -274,7 +274,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:23 +0000",
+  "dateModified": "1970-01-01 00:00:14 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Scripting Galaxy using the API and BioBlend",
   "interactivityType": "mixed",
@@ -537,7 +537,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 23, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -651,7 +651,7 @@
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: the unique <strong>identifier</strong> of the history, needed for all specific requests about this resource</li>
   <li><code class="language-plaintext highlighter-rouge">name</code>: the name of this history as given by the user</li>
-  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted</li>
+  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted.</li>
 </ul>
 
 <p>There is no readily-available filtering capability, but it’s not difficult to filter histories <strong>by name</strong>:</p>
@@ -754,23 +754,17 @@
 </span>
 </code></pre></div></div>
 
-<blockquote>
+<blockquote class="question">
   <h3 id="question-question-new-history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: New History</h3>
   <p>Next, create a new <span class="notranslate">Galaxy</span> history via POST to the correct API.</p>
-  <blockquote>
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>```python
-headers = {“Content-Type”: “application/json”, “x-api-key”: api_key}</p>
-  </blockquote>
-</blockquote>
-
-<blockquote class="question">
   <blockquote class="solution">
-    <p>data = {‘name’: ‘New history’}
-r = requests.post(base_url + “/histories”, json.dumps(data), headers=headers)
-new_hist = r.json()
-pprint(new_hist)
-```</p>
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"New history"</span><span class="p">}</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">new_hist</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
+</code></pre></div>    </div>
 
   </blockquote>
 </blockquote>
@@ -781,22 +775,22 @@ pprint(new_hist)
 
 <blockquote class="question">
   <h3 id="question-question-upload-a-dataset"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
-  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history. You need to run the special ‘upload1’ tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as ‘files_0|file_data’.</p>
+  <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history. You need to run the special <code class="language-plaintext highlighter-rouge">upload1</code> tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as <code class="language-plaintext highlighter-rouge">files_0|file_data</code>. Also, note that when attaching a file you need to drop <code class="language-plaintext highlighter-rouge">Content-Type</code> from the request headers.</p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
 
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s">'key'</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'history_id'</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
-    <span class="s">'tool_id'</span><span class="p">:</span> <span class="s">'upload1'</span><span class="p">}</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">'files_0|file_data'</span><span class="p">:</span> <span class="n">f</span><span class="p">}</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">'/tools'</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"history_id"</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
+    <span class="s">"tool_id"</span><span class="p">:</span> <span class="s">"upload1"</span>
+<span class="p">}</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">{</span><span class="s">"files_0|file_data"</span><span class="p">:</span> <span class="n">f</span><span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/tools"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">})</span>
 <span class="n">ret</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -810,7 +804,7 @@ pprint(new_hist)
 
 <blockquote class="question">
   <h3 id="question-question-find-the-dataset-in-your-history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Find the dataset in your history</h3>
-  <p>Find the new uploaded dataset, either from the dict returned by the POST request or from the history contents.</p>
+  <p>Find the new uploaded dataset, either from the dict returned by the POST request above or from the history contents.</p>
   <blockquote class="solution">
     <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -826,19 +820,19 @@ pprint(new_hist)
 
 <blockquote class="question">
   <h3 id="question-question-import-a-workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is ‘<span class="notranslate">workflow</span>’, which must be a deserialized JSON representation of the <span class="notranslate">workflow</span>.</p>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code>, which must be a deserialized JSON representation of the <span class="notranslate">workflow</span>.</p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'<span class="notranslate">workflow</span>'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -850,7 +844,7 @@ pprint(new_hist)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-view-the-wf-details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF details</h3>
+  <h3 id="question-question-view-the-workflow-details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the <span class="notranslate">workflow</span> details</h3>
   <p>View the details of the imported <span class="notranslate">workflow</span> by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
   <blockquote class="solution">
     <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -867,8 +861,8 @@ pprint(new_hist)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-run-the-wf"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
-  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/&lt;id&gt;/invocations</code>. The only needed data are ‘history’ and ‘inputs’.</p>
+  <h3 id="question-question-invoke-the-workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Invoke the <span class="notranslate">workflow</span></h3>
+  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/WORKFLOW_ID/invocations</code>. The only needed data are <code class="language-plaintext highlighter-rouge">history</code> and <code class="language-plaintext highlighter-rouge">inputs</code>.</p>
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
@@ -876,11 +870,15 @@ pprint(new_hist)
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">'history'</span><span class="p">:</span> <span class="s">'hist_id='</span> <span class="o">+</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span>
     <span class="s">'inputs'</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="o">+</span> <span class="s">"/invocations"</span><span class="p">,</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span> <span class="o">+</span> <span class="s">"/invocations"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
 
 <blockquote class="question">
   <h3 id="question-question-view-the-results"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the results</h3>
@@ -920,8 +918,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <ul>
   <li><code class="language-plaintext highlighter-rouge">id</code>: the unique <strong>identifier</strong> of the history, needed for all specific requests about this resource</li>
   <li><code class="language-plaintext highlighter-rouge">name</code>: the name of this history as given by the user</li>
-  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted</li>
-  <li><code class="language-plaintext highlighter-rouge">url</code>: the relative URL to get all info about this resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">deleted</code>: whether the history has been deleted.</li>
 </ul>
 
 <p><strong>New resources</strong> are created with <code class="language-plaintext highlighter-rouge">create_</code> methods, e.g. the call to create a new history is:</p>
@@ -937,20 +934,18 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>It is also possible to specify the unique <strong>id</strong> of the resource to retrieve, e.g. to get back the history we created before:</p>
+<p>To <strong>upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history, you can run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">tools</code> controller.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist_id</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
+<p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div></div>
 
-<p>Please note that independently of which parameters are passed to the <code class="language-plaintext highlighter-rouge">get_</code> method, it always returns a list.</p>
-
-<p>To <strong>upload</strong> files to the new history, run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">tools</code> controller:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">'test-data/1.txt'</span><span class="p">,</span> <span class="n">hist_id</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist_id</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">]</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">hist_id</span><span class="p">))</span>
 </code></pre></div></div>
 
-<p>If you are interested in more <strong>details</strong> about a given resource, you can use the corresponding <code class="language-plaintext highlighter-rouge">show_</code> method. For example, to the get more info for the history we have just populated:</p>
+<p>If you are interested in more <strong>details</strong> about a given resource for which you know the id, you can use the corresponding <code class="language-plaintext highlighter-rouge">show_</code> method. For example, to the get more info for the history we have just populated:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">show_history</span><span class="p">(</span><span class="n">history_id</span><span class="o">=</span><span class="n">hist_id</span><span class="p">))</span>
 </code></pre></div></div>
@@ -1041,15 +1036,15 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <h3 id="question-question-upload-a-dataset-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
-  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history using <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> .</p>
+  <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history using <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> .</p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
     <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1070,17 +1065,21 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   </blockquote>
 </blockquote>
 
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Try it out here!
+</span>
+</code></pre></div></div>
+
 <blockquote class="question">
   <h3 id="question-question-import-a-workflow-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
     <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_workflow_from_local_path</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_workflow_from_local_path</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1091,7 +1090,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-view-the-wf-details-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF details</h3>
+  <h3 id="question-question-view-the-workflow-details-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the <span class="notranslate">workflow</span> details</h3>
   <p>View the details of the imported <span class="notranslate">workflow</span> using <code class="language-plaintext highlighter-rouge">workflows.show_<span class="notranslate">workflow</span>()</code></p>
   <blockquote class="solution">
     <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -1106,7 +1105,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-run-the-wf-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
+  <h3 id="question-question-invoke-the-workflow-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Invoke the <span class="notranslate">workflow</span></h3>
   <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_<span class="notranslate">workflow</span>()</code> .</p>
   <blockquote class="solution">
     <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -1129,7 +1128,6 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <h1 id="interacting-with-histories-in-bioblendobjects">Interacting with histories in BioBlend.objects</h1>
 
 <p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
-
 <ol>
   <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
   <li>Click on “User” on the top menu, then “Preferences”</li>
@@ -1170,36 +1168,37 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <p>Both <code class="language-plaintext highlighter-rouge">get_previews()</code> and <code class="language-plaintext highlighter-rouge">list()</code> methods usually have <strong>filtering</strong> capabilities, e.g. it is possible to filter histories <strong>by name</strong>:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hists</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">)</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nb">list</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'BioBlend test'</span><span class="p">))</span>
 </code></pre></div></div>
+
+<p>To <strong>upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history, you can run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object.</p>
+
+<p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
+<span class="n">hda</span>
+</code></pre></div></div>
+
+<p>Please note that with BioBlend.objects there is no need to find the upload dataset, since <code class="language-plaintext highlighter-rouge">upload_file()</code> already returns a <code class="language-plaintext highlighter-rouge">HistoryDatasetAssociation</code> object.</p>
 
 <p>Both <code class="language-plaintext highlighter-rouge">HistoryPreview</code> and <code class="language-plaintext highlighter-rouge">History</code> objects have many of their properties available as <strong>attributes</strong>, e.g. the id.</p>
 
 <p>If you need to specify the unique <strong>id</strong> of the resource to retrieve, you can use the <code class="language-plaintext highlighter-rouge">get()</code> method, e.g. to get back the history we created before:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist0_id</span> <span class="o">=</span> <span class="n">hists</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nb">id</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">hist0_id</span><span class="p">)</span>
-<span class="n">h</span>
-</code></pre></div></div>
-
-<p>To <strong>upload</strong> files to the new history, run the special upload tool by calling the <code class="language-plaintext highlighter-rouge">upload_file</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">h</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">'test-data/1.txt'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To get the list of <strong>datasets contained</strong> in a history, simply look at the <code class="language-plaintext highlighter-rouge">content_infos</code> attribute of the <code class="language-plaintext highlighter-rouge">History</code> object.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hdas</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">content_infos</span>
-<span class="n">pprint</span><span class="p">(</span><span class="n">hdas</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">.</span><span class="n">content_infos</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>To get the details about one dataset, you can use the <code class="language-plaintext highlighter-rouge">get_dataset()</code> method of the <code class="language-plaintext highlighter-rouge">History</code> object:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda0_id</span> <span class="o">=</span> <span class="n">hdas</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nb">id</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
-<span class="n">h</span><span class="p">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">hda0_id</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span><span class="p">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>You can also filter history datasets by name using the <code class="language-plaintext highlighter-rouge">get_datasets()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
@@ -1231,7 +1230,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -1258,15 +1257,15 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <h3 id="question-question-upload-a-dataset-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Upload a dataset</h3>
-  <p><strong>Upload</strong> the local file “test-data/1.txt” to a new dataset in the created history using the <code class="language-plaintext highlighter-rouge">upload_file()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
+  <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history using the <code class="language-plaintext highlighter-rouge">upload_file()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
     <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"test-data/1.txt"</span><span class="p">)</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
 <span class="n">hda</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1276,19 +1275,17 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </span>
 </code></pre></div></div>
 
-<p>Please note that with BioBlend.objects there is no need to find the upload dataset, since <code class="language-plaintext highlighter-rouge">upload_file()</code> already returns a <code class="language-plaintext highlighter-rouge">HistoryDatasetAssociation</code> object.</p>
-
 <blockquote class="question">
   <h3 id="question-question-import-a-workflow-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Import a <span class="notranslate">workflow</span></h3>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file “test-data/convert_to_tab.ga” using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
+  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
 
-  <p>You can obtain this file from the following URL, you’ll need to download it first.</p>
+  <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
     <h3 id="solution-solution-17"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'test-data/convert_to_tab.ga'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
 <span class="n">wf</span>
@@ -1301,7 +1298,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-view-the-wf-inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the WF inputs</h3>
+  <h3 id="question-question-view-the-workflow-inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: View the <span class="notranslate">workflow</span> inputs</h3>
   <blockquote class="solution">
     <h3 id="solution-solution-18"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span>
@@ -1314,11 +1311,11 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-run-the-wf-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Run the WF</h3>
+  <h3 id="question-question-invoke-the-workflow-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Invoke the <span class="notranslate">workflow</span></h3>
   <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge"><span class="notranslate">Workflow</span></code> objects.</p>
   <blockquote class="solution">
     <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">hda</span><span class="p">.</span><span class="n">SRC</span><span class="p">}}</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="n">hda</span><span class="p">}</span>
 <span class="n">wf</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1429,8 +1426,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 author = "",
 title = "Scripting Galaxy using the API and BioBlend (Galaxy Training Materials)",
 year = "2022",
-month = "06",
-day = "23"
+month = "07",
+day = "14"
 url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
