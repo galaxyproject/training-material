@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Debugging Galaxy" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:29 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:16 +0000" />
 <meta name="DC.creator" content="Assunta DeSanto" />
 <meta name="DC.creator" content="John Davis" />
 <meta name="DC.creator" content="John Chilton" />
@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:29 +0000",
+  "dateModified": "1970-01-01 00:00:16 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Debugging Galaxy",
   "interactivityType": "mixed",
@@ -762,7 +762,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 29, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 16, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -842,7 +842,7 @@
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> training https://github.com/&lt;your-use<span class="notranslate">rna</span>me&gt;/<span class="notranslate">galaxy</span> <span class="notranslate">GALAXY</span>_ROOT
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> training2022 https://github.com/&lt;your-use<span class="notranslate">rna</span>me&gt;/<span class="notranslate">galaxy</span> <span class="notranslate">GALAXY</span>_ROOT
 <span class="nb">cd </span><span class="notranslate">GALAXY</span>_ROOT
 </code></pre></div>        </div>
       </blockquote>
@@ -891,7 +891,7 @@
 
         <blockquote class="code-out">
           <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
-          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  training
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  training2022
 <span class="k">*</span> my-training
 </code></pre></div>          </div>
         </blockquote>
@@ -1062,7 +1062,7 @@ FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::Li
 
       <p>Our next step is to examine the controller for this endpoint. For that, we head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/licenses.py</code>.</p>
 
-      <p>There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you’ll see the <code class="language-plaintext highlighter-rouge">get</code> method that is responsible for fetching the data in response to a <code class="language-plaintext highlighter-rouge">GET</code> HTTP request received at the <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code> endpoint:</p>
+      <p>If you look at the FastAPI controller, you’ll see the <code class="language-plaintext highlighter-rouge">get</code> method that is responsible for fetching the data in response to a <code class="language-plaintext highlighter-rouge">GET</code> HTTP request received at the <code class="language-plaintext highlighter-rouge">licenses/{licenseId}</code> endpoint:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="o">@</span><span class="n">router</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'/api/licenses/{id}'</span><span class="p">,</span>
         <span class="n">summary</span><span class="o">=</span><span class="s">"Gets the SPDX license metadata associated with the short identifier"</span><span class="p">,</span>
@@ -1123,7 +1123,7 @@ FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_licenses.py::Li
 
       <p>With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” <span class="notranslate">workflow</span> has been skipped in the last commit.</p>
 
-      <p>Therefore, for this section, <a href="https://github.com/galaxyproject/galaxy/runs/2780158706">you’ll need to use the results from this commit</a> to find the failing test.</p>
+      <p>Therefore, in this section, for the remote results, we’ll have to describe what would have been displayed.</p>
 
       <p>One of the failing tests on GitHub says “get_code_and_test”. Clicking on the word “Details” assocated with this failure will open a brief view of the CircleCI Checks, with a list of tests that are run as part of that command. You’ll see that the one that is failing is js_lint. And if you click that, you’ll be navigated to the CicleCI app, where you can see much more information about the failures.</p>
 
@@ -1185,6 +1185,7 @@ In the file <code class="language-plaintext highlighter-rouge">src/components/Ru
   <ol>
     <li>
       <p><strong>Finding the failing test on GitHub</strong>
+In this section we, again, can’t demonstrate the remote output, so we descibe it instead. 
 One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.</p>
 
       <blockquote class="solution">
@@ -1382,12 +1383,12 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
 
       <p><code class="language-plaintext highlighter-rouge">In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".</code></p>
 
-      <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Then start your local <span class="notranslate">Galaxy</span>:</p>
+      <p>Make sure you are in <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Then start your local <span class="notranslate">Galaxy</span> using the <code class="language-plaintext highlighter-rouge">uvicorn</code> command*:</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
           <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run.sh
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv"><span class="notranslate">GALAXY</span>_CONFIG_FILE</span><span class="o">=</span>config/<span class="notranslate">galaxy</span>.yml uvicorn <span class="nt">--app-dir</span> lib <span class="nt">--factory</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory
 </code></pre></div>          </div>
         </blockquote>
 
@@ -1395,13 +1396,14 @@ One of the failing tests on GitHub says “Client Unit Testing / jest”. Clicki
           <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
           <p>The first startup may take a few minutes. Eventually, you’ll see the following output (the PID will be different):</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting server in PID 1583948.
-serving on http://127.0.0.1:8080
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
 
-      <p>Now you can access your <span class="notranslate">Galaxy</span> instance from the browser at <a href="http://127.0.0.1:8080"><code class="language-plaintext highlighter-rouge">http://127.0.0.1:8080</code></a>.</p>
+      <p>*NOTE: We are not using <code class="language-plaintext highlighter-rouge">run.sh</code> because that would prevent us from using the Python interactive debugger, which we will be utilizing in this section.</p>
+
+      <p>Now you can access your <span class="notranslate">Galaxy</span> instance from the browser at <a href="http://127.0.0.1:8000"><code class="language-plaintext highlighter-rouge">http://127.0.0.1:8000</code></a>.</p>
 
       <p>To reproduce this error, we need to access the User menu. For this, we need to be logged in to <span class="notranslate">Galaxy</span>:</p>
 
@@ -1430,23 +1432,23 @@ serving on http://127.0.0.1:8080
 Traceback (most recent call last):
   File "lib/<span class="notranslate">galaxy</span>/web/framework/decorators.py", line 312, in decorator
     rval = func(self, trans, *args, **kwargs)
-  File "lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py", line 129, in index
+  File "lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py", line 100, in index
     raise Exception('This should not happen!')
 Exception: This should not happen!
 </code></pre></div>        </div>
 
-        <p>From this error log, we can easily tell that the error happens in the <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py</code> file on line 129. The specific error message doesn’t tell us much - which is often what happens in the wild.</p>
+        <p>From this error log, we can easily tell that the error happens in the <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py</code> file on line 100. The specific error message doesn’t tell us much - which is often what happens in the wild.</p>
       </blockquote>
 
-      <p>Let’s head over to the <code class="language-plaintext highlighter-rouge">datasets'py</code> file, line 129:</p>
+      <p>Let’s head over to the <code class="language-plaintext highlighter-rouge">datasets'py</code> file, line 100:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'show_datasets'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">)):</span>
-<span class="mi">127</span>             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">serializer_by_type</span><span class="p">[</span><span class="n">content</span><span class="p">.</span><span class="n">history_content_type</span><span class="p">].</span><span class="n">serialize_to_view</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">trans</span><span class="p">.</span><span class="n">user</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">)</span> <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
-<span class="mi">128</span>         <span class="k">else</span><span class="p">:</span>
-<span class="mi">129</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'This should not happen!'</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="mi">97</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
+ <span class="mi">98</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
+ <span class="mi">99</span>         <span class="k">else</span><span class="p">:</span>
+<span class="mi">100</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <p>The good news is that the error happens inside an <code class="language-plaintext highlighter-rouge">if/else</code> block, which narrows down our search to line 126: that line evaluates to <code class="language-plaintext highlighter-rouge">False</code>, causing the <code class="language-plaintext highlighter-rouge">else</code> clause to execute. The bad news is that we have no idea what causes that line to evaluate to <code class="language-plaintext highlighter-rouge">False</code>.</p>
+      <p>The good news is that the error happens inside an <code class="language-plaintext highlighter-rouge">if/else</code> block, which narrows down our search to line 97: that line evaluates to <code class="language-plaintext highlighter-rouge">False</code>, causing the <code class="language-plaintext highlighter-rouge">else</code> clause to execute. The bad news is that we have no idea what causes that line to evaluate to <code class="language-plaintext highlighter-rouge">False</code>.</p>
     </li>
     <li>
       <p><strong>Identify the problem</strong></p>
@@ -1461,10 +1463,10 @@ Exception: This should not happen!
         <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">126</span>         <span class="n">breakpoint</span><span class="p">()</span>
-<span class="mi">127</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'show_datasets'</span><span class="p">,</span> <span class="s">'True'</span><span class="p">)):</span>
-<span class="mi">128</span>             <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">serializer_by_type</span><span class="p">[</span><span class="n">content</span><span class="p">.</span><span class="n">history_content_type</span><span class="p">].</span><span class="n">serialize_to_view</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="n">trans</span><span class="p">.</span><span class="n">user</span><span class="p">,</span> <span class="n">trans</span><span class="o">=</span><span class="n">trans</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">)</span> <span class="k">for</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">contents</span><span class="p">]</span>
-<span class="mi">129</span>         <span class="k">else</span><span class="p">:</span>
-<span class="mi">130</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">'This should not happen!'</span><span class="p">)</span>
+ <span class="mi">97</span>         <span class="k">if</span> <span class="n">str_as_bool</span><span class="p">(</span><span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"show_datasets"</span><span class="p">,</span> <span class="s">"True"</span><span class="p">)):</span>
+ <span class="mi">98</span>             <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">service</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">history_id</span><span class="p">,</span> <span class="n">serialization_params</span><span class="p">,</span> <span class="n">filter_query_params</span><span class="p">)</span>
+ <span class="mi">99</span>         <span class="k">else</span><span class="p">:</span>
+<span class="mi">100</span>             <span class="k">raise</span> <span class="nb">Exception</span><span class="p">(</span><span class="s">"This should not happen!"</span><span class="p">)</span>
 </code></pre></div>        </div>
 
       </blockquote>
@@ -1473,24 +1475,24 @@ Exception: This should not happen!
 
       <blockquote class="code-in">
         <h3 id="code-in-input-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv"><span class="notranslate">GALAXY</span>_CONFIG_DEBUG</span><span class="o">=</span>1 ./run.sh
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv"><span class="notranslate">GALAXY</span>_CONFIG_DEBUG</span><span class="o">=</span>1 <span class="nv"><span class="notranslate">GALAXY</span>_CONFIG_FILE</span><span class="o">=</span>config/<span class="notranslate">galaxy</span>.yml uvicorn <span class="nt">--app-dir</span> lib <span class="nt">--factory</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-why-we-set-the-debug-option"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why we set the debug option</h3>
 
-        <p>The reason for setting the <code class="language-plaintext highlighter-rouge">debug</code> option is quite esoteric: among other things, it prevents uWSGI from re<span class="notranslate">mapping</span> <code class="language-plaintext highlighter-rouge">stdin</code> to <code class="language-plaintext highlighter-rouge">dev/null</code> which would prevent tools like pdb from running.</p>
+        <p>The reason for setting the <code class="language-plaintext highlighter-rouge">debug</code> option for releases prior to 22.05 was quite esoteric: among other things, it prevents uWSGI (no longer used as of 22.05) from re<span class="notranslate">mapping</span> <code class="language-plaintext highlighter-rouge">stdin</code> to <code class="language-plaintext highlighter-rouge">dev/null</code> which would prevent tools like pdb from running.</p>
       </blockquote>
 
       <p>Now your <span class="notranslate">Galaxy</span> is running in debug mode. Repeat your steps that reproduced the error. When you click “Datasets”, head over to your terminal. At the bottom of the log you’ll see something like this:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; /home/sergey/2sandbox/<span class="notranslate">galaxy</span>/dev_training/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py(127)index()
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; /home/sergey/2sandbox/<span class="notranslate">galaxy</span>/dev_training/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py(97)index()
 -&gt; if str_as_bool(trans.app.config.get('show_datasets', 'True')):
 (Pdb)
 </code></pre></div>      </div>
 
-      <p>You’re at the pdb prompt. From here you can execute Python code interactively. So, let’s explore what’s happening in the next line:</p>
+      <p>You’re at the pdb prompt. From here you can execute Python code interactively. The logs printed to <code class="language-plaintext highlighter-rouge">stdout</code> can be distracting, so try to ignore them. Let’s explore what’s happening in the next line:</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-pdb"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Pdb</h3>
@@ -1510,20 +1512,20 @@ Exception: This should not happen!
 
       <p>Now let’s take a look at the definition of the <code class="language-plaintext highlighter-rouge">get</code> method. We need to find <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code> which is used by <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.config.<span class="notranslate">Galaxy</span>AppConfiguration</code>.</p>
 
-      <p>Head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/config/__init__.py</code> and look for the class <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code>. Once you find it, look for the definition of its <code class="language-plaintext highlighter-rouge">get</code> method. When you find it, look at the method signature. What is the meaning of the argument <code class="language-plaintext highlighter-rouge">'True'</code> that is passed to this method in <code class="language-plaintext highlighter-rouge">datasets.py</code> on line 127?</p>
+      <p>Head over to <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/config/__init__.py</code> and look for the class <code class="language-plaintext highlighter-rouge">CommonConfigurationMixin</code>. Once you find it, look for the definition of its <code class="language-plaintext highlighter-rouge">get</code> method. When you find it, look at the method signature. What is the meaning of the argument <code class="language-plaintext highlighter-rouge">'True'</code> that is passed to this method in <code class="language-plaintext highlighter-rouge">datasets.py</code> on line 97?</p>
 
       <blockquote class="solution">
         <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">480</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<span class="mi">481</span>         <span class="c1"># Warning: the value of self.config_dict['foo'] may be different from self.foo
-</span><span class="mi">482</span>         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">config_dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">584</span>     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="mi">585</span>         <span class="c1"># Warning: the value of self.config_dict['foo'] may be different from self.foo
+</span><span class="mi">586</span>         <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">config_dict</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
 </code></pre></div>        </div>
 
         <p>The argument <code class="language-plaintext highlighter-rouge">True</code> corresponds to the parameter <code class="language-plaintext highlighter-rouge">default</code>. In the method’s body, we see that this value will be passed to <code class="language-plaintext highlighter-rouge">self.config_dict.get()</code>; <code class="language-plaintext highlighter-rouge">self.config_dict</code> is a Python dictionary, so the second argument to <code class="language-plaintext highlighter-rouge">get()</code> is the default value that will be retuned if <code class="language-plaintext highlighter-rouge">key</code> is not in <code class="language-plaintext highlighter-rouge">self.config_dict</code>.</p>
       </blockquote>
 
-      <p>Back to <code class="language-plaintext highlighter-rouge">datasets.py</code>, line 127. Now we know that <code class="language-plaintext highlighter-rouge">True</code> is the default value that will be returned if the key <code class="language-plaintext highlighter-rouge">show_datasets</code> does not exist in the <code class="language-plaintext highlighter-rouge">config_dict</code> dictionary. Moving on:</p>
+      <p>Back to <code class="language-plaintext highlighter-rouge">datasets.py</code>, line 97. Now we know that <code class="language-plaintext highlighter-rouge">True</code> is the default value that will be returned if the key <code class="language-plaintext highlighter-rouge">show_datasets</code> does not exist in the <code class="language-plaintext highlighter-rouge">config_dict</code> dictionary. Moving on:</p>
 
       <blockquote class="code-in">
         <h3 id="code-in-input-pdb-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Pdb</h3>
@@ -1550,12 +1552,12 @@ Head over to the function’s definition (you can tell from the import statement
       <blockquote class="solution">
         <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
-<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
-<span class="mi">105</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">):</span>
-<span class="mi">106</span>         <span class="k">return</span> <span class="bp">True</span>
-<span class="mi">107</span>     <span class="k">else</span><span class="p">:</span>
-<span class="mi">108</span>         <span class="k">return</span> <span class="bp">False</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">118</span>     <span class="s">"""This is for training only."""</span>
+<span class="mi">119</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
+<span class="mi">120</span>         <span class="k">return</span> <span class="bp">True</span>
+<span class="mi">121</span>     <span class="k">else</span><span class="p">:</span>
+<span class="mi">122</span>         <span class="k">return</span> <span class="bp">False</span>
 </code></pre></div>        </div>
 
         <p>At first glance, everything seems right. But think of what value we are passing: <code class="language-plaintext highlighter-rouge">'True'</code> - it is <em>not</em> in the <code class="language-plaintext highlighter-rouge">('true', 'yes', 'on', '1')</code> tuple! Aparently, the developer did not account for upper vs. lower case!</p>
@@ -1604,15 +1606,15 @@ Head over to the function’s definition (you can tell from the import statement
 
         <p>One way to do it is to simply convert the input value to lowercase:</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
-<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
-<span class="mi">105</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">):</span>
-<span class="mi">106</span>         <span class="k">return</span> <span class="bp">True</span>
-<span class="mi">107</span>     <span class="k">else</span><span class="p">:</span>
-<span class="mi">108</span>         <span class="k">return</span> <span class="bp">False</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">118</span>     <span class="s">"""This is for training only."""</span>
+<span class="mi">119</span>     <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">,</span> <span class="s">"on"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">):</span>
+<span class="mi">120</span>         <span class="k">return</span> <span class="bp">True</span>
+<span class="mi">121</span>     <span class="k">else</span><span class="p">:</span>
+<span class="mi">122</span>         <span class="k">return</span> <span class="bp">False</span>
 </code></pre></div>        </div>
 
-        <p>In fact, that’s exactly what the real function does! Check line 966 - you’ll see almost the exact same function, named <code class="language-plaintext highlighter-rouge">string_as_bool</code>: we didn’t modify it because that might have broken other parts of <span class="notranslate">Galaxy</span> which would have been a distraction from the core aspects of the exercise.</p>
+        <p>In fact, that’s exactly what the real function does! Check line 1017 - you’ll see almost the exact same function, named <code class="language-plaintext highlighter-rouge">string_as_bool</code>: we didn’t modify it because that might have broken other parts of <span class="notranslate">Galaxy</span> which would have been a distraction from the core aspects of the exercise.</p>
       </blockquote>
 
       <p>Run the test - now it should pass!</p>
@@ -1625,9 +1627,9 @@ Head over to the function’s definition (you can tell from the import statement
       <blockquote class="solution">
         <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">103</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
-<span class="mi">104</span>     <span class="s">""" This is for training only."""</span>
-<span class="mi">105</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">117</span> <span class="k">def</span> <span class="nf">str_as_bool</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<span class="mi">118</span>     <span class="s">""" This is for training only."""</span>
+<span class="mi">119</span>     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">string</span><span class="p">).</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">'true'</span><span class="p">,</span> <span class="s">'yes'</span><span class="p">,</span> <span class="s">'on'</span><span class="p">,</span> <span class="s">'1'</span><span class="p">)</span>
 </code></pre></div>        </div>
 
         <p>Much better!</p>
@@ -1753,8 +1755,8 @@ Head over to the function’s definition (you can tell from the import statement
 author = "Assunta DeSanto and John Davis and John Chilton",
 title = "Debugging Galaxy (Galaxy Training Materials)",
 year = "2022",
-month = "05",
-day = "29"
+month = "07",
+day = "16"
 url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
