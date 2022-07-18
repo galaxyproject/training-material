@@ -3,31 +3,38 @@ var lunr = require("lunr"),
 	path = require("path"),
 	fs = require("fs"),
 	stdout = process.stdout,
-	properties = ["tags", "questions", "objectives", "key_points", "contributors"];
+	properties = ["tags", "questions", "objectives", "key_points"];
 
-function findTutorials(startPath, filter) {
+function findResources(startPath) {
 	if (!fs.existsSync(startPath)) {
 		return;
 	}
-	var tutorials = [];
+	var resources = [];
 
 	var files = fs.readdirSync(startPath);
 	for (var i = 0; i < files.length; i++) {
 		var filename = path.join(startPath, files[i]);
 		var stat = fs.lstatSync(filename);
 		if (stat.isDirectory()) {
-			findTutorials(filename, filter).forEach(x => {
-				tutorials.push(x);
+			findResources(filename).forEach(x => {
+				resources.push(x);
 			});
-		} else if (filename.indexOf(filter) >= 0) {
-			tutorials.push(filename);
+		} else {
+			if(filename.indexOf('.') != 0 && filename.indexOf('_site') != 0 && !stat.isSymbolicLink()){
+				resources.push(filename);
+			}
 		}
 	}
 
-	return tutorials;
+	return resources;
 }
 
-tutorials = findTutorials("topics", "tutorial.md").map(tuto => {
+var resources = findResources('.');
+tutorials = resources.filter(x => x.indexOf('topics/') == 0).filter(x => x.endsWith('tutorial.md'))
+faqs = resources.filter(x => x.indexOf('faqs/') > 0 ).filter(x => x.endsWith('.md'))
+
+
+tutorials = tutorials.map(tuto => {
 	const contents = fs.readFileSync(tuto, "utf8");
 	const result = metadataParser(contents);
 	result.metadata.id = tuto;
@@ -35,19 +42,50 @@ tutorials = findTutorials("topics", "tutorial.md").map(tuto => {
 	filtered = result.content.split('\n')
 		.filter(x => x[0] !== '>') // Remove boxes
 		.filter(x => x[0] !== '{') // remove closing tag
+		.filter(x => x != '') // don't index whitespace
 		//.slice(0, 25) // first 25 lines
 		.join('\n')
 
 	output = {
 		id: tuto,
+		type: "tutorial",
 		title: result.metadata.title,
 		content: filtered,
+		contributors: (result.metadata.contributors || []).join(" "),
+		meta: "",
 	};
 
 	// Array style properties
 	properties.forEach(prop => {
 		if (Array.isArray(result.metadata[prop])) {
-			output[prop] = result.metadata[prop].join(" ");
+			output['meta'] += result.metadata[prop].join(" ") + "\n";
+		}
+	});
+	return output;
+});
+
+faqs = faqs.map(faqPath => {
+	const contents = fs.readFileSync(faqPath, "utf8");
+	const result = metadataParser(contents);
+	return [result, faqPath];
+}).filter(x => {
+	return x[0].metadata.layout === 'faq'
+}).map(faqdata => {
+	result = faqdata[0];
+
+	output = {
+		id: faqdata[1],
+		type: "faq",
+		title: result.metadata.title,
+		content: result.content,
+		contributors: (result.metadata.contributors || []).join(" "),
+		meta: "",
+	};
+
+	// Array style properties
+	properties.forEach(prop => {
+		if (Array.isArray(result.metadata[prop])) {
+			output['meta'] += result.metadata[prop].join(" ") + "\n";
 		}
 	});
 	return output;
@@ -56,14 +94,15 @@ tutorials = findTutorials("topics", "tutorial.md").map(tuto => {
 var idx = lunr(function() {
 	this.ref("id");
 	this.field("title");
-	this.field("tags");
-	this.field("questions");
-	this.field("objectives");
-	this.field("key_points");
+	this.field("meta");
 	this.field("contributors");
 	this.field("content");
 
 	tutorials.forEach(function(doc) {
+		this.add(doc);
+	}, this);
+
+	faqs.forEach(function(doc) {
 		this.add(doc);
 	}, this);
 });

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Interval-Wise Testing for omics data"
-zenodo_link: "https://doi.org/10.5281/zenodo.1288429"
+zenodo_link: "https://doi.org/10.5281/zenodo.5589610"
 questions:
   - "How to visualize high-resolution omics data in different groups of genomic regions?"
   - "How to evaluate differences in high-resolution omics data between groups of genomic regions?"
@@ -41,7 +41,7 @@ The dataset contains two region datasets "ETn fixed", "Control" and one feature 
 
 Recombination hotspots measurements are associated to each "ETn fixed" and "Control" region. In particular, this feature is measured in 1-kb windows, so that each region is associated to a recombination hotspots curve made of 64 values. The measurement used is the feature content, i.e. the fraction of the 1-kb window that is covered by recombination hotspots
 
-The data we use in this tutorial is available at [Zenodo](https://doi.org/10.5281/zenodo.1184682).
+The data we use in this tutorial is available at [Zenodo](https://doi.org/10.5281/zenodo.5589610).
 
 > ### Agenda
 >
@@ -67,18 +67,20 @@ The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic r
 >    - Recombination Hotspot (`Recombination_hotspots.txt`) content
 >
 >    ```
->    https://zenodo.org/record/1288429/files/ETn_fixed.bed
->    https://zenodo.org/record/1288429/files/Control.bed
->    https://zenodo.org/record/1288429/files/Recombination_hotspots.txt
+>    https://zenodo.org/record/5589610/files/ETn_fixed.bed
+>    https://zenodo.org/record/5589610/files/Control.bed
+>    https://zenodo.org/record/5589610/files/Recombination_hotspots.txt
 >    ```
 > 3. Import header files for regions and features:
 >    - `regions_header.tabular`
 >    - `features_header.tabular`
 >
 >    ```
->    https://zenodo.org/record/1288429/files/regions_header.tabular
->    https://zenodo.org/record/1288429/files/features_header.tabular
+>    https://zenodo.org/record/5589610/files/regions_header.tabular
+>    https://zenodo.org/record/5589610/files/features_header.tabular
 >    ```
+>
+>    Please note that the file names in the first column of the header files must exactly match the dataset names in the Galaxy history.
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Pre-process data and create pointwise boxplot

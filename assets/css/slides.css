@@ -41,6 +41,18 @@ body.theme-rainbow div.my-header {
 }
 body.theme-rainbow .my-header i {color: black;}
 
+.color-overview { background: #8A9AD0; }
+.color-agenda { background: #86D486; }
+.color-keypoints { background: #FFA1A1; }
+.color-tip { background: #FFE19E; }
+.color-warning { background: #de8875; }
+.color-comment { background: #ffecc1; }
+.color-handson { background: #dfe5f9; }
+.color-question { background: #8A9AD0; }
+.color-solution { background: #B8C3EA; }
+.color-feedback { background: #86D486; }
+.color-code { background: #86D486; }
+.color-code-out { background: #fb99d0; }
 
 h1,
 h2,
@@ -95,14 +107,14 @@ ol {
 
 img {
   max-height: 400px;
-  max-width: 700px;
+  max-width: min(700px, 100%);
   border: 0 !important;
   box-shadow: none !important;
   background: none !important;
 }
 
 img.cover-logo {
-  max-height: 12em;
+  max-height: 10em;
 }
 
 .image-05 img {
@@ -441,18 +453,35 @@ blockquote {
     color: $gray;
     font-size: 1.1em;
     margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: baseline;
+    justify-content: center;
 }
 
 .contributor-badge {
-  /* prevent breaking across lines */
-  white-space: nowrap;
+    /* prevent breaking across lines */
+    white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 1em;
+    border: 1px solid #b7daff;
+    padding-right: 0.5em;
+    margin: 0.2em;
+    line-height: 1em;
+    flex-shrink: 0;
 }
 
 .contributor-badge img {
-  height: 0.9em;
-  border-radius: 50%;
-  padding-right: 0.25em;
-  padding-left: 0.25em;
+	height: 1.5em;
+	border-radius: 50%;
+	margin: 0 0.25em 0 0;
+}
+
+.contributor-newcontributors i {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 
@@ -505,3 +534,33 @@ blockquote {
 .remark-slide-container:nth-child(1) .my-footer {
 	display: none;
 }
+
+
+ul.text-list, ol.text-list {
+    list-style: none;
+	padding-left: 0;
+}
+
+ul.text-list li, ol.text-list li {
+	display: inline;
+}
+.row {
+	display: flex;
+}
+
+.row .col-md-3 {
+	flex-grow: 1;
+}
+
+.gtn-card {
+	border-radius: 10px;
+}
+.gtn-card .card-title {
+	font-size: 500%;
+	font-weight: 900;
+	margin-bottom: 0
+}
+.gtn-card .card-text {
+	text-align: center;
+	font-size: 150%;
+	padding: 0.3em;

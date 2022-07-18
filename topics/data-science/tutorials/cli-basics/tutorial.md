@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: CLI basics in Galaxy
+title: CLI basics
 level: Introductory
 zenodo_link: ""
 requirements: []
@@ -67,6 +67,10 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
+  - erasmusplus
+  - avans-atgm
+tags:
+- bash
 ---
 
 This tutorial will walk you through the basics of how to use the Unix command line.

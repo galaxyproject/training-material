@@ -37,7 +37,9 @@ new_topic_for_tuto = {
     'Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)': 'Epigenetics',
     'RAD-Seq Reference-based data analysis': 'Ecology',
     'RAD-Seq de-novo data analysis': 'Ecology',
-    'RAD-Seq to construct genetic maps': 'Ecology'
+    'RAD-Seq to construct genetic maps': 'Ecology',
+    'Advanced R in Galaxy': 'Foundations of Data Science',
+    'R basics in Galaxy': 'Foundations of Data Science'
 }
 new_topics = {
     'User Interface and Features': 'Using Galaxy and Managing your Data',
@@ -54,6 +56,7 @@ acceptable_topics = [
     "Development in Galaxy",
     "Ecology",
     "Epigenetics",
+    "Foundations of Data Science",
     "Galaxy Server administration",
     "Genome Annotation",
     "Imaging",

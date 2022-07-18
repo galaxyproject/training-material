@@ -22,6 +22,10 @@ module Jekyll
 
     def figurify(page, site)
       num = 0
+      if page.content.nil?
+        return
+      end
+
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) {
         alt = $1
         url = $2
@@ -34,6 +38,12 @@ module Jekyll
           num += 1
 
           alt.gsub!(/"/, '&quot;')
+          if alt.strip.length > 0
+            unless alt.end_with?(".") || alt.end_with?("!") || alt.end_with?("?")
+              alt = "#{alt}. "
+            end
+          end
+
           prefix = figcaption_prefix(page, site)
           "<figure id=\"figure-#{num}\">" +
             "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">" +
@@ -48,6 +58,11 @@ module Jekyll
         style = $4
 
         alt.gsub!(/"/, '&quot;')
+        if alt.strip.length > 0
+          unless alt.end_with?(".") || alt.end_with?("!") || alt.end_with?("?")
+            alt = "#{alt}. "
+          end
+        end
         "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">"
       }
     end

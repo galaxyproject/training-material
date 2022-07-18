@@ -79,7 +79,7 @@ atm   cpl   lnd   share
 ```
 
 Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
-For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %}
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vandvik2020 %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -261,7 +261,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. We can clearly see a seasonal cycle.
->    > > ![Panoply LEAFC timeserie](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
+>    > > ![Panoply LEAFC timeseries](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
 >    > {: .solution}
 >    {: .question}
 >
@@ -331,7 +331,7 @@ so that we can reuse it for any simulations.
 >
 > 6. **View** {% icon galaxy-eye%} the resulting plot:
 >
->    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
+>    ![Snapshot of LEAFC resulting plot](../../images/LEAFC_ALP1_exp_ggplot.png)
 >
 {: .hands_on}
 
@@ -373,7 +373,7 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >      - Generate the corresponding plot.
 >    The final workflow would be similar to the one shown below:
 >
->    ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
+>    ![Snapshot of FATES workflow](../../images/fates_workflow.png "FATES workflow")
 >
 >    > ### {% icon question %} Question
 >    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?

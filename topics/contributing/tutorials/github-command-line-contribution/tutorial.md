@@ -118,7 +118,7 @@ In GitHub flow, there is a concept: one new feature or change = one branch.
 
 When you're working on a project, you're going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow. You should develop different features on different branches to help keep the changes you make simple and easy to review.
 
-![Divergence of a branch compared to master](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the master branch")
+![Divergence of a branch compared to main](../../images/PR_branches_01.png "When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the main branch")
 
 Here for this tutorial, you will create a branch called "my_new_branch" in which you will modify the `CONTRIBUTORS.yaml` file, the file used to generate the [Hall of Fame]({% link hall-of-fame.md %}).
 
@@ -128,7 +128,7 @@ Here for this tutorial, you will create a branch called "my_new_branch" in which
 >
 >    ```
 >    $ git branch
->      * master
+>      * main
 >    ```
 >
 >    The branch on which you are is shown with the `*`
@@ -149,9 +149,9 @@ This branch is added to your local copy:
 
 # Make your changes on this branch
 
-You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `master` branch. It will contain data that is only on this new branch:
+You have created your first branch! Now you want to make the change in the `CONTRIBUTING.yaml` file. By changing a file in this branch, it will diverge from the `main` branch. It will contain data that is only on this new branch:
 
-![Divergence of the branch compared to master](../../images/PR_branches_02.png "The changes on your branch will not be on the master branch")
+![Divergence of the branch compared to main](../../images/PR_branches_02.png "The changes on your branch will not be on the main branch")
 
 > ### {% icon hands_on %} Hands-on: Make changes in a branch
 >
@@ -204,7 +204,7 @@ The changes you made on your branch are only on the local copy of the repository
 >
 > 2. Go to your GitHub repository
 > 3. Change to the "my_new_branch" branch:
->    1. Click on **Branch: master** (left)
+>    1. Click on **Branch: main** (left)
 >
 >       ![Selecting branch on GitHub](../../images/PR_branch_github.png)
 >
@@ -229,7 +229,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 >
 >    !["Opening a pull request"](../../images/PR_button.png)
 >
-> 3. Check that the selected branch are correct: **master** on the left and your branch name on the right
+> 3. Check that the selected branch are correct: **main** on the left and your branch name on the right
 >
 >    ![Branches in PR](../../images/PR_branch_check.png)
 >
@@ -245,7 +245,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 
 Once the pull is open, it will be reviewed. There are two possible outcomes:
 
-1. Your pull request is accepted. Congratulations! Your changes will be merged into the master branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
+1. Your pull request is accepted. Congratulations! Your changes will be merged into the main branch of the original repository. The website will be re-built and you will be in the [Hall of Fame]({% link hall-of-fame.md %})
 2. Your pull request needs modifications: the reviewers will ask for some changes, possibly because the automatic tests are failing.
 
 # Make the requested changes
@@ -329,10 +329,10 @@ You now want to work on a new tutorial or make some other new changes. However s
 
 > ### {% icon hands_on %} Hands-on: Update the local copy
 >
-> 1. Move to the `master` branch
+> 1. Move to the `main` branch
 >
 >    ```
->    $ git checkout master
+>    $ git checkout main
 >    ```
 >
 > 2. Add a reference to the original GitHub repository
@@ -348,12 +348,35 @@ You now want to work on a new tutorial or make some other new changes. However s
 > 4. Update the local copy of the repository by "pulling" in the content of the original GitHub repository
 >
 >    ```
->    $ git pull upstream master
+>    $ git pull upstream main
 >    ```
 >
 {: .hands_on}
 
 You can now restart the GitHub flow to propose new changes: start by [creating a new branch](#create-a-new-branch).
+
+
+# Close the Pull Request
+
+Great! You now know how to make pull request on GitHub, and how to make changes after a review.
+Reviewers can now approve and merge your pull request.
+
+Because this was just a practice pull request, let's close it again.
+
+
+> ### {% icon hands_on %} Hands-on: Close the Pull Request
+>
+> Once you have run through all these steps, please close the pull request again.
+>
+> 1. Go to the [list of pull request tab on GitHub](https://github.com/galaxyproject/training-material/pulls)
+> 2. Click on your pull request
+> 3. Scroll to the bottom of the page
+> 3. Click on "Close pull request" button
+>
+> Whenever you add your first real contribution, you can add yourself to the `CONTRIBUTORS.yaml` file in that PR.
+>
+{: .hands_on}
+
 
 # Conclusion
 {:.no_toc}
@@ -367,7 +390,7 @@ You also learned the GitHub flow and its cycle:
 1. Create a new branch in your local copy
 2. Commit the changes in that branch
 1. Push that branch to your fork on GitHub
-1. Submit a pull request from that branch to the master repository
+1. Submit a pull request from that branch to the main repository
 1. Wait for feedbacks and make requested changes
 1. Update your local copy
 1. Restart the cycle

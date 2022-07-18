@@ -6,7 +6,7 @@ layout: base
 	<a href="{{ site.github_repository }}/blob/main/{{ page.url | replace: 'slides-plain','slides' }}">View markdown source on GitHub</a>
 	<h1>{{ page.title }}</h1>
 		<h2>Contributors</h2>
-		{% include _includes/contributor-author-list-comma.html contributors=page.contributors %}
+{% include _includes/contributors-line.html page=page %}
 
 		{% if page.questions %}
 		<h2>Questions</h2>
@@ -68,12 +68,6 @@ Follow one of our recommended follow-up trainings:
 
 This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
-</div>
-{% endif %}
-
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
@@ -86,3 +80,12 @@ This material is the result of a collaborative work. Thanks to the <a href="http
 
 This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 </section>
+
+{% if page.cited %}
+<h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+{% bibliography --cited %}
+{% endif %}
+
+{% if page.contributions %}
+{% include _includes/funding-statement.md contributions=page.contributions %}
+{% endif %}

@@ -12,7 +12,7 @@ objectives:
 follow_up_training:
 -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
 time_estimation: 3H
@@ -24,6 +24,7 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
+  - erasmusplus
 subtopic: analyse
 ---
 
@@ -31,7 +32,7 @@ subtopic: analyse
 # Introduction
 {:.no_toc}
 
-{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
+{% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
 [RStudio](https://www.rstudio.com/products/RStudio/) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). Like most IDEs, it provides a graphical interface to R, making it more user-friendly, and providing dozens of useful features. We will introduce additional benefits of using RStudio as you cover the lessons. In this case, we are specifically using [RStudio Server](https://www.rstudio.com/products/RStudio/#Server), a version of RStudio that can be accessed in your web browser. RStudio Server has the same features of the Desktop version of RStudio you could download as standalone software.
 

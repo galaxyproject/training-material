@@ -18,7 +18,7 @@ key_points:
   - Re-run the playbook from time to time to keep your Galaxy server up to date with any minor changes and patches
 contributors:
   - slugger70
-subtopic: features
+subtopic: maintenance
 tags:
   - ansible
 requirements:
@@ -219,6 +219,8 @@ Once you've made sure of these things, it's time to do it!
 >     miniconda_version: 4.7.12
 >    ```
 >    {% endraw %}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Now run the playbook!
 >

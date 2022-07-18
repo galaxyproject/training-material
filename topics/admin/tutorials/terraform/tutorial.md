@@ -17,10 +17,12 @@ key_points:
   - It can drastically simplify management of large numbers of VMs
 contributors:
   - hexylena
+subtopic: cloud
 tags:
   - terraform
   - deploying
   - cloud
+priority: 3
 ---
 
 # Overview
@@ -330,7 +332,7 @@ We should now have a keypair in our cloud!
 We now have:
 
 - Terraform installed
-- The OpenStack plugin intialized
+- The OpenStack plugin initialized
 - A keypair in OpenStack
 
 > ### {% icon comment %} Doing this training outside of a training event

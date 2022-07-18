@@ -140,7 +140,7 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 >    - {% icon param-file %} *"SMILES input type"*: File
 >    - {% icon param-file %} *"Input file"*: 'Ligand SMILES' file
 >    - {% icon param-file %} *"Search type"*: `Similarity`
->    - {% icon param-file %} *"Tanimoto cutoff score"*: `60`
+>    - {% icon param-file %} *"Tanimoto cutoff score"*: `40`
 >    - {% icon param-file %} *"Filter for Lipinski's Rule of Five"*: `Yes`
 >    - All other parameters can be left as their defaults.
 >
@@ -251,6 +251,7 @@ Further, docking requires the coordinates of a binding site to be defined. Effec
 >    - {% icon param-file %} *"Molecular input file"*: 'Compound library' file.
 >    - {% icon param-file %} *"Output format"*: `SDF`
 >    - {% icon param-file %} *"Generate 3D coordinates"*: `Yes`
+>    - {% icon param-file %} *"Add hydrogens appropriate for pH"*: `7.4`
 >    - Leave all other options unchanged.
 >    - Rename to 'Prepared ligands'
 > 3. {% tool [Calculate the box parameters for an AutoDock Vina job](toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_box/prepare_box/2021.03.4+galaxy0) %}  with the following parameters:
@@ -258,8 +259,7 @@ Further, docking requires the coordinates of a binding site to be defined. Effec
 >    - {% icon param-file %} *"x-axis buffer"*: `5`
 >    - {% icon param-file %} *"y-axis buffer"*: `5`
 >    - {% icon param-file %} *"z-axis buffer"*: `5`
->    - {% icon param-file %} *"Exhaustiveness"*: `1`
->    - The 'Random seed' parameter should be left empty.
+>    - {% icon param-file %} *"Random seed"*: `1`
 >    - Rename to 'Docking config file'.
 {: .hands_on}
 
@@ -281,8 +281,8 @@ Perhaps you are interested in a system which does not have a ligand within the b
 > >    - {% icon param-file %} *"x-axis buffer"*: `5`
 > >    - {% icon param-file %} *"y-axis buffer"*: `5`
 > >    - {% icon param-file %} *"z-axis buffer"*: `5`
-> >    - {% icon param-file %} *"Exhaustiveness"*: `1`
-> >    - The 'Random seed' parameter can be left empty.
+> >    - {% icon param-file %} *"Exhaustiveness (optional)"*: `1`
+> >    - {% icon param-file %} *"Random seed"*: `1`
 > >    - Rename to 'Docking config file derived from pocket'.
 > >
 > >  The fpocket tool generates two different outputs: a `Pocket properties` log file containing details of all the pockets which fpocket found in the protein. The second output is a collection (a list) containing one PDB file for each of the pockets. Each of the PDB files contains only the atoms in contact with that particular pocket. Note that fpocket assigns a score to each pocket, but you should not assume that the top scoring one is the only one where compounds can bind! For example, the pocket where the ligand in the `2brc` PDB file binds is ranked as the second-best according to fpocket.
@@ -312,7 +312,7 @@ The output consists of a collection, which contains an SDF output file for each 
 
 # Optional: cheminformatics tools applied to the compound library
 
-The ChemicalToolBox contains a large number of cheminformatics tools. This section will demonstrate some of the useful functionalities available. If you are just interested in docking, feel free to skip this section - or, just try out the tools which look particularly interesting.
+The ChemicalToolbox contains a large number of cheminformatics tools. This section will demonstrate some of the useful functionalities available. If you are just interested in docking, feel free to skip this section - or, just try out the tools which look particularly interesting.
 
 (This section can also be completed while waiting for the docking, which can take some time to complete.)
 
@@ -327,15 +327,15 @@ It can be useful to visualize the compounds generated. There is a tool available
 >    - {% icon param-file %} *"Embed molecule as CML"*: `No`
 >    - {% icon param-file %} *"Draw all carbon atoms"*: `No`
 >    - {% icon param-file %} *"Use thicker lines"*: `No`
->    - {% icon param-file %} *"Property to display under the molecule"*: `Molecule weight`
+>    - {% icon param-file %} *"Property to display under the molecule"*: `Molecule title`
 >    - {% icon param-file %} *"Sort the displayed molecules by"*: `Molecular weight`
->    - {% icon param-file %} Format of the resultant picture"*: `SVG`
+>    - {% icon param-file %} *"Format of the resultant picture"*: `SVG`
 >
 {: .hands_on}
 
 This produces an SVG image of all the structures generated ordered by molecular weight.
 
-![Hsp90 N-terminus structure]({% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
+![Image showing structures of compounds from ChEMBL]({% link topics/computational-chemistry/images/compound_library.png %} "Structures of the compounds from ChEMBL.")
 
 ### Calculation of fingerprints and clustering
 
@@ -360,13 +360,13 @@ Before clustering, let's label each compound. To do so add a second column to th
 
 Taylor-Butina clustering  ({% cite Butina1999 %}) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.
 
-![Fingerprinting]({% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
+![Image showing a Fingerprinting System]({% link topics/computational-chemistry/images/fingerprints.png %} "A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.")
 
 > ### {% icon hands_on %} Hands-on: Cluster molecules using molecular fingerprints
 > 1. {% tool [Taylor-Butina clustering](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5) %} with the following parameters:
 >    - {% icon param-file %} *"Fingerprint dataset"*: 'Fingerprints' file.
 >    - {% icon param-file %} *"threshold"*: `0.8`
-> 2. {% tool [Taylor-Butina clustering](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1) %} with the following parameters:
+> 2. {% tool [NxN clustering](toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_nxn_clustering/1.5.1) %} with the following parameters:
 >    - {% icon param-file %} *"Fingerprint dataset"*: 'Fingerprints' file.
 >    - {% icon param-file %} *"threshold"*: `0.0`
 >    - {% icon param-file %} *"Format of the resulting picture"*: `SVG`
@@ -394,7 +394,7 @@ From our collection of SD-files, we first extract all stored values into tabular
 > 1. {% tool [Extract values from an SD-file](toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input SD-file"*: Collection of SD-files generated by the docking step. (Remember to select the 'collection' icon!)
 >    - {% icon param-file %} *"Include the property name as header"*: `Yes` 
->    - {% icon param-file %} *"Specify pH value for ligand protonation"*: `7.4` 
+>    - {% icon param-file %} *"Include SMILES as column in output"*: `Yes`
 >    - {% icon param-file %} *"Include molecule name as column in output"*: `Yes` 
 >    - Leave all other paramters unchanged.
 > 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:

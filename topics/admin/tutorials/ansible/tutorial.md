@@ -20,6 +20,8 @@ contributors:
   - hexylena
   - shiltemann
 subtopic: core
+tags:
+  - ansible
 
 ---
 
@@ -529,9 +531,7 @@ Templates give you greater control over the files you are deploying to the targe
 >     server_name: Dogs!
 >     ```
 >
->     > ### {% icon tip %} Variable connection
->     > When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named `my_hosts`, it checks many different places for variables, including "group_vars/my_hosts.yml". If there are variables there, they're added to the collection of current variables. It also checks "group_vars/all.yml" (for the built-in host group `all`). There is a precedence order, but then these variables are available for roles and tasks to consume.
->     {: .tip}
+>     {% snippet topics/admin/faqs/ansible-connection.md %}
 >
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
 >
@@ -541,10 +541,7 @@ Templates give you greater control over the files you are deploying to the targe
 >     > ```
 >     {: .code-in}
 >
->     > ### {% icon tip %} What if you forget `--diff`?
->     > If you forget to use `--diff`, it is not easy to see what has changed. Some modules like the `copy` and `template` modules have a `backup` option. If you set this option, then it will keep a backup copy next to the destination file.
->     > However, most modules do not have such an option, so if you want to know what changes, always use `--diff`.
->     {: .tip}
+>     {% snippet topics/admin/faqs/ansible_diff.md %}
 >
 >     > ### {% icon code-out %} Output
 >     >
@@ -671,11 +668,7 @@ These are usually good proxies for quality, but do not treat them as strict rule
 
 Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with `ansible-galaxy install`, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. [galaxyproject](https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles) and [usegalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles)
 
-> ### {% icon tip %} How do I know what I can do with a role? What variables are available?
-> You don't. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, galaxyproject) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.
->
-> So, definitely check there first, but if they aren't there, then you'll need to read through `defaults/` and `tasks/` and `templates/` to figure out what the role does and how you can control and modify it to accomplish your goals.
-{: .tip}
+{% snippet topics/admin/faqs/ansible_role-properties.md %}
 
 # Ansible Vault
 

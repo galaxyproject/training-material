@@ -225,7 +225,7 @@ Alternatively, you might want to use a web-based tool designed for chloroplast g
 
 > ### {% icon hands_on %} Hands-on: Annotate with GeSeq
 > * Download `polished-assembly.fasta` to your computer (click on the file in your history; then click on the disk icon).
-> * In a new broswer tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the GeSeq tool ({% cite Tillich_2017 %}) to annotate our sequence.
+> * In a new browser tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the GeSeq tool ({% cite Tillich_2017 %}) to annotate our sequence.
 > * Upload the `fasta` file there. Information about how to use the tool is available on the page.
 > * Once the annotation is completed, download the required files.
 > * In Galaxy, import the annotation `GFF3` file.

@@ -137,7 +137,7 @@ That's it! With this, videos can be automatically generated.
 		- [Those get converted into mp3 files](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L55) by AWS Polly (or MozillaTTS), one per slide.
 		- The PDFs get turned into [a series of PNG images](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L60)
 		- We take the timings of the mp3 files together with the json 'script' to [write out webvtt / srt subtitles](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L69) which get embedded into the video, and supplied next to it.
-		- [ffmpeg is used](https://github.com/galaxyproject/training-material/blob/main/bin/ari.sh#L75) to knit together the PNGs + mp3s with appropriate delay
+		- [editly is used](https://github.com/mifi/editly) to knit together the PNGs + mp3s with appropriate delay
 
 
 All of this is run on cron by [`.github/workflows/video.yml`](https://github.com/galaxyproject/training-material/blob/main/.github/workflows/video.yml) which handles building all of these videos and then later uploading them to s3.

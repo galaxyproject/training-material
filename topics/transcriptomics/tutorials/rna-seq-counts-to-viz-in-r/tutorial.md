@@ -13,7 +13,7 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
         - r-advanced
@@ -37,12 +37,13 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
+  - erasmusplus
 ---
 
 # Introduction
 {:.no_toc}
 
-{% include topics/introduction/tutorials/r-basics/tutorial_origin.md %}
+{% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
 With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
@@ -424,7 +425,7 @@ We would like now to make a barplot showing the number of differentially express
 
 > ### {% icon question %} Create a R script with plots
 >
-> Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the [RStudio `ggplot2` cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) for inspiration).
+> Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the [RStudio `ggplot2` cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization-2.1.pdf) for inspiration).
 >
 > Here are some ideas:
 > 1. Change the size or shape of the plotting symbol

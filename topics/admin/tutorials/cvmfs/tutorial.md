@@ -14,7 +14,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
@@ -25,6 +24,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -176,15 +179,17 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -14,3 +14,5 @@
+>       version: 0.1.5
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
 >    +  version: 0.2.13
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 >    > Okay, so the first thing I'm going to do is I'm going to add the CVMFS
 >    > role to the requirements.yml.
@@ -296,10 +301,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,3 +21,4 @@
->           become: true
+>    @@ -20,3 +20,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
@@ -495,9 +500,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
 >         brand: "🧬🔬🚀"
+>         admin_users: admin@example.org
+>         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
@@ -584,7 +589,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=4 %}
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 # Common Production Questions
 

@@ -18,7 +18,7 @@ def discover_trainings(topics_dir):
             continue
 
         with open(metadata_file, 'r') as handle:
-            training_data = yaml.load(handle)
+            training_data = yaml.safe_load(handle)
 
         training = {
             'title': training_data['title'],
@@ -27,7 +27,7 @@ def discover_trainings(topics_dir):
 
         for material in glob.glob(os.path.join(training_dir, 'tutorials', '*', 'tutorial.md')) + glob.glob(os.path.join(training_dir, 'tutorials', '*', 'slides.html')):
             with open(material, 'r') as handle:
-                material_data = yaml.load_all(handle)
+                material_data = yaml.safe_load_all(handle)
                 material_data = next(material_data)
 
             name = material.split('/')[-2]
@@ -133,7 +133,7 @@ if __name__ == '__main__':
 
     # Load the validated list of instances which support trainings
     with open(args.instances, 'r') as handle:
-        data = yaml.load(handle)
+        data = yaml.safe_load(handle)
 
     # Collect a list of instances seen
     instances = []

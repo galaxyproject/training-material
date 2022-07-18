@@ -264,7 +264,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 ## Taxonomic classification with Kraken2
 
-To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
+To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
 
 > ### {% icon comment %} Comments

@@ -20,6 +20,7 @@ $light-blue: #5daadd;
 $purple: #882d60;
 $mid-gray: #9d9d9d;
 
+
 // colors general
 $bg-color: $dark-blue;
 $menu-color: $dark-blue;
@@ -38,6 +39,21 @@ $details-color: $light-gray;
 $feedback-color: #86D486;
 $code-color: #86D486;
 $code-out-color: #fb99d0;
+
+.color-overview { background: $overview-color; }
+.color-agenda { background: $agenda-color; }
+.color-keypoints { background: $keypoints-color; }
+.color-tip { background: $tip-color; }
+.color-warning { background: $warning-color; }
+.color-comment { background: $comment-color; }
+.color-handson { background: $handson-color; }
+.color-question { background: $question-color; }
+.color-solution { background: $solution-color; }
+.color-details { background: $details-color; }
+.color-feedback { background: $feedback-color; }
+.color-code { background: $code-color; }
+.color-code-out { background: $code-out-color; }
+
 
 
 $hyperlink: #0067d6;
@@ -379,7 +395,6 @@ body.theme-rainbow {
 		tbody tr:nth-of-type(5n+4) td:not(:first-child) { color: blue; i{color: blue} }
 		tbody tr:nth-of-type(5n+5) td:not(:first-child) { color: purple; i{color: purple} }
 	}
-
 	.tutorials-list.topic-type-use table.table-striped {
 		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
 		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
@@ -433,6 +448,8 @@ body.theme-progress {
 
 		}
 	}
+
+    .contributor-hexylena {background: linear-gradient(to right, #cfe4f777 0%, #cfe4f777 20%, #f7d7dc77 20%, #f7d7dc77 40%, white 40%, white 60%, #f7d7dc77 60%, #f7d7dc77 80%, #cfe4f777 80%, #cfe4f777 100%);}
 
 	.tutorials-list:not(.topic-type-use) table.table-striped {
 		tbody tr:nth-of-type(5n+1) td:not(:first-child) { color: red; i{color: red} }
@@ -540,7 +557,7 @@ nav input.nicer {
 }
 
 #search-container input.nicer {
-	@include input-nicer(white);
+	@include input-nicer(black);
 }
 
 #search-input {
@@ -568,13 +585,13 @@ nav input.nicer {
 }
 
 .faqs{
-  h3.faq-area{
+  h4.faq-area{
     color: #888888;
     i {
      font-size: 0.5em;
     }
   }
-  h2{
+  h3{
    a{
      color: black;
     }
@@ -586,7 +603,7 @@ nav input.nicer {
         margin-bottom: 1rem;
     }
 
-    table {
+    table:not(.contributions) {
         display: block;
         width: 100%;
         overflow-x: auto;
@@ -615,109 +632,109 @@ nav input.nicer {
 		}
 	}
 
-    // tutorial boxes
-    blockquote {
-        ul,
-        ol,
-        & > blockquote,
-        p {
-            margin-bottom: 0px;
-        }
-
-        img {
-            display: block;
-        }
-
-        &.agenda {
-            @include tutorial-box($agenda-color, $text-color);
-        }
-
-        &.tip {
-            @include tutorial-box($tip-color, $text-color);
-        }
-
-        &.question {
-            @include tutorial-box($question-color, $text-color);
-        }
-
-        &.code-in {
-            @include tutorial-box($code-color, $text-color);
-        }
-
-        &.code-out {
-            @include tutorial-box($code-out-color, $text-color);
-        }
-
-        &.code-max-300 {
-            pre {
-                max-height: 300px
-            }
-        }
-
-        &.solution {
-            @include tutorial-box($solution-color, $text-color);
-        }
-
-        &.comment {
-            @include tutorial-box($comment-color, $text-color);
-        }
-
-        &.hands_on {
-            @include tutorial-box($handson-color, $text-color);
-        }
-
-        &.key_points {
-            @include tutorial-box($keypoints-color, $text-color);
-        }
-
-        &.overview {
-            @include tutorial-box($overview-color, $text-color);
-        }
-
-        &.warning {
-            @include tutorial-box($warning-color, $text-color);
-        }
-
-        &.details {
-            @include tutorial-box($details-color, $text-color);
-        }
-
-        &.quote {
-            border-left: 5px solid #eee;
-            padding-left: 1em;
-        }
-
-        &.spoken {
-            display: none;
-        }
-
-        &.hidden {
-            display: none;
-        }
-
-        &.matrix {
-            @include matrix-table();
-        }
-
-        &.feedback{
-            @include tutorial-box($feedback-color, $text-color);
-        }
-    }
-
-	.pre-break-lines code {
-		white-space: pre-wrap;
-	}
-
-    .fold-unfold {
-        margin-left: $tutorial-box-spacing;
-    }
-
     .google-form {
         width: 100%;
         height: 1100px;
         border: 0;
     }
 }
+
+// tutorial boxes
+blockquote {
+    ul,
+    ol,
+    & > blockquote,
+    li p {
+        margin-bottom: 0px;
+    }
+    img {
+        display: block;
+    }
+
+    &.agenda {
+        @include tutorial-box($agenda-color, $text-color);
+    }
+
+    &.tip {
+        @include tutorial-box($tip-color, $text-color);
+    }
+
+    &.question {
+        @include tutorial-box($question-color, $text-color);
+    }
+
+    &.code-in {
+        @include tutorial-box($code-color, $text-color);
+    }
+
+    &.code-out {
+        @include tutorial-box($code-out-color, $text-color);
+    }
+
+    &.code-max-300 {
+        pre {
+            max-height: 300px
+        }
+    }
+
+    &.solution {
+        @include tutorial-box($solution-color, $text-color);
+    }
+
+    &.comment {
+        @include tutorial-box($comment-color, $text-color);
+    }
+
+    &.hands_on {
+        @include tutorial-box($handson-color, $text-color);
+    }
+
+    &.key_points {
+        @include tutorial-box($keypoints-color, $text-color);
+    }
+
+    &.overview {
+        @include tutorial-box($overview-color, $text-color);
+        margin-top: 5rem;
+    }
+
+    &.warning {
+        @include tutorial-box($warning-color, $text-color);
+    }
+
+    &.details {
+        @include tutorial-box($details-color, $text-color);
+    }
+
+    &.quote {
+        border-left: 5px solid #eee;
+        padding-left: 1em;
+    }
+
+    &.spoken {
+        display: none;
+    }
+
+    &.hidden {
+        display: none;
+    }
+
+    &.matrix {
+        @include matrix-table();
+    }
+
+    &.feedback{
+        @include tutorial-box($feedback-color, $text-color);
+    }
+}
+
+.fold-unfold {
+    margin-left: $tutorial-box-spacing;
+}
+.pre-break-lines code {
+    white-space: pre-wrap;
+}
+
 
 .newslist {
     display: flex;
@@ -745,21 +762,14 @@ nav input.nicer {
     h3 {
         margin-top: 1rem;
     }
-    .contributors-line{
-        margin-bottom: 1rem;
-    }
 }
 
-.newsitem{
- .contributors-line{
-        margin-bottom: 1rem;
-    }
-}
 
 .newstable{
-  h5 {
+  div {
     margin-top: 0px;
     color: $text-color !important;
+    font-weight: bold;
   }
   a.newstitle{
     font-color: $text-color;
@@ -787,7 +797,7 @@ nav input.nicer {
 
     .hall-of-fame-hero {
         margin: 0;
-        width: 20%;
+        width: 18%;
 
         .name {
             font-size: 0.7em;
@@ -809,12 +819,6 @@ nav input.nicer {
 		max-width: 100%;
 		width: 100%;
 	}
-}
-
-.contributors-line {
-    color: $gray;
-    font-size: 1.2em;
-    margin-bottom: 5rem;
 }
 
 .hall-of-fame {
@@ -1064,14 +1068,54 @@ nav[data-toggle='toc'] {
     }
 }
 
+.contributors-line {
+    color: $gray;
+    font-size: 1.2em;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: baseline;
+    line-height: 1.5em;
+
+    .contributor-badge {
+        img {
+            height: 1.5em;
+            line-height: 1.5em;
+        }
+        i {
+            height: 1.5em;
+            line-height: 1.5em;
+            margin-left: 0.5em;
+            margin-right: 0.5em;
+        }
+    }
+
+}
+
 .contributor-badge {
     /* prevent breaking across lines */
     white-space: nowrap;
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 1em;
+    border: 1px solid #b7daff;
+    padding-right: 0.5em;
+    margin: 0.2em;
+    line-height: 1em;
+    flex-shrink: 0;
 
     img {
-        height: 1.25em;
+        height: 1em;
         border-radius: 50%;
-        margin: 0.25em;
+        margin: 0 0.25em 0 0;
+    }
+}
+
+table.contributions{
+    tr td:nth-child(1) {
+        display: flex;
+        flex-wrap: wrap;
     }
 }
 
@@ -1247,6 +1291,191 @@ abbr {
                 margin-top: 0px;
             }
         }
-    }    
+    }
 }
 
+// Style definition lists a bit more nicely
+div.contributors-line {
+    dl {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 0;
+    }
+    dt {
+      width: 8em;
+      text-align: right;
+      font-weight: initial;
+    }
+    dd {
+      margin-left: auto;
+      width: calc(100% - 9em);
+      display: flex;
+    }
+}
+
+// big buttons
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  white-space: normal;
+
+  div {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+$btn-red: #bf4646;
+$btn-orange:$warning-color;
+$btn-yellow:$tip-color;
+$btn-green:$agenda-color;
+$btn-blue:$handson-color;
+$btn-purple:$question-color;
+$btn-pink:$keypoints-color;
+
+
+.btn-red{
+ background-color: $btn-red;
+ color: white;
+}
+
+.btn-orange{
+ background-color: $btn-orange;
+ color: black;
+}
+
+.btn-yellow{
+ background-color: $btn-yellow;
+ color: black;
+}
+
+.btn-green{
+ background-color: $btn-green;
+ color: black;
+}
+
+.btn-blue{
+ background-color: $btn-blue;
+ color: black;
+}
+
+.btn-purple{
+ background-color: $btn-purple;
+ color: white;
+}
+
+.btn-pink{
+ background-color: $btn-pink;
+ color: black;
+}
+
+
+.btn-square-small {
+  width: 50px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 50px !important;
+  text-align: center;
+  padding: 5px;
+  font-size:0.75rem;
+  margin: 5px;
+}
+
+.btn-square-medium {
+  width: 100px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 100px !important;
+  text-align: center;
+  padding: 5px;
+  font-size:1rem;
+  margin: 5px;
+}
+
+.btn-square-large {
+  width: 150px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 150px !important;
+  text-align: center;
+  padding: 5px;
+  font-size:1.25rem;
+  margin: 5px;
+}
+
+.btn-square-extralarge {
+  width: 200px !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  height: 200px !important;
+  text-align: center;
+  padding: 5px;
+  font-size:1.5rem;
+  margin: 5px;
+}
+
+
+/* CYOA */
+.gtn-cyoa {
+    input[type="radio"] {
+        display: none;
+        &:checked+label {
+            background-color: $question-color;
+        }
+    }
+
+    .btn-secondary {
+        color: $text-color;
+        background-color: $handson-color;
+        border-color: transparent;
+        &:hover {
+            background-color: $solution-color;
+        }
+    }
+
+    label {
+        padding: 1em;
+        display: inline-block;
+    }
+}
+
+.gtn-cyoa-hidden {
+	height: 0px;
+	visibility: hidden;
+	display: none;
+	padding: 0rem;
+}
+
+/*
+Maybe something like this for the case where they do not select anything?
+.openstack {
+	border-left: 2px solid red;
+}
+.digitalocean {
+	border-left: 2px solid blue;
+}
+*/
+
+ul.text-list, ol.text-list {
+    list-style: none;
+	  padding-left: 0;
+
+    li {
+        display: inline;
+    }
+}
+
+.gtn-card {
+    border-radius: 10px;
+
+    .card-title {
+        font-size: 500%;
+        font-weight: 900;
+        margin-bottom: 0
+    }
+    .card-text {
+        text-align: center;
+        font-size: 150%;
+        padding: 0.3em;
+    }
+}
