@@ -2058,9 +2058,9 @@ class: enlarge200
 ### Best Practices
 
 - Place tasks in `galaxy.celery.tasks`.
-- Keep the tasks as thing as possible (ideally simply delegate inputs
+- Keep the tasks as thin as possible (ideally simply delegate inputs
   to a manager or another Galaxy component independent of Celery).
-- Ensure required/inject Galaxy components as small and decomposed as
+- Ensure required/injected Galaxy components as small and decomposed as
   possible.
 - Place new request definition argument types in `galaxy.schema.tasks`.
 
@@ -2085,7 +2085,7 @@ class: enlarge150
 
 - A Galaxy component for managing user downloadable files that only
   need to exist for a little time.
-- Traditionally, these kind of files have required a lot of admin
+- Traditionally, these kind of files have required a lot of
   hacking to do well in Galaxy (tracking transient request-like stuff in data model, etc..)
 - Not just unoptimized by default, but unusable
 - Required customizing nginx routes, special web server plugins, etc...
