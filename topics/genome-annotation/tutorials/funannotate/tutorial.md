@@ -238,7 +238,7 @@ To get a better picture of the quality of the result, we will run BUSCO in the n
 
 Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
 
-{% include {{ page.dir }}content.md %}
+{% include topics/genome-annotation/tutorials/functional/content.md %}
 
 # Submission to NCBI
 

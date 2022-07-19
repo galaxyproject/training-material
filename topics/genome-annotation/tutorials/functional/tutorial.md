@@ -10,7 +10,7 @@ questions:
   - How to perform functional annotation on protein sequences?
 objectives:
   - Perform functional annotation using EggNOG-mapper and InterProScan
-time_estimation: 2h
+time_estimation: 1h
 level: Introductory
 key_points:
   - EggNOG Mapper compares sequences to a database of annotated orthologous sequences
