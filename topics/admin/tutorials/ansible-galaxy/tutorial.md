@@ -12,12 +12,24 @@ time_estimation: "2h30m"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
-contributors:
+contributions:
+  authorship:
   - hexylena
   - natefoo
   - slugger70
+  editing:
   - shiltemann
   - nsoranzo
+  - gmauro
+  - mvdbeek
+  - martenson
+  - jmchilton
+  - davebx
+  - nsoranzo
+  - lecorguille
+  - abretaud
+  testing:
+  - mira-miracoli
 tags:
   - ansible
   - deploying
@@ -207,7 +219,7 @@ To proceed from here it is expected that:
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
 >    {: .comment}
 >
-> 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
+> 2. Your `ansible` version is `>=2.10`, you can check this by running `ansible --version`
 > 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 > 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
 > 5. Your VM has `python3` installed.
@@ -1869,7 +1881,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
->    +  gzip: "on"
+>    +  # gzip: "on" # This is enabled by default in Ubuntu, and the duplicate directive will cause a crash.
 >    +  gzip_proxied: "any"
 >    +  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
 >    +  gzip_vary: "on"

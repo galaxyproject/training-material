@@ -41,7 +41,12 @@ module Jekyll
       end
 
       attributes += get_authors(material).map{|user|
-        ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
+        if site['data']['contributors'].has_key?(user) then
+          ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
+        else
+          puts "[GTN/Meta] #{user} not found in CONTRIBUTORS.yaml"
+          ['DC.creator', user]
+        end
       }
 
       return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\" />" }.join("\n")
