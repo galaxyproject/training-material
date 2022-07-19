@@ -67,3 +67,7 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 {:.no_toc}
 
 Congratulations for reaching the end of this tutorial! Now you know how to perform the functional annotation of a set of protein sequences, using EggNOG mapper and InterProScan.
+
+If you want to collect more functional annotation, you can try to run the {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} or {% tool [Diamond](toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0) %} tools against the UniProt or NR databases (Diamond runs much faster on big datasets). These tools will search for similarities between your protein sequences and the ones already described in big international databases.
+
+Also note that many other more specialised tools exist to collect even more functional annotation, in particular for certain species (prokaryotes forexample), or enzyme/protein families.
