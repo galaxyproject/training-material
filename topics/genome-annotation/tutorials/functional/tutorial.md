@@ -17,6 +17,7 @@ key_points:
   - InterProScan detects known motifs in protein sequences
 contributors:
   - abretaud
+  - erasmusplus
 ---
 
 
