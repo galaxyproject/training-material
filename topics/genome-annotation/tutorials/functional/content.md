@@ -1,3 +1,9 @@
+{% if include.short %}
+  {% assign input_dataset = "`proteins.fasta` (Input dataset)" %}
+{% else %}
+  {% capture input_dataset %}`protein sequences` (output of **Funannotate predict annotation** {% icon tool %})"{% endcapture%}
+{% endif %}
+
 # Functional annotation
 
 ## **EggNOG Mapper**
@@ -7,7 +13,7 @@
 > ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8) %} with the following parameters:
->    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
+>    - {% icon param-file %} *"Fasta sequences to annotate"*: {{ input_dataset }}
 >    - *"Version of eggNOG Database"*: select the latest version available
 >    - In *"Output Options"*:
 >        - *"Exclude header lines and stats from output files"*: `No`
@@ -29,7 +35,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 > ### {% icon hands_on %} Hands-on
 >
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
+>    - {% icon param-file %} *"Protein FASTA File"*: {{ input_dataset }}
 >    - *"InterProScan database"*: select the latest version available
 >    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
 >    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`

@@ -61,7 +61,7 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 >
 {: .hands_on}
 
-{% include {{ page.dir }}content.md %}
+{% include {{ page.dir }}content.md short=true %}
 
 # Conclusion
 {:.no_toc}
