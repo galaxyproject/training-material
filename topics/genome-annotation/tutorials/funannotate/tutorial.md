@@ -23,7 +23,7 @@ key_points:
   - Functional annotation can be performed using EggNOG-mapper and InterProScan.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
-contributors:
+contributions:
   authorship:
     - abretaud
   editing:

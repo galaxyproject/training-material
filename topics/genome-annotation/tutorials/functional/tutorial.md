@@ -15,7 +15,7 @@ level: Introductory
 key_points:
   - EggNOG Mapper compares sequences to a database of annotated orthologous sequences
   - InterProScan detects known motifs in protein sequences
-contributors:
+contributions:
   authorship:
     - abretaud
   funding:
