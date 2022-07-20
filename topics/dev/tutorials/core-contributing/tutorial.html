@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Contributing a New Feature to Galaxy Core" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:11 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:20 +0000" />
 <meta name="DC.creator" content="John Chilton" />
 <meta name="DC.creator" content="John Davis" />
 
@@ -275,7 +275,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:11 +0000",
+  "dateModified": "1970-01-01 00:00:20 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Contributing a New Feature to Galaxy Core",
   "interactivityType": "mixed",
@@ -750,7 +750,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 11, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 20, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1395,17 +1395,20 @@ favorite extensions in the UI. This URL needs to be registered as a client route
 
   <p>Possible changes to file <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py</code>:</p>
 
-  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 7fbe248c66..76fe7cd819 100644
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 83757e5307..c9e0feeb77 100644
 </span><span class="gd">--- a/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py
 </span><span class="gi">+++ b/lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/buildapp.py
-</span><span class="p">@@ -155,6 +155,7 @@</span> def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):
-     webapp.add_client_route('/tours/{tour_id}')
-     webapp.add_client_route('/user')
-     webapp.add_client_route('/user/{form_id}')
+</span><span class="p">@@ -213,6 +213,7 @@</span> def app_pair(global_conf, load_app_kwds=None, wsgi_preflight=True, **kwargs):
+     webapp.add_client_route("/tours/{tour_id}")
+     webapp.add_client_route("/user")
+     webapp.add_client_route("/user/{form_id}")
 <span class="gi">+    webapp.add_client_route('/user/favorite/extensions')
-</span>     webapp.add_client_route('/visualizations')
-     webapp.add_client_route('/visualizations/edit')
-     webapp.add_client_route('/visualizations/sharing')
+</span>     webapp.add_client_route("/welcome/new")
+     webapp.add_client_route("/visualizations")
+     webapp.add_client_route("/visualizations/edit")
+<span class="gd">-- 
+</span><span class="p">2.30.1 (Apple Git-130)
+</span>
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1419,10 +1422,10 @@ we described above to <code class="language-plaintext highlighter-rouge">menu.js
 
   <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/layout/menu.js</code>:</p>
 
-  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index 062191b492..de91d9670c 100644
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index b4f6c46a2f..d2eab16f6f 100644
 </span><span class="gd">--- a/client/src/layout/menu.js
 </span><span class="gi">+++ b/client/src/layout/menu.js
-</span><span class="p">@@ -314,6 +314,11 @@</span> export function fetchMenu(options = {}) {
+</span><span class="p">@@ -303,6 +303,11 @@</span> export function fetchMenu(options = {}) {
                      url: "workflows/invocations",
                      target: "__use_router__",
                  },
@@ -1444,45 +1447,38 @@ render.</p>
 <p>Assume a VueJS component will be available called
 <code class="language-plaintext highlighter-rouge">FavoriteExtensions</code> in the file
 <code class="language-plaintext highlighter-rouge">components/User/FavoriteExtensions/index.js</code>.  In
-<code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code> respond to the route
+<code class="language-plaintext highlighter-rouge">client/src/entry/analysis/router.js</code> respond to the route
 added above in <code class="language-plaintext highlighter-rouge">buildapp.py</code> and render the fictitious VueJS component
 <code class="language-plaintext highlighter-rouge">FavoriteExtensions</code>.</p>
 
 <blockquote class="solution">
-  <h3 id="solution-clientsrcentryanalysisanalysisrouterjs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code></h3>
+  <h3 id="solution-clientsrcentryanalysisrouterjs"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/router.js</code></h3>
 
-  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/AnalysisRouter.js</code>:</p>
+  <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/entry/analysis/router.js</code>:</p>
 
-  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index b409c8374f..61b01f85fa 100644
-</span><span class="gd">--- a/client/src/entry/analysis/AnalysisRouter.js
-</span><span class="gi">+++ b/client/src/entry/analysis/AnalysisRouter.js
-</span><span class="p">@@ -32,6 +32,7 @@</span> import InteractiveTools from "components/InteractiveTools/InteractiveTools.vue";
- import WorkflowList from "components/<span class="notranslate">Workflow</span>/WorkflowList.vue";
- import HistoryImport from "components/HistoryImport.vue";
- import { HistoryExport } from "components/HistoryExport/index";
+  <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">index e4b3ce87cc..73332bf4ac 100644
+</span><span class="gd">--- a/client/src/entry/analysis/router.js
+</span><span class="gi">+++ b/client/src/entry/analysis/router.js
+</span><span class="p">@@ -22,6 +22,7 @@</span> import Grid from "components/Grid/Grid";
+ import GridShared from "components/Grid/GridShared";
+ import GridHistory from "components/Grid/GridHistory";
+ import HistoryImport from "components/HistoryImport";
 <span class="gi">+import { FavoriteExtensions } from "components/User/FavoriteExtensions/index";
-</span> import HistoryView from "components/HistoryView.vue";
- import WorkflowInvocationReport from "components/<span class="notranslate">Workflow</span>/InvocationReport.vue";
- import WorkflowRun from "components/<span class="notranslate">Workflow</span>/Run/WorkflowRun.vue";
-<span class="p">@@ -67,6 +68,7 @@</span> export const getAnalysisRouter = (<span class="notranslate">Galaxy</span>) =&gt; {
-             "(/)user(/)cloud_auth": "show_cloud_auth",
-             "(/)user(/)exte<span class="notranslate">rna</span>l_ids": "show_exte<span class="notranslate">rna</span>l_ids",
-             "(/)user(/)(:form_id)": "show_user_form",
-<span class="gi">+            "(/)user(/)favorite(/)extensions": "show_user_favorite_extensions",
-</span>             "(/)pages(/)create(/)": "show_pages_create",
-             "(/)pages(/)edit(/)": "show_pages_edit",
-             "(/)pages(/)sharing(/)": "show_pages_sharing",
-<span class="p">@@ -157,6 +159,10 @@</span> export const getAnalysisRouter = (<span class="notranslate">Galaxy</span>) =&gt; {
-             this.page.display(new FormWrapper.View(_.extend(model[form_id], { active_tab: "user" })));
-         },
- 
-<span class="gi">+        show_user_favorite_extensions: function () {
-+            this._display_vue_helper(FavoriteExtensions, {});
-+        },
-+
-</span>         show_interactivetool_list: function () {
-             this._display_vue_helper(InteractiveTools);
-         },
+</span> import HistoryView from "components/HistoryView";
+ import InteractiveTools from "components/InteractiveTools/InteractiveTools";
+ import InvocationReport from "components/<span class="notranslate">Workflow</span>/InvocationReport";
+<span class="p">@@ -299,6 +300,11 @@</span> export function getRouter(<span class="notranslate">Galaxy</span>) {
+                         props: true,
+                         redirect: redirectAnon(),
+                     },
+<span class="gi">+                    {
++                        path: "user/favorite/extensions",
++                        component: FavoriteExtensions,
++                        redirect: redirectAnon(),
++                    },
+</span>                     {
+                         path: "visualizations",
+                         component: VisualizationsList,
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1615,29 +1611,25 @@ individual components make sense before continuing though.</p>
   <p>Possible changes to file <code class="language-plaintext highlighter-rouge">client/src/components/User/FavoriteExtensions/List.vue</code>:</p>
 
   <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">new file mode 100644
-</span><span class="gh">index 0000000000..e5e7d07ab2
+</span><span class="gh">index 0000000000..053b354f63
 </span><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/client/src/components/User/FavoriteExtensions/List.vue
-</span><span class="p">@@ -0,0 +1,82 @@</span>
+</span><span class="p">@@ -0,0 +1,78 @@</span>
 <span class="gi">+&lt;template&gt;
 +    &lt;div class="favorite-extensions-card"&gt;
-+        &lt;b-alert variant="error" show v-if="errorMessage"&gt;
-+            
-+        &lt;/b-alert&gt;
++        &lt;b-alert variant="error" show v-if="errorMessage"&gt; &lt;/b-alert&gt;
 +        &lt;loading-span v-if="loading" message="Loading favorite extensions" /&gt;
 +        &lt;ul id="favorite-extensions" v-else&gt;
 +            &lt;li v-for="extension in extensions" :key="extension" :data-extension-target="extension"&gt;
 +                &lt;span
 +                    class="favorite-link unmark-favorite"
 +                    v-if="favoriteExtensions.indexOf(extension) &gt;= 0"
-+                    title="Unmark as favorite"
-+                &gt;
++                    title="Unmark as favorite"&gt;
 +                    &lt;a href="#" @click="unmarkAsFavorite(extension)"&gt;(X)&lt;/a&gt;
 +                &lt;/span&gt;
 +                &lt;span class="favorite-link mark-favorite" v-else title="Mark as favorite"&gt;
 +                    &lt;a href="#" @click="markAsFavorite(extension)"&gt;(+)&lt;/a&gt;
 +                &lt;/span&gt;
-+                
 +            &lt;/li&gt;
 +        &lt;/ul&gt;
 +    &lt;/div&gt;
@@ -1813,7 +1805,7 @@ author = "John Chilton and John Davis",
 title = "Contributing a New Feature to Galaxy Core (Galaxy Training Materials)",
 year = "2022",
 month = "07",
-day = "11"
+day = "20"
 url = "\url{https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
