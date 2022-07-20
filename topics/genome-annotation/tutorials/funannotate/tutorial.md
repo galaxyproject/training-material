@@ -24,12 +24,15 @@ key_points:
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
 contributors:
-  - abretaud
-  - alexcorm
-  - lleroi
-  - r1corre
-  - stephanierobin
-  - erasmusplus
+  authorship:
+    - abretaud
+  editing:
+    - alexcorm
+    - lleroi
+    - r1corre
+    - stephanierobin
+  funding:
+    - erasmusplus
 
 abbreviations:
     NMDS: Non-metric multidimensional scaling
