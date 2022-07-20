@@ -61,6 +61,8 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_sort="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" %}
 {% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
 {% assign version_unique="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" %}
+{% assign version_wc="wc_gnu" %}
+
 
 # Introduction
 {:.no_toc}
@@ -90,10 +92,10 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Operation              | Description                        | Galaxy Tool    |
 |------------------------|------------------------------------|----------------|
 | Convert format         | Change the file format             | {% icon galaxy-pencil%} Edit attributes |
-| Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count](wc_gnu) %} |
-| Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort](sort1) %} |
-| Filter                 | Remove rows based on values in one or more columns | {% tool [Filter](Filter1) %}|
-| Counting               | Count occurrences of values in a column   | {% tool [**Count**](Count1) %}, {% tool [Datamash]({{version_datamash}}) %}|
+| Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count]({{version_wc}}) %} |
+| Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort]({{version_sort}}) %} |
+| Filter                 | Remove rows based on values in one or more columns | {% tool [Filter]({{version_filter}}) %}|
+| Counting               | Count occurrences of values in a column   | {% tool [**Count**]({{version_count}}) %}, {% tool [Datamash]({{version_datamash}}) %}|
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row, add it as a new column | {% tool [Compute]({{version_compute}}) %} |
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
@@ -464,9 +466,154 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 {: .question}
 
 
+# Filtering
+
+This file contains a lot of data, but we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will create a new dataset, removing any rows that are not of interest to us (i.e. that don't meet the criteria we provide).
+
+
+> ### {% icon hands_on %} Hands-on: Filter table based on a column
+>
+> We will filter the file to show only winter Olympics
+>
+> 1. Look at the `olympics.tsv` file and answer the following questions
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Which column contains this information?
+>    > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. Column 13, the column with the *season* header
+>    > > 2. The values can be `Summer` or `Winter`
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 2. Open the tool {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %}
+>    - read the help text at the bottom of the tool carefully
+>    - get familiar with how to indicate columns and write expressions for filtering
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How would you write the expressions for the following conditions:
+>    >    1. column 6 must be 'Yes'
+>    >    2. column 13 must be smaller than 75
+>    >    3. column 7 cannot be 'NA'
+>    >    4. column 2 cannot be empty
+>    >
+>    > 2. It is also possible to combine multiple conditions, using `and`, `or`, `not` and parentheses
+>    >    How would you write expressions for the following filtering conditions:
+>    >    1. column 5 is larger than 2 or smaller than -2
+>    >    2. column 5 is larger than 2 and smaller than 10
+>    >    3. the sum of columns 4 and 6 is greater than or equal to 25,000
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. The answers are:
+>    > >    1. `c6=='Yes'`
+>    > >    2. `c13<75`
+>    > >    3. `c7!='NA'`
+>    > >    4. `c2!=''`
+>    > >
+>    > > 2. The answers are:
+>    > >    1. `c5>2 or c5<-2`
+>    > >    2. `c5>2 and c5<10`
+>    > >    3. `c4+c6 >= 25000`
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>    Ok, great, now that you've got the hang of writing expressions for this tool, let's create a file with only Winter Olympics:
+>
+> 3. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+>    - {% icon param-text %} *"With the following condition"*: `c13=='Winter'`
+>    - {% icon param-text %} *"Number of header lines to skip"*: `1`
+>
+> 4. {% icon galaxy-eye %} **View** the filtered file.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > How many lines are in this file? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    >
+>    > > ### {% icon solution %} Answer
+>    > >
+>    > > 44,681 (this is including the header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 5. **Repeat** the step for the Summer Olympics
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many lines do you expect in the this file?
+>    > 2. How many lines are in this file? Were you right?
+>    >
+>    > > ### {% icon solution %} Hints
+>    > >
+>    > > 1. Use the {% tool [Line/Word/Character count]({{version_wc}}) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter Olympics file
+>    > > 2. Be careful to consider whether these counts include the header line of the file or not
+>    > >
+>    > {: .solution}
+>    >
+>    > > ### {% icon solution %} Answers
+>    > >
+>    > > 1. The original file has 234,523 lines, and the Winter Olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer Olympics file to have 1 more line that this, so 189,843 total lines.
+>    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
+>    > > <br>
+>    > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 6. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive (e.g. `Filter: Winter Olympics only` etc)
+>    - This is primarily to get you into the habit. If this is a file you might want to view or use again later, it will be hard to find back again unless you name it well.
+>
+{: .hands_on}
+
+## Exercises
+
+Ok, time to train! let's see if you can use the {% tool [Filter]({{version_filter}}) %} tool to answer the following questions:
+
+
+> ### {% icon question %} Exercise: Medal winners
+>
+> 1. How many gold medals were handed out?
+> 2. How many total medals?
+> 3. How many medals were handed out during the 2018 Olympics?
+> 4. How many medals were won by individuals with a height between 170 and 180 cm?
+> 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
+>
+> > ### {% icon solution %} Hints
+> >
+> > - Column 17 contains information about medals
+> > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
+> > - Expand the output or use the tool {% tool [Line/Word/Character count]({{version_wc}}) %} to see the number of lines in the file
+> > - Don't forget that the output (and line count) may include the header line
+> > - Do not use quotes on number columns (e.g. year)
+> > - You may need parentheses for complex conditions
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> >  1. 8,110   (Expression: `c17=='Gold'`)
+> >  2. 24,633  (Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!='NA'`)
+> >  3. 131     (Expression: `c17=='Gold' and c12==2018` (note: do not use quotes around `2018`, as it is a numerical value))
+> >  4. 8,086   (Expression: `c17!='NA' and c7>=170 and c7<=180`)
+> >  5. 812     (Expression: `c17=='Gold' and (c7<160 or c7>190)` (note: parentheses are important here))
+> >
+> > Note: these numbers are found by determining the number of lines in the file after each filtering step, and subtracting 1 for the header line.
+> >
+> {: .solution}
+{: .question}
+
+
 # Counting
 
-A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool {% tool [**Count** occurrences of each record](Count1) %} does exactly this.
+A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool {% tool [**Count** occurrences of each record]({{version_count}}) %} does exactly this.
 
 
 > ### {% icon hands_on %} Hands-on: Count occurrences of values in columns
@@ -576,7 +723,10 @@ To answer these types of questions we can use a slightly more advanced tool, cal
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > 1. This is for technical reasons, the tool assumes a sorted file, so it will restart the counter every time it encounters a value in a column that is different from the previous one.
+>    > > 1. This is for technical reasons; the tool assumes that your file is sorted (on the column that you supplied to the "Group by fields" parameter).
+>    > >    This assumption can greatly speed up the calculation, but will give incorrect results if the file was not actually sorted.
+>    > >    If you know for sure that your data is sorted in the right way, you can skip this step. If you are unsure, enable this parameter to be safe, and the
+>    > >    tool will perform the sorting step before its calculation.
 >    > > 2. 10 and 38.
 >    > > 3. The 2020 Summer Olympics had the most different sports (38)
 >    > >
@@ -615,7 +765,7 @@ Ok, let's practice!
 >
 > > ### {% icon solution %} Full Solutions
 > >
-> >  1. {% tool [Count](Count1) %} with the following parameters:
+> >  1. {% tool [Count]({{version_count}}) %} with the following parameters:
 > >     - {% icon param-file %} *"from dataset"*: `olympics.tsv`
 > >     - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column 9` (the `team` column)
 > >     - {% icon param-select %} *"How should the results be sorted?"*: `With the most common values first`
@@ -654,149 +804,6 @@ Ok, let's practice!
 
 
 
-# Filtering
-
-This file contains a lot of data, but we may only be interested in a subset of this data. For example, we may only want to look at one particular Olympics, or one particular sport. In such cases we can filter the dataset. This will create a new dataset, removing any rows that are not of interest to us (i.e. that don't meet the criteria we provide).
-
-
-> ### {% icon hands_on %} Hands-on: Filter table based on a column
->
-> We will filter the file to show only winter Olympics
->
-> 1. Look at the `olympics.tsv` file and answer the following questions
->
->    > ### {% icon question %} Questions
->    >
->    > 1. Which column contains this information?
->    > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
->    >
->    > > ### {% icon solution %} Answers
->    > >
->    > > 1. Column 13, the column with the *season* header
->    > > 2. The values can be `Summer` or `Winter`
->    > >
->    > {: .solution}
->    {: .question}
->
-> 2. Open the tool {% tool [**Filter** data on any column using simple expressions](Filter1) %}
->    - read the help text at the bottom of the tool carefully
->    - get familiar with how to indicate columns and write expressions for filtering
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How would you write the expressions for the following conditions:
->    >    1. column 6 must be 'Yes'
->    >    2. column 13 must be smaller than 75
->    >    3. column 7 cannot be 'NA'
->    >    4. column 2 cannot be empty
->    >
->    > 2. It is also possible to combine multiple conditions, using `and`, `or`, `not` and parentheses
->    >    How would you write expressions for the following filtering conditions:
->    >    1. column 5 is larger than 2 or smaller than -2
->    >    2. column 5 is larger than 2 and smaller than 10
->    >    3. the sum of columns 4 and 6 is greater than or equal to 25,000
->    >
->    > > ### {% icon solution %} Answers
->    > >
->    > > 1. The answers are:
->    > >    1. `c6=='Yes'`
->    > >    2. `c13<75`
->    > >    3. `c7!='NA'`
->    > >    4. `c2!=''`
->    > >
->    > > 2. The answers are:
->    > >    1. `c5>2 or c5<-2`
->    > >    2. `c5>2 and c5<10`
->    > >    3. `c4+c6 >= 25000`
->    > >
->    > {: .solution}
->    {: .question}
->
->    Ok, great, now that you've got the hang of writing expressions for this tool, let's create a file with only Winter Olympics:
->
-> 3. {% tool [**Filter** data on any column using simple expressions](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `olympics.tsv`
->    - {% icon param-text %} *"With the following condition"*: `c13=='Winter'`
->    - {% icon param-text %} *"Number of header lines to skip"*: `1`
->
-> 4. {% icon galaxy-eye %} **View** the filtered file.
->
->    > ### {% icon question %} Question
->    >
->    > How many lines are in this file? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count](wc_gnu) %} )
->    >
->    > > ### {% icon solution %} Answer
->    > >
->    > > 44,681 (this is including the header line)
->    > >
->    > {: .solution}
->    {: .question}
->
-> 5. **Repeat** the step for the Summer Olympics
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many lines do you expect in the this file?
->    > 2. How many lines are in this file? Were you right?
->    >
->    > > ### {% icon solution %} Hints
->    > >
->    > > 1. Use the {% tool [Line/Word/Character count](wc_gnu) %} to find the number of lines in the `olympics.tsv` file and subtract the number of rows in the Winter Olympics file
->    > > 2. Be careful to consider whether these counts include the header line of the file or not
->    > >
->    > {: .solution}
->    >
->    > > ### {% icon solution %} Answers
->    > >
->    > > 1. The original file has 234,523 lines, and the Winter Olympics had 44,681 lines. So we would expect 234,523 - 44,681 = 189,842 rows of data. Since we have subtracted the header line in this equation as well, we expect the Summer Olympics file to have 1 more line that this, so 189,843 total lines.
->    > > 2. 189,843. If you were off by one or two lines, it may have been that you counted the header lines double
->    > > <br>
->    > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
->    > >
->    > {: .solution}
->    {: .question}
->
-> 6. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive (e.g. `Filter: Winter Olympics only` etc)
->    - This is primarily to get you into the habit. If this is a file you might want to view or use again later, it will be hard to find back again unless you name it well.
->
-{: .hands_on}
-
-## Exercises
-
-Ok, time to train! let's see if you can use the filter tool to answer the following questions:
-
-
-> ### {% icon question %} Exercise: Medal winners
->
-> 1. How many gold medals were handed out?
-> 2. How many total medals?
-> 3. How many medals were handed out during the 2018 Olympics?
-> 4. How many medals were won by individuals with a height between 170 and 180 cm?
-> 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
->
-> > ### {% icon solution %} Hints
-> >
-> > - Column 17 contains information about medals
-> > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
-> > - Expand the output or use the tool {% tool [Line/Word/Character count](wc_gnu) %} to see the number of lines in the file
-> > - Don't forget that the output (and line count) may include the header line
-> > - Do not use quotes on number columns (e.g. year)
-> > - You may need parentheses for complex conditions
-> >
-> {: .solution}
->
-> > ### {% icon solution %} Answers
-> >
-> >  1. 8,110   (Expression: `c17=='Gold'`)
-> >  2. 24,633  (Expression: `c17=='Gold' or c17=='Silver' or c17=='Bronze'`, or `c17!='NA'`)
-> >  3. 131     (Expression: `c17=='Gold' and c12==2018` (note: do not use quotes around `2018`, as it is a numerical value))
-> >  4. 8,086   (Expression: `c17!='NA' and c7>=170 and c7<=180`)
-> >  5. 812     (Expression: `c17=='Gold' and (c7<160 or c7>190)` (note: parentheses are important here))
-> >
-> > Note: these numbers are found by determining the number of lines in the file after each filtering step, and subtracting 1 for the header line.
-> >
-> {: .solution}
-{: .question}
 
 
 
@@ -810,7 +817,7 @@ In the [counting](#counting) section of this tutorial we show how to get answers
 
 We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose.
 
-> ### {% icon hands_on %} Hands-on: Number of athletes per Olympics
+> ### {% icon hands_on %} Hands-on: Tallest athlete per sport
 >
 > We would like to answer the following question: *How tall was the tallest athlete of each sport?*
 >
@@ -822,7 +829,7 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 >    >
 >    > > ### {% icon solution %} Answer
 >    > >
->    > > - *"Group by fields"*: We want to group by team (Column 15).
+>    > > - *"Group by fields"*: We want to group by sport (Column 15).
 >    > > - *"Sort"*: `Yes`. This may not be obvious, but because our file is currently not sorted by our chosen group (sport), we need to tell the tool to do this.
 >    > > - *"Skip NA or NaN values"*: since we do have NA values for athletes for whom height data is unknown, we should set this to `Yes`
 >    > > - Our file has a header line, so we should indicate this as well
@@ -832,13 +839,14 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 >    {: .question}
 >
 > 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
->    - *"Input tabular dataset"*: `olympics.tsv`
->    - *"Group by fields"*: `15`
->    - *"Sort input"*: `yes`
->    - *"Input file has a header line"*: `yes`
->    - *"Skip NA or NaN values"*: `yes`
->    - *"Operation to perform on each group"*: `Maximum`
->      - *"On Column"*: `Column: 7`
+>    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+>    - {% icon param-text %} *"Group by fields"*: `15`
+>    - {% icon param-toggle %} *"Sort input"*: `yes`
+>    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+>    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
+>    - *"Operation to perform on each group"*:
+>      - {% icon param-select %} *"Type"*: `Maximum`
+>      - {% icon param-select %} *"On Column"*: `Column: 7`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -862,7 +870,7 @@ We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose
 You may have noticed that we could also provide multiple columns to group on. If we do this, we can compute values for combinations of groups, such as sex and sport, to find e.g. the tallest woman in basketball or the shortest man per Olympics. There are also many more options for the computation we perform, so perhaps we are more interested not in the tallest athlete, but the average height. Let's perform some of these slightly more advanced queries now.
 
 
-> ### {% icon hands_on %} Hands-on: Tallest man and woman per sport
+> ### {% icon hands_on %} Hands-on: Average height of men and women per sport
 >
 > The question we would like to answer here, is what is the average height for men and women per sport?
 >
@@ -871,14 +879,15 @@ You may have noticed that we could also provide multiple columns to group on. If
 >     - Refer to the help section at the bottom of the tool page if you need more information
 >
 > 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
->    - *"Input tabular dataset"*: `olympics.tsv`
->    - *"Group by fields"*: `15,3` (The sports column, and the sex column)
->    - *"Sort input"*: `yes`
->    - *"Input file has a header line"*: `yes`
->    - *"Print header line"*: `yes`
->    - *"Skip NA or NaN values"*: `yes`
->    - *"Operation to perform on each group"*: `Mean`
->      - *"On Column"*: `Column: 7`
+>    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+>    - {% icon param-text %} *"Group by fields"*: `15,3` (The sports column, and the sex column)
+>    - {% icon param-toggle %} *"Sort input"*: `yes`
+>    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+>    - {% icon param-toggle %} *"Print header line"*: `yes`
+>    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
+>    - *"Operation to perform on each group"*:
+>      - {% icon param-select %} *"Type"*: `Mean`
+>      - {% icon param-select %} *"On Column"*: `Column: 7`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >    - Notice the header line in this output that we requested with the *"Print header line parameter"*. Adding this line will help you remember which columns you grouped on and which computation you performed. In our case it was obvious, but if you have a dataset with multiple columns with similar values, this can be useful
@@ -925,33 +934,42 @@ You may have noticed that we could also provide multiple columns to group on. If
 > ### {% icon question %} Exercise: Grouping and computing
 >
 > 1. How tall is the shortest woman Badminton player to win a gold medal?
-> 2. What is the average weight of athletes from Denmark (DEN) in the 2020 Olympics?
+> 2. What is the average height and standard deviation of athletes from Denmark (DEN) in the 1964 Olympics?
+> 3. Can you determine how heavy the heaviest tennis player in the 2020 Olympics is? Why not?
 >
 > > ### {% icon solution %} Hints
 > >
 > > 1. We need to group on 3 columns: medals, sport and sex (note: the order you provide the columns determines the order they are listed in in the output)
-> > 2. We need to group on 2 columns: country and year, then compute the average (mean) over column 8 (weight)
+> > 2. We need to group on 2 columns: country (team) and year, then compute 2 things: the average (mean) and population standard deviation over column 7 (height).
+> >    (explanation of [sample vs population standard deviation](https://www.statology.org/population-vs-sample-standard-deviation/))
+> > 3. You should get an error message here, try to read it carefully to find out why it didn't work, and how we might be able to fix it (Tip: [troubleshooting errors HOWTO]({% link faqs/galaxy/analysis_troubleshooting.md %}))
 > >
+> > TIP: You can use CTRL+F in your browser to search for values in the file (e.g. "Badminton")
 > {: .solution}
 >
 > > ### {% icon solution %} Answers
 > >
 > >  1. 161 cm.
-> >  2.
+> >  2. mean height: 175.91304347826, standard deviation: 7.0335410308672`
+> >  3. We get an error message saying: `datamash: invalid numeric value in line 2434 field 8: '63-67'`. So from this we see that our weight column is not always a
+> >     single number, but sometimes a range, such as `63-67` (kg), e.g. for sports with weight classes such as boxing. Datamash does not know how to
+> >     handle such values, and will therefore fail. If we want to do this computation, we will have to clean up our data first (e.g. by replacing each
+> >     range by its upper or lower value. We will do this in the [final exercise section](#exercises-putting-it-all-together) of this tutorial)
 > >
 > {: .solution}
 >
 > > ### {% icon solution %} Full Solutions
 > >
 > > 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
-> >    - *"Input tabular dataset"*: `olympics.tsv`
-> >    - *"Group by fields"*: `17,15,3` (The medal, sports, and the sex columns)
-> >    - *"Sort input"*: `yes`
-> >    - *"Input file has a header line"*: `yes`
-> >    - *"Print header line"*: `yes`
-> >    - *"Skip NA or NaN values"*: `yes`
-> >    - *"Operation to perform on each group"*: `Minimum`
-> >      - *"On Column"*: `Column: 7`
+> >    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+> >    - {% icon param-text %} *"Group by fields"*: `17,15,3` (The medal, sports, and the sex columns)
+> >    - {% icon param-toggle %} *"Sort input"*: `yes`
+> >    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+> >    - {% icon param-toggle %} *"Print header line"*: `yes`
+> >    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
+> >    - *"Operation to perform on each group"*:
+> >      - {% icon param-select %} *"Type"*: `Minimum`
+> >      - {% icon param-select %} *"On Column"*: `Column: 7`
 > >
 > >    This will give an output like below, scroll down to find the gold medalists, then badminton, then F (if you used a different order in the Group by fields parameter, this file may look a bit different, but will still provide the same information)
 > >
@@ -964,30 +982,46 @@ You may have noticed that we could also provide multiple columns to group on. If
 > >    Bronze	Art Competitions	F	-inf
 > >    Bronze	Art Competitions	M	172
 > >    Bronze	Artistic Gymnastics	F	136
+> >    ...
 > >    ```
 > >
 > > 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
-> >    - *"Input tabular dataset"*: `olympics.tsv`
-> >    - *"Group by fields"*: `12,9` (year and team columns)
-> >    - *"Sort input"*: `yes`
-> >    - *"Input file has a header line"*: `yes`
-> >    - *"Print header line"*: `yes`
-> >    - *"Skip NA or NaN values"*: `yes`
-> >    - *"Operation to perform on each group"*: `Minimum`
-> >      - *"On Column"*: `Column: 8`
+> >    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
+> >    - {% icon param-text %} *"Group by fields"*: `12,9` (year and team columns)
+> >    - {% icon param-toggle %} *"Sort input"*: `yes`
+> >    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+> >    - {% icon param-toggle %} *"Print header line"*: `yes`
+> >    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
+> >    - *"Operation to perform on each group"*:
+> >      - {% icon param-select %} *"Type"*: `Mean`
+> >      - {% icon param-select %} *"On Column"*: `Column: 7`
+> >    - {% icon param-repeat %} *"Insert Operation to perform on each group"*:
+> >      - {% icon param-select %} *"Type"*: `Population Standard deviation`
+> >      - {% icon param-select %} *"On Column"*: `Column: 7`
 > >
 > >    This will give an output like below:
 > >
 > >    ```
-> >    GroupBy(medal)	GroupBy(sport)	GroupBy(sex)	min(height)
-> >    Bronze	Alpine Skiing	F	156
-> >    Bronze	Alpine Skiing	M	167
-> >    Bronze	Archery	F	155
-> >    Bronze	Archery	M	166
-> >    Bronze	Art Competitions	F	-inf
-> >    Bronze	Art Competitions	M	172
-> >    Bronze	Artistic Gymnastics	F	136
+> >    GroupBy(year)	GroupBy(team)	mean(height)	pstdev(height)
+> >    1896	Australia	nan	nan
+> >    1896	Austria	nan	nan
+> >    1896	Belgium	nan	nan
+> >    1896	Bulgaria	nan	nan
+> >    1896	Denmark	nan	nan
+> >    1896	France	167.62962962963	4.6836844324555
+> >    ...
 > >    ```
+> >
+> > 3. Any calculations you run which try to compute anything over the weight column (Column 8) will fail. Please see the [final exercise section](#exercises-putting-it-all-together) for the solution
+> >    to this question, in which we will first clean up the data in the weight column using the Find and Replace operation.
+> >
+> >    This type of situation occurs quite frequently, where you data does not fit with your expectations or assumptions, and you may have to perform additional data
+> >    manipulation steps to clean up your data. It is very useful to know how to read the error messages of tools. Depending on the tool, the error messages may or may
+> >    not be very informative, but in many cases it can give you a clue as to why it failed, which sometimes can be fixed by you. If you think it is a problem with the
+> >    tool itself, please submit a bug report, and the tool authors will be able to have a look at it. More information about troubleshooting and reporting errors can
+> >    be found in [this FAQ]({% link faqs/galaxy/analysis_troubleshooting.md %})
+> >
+> >
 > {: .solution}
 >
 {: .question}
@@ -1007,11 +1041,11 @@ As an example, let's calculate the age of each athlete at the time of participat
 >    - what parameters do you think we need to use?
 >
 > 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
->    - *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
->    - *"As a new column to"*: `olympics.tsv`
->    - *"Round result?"*: `Yes`
->    - *"Input has a header line with column names?"*: `Yes`
->    - *"The new column name"*: `age`
+>    - {% icon param-text %} *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
+>    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
+>    - {% icon param-toggle %} *"Round result?"*: `Yes`
+>    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
+>    - {% icon param-text %} *"The new column name"*: `age`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -1080,11 +1114,11 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 > > ### {% icon solution %} Answers
 > >
 > > 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:
-> >    - *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
-> >    - *"As a new column to"*: `olympics.tsv`
-> >    - *"Round result?"*: `No`
-> >    - *"Input has a header line with column names?"*: `Yes`
-> >    - *"The new column name"*: `BMI`
+> >    - {% icon param-text %} *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
+> >    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
+> >    - {% icon param-toggle %} *"Round result?"*: `No`
+> >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
+> >    - {% icon param-text %} *"The new column name"*: `BMI`
 > >
 > {: .solution}
 >
@@ -1176,8 +1210,8 @@ Different tools may expect different ways of handling missing data. So you may h
 >    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
 >    - {% icon param-select %}*"using column"*: `Column 6`
 >    - {% icon param-repeat %} *"Check"*
->      - *"Find Regex"*: `^$`
->      - *"Replacement"*: `NA`
+>      - {% icon param-text %} *"Find Regex"*: `^$`
+>      - {% icon param-text %} *"Replacement"*: `NA`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >    - Look at the file before replacement, find a line without a value in the `birth_place` column. Verify that it has been replaced in the resulting file.
@@ -1233,8 +1267,8 @@ Look at the `birth_day` column. It has values in a format like `12 December`. Su
 >    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
 >    - {% icon param-select %}*"using column"*: `Column 5`
 >    - {% icon param-repeat %} *"Check"*
->      - *"Find Regex"*: `(\d{1,2}) ([a-zA-Z]+)` (or your own variation)
->      - *"Replacement"*: `\2 \1` (first month, then space, then day)
+>      - {% icon param-text %} *"Find Regex"*: `(\d{1,2}) ([a-zA-Z]+)` (or your own variation)
+>      - {% icon param-text %} *"Replacement"*: `\2 \1` (first month, then space, then day)
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >    - Did it work? If not, no shame, it often takes some trial and error to get your expression right. Click the rerun {% icon galaxy-refresh %} button on the tool,
@@ -1429,11 +1463,11 @@ We would now like to take our Olympics dataset as the basis, and add columns to 
 >    - Which settings do you think we need to use?
 >
 > 2. {% tool [Join two Datasets side by side on a specified field]({{version_join}}) %} with the following parameters:
->    - *"Join"*: `olympics.tsv`
->    - *"using column"*: `Column 10` (the `noc` column)
->    - *"with"*: `country-information.tsv`
->    - *"and column"*: `Column 2` (the `NOC` column)
->    - *"Keep the header lines?"*: `Yes`
+>    - {% icon param-file %} *"Join"*: `olympics.tsv`
+>    - {% icon param-select %} *"using column"*: `Column 10` (the `noc` column)
+>    - {% icon param-file %} *"with"*: `country-information.tsv`
+>    - {% icon param-select %} *"and column"*: `Column 2` (the `NOC` column)
+>    - {% icon param-toggle %} *"Keep the header lines?"*: `Yes`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -1498,23 +1532,24 @@ Since this new dataset has the exact same structure (number and order of columns
 
 > ### {% icon hands_on %} Hands-on: Adding 2022 Olympics to our dataset
 >
-> First we need to remove the header line from the 2022 file
+> First we need to remove the header line from the 2022 file (since these lines will be added to the end of our olympic dataset, we don't want to have a second header line floating around in our file)
 >
 > 1. {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} with the following parameters:
->    - *"Remove first"*: `1`
->    - *"from"*: `olympics_2022.tsv`
+>    - {% icon param-text %} *"Remove first"*: `1`
+>    - {% icon param-file %} *"from"*: `olympics_2022.tsv`
 >
 >    Now we can perform the concatenation:
 >
 > 2. {% tool [Concatenate datasets tail-to-head]({{version_cat}}) %} with the following parameters:
->    - *"Concatenate Datasets"*: `olympics.tsv` (this file will be first)
->    - {% icon param-repeat%} *"Insert Dataset"*: `output from step 1` (2022 data without the header)
+>    - {% icon param-file %} *"Concatenate Datasets"*: `olympics.tsv` (this file will be first)
+>    - {% icon param-repeat%} *"Insert Dataset"*:
+>      - {% icon param-file %}*"Dataset"*: `output from step 1` (2022 data without the header)
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. How many lines do you expect in the new file? Were you correct? (Hint: use {% tool [Line/Word/Character count](wc_gnu) %} to count lines)
+>    > 1. How many lines do you expect in the new file? Were you correct? (Hint: use {% tool [Line/Word/Character count]({{version_wc}}) %} to count lines)
 >    > 2. Where are the lines of the 2022 Olympics?
 >    >
 >    > > ### {% icon solution %} Answer
@@ -1544,9 +1579,9 @@ Tip: use this tool only if you want a separate file for **all values** in a colu
 >    - which settings do you think we need to use?
 >
 > 2. {% tool [Split file according to the values of a column]({{version_split}}) %} with the following parameters:
->    - *"File to select"*: `olympics.tsv`
->    - *"on column"*: `Column 11` (the `games` column)
->    - *"Include the header in all splitted files?"*: `Yes`
+>    - {% icon param-file %} *"File to select"*: `olympics.tsv`
+>    - {% icon param-select %} *"on column"*: `Column 11` (the `games` column)
+>    - {% icon param-toggle %} *"Include the header in all splitted files?"*: `Yes`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
@@ -1695,12 +1730,124 @@ This section provides a number of exercises that require you to combine two or m
 {: .question}
 
 
+
+Ok, let's try another exercise! If you have done the exercises in the [Grouping](#grouping) section, you will have noticed that we were not able
+to perform computation on the weight column, because some of the values were weight classes, e.g. `63-78` (kg), and the {% tool [Datamash]({{version_datamash}}) %}
+tool could not handle such values. In this exercise, we will first clean up this weight column to avoid ranges (by taking the lower number in the range for every
+row a weight range is used), and then answering the question a couple of questions around the weight of athletes.
+
+> ### {% icon question %} Exercise 2: Data cleaning and computations of the weight column
+>
+> 1. Get a list of all the values that occur in the weight column, take note of all the values that are not a single number or `NA`; anything else should be cleaned up
+> 2. Clean up the weight column (Colum 8) so that we only have single numbers; weight classes (e.g. `63-78`) should be replace by the lower bound (`63`) of that class
+> 3. How heavy was the lightest woman competing in the Biathlon? And the heaviest?
+>
+> > ### {% icon solution %} Hints
+> >
+> > 1. You can use the {% tool [**Count**]({{version_count}}) %} tool to get a list of all the different values that appear in Column 8
+> > 2. You can use the {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} tool to clean up the weight column.
+> >    This tool is a bit complex, if you haven't done so yet, we strongly recommend you work through the [Find and Replace section](#find-and-replace) first.
+> >    To check if your cleaning worked, re-run {% icon galaxy-refresh %} the {% tool [**Count**]({{version_count}}) %} tool from step 1.
+> > 3. Use the {% tool [Datamash]({{version_datamash}}) %} tool to answer this question, make sure you use the cleaned up datset as input! Find the row
+> >    showing Biathlon.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Answers
+> >
+> > 1. We see values such as `100-105`, but also `77,5`, `100, 104` (notice the space!) and even `76, 77, 79` to indicate weight ranges or other unexpected weight values.
+> >    All these variations must be converted to single numbers. For this example we will simply convert these ranges to their lower number, and remove the rest when we
+> >    clean the column (taking the upper or median value would be equally valid,  but for our solution we will remove everything after the first number.
+> >
+> > 2. There are many possible regular expression that will clean this column. You can use a single check to catch all the exceptions, or use multiple, there is no one right answer.
+> >    Check if your cleaning is successful using the {% tool [**Count**]({{version_count}}) %} tool again. Make sure you only have single number values in the weight column before
+> >    proceeding to question 3 in this exercise. Also make sure the weights you have make sense (e.g. if you end up with columns having a weight of `0`, something went wrong somewhere!)
+> >
+> > 3. lightest woman weighed 45 kilograms, the heaviest 82.
+> >
+> {: .solution}
+>
+> > ### {% icon solution %} Full Solutions
+> >
+> > 1. {% tool [**Count** occurrences of each record]({{version_count}}) %} with the following parameters
+> >    - {% icon param-file %} *"from dataset"*: `olympics.tsv`
+> >    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column 8`
+> >
+> >    This should output a file like:
+> >
+> >    ```
+> >    921	100
+> >    2	100, 104
+> >    2	100, 107
+> >    2	100-105
+> >    1	100-106
+> >    5	100-110
+> >    4	100-113
+> >    71	101
+> >    3	101-125
+> >    204	102
+> >    2	102, 103
+> >    4	102, 105
+> >    2	102-106
+> >    97	103
+> >    125	104
+> >    ...
+> >    ```
+> >
+> >    We will want to change weight ranges to single numbers in the next step
+> >
+> > 2. {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Select cells from"*: `olympics.tsv`
+> >    - {% icon param-select %}*"using column"*: `Column 14`
+> >    - {% icon param-repeat %} *"Check"*
+> >     - *"Find Regex"*: `(\d+)(,|-).*` (one or more digits (captured), followed by a dash or comma, then zero or more of any other characters)
+> >     - *"Replacement"*: `\1` (only the first set of numbers we captured)
+> >
+> >    **NOTE:** there will be a lot of valid answers here, you could do it all in one check like the solution above, or in multiple checks (e.g. one for each different kind of way to
+> >    denote a weight range you found in step 1). As long as a re-run of the {% tool [**Count** occurrences of each record]({{version_count}}) %} tool shows only single numbers in the
+> >    column after your find & replace step, then your answer was correct! Also make sure the weights make sense (e.g. if your resulting column has weights of `0` or other small numbers, this
+> >    doesn't make sense and you will have to tweak your expression. Don't feel bad if this takes a bit of trial and error, that is expected!
+> >
+> > 3. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Input tabular dataset"*: `olympics-cleaned.tsv` (output from your cleaning step)
+> >    - {% icon param-text %} *"Group by fields"*: `15,3`
+> >    - {% icon param-toggle %} *"Sort input"*: `yes`
+> >    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
+> >    - {% icon param-toggle %} *"Print header line"*: `yes`
+> >    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
+> >    - *"Operation to perform on each group"*:
+> >      - {% icon param-select %} *"Type"*: `Minimum`
+> >      - {% icon param-select %} *"On Column"*: `Column: 8`
+> >    - {% icon param-repeat %} *"Insert Operation to perform on each group"*:
+> >      - {% icon param-select %} *"Type"*: `Maximum`
+> >      - {% icon param-select %} *"On Column"*: `Column: 8`
+> >
+> >    Your resulting file should look something like:
+> >
+> >    ```
+> >    GroupBy(sport)	GroupBy(sex)	min(weight)	max(weight)
+> >    Aeronautics	M	-inf	inf
+> >    Alpine Skiing	F	45	90
+> >    Alpine Skiing	M	50	138
+> >    Alpinism	M	-inf	inf
+> >    Archery	F	42	95
+> >    Archery	M	46	130
+> >    Art Competitions	F	-inf	inf
+> >    Art Competitions	M	59	93
+> >    ...
+> >    ```
+> >
+> {: .solution}
+>
+{: .question}
+
+
 Ok, let's try another one. We will calculate BMI again (see [Computing](#computing) section), but this time also include athletes for which we couldn't
 compute a BMI due to missing data. Sounds simple? Not all tools work exactly the way we would like them to for our question, so we will have to get a bit
 creative.
 
 
-> ### {% icon question %} Exercise 2: Calculate BMI, handle missing values
+> ### {% icon question %} Exercise 3: Calculate BMI, handle missing values
 >
 > If you did the exercises in the [Computing](#computing) section, you will have noticed that the computation cannot be performed for all rows due to missing data.
 > The resulting table will only contain rows for which the computation was successful.
@@ -1732,7 +1879,7 @@ creative.
 > >    What can we do to avoid duplicate columns here?
 > >
 > > 3. Did you get too many lines after joining? If there are multiple matches, join will make an entry for each combination. So make sure you only
-> >    have each athlete and their BMI in the file you will join with once
+> >    have each athlete and their BMI in the file you will join with once (tip: {% tool [Unique]({{version_unique}}) %} tool)
 > >
 > > 4. Did your header line get lost somewhere along the line? Use {% tool [Select First]({{version_select_first}}) %} tool to store your header line
 > >    in a separate file. Then use {% tool [Concatenate]({{version_cat}}) %} to restore it later.
@@ -1818,7 +1965,6 @@ creative.
 > adding a header line), will help you deal with situations like this more easily.
 >
 {: .question}
-
 
 
 Congratulations! You have now mastered the basics of data manipulation! There are a lot more data manipulation operations available in Galaxy that you may need.
