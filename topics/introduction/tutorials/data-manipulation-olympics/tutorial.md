@@ -1398,7 +1398,7 @@ Let's say we would like to create a list of all unique athletes (id and name).
 >    {: .question}
 >
 > 3. {% tool [Unique - occurrences of each record]({{version_unique}}) %} with the following parameters:
->    - *"File to scan for unique values"*: `output from the first step`
+>    - {% icon param-file %} *"File to scan for unique values"*: `output from the first step`
 >
 > 4. **View** {% icon galaxy-eye %} the resulting dataset
 >
