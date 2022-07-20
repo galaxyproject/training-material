@@ -65,7 +65,6 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 {% include {{ page.dir }}content.md short=true %}
 
 # Conclusion
-{:.no_toc}
 
 Congratulations for reaching the end of this tutorial! Now you know how to perform the functional annotation of a set of protein sequences, using EggNOG mapper and InterProScan.
 
