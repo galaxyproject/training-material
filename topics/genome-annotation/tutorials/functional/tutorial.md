@@ -22,7 +22,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
 When performing the structural annotation of a genome sequence, you get the position of each gene, but you don't have information about their name of their function. That's the goal of **functional annotation**.
 
