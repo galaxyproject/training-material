@@ -36,9 +36,6 @@ requirements:
 ---
 
 
-# Overview
-{:.no_toc}
-
 Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 
 
@@ -48,6 +45,8 @@ Monitoring is an incredibly important part of server monitoring and maintenance.
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}
 
 This tutorial explicitly assumes you are starting with a setup like that created in the *Galaxy installation with Ansible* tutorial
 

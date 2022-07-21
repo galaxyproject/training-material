@@ -58,6 +58,8 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}
+
 {% snippet topics/admin/faqs/admin-testing.md %}
 
 # Playbook Overview

@@ -101,6 +101,8 @@ A slideshow presentation on this subject can be found [here](slides.html). More 
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="cvmfs" %}
+
 > The agenda we're going to follow today is: We're going to install and
 > configure Galaxy CVMFS reference data using ansible. We're going to explore
 > the CVMFS installation and then we're going to configure Galaxy to use it.

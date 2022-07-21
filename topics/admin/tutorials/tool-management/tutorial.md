@@ -24,9 +24,6 @@ tags:
   - git-gat
 ---
 
-# Overview
-{:.no_toc}
-
 This tutorial will introduce you to one of Galaxy's associated projects - [Ephemeris](https://ephemeris.readthedocs.io/). Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows. It aims to help automate, and limit the quantity of manual actions admins have to do in order to maintain a Galaxy instance.
 
 > ### Agenda
@@ -35,6 +32,8 @@ This tutorial will introduce you to one of Galaxy's associated projects - [Ephem
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tool-management" %}
 
 # Background
 

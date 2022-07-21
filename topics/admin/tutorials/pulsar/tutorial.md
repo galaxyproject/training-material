@@ -41,9 +41,6 @@ requirements:
 ---
 
 
-# Overview
-{:.no_toc}
-
 Pulsar is the Galaxy Project's remote job running system. It was written by John Chilton ([@jmchilton](https://github.com/jmchilton)) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.
 
 More details on Pulsar can be found at:
@@ -64,6 +61,8 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="pulsar" %}
 
 **This tutorial assumes that:**
 
