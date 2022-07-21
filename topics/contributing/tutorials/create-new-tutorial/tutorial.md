@@ -152,6 +152,10 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 >    For the Copernicus tutorial:
 >    - **Annotation**: `Retrieve climate data from Copernicus`
 >    - **Tag**: `climate`
+>
+> 4. Make the workflow accessible (publishing is not necessary)
+>
+>    {% snippet faqs/galaxy/workflows_publish.md %}
 >     
 {: .hands_on}
 
