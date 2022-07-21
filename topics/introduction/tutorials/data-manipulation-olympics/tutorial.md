@@ -54,12 +54,12 @@ Also make sure to include many exercises (with answers) for your section!
 {% assign version_remove_beginning="Remove beginning1" %}
 {% assign version_remove_columns_by_header="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/0.0.1" %}
 {% assign version_replace_text_column="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" %}
-{% assign version_replace_text_line="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" %}}
+{% assign version_replace_text_line="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" %}
 {% assign version_paste="Paste1" %}
 
 {% assign version_select_first="Show beginning1" %}
 {% assign version_sort="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" %}
-{% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4" %}
+{% assign version_split="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6" %}
 {% assign version_unique="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0" %}
 {% assign version_wc="wc_gnu" %}
 
@@ -95,8 +95,8 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count]({{version_wc}}) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort]({{version_sort}}) %} |
 | Filter                 | Remove rows based on values in one or more columns | {% tool [Filter]({{version_filter}}) %}|
-| Counting               | Count occurrences of values in a column   | {% tool [**Count**]({{version_count}}) %}, {% tool [Datamash]({{version_datamash}}) %}|
-| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
+| Counting               | Count occurrences of values in a column   | {% tool [Count]({{version_count}}) %} , {% tool [Datamash]({{version_datamash}}) %} |
+| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [Group](Grouping1) %} , {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row, add it as a new column | {% tool [Compute]({{version_compute}}) %} |
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
 | Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
