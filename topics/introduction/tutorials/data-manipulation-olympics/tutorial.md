@@ -95,8 +95,8 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Word count             | Count the number of lines, words and characters in a file | {% tool [Line/Word/Character count]({{version_wc}}) %} |
 | Sort on a column       | Change the order of the rows based on values in one or more columns | {% tool [Sort]({{version_sort}}) %} |
 | Filter                 | Remove rows based on values in one or more columns | {% tool [Filter]({{version_filter}}) %}|
-| Counting               | Count occurrences of values in a column   | {% tool [**Count**]({{version_count}}) %}, {% tool [Datamash]({{version_datamash}}) %}|
-| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [**Group**](Grouping1) %}, {% tool [Datamash]({{version_datamash}}) %} |
+| Counting               | Count occurrences of values in a column   | {% tool [Count]({{version_count}}) %} , {% tool [Datamash]({{version_datamash}}) %} |
+| Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [Group](Grouping1) %} , {% tool [Datamash]({{version_datamash}}) %} |
 | Compute an expression  | Over each row, add it as a new column | {% tool [Compute]({{version_compute}}) %} |
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
 | Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
