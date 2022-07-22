@@ -33,7 +33,6 @@ module Jekyll
 
       material['last_modified_at'].format = '%s'
       begin
-        puts "#{material['last_modified_at']} #{Time.at(material['last_modified_at'].to_s.to_i)} #{material.fetch('path')}"
         attributes += [
           ["DC.date", Time.at(material['last_modified_at'].to_s.to_i)],
         ]

@@ -38,6 +38,8 @@ The reports application gives some pre-configured analytics screens. These are v
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}
+
 # Setting up Reports
 
 The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.

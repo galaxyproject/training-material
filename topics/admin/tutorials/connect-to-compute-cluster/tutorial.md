@@ -41,13 +41,11 @@ follow_up_training:
       - job-destinations
 ---
 
-# Running Galaxy Jobs with Slurm
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
-
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy's job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.
+
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -55,6 +53,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="connect-to-compute-cluster" %}
 
 ## Installing Slurm
 

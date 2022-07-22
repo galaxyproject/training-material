@@ -44,6 +44,10 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 ---
 
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -57,6 +61,8 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}
 
 {% snippet topics/admin/faqs/admin-testing.md %}
 
@@ -249,6 +255,10 @@ To proceed from here it is expected that:
 {: .comment}
 
 
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -265,7 +275,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.3
+>    +  version: 0.10.4
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
