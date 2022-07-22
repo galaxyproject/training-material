@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-enable: false
 
 title: 'Mass spectrometry: LC-MS data processing'
 zenodo_link: 'https://zenodo.org/record/5179809'
