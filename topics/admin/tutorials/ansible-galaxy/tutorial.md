@@ -44,6 +44,10 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 ---
 
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -250,6 +254,10 @@ To proceed from here it is expected that:
 > CentOS8 (and RHEL in general) have significantly different package names for some modules, beware!
 {: .comment}
 
+
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
 
 ## Requirements
 
