@@ -12,7 +12,7 @@ objectives:
 - To comprehend the key role of data processing.
 - To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.
 - To be familiar with the "identify then perform" approach necessary to deploy relevant data processing strategies.
-time_estimation: 1H
+time_estimation: 2H
 key_points:
 - Data processing is a key step in untargeted Metabolomics analyses. The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. In particular, blank filtering, pool variation study and signal drift correction are common aspects to consider when dealing with LC-MS.
 - Although some main steps are standard, various ways to combine tools exist. Remember that depending on your context (type of samples, protocol specificities...) specific filters/normalisations may be needed, independently of standards ones.
