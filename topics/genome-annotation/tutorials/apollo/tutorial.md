@@ -451,6 +451,8 @@ You can add other types of alterations like insertions or deletions.
 
 Once you have added some alterations, Apollo will automatically display the effect it has on the overlapping genes.
 
+# Exporting and collaborating
+
 {% include {{ page.dir }}collab.md eukaryote=false %}
 
 # Conclusion

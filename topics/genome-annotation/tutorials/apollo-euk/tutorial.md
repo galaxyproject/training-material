@@ -55,6 +55,14 @@ After automatically annotating your genome using [Funannotate](../funannotate/tu
 
 This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance.
 
+> ### {% icon comment %} Ask your instructor!
+> This tutorial shows you how to use Galaxy to set up a genome curation project by loading a new organism in Apollo. If you only want to focus on the usage of Apollo, your instructor might already have created for you an organism in Apollo. In this case select the `Use a pre-created organism` option below (you will skip a few steps in Galaxy), and select the organism prepared for you by your instructor.
+>
+> If you're doing this tutorial on your own, or if the instructor has not set up a specific Apollo organism for you, select `Create your own organism`.
+{: .comment}
+
+{% include _includes/cyoa-choices.html option1="Create your own organism" option2="Use a pre-created organism" default="Create your own organism" %}
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -64,16 +72,12 @@ This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readt
 >
 {: .agenda}
 
-> ### {% icon comment %} Ask your instructor!
-> This tutorial shows you how to use Galaxy to set up a genome curation project by loading a new organism in Apollo. If you only want to focus on the usage of Apollo, your instructor might already have created for you an organism in Apollo. In this case select the `Use a pre-created organism` option below (you will skip a few steps in Galaxy), and select the organism prepared for you by your instructor.
->
-> If you're doing this tutorial on your own, or if the instructor has not set up a specific Apollo organism for you, select `Create your own organism`.
-{: .comment}
+# Preparing for Apollo
 
-{% include _includes/cyoa-choices.html option1="Create your own organism" option2="Use a pre-created organism" default="Create your own organism" %}
+<div class="Create-your-own-organism" markdown="1">
 
-<span class="Create-your-own-organism">
-# Data upload
+## Data upload
+{:.no_toc}
 
 To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can be any data like:
 
@@ -88,7 +92,8 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 > While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on *Mucor mucedo*, this is not necessarily the data *you* might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.
 {: .comment}
 
-## Get data
+### Get data
+{:.no_toc}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -111,7 +116,8 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 >
 {: .hands_on}
 
-# Using Apollo for Annotation
+## Using Apollo for Annotation
+{:.no_toc}
 
 Refining genome annotations happens in multiple steps:
 
@@ -130,7 +136,7 @@ In this tutorial we will focus more on the practical portions than the theoretic
 > Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient, leading to imperfect automatic annotation.
 {: .details}
 
-## Build the JBrowse Instance
+### Build the JBrowse Instance
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
@@ -166,7 +172,7 @@ Let's begin by building a JBrowse instance with all the data we have for this ge
 
 This tool will take some time to run dependent on data size. All of the inputs need to be pre-processed by JBrowse into a form that it can render and visualise easily. Once this is complete, you can click on the {% icon galaxy-eye %} eyeball to view the JBrowse instance. This is a static view into the data, JBrowse does not let you make any annotations or save any changes. We will convert it into a dynamic view where we can make persistent annotations and share these with our colleagues.
 
-## Sending data to Apollo
+### Sending data to Apollo
 
 Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.
 
@@ -188,13 +194,8 @@ Now that we have a good looking static JBrowse instance, it is time to load it i
 
 Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This "Annotate" output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of Galaxy. While the URL will be different for each Galaxy server that supports Apollo, UseGalaxy.eu's Apollo server is available at [https://usegalaxy.eu/apollo](https://usegalaxy.eu/apollo).
 
-# Apollo
-
-
-![Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right.](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
-
-</span>
-<span class="Use-a-pre-created-organism">
+</div>
+<div class="Use-a-precreated-organism" markdown="1">
 
 While the URL will be different for each Galaxy server that supports Apollo, to access UseGalaxy.eu's Apollo server:
 
@@ -204,8 +205,14 @@ While the URL will be different for each Galaxy server that supports Apollo, to 
 It is important to first login on [https://usegalaxy.eu](https://usegalaxy.eu) before connecting to Apollo as it will set up everything to make Apollo recognize your user account.
 
 Your instructor should give you the name of the organism you will work on, you need to select it in the drop down box at the top of the right panel of Apollo. If multiple users are using the same organism, you will experiment the true collaborative aspect of Apollo: all the actions performed on the gene models by anyone will be seen by everyone instantly.
-
+</div>
 # Apollo
+<div class="Create-your-own-organism" markdown="1">
+
+![Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right.](../../images/apollo/ui.png "This is the Apollo interface, when viewed from inside Galaxy. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in Galaxy. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
+
+</div>
+<div class="Use-a-precreated-organism" markdown="1">
 
 ![Screenshot of Apollo.](../../images/apollo/ui_apollo.png "This is the Apollo interface, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.")
 
@@ -214,7 +221,7 @@ Your instructor should give you the name of the organism you will work on, you n
 > At the top of the right panel, you can switch from one organism to another. Depending on the server you are using, the organism names can be suffixed with `gx[number]` or an email address: this is to avoid possible confusion between organisms with the same name created by multiple users.
 {: .details}
 
-</span>
+</div>
 
 From the Apollo user manual:
 
@@ -290,11 +297,11 @@ The second track (`rnaseq.bam`) represent the alignment of each individual RNA-S
 
 Let's suppose you want to improve the annotation of one of the gene. To do it, you can either click on one of its intron and drag and drop it to the User-created Annotations track (yellow background, at the top), or if you prefer, right click on one of its intron and select **Create new annotation** > **gene**. It should appear shortly in the **User-created Annotation** track.
 
-<span class="Use-a-pre-created-organism">
+<div class="Use-a-precreated-organism" markdown="1">
 > ### {% icon warning %} Working with others
 > Maybe you're not doing this tutorial alone, if you see that other people have started working on this region of the genome, it is best to move to a different region to avoid disturbing them by modifying the same genes at the same time.
 {: .warning}
-</span>
+</div>
 
 ![One gene is added to the User-created Annotation track](../../images/apollo/added_genes_euk.png)
 
@@ -379,16 +386,22 @@ When you click on one of the steps, you can see below the list a preview of how 
 
 Sometimes you'll want to modify a gene that was predicted by FunAnnotate, just to add functional annotation to it, like Gene Ontology terms, of references to external databases (UniProt, InterPro, ...). This can be done using Apollo, have a look at the [Apollo tutorial for prokaryotes]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.
 
-<span class="Create-your-own-organism">
+# Exporting and collaborating
 
+<div class="Create-your-own-organism" markdown="1">
 {% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=true %}
+</div>
+<div class="Use-a-precreated-organism" markdown="1">
+It is of course possible to export all your annotation from Apollo in standard formats, directly from its interface (`Ref Sequence` tab), or from Galaxy. If you create your own organism in Apollo, you can choose to make it open to the public, or to restrict it to only your collaborators.
 
-</span>
+Click on **Create your own organism** at the beginning to learn more.
+
+</div>
 
 # Conclusion
 {:.no_toc}
 
-Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-pre-created-organism">. Although you use a pre-created organism, remember that you can use Galaxy to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.
+Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-precreated-organism">. Although you use a pre-created organism, remember that you can use Galaxy to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.
 
 A [similar tutorial for prokaryote genomes]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) exists, using different types of evidence tracks, feel free to have a look at it to learn more.
 
