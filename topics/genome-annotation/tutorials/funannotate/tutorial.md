@@ -42,6 +42,9 @@ requirements:
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
+
+subtopic: eukaryote
+priority: 2
 ---
 
 

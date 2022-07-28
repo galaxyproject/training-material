@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Genome Annotations with Apollo
+title: Refining Genome Annotations with Apollo (prokaryotes)
 zenodo_link: https://zenodo.org/record/3270822
 tags:
   - prokaryote
@@ -39,6 +39,8 @@ requirements:
     topic_name: genome-annotation
     tutorials:
       - annotation-with-prokka
+
+subtopic: prokaryote
 ---
 
 > ### {% icon warning %} Only works on UseGalaxy.eu
@@ -154,7 +156,7 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
-> ### {% icon comment %} Why bother?
+> ### {% icon comment %} Reduced data
 >
 > To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
 {: .comment}
