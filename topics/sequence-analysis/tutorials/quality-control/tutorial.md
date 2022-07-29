@@ -14,7 +14,7 @@ objectives:
   - Summarise quality metrics MultiQC
   - Process single-end and paired-end data
 follow_up_training:
-  - 
+  -
     type: "internal"
     topic_name: sequence-analysis
     tutorials:
@@ -35,6 +35,7 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
+  - erasmusplus
 
 ---
 
@@ -599,7 +600,7 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 >    > 3. What % reads have been removed because they were too short?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 58.6% reads contain adapter (`Reads with adapters:`)
+>    > > 1. 56.8% reads contain adapter (`Reads with adapters:`)
 >    > > 2. 35.1% reads have been trimmed because of bad quality (`Quality-trimmed:`)
 >    > > 3. 0 % reads were removed because they were too short
 >    > {: .solution }

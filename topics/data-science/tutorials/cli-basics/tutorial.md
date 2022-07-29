@@ -67,8 +67,9 @@ contributors:
   - carpentries
   - hexylena
   - bazante1
+  - erasmusplus
+  - avans-atgm
 tags:
-- jupyter-notebook
 - bash
 ---
 

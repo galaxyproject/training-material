@@ -449,7 +449,7 @@ check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Plot iris feature pairs in two dimensions
 >
-> 1. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %}   with the following parameters:
+> 1. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0) %}   with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **iris clean**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -492,7 +492,7 @@ check whether we can spot any immediate patterns.
 >  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distinguished from *Iris versicolor* and
 >  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
 >    > > virginica*.
->  > > 2. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %} with the following parameters:
+>  > > 2. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.3.5+galaxy0) %} with the following parameters:
 >  > >     - {% icon param-file %} *"Input tabular dataset"*: `iris clean`
 >  > >     - *"Column to plot on x-axis"*: `3`
 >  > >     - *"Column to plot on y-axis"*: `4`

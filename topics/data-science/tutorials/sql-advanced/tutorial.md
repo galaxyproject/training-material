@@ -75,6 +75,7 @@ key_points:
 contributors:
 - carpentries
 - hexylena
+- avans-atgm
 
 subtopic: sql
 
@@ -86,8 +87,9 @@ abbreviations:
 
 tags:
 - SQL
-- jupyter-notebook
 ---
+
+{% include _includes/quiz.html id="recap.yml" %}
 
 > ### {% icon comment %} Comment
 >

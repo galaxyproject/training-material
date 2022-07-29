@@ -82,6 +82,8 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 You have generated an annotated AnnData object from your raw scRNA-seq fastq files. However, you have only completed a 'rough' filter of your dataset - there will still be a number of 'cells' that are actually just background from empty droplets or simply low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to analyse them. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the noise, but also makes it computationally heavy to analyse. These spurious reads take a lot of computational power to analyse! First on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > ### {% icon question %} Questions
 >
 > 1. What information is stored in your AnnData object? The last tool to generate this object counted the mitochondrial associated genes in your matrix. Where is that data stored?
@@ -499,6 +501,8 @@ Now we need to look at reducing our gene dimensions. We have loads of genes, but
 > 1. {% tool [Scanpy FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
 >    - *"Flavor of computing normalised dispersion"*: `Seurat`
+> 
+> 2. **Rename** {% icon galaxy-pencil %} plot output `Use_me_FVG`
 {: .hands_on}
 
 Next up, we're going to scale our data so that all genes have the same variance and a zero mean. This is important to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a '0' when you calculate gene differences between clusters.
@@ -506,8 +510,9 @@ Next up, we're going to scale our data so that all genes have the same variance 
 > ### {% icon hands_on %} Hands-on: Scaling data
 >
 > 1. {% tool [Scanpy ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindVariableGenes** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_FVG` (output of **Scanpy FindVariableGenes** {% icon tool %})
 >    - *"Truncate to this value after scaling"*: `10.0`
+> 2. **Rename** {% icon galaxy-pencil %} plot output `Use_me_Scaled`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You have processed your object!
@@ -523,10 +528,14 @@ Principal components are calculated from highly dimensional data to find the mos
 > Where did the `2262` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 2262 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 2262 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 2262 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
+> ### {% icon warning %} Danger: Check your AnnData object!
+> Your AnnData object should have far more than 2262 genes in it (if you followed our settings and tool versions, you'd have a matrix 7874 x 14832 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 2262 or 2000 output from your testing in the section above labelled '2262'.
+{: .warning}
+
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components
 >
 > 1. {% tool [Scanpy RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ScaleData** {% icon tool %})
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_Scaled` (output of **Scanpy ScaleData** {% icon tool %})
 >    - *"Number of PCs to produce"*: `50`
 >
 > 2.  {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:

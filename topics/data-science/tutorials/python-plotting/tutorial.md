@@ -27,10 +27,12 @@ contributors:
   - mcmaniou
   - fpsom
   - carpentries
+  - erasmusplus
 
 priority: 3
 notebook:
   language: python
+  pyolite: true
 ---
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of data analysis using the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the "Introduction to Python" and "Advanced Python" tutorials available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson.

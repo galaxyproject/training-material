@@ -27,10 +27,12 @@ contributors:
   - mcmaniou
   - fpsom
   - carpentries
+  - erasmusplus
 
 priority: 1
 notebook:
   language: python
+  pyolite: true
 ---
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson.

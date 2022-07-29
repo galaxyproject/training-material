@@ -54,7 +54,7 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 - `M117-bl_1` - family 117, mother, *forward* (**F**) reads from **blood**
 - `M117-bl_2` - family 117, mother, *reverse* (**R**) reads from **blood**
 - `M117-ch_1` - family 117, mother, *forward* (**F**) reads from **cheek**
-- `M117-ch_1` - family 117, mother, *reverse* (**R**) reads from **cheek**
+- `M117-ch_2` - family 117, mother, *reverse* (**R**) reads from **cheek**
 - `M117C1-bl_1`- family 117, child, *forward* (**F**) reads from **blood**
 - `M117C1-bl_2`- family 117, child, *reverse* (**R**) reads from **blood**
 - `M117C1-ch_1`- family 117, child, *forward* (**F**) reads from **cheek**

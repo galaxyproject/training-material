@@ -23,7 +23,7 @@ key_points:
   - "Pdb is your friend."
 contributors:
   - assuntad23
-  - ic4f
+  - jdavcs
   - jmchilton
 requirements:
   - type: none
@@ -83,7 +83,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > git clone -b training https://github.com/<your-username>/galaxy GALAXY_ROOT
+>    > git clone -b training2022 https://github.com/<your-username>/galaxy GALAXY_ROOT
 >    > cd GALAXY_ROOT
 >    > ```
 >    {: .code-in}
@@ -128,7 +128,7 @@ Good news! All of the failing tests are on the same Galaxy branch! That means yo
 >    >
 >    > > ### {% icon code-out %} Output
 >    > > ```bash
->    > >   training
+>    > >   training2022
 >    > > * my-training
 >    > > ```
 >    > {: .code-out}
@@ -282,7 +282,7 @@ API tests test various aspects of the Galaxy API, as well as general backend asp
 >
 >    Our next step is to examine the controller for this endpoint. For that, we head over to `lib/galaxy/webapps/galaxy/api/licenses.py`.
 >
->    There are 2 controllers (a legacy controller and a FastAPI controller) that have identical functionality; we can use either one. If you look at the FastAPI controller, you'll see the `get` method that is responsible for fetching the data in response to a `GET` HTTP request received at the `licenses/{licenseId}` endpoint:
+>    If you look at the FastAPI controller, you'll see the `get` method that is responsible for fetching the data in response to a `GET` HTTP request received at the `licenses/{licenseId}` endpoint:
 >
 >    ```python
 >        @router.get('/api/licenses/{id}',
@@ -339,7 +339,7 @@ Client Linting is important to reduce errors, improve quality of the codebase, a
 >
 >    With this error, one of the failing test workflows on GitHub would normally be “get_code_and_test”. However, since we are working on a branch that contains multiple bugs by design, some of the test failures overlap, as a result of which the “get_code_and_test” workflow has been skipped in the last commit.
 >
->    Therefore, for this section, [you'll need to use the results from this commit](https://github.com/galaxyproject/galaxy/runs/2780158706) to find the failing test.
+>    Therefore, in this section, for the remote results, we'll have to describe what would have been displayed.
 >
 >    One of the failing tests on GitHub says "get_code_and_test". Clicking on the word "Details" assocated with this failure will open a brief view of the CircleCI Checks, with a list of tests that are run as part of that command. You'll see that the one that is failing is js_lint. And if you click that, you'll be navigated to the CicleCI app, where you can see much more information about the failures.
 >
@@ -393,6 +393,7 @@ Client tests are tests written by developers to test front-end code. In the case
 > ### {% icon hands_on %} Hands-on: Fixing a failing client unit test
 >
 > 1. **Finding the failing test on GitHub**
+>    In this section we, again, can't demonstrate the remote output, so we descibe it instead. 
 >    One of the failing tests on GitHub says "Client Unit Testing / jest". Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.
 >
 >    > ### {% icon solution %} Solution
@@ -561,11 +562,11 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    ```In the User menu, clicking the Datasets option causes an error message to be displayed on the page: "Uncaught exception in exposed API method".```
 >
->    Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy:
+>    Make sure you are in `GALAXY_ROOT`. Then start your local Galaxy using the `uvicorn` command*:
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
->    > > ./run.sh
+>    > > GALAXY_CONFIG_FILE=config/galaxy.yml uvicorn --app-dir lib --factory galaxy.webapps.galaxy.fast_factory:factory
 >    > > ```
 >    > {: .code-in}
 >    >
@@ -573,13 +574,14 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > > The first startup may take a few minutes. Eventually, you'll see the following output (the PID will be different):
 >    > >
 >    > > ```
->    > > Starting server in PID 1583948.
->    > > serving on http://127.0.0.1:8080
+>    > > Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
 >
->    Now you can access your Galaxy instance from the browser at [`http://127.0.0.1:8080`](http://127.0.0.1:8080).
+>    *NOTE: We are not using `run.sh` because that would prevent us from using the Python interactive debugger, which we will be utilizing in this section.
+>
+>    Now you can access your Galaxy instance from the browser at [`http://127.0.0.1:8000`](http://127.0.0.1:8000).
 >
 >    To reproduce this error, we need to access the User menu. For this, we need to be logged in to Galaxy:
 >
@@ -605,24 +607,24 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > Traceback (most recent call last):
 >    >   File "lib/galaxy/web/framework/decorators.py", line 312, in decorator
 >    >     rval = func(self, trans, *args, **kwargs)
->    >   File "lib/galaxy/webapps/galaxy/api/datasets.py", line 129, in index
+>    >   File "lib/galaxy/webapps/galaxy/api/datasets.py", line 100, in index
 >    >     raise Exception('This should not happen!')
 >    > Exception: This should not happen!
 >    > ```
 >    >
->    > From this error log, we can easily tell that the error happens in the `lib/galaxy/webapps/galaxy/api/datasets.py` file on line 129. The specific error message doesn't tell us much - which is often what happens in the wild.
+>    > From this error log, we can easily tell that the error happens in the `lib/galaxy/webapps/galaxy/api/datasets.py` file on line 100. The specific error message doesn't tell us much - which is often what happens in the wild.
 >    {: .solution }
 >
->    Let's head over to the `datasets'py` file, line 129:
+>    Let's head over to the `datasets'py` file, line 100:
 >
 >    ```python
->    126         if str_as_bool(trans.app.config.get('show_datasets', 'True')):
->    127             return [self.serializer_by_type[content.history_content_type].serialize_to_view(content, user=trans.user, trans=trans, view=view) for content in contents]
->    128         else:
->    129             raise Exception('This should not happen!')
+>     97         if str_as_bool(trans.app.config.get("show_datasets", "True")):
+>     98             return self.service.index(trans, history_id, serialization_params, filter_query_params)
+>     99         else:
+>    100             raise Exception("This should not happen!")
 >    ```
 >
->    The good news is that the error happens inside an `if/else` block, which narrows down our search to line 126: that line evaluates to `False`, causing the `else` clause to execute. The bad news is that we have no idea what causes that line to evaluate to `False`.
+>    The good news is that the error happens inside an `if/else` block, which narrows down our search to line 97: that line evaluates to `False`, causing the `else` clause to execute. The bad news is that we have no idea what causes that line to evaluate to `False`.
 >
 > 3. **Identify the problem**
 >
@@ -636,10 +638,10 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    >
 >    > ```python
 >    > 126         breakpoint()
->    > 127         if str_as_bool(trans.app.config.get('show_datasets', 'True')):
->    > 128             return [self.serializer_by_type[content.history_content_type].serialize_to_view(content, user=trans.user, trans=trans, view=view) for content in contents]
->    > 129         else:
->    > 130             raise Exception('This should not happen!')
+>    >  97         if str_as_bool(trans.app.config.get("show_datasets", "True")):
+>    >  98             return self.service.index(trans, history_id, serialization_params, filter_query_params)
+>    >  99         else:
+>    > 100             raise Exception("This should not happen!")
 >    > ```
 >    >
 >    {: .solution }
@@ -648,24 +650,24 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > GALAXY_CONFIG_DEBUG=1 ./run.sh
+>    > GALAXY_CONFIG_DEBUG=1 GALAXY_CONFIG_FILE=config/galaxy.yml uvicorn --app-dir lib --factory galaxy.webapps.galaxy.fast_factory:factory
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon comment %} Why we set the debug option
 >    >
->    > The reason for setting the `debug` option is quite esoteric: among other things, it prevents uWSGI from remapping `stdin` to `dev/null` which would prevent tools like pdb from running.
+>    > The reason for setting the `debug` option for releases prior to 22.05 was quite esoteric: among other things, it prevents uWSGI (no longer used as of 22.05) from remapping `stdin` to `dev/null` which would prevent tools like pdb from running.
 >    {: .comment}
 >
 >    Now your Galaxy is running in debug mode. Repeat your steps that reproduced the error. When you click "Datasets", head over to your terminal. At the bottom of the log you'll see something like this:
 >
 >    ```
->    > /home/sergey/2sandbox/galaxy/dev_training/lib/galaxy/webapps/galaxy/api/datasets.py(127)index()
+>    > /home/sergey/2sandbox/galaxy/dev_training/lib/galaxy/webapps/galaxy/api/datasets.py(97)index()
 >    -> if str_as_bool(trans.app.config.get('show_datasets', 'True')):
 >    (Pdb)
 >    ```
 >
->    You're at the pdb prompt. From here you can execute Python code interactively. So, let's explore what's happening in the next line:
+>    You're at the pdb prompt. From here you can execute Python code interactively. The logs printed to `stdout` can be distracting, so try to ignore them. Let's explore what's happening in the next line:
 >
 >    > ### {% icon code-in %} Input: Pdb
 >    > ```
@@ -685,20 +687,20 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >
 >    Now let's take a look at the definition of the `get` method. We need to find `CommonConfigurationMixin` which is used by `galaxy.config.GalaxyAppConfiguration`.
 >
->    Head over to `lib/galaxy/config/__init__.py` and look for the class `CommonConfigurationMixin`. Once you find it, look for the definition of its `get` method. When you find it, look at the method signature. What is the meaning of the argument `'True'` that is passed to this method in `datasets.py` on line 127?
+>    Head over to `lib/galaxy/config/__init__.py` and look for the class `CommonConfigurationMixin`. Once you find it, look for the definition of its `get` method. When you find it, look at the method signature. What is the meaning of the argument `'True'` that is passed to this method in `datasets.py` on line 97?
 >
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
->    > 480     def get(self, key, default=None):
->    > 481         # Warning: the value of self.config_dict['foo'] may be different from self.foo
->    > 482         return self.config_dict.get(key, default)
+>    > 584     def get(self, key, default=None):
+>    > 585         # Warning: the value of self.config_dict['foo'] may be different from self.foo
+>    > 586         return self.config_dict.get(key, default)
 >    > ```
 >    >
 >    > The argument `True` corresponds to the parameter `default`. In the method's body, we see that this value will be passed to `self.config_dict.get()`; `self.config_dict` is a Python dictionary, so the second argument to `get()` is the default value that will be retuned if `key` is not in `self.config_dict`.
 >    {: .solution }
 >
->    Back to `datasets.py`, line 127. Now we know that `True` is the default value that will be returned if the key `show_datasets` does not exist in the `config_dict` dictionary. Moving on:
+>    Back to `datasets.py`, line 97. Now we know that `True` is the default value that will be returned if the key `show_datasets` does not exist in the `config_dict` dictionary. Moving on:
 >
 >    > ### {% icon code-in %} Input: Pdb
 >    > ```
@@ -725,12 +727,12 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
->    > 103 def str_as_bool(string):
->    > 104     """ This is for training only."""
->    > 105     if str(string) in ('true', 'yes', 'on', '1'):
->    > 106         return True
->    > 107     else:
->    > 108         return False
+>    > 117 def str_as_bool(string):
+>    > 118     """This is for training only."""
+>    > 119     if str(string) in ("true", "yes", "on", "1"):
+>    > 120         return True
+>    > 121     else:
+>    > 122         return False
 >    > ```
 >    >
 >    > At first glance, everything seems right. But think of what value we are passing: `'True'` - it is _not_ in the `('true', 'yes', 'on', '1')` tuple! Aparently, the developer did not account for upper vs. lower case!
@@ -778,15 +780,15 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > One way to do it is to simply convert the input value to lowercase:
 >    >
 >    > ```python
->    > 103 def str_as_bool(string):
->    > 104     """ This is for training only."""
->    > 105     if str(string).lower() in ('true', 'yes', 'on', '1'):
->    > 106         return True
->    > 107     else:
->    > 108         return False
+>    > 117 def str_as_bool(string):
+>    > 118     """This is for training only."""
+>    > 119     if str(string).lower() in ("true", "yes", "on", "1"):
+>    > 120         return True
+>    > 121     else:
+>    > 122         return False
 >    > ```
 >    >
->    > In fact, that's exactly what the real function does! Check line 966 - you'll see almost the exact same function, named `string_as_bool`: we didn't modify it because that might have broken other parts of Galaxy which would have been a distraction from the core aspects of the exercise.
+>    > In fact, that's exactly what the real function does! Check line 1017 - you'll see almost the exact same function, named `string_as_bool`: we didn't modify it because that might have broken other parts of Galaxy which would have been a distraction from the core aspects of the exercise.
 >    {: .solution }
 >
 >    Run the test - now it should pass!
@@ -798,9 +800,9 @@ Our last error happens at runtime, which means we don't have a failing test; ins
 >    > ### {% icon solution %} Solution
 >    >
 >    > ```python
->    > 103 def str_as_bool(string):
->    > 104     """ This is for training only."""
->    > 105     return str(string).lower() in ('true', 'yes', 'on', '1')
+>    > 117 def str_as_bool(string):
+>    > 118     """ This is for training only."""
+>    > 119     return str(string).lower() in ('true', 'yes', 'on', '1')
 >    > ```
 >    >
 >    > Much better!

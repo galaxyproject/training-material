@@ -15,8 +15,9 @@ contributors:
   - natefoo
   - hexylena
   - gmauro
-subtopic: features
+subtopic: data
 tags:
+  - ansible
   - storage
 requirements:
  - type: "internal"
@@ -60,7 +61,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    ```yaml
 >    galaxy_config:
 >      galaxy:
->        object_store_config_file: {% raw %}"{{ galaxy_config_dir }}/object_store_conf.xml.j2"{% endraw %}
+>        object_store_config_file: {% raw %}"{{ galaxy_config_dir }}/object_store_conf.xml"{% endraw %}
 >    ```
 >
 > 2. In your group variables file, add it to the `galaxy_config_templates` section:
@@ -216,7 +217,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >
 >    Galaxy will need to use the bucket, and will want it to be there when it boots, so we need to setup the object store first.
 >
-> 5. Edit the `templates/galaxy/config/object_store_conf.xml`, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.
+> 5. Edit the `templates/galaxy/config/object_store_conf.xml.j2`, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.
 >
 >    {% raw %}
 >    ```diff
@@ -247,6 +248,8 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 >     </object_store>
 >    ```
 >    {% endraw %}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 6. Run the playbook.
 >
@@ -306,14 +309,10 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -35,6 +35,8 @@ galaxy_config:
->         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
 >    +    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
 >    +    user_preferences_extra_conf_path: "{{ galaxy_config_dir }}/user_preferences_extra_conf.yml"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
 >    ```
 >    {% endraw %}
 >
@@ -324,7 +323,7 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -65,6 +67,12 @@ galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >     
 >    +galaxy_config_files:

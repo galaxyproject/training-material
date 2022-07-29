@@ -18,14 +18,16 @@ contributors:
   - afgane
   - nuwang
   - almahmoud
-  - ic4f
+  - jdavcs
 tags:
   - kubernetes
+subtopic: cloud
 follow_up_training:
   - type: "internal"
     topic_name: admin
     tutorials:
       - k8s-managing-galaxy
+priority: 2
 ---
 
 # Galaxy Helm Chart

@@ -47,30 +47,34 @@ layout: base
  <!-- stats cards -->
 
  <!-- number of topics -->
-<div class="col-md-4">
- <div class="card">
-  <div class="card-body">
-   <h5 class="card-title">{{ topics | size }} Topics</h5>
-   </div>
+<div class="col-md-3">
+ <div class="gtn-card color-agenda">
+   <div class="card-title">{{ topics | size }}</div>
+   <div class="card-text">Topics</div>
  </div>
 </div>
 
  <!-- number of tutorials -->
-<div class="col-md-4">
- <div class="card">
-  <div class="card-body">
-   <h5 class="card-title">{{ tutorials | size }} Tutorials</h5>
-   <!--<p class="card-text">amazing!.</p>-->
-  </div>
+<div class="col-md-3">
+ <div class="gtn-card color-tip">
+   <div class="card-title">{{ tutorials | size }}</div>
+   <div class="card-text">Tutorials</div>
  </div>
 </div>
 
 <!-- number of contributors -->
-<div class="col-md-4">
- <div class="card">
-  <div class="card-body">
-   <h5 class="card-title">{{ contributors | size }} Contributors</h5>
-  </div>
+<div class="col-md-3">
+ <div class="gtn-card color-comment">
+   <div class="card-title">{{ contributors | size }}</div>
+   <div class="card-text">Contributors</div>
+ </div>
+</div>
+
+<!-- years of contributors -->
+<div class="col-md-3">
+ <div class="gtn-card color-handson">
+   <div class="card-title">{{ site.age | round: 1}}</div>
+   <div class="card-text">Years</div>
  </div>
 </div>
 

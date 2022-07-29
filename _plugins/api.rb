@@ -4,6 +4,14 @@ require './_plugins/jekyll-topic-filter.rb'
 module Jekyll
   class APIGenerator < Generator
 
+    def get_contributors(data)
+      if data.has_key?('contributors')
+        return data['contributors']
+      elsif data.has_key?('contributions')
+        return data['contributions'].keys.map{|k| data['contributions'][k]}.flatten()
+      end
+    end
+
     def generate(site)
 
       # Full Bibliography
@@ -13,8 +21,30 @@ module Jekyll
       page3.data["layout"] = nil
       site.pages << page3
 
+      def markdownify(site, text)
+        site.find_converter_instance(
+          Jekyll::Converters::Markdown
+        ).convert(text.to_s)
+      end
+
+      def visitAndMarkdownify(site, f)
+          if f.is_a?(Array)
+              f.map!{|x| visitAndMarkdownify(site, x)}
+          elsif f.is_a?(Hash)
+              f = f.map{|k, v|
+                  [k, visitAndMarkdownify(site, v)]
+              }.to_h
+          elsif f.is_a?(String)
+              f = markdownify(site, f).strip().gsub(/<p>/, "").gsub(/<\/p>/, "")
+          end
+          f
+      end
+
       def mapContributor(site, c)
-        site.data['contributors'].fetch(c, {}).merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+        x = site.data['contributors']
+          .fetch(c, {})
+          .merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+        visitAndMarkdownify(site, x)
       end
 
       # Contributors
@@ -38,7 +68,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map{|x|
           q = x.dup
-          q['contributors'] = q['contributors'].dup.map{|c| mapContributor(site, c)}
+          q['contributors'] = get_contributors(q).dup.map{|c| mapContributor(site, c)}
 
           q['urls'] = Hash.new
 
@@ -49,6 +79,12 @@ module Jekyll
           if ! q['slides'].nil?
             q['urls']['slides'] = site.config['url'] + site.config['baseurl'] + "/api/topics/#{q['url'][7..-6]}.json"
           end
+
+          # Write out the individual page
+          page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          page6.content = JSON.pretty_generate(q)
+          page6.data["layout"] = nil
+          site.pages << page6
 
           q
         }
@@ -92,11 +128,16 @@ module Jekyll
 
         page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
         p = page.data.dup
-        p['contributors'] = p['contributors'].dup.map{|c| mapContributor(site, c)}
+        p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
         page5.content = JSON.pretty_generate(p)
         page5.data["layout"] = nil
         site.pages << page5
       }
+      # Deploy the feedback file as well
+      page2 = PageWithoutAFile.new(site, "", "api/", "feedback.json")
+      page2.content = JSON.pretty_generate(site.data['feedback'])
+      page2.data["layout"] = nil
+      site.pages << page2
 
     end
   end

@@ -32,6 +32,9 @@
     <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
     <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
     <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+
+    <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
+
     <script type="application/ld+json">
       {% include _includes/material.jsonld material=page topic=topic site=site %}
     </script>
@@ -68,6 +71,7 @@ class: center, middle, inverse
 
 ---
 
+
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" class="cover-logo"/>
 {% else %}
@@ -80,14 +84,13 @@ class: center, middle, inverse
 
 # {{ title }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true newcontributors=true %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page authorsonly=true %}
 
-<div class="footnote" style="bottom: 3em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
-<div class="footnote" style="bottom: 2em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Or view the plain-text slides without JS"}}</a></div>
+<div class="footnote" style="bottom: {% if page.video%}5.5em;{% else %}4 em;{% endif %}">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+{% if page.video %}
+<div class="footnote" style="bottom: 4em;"><a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{% icon video-slides %} View video slides for this lecture</a></div>
+{% endif %}
+<div class="footnote" style="bottom: 2.5em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a></div>
 <div class="footnote" style="bottom: 1em;"><strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}</div>
 
 ???
@@ -125,12 +128,9 @@ Useful when presenting."
 
 {{ locale['collaborative-effort'] | default: "This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!" }}
 
-{% if tutorial.contributors %}
-<div class="contributors-line">
-{% include _includes/contributor-list.html contributors=tutorial.contributors badge=true %}
-</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
 {% if page.logo == "GTN" %}
 <img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
 {% else %}
@@ -140,6 +140,10 @@ Useful when presenting."
 <img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
   {% endif %}
 {% endif %}
+{% if page.contributions %}
+	{% include _includes/funding-statement-short.md contributions=page.contributions %}
+{% endif %}
+</div>
 
 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
 {{ locale['license-tutorial'] | default: "This material is licensed under the Creative Commons Attribution 4.0 International License" }}</a>.

@@ -33,6 +33,7 @@ requirements:
       - ansible-galaxy
       - connect-to-compute-cluster
       - job-destinations
+subtopic: features
 ---
 
 > ### {% icon warning %} Evolving Topic
@@ -202,7 +203,7 @@ Congratulations, you've set up Docker. Verify the installation using the `docker
 When an Interactive Tool's Docker container starts, it will be assigned a random port. In order to connect clients to the Interactive Tool, Galaxy needs to determine this port (and the node on which the tool is running) and configure a *proxy* from Galaxy to the GxIT's host and port. Consider the following example of running the Jupyter Notebook Interactive Tool, shown in Figure 1 below:
 
 - nginx listens for requests from the client on **port 443** (https)
-- Requests for Galaxy are delivered from nginx to Galaxy over a UNIX domain socket (uWSGI protocol)
+- Requests for Galaxy are delivered from nginx to Galaxy over a UNIX domain socket
 - Requests for Interactive Tools are delivered from nginx to the Interactive Tools Proxy over (by default) **port 8000** (http)
   - GxIT http requests are forwarded by the proxy to Docker on the node on the container's (randomly assigned) **port 32768**
   - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888**
@@ -242,7 +243,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    {% raw %}
 >    ```yaml
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: master
+>    gie_proxy_git_version: main
 >    gie_proxy_setup_nodejs: nodeenv
 >    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
@@ -482,6 +483,8 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >         - geerlingguy.docker
 >         - usegalaxy_eu.gie_proxy
 >    ```
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
