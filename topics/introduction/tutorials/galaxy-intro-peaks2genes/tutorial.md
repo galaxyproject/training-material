@@ -559,21 +559,21 @@ We need to generate a new BED file from the original peak file that contains the
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
->   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
->   - *"Round result?"*: `YES`
+> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+>   - *"Input file"*: our peak file `Peak regions` (the interval format file)
+>   - *"Input has a header line with column names?": `No`
+>   - In *"Expressions"*:
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c2 + c5`
+>           - *"Mode of the operation"*: Append
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c8 + c1`
+>           - *"Mode of the operation"*: Append
 >
->   This will create an 8th column in our table, which we will use in our next step:
+>   This will create an 8th and a 9th column in our table, which we will use in our next step:
 >
-> 2. Rename the output `Peak regions new column`
+> 2. Rename the output `Peak summit regions`
 >
-> 3. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} rerun this tool on the last result with:
->   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the `Peak regions new column` file we just created
->   - *"Round result?"*: `YES`
->
-> 4. Rename this file `Peak summit regions`
 {: .hands_on}
 
 Now we cut out just the chromosome plus the start and end of the summit:
