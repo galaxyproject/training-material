@@ -457,7 +457,9 @@ Since we have some nice data, let's draw a barchart out of it!
 > 5. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
 > 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
 >
->    This will store it to your saved visualisations where you can later view, download, or share it with others.
+>    This will store it to your saved visualisations. Later you can view,
+>    download, or share it with others from **User -> Visualizations** in the
+>    top menu of Galaxy.
 >
 {: .hands_on}
 
