@@ -557,7 +557,7 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 
 ## Create peak summit file
 
-We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end of the peak region, we will simply define `start + 1`.
+We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5, rounded down to the next smallest integer because some peak summits fall in between to bases). As the end of the peak region, we will simply define `start + 1`.
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
@@ -566,7 +566,7 @@ We need to generate a new BED file from the original peak file that contains the
 >   - *"Input has a header line with column names?": `No`
 >   - In *"Expressions"*:
 >       - {% icon param-repeat %} *"Expressions"*
->           - *"Add expression"*: `c2 + c5`
+>           - *"Add expression"*: `c2 + int(c5)`
 >           - *"Mode of the operation"*: Append
 >       - {% icon param-repeat %} *"Expressions"*
 >           - *"Add expression"*: `c8 + c1`
