@@ -4,7 +4,7 @@ logo: "GTN"
 
 title: "Genome assembly quality control."
 questions:
-  - "Is my genome assembly ready for annotation?"
+  - "Is my genome assembly ready for annotation and/or scaffolding?"
 contributors:
   - abretaud
   - alexcorm
@@ -28,7 +28,9 @@ level: Introductory
 
 ---
 
-# **C**ontiguity
+.image-30[
+  ![Illustration of genome assembly contiguity](../../images/genome-qc/contiguity.png)
+]
 
 ---
 
@@ -116,7 +118,9 @@ It also includes:
 
 ---
 
-# **C**ompleteness
+.image-30[
+  ![Illustration of genome assembly completeness](../../images/genome-qc/completeness.png)
+]
 
 ---
 
@@ -191,17 +195,40 @@ The aim is to check assembly coherence against the content within reads that wer
 
 - Merqury or KAT
 - Histogram is build with read kmer content.
-- Colors come from assembly:
-  - **Black = not in the assembly** (heterozygous part, second haplotype).
-  - **Red = once in the assembly.**
+
+---
+
+### K-mer spectrum plots
+
+.pull-left[
+.image-70[
+![How to read kmer spectrum of reads](../../images/genome-qc/kmer-spectrum-reads.png)
+]]
+.pull-right[
+.image-70[
+![How to read kmer spectrum of an assembly using reads](../../images/genome-qc/kmer-spectrum-assembly.png)
+]]
+
+.footnote[Rhie, A., Walenz, B. P., Koren, S. & Phillippy, A. M. Merqury: reference-free quality, completeness, and phasing assessment for genome assemblies. Genome Biol 21, 245 (2020).]
 
 ---
 
 ### Assembly kmer content - Homozygous genomes
 
-.image-80[
-![KAT spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/pe_v_asm_clean.png)
-]
+<br>
+<br>
+
+K-mer spectra representation for Merqury (left) and KAT (rigth)
+
+.pull-left[
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-merqury-homozygous-good.png)
+]]
+
+.pull-right[
+.image-70[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-kat-homozygous-good.png)
+]]
 
 {% icon congratulations %} Good kmer representation of reads in the assembly
 
@@ -209,9 +236,15 @@ The aim is to check assembly coherence against the content within reads that wer
 
 ### Assembly kmer content - Homozygous genomes
 
-.image-80[
-![KAT spectra-cn plot for S.cerevesiae S288C assembly but with a too short kmer used with the assembler](../../images/genome-qc/pe_v_asm_wrong.png)
-]
+.pull-left[
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-merqury-homozygous-bad.png)
+]]
+
+.pull-right[
+.image-70[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-kat-homozygous-bad.png)
+]]
 
 <i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly
 
@@ -231,29 +264,6 @@ The lost content (the black peak) represents the half of the heterozygous conten
 
 ### Assembly kmer content - Heterozygous genomes
 
-.image-40[
-![KAT spectra-cn plot for highly heterozygous assembly and for which both haplotypes are present.](../../images/genome-qc/heterozygous_perfect_2.png)
-]
-
-{% icon congratulations %} Good kmer representation of reads in the assembly
-
-In this case, haplotypes are separated by duplicating all the homozygous regions and allowing us to fully capture the heterozygous content.
-We don’t typically, aim for this scenario when assembling genomes or at least, we split both haplotypes in 2 separated files.
-
----
-
-### Assembly kmer content - Heterozygous genomes
-
-.image-80[
-![KAT spectra-cn plot for an actual highly heterozygous assembly with an awful kmer representation ](../../images/genome-qc/heterozygous_real.png)
-]
-
-<i class="fa fa-thumbs-down"></i> Extremely bad kmer representation of reads in the assembly
-
----
-
-### Assembly kmer content - Heterozygous genomes
-
 .image-80[
 ![KAT spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-cn_c.gigas-hap2.png)
 ]
@@ -263,7 +273,9 @@ We don’t typically, aim for this scenario when assembling genomes or at least,
 ---
 
 
-# **C**orrectness
+.image-30[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
+]
 
 ---
 
@@ -322,14 +334,28 @@ In blue, heterozygous locus from first haplotype. In red, heterozygous locus fro
 # Evaluation against reference genome
 
 
-Dot plots are widely used to quickly compare 2 sequence sets. They provide a synthetic similarity overview, highlighting repetitions, breaks and inversions.
-
 .image-30[
 ![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
 ]
 
 ---
 
+.pull-left[
+.left[
+Dot plots are widely used to quickly compare 2 sequence sets. They provide a synthetic overview of:
+- Similarity
+- Specificity
+- Highlighting repetitions, breaks and inversions.
+]
+
+</br>
+
+.image-50[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+]
+
+.pull-right[
 .left[
 A non-exhaustive list of tools for making dot plots:
 - MUMmer dotplot
@@ -337,12 +363,11 @@ A non-exhaustive list of tools for making dot plots:
 - D-genies (not yet available into Galaxy)
 ]
 
-.pull-left[
-.image-70[
-![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
-]]
+</br>
+</br>
+</br>
 
-.pull-right[
-.image-70[
+.image-50[
 ![Interpret Dot Plots here based on great explanation by Michael Schatz.](../../images/dotplot.png)
-]]
+]
+]
