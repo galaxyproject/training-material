@@ -395,7 +395,7 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 >
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
 > 2. Switch to the **Convert** tab
-> 3. Select `Convert Genomic Intervals to BED`
+> 3. Under *"Target datatype"*: `bed (using 'interval-to-bed')`
 > 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
