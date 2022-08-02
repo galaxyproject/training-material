@@ -313,11 +313,15 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 2. Rename your output file `chr prefix added`.
 >
-> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with
+> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with two more replacements
 >    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `1`
->    - *"Find pattern"*: `chr20`
->    - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Replacement
+>      - *"Find pattern"*: `chr20`
+>      - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Insert Replacement
+>      - *"Find pattern"*: `chr21`
+>      - *"Replace with"*: `chrY`
 >
 >    > ### {% icon tip %} Tip: Rerunning a tool
 >    >
@@ -325,15 +329,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
-> 4. Rename your output file `chrX fixed`
->
-> 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Rerun this tool to do the same for chromosome Y
->    - *"File to process"*: `chrX fixed`, the output from the last run
->    - *"in column"*: `1`
->    - *"Find pattern"*: `chr21`
->    - *"Replace with"*: `chrY`
->
-> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
+> 4. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
 >
 >    We have quite a few files now and need to take care to select the correct ones at each step.
 >
@@ -347,7 +343,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > {: .solution }
 >    {: .question}
 >
-> 7. Rename the file to something more recognizable, e.g. `Peak regions`
+> 5. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
