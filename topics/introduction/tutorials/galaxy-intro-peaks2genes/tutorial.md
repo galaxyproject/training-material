@@ -420,7 +420,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
-> 1. {% tool [Group](Grouping1) %}  data by a column and perform aggregate operation on other columns with the following settings:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns, with the following settings:
 >     - *"Select data"* to the result of the intersection
 >     - *"Group by column"*:`Column 1`
 >     - Press **Insert Operation** and choose:
@@ -442,7 +442,28 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 ## Visualization
 
-Since we have some nice data, let's draw a barchart out of it!
+We have some nice aggregated data, so why not draw a barchart of it?
+
+Before we do that we should polish our grouped data a bit more though.
+
+You may have noticed that the mouse chromosomes are not listed in their correct
+order in that dataset (the **Group** tool tried to sort them, but did so
+alphabetically).
+
+We can fix this by running a dedicated tool for sorting on our data.
+
+> ### {% icon hands_on %} Hands-on: Fix sort order of gene counts table
+>
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order, with the following settings:
+>     - *"Sort Query"*: result of running the Group tool
+>     - in {% icon param-repeat %} *"Column selections"*
+>       - *"on column"*: `Column 1`
+>       - *"in"*: `Ascending order`
+>       - *"Flavor"*: `Natural/Version sort (-V)`
+>
+{: .hands_on}
+
+Great, we are ready to plot things!
 
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
