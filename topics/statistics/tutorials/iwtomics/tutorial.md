@@ -23,7 +23,7 @@ key_points:
   - "Locations and scales do not need to be specified at the outset, indeed IWTomics permits to detect them"
 contributors:
   - marziacremona
-  - fabio-cumbo
+  - cumbof
 
 ---
 
