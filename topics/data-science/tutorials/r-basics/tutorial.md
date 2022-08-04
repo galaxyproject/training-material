@@ -128,7 +128,7 @@ This **Environment** window allows you to keep track of the objects you have cre
 > > 1. `human_chr_number <- 23`
 > > 2. `gene_name <- 'pten'`
 > > 3. `ensemble_url <- 'ftp://ftp.ensemblgenomes.org/pub/bacteria/release-39/fasta/bacteria_5_collection/escherichia_coli_b_str_rel606/'`
-> > 4. `human_diploid_chr_num <-  36`
+> > 4. `human_diploid_chr_num <- 46`
 > >
 > {: .solution}
 {: .question}
@@ -772,7 +772,7 @@ We can use the `as.` functions to explicitly coerce values from one form into an
 > 3. Coerce into a numeric type using `as.numeric()`
 >
 >    ```R
->    > positions <- as.numeric(positions)
+>    > snp_positions_2 <- as.numeric(positions)
 >    > typeof(snp_positions_2)
 >    [1] "double"
 >    > snp_positions_2[1]
@@ -792,12 +792,12 @@ Here the coercion is straight forward, but what would happen if we tried using `
 > 2. Coerce into a numeric type using `as.numeric()`
 >
 >    ```R
->    > snp_chromosomes_2 <- as.numeric(snp_chromosomes_2)
+>    > snp_chromosomes_2 <- as.numeric(chromosomes_2)
 >    Warning message:
 >    NAs introduced by coercion
 >    ```
 >
-> 3. Check the content of `chromosomes_2`
+> 3. Check the content of `snp_chromosomes_2`
 >
 >    ```R
 >    > snp_chromosomes_2
