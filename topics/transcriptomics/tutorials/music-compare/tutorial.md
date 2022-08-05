@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 subtopic: single-cell
 priority: 10
-title: Bulk deconvolution across multiple variables
+title: Bulk deconvolution with MuSiC across multiple variables
 zenodo_link: https://zenodo.org/record/5719228
 tags:
   - single-cell
@@ -37,7 +37,7 @@ requirements:
 {:.no_toc}
 
 <!-- This is a comment. -->
-
+#FIXME
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
@@ -90,36 +90,65 @@ depending on the specifics of your tutorial.
 
 have fun!
 
+
+
+# Data
+
+We will use the same data from the Deconvolution with MuSiC tutorial. As a reminder, this means we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subjects and 4 with Type-II diabetes (T2D). One of our first tasks will be separating these datasets into healthy and T2D so we can analyse them separately.
+
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial *"Deconvolution: Cell Type inference of Human Pancreas Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>    * Human pancreas bulk RNA datasets (tag: `#bulk`)
 >
->    ***TODO***: *Remove the useless files (if added)*
+>      ```
+>      https://zenodo.org/record/5719228/files/GSE50244bulkeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/GSE50244bulkeset.phenotype.tabular
+>      ```
+>    * Human pancreas single-cell RNA datasets (tag: `#scrna`)
+>      ```
+>      https://zenodo.org/record/5719228/files/EMTABesethealthy.expression.tabular
+>      https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
+>      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 > 3. Rename the datasets
-> 4. Check that the datatype
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+> 4. Check the datatype
 >
-> 5. Add to each database a tag corresponding to ...
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 5. Add to each `expression` file a tag corresponding to `#bulk` and `#scrna`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+### Exploring the Datasets
+
+
+The data consists of:
+  * The bulk human pancreas dataset is 89 samples across 56 638 genes
+
+  * The single cell human pancreas datasets is 2209 cells across 24 453 genes.
+
+If you examine {% icon galaxy-eye %} the bulk dataset phenotype, you will remember that it appears as follows:
+
+![peek_tabular_bulk_pheno.png](../../images/bulk-music/peek_tabular_bulk_pheno.png "Peeking at the tabular bulk RNA-seq phenotype dataset")
+
+The expression meanwhile looks like this:
+![bulk_tab](../../images/bulk-music/peek_tabular_bulk_expr.png "Peeking at the tabular bulk RNA-seq expression dataset")
+
+Importantly, the first six columns are healthy controls, while the final four represent a disease model. We have our two variables to compare! Let's separate out these datasets.
 
 # Title of the section usually corresponding to a big step in the analysis
 
