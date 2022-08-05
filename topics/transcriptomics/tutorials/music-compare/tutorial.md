@@ -1,26 +1,35 @@
 ---
 layout: tutorial_hands_on
-
-title: Comparing variables with bulk deconvolution
-zenodo_link: ''
+subtopic: single-cell
+priority: 10
+title: Bulk deconvolution across multiple variables
+zenodo_link: https://zenodo.org/record/5719228
+tags:
+  - single-cell
+  - mouse
+  - human
+  - deconvolution
+  - bulk
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How do the cell type distributions vary in bulk RNA samples across my variable of interest?
+- For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
+- Apply the MuSiC deconvolution to samples and compare the cell type distributions
+- Use statistical outputs to identify significant differences
   what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Describe methods of input - i.e. using a single scRNA-seq datatype or multiple
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets
 contributors:
-- contributor1
-- contributor2
-
+- nomadscientist
+- metekman
+requirements:
+-
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - bulk-music
 ---
 
 
