@@ -3,8 +3,14 @@ title: If a Tool is Missing
 area: tools
 box_type: tip
 layout: faq
-contributors: [shiltemann]
+contributors: [shiltemann, garimavs]
 ---
+
+To use the tools installed and available on the Galaxy server:
+
+1. At the top of the left tool panel, type in a tool name or datatype into the tool search box.
+2. Shorter keywords find more choices.
+3. Tools can also be directly browsed by category in the tool panel.
 
 If you can't find a tool you need for a tutorial on Galaxy, please:
 
@@ -16,7 +22,7 @@ If you can't find a tool you need for a tutorial on Galaxy, please:
   - You can create an account on one of the supporting Galaxies
   ![screenshot of overview box with available Galaxies section]({% link /faqs/galaxy/images/supporting_galaxies.png %})
 
-2. Use the **GTN-in-Galaxy** feature
+2. Use the **Tutorial mode** feature
   - Open your Galaxy server
   - Click on the {% icon curriculum %} icon on the top menu, this will open the GTN inside Galaxy.
   - Navigate to your tutorial
@@ -26,5 +32,3 @@ If you can't find a tool you need for a tutorial on Galaxy, please:
 
 3. **Still not finding the tool?**
   - Ask help in [Gitter]({{site.gitter_url}}).
-
-

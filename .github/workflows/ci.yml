@@ -66,3 +66,7 @@ jobs:
             --allow-hash-href \
             --disable-external \
             ./_site
+
+      - run: |
+          # If this fails, ask @hexylena to look at your notebook
+          find _site | grep ipynb | xargs -n 1 bundle exec ruby bin/check-valid-json.rb

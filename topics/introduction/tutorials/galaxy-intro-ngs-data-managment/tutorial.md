@@ -18,7 +18,7 @@ key_points:
   - "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL."
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
-subtopic: core
+subtopic: next-steps
 contributors:
   - nekrut
   - mvdbeek

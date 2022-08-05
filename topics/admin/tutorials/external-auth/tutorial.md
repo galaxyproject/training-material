@@ -46,25 +46,24 @@ For this exercise we will use a basic password file method for authenticating - 
 > 1. Edit the galaxy.j2 template file in the templates/nginx directory and update the main location block defined for serving galaxy. Add the parameters:
 >      - `auth_basic galaxy;`
 >      - `auth_basic_user_file /etc/nginx/passwd;`
->      - `uwsgi_param HTTP_REMOTE_USER $remote_user;`
->      - `uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;`
+>      - `proxy_set_header HTTP_REMOTE_USER $remote_user;`
+>      - `proxy_set_header HTTP_GX_SECRET SOME_SECRET_STRING;`
 >
 >    It should look like:
 >
 >    ```diff
 >    @@ -14,6 +14,10 @@
->             uwsgi_pass 127.0.0.1:5000;
->             uwsgi_param UWSGI_SCHEME $scheme;
->             include uwsgi_params;
 >    +        auth_basic           galaxy;
 >    +        auth_basic_user_file /etc/nginx/passwd;
->    +        uwsgi_param          HTTP_REMOTE_USER $remote_user;
->    +        uwsgi_param          HTTP_GX_SECRET SOME_SECRET_STRING;
+>    +        proxy_set_header          HTTP_REMOTE_USER $remote_user;
+>    +        proxy_set_header          HTTP_GX_SECRET SOME_SECRET_STRING;
 >         }
 >     
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
-
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 >    > ### {% icon tip %} Running this tutorial *just* for Reports?
 >    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
 >    {: .tip}
@@ -72,12 +71,12 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
 >    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
->    `uwsgi_param` adds `HTTP_REMOTE_USER` to the special variables passed by nginx to uwsgi, with value `$remote_user`, which is a nginx embedded variable containing the username supplied with the Basic authentication.
+>    `proxy_set_header` adds `HTTP_REMOTE_USER` to the special variables passed by nginx to Galaxy, with value `$remote_user`, which is a nginx embedded variable containing the username supplied with the Basic authentication.
 >
 >    `GX_SECRET` is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent `REMOTE_USER` headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the `REMOTE_USER` header, you can impersonate any other use. While having Galaxy listen on `127.0.0.1` prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. `GX_SECRET` adds additional security as it needs to match `remote_user_secret` in your galaxy configutation.
 >
 >    > ### {% icon tip %} Proxy bypass
->    > Users can bypass the authentication only if they can talk directly to the uWSGI processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving galaxy, and there is no proxy.)
+>    > Users can bypass the authentication only if they can talk directly to the gunicorn processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving galaxy, and there is no proxy.)
 >    > This can happen mostly when some users have command line access to the Galaxy server, which is considered a bad practice.
 >    {: .tip}
 >

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import sys
 import re
 
@@ -25,7 +25,8 @@ ALLOWED_SHORT_IDS = [
     'wig_to_bigWig',
     'ChangeCase',
     'param_value_from_file',
-    'Convert characters1'
+    'Convert characters1',
+    'wc_gnu'
 ]
 
 RE_TOOL = '{% tool ([^[%}]*)\s*%}'
@@ -44,25 +45,28 @@ for line in sys.stdin.readlines():
     for m in re.finditer(RE_TOOL_ID, lineContents):
         (title, toolid) = m.groups()
         # TS tool
-        if '/' in toolid:
-            if toolid.count('/') < 5:
-                print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} has fewer than the expected number of slashes, meaning you have probably left off the version component.')
-                WROTE = 1
-
-            if 'testtoolshed' in toolid:
-                print(f'::warning file="{fn}",line="{lineNo}",col={m.start()}::The GTN strongly avoids using testtoolshed tools in your tutorials or workflows')
-                WROTE = 1
+        if '{{' in toolid: # don't check variable tool names for now (TODO)
+            WROTE=0
         else:
-            if '+' in toolid:
-                print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} has an unnecessary +')
-                WROTE = 1
+            if '/' in toolid:
+                if toolid.count('/') < 5:
+                    print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} has fewer than the expected number of slashes, meaning you have probably left off the version component.')
+                    WROTE = 1
 
-            if toolid not in ALLOWED_SHORT_IDS and not toolid.startswith('interactive_tool_') and not re.match('__[A-Z_]+__', toolid):
-                print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Unknown short tool ID {toolid}. If this is correct, please add to bin/check-broken-tool-links.py')
-                WROTE = 1
+                if 'testtoolshed' in toolid:
+                    print(f'::warning file="{fn}",line="{lineNo}",col={m.start()}::The GTN strongly avoids using testtoolshed tools in your tutorials or workflows')
+                    WROTE = 1
+            else:
+                if '+' in toolid:
+                    print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} has an unnecessary +')
+                    WROTE = 1
 
-        if '://' in toolid or '?' in toolid or '#' in toolid:
-            print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} seems to include part of a URL which is incorrect. It should just be the tool ID.')
-            WROTE = 1
+                if toolid not in ALLOWED_SHORT_IDS and not toolid.startswith('interactive_tool_') and not re.match('__[A-Z_]+__', toolid):
+                    print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Unknown short tool ID {toolid}. If this is correct, please add to bin/check-broken-tool-links.py')
+                    WROTE = 1
+
+            if '://' in toolid or '?' in toolid or '#' in toolid:
+                print(f'::error file="{fn}",line="{lineNo}",col={m.start()}::Broken tool link, {toolid} seems to include part of a URL which is incorrect. It should just be the tool ID.')
+                WROTE = 1
 
 sys.exit(WROTE)

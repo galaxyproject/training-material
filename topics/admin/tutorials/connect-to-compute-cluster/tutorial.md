@@ -25,7 +25,9 @@ contributors:
   - hexylena
 tags:
   - jobs
-subtopic: features
+  - ansible
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin
@@ -39,13 +41,11 @@ follow_up_training:
       - job-destinations
 ---
 
-# Running Galaxy Jobs with Slurm
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
-
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy's job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.
+
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -53,6 +53,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="connect-to-compute-cluster" %}
 
 ## Installing Slurm
 
@@ -72,10 +74,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,7 @@
+>    @@ -20,3 +20,7 @@
+>       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>     - src: gantsign.golang
 >       version: 2.6.3
->     - src: galaxyproject.cvmfs
->       version: 0.2.13
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.2
 >    +- src: galaxyproject.slurm
@@ -83,6 +85,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 >    The `galaxyproject.repos` role adds the [Galaxy Packages for Enterprise Linux (GPEL)](https://depot.galaxyproject.org/yum/) repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the [Slurm-DRMAA PPA](https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa) (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).
 >
@@ -120,11 +124,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,3 +137,13 @@ golang_gopath: '/opt/workspace-go'
->     # Singularity target version
+>    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
->    +
+>     
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
@@ -134,6 +137,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +  SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
 >    +  SelectType: select/cons_res
 >    +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add slurm configuration"}
@@ -359,10 +366,10 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,7 @@ galaxy_config_templates:
+>    @@ -98,6 +98,7 @@ galaxy_config_templates:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
 >     # Certbot
@@ -377,26 +384,33 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -1,9 +1,16 @@
->     <job_conf>
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->         </plugins>
->    -    <destinations default="singularity">
->    +    <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="slurm" runner="slurm">
->    +            <param id="singularity_enabled">true</param>
->    +            <env id="LC_ALL">C</env>
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->             <destination id="singularity" runner="local_plugin">
->                 <param id="singularity_enabled">true</param>
->                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -2,12 +2,24 @@ runners:
+>       local_runner:
+>         load: galaxy.jobs.runners.local:LocalJobRunner
+>         workers: 4
+>    +  slurm:
+>    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>     
+>     execution:
+>       default: singularity
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    slurm:
+>    +      runner: slurm
+>    +      singularity_enabled: true
+>    +      env:
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}
@@ -421,8 +435,8 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    > ### {% icon code-out %} Output
 >    > Your output may look slightly different:
 >    > ```console
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
->    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu uwsgi[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
+>    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 >    > ```
 >    {: .code-out}
 >
@@ -667,7 +681,7 @@ There is not a good rule we can tell you, just choose what you think is useful o
 You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
 
 
-{% snippet topics/admin/faqs/missed-something.md step=6 %}
+{% snippet topics/admin/faqs/missed-something.md step=7 %}
 
 ## Further Reading
 

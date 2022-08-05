@@ -21,10 +21,8 @@ contributors:
 subtopic: features
 tags:
   - tools
+  - git-gat
 ---
-
-# Overview
-{:.no_toc}
 
 This tutorial will introduce you to one of Galaxy's associated projects - [Ephemeris](https://ephemeris.readthedocs.io/). Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows. It aims to help automate, and limit the quantity of manual actions admins have to do in order to maintain a Galaxy instance.
 
@@ -34,6 +32,8 @@ This tutorial will introduce you to one of Galaxy's associated projects - [Ephem
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tool-management" %}
 
 # Background
 
@@ -94,7 +94,7 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > wget https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga
+>    > wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
@@ -186,22 +186,21 @@ For that, you can install from a YAML file:
 >
 > 4. Open your Galaxy's admin interface and check that the tools have been installed.
 >
-> 5. Using the UI import the workflow file that you used, [mapping.ga](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga).
->    >> (i) Right-click or Ctrl-click on the link above and copy the link address
->    >>
->    >> (ii) On your Galaxy instance click on `Workflow`, then `Import`.  Paste the URL into the `Import Archived URL` field.
+> 5. Using the UI import the workflow file that you used, [mapping.ga]({% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}).
+>    1. Right-click or Ctrl-click on the link above and copy the link address
+>    2. On your Galaxy instance click on `Workflow`, then `Import`.  Paste the URL into the `Import Archived URL` field.
 {: .hands_on}
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
 > ###  {% icon tip %} Tip: Opening a split screen in byobu
-> `Shift-F2`: Create a horizontal split
+> <kbd>Shift-F2</kbd>: Create a horizontal split
 >
-> `Shift-Left/Right/Up/Down`: Move focus among splits
+> <kbd>Shift-Left/Right/Up/Down</kbd>: Move focus among splits
 >
-> `Ctrl-F6`:  Close split in focus
+> <kbd>Ctrl-F6</kbd>:  Close split in focus
 >
-> `Ctrl-D`:  (Linux, Mac users) Close split in focus
+> <kbd>Ctrl-D</kbd>:  (Linux, Mac users) Close split in focus
 >
 > There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
 {: .tip}
@@ -325,4 +324,14 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 > {: .quote}
 >
 > There is no one right answer.
+{: .tip}
+
+> ### {% icon tip %} Tools not showing up? Refresh the toolbox!
+> Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:
+>
+> ```console
+> curl -X PUT https://<your-galaxy>/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
+> ```
+>
+> This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
 {: .tip}

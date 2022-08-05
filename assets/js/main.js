@@ -19,6 +19,52 @@ $(".question,.hands_on,.comment").each(function() {
 
 $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
 
+// CYOA Support
+function cyoaChoice(text){
+	if(text !== undefined && text !== null){
+		localStorage.setItem('gtn-cyoa', text);
+
+		var inputs = document.querySelectorAll(".gtn-cyoa input"),
+			options = [...inputs].map(x => x.value),
+			nonMatchingOptions = options.filter(x => x !== text);
+
+		nonMatchingOptions.forEach(value => {
+			document.querySelectorAll(`.${value}`).forEach(el => el.classList.add("gtn-cyoa-hidden"));
+		})
+
+		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
+
+		// Just in case we mark it as checked (e.g. if default/from URL)
+		document.querySelector(`input[value="${text}"]`).checked = true
+	}
+}
+
+function cyoaDefault(defaultOption){
+	// Start with the URL parameter
+	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+	if(urlOption){
+		cyoaChoice(urlOption);
+		return;
+	}
+
+	// Otherwise fall back to local storage (survives refreshes)
+	var lsOption = localStorage.getItem('gtn-cyoa');
+	if(lsOption !== null){
+		cyoaChoice(lsOption);
+		return;
+	}
+
+	// Otherwise if the browser is remembering for us, use that.
+	var currentlySelected = [...document.querySelectorAll("input[name='cyoa']")].filter(x => x.checked)[0];
+	if(currentlySelected){
+		cyoaChoice(currentlySelected);
+		return;
+	}
+
+	// And failing that, use the default.
+	cyoaChoice(defaultOption);
+}
+
 (function (window, document) {
     function onDocumentReady(fn) {
         if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
@@ -50,13 +96,19 @@ $("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:
 })(window, document);
 
 
-<!--  For admin training -->
-$("section.tutorial.topic-admin div.language-diff pre code .gi,section.tutorial.topic-admin div.language-diff pre code .gd").each((x, e) => {
-  var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-  $(e).text(fixed);
-})
-$("section.tutorial.topic-data-science div.language-diff pre code .gi,section.tutorial.topic-data-science div.language-diff pre code .gd").each((x, e) => {
-  var fixed = $(e).text().split('\n').map(q => { return q.slice(1) }).join('\n');
-  $(e).text(fixed);
-})
+function fixDiffPresentation(codeBlock){
+	codeBlock.childNodes.forEach(x => {
+		if(x.nodeName == '#text'){
+			x.textContent = x.textContent.split('\n').map(q => { return q.startsWith(" ") ? q.slice(1) : q }).join('\n')
+		} else {
+			if(!(x.nodeName.toLowerCase() === 'span' && x.classList[0] === 'notranslate')){
+				var fixed = $(x).text().split('\n').map(q => { return q.slice(1) }).join('\n');
+				$(x).text(fixed);
+			}
+		}
+	})
+}
 
+<!--  For admin training -->
+document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))

@@ -23,13 +23,16 @@ key_points:
   - Functional annotation can be performed using EggNOG-mapper and InterProScan.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
-contributors:
-  - abretaud
-  - alexcorm
-  - lleroi
-  - r1corre
-  - stephanierobin
-  - erasmusplus
+contributions:
+  authorship:
+    - abretaud
+  editing:
+    - alexcorm
+    - lleroi
+    - r1corre
+    - stephanierobin
+  funding:
+    - erasmusplus
 
 abbreviations:
     NMDS: Non-metric multidimensional scaling
@@ -238,102 +241,7 @@ To get a better picture of the quality of the result, we will run BUSCO in the n
 
 Before moving on, have a quick look at the `tbl2asn error summary report` output: it lists a few potential problems that were identified by Funannotate in the results it generated. For example, Funannotate can tell you when it predicted genes that contain very short exons, or that use a rare splice site sequence. You can have a detailed list of identified potential problems in the `tbl2asn genome validation report` dataset. It does not mean that each listed gene is wrong, but it means that you might want to give a closer look at these ones. If you have time to manually check each gene, Apollo can help you in doing this, see the note in the conclusion for this.
 
-## Evaluation with **Busco**
-
-[BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
-
-> ### {% icon hands_on %} Hands-on
->
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
->    - *"Mode"*: `annotated gene sets (protein)`
->    - *"Auto-detect or select lineage?"*: `Select lineage`
->        - *"Lineage"*: `Mucorales`
->    - In *"Advanced Options"*:
->        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
->
-{: .hands_on}
-
-> ### {% icon question %} Question
->
-> How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
->
-> > ### {% icon solution %} Solution
-> >
-> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
-> >
-> > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
-> >
-> > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
-> {: .solution}
->
-{: .question}
-
-# Functional annotation
-
-The aim of the previous step is to predict the position of the genes on the genome (structural annotation). Now we want to assign names and functions to the predicted genes. We can do this automatically using specialised tools: **EggNOG Mapper** and **InterProScan**.
-
-## **EggNOG Mapper**
-
-**EggNOG Mapper** compares each protein sequence of the annotation to a huge set of ortholog groups from the [EggNOG database](http://eggnog5.embl.de). In this database, each ortholog group is associated with functional annotation like [Gene Ontology (GO)](http://www.geneontology.org/) terms or [KEGG pathways](https://www.genome.jp/kegg/pathway.html). When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.
-
-> ### {% icon hands_on %} Hands-on
->
-> 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Fasta sequences to annotate"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
->    - *"Version of eggNOG Database"*: select the latest version available
->    - In *"Output Options"*:
->        - *"Exclude header lines and stats from output files"*: `No`
->
-{: .hands_on}
-
-The output of this tool is a tabular file, where each line represents a gene from our annotation, with the functional annotation that was found by EggNOG-mapper. It includes a predicted protein name, GO terms, EC numbers, KEGG identifiers, ...
-
-Display the file and explore which kind of identifiers were found by EggNOG Mapper.
-
-## **InterProScan**
-
-[InterPro](https://www.ebi.ac.uk/interpro/) is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or [Gene Ontology (GO)](http://www.geneontology.org/). A good proportion of the signatures are manually curated, which means they are of very good quality.
-
-**InterProScan** is a tool that analyses each protein sequence from our annotation to determine if they contain one or several of the signatures from InterPro. When a protein contains a known signature, the corresponding functional annotation will be assigned to it by **InterProScan**.
-
-**InterProScan** itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).
-
-> ### {% icon hands_on %} Hands-on
->
-> 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.54-87.0+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Protein FASTA File"*: `protein sequences` (output of **Funannotate predict annotation** {% icon tool %})
->    - *"InterProScan database"*: select the latest version available
->    - *"Use applications with restricted license, only for non-commercial use?"*: `Yes` (set it to `No` if you run InterProScan for commercial use)
->    - *"Output format"*: `Tab-separated values format (TSV)` and `XML`
->
-{: .hands_on}
-
-> ### {% icon comment %} Comments
->
-> To speed up the processing by InterProScan during this tutorial, you can disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
->
-> When some applications are disabled, you will of course miss the corresponding results in the output of **InterProScan**.
-{: .comment}
-
-The output of this tool is both a tabular file and an XML file. Both contain the same information, but the tabular one is more readable for a Human: each line represents a gene from our annotation, with the different domains and motifs that were found by InterProScan.
-
-If you display the TSV file you should see something like this:
-
-![InterProScan TSV output](../../images/interproscan_output.png "Extract of an InterProScan TSV output")
-
-Each line correspond to a motif found in one of the annotated proteins. The most interesting columns are:
-
-- Column 1: the protein identifier
-- Column 5: the identifier of the signature that was found in the protein sequence
-- Column 4: the databank where this signature comes from (InterProScan regroups several motifs databanks)
-- Column 6: the human readable description of the motif
-- Columns 7 and 8: the position where the motif was found
-- Column 9: a score for the match (if available)
-- Column 12 and 13: identifier of the signature integrated in InterPro (if available). Have a look an example webpage for [IPR036859](https://www.ebi.ac.uk/interpro/entry/InterPro/IPR036859/) on InterPro.
-- The following columns contains various identifiers that were assigned to the protein based on the match with the signature (Gene ntology term, Reactome, ...)
-
-The XML output file contains the same information in a computer-friendly format, we will use it in the next step.
+{% include topics/genome-annotation/tutorials/functional/content.md short=false %}
 
 # Submission to NCBI
 
@@ -385,6 +293,37 @@ This tool produces several output dataset, in particular:
 - Some statistics and reports
 
 If you display the GFF3 output, you will notice that the functional information, including gene names, is now stored in this file.
+
+## Evaluation with **Busco**
+
+We now have a complete annotation, including functional annotation, but it's time to evaluate the quality of this annotation. [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
+
+> ### {% icon hands_on %} Hands-on
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
+>    - *"Mode"*: `annotated gene sets (protein)`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>        - *"Lineage"*: `Mucorales`
+>    - In *"Advanced Options"*:
+>        - *"Which outputs should be generated"*: `shortsummary text` and `summary image`
+>
+{: .hands_on}
+
+> ### {% icon question %} Question
+>
+> How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
+>
+> > ### {% icon solution %} Solution
+> >
+> > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
+> >
+> > That's a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.
+> >
+> > To improve the result you can consider using more RNASeq data, and using the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"* option.
+> {: .solution}
+>
+{: .question}
 
 # Visualisation with a genome browser
 

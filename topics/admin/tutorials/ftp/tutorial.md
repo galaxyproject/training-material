@@ -25,10 +25,10 @@ requirements:
 abbreviations:
   FTP: File Transfer Protocol
   NAT: Network Address Translation
+tags:
+  - data
+  - git-gat
 ---
-
-# Overview
-{:.no_toc}
 
 This tutorial will guide you to setup an {FTP} server so galaxy users can use it to upload large files. Indeed, as written on the [galaxy community hub](https://galaxyproject.org/ftp-upload/), uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.
 
@@ -38,6 +38,8 @@ This tutorial will guide you to setup an {FTP} server so galaxy users can use it
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ftp" %}
 
 # FTP
 
@@ -83,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -36,3 +36,5 @@
+>    @@ -38,3 +38,5 @@
 >       version: 0.12.0
 >     - src: usegalaxy_eu.tiaas2
 >       version: 0.0.8
@@ -108,7 +110,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -162,9 +162,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -159,9 +159,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -132,16 +134,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,9 @@ galaxy_config:
->         allow_user_impersonation: true
->         # Tool security
+>    @@ -100,6 +100,9 @@ galaxy_config:
 >         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ftp vars in galaxy"}
@@ -154,7 +156,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -231,6 +231,27 @@ rabbitmq_users:
+>    @@ -250,6 +250,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -219,9 +221,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
->         - dj-wasabi.telegraf
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}
@@ -391,3 +393,5 @@ It's working!
 {: .hands_on}
 
 Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
+
+{% snippet topics/admin/faqs/missed-something.md step=14 %}

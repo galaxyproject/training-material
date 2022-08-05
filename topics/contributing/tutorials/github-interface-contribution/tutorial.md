@@ -21,7 +21,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github.repository_url }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
+All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github_repository }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
 > ### Agenda
 >
@@ -34,11 +34,11 @@ All the training material which you find on [{{ site.url }}{{ site.baseurl }}/](
 
 # GitHub
 
-The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github.repository_url }}).
+The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github_repository }}).
 
 > ### {% icon hands_on %} Hands-on: Familiarization with GitHub
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 >
 >    ![GitHub interface](../../images/github_interface.png "Interface of the GitHub repository of the training material")
 >
@@ -194,6 +194,29 @@ One of the reviewers of your pull request asked you to add your name after your 
 > 9. Check that the new changes are added to the pull request on GitHub
 >
 {: .hands_on}
+
+
+# Close the Pull Request
+
+Great! You now know how to make pull request on GitHub, and how to make changes after a review.
+Reviewers can now approve and merge your pull request.
+
+Because this was just a practice pull request, let's close it again.
+
+
+> ### {% icon hands_on %} Hands-on: Close the Pull Request
+>
+> Once you have run through all these steps, please close the pull request again.
+>
+> 1. Go to the [list of pull request tab on GitHub](https://github.com/galaxyproject/training-material/pulls)
+> 2. Click on your pull request
+> 3. Scroll to the bottom of the page
+> 3. Click on *"Close pull request"* button
+>
+> Whenever you add your first real contribution, you can add yourself to the `CONTRIBUTORS.yaml` file in that PR.
+>
+{: .hands_on}
+
 
 # Conclusion
 {:.no_toc}

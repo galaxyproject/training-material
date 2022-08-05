@@ -140,9 +140,9 @@ The forward and reverse reads of the same fragment are at the same line position
 
 > ### {% icon hands_on %} Hands-on: Recover consensus sequences from overlapping forward and reverse reads.
 >
-> 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_illuminapairedend/1.2.13) %} with the following parameters:
+> 1. {% tool [illuminapairedend](toolshed.g2.bx.psu.edu/repos/iuc/obi_illumina_pairend/obi_illumina_pairend/1.2.13) %} with the following parameters:
 >    - *"Read from file"*: `wolf_F` for the 3p file
->    - *"Read from file"*: `wolfRF` for the 5p file
+>    - *"Read from file"*: `wolf_R` for the 5p file
 >    - *"minimum score for keeping aligment"*: `40.0`
 >
 >    > ### {% icon comment %} Comment
@@ -382,6 +382,7 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 >
 > 1. {% tool [obiclean](toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13) %} with the following parameters:
 >    - *"Input sequences file"*: `obigrep output file`
+>    - *"attribute containing sample definition"*: `merged_sample`
 >    - *"Maximum numbers of differences between two variant sequences (default: 1)"*: `1`
 >    -  *"Threshold ratio between counts (rare/abundant counts) of two sequence records so that the less abundant one is a variant of the more abundant (default: 1, i.e. all less abundant sequences are variants)"*: `0.05`
 >    - *"Do you want to select only sequences with the head status in a least one sample?"*: `Yes`

@@ -118,6 +118,8 @@ Parameterization needs to be done separately for the ligand and protein. Therefo
 
 Here, we simply filter the original PDB twice: once for lines which do not match `HETATM`, which returns a PDB file containing only protein, not ligand and solvent; and once for lines which match the ligand's identity code `AG5E`, which returns a PDB file containing only the ligand.
 
+If you inspect the PDB file, you will see that two different ligands are listed: `AG5E` and `BG5E`. These are the same compound (`G5E`); they refer to two possible conformations it could adopt, both of which would be compatible with the crystallographic data. We choose to take the coordinates from `AG5E` for our simulations, though you could just as well enter `BG5E` instead. For the purpose of this tutorial, you should consider this as a minor technical detail arising from the nature of protein crystallography.
+
 ### Set up protein topology
 
 Firstly, we need to calculate the topology for the protein file. We will use the **GROMACS initial setup** {% icon tool %} tool.

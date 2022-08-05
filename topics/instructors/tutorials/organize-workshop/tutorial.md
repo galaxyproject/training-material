@@ -74,6 +74,8 @@ These recommendations are highly inspired from the one by [The Carpentries](http
     - The building and room can accommodate service animals
     - Lactation space is provided
 
+    [Here is an additional (US-centric)](https://www.adaatyourservice.org/accessible-meetings-events-conferences-guide/book) guide book covering all aspects of event accessibility required under the ADA in the US. Inspiration can be taken for other non-US countries, as the list is quite extensive.
+
 5. Create a registration form
     1. Decide if there will be a workshop fee
 

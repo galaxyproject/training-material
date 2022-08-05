@@ -14,7 +14,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 requirements:
   - type: "internal"
     topic_name: admin
@@ -25,6 +24,10 @@ voice:
   id: Olivia
   lang: en-AU
   neural: true
+subtopic: data
+tags:
+  - ansible
+  - git-gat
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -97,6 +100,8 @@ A slideshow presentation on this subject can be found [here](slides.html). More 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="cvmfs" %}
 
 > The agenda we're going to follow today is: We're going to install and
 > configure Galaxy CVMFS reference data using ansible. We're going to explore
@@ -176,15 +181,17 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -14,3 +14,5 @@
+>       version: 0.1.5
+>     - name: galaxyproject.tusd
+>       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
 >    +  version: 0.2.13
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement" data-ref="add-req"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 >    > Okay, so the first thing I'm going to do is I'm going to add the CVMFS
 >    > role to the requirements.yml.
@@ -296,10 +303,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,3 +21,4 @@
->           become: true
+>    @@ -20,3 +20,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
@@ -495,9 +502,9 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
 >         brand: "🧬🔬🚀"
+>         admin_users: admin@example.org
+>         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}
@@ -584,7 +591,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > {: data-test="true"}
 {: .hidden}
 
-{% snippet topics/admin/faqs/missed-something.md step=4 %}
+{% snippet topics/admin/faqs/missed-something.md step=5 %}
 
 # Common Production Questions
 
@@ -603,6 +610,56 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 > ### {% icon question %} If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?
 > Yes. Often admins with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site uses.
 {: .question}
+
+> ### {% icon tip %} Debugging failed mounting
+>
+> Are you having issues mounting your CVMFS mount? Is it giving strange errors like "Endpoint not connected"
+> Try running this command as root:
+>
+> > > ### {% icon code-in %} Input: Bash
+> > > ```console
+> > > /usr/bin/cvmfs2 -d -o rw,system_mount,fsname=cvmfs2,allow_other,grab_mountpoint singularity.galaxyproject.org /mnt
+> > > ```
+> > {: .code-in}
+> >
+> > > ### {% icon code-out %} Output: Consolue
+> > > ```console
+> > > Debug: using library /usr/lib/libcvmfs_fuse3_stub.so
+> > > CernVM-FS: running in debug mode
+> > > CernVM-FS: loading Fuse module... (cvmfs) Parsing config file /etc/cvmfs/default.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280373)    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) Parsing config file /etc/cvmfs/default.d/50-cern-debian.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280375)    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) Parsing config file /etc/cvmfs/default.d/80-ansible-galaxyproject-cvmfs.conf    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) execve'd /bin/sh (PID: 280378)    [07-21-2022 11:11:20 UTC]
+> > > [...]
+> > > (dns) empty hostname    [07-21-2022 11:11:20 UTC]
+> > > (download) installed 1 proxies in 1 load-balance groups    [07-21-2022 11:11:20 UTC]
+> > > (cvmfs) DNS roaming is disabled for this repository.    [07-21-2022 11:11:20 UTC]
+> > > (catalog) constructing client catalog manager    [07-21-2022 11:11:20 UTC]
+> > > (catalog) Initialize catalog    [07-21-2022 11:11:20 UTC]
+> > > (cache) unable to read local checksum    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfspublished to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfspublished    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /.cvmfspublished, proxy DIRECT (curl error 0)    [07-21-2022 11:11:20 UTC]
+> > > (cache) miss ./e2/ab48b0984729d99951cb62c4312f501b3ddc6b (-2)    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /data/e2/ab48b0984729d99951cb62c4312f501b3ddc6bX, proxy DIRECT (curl error 0)    [07-21-2022 11:11:20 UTC]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfswhitelist to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/.cvmfswhitelist    [07-21-2022 11:11:20 UTC]
+> > > [...]
+> > > (download) escaped http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/c7/f1555f421b1868b979291dc23f34a83132eadbC to http://cvmfs1-psu0.galaxyproject.org/cvmfs/singularity.galaxyproject.org/data/c7/f1555f421b1868b979291dc23f34a83132eadbC    [07-21-2022 11:11:20 UTC]
+> > > (download) Verify downloaded url /data/c7/f1555f421b1868b979291dc23f34a83132eadbC, proxy DIRECT (curl error 0)    [07-21-2022 11:11:25 UTC]
+> > > (cache) finished downloading of /data/c7/f1555f421b1868b979291dc23f34a83132eadbC    [07-21-2022 11:11:25 UTC]
+> > > (cache) commit ./c7/f1555f421b1868b979291dc23f34a83132eadb ./txn/fetchJWcwtt    [07-21-2022 11:11:25 UTC]
+> > > (quota) pin into lru c7f1555f421b1868b979291dc23f34a83132eadb, path file catalog at singularity.galaxyproject.org:/ (c7f1555f421b1868b979291dc23f34a83132eadb)    [07-21-2022 11:11:25 UTC]
+> > > (cache) commit failed: cannot pin c7f1555f421b1868b979291dc23f34a83132eadb    [07-21-2022 11:11:25 UTC]
+> > > (catalog) failed to load catalog '' (2 - not enough space to load catalog)    [07-21-2022 11:11:25 UTC]
+> > > (catalog) failed to initialize root catalog    [07-21-2022 11:11:25 UTC]
+> > > Failed to initialize root file catalog (16 - file catalog failure)
+> > > (cache) unpinning / unloading all catalogs    [07-21-2022 11:11:25 UTC]
+> > > ```
+> > {: .code-out}
+> {: .code-2col}
+{: .tip}
 
 # Other Aspects
 
