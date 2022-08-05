@@ -953,7 +953,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
 
 <p><img src="../../images/metatranscriptomics/Why_MT.png" alt="Multiomics" /></p>
 
-<p>New generations of sequencing platforms coupled to numerous bioinformatics tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.</p>
+<p>New generations of sequencing platforms coupled to numerous bioinformatic tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.</p>
 
 <p><img src="../../images/metatranscriptomics/meta-omics.png" alt="meta-momics diagram" /></p>
 
@@ -961,9 +961,9 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
 
 <p>Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population. It provides scientists with the confirmation of predicted open‐reading frames (ORFs) and potential identification of novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.</p>
 
-<p>To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor (<span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>). They generated metatranscriptomics data for 3 replicates over 7 time points. <span class="notranslate">RNA</span>s were enriched by r<span class="notranslate">RNA</span> depletion and treated with <span class="notranslate">DNA</span>se and library was prepared with the TruSeq stranded <span class="notranslate">RNA</span> sample preparation, which included the production of a c<span class="notranslate">DNA</span> library.</p>
+<p>To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor (<span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>). They generated metatranscriptomics data for 3 replicates over 7 time points. Before amplification the amount of r<span class="notranslate">RNA</span> was reduced by r<span class="notranslate">RNA</span> depletion. The sequencing libray was prepared with the TruSeq stranded <span class="notranslate">RNA</span> sample preparation, which included the production of a c<span class="notranslate">DNA</span> library.</p>
 
-<p>In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.</p>
+<p>In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how to compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.</p>
 
 <p>To analyze the data, we will follow the ASaiM <span class="notranslate">workflow</span> and explain it step by step. ASaiM (<span class="citation"><a href="#batut2018asaim">Batut <i>et al.</i> 2018</a></span>) is an open-source <span class="notranslate">Galaxy</span>-based <span class="notranslate">workflow</span> that enables microbiome analyses. Its <span class="notranslate">workflow</span> offers a streamlined <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM <span class="notranslate">workflow</span> has been updated by the <strong><span class="notranslate">Galaxy</span>P</strong> team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.</p>
 
@@ -973,7 +973,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
   <li>Preprocess</li>
   <li>Extract and analyze the community structure (taxonomic information)</li>
   <li>Extract and analyze the community functions (functional information)</li>
-  <li>Combine taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.</li>
+  <li>Combine taxonomic and functional information to offer insights into the taxonomic contribution to a function or functions expressed by a particular taxonomy.</li>
 </ol>
 
 <p>A graphical representation of the ASaiM <span class="notranslate">workflow</span> which we will be using today is given below:</p>
@@ -1132,7 +1132,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <p>Inspect the webpage output from MultiQC</p>
 
   <ol>
-    <li>How many sequences does each file have?</li>
+    <li>How many sequences does each file has?</li>
     <li>How is the quality score over the <span class="notranslate">reads</span>? And the mean score?</li>
     <li>Is there any bias in base content?</li>
     <li>How is the GC content?</li>
@@ -1204,7 +1204,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 <p>Even though our data is already of pretty high quality, we can improve it even more by:</p>
 <ol>
   <li>Trimming <span class="notranslate">reads</span> to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the <span class="notranslate">reads</span></li>
-  <li>Removing <span class="notranslate">reads</span> of overall bad quality.</li>
+  <li>Removing <span class="notranslate">reads</span> of overall bad quality</li>
   <li>Removing <span class="notranslate">reads</span> that are too short to be informative in <span class="notranslate">downstream</span> analysis</li>
 </ol>
 
@@ -1287,7 +1287,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <p>Inspect the output report from <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
   <ol>
-    <li>How many basepairs has been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
+    <li>How many basepairs have been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
     <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
   </ol>
 
@@ -1304,7 +1304,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <p>Metatranscriptomics sequencing targets any <span class="notranslate">RNA</span> in a pool of micro-organisms. The highest proportion of the <span class="notranslate">RNA</span> sequences in any organism will be ribosomal <span class="notranslate">RNA</span>s.</p>
 
-<p>These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<span class="citation"><a href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a></span>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
+<p>These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed). To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<span class="citation"><a href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a></span>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
 
 <p><img src="../../images/metatranscriptomics/sortmerna.png" alt="SortMeRNA" /></p>
 
@@ -1434,7 +1434,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <ul>
   <li>
-    <p>Identification and classification of OTUs, as used in amplicon data</p>
+    <p>Identification and classification of Operational Taxonomic Units OTUs, as used in amplicon data</p>
 
     <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong>), then again using the same tools as for amplicon data (as explained in tutorials like <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html">16S Microbial Analysis with mothur</a> or <a href="/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">16S Microbial analysis with Nanopore data</a>).</p>
 
@@ -1697,7 +1697,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <p>In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using <strong>HUMAnN</strong> (<span class="citation"><a href="#franzosa2018species">Franzosa <i>et al.</i> 2018</a></span>). <strong>HUMAnN</strong> is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.</p>
 
-<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn</strong>. This will help <strong>HUMAnN</strong> to focus on the know sequences for the identified organisms.</p>
+<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn</strong>. This will help <strong>HUMAnN</strong> to focus on the known sequences for the identified organisms.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-the-functional-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the functional information</h3>
@@ -1874,7 +1874,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
 
   <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN</strong>. <span class="notranslate">RNA</span> <span class="notranslate">reads</span> are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the <span class="notranslate">RNA</span>-level outputs (e.g. transcript family abundance) by corresponding <span class="notranslate">DNA</span>-level outputs to the quantification of microbial <span class="notranslate">expression</span> independent of gene copy number.</p>
 
-  <p>Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation</p>
+  <p>Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation.</p>
 
 </blockquote>
 
@@ -1911,7 +1911,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
   <blockquote class="solution">
     <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>14% (<code class="language-plaintext highlighter-rouge">0.14438 x 100</code>) of the sequences have not be assigned to a gene family</li>
+      <li>14% (<code class="language-plaintext highlighter-rouge">0.14438 x 100</code>) of the sequences have not be assigned to a gene family.</li>
       <li>The UniRef90_A3DCI4 family represents 6% of the <span class="notranslate">reads</span>.</li>
     </ol>
   </blockquote>
@@ -2012,7 +2012,7 @@ PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3D
 
 <h2 id="group-gene-families-into-go-terms">Group gene families into GO terms</h2>
 
-<p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families.</p>
+<p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help construct a big picture, we could identify and use categories of genes using the gene families.</p>
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with <strong>HUMAnN</strong> into GO terms.</p>
 
@@ -2112,7 +2112,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
   <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the 3 outputs of these steps</p>
 
   <ol>
-    <li>How many GO terms have been identified</li>
+    <li>How many GO terms have been identified?</li>
     <li>Which of the GO terms related to molecular functions is the most abundant?</li>
   </ol>
 
