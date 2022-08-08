@@ -52,7 +52,7 @@ Submission of raw reads to public repositories allows reuse of data and reproduc
 The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
-In this tutorial we will show you how to use Galaxy's 'ENA Upl0.0.0.0:oad tool' to submit raw sequencing reads, consensus sequences and their associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server usind Galaxy's 'ENA upload tool'.
+In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit raw sequencing reads, consensus sequences and their associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server using Galaxy's 'ENA upload tool'.
 Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina reads to demonstrate how to use the ENA metadata template. Finally, we will submit consensus sequences to ENA using 'Submit consensus sequence to ENA' tool.
 
 Data will be submitted to ENA's test server and will not be public.
@@ -106,7 +106,7 @@ In this first example, you will submit one ONT sequence file using {% tool [ENA 
 >
 {: .hands_on}
 
-Once the data is uploaded, we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does not include any [Sample Checklist metadata](https://www.ebi.ac.uk/ena/browser/checklists), only the basic minimal sample metadata required for a succesful submission. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
+Once the data is uploaded, we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does not include any [Sample Checklist metadata](https://www.ebi.ac.uk/ena/browser/checklists), only the basic minimal sample metadata required for a successful submission. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
 
 We recommend always submitting to the test server before submitting to the public one.
 After you confirm that all the data and metadata looks ok, you can go ahead and submit to the public ENA server.
@@ -155,11 +155,8 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
 
 > ### {% icon tip %} Tip: Metadata ticket
-> Upon succesful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
+> Upon successful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
 {: .tip}
-
-
-
 
 
 ## Option 2: submitting to ENA using a metadata template
