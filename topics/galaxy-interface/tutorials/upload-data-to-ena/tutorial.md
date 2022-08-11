@@ -74,7 +74,7 @@ Data will be submitted to ENA's test server and will not be public.
 
 # Adding ENA Webin credentials to your Galaxy user information
 
-In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [here](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}.
+In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [here](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}.
 
 > ### {% icon hands_on %} Hands-on: Add Webin credentials to your Galaxy user information
 >
@@ -88,7 +88,7 @@ In order to submit data to ENA, you need to have a valid Webin account. If you d
 # Submitting raw sequence data (reads) to the ENA
 ## Option 1: submitting to ENA using interactive metadata generator
 
-In this first example, you will submit one ONT sequence file using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %} interactive metadata forms. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.
+In this first example, you will submit one ONT sequence file using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %} interactive metadata forms. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -105,7 +105,7 @@ In this first example, you will submit one ONT sequence file using {% tool [ENA 
 >
 {: .hands_on}
 
-Once the data is uploaded, we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.3.2) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does not include any [Sample Checklist metadata](https://www.ebi.ac.uk/ena/browser/checklists), only the basic minimal sample metadata required for a successful submission. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
+Once the data is uploaded, we fill the metadata using {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}'. Interactive metadata forms are nested to fit [ENA's metadata model](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html). Briefly, you add Samples to a Study, Experiments to Samples and Runs to Experiments. The interactive metadata form does not include any [Sample Checklist metadata](https://www.ebi.ac.uk/ena/browser/checklists), only the basic minimal sample metadata required for a successful submission. If you wish to include additional metadata from a sample checklist, please use Option 2 below.
 
 We recommend always submitting to the test server before submitting to the public one.
 After you confirm that all the data and metadata looks ok, you can go ahead and submit to the public ENA server.
@@ -115,7 +115,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 
 > ### {% icon hands_on %} Hands-on: add metadata interactively and submit a single sequence to ENA
 >
-> 1. {% tool [ENA Upload tool](https://toolshed.g2.bx.psu.edu/repository?repository_id=0db04aa13ef9d2f8) %}:
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
 >    - *"Action to execute"*: `Add new data`
 >    - Under "Testing options":
 >       - *"Submit to test ENA server?"*: `yes`
@@ -213,7 +213,7 @@ As before, the submission is done to the test server before submitting to the pu
 
 > ### {% icon hands_on %} Hands-on: use a metadata template and submit multiple sequences to ENA
 >
-> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.5.3) %}:
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
 >    - *"Action to execute"*: `Add new data`
 >    - Under "Testing options":
 >       - *"Submit to test ENA server?"*: `yes`
@@ -256,7 +256,7 @@ We will link it to the reads submitted in the first step using the accession num
 >    https://zenodo.org/record/6912963/files/SRR10903401.fasta
 >    ```
 > 2. {% icon galaxy-eye %} Open the 'ENA submsission receipt' and find the Study and Sample accession numbers from the raw data submission.
-> 3. {% tool [Submit consensus sequence to ENA](https://toolshed.g2.bx.psu.edu/view/ieguinoa/ena_webin_cli/7d751b5943b0) %}:
+> 3. {% tool [Submit consensus sequence to ENA](https://toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/rev/7d751b5943b0) %}:
 >    - *"Submit to test ENA server?"*: `yes`
 >    - *"Validate files and metadata but do not submit"*: `no`
 >    - Fill the assembly metadata. For our assembly:
