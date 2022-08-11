@@ -256,7 +256,7 @@ We will link it to the reads submitted in the first step using the accession num
 >    https://zenodo.org/record/6912963/files/SRR10903401.fasta
 >    ```
 > 2. {% icon galaxy-eye %} Open the 'ENA submsission receipt' and find the Study and Sample accession numbers from the raw data submission.
-> 3. {% tool [Submit consensus sequence to ENA](https://toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/rev/7d751b5943b0) %}:
+> 3. {% tool [Submit consensus sequence to ENA](https://toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/) %}:
 >    - *"Submit to test ENA server?"*: `yes`
 >    - *"Validate files and metadata but do not submit"*: `no`
 >    - Fill the assembly metadata. For our assembly:
