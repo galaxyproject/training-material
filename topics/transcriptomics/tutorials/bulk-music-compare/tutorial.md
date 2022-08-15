@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: single-cell
-priority: 10
+priority: 11
 title: Bulk deconvolution with MuSiC across multiple variables
 zenodo_link: https://zenodo.org/record/5719228
 tags:
@@ -23,7 +23,7 @@ key_points:
 - Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets
 contributors:
 - nomadscientist
-- metekman
+- mtekman
 requirements:
 -
     type: "internal"
