@@ -25,10 +25,13 @@ contributors:
 - nomadscientist
 - mtekman
 requirements:
--
+  -
+    type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - bulk-music
+      - bulk-music
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
@@ -36,11 +39,6 @@ requirements:
 {:.no_toc}
 
 <!-- This is a comment. -->
-#TODO
-- TRY A WORKFLOW WITH 3 DIFFERENT VARIABLES (does the stats handle this?)
-- Fix main tutorial dataset descriptions
-- Remake workflow with separated scRNA-seq references
-- Future: include link to 'how we made the datasets'
 
 The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need is well-annotated, high quality reference scRNA-seq dataset (or multiple!) and your bulk RNA-samples of choice. For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}
 
@@ -58,6 +56,72 @@ The goal of this tutorial is to apply bulk RNA deconvolution techniques to a pro
 # Data
 
 We will use the same data from the Deconvolution with MuSiC tutorial. As a reminder, this means we will extract cell proportions from a bulk data of human pancreas data from {%cite fadista2014global %} concerning 56 638 genes across 89 samples, using a single cell human pancreas dataset from {%cite segerstolpe2016single %} containing 25 453 genes across 2209 cells, clustered into 14 cell types, from 6 healthy subjects and 4 with Type-II diabetes (T2D). One of our first tasks will be separating these datasets into healthy and T2D so we can analyse them separately.
+
+To perform this analysis, we will use mouse kidney single-cell RNA-seq data from {% cite park2018single %} described by 16 273 genes over a trimmed subset of 10 000 cells, giving 16 unique cell type (2 of which are novel) across 7 subjects. The bulk RNA-seq dataset is from {% cite beckerman2017transgenic %} and contains mouse kidney tissue described by 19 033 genes over 10 samples.
+
+## Get data
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. Create a new history for this tutorial *"Deconvolution: Dendrogram of Mouse Data"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    * Mouse kidney bulk RNA datasets (tag: `#bulk`)
+>
+>      ```
+>      https://zenodo.org/record/5719228/files/Mousebulkeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/Mousebulkeset.phenotype.tabular
+>      ```
+>    * Mouse kidney single-cell RNA datasets (tag: `#scrna`)
+>      ```
+>      https://zenodo.org/record/5719228/files/Mousesubeset.expression.tabular
+>      https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
+>      ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+>
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 5. Add to each `expression` file a tag corresponding to `#bulk` and `#scrna`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+> ### {% icon details %} Exploring the Datasets
+>
+> As before, you may choose to explore the bulk and scrna datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.
+>
+{: .details}
+
+You will need to again create ExpressionSet objects, as before.
+
+### **Construct Expression Set Object**
+
+> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
+>
+> 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"Assay Data"*: `Mousebulkeset.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `Mousebulkeset.phenotype.tabular` (Input dataset)
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
+>    {: .comment}
+>
+> 2. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"Assay Data"*: `Mousesubeset.expression.tabular` (Input dataset)
+>    - {% icon param-file %} *"Phenotype Data"*: `Mousesubeset.phenotype.tabular` (Input dataset)
+>
+{: .hands_on}
 
 ## Get data
 
