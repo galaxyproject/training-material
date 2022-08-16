@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 subtopic: single-cell
-priority: 10
+priority: 11
 title: Bulk deconvolution with MuSiC across multiple variables
 zenodo_link: https://zenodo.org/record/5719228
 tags:
@@ -17,16 +17,15 @@ objectives:
 - Apply the MuSiC deconvolution to samples and compare the cell type distributions
 - Use statistical outputs to identify significant differences
   what you should focus on during the course
-- Describe methods of input - i.e. using a single scRNA-seq datatype or multiple
-time_estimation: 3H
+- Describe methods of input - i.e. using a single scRNA-seq datatype or multiple scRNA-seq files
+time_estimation: 2H
 key_points:
 - Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets
 contributors:
 - nomadscientist
-- metekman
+- mtekman
 requirements:
 -
-    type: "internal"
     topic_name: transcriptomics
     tutorials:
         - bulk-music
@@ -37,28 +36,14 @@ requirements:
 {:.no_toc}
 
 <!-- This is a comment. -->
-#FIXME
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+#TODO
+- TRY A WORKFLOW WITH 3 DIFFERENT VARIABLES (does the stats handle this?)
+- Fix main tutorial dataset descriptions
+- Remake workflow with separated scRNA-seq references
+- Future: include link to 'how we made the datasets'
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need is well-annotated, high quality reference scRNA-seq dataset (or multiple!) and your bulk RNA-samples of choice. For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -68,28 +53,6 @@ tutorial.
 > {:toc}
 >
 {: .agenda}
-
-# Title for your first section
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
 
 
 # Data
