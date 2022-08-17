@@ -41,13 +41,11 @@ follow_up_training:
       - job-destinations
 ---
 
-# Running Galaxy Jobs with Slurm
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
-
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 To account for this, Galaxy's job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.
+
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -55,6 +53,8 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="connect-to-compute-cluster" %}
 
 ## Installing Slurm
 
@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -135,6 +135,16 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >     
@@ -369,7 +369,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    @@ -98,6 +98,7 @@ galaxy_config_templates:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
 >     # Certbot

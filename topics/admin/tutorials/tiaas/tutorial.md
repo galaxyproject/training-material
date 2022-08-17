@@ -32,9 +32,13 @@ requirements:
       - pulsar
 ---
 
+Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
+Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+resources, thus reducing queue times on the day of the training.
 
-# Overview
-{:.no_toc}
+![TIaaS concept](../../images/tiaas/tiaas_intro.png "With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available."){: width="70%"}
+
+This tutorial will go cover how to set up such a service on your own Galaxy server.
 
 
 > ### Agenda
@@ -44,15 +48,7 @@ requirements:
 >
 {: .agenda}
 
-# Introduction
-
-Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
-Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
-resources, thus reducing queue times on the day of the training.
-
-![TIaaS concept](../../images/tiaas/tiaas_intro.png "With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available."){: width="70%"}
-
-This tutorial will go cover how to set up such a service on your own Galaxy server.
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tiaas" %}
 
 
 # Setting up TIaaS
@@ -92,7 +88,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -212,6 +212,15 @@ telegraf_plugins_extra:
+>    @@ -234,6 +234,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -362,7 +358,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +- hogwarts.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}

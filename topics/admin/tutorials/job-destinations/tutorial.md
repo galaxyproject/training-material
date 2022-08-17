@@ -35,13 +35,12 @@ requirements:
       - connect-to-compute-cluster
 ---
 
-# Mapping Jobs
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first.
 
 Now that you have a working scheduler, we will start configuring which jobs are sent to which destinations.
+
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -49,6 +48,8 @@ Now that you have a working scheduler, we will start configuring which jobs are 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}
 
 # Galaxy and Slurm - Statically Mapping a Job
 
@@ -96,7 +97,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +- testing.xml
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >    {% endraw %}
 >    ```
@@ -261,7 +262,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +- my_rules.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy my_rules dynamic rule"}
@@ -650,7 +651,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    +- map_resources.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy map_resources.py"}

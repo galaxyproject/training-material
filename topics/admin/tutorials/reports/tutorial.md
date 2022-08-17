@@ -38,6 +38,8 @@ The reports application gives some pre-configured analytics screens. These are v
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}
+
 # Setting up Reports
 
 The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.
@@ -92,7 +94,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -51,6 +51,7 @@ galaxy_root: /srv/galaxy
 >     galaxy_user: {name: galaxy, shell: /bin/bash}
->     galaxy_commit_id: release_22.01
+>     galaxy_commit_id: release_22.05
 >     galaxy_force_checkout: true
 >    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
@@ -121,7 +123,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_manage_systemd_reports: yes
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
