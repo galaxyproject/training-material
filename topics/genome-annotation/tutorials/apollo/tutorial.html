@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Refining Genome Annotations with Apollo</title>
+        <title>Refining Genome Annotations with Apollo (prokaryotes)</title>
         
             <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
 
@@ -22,9 +22,9 @@
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
 <meta name="DC.type" content="text" />
-<meta name="DC.title" content="Refining Genome Annotations with Apollo" />
+<meta name="DC.title" content="Refining Genome Annotations with Apollo (prokaryotes)" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:33:41 +0000" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
 <meta name="DC.creator" content="Anthony Bretaudeau" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nathan Dunn" />
@@ -38,7 +38,7 @@
         
         <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
         <meta property="og:site_name" content="Galaxy Training Network" />
-        <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo" />
+        <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo (prokaryotes)" />
         <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
 
@@ -278,9 +278,9 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:41 +0000",
+  "dateModified": "1970-01-01 00:33:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Refining Genome Annotations with Apollo",
+  "headline": "Refining Genome Annotations with Apollo (prokaryotes)",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -328,7 +328,7 @@
     "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Refining Genome Annotations with Apollo' tutorial",
+  "name": "Hands-on for 'Refining Genome Annotations with Apollo (prokaryotes)' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html",
   "timeRequired": "PT3H",
   "keywords": "genome-annotation, prokaryote",
@@ -637,7 +637,7 @@
 </script>
 
 <section class="tutorial topic-genome-annotation">
-    <h1 data-toc-skip>Refining Genome Annotations with Apollo</h1>
+    <h1 data-toc-skip>Refining Genome Annotations with Apollo (prokaryotes)</h1>
     
 
     <div markdown="0">
@@ -840,6 +840,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -893,7 +895,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/workflows/" title="Workflows" alt="Refining Genome Annotations with Apollo workflows">
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/workflows/" title="Workflows" alt="Refining Genome Annotations with Apollo (prokaryotes) workflows">
         <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
     </a>
 
@@ -993,7 +995,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 22, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1018,7 +1020,7 @@
 
 <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>After automatically annotating your genome using <a href="../annotation-with-prokka/tutorial.html">Prokka</a> or <a href="../annotation-with-maker/tutorial.html">Maker</a>, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.</p>
+<p>After automatically annotating your genome using <a href="../annotation-with-prokka/tutorial.html">Prokka</a> for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.</p>
 
 <p><a href="https://github.com/gmod/apollo">Apollo</a> <span class="citation"><a href="#Dunn2019">Dunn <i>et al.</i> 2019</a></span> provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as “Google Docs” for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.</p>
 
@@ -1047,10 +1049,9 @@
       <li><a href="#adding-more-functional-annotation" id="markdown-toc-adding-more-functional-annotation">Adding more functional annotation</a></li>
       <li><a href="#comparing-with-the-official-annotation" id="markdown-toc-comparing-with-the-official-annotation">Comparing with the official annotation</a></li>
       <li><a href="#sequence-alterations" id="markdown-toc-sequence-alterations">Sequence alterations</a></li>
-      <li><a href="#exporting-annotation" id="markdown-toc-exporting-annotation">Exporting annotation</a></li>
     </ol>
   </li>
-  <li><a href="#collaborating-with-other-annotators" id="markdown-toc-collaborating-with-other-annotators">Collaborating with other annotators</a></li>
+  <li><a href="#exporting-and-collaborating" id="markdown-toc-exporting-and-collaborating">Exporting and collaborating</a></li>
   <li><a href="#whats-next" id="markdown-toc-whats-next">What’s next?</a></li>
 </ol>
 
@@ -1178,7 +1179,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>Let’s begin by building a JBrowse instance with all the data we have for this genome.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-why-bother"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why bother?</h3>
+  <h3 id="comment-reduced-data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Reduced data</h3>
 
   <p>To reduce the size of the data, in this tutorial we will only work on a portion of the <em>Escherichia coli K12 str. MG1655</em> genome.</p>
 </blockquote>
@@ -1601,7 +1602,9 @@ The GO defines concepts/classes used to describe gene function, and relationship
 
 <p>Once you have added some alterations, Apollo will automatically display the effect it has on the overlapping genes.</p>
 
-<h2 id="exporting-annotation">Exporting annotation</h2>
+<h1 id="exporting-and-collaborating">Exporting and collaborating</h1>
+
+<h2 class="no_toc" id="exporting-annotation">Exporting annotation</h2>
 
 <p>You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from <span class="notranslate">Galaxy</span>:</p>
 
@@ -1638,17 +1641,17 @@ The GO defines concepts/classes used to describe gene function, and relationship
 
 <p>Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.</p>
 
-<h1 id="collaborating-with-other-annotators">Collaborating with other annotators</h1>
+<h2 class="no_toc" id="collaborating-with-other-annotators">Collaborating with other annotators</h2>
 
-<p>As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users hving an account on the same <span class="notranslate">Galaxy</span>  (most probably use<span class="notranslate">galaxy</span>.eu).</p>
+<p>As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users having an account on the same <span class="notranslate">Galaxy</span>  (most probably use<span class="notranslate">galaxy</span>.eu).</p>
 
 <p>Click on the <strong>Sharing</strong> tab in the Apollo right panel.</p>
 
-<p><img src="../../images/apollo/sharing.png" alt="Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active." loading="lazy" /></p>
+<p><img src="../../images/apollo/sharing.png" alt="Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active." /></p>
 
 <p>You should see a screen like this:</p>
 
-<p><img src="../../images/apollo/perm_home.png" alt="Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads &quot;Shareable organisms&quot; and lists organisms that can be shared. A &quot;Group membership&quot; section shows that they are not a member of any group." loading="lazy" /></p>
+<p><img src="../../images/apollo/perm_home.png" alt="Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads &quot;Shareable organisms&quot; and lists organisms that can be shared. A &quot;Group membership&quot; section shows that they are not a member of any group." /></p>
 
 <p>It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: <code class="language-plaintext highlighter-rouge">E. coli K12</code>.</p>
 
@@ -1667,13 +1670,13 @@ The GO defines concepts/classes used to describe gene function, and relationship
     </li>
   </ol>
 
-  <p><img src="../../images/apollo/perm_group_create.png" alt="Group creation dialog with one field, the group name set to 'my_friends'. " loading="lazy" /></p>
+  <p><img src="../../images/apollo/perm_group_create.png" alt="Group creation dialog with one field, the group name set to 'my_friends'" /></p>
 
 </blockquote>
 
 <p>Now you should see a screen like this:</p>
 
-<p><img src="../../images/apollo/perm_group_added.png" alt="Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group." loading="lazy" /></p>
+<p><img src="../../images/apollo/perm_group_added.png" alt="Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group." /></p>
 
 <p>Let’s add a colleague to our newly created group.</p>
 
@@ -1695,7 +1698,7 @@ The GO defines concepts/classes used to describe gene function, and relationship
     </li>
   </ol>
 
-  <p><img src="../../images/apollo/perm_add_user.png" alt="Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value." loading="lazy" /></p>
+  <p><img src="../../images/apollo/perm_add_user.png" alt="Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value." /></p>
 
 </blockquote>
 
@@ -1723,6 +1726,8 @@ The GO defines concepts/classes used to describe gene function, and relationship
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to <span class="notranslate">Galaxy</span> for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.</p>
+
+<p>A <a href="/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html">similar tutorial for eukaryote genomes</a> exists, using different types of evidence tracks, feel free to have a look at it to learn more.</p>
 
 <p>When refinement is sufficient an updated or new version of the annotation may be exported as GFF3 as well as published as a new JBrowse directory for inspection.</p>
 
@@ -1798,7 +1803,7 @@ The GO defines concepts/classes used to describe gene function, and relationship
                                 e.hide();
 
                                 $("#feedback-form").html(`
-                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Refining Genome Annotations with Apollo (Genome Annotation)">Loading...</iframe>
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Refining Genome Annotations with Apollo (prokaryotes) (Genome Annotation)">Loading...</iframe>
                                 `)
                             })
                         });
@@ -1808,7 +1813,7 @@ The GO defines concepts/classes used to describe gene function, and relationship
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Anthony Bretaudeau, Helena Rasche, Nathan Dunn, Mateo Boudet, Erasmus+ Programme, 2021 <b>Refining Genome Annotations with Apollo (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Anthony Bretaudeau, Helena Rasche, Nathan Dunn, Mateo Boudet, Erasmus+ Programme, 2022 <b>Refining Genome Annotations with Apollo (prokaryotes) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1824,10 +1829,10 @@ The GO defines concepts/classes used to describe gene function, and relationship
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{genome-annotation-apollo,
 author = "Anthony Bretaudeau and Helena Rasche and Nathan Dunn and Mateo Boudet and Erasmus+ Programme",
-title = "Refining Genome Annotations with Apollo (Galaxy Training Materials)",
-year = "2021",
-month = "12",
-day = "14"
+title = "Refining Genome Annotations with Apollo (prokaryotes) (Galaxy Training Materials)",
+year = "2022",
+month = "08",
+day = "22"
 url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

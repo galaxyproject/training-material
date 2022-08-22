@@ -1,0 +1,1605 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Refining Genome Annotations with Apollo (eukaryotes)</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Refining Genome Annotations with Apollo (eukaryotes)" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Anthony Bretaudeau" />
+<meta name="DC.creator" content="Erasmus+ Programme" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo (eukaryotes)" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/apollo-euk/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/apollo-euk/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/genome-annotation/tutorials/apollo-euk/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/genome-annotation/tutorials/apollo-euk/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-06-01/topics/genome-annotation/tutorials/apollo-euk/tutorial.html" title="Version 2022-06-01">2022-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Refining Genome Annotations with Apollo (eukaryotes)",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Refining Genome Annotations with Apollo (eukaryotes)' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "genome-annotation, eukaryote, cyoa",
+  "description": "The questions this  addresses are:\n - How to visualize your genome after automated annotations have been performed?\n - How to manually annotate genome after automated annotations have been performed?\n - How to evaluate and visualize annotated genomic features?\n - How do I collaborate when doing genome annotation?\n\n\\nThe objectives are:\n - Load a genome into Galaxy\n - View annotations in JBrowse\n - Learn how to load JBrowse data into Apollo\n - Learn how to manually refine genome annotations within Apollo\n - Export refined genome annotations\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+      "name": "Rule Based Uploader",
+      "description": "Hands-on for 'Rule Based Uploader' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html",
+      "name": "Genome annotation with Funannotate",
+      "description": "Hands-on for 'Genome annotation with Funannotate' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "name": "Erasmus+ Programme",
+      "image": "https://avatars.githubusercontent.com/erasmusplus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/",
+      "name": "Erasmus+ Programme",
+      "image": "https://avatars.githubusercontent.com/erasmusplus",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Refining Genome Annotations with Apollo (eukaryotes)</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+
+<a href="/training-material/hall-of-fame/erasmusplus/" class="contributor-badge contributor-erasmusplus"><img src="https://avatars.githubusercontent.com/erasmusplus?s=27" alt="Avatar">Erasmus+ Programme</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to visualize your genome after automated annotations have been performed?</p>
+</li>
+        
+        <li><p>How to manually annotate genome after automated annotations have been performed?</p>
+</li>
+        
+        <li><p>How to evaluate and visualize annotated genomic features?</p>
+</li>
+        
+        <li><p>How do I collaborate when doing genome annotation?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Load a genome into Galaxy</p>
+</li>
+        
+        <li><p>View annotations in JBrowse</p>
+</li>
+        
+        <li><p>Learn how to load JBrowse data into Apollo</p>
+</li>
+        
+        <li><p>Learn how to manually refine genome annotations within Apollo</p>
+</li>
+        
+        <li><p>Export refined genome annotations</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Rule Based Uploader:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/genome-annotation">Genome Annotation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Genome annotation with Funannotate:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/genome-annotation/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/3270822">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                 <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo-euk/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+  </li>
+
+
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 22, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <blockquote class="warning">
+  <h3 id="warning-only-works-on-usegalaxyeu"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Only works on Use<span class="notranslate">Galaxy</span>.eu</h3>
+  <p>Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on Use<span class="notranslate">Galaxy</span>.eu, hopefully this list will expand in the future.</p>
+</blockquote>
+
+<h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>After automatically annotating your genome using <a href="../funannotate/tutorial.html">Funannotate</a> or <a href="../annotation-with-maker/tutorial.html">Maker</a> for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.</p>
+
+<p><a href="https://github.com/gmod/apollo">Apollo</a> <span class="citation"><a href="#Dunn2019">Dunn <i>et al.</i> 2019</a></span> provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as “Google Docs” for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.</p>
+
+<p>This demo is inspired by the <a href="https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html">Apollo User’s Guide</a>, which provides additional guidance.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-ask-your-instructor"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ask your instructor!</h3>
+  <p>This tutorial shows you how to use <span class="notranslate">Galaxy</span> to set up a genome curation project by loading a new organism in Apollo. If you only want to focus on the usage of Apollo, your instructor might already have created for you an organism in Apollo. In this case select the <code class="language-plaintext highlighter-rouge">Use a pre-created organism</code> option below (you will skip a few steps in <span class="notranslate">Galaxy</span>), and select the organism prepared for you by your instructor.</p>
+
+  <p>If you’re doing this tutorial on your own, or if the instructor has not set up a specific Apollo organism for you, select <code class="language-plaintext highlighter-rouge">Create your own organism</code>.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+  <h3><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Choose Your Own Tutorial</h3>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Create-your-own-organism" onclick="cyoaChoice('Create-your-own-organism')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Create your own organism</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Use-a-precreated-organism" onclick="cyoaChoice('Use-a-precreated-organism')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Use a pre-created organism</label>
+	
+	
+	
+
+	
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Create-your-own-organism");
+		})
+	</script>
+	
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-for-apollo" id="markdown-toc-preparing-for-apollo">Preparing for Apollo</a></li>
+  <li><a href="#apollo" id="markdown-toc-apollo">Apollo</a>    <ol>
+      <li><a href="#evidence-tracks" id="markdown-toc-evidence-tracks">Evidence tracks</a></li>
+      <li><a href="#adding-new-genes" id="markdown-toc-adding-new-genes">Adding new genes</a></li>
+      <li><a href="#editing-a-gene-structure" id="markdown-toc-editing-a-gene-structure">Editing a gene structure</a></li>
+      <li><a href="#working-with-isoforms" id="markdown-toc-working-with-isoforms">Working with isoforms</a></li>
+      <li><a href="#viewing-and-reverting-changes" id="markdown-toc-viewing-and-reverting-changes">Viewing and reverting changes</a></li>
+      <li><a href="#adding-more-functional-annotation" id="markdown-toc-adding-more-functional-annotation">Adding more functional annotation</a></li>
+    </ol>
+  </li>
+  <li><a href="#exporting-and-collaborating" id="markdown-toc-exporting-and-collaborating">Exporting and collaborating</a></li>
+  <li><a href="#whats-next" id="markdown-toc-whats-next">What’s next?</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="preparing-for-apollo">Preparing for Apollo</h1>
+
+<div class="Create-your-own-organism">
+
+  <h2 class="no_toc" id="data-upload">Data upload</h2>
+
+  <p>To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. “Evidence tracks” can be any data like:</p>
+
+  <ul>
+    <li>A set of prior gene predictions or other genomic feature predictions</li>
+    <li>The output of a bioinformatics analysis like BLAST or InterProScan</li>
+    <li>Sequencing <span class="notranslate">reads</span> from <span class="notranslate">RNA</span>-Seq or another HTS analysis</li>
+    <li>If you are not doing a <em>de novo</em> annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr></li>
+  </ul>
+
+  <p>In this tutorial we use the same data as in the <a href="../funannotate/tutorial.html">Funannotate</a> tutorial: the genome sequence, the annotation produced by <strong>Funannotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and the <span class="notranslate">mapping</span> of <span class="notranslate">RNA</span>-Seq data along the genome using <strong><span class="notranslate">RNA</span> star</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. We will visualise this data and use it to make some manual annotations in order to familiarise you with the process.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-real-data-unreal-circumstances"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Real Data: Unreal Circumstances</h3>
+    <p>While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on <em>Mucor mucedo</em>, this is not necessarily the data <em>you</em> might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.</p>
+  </blockquote>
+
+  <h3 class="no_toc" id="get-data">Get data</h3>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+      </li>
+      <li>
+        <p>Import the files from <a href="https://zenodo.org/record/3270822">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">genome-annotation</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Refining Genome Annotations with Apollo (eukaryotes)</code>):</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/genome.fasta
+https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/annotation.gff3
+https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/<span class="notranslate">rna</span>seq.bam
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+        <!--SNIPPET-->
+        <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <h2 class="no_toc" id="using-apollo-for-annotation">Using Apollo for Annotation</h2>
+
+  <p>Refining genome annotations happens in multiple steps:</p>
+
+  <ul>
+    <li>Create a JBrowse instance from the reference genome FASTA file and evidence tracks</li>
+    <li>Import this data into Apollo</li>
+    <li>Refine the annotations</li>
+    <li>Export the refined genome annotations</li>
+  </ul>
+
+  <p>In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that are covered in other tutorials. When you’ve completed this tutorial you should be comfortable manipulating genomic data in <span class="notranslate">Galaxy</span> and Apollo.</p>
+
+  <blockquote class="details">
+    <h3 id="details-why-bother"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Why bother?</h3>
+
+    <p>Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
+Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.</p>
+
+    <p>Additionally, many times assemblies are less than perfect or read depth and quality may be insufficient, leading to imperfect automatic annotation.</p>
+  </blockquote>
+
+  <h3 id="build-the-jbrowse-instance">Build the JBrowse Instance</h3>
+
+  <p>Let’s begin by building a JBrowse instance with all the data we have for this genome.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+        <ul>
+          <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">genome.fasta</code> (Input dataset)</li>
+            </ul>
+          </li>
+          <li>In <em>“Track Group”</em>:
+            <ul>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+                <ul>
+                  <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">Annotation</code></li>
+                  <li>In <em>“Annotation Track”</em>:
+                    <ul>
+                      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                        <ul>
+                          <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code>
+                            <ul>
+                              <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: <code class="language-plaintext highlighter-rouge">annotation.gff3</code> (Input dataset)</li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
+                <ul>
+                  <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-Seq</code></li>
+                  <li>In <em>“Annotation Track”</em>:
+                    <ul>
+                      <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
+                        <ul>
+                          <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM Pileups</code>
+                            <ul>
+                              <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq.bam</code> (Input dataset)</li>
+                              <li><em>“Autogenerate SNP Track”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <blockquote class="comment">
+          <h3 id="comment-jbrowse-is-highly-configurable"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> JBrowse is highly configurable</h3>
+
+          <p>JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some exte<span class="notranslate">rna</span>l identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.</p>
+
+          <p>A static genome browser like this (just JBrowse, not in Apollo) is very useful for summarising results of a genomics <span class="notranslate">workflow</span>, where the next step is simply interpretation and not annotation. Have a look at the <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">JBrowse tutorial</a> for more information.</p>
+
+          <p>Currently we have built a standalone genome browser (data + the html page and user interface and javascript), but it’s possible to just compile the data directory if you intend to send this data to Apollo, and don’t need to view the static data in <span class="notranslate">Galaxy</span>.</p>
+        </blockquote>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>This tool will take some time to run dependent on data size. All of the inputs need to be pre-processed by JBrowse into a form that it can render and visualise easily. Once this is complete, you can click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eyeball to view the JBrowse instance. This is a static view into the data, JBrowse does not let you make any annotations or save any changes. We will convert it into a dynamic view where we can make persistent annotations and share these with our colleagues.</p>
+
+  <h3 id="sending-data-to-apollo">Sending data to Apollo</h3>
+
+  <p>Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-import-to-apollo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Import to Apollo</h3>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5" title="Tested with toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5"><strong>Create or Update Organism</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5</span></span>  with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“JBrowse HTML Output”</em>: output of <strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><em>“Organism Common Name Source”</em>: <code class="language-plaintext highlighter-rouge">Direct Entry</code>
+            <ul>
+              <li><em>“Organism Common Name”</em>: <code class="language-plaintext highlighter-rouge">Mucor mucedo</code></li>
+            </ul>
+          </li>
+          <li><em>“Genus”</em>: <code class="language-plaintext highlighter-rouge">Mucor</code></li>
+          <li><em>“Species”</em>: <code class="language-plaintext highlighter-rouge">mucedo</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/gga/apollo_iframe/iframe/4.2.5" title="Tested with toolshed.g2.bx.psu.edu/repos/gga/apollo_iframe/iframe/4.2.5"><strong>Annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/gga/apollo_iframe/iframe/4.2.5</span></span>  with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Apollo Organism Listing”</em>: output of <strong>Create or Update Organism</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        </ul>
+      </li>
+      <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output of the Annotate tool, when it is ready.</li>
+    </ol>
+
+  </blockquote>
+
+  <p>Viewing the output will open a view into Apollo in the main panel. Here you can interact with your genome and make annotations. This “Annotate” output is a quick link to that specific genome, and while Apollo allows you to manage and annotate multiple genomes, this dataset will always take you back to that specific genome. You can additionally access the Apollo server outside of <span class="notranslate">Galaxy</span>. While the URL will be different for each <span class="notranslate">Galaxy</span> server that supports Apollo, Use<span class="notranslate">Galaxy</span>.eu’s Apollo server is available at <a href="https://usegalaxy.eu/apollo">https://use<span class="notranslate">galaxy</span>.eu/apollo</a>.</p>
+
+</div>
+<div class="Use-a-precreated-organism">
+
+  <p>While the URL will be different for each <span class="notranslate">Galaxy</span> server that supports Apollo, to access Use<span class="notranslate">Galaxy</span>.eu’s Apollo server:</p>
+
+  <ul>
+    <li>First login on <a href="https://usegalaxy.eu">https://use<span class="notranslate">galaxy</span>.eu</a></li>
+    <li>Then go to <a href="https://usegalaxy.eu/apollo">https://use<span class="notranslate">galaxy</span>.eu/apollo</a>.</li>
+  </ul>
+
+  <p>It is important to first login on <a href="https://usegalaxy.eu">https://use<span class="notranslate">galaxy</span>.eu</a> before connecting to Apollo as it will set up everything to make Apollo recognize your user account.</p>
+
+  <p>Your instructor should give you the name of the organism you will work on, you need to select it in the drop down box at the top of the right panel of Apollo. If multiple users are using the same organism, you will experiment the true collaborative aspect of Apollo: all the actions performed on the gene models by anyone will be seen by everyone instantly.</p>
+</div>
+<h1 id="apollo">Apollo</h1>
+<div class="Create-your-own-organism">
+
+  <figure id="figure-1"><img src="../../images/apollo/ui.png" alt="Screenshot of Apollo in Galaxy, apollo takes up most of the space in the center iframe with the history shown on the right." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> This is the Apollo interface, when viewed from inside <span class="notranslate">Galaxy</span>. The Annotate tool produces a special output which acts like a link to the Apollo server. It is <b>not</b> sufficient to download this file to save a copy of your annotations, unlike other datasets in <span class="notranslate">Galaxy</span>. In the main panel Apollo is displayed, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.</figcaption></figure>
+
+</div>
+<div class="Use-a-precreated-organism">
+
+  <figure id="figure-2"><img src="../../images/apollo/ui_apollo.png" alt="Screenshot of Apollo." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> This is the Apollo interface, with two panels of its own: the Annotation Window (left), and the Annotator Panel (right). The annotation window is the main view into our genome and here we will see evidence, reconcile it, and make our annotations. The right panel allows us to show or hide individual evidence tracks, switch between organisms, and navigate around the genome.</figcaption></figure>
+
+  <blockquote class="details">
+    <h3 id="details-organism-naming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Organism naming</h3>
+
+    <p>At the top of the right panel, you can switch from one organism to another. Depending on the server you are using, the organism names can be suffixed with <code class="language-plaintext highlighter-rouge">gx[number]</code> or an email address: this is to avoid possible confusion between organisms with the same name created by multiple users.</p>
+  </blockquote>
+
+</div>
+
+<p>From the Apollo user manual:</p>
+
+<blockquote class="quote">
+  <p>The major steps of manual annotation using Apollo can be summarized as follows:</p>
+
+  <ol>
+    <li>Locate a chromosomal region of interest.</li>
+    <li>Determine whether a feature in an existing evidence track provides a reasonable gene model to start annotating.</li>
+    <li>Drag the selected feature to the ‘User Annotation’ area, creating an initial gene model.</li>
+    <li>Use editing functions to edit the gene model if necessary.</li>
+    <li>Check your edited gene model for consistency with existing homologs by exporting the FASTA formatted sequence and searching a protein sequence database, such as UniProt or the NCBI Non Redundant (NR) database, and by conducting preliminary functional assignments using the Gene Ontology (GO) database.</li>
+  </ol>
+
+</blockquote>
+
+<p>The first four steps are generally the process of structural annotation (the process of identifying the correct gene model), and the last includes functional annotation (the process of assigning a putative function to a gene in your annotations).</p>
+
+<h2 id="evidence-tracks">Evidence tracks</h2>
+
+<p>Let’s start by looking at the tracks available to us, and then turning on the annotation track so we can start exploring our data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-visualize-the-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Visualize the annotation</h3>
+
+  <ol>
+    <li>
+      <p>In the right hand panel at the top click on <strong>Tracks</strong> to open the track listing</p>
+
+      <p><img src="../../images/apollo/tracks_eu.png" alt="Zoomed in screenshot of the track menu with the Annotation set of tracks expanded showing Augustus and NCBI AnnotWriter genes." loading="lazy" /></p>
+    </li>
+    <li>
+      <p>In the <strong>Annotation</strong> group, select the <code class="language-plaintext highlighter-rouge">annotation.gff3</code> track.</p>
+
+      <p>You can either activate tracks in bulk, by clicking on the checkbox to the right of the group name (“Annotation”), or by clicking on the group name to expand the section, and then selecting individual tracks.</p>
+    </li>
+    <li>
+      <p>Zoom to a region of the genome.</p>
+
+      <ol>
+        <li>In the left hand Annotation Window, at the top navigation bar you will find a textbox which shows the current location on the genome.</li>
+        <li>Edit this and enter <code class="language-plaintext highlighter-rouge">scaffold_1:3000..12000</code></li>
+        <li>Press <em>Go</em> or use <kbd>Enter</kbd> on your keyboard.</li>
+      </ol>
+
+      <p><img src="../../images/apollo/location_euk.png" alt="Screenshot of Jbrowse header with the control panel with magnifying glasses and zoom location." loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-track-names"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Track names</h3>
+  <p>Apollo uses the dataset names from your <span class="notranslate">Galaxy</span> history to name the tracks in the track list.</p>
+</blockquote>
+
+<p>We can now see an evidence track: <code class="language-plaintext highlighter-rouge">annotation.gff3</code> is the output of the <a href="../funannotate/tutorial.html">Funannotate tutorial</a>. In a <em>de novo</em> annotation project, we probably will only have the outputs of various gene callers, and potentially some <span class="notranslate">expression</span> evidence like <span class="notranslate">RNA</span>-Seq.</p>
+
+<p>For this organism, we only have one track in the <strong>Annotation</strong> group, but an organism can have multiple annotations coming from different sources.</p>
+
+<h2 id="adding-new-genes">Adding new genes</h2>
+
+<p>With the selected track, if you look along the genome, you will see many genes that were predicted by Funannotate. Each of them as a name assigned by Funannotate based on automatic functional annotation. If you right click on gene, an select <code class="language-plaintext highlighter-rouge">View details</code>, you can get access to detailed information on the predicted gene, including its unique name (e.g. <code class="language-plaintext highlighter-rouge">FUN_000002</code>), functional annotation (e.g. <code class="language-plaintext highlighter-rouge">InterPro:IPR006594</code>, <code class="language-plaintext highlighter-rouge">GO:0005515</code>) or the coding sequence (CDS).</p>
+
+<blockquote class="details">
+  <h3 id="details-gene-colors"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Gene colors</h3>
+  <p>Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.</p>
+</blockquote>
+
+<p>What we want now is first to check that the structure of the genes predicted by Funannotate are in good shape. To do this, we will display an additional evidence tracks.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-display-rna-seq-track"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Display <span class="notranslate">RNA</span>-Seq track</h3>
+
+  <ol>
+    <li>
+      <p>In the right hand panel at the top click on <strong>Tracks</strong> to open the track listing</p>
+    </li>
+    <li>
+      <p>In the <strong><span class="notranslate">RNA</span>-Seq</strong> group, select the <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq.bam - SNPs/Coverage</code> track and then the <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq.bam</code> track.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>These new tracks represent the result of aligning <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> along the genome, with two different representation. It should look like that:</p>
+
+<p><img src="../../images/apollo/rnaseq_euk.png" alt="JBrowse with RNA-Seq data shown, genes appear as red green and blue stripes with a pointed end, RNA-Seq appear as a coverage plot along the genome, and as individual reads as red and blue stripes. " loading="lazy" /></p>
+
+<p>The first track (<code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq.bam - SNPs/Coverage</code>) is a coverage xy-plot, representing the number of <span class="notranslate">reads</span> aligned on the genome at each position. The little coloured teardrops represent positions where mismatches where found between some <span class="notranslate">reads</span> and the reference sequence (SNPs or sequenceing errors). Light grey regions corresponding to portions of the genomes where <span class="notranslate">RNA</span>Seq were mapped, and darker grey regions corresponding to introns (= regions were some <span class="notranslate">reads</span> were found to match both the end of an exon, and the start of the next one).</p>
+
+<p>The second track (<code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq.bam</code>) represent the alignment of each individual <span class="notranslate">RNA</span>-Seq read. Red <span class="notranslate">reads</span> were aligned in the forward strand, and blue ones in the reverse strand.</p>
+
+<p>Let’s suppose you want to improve the annotation of one of the gene. To do it, you can either click on one of its intron and drag and drop it to the User-created Annotations track (yellow background, at the top), or if you prefer, right click on one of its intron and select <strong>Create new annotation</strong> &gt; <strong>gene</strong>. It should appear shortly in the <strong>User-created Annotation</strong> track.</p>
+
+<div class="Use-a-precreated-organism">
+  <blockquote class="warning">
+    <h3 id="warning-working-with-others"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Working with others</h3>
+    <p>Maybe you’re not doing this tutorial alone, if you see that other people have started working on this region of the genome, it is best to move to a different region to avoid disturbing them by modifying the same genes at the same time.</p>
+  </blockquote>
+</div>
+
+<p><img src="../../images/apollo/added_genes_euk.png" alt="One gene is added to the User-created Annotation track. " loading="lazy" /></p>
+
+<p>You can also see that it appears now in the list of genes in the right panel, at the gene and the m<span class="notranslate">RNA</span> level (as a gene can have multiple isoforms).</p>
+
+<p><img src="../../images/apollo/gene_list_euk.png" alt="Gene list showing gene FUN_000005 which is expanded to reveal a child mRNA. " loading="lazy" /></p>
+
+<p>The <strong>User-created Annotation</strong> track is where you can make modifications to genes, like changing their coordinates, or their name and functional annotation. If you right click on a gene in this track, you will see all the possibilities offered by apollo.</p>
+
+<p><img src="../../images/apollo/gene_menu_euk.png" alt="Gene contextual menu showing way too many options, the mouse hovers over Open Annotation (alt-click). " loading="lazy" /></p>
+
+<p>Currently, the gene we added has a meaningless name. Let’s improve that: right click on the gene, and click on <strong>Open Annotation (alt-click)</strong>.</p>
+
+<p><img src="../../images/apollo/gene_details_euk.png" alt="Gene details menu in apollo showing type set to gene, the name field has been filled with FUN_000004-T1 and a number of other empty fields like symbol, aliases, description." loading="lazy" /></p>
+
+<p>One way to give a better name is to find a similarity with genes of another species: if you right click on the gene, you can get the protein sequence by clicking on <strong>Get Sequence</strong>, and then compare it with a sequence database with Blast for example (using <span class="notranslate">Galaxy</span>, or the <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">NCBI blast form</a> for example).</p>
+
+<p>In this case, the blast result suggests that this name is similar to <code class="language-plaintext highlighter-rouge">alpha/beta-hydrolase</code> genes in other fungi species. This is not a very strong evidence, but for this exercise, let’s use this as a name: write <code class="language-plaintext highlighter-rouge">alpha/beta-hydrolase</code> in the <strong>Name</strong> field (type it manually and select it from the drop down list).</p>
+
+<blockquote class="details">
+  <h3 id="details-naming-genes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Naming genes</h3>
+
+  <p>Giving a proper name to a gene is not always easy. Should it include “Putative” or not? What if multiple names can apply? Should it be lowercase or uppercase?
+The important thing is to always use the same naming rules when working on a full annotation, and to agree on these rules with other collaborators.
+Usually, big annotation consortiums have naming guidelines that you are supposed to follow.</p>
+</blockquote>
+
+<p>We have just edited the gene name, but Apollo allows to edit information at the m<span class="notranslate">RNA</span> level too. Click on the <strong>Sync name with transcript</strong> button to copy the gene name to the m<span class="notranslate">RNA</span> name. It should now display in the <strong>User-created Annotation</strong> track. To check what you can edit at the m<span class="notranslate">RNA</span> level, just click on the corresponding m<span class="notranslate">RNA</span> in the list above:</p>
+
+<p><img src="../../images/apollo/mrna_level_euk.png" alt="very zoomed screenshot showing clicking on the transcript below the gene to open the mRNA info." loading="lazy" /></p>
+
+<p>You should see <code class="language-plaintext highlighter-rouge">alpha/beta-hydrolase</code> in the <strong>Name</strong> field.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-saving-your-work"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Saving your work</h3>
+
+  <p>You do not need to do anything specific to <em>Save</em> your work in Apollo. Just like Google Docs, each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.</p>
+</blockquote>
+
+<h2 id="editing-a-gene-structure">Editing a gene structure</h2>
+
+<p>Apollo allows to edit the whole structure of a gene. If you zoom to the 5’ end of the gene, you will notice two things:</p>
+
+<ul>
+  <li>a few <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> were mapped a little before the 5’ limit of our gene</li>
+  <li>there is another potential start codon a few bases after the one that was predicted by Funannotate</li>
+</ul>
+
+<p>Let’s modify the 5’ of the gene to add a 5’ untranslated region. Although we don’t have enough evidences to be sure that the start codon should be changed, for this exercise will we do it too. To do it, all you need to do is click on the 5’ limit of the gene and drag it to the desired position. You will notice that the structure of the gene will be shortly changed. Changing the start codon can be done by right clicking on the new position and clicking on “Set Translation Start”</p>
+
+<p><img src="../../images/apollo/change_start_euk.gif" alt="Gif showing modifying the 5' region of a gene by dragging it." loading="lazy" /></p>
+
+<p>The new white region corresponds to the newly create 5’ untranslated region.</p>
+
+<p>This kind of modifications is very common when using Apollo, and you can perform it at the gene level, and at the exon/intron level (an exclaim mark appears when Apollo detects that an exon/intron junction doesn’t match with the cannonical acceptor/donor sequences).</p>
+
+<p><img src="../../images/apollo/exon_edit.gif" alt="Gif showing modifying a exon/intron junction of a gene by dragging it." loading="lazy" /></p>
+
+<p>To guide you doing these changes, you should look at all the tracks available for the genome you study. <span class="notranslate">RNA</span>-Seq track are very helpful to determine the limits of coding sequences on the genome. Other tracks can be helpful, like alignements of transcripts or proteins from closely related species (or even big databanks like Swissprot or NR).</p>
+
+<h2 id="working-with-isoforms">Working with isoforms</h2>
+
+<p>In the eukaryote world, with the process of alte<span class="notranslate">rna</span>tive splicing, multiple m<span class="notranslate">RNA</span> sequences (isoforms) can be generated for a single gene, based on the use of various splice site combinations. This process has a complex regulation mechanism allowing to express or not each isoform depending on multiple conditions (tissue, developmental stage, environmental conditions, …).</p>
+
+<p>Often automatic annotation softwares produce gene models composed of many exons, but does not give the detail of the sequence of each potential isoforms. However, in some cases, the <span class="notranslate">RNA</span>-Seq data and the scientific knowledge on specific gene families can be used to annotate each isoform of a gene.</p>
+
+<p>Apollo allows to do that: just duplicate an existing gene model at the same position. Each copy will be considered as an isoform of the same gene. You can then make all the modifications you want to each one independently.</p>
+
+<p><img src="../../images/apollo/isoforms.gif" alt="Gif showing creating two isoforms and removing exons from them." loading="lazy" /></p>
+
+<p>The isoforms will appear in the gene list, under their common gene.</p>
+
+<p><img src="../../images/apollo/isoform_list.png" alt="Gene list showing the three isoforms of the same gene." loading="lazy" /></p>
+
+<p>As isoforms regulation depends heavily on multiple conditions (tissue, developmental stage, environmental conditions, …), it is important when annotating a new genome to have access to a lot of <span class="notranslate">RNA</span>-Seq data sequenced in multiple conditions and from different tissues.</p>
+
+<h2 id="viewing-and-reverting-changes">Viewing and reverting changes</h2>
+
+<p>Everything you do in Apollo is tracked in a database. If you right click on the gene, and select <strong>Show History</strong>, you have access to the full list of all the actions that were performed on it.</p>
+
+<p><img src="../../images/apollo/history.png" alt="History of changes on a gene showing many changes to Set Name and a final Set Exon Boundaries change. " loading="lazy" /></p>
+
+<p>When you click on one of the steps, you can see below the list a preview of how the gene looked at the time. And you can revert to a specific version of the gene by clicking on the arrow button on the right.</p>
+
+<h2 id="adding-more-functional-annotation">Adding more functional annotation</h2>
+
+<p>Sometimes you’ll want to modify a gene that was predicted by FunAnnotate, just to add functional annotation to it, like Gene Ontology terms, of references to exte<span class="notranslate">rna</span>l databases (UniProt, InterPro, …). This can be done using Apollo, have a look at the <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">Apollo tutorial for prokaryotes</a> for more details.</p>
+
+<h1 id="exporting-and-collaborating">Exporting and collaborating</h1>
+
+<div class="Create-your-own-organism">
+
+  <h2 class="no_toc" id="exporting-annotation">Exporting annotation</h2>
+
+  <p>You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from <span class="notranslate">Galaxy</span>:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-export-data-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Export data to <span class="notranslate">Galaxy</span></h3>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5" title="Tested with toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5"><strong>Retrieve Data from Apollo into <span class="notranslate">Galaxy</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5</span></span>  with the following parameters:
+        <ul>
+          <li><em>“Organism Common Name Source”</em>: <code class="language-plaintext highlighter-rouge">Direct Entry</code>
+            <ul>
+              <li><em>“Organism Common Name”</em>: <code class="language-plaintext highlighter-rouge">Mucor mucedo</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>This tool will create new datasets in your history:</p>
+
+  <ul>
+    <li>the whole content of the <strong>User-created Annotation</strong> track, in GFF3 format</li>
+    <li>the c<span class="notranslate">DNA</span> sequence of all the genes from this same track</li>
+    <li>the CDS sequence of all the genes from this same track</li>
+    <li>the peptide sequences of all the genes from this same track</li>
+    <li>sequence alterations</li>
+  </ul>
+
+  <p>You can then do any other analysis using normal <span class="notranslate">Galaxy</span> tools.</p>
+
+  <p>If you prefer, the same data can be downloaded directly from the Apollo right panel, in the <strong>Ref Sequence</strong> tab.</p>
+
+  <p>Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.</p>
+
+  <h2 class="no_toc" id="collaborating-with-other-annotators">Collaborating with other annotators</h2>
+
+  <p>As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users having an account on the same <span class="notranslate">Galaxy</span>  (most probably use<span class="notranslate">galaxy</span>.eu).</p>
+
+  <p>Click on the <strong>Sharing</strong> tab in the Apollo right panel.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-screenshots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Screenshots</h3>
+    <p>The following screenshots mention <code class="language-plaintext highlighter-rouge">E. coli K12</code>, but it works exactly the same for our eukaryote organism <code class="language-plaintext highlighter-rouge">Mucor mucedo</code>.</p>
+  </blockquote>
+
+  <p><img src="../../images/apollo/sharing.png" alt="Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active." /></p>
+
+  <p>You should see a screen like this:</p>
+
+  <p><img src="../../images/apollo/perm_home.png" alt="Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads &quot;Shareable organisms&quot; and lists organisms that can be shared. A &quot;Group membership&quot; section shows that they are not a member of any group." /></p>
+
+  <p>It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: <code class="language-plaintext highlighter-rouge">Mucor mucedo</code>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-create-a-user-group"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Create a user group</h3>
+
+    <ol>
+      <li>
+        <p>Click on the <strong>Group management</strong> tab</p>
+      </li>
+      <li>
+        <p>Click on the <strong>New</strong> button</p>
+      </li>
+      <li>
+        <p>Give a name to your new group, and then click on the <strong>Create group</strong> button</p>
+      </li>
+    </ol>
+
+    <p><img src="../../images/apollo/perm_group_create.png" alt="Group creation dialog with one field, the group name set to 'my_friends'" /></p>
+
+  </blockquote>
+
+  <p>Now you should see a screen like this:</p>
+
+  <p><img src="../../images/apollo/perm_group_added.png" alt="Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group." /></p>
+
+  <p>Let’s add a colleague to our newly created group.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-adding-a-user-in-the-group"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Adding a user in the group</h3>
+
+    <ol>
+      <li>
+        <p>Click on the <strong>Group members</strong> tab</p>
+      </li>
+      <li>
+        <p>Click on the <strong>Add user</strong> button</p>
+      </li>
+      <li>
+        <p>Enter the email address of a user you want to work with (the one used to register on the same <span class="notranslate">Galaxy</span> server)</p>
+      </li>
+      <li>
+        <p>Click on the <strong>Add user</strong> button</p>
+      </li>
+    </ol>
+
+    <p><img src="../../images/apollo/perm_add_user.png" alt="Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value." /></p>
+
+  </blockquote>
+
+  <p>And now allow the user group to access our <code class="language-plaintext highlighter-rouge">Mucor mucedo</code> organism.</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-giving-access-to-an-organism"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Giving access to an organism</h3>
+
+    <ol>
+      <li>
+        <p>Click on the <strong>Organisms</strong> tab (if not already selected)</p>
+      </li>
+      <li>
+        <p>Click on the <strong>+</strong> button next to the <code class="language-plaintext highlighter-rouge">Mucor mucedo</code> organism</p>
+      </li>
+      <li>
+        <p>Confirm that you want to give access</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+  <p>Now the other user should be able to access your organism, and make any modifications to the annotation (creating genes, structural changes, functional annotation, …). In each gene history, Apollo keeps track of which user performed which operation, so you will always be able to know who did what on the annotation, and blame or credit them. Of course, using the same <strong>Sharing</strong> tab, you can stop at any time sharing an organism to a whole group or a specific users in a few clicks.</p>
+
+</div>
+<div class="Use-a-precreated-organism">
+  <p>It is of course possible to export all your annotation from Apollo in standard formats, directly from its interface (<code class="language-plaintext highlighter-rouge">Ref Sequence</code> tab), or from <span class="notranslate">Galaxy</span>. If you create your own organism in Apollo, you can choose to make it open to the public, or to restrict it to only your collaborators.</p>
+
+  <p>Click on <strong>Create your own organism</strong> at the beginning to learn more.</p>
+
+</div>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to <span class="notranslate">Galaxy</span> for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-precreated-organism">. Although you use a pre-created organism, remember that you can use <span class="notranslate">Galaxy</span> to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.</p>
+
+<p>A <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">similar tutorial for prokaryote genomes</a> exists, using different types of evidence tracks, feel free to have a look at it to learn more.</p>
+
+<p>When refinement is sufficient an updated or new version of the annotation may be exported as GFF3 as well as published as a new JBrowse directory for inspection.</p>
+
+<h1 id="whats-next">What’s next?</h1>
+
+<p>After generating your refined annotation, you’ll want to merge it back into the official gene sets. A future tutorial will show you how to do it within <span class="notranslate">Galaxy</span>.</p>
+
+<p>If a <em>de novo</em> set, you can export it as GFF3 and load it into a tool like <a href="http://tripal.info">Tripal</a> to provide visualization.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Apollo is the Google Docs of the genome annotation world, real-time collaborative genome annotation.</p>
+</li>
+                        
+                        <li><p>Apollo allows a group to view and manually refine predicted genome annotations</p>
+</li>
+                        
+                        <li><p>Use Apollo to edit annotations within your group.</p>
+</li>
+                        
+                        <li><p>Export manual annotations as GFF3.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Dunn2019">Dunn, N. A., D. R. Unni, C. Diesh, M. Munoz-Torres, N. L. Harris <i>et al.</i>, 2019 <b>Apollo: Democratizing genome annotation</b> (A. E. Darling, Ed.). PLOS Computational Biology 15: e1006790. <a href="https://doi.org/10.1371/journal.pcbi.1006790">10.1371/journal.pcbi.1006790</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Refining Genome Annotations with Apollo (eukaryotes) (Genome Annotation)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anthony Bretaudeau, Erasmus+ Programme, 2022 <b>Refining Genome Annotations with Apollo (eukaryotes) (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-apollo-euk,
+author = "Anthony Bretaudeau and Erasmus+ Programme",
+title = "Refining Genome Annotations with Apollo (eukaryotes) (Galaxy Training Materials)",
+year = "2022",
+month = "08",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
