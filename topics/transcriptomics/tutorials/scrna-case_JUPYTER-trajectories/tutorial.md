@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Trajectory Analysis using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell-CS
-priority: 3
+priority: 4
 zenodo_link: 'https://zenodo.org/record/4726927'
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
@@ -19,8 +19,9 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-        - droplet-quantification-preprocessing
-        - scrna-seq-basic-pipeline
+        - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
+        - scrna-case_basic-pipeline
 -
     type: "internal"
     topic_name: galaxy-interface
