@@ -5,7 +5,6 @@ title: Functional annotation of protein sequences
 zenodo_link: https://zenodo.org/record/6861851
 tags:
   - eukaryote
-  - prokaryote
 questions:
   - How to perform functional annotation on protein sequences?
 objectives:
@@ -20,6 +19,8 @@ contributions:
     - abretaud
   funding:
     - erasmusplus
+subtopic: eukaryote
+priority: 6
 ---
 
 
