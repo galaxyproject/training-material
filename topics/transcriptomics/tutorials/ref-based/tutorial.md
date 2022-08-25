@@ -402,7 +402,20 @@ The BAM file contains information for all our reads, making it difficult to insp
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > 4. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
 > 5. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
->
+> ### {% icon comment %} Cannot see the `local` link?
+> Try switching your history view to legacy mode:
+> From the History Options drop down menu (top right in the history panel)
+> Select the Return to Legacy Panel option at the foot of the menu
+
+>    > ### {% icon comment %} Cannot see the IGV links in steps 4/5?
+>    >
+>    > In order for this step to work, you will need to have either IGV or [Java Web Start](https://www.java.com/en/download/faq/java_webstart.xml)
+>    > installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
+>    >
+>    > Check the [IGV documentation](https://software.broadinstitute.org/software/igv/AlignmentData) for more information.
+>    >
+>    {: .comment}
+
 >    > ### {% icon comment %} Comments
 >    >
 >    > In order for this step to work, you will need to have either IGV or [Java Web Start](https://www.java.com/en/download/faq/java_webstart.xml)
