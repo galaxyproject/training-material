@@ -230,8 +230,22 @@ At this point we have three input datasets that would allow us to find and visua
 
 ## Step 5: Finding matches
 
+To find location of genes, we will use the following workflow that is available as a part of this tutorial:
 
+![WF](../../images/gene-centric/wf.png)
 
+The workflow takes three inputs: 
+
+1. <kbd>DiamondDB</kbd> - Diamond database of ORF translations from genome assemblies
+2. <kbd>ORF BED</kbd> - Coordinates and frame information about ORFs in BED format
+3. <kbd>EXONS</kbd> - Amino acid translation of exons from the gene of interest
+
+Its overall logic can be summarized as follows:
+
+1. Perform [__Diamond__](https://github.com/bbuchfink/diamond) search to identify matches between the gene of interest (<kbd>EXONS</kdb>) and ORF sets from each genomes (<kbd>DiamondDB</kbd>).
+2. Intersect information about the matches with BED file containing ORF coordinates (<kbd>ORF BED</kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).
+3. Extract matching parts of the sequences and generated multiple alignments using [__MAFFT__](https://mafft.cbrc.jp/alignment/software/). This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of *XBP-1* there will be five sets of alignemnts. 
+4. Build phylogenetic tree for each alignment produced in the previous step using the [Neighbor Joining method](https://en.wikipedia.org/wiki/Neighbor_joining) - a simple and quick way to obtain a rough phylogeny.
 
 
 
