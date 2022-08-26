@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Genome assembly quality control.</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:title" content="Galaxy Training: Genome assembly quality control." />
+    <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-quality-control/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Genome assembly quality control.",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Genome assembly quality control.' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-quality-control/slides.html",
+  "keywords": "assembly",
+  "description": "The questions this  addresses are:\n - Is my genome assembly ready for annotation and/or scaffolding?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "name": "Alexandre Cormier",
+      "image": "https://avatars.githubusercontent.com/alexcorm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7775-8413",
+      "orcid": "https://orcid.org/0000-0002-7775-8413"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "name": "Stéphanie Robin",
+      "image": "https://avatars.githubusercontent.com/stephanierobin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7379-9173",
+      "orcid": "https://orcid.org/0000-0001-7379-9173"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "name": "Erwan Corre",
+      "image": "https://avatars.githubusercontent.com/r1corre",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6354-2278",
+      "orcid": "https://orcid.org/0000-0001-6354-2278"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "name": "Laura Leroi",
+      "image": "https://avatars.githubusercontent.com/lleroi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3748-4179",
+      "orcid": "https://orcid.org/0000-0003-3748-4179"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/chklopp/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/chklopp/",
+      "name": "Christophe Klopp",
+      "image": "https://avatars.githubusercontent.com/chklopp",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/",
+      "name": "Anthony Bretaudeau",
+      "image": "https://avatars.githubusercontent.com/abretaud",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0914-2470",
+      "orcid": "https://orcid.org/0000-0003-0914-2470"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/",
+      "name": "Alexandre Cormier",
+      "image": "https://avatars.githubusercontent.com/alexcorm",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7775-8413",
+      "orcid": "https://orcid.org/0000-0002-7775-8413"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/",
+      "name": "Stéphanie Robin",
+      "image": "https://avatars.githubusercontent.com/stephanierobin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7379-9173",
+      "orcid": "https://orcid.org/0000-0001-7379-9173"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/",
+      "name": "Erwan Corre",
+      "image": "https://avatars.githubusercontent.com/r1corre",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6354-2278",
+      "orcid": "https://orcid.org/0000-0001-6354-2278"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/",
+      "name": "Laura Leroi",
+      "image": "https://avatars.githubusercontent.com/lleroi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3748-4179",
+      "orcid": "https://orcid.org/0000-0003-3748-4179"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/chklopp/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/chklopp/",
+      "name": "Christophe Klopp",
+      "image": "https://avatars.githubusercontent.com/chklopp",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/assembly" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/assembly-quality-control/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Genome assembly quality control.
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+
+<a href="/training-material/hall-of-fame/chklopp/" class="contributor-badge contributor-chklopp"><img src="https://avatars.githubusercontent.com/chklopp?s=27" alt="Avatar">Christophe Klopp</a>
+
+
+
+	</div>
+
+</div>
+
+
+<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Aug 26, 2022</div>
+
+<div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
+<div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- Is my genome assembly ready for annotation and/or scaffolding?
+
+
+---
+
+
+
+
+# Genome assembly quality control, or &quot;the 3C&quot;
+
+
+&lt;br&gt;
+&lt;br&gt;
+
+.image-100[
+  ![The 3C for genome assembly quality control](../../images/genome-qc/3C.png)
+]
+
+---
+
+.image-30[
+  ![Illustration of genome assembly contiguity](../../images/genome-qc/contiguity.png)
+]
+
+---
+
+### **C**ontiguity
+
+.pull-left[
+
+**Desire**
+- Fewer sequences
+- Longer sequences
+]
+
+.pull-right[
+**Metrics**:
+- Number of sequences
+- Average sequences length
+- Median sequences length
+- Minimum and maximum sequences length
+- N50, NG50, L50, LG50
+- GC content
+- Number and proportion of bases that are N
+
+]
+
+---
+
+### N50
+
+**N50: given a set of sequences of varying lengths, the N50 is defined as the length L of the shortest contig for which longer and equal length contigs cover at least 50% of the assembly**
+
+.pull-left[
+Example:
+- Genome size = 100
+- Sequence sorted by size list L = (25, 10, 10, 8 , 7, 7 , 6 , 5, 5, 5, 5, 3, 2, 2 ) = 100
+- 50% of the total length is contained within sequences of at least 8bp: 25 + 10 + 10 + 8 ≥ 50
+- **N50 = 8**
+]
+
+.image-100[
+  ![Schematic explanation of N50](../../images/genome-qc/N50.png)
+]
+.footnote[Alhakami, H., Mirebrahim, H., &amp; Lonardi, S. (2017). A comparative evaluation of genome assembly reconciliation tools. Genome biology, 18(1), 1-14.]
+
+---
+
+### N50
+
+However, the N50 statistic may not reflect some assembly improvements.
+If we connect two sequences longer than N50 or connect two sequences shorter than N50, N50 is not changed. N50 is only improved if we connect a sequence shorter than N50 and a sequence longer than N50.
+
+.image-40[
+![Schematic explanation of N50 and it limits](../../images/genome-qc/N50-limitation.png)
+]
+
+---
+
+### Nx curve
+
+« 50 » is a single point on the Nx curve. The entire Nx curve in fact gives us a better sense of contiguity.
+
+.pull-left[
+![Example of Nx graph for Drosophila assemblies](../../images/genome-qc/Nx-curve.png)
+]
+
+.pull-right[
+![Example of cumulative sequence length graph for Drosophila assemblies](../../images/genome-qc/cumulative-length.png)
+]
+
+---
+
+### QUAST - A tool to evaluate genome assemblies
+
+- **QUAST**: for genome assemblies.
+- **MetaQUAST**: for metagenomic datasets.
+- **QUAST-LG**: for large genomes (e.g., mammalians).
+- **rnaQUAST**: for RNAseq.
+- **Icarus**: an interactive visualizer for these tools.
+
+
+It also includes:
+- Reads mapping (mi-assemblies evaluation).
+- Kmer representation (KMC)
+- Structural prediction modules (GeneMark,  GlimmerHMM, Barrnap and BUSCO).
+- For metagenomics dataset: MetaGeneMark, Krona tools, BLAST, and SILVA 16S rRNA database.
+
+---
+
+.image-30[
+  ![Illustration of genome assembly completeness](../../images/genome-qc/completeness.png)
+]
+
+---
+
+### Assembly size vs estimated
+
+Proportion of the original genome represented by the assembly:
+&lt;br&gt;
+
+.image-100[
+![Formula to estimate assembly size completeness](../../images/genome-qc/assembly-size-qc-formula.png)
+]
+
+&lt;br&gt;
+- &quot;*&quot; it’s an estimation, so not perfect
+
+---
+
+### Core genes
+
+
+.pull-left[
+Quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs.
+.image-70[
+![Formula to estimate assembly completeness for core genes](../../images/genome-qc/busco-formula.png)
+]
+]
+.pull-right[
+.image-70[
+![Example of BUSCO plot for Nosema species (Microsporidia) ](../../images/genome-qc/BUSCO-scores.png)
+]]
+
+.footnote[Tips: Reference databases are constructed using known genomes. Species with few/no close genomes available can have very bad scores.]
+
+---
+
+### Core genes evaluation software
+
+**BUSCO**: Assessing genome assembly and annotation completeness with **B**enchmarking **U**niversal **S**ingle-**C**opy **O**rthologs
+
+.image-40[
+![Explanation of orthology classification for creation of BUSCO sets](../../images/genome-qc/busco_sampling.png)
+]
+
+.footnote[Waterhouse, R. M., Zdobnov, E. M. &amp; Kriventseva, E. V. Correlating Traits of Gene Retention, Sequence Divergence, Duplicability and Essentiality in Vertebrates, Arthropods, and Fungi. Genome Biol Evol 3, 75–86 (2011).]
+
+---
+
+### BUSCO limitations
+
+**The value of the BUSCO is only as good as its reference database.**
+&lt;br&gt;
+&lt;br&gt;
+Example with BUSCO Eukaryotic set:
+.pull-left[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part A](../../images/genome-qc/BUSCO_limitations_A.png)
+]]
+.pull-right[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part B](../../images/genome-qc/BUSCO_limitations_B.png)
+]]
+
+.footnote[Saary, P., Mitchell, A. L. &amp; Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]
+
+---
+
+### Assembly kmer content
+
+The aim is to check assembly coherence against the content within reads that were used to produce the assembly. Basically, how many elements of each frequency on the read’s spectrum ended up being not included in the assembly, included once, included twice etc.
+&lt;br&gt;
+&lt;br&gt;
+
+- Merqury or KAT
+- Histogram is build with read kmer content.
+
+---
+
+### K-mer spectrum plots
+
+.pull-left[
+.image-70[
+![How to read kmer spectrum of reads](../../images/genome-qc/kmer-spectrum-reads.png)
+]]
+.pull-right[
+.image-70[
+![How to read kmer spectrum of an assembly using reads](../../images/genome-qc/kmer-spectrum-assembly.png)
+]]
+
+.footnote[Rhie, A., Walenz, B. P., Koren, S. &amp; Phillippy, A. M. Merqury: reference-free quality, completeness, and phasing assessment for genome assemblies. Genome Biol 21, 245 (2020).]
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+&lt;br&gt;
+&lt;br&gt;
+
+K-mer spectra representation for Merqury (left) and KAT (rigth)
+
+.pull-left[
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-merqury-homozygous-good.png)
+]]
+
+.pull-right[
+.image-70[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-kat-homozygous-good.png)
+]]
+
+&lt;i class=&quot;far fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;congratulations&lt;/span&gt; Good kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+&lt;/br&gt;
+
+.pull-left[
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-merqury-homozygous-bad.png)
+]]
+
+.pull-right[
+.image-70[
+![KAT spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-kat-homozygous-bad.png)
+]]
+
+&lt;i class=&quot;fa fa-thumbs-down&quot;&gt;&lt;/i&gt; Bad kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+.pull-left[
+.image-70[
+![Merqury spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-merqury-heterozygous-good.png)
+]]
+
+.pull-right[
+.image-70[
+![KAT spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-kat-heterozygous-good.png)
+]]
+
+&lt;i class=&quot;far fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;congratulations&lt;/span&gt; Good kmer representation of reads in the assembly
+
+The lost content (the black peak) represents the half of the heterozygous content that is lost when bubbles are collapsed.
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.pull-left[
+.image-80[
+![Merqury spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-spectra-merqury-c.gigas-hap2.png)
+]]
+
+.pull-right[
+.image-80[
+![KAT spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-spectra-kat-c.gigas-hap2.png)
+]]
+
+&lt;i class=&quot;fa fa-thumbs-down&quot;&gt;&lt;/i&gt; Bad kmer representation of reads in the assembly
+
+---
+
+.image-30[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
+]
+
+---
+
+### Mistakes into the assembly
+
+** Proportion of the assembly that is free from mistakes**
+&lt;br&gt;
+&lt;br&gt;
+- Indels / SNPs
+- Mis-joins
+- Repeat compressions
+- Unnecessary duplications
+- Rearrangements
+&lt;br&gt;
+&lt;br&gt;
+**→ Align back reads to the assembly and check for inconsistencies**
+
+---
+
+### SNP / indels errors
+
+.image-80[
+![Illustration of SNP errors in a genome assembly.](../../images/genome-qc/snp-indels_errors.png)
+]
+
+---
+
+### Other mis-assemblies
+
+.image-80[
+![Illustration of rearrangements inversions assembly errors.](../../images/genome-qc/misassemblies_1.png)
+]
+
+---
+
+### Other mis-assemblies
+
+.image-80[
+![Illustration of collapsed and expanded repeats assembly errors.](../../images/genome-qc/misassemblies_2.png)
+]
+
+---
+
+### Switch and hamming errors (phased assemblies)
+
+.image-50[
+![Illustration of switch and hamming errors in phased genome assembly.](../../images/genome-qc/switch-hamming-errors.png)
+]
+
+In blue, heterozygous locus from first haplotype. In red, heterozygous locus from second haplotype.
+
+.footnote[http://lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
+
+---
+
+# Evaluation against reference genome
+
+
+.image-30[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+
+---
+
+.pull-left[
+.left[
+Dot plots are widely used to quickly compare 2 sequence sets. They provide a synthetic overview of:
+- Similarity
+- Specificity
+- Highlighting repetitions, breaks and inversions.
+]
+
+&lt;/br&gt;
+
+.image-50[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+]
+
+.pull-right[
+.left[
+A non-exhaustive list of tools for making dot plots:
+- MUMmer dotplot
+- Chromeister
+- D-genies (not yet available into Galaxy)
+]
+
+&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;
+
+.image-50[
+![Interpret Dot Plots here based on great explanation by Michael Schatz.](../../images/dotplot.png)
+]
+]
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
+
+
+
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+
+<a href="/training-material/hall-of-fame/stephanierobin/" class="contributor-badge contributor-stephanierobin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/stephanierobin?s=27" alt="Avatar">Stéphanie Robin</a>
+
+
+
+<a href="/training-material/hall-of-fame/r1corre/" class="contributor-badge contributor-r1corre"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/r1corre?s=27" alt="Avatar">Erwan Corre</a>
+
+
+
+<a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
+
+
+
+<a href="/training-material/hall-of-fame/chklopp/" class="contributor-badge contributor-chklopp"><img src="https://avatars.githubusercontent.com/chklopp?s=27" alt="Avatar">Christophe Klopp</a>
+
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
