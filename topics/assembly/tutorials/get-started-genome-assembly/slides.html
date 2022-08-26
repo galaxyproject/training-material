@@ -113,7 +113,7 @@
   "name": "Slides for 'An introduction to get started in genome assembly and annotation' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides.html",
   "keywords": "assembly",
-  "description": "The questions this  addresses are:\n - What are the guidelines before starting a Genome Assembly and Annotation project?\n\n",
+  "description": "The questions this  addresses are:\n - Definitions of bioinformatics terms for assembly and annotation\n - What are the guidelines before starting a Genome Assembly and Annotation project?\n - What file formats are used for assembly and annotation?\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -214,6 +214,12 @@ class: center, middle, inverse
 			
 			<li>
 				
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+
+			<li>
+				
 <a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
 
 
@@ -227,7 +233,7 @@ class: center, middle, inverse
 </div>
 
 
-<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: May 17, 2022</div>
+<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Aug 26, 2022</div>
 
 <div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
 <div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
@@ -286,7 +292,11 @@ Before diving into this slide deck, we recommend you to have a look at:
 ### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
+- Definitions of bioinformatics terms for assembly and annotation
+
 - What are the guidelines before starting a Genome Assembly and Annotation project?
+
+- What file formats are used for assembly and annotation?
 
 
 ---
@@ -294,18 +304,105 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 
+# The truth about bioinformatics
+
+.image-100[
+  ![Bioinformatics is not just about pushing a button and getting your result](../../images/genome_assembly_introduction/the_truth_about_bioinformatics.jpg)
+]
+
+---
+
+# Let's start with some important definitions
+
+.image-40[
+  ![Importance to speak the same language](../../images/genome_assembly_introduction/bulle-bd.png)
+]
+
+---
+.left[
+**Contig**: a contiguous sequence in an assembly. A contig does not contain long stretches of unknown sequences (aka assembly **gaps**).
+
+**Scaffold**: a sequence consists of one or multiple contigs connected by assembly gaps of typically inexact sizes. A scaffold is also called a **supercontig**, though this terminology is rarely used nowadays.
+
+**Assembly**: a set of contigs or scaffolds.
+]
+
+.image-60[
+  ![Illustration of the working principle of scaffolding](../../images/genome_assembly_introduction/scaffolding.png)
+]
+
+---
+
+.left[
+**Haplotig**: a contig that comes from the same haplotype. In an unphased assembly, a contig may join alleles from different parental haplotypes in a diploid or polyploid genome.
+
+**Primary assembly**: a complete assembly with long stretches of phased blocks.
+
+**Alternate assembly**: an incomplete assembly consisting of haplotigs in heterozygous regions. An alternate assembly always accompanies a primary assembly. It is not useful by itself as it is fragmented and incomplete.
+
+**Haplotype-resolved assembly**: sets of complete assemblies consisting of haplotigs, representing an entire diploid/polyploid genome.
+]
+
+.image-60[
+  ![Illustration of the assembly types](../../images/genome_assembly_introduction/assemblies_definitions.png)
+]
+
+---
+
+.left[
+**Telomere to telomere**: An assembly where each chromosome is fully phased and assembled without gaps.
+
+**Linkage group**: a set of contigs or scaffolds ordered and oriented using a collection of genes that are inferred to be located together on a single chromosome because of the pattern of their inheritance.
+]
+
+.image-20[
+  ![Example of linkage map from JCVI](../../images/genome_assembly_introduction/linkage_map.png)
+]
+
+---
+
+.left[
+**Coverage in terms of redundancy (A)**: number of reads that align to, or &quot;cover,&quot; a known reference. It describes how often, in average, a reference sequence is covered by bases from the reads. 
+
+**Coverage in terms of the percentage coverage of a reference by reads (B)**: E.g. if 90% of a reference is covered by reads (and 10% not) it is a 90% coverage.
+
+**Sequencing depth (C)**: total number of usable reads from the sequencing machine. 
+]
+
+.image-80[
+  ![Illustration of coverage and depth](../../images/genome_assembly_introduction/comparison-coverage-and-sequencing-depth.gif)
+]
+
+---
+
+# Assembly and annotation in a ideal world
+
+.image-100[
+  ![The perfect assembly dream](../../images/genome_assembly_introduction/assembly_dream.png)
+]
+
+---
+
+# Key concepts for assembly and annotation
+
+.image-100[
+  ![Assembly and annotation overview](../../images/genome_assembly_introduction/assembly_and_annotation_simplified_overview.png)
+]
+
+---
+
 # Steps before starting a genome project
 
 .left[
-- Step 1: Build a wide community for the project if possible
+- Step 1: Build a broad community of collaborators for the project, if possible
 
 - Step 2: Gather information about the target genome
 
-- Step 3: Select the best possible DNA source and extraction
+- Step 3: Select the best possible DNA source and an optimal extraction procedure
 
 - Step 5: Choose an appropriate sequencing technology
 
-- Step 6: Check the computational resources and requirements
+- Step 6: Check the computational resources requirements and availability
 ]
 
 ---
@@ -317,15 +414,15 @@ The aim of a genome project is to **sequence the entire target genome** for a wi
 ]
 
 .left[
-**Analyses**, **reanalyses** and **integration** of genomic and other phenotype information require:
+**Analyses**, **reanalyses** and **integration** of genomic and other phenotype information are required:
 ]
 
 - **Facilities:** Wet lab, sequencing, bioinformatics,…
-- **Personnel:** Skill intensive
+- **Personnel:** Highly skilled
 - **Software:** Knowledge intensive
 
 .left[
-&lt;i class=&quot;fas fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;warning&lt;/span&gt; Data storage, maintenance, transfer, and analysis costs will also likely remain substantial and represent an increasing proportion of overall sequencing costs in the future.
+&lt;i class=&quot;fas fa-exclamation-triangle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;warning&lt;/span&gt; The cost of data storage, maintenance, transfer, and analysis are likely to be significant and will represent an increasing proportion of overall sequencing costs in the future.
 ]
 
 ---
@@ -335,7 +432,7 @@ The aim of a genome project is to **sequence the entire target genome** for a wi
 .pull-left[
 **How to collect informations?**
 
-- Flux cytometry
+- Experimentally : Flux cytometry
 - Databases:
   - Fungi: [http://www.zbi.ee/fungalgenomesize](http://www.zbi.ee/fungalgenomesize)
   - Animals: [http://www.genomesize.com](http://www.genomesize.com)
@@ -345,7 +442,7 @@ The aim of a genome project is to **sequence the entire target genome** for a wi
 
 .pull-right[
 .image-100[
-  ![variation in estimated genome sizes in base pairs](../../images/genomes-size.png)
+  ![variation in estimated genome sizes in base pairs](../../images/genome_assembly_introduction/genomes-size.png)
 ]]
 
 .footnote[https://commons.wikimedia.org/w/index.php?curid=19537795]
@@ -367,12 +464,12 @@ GC and AT rich regions are under-represented.
 **How to solve?**
 - Chemistry quirks
 - Increase the sequencing depth
-- Technologies combination (both long and short reads)
+- Technologies combination (long and short reads)
 ]
 
 .pull-right[
 .image-100[
-  ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
+  ![Sequencing coverage by GC content](../../images/genome_assembly_introduction/coverage-x-GC.png)
 ]]
 
 .footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
@@ -383,7 +480,7 @@ GC and AT rich regions are under-represented.
 
 .pull-right[
 .image-55[
-  ![Heterozigous genotype](../../images/ploidy.png)
+  ![Heterozigous genotype](../../images/genome_assembly_introduction/ploidy.png)
 ]]
 
 .pull-left[
@@ -419,11 +516,11 @@ Number of sets of chromosomes in a cell
 
 .pull-right[
 .image-100[
-  ![Heterozigous genotype](../../images/heterozygous.jpg)
+  ![Heterozigous genotype](../../images/genome_assembly_introduction/heterozygous.jpg)
 ]]
 
 .left[
-**Heterozygosity** is a metric used to denote the probability an individual will be heterozygous for a particular allele
+**Heterozygosity** is a metric used to indicate the probability that an individual is heterozygous for a particular allele
 ]
 
 **Higher heterozygosity -&gt; harder to assemble =&gt; Increase of sequencing depth**
@@ -435,7 +532,7 @@ Number of sets of chromosomes in a cell
 ### Genome information: Heterozygosity level
 
 .image-125[
-  ![Concepts in phased assemblies](../../images/phased-assemblies.png)
+  ![Concepts in phased assemblies](../../images/genome_assembly_introduction/phased-assemblies.png)
 ]
 
 .footnote[Heng Li’s blog: lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
@@ -452,12 +549,12 @@ Most common source of assembly errors:
 
 .pull-left[
 .image-65[
-  ![Collapsed consensus from repeat copies](../../images/collapsed-consensus.png)
+  ![Collapsed consensus from repeat copies](../../images/genome_assembly_introduction/collapsed-consensus.png)
 ]]
 
 .pull-right[
 .image-65[
-  ![Collapsed, excision and rearrangement consensus](../../images/excision-rearrangement-consensus.png)
+  ![Collapsed, excision and rearrangement consensus](../../images/genome_assembly_introduction/excision-rearrangement-consensus.png)
 ]]
 
 ---
@@ -478,20 +575,15 @@ Most common source of assembly errors:
 - **k-mer frequency from Illumina reads** : genome size, ploidy level, GC content, heterozygosity and even repeats composition!
 ]
 
-.pull-right[
-.image-20[
-  ![GenomeScope Profile](../../images/kmers-frequency.png)
-]]
-
 ---
 
 ### The best possible DNA
 
 .left[
-Select the best possible DNA source and extraction.
+Select the best possible DNA source and extraction method.
 The extraction of **high-quality DNA** is the **most important** aspect of a successful genome project
 
-The **lack of a good starting material** will limit the choice of sequencing technology and will **affect the quality of obtained data**
+The **lack of a good starting material** will limit the choice of sequencing technology and  **affect the quality of data obtained**
 ]
 
 ---
@@ -509,7 +601,7 @@ The **lack of a good starting material** will limit the choice of sequencing tec
 - Pigments
 - Etc,...
 
-All these contaminants **can impair the efficacy of library preparation** in any technology, especially true **for PCR-free libraries** (both PacBio and ONT)
+All these contaminants **can affect the efficacy of library preparation**, regardless of the technology, and this is especially true **for PCR-free libraries** (PacBio and ONT)
 ]
 
 ---
@@ -521,7 +613,7 @@ Different technologies require different amount of DNA:
 - Illumina and 10x &gt; 3 ng
 - BioNano &gt; 200 ng
 - ONT &gt; 1 μg
-- Dovetail (Hic) &gt; 5 μg
+- Hi-C &gt; 5 μg
 - PacBio &gt; 15 μg
 ]
 
@@ -538,9 +630,9 @@ High Molecular Weight (**HMW**) for Nanopore/PacBio (obtained mainly from fresh 
 ### The best possible DNA: Tips
 
 .left[
-- Many *DNA extraction protocol* available for a lot of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
-- **Keep DNA samples** from the same individual in case of library preparation/sequencing fail, need more coverage, new sequencing technology, etc
-- Use a **single individual** and sequence a **haploid, highly inbred diploid** organism, or **isogenic** individual
+- Many *DNA extraction protocol* are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
+- **Keep DNA samples** from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc
+- Use a **single individual** and sequence a **haploid, a highly inbred diploid** organism, or an **isogenic** individual
 ]
 
 ---
@@ -548,9 +640,9 @@ High Molecular Weight (**HMW**) for Nanopore/PacBio (obtained mainly from fresh 
 ### Appropriate sequencing technology
 
 .left[
-Mostly **dependant on the quantity and quality of DNA and the cost** but many parameters need to be considered prior to running an NGS experiment:
+This mainly **depends on the quantity and quality of DNA as well as the cost of the experiment** but many parameters need to be considered before performing an NGS experiment:
 
-- Short versus long reads or both
+- Short **versus** long reads or **both**
 - Read length
 - Read quality/error rate
 - Genome read coverage/depth
@@ -560,10 +652,10 @@ Mostly **dependant on the quantity and quality of DNA and the cost** but many pa
 
 ---
 
-### Appropriate sequencing technology: Primary assembly
+### Appropriate sequencing technology: Assembly
 
 .left[
-- **Illumina:** short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions
+- **Illumina or MGI:** short reads (up to 2x250bp) with high quality reads. Sequencing bias with AT/GC rich regions
 - **IonTorrent:** short reads (up to 500bp) with medium quality reads
 - **Nanopore:** long reads (average ~15kbp) with low quality reads. Errors are not randomly distributed!
 - **PacBio:**
@@ -576,26 +668,52 @@ Mostly **dependant on the quantity and quality of DNA and the cost** but many pa
 ### Appropriate sequencing technology: Scaffolding
 
 .left[
-- **HiC:** single or double **restriction enzyme fragmentation.** Need huge amount of coverage.
-- **Omni-C: sequence-independent endonuclease**
+- **Hi-C:** **restriction enzyme fragmentation** (single, multiples sites or DNAse). Need huge amount of coverage.
+  - Phase Genomics
+  - Dovetail Genomics
+  - Arima Genomics
+- Optical mapping: technique to physically locate specific enzymes restriction sites or sequence motifs to produce DNA sequence fingerprints.
+  - BioNano
+  - BGI
+- Mate pair (deprecated)
+- BAC/YAC/Fosmids (deprecated)
 ]
+
+---
+
+### Appropriate sequencing technology
+
+.image-100[
+  ![Several sequencing technologies](../../images/genome_assembly_introduction/sequencing-technologies.png)
+]
+
+.footnote[Stark, R., Grzelak, M. &amp; Hadfield, J. RNA sequencing: the teenage years. Nat Rev Genetics 20, 631–656 (2019).]
 
 ---
 
 ### Appropriate sequencing technology: Short vs long reads
 
 .pull-left[
-Depending on the sequencing technology reads length and sequencing depth are different.
-- More sequencing depth but shorter reads
-- Longer reads but less sequencing depth
+**Short reads platforms**:
+Highest sequencing depth but shorter reads
 ]
 
 .pull-rigth[
 .image-40[
-  ![Gigabase per run per read length](../../images/gigabase-read-length.png)
+  ![Reads accuracy distribution](../../images/genome_assembly_introduction/short-read-sequencing-platforms-specifications.png)
 ]]
 
-.footnote[https://github.com/alexcorm/developments-in-next-generation-sequencing]
+.pull-left[
+**Long reads platforms**:
+Longer reads but less sequencing depth
+]
+
+.pull-rigth[
+.image-40[
+  ![Reads accuracy distribution](../../images/genome_assembly_introduction/long-read-sequencing-platforms-specifications.png)
+]]
+
+.footnote[Kanzi, A. M. et al. Next Generation Sequencing and Bioinformatics Analysis of Family Genetic Inheritance. Frontiers Genetics 11, 544162 (2020).]
 
 ---
 
@@ -609,33 +727,23 @@ Reads accuracy differs depending on the sequencing technology:
 
 .pull-rigth[
 .image-40[
-  ![Reads accuracy distribution](../../images/reads-accuracy-distribution.png)
+  ![Reads accuracy distribution](../../images/genome_assembly_introduction/reads-accuracy-distribution.png)
 ]]
-
----
-
-### Appropriate sequencing technology
-
-.image-100[
-  ![Several sequencing technologies](../../images/sequencing-technologies.png)
-]
-
-.footnote[Stark, R., Grzelak, M. &amp; Hadfield, J. RNA sequencing: the teenage years. Nat Rev Genetics 20, 631–656 (2019).]
 
 ---
 
 ### Appropriate sequencing technology: Coverage versus depth
 
 .left[
-**Coverage:** fraction of the genome sequenced at least by one read
+**Coverage in terms of redundancy**
 
-**Depth:** average number of reads that cover any given region
+**Coverage in terms of the percentage coverage of a reference by reads**
 
-Intuitively, more reads should increase coverage and depth.
+Intuitively, increase sequencing depth should increase both types of coverage.
 ]
 
 .image-40[
-  ![Sequencing coverage by GC content](../../images/coverage-x-GC.png)
+  ![Sequencing coverage by GC content](../../images/genome_assembly_introduction/coverage-x-GC.png)
 ]
 
 .footnote[Chaisson et al. Genetic variation and the de novo assembly of human genomes. Nat Rev Genet 16, 627–640 (2015).]
@@ -645,16 +753,16 @@ Intuitively, more reads should increase coverage and depth.
 ### Computational resources and requirements
 
 .left[
-To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime and storage)**.
-- The resource are **different** between:
+To be successful, you must have **sufficient computing resources (CPUS, RAM, walltime and storage)**. 
+- The resources needed are **different** for each step:
   - Assembly
   - Annotation
   - Other analysis tools
 
 - For genome **assembly:**
-  - Running times and RAM increase with the **type** and **amount of data**
-  - More data for large genomes, increase **running time/RAM/Storage**
-  - Most of tools **running** on a **single node:** parallelized but not distributed
+  - Running times and RAM increase with data **type** and **amount**
+  - More data for large genomes, increase **runtime/RAM/Storage**
+  - Most of tools **run** on a **single node**: they are parallelized but not distributed
 
 - For genome **annotation:**
   - Mapping/alignment of external data (RNA-seq, proteins) can be parallelized and distributed
@@ -667,7 +775,6 @@ To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime 
 
 .left[
 - PacBio CLR or Oxford Nanopore reads at 40-50x coverage, self-correction and/or hybrid correction (using Illumina data)
-- PacBio HiFi reads at 20-30x coverage
 - Illumina 2x250bp paired-end reads from MiSeq
 ]
 
@@ -676,10 +783,69 @@ To succeed you need to have **sufficient compute resources (CPUS, RAM, walltime 
 ### Typical sequencing strategies: Larger genomes
 
 .left[
-- PacBio CLR or Oxford Nanopore reads at 100x coverage, hybrid correction using Illumina data and scaffolding using HiC or Omni-C
-- PacBio HiFi reads at 30x coverage and scaffolding using HiC or Omni-C
+- PacBio CLR or Oxford Nanopore reads at 100x coverage, hybrid correction using Illumina data and scaffolding using Hi-C
+- PacBio HiFi reads at 30x coverage and scaffolding using Hi-C
 - PacBio HiFi reads at 30x coverage, 120x Oxford Nanopore ultra long reads
 ]
+
+---
+
+# Bioinformatics data formats
+
+.left[
+**FASTA**: a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes.
+]
+
+.image-100[
+  ![Fasta format description](../../images/genome_assembly_introduction/fasta_format.png)
+]
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
+---
+
+# Bioinformatics data formats
+
+.left[
+**FASTQ**: a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores (Phred). Both the sequence letter and quality score are each encoded with a single ASCII character for brevity. It's the standard sequencing output for Illumina and MGI sequencers.
+]
+
+.image-100[
+  ![Fastq format description](../../images/genome_assembly_introduction/fastq_format.png)
+]
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
+---
+
+# Bioinformatics data formats
+
+.left[
+**FAST5**: the standard sequencing output for Oxford Nanopore sequencers. It is based on the hierarchical data format HDF5 format which enables storage of large and complex data. In contrast to fasta and fastq files a FAST5 file is binary and can not be opened with a normal text editor. Data stored in nanopore FAST5 files can contain the sequence of a read in fastq format (after basecalling), the raw signal of the pore as well as several log files and other information 
+]
+
+.image-100[
+  ![Interactive view of a Fast5 with HDFview](../../images/genome_assembly_introduction/fast5_hdfViewer.png)
+]
+
+---
+
+# Bioinformatics data formats
+
+.left[
+**SAM (Sequence Alignment Map)**: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.
+
+**BAM (Binary Alignment Map)**: the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the SAM format. It's the standard sequencing output for PacBio sequencers.
+
+**CRAM (Compressed Reference-oriented Alignment Map)**: a compressed columnar file format for storing biological sequences aligned to a reference sequence.
+]
+
+.image-100[
+  ![SAM format description](../../images/genome_assembly_introduction/sam_format.png)
+]
+
+.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
+
 
 
 
@@ -705,6 +871,10 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
 			
+<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
+
+
+
 <a href="/training-material/hall-of-fame/lleroi/" class="contributor-badge contributor-lleroi"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/lleroi?s=27" alt="Avatar">Laura Leroi</a>
 
 
@@ -718,10 +888,6 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 		<td>
 			
 <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/abretaud?s=27" alt="Avatar">Anthony Bretaudeau</a>
-
-
-
-<a href="/training-material/hall-of-fame/alexcorm/" class="contributor-badge contributor-alexcorm"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/alexcorm?s=27" alt="Avatar">Alexandre Cormier</a>
 
 
 
