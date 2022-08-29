@@ -40,22 +40,26 @@ priority: 8
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are intersted in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
-## What I have:
+> > ### {% icon question %} What I want:
+> > - I work with a gene _X_
+> > - I would like to compare the structure of gene _X_ across _N_ genomes
+> {: .code-in}
+>
+> > ### {% icon galaxy-chart-select-data %} What I have:
+> > - I know the gene's name
+> > - I know which species I'm interested in
+> > - I know where to find genomes of these species
+> {: .code-out}
+{: .code-2col}
 
-- A set of large genome assemblies
-- Name of one gene
-
-As an example we will use a subset of genomes produced by the Vertebrate Genome Project ([VGP](https://vertebrategenomesproject.org/)). 
-
-## What I need:
-
-- Find location of this gene in a given set of genome assemblies
-- Visualize gene strcuture across all assemblies
-- Build a "quick and dirty" phylogenetic tree 
+> ### {% icon interactive_tour %} What I will get:
+> - Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.
+> - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
+{: .warning}
 
 ------
 
-# Outline
+# The logic
 
 To get what I need I will follow the following series of steps:
 
@@ -66,6 +70,8 @@ To get what I need I will follow the following series of steps:
 1. Step 5: Find matches between **Exons** and **ORFs**
 1. Step 6: Create an graphical comparison of gene structures across the genomes
 1. Step 7: Build a rough phylogenetic tree for each Exon
+
+![Logic](../../images/gene-centric/gene_analysis.svg)
 
 ------
 
@@ -243,7 +249,7 @@ The workflow takes three inputs:
 Its overall logic can be summarized as follows:
 
 1. Perform [__Diamond__](https://github.com/bbuchfink/diamond) search to identify matches between the gene of interest (<kbd>EXONS</kdb>) and ORF sets from each genomes (<kbd>DiamondDB</kbd>).
-2. Intersect information about the matches with BED file containing ORF coordinates (<kbd>ORF BED</kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).
+2. Intersect information about the matches with BED file containing ORF coordinates (<kbd>ORF BED</kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, m3 or -1, -2, -3).
 3. Extract matching parts of the sequences and generated multiple alignments using [__MAFFT__](https://mafft.cbrc.jp/alignment/software/). This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of *XBP-1* there will be five sets of alignemnts. 
 4. Build phylogenetic tree for each alignment produced in the previous step using the [Neighbor Joining method](https://en.wikipedia.org/wiki/Neighbor_joining) - a simple and quick way to obtain a rough phylogeny.
 
