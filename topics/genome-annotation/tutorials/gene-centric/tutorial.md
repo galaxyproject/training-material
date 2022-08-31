@@ -98,13 +98,18 @@ This [example history](https://usegalaxy.org/u/cartman/h/xbp1vgpsample) contains
 
 {% snippet faqs/galaxy/histories_import.md %}
 
-You can use this history to inderstand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with tags:
+You can use this history to inderstand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
 
-- <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
-- <kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest
-- <kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest
-- <kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs
-- <kbd>Trees</kbd> - phylogenetic trees for each exon 
+> ### {% icon code-in %} Input dataset in the example history
+> - <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
+> - <kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest
+> - <kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest
+{: .code-in}
+
+> ### {% icon code-out %} Outputs in the sample history
+> - <kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs
+> - <kbd>Trees</kbd> - phylogenetic trees for each exon 
+{: .code-out}
 
 > ### {% icon warning %} A suggestion!
 > Importing and looking around this history is very helpful for understanding how this analysis works!
@@ -267,8 +272,8 @@ It produces two primary outputs:
 
 > ### {% icon code-out %} Results
 >
-> 1. Phylogenetic trees for each input exon as [Newick](https://en.wikipedia.org/wiki/Newick_format) file
-> 1. A summary table of exon matches for each genome
+> 1. <kbd>Trees</kbd> - Phylogenetic trees for each input exon as [Newick](https://en.wikipedia.org/wiki/Newick_format) file
+> 1. <kbd>PlottingData</kbd> - A summary table of exon matches for each genome
 >
 {: .code-out}
 
@@ -299,11 +304,34 @@ After running the workflow phylogenetic trees will be saved into a collection na
 
 Another workflow output will represent a single file summarzing genomic location of matches between each of the genomes in our dataset and amino acid translation fo exons from the gene of interest. It will be called `Mapping report` and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use external Jupyter notebook (note that Jupyter can be run directly from Galaxy, but to make this tutorial runnable on any Galaxy instance we will use an internal notebook server). 
 
-### Looking at the trees
+### Starting notebook
+
+The notebook can be accessed [from here](https://colab.research.google.com/drive/1smTpRejBb7c02LiIxMPNVDjOucLAsD81?usp=sharing). You do need to have a Google Account to be able to use the notebook.
+
+### Proving data
+
+The data is provided to the notebook by setting the `dataset_url` parameter in this cell:
+
+```python
+# Paste link to the dataset here
+dataset_url = 'https://usegalaxy.org/api/datasets/f9cad7b01a472135a8abd43f91f8d3cf/display?to_ext=tabular'
+```
+
+This is a URL pointing to one of the workflow outputs: `Mapping report` with the <kbd>PlottingData</kbd> tag. To copy the URL click on the {% icon galaxy-link %} icon adjacent to the dataset:
+
+![Copying the link](../../images/gene-centric/copy_link.png)
+
+Running the notebook will generate two graphs explained in the next section.
+
+### Interpreting the graph
+
 
 
 
 # About the gene
+
+XBP-1 is another example of a gene with overlapping reading frames. In this case the switch between two reading frames occurs not because of alternative splicing as was the case for CDKN2a. Instead, a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from XBP-1 mRNA. This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes that is conserved all the way to yeast (with XBP-1 homologue HAC-1). The XBP-1 is present in all assembled genomes described here. Yet the most interesting aspect is the duplication history of this gene revealed by our analysis. XBP-1 duplications have occurred at several points within vertebrate evolution. For example, humans contain an XBP-1 pseudogene on chromosome 5 and our analysis indicates the presence of another pseudogene in Tammar wallaby (Fig. SX). However, in philippine flying lemur (Cynocephalus volans) there appear to be two functional copies (Fig. XBP Top panel) located within the same linkage group (scaffold) and separated by over 160 Mb of sequence. The copies have distinct arrangements. The XBP-1-Right is the “original” copy retaining the gene structure expected from comparison with the human orthologue. The XBP-1-Left copy appears to be an insertion of a processed mRNA -- a hallmark of retrotransposition (REF). Exon 1 and “unspliced” fragments p1 and p2 (see Methods) lay within the same reading frame and in +1 phase relative to the “spliced” fragments as would be in the processed transcript. Both reading frames appear to be intact and sharing XX% identity with the XBP-1-Right copy and IRE1 recognition site is undisturbed. 
+
 
 > ### {% icon tip %} Tip: Getting help
 >
@@ -319,4 +347,4 @@ Another workflow output will represent a single file summarzing genomic location
 # Acknowledgements
 {:.no_toc}
 
-Thanks to Mehmet Tekman for suggesting the awk tool. Thanks also to Jennifer Devlin, Lydia Lim and Sylvia Mahara for comments and feedback on the tutorial.
+Thank to VGP consortium
