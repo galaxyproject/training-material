@@ -9,7 +9,7 @@ questions:
 - How do I do that?
 objectives:
 - Provide a quick method for identifying genes of interest in unannotated or newly assembled genomes
-time_estimation: 2H
+time_estimation: 30 min
 key_points:
 - You can easily 
 contributors:
@@ -35,18 +35,7 @@ subtopic: eukaryote
 priority: 8
 ---
 
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-
 # Introduction
-{:.no_toc}
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are intersted in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
@@ -78,7 +67,7 @@ The analysis follow the following logic (also see the following figure):
 1. Identify genomes of interest
 1. Extract amino acid sequences and genome coordinates for all possible open reading frames (ORFs) from all genomes in my set
 
-    The following steps 5, 6, and 7 are performed using a single Galaxy workflow (grey area in the following figure):
+    The following steps 5, 6, and 7 are performed using a single Galaxy workflow (grey area in the following figure).
 
 1. Align - Find matches between exons of the gene of interest and ORFs
 1. Intersect - Compute genome coordinates of matches
@@ -176,6 +165,14 @@ In this section we first show how to upload sample datasets. These datasets were
 > {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
+
+These correspond to fragments of genomes from:
+
+ - `aGasCar1` - _Gastrophryne carolinensis_ (Eastern narrowmouth toad)
+ - `bTaeGut` - _Taeniopygia guttata_ (Zebra finch)
+ - `fScoJap` - _Scomber japonicus_ (Chub mackerel)
+ - `mCynVol` - _Cynocephalus volans_ (Philippine flying lemur)
+ - `mHomSap` - _Homo sapiens_ (Human)
 
 ### Uploading VGP data from GenomeArk
 
@@ -300,7 +297,7 @@ After running the workflow phylogenetic trees will be saved into a collection na
 >     ![The tree](../../images/gene-centric/tree.png)
 {: .hands_on}
 
-## Step 8: Generating comparative genome graph
+## Step 8: Generating and interpreting the comparative genome graph
 
 Another workflow output will represent a single file summarzing genomic location of matches between each of the genomes in our dataset and amino acid translation fo exons from the gene of interest. It will be called `Mapping report` and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use external Jupyter notebook (note that Jupyter can be run directly from Galaxy, but to make this tutorial runnable on any Galaxy instance we will use an internal notebook server). 
 
@@ -323,28 +320,3720 @@ This is a URL pointing to one of the workflow outputs: `Mapping report` with the
 
 Running the notebook will generate two graphs explained in the next section.
 
-### Interpreting the graph
+### Interpreting the graphs
 
+Analysis of sample data associated with this tutorial will produce the genome graph shown below. In this graph the Y-axis represents ORFs on positive (1, 2, 3 in red color) and negative (-1, -2, -3 in blue color) strands. The X-axis is genomic coordinates.  Boxes represent matches between amino acid sequences of exons and ORFs they are superimposed to. The color of boxes reflect the extent of amino acid identity. The color key is shown in the left upper corner of the plot. The image is interactive so you can zoom in and out.
 
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {
+    "view": {"continuousWidth": 400, "continuousHeight": 300},
+    "title": {"anchor": "start", "fontSize": 10}
+  },
+  "vconcat": [
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [52, 10726]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector001": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        }
+      ],
+      "data": {"name": "data-4c922bb95694b1514f353a1acd2ab409"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-228, 3860]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector002": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        }
+      ],
+      "data": {"name": "data-cd3fa6c014d625fc2f85cfeb0119b9e0"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [314, 3976]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector003": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        }
+      ],
+      "data": {"name": "data-33f25281b1f78907be251e80305165ce"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-71, 6632]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector004": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        }
+      ],
+      "data": {"name": "data-b9417f0d40ef923551b8b4d9ff9101ea"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [315, 2819]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector005": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        }
+      ],
+      "data": {"name": "data-4ee088ff88102dae61c31ea38e9d47e2"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-74, 5866]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector006": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        }
+      ],
+      "data": {"name": "data-729a5f2f10472b0a903d29284fd22ba5"},
+      "height": 100,
+      "width": 800
+    }
+  ],
+  "resolve": {"scale": {"y": "shared"}},
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-4c922bb95694b1514f353a1acd2ab409": [
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 552,
+        "end": 684,
+        "orf": "aGasCar1.fascaffold_1_ORF.2",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 762,
+        "end": 1029,
+        "orf": "aGasCar1.fascaffold_1_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8880,
+        "end": 9045,
+        "orf": "aGasCar1.fascaffold_1_ORF.31",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "8970",
+        "matchStart": "8904",
+        "matchEnd": "9036",
+        "exon": "xbp-1u-p1",
+        "id": "75.6",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8880,
+        "end": 9045,
+        "orf": "aGasCar1.fascaffold_1_ORF.31",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "8923",
+        "matchStart": "8904",
+        "matchEnd": "8943",
+        "exon": "xbp-1s-p12",
+        "id": "85.7",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9270,
+        "end": 9432,
+        "orf": "aGasCar1.fascaffold_1_ORF.32",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9807,
+        "end": 9921,
+        "orf": "aGasCar1.fascaffold_1_ORF.33",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 697,
+        "end": 949,
+        "orf": "aGasCar1.fascaffold_1_ORF.43",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9424,
+        "end": 10126,
+        "orf": "aGasCar1.fascaffold_1_ORF.64",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": "9776",
+        "matchStart": "9514",
+        "matchEnd": "10039",
+        "exon": "xbp-1s-p3",
+        "id": "46.5",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 659,
+        "end": 959,
+        "orf": "aGasCar1.fascaffold_1_ORF.73",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "831",
+        "matchStart": "749",
+        "matchEnd": "914",
+        "exon": "xbp1_ex1",
+        "id": "52.4",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8933,
+        "end": 9137,
+        "orf": "aGasCar1.fascaffold_1_ORF.102",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9467,
+        "end": 9686,
+        "orf": "aGasCar1.fascaffold_1_ORF.104",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9824,
+        "end": 9974,
+        "orf": "aGasCar1.fascaffold_1_ORF.105",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9977,
+        "end": 10226,
+        "orf": "aGasCar1.fascaffold_1_ORF.106",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9708,
+        "end": 9930,
+        "orf": "aGasCar1.fascaffold_1_ORF.120",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9585,
+        "end": 9705,
+        "orf": "aGasCar1.fascaffold_1_ORF.121",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9396,
+        "end": 9564,
+        "orf": "aGasCar1.fascaffold_1_ORF.122",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8952,
+        "end": 9081,
+        "orf": "aGasCar1.fascaffold_1_ORF.124",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 10007,
+        "end": 10187,
+        "orf": "aGasCar1.fascaffold_1_ORF.157",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9791,
+        "end": 9953,
+        "orf": "aGasCar1.fascaffold_1_ORF.158",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9482,
+        "end": 9662,
+        "orf": "aGasCar1.fascaffold_1_ORF.159",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9305,
+        "end": 9431,
+        "orf": "aGasCar1.fascaffold_1_ORF.160",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8801,
+        "end": 9032,
+        "orf": "aGasCar1.fascaffold_1_ORF.162",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 821,
+        "end": 1025,
+        "orf": "aGasCar1.fascaffold_1_ORF.187",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 686,
+        "end": 800,
+        "orf": "aGasCar1.fascaffold_1_ORF.188",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9949,
+        "end": 10063,
+        "orf": "aGasCar1.fascaffold_1_ORF.197",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9661,
+        "end": 9796,
+        "orf": "aGasCar1.fascaffold_1_ORF.198",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9550,
+        "end": 9658,
+        "orf": "aGasCar1.fascaffold_1_ORF.199",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8947,
+        "end": 9136,
+        "orf": "aGasCar1.fascaffold_1_ORF.200",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 781,
+        "end": 946,
+        "orf": "aGasCar1.fascaffold_1_ORF.227",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 658,
+        "end": 778,
+        "orf": "aGasCar1.fascaffold_1_ORF.228",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      }
+    ],
+    "data-cd3fa6c014d625fc2f85cfeb0119b9e0": [
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 717,
+        "end": 1026,
+        "orf": "bTaeGut2.fascaffold_18_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "927",
+        "matchStart": "831",
+        "matchEnd": "1023",
+        "exon": "xbp1_ex1",
+        "id": "48.6",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2760,
+        "end": 3348,
+        "orf": "bTaeGut2.fascaffold_18_ORF.11",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "3072",
+        "matchStart": "2796",
+        "matchEnd": "3348",
+        "exon": "xbp-1s-p3",
+        "id": "60.8",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 634,
+        "end": 733,
+        "orf": "bTaeGut2.fascaffold_18_ORF.15",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 781,
+        "end": 997,
+        "orf": "bTaeGut2.fascaffold_18_ORF.16",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1957,
+        "end": 2098,
+        "orf": "bTaeGut2.fascaffold_18_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2773,
+        "end": 2980,
+        "orf": "bTaeGut2.fascaffold_18_ORF.23",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": "2887",
+        "matchStart": "2797",
+        "matchEnd": "2977",
+        "exon": "xbp-1u-p2",
+        "id": "60.7",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3142,
+        "end": 3355,
+        "orf": "bTaeGut2.fascaffold_18_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 272,
+        "end": 863,
+        "orf": "bTaeGut2.fascaffold_18_ORF.29",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 878,
+        "end": 1529,
+        "orf": "bTaeGut2.fascaffold_18_ORF.30",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1886,
+        "end": 2069,
+        "orf": "bTaeGut2.fascaffold_18_ORF.32",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1994",
+        "matchStart": "1928",
+        "matchEnd": "2060",
+        "exon": "xbp-1u-p1",
+        "id": "66.7",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2798,
+        "end": 2954,
+        "orf": "bTaeGut2.fascaffold_18_ORF.35",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3151,
+        "end": 3262,
+        "orf": "bTaeGut2.fascaffold_18_ORF.41",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2980,
+        "end": 3148,
+        "orf": "bTaeGut2.fascaffold_18_ORF.42",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1774,
+        "end": 2056,
+        "orf": "bTaeGut2.fascaffold_18_ORF.45",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 991,
+        "end": 1261,
+        "orf": "bTaeGut2.fascaffold_18_ORF.47",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 865,
+        "end": 988,
+        "orf": "bTaeGut2.fascaffold_18_ORF.48",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 700,
+        "end": 856,
+        "orf": "bTaeGut2.fascaffold_18_ORF.49",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3207,
+        "end": 3360,
+        "orf": "bTaeGut2.fascaffold_18_ORF.53",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3087,
+        "end": 3204,
+        "orf": "bTaeGut2.fascaffold_18_ORF.54",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1971,
+        "end": 2082,
+        "orf": "bTaeGut2.fascaffold_18_ORF.56",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1848,
+        "end": 1968,
+        "orf": "bTaeGut2.fascaffold_18_ORF.57",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 627,
+        "end": 1599,
+        "orf": "bTaeGut2.fascaffold_18_ORF.58",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3212,
+        "end": 3347,
+        "orf": "bTaeGut2.fascaffold_18_ORF.62",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2993,
+        "end": 3170,
+        "orf": "bTaeGut2.fascaffold_18_ORF.63",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2609,
+        "end": 2990,
+        "orf": "bTaeGut2.fascaffold_18_ORF.64",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2012,
+        "end": 2168,
+        "orf": "bTaeGut2.fascaffold_18_ORF.66",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1763,
+        "end": 1973,
+        "orf": "bTaeGut2.fascaffold_18_ORF.67",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 584,
+        "end": 1289,
+        "orf": "bTaeGut2.fascaffold_18_ORF.70",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      }
+    ],
+    "data-33f25281b1f78907be251e80305165ce": [
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1113,
+        "end": 1266,
+        "orf": "fScoJap1.fascaffold_13_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1284,
+        "end": 1383,
+        "orf": "fScoJap1.fascaffold_13_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1386,
+        "end": 1488,
+        "orf": "fScoJap1.fascaffold_13_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1632,
+        "end": 1755,
+        "orf": "fScoJap1.fascaffold_13_ORF.6",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1797,
+        "end": 1971,
+        "orf": "fScoJap1.fascaffold_13_ORF.7",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3135,
+        "end": 3321,
+        "orf": "fScoJap1.fascaffold_13_ORF.11",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 814,
+        "end": 1285,
+        "orf": "fScoJap1.fascaffold_13_ORF.16",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1288,
+        "end": 1480,
+        "orf": "fScoJap1.fascaffold_13_ORF.17",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1534,
+        "end": 1690,
+        "orf": "fScoJap1.fascaffold_13_ORF.18",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1693,
+        "end": 1810,
+        "orf": "fScoJap1.fascaffold_13_ORF.19",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1813,
+        "end": 1951,
+        "orf": "fScoJap1.fascaffold_13_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2971,
+        "end": 3241,
+        "orf": "fScoJap1.fascaffold_13_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 836,
+        "end": 1061,
+        "orf": "fScoJap1.fascaffold_13_ORF.25",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1070,
+        "end": 1436,
+        "orf": "fScoJap1.fascaffold_13_ORF.26",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1688,
+        "end": 1829,
+        "orf": "fScoJap1.fascaffold_13_ORF.28",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3017,
+        "end": 3119,
+        "orf": "fScoJap1.fascaffold_13_ORF.31",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3122,
+        "end": 3254,
+        "orf": "fScoJap1.fascaffold_13_ORF.32",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2974,
+        "end": 3253,
+        "orf": "fScoJap1.fascaffold_13_ORF.35",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1648,
+        "end": 1750,
+        "orf": "fScoJap1.fascaffold_13_ORF.40",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 862,
+        "end": 1435,
+        "orf": "fScoJap1.fascaffold_13_ORF.42",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1147",
+        "matchStart": "862",
+        "matchEnd": "1432",
+        "exon": "xbp-1s-p3",
+        "id": "44.6",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2970,
+        "end": 3309,
+        "orf": "fScoJap1.fascaffold_13_ORF.47",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "3097",
+        "matchStart": "2982",
+        "matchEnd": "3213",
+        "exon": "xbp1_ex1",
+        "id": "48.1",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1584,
+        "end": 1704,
+        "orf": "fScoJap1.fascaffold_13_ORF.51",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1260,
+        "end": 1479,
+        "orf": "fScoJap1.fascaffold_13_ORF.52",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 840,
+        "end": 1131,
+        "orf": "fScoJap1.fascaffold_13_ORF.53",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3305,
+        "end": 3476,
+        "orf": "fScoJap1.fascaffold_13_ORF.57",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3008,
+        "end": 3167,
+        "orf": "fScoJap1.fascaffold_13_ORF.58",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1550,
+        "end": 1844,
+        "orf": "fScoJap1.fascaffold_13_ORF.63",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "1668",
+        "matchStart": "1601",
+        "matchEnd": "1736",
+        "exon": "xbp-1u-p1",
+        "id": "56.5",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1076,
+        "end": 1247,
+        "orf": "fScoJap1.fascaffold_13_ORF.64",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      }
+    ],
+    "data-b9417f0d40ef923551b8b4d9ff9101ea": [
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 429,
+        "end": 630,
+        "orf": "mHomSapT2T.fachr22_ORF.2",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 900,
+        "end": 1023,
+        "orf": "mHomSapT2T.fachr22_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1317,
+        "end": 1431,
+        "orf": "mHomSapT2T.fachr22_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1539,
+        "end": 1719,
+        "orf": "mHomSapT2T.fachr22_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5358,
+        "end": 5631,
+        "orf": "mHomSapT2T.fachr22_ORF.16",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5781,
+        "end": 6132,
+        "orf": "mHomSapT2T.fachr22_ORF.17",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 466,
+        "end": 586,
+        "orf": "mHomSapT2T.fachr22_ORF.22",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 589,
+        "end": 712,
+        "orf": "mHomSapT2T.fachr22_ORF.23",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 715,
+        "end": 919,
+        "orf": "mHomSapT2T.fachr22_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 922,
+        "end": 1102,
+        "orf": "mHomSapT2T.fachr22_ORF.25",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1429,
+        "end": 1546,
+        "orf": "mHomSapT2T.fachr22_ORF.26",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5275,
+        "end": 5932,
+        "orf": "mHomSapT2T.fachr22_ORF.36",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 551,
+        "end": 701,
+        "orf": "mHomSapT2T.fachr22_ORF.42",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 845,
+        "end": 968,
+        "orf": "mHomSapT2T.fachr22_ORF.43",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 980,
+        "end": 1112,
+        "orf": "mHomSapT2T.fachr22_ORF.44",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1115,
+        "end": 1337,
+        "orf": "mHomSapT2T.fachr22_ORF.45",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1346,
+        "end": 1499,
+        "orf": "mHomSapT2T.fachr22_ORF.46",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5402,
+        "end": 6107,
+        "orf": "mHomSapT2T.fachr22_ORF.59",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5401,
+        "end": 5833,
+        "orf": "mHomSapT2T.fachr22_ORF.66",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "5705",
+        "matchStart": "5611",
+        "matchEnd": "5800",
+        "exon": "xbp1_ex1",
+        "id": "87.5",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1333,
+        "end": 1552,
+        "orf": "mHomSapT2T.fachr22_ORF.77",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1406",
+        "matchStart": "1336",
+        "matchEnd": "1477",
+        "exon": "xbp-1u-p1",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1333,
+        "end": 1552,
+        "orf": "mHomSapT2T.fachr22_ORF.77",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1456",
+        "matchStart": "1435",
+        "matchEnd": "1477",
+        "exon": "xbp-1s-p12",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 844,
+        "end": 1015,
+        "orf": "mHomSapT2T.fachr22_ORF.78",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5625,
+        "end": 5985,
+        "orf": "mHomSapT2T.fachr22_ORF.84",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5427,
+        "end": 5622,
+        "orf": "mHomSapT2T.fachr22_ORF.85",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5274,
+        "end": 5424,
+        "orf": "mHomSapT2T.fachr22_ORF.86",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1353,
+        "end": 1467,
+        "orf": "mHomSapT2T.fachr22_ORF.95",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 465,
+        "end": 1167,
+        "orf": "mHomSapT2T.fachr22_ORF.96",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "741",
+        "matchStart": "465",
+        "matchEnd": "1017",
+        "exon": "xbp-1s-p3",
+        "id": "95.7",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5780,
+        "end": 6047,
+        "orf": "mHomSapT2T.fachr22_ORF.99",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5357,
+        "end": 5777,
+        "orf": "mHomSapT2T.fachr22_ORF.100",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1313,
+        "end": 1445,
+        "orf": "mHomSapT2T.fachr22_ORF.112",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "1388",
+        "matchStart": "1334",
+        "matchEnd": "1442",
+        "exon": "xbp-1s-p12",
+        "id": "81.1",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 836,
+        "end": 1073,
+        "orf": "mHomSapT2T.fachr22_ORF.113",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "926",
+        "matchStart": "836",
+        "matchEnd": "1016",
+        "exon": "xbp-1u-p2",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 524,
+        "end": 674,
+        "orf": "mHomSapT2T.fachr22_ORF.114",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      }
+    ],
+    "data-4ee088ff88102dae61c31ea38e9d47e2": [
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 960,
+        "end": 1080,
+        "orf": "mCynVol1.fascaffold_2_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1048",
+        "matchStart": "1017",
+        "matchEnd": "1080",
+        "exon": "xbp1_ex1",
+        "id": "68.2",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1542",
+        "matchStart": "1476",
+        "matchEnd": "1608",
+        "exon": "xbp-1u-p1",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1731",
+        "matchStart": "1659",
+        "matchEnd": "1803",
+        "exon": "xbp-1u-p2",
+        "id": "91.8",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1497",
+        "matchStart": "1476",
+        "matchEnd": "1518",
+        "exon": "xbp-1s-p12",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1171",
+        "matchStart": "1098",
+        "matchEnd": "1245",
+        "exon": "xbp1_ex1",
+        "id": "90.0",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 985,
+        "end": 1219,
+        "orf": "mCynVol1.fascaffold_2_ORF.7",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1486,
+        "end": 1591,
+        "orf": "mCynVol1.fascaffold_2_ORF.8",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1624,
+        "end": 1795,
+        "orf": "mCynVol1.fascaffold_2_ORF.9",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 950,
+        "end": 1307,
+        "orf": "mCynVol1.fascaffold_2_ORF.14",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1310,
+        "end": 1451,
+        "orf": "mCynVol1.fascaffold_2_ORF.15",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1508,
+        "end": 2171,
+        "orf": "mCynVol1.fascaffold_2_ORF.16",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1565",
+        "matchStart": "1511",
+        "matchEnd": "1619",
+        "exon": "xbp-1s-p12",
+        "id": "70.3",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1508,
+        "end": 2171,
+        "orf": "mCynVol1.fascaffold_2_ORF.16",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1896",
+        "matchStart": "1622",
+        "matchEnd": "2171",
+        "exon": "xbp-1s-p3",
+        "id": "87.0",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2006,
+        "end": 2207,
+        "orf": "mCynVol1.fascaffold_2_ORF.21",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1610,
+        "end": 1760,
+        "orf": "mCynVol1.fascaffold_2_ORF.22",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1391,
+        "end": 1607,
+        "orf": "mCynVol1.fascaffold_2_ORF.23",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1082,
+        "end": 1271,
+        "orf": "mCynVol1.fascaffold_2_ORF.24",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 815,
+        "end": 1079,
+        "orf": "mCynVol1.fascaffold_2_ORF.25",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2050,
+        "end": 2170,
+        "orf": "mCynVol1.fascaffold_2_ORF.31",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1927,
+        "end": 2047,
+        "orf": "mCynVol1.fascaffold_2_ORF.32",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1720,
+        "end": 1924,
+        "orf": "mCynVol1.fascaffold_2_ORF.33",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1522,
+        "end": 1717,
+        "orf": "mCynVol1.fascaffold_2_ORF.34",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1213,
+        "end": 1447,
+        "orf": "mCynVol1.fascaffold_2_ORF.35",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 964,
+        "end": 1132,
+        "orf": "mCynVol1.fascaffold_2_ORF.36",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2166,
+        "end": 2319,
+        "orf": "mCynVol1.fascaffold_2_ORF.42",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1974,
+        "end": 2085,
+        "orf": "mCynVol1.fascaffold_2_ORF.43",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1797,
+        "end": 1902,
+        "orf": "mCynVol1.fascaffold_2_ORF.44",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1692,
+        "end": 1794,
+        "orf": "mCynVol1.fascaffold_2_ORF.45",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1419,
+        "end": 1524,
+        "orf": "mCynVol1.fascaffold_2_ORF.46",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1068,
+        "end": 1359,
+        "orf": "mCynVol1.fascaffold_2_ORF.47",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 924,
+        "end": 1065,
+        "orf": "mCynVol1.fascaffold_2_ORF.48",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      }
+    ],
+    "data-729a5f2f10472b0a903d29284fd22ba5": [
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 426,
+        "end": 579,
+        "orf": "mCynVol1.fascaffold_3_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 660,
+        "end": 771,
+        "orf": "mCynVol1.fascaffold_3_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 843,
+        "end": 948,
+        "orf": "mCynVol1.fascaffold_3_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 951,
+        "end": 1053,
+        "orf": "mCynVol1.fascaffold_3_ORF.6",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1452,
+        "end": 1605,
+        "orf": "mCynVol1.fascaffold_3_ORF.8",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1638,
+        "end": 1839,
+        "orf": "mCynVol1.fascaffold_3_ORF.9",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4395,
+        "end": 5139,
+        "orf": "mCynVol1.fascaffold_3_ORF.14",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 538,
+        "end": 739,
+        "orf": "mCynVol1.fascaffold_3_ORF.18",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 985,
+        "end": 1213,
+        "orf": "mCynVol1.fascaffold_3_ORF.19",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1423,
+        "end": 1537,
+        "orf": "mCynVol1.fascaffold_3_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4570,
+        "end": 4831,
+        "orf": "mCynVol1.fascaffold_3_ORF.27",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4912,
+        "end": 5047,
+        "orf": "mCynVol1.fascaffold_3_ORF.28",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 5050,
+        "end": 5272,
+        "orf": "mCynVol1.fascaffold_3_ORF.29",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 575,
+        "end": 695,
+        "orf": "mCynVol1.fascaffold_3_ORF.36",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 698,
+        "end": 818,
+        "orf": "mCynVol1.fascaffold_3_ORF.37",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 821,
+        "end": 1025,
+        "orf": "mCynVol1.fascaffold_3_ORF.38",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1028,
+        "end": 1148,
+        "orf": "mCynVol1.fascaffold_3_ORF.39",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1535,
+        "end": 1652,
+        "orf": "mCynVol1.fascaffold_3_ORF.40",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4544,
+        "end": 4976,
+        "orf": "mCynVol1.fascaffold_3_ORF.49",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4979,
+        "end": 5366,
+        "orf": "mCynVol1.fascaffold_3_ORF.50",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4521,
+        "end": 5271,
+        "orf": "mCynVol1.fascaffold_3_ORF.56",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1419,
+        "end": 1551,
+        "orf": "mCynVol1.fascaffold_3_ORF.62",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1494",
+        "matchStart": "1440",
+        "matchEnd": "1548",
+        "exon": "xbp-1s-p12",
+        "id": "70.3",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 942,
+        "end": 1179,
+        "orf": "mCynVol1.fascaffold_3_ORF.63",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1032",
+        "matchStart": "942",
+        "matchEnd": "1122",
+        "exon": "xbp-1u-p2",
+        "id": "91.8",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4655,
+        "end": 5102,
+        "orf": "mCynVol1.fascaffold_3_ORF.67",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "4868",
+        "matchStart": "4799",
+        "matchEnd": "4937",
+        "exon": "xbp1_ex1",
+        "id": "91.5",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1427,
+        "end": 1709,
+        "orf": "mCynVol1.fascaffold_3_ORF.76",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "1515",
+        "matchStart": "1448",
+        "matchEnd": "1583",
+        "exon": "xbp-1u-p1",
+        "id": "91.3",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1427,
+        "end": 1709,
+        "orf": "mCynVol1.fascaffold_3_ORF.76",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "1562",
+        "matchStart": "1541",
+        "matchEnd": "1583",
+        "exon": "xbp-1s-p12",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 950,
+        "end": 1121,
+        "orf": "mCynVol1.fascaffold_3_ORF.77",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4825,
+        "end": 5293,
+        "orf": "mCynVol1.fascaffold_3_ORF.81",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4609,
+        "end": 4732,
+        "orf": "mCynVol1.fascaffold_3_ORF.82",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1621,
+        "end": 1732,
+        "orf": "mCynVol1.fascaffold_3_ORF.90",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1468,
+        "end": 1573,
+        "orf": "mCynVol1.fascaffold_3_ORF.91",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 574,
+        "end": 1147,
+        "orf": "mCynVol1.fascaffold_3_ORF.92",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "848",
+        "matchStart": "574",
+        "matchEnd": "1123",
+        "exon": "xbp-1s-p3",
+        "id": "88.6",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
 
+One of the interesting things you can immediate see in this graph is that the Philippine flying lemur (`mCynVol`) contains two copies of _XBP-1_ located on `scaffold_2` and `scaffold_3`. Furthermore, the copy located on `scaffold_2` looks like a retransposed duplicate of the gene because it is shorter and likely missing some of the introns -- a hallmark of retrotransposition. 
+
+Another plot currently produced by the notebook is a summary plot showing the distribution of matches across species and their amino acid identity:
+
+![Copying the link](../../images/gene-centric/summary_plot.svg)
 
 # About the gene
 
-XBP-1 is another example of a gene with overlapping reading frames. In this case the switch between two reading frames occurs not because of alternative splicing as was the case for CDKN2a. Instead, a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from XBP-1 mRNA. This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes that is conserved all the way to yeast (with XBP-1 homologue HAC-1). The XBP-1 is present in all assembled genomes described here. Yet the most interesting aspect is the duplication history of this gene revealed by our analysis. XBP-1 duplications have occurred at several points within vertebrate evolution. For example, humans contain an XBP-1 pseudogene on chromosome 5 and our analysis indicates the presence of another pseudogene in Tammar wallaby (Fig. SX). However, in philippine flying lemur (Cynocephalus volans) there appear to be two functional copies (Fig. XBP Top panel) located within the same linkage group (scaffold) and separated by over 160 Mb of sequence. The copies have distinct arrangements. The XBP-1-Right is the “original” copy retaining the gene structure expected from comparison with the human orthologue. The XBP-1-Left copy appears to be an insertion of a processed mRNA -- a hallmark of retrotransposition (REF). Exon 1 and “unspliced” fragments p1 and p2 (see Methods) lay within the same reading frame and in +1 phase relative to the “spliced” fragments as would be in the processed transcript. Both reading frames appear to be intact and sharing XX% identity with the XBP-1-Right copy and IRE1 recognition site is undisturbed. 
-
+_XBP-1_ is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene. In this case the switch between two reading frames occurs when a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from _XBP-1_ mRNA. This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes that is conserved all the way to yeast (with _XBP-1_'s homologue _HAC-1_). 
 
 > ### {% icon tip %} Tip: Getting help
 >
 > For questions about using Galaxy, you can ask in the [Galaxy help forum](https://help.galaxyproject.org/).
 >
 {: .tip}
-
-# Conclusion
-{:.no_toc}
-
-{
-
-# Acknowledgements
-{:.no_toc}
-
-Thank to VGP consortium
