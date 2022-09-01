@@ -60,8 +60,6 @@ This tutorial will take you from the multiple AnnData outputs of the [previous t
 >
 {: .agenda}
 
-# Combining FASTQ files
-Let's combine these files!
 
 ## Get Data
 The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html)
@@ -73,14 +71,11 @@ You can access the data for this tutorial in multiple ways:
  > {% snippet faqs/galaxy/histories_copy_dataset.md %}
  
  2.  **Importing from a history** - You can import [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)
- 
  >
  > {% snippet faqs/galaxy/histories_import.md %}
  
  3.  **Uploading from Zenodo** (see below)
 
-
-## Get Data
 
 > ### {% icon hands_on %} Hands-on: Data upload for 7 files
 >
@@ -146,7 +141,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 > > ### {% icon solution %} Solution
 > >
 > > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `338 cells`, as the matrix is now 338 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
-> > 2. Under **Key-indexed observations annotation (obs)**. Different versions of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course puts `batch` in the `8th` column. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this (i.e. if your first dataset is N703 and the second is N701, the `batch` will call N703 `0` and N701 `1`!
+> > 2. Under **Key-indexed observations annotation (obs)**. Different versions of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course puts `batch` in the `8th` column. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this (i.e. if your first dataset is N703 and the second is N701, the `batch` will call N703 `0` and N701 `1`!)
 > {: .solution}
 >
 {: .question}
@@ -155,7 +150,9 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
 I set up the example history with the earliest indices at the bottom.
 
-![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "Note how N701 is lowest, ordered ascending to N707")
+<img src="../../images/scrna-casestudy/wab-history-files-ascending.png "Ordered history"" alt="Note how N701 is lowest, ordered ascending to N707."  loading="lazy">
+
+<img src="./../images/scrna-casestudy/wab-history-files-ascending.png" alt="proper alt text describing the image for visually impaired learners. " loading="lazy">
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 
@@ -179,26 +176,26 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
 >    - *"1. Replacement"*
 >
->         - *"in column"*: `Column: 9` - or whichever column `batch` is in
+>         - *"in column"*: `Column: 8` - or whichever column `batch` is in
 >         - *"Find pattern"*: `0|1|3|4|5|6`
 >         - *"Replace with"*: `male`
 >    - **+ Insert Replacement**
 >    - *"2. Replacement"*
 >
->         - *"in column"*: `Column: 9`
+>         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `2`
 >         - *"Replace with"*: `female`
 >    - **+ Insert Replacement**
 >    - *"3. Replacement"*
 >
->         - *"in column"*: `Column: 9`
+>         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
 >    Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c9`
+>    - *"Cut columns"*: `c8`
 >    - *"Delimited by"*: `Tab`
 >    - % icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
 >
@@ -213,19 +210,19 @@ That was so fun, let's do it all again but for genotype!
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %}
 >    - *"1. Replacement"*
 >
->         - *"in column"*: `Column: 9`
+>         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `0|3|4|5`
 >         - *"Replace with"*: `wildtype`
 >    - **+ Insert Replacement**
 >    - *"2. Replacement"*
 >
->         - *"in column"*: `Column: 9`
+>         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `1|2|6`
 >         - *"Replace with"*: `knockout`
 >    - **+ Insert Replacement**
 >    - *"3. Replacement"*
 >
->         - *"in column"*: `Column: 9`
+>         - *"in column"*: `Column: 8`
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `genotype`
 >
@@ -254,18 +251,18 @@ Let's add it to the AnnData object!
 
 > ### {% icon hands_on %} Hands-on: Adding metadata to AnnData object
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of previous **Manipulate AnnData** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >    - *"What to annotate?"*: `Observations (obs)``
 >    - {% icon param-file %} *"Table with new annotations"*: `Cell Metadata`
 {: .hands_on}
 
-Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
+Woohoo! We're there! You can run an {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
 
 > ### {% icon hands_on %} Hands-on: Labelling batches
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
@@ -277,19 +274,17 @@ Huzzah! We are JUST about there. However, while we've been focussing on our cell
 
 # Mitochondrial reads
 
-Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one (and thus skipping sections 4 & 5).
+Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one.
 
 > ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
 >
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: output of **Manipulate AnnData - Rename categories** {% icon tool %}
 >    - *"Format of output object"*: `AnnData format`
->    - *"Copy AnnData to .raw"*: `No`
 >    - *"Gene symbols field in AnnData"*: `NA.`
 >    - *"Flag genes that start with these names"*: `Insert Flag genes that start with these names`
 >    - *"Starts with"*: `True`
 >    - *"Var name"*: `mito`
->    - *"Number of top genes"*: `50`
 {: .hands_on}
 
 {% icon congratulations %}Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final `Pre-processed object` to see the wealth of information that has been added. You are now ready to move along to further filtering! There is a cheat that may save you time in the future though...
@@ -318,9 +313,9 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 # Conclusion
 {:.no_toc}
 
-![Workflow Part 1](../../images/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
+![Workflow Part 1](../../images/scrna-casestudy/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
 
-![Workflow Part 2](../../images/wab-alevin-part2workflow.png "Workflow  - Steps 4-6")
+![Workflow Part 2](../../images/scrna-casestudy/wab-alevin-part2workflow.png "Workflow  - Steps 4-6")
 
 You've reached the end of this session!
 You may be interested in seeing an [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) and [Part 2 workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing all the reads can be found in [here](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example).
