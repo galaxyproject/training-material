@@ -22,7 +22,7 @@ tags:
 - citizen science
 - metagenomics
 contributors:
-- PlushZ
+- plushz
 - chensy96
 - bebatut
 ---
