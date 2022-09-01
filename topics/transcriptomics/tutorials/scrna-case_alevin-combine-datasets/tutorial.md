@@ -5,7 +5,7 @@ title: "Combining datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
-zenodo_link: 'https://zenodo.org/record/4574153'
+zenodo_link: 'https://zenodo.org/record/7041120'
 
 questions:
   - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?
@@ -88,14 +88,14 @@ You can access the data for this tutorial in multiple ways:
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/4574153#.YD56YS-l2uU)
 >
 >    ```
->    {{ page.zenodo_link }}/files/Experimental_Design.tabular
->    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N704-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N705-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N706-400k-AnnData.h5ad
->    {{ page.zenodo_link }}/files/N707-400k-AnnData.h5ad
+>    {{ page.zenodo_link }}/files/Experimental_Design.tsv
+>    {{ page.zenodo_link }}/files/N701-400k.h5ad
+>    {{ page.zenodo_link }}/files/N702-400k.h5ad
+>    {{ page.zenodo_link }}/files/N703-400k.h5ad
+>    {{ page.zenodo_link }}/files/N704-400k.h5ad
+>    {{ page.zenodo_link }}/files/N705-400k.h5ad
+>    {{ page.zenodo_link }}/files/N706-400k.h5ad
+>    {{ page.zenodo_link }}/files/N707-400k.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -107,13 +107,13 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
-Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
+Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
 ## Concatenating objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k-AnnData`
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1){% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: 'Concatenate along the observations axis'
 >    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files from bottom to top'
 >    - *"Join method"*: `Intersection of variables`
@@ -125,13 +125,13 @@ Now let's look at what we've done! Unfortunately, AnnData objects are quite comp
 
 > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `General information about the object`
-> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
@@ -145,8 +145,8 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `4079 cells`, as the matrix is now 4079 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
-> > 2. Under **Key-indexed observations annotation (obs)**. Different version of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course has the `9th` column at the farthest right is `batch`. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this!
+> > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `338 cells`, as the matrix is now 338 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
+> > 2. Under **Key-indexed observations annotation (obs)**. Different versions of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course puts `batch` in the `8th` column. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this (i.e. if your first dataset is N703 and the second is N701, the `batch` will call N703 `0` and N701 `1`!
 > {: .solution}
 >
 {: .question}
@@ -155,7 +155,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
 I set up the example history with the earliest indices at the bottom.
 
-![Ordered history](../../images/wab-history-files-ascending.png "Note how N701 is lowest, ordered ascending to N707")
+![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "Note how N701 is lowest, ordered ascending to N707")
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 

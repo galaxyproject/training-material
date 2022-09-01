@@ -265,15 +265,15 @@ The question we're looking to answer here, is: "do we have mostly a have a singl
 > 2. Rename {% icon galaxy-pencil %} the image output `Barcode Plot - raw barcode frequencies`
 {: .hands_on}
 
-![raw droplet barcode plots-400k](../../images/wab-raw_barcodes-400k.png "400k subsample raw")
+![raw droplet barcode plots-400k](../../images/scrna-casestudy/wab-raw_barcodes-400k.png "400k subsample raw")
 
 Now, the image generated here (400k) isn't the most informative - but you are dealing with a fraction of the reads! If you run the total sample (so identical steps above, but with significantly more time!) you'd get the image below.
 
-![raw droplet barcode plots-total](../../images/wab-raw_barcodes-total.png "Total sample - 32,579,453 reads - raw")
+![raw droplet barcode plots-total](../../images/scrna-casestudy/wab-raw_barcodes-total.png "Total sample - 32,579,453 reads - raw")
 
 This is our own formulation of the barcode plot based on a [discussion](https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480) we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/)).
 
-![raw droplet barcode plots - lung atlas](../../images/wab-lung-atlas-barcodes-raw.png "Pretty data - raw")
+![raw droplet barcode plots - lung atlas](../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png "Pretty data - raw")
 
 In that plot, you can see the clearer 'knee' bend, showing the cut-off between empty droplets and cell-containing droplets.
 
@@ -298,7 +298,7 @@ And the full sample looks like:
 
 And to round this off, here's the lung atlas plot.
 
-![raw droplet barcode plots - total](../../images/wab-alevin-barcodes-lung.png "Pretty data - Alevin processed")
+![raw droplet barcode plots - total](../../images/scrna-casestudy/wab-alevin-barcodes-lung.png "Pretty data - Alevin processed")
 
 You should see a completely vertical drop-off where Alevin has trunctated the distribution (after excluding any cell barcode that had <10 UMI, Alevin then chose a threshold based off the curve and removed all barcodes with fewer UMIs).
 
@@ -490,7 +490,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 # Conclusion
 {:.no_toc}
 
-![Workflow Part 1](../../images/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
+![Workflow Part 1](../../images/scrna-casestudy/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
 
 We have:
 
