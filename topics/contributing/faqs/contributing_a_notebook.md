@@ -3,7 +3,7 @@ title: Contributing a Jupyter Notebook to the GTN
 area: notebooks
 box_type: tip
 layout: faq
-contributors: [hexylena]
+contributors: [hexylena, nsoranzo]
 ---
 
 Problem: I have a notebook that I'd like to add to the GTN.
