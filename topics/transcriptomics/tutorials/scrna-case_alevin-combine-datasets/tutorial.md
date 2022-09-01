@@ -18,6 +18,7 @@ time_estimation: 1H
 
 key_points:
   - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
+  - Retreive partially analysed data from a public repository
 
 tags:
   - single-cell
@@ -150,9 +151,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
 I set up the example history with the earliest indices at the bottom.
 
-<img src="../../images/scrna-casestudy/wab-history-files-ascending.png "Ordered history"" alt="Note how N701 is lowest, ordered ascending to N707."  loading="lazy">
-
-<img src="./../images/scrna-casestudy/wab-history-files-ascending.png" alt="proper alt text describing the image for visually impaired learners. " loading="lazy">
+![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "Correct order of the history")
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 
@@ -291,7 +290,7 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 
 # Pulling single cell data from public resources
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which rather skips forward all these steps in one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all these steps into one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
 > ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
 >
@@ -301,7 +300,7 @@ If you happen to be interested in analysing publicly available data, particularl
 >
 >    Now we need to transform this into an AnnData objects
 >
-> 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0) %} with the following parameters:
+> 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
@@ -313,20 +312,10 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 # Conclusion
 {:.no_toc}
 
-![Workflow Part 1](../../images/scrna-casestudy/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
-
-![Workflow Part 2](../../images/scrna-casestudy/wab-alevin-part2workflow.png "Workflow  - Steps 4-6")
+![Combining data files](../../images/scrna-casestudy/wab-combining_datasets_alevin.png "Workflow  - Combining datasets")
 
 You've reached the end of this session!
-You may be interested in seeing an [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) and [Part 2 workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing all the reads can be found in [here](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example).
-
-We have:
-
- * Taken raw read data and annotations and necessary input files for quantification.
- * Run Alevin in two different parameterisations, both allowing Alevin to make its own calls on what constitutes empty droplets, and applying emptyDrops instead.
- * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
- * Applied the necessary conversion to pass these data to downstream processes.
- * Retrieved partially analysed data from the Single Cell Expression Atlas
+You may be interested in seeing an [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---answer-key-1) and [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [here](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---answer-key).
 
  To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
  [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
