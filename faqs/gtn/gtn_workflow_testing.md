@@ -15,11 +15,11 @@ contributors: [hexylena]
    machinelearning/workflows/machine_learning-test.yml
    ```
 
-   You want to find tutorials without either of these.
+   You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.
 
 2. Check if it has a workflow (if it does, skip to step 5.)
 3. Follow the tutorial
-4. Build a workflow
+4. Extract a workflow from the history
 5. Run that workflow in a new history to test
 6. Obtain the workflow invocation ID, and your API key (User → Preferences → Manage API Key)
 
@@ -32,7 +32,7 @@ contributors: [hexylena]
    pip install git+https://github.com/galaxyproject/planemo
    ```
 
-8. Run the command to initialise a workflow test
+8. Run the command to initialise a workflow test from the `workflows/` subdirectory - if it doesn't exist, you might need to create it first.
 
    ```
    planemo workflow_test_init --from_invocation <INVOCATION ID> --galaxy_url <GALAXY SERVER URL> --galaxy_user_key" <GALAXY API KEY>
