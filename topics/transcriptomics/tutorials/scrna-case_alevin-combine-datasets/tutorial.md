@@ -8,19 +8,16 @@ priority: 2
 zenodo_link: 'https://zenodo.org/record/4574153'
 
 questions:
-  - I have some single cell FASTQ files I want to analyse. Where do I start?
+  - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?
 
 objectives:
-  - Repeat matrix generation for any droplet-based single cell sequencing data
-  - Apply data combination and metadata editing for particular experimental designs
-  - Interpret quality control (QC) plots to make informed decisions on cell thresholds
-  - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
+  - Combine data matrices from different samples in the same experiment
+  - Label the metadata for downstream processing
 
-time_estimation: 3H
+time_estimation: 1.5H
 
 key_points:
-  - Create a scanpy-accessible AnnData object from FASTQ files, including relevant cell and gene metadata
-  - Combine multiple samples and label according to study design
+  - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
 
 tags:
   - single-cell
@@ -38,6 +35,7 @@ requirements:
     tutorials:
         - scrna-intro
         - scrna-umis
+        - scrna-case_alevin
 
 translations:
   - es
@@ -51,7 +49,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 <!-- This is a comment. -->
 
-This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining FASTQ files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
+This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on. 
 
 > ### Agenda
 >
@@ -62,25 +60,27 @@ This tutorial will take you from raw FASTQ files to a cell x gene data matrix in
 >
 {: .agenda}
 
-# Generating a matrix
-
-In this section, we will show you the principles of the initial phase of single-cell RNA-seq analysis: generating expression measures in a matrix. We'll concentrate on droplet-based (rather than plate-based) methodology, since this is the process with most differences with respect to conventional approaches developed for bulk RNA-seq.
-
-Droplet-based data consists of three components: cell barcodes, unique molecular identifiers (UMIs) and cDNA reads. To generate cell-wise quantifications we need to:
-
- * Process cell barcodes, working out which ones correspond to 'real' cells, which to sequencing artefacts, and possibly correct any barcodes likely to be the product of sequencing errors by comparison to more frequent sequences.
- * Map biological sequences to the reference genome or transcriptome.
- * 'De-duplicate' using the UMIs.
-
-This used to be a complex process involving multiple algorithms, or was performed with technology-specific methods (such as 10X's 'Cellranger' tool)  but is now much simpler thanks to the advent of a few new methods. When selecting methodology for your own work you should consider:
-
 # Combining FASTQ files
+Let's combine these files!
 
-This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
+## Get Data
+The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html)
 
-## Data
+You can access the data for this tutorial in multiple ways:
+ - **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
 
-> ### {% icon hands_on %} Hands-on: Data upload - Combining files
+ {% snippet faqs/galaxy/histories_copy_dataset.md %}
+ 
+ - **Importing from a history** - You can import [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)
+ 
+  {% snippet faqs/galaxy/histories_import.md %}
+ 
+ - **Uploading from Zenodo (see below) 
+
+
+## Get Data
+
+> ### {% icon hands_on %} Hands-on: Data upload for 7 files
 >
 > 1. Create a new history for this tutorial (if you're not importing the history above)
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/4574153#.YD56YS-l2uU)
