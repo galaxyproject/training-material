@@ -1,7 +1,6 @@
 ---
 layout: tutorial_hands_on
-
-title: Comparative gene analysis
+title: Comparative gene analysis in unannotated genomes
 zenodo_link: https://zenodo.org/record/7034885
 questions:
 - I have several genomes assemblies that are not annoatated (or I do not trust annotations)
@@ -9,21 +8,24 @@ questions:
 - How do I do that?
 objectives:
 - Provide a quick method for identifying genes of interest in unannotated or newly assembled genomes
-time_estimation: 30 min
+time_estimation: 30M
 key_points:
-- You can easily 
+- You can locate gene of interest in unannotated genomes and compare its structure across multiple species 
 contributors:
 - nekrut
 tags:
+- evolution
 - annotation
 - vgp
 - cookbook
+- eukaryote
+- prokaryote
 requirements:
   -
     type: "internal"
-    topic_name: sequence-analysis
+    topic_name: introduction
     tutorials:
-      - quality-control
+      - galaxy-intro-101
   -
     type: "internal"
     topic_name: galaxy-interface
@@ -31,13 +33,12 @@ requirements:
       - collections
 abbreviations:
   ORF: Open Reading Frame
-subtopic: eukaryote
-priority: 8
+priority: 2
 ---
 
 # Introduction
 
-Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are intersted in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
+Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
 > > ### {% icon question %} What I want:
 > > - I work with a gene _X_
@@ -83,11 +84,11 @@ The analysis follow the following logic (also see the following figure):
 
 # Example history
 
-This [example history](https://usegalaxy.org/u/cartman/h/xbp1vgpsample) contains results of the analysis described in this tutorial. 
+This [example history](https://usegalaxy.org/u/cartman/h/genecomparisonxbp1) contains results of the analysis described in this tutorial. 
 
 {% snippet faqs/galaxy/histories_import.md %}
 
-You can use this history to inderstand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
+You can use this history to understand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
 
 > ### {% icon code-in %} Input dataset in the example history
 > - <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
@@ -110,7 +111,7 @@ You can use this history to inderstand the input datasets as well as outputs of 
 
 ## Step 1: Pick a gene and select genomes to analyze
 
-In this example we will compare structure of X-box protein 1 gene (*XBP-1*) across a set of five vertebrate genomes sequenced by [VGP](https://vertebrategenomesproject.org/) consortium.
+In this example we will compare structure of X-box protein 1 gene (*XBP-1*) across a set of five vertebrate genomes sequenced by [VGP](https://vertebrategenomesproject.org/) consortium ({% cite Rhie2021-ks %}).
 
 ## Step 2: Get amino acid translations for all exons of my gene of interest
 
@@ -122,7 +123,7 @@ The best annotated vertebrate is ... human. To obtain amino acid translation of 
 
 Clicking on the names of the transcripts open a UCSC page specific to that transcript. From there you can obtain genomic sequences corresponding to all exons. You can then translate these sequences using any available online tool (e.g., [NCBI ORFinder](https://www.ncbi.nlm.nih.gov/orffinder/)). 
 
-In this particular case we did not create translation of all exons. Instead, we created translation of exon 1  and two terminal exons. The first exon is shared between the two transcripts. It will allow us to anchor the beginning of the gene. The two terminal exons are different between the two transcripts. Because of this we create two alternative tralations per exon: `s-p2` and `s-p12` for the spliced version and `u-p1` and `u-p2` for unspliced transcript. A FASTA file containing all translation is shown below:
+In this particular case we did not create translation of all exons. Instead, we created translation of exon 1  and two terminal exons. The first exon is shared between the two transcripts. It will allow us to anchor the beginning of the gene. The two terminal exons are different between the two transcripts. Because of this we create two alternative translation per exon: `s-p2` and `s-p12` for the spliced version and `u-p1` and `u-p2` for unspliced transcript. A FASTA file containing all translation is shown below:
 
 ```
 >xbp-1u-p1
@@ -144,9 +145,9 @@ ASGGLPQARKRQRLTHLSPEEKALR
 
 ## Step 3: Identify and upload genomes of interest
 
-This tutorial has been initially designed for the analysis of data produced by the Veretebrate Genome Consortium [VGP](https://vertebrategenomesproject.org/). However, it is equally suitable for any genomic sequences (including prokaryotic ones).
+This tutorial has been initially designed for the analysis of data produced by the Vertebrate Genome Consortium [VGP](https://vertebrategenomesproject.org/). However, it is equally suitable for any genomic sequences (including prokaryotic ones).
 
-In this section we first show how to upload sample datasets. These datasets were intentionally made small. All subsequent steps of this tutoirial are performed using these sample data. We then demonstrate how to upload full size genomes from the VGP data repository called [GenomeArk](https://vgp.github.io/genomeark/).
+In this section we first show how to upload sample datasets. These datasets were intentionally made small. All subsequent steps of this tutorial are performed using these sample data. We then demonstrate how to upload full size genomes from the VGP data repository called [GenomeArk](https://vgp.github.io/genomeark/).
 
 ### Uploading sample data
 
@@ -168,7 +169,7 @@ In this section we first show how to upload sample datasets. These datasets were
 
 These correspond to fragments of genomes from:
 
- - `aGasCar1` - _Gastrophryne carolinensis_ (Eastern narrowmouth toad)
+ - `aGasCar1` - _Gastrophryne carolinensis_ (Eastern narrow-mouth toad)
  - `bTaeGut` - _Taeniopygia guttata_ (Zebra finch)
  - `fScoJap` - _Scomber japonicus_ (Chub mackerel)
  - `mCynVol` - _Cynocephalus volans_ (Philippine flying lemur)
@@ -191,7 +192,7 @@ Galaxy provides a direct connection to [GenomeArk](https://vgp.github.io/genomea
 >
 > Generally for a given species you want the assembly with the highest version number. For example, Human (_Homo sapiens_) had three assemblies at the time of writing: `mHomSap1`, `mHomSap2`, and `mHomSap3`. Pick `mHomSap3` in this situation. 
 >
-> Inside each assembly folder you will see typically see different subfolders. The one you should generally be interested in will be called `assembly_curated`. Inside that folder you will typically see separate assemblies for maternal (indicated with `mat`) and paternal (indicated with `pat`) haplotypes. In the analyses here we are choosing as assembly representing heterogametic haplotype (`pat` in the case of Human).
+> Inside each assembly folder you will see typically see different sub-folders. The one you should generally be interested in will be called `assembly_curated`. Inside that folder you will typically see separate assemblies for maternal (indicated with `mat`) and paternal (indicated with `pat`) haplotypes. In the analyses here we are choosing as assembly representing heterogametic haplotype (`pat` in the case of Human).
 >
 > - Repeat this process for all assemblies you are interested in.
 >
@@ -203,7 +204,7 @@ After uploading data from GenomeArk you will end up with a number of FASTA datas
 
 > ### {% icon hands_on %} Combine genome assemblies into a dataset collection
 >
-> To create a collection from genome assemblies you just uploded into GenomeArk follow the steps in the video below. Obviously, you only want to click checkboxes next to FASTA files (assemblies) you want to include and leave everything else out.
+> To create a collection from genome assemblies you just uploaded into GenomeArk follow the steps in the video below. Obviously, you only want to click check-boxes next to FASTA files (assemblies) you want to include and leave everything else out.
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -227,10 +228,10 @@ Now we can go ahead and find all ORFs in all genome assemblies we have bundled i
 >
 {: .hands_on}
 
-Because this operation is performed on a dataset collection. it will produce a dataset collection as an output. Actually, it will produce two because we selected `BED` and `Pepetides` options. One collection will contain amino acid sequences for all ORFs (it will typically be called `ORFs on collection ... (FASTA format)`) and another their coordinates (called `ORFs on collection ... (BED format)`)
+Because this operation is performed on a dataset collection. it will produce a dataset collection as an output. Actually, it will produce two because we selected `BED` and `Peptides` options. One collection will contain amino acid sequences for all ORFs (it will typically be called `ORFs on collection ... (FASTA format)`) and another their coordinates (called `ORFs on collection ... (BED format)`)
 )
 
-This will produce two new dataset collections in your histiory: one containing coordinates of ORFs and the other containing their amino acid translations. Because genomes are large these will likely be tens of millions of ORFs identified this way.
+This will produce two new dataset collections in your history: one containing coordinates of ORFs and the other containing their amino acid translations. Because genomes are large these will likely be tens of millions of ORFs identified this way.
 
 ### Creating __Diamond__ database
 
@@ -278,9 +279,9 @@ The overall logic of the workflow is as follows:
 
 1. Perform [__Diamond__](https://github.com/bbuchfink/diamond) search to identify matches between the gene of interest (<kbd>EXONS</kbd>) and ORF sets from each genomes (<kbd>DiamondDB</kbd>).
 2. Intersect information about the matches with BED file containing ORF coordinates (<kbd>ORF BED</kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).
-3. Extract matching parts of the sequences and generated multiple alignments using [__MAFFT__](https://mafft.cbrc.jp/alignment/software/). This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of *XBP-1* there will be five sets of alignemnts. 
+3. Extract matching parts of the sequences and generated multiple alignments using [__MAFFT__](https://mafft.cbrc.jp/alignment/software/). This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of *XBP-1* there will be five sets of alignments. 
 4. Build phylogenetic tree for each alignment produced in the previous step using the [Neighbor Joining method](https://en.wikipedia.org/wiki/Neighbor_joining) - a simple and quick way to obtain a rough phylogeny.
-5. Use information from step 1 to compute genome coordinates of matches. This is done by combining th einformation about genomic positions of ORFs from the <kbd>ORF BED</kbd> file and local alignment information generated during step 1.
+5. Use information from step 1 to compute genome coordinates of matches. This is done by combining the information about genomic positions of ORFs from the <kbd>ORF BED</kbd> file and local alignment information generated during step 1.
 
 ## Step 7: Looking at the trees
 
@@ -299,7 +300,7 @@ After running the workflow phylogenetic trees will be saved into a collection na
 
 ## Step 8: Generating and interpreting the comparative genome graph
 
-Another workflow output will represent a single file summarzing genomic location of matches between each of the genomes in our dataset and amino acid translation fo exons from the gene of interest. It will be called `Mapping report` and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use external Jupyter notebook (note that Jupyter can be run directly from Galaxy, but to make this tutorial runnable on any Galaxy instance we will use an internal notebook server). 
+Another workflow output will represent a single file summarizing genomic location of matches between each of the genomes in our dataset and amino acid translation of exons from the gene of interest. It will be called `Mapping report` and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use external Jupyter notebook (note that Jupyter can be run directly from Galaxy, but to make this tutorial runnable on any Galaxy instance we will use an internal notebook server). 
 
 ### Starting notebook
 
@@ -4030,7 +4031,7 @@ Another plot currently produced by the notebook is a summary plot showing the di
 
 # About the gene
 
-_XBP-1_ is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene. In this case the switch between two reading frames occurs when a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from _XBP-1_ mRNA. This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes that is conserved all the way to yeast (with _XBP-1_'s homologue _HAC-1_). 
+_XBP-1_ is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene ({% cite Chung2007-wv %}). In this case the switch between two reading frames occurs when a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from _XBP-1_ mRNA ({% cite Nekrutenko2006-bk %}). This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes ({% cite Chen2021-ws %}) that is conserved all the way to yeast (with _XBP-1_'s homologue _HAC-1_; {% cite Calfon2002-dl %} ) . 
 
 > ### {% icon tip %} Tip: Getting help
 >
