@@ -14,7 +14,7 @@ objectives:
   - Combine data matrices from different samples in the same experiment
   - Label the metadata for downstream processing
 
-time_estimation: 1.5H
+time_estimation: 1H
 
 key_points:
   - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
@@ -67,15 +67,17 @@ Let's combine these files!
 The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html)
 
 You can access the data for this tutorial in multiple ways:
- - **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
 
- {% snippet faqs/galaxy/histories_copy_dataset.md %}
+ 1.  **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+ >
+ > {% snippet faqs/galaxy/histories_copy_dataset.md %}
  
- - **Importing from a history** - You can import [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)
+ 2.  **Importing from a history** - You can import [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)
  
-  {% snippet faqs/galaxy/histories_import.md %}
+ >
+ > {% snippet faqs/galaxy/histories_import.md %}
  
- - **Uploading from Zenodo (see below) 
+ 3.  **Uploading from Zenodo** (see below)
 
 
 ## Get Data
