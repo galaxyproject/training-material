@@ -487,6 +487,10 @@ However, it may be that you want to combine this object with others like it, for
 
 This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs1generating-a-single-cell-matrix-using-alevin) and run them all at once! All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata). To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: [Combining datasets after pre-processing](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html)
 
+# Mitochondrial flagging
+
+We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datsets#mitochondrial-reads
+
 # Conclusion
 {:.no_toc}
 
