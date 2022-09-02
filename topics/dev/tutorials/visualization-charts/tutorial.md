@@ -202,7 +202,7 @@ your plugin with its new logo in the list there.
 >
 >    `<test type="isinstance" test_attr="datatype" result_type="datatype">molecules.PDB</test>`
 >
-> 3. Remove the `<specs>` and `<groups>` sections.
+> 3. Remove the `<settings>` and `<groups>` sections.
 >
 {: .hands_on}
 
