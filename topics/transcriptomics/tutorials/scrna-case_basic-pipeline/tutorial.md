@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Filter, Plot and Explore Single-cell RNA-seq Data
 subtopic: single-cell-CS
 priority: 3
-zenodo_link: 'https://zenodo.org/record/4624461'
+zenodo_link: 'https://zenodo.org/record/7045050'
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -25,6 +25,7 @@ requirements:
     topic_name: transcriptomics
     tutorials:
         - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
 tags:
 - single-cell
 - 10x
@@ -42,7 +43,7 @@ translations:
 # Introduction
 {:.no_toc}
 
-You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest (or, if not, please see [this tutorial]({% link topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.md %}) to do so!) Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
+You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
 > ### {% icon comment %} Tutorials everywhere?
 > This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
@@ -59,7 +60,7 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -67,7 +68,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    {{ page.zenodo_link }}/files/Mito-counted_AnnData
+>    {{ page.zenodo_link }}/files/Annotated_AnnData.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -95,13 +96,13 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 >   >
 >   >   > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
 >   >   >
->   >   > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>   >   > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >   >   >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >   >   >    - *"What to inspect?"*: `General information about the object`
->   >   > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>   >   > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >   >   >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >   >   >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
->   >   > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>   >   > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >   >   >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >   >   >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >   >   {: .hands_on}
@@ -112,7 +113,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 > >   - For instance, you can see a `n_cells` under **var**, which counts the number of cells that gene appears in.
 > >   - In the **obs**, you have both discrete and log-based metrics for `n_genes`, how many genes are counted in a cell, and `n_counts`, how many UMIs are counted per cell. So, for instance, you might count multiple GAPDHs in a cell. Your `n_counts` should thus be higher than `n_genes`.
 > >   - But what about the mitochondria?? Within the cells information **obs**, the `total_counts_mito`,  `log1p_total_counts_mito`, and `pct_counts_mito` has been calculated for each cell.
-> > 2. You can see in the {% icon tool %} **General information about the object** output that the matrix is `25281 x 35734`. This is `obs x vars`, or rather, `cells x genes`, so there are `25281 cells` and `35734 genes` in the matrix.
+> > 2. You can see in the {% icon tool %} **General information about the object** output that the matrix is `31178 x 35734`. This is `obs x vars`, or rather, `cells x genes`, so there are `31178 cells` and `35734 genes` in the matrix.
 > >
 > {: .solution}
 >
@@ -132,7 +133,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 > ### {% icon hands_on %} Hands-on: Making QC plots
 >
-> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -141,7 +142,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Violin - genotype - log`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -150,7 +151,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 >
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin - sex - log`
 >
-> 5. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 5. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -159,7 +160,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 >
 > 6. **Rename** {% icon galaxy-pencil %} output `Violin - batch - log`
 >
-> 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -168,7 +169,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 >
 > 6. **Rename** {% icon galaxy-pencil %} output `Scatter - mito x UMIs`
 >
-> 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 7. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -177,7 +178,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 >
 > 8. **Rename** {% icon galaxy-pencil %} output `Scatter - mito x genes`
 >
-> 9. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 9. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
 >    - *"Method used for plotting"*: `Generic: Scatter plot along observations or variables axes, using 'pl.scatter'`
 >        - *"Plotting tool that computed coordinates"*: `Using coordinates`
@@ -204,9 +205,9 @@ That's a lot of information! Let's attack this in sections and see what question
 > > ### {% icon solution %} Solution
 > >
 > > 1. The plot `violin - batch - log` will have what you're looking for!
-> >     ![Violin - batch - log](../../images/wab-violin-batch-log.png "Violin - batch - log (Raw)")
+> >     ![Violin - batch - log](../../images/scrna-casestudy/wab-violin-batch-log.png "Violin - batch - log (Raw)")
 > > 2. Keeping in mind that this is a log scale - which means that small differences can mean large differences - the violin plots probably look pretty similar.
-> >    - `N707` and `N703` might be a bit lower on genes and counts (or UMIs), but the differences aren't catastrophic.
+> >    - `N702` and `N705` might be a bit lower on genes and counts (or UMIs), but the differences aren't catastrophic.
 > >    - The `pct_counts_mito` looks pretty similar across the batches, so this also looks good.
 > >    - Nothing here would cause us to eliminate a sample from our analysis, but if you see a sample looking completely different from the rest, you would need to question why that is and consider eliminating it from your experiment!
 > >
@@ -224,11 +225,11 @@ That's a lot of information! Let's attack this in sections and see what question
 > > ### {% icon solution %} Solution
 > >
 > > 1. Similar to above, the plots `violin - sex - log` and `violin - genotype - log` will have what you're looking for!
-> >      ![Violin - sex - log](../../images/wab-violin-sex-log.png "Violin - sex - log (Raw)")
-> >      ![Violin - genotype - log](../../images/wab-violin-genotype-log.png "Violin - genotype - log (Raw)")
+> >      ![Violin - sex - log](../../images/scrna-casestudy/wab-violin-sex-log.png "Violin - sex - log (Raw)")
+> >      ![Violin - genotype - log](../../images/scrna-casestudy/wab-violin-genotype-log.png "Violin - genotype - log (Raw)")
 > > 2. There isn't a major difference in sequencing depth across sex, I would say - though you are welcome to disagree!
-> >    - It is clear there are far fewer female cells, which makes sense given that only one sample was female. *Note - that was an unfortunate discovery made long after generating libraries. It's quite hard to identify the sex of a neonate in the lab! In practice, try hard to not let such a confounding factor into your data! You could consider re-running all the following analysis without that female sample, if you wish.*
-> > 3. In `Violin - genotype - log`, however, we can see there is a difference. The `knockout` samples clearly have fewer genes and counts. From an experimental point of view, we can consider, does this make sense?
+> >    - There are far fewer female cells, which makes sense given that only one sample was female. *Note - that was an unfortunate discovery made long after generating libraries. It's quite hard to identify the sex of a neonate in the lab! In practice, try hard to not let such a confounding factor into your data! You could consider re-running all the following analysis without that female sample, if you wish.*
+> > 3. In `Violin - genotype - log`, however, we can see there is a difference. The `knockout` samples seem to have fewer genes and counts. From an experimental point of view, we can consider, does this make sense?
 > >    - Would we biologically expect that those cells would be smaller or having fewer transcripts? Possibly, in this case, given that these cells were generated by growth restricted neonatal mice, and in which case we don't need to worry about our good data, but rather keep this in mind when generating clusters, as we don't want depth to define clusters, we want biology to!
 > >    - On the other hand, it may be that those cells didn't survive dissociation as well as the healthy ones (in which case we'd expect higher mitochondrial-associated genes, which we don't see, so we can rule that out!).
 > >    - Maybe we unluckily poorly prepared libraries for specifically those knockout samples. There are only three, so maybe those samples are under-sequenced.
@@ -251,11 +252,11 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > > ### {% icon solution %} Solution
 > >
 > > 1. Any plot with `log1p_n_genes_by_counts` would do here, actually! Some people prefer scatterplots to violins.
-> > ![Scatter-genesxmito](../../images/wab-scatter-genesxmito.png "Scatter - mito x genes (Raw)")
+> > ![Scatter-genesxmito](../../images/scrna-casestudy/wab-scatter-genesxmito.png "Scatter - mito x genes (Raw)")
 > >
 > > 2. In `Scatter - mito x genes` you can see how cells with `log1p_n_genes_by_counts` up to around, perhaps, `5.7` (around 300 genes) often have high `pct_counts_mito`.
 > >   - You can plot this as just `n_counts` and see this same trend at around 300 genes, but with this data the log format is clearer so that's how we're presenting it.
-> >   - You could also use the violin plots to come up with the threshold, and thus also take batch into account. It's good to look at the violins as well, because you don't want to accidentally cut out an entire sample (i.e. N703 and N707).
+> >   - You could also use the violin plots to come up with the threshold, and thus also take batch into account. It's good to look at the violins as well, because you don't want to accidentally cut out an entire sample (i.e. N702 and N705).
 > >   - Some bioinformaticians would recommend filtering each sample individually, but this is difficult in larger scale and in this case (you're welcome to give it a go! You'd have to filter separately and then concatenate), it won't make a notable difference in the final interpretation.
 > >
 > {: .solution}
@@ -266,8 +267,8 @@ Now that we've assessed the differences in our samples, we will look at the libr
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. As before, any plot with `log1p_n_total_counts` will do! Again, we'll use a scatterplot here, but you can use a violin plot if you wish!
-> > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
+> > 1. As before, any plot with `log1p_total_counts` will do! Again, we'll use a scatterplot here, but you can use a violin plot if you wish!
+> > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
 > >
 > > 2. We can see that we will need to set a higher threshold (which makes sense, as you'd expect more UMI's per cell rather than unique genes!). Again, perhaps being a bit aggressive in our threshold, we might choose `6.3`, for instance (which amounts to around 500 counts/cell).
 > >   - In an ideal world, you'll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!
@@ -281,7 +282,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > > ### {% icon solution %} Solution
 > >
 > > 1. Any plot with `pct_counts_mito` would do here, however the scatterplots are likely the easiest to interpret. We'll use the same as last time.
-> > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
+> > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
 > >
 > > 2. We can see a clear trend wherein cells that have around 5% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we'll go more aggressive with a `4.5%`.
 > >    - In general, you must adapt all cut-offs to your data - metabolically active cells might have higher mitochondrial RNA in general, and you don't want to lose a cell population because of a cut-off.
@@ -291,7 +292,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 
 ## Apply the thresholds
 
-It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `25281 cells` and `35734 genes`. Let's see how that changes each time!
+It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `31178 cells` and `35734 genes`. Let's see how that changes each time!
 
 > ### {% icon details %} Working in a group? Decision-time!
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
