@@ -1127,7 +1127,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 30, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 2, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1570,12 +1570,22 @@ As we can see, the peak file lacks <code class="language-plaintext highlighter-r
     <li>
       <p>Rename your output file <code class="language-plaintext highlighter-rouge">chr prefix added</code>.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>   : Let’s rerun the tool with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>   : Let’s rerun the tool with two more replacements
       <ul>
         <li><em>“File to process”</em>: the output from the last run, <code class="language-plaintext highlighter-rouge">chr prefix added</code></li>
         <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">chr20</code></li>
-        <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">chrX</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Replacement
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">chr20</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">chrX</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Insert Replacement
+          <ul>
+            <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">chr21</code></li>
+            <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">chrY</code></li>
+          </ul>
+        </li>
       </ul>
 
       <blockquote class="tip">
@@ -1586,17 +1596,6 @@ As we can see, the peak file lacks <code class="language-plaintext highlighter-r
           <li>Press the <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> icon (<strong>Run this job again</strong>)</li>
         </ul>
       </blockquote>
-    </li>
-    <li>
-      <p>Rename your output file <code class="language-plaintext highlighter-rouge">chrX fixed</code></p>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>   : Rerun this tool to do the same for chromosome Y
-      <ul>
-        <li><em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">chrX fixed</code>, the output from the last run</li>
-        <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-        <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">chr21</code></li>
-        <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">chrY</code></li>
-      </ul>
     </li>
     <li>
       <p>Inspect the latest file through the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon. Have we been successful?</p>
@@ -1678,7 +1677,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
   <ol>
     <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon in the history entry of our peak region file</li>
     <li>Switch to the <strong>Convert</strong> tab</li>
-    <li>Select <code class="language-plaintext highlighter-rouge">Convert Genomic Intervals to <span class="notranslate">BED</span></code></li>
+    <li>Under <em>“Target datatype”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span> (using 'interval-to-<span class="notranslate">bed</span>')</code></li>
     <li>Press <strong>Create Dataset</strong></li>
     <li>Check that the “Database/Build” is <code class="language-plaintext highlighter-rouge">mm9</code> (the database build for mice used in the paper)</li>
     <li>Again rename the file to something more recognizable, e.g. <code class="language-plaintext highlighter-rouge">Peak regions <span class="notranslate">BED</span></code></li>
@@ -1717,7 +1716,7 @@ We will group the table by chromosome and count the number of genes with peaks o
   <h3 id="hands_on-hands-on-count-genes-on-different-chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Count genes on different chromosomes</h3>
 
   <ol>
-    <li><span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>   data by a column and perform aggregate operation on other columns with the following settings:
+    <li><span class="tool" data-tool="Grouping1" title="Tested with Grouping1"><strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grouping1</span></span>  data by a column and perform aggregate operation on other columns, with the following settings:
       <ul>
         <li><em>“Select data”</em> to the result of the intersection</li>
         <li><em>“Group by column”</em>:<code class="language-plaintext highlighter-rouge">Column 1</code></li>
@@ -1748,7 +1747,37 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 <h2 id="visualization">Visualization</h2>
 
-<p>Since we have some nice data, let’s draw a barchart out of it!</p>
+<p>We have some nice aggregated data, so why not draw a barchart of it?</p>
+
+<p>Before we do that we should polish our grouped data a bit more though.</p>
+
+<p>You may have noticed that the mouse chromosomes are not listed in their correct
+order in that dataset (the <strong>Group</strong> tool tried to sort them, but did so
+alphabetically).</p>
+
+<p>We can fix this by running a dedicated tool for sorting on our data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fix-sort-order-of-gene-counts-table"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fix sort order of gene counts table</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  data in ascending or descending order, with the following settings:
+      <ul>
+        <li><em>“Sort Query”</em>: result of running the Group tool</li>
+        <li>in <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column selections”</em>
+          <ul>
+            <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+            <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Natural/Version sort (-V)</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Great, we are ready to plot things!</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-draw-barchart"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Draw barchart</h3>
@@ -1762,7 +1791,9 @@ We will group the table by chromosome and count the number of genes with peaks o
     <li>
       <p>When you are happy, click the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> <strong>Save</strong> visualization in the top right of the <em>main panel</em></p>
 
-      <p>This will store it to your saved visualisations where you can later view, download, or share it with others.</p>
+      <p>This will store it to your saved visualisations. Later you can view,
+download, or share it with others from <strong>User -&gt; Visualizations</strong> in the
+top menu of <span class="notranslate">Galaxy</span>.</p>
     </li>
   </ol>
 
@@ -1882,36 +1913,41 @@ Wouldn’t it be nice to just convert this history into a <span class="notransla
 
 <h2 id="create-peak-summit-file">Create peak summit file</h2>
 
-<p>We need to generate a new <span class="notranslate">BED</span> file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical <span class="notranslate">DNA</span> fragment coverage (column 5). As the end of the peak region, we will simply define <code class="language-plaintext highlighter-rouge">start + 1</code>.</p>
+<p>We need to generate a new <span class="notranslate">BED</span> file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical <span class="notranslate">DNA</span> fragment coverage (column 5, rounded down to the next smallest integer because some peak summits fall in between to bases). As the end of the peak region, we will simply define <code class="language-plaintext highlighter-rouge">start + 1</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-peak-summit-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create peak summit file</h3>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0"><strong>Compute on rows</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0</span></span>  with the following parameters:
       <ul>
-        <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2+c5</code></li>
-        <li><em>“as a new column to”</em>: our peak file <code class="language-plaintext highlighter-rouge">Peak regions</code> (the interval format file)</li>
-        <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">YES</code></li>
+        <li><em>“Input file”</em>: our peak file <code class="language-plaintext highlighter-rouge">Peak regions</code> (the interval format file)</li>
+        <li>*“Input has a header line with column names?”: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>In <em>“<span class="notranslate">Expression</span>s”</em>:</li>
+      </ul>
+      <ul>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“<span class="notranslate">Expression</span>s”</em>
+          <ul>
+            <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2 + int(c5)</code></li>
+            <li><em>“Mode of the operation”</em>: Append</li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“<span class="notranslate">Expression</span>s”</em>
+          <ul>
+            <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c8 + c1</code></li>
+            <li><em>“Mode of the operation”</em>: Append</li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ol>
 
-  <p>This will create an 8th column in our table, which we will use in our next step:</p>
+  <p>This will create an 8th and a 9th column in our table, which we will use in our next step:</p>
 
   <ol>
-    <li>
-      <p>Rename the output <code class="language-plaintext highlighter-rouge">Peak regions new column</code></p>
-    </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  rerun this tool on the last result with:
-      <ul>
-        <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c8+1</code></li>
-        <li><em>“as a new column to”</em>: the <code class="language-plaintext highlighter-rouge">Peak regions new column</code> file we just created</li>
-        <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">YES</code></li>
-      </ul>
-    </li>
-    <li>Rename this file <code class="language-plaintext highlighter-rouge">Peak summit regions</code></li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">Peak summit regions</code></li>
   </ol>
+
 </blockquote>
 
 <p>Now we cut out just the chromosome plus the start and end of the summit:</p>
@@ -2174,8 +2210,8 @@ But wouldn’t it be more interesting to know the number of peaks in each unique
 author = "Anne Pajon and Clemens Blank and Bérénice Batut and Björn Grüning and Nicola Soranzo and Dilmurat Yusuf and Sarah Peter and Helena Rasche",
 title = "From peaks to genes (Galaxy Training Materials)",
 year = "2022",
-month = "06",
-day = "30"
+month = "08",
+day = "02"
 url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
