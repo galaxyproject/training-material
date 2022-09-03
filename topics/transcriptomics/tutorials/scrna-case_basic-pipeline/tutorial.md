@@ -60,7 +60,7 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---input) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---input-1) or download from Zenodo below.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -305,7 +305,7 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 
 > ### {% icon hands_on %} Hands-on: Filter cells by log1p_n_genes_by_counts
 >
-> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-counted AnnData`
 >    - In *"Parameters to select cells to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
@@ -315,7 +315,7 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 >
 > 2. **Rename** {% icon galaxy-pencil %} output as `Genes-filtered Object`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Genes-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -324,7 +324,7 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 >
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin - Filterbygenes`
 >
-> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Genes-filtered Object`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -340,9 +340,9 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > > ### {% icon solution %} Solution
 > >
-> > ![Violinplot-filteronce](../../images/wab-violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
-> > 1. The only part that seems to change is the `log1p_n_genes_by_counts`. You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.
-> > 2. In `General - Filterbygenes`, you can see you now have `14,501 cells x 35,734 genes`.
+> > ![Violinplot-filteronce](../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
+> > 1. The only part that seems to change is the `log1p_n_genes_by_counts`. You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this filtering would create a beautiful violin plot because there would be a clear population of low-gene number cells. However, the pre-processing already did quite a good job, so to some degree filtering here makes it look worse, but for the purposes of practicing filtering, this will work fine!
+> > 2. In `General - Filterbygenes`, you can see you now have `17,040 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -350,7 +350,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 
 > ### {% icon hands_on %} Hands-on: Filter cells by log1p_total_counts
 >
-> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Genes-filtered Object`
 >    - In *"Parameters to select cells to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
@@ -360,7 +360,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > 2. **Rename** {% icon galaxy-pencil %} output as `Counts-filtered Object`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Counts-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -369,7 +369,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin - Filterbycounts`
 >
-> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Counts-filtered Object`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -383,9 +383,9 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > > ### {% icon solution %} Solution
 > >
-> > ![Violinplot-filtertwice](../../images/wab-violin-filteredgenesxfilteredcounts.png "1st filter vs 2nd filter - counts/cell")
-> > 1. We will focus on the `log1p_total_counts`. Similar to above, the bottom of the violin shape has flattered due to the threshold.
-> > 2. In `General - Filterbycounts`, you can see you now have `7,916 cells x 35,734 genes`.
+> > ![Violinplot-filtertwice](../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png "1st filter vs 2nd filter - counts/cell")
+> > 1. We will focus on the `log1p_total_counts` as that shows the biggest change. Similar to above, the bottom of the violin shape has flattered due to the threshold.
+> > 2. In `General - Filterbycounts`, you can see you now have `8,678 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -393,7 +393,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 
 > ### {% icon hands_on %} Hands-on: Filter cells by pct_counts_mito
 >
-> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Counts-filtered Object`
 >    - In *"Parameters to select cells to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select cells to keep"*
@@ -403,7 +403,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > 2. **Rename** {% icon galaxy-pencil %} output as `Mito-filtered Object`
 >
-> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 3. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-filtered Object`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >        - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
@@ -416,7 +416,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin - Filterbymito`
 >
-> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-filtered Object`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -430,16 +430,16 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 > > ### {% icon solution %} Solution
 > >
-> > ![Violinplot-filtermito](../../images/wab-violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
+> > ![Violinplot-filtermito](../../images/scrna-casestudy/wab-violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
 > > 1. If we carefully check the axes, we can see that the `pct_counts_mito` has shrunk.
-> > 2. In `General - Filterbymito`, you can see you now have `7,874 × cells x 35,734 genes`.
+> > 2. In `General - Filterbymito`, you can see you now have `8,605 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
 {: .question}
 
 Here's a quick overall summary for easy visualisation if you fancy it.
-![Violinplot-Summary](../../images/wab-violins2gether.png "Filtering summary")
+![Violinplot-Summary](../../images/scrna-casestudy/wab-violins2gether.png "Filtering summary")
 
 Fantastic work! However, you've now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let's remove them! Note that `3` is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
 
@@ -453,7 +453,7 @@ Fantastic work! However, you've now removed a whole heap of cells, and since the
 
 > ### {% icon hands_on %} Hands-on: Filter genes
 >
-> 1. {% tool [Scanpy FilterGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FilterGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-filtered Object`
 >    - In *"Parameters to select genes to keep"*:
 >        - {% icon param-repeat %} *"Insert Parameters to select genes to keep"*
@@ -463,7 +463,7 @@ Fantastic work! However, you've now removed a whole heap of cells, and since the
 >
 > 2. **Rename** {% icon galaxy-pencil %} output as `Filtered Object`
 >
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Filtered Object`
 >    - *"What to inspect?"*: `General information about the object`
 >
@@ -476,21 +476,21 @@ Using the final `General - Filtered object`, we can summarise the results of our
 
 |       | Cells | Genes |
 |------ |--------------------|
-| Raw | 25281    | 35734    |
-| Filter genes/cell | 14501    | 35734    |
-| Filter counts/cell | 7916    | 35734    |
-| Filter mito/cell | 7874   | 35734    |
-| Filter cells/gene | 7874    | 14832    |
+| Raw | 31178    | 35734    |
+| Filter genes/cell | 17040    | 35734    |
+| Filter counts/cell | 8678    | 35734    |
+| Filter mito/cell | 8605   | 35734    |
+| Filter cells/gene | 8605    | 15395    |
 
 {% icon congratulations %} Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
 
 # Processing
 
-So currently, you have a matrix that is 7874 cells by 14832 genes. This is still quite big data. We have two issues here - firstly, you already know there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. Secondly, we like to plot things on x/y plots, so for instance *Gapdh* could be on one axis, and *Actin* can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in this case, 14830 more dimensions), is a bit trickier! So our next steps are to transform our big data object into something that is easy to analyse and easy to visualise.
+So currently, you have a matrix that is 8605 cells by 15395 genes. This is still quite big data. We have two issues here - firstly, you already know there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. Secondly, we like to plot things on x/y plots, so for instance *Gapdh* could be on one axis, and *Actin* can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in this case, 15393 more dimensions), is a bit trickier! So our next steps are to transform our big data object into something that is easy to analyse and easy to visualise.
 
 > ### {% icon hands_on %} Hands-on: Normalisation
 >
-> 1. {% tool [Scanpy NormaliseData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy NormaliseData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Filtered Object`
 {: .hands_on}
 
@@ -500,9 +500,10 @@ Now we need to look at reducing our gene dimensions. We have loads of genes, but
 
 > ### {% icon hands_on %} Hands-on: Find variable genes
 >
-> 1. {% tool [Scanpy FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
 >    - *"Flavor of computing normalised dispersion"*: `Seurat`
+>    - *"Number of top variable genes to keep, mandatory if flavor='seurat_v3'"*: `` (remove the automated 2000 here and leave the space blank)
 > 
 > 2. **Rename** {% icon galaxy-pencil %} plot output `Use_me_FVG`
 {: .hands_on}
@@ -511,7 +512,7 @@ Next up, we're going to scale our data so that all genes have the same variance 
 
 > ### {% icon hands_on %} Hands-on: Scaling data
 >
-> 1. {% tool [Scanpy ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_FVG` (output of **Scanpy FindVariableGenes** {% icon tool %})
 >    - *"Truncate to this value after scaling"*: `10.0`
 > 2. **Rename** {% icon galaxy-pencil %} plot output `Use_me_Scaled`
@@ -524,14 +525,14 @@ Next up, we're going to scale our data so that all genes have the same variance 
 We still have too many dimensions. Transcript changes are not usually singular - which is to say, genes were in pathways and in groups. It would be easier to analyse our data if we could more easily group these changes.
 
 ## Principal components
-Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, `2262` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first `x` principal components in our data to drastically reduce the number of dimensions.
+Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, `3248` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first `x` principal components in our data to drastically reduce the number of dimensions.
 
-> ### {% icon comment %} 2262???
-> Where did the `2262` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 2262 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 2262 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 2262 or 2000 (if you set a limit on it) highly variable genes.
+> ### {% icon comment %} 3248???
+> Where did the `3248` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
 > ### {% icon warning %} Danger: Check your AnnData object!
-> Your AnnData object should have far more than 2262 genes in it (if you followed our settings and tool versions, you'd have a matrix 7874 x 14832 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 2262 or 2000 output from your testing in the section above labelled '2262'.
+> Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '2262'.
 {: .warning}
 
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components
