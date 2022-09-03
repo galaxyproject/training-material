@@ -532,16 +532,16 @@ Principal components are calculated from highly dimensional data to find the mos
 {: .comment}
 
 > ### {% icon warning %} Danger: Check your AnnData object!
-> Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '2262'.
+> Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '3248'.
 {: .warning}
 
 > ### {% icon hands_on %} Hands-on: Calculate Principal Components
 >
-> 1. {% tool [Scanpy RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1) %} with the following parameters:
+> 1. {% tool [Scanpy RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_Scaled` (output of **Scanpy ScaleData** {% icon tool %})
 >    - *"Number of PCs to produce"*: `50`
 >
-> 2.  {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
+> 2.  {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
 >    - *"Method used for plotting"*: `PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'`
 >        - *"Number of PCs to show"*: `50`
@@ -551,7 +551,7 @@ Principal components are calculated from highly dimensional data to find the mos
 
 Why 50 principal components you ask? Well, we're pretty confident 50 is an over-estimate. Examine `PCA Variance`.
 
-![PCA-variance](../../images/wab-pcavariance.png "Variability explained per PC")
+![PCA-variance](../../images/scrna-casestudy/wab-pcavariance.png "Variability explained per PC")
 
 We can see that there is really not much variation explained past component 19. So we might save ourselves a great deal of time and muddied data by focusing on the top `20` PCs.
 
