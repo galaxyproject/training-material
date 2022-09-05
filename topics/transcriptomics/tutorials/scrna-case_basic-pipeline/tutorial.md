@@ -753,22 +753,27 @@ Note that the cluster numbering is based on size alone - clusters 0 and 1 are no
 | 7 | Hba-a1    | Red blood cells |
 | 8 | Aif1    | Macrophages    |
 
-![Marker Gene UMAPs](../../images/wab-markergeneumaps.png "Known marker gene locations")
+![Marker Gene UMAPs](../../images/scrna-casestudy/wab-markergeneumaps.png "Known marker gene locations")
 
 The authors weren't interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn't really require such granularity of clusters.
+
+> ### {% icon details %} Working in a group? Important!
+> If you have deviated from any of the original parameters in this tutorial, you will likely have a different number of clusters. You will, therefore, need to change the 'Annotating clusters' *"Comma-separated list of new categories"* accordingly. Best of luck!
+>
+{: .details}
 
 ### Annotating Clusters
 
 > ### {% icon hands_on %} Hands-on: Annotating clusters
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `louvain`
->    - *"Comma-separated list of new categories"*: `DP-M1,DP-M2,T-mat,DN,DP-M3,DP-L,DP-M4,RBC,Macrophages`
+>    - *"Comma-separated list of new categories"*: `DP-M3,DP-M4,DN,T-mat,DP-M1,DP-L,DP-M2,RBC,Macrophages`
 >    - Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
 >
-> 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} with the following parameters:
+> 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
 >    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
 >    - **"Keys from obs to copy"**
@@ -777,7 +782,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
 >    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
 >
-> 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1) %} {% icon tool %} with the following parameters:
+> 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
 >    - *"Change field names in AnnData observations"*
 >    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"*
@@ -787,7 +792,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >
 > 4. **Rename** {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
 >   -  Time to re-plot! {% icon time %} Feel free to re-run {% icon galaxy-refresh %} the **Scanpy PlotEmbed** tool {% icon tool %} on the new object plotting `cell_type` to speed this up. Otherwise...
-> 5. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
+> 5. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final cell annotated object`
 >    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `cell_type,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
@@ -795,7 +800,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >
 {: .hands_on}
 
-![Annotated cell types](../../images/wab-annotated cells.png "Our annotated UMAP")
+![Annotated cell types](../../images/scrna-casestudy/wab-annotatedcells.png "Our annotated UMAP")
 
 Now that we know what we're dealing with, let's examine the effect of our variable, proper science!
 
@@ -803,7 +808,7 @@ Now that we know what we're dealing with, let's examine the effect of our variab
 >
 > Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?
 >
-> ![Genotype Images](../../images/wab-genotypedifferences.png "Genotype differences")
+> ![Genotype Images](../../images/scrna-casestudy/wab-genotypedifferences.png "Genotype differences")
 >
 > > ### {% icon solution %} Solution
 > >
