@@ -400,7 +400,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
-> 4. Click on the  visualize icon in the `GSM461177` file block.
+> 4. Click on the {% icon galaxy-barchart %} visualize icon in the `GSM461177` file block.
 > 5. In the center panel click on the `local` in `display with IGV local D. melanogaster (dm6)`to load the reads into the IGV browser
 >    > ### {% icon comment %} Comments
 >    >
