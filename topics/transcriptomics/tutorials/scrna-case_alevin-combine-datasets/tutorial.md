@@ -67,11 +67,11 @@ The sample data is a subset of the reads in a mouse dataset of fetal growth rest
 
 You can access the data for this tutorial in multiple ways:
 
- 1.  **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+ 1.  **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
  >
  > {% snippet faqs/galaxy/histories_copy_dataset.md %}
  
- 2.  **Importing from a history** - You can import [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input)
+ 2.  **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
  >
  > {% snippet faqs/galaxy/histories_import.md %}
  
@@ -315,7 +315,7 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 ![Combining data files](../../images/scrna-casestudy/wab-combining_datasets_alevin.png "Workflow  - Combining datasets")
 
 You've reached the end of this session!
-You may be interested in seeing an [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---answer-key-1) and [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [here](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---answer-key).
+You may be interested in seeing an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-answerkey) and [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [here](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing--total-processed-to-single-object).
 
  To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
  [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
