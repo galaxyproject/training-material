@@ -25,12 +25,16 @@ tags:
 - nanopore
 - assembly
 - amr
-contributors:
-- bazante1
-- miaomiaozhou88
-- shiltemann
-- hexylena
-- avans-atgm
+
+contributions:
+  authorship:
+  - miaomiaozhou88
+  editing:
+  - hexylena
+  - bazante1
+  - shiltemann
+  funding:
+  - avans-atgm
 
 follow_up_training:
 - type: "internal"
@@ -427,8 +431,6 @@ from prokka as an information track.
 >        - *"Qualifier value column or raw text"*: `11`
 >
 > 4. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `consensus` (output of **Flye assembly** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`
