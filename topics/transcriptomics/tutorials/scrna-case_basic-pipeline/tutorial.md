@@ -564,15 +564,16 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 > - Control
 >      - **Number of PCs to use** = `20`
 >      - **Maximum number of neighbours used** = `15`
-> - Everyone else: Use the PC variance plot to pick your own PC number, and choose your own neighbour maximum as well!
+> - Everyone else: Use the PC variance plot to pick your own PC number, and choose your own neighbour maximum as well!b
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: ComputeGraph
 >
-> 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4) %} with the following parameters:
+> 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
+>    - *"Use the indicated representation"*: `X_pca`
 >    - *"Number of PCs to use"*: `20`
 {: .hands_on}
 
@@ -589,12 +590,13 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 > ### {% icon hands_on %} Hands-on: Calculating tSNE & UMAP
 >
-> 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2) %} with the following parameters:
+> 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
+>    - *"Use the indicated representation"*: `X_pca`
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
-> 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1) %} with the following parameters:
+> 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 {: .hands_on}
@@ -620,7 +622,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 > ### {% icon details %} Working in a group? Decision-time!
 > Oh yes, yet another decision! Single cell analysis is sadly not straight forward.
 > - Control
->      - **Resolution, high value for more and smaller clusters** = `0.6`
+>      - **Resolution, high value for more and smaller clusters** = `0.7`
 >      - **Clustering algorithm** = `Louvain`
 > - Everyone else: Pick your own number. If it helps, this sample should have a lot of very similar cells in it. It contains developing T-cells, so you aren't expecting massive differences between cells, like you would in, say, an entire embryo, with all sorts of unrelated cell types.
 > - Everyone else: Consider the newer **Leiden** clustering method. Note that in future parameters, you will likely need to specify 'leiden' rather than 'louvain', which is the default, if you choose this clustering method.
@@ -628,10 +630,10 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 
 > ### {% icon hands_on %} Hands-on: FindClusters
 >
-> 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4) %} with the following parameters:
+> 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
->    - *"Resolution, high value for more and smaller clusters"*: `0.6`
+>    - *"Resolution, high value for more and smaller clusters"*: `0.7`
 {: .hands_on}
 
 Nearly plotting time! But one final piece is to add in SOME gene information. Let's focus on genes driving the clusters.
@@ -640,9 +642,9 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 
 > ### {% icon hands_on %} Hands-on: FindMarkers
 >
-> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3) %} with the following parameters:
+> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No` <--- trust me, there's an odd glitch here in some tool versions that is solved by simply ticking `No` here
+>    - *"Use programme defaults"*: {% icon history-share %} `Yes` <--- trust me, there's an odd glitch here in some tool versions that is solved by simply ticking `Yes`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - cluster`
 >
@@ -650,7 +652,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 >
 > But we are also interested in differences across genotype, so let's also check that (note that in this case, it's turning it almost into bulk RNA-seq, because you're comparing all cells of a certain genotype against all cells of the other)
 >
-> 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4) %} with the following parameters:
+> 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
@@ -665,7 +667,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 
 > ### {% icon hands_on %} Hands-on: Adding in Gene Names
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
@@ -699,20 +701,20 @@ But first, let's pick some marker genes from the `Markers-cluster` list that you
 
 > ### {% icon hands_on %} Hands-on: Plot the cells!
 >
-> 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `pca`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
 >    - {% icon time %} *You can re-run {% icon galaxy-refresh %} the same tool again, but change `pca` to `tsne` and then finally to `umap` in order to skip the following two steps.*
 >
-> 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
+> 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `tsne`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
 >
-> 3. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0) %} with the following parameters:
+> 3. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts`
@@ -730,7 +732,7 @@ Now it's the fun bit! We can see where genes are expressed, and start considerin
 > ### {% icon question %} Question - Appearance is everything
 >
 > Which visualisation is the most useful for getting an overview of our data, *pca*, *tsne*, or *umap*?
-> ![PCA-tSNE-UMAP](../../images/wab-3visualisations.png "Louvain clustering by dimension reduction")
+> ![PCA-tSNE-UMAP](../../images/scrna-casestudy/wab-3visualisations.png "Louvain clustering by dimension reduction")
 >
 > > ### {% icon solution %} Solution
 > >
