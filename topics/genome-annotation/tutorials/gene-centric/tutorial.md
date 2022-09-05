@@ -57,7 +57,15 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 > - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
 {: .warning}
 
-------
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 
 # Logic
 
@@ -78,7 +86,7 @@ The analysis follow the following logic (also see the following figure):
 
 1. Create a comparative plot showing distribution of matches across genomes of interest
 
-![Logic](../../images/gene-centric/gene_analysis.svg)
+![A schematic diagram of the above workflow](../../images/gene-centric/gene_analysis.svg)
 
 ------
 
@@ -156,14 +164,14 @@ In this section we first show how to upload sample datasets. These datasets were
 > - Create a new history for this tutorial
 > - Import the files from [Zenodo]({{ page.zenodo_link }}) using the following URLs:
 >
-> ```
-> https://zenodo.org/record/7034885/files/aGasCar1.fa
-> https://zenodo.org/record/7034885/files/bTaeGut2.fa
-> https://zenodo.org/record/7034885/files/fScoJap1.fa
-> https://zenodo.org/record/7034885/files/mCynVol1.fa
-> https://zenodo.org/record/7034885/files/mHomSapT2T.fa
-> ```
-> {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>   ```
+>   https://zenodo.org/record/7034885/files/aGasCar1.fa
+>   https://zenodo.org/record/7034885/files/bTaeGut2.fa
+>   https://zenodo.org/record/7034885/files/fScoJap1.fa
+>   https://zenodo.org/record/7034885/files/mCynVol1.fa
+>   https://zenodo.org/record/7034885/files/mHomSapT2T.fa
+>   ```
+>   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -208,7 +216,7 @@ After uploading data from GenomeArk you will end up with a number of FASTA datas
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+> <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="Auto-generated english language captioning on video covering collections" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 >
 {: .hands_on}
 
