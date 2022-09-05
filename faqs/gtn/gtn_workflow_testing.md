@@ -50,4 +50,5 @@ contributors: [hexylena]
    └── testing-openlayer-tests.yml
    ```
 
-9. Contribute all of those files to the GTN in a PR.
+9. You will need to check the `-tests.yml` file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.
+10. Contribute all of those files to the GTN in a PR.
