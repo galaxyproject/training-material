@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Filter, Plot and Explore Single-cell RNA-seq Data
 subtopic: single-cell-CS
 priority: 3
-zenodo_link: 'https://zenodo.org/record/7045050'
+zenodo_link: 'https://zenodo.org/record/7053673'
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
