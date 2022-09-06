@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Trajectory Analysis using Python (Jupyter Notebook) in Galaxy
+title: Inferring Trajectories using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell-CS
 priority: 4
 zenodo_link: 'https://zenodo.org/record/4726927'
@@ -46,7 +46,7 @@ You've done all the hard work of preparing a single cell matrix, processing it, 
 
 Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise, that generally there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'. We 'assume' or 'infer' relationships between cells.
 
-We will use the same sample from the previous two tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it's time to look further!
+We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it's time to look further!
 
 > ### Agenda
 >
@@ -59,7 +59,7 @@ We will use the same sample from the previous two tutorials, which contains larg
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---input) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input) or download from Zenodo below.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -89,23 +89,13 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 ## Filtering for T-cells
 
-One problem with our current dataset is that it's not just T-cells: we found in the previous tutorial that it also contains macrophages and red blood cells. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.
+One problem with our current dataset is that it's not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 > ### {% icon hands_on %} Hands-on: Removing macrophages and RBCs
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Final cell annotated object`
->    - *"Function to manipulate the object"*: `Filter observations or variables`
->    - *"What to filter?"*: `Observations (obs)`
->    - *"Type of filtering?"*: `By key (column) values`
->    - *"Key to filter"*: `cell_type`
->    - *"Type of value to filter"*: `Text`
->    - *"Filter"*: `not equal to`
->    - *"Value"*: `RBC`
->
-> 2. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Filter observations or variables`
 >    - *"What to filter?"*: `Observations (obs)`
@@ -119,7 +109,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 >
 {: .hands_on}
 
-You should now have `7795` cells, as opposed to the `7874` you started with. You've only removed a few cells (the contaminants!), but it makes a big difference in the next steps.
+You should now have `8569` cells, as opposed to the `8605` you started with. You've only removed a few cells (the contaminants!), but it makes a big difference in the next steps.
 
 Take note of what # this dataset is in your history, as you will need that shortly!
 
@@ -159,7 +149,7 @@ Welcome!
 >
 > 1. Click the **Python 3** icon under **Notebook**
 >
->   ![Python 3 icon](../../images/wab-python3logo.png "Python 3 Button")
+>   ![Python 3 icon](../../images/scrna-casestudy/wab-python3logo.png "Python 3 Button")
 >
 > 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
 >
@@ -189,19 +179,19 @@ At this point, to prevent you having to switch back and forth between browsers, 
 
 Just in case, we've put the plots you should generate in the tutorial here. If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_AnswerKey.ipynb).
 
-![Plot1-Force-Directed Graph](../../images/wab-Plot1.png "Plot1-Force-Directed Graph")
+![Plot1-Force-Directed Graph](../../images/scrna-casestudy/draw_graph_faPlot1.png "Plot1-Force-Directed Graph")
 
-![Diffusion Map](../../images/wab-Plot2.png "Diffusion Map")
+![Diffusion Map](../../images/scrna-casestudy/draw_graph_faPlot2.png "Diffusion Map")
 
-![PAGA](../../images/wab-Plot3.png "PAGA")
+![PAGA](../../images/scrna-casestudy/pagaPlot4.png "PAGA")
 
-![Force-Directed + PAGA - Cell type](../../images/wab-Plot4.png "Force-Directed + PAGA - Cell type")
+![Force-Directed + PAGA - Cell type](../../images/scrna-casestudy/draw_graph_faPlot5.png "Force-Directed + PAGA - Cell type")
 
-![Force-Directed + PAGA - Genotype](../../images/wab-Plot5.png "Force-Directed + PAGA - Genotype")
+![Force-Directed + PAGA - Genotype](../../images/scrna-casestudy/draw_graph_faPlot6.png "Force-Directed + PAGA - Genotype")
 
-![Force-Directed + PAGA - Markers](../../images/wab-Plot6.png "Force-Directed + PAGA - Markers")
+![Force-Directed + PAGA - Markers](../../images/scrna-casestudy/draw_graph_faPlot7.png "Force-Directed + PAGA - Markers")
 
-![Force-Directed + Pseudotime](../../images/wab-Plot7.png "Force-Directed + Pseudotime")
+![Force-Directed + Pseudotime](../../images/scrna-casestudy/draw_graph_faPlot8.png "Force-Directed + Pseudotime")
 
 # After Jupyter
 
