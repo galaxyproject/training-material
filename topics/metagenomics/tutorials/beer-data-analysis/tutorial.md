@@ -67,7 +67,7 @@ DNA of yeasts in a bottle of La Trappe beer has been extracted and sequenced usi
 MinION to obtain sequences of DNA of the extracted yeasts. Now, we would like to identify
 for each sequence to which yeast species they belong, and hereby outline the diversity of organisms (the microbiome community) in the beer sample.
 
-To get this information, we need to process the sequence data in few steps:
+To get this information, we need to process the sequenced data in a few steps:
 1. Check the quality of the data
 2. Assign taxonomic label, i.e. assigh 'species' to the sequences
 3. Visualize the species distribution
