@@ -213,9 +213,9 @@ Ahora tenemos:
 
 Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas dentro de algunas de las instancias públicas. Si esto sucede, haz click sobre la pestaña Single Cell en la parte izquierda de la pantalla y desplázate hacia abajo hasta encontrar la herramienta Alevin. Consejo: Si haces click sobre las herramientas (tools) dentro de la opción ‘tutorial’ de Galaxy siempre tendrás la versión correcta de la herramienta. En este caso: Galaxy Version 1.3.0+galaxy2 - debe ser la versión por defecto; si no lo es, haz click sobre ‘Versiones’ (‘Versions’) y escoge dicha versión.
 
-![Tutorial option in Galaxy](../../images/wab-tutorial-in-galaxy.png "La opción de tutorial está situada en la parte superior derecha de Galaxy")
+![Tutorial option in Galaxy](../../images/scrna-casestudy-tutorial-in-galaxy.png "La opción de tutorial está situada en la parte superior derecha de Galaxy")
 
-![Accessing tools in the tutorial option within Galaxy](../../images/wab-tutorial-option-filler.png "Haz click sobre la herramienta en el tutorial de Galaxy")
+![Accessing tools in the tutorial option within Galaxy](../../images/scrna-casestudy-tutorial-option-filler.png "Haz click sobre la herramienta en el tutorial de Galaxy")
 
 > ### {% icon hands_on %} Practica: Ejecutando Alevin
 >
@@ -314,15 +314,15 @@ La pregunta que buscamos contestar aquí es: “En su mayoría, ¿tenemos una so
 > 2. Cambiar el nombre {% icon galaxy-pencil %} a la imagen de salida `Barcode Plot - raw barcode frequencies`
 {: .hands_on}
 
-![raw droplet barcode plots-400k](../../images/wab-raw_barcodes-400k.png "Subconjunto de datos crudos, 400k cadenas")
+![raw droplet barcode plots-400k](../../images/scrna-casestudy-raw_barcodes-400k.png "Subconjunto de datos crudos, 400k cadenas")
 
 La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si procesas la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.
 
-![raw droplet barcode plots-total](../../images/wab-raw_barcodes-total.png "Muestra completa - 32,579,453 lecturas - datos crudos")
+![raw droplet barcode plots-total](../../images/scrna-casestudy-raw_barcodes-total.png "Muestra completa - 32,579,453 lecturas - datos crudos")
 
 Esta es la formulación del gráfico de código de barras que basamos en una [discusión](https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480) que entablamos con miembros de la comunidad científica. Los gráficos de líneas suaves de la izquierda son los principales; estos gráficos muestran, clasificados de los más bajos a los más altos, los conteos de UMIs para códigos de barras individuales. Esperamos una fuerte caída entre las gotas que contienen células y las gotas vacías o que solo contienen restos celulares. Este no es un conjunto de datos ideal, así que en perspectiva, en un mundo ideal un conjunto de datos muy limpio proveniente de procesados 10x, los datos se asemejarían un poco más a la siguiente imagen del atlas de pulmón (ver [aquí](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne) el estudio del Atlas de Expresión de Células Únicas y la remisión del proyecto [aquí](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/)).
 
-![raw droplet barcode plots - lung atlas](../../images/wab-lung-atlas-barcodes-raw.png "Datos ‘bonitos’ - crudos")
+![raw droplet barcode plots - lung atlas](../../images/scrna-casestudy-lung-atlas-barcodes-raw.png "Datos ‘bonitos’ - crudos")
 
 En este gráfico puedes ver más claramente una flexión tipo “rodilla”, mostrando el corte entre las gotas vacías y las gotas que contienen células.
 
@@ -341,15 +341,15 @@ A la derecha encontramos los gráficos de densidad de la primera, y los umbrales
 > 2. Cambiar el nombre {% icon galaxy-pencil %} de la imagen de salida `Barcode Plot - Alevin processed barcodes`
 {: .hands_on}
 
-![raw droplet barcode plots - 400k](../../images/wab-alevin-barcodes-400k.png "400k sub-muestreo - Alevin procesado")
+![raw droplet barcode plots - 400k](../../images/scrna-casestudy-alevin-barcodes-400k.png "400k sub-muestreo - Alevin procesado")
 
 Y la muestra completa se ve como la siguiente figura:
 
-![raw droplet barcode plots - total](../../images/wab-alevin-barcodes-total.png "Muestra total - 32,579,453 lecturas - Alevin procesado")
+![raw droplet barcode plots - total](../../images/scrna-casestudy-alevin-barcodes-total.png "Muestra total - 32,579,453 lecturas - Alevin procesado")
 
 Y concluyendo, he aquí el gráfico del atlas de pulmón.
 
-![raw droplet barcode plots - total](../../images/wab-alevin-barcodes-lung.png "Datos bonitos - Alevin procesado")
+![raw droplet barcode plots - total](../../images/scrna-casestudy-alevin-barcodes-lung.png "Datos bonitos - Alevin procesado")
 
 Debes ver una caída casi vertical de la curva, que es donde Alevin truncó la distribución (después de haber excluido muchos códigos de barra celulares que tuvieron <10 UMI, Alevin posteriormente selecciona un umbral basándose en la curva y elimina los códigos de barras con menos UMIs)
 
@@ -635,7 +635,7 @@ Ya hemos visualizado las tres salidas de {% icon tool %} **Inspect AnnData**.
 
 Configura el historial de ejemplo con los índices más antiguos en la parte inferior.
 
-![Ordered history](../../images/wab-history-files-ascending.png "Nota como N701 es el más bajo, en orden ascendente al N707")
+![Ordered history](../../images/scrna-casestudy-history-files-ascending.png "Nota como N701 es el más bajo, en orden ascendente al N707")
 
 Por tanto, cuando se concatenan, el lote (`batch`) aparece de la siguiente manera:
 
@@ -797,9 +797,9 @@ Es importante tener en cuenta que esta matriz es procesada de cierto modo por me
 # Conclusion
 {:.no_toc}
 
-![Workflow Part 1](../../images/wab-alevin-part1workflow.png "Flujo de trabajo - Pasos 1-3")
+![Workflow Part 1](../../images/scrna-casestudy-alevin-part1workflow.png "Flujo de trabajo - Pasos 1-3")
 
-![Workflow Part 2](../../images/wab-alevin-part2workflow.png "Flujo de trabajo - Pasos 4-6")
+![Workflow Part 2](../../images/scrna-casestudy-alevin-part2workflow.png "Flujo de trabajo - Pasos 4-6")
 
 ¡Has llegado al final de esta sesión! Quizá te interese echarle un vistazo a un [ejemplo de un historial](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) y a la [Parte 2 del flujo de trabajo](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (`column`) que contiene el lote de metadatos. [Aquí](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example) puedes encontrar el objeto final que contiene todas las lecturas.
 
