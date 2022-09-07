@@ -73,7 +73,7 @@ To get this information, we need to process the sequence data in few steps:
 3. Visualize the species distribution
 
 This type of data analysis requires running several bioinformatics tools and
-usually require a computer science background. [Galaxy](https://galaxyproject.org/) is
+usually requires a computer science background. [Galaxy](https://galaxyproject.org/) is
 an open-source platform for data analysis that enables users to use bioinformatics
 tools through its graphical web interface, accessible via any Web browser.
 
