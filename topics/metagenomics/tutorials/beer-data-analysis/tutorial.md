@@ -92,7 +92,7 @@ of yeasts from a beer bottle.
 
 # Prepare Galaxy and data
 
-First of all, this tutorial will get you hands on the basic Galaxy tasks, including creating a history and importing data.
+First of all, this tutorial will get you hands on with some basic Galaxy tasks, including creating a history and importing data.
 
 ## Get familiar with Galaxy
 
