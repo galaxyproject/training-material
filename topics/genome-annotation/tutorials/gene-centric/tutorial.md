@@ -312,7 +312,32 @@ Another workflow output will represent a single file summarizing genomic locatio
 
 ### Starting notebook
 
+{% include _includes/cyoa-choices.html option1="UseGalaxy.org" option2="Galaxy Europe, Australia, and Others" default="UseGalaxyorg"
+       text="If you are on a server with Interactive Tool support (e.g. Galaxy Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience." %}
+
+
+<div class="UseGalaxyorg" markdown="1">
+
 The notebook can be accessed [from here](https://colab.research.google.com/drive/1smTpRejBb7c02LiIxMPNVDjOucLAsD81?usp=sharing). You do need to have a Google Account to be able to use the notebook.
+
+</div>
+<div class="Galaxy-Europe-Australia-and-Others" markdown="1">
+
+{% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
+{% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "gene_image.ipynb" }}{% endcapture %}
+
+1. Once the notebook has started, open a Terminal in Jupyter **File → New → Terminal**
+
+2. Run the following command:
+
+   ```
+   wget {{ ipynbpath }}
+   ```
+
+3. Switch to the Notebook that appears in the list of files on the left
+
+</div>
+
 
 ### Proving data
 
