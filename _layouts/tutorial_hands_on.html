@@ -61,9 +61,7 @@ footer: no
     </div>
     {% endif %}
 
-
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}</div>
-
+    {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
@@ -272,10 +270,28 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
+                {% if own_material.quiz %}
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    {% for q in own_material.quiz %}
+                    <h2>{{ q.title }}</h2>
+                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true %}</div>
+                    <ul>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ q.path }}">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ q.path }}">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
                 {% if topic.references %}
                 <h1 data-toc-skip>Useful literature</h1>
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
                 {% endif %}
+
 
                 {% if material.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
@@ -326,8 +342,6 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     })(window, document);
                 </script>
 
-
-
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
                     <ol>
@@ -347,7 +361,8 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
+{% assign authors = page.contributors | filter_authors:page.contributions -%}
+author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",
@@ -371,6 +386,10 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% endif %}
 
 
 <script type="text/javascript">

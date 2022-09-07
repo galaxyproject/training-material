@@ -12,8 +12,8 @@ Deleted datasets and histories can be recovered by users as they are retained in
     1. Click on the name to expand it.
     2. If it is only deleted, but not permanently deleted, you'll see a message with links to recover or to purge.
         - Click on _Undelete_ it to recover the dataset, making it active and accessible to tools again.
-        - Click on _Permenently remove it from disk_ to purge the dataset and remove it from the account quota calculation.
+        - Click on _Permanently remove it from disk_ to purge the dataset and remove it from the account quota calculation.
 
 - To review or adjust multiple datasets in batch:
-    1. Click on the "checked box" icon near the top right of the history panel to switch into "Operations on Multiple Datasets" mode.
-    2. Accordingly for each individual dataset, choose the selection box. Check the datasets you want to modify and chose your option (show, hide, delete, undelete, purge, and group datasets).
+    1. Click on the checked box icon {% icon galaxy-selector %} near the top right of the history panel to switch into "Operations on Multiple Datasets" mode.
+    2. Accordingly for each individual dataset, choose the selection box. Check the datasets you want to modify and choose your option (show, hide, delete, undelete, purge, and group datasets).

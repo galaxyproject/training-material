@@ -14,6 +14,7 @@ key_points:
 contributors:
   - erxleben
   - bgruening
+subtopic: prokaryote
 ---
 
 # Introduction

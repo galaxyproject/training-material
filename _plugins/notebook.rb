@@ -164,7 +164,13 @@ module GTNNotebooks
     out.flatten(1).join("\n")
   end
 
-  def self.construct_byline(folks)
+  def self.construct_byline(metadata)
+    if metadata.has_key?('contributors')
+      folks = metadata['contributors']
+    else
+      folks = metadata['contributions'].map{|k, v| v }.flatten
+    end
+
     contributors = nil
     File.open('CONTRIBUTORS.yaml', 'r') do |f2|
       contributors = YAML.load(f2.read)
@@ -176,7 +182,7 @@ module GTNNotebooks
   end
 
   def self.add_metadata_cell(notebook, metadata)
-    by_line = self.construct_byline(metadata['contributors'])
+    by_line = self.construct_byline(metadata)
 
     meta_header = [
       "<div style=\"border: 2px solid #8A9AD0; margin: 1em 0.2em; padding: 0.5em;\">\n\n",
@@ -294,7 +300,7 @@ module GTNNotebooks
   end
 
   def self.render_rmarkdown(page_data, page_content, page_url, page_last_modified, fn)
-    by_line = self.construct_byline(page_data['contributors'])
+    by_line = self.construct_byline(page_data)
 
     # Replace top level `>` blocks with fenced `:::`
     content = group_doc_by_first_char(page_content)
@@ -411,6 +417,9 @@ module GTNNotebooks
         # rendering otherwise by going through rouge
         source = source.gsub(/ `([^`]*)`([^`])/, ' <code>\1</code>\2')
           .gsub(/([^`])`([^`]*)` /, '\1<code>\2</code> ')
+
+        # Strip out includes
+        source = source.gsub(/{% include .* %}/, '')
 
         # Replace all the broken icons that can't render, because we don't
         # have access to the full render pipeline.
