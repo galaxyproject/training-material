@@ -210,7 +210,7 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 > > ### {% icon solution %} Respuesta
 > >
 > > 1. ¡El diagrama `violin - batch - log` tendrá todo lo que buscas!
-> >     ![Violin - batch - log](../../images/wab-violin-batch-log.png "Violin - lote - log (Datos crudos)")
+> >     ![Violin - batch - log](../../images/scrna-casestudy/wab-violin-batch-log.png "Violin - lote - log (Datos crudos)")
 > > 2. Teniendo en cuenta que está en escala logarítmica - lo que significa que pequeñas diferencias pueden significar grandes diferencias - la representación en forma de violín tiene probablemente un aspecto similar.
 > >    - `N707` y `N703` podría presentar unos valores de conteo y de genes (o UMIs) un poco bajos, pero las diferencias no son catastróficas.
 > >    - El `pct_counts_mito` se mantiene similar en los diferentes lotes, una buena señal.
@@ -230,8 +230,8 @@ Queremos filtrar nuestras células, pero primero necesitamos saber cómo se ven 
 > > ### {% icon solution %} Respuesta
 > >
 > > 1. Al igual que anteriormente, los diagramas `violin - sex - log` y `violin - genotype - log` tendrán lo que buscas.
-> >      ![Violin - sex - log](../../images/wab-violin-sex-log.png "Violin - sexo - log (Datos crudos)")
-> >      ![Violin - genotype - log](../../images/wab-violin-genotype-log.png "Violin - genotipo - log (Datos crudos)")
+> >      ![Violin - sex - log](../../images/scrna-casestudy/wab-violin-sex-log.png "Violin - sexo - log (Datos crudos)")
+> >      ![Violin - genotype - log](../../images/scrna-casestudy/wab-violin-genotype-log.png "Violin - genotipo - log (Datos crudos)")
 > > 2. No hay grandes diferencias en profundidad de secuenciación en los diferentes sexos diría yo - ¡aunque tú puedes no estar de acuerdo!
 > >    - Está claro que hay menos células femeninas, cosa que tiene sentido dado que sólo una de las muestras era femenina. *Nota - esto fue un descubrimiento desafortunado tras la generación de librerías. ¡Es bastante difícil identificar el sexo de neonatos en el laboratorio! En la práctica, intenta no dejar que un factor así influya en tus datos! Podrías considerar volver a ejecutar todos los análisis que vienen a continuación sin la muestra femenina si quieres.*
 > > 3. Sin embargo, en el gráfico `Violin - genotype - log`, podemos ver que hay una diferencia. Las muestras `knockout` tienen claramente menos genes y conteos. Desde el punto de vista experimental, ¿tiene esto sentido?
@@ -257,7 +257,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 > > ### {% icon solution %} Respuesta
 > >
 > > 1. Cualquier diagrama con `log1p_n_genes_by_counts` funcionaría aquí en realidad. Algunas personas prefieren diagramas de dispersión frente a los diagramas de violín.
-> > ![Scatter-genesxmito](../../images/wab-scatter-genesxmito.png "Dispersión - mito x genes (Datos crudos)")
+> > ![Scatter-genesxmito](../../images/scrna-casestudy/wab-scatter-genesxmito.png "Dispersión - mito x genes (Datos crudos)")
 > >
 > > 2. En `Scatter - mito x genes` puedes ver cómo las células con `log1p_n_genes_by_counts` hasta, quizás, `5.7` (sobre 300 genes) a menudo tienen alto `pct_counts_mito`.
 > >   - Puedes representar esto como `n_counts` y ver la misma tendencia alrededor de 300 genes, pero con estos datos el formato logarítmico es más claro, y así lo presentaremos.
@@ -273,7 +273,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 > > ### {% icon solution %} Respuesta
 > >
 > > 1. Como anteriormente, ¡cualquier diagrama con `log1p_n_total_counts` funcionaría! De nuevo, usaremos un diagrama de dispersión aquí, ¡pero puedes usar un diagram de violín si quieres!
-> > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Gráfico de dispersión - mito x UMIs (Datos crudos)")
+> > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Gráfico de dispersión - mito x UMIs (Datos crudos)")
 > >
 > > 2. Podemos ver que necesitaremos fijar un umbral más alto (lo que tiene sentido, ya que esperaríamos más UMIs por célula que genes únicos). De nuevo, quizás siendo un poco agresivos en nuestros umbrales, podríamos elegir `6.3`, por ejemplo (que equivale a unos 500 conteos/célula).
 > >   - En un mundo ideal, verás claramente una población de células reales separada de una clara población de células restantes. Muchas muestras, como esta, han sido poco secuenciadas y esa separación se vería probablemente mejor tras la secuenciación profunda!
@@ -287,7 +287,7 @@ Ahora que hemos evaluado la diferencia en nuestras muestras, miraremos a las lib
 > > ### {% icon solution %} Respuesta
 > >
 > > 1. Cualquier plot con `pct_counts_mito` funcionaría bien, sin embargo, los diagramas de dispersión son más fáciles de interpretar. Los usaremos igual que la última vez.
-> > ![Scatter-countsxmito](../../images/wab-scatter-countsxmito.png "Gráfico de dispersión - mito x UMIs (Datos crudos)")
+> > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Gráfico de dispersión - mito x UMIs (Datos crudos)")
 > >
 > > 2. Podemos ver una tendencia clara donde las células que tienen sobre un 5% de conteo mito o superior también tienen muchos menos conteos totales. Estas células tienen baja calidad, enturbiarán nuestros datos, y han estado posiblemente sometidas a condiciones de estrés o ruptura previa a la encapsulación en la gota. Aunque el 5% es un corte bastante común, estos datos son bastante complicados, así que solo por diversión elegiremos un umbral más agresivo de un `4.5%`.
 > >    - En general debes adaptar tus puntos de corte a tus datos - las células más activas metabólicamente podrían tener un RNA mitocondrial más alto, y no quieres perder parte de la población de células debido a un corte muy agresivo.
@@ -345,7 +345,7 @@ Nota que {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-r
 >
 > > ### {% icon solution %} Solución
 > >
-> > ![Violinplot-filteronce](../../images/wab-violin-raw-filteredgenes.png "Datos crudos vs el primer filtrado - genes/células")
+> > ![Violinplot-filteronce](../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png "Datos crudos vs el primer filtrado - genes/células")
 > > 1. La única parte que parece haber cambiado es `log1p_n_genes_by_counts`. Observa que la parte inferior del gráfico de violín está más plano - este es el umbral más bajo que se ha establecido. Idealmente, esto hubiera creado un hermoso diagrama de violín debido a que habría una clara población de células con bajo número de genes. Desafortunadamente, este no es el caso, pero sigue siendo un filtro razonable.
 > > 2. Puedes ver en `General - Filterbygenes` que ahora tienes `14,501 cells x 35,734 genes`.
 > >
@@ -388,7 +388,7 @@ Nota que {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-r
 >
 > > ### {% icon solution %} Solución
 > >
-> > ![Violinplot-filtertwice](../../images/wab-violin-filteredgenesxfilteredcounts.png "1er filtro vs 2do filtro - conteos/célula")
+> > ![Violinplot-filtertwice](../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png "1er filtro vs 2do filtro - conteos/célula")
 > > 1. Nos enfocaremos en `log1p_total_counts`. De manera similar a la superior, la parte inferior de la forma del violín se ha aplanado debido al umbral.
 > > 2. En `General - Filterbycounts`, puedes ver que ahora tienes `7,916 cells x 35,734 genes`.
 > >
@@ -435,7 +435,7 @@ Nota que {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-r
 >
 > > ### {% icon solution %} Solución
 > >
-> > ![Violinplot-filtermito](../../images/wab-violin-mitofilter.png "Gráficos de violín después del filtrado de genes, conteos y mito contenido/célula")
+> > ![Violinplot-filtermito](../../images/scrna-casestudy/wab-violin-mitofilter.png "Gráficos de violín después del filtrado de genes, conteos y mito contenido/célula")
 > > 1. Si observamos los ejes detalladamente podemos ver que el `pct_counts_mito` se ha reducido.
 > > 2. En `General - Filterbymito`, puedes ver que ahora tienes `7,874 × cells x 35,734 genes`.
 > >
@@ -444,7 +444,7 @@ Nota que {% icon tool %} **Scanpy Filtercells** te permite poner {% icon param-r
 {: .question}
 
 Si te es de ayuda, aquí tenemos un vistazo al resumen general.
-![Violinplot-Summary](../../images/wab-violins2gether.png "Resumen de filtrado")
+![Violinplot-Summary](../../images/scrna-casestudy/wab-violins2gether.png "Resumen de filtrado")
 
 ¡Excelente trabajo! Sin embargo, eliminaste un montón de células, y ya que los genes capturados son esporádicos (ejemplo, un pequeño porcentaje del transcriptoma completo por célula), esto significa que hay un número de genes en tu matriz que al momento no están en ninguna de las células restantes. Los genes que no aparecen en ninguna célula, ni siquiera en una o dos células, causarán que algunas de las herramientas analíticas funcionen incorrectamente (o dejen de funcionar) y en general, no serán informativos con respecto a la biología del fenómeno analizado. !Entonces eliminemos estos genes! Nota que `3` no es necesariamente el mejor número, más bien es un umbral bastante conservador. Podrías subir hasta 10 o más.
 
@@ -550,7 +550,7 @@ Los componentes principales se calculan a partir de datos con alta dimensionalid
 
 ¿Te cuestionas el por qué 50 Componentes Principales? Bueno, estamos bastante seguros de que 50 es una sobreestimación. Examina `PCA Variance`.
 
-![PCA-variance](../../images/wab-pcavariance.png "Variabilidad explicada por CP")
+![PCA-variance](../../images/scrna-casestudy/wab-pcavariance.png "Variabilidad explicada por CP")
 
 Podemos ver que en realidad no existe mucha variación que pueda ser explicada una vez que pasamos del componente 19. Así es que nos ahorraremos un buen de tiempo y datos confusos si nos enfocamos en los primeros `20` CPs.
 
@@ -731,7 +731,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
 >
 > ¿Qué visualización es la más útil para obtener una visión general de nuestros datos, *pca*, *tsne* o *umap*?
 >
-> ![PCA-tSNE-UMAP](../../images/wab-3visualisations.png "Agrupamiento de Louvain por reducción de dimensión")
+> ![PCA-tSNE-UMAP](../../images/scrna-casestudy/wab-3visualisations.png "Agrupamiento de Louvain por reducción de dimensión")
 >
 > > ### {% icon solution %} Solución
 > >
@@ -753,7 +753,7 @@ Ten en cuenta que la numeración de las agrupaciones se basa únicamente en el t
 | 7 | Hba-a1    | Células sanguíneas |
 | 8 | Aif1    | Macrófagos    |
 
-![Marker Gene UMAPs](../../images/wab-markergeneumaps.png "Ubicaciones conocidas de genes marcadores")
+![Marker Gene UMAPs](../../images/scrna-casestudy/wab-markergeneumaps.png "Ubicaciones conocidas de genes marcadores")
 
 Los autores no estaban interesados en seguir anotando las células DP, así que nosotros tampoco. A veces, esto ocurre. Las matemáticas intentan llamar a las agrupaciones de tamaño similar, sean o no biológicamente relevantes. O bien, la pregunta que se hace no precisa realmente tal granularidad de agrupaciones.
 
@@ -796,7 +796,7 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >
 {: .hands_on}
 
-![Annotated cell types](../../images/wab-annotated cells.png "Nuestro UMAP anotado")
+![Annotated cell types](../../images/scrna-casestudy/wab-annotated cells.png "Nuestro UMAP anotado")
 
 Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra variable, ¡ciencia en estado puro!
 
@@ -804,7 +804,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 >¿Existen diferencias en el genotipo? O bien en términos biológicos, ¿hay un impacto de la restricción del crecimiento en el desarrollo de las células T en el timo?
 >
-> ![Genotype Images](../../images/wab-genotypedifferences.png "Diferencias de genotipo")
+> ![Genotype Images](../../images/scrna-casestudy/wab-genotypedifferences.png "Diferencias de genotipo")
 >
 > > ### {% icon solution %} Solución
 > >
@@ -822,14 +822,14 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > ¿existe un efecto de lote “batch effect”?
 >
-> ![Batch effect](../../images/wab-batcheffect.png "Efecto de lote?")
+> ![Batch effect](../../images/scrna-casestudy/wab-batcheffect.png "Efecto de lote?")
 >
 > > ### {% icon solution %} Solución
 > >
 > >Si bien se esperan algunos cambios, no hay nada de qué preocuparse, DP-L parece estar limitado a  sólo dos muestras: N706 y N705. Ahora, para ser justos, ambas son de fenotipo normal, pero aún así, no es bueno que sólo el 50% de las muestras de fenotipo normal estén realmente en ese grupo. ¿Se puede decir que es la razón por la que no hay células knockout allí? Es posible que haya un poco de efecto de lote “batch effect”, por lo que se debería considerar el uso de la corrección de lote en este conjunto de datos. Sin embargo, si centramos nuestra atención en el otro agrupamiento -células T maduras- en el que hay mezcla de lotes, todavía podemos evaluar esto biológicamente incluso sin corrección de lotes.
 > > Además, también analizaremos el effecto de confusión del sexo.
 > >
-> > ![Sex effect](../../images/wab-sex-batch.png "Diferencias de sexo")
+> > ![Sex effect](../../images/scrna-casestudy/wab-sex-batch.png "Diferencias de sexo")
 > >
 > >Observamos que la única muestra femenina -desgraciadamente, una de las tres muestras knockout- parece estar distribuida en las mismas zonas que las muestras knockout en general, por lo que, afortunadamente, no parece ser un factor de confusión y podemos seguir aprendiendo de nuestros datos. Lo ideal sería volver a realizar este experimento con más muestras de hembras o sustituir esta muestra de hembras por la de machos.
 > >
@@ -841,7 +841,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > ¿Existen agrupaciones o diferencias impulsadas por la profundidad de la secuenciación, un factor técnico y aleatorio?
 >
-> ![Sequencing depth](../../images/wab-umap-totalcounts.png "Conteo a través de grupos")
+> ![Sequencing depth](../../images/scrna-casestudy/wab-umap-totalcounts.png "Conteo a través de grupos")
 >
 > > ### {% icon solution %} Solución
 > >
@@ -855,7 +855,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > ¿Crees que hemos procesado estas muestras lo suficientemente bien?
 >
-> ![Sequencing depth](../../images/wab-hba.png "Hemoglobina a través de grupos")
+> ![Sequencing depth](../../images/scrna-casestudy/wab-hba.png "Hemoglobina a través de grupos")
 >
 > > ### {% icon solution %} Solución
 > >
@@ -869,7 +869,7 @@ Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra 
 >
 > ¿Consideras que la agrupación es adecuada? es decir, ¿hay agrupaciones individuales que crees que deberían estar separadas, y agrupaciones múltiples que podrían combinarse?
 >
-> ![Itm2a Expression](../../images/wab-umap-itm2a.png "Itm2a a través de grupos")
+> ![Itm2a Expression](../../images/scrna-casestudy/wab-umap-itm2a.png "Itm2a a través de grupos")
 >
 > > ### {% icon solution %} Solución
 > >
