@@ -226,7 +226,7 @@ We can see that the quality of our sequencing data grows after the first few bas
 
 In order to improve the quality of our data, we will use two tools:
 - **porechop** ({% cite rrwick2017 %}) to remove adapters that were added for sequencing and chimera (contaminant)
-- **fastp** ({% cite Chen_2018 %}) to filter sequences with low quality score (below 9)
+- **fastp** ({% cite Chen_2018 %}) to filter sequences with low quality scores (below 9)
 
 > ### {% icon hands_on %} Hands-on: Improve the dataset quality
 >
