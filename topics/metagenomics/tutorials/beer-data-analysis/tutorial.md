@@ -64,8 +64,7 @@ In this tutorial, we will use data generated via the [BeerDEcoded project](https
 {: .comment}
 
 DNA of yeasts in a bottle of La Trappe beer has been extracted and sequenced using a
-MinION to obtain sequences of DNA of the extracted yeasts. Now, we would like to identify
-for each sequence to which yeast species they belong, and hereby outline the diversity of organisms (the microbiome community) in the beer sample.
+MinION to obtain sequences of DNA of the extracted yeasts. Now, for each obtained sequence, we would like to identify the yeast species to which it belongs, and thereby outline the diversity of organisms (the microbiome community) in the beer sample.
 
 To get this information, we need to process the sequenced data in a few steps:
 1. Check the quality of the data
