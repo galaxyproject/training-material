@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Inferring Trajectories using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell-CS
 priority: 4
-zenodo_link: 'https://zenodo.org/record/4726927'
+zenodo_link: 'https://zenodo.org/record/7054806'
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 objectives:
@@ -93,7 +93,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> ### {% icon hands_on %} Hands-on: Removing macrophages and RBCs
+> ### {% icon hands_on %} Hands-on: Removing macrophages
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: (output of **Manipulate AnnData** {% icon tool %})
@@ -115,27 +115,29 @@ Take note of what # this dataset is in your history, as you will need that short
 
 ## Launching Jupyter
 
-> ### {% icon hands_on %} Hands-on: Downloading the directions
->
-> 1. Click the **Trajectories_Instructions.ipynb** dataset and the download {% icon galaxy-save %} button to get the file onto your computer
->
-{: .hands_on}
+> ### {% icon warning %} Data uploads and Jupyter
+> There are a few ways of importing and uploading data in Jupyter. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
+{: .warning}
 
 JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of [RStudio](https://www.rstudio.com/products/rstudio/features/)? Then don't worry, just follow the instructions!
 
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
 
+> ### {% icon hands_on %} Hands-on: Downloading the tutorial notebook
+> 
+> 1. You will need to download the tutorial notebook locally to your own computer. Do this by going here: [Download the notebook](https://zenodo.org/record/7054806/files/Trajectories_Instructions.ipynb?download=1)
+{: .hands_on}
+
 > ### {% icon hands_on %} Hands-on: Launching JupyterLab
 >
-> 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
+> 1. {% tool [Interactive JupyTool and Notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
->    - {% icon param-file %} *"Include data into the environment"*:  `Nothing selected`
 >
 >    This may take a moment, but once the `Executed notebook` in your dataset is orange, you are up and running!
 >
-> 4. Either click on the blue `User menu`, or go to the top of the screen and choose `User` and then `Active InteractiveTools`
+> 2. Either click on the blue `User menu`, or go to the top of the screen and choose `User` and then `Active InteractiveTools`
 >
-> 5. Click on the newest `Jupyter Interactive Tool`.
+> 3. Click on the newest `JupyTool interactive tool`.
 >
 {: .hands_on}
 
@@ -173,7 +175,7 @@ Cool! Now you know how to create a file! Helpfully, however, we have created one
 
 # Run the tutorial!
 
-At this point, to prevent you having to switch back and forth between browsers, the directions for the rest of tutorial are all in the notebook you input! Go to `data` and double click `Trajectories_Instructions.ipynb` You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the {% icon workflow-run %} *Run the selected cells and advance* step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
+At this point, to prevent you having to switch back and forth between browsers, the directions for the rest of tutorial are all in the notebook you input! You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the {% icon workflow-run %} *Run the selected cells and advance* step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
 # Tutorial Plot Answers
 
@@ -210,7 +212,7 @@ If you want to run this notebook again, or share it with others, it now exists i
 # Conclusion
 {:.no_toc}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---jupyter---answer-key)
+{% icon congratulations %} Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1).
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 
