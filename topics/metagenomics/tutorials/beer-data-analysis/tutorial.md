@@ -43,7 +43,7 @@ One crucial component is the DNA, the blueprint of life. The DNA encodes the
 shape and size and many other characteristics unique to a bacterial species. Because of
 the encoding information the DNA can be used to identify what kind of bacteria
 the DNA is from. Therefore, within a metagenomic sample, e.g. form soil, gut, or beer, one can
-specify what kind of species are inside the sample.
+identify what kind of species are inside the sample.
 
 In this tutorial, we will use data generated via the [BeerDEcoded project](https://streetscience.community/projects/beerdecoded/).
 
