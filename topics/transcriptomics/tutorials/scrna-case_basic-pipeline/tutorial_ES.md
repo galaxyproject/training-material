@@ -796,7 +796,7 @@ Los autores no estaban interesados en seguir anotando las células DP, así que 
 >
 {: .hands_on}
 
-![Annotated cell types](../../images/scrna-casestudy/wab-annotated cells.png "Nuestro UMAP anotado")
+![Annotated cell types](../../images/scrna-casestudy/wab-annotatedcells.png "Nuestro UMAP anotado")
 
 Ahora que sabemos a qué nos enfrentamos, vamos a examinar el efecto de nuestra variable, ¡ciencia en estado puro!
 
