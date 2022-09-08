@@ -150,7 +150,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
 I set up the example history with the earliest indices at the bottom.
 
-![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "The files are numbered such that dataset #1 is N701, while dataset #7 is N707, with the rest of the files in order. This ensures they are added in order, allowing you to add metadata correctly.")
+![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "The files are numbered such that dataset #1 is N701, dataset #2 is N702, etc., up through #7 as N707. This puts N707 at the top and N701 at the bottom in the Galaxy history.")
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 
