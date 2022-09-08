@@ -1,0 +1,5048 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Comparative gene analysis in unannotated genomes</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Comparative gene analysis in unannotated genomes" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Anton Nekrutenko" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Comparative gene analysis in unannotated genomes" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Genome Annotation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/genome-annotation/tutorials/gene-centric/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/genome-annotation/faqs/" title="Check our FAQs for the Genome Annotation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/genome-annotation/tutorials/gene-centric/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/genome-annotation/tutorials/gene-centric/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/genome-annotation/tutorials/gene-centric/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/genome-annotation/tutorials/gene-centric/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Comparative gene analysis in unannotated genomes",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Comparative gene analysis in unannotated genomes' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "genome-annotation, evolution, annotation, vgp, cookbook, eukaryote, prokaryote",
+  "description": "The questions this  addresses are:\n - I have several genomes assemblies that are not annoatated (or I do not trust annotations)\n - I am interested to compare structure of a particular gene across these genome assemblies\n - How do I do that?\n\n\\nThe objectives are:\n - Provide a quick method for identifying genes of interest in unannotated or newly assembled genomes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html",
+      "name": "Galaxy 101",
+      "description": "Hands-on for 'Galaxy 101' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collections",
+      "description": "Hands-on for 'Using dataset collections' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/",
+      "name": "Anton Nekrutenko",
+      "image": "https://avatars.githubusercontent.com/nekrut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-genome-annotation">
+    <h1 data-toc-skip>Comparative gene analysis in unannotated genomes</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=27" alt="Avatar">Anton Nekrutenko</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>I have several genomes assemblies that are not annoatated (or I do not trust annotations)</p>
+</li>
+        
+        <li><p>I am interested to compare structure of a particular gene across these genome assemblies</p>
+</li>
+        
+        <li><p>How do I do that?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Provide a quick method for identifying genes of interest in unannotated or newly assembled genomes</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy 101:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">Using Galaxy and Managing your Data</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Using dataset collections:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/genome-annotation/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7034885">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/" title="Workflows" alt="Comparative gene analysis in unannotated genomes workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 7, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 id="introduction">Introduction</h1>
+
+<p>Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the <a href="https://en.wikipedia.org/wiki/Murphy%27s_law">Murthy’s law</a>: if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So …</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-in">
+    <h3 id="question-what-i-want"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> What I want:</h3>
+    <ul>
+      <li>I work with a gene <em>X</em></li>
+      <li>I would like to compare the structure of gene <em>X</em> across <em>N</em> genomes</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="galaxy-chart-select-data-what-i-have"><i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> What I have:</h3>
+    <ul>
+      <li>I know the gene’s name</li>
+      <li>I know which species I’m interested in</li>
+      <li>I know where to find genomes of these species</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="interactive_tour-what-i-will-get"><i class="fas fa-magic" aria-hidden="true"></i><span class="visually-hidden">interactive_tour</span> What I will get:</h3>
+  <ul>
+    <li>Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.</li>
+    <li>Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#logic" id="markdown-toc-logic">Logic</a></li>
+  <li><a href="#example-history" id="markdown-toc-example-history">Example history</a></li>
+  <li><a href="#practice" id="markdown-toc-practice">Practice</a>    <ol>
+      <li><a href="#step-1-pick-a-gene-and-select-genomes-to-analyze" id="markdown-toc-step-1-pick-a-gene-and-select-genomes-to-analyze">Step 1: Pick a gene and select genomes to analyze</a></li>
+      <li><a href="#step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest" id="markdown-toc-step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest">Step 2: Get amino acid translations for all exons of my gene of interest</a></li>
+      <li><a href="#step-3-identify-and-upload-genomes-of-interest" id="markdown-toc-step-3-identify-and-upload-genomes-of-interest">Step 3: Identify and upload genomes of interest</a></li>
+      <li><a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs" id="markdown-toc-step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4: Extract amino acid sequences and genome coordinates for all ORFs</a></li>
+      <li><a href="#steps-5-6-and-7-finding-matches-and-building-trees" id="markdown-toc-steps-5-6-and-7-finding-matches-and-building-trees">Steps 5, 6, and 7: Finding matches and building trees</a></li>
+      <li><a href="#step-7-looking-at-the-trees" id="markdown-toc-step-7-looking-at-the-trees">Step 7: Looking at the trees</a></li>
+      <li><a href="#step-8-generating-and-interpreting-the-comparative-genome-graph" id="markdown-toc-step-8-generating-and-interpreting-the-comparative-genome-graph">Step 8: Generating and interpreting the comparative genome graph</a></li>
+    </ol>
+  </li>
+  <li><a href="#about-the-gene" id="markdown-toc-about-the-gene">About the gene</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="logic">Logic</h1>
+
+<p>The analysis follow the following logic (also see the following figure):</p>
+
+<ol>
+  <li>Pick a gene and select genomes to analyze</li>
+  <li>Get amino acid translations for all exons of my gene of interest</li>
+  <li>Identify genomes of interest</li>
+  <li>
+    <p>Extract amino acid sequences and genome coordinates for all possible open reading frames (ORFs) from all genomes in my set</p>
+
+    <p>The following steps 5, 6, and 7 are performed using a single <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> (grey area in the following figure).</p>
+  </li>
+  <li>Align - Find matches between exons of the gene of interest and ORFs</li>
+  <li>Intersect - Compute genome coordinates of matches</li>
+  <li>
+    <p>Build phylogenetic trees for individual exons</p>
+
+    <p>The final step is performed using Jupyter notebook</p>
+  </li>
+  <li>Create a comparative plot showing distribution of matches across genomes of interest</li>
+</ol>
+
+<p><img src="../../images/gene-centric/gene_analysis.svg" alt="A schematic diagram of the above workflow. " loading="lazy" /></p>
+
+<hr />
+
+<h1 id="example-history">Example history</h1>
+
+<p>This <a href="https://usegalaxy.org/u/cartman/h/genecomparisonxbp1">example history</a> contains results of the analysis described in this tutorial.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history</h3>  <ol>  <li>Open the link to the shared history</li>  <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>  <li>Enter a title for the new history</li>  <li>Click on <strong>Import</strong></li></ol></blockquote>
+
+<p>You can use this history to understand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-dataset-in-the-example-history"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input dataset in the example history</h3>
+  <ul>
+    <li><kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (<em>XBP-1</em>)</li>
+    <li><kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest</li>
+    <li><kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest</li>
+  </ul>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-outputs-in-the-sample-history"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Outputs in the sample history</h3>
+  <ul>
+    <li><kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs</li>
+    <li><kbd>Trees</kbd> - phylogenetic trees for each exon</li>
+  </ul>
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="warning-a-suggestion"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> A suggestion!</h3>
+  <p>Importing and looking around this history is very helpful for understanding how this analysis works!</p>
+</blockquote>
+
+<hr />
+
+<h1 id="practice">Practice</h1>
+
+<h2 id="step-1-pick-a-gene-and-select-genomes-to-analyze">Step 1: Pick a gene and select genomes to analyze</h2>
+
+<p>In this example we will compare structure of X-box protein 1 gene (<em>XBP-1</em>) across a set of five vertebrate genomes sequenced by <a href="https://vertebrategenomesproject.org/">VGP</a> consortium (<span class="citation"><a href="#Rhie2021-ks">Rhie <i>et al.</i> 2021</a></span>).</p>
+
+<h2 id="step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest">Step 2: Get amino acid translations for all exons of my gene of interest</h2>
+
+<p>This step is manual and is performed outside <span class="notranslate">Galaxy</span>.</p>
+
+<p>The best annotated vertebrate is … human. To obtain amino acid translation of individual exons of <em>XBP-1</em> you can use <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr22%3A28794555%2D28800597&amp;hgsid=1433476153_N1Iet0RvAaPQIpPuVl2qbi74BrC3">UCSC Genome browser</a>. The “UCSC annotations of RefSeq <span class="notranslate">RNA</span>s (NM_* and NR_*)” track shows two alte<span class="notranslate">rna</span>tive transcripts produced by <em>XBP-1</em> : spliced and unspliced (here ‘spliced’ and ‘unspliced’ do not refer to the “normal’ splicing process. To learn more about this fascinating gene read here).</p>
+
+<p><img src="../../images/gene-centric/xbp-1.svg" alt="XBP-1. " loading="lazy" /></p>
+
+<p>Clicking on the names of the transcripts open a UCSC page specific to that transcript. From there you can obtain genomic sequences corresponding to all exons. You can then translate these sequences using any available online tool (e.g., <a href="https://www.ncbi.nlm.nih.gov/orffinder/">NCBI ORFinder</a>).</p>
+
+<p>In this particular case we did not create translation of all exons. Instead, we created translation of exon 1  and two terminal exons. The first exon is shared between the two transcripts. It will allow us to anchor the beginning of the gene. The two terminal exons are different between the two transcripts. Because of this we create two alte<span class="notranslate">rna</span>tive translation per exon: <code class="language-plaintext highlighter-rouge">s-p2</code> and <code class="language-plaintext highlighter-rouge">s-p12</code> for the spliced version and <code class="language-plaintext highlighter-rouge">u-p1</code> and <code class="language-plaintext highlighter-rouge">u-p2</code> for unspliced transcript. A FASTA file containing all translation is shown below:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;xbp-1u-p1
+GNEVRPVAGSAESAALRLRAPLQQVQAQLSPLQNISPWILAVLTLQIQ
+&gt;xbp-1u-p2
+LISCWAFWTTWTQSCSSNALPQSLPAWRSSQRSTQKDPVPYQPPFLCQWG
+RHQPSWKPLMN
+&gt;xbp-1s-p12
+GNEVRPVAGSAESAAGAGPVVTPPEHLPMDSGGIDSSDSE
+&gt;xbp-1s-p3
+SDILLGILDNLDPVMFFKCPSPEPASLEELPEVYPEGPSSLPASLSLSVG
+TSSAKLEAINELIRFDHIYTKPLVLEIPSETESQANVVVKIEEAPLSPSE
+NDHPEFIVSVKEEPVEDDLVPELGISNLLSSSHCPKPSSCLLDAYSDCGY
+GGSLSPFSDMSSLLGVNHSWEDTFANELFPQLISV
+&gt;xbp1_ex1
+MVVVAAAPNPADGTPKVLLLSGQPASAAGAPAGQALPLMVPAQRGASPEA
+ASGGLPQARKRQRLTHLSPEEKALR
+</code></pre></div></div>
+
+<h2 id="step-3-identify-and-upload-genomes-of-interest">Step 3: Identify and upload genomes of interest</h2>
+
+<p>This tutorial has been initially designed for the analysis of data produced by the Vertebrate Genome Consortium <a href="https://vertebrategenomesproject.org/">VGP</a>. However, it is equally suitable for any genomic sequences (including prokaryotic ones).</p>
+
+<p>In this section we first show how to upload sample datasets. These datasets were intentionally made small. All subsequent steps of this tutorial are performed using these sample data. We then demonstrate how to upload full size genomes from the VGP data repository called <a href="https://vgp.github.io/genomeark/">GenomeArk</a>.</p>
+
+<h3 id="uploading-sample-data">Uploading sample data</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-sample-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Sample Data upload</h3>
+
+  <ul>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/7034885">Zenodo</a> using the following URLs:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7034885/files/aGasCar1.fa
+https://zenodo.org/record/7034885/files/bTaeGut2.fa
+https://zenodo.org/record/7034885/files/fScoJap1.fa
+https://zenodo.org/record/7034885/files/mCynVol1.fa
+https://zenodo.org/record/7034885/files/mHomSapT2T.fa
+</code></pre></div>      </div>
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>These correspond to fragments of genomes from:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">aGasCar1</code> - <em>Gastrophryne carolinensis</em> (Eastern narrow-mouth toad)</li>
+  <li><code class="language-plaintext highlighter-rouge">bTaeGut</code> - <em>Taeniopygia guttata</em> (Zebra finch)</li>
+  <li><code class="language-plaintext highlighter-rouge">fScoJap</code> - <em>Scomber japonicus</em> (Chub mackerel)</li>
+  <li><code class="language-plaintext highlighter-rouge">mCynVol</code> - <em>Cynocephalus volans</em> (Philippine flying lemur)</li>
+  <li><code class="language-plaintext highlighter-rouge">mHomSap</code> - <em>Homo sapiens</em> (Human)</li>
+</ul>
+
+<h3 id="uploading-vgp-data-from-genomeark">Uploading VGP data from GenomeArk</h3>
+
+<p><span class="notranslate">Galaxy</span> provides a direct connection to <a href="https://vgp.github.io/genomeark/">GenomeArk</a> from its “Upload Data” tool. To access GenomeArk data you need to:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-upload-vgp-data-from-genomeark"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Upload VGP data from GenomeArk</h3>
+
+  <ul>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import genome assembly FASTA files from GenomeArk:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Upload Data</strong> menu</li>
+        <li>Click on <strong>Choose remote files</strong> button at the bottom of the Upload interface</li>
+        <li>Choose <strong>Genome Ark</strong></li>
+        <li>Pick assembles you would like to include in your analysis (use Search box on top)</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Generally for a given species you want the assembly with the highest version number. For example, Human (<em>Homo sapiens</em>) had three assemblies at the time of writing: <code class="language-plaintext highlighter-rouge">mHomSap1</code>, <code class="language-plaintext highlighter-rouge">mHomSap2</code>, and <code class="language-plaintext highlighter-rouge">mHomSap3</code>. Pick <code class="language-plaintext highlighter-rouge">mHomSap3</code> in this situation.</p>
+
+  <p>Inside each assembly folder you will see typically see different sub-folders. The one you should generally be interested in will be called <code class="language-plaintext highlighter-rouge">assembly_curated</code>. Inside that folder you will typically see separate assemblies for mate<span class="notranslate">rna</span>l (indicated with <code class="language-plaintext highlighter-rouge">mat</code>) and pate<span class="notranslate">rna</span>l (indicated with <code class="language-plaintext highlighter-rouge">pat</code>) haplotypes. In the analyses here we are choosing as assembly representing heterogametic haplotype (<code class="language-plaintext highlighter-rouge">pat</code> in the case of Human).</p>
+
+  <ul>
+    <li>Repeat this process for all assemblies you are interested in.</li>
+  </ul>
+
+</blockquote>
+
+<h3 id="combine-uploaded-sequences-into-a-dataset-collection">Combine uploaded sequences into a dataset collection</h3>
+
+<p>After uploading data from GenomeArk you will end up with a number of FASTA datasets in your history. To proceed with the analysis you will need to combine these into a single dataset collection:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-combine-genome-assemblies-into-a-dataset-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Combine genome assemblies into a dataset collection</h3>
+
+  <p>To create a collection from genome assemblies you just uploaded into GenomeArk follow the steps in the video below. Obviously, you only want to click check-boxes next to FASTA files (assemblies) you want to include and leave everything else out.</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="Auto-generated english language captioning on video covering collections" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+  <p>&lt;/p&gt;</p>
+
+</blockquote>
+
+<h2 id="step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4: Extract amino acid sequences and genome coordinates for all ORFs</h2>
+
+<h3 id="extract-orfs-from-genomic-sequences">Extract ORFs from genomic sequences</h3>
+
+<p>Now we can go ahead and find all ORFs in all genome assemblies we have bundled into a collection. For this we will use tool called <a href="https://github.com/urmi-21/orfipy">ORFiPy</a>:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-find-orfs-witrh-orfipy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Find ORFs witrh ORFiPy</h3>
+
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0"><strong>ORFiPy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Find ORFs in”</em>: The collection containing genome assemblies we just created (click “Dataset collection” <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> button on left-side of this input field)</li>
+    <li><em>“Select options”</em>: check the box next to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span></code> and <code class="language-plaintext highlighter-rouge">Peptides</code></li>
+    <li><em>“Minimum length of ORFs”</em>: type the number <code class="language-plaintext highlighter-rouge">99</code>. We do not want ORFs to be too short as their number will be too high</li>
+    <li><em>“Output ORFs bound by Stop codons?”</em>: set this option to <code class="language-plaintext highlighter-rouge">Yes</code>.</li>
+  </ul>
+
+</blockquote>
+
+<p>Because this operation is performed on a dataset collection. it will produce a dataset collection as an output. Actually, it will produce two because we selected <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span></code> and <code class="language-plaintext highlighter-rouge">Peptides</code> options. One collection will contain amino acid sequences for all ORFs (it will typically be called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (FASTA format)</code>) and another their coordinates (called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (<span class="notranslate">BED</span> format)</code>)
+)</p>
+
+<p>This will produce two new dataset collections in your history: one containing coordinates of ORFs and the other containing their amino acid translations. Because genomes are large these will likely be tens of millions of ORFs identified this way.</p>
+
+<h3 id="creating-diamond-database">Creating <strong>Diamond</strong> database</h3>
+
+<p>Because we will be using the <a href="https://github.com/bbuchfink/diamond">Diamond</a> tool to find matches between our gene of interest and ORF translations we need to convert FASTA files into Diamond database using <strong>Diamond makedb</strong> tool:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-create-diamond-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Create Diamond database</h3>
+
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0"><strong>Diamond makedb</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+<span class="notranslate">galaxy</span>0</span></span>  on the collection containing amino acid translations of ORFs generated using <strong>ORFiPy</strong>:</p>
+  <ul>
+    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “Input reference file in FASTA format”*: Select collections containing amino acid (FASTA Protein) output of <strong>ORFiPy</strong></li>
+  </ul>
+
+</blockquote>
+
+<p>At this point we have three input datasets that would allow us to find and visualize matches between the gene of interest and genome asseblies:</p>
+
+<ol>
+  <li>Diamond database of ORF translations from genome assemblies</li>
+  <li>Coordinates and frame information about ORFs in <span class="notranslate">BED</span> format</li>
+  <li>Amino acid translation of exons from the gene of interest</li>
+</ol>
+
+<h2 id="steps-5-6-and-7-finding-matches-and-building-trees">Steps 5, 6, and 7: Finding matches and building trees</h2>
+
+<p>To find location of genes, we will use the following <a href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/"><span class="notranslate">workflow</span></a> that is available as a part of this tutorial. To use this <span class="notranslate">workflow</span> you need to import it into your <span class="notranslate">Galaxy</span> instance as described <a href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/">here</a>.</p>
+
+<p><img src="../../images/gene-centric/wf.png" alt="WF. " loading="lazy" /></p>
+
+<p>The <span class="notranslate">workflow</span> takes three inputs:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-workflow-inputs"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> <span class="notranslate">Workflow</span> inputs</h3>
+
+  <ol>
+    <li><kbd>EXONS</kbd> - Amino acid translation of exons from the gene of interest (<a href="#step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest">Step 2</a> of this tutorial)</li>
+    <li><kbd>DiamondDB</kbd> - Diamond database of ORF translations from genome assemblies (<a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4</a> of this tutorial)</li>
+    <li><kbd>ORF <span class="notranslate">BED</span></kbd> - Coordinates and frame information about ORFs in <span class="notranslate">BED</span> format (<a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4</a>  of this tutorial)</li>
+  </ol>
+
+</blockquote>
+
+<p>It produces two primary outputs:</p>
+
+<blockquote class="code-out">
+  <h3 id="code-out-results"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Results</h3>
+
+  <ol>
+    <li><kbd>Trees</kbd> - Phylogenetic trees for each input exon as <a href="https://en.wikipedia.org/wiki/Newick_format">Newick</a> file</li>
+    <li><kbd>PlottingData</kbd> - A summary table of exon matches for each genome</li>
+  </ol>
+
+</blockquote>
+
+<p>The overall logic of the <span class="notranslate">workflow</span> is as follows:</p>
+
+<ol>
+  <li>Perform <a href="https://github.com/bbuchfink/diamond"><strong>Diamond</strong></a> search to identify matches between the gene of interest (<kbd>EXONS</kbd>) and ORF sets from each genomes (<kbd>DiamondDB</kbd>).</li>
+  <li>Intersect information about the matches with <span class="notranslate">BED</span> file containing ORF coordinates (<kbd>ORF <span class="notranslate">BED</span></kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).</li>
+  <li>Extract matching parts of the sequences and generated multiple alignments using <a href="https://mafft.cbrc.jp/alignment/software/"><strong>MAFFT</strong></a>. This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of <em>XBP-1</em> there will be five sets of alignments.</li>
+  <li>Build phylogenetic tree for each alignment produced in the previous step using the <a href="https://en.wikipedia.org/wiki/Neighbor_joining">Neighbor Joining method</a> - a simple and quick way to obtain a rough phylogeny.</li>
+  <li>Use information from step 1 to compute genome coordinates of matches. This is done by combining the information about genomic positions of ORFs from the <kbd>ORF <span class="notranslate">BED</span></kbd> file and local alignment information generated during step 1.</li>
+</ol>
+
+<h2 id="step-7-looking-at-the-trees">Step 7: Looking at the trees</h2>
+
+<p>After running the <span class="notranslate">workflow</span> phylogenetic trees will be saved into a collection named <code class="language-plaintext highlighter-rouge">Join neighbors on ...</code>. This collection will also be labelled with tag <kbd>Trees</kbd>. To visualize the trees:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-visualize-the-trees"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Visualize the trees</h3>
+
+  <ul>
+    <li>Expand the collection by clicking on it</li>
+    <li>Click on any dataset</li>
+    <li>Click the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> icon:
+  <img src="../../images/gene-centric/display_tree.png" alt="Graph icon. " loading="lazy" /></li>
+    <li>A selection of tree visualization tools will appear in the center pane of the interface</li>
+    <li>Select <code class="language-plaintext highlighter-rouge">Phylogenetic Tre Visualization</code> and play with it:
+  <img src="../../images/gene-centric/tree.png" alt="The tree. " loading="lazy" /></li>
+  </ul>
+</blockquote>
+
+<h2 id="step-8-generating-and-interpreting-the-comparative-genome-graph">Step 8: Generating and interpreting the comparative genome graph</h2>
+
+<p>Another <span class="notranslate">workflow</span> output will represent a single file summarizing genomic location of matches between each of the genomes in our dataset and amino acid translation of exons from the gene of interest. It will be called <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> report</code> and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use exte<span class="notranslate">rna</span>l Jupyter notebook (note that Jupyter can be run directly from <span class="notranslate">Galaxy</span>, but to make this tutorial runnable on any <span class="notranslate">Galaxy</span> instance we will use an inte<span class="notranslate">rna</span>l notebook server).</p>
+
+<h3 id="starting-notebook">Starting notebook</h3>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+  <h3><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Choose Your Own Tutorial</h3>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		If you are on a server with Interactive Tool support (e.g. <span class="notranslate">Galaxy</span> Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="UseGalaxyorg" onclick="cyoaChoice('UseGalaxyorg')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Use<span class="notranslate">Galaxy</span>.org</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Galaxy-Europe-Australia-and-Others" onclick="cyoaChoice('Galaxy-Europe-Australia-and-Others')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary"><span class="notranslate">Galaxy</span> Europe, Australia, and Others</label>
+	
+	
+	
+
+	
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Use<span class="notranslate">Galaxy</span>org");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="UseGalaxyorg">
+
+  <p>The notebook can be accessed <a href="https://colab.research.google.com/drive/1smTpRejBb7c02LiIxMPNVDjOucLAsD81?usp=sharing">from here</a>. You do need to have a Google Account to be able to use the notebook.</p>
+
+</div>
+<div class="Galaxy-Europe-Australia-and-Others">
+
+  <!--SNIPPET-->
+  <blockquote class="notranslate hands_on">  <h3 data-toc-skip="" id="-hands-on-launch-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch JupyterLab</h3>  <blockquote class="tip">  <h3 data-toc-skip="" id="tip-tip-launch-jupyterlab-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch JupyterLab in <span class="notranslate">Galaxy</span></h3>  <p>Currently JupyterLab in <span class="notranslate">Galaxy</span> is available on <a href="https://live.usegalaxy.eu">Live.use<span class="notranslate">Galaxy</span>.eu</a>, <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a> and <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>.</p>  <blockquote class="notranslate hands_on">    <h3 data-toc-skip="" id="hands_on-hands-on-run-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run JupyterLab</h3>    <ol>      <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive Jupyter Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span> :</li>      <li>Click Execute</li>      <li>The tool will start running and will stay running permanently</li>      <li>Click on the <strong>User</strong> menu at the top and go to <strong>Active Interactive Tools</strong> and locate the JupyterLab instance you started.</li>      <li>Click on your JupyterLab instance</li>    </ol>  </blockquote></blockquote>  <blockquote class="tip">  <h3 data-toc-skip="" id="tip-tip-launch-try-jupyterlab-if-not-available-on-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch Try JupyterLab if not available on <span class="notranslate">Galaxy</span></h3>  <p>If JupyterLab is not available on the <span class="notranslate">Galaxy</span> instance:</p>  <ol>    <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">Try JupyterLab</a></li>  </ol></blockquote></blockquote>
+
+  <ol>
+    <li>
+      <p>Once the notebook has started, open a Terminal in Jupyter <strong>File → New → Terminal</strong></p>
+    </li>
+    <li>
+      <p>Run the following command:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.<span class="notranslate">galaxy</span>project.org/training-material/topics/genome-annotation/tutorials/gene-centric/gene_image.ipynb
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Switch to the Notebook that appears in the list of files on the left</p>
+    </li>
+  </ol>
+
+</div>
+
+<h3 id="proving-data">Proving data</h3>
+
+<p>The data is provided to the notebook by setting the <code class="language-plaintext highlighter-rouge">dataset_url</code> parameter in this cell:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Paste link to the dataset here
+</span><span class="n">dataset_url</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.org/api/datasets/f9cad7b01a472135a8abd43f91f8d3cf/display?to_ext=tabular'</span>
+</code></pre></div></div>
+
+<p>This is a URL pointing to one of the <span class="notranslate">workflow</span> outputs: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> report</code> with the <kbd>PlottingData</kbd> tag. To copy the URL click on the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-link</span> icon adjacent to the dataset:</p>
+
+<p><img src="../../images/gene-centric/copy_link.png" alt="Copying the link. " loading="lazy" /></p>
+
+<p>Running the notebook will generate two graphs explained in the next section.</p>
+
+<h3 id="interpreting-the-graphs">Interpreting the graphs</h3>
+
+<p>Analysis of sample data associated with this tutorial will produce the genome graph shown below. In this graph the Y-axis represents ORFs on positive (1, 2, 3 in red color) and negative (-1, -2, -3 in blue color) strands. The X-axis is genomic coordinates.  Boxes represent matches between amino acid sequences of exons and ORFs they are superimposed to. The color of boxes reflect the extent of amino acid identity. The color key is shown in the left upper corner of the plot. The image is interactive so you can zoom in and out.</p>
+
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+</head>
+<body>
+  <div id="vis" />
+  <script>
+    const spec = {
+  "config": {
+    "view": {"continuousWidth": 400, "continuousHeight": 300},
+    "title": {"anchor": "start", "fontSize": 10}
+  },
+  "vconcat": [
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [52, 10726]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector001": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "aGasCar1.fascaffold_1"
+        }
+      ],
+      "data": {"name": "data-4c922bb95694b1514f353a1acd2ab409"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-228, 3860]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector002": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "bTaeGut2.fascaffold_18"
+        }
+      ],
+      "data": {"name": "data-cd3fa6c014d625fc2f85cfeb0119b9e0"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [314, 3976]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector003": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "fScoJap1.fascaffold_13"
+        }
+      ],
+      "data": {"name": "data-33f25281b1f78907be251e80305165ce"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-71, 6632]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector004": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mHomSapT2T.fachr22"
+        }
+      ],
+      "data": {"name": "data-b9417f0d40ef923551b8b4d9ff9101ea"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [315, 2819]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector005": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_2"
+        }
+      ],
+      "data": {"name": "data-4ee088ff88102dae61c31ea38e9d47e2"},
+      "height": 100,
+      "width": 800
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rule", "strokeWidth": 2},
+          "encoding": {
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {
+              "field": "start",
+              "scale": {"domain": [-74, 5866]},
+              "title": null,
+              "type": "quantitative"
+            },
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "selection": {
+            "selector006": {
+              "type": "interval",
+              "bind": "scales",
+              "encodings": ["x", "y"]
+            }
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "start", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "point", "shape": "arrow", "strokeWidth": 2},
+          "encoding": {
+            "angle": {
+              "condition": {"value": 270, "test": "(datum['strand'] === '-')"},
+              "value": 90
+            },
+            "color": {
+              "condition": {
+                "value": "blue",
+                "test": "(datum['strand'] === '-')"
+              },
+              "value": "red"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "end", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "rule", "opacity": 0.9, "strokeWidth": 10},
+          "encoding": {
+            "color": {
+              "field": "id",
+              "scale": {"scheme": "blueorange"},
+              "type": "quantitative"
+            },
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "matchStart", "type": "quantitative"},
+            "x2": {"field": "matchEnd"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        },
+        {
+          "mark": {"type": "text", "yOffset": -10},
+          "encoding": {
+            "color": {"value": "black"},
+            "text": {"field": "exon", "type": "nominal"},
+            "tooltip": [
+              {"field": "orf", "title": "ORF id", "type": "nominal"},
+              {"field": "genome", "title": "Genome", "type": "nominal"},
+              {"field": "chr", "title": "Chromosome", "type": "nominal"},
+              {"field": "id", "title": "% identity", "type": "nominal"}
+            ],
+            "x": {"field": "midpoint", "type": "quantitative"},
+            "x2": {"field": "end"},
+            "y": {"field": "frame", "title": null, "type": "nominal"}
+          },
+          "title": "mCynVol1.fascaffold_3"
+        }
+      ],
+      "data": {"name": "data-729a5f2f10472b0a903d29284fd22ba5"},
+      "height": 100,
+      "width": 800
+    }
+  ],
+  "resolve": {"scale": {"y": "shared"}},
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-4c922bb95694b1514f353a1acd2ab409": [
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 552,
+        "end": 684,
+        "orf": "aGasCar1.fascaffold_1_ORF.2",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 762,
+        "end": 1029,
+        "orf": "aGasCar1.fascaffold_1_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8880,
+        "end": 9045,
+        "orf": "aGasCar1.fascaffold_1_ORF.31",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "8970",
+        "matchStart": "8904",
+        "matchEnd": "9036",
+        "exon": "xbp-1u-p1",
+        "id": "75.6",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8880,
+        "end": 9045,
+        "orf": "aGasCar1.fascaffold_1_ORF.31",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "8923",
+        "matchStart": "8904",
+        "matchEnd": "8943",
+        "exon": "xbp-1s-p12",
+        "id": "85.7",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9270,
+        "end": 9432,
+        "orf": "aGasCar1.fascaffold_1_ORF.32",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9807,
+        "end": 9921,
+        "orf": "aGasCar1.fascaffold_1_ORF.33",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 697,
+        "end": 949,
+        "orf": "aGasCar1.fascaffold_1_ORF.43",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9424,
+        "end": 10126,
+        "orf": "aGasCar1.fascaffold_1_ORF.64",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": "9776",
+        "matchStart": "9514",
+        "matchEnd": "10039",
+        "exon": "xbp-1s-p3",
+        "id": "46.5",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 659,
+        "end": 959,
+        "orf": "aGasCar1.fascaffold_1_ORF.73",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "831",
+        "matchStart": "749",
+        "matchEnd": "914",
+        "exon": "xbp1_ex1",
+        "id": "52.4",
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8933,
+        "end": 9137,
+        "orf": "aGasCar1.fascaffold_1_ORF.102",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9467,
+        "end": 9686,
+        "orf": "aGasCar1.fascaffold_1_ORF.104",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9824,
+        "end": 9974,
+        "orf": "aGasCar1.fascaffold_1_ORF.105",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9977,
+        "end": 10226,
+        "orf": "aGasCar1.fascaffold_1_ORF.106",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9708,
+        "end": 9930,
+        "orf": "aGasCar1.fascaffold_1_ORF.120",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9585,
+        "end": 9705,
+        "orf": "aGasCar1.fascaffold_1_ORF.121",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9396,
+        "end": 9564,
+        "orf": "aGasCar1.fascaffold_1_ORF.122",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8952,
+        "end": 9081,
+        "orf": "aGasCar1.fascaffold_1_ORF.124",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 10007,
+        "end": 10187,
+        "orf": "aGasCar1.fascaffold_1_ORF.157",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9791,
+        "end": 9953,
+        "orf": "aGasCar1.fascaffold_1_ORF.158",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9482,
+        "end": 9662,
+        "orf": "aGasCar1.fascaffold_1_ORF.159",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9305,
+        "end": 9431,
+        "orf": "aGasCar1.fascaffold_1_ORF.160",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8801,
+        "end": 9032,
+        "orf": "aGasCar1.fascaffold_1_ORF.162",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 821,
+        "end": 1025,
+        "orf": "aGasCar1.fascaffold_1_ORF.187",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 686,
+        "end": 800,
+        "orf": "aGasCar1.fascaffold_1_ORF.188",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9949,
+        "end": 10063,
+        "orf": "aGasCar1.fascaffold_1_ORF.197",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9661,
+        "end": 9796,
+        "orf": "aGasCar1.fascaffold_1_ORF.198",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 9550,
+        "end": 9658,
+        "orf": "aGasCar1.fascaffold_1_ORF.199",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 8947,
+        "end": 9136,
+        "orf": "aGasCar1.fascaffold_1_ORF.200",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 781,
+        "end": 946,
+        "orf": "aGasCar1.fascaffold_1_ORF.227",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      },
+      {
+        "genome": "aGasCar1.fa",
+        "chr": "scaffold_1",
+        "start": 658,
+        "end": 778,
+        "orf": "aGasCar1.fascaffold_1_ORF.228",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "aGasCar1.fascaffold_1",
+        "clade": "a"
+      }
+    ],
+    "data-cd3fa6c014d625fc2f85cfeb0119b9e0": [
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 717,
+        "end": 1026,
+        "orf": "bTaeGut2.fascaffold_18_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "927",
+        "matchStart": "831",
+        "matchEnd": "1023",
+        "exon": "xbp1_ex1",
+        "id": "48.6",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2760,
+        "end": 3348,
+        "orf": "bTaeGut2.fascaffold_18_ORF.11",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "3072",
+        "matchStart": "2796",
+        "matchEnd": "3348",
+        "exon": "xbp-1s-p3",
+        "id": "60.8",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 634,
+        "end": 733,
+        "orf": "bTaeGut2.fascaffold_18_ORF.15",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 781,
+        "end": 997,
+        "orf": "bTaeGut2.fascaffold_18_ORF.16",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1957,
+        "end": 2098,
+        "orf": "bTaeGut2.fascaffold_18_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2773,
+        "end": 2980,
+        "orf": "bTaeGut2.fascaffold_18_ORF.23",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": "2887",
+        "matchStart": "2797",
+        "matchEnd": "2977",
+        "exon": "xbp-1u-p2",
+        "id": "60.7",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3142,
+        "end": 3355,
+        "orf": "bTaeGut2.fascaffold_18_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 272,
+        "end": 863,
+        "orf": "bTaeGut2.fascaffold_18_ORF.29",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 878,
+        "end": 1529,
+        "orf": "bTaeGut2.fascaffold_18_ORF.30",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1886,
+        "end": 2069,
+        "orf": "bTaeGut2.fascaffold_18_ORF.32",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1994",
+        "matchStart": "1928",
+        "matchEnd": "2060",
+        "exon": "xbp-1u-p1",
+        "id": "66.7",
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2798,
+        "end": 2954,
+        "orf": "bTaeGut2.fascaffold_18_ORF.35",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3151,
+        "end": 3262,
+        "orf": "bTaeGut2.fascaffold_18_ORF.41",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2980,
+        "end": 3148,
+        "orf": "bTaeGut2.fascaffold_18_ORF.42",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1774,
+        "end": 2056,
+        "orf": "bTaeGut2.fascaffold_18_ORF.45",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 991,
+        "end": 1261,
+        "orf": "bTaeGut2.fascaffold_18_ORF.47",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 865,
+        "end": 988,
+        "orf": "bTaeGut2.fascaffold_18_ORF.48",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 700,
+        "end": 856,
+        "orf": "bTaeGut2.fascaffold_18_ORF.49",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3207,
+        "end": 3360,
+        "orf": "bTaeGut2.fascaffold_18_ORF.53",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3087,
+        "end": 3204,
+        "orf": "bTaeGut2.fascaffold_18_ORF.54",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1971,
+        "end": 2082,
+        "orf": "bTaeGut2.fascaffold_18_ORF.56",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1848,
+        "end": 1968,
+        "orf": "bTaeGut2.fascaffold_18_ORF.57",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 627,
+        "end": 1599,
+        "orf": "bTaeGut2.fascaffold_18_ORF.58",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 3212,
+        "end": 3347,
+        "orf": "bTaeGut2.fascaffold_18_ORF.62",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2993,
+        "end": 3170,
+        "orf": "bTaeGut2.fascaffold_18_ORF.63",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2609,
+        "end": 2990,
+        "orf": "bTaeGut2.fascaffold_18_ORF.64",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 2012,
+        "end": 2168,
+        "orf": "bTaeGut2.fascaffold_18_ORF.66",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 1763,
+        "end": 1973,
+        "orf": "bTaeGut2.fascaffold_18_ORF.67",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      },
+      {
+        "genome": "bTaeGut2.fa",
+        "chr": "scaffold_18",
+        "start": 584,
+        "end": 1289,
+        "orf": "bTaeGut2.fascaffold_18_ORF.70",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "bTaeGut2.fascaffold_18",
+        "clade": "b"
+      }
+    ],
+    "data-33f25281b1f78907be251e80305165ce": [
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1113,
+        "end": 1266,
+        "orf": "fScoJap1.fascaffold_13_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1284,
+        "end": 1383,
+        "orf": "fScoJap1.fascaffold_13_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1386,
+        "end": 1488,
+        "orf": "fScoJap1.fascaffold_13_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1632,
+        "end": 1755,
+        "orf": "fScoJap1.fascaffold_13_ORF.6",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1797,
+        "end": 1971,
+        "orf": "fScoJap1.fascaffold_13_ORF.7",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3135,
+        "end": 3321,
+        "orf": "fScoJap1.fascaffold_13_ORF.11",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 814,
+        "end": 1285,
+        "orf": "fScoJap1.fascaffold_13_ORF.16",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1288,
+        "end": 1480,
+        "orf": "fScoJap1.fascaffold_13_ORF.17",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1534,
+        "end": 1690,
+        "orf": "fScoJap1.fascaffold_13_ORF.18",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1693,
+        "end": 1810,
+        "orf": "fScoJap1.fascaffold_13_ORF.19",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1813,
+        "end": 1951,
+        "orf": "fScoJap1.fascaffold_13_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2971,
+        "end": 3241,
+        "orf": "fScoJap1.fascaffold_13_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 836,
+        "end": 1061,
+        "orf": "fScoJap1.fascaffold_13_ORF.25",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1070,
+        "end": 1436,
+        "orf": "fScoJap1.fascaffold_13_ORF.26",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1688,
+        "end": 1829,
+        "orf": "fScoJap1.fascaffold_13_ORF.28",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3017,
+        "end": 3119,
+        "orf": "fScoJap1.fascaffold_13_ORF.31",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3122,
+        "end": 3254,
+        "orf": "fScoJap1.fascaffold_13_ORF.32",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2974,
+        "end": 3253,
+        "orf": "fScoJap1.fascaffold_13_ORF.35",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1648,
+        "end": 1750,
+        "orf": "fScoJap1.fascaffold_13_ORF.40",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 862,
+        "end": 1435,
+        "orf": "fScoJap1.fascaffold_13_ORF.42",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1147",
+        "matchStart": "862",
+        "matchEnd": "1432",
+        "exon": "xbp-1s-p3",
+        "id": "44.6",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 2970,
+        "end": 3309,
+        "orf": "fScoJap1.fascaffold_13_ORF.47",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "3097",
+        "matchStart": "2982",
+        "matchEnd": "3213",
+        "exon": "xbp1_ex1",
+        "id": "48.1",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1584,
+        "end": 1704,
+        "orf": "fScoJap1.fascaffold_13_ORF.51",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1260,
+        "end": 1479,
+        "orf": "fScoJap1.fascaffold_13_ORF.52",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 840,
+        "end": 1131,
+        "orf": "fScoJap1.fascaffold_13_ORF.53",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3305,
+        "end": 3476,
+        "orf": "fScoJap1.fascaffold_13_ORF.57",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 3008,
+        "end": 3167,
+        "orf": "fScoJap1.fascaffold_13_ORF.58",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1550,
+        "end": 1844,
+        "orf": "fScoJap1.fascaffold_13_ORF.63",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "1668",
+        "matchStart": "1601",
+        "matchEnd": "1736",
+        "exon": "xbp-1u-p1",
+        "id": "56.5",
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      },
+      {
+        "genome": "fScoJap1.fa",
+        "chr": "scaffold_13",
+        "start": 1076,
+        "end": 1247,
+        "orf": "fScoJap1.fascaffold_13_ORF.64",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "fScoJap1.fascaffold_13",
+        "clade": "f"
+      }
+    ],
+    "data-b9417f0d40ef923551b8b4d9ff9101ea": [
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 429,
+        "end": 630,
+        "orf": "mHomSapT2T.fachr22_ORF.2",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 900,
+        "end": 1023,
+        "orf": "mHomSapT2T.fachr22_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1317,
+        "end": 1431,
+        "orf": "mHomSapT2T.fachr22_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1539,
+        "end": 1719,
+        "orf": "mHomSapT2T.fachr22_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5358,
+        "end": 5631,
+        "orf": "mHomSapT2T.fachr22_ORF.16",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5781,
+        "end": 6132,
+        "orf": "mHomSapT2T.fachr22_ORF.17",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 466,
+        "end": 586,
+        "orf": "mHomSapT2T.fachr22_ORF.22",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 589,
+        "end": 712,
+        "orf": "mHomSapT2T.fachr22_ORF.23",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 715,
+        "end": 919,
+        "orf": "mHomSapT2T.fachr22_ORF.24",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 922,
+        "end": 1102,
+        "orf": "mHomSapT2T.fachr22_ORF.25",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1429,
+        "end": 1546,
+        "orf": "mHomSapT2T.fachr22_ORF.26",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5275,
+        "end": 5932,
+        "orf": "mHomSapT2T.fachr22_ORF.36",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 551,
+        "end": 701,
+        "orf": "mHomSapT2T.fachr22_ORF.42",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 845,
+        "end": 968,
+        "orf": "mHomSapT2T.fachr22_ORF.43",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 980,
+        "end": 1112,
+        "orf": "mHomSapT2T.fachr22_ORF.44",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1115,
+        "end": 1337,
+        "orf": "mHomSapT2T.fachr22_ORF.45",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1346,
+        "end": 1499,
+        "orf": "mHomSapT2T.fachr22_ORF.46",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5402,
+        "end": 6107,
+        "orf": "mHomSapT2T.fachr22_ORF.59",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5401,
+        "end": 5833,
+        "orf": "mHomSapT2T.fachr22_ORF.66",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "5705",
+        "matchStart": "5611",
+        "matchEnd": "5800",
+        "exon": "xbp1_ex1",
+        "id": "87.5",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1333,
+        "end": 1552,
+        "orf": "mHomSapT2T.fachr22_ORF.77",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1406",
+        "matchStart": "1336",
+        "matchEnd": "1477",
+        "exon": "xbp-1u-p1",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1333,
+        "end": 1552,
+        "orf": "mHomSapT2T.fachr22_ORF.77",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1456",
+        "matchStart": "1435",
+        "matchEnd": "1477",
+        "exon": "xbp-1s-p12",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 844,
+        "end": 1015,
+        "orf": "mHomSapT2T.fachr22_ORF.78",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5625,
+        "end": 5985,
+        "orf": "mHomSapT2T.fachr22_ORF.84",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5427,
+        "end": 5622,
+        "orf": "mHomSapT2T.fachr22_ORF.85",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5274,
+        "end": 5424,
+        "orf": "mHomSapT2T.fachr22_ORF.86",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1353,
+        "end": 1467,
+        "orf": "mHomSapT2T.fachr22_ORF.95",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 465,
+        "end": 1167,
+        "orf": "mHomSapT2T.fachr22_ORF.96",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "741",
+        "matchStart": "465",
+        "matchEnd": "1017",
+        "exon": "xbp-1s-p3",
+        "id": "95.7",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5780,
+        "end": 6047,
+        "orf": "mHomSapT2T.fachr22_ORF.99",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 5357,
+        "end": 5777,
+        "orf": "mHomSapT2T.fachr22_ORF.100",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 1313,
+        "end": 1445,
+        "orf": "mHomSapT2T.fachr22_ORF.112",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "1388",
+        "matchStart": "1334",
+        "matchEnd": "1442",
+        "exon": "xbp-1s-p12",
+        "id": "81.1",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 836,
+        "end": 1073,
+        "orf": "mHomSapT2T.fachr22_ORF.113",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "926",
+        "matchStart": "836",
+        "matchEnd": "1016",
+        "exon": "xbp-1u-p2",
+        "id": "100",
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      },
+      {
+        "genome": "mHomSapT2T.fa",
+        "chr": "chr22",
+        "start": 524,
+        "end": 674,
+        "orf": "mHomSapT2T.fachr22_ORF.114",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mHomSapT2T.fachr22",
+        "clade": "m"
+      }
+    ],
+    "data-4ee088ff88102dae61c31ea38e9d47e2": [
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 960,
+        "end": 1080,
+        "orf": "mCynVol1.fascaffold_2_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1048",
+        "matchStart": "1017",
+        "matchEnd": "1080",
+        "exon": "xbp1_ex1",
+        "id": "68.2",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1542",
+        "matchStart": "1476",
+        "matchEnd": "1608",
+        "exon": "xbp-1u-p1",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1731",
+        "matchStart": "1659",
+        "matchEnd": "1803",
+        "exon": "xbp-1u-p2",
+        "id": "91.8",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1497",
+        "matchStart": "1476",
+        "matchEnd": "1518",
+        "exon": "xbp-1s-p12",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1083,
+        "end": 1803,
+        "orf": "mCynVol1.fascaffold_2_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": "1171",
+        "matchStart": "1098",
+        "matchEnd": "1245",
+        "exon": "xbp1_ex1",
+        "id": "90.0",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 985,
+        "end": 1219,
+        "orf": "mCynVol1.fascaffold_2_ORF.7",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1486,
+        "end": 1591,
+        "orf": "mCynVol1.fascaffold_2_ORF.8",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1624,
+        "end": 1795,
+        "orf": "mCynVol1.fascaffold_2_ORF.9",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 950,
+        "end": 1307,
+        "orf": "mCynVol1.fascaffold_2_ORF.14",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1310,
+        "end": 1451,
+        "orf": "mCynVol1.fascaffold_2_ORF.15",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1508,
+        "end": 2171,
+        "orf": "mCynVol1.fascaffold_2_ORF.16",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1565",
+        "matchStart": "1511",
+        "matchEnd": "1619",
+        "exon": "xbp-1s-p12",
+        "id": "70.3",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1508,
+        "end": 2171,
+        "orf": "mCynVol1.fascaffold_2_ORF.16",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": "1896",
+        "matchStart": "1622",
+        "matchEnd": "2171",
+        "exon": "xbp-1s-p3",
+        "id": "87.0",
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2006,
+        "end": 2207,
+        "orf": "mCynVol1.fascaffold_2_ORF.21",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1610,
+        "end": 1760,
+        "orf": "mCynVol1.fascaffold_2_ORF.22",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1391,
+        "end": 1607,
+        "orf": "mCynVol1.fascaffold_2_ORF.23",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1082,
+        "end": 1271,
+        "orf": "mCynVol1.fascaffold_2_ORF.24",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 815,
+        "end": 1079,
+        "orf": "mCynVol1.fascaffold_2_ORF.25",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2050,
+        "end": 2170,
+        "orf": "mCynVol1.fascaffold_2_ORF.31",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1927,
+        "end": 2047,
+        "orf": "mCynVol1.fascaffold_2_ORF.32",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1720,
+        "end": 1924,
+        "orf": "mCynVol1.fascaffold_2_ORF.33",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1522,
+        "end": 1717,
+        "orf": "mCynVol1.fascaffold_2_ORF.34",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1213,
+        "end": 1447,
+        "orf": "mCynVol1.fascaffold_2_ORF.35",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 964,
+        "end": 1132,
+        "orf": "mCynVol1.fascaffold_2_ORF.36",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 2166,
+        "end": 2319,
+        "orf": "mCynVol1.fascaffold_2_ORF.42",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1974,
+        "end": 2085,
+        "orf": "mCynVol1.fascaffold_2_ORF.43",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1797,
+        "end": 1902,
+        "orf": "mCynVol1.fascaffold_2_ORF.44",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1692,
+        "end": 1794,
+        "orf": "mCynVol1.fascaffold_2_ORF.45",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1419,
+        "end": 1524,
+        "orf": "mCynVol1.fascaffold_2_ORF.46",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 1068,
+        "end": 1359,
+        "orf": "mCynVol1.fascaffold_2_ORF.47",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_2",
+        "start": 924,
+        "end": 1065,
+        "orf": "mCynVol1.fascaffold_2_ORF.48",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_2",
+        "clade": "m"
+      }
+    ],
+    "data-729a5f2f10472b0a903d29284fd22ba5": [
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 426,
+        "end": 579,
+        "orf": "mCynVol1.fascaffold_3_ORF.3",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 660,
+        "end": 771,
+        "orf": "mCynVol1.fascaffold_3_ORF.4",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 843,
+        "end": 948,
+        "orf": "mCynVol1.fascaffold_3_ORF.5",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 951,
+        "end": 1053,
+        "orf": "mCynVol1.fascaffold_3_ORF.6",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1452,
+        "end": 1605,
+        "orf": "mCynVol1.fascaffold_3_ORF.8",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1638,
+        "end": 1839,
+        "orf": "mCynVol1.fascaffold_3_ORF.9",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4395,
+        "end": 5139,
+        "orf": "mCynVol1.fascaffold_3_ORF.14",
+        "frame": 1,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 538,
+        "end": 739,
+        "orf": "mCynVol1.fascaffold_3_ORF.18",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 985,
+        "end": 1213,
+        "orf": "mCynVol1.fascaffold_3_ORF.19",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1423,
+        "end": 1537,
+        "orf": "mCynVol1.fascaffold_3_ORF.20",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4570,
+        "end": 4831,
+        "orf": "mCynVol1.fascaffold_3_ORF.27",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4912,
+        "end": 5047,
+        "orf": "mCynVol1.fascaffold_3_ORF.28",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 5050,
+        "end": 5272,
+        "orf": "mCynVol1.fascaffold_3_ORF.29",
+        "frame": 2,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 575,
+        "end": 695,
+        "orf": "mCynVol1.fascaffold_3_ORF.36",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 698,
+        "end": 818,
+        "orf": "mCynVol1.fascaffold_3_ORF.37",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 821,
+        "end": 1025,
+        "orf": "mCynVol1.fascaffold_3_ORF.38",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1028,
+        "end": 1148,
+        "orf": "mCynVol1.fascaffold_3_ORF.39",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1535,
+        "end": 1652,
+        "orf": "mCynVol1.fascaffold_3_ORF.40",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4544,
+        "end": 4976,
+        "orf": "mCynVol1.fascaffold_3_ORF.49",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4979,
+        "end": 5366,
+        "orf": "mCynVol1.fascaffold_3_ORF.50",
+        "frame": 3,
+        "strand": "+",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4521,
+        "end": 5271,
+        "orf": "mCynVol1.fascaffold_3_ORF.56",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1419,
+        "end": 1551,
+        "orf": "mCynVol1.fascaffold_3_ORF.62",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1494",
+        "matchStart": "1440",
+        "matchEnd": "1548",
+        "exon": "xbp-1s-p12",
+        "id": "70.3",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 942,
+        "end": 1179,
+        "orf": "mCynVol1.fascaffold_3_ORF.63",
+        "frame": -1,
+        "strand": "-",
+        "midpoint": "1032",
+        "matchStart": "942",
+        "matchEnd": "1122",
+        "exon": "xbp-1u-p2",
+        "id": "91.8",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4655,
+        "end": 5102,
+        "orf": "mCynVol1.fascaffold_3_ORF.67",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "4868",
+        "matchStart": "4799",
+        "matchEnd": "4937",
+        "exon": "xbp1_ex1",
+        "id": "91.5",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1427,
+        "end": 1709,
+        "orf": "mCynVol1.fascaffold_3_ORF.76",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "1515",
+        "matchStart": "1448",
+        "matchEnd": "1583",
+        "exon": "xbp-1u-p1",
+        "id": "91.3",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1427,
+        "end": 1709,
+        "orf": "mCynVol1.fascaffold_3_ORF.76",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": "1562",
+        "matchStart": "1541",
+        "matchEnd": "1583",
+        "exon": "xbp-1s-p12",
+        "id": "86.7",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 950,
+        "end": 1121,
+        "orf": "mCynVol1.fascaffold_3_ORF.77",
+        "frame": -2,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4825,
+        "end": 5293,
+        "orf": "mCynVol1.fascaffold_3_ORF.81",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 4609,
+        "end": 4732,
+        "orf": "mCynVol1.fascaffold_3_ORF.82",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1621,
+        "end": 1732,
+        "orf": "mCynVol1.fascaffold_3_ORF.90",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 1468,
+        "end": 1573,
+        "orf": "mCynVol1.fascaffold_3_ORF.91",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": null,
+        "matchStart": null,
+        "matchEnd": null,
+        "exon": null,
+        "id": null,
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      },
+      {
+        "genome": "mCynVol1.fa",
+        "chr": "scaffold_3",
+        "start": 574,
+        "end": 1147,
+        "orf": "mCynVol1.fascaffold_3_ORF.92",
+        "frame": -3,
+        "strand": "-",
+        "midpoint": "848",
+        "matchStart": "574",
+        "matchEnd": "1123",
+        "exon": "xbp-1s-p3",
+        "id": "88.6",
+        "genome_chr": "mCynVol1.fascaffold_3",
+        "clade": "m"
+      }
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
+
+<p>One of the interesting things you can immediate see in this graph is that the Philippine flying lemur (<code class="language-plaintext highlighter-rouge">mCynVol</code>) contains two copies of <em>XBP-1</em> located on <code class="language-plaintext highlighter-rouge">scaffold_2</code> and <code class="language-plaintext highlighter-rouge">scaffold_3</code>. Furthermore, the copy located on <code class="language-plaintext highlighter-rouge">scaffold_2</code> looks like a retransposed duplicate of the gene because it is shorter and likely missing some of the introns – a hallmark of retrotransposition.</p>
+
+<p>Another plot currently produced by the notebook is a summary plot showing the distribution of matches across species and their amino acid identity:</p>
+
+<p><img src="../../images/gene-centric/summary_plot.svg" alt="Copying the link. " loading="lazy" /></p>
+
+<h1 id="about-the-gene">About the gene</h1>
+
+<p><em>XBP-1</em> is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene (<span class="citation"><a href="#Chung2007-wv">Chung <i>et al.</i> 2007</a></span>). In this case the switch between two reading frames occurs when a highly specialized <span class="notranslate">RNA</span> endonuclease, IRE1, excises a 26 nucleotide spacer from <em>XBP-1</em> m<span class="notranslate">RNA</span> (<span class="citation"><a href="#Nekrutenko2006-bk">Nekrutenko and He 2006</a></span>). This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes (<span class="citation"><a href="#Chen2021-ws">Chen and Cubillos-Ruiz 2021</a></span>) that is conserved all the way to yeast (with <em>XBP-1</em>’s homologue <em>HAC-1</em>; <span class="citation"><a href="#Calfon2002-dl">Calfon <i>et al.</i> 2002</a></span> ) .</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-getting-help"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Getting help</h3>
+
+  <p>For questions about using <span class="notranslate">Galaxy</span>, you can ask in the <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span> help forum</a>.</p>
+
+</blockquote>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>You can locate gene of interest in unannotated genomes and compare its structure across multiple species</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/genome-annotation/faqs/">FAQ page for the Genome Annotation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Calfon2002-dl">Calfon, M., H. Zeng, F. Urano, and J. H. Till, 2002 <b>IRE1 couples endoplasmic reticulum load to secretory capacity by processing the XBP-1 mRNA</b>. ….</li>
+<li id="Nekrutenko2006-bk">Nekrutenko, A., and J. He, 2006 <b>Functionality of unspliced XBP1 is required to explain evolution of overlapping reading frames</b>. Trends in Genetics 22: 645–648.</li>
+<li id="Chung2007-wv">Chung, W.-Y., S. Wadhawan, R. Szklarczyk, S. K. Pond, and A. Nekrutenko, 2007 <b>A first look at ARFome: dual-coding genes in mammalian genomes</b>. PLoS Comput. Biol. 3: e91.</li>
+<li id="Chen2021-ws">Chen, X., and J. R. Cubillos-Ruiz, 2021 <b>Endoplasmic reticulum stress signals in the tumour and its microenvironment</b>. Nat. Rev. Cancer 21: 71–88.</li>
+<li id="Rhie2021-ks">Rhie, A., S. A. McCarthy, O. Fedrigo, J. Damas, G. Formenti <i>et al.</i>, 2021 <b>Towards complete and error-free genome assemblies of all vertebrate species</b>. Nature 592: 737–746.</li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>ORF</dt>
+                    <dd>Open Reading Frame</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Comparative gene analysis in unannotated genomes (Genome Annotation)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Anton Nekrutenko, 2022 <b>Comparative gene analysis in unannotated genomes (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html">https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-gene-centric,
+author = "Anton Nekrutenko",
+title = "Comparative gene analysis in unannotated genomes (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "07"
+url = "\url{https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
