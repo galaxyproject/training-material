@@ -213,9 +213,9 @@ Ahora tenemos:
 
 Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas dentro de algunas de las instancias públicas. Si esto sucede, haz click sobre la pestaña Single Cell en la parte izquierda de la pantalla y desplázate hacia abajo hasta encontrar la herramienta Alevin. Consejo: Si haces click sobre las herramientas (tools) dentro de la opción ‘tutorial’ de Galaxy siempre tendrás la versión correcta de la herramienta. En este caso: Galaxy Version 1.3.0+galaxy2 - debe ser la versión por defecto; si no lo es, haz click sobre ‘Versiones’ (‘Versions’) y escoge dicha versión.
 
-![Tutorial option in Galaxy](../../images/scrna-casestudy/wab-tutorial-in-galaxy.png "La opción de tutorial está situada en la parte superior derecha de Galaxy")
+![La opción de tutorial está situada en la parte superior derecha de Galaxy](../../images/scrna-casestudy/wab-tutorial-in-galaxy.png "La opción de tutorial")
 
-![Accessing tools in the tutorial option within Galaxy](../../images/scrna-casestudy/wab-tutorial-option-filler.png "Haz click sobre la herramienta en el tutorial de Galaxy")
+![La herramienta en el tutorial de Galaxy tiene un botón](../../images/scrna-casestudy/wab-tutorial-option-filler.png "Haz click sobre la herramienta en el tutorial de Galaxy")
 
 > ### {% icon hands_on %} Practica: Ejecutando Alevin
 >
