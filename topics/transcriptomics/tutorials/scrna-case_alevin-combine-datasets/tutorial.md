@@ -46,7 +46,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 # Introduction
-{:.no_toc}
 
 <!-- This is a comment. -->
 
