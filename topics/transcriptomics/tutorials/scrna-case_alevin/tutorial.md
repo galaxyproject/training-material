@@ -29,9 +29,16 @@ tags:
   - paper-replication
   - español
 
-contributors:
-  - nomadscientist
-  - pinin4fjords
+contributions:
+  authorship:
+    - nomadscientist
+    - pinin4fjords
+
+  editing:
+    - hexylena
+
+  testing:
+    - wee-snufkin
 
 requirements:
   - type: "internal"

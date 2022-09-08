@@ -34,9 +34,17 @@ tags:
 - 10x
 - paper-replication
 - interactive-tools
-contributors:
-- nomadscientist
-- mtekman
+
+contributions:
+  authorship:
+    - nomadscientist
+    - mtekman
+  editing:
+    - hexylena
+
+  testing:
+    - wee-snufkin
+
 
 ---
 
