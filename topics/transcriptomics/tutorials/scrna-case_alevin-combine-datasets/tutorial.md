@@ -150,7 +150,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
 I set up the example history with the earliest indices at the bottom.
 
-![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "Correct order of the history")
+![Ordered history](../../images/scrna-casestudy/wab-history-files-ascending.png "The files are numbered such that dataset #1 is N701, while dataset #7 is N707, with the rest of the files in order. This ensures they are added in order, allowing you to add metadata correctly.")
 
 Therefore, when it is all concatenated together, the `batch` appears as follows:
 
