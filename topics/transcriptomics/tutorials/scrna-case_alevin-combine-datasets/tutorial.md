@@ -310,7 +310,6 @@ If you happen to be interested in analysing publicly available data, particularl
 It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to this tutorial, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations).
 
 # Conclusion
-{:.no_toc}
 
 ![Combining data files](../../images/scrna-casestudy/wab-combining_datasets_alevin.png "Workflow  - Combining datasets")
 
