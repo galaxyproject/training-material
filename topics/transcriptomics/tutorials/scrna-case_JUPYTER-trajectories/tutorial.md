@@ -5,6 +5,8 @@ title: Inferring Trajectories using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell-CS
 priority: 4
 zenodo_link: 'https://zenodo.org/record/7054806'
+redirect_from:
+- /topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 objectives:

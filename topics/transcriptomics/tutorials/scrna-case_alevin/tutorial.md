@@ -7,6 +7,9 @@ priority: 1
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
+redirect_from:
+- /topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial
+
 questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
 
