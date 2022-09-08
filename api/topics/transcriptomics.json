@@ -699,7 +699,7 @@
         }
       ],
       "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "last_modified_at": "2021-05-27T10:56:26+00:00",
+      "last_modified_at": "2022-08-30T22:17:13+00:00",
       "url": "/topics/transcriptomics/tutorials/scrna-plant/tutorial.html",
       "topic_name": "transcriptomics",
       "tutorial_name": "scrna-plant",
@@ -1059,6 +1059,129 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Combining datasets after pre-processing",
+      "subtopic": "single-cell-CS",
+      "priority": 2,
+      "zenodo_link": "https://zenodo.org/record/7041120",
+      "questions": [
+        "I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?"
+      ],
+      "objectives": [
+        "Combine data matrices from different samples in the same experiment",
+        "Label the metadata for downstream processing"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design",
+        "Retreive partially analysed data from a public repository"
+      ],
+      "tags": [
+        "single-cell",
+        "10x",
+        "paper-replication",
+        "español"
+      ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist",
+          "pinin4fjords"
+        ],
+        "editing": [
+          "hexylena"
+        ],
+        "testing": [
+          "wee-snufkin"
+        ]
+      },
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-intro",
+            "scrna-umis",
+            "scrna-case_alevin"
+          ]
+        }
+      ],
+      "translations": {
+        "tutorial": [
+          "es"
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "last_modified_at": "2022-09-08T12:08:00+00:00",
+      "url": "/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-case_alevin-combine-datasets",
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "CS2_Combining_datasets_after_pre-processing.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "Cut1",
+        "Paste1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"
+      ],
+      "tours": false,
+      "video": false,
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Jonathan Manning",
+          "email": "jmanning@ebi.ac.uk",
+          "joined": "2021-02",
+          "id": "pinin4fjords",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pinin4fjords.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Julia Jakiela",
+          "email": "juliajot36@gmail.com",
+          "joined": "2022-06",
+          "id": "wee-snufkin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.json"
       }
     },
     {
@@ -1430,8 +1553,11 @@
       "layout": "tutorial_hands_on",
       "title": "Filter, Plot and Explore Single-cell RNA-seq Data",
       "subtopic": "single-cell-CS",
-      "priority": 2,
-      "zenodo_link": "https://zenodo.org/record/4624461",
+      "priority": 3,
+      "zenodo_link": "https://zenodo.org/record/7053673",
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial"
+      ],
       "questions": [
         "Is my single cell dataset a quality dataset?",
         "How do I generate and annotate cell clusters?",
@@ -1454,7 +1580,8 @@
           "type": "internal",
           "topic_name": "transcriptomics",
           "tutorials": [
-            "droplet-quantification-preprocessing"
+            "scrna-case_alevin",
+            "scrna-case_alevin-combine-datasets"
           ]
         }
       ],
@@ -1462,9 +1589,20 @@
         "single-cell",
         "10x",
         "paper-replication",
-        "interactive-tools",
-        "español"
+        "español",
+        "interactive-tools"
       ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist"
+        ],
+        "editing": [
+          "hexylena"
+        ],
+        "testing": [
+          "wee-snufkin"
+        ]
+      },
       "contributors": [
         {
           "name": "Wendi Bacon",
@@ -1485,15 +1623,15 @@
         ],
         "video": false
       },
-      "last_modified_at": "2022-03-11T09:22:32+00:00",
-      "url": "/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html",
+      "last_modified_at": "2022-09-08T12:08:00+00:00",
+      "url": "/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html",
       "topic_name": "transcriptomics",
-      "tutorial_name": "scrna-seq-basic-pipeline",
+      "tutorial_name": "scrna-case_basic-pipeline",
       "hands_on": true,
       "slides": false,
       "workflows": [
         {
-          "workflow": "main_workflow.ga",
+          "workflow": "CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.ga",
           "tests": false
         }
       ],
@@ -1501,30 +1639,29 @@
         "Cut1",
         "interactive_tool_cellxgene",
         "join1",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1"
       ],
       "tours": false,
       "video": false,
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.json"
       }
     },
     {
@@ -1533,19 +1670,20 @@
       "subtopic": "single-cell-CS",
       "priority": 1,
       "zenodo_link": "https://zenodo.org/record/4574153",
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial"
+      ],
       "questions": [
         "I have some single cell FASTQ files I want to analyse. Where do I start?"
       ],
       "objectives": [
-        "Repeat matrix generation for any droplet-based single cell sequencing data",
-        "Apply data combination and metadata editing for particular experimental designs",
+        "Generate a cellxgene matrix for droplet-based single cell sequencing data",
         "Interpret quality control (QC) plots to make informed decisions on cell thresholds",
         "Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata"
       ],
-      "time_estimation": "3H",
+      "time_estimation": "2H",
       "key_points": [
-        "Create a scanpy-accessible AnnData object from FASTQ files, including relevant cell and gene metadata",
-        "Combine multiple samples and label according to study design"
+        "Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata"
       ],
       "tags": [
         "single-cell",
@@ -1553,24 +1691,18 @@
         "paper-replication",
         "español"
       ],
-      "contributors": [
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
-        },
-        {
-          "name": "Jonathan Manning",
-          "email": "jmanning@ebi.ac.uk",
-          "joined": "2021-02",
-          "id": "pinin4fjords",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pinin4fjords.json"
-        }
-      ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist",
+          "pinin4fjords"
+        ],
+        "editing": [
+          "hexylena"
+        ],
+        "testing": [
+          "wee-snufkin"
+        ]
+      },
       "requirements": [
         {
           "type": "internal",
@@ -1591,47 +1723,71 @@
         "video": false
       },
       "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "last_modified_at": "2022-03-01T08:52:18+00:00",
-      "url": "/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.html",
+      "last_modified_at": "2022-09-08T12:08:00+00:00",
+      "url": "/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html",
       "topic_name": "transcriptomics",
-      "tutorial_name": "droplet-quantification-preprocessing",
+      "tutorial_name": "scrna-case_alevin",
       "hands_on": true,
       "slides": false,
       "workflows": [
         {
-          "workflow": "Pre-processing_with_Alevin_Steps_4-6.ga",
-          "tests": false
-        },
-        {
-          "workflow": "Pre-processing_with_Alevin_Steps_1-3.ga",
+          "workflow": "Generating a single cell matrix using Alevin.ga",
           "tests": false
         }
       ],
       "tools": [
         "Cut1",
-        "Paste1",
         "join1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"
       ],
       "tours": false,
       "video": false,
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Jonathan Manning",
+          "email": "jmanning@ebi.ac.uk",
+          "joined": "2021-02",
+          "id": "pinin4fjords",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pinin4fjords.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Julia Jakiela",
+          "email": "juliajot36@gmail.com",
+          "joined": "2022-06",
+          "id": "wee-snufkin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json"
+        }
+      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_alevin/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_alevin/tutorial.json"
       }
     },
     {
@@ -1697,6 +1853,127 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Inferring Trajectories using Python (Jupyter Notebook) in Galaxy",
+      "subtopic": "single-cell-CS",
+      "priority": 4,
+      "zenodo_link": "https://zenodo.org/record/7054806",
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial"
+      ],
+      "questions": [
+        "How can I infer lineage relationships between single cells based on their RNA, without a time series?"
+      ],
+      "objectives": [
+        "Execute multiple plotting methods designed to maintain lineage relationships between cells",
+        "Interpret these plots"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Trajectory analysis is less robust than pure plotting methods, as such 'inferred relationships' are a bigger mathematical leap",
+        "As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing novel insight"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "scrna-case_alevin",
+            "scrna-case_alevin-combine-datasets",
+            "scrna-case_basic-pipeline"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "galaxy-intro-jupyter"
+          ]
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "10x",
+        "paper-replication",
+        "interactive-tools"
+      ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist",
+          "mtekman"
+        ],
+        "editing": [
+          "hexylena"
+        ],
+        "testing": [
+          "wee-snufkin"
+        ]
+      },
+      "last_modified_at": "2022-09-08T12:08:00+00:00",
+      "url": "/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "scrna-case_JUPYTER-trajectories",
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "interactive_tool_jupyter_notebook",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Julia Jakiela",
+          "email": "juliajot36@gmail.com",
+          "joined": "2022-06",
+          "id": "wee-snufkin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.json"
       }
     },
     {
@@ -2813,93 +3090,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Trajectory Analysis using Python (Jupyter Notebook) in Galaxy",
-      "subtopic": "single-cell-CS",
-      "priority": 3,
-      "zenodo_link": "https://zenodo.org/record/4726927",
-      "questions": [
-        "How can I infer lineage relationships between single cells based on their RNA, without a time series?"
-      ],
-      "objectives": [
-        "Execute multiple plotting methods designed to maintain lineage relationships between cells",
-        "Interpret these plots"
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "Trajectory analysis is less robust than pure plotting methods, as such 'inferred relationships' are a bigger mathematical leap",
-        "As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing novel insight"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "droplet-quantification-preprocessing",
-            "scrna-seq-basic-pipeline"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "galaxy-intro-jupyter"
-          ]
-        }
-      ],
-      "tags": [
-        "single-cell",
-        "10x",
-        "paper-replication",
-        "interactive-tools"
-      ],
-      "contributors": [
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
-        },
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
-        }
-      ],
-      "last_modified_at": "2022-03-01T08:52:18+00:00",
-      "url": "/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "scrna-JUPYTER-trajectories",
-      "hands_on": true,
-      "slides": false,
-      "tools": [
-        "interactive_tool_jupyter_notebook",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.json"
       }
     },
     {
