@@ -4,13 +4,35 @@ module Jekyll
   class Figurify < Jekyll::Generator
 
     ICONS = {
-      "tip" => "far fa-lightbulb",
+      "agenda" => ""
+      "code-in" => "far fa-keyboard",
+      "code-out" => "fas fa-laptop-code",
       "comment" => "far fa-comment-dots",
+      "details" => "fas fa-info-circle",
+      "feedback" => "far fa-comments",
+      "hands-on" => "fas fa-pencil-alt",
+      "hidden" => "",
+      "matrix" => "",
+      "overview" => "",
+      "question" => "far fa-question-circle",
+      "quote" => "",
+      "solution" => "far fa-eye",
+      "spoken" => "",
+      "tip" => "far fa-lightbulb",
+      "warning" => "fas fa-exclamation-triangle",
     }
 
     BOX_TITLES = {
-      "tip" => "Tip",
+      "agenda" => "Agenda",
+      "code-in" => "Input"
+      "code-out" => "Output"
       "comment" => "Comment",
+      "details" => "Details",
+      "hands-on" => "Hands-on"
+      "question" => "Question"
+      "solution" => "Solution"
+      "tip" => "Tip",
+      "warning" => "Warning"
     }
 
     def initialize(config)
@@ -34,27 +56,33 @@ module Jekyll
        end
     end
 
+    def generate_box(box_type, count, title)
+      "<div class=\"box #{box_type}\">" +
+        "<button class=\"box-title\" type=\"button\" aria-controls=\"box-#{box_type}-#{count}\" aria-expanded=\"true\" aria-label=\"Toggle #{box_type} box: #{title}\">" + 
+          "#{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}: #{title}" + 
+          "<span role='button' class='fold-unfold fa fa-plus-square'></span>" + 
+        "</button>" +
+        "<div id=\"box-#{box_type}-#{count}\" class=\"box-content\" markdown=1>"
+    end
+
     def boxify(page, site)
       if page.content.nil?
         return
       end
       count = 0
 
-      page.content = page.content.gsub(/<(tip|comment) title="([^"]*)">/) {
-        box_type = $1
-        title = $2
-
-        count += 1
-
-        "<div class=\"box #{box_type}\">" +
-          "<button class=\"box-title\" type=\"button\" aria-controls=\"box-no-#{count}\" aria-expanded=\"true\" aria-label=\"Toggle #{box_type} box: #{title}\">" + 
-            "#{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}: #{title}" + 
-            "<span role='button' class='fold-unfold fa fa-plus-square'></span>" + 
-          "</button>" +
-          "<div id=\"box-no-#{count}\" class=\"box-content\" markdown=1>"
+      page.content = page.content.gsub(/<(agenda|code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning)>/) {
+        generate_box("agenda", 0, "Agenda")
       }
 
-      page.content = page.content.gsub(/<\/\s*(tip|comment)\s*>/) {
+      page.content = page.content.gsub(/<(code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning) title="([^"]*)">/) {
+        box_type = $1
+        title = $2
+        count += 1
+        generate_box(box_type, count, title)
+      }
+
+      page.content = page.content.gsub(/<\/\s*(agenda|code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning)\s*>/) {
         "</div>" +  # box-content
         "</div>" # box itself
       }
