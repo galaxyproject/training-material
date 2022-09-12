@@ -257,6 +257,7 @@ rebuild-search-index: ## Rebuild search index
 	node bin/lunr-index.js > search.json
 
 api/swagger.json: metadata/swagger.yaml
+	$(ACTIVATE_ENV) && \
 	cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
 
 clean: ## clean up junk files
