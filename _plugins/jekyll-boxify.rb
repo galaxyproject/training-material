@@ -4,7 +4,7 @@ module Jekyll
   class Figurify < Jekyll::Generator
 
     ICONS = {
-      "agenda" => ""
+      "agenda" => "",
       "code-in" => "far fa-keyboard",
       "code-out" => "fas fa-laptop-code",
       "comment" => "far fa-comment-dots",
@@ -24,16 +24,18 @@ module Jekyll
 
     BOX_TITLES = {
       "agenda" => "Agenda",
-      "code-in" => "Input"
-      "code-out" => "Output"
+      "code-in" => "Input",
+      "code-out" => "Output",
       "comment" => "Comment",
       "details" => "Details",
-      "hands-on" => "Hands-on"
-      "question" => "Question"
-      "solution" => "Solution"
+      "hands-on" => "Hands-on",
+      "question" => "Question",
+      "solution" => "Solution",
       "tip" => "Tip",
-      "warning" => "Warning"
+      "warning" => "Warning",
     }
+
+    CLASSES = ICONS.keys.join "|"
 
     def initialize(config)
       @config = config['boxify'] ||= {}
@@ -57,12 +59,15 @@ module Jekyll
     end
 
     def generate_box(box_type, count, title)
-      "<div class=\"box #{box_type}\">" +
-        "<button class=\"box-title\" type=\"button\" aria-controls=\"box-#{box_type}-#{count}\" aria-expanded=\"true\" aria-label=\"Toggle #{box_type} box: #{title}\">" + 
-          "#{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}: #{title}" + 
-          "<span role='button' class='fold-unfold fa fa-plus-square'></span>" + 
-        "</button>" +
-        "<div id=\"box-#{box_type}-#{count}\" class=\"box-content\" markdown=1>"
+      title_fmted = (title ? ": #{title}" : "")
+      return %Q(
+        <div class="box #{box_type}" markdown=0>
+        <button class="box-title" type="button" aria-controls="box-#{box_type}-#{count}" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
+          #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
+          <span role="button" class="fold-unfold fa fa-plus-square"></span>
+        </button>
+        <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
+      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
     def boxify(page, site)
@@ -71,20 +76,24 @@ module Jekyll
       end
       count = 0
 
-      page.content = page.content.gsub(/<(agenda|code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning)>/) {
-        generate_box("agenda", 0, "Agenda")
+      page.content = page.content.gsub(/<(#{CLASSES})>/) {
+        box_type = $1
+        box = generate_box(box_type, 0, nil)
+        puts "BOX #{box}"
+        box
       }
 
-      page.content = page.content.gsub(/<(code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning) title="([^"]*)">/) {
+      page.content = page.content.gsub(/<(#{CLASSES}) title="([^"]*)">/) {
         box_type = $1
         title = $2
         count += 1
-        generate_box(box_type, count, title)
+        box = generate_box(box_type, count, title)
+        puts "BOX #{box}"
+        box
       }
 
-      page.content = page.content.gsub(/<\/\s*(agenda|code-in|code-out|comment|details|feedback|hands-on|hidden|matrix|overview|question|quote|solution|spoken|tip|warning)\s*>/) {
-        "</div>" +  # box-content
-        "</div>" # box itself
+      page.content = page.content.gsub(/<\/\s*(#{CLASSES})\s*>/) {
+        "\n\n</div></div>"
       }
     end
   end
