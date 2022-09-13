@@ -73,15 +73,15 @@ The sample data is a subset of the reads in a mouse dataset of fetal growth rest
 
 You can access the data for this tutorial in multiple ways:
 
- 1.  **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
- >
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
- 
- 2.  **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
- >
+
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
+
    {% snippet faqs/galaxy/histories_import.md %}
- 
- 3.  **Uploading from Zenodo** (see below)
+
+3. **Uploading from Zenodo** (see below)
 
 
 > ### {% icon hands_on %} Hands-on: Data upload for 7 files
@@ -112,6 +112,7 @@ You can access the data for this tutorial in multiple ways:
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
 ## Concatenating objects
+
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1){% icon tool %} with the following parameters:
