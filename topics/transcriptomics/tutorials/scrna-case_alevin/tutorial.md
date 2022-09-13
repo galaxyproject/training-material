@@ -194,7 +194,7 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions - this tutorial was build with  In this case, it is: (Galaxy Version 1.5.1+galaxy0). To identify which version of a tool you are using. Select {% icon tool-versions %} 'Versions' and choose the appropriate version.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. In this case the tutorial was built with Alevin Galaxy Version 1.5.1+galaxy0. To identify which version of a tool you are using. Select {% icon tool-versions %} 'Versions' and choose the appropriate version.
 
 
 > ### {% icon hands_on %} Hands-on: Running Alevin
@@ -207,7 +207,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     >
 >     >   > ### {% icon tip %} Tip: Strandedness?
 >     >   >
->     >   > The Salmon documentation on 'Fragment Library Types' and running the Alevin command ([salmon.readthedocs.io/en/latest/library_type.html](https://salmon.readthedocs.io/en/latest/library_type.html]) and [salmon.readthedocs.io/en/latest/alevin.html](https://salmon.readthedocs.io/en/latest/alevin.html)) will help here, although keep in mind the image there is drawn with the RNA 5' on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3' tail and thus effectively the bottom or reverse strand...)
+>     >   > The Salmon documentation on 'Fragment Library Types' and running the Alevin command is here: [salmon.readthedocs.io/en/latest/library_type.html](https://salmon.readthedocs.io/en/latest/library_type.html) and [salmon.readthedocs.io/en/latest/alevin.html](https://salmon.readthedocs.io/en/latest/alevin.html). These links will help here, although keep in mind the image there is drawn with the RNA 5' on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3' tail and thus effectively the bottom or reverse strand...)
 >     >   {: .tip}
 >     >
 >     >   > ### {% icon solution %} Solution
@@ -264,7 +264,7 @@ This is the matrix market (MTX) format.
 
 # Basic QC
 
-The question we're looking to answer here, is: "do we have mostly a have a single cell per droplet"? That's what experimenters are normally aiming for, but it's not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.
+The question we're looking to answer here, is: "do we mostly have a single cell per droplet"? That's what experimenters are normally aiming for, but it's not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.
 
 > ### {% icon hands_on %} Hands-on: Generate a raw barcode QC plot
 >
@@ -464,7 +464,7 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
 >   > ### {% icon tip %} Hint
->   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `37 barcodes` or something similar to that. Why is this so low?? And why might the number be different?
+>   > If you click on the `Emptied-Object` in the {% icon galaxy-history %} history, the text in that window says `37 barcodes` or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
@@ -500,7 +500,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 
 # Mitochondrial flagging
 
-We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datsets#mitochondrial-reads
+We have assumed you will be combining multiple files - but if that's not the case, you'll need to perform this step to turn your column of `true` and `false` labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datsets#mitochondrial-reads).
 
 # Conclusion
 {:.no_toc}
