@@ -6,7 +6,7 @@ $("blockquote.solution>h3,blockquote.details>h3,blockquote.tip>h3,blockquote.que
 });
 
 //NEW
-$("div.solution>.box-title,div.details>.box-title,div.tip>.box-title,div.question>.box-title,div.hands_on>.box-title,div.comment>.box-title").click(function(event) {
+$("div.solution>.box-title,div.details>.box-title,div.tip>.box-title,div.question>.box-title,div.hands-on>.box-title,div.comment>.box-title").click(function(event) {
     $(">.box-content", $(this).parent()).toggle(400);
     $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
 
@@ -37,7 +37,7 @@ $("div.solution,div.details,div.tip").each(function() {
     $(">.box-title", this).click();
 });
 
-$("section.tutorial .hands_on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
+$("section.tutorial .hands_on,section.tutorial .hands-on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
 
 // CYOA Support
 function cyoaChoice(text){
@@ -100,16 +100,19 @@ function cyoaDefault(defaultOption){
         if (window.location.search.match(/\?with-answers/gi)) {
             // Same as above selector
             $(".solution>h3,.details>h3,.tip>h3").click();
+            $(".solution>.box-title,.details>.box-title,.tip>.box-title").click();
 
         }
         if (window.location.search.match(/\?with-answers/gi)) {
             // Same as above selector
             $(".solution>h3,.details>h3,.tip>h3,.hands_on>h3,.question>h3").click();
+            $(".solution>.box-title,.details>.box-title,.tip>.box-title,.hands_on>.box-title,.question>.box-title").click();
 
         }
         // collapse all boxes on the faq overview pages
         if (window.location.href.indexOf("faqs") > -1) {
             $(".hands_on>h3,.question>h3,.comment>h3").click();
+            $(".hands_on>.box-title,.question>.box-title,.comment>.box-title").click();
         }
     });
 

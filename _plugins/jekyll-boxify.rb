@@ -93,7 +93,8 @@ module Jekyll
       }
 
       page.content = page.content.gsub(/<\/\s*(#{CLASSES})\s*>/) {
-        "\n\n</div></div>"
+        box_type = $1
+        "\n</div></div><!--#{box_type}-->"
       }
     end
   end

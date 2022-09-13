@@ -91,7 +91,7 @@ $hyperlink: #0067d6;
     }
 
 	// The new replacement
-    .box-title {
+    & > .box-title {
         font-size: $font-size + 3;
         margin-left: -$tutorial-box-spacing;
         margin-right: -$tutorial-box-spacing;
@@ -774,7 +774,8 @@ div.box {
 		}
 	}
 
-    padding: $tutorial-box-spacing - 0.4rem $tutorial-box-spacing - 0.11rem 0.1rem;
+	// Can remove once we phase out legacy boxes.
+    padding: ($tutorial-box-spacing - 0.4rem) $tutorial-box-spacing - 0.11rem 0.1rem !important;
 
     &.agenda {
         @include tutorial-box($agenda-color, $text-color);
