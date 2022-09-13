@@ -73,7 +73,7 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---input-1) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -81,7 +81,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    {{ page.zenodo_link }}/files/Annotated_AnnData.h5ad
+>    {{ page.zenodo_link }}/files/Mito-counted_AnnData
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -569,7 +569,7 @@ We can see that there is really not much variation explained past component 19. 
 
 ## Neighborhood graph
 
-We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. [Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default](https://github.com/lmcinnes/umap).
+We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): "Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default".
 
 > ### {% icon details %} Working in a group? Decision-time!
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
@@ -667,7 +667,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
@@ -718,6 +718,7 @@ But first, let's pick some marker genes from the `Markers-cluster` list that you
 >    - *"name of the embedding to plot"*: `pca`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
+>    - *"Use raw attributes if present"*: `No`
 >    - {% icon time %} *You can re-run {% icon galaxy-refresh %} the same tool again, but change `pca` to `tsne` and then finally to `umap` in order to skip the following two steps.*
 >
 > 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
@@ -725,12 +726,14 @@ But first, let's pick some marker genes from the `Markers-cluster` list that you
 >    - *"name of the embedding to plot"*: `tsne`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
+>    - *"Use raw attributes if present"*: `No`
 >
 > 3. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts`
 >    - *"Field for gene symbols"*: `Symbol`
+>    - *"Use raw attributes if present"*: `No`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You now have plots galore!
@@ -787,17 +790,18 @@ The authors weren't interested in further annotation of the DP cells, so neither
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
 >    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
->    - **"Keys from obs to copy"**
->    - *"Keys from obs to copy"*
+>    - **Keys from obs to copy**
+>    - *"+ Insert Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
+>    
 >    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
 >
 > 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
->    - *"Change field names in AnnData observations"*
->    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"*
->    - *"1: Change field names in AnnData observations"*
+>    - **Change field names in AnnData observations**
+>    - {% icon galaxy-wf-new %} *"+ Insert Change field names in AnnData observations"*
+>    - **1: Change field names in AnnData observations**
 >    - *"Original name"*: `louvain_0`
 >    - *"New name"*: `cell_type`
 >
@@ -808,6 +812,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts,cell_type`
 >    - *"Field for gene symbols"*: `Symbol`
+>    - *"Use raw attributes if present"*: `No`
 >
 {: .hands_on}
 
@@ -933,7 +938,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > > 3. Feel free to explore any other similar histories
 {: .details}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](hhttps://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2) helpful to compare with, or this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data).
+{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2) helpful to compare with, or this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data).
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 
