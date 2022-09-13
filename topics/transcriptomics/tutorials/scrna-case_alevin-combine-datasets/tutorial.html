@@ -923,7 +923,7 @@
                 <li class="btn btn-default supporting_material">
 
 
-<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7041120">
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7075635">
     <i class="far fa-copy" aria-hidden="true"></i> Datasets
 </a>
 
@@ -1044,7 +1044,7 @@
 </blockquote>
 
 <h2 id="get-data">Get Data</h2>
-<p>The sample data is a subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). Each of the 7 samples (N701 –&gt; N707) has been run through the <span class="notranslate">workflow</span> from the <a href="https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html">Alevin tutorial</a></p>
+<p>The sample data is a subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). Each of the 7 samples (N701 –&gt; N707) has been run through the <span class="notranslate">workflow</span> from the <a href="https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html">Alevin tutorial</a>.</p>
 
 <p>You can access the data for this tutorial in multiple ways:</p>
 
@@ -1072,16 +1072,16 @@
   <ol>
     <li>Create a new history for this tutorial (if you’re not importing the history above)</li>
     <li>
-      <p>Import the different AnnData files and the experimental design table from <a href="https://zenodo.org/record/4574153#.YD56YS-l2uU">Zenodo</a></p>
+      <p>Import the different AnnData files and the experimental design table from <a href="https://zenodo.org/record/7075635">Zenodo</a>.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7041120/files/Experimental_Design.tsv
-https://zenodo.org/record/7041120/files/N701-400k.h5ad
-https://zenodo.org/record/7041120/files/N702-400k.h5ad
-https://zenodo.org/record/7041120/files/N703-400k.h5ad
-https://zenodo.org/record/7041120/files/N704-400k.h5ad
-https://zenodo.org/record/7041120/files/N705-400k.h5ad
-https://zenodo.org/record/7041120/files/N706-400k.h5ad
-https://zenodo.org/record/7041120/files/N707-400k.h5ad
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7075635/files/Experimental_Design.tsv
+https://zenodo.org/record/7075635/files/N701-400k.h5ad
+https://zenodo.org/record/7075635/files/N702-400k.h5ad
+https://zenodo.org/record/7075635/files/N703-400k.h5ad
+https://zenodo.org/record/7075635/files/N704-400k.h5ad
+https://zenodo.org/record/7075635/files/N705-400k.h5ad
+https://zenodo.org/record/7075635/files/N706-400k.h5ad
+https://zenodo.org/record/7075635/files/N707-400k.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1109,13 +1109,22 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">N701-400k</code></li>
-        <li><em>“Function to manipulate the object”</em>: ‘Concatenate along the observations axis’</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: ‘Select all the other matrix files from bottom to top’</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Concatenate along the observations axis</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: <code class="language-plaintext highlighter-rouge">Select all the other matrix files from bottom to top, N707 to N702</code></li>
+      </ul>
+
+      <blockquote class="warning">
+        <h3 id="warning-warning-n707-to-n702"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning!: N707 to N702!</h3>
+        <p>You are adding files to N701, so do not add N701 to itself!</p>
+      </blockquote>
+
+      <ul>
         <li><em>“Join method”</em>: <code class="language-plaintext highlighter-rouge">Intersection of variables</code></li>
         <li><em>“Key to add the batch annotation to obs”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
         <li><em>“Separator to join the existing index names with the batch category”</em>: <code class="language-plaintext highlighter-rouge">-</code></li>
       </ul>
     </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> output <code class="language-plaintext highlighter-rouge">Combined Object</code></li>
   </ol>
 </blockquote>
 
@@ -1127,19 +1136,19 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
       </ul>
     </li>
@@ -1329,7 +1338,7 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
     </li>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Replace text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1363,7 +1372,7 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: output of previous <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations or variables</code></li>
         <li><em>“What to annotate?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code>`</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table with new annotations”</em>: <code class="language-plaintext highlighter-rouge">Cell Metadata</code></li>
@@ -1386,6 +1395,7 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
         <li><em>“Comma-separated list of new categories”</em>: <code class="language-plaintext highlighter-rouge">N701,N702,N703,N704,N705,N706,N707</code></li>
       </ul>
     </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> output <code class="language-plaintext highlighter-rouge">Batched Object</code></li>
   </ol>
 </blockquote>
 
@@ -1401,7 +1411,7 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: output of <strong>Manipulate AnnData - Rename categories</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Batched Object</code></li>
         <li><em>“Format of output object”</em>: <code class="language-plaintext highlighter-rouge">AnnData format</code></li>
         <li><em>“Gene symbols field in AnnData”</em>: <code class="language-plaintext highlighter-rouge">NA.</code></li>
         <li><em>“Flag genes that start with these names”</em>: <code class="language-plaintext highlighter-rouge">Insert Flag genes that start with these names</code></li>
@@ -1409,6 +1419,7 @@ https://zenodo.org/record/7041120/files/N707-400k.h5ad
         <li><em>“Var name”</em>: <code class="language-plaintext highlighter-rouge">mito</code></li>
       </ul>
     </li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> output <code class="language-plaintext highlighter-rouge">Annotated Object</code></li>
   </ol>
 </blockquote>
 
@@ -1463,6 +1474,9 @@ You may be interested in seeing an <a href="https://usegalaxy.eu/u/wendi.bacon.t
 </li>
                         
                         <li><p>Retreive partially analysed data from a public repository</p>
+</li>
+                        
+                        <li><p>Ready for the <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html">next tutorial</a> in this case study</p>
 </li>
                         
                     </ul>

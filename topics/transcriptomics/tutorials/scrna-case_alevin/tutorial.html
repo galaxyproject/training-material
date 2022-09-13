@@ -906,7 +906,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 8, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 13, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1069,8 +1069,8 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <li><em>“Suppress header line in output?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (The next tool (Alevin) does not expect a header)</li>
         <li><em>“Comma-separated list of field names to extract from the GTF (default: use all fields)”</em>: <code class="language-plaintext highlighter-rouge">transcript_id,gene_id</code> (This calls the first column to be the transcript_id, and the second the gene_id. Thus, your key can turn transcripts into genes)</li>
         <li><em>“Append version to transcript identifiers?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (The Ensembl FASTA files usually have these, and since we need the FASTA transcriptome and the GTF gene information to work together, we need to append these!)</li>
-        <li><em>“Flag mitochondrial features?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Filter a FASTA-format c<span class="notranslate">DNA</span> file to match annotations?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Flag mitochondrial features?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Provide a c<span class="notranslate">DNA</span> file for extracting annotations and/ or possible filtering?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA-format c<span class="notranslate">DNA</span>/transcript file”</em>: <code class="language-plaintext highlighter-rouge">FASTA file in your history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span></li>
         <li><em>“Annotation field to match with sequences”</em>: <code class="language-plaintext highlighter-rouge">transcript_id</code></li>
         <li><em>“Filter the c<span class="notranslate">DNA</span> file to match the annotations?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1103,7 +1103,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <li>filtered FASTA</li>
 </ul>
 
-<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the <span class="notranslate">Single Cell</span> tab at the left and scroll down to the Alevin tool. Alte<span class="notranslate">rna</span>tively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions - this tutorial was build with  In this case, it is: (<span class="notranslate">Galaxy</span> Version 1.5.1+<span class="notranslate">galaxy</span>0). To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
+<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the <span class="notranslate">Single Cell</span> tab at the left and scroll down to the Alevin tool. Alte<span class="notranslate">rna</span>tively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. In this case the tutorial was built with Alevin <span class="notranslate">Galaxy</span> Version 1.5.1+<span class="notranslate">galaxy</span>0. To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-running-alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running Alevin</h3>
@@ -1120,7 +1120,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <blockquote class="tip">
           <h3 id="tip-tip-strandedness"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Strandedness?</h3>
 
-          <p>The Salmon documentation on ‘Fragment Library Types’ and running the Alevin command (<a href="https://salmon.readthedocs.io/en/latest/library_type.html]">salmon.readthedocs.io/en/latest/library_type.html</a> and <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>) will help here, although keep in mind the image there is drawn with the <span class="notranslate">RNA</span> 5’ on top, whereas in this sc<span class="notranslate">RNA</span>-seq protocol, the polyA is captured by its 3’ tail and thus effectively the bottom or reverse strand…)</p>
+          <p>The Salmon documentation on ‘Fragment Library Types’ and running the Alevin command is here: <a href="https://salmon.readthedocs.io/en/latest/library_type.html">salmon.readthedocs.io/en/latest/library_type.html</a> and <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>. These links will help here, although keep in mind the image there is drawn with the <span class="notranslate">RNA</span> 5’ on top, whereas in this sc<span class="notranslate">RNA</span>-seq protocol, the polyA is captured by its 3’ tail and thus effectively the bottom or reverse strand…)</p>
         </blockquote>
 
         <blockquote class="solution">
@@ -1198,7 +1198,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <h1 id="basic-qc">Basic QC</h1>
 
-<p>The question we’re looking to answer here, is: “do we have mostly a have a <span class="notranslate">single cell</span> per droplet”? That’s what experimenters are normally aiming for, but it’s not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.</p>
+<p>The question we’re looking to answer here, is: “do we mostly have a <span class="notranslate">single cell</span> per droplet”? That’s what experimenters are normally aiming for, but it’s not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-a-raw-barcode-qc-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate a raw barcode QC plot</h3>
@@ -1452,7 +1452,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
   <blockquote class="tip">
     <h3 id="tip-hint-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hint</h3>
-    <p>If you click on the <code class="language-plaintext highlighter-rouge">Emptied-Object</code> in the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span> history, the text in that window says <code class="language-plaintext highlighter-rouge">37 barcodes</code> or something similar to that. Why is this so low?? And why might the number be different?
+    <p>If you click on the <code class="language-plaintext highlighter-rouge">Emptied-Object</code> in the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span> history, the text in that window says <code class="language-plaintext highlighter-rouge">37 barcodes</code> or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 Consider…is this a complete set of data?</p>
   </blockquote>
 
@@ -1493,7 +1493,7 @@ Consider…is this a complete set of data?</p>
 
 <h1 id="mitochondrial-flagging">Mitochondrial flagging</h1>
 
-<p>We have assumed you will be combining multiple files - but if that’s not the case, you’ll need to perform this step to turn your column of <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: [Mitochondrial calculations](https://training.<span class="notranslate">galaxy</span>project.org/training-material/topics/transcriptomics/tutorials/sc<span class="notranslate">rna</span>-case_alevin-combine-datsets#mitochondrial-<span class="notranslate">reads</span></p>
+<p>We have assumed you will be combining multiple files - but if that’s not the case, you’ll need to perform this step to turn your column of <code class="language-plaintext highlighter-rouge">true</code> and <code class="language-plaintext highlighter-rouge">false</code> labelling the mitochondrial genes into some metrics telling you the % of mitochondrial genes in each cell. You can follow that step here: <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datsets#mitochondrial-reads">Mitochondrial calculations</a>.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1518,6 +1518,9 @@ Consider…is this a complete set of data?</p>
                     <ul>
                         
                         <li><p>Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata</p>
+</li>
+                        
+                        <li><p>Ready for the <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">next tutorial</a> in this case study</p>
 </li>
                         
                     </ul>
@@ -1602,7 +1605,7 @@ author = "Wendi Bacon and Jonathan Manning",
 title = "Generating a single cell matrix using Alevin (Galaxy Training Materials)",
 year = "2022",
 month = "09",
-day = "08"
+day = "13"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

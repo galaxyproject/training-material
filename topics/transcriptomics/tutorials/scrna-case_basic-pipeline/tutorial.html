@@ -917,7 +917,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 8, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 13, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -981,7 +981,7 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">this tutorial</a> if you used the full FASTQ files rather than the subsampled ones (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). You can find this dataset in this <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---input-1">input history</a> or download from Zenodo below.</p>
+<p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">this tutorial</a> if you used the full FASTQ files rather than the subsampled ones (see the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">here</a> and the project submission <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">here</a>). You can find this dataset in this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey">input history</a> or download from Zenodo below.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -991,7 +991,7 @@
     <li>
       <p>Import the AnnData object from <a href="https://zenodo.org/record/7053673">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7053673/files/Annotated_AnnData.h5ad
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1794,7 +1794,7 @@
 
 <h2 id="neighborhood-graph">Neighborhood graph</h2>
 
-<p>We’re still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. <a href="https://github.com/lmcinnes/umap">Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default</a>.</p>
+<p>We’re still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. From <a href="https://github.com/lmcinnes/umap">UMAP developers</a>: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.</p>
 
 <blockquote class="details">
   <h3 id="details-working-in-a-group-decision-time-2"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Working in a group? Decision-time!</h3>
@@ -1940,7 +1940,7 @@
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“The sample grouping/clustering to use”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
-        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>
@@ -2012,6 +2012,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">pca</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts</code></li>
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> <em>You can re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the same tool again, but change <code class="language-plaintext highlighter-rouge">pca</code> to <code class="language-plaintext highlighter-rouge">tsne</code> and then finally to <code class="language-plaintext highlighter-rouge">umap</code> in order to skip the following two steps.</em></li>
       </ul>
     </li>
@@ -2021,6 +2022,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">tsne</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts</code></li>
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2029,6 +2031,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain,sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,log1p_total_counts</code></li>
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -2125,19 +2128,21 @@ But first, let’s pick some marker genes from the <code class="language-plainte
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“Copy observations (such as clusters)”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <em>Yes</em></li>
-        <li><strong>“Keys from obs to copy”</strong></li>
-        <li><em>“Keys from obs to copy”</em></li>
+        <li><strong>Keys from obs to copy</strong></li>
+        <li><em>”+ Insert Keys from obs to copy”</em></li>
         <li><em>“Key contains”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“AnnData objects with obs to copy”</em>: (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>
+          <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“AnnData objects with obs to copy”</em>: (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
+        </li>
         <li>You’ve added the new cell annotations in, now titled <code class="language-plaintext highlighter-rouge">louvain_0</code>. What, that’s not good enough? You want to change the title as well? So be it.</li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+<span class="notranslate">galaxy</span>0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: (output of <strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Change field names in AnnData observations”</em></li>
-        <li><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-new</span> <em>“Insert Change field names in AnnData observations”</em></li>
-        <li><em>“1: Change field names in AnnData observations”</em></li>
+        <li><strong>Change field names in AnnData observations</strong></li>
+        <li><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-new</span> <em>”+ Insert Change field names in AnnData observations”</em></li>
+        <li><strong>1: Change field names in AnnData observations</strong></li>
         <li><em>“Original name”</em>: <code class="language-plaintext highlighter-rouge">louvain_0</code></li>
         <li><em>“New name”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
       </ul>
@@ -2153,6 +2158,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts,cell_type</code></li>
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -2310,7 +2316,7 @@ For those that did not take the ‘control’ options, please</p>
   </blockquote>
 </blockquote>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You’ve made it to the end! You might find this <a href="hhttps://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2">example control history</a> helpful to compare with, or this <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data"><span class="notranslate">workflow</span></a>.</p>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You’ve made it to the end! You might find this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2">example control history</a> helpful to compare with, or this <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data"><span class="notranslate">workflow</span></a>.</p>
 
 <p>In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing sc<span class="notranslate">RNA</span>-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!</p>
 
@@ -2326,7 +2332,7 @@ For those that did not take the ‘control’ options, please</p>
                         <li><p>Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis</p>
 </li>
                         
-                        <li><p>Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights</p>
+                        <li><p>Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study</p>
 </li>
                         
                     </ul>
@@ -2414,7 +2420,7 @@ author = "Wendi Bacon",
 title = "Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)",
 year = "2022",
 month = "09",
-day = "08"
+day = "13"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
