@@ -166,11 +166,12 @@ It's now time to parse the GTF file using the [rtracklayer](https://bioconductor
 >    - *"Suppress header line in output?"*: `Yes` (The next tool (Alevin) does not expect a header)
 >    - *"Comma-separated list of field names to extract from the GTF (default: use all fields)"*: `transcript_id,gene_id` (This calls the first column to be the transcript_id, and the second the gene_id. Thus, your key can turn transcripts into genes)
 >    - *"Append version to transcript identifiers?"*: `Yes` (The Ensembl FASTA files usually have these, and since we need the FASTA transcriptome and the GTF gene information to work together, we need to append these!)
->    - *"Flag mitochondrial features?"*: `Yes`
->    - *"Filter a FASTA-format cDNA file to match annotations?"*: `No`
+>    - *"Flag mitochondrial features?"*: `No`
+>    - *"Provide a cDNA file for extracting annotations and/ or possible filtering?"*: `Yes`
 >    - {% icon param-file %} *"FASTA-format cDNA/transcript file"*: `FASTA file in your history` {% icon galaxy-history %}
 >    - *"Annotation field to match with sequences"*: `transcript_id`
 >    - *"Filter the cDNA file to match the annotations?"*: `Yes`
+>
 > 2. Rename {% icon galaxy-pencil %} the annotation table to `Map`
 >
 > 3. Rename {% icon galaxy-pencil %} the uncompressed filtered FASTA file to `Filtered FASTA`
