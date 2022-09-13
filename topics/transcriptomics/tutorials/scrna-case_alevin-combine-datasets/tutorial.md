@@ -5,7 +5,7 @@ title: "Combining datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
-zenodo_link: 'https://zenodo.org/record/7041120'
+zenodo_link: 'https://zenodo.org/record/7075635'
 
 questions:
   - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?
@@ -19,6 +19,7 @@ time_estimation: 1H
 key_points:
   - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
   - Retreive partially analysed data from a public repository
+  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) in this case study 
 
 tags:
   - single-cell
@@ -69,7 +70,7 @@ This tutorial will take you from the multiple AnnData outputs of the [previous t
 
 
 ## Get Data
-The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html)
+The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html).
 
 You can access the data for this tutorial in multiple ways:
 
@@ -87,7 +88,7 @@ You can access the data for this tutorial in multiple ways:
 > ### {% icon hands_on %} Hands-on: Data upload for 7 files
 >
 > 1. Create a new history for this tutorial (if you're not importing the history above)
-> 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/4574153#.YD56YS-l2uU)
+> 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/7075635).
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Experimental_Design.tsv
@@ -117,11 +118,17 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
->    - *"Function to manipulate the object"*: 'Concatenate along the observations axis'
->    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files from bottom to top'
+>    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
+>    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N707 to N702`
+>
+>    > ### {% icon warning %} Warning!: N707 to N702!
+>    > You are adding files to N701, so do not add N701 to itself!
+>    {: .warning}
+>
 >    - *"Join method"*: `Intersection of variables`
 >    - *"Key to add the batch annotation to obs"*: `batch`
 >    - *"Separator to join the existing index names with the batch category"*: `-`
+> 2. Rename {% icon galaxy-pencil %} output `Combined Object`
 {: .hands_on}
 
 Now let's look at what we've done! Unfortunately, AnnData objects are quite complicated, so the {% icon galaxy-eye %} won't help us too much here. Instead, we're going to use a tool to look into our object from now on.
@@ -129,13 +136,13 @@ Now let's look at what we've done! Unfortunately, AnnData objects are quite comp
 > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
 >    - *"What to inspect?"*: `General information about the object`
 > 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
 > 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
 
@@ -235,7 +242,7 @@ That was so fun, let's do it all again but for genotype!
 >    Now we want only the column containing the genotype information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c9`
+>    - *"Cut columns"*: `c8`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
 >
@@ -258,7 +265,7 @@ Let's add it to the AnnData object!
 > ### {% icon hands_on %} Hands-on: Adding metadata to AnnData object
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: output of previous **Manipulate AnnData** {% icon tool %}
+>    - {% icon param-file %} *"Annotated data matrix"*: `Combined object`
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >    - *"What to annotate?"*: `Observations (obs)``
 >    - {% icon param-file %} *"Table with new annotations"*: `Cell Metadata`
@@ -273,6 +280,7 @@ Woohoo! We're there! You can run an {% tool [Inspect AnnData](toolshed.g2.bx.psu
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
 >    - *"Comma-separated list of new categories"*: `N701,N702,N703,N704,N705,N706,N707`
+> 2. Rename {% icon galaxy-pencil %} output `Batched Object`
 {: .hands_on}
 
 
@@ -285,12 +293,13 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 > ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: output of **Manipulate AnnData - Rename categories** {% icon tool %}
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Batched Object`
 >    - *"Format of output object"*: `AnnData format`
 >    - *"Gene symbols field in AnnData"*: `NA.`
 >    - *"Flag genes that start with these names"*: `Insert Flag genes that start with these names`
 >    - *"Starts with"*: `True`
 >    - *"Var name"*: `mito`
+> 2. Rename {% icon galaxy-pencil %} output `Annotated Object`
 {: .hands_on}
 
 {% icon congratulations %}Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final `Pre-processed object` to see the wealth of information that has been added. You are now ready to move along to further filtering! There is a cheat that may save you time in the future though...
