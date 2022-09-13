@@ -22,6 +22,7 @@ time_estimation: 3H
 key_points:
 - Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
 - Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
+  - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study 
 requirements:
 -
     type: "internal"

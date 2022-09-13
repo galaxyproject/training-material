@@ -22,6 +22,7 @@ time_estimation: 2H
 
 key_points:
   - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
+  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) in this case study 
 
 tags:
   - single-cell
