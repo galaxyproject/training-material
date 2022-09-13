@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Inferring Trajectories using Python (Jupyter Notebook) in Galaxy
 subtopic: single-cell-CS
 priority: 4
-zenodo_link: 'https://zenodo.org/record/7054806'
+zenodo_link: 'https://zenodo.org/record/7075718'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial
 questions:
@@ -106,7 +106,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 > ### {% icon hands_on %} Hands-on: Removing macrophages
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: (output of **Manipulate AnnData** {% icon tool %})
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final cell annotated object`
 >    - *"Function to manipulate the object"*: `Filter observations or variables`
 >    - *"What to filter?"*: `Observations (obs)`
 >    - *"Type of filtering?"*: `By key (column) values`
