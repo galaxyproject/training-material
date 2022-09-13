@@ -19,6 +19,15 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
+    # todo migrate somewhere more generic
+    def filter_authors(contributors, contributions)
+      if not contributors.nil?
+        return contributors
+      else
+        return contributions["authorship"]
+      end
+    end
+
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return

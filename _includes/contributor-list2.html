@@ -23,6 +23,17 @@
 		</td>
 	</tr>
 	{% endif %}
+
+
+	{% if include.contributors.translation %}
+	<tr>
+		<td><abbr title="These people did the translation and localisation of this text.">Translation</abbr></td>
+		<td>
+			{% for id in include.contributors.translation %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
 	{% if include.contributors.editing %}
 	<tr>
 		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>

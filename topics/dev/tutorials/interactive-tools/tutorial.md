@@ -578,7 +578,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 >
 > Finally, copy your GxIT wrapper to the Interactive Tool directory:
 > ```sh
-> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/server/tools/interactive/
+> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/tools/interactive/
 > ```
 {: .hands_on}
 
