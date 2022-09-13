@@ -210,7 +210,7 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c8`
 >    - *"Delimited by"*: `Tab`
->    - % icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
+>    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
 >
 > 3. Rename {% icon galaxy-pencil %} output `Sex metadata`
 {: .hands_on}
