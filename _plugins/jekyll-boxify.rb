@@ -35,6 +35,10 @@ module Jekyll
       "warning" => "Warning",
     }
 
+    COLLAPSIBLE_BOXES = [
+      "hands-on", "details", "question", "solution", "tip",
+    ]
+
     CLASSES = ICONS.keys.join "|"
 
     def initialize(config)
@@ -58,7 +62,7 @@ module Jekyll
        end
     end
 
-    def generate_box(box_type, count, title)
+    def generate_collapsible_box(box_type, count, title)
       title_fmted = (title ? ": #{title}" : "")
       return %Q(
         <div class="box #{box_type}" markdown=0>
@@ -68,6 +72,25 @@ module Jekyll
         </button>
         <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
+    end
+
+    def generate_static_box(box_type, count, title)
+      title_fmted = (title ? ": #{title}" : "")
+      return %Q(
+        <div class="box #{box_type}" markdown=0>
+        <div class="box-title" aria-label="#{box_type} box: #{title}">
+          #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
+        </div>
+        <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
+      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
+    end
+
+    def generate_box(box_type, count, title)
+      if COLLAPSIBLE_BOXES.include?(box_type)
+        return generate_collapsible_box(box_type, count, title)
+      else
+        return generate_static_box(box_type, count, title)
+      end
     end
 
     def boxify(page, site)
