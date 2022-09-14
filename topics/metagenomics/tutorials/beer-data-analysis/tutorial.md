@@ -1,8 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Identification of yeasts in a beer'
-zenodo_link: 'https://doi.org/10.5281/zenodo.6620778'
+title: Identification of yeasts in a beer
+zenodo_link: https://doi.org/10.5281/zenodo.6620778
+level: Introductory
 questions:
 - How can yeast strains in a beer sample be identified?
 - How can we process metagenomic data sequenced using Nanopore?
@@ -13,9 +14,10 @@ objectives:
 - Visualize the microbiome community of a beer sample
 time_estimation: 1H
 key_points:
-- TO REPHRASE
 - Galaxy provides various tools for data analysis, dataset alteration, and visualization
 - Inputting correct values for the parameters of proper tools is important
+- Profiling...
+- Microbiome
 tags:
 - nanopore
 - beer
@@ -96,10 +98,12 @@ First of all, this tutorial will get you hands on with some basic Galaxy tasks, 
 ## Get familiar with Galaxy
 
 > ### {% icon hands_on %} Hands-on: Open Galaxy
-> At first, Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
-> 
+>
+> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+> 2. Create a Galaxy account if you do not have one
+>
 >    {% snippet faqs/galaxy/galaxy_creating_an_account.md %}
-
+>
 {: .hands_on}
 
 The Galaxy homepage is divided into three panels:
@@ -147,7 +151,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >
 >    Your uploaded file is now in your current history. When the file has uploaded to Galaxy, it will turn green. But, what is this file?
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
+> 2. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name to look at the file content
 >
 {: .hands_on}
 
@@ -155,48 +159,7 @@ The contents of the file will be displayed in the central Galaxy panel.
 
 This file contains the sequences, also called **reads**, of DNA, *i.e.* succession of nucleotides, for all fragments from the yeasts in the beer, in FASTQ format.
 
-> ### {% icon details %} FASTQ format
->
-> Although it looks complicated (and maybe it is), the FASTQ format is easy to > understand with a little decoding. Each read, representing a fragment of DNA, is encoded by 4 lines:
->
-> Line  | Description
-> --- | ---
-> 1 | Always begins with `@` followed by the information about the read
-> 2 | The actual nucleic sequence
-> 3 | Always begins with a `+` and contains sometimes the same info in line 1
-> 4 | Has a string of characters which represent the quality scores associated with each base of the nucleic sequence; must have the same number of characters as line 2
->
-> So for example, the first sequence in our file is:
->
-> ```
-> @03dd2268-71ef-4635-8bce-a42a0439ba9a runid=8711537cc800b6622b9d76d9483ecb373c6544e5 read=252 ch=179 start_time=2019-12-08T11:54:28Z flow_cell_id=FAL10820 protocol_group_id=la_trappe sample_id=08_12_2019
-> AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA
-> +
-> $'())#$$%#$%%'-$&$%'%#$%('+;<>>>18.?ACLJM7E:CFIMK<=@0/.4<9<&$007:,3<IIN<3%+&$(+#$%'$#$.2@401/5=49IEE=CH.20355>-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:<?9B522.(&%%(9:3E99<BIL?:>RB--**5,3(/.-8B>F@@=?,9'36;:87+/19BAD@=8*''&''7752'$%&,5)AM<99$%;EE;BD:=9<@=9+%$
-> ```
->
-> It means that the fragment named `@03dd2268-71ef-4635-8bce-a42a0439ba9a` (ID given in line1) corresponds to:
-> - the DNA sequence `AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA` (line2)
-> - this sequence has been sequenced with a quality `$'())#$$%#$%%'-$&$%'%#$%('+;<>>>18.?ACLJM7E:CFIMK<=@0/.4<9<&$007:,3<IIN<3%+&$(+#$%'$#$.2@401/5=49IEE=CH.20355>-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:<?9B522.(&%%(9:3E99<BIL?:>RB--**5,3(/.-8B>F@@=?,9'36;:87+/19BAD@=8*''&''7752'$%&,5)AM<99$%;EE;BD:=9<@=9+%$` (line 4).
->
-> But what does this quality score mean?
->
-> The quality score for each sequence is a string of characters, one for each base of the nucleotide sequence, used to characterize the probability of misidentification of each base. The score is encoded using the ASCII character table (with [some historical differences](https://en.wikipedia.org/wiki/FASTQ_format#Encoding)):
->
-> ![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](./images/fastq-quality-encoding.png)
->
-> So there is an ASCII character associated with each nucleotide, representing its [Phred quality score](https://en.wikipedia.org/wiki/Phred_quality_score), the probability of an incorrect base call:
->
-> Phred Quality Score | Probability of incorrect base call | Base call accuracy
-> --- | --- | ---
-> 10 | 1 in 10 | 90%
-> 20 | 1 in 100 | 99%
-> 30 | 1 in 1000 | 99.9%
-> 40 | 1 in 10,000 | 99.99%
-> 50 | 1 in 100,000 | 99.999%
-> 60 | 1 in 1,000,000 | 99.9999%
->
-{: .details }
+{% snippet topics/sequence-analysis/faqs/fastq.md %}
 
 # Data quality
 
@@ -209,17 +172,34 @@ Before starting to work on our data, it is necessary to assess its quality. This
 > ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters
->    - {% icon param-files %} *"Raw read data from your current history"*: `Reads`
+>    - {% icon param-file %} *"Raw read data from your current history"*: `Reads`
 >
 > 2. Inspect the generated HTML file
 >
 {: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> Given the Basic Statistics table on the top,
+> 1. How many sequences are in the FASTQ file?
+> 2. How long are the sequences?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. There are 1876 sequences.
+> > 2. The sequences range from 130 nucleotides to 2327 nucleotides. Not all sequences have then the same length.
+> >
+> {: .solution}
+>
+{: .question}
 
 **FastQC** provides information on various parameters, such as the range of quality values across all bases at each position:
 
 ![FastQC Per base sequence quality with scores below 200](./images/fastqc_1.png "Per base sequence quality")
 
 We can see that the quality of our sequencing data grows after the first few bases, stays around a score of 18, which is a relatively low value compared to other sequencing technologies, and then decreases again at the end of the sequences.
+
+For more detailed information about the other plots in the FASTQC report, check out our [dedicated tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 ## Improve the dataset quality
 
@@ -230,64 +210,57 @@ In order to improve the quality of our data, we will use two tools:
 > ### {% icon hands_on %} Hands-on: Improve the dataset quality
 >
 > 1. {% tool [Porechop](toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3) %} with the following parameters:
->    - *"Input FASTA/FASTQ"*: {% icon param-files %} `Reads`
+>    - {% icon param-file %} *"Input FASTA/FASTQ"*:  `Reads`
 >    - *"Output format for the reads"*: `fastq`
 >
 > 2. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Single-end`
->     - {% icon param-collection %} *"Dataset collection"*: output of **Porechop**
->        - In *"Adapter Trimming Options"*:
->            - *"Disable adapter trimming"*: `Yes`
+>    - {% icon param-file %} *"Dataset collection"*: output of **Porechop**
+>    - In *"Adapter Trimming Options"*:
+>        - *"Disable adapter trimming"*: `Yes`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `9`
 >    - In *"Read Modification Options"*:
 >        - *"PolyG tail trimming"*: `Disable polyG tail trimming`
 >
-> 3. (Optional) {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters
->    - {% icon param-files %} *"Raw read data from your current history"*: `output of **fastp**
->
-> 4. (Optional) Inspect the output of **FASTQC** to see how the quality has been improved
+> 3. Inspect the HTML report of **fastp** to see how the quality has been improved
 {: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many sequences are there before filtering? Is it the same number as in FASTQC report?
+> 2. How many sequences are there after filtering? How many sequences have then been removed by filtering?
+> 3. What is the mean length before filtering? And after filtering?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. There are 1,869 reads before filtering. The number is lower than in the FASTQC report. Some reads may have been discarded via Porechop
+> > 2. There are 1,350 reads after filtering. So the filtering step has removed $$1869-1350 = 519$$ sequences.
+> > 3. The mean length is 314 nucleotide before filtering and 316bp after filtering.
+> {: .solution}
+>
+{: .question}
 
 # Assign taxonomic classifications
 
-One of the key steps in metagenomic data analysis is to identify the taxon to which the individual reads belong.
+One of the main aim in microbiome data analysis is to identify the organisms sequenced. For that we try to identify the taxon to which each individual reads belong.
 
-> ### {% icon comment %} Taxon?
->
-> Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics. It is founded on the concept that morphological similarities descend from a common evolutionary ancestor.
->
-> At a very broad level, all living organisms are grouped into one of the 7 Kingdoms of Life each of which are split further into Phylum > Class > Order > Family > Genus > Species.
->
-> For example for the cat:
->
-> Level | Classification
-> --- | ---
-> Kingdom | Animalia
-> Phylum | Chordata
-> Class | Mammalia
-> Order | Carnivora
-> Family | Felidae
-> Genus | *Felis*
-> Species |	*F. catus*
->
-> A taxon is a group of organisms and/ or populations(s) of organisms that together form a taxonomic unit. A taxon is usually assigned a rank when it is given its formal, Latin name.
->
-> ![Example of taxonomy. It starts, top to bottom, with Kingdom "Animalia", Phylum "Chordata", Class "Mammalia", and Order "Carnivora". Then it splits in 3. On the left, Family "Felidae", with 2 genus "Felis" and "Panthera" and below 3 species "F. catus" and "F. pardalis" below "Felis", "P. pardus" below "Panthera". In the middle, Family "Canidae", genus "Canis" and 2 species "C. familiaris" and "C. lupus". On the right, Family "Ursidae", Genus "Ursus" and 2 species "U. arctos" and "U. horribilus". Below each species is a illustration of the species](./images/taxonomy.png)
->
->
-{: .comment}
+{% snippet topics/metagenomics/faqs/taxon.md %}
 
-Taxonomic classification tools are based on microbial genome databases to identify the origin of each sequence. To perform the taxonomic classification we will use **Kraken2** ({% cite Wood2019 %}).
+Taxonomic assignment or classification is the process of assigning an **Operational Taxonomic Unit** (OTUs, that is, groups of related individuals / taxon) to sequences. To assign an OTU to a sequence it is compared against a database, but this comparison can be done in different ways, with different bioinformatics tools. Here we will use **Kraken2** ({% cite wood2019improved %}).
 
-> ### {% icon details %} Kraken2
+> ### {% icon details %} Kraken2 and the k-mer approach for taxonomy classification
 >
-> This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length $$k$$) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using dustmasker.
+> In the $$k$$-mer approach for taxonomy classification, we use a database containing the DNA sequences of genomes we know the taxonomy. The genome database is broken into pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
 >
-> ![Kraken2](./images/kraken2.jpg)
+> **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database and make the classification with the most probable position.  the maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
+>
+> ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. lowest node) of the genomes that contain that k-mer in a database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
 >
 {: .details}
+
+<!-- Add something about database -->
 
 > ### {% icon hands_on %} Hands-on: Kraken2
 >
@@ -298,8 +271,58 @@ Taxonomic classification tools are based on microbial genome databases to identi
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
+>    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes: PlusPF`
 >
+> 2. Inspect the report file
 {: .hands_on}
+
+The Kraken report in MPA format is a tabular file with 2 columns:
+
+```
+d__Eukaryota	756
+d__Eukaryota|k__Metazoa	402
+d__Eukaryota|k__Metazoa|p__Chordata	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo|s__Homo sapiens	402
+d__Eukaryota|k__Fungi	342
+d__Eukaryota|k__Fungi|p__Ascomycota	341
+d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
+...
+```
+
+1. The first column lists clades, ranging from taxonomic domains (Bacteria, Archaea, etc.) through species.
+
+    The taxonomic level of each clade is prefixed to indicate its level:
+    - Domain: `d__`
+    - Kingdom: `k__`
+    - Phylum: `p__`
+    - Class: `c__`
+    - Order: `o__`
+    - Family: `f__`
+    - Genus: `g__`
+    - Species: `s__`
+
+2. The second column gives the number of reads assigned to the clade rooted at that taxon
+
+
+> ### {% icon question %} Questions
+>
+> 1. How many reads are assigned Homo sapiens?
+> 2. What is the most found taxon?
+> 3. Which fungi species are found?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. 402 reads are assigned to **Homo sapiens**
+> > 2. Eukaryota is the most found taxon
+> > 3. Saccharomyces cerevisiae, Saccharomyces paradoxus, Saccharomyces eubayanus, Kluyveromyces marxianus, Sugiyamaella lignohabitans
+> >
+> {: .solution}
+>
+{: .question}
 
 # Visualize the community
 

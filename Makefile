@@ -61,7 +61,7 @@ serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --trace --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
+		${JEKYLL} serve --trace --strict_front_matter -d _site/training-material ${FLAGS}
 .PHONY: serve
 
 serve-quick: api/swagger.json ## run a local server (faster, some plugins disabled for speed)
@@ -69,7 +69,7 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
+		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml ${FLAGS} --trace
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
