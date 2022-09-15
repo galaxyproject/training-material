@@ -1,7 +1,7 @@
 ---
 title: FASTQ format
 area: format
-box_type: comment
+box_type: details
 layout: faq
 contributors: [bebatut]
 ---
