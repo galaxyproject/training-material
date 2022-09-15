@@ -2,7 +2,10 @@
 layout: tutorial_hands_on
 
 title: 'Trajectory Analysis using Monocle3 '
-zenodo_link: ''
+subtopic: single-cell-CS
+priority: 5
+zenodo_link: 'https://zenodo.org/record/7078524'
+
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
@@ -17,35 +20,33 @@ time_estimation: 3H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
+
+requirements:
+-
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
+        - scrna-case_basic-pipeline
+tags:
+- single-cell
+- trajectory-analysis
+- paper-replication
+
 contributors:
-- contributor1
-- contributor2
-
----
-
+  authorship:
+    - wee-snufkin
+    - nomadscientist
 
 # Introduction
 {:.no_toc}
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This tutorial is a follow-up to the 'Single-cell RNA-seq: Case Study' (find it [here](https://training.galaxyproject.org/training-material/topics/transcriptomics/)), we will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html), [combine datasets](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) or [filter, plot and process scRNA-seq data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) to get the data in the form we’ll be working on today.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis here /slides/. We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
 
 
 **Please follow our
