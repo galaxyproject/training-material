@@ -6,10 +6,10 @@ zenodo_link: https://zenodo.org/record/6628296
 questions:
 - How to evaluate a set of heterologous pathways ?
 objectives:
-- Calculate the production flux of the Lycopene target molecule using rpFBA.
-- Compute thermodynamics values to optimize the yield of the reaction producing the Lycopene using rpThermo.
-- Compute the enzyme availability score for the chemical transformations.
-- Rank the computed heterologous pathways depending on their length.
+- Calculate the production flux of the lycopene target molecule using _Flux Balance Analysis_ tool.
+- Compute thermodynamics values to optimize the yield of the reaction producing the lycopene using _Thermo_ tool.
+- Compute the global score for the previous annotated pathways.
+- Rank the computed heterologous pathways depending on their score.
 time_estimation: 20M
 contributors:
 - kenza12
@@ -27,23 +27,23 @@ contributors:
 
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
-In this tutorial, we will use a set of tools from the **Pathway Analysis workflow** which will enable you to evaluate a set of heterelogous pathways previously produced by RetroSynthesis workflow in a chassis organism (E.Coli iML1515). These workflows are available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org). The goal is to inform the user as to the theoretically best performing pathways by ranking them based on the four criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.
+In this tutorial, we will use a set of tools from the **Pathway Analysis workflow** which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis workflow in a chassis organism (_E. coli_ iML1515). These workflows are available in the [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org). The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.
 
-We recommend that you follow the Retrosynthesis tutorial before starting the current tutorial which will enable you to find pathways to synthesize heterologous compounds producing Lycopene in chassis organisms (E.Coli iML1515).
+We recommend that you follow the Retrosynthesis tutorial before starting the current tutorial which will enable you to find pathways to synthesize heterologous compounds producing Lycopene in the _E. coli_ chassis organism.
 
 Four main steps will be run using the following workflow:
 
-To rank the computed heterelogous pathways, we need to calculate some metrics. This is why an in-house Flux Balance Analysis (FBA) was developed to calculate the production flux of a given target (Lycopene). The method forces a fraction of its maximal flux through the biomass reaction while optimizing for the target molecule. This is achieved by rpFBA tool.
+To rank the computed heterologous pathways, we need to calculate some metrics. This is why an in-house Flux Balance Analysis (FBA) was developed to calculate the production flux of a given target (e.g. lycopene). The method forces a fraction of its maximal flux through the biomass reaction while optimizing for the target molecule. This is achieved by the _Flux Balance Analysis_ tool.
 
-Secondly, we will use rpThermo tool to compute thermodynamics values (based on Gibbs free energies) for each pathway by using a linear equation system solver to know whether a reaction direction of a pathway is feasible in physiological conditions.
+Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions. The contribution of individual reactions to the final pathway thermodynamic is balanced solving a linear equation system.
 
-After that, rpScore is used to calculate the enzyme availability score for the chemical transformation where high values favor less promiscuous reaction rules and express better confidence.
+After that, the _Score Pathway_ tool is used to calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability.
 
-Finally, the length of the pathway is taken into consideration where shorter pathways are favored over longer pathways.
+Finally, the pathway are ranked based on the global score using the _Rank Pathways_ tool.
 
-![Pathway Analysis Workflow](../../images/pathway_analysis_workflow.png)
+![Pathway Analysis Workflow](../../images/pathway_analysis_workflow.jpg)
 
-Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps as well. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.
+Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.
 
 > ### Agenda
 >
@@ -60,7 +60,7 @@ First we need to upload and prepare the following inputs to analyze:
 
 - A set of pathways provided in the SBML format (Systems Biology Markup Language) to be ranked, modeling heterologous pathways such as those outputted by the **RetroSynthesis workflow** (available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org)).
 
-- The GEM (Genome-scale metabolic models) which is a formalized representation of the metabolism of the host organism (the model is E. coli iML1515), provided in the SBML format.
+- The GEM (Genome-scale Metabolic Models) which is a formalized representation of the metabolism of the host organism (the model is _E. coli_ iML1515), provided in the SBML format.
 
 ## Get data
 
@@ -92,23 +92,21 @@ First we need to upload and prepare the following inputs to analyze:
 
 # Compute the target product flux
 
-Firstly, in the RetroSynthesis workflow (available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org)), molecules contained within a full SBML model are used to generate heterologous pathways. As a result, the calculated heterologous pathways can easily be merged into the full organism GEM (Genome-scale metabolic models) (E.Coli iML1515), enabling the whole-cell context to calculate the production flux of a given target (Lycopene). The provided model is in SBML format and was previously downloaded from the [BiGG database](http://bigg.ucsd.edu/). 
+Notice that the starting compounds (in other words, _the precursors_) of the predicted pathways (also referred as the _heterologous pathways_) are compounds that have been initially extracted from the genome-scale metabolic model (GEM) of the organism we are interested in (also referred as _chassis_). While this step is out of the scope of the present Pathway Analysis tutorial, this means that the precursors of predicted pathways are also present in the chassis model. Hence, predicted pathways and the chassis organism model can be merged to construct "augmented" whole-cell models, enabling flux analysis of these metabolic systems. This is what we'll do here to predict the production flux of a compound of interest. 
 
-The FBA (Flux Balance Analysis) method used to calculate the flux is a mathematical approach (as decribed in section Methods in {% cite Hrisson2022 %}) which uses the COBRApy package ({% cite Ebrahim2013 %}) and proposes 3 different analysis methods (standard FBA, Parsimonious FBA, Fraction of Reaction).
+Within the frame of this tutorial, we'll use the _E. coli_ iML1515 GEM (downloaded from the [BiGG database](http://bigg.ucsd.edu/)) to model the chassis metabolism of _E. coli_ and the target compound is the lycopene. The provided _E. coli_ model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis workflow (available in [Galaxy SynbioCAD platform](https://galaxy-synbiocad.org)). 
 
-The first two methods are specific to COBRApy package and the last one `Fraction of Reaction` is an in-house analysis method (as decribed in section Methods in {% cite Hrisson2022 %}) to consider the potential burden that the production of a target molecule may have on the cell and the impact of the target itself.
+The FBA (Flux Balance Analysis) method used to calculate the flux is a mathematical approach (as decribed in section Methods in {% cite Hrisson2022 %}) which uses the COBRApy package ({% cite Ebrahim2013 %}) and proposes 3 different analysis methods (standard FBA, parsimonious FBA, fraction of reaction). The first two methods are specific to the COBRApy package and the last one `Fraction of Reaction` is an in-house analysis method (as decribed in section Methods in {% cite Hrisson2022 %}) to consider the cell needs for its own maintenance while producing the target compound.
 
-The objective of FBA is to simulate the flux of a target while considering this potential burden. Under such simulation conditions, the analysis that returns a low flux may be caused by the starting native compound itself not having a high flux, or the cofactors required having a low flux, while the pathways with high flux would be caused by both the starting compound and the cofactors being in abundance. In either case, bottlenecks that limit the flux of the pathway may be identified and pathways that do not theoretically generate high yields can be filtered out.
+Within the workflow, the purpose of the _Flux Balance Analysis_ tool is to predict the production flux of the targeted compound, while considering the cellular needs. Under such simulation conditions, the analysis that returns a low production flux may be due to some precursor compounds having a limiting production flux, nor cofactor fluxes involved not being sufficiently balanced by the chassis native metabolism. Pathways with high flux would be caused by both the precursor compounds and the cofactors being in abundance. In either case, bottlenecks that limit the flux of the pathway may be investigated (this is outside of the scope of the workflow) and pathways that do not theoretically generate high yields can be filtered out.
 
-We first perform FBA (with COBRApy) for the biomass reaction and record its flux. The upper and lower bounds of the biomass reaction are then set to the same amount, defined as a fraction of its previously recorded optimum (default is 75% of its optimum). This ensures that any further FBA solution would have a fixed biomass production regardless of the conditions set for further analysis.
-
-The method forces a fraction of its maximal flux through the biomass reaction while optimizing for the target molecule, records the flux directly to the SBML file and all changed bounds are reset to their original values before saving the file.
+We first perform an FBA (with COBRApy) optimizing the biomass reaction and record its maximal theoretical flux. The upper and lower bounds of the biomass reaction are then set to a same amount, equals to a fraction of its previously recorded optimum (default is 75% of its optimum). The method then performs a second FBA where biomass flux is enforced to this fraction of its optimum while optimizing the target production flux. Simulated fluxes are recorded directly into the SBML file and all changed flux bounds are reset to their original values before saving the output file.
 
 ![Flux Balance Analysis](../../images/fba_calculation.png)
 
 > ### {% icon details %} Comment
 >
-> Compounds that cannot carry any flux are temporarily removed from the reaction for the FBA evaluation. Such cases can happen due to side substrates or products of predicted reactions that do not match any chassis compound. This enables FBA to consider whole-cell conditions for the theoretical production of the user’s target molecule.
+> Blocking compounds that cannot provide any flux are temporarily removed from heterologous reactions for the FBA evaluation. Such cases can happen due to side substrates or products of predicted reactions that do not match any chassis compound, representing dead-end paths.
 >
 {: .details}
 
@@ -125,11 +123,11 @@ The method forces a fraction of its maximal flux through the biomass reaction wh
 >    > The default is `c`, the BiGG code for the cytoplasm.
 >    {: .comment}
 >
->    - *"biomass reaction ID"*: Specify the biomass reaction ID that will be restricted in the "fraction" simulation type `R_BIOMASS_Ec_iML1515_core_75p37M`.
+>    - *"biomass reaction ID"*: Specify the biomass reaction ID that will be used for the "fraction" simulation, type `R_BIOMASS_Ec_iML1515_core_75p37M`.
 >
->    > ### {% icon comment %} How to select the Biomass reaction ID ?
+>    > ### {% icon comment %} How to select the biomass reaction ID ?
 >    >
->    > The biomass reaction ID objective is extracted from the current model *E.Coli iML1515*. You can search the term `biomass` in your XML model and pick the ID where `core` is noticed.
+>    > The biomass reaction ID objective is extracted from the current model *E.Coli iML1515*. You can search the term `biomass` in your XML model and pick the ID where the term `core` appears.
 >    {: .comment}
 >
 >    - *"Constraint based simulation type"*: `Fraction of Reaction`
@@ -150,9 +148,11 @@ The method forces a fraction of its maximal flux through the biomass reaction wh
 
 ## Compute thermodynamics values
 
-Thermodynamic analysis were performed to every chemical species involved in each reaction to calculate the Gibbs free energy of reactions and heterologous pathways. We use eQuilibrator ({% cite Flamholz_2011 %}) to calculate the formation energy either using public database ID reference (when recognized with the tools internal database) or by decomposing the chemical structure and calculating its formation energy using the component contribution method.
+The goal of the thermodynamic analysis is to estimate the feasibility of the predicted pathways toward target production, in physiological conditions. The eQuilibrator libraries ({% cite Flamholz_2011 %}) are used to calculate the formation energy of compounds by either using public database IDs (when referenced within the tools internal database) or by decomposing the chemical structure and calculating its energy of formation using the component contribution method.
 
-Thereafter, the species involved in a reaction are combined (with consideration for stoichiometry) and the thermodynamic feasibility of the pathway is estimated by taking the sum of the Gibbs free energy of each participating reaction (See Thermodynamics in Methods section for further details: {% cite Hrisson2022 %}).
+The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients).
+
+Finally, the thermodynamic of a pathway is estimated by combining the Gibbs energy of reactions involved in it. The contribution of individual reactions to the final pathway thermodynamic is balanced using a linear equation system, according to the relative uses of intermediate compounds across the pathway (See Thermodynamics in Methods section for further details: {% cite Hrisson2022 %}). A pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target.
 
 ![Thermodynamics](../../images/rpthermo.png)
 
@@ -180,27 +180,25 @@ Thereafter, the species involved in a reaction are combined (with consideration 
 >
 {: .question}
 
-## Compute the enzyme availability score for the chemical transformations
+## Compute the global score of pathways
 
-Enzyme availability for the chemical transformation is also taken into consideration, where high values favor less promiscuous reaction rules and express better confidence. The method used to compute enzyme availability score is described in the Methods section (cf. Retrosynthesis from target to chassis: {% cite Hrisson2022 %}).
+The _Pathway Score_ tool provides a global score for a given pathway previously annotated by the _Flux Balance Analysis_ and _Thermo_ tools. This score is computed by a machine learning (ML) model (cf. Machine Learning Global Scoring in {% cite Hrisson2022 %}). The model takes as input features describing the pathway (thermodynamic feasibility, target flux with fixed biomass, length) and the reactions within the pathway (reaction SMARTS, Gibbs free energy, enzyme availability score) and prints out the probability for the pathway to be a valid pathway. The ML model has been trained on literature data (cf. section Benchmarking with literature data in {% cite Hrisson2022 %}) and by a validation trial (cf. section Benchmarking by expert validation trial in {% cite Hrisson2022 %}).
 
-rpScore tool compute a global score from the previous annotated pathways. This score is calculated from a learning process based on features describing the pathway (thermodynamic feasibility, target flux with fixed biomass, length) and the reactions within the pathway (reaction SMARTS (Canonical SMiles ARbitrary Target Specification), Gibbs free energy, enzyme availability score).
-
-> ### {% icon hands_on %} Hands-on: Calculate the enzyme availability score using rpscorer tool
+> ### {% icon hands_on %} Hands-on: Compute the global score using the _Pathway Score_ tool
 >
 > 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1) %} with the following parameters:
 >    - {% icon param-file %} *"Pathway (rpSBML)"*: `pathway_with_thermo` (output of **Thermo** {% icon tool %})
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool will print out the probability for the pathway to be a valid pathway in SBML format.
+>    > This tool will output a new annotated SBML file representing the pathway, containing the `global_score` annotation.
 >    {: .comment}
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. What is the computed global score for `rp_001_0001` pathway ?
+> 1. What is the computed global score for the `rp_001_0001` pathway ?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -212,7 +210,7 @@ rpScore tool compute a global score from the previous annotated pathways. This s
 
 ## Rank annotated pathways
 
-Finally, **rpRanker** ranks the previous set of heterologous pathways, based on their length, to reveal what are the most likely pathways to produce the target molecule (*Lycopene*) in an organism of choice (*E.Coli*). Shorter pathways are favored over longer pathways.
+Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based on their global score, to reveal what are the most likely pathways to produce the target molecule (here it is _lycopene_) in a given organism of interest (_E. coli_ in this tutorial).
 
 > ### {% icon hands_on %} Hands-on: Rank annotated pathways using rpRanker tool
 >
@@ -221,7 +219,7 @@ Finally, **rpRanker** ranks the previous set of heterologous pathways, based on 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This tool will output a CSV file wich contains the pathway IDs and their corresponding score.
+>    > This tool will output a CSV file which contains the pathway IDs and their corresponding global score.
 >    {: .comment}
 >
 {: .hands_on}
@@ -229,7 +227,7 @@ Finally, **rpRanker** ranks the previous set of heterologous pathways, based on 
 
 > ### {% icon question %} Questions
 >
-> 1. What are the 3 top ranked pathways ?
+> 1. What are the 3 top-ranked pathways ?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -245,7 +243,7 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 
 > ### {% icon hands_on %} Hands-on: Execute the entire workflow in one go.
 >
-> 1. Import your **Pathway Analysis Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/main_workflow.ga).
+> 1. Import your **Pathway Analysis Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga).
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
@@ -266,6 +264,6 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 # Conclusion
 {:.no_toc}
 
-To select the best pathways for producing the Lycopene in *E.Coli*, some metrics have to be computed: Flux balance analysis, thermodynamics, pathway length, and reaction SMARTS. This is achieved using the tools from the following pathway analysis workflow.
+To select the best pathways for producing the lycopene in *E. coli*, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis workflow.
 
 ![pathway analysis scheme](../../images/pathway_analysis_scheme.png)
