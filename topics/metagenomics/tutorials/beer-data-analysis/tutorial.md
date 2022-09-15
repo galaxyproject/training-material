@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Identification of yeasts in a beer
+title: Identification of yeasts in a beer using Nanopore sequencing
 zenodo_link: https://doi.org/10.5281/zenodo.6620778
 level: Introductory
 questions:
@@ -29,53 +29,91 @@ contributors:
 - bebatut
 ---
 
-
 # Introduction
 {:.no_toc}
 
 <!-- This is a comment. -->
 
 What is a microbiome? There are collections of small living creatures.
-These small creatures are called bacteria and they are everywhere. In our gut,
-in the soil, on vending machines, and even inside the beer. Most of these bacteria are
+These small creatures are called **micro-organisms** and they are **everywhere**. In our gut,
+in the soil, on vending machines, and even inside the beer. Most of these micro-organisms are
 actually very good for us, but some can make us very ill.
 
-Bacteria come in different shapes and sizes, but they have the same components.
-One crucial component is the DNA, the blueprint of life. The DNA encodes the
-shape and size and many other characteristics unique to a bacterial species. Because of
-the encoding information the DNA can be used to identify what kind of bacteria
-the DNA is from. Therefore, within a metagenomic sample, e.g. form soil, gut, or beer, one can
-identify what kind of species are inside the sample.
+Micro-organisms come in different shapes and sizes, but they have the same components.
+One crucial component is the **DNA**, the blueprint of life. The DNA encodes the
+shape and size and many other characteristics unique to a species. Because of
+the encoding information the DNA can be used to identify what kind of micro-organism
+the DNA is from. Therefore, within a metagenomic sample, *e.g.* form soil, gut,
+or beer, one can identify what kind of species are inside the sample.
 
-In this tutorial, we will use data generated via the [BeerDEcoded project](https://streetscience.community/projects/beerdecoded/).
+In this tutorial, we will use data of beer microbiome generated via the
+[BeerDEcoded project](https://streetscience.community/projects/beerdecoded/).
 
-> ### {% icon comment %} The BeerDEcoded project
+> ### {% icon details %} The BeerDEcoded project
 >
 > The BeerDEcoded project are workshops organized with and for schools and general
-> audience, to introduce biology and genomic science. People will learn about
-> DNA, sequencing technologies, bioinformatics, open science, how these technologies and concepts are
-> applied and how they are impacting their daily life.
+> audience, to introduce biology and genomic science. People learn in an interactive way
+> about DNA, sequencing technologies, bioinformatics, open science, how these technologies
+> and concepts are applied and how they are impacting their daily life.
 >
-> The 1-2 days continuous (or divided over several days) workshops include the following steps:
+> Beer is alive and contains many microorganisms. It can be found in many places
+> and there are many of them. It is a fun media to bring the people to the
+> contact of molecular biology, data-analysis, and open science
+>
+> A BeerDEcoded workshop includes the following steps:
 > 1. Extract yeasts and their DNA from beer bottle,
 > 2. Sequence the extracted DNA using a MinION sequencer to obtain the sequence of bases/nucleotides (A, T, C and G) for each DNA fragment in the sample,
 > 3. Analyze the sequenced data in order to know which organisms this DNA is from
 >
 > ![The image represents a BeerDEcoded workshop. On the left, there is a beer glass. An arrow goes from the bottle to DNA with "Extraction" written on the below. An arrow goes from DNA to DNA sequences with "Sequencing" written on the below. An arrow goes from the DNA sequences to Yeasts with "Data analysis" written on the below](./images/beerprocess.png)
 >
+{: .details}
+
+> ### {% icon comment %} Beer microbiome
+>
+> Beer is alive! It contains microorganisms, in particular **yeasts**.
+>
+> Indeed, grain and water create a sugary liquid (called wort). The beer brewer
+> adds yeasts to it. By eating the sugar, yeasts creates alcohol, carbonation,
+> and other compounds (esters, phenols, etc.) that give beer its particular
+> flavor.
+>
+> Yeasts are microorganism, more precisely **unicellular fungi**. The majority
+> of beers use a yeast genera called ***Saccharomyces***, which in greek means
+> "sugar fungus". Within that genera, two specific species of *Saccharomyces*
+> are the most use:
+>
+> - ***Saccharomyces cerevisiae***: a top-fermenting (*i.e.* yeast which to rise
+> up to the top of the beer as it eats and creates alcohol) ale yeast,responsible
+> for a huge range of beer styles like witbiers, stouts, ambers, tripels, saisons,
+> IPAs, and so many more. It is most likely the yeast that brewers were
+> inadvertently brewing with over 3,000 years ago.
+> - ***Saccharomyces pastorianus***: a bottom-fermenting (*i.e.* it sits on the
+> bottom of the tank as it ferments) lager yeast, responsible for beer styles
+> like Pilsners, lagers, märzens, bocks, and more. This yeast was originally
+> found, and cultivated, by Bavarian brewers a little over 200 years ago. It is
+> the most-used yeast int terms of raw amount of beer produced around the world.
+>
+> But yeast is actually all around us. And we can actually brew spontaneously
+> fermented beer with wild yeast and souring microbiota floating through the air.
+>
 {: .comment}
 
-DNA of yeasts in a bottle of La Trappe beer has been extracted and sequenced using a
-MinION to obtain sequences of DNA of the extracted yeasts. Now, for each obtained sequence, we would like to identify the yeast species to which it belongs, and thereby outline the diversity of organisms (the microbiome community) in the beer sample.
+During one BeerDEcoded workshop, we extracted yeasts out of a bottle of
+[La Trappe beer](https://en.wikipedia.org/wiki/De_Koningshoeven_Brewery). We then
+extracted the DNA of these yeasts and sequenced it using a MinION to obtain the DNA
+sequences. Now, we would like to **identify the yeast species** sequenced there, and
+thereby **outline the diversity of microorganisms** (the microbiome community) in the beer
+sample.
 
 To get this information, we need to process the sequenced data in a few steps:
 1. Check the quality of the data
-2. Assign taxonomic label, i.e. assigh 'species' to the sequences
-3. Visualize the species distribution
+2. Assign taxonomic label, *i.e.* assign 'species' to the sequences
+3. Visualize the distribution of the different species
 
 This type of data analysis requires running several bioinformatics tools and
 usually requires a computer science background. [Galaxy](https://galaxyproject.org/) is
-an open-source platform for data analysis that enables users to use bioinformatics
+an open-source platform for data analysis that enables anyone to use bioinformatics
 tools through its graphical web interface, accessible via any Web browser.
 
 So, in this tutorial, we will use Galaxy to extract and visualize the community
@@ -242,11 +280,37 @@ In order to improve the quality of our data, we will use two tools:
 >
 {: .question}
 
-# Assign taxonomic classifications
+# Assign taxonomic classification
 
-One of the main aim in microbiome data analysis is to identify the organisms sequenced. For that we try to identify the taxon to which each individual reads belong.
+One of the main aim in microbiome data analysis is to identify the organisms sequenced. For that we try to **identify the taxon** to which each individual reads belong.
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
+
+> ### {% icon question %} Questions
+>
+> 1. Which microorganisms do we expect to identify in our data?
+> 2. What is the taxonomy of main expected microorganism?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The sequences are supposed to be yeasts extracted from a beer bottle. The majority of beers use a yeast genera called ***Saccharomyces*** and 2 species in that genera: *Saccharomyces cerevisiae* (ale yeast) and *Saccharomyces pastorianus* (lager yeast). The used beer is an ale beer, so we expect to find ***Saccharomyces cerevisiae***. But other yeasts can also have been used and then found. We could also have some DNA left from other beer components, but also contaminations by other microorganisms and even human DNA from people who manipulated the beer or did the extraction.
+> >
+> > 2. The main expected microorganism is ***Saccharomyces cerevisiae***:
+> >
+> >    Level | Classification
+> >    --- | ---
+> >    Domain | Eukaryota
+> >    Kingdom | Fungi
+> >    Phylum | Ascomycota
+> >    Class | Saccharomycetes
+> >    Order | Saccharomycetales
+> >    Family | Saccharomycetaceae
+> >    Genus | *Saccharomyces*
+> >    Species | *S. cerevisiae*
+> >
+> {: .solution}
+>
+{: .question}
 
 Taxonomic assignment or classification is the process of assigning an **Operational Taxonomic Unit** (OTUs, that is, groups of related individuals / taxon) to sequences. To assign an OTU to a sequence it is compared against a database, but this comparison can be done in different ways, with different bioinformatics tools. Here we will use **Kraken2** ({% cite wood2019improved %}).
 
