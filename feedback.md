@@ -15,6 +15,11 @@ layout: base
 <script src="https://github.com/nagix/chartjs-plugin-colorschemes/releases/download/v0.4.0/chartjs-plugin-colorschemes.js"></script>
 <!-- define the charts -->
 <script type="text/javascript">
+    const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+    if(isReduced){
+        Chart.defaults.global.animation.duration = 0;
+    }
+
     Chart.plugins.unregister(ChartDataLabels);
 
     function genColors(size) {
