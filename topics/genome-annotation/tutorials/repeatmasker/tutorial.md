@@ -32,6 +32,8 @@ follow_up_training:
   topic_name: genome-annotation
   tutorials:
     - funannotate
+subtopic: eukaryote
+priority: 1
 ---
 
 
