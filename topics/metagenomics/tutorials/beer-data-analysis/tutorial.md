@@ -295,7 +295,8 @@ One of the main aim in microbiome data analysis is to identify the organisms seq
 > >
 > > 1. The sequences are supposed to be yeasts extracted from a beer bottle. The majority of beers use a yeast genera called ***Saccharomyces*** and 2 species in that genera: *Saccharomyces cerevisiae* (ale yeast) and *Saccharomyces pastorianus* (lager yeast). The used beer is an ale beer, so we expect to find ***Saccharomyces cerevisiae***. But other yeasts can also have been used and then found. We could also have some DNA left from other beer components, but also contaminations by other microorganisms and even human DNA from people who manipulated the beer or did the extraction.
 > >
-> > 2. The main expected microorganism is ***Saccharomyces cerevisiae***:
+> >
+> > 2. The main expected microorganism is ***Saccharomyces cerevisiae*** with its taxonomy
 > >
 > >    Level | Classification
 > >    --- | ---
@@ -324,8 +325,6 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 >
 {: .details}
 
-<!-- Add something about database -->
-
 > ### {% icon hands_on %} Hands-on: Kraken2
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} with the following parameters:
@@ -336,6 +335,9 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
 >    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes: PlusPF`
+>
+>      The database here contains reference sequences and taxonomies. We need to
+>      be sure it contains yeasts, i.e. fungi.
 >
 > 2. Inspect the report file
 {: .hands_on}
@@ -374,39 +376,130 @@ d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
 
 > ### {% icon question %} Questions
 >
-> 1. How many reads are assigned Homo sapiens?
-> 2. What is the most found taxon?
-> 3. Which fungi species are found?
+> 1. How many taxons have been identified?
+> 2. How many reads have been classified?
+> 3. Which domains are found and with how many reads?
+> 4. Which yeasts have been identified? Are they the expected ones?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 402 reads are assigned to **Homo sapiens**
-> > 2. Eukaryota is the most found taxon
-> > 3. Saccharomyces cerevisiae, Saccharomyces paradoxus, Saccharomyces eubayanus, Kluyveromyces marxianus, Sugiyamaella lignohabitans
+> > 1. The file contains 215 lines (*information visible when expanding the report
+> >    dataset in the history panel*). So 215 taxons have been identified.
+> >
+> > 2. On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). *Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with "Loading database information" below the format information.*
+> >
+> > 3. The 3 domains are found:
+> >    - Eukaryota with 756 reads assigned to it
+> >    - Bacteria with 17 reads
+> >    - Archaea with 2 reads
+> >
+> > 4. Yeasts do not form a single taxonomic group ({% cite kurtzman1994molecular %}). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. [But the "true yeasts" are classified in the order Saccharomycetales](https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html).
+> >
+> >    In the data, 6 species from the Saccharomycetales order have been identified:
+> >    - Saccharomycetaceae family
+> >      - *Saccharomyces* genus
+> >        - *Saccharomyces cerevisiae* species, the most abundant identified yeast species with 293 reads and the one expected given the type of beers
+> >        - *Saccharomyces paradoxus* species, a wild yeast and the closest known species to *Saccharomyces cerevisiae*
+> >
+> >          These reads might have been misidentified to *Saccharomyces paradoxus* instead of *Saccharomyces cerevisiae* because of some errors in the sequences, as *Saccharomyces cerevisiae* and *Saccharomyces paradoxus* are close species and should share then a lot of similarity in their sequences.
+> >
+> >        - *Saccharomyces eubayanus* species, most likely the parent of the lager brewing yeast, *Saccharomyces pastorianus* ({% cite sampaio2018microbe %})
+> >
+> >          Similar to *Saccharomyces paradoxus*, these reads might have been misassigned.
+> >
+> >      - *Kluyveromyces* genus - *Kluyveromyces marxianus* species: only 1 read
+> >
+> >    - Trichomonascaceae family - *Sugiyamaella* genus - *Sugiyamaella lignohabitans* species: only 1 read
+> >    - Debaryomycetaceae family - *Candida* genus - *Candida dubliniensis* species: only 1 read
+> >
+> >    Everything except *Saccharomyces cerevisiae* are probably misindentified reads.
 > >
 > {: .solution}
 >
+{: .question}
+
+Other taxons than yeast have been identified. They could be contamination or misidentification of reads. Indeed, many taxons have less than 5 reads assigned. We will filter these reads out to get a better view of the possible contaminations.
+
+> ### {% icon hands_on %} Hands-on: Filter taxons with low assignements
+>
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: report outpout of **Kraken2**
+>    - *"With following condition"*: `c2>5`
+>
+>      We want to keep only taxons with the number of reads assigned, *i.e.* the value in the 2nd column, is higher than 5.
+>
+> 2. Inspect the output
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How many taxons have been removed? How many are kept?
+> 2. What are the possible contaminations?
+>
+> > ### {% icon solution %} Solution
+> > 1. 27 lines are now in the file so $215 - 27 = 188$ taxons have been removed because low assignment rates.
+> >
+> > 2. Most of the reads (402) are assigned to human (*Homo sapiens*). This is a likely contamination either during the beer production or more likely during the DNA extraction.
+> >
+> >    Bacteria are also found: Firmicutes, Proteobacteria and Bacteroidetes. But the identified taxons are not really precise (not below order level). So difficult to identify the possible source of contamination.
+> {: .solution}
 {: .question}
 
 # Visualize the community
 
 Once we have assigned the corresponding taxa to the sequences, the next step is to properly visualize the data: visualize the diversity of taxons at different levels.
 
-To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before that, we need to adjust the format of the data output from Kraken2.
+To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before that, we need to adjust the output from Kraken2 to the requirements of **Krona**. Indeed, **Krona** expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of reads. We will use a tool developed for another taxonomy classification tool but it makes the exact formatting we need.
+
+<!--
+So we need to work on the file by:
+1. Reversing the columns so the 1st column contains the number of reads and the second the taxon
+2. Splitting the taxonomy description into different columns, each being a different level. For that we replace the `|` with tabular (`\t` character)
 
 > ### {% icon hands_on %} Hands-on: Prepare dataset for Krona
 >
 > 1. {% tool [Reverse](toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: output of **Kraken2** {% icon tool %})
+>    - {% icon param-file %} *"Input tabular dataset"*: output of **Filter** {% icon tool %})
+>
 > 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `out_file` (output of **Reverse** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `\|`
 >            - *"Replace with:"*: `\t`
+> 3. Inspect the output file
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > How many columns are now in the file?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+-->
+
+> ### {% icon hands_on %} Hands-on: Prepare dataset for Krona
+>
+> 1. {% tool [Format MetaPhlAn2](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file (MetaPhlAN2 output)"*: report output of **Kraken2** {% icon tool %})
+>
+> 2. Inspect the output file
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many columns are now in the file?
+>    > 2. How many taxons are then found?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
+>    > > 2. With the actual formatting, one row is a found taxon (to the most precise level). So 55 lines means 55 identified taxons.
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
-**Krona** creates an interactive report that allows hierarchical data (like taxonomy) to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of the microbiome communities and also compare how the populations of microorganisms are modified between different samples.
+We can now run **Krona**. This tool creates an interactive report that allows hierarchical data (like taxonomy) to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of a microbiome community.
 
 > ### {% icon hands_on %} Hands-on: Krona pie chart
 >
@@ -419,10 +512,7 @@ To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before t
 
 Let's take a look at the result.
 
-<!--
-<iframe id="krona" src="krona_all.html" frameBorder="0" width="100%" height="900px"> ![Krona](./images/krona.png) </iframe>
-
-Add data interpretation and questions to understand the data
+<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona](./images/krona.png) </iframe>
 
 > ### {% icon question %} Questions
 >
@@ -436,7 +526,6 @@ Add data interpretation and questions to understand the data
 >
 {: .question}
 
---->
 
 # Conclusion
 {:.no_toc}
