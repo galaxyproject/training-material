@@ -14,9 +14,9 @@ objectives:
 - Visualize the microbiome community of a beer sample
 time_estimation: 1H
 key_points:
-- Data obtained by sequencing needs to be checked for quality and cleaned before further processed
+- Data obtained by sequencing needs to be checked for quality and cleaned before further processing
 - Yeast species but also contamination can be identified and visualized directly from the sequences using several bioinformatics tools
-- Galaxy makes it easy with its interface to the needed bioinformatics tools
+- With its graphical interface, Galaxy makes it easy to use the needed bioinformatics tools
 - Beer microbiome is not just made of yeast and can be quite complex
 tags:
 - nanopore
@@ -48,9 +48,9 @@ actually very good for us, but some can make us very ill.
 
 Micro-organisms come in different shapes and sizes, but they have the same components.
 One crucial component is the **DNA**, the blueprint of life. The DNA encodes the
-shape and size and many other characteristics unique to a species. Because of
-the encoding information the DNA can be used to identify what kind of micro-organism
-the DNA is from. Therefore, within a metagenomic sample, *e.g.* form soil, gut,
+shape and size and many other characteristics unique to a species. Because DNA is so species-specific, 
+reading the DNA can be used to identify what kind of micro-organism
+the it is from. Therefore, within a metagenomic specimen, *e.g.* a sample form soil, gut,
 or beer, one can identify what kind of species are inside the sample.
 
 In this tutorial, we will use data of beer microbiome generated via the
@@ -58,14 +58,14 @@ In this tutorial, we will use data of beer microbiome generated via the
 
 > ### {% icon details %} The BeerDEcoded project
 >
-> The BeerDEcoded project are workshops organized with and for schools and general
-> audience, to introduce biology and genomic science. People learn in an interactive way
+> The BeerDEcoded Project is a series of workshops organized with and for schools as well as the general
+> audience, aiming to introduce biology and genomic science. People learn in an interactive way
 > about DNA, sequencing technologies, bioinformatics, open science, how these technologies
 > and concepts are applied and how they are impacting their daily life.
 >
 > Beer is alive and contains many microorganisms. It can be found in many places
 > and there are many of them. It is a fun media to bring the people to the
-> contact of molecular biology, data-analysis, and open science
+> contact of molecular biology, data-analysis, and open science.
 >
 > A BeerDEcoded workshop includes the following steps:
 > 1. Extract yeasts and their DNA from beer bottle,
@@ -85,21 +85,21 @@ In this tutorial, we will use data of beer microbiome generated via the
 > and other compounds (esters, phenols, etc.) that give beer its particular
 > flavor.
 >
-> Yeasts are microorganism, more precisely **unicellular fungi**. The majority
-> of beers use a yeast genera called ***Saccharomyces***, which in greek means
-> "sugar fungus". Within that genera, two specific species of *Saccharomyces*
-> are the most use:
+> Yeasts are microorganisms, more precisely **unicellular fungi**. The majority
+> of beers use a yeast genus called ***Saccharomyces***, which in Greek means
+> "sugar fungus". Within that genus, two specific species of *Saccharomyces*
+> are the most commonly used:
 >
-> - ***Saccharomyces cerevisiae***: a top-fermenting (*i.e.* yeast which to rise
-> up to the top of the beer as it eats and creates alcohol) ale yeast,responsible
+> - ***Saccharomyces cerevisiae***: a top-fermenting (*i.e.* yeast which rise
+> up to the top of the beer as it eats and creates alcohol) ale yeast, responsible
 > for a huge range of beer styles like witbiers, stouts, ambers, tripels, saisons,
-> IPAs, and so many more. It is most likely the yeast that brewers were
+> IPAs, and many more. It is most likely the yeast that the early brewers were
 > inadvertently brewing with over 3,000 years ago.
 > - ***Saccharomyces pastorianus***: a bottom-fermenting (*i.e.* it sits on the
 > bottom of the tank as it ferments) lager yeast, responsible for beer styles
 > like Pilsners, lagers, märzens, bocks, and more. This yeast was originally
 > found, and cultivated, by Bavarian brewers a little over 200 years ago. It is
-> the most-used yeast int terms of raw amount of beer produced around the world.
+> the most commonly used yeast in terms of the raw amount of beer produced around the world.
 >
 > But yeast is actually all around us. And we can actually brew spontaneously
 > fermented beer with wild yeast and souring microbiota floating through the air.
@@ -115,7 +115,7 @@ sample.
 
 To get this information, we need to process the sequenced data in a few steps:
 1. Check the quality of the data
-2. Assign taxonomic label, *i.e.* assign 'species' to the sequences
+2. Assign a taxonomic label, *i.e.* assign 'species' to each sequence
 3. Visualize the distribution of the different species
 
 This type of data analysis requires running several bioinformatics tools and
@@ -124,7 +124,7 @@ an open-source platform for data analysis that enables anyone to use bioinformat
 tools through its graphical web interface, accessible via any Web browser.
 
 So, in this tutorial, we will use Galaxy to extract and visualize the community
-of yeasts from a beer bottle.
+of yeasts from a bottle of beer.
 
 > ### Agenda
 >
@@ -144,7 +144,7 @@ First of all, this tutorial will get you hands on with some basic Galaxy tasks, 
 
 > ### {% icon hands_on %} Hands-on: Open Galaxy
 >
-> 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
+> 1. Open your favorite browser (Works on Chrome, Firefox, Safari but not Internet Explorer!)
 > 2. Create a Galaxy account if you do not have one
 >
 >    {% snippet faqs/galaxy/galaxy_creating_an_account.md %}
@@ -186,7 +186,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >
 >      {% snippet faqs/galaxy/datasets_upload.md %}
 >
->    - Option 2: From Zenodo, an external server via URL
+>    - Option 2: From Zenodo, an external server, via URL
 >
 >      ```text
 >      {{ page.zenodo_link }}
@@ -194,9 +194,9 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    Your uploaded file is now in your current history. When the file has uploaded to Galaxy, it will turn green. But, what is this file?
+>    Your uploaded file is now in your current history. When the file is fully uploaded to Galaxy, it will turn green. But, what is this file?
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name to look at the file content
+> 2. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name to look at the file contents.
 >
 {: .hands_on}
 
@@ -250,7 +250,7 @@ For more detailed information about the other plots in the FASTQC report, check 
 
 In order to improve the quality of our data, we will use two tools:
 - **porechop** ({% cite rrwick2017 %}) to remove adapters that were added for sequencing and chimera (contaminant)
-- **fastp** ({% cite Chen_2018 %}) to filter sequences with low quality scores (below 9)
+- **fastp** ({% cite Chen_2018 %}) to filter sequences with low quality scores (below 10)
 
 > ### {% icon hands_on %} Hands-on: Improve the dataset quality
 >
@@ -265,7 +265,7 @@ In order to improve the quality of our data, we will use two tools:
 >        - *"Disable adapter trimming"*: `Yes`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
->            - *"Qualified quality phred"*: `9`
+>            - *"Qualified quality phred"*: `10`
 >    - In *"Read Modification Options"*:
 >        - *"PolyG tail trimming"*: `Disable polyG tail trimming`
 >
@@ -289,7 +289,7 @@ In order to improve the quality of our data, we will use two tools:
 
 # Assign taxonomic classification
 
-One of the main aim in microbiome data analysis is to identify the organisms sequenced. For that we try to **identify the taxon** to which each individual reads belong.
+One of the main aims in microbiome data analysis is to identify the organisms sequenced. For that we try to **identify the taxon** to which each individual reads belong.
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
@@ -300,10 +300,10 @@ One of the main aim in microbiome data analysis is to identify the organisms seq
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The sequences are supposed to be yeasts extracted from a beer bottle. The majority of beers use a yeast genera called ***Saccharomyces*** and 2 species in that genera: *Saccharomyces cerevisiae* (ale yeast) and *Saccharomyces pastorianus* (lager yeast). The used beer is an ale beer, so we expect to find ***Saccharomyces cerevisiae***. But other yeasts can also have been used and then found. We could also have some DNA left from other beer components, but also contaminations by other microorganisms and even human DNA from people who manipulated the beer or did the extraction.
+> > 1. The sequences are supposed to be yeasts extracted from a bottle of beer. The majority of beers contain a yeast genus called ***Saccharomyces*** and 2 species in that genus: *Saccharomyces cerevisiae* (ale yeast) and *Saccharomyces pastorianus* (lager yeast). The used beer is an ale beer, so we expect to find ***Saccharomyces cerevisiae***. But other yeasts can also have been used and then found. We could also have some DNA left from other beer components, but also contaminations by other microorganisms and even human DNA from people who manipulated the beer or did the extraction.
 > >
 > >
-> > 2. The main expected microorganism is ***Saccharomyces cerevisiae*** with its taxonomy
+> > 2. The main expected microorganism is ***Saccharomyces cerevisiae*** with its taxonomy:
 > >
 > >    Level | Classification
 > >    --- | ---
@@ -324,11 +324,11 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 
 > ### {% icon details %} Kraken2 and the k-mer approach for taxonomy classification
 >
-> In the $$k$$-mer approach for taxonomy classification, we use a database containing the DNA sequences of genomes we know the taxonomy. The genome database is broken into pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
+> In the $$k$$-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
 >
 > **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database and make the classification with the most probable position.  the maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
 >
-> ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. lowest node) of the genomes that contain that k-mer in a database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
+> ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
 >
 {: .details}
 
@@ -385,7 +385,7 @@ d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
 >
 > 1. How many taxons have been identified?
 > 2. How many reads have been classified?
-> 3. Which domains are found and with how many reads?
+> 3. Which domains were found and with how many reads?
 > 4. Which yeasts have been identified? Are they the expected ones?
 >
 > > ### {% icon solution %} Solution
@@ -395,7 +395,7 @@ d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
 > >
 > > 2. On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). *Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with "Loading database information" below the format information.*
 > >
-> > 3. The 3 domains are found:
+> > 3. The 3 domains were found:
 > >    - Eukaryota with 756 reads assigned to it
 > >    - Bacteria with 17 reads
 > >    - Archaea with 2 reads
@@ -440,15 +440,15 @@ Other taxons than yeast have been identified. They could be contamination or mis
 
 > ### {% icon question %} Questions
 >
-> 1. How many taxons have been removed? How many are kept?
+> 1. How many taxons have been removed? How many were kept?
 > 2. What are the possible contaminations?
 >
 > > ### {% icon solution %} Solution
-> > 1. 27 lines are now in the file so $215 - 27 = 188$ taxons have been removed because low assignment rates.
+> > 1. 27 lines are now in the file so $$215 - 27 = 188$$ taxons have been removed because low assignment rates.
 > >
-> > 2. Most of the reads (402) are assigned to human (*Homo sapiens*). This is a likely contamination either during the beer production or more likely during the DNA extraction.
+> > 2. Most of the reads (402) were assigned to humans (*Homo sapiens*). This is likely a contamination either during the beer production or more likely during DNA extraction.
 > >
-> >    Bacteria are also found: Firmicutes, Proteobacteria and Bacteroidetes. But the identified taxons are not really precise (not below order level). So difficult to identify the possible source of contamination.
+> >    Bacteria were also found: Firmicutes, Proteobacteria and Bacteroidetes. But the identified taxons are not really precise (not below order level). So difficult to identify the possible source of contamination.
 > {: .solution}
 {: .question}
 
@@ -456,7 +456,7 @@ Other taxons than yeast have been identified. They could be contamination or mis
 
 Once we have assigned the corresponding taxa to the sequences, the next step is to properly visualize the data: visualize the diversity of taxons at different levels.
 
-To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before that, we need to adjust the output from Kraken2 to the requirements of **Krona**. Indeed, **Krona** expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of reads. We will use a tool developed for another taxonomy classification tool but it makes the exact formatting we need.
+To do that, we will use the tool **Krona** ({% cite Ondov_2011 %}). But before that, we need to adjust the output from Kraken2 to the requirements of **Krona**. Indeed, **Krona** expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of reads. We will now use another tool, which also provides taxonomic classification, but it produces the exact formatting Krona needs.
 
 <!--
 So we need to work on the file by:
@@ -497,16 +497,16 @@ So we need to work on the file by:
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How many columns are now in the file?
->    > 2. How many taxons are then found?
+>    > 2. How many taxons were now found?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
->    > > 2. With the actual formatting, one row is a found taxon (to the most precise level). So 55 lines means 55 identified taxons.
+>    > > 2. With this new formatting, each row represents 1 detected taxon (to the most precise level). So 55 lines mean 55 identified taxons.
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
-We can now run **Krona**. This tool creates an interactive report that allows hierarchical data (like taxonomy) to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of a microbiome community.
+We can now run **Krona**. This tool creates an interactive report that allows hierarchical data (like taxonomy) to be explored with zooming, as multi-layered pie charts. With this tool, we can easily visualize the composition of a microbiome community.
 
 > ### {% icon hands_on %} Hands-on: Krona pie chart
 >
@@ -539,7 +539,7 @@ Let's take a look at the result.
 > >
 > >    ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). *Saccharomyces* is highligthed with on the right the percentages of identified reads assigned to *Saccharomyces* for the different taxonomic levels](./images/krona_saccharomyces_1.png)
 > >
-> > 3. 92% of *Saccharomyces* reads are assigned to *Saccharomyces cerevisiae*, 5% to*Saccharomyces paradoxus* and 3% to *Saccharomyces eubayanus*
+> > 3. 92% of *Saccharomyces* reads are assigned to *Saccharomyces cerevisiae*, 5% to *Saccharomyces paradoxus* and 3% to *Saccharomyces eubayanus*,.
 > >
 > >    ![Krona chart with the community profile for *Saccharomyces* with the different species](./images/krona_saccharomyces_2.png)
 > {: .solution}
