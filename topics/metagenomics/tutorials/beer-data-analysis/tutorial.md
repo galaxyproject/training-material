@@ -24,6 +24,10 @@ tags:
 - citizen science
 - metagenomics
 contributors:
+- plushz
+- chensy96
+- bebatut
+- teresa-m
 contributions:
     authorship:
     - plushz
