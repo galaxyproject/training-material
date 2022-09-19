@@ -10,23 +10,26 @@ questions:
 objectives:
 - Inspect metagenomics data
 - Run metagenomics tools
-- Identify yeast strains contained in a sequenced beer sample using DNA
+- Identify yeast species contained in a sequenced beer sample using DNA
 - Visualize the microbiome community of a beer sample
 time_estimation: 1H
 key_points:
-- Galaxy provides various tools for data analysis, dataset alteration, and visualization
-- Inputting correct values for the parameters of proper tools is important
-- Profiling...
-- Microbiome
+- Data obtained by sequencing needs to be checked for quality and cleaned before further processed
+- Yeast species but also contamination can be identified and visualized directly from the sequences using several bioinformatics tools
+- Galaxy makes it easy with its interface to the needed bioinformatics tools
+- Beer microbiome is not just made of yeast and can be quite complex
 tags:
 - nanopore
 - beer
 - citizen science
 - metagenomics
 contributors:
-- plushz
-- chensy96
-- bebatut
+contributions:
+    authorship:
+    - plushz
+    - chensy96
+    - bebatut
+    - teresa-m
 ---
 
 # Introduction
@@ -512,54 +515,40 @@ We can now run **Krona**. This tool creates an interactive report that allows hi
 
 Let's take a look at the result.
 
-<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona](./images/krona.png) </iframe>
+<iframe id="krona" src="krona.html" frameBorder="0" width="100%" height="900px"> ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species)](./images/krona.png) </iframe>
 
 > ### {% icon question %} Questions
 >
-> 1.
+> 1. What is the percentage of identified reads assigned to *Homo sapiens*? To Archaea?
+> 2. Click on *Saccharomyces* in the graph. What are the percentages of identified reads assigned to *Saccharomyces* for different levels?
+> 3. Click a second time on *Saccharomyces* in the graph. What is the repartition between the different *Saccharomyces* species?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1.
+> > 1. 52% of identified reads are assigned to *Homo sapiens*, and 0.3% of Archaea
+> > 2. Reads are assigned to *Saccharomyces*
+> >    - 41% out of total identified reads (root)
+> >    - 43% out of identified reads for Eukaryota domain
+> >    - 98% out of identified reads for Ascomycota phylum
+> >    - 99% out of identified reads for Saccharomycetales order
+> >    - 100% out of identified reads for Saccharomycetaceae family
 > >
+> >    ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). *Saccharomyces* is highligthed with on the right the percentages of identified reads assigned to *Saccharomyces* for the different taxonomic levels](./images/krona_saccharomyces_1.png)
+> >
+> > 3. 92% of *Saccharomyces* reads are assigned to *Saccharomyces cerevisiae*, 5% to*Saccharomyces paradoxus* and 3% to *Saccharomyces eubayanus*
+> >
+> >    ![Krona chart with the community profile for *Saccharomyces* with the different species](./images/krona_saccharomyces_2.png)
 > {: .solution}
 >
 {: .question}
 
-
-# Conclusion
-{:.no_toc}
-
-
-## (Optional) Sharing your history
+# (Optional) Sharing your history
 
 One of the most important features of Galaxy comes at the end of an analysis: sharing your histories with others so they can review them.
 
-> ### {% icon hands_on %} Hands-on: Share history and workflow
->
-> 1. Click on the {% icon galaxy-gear %} (gear) symbol in the history panel
-> 2. Select `Share or Publish`
-> 3. Make your history accessible via a link
-> 4. Copy the link
->
-{: .hands_on}
+{% snippet faqs/galaxy/histories_sharing.md %}
 
-> ### {% icon comment %} The 3 ways to share in Galaxy
->
-> 1. **Make accessible via Link**
->
->     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
->
-> 2. **Publish History**
->
->     This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
->
-> 3. **Share with Individual Users**
->
->     This will share the history only with specific users on the Galaxy instance.
->
-{: .comment}
-
-
+# Conclusion
+{:.no_toc}
 
 
