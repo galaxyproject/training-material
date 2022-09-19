@@ -308,7 +308,7 @@
 
 		
 
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Aug 26, 2022 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 19, 2022 </div>
 
 	<hr />
 
@@ -452,7 +452,7 @@ The aim of a genome project is to <strong>sequence the entire target genome</str
 <strong>How to collect informations?</strong></p>
 
 <ul>
-  <li>Experimentally : Flux cytometry</li>
+  <li>Experimentally : Flow cytometry</li>
   <li>Databases:
     <ul>
       <li>Fungi: <a href="http://www.zbi.ee/fungalgenomesize">http://www.zbi.ee/fungalgenomesize</a></li>
@@ -623,9 +623,22 @@ GC and AT rich regions are under-represented.
 
 <p>.pull-left[</p>
 <ul>
-  <li><strong>Flux cytometry</strong> :  genome size and ploidy level</li>
-  <li><strong>k-mer frequency from Illumina reads</strong> : genome size, ploidy level, GC content, heterozygosity and even repeats composition!
+  <li><strong>Flow cytometry</strong> :
+    <ul>
+      <li>Genome size</li>
+      <li>Ploidy level</li>
+    </ul>
+  </li>
+  <li><strong>k-mer frequency from Illumina reads</strong> :
+    <ul>
+      <li>Genome size</li>
+      <li>Ploidy level</li>
+      <li>GC content</li>
+      <li>Heterozygosity</li>
+      <li>Repeats composition
 ]</li>
+    </ul>
+  </li>
 </ul>
 
 <hr />
@@ -688,7 +701,7 @@ High Molecular Weight (<strong>HMW</strong>) for Nanopore/PacBio (obtained mainl
 
 <p>.left[</p>
 <ul>
-  <li>Many <em>DNA extraction protocol</em> are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)</li>
+  <li>Many <strong>DNA extraction protocol</strong> are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)</li>
   <li><strong>Keep DNA samples</strong> from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc</li>
   <li>Use a <strong>single individual</strong> and sequence a <strong>haploid, a highly inbred diploid</strong> organism, or an <strong>isogenic</strong> individual
 ]</li>
@@ -794,7 +807,7 @@ Longer reads but less sequencing depth
 <h3 id="appropriate-sequencing-technology-short-vs-long-reads-1">Appropriate sequencing technology: Short vs long reads</h3>
 
 <p>.pull-left[
-Reads accuracy differs depending on the sequencing technology:</p>
+<strong>Reads accuracy differs depending on the sequencing technology:</strong></p>
 <ul>
   <li>Illumina and PacBio HiFi: more accurate</li>
   <li>ONT and PacBio CLR: less accurate (but longer)
@@ -887,7 +900,8 @@ To be successful, you must have <strong>sufficient computing resources (CPUS, RA
 
 <p>.image-100[
   <img src="../../images/genome_assembly_introduction/fasta_format.png" alt="Fasta format description. " loading="lazy" />
-]</p>
+]
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span></p>
 
 <p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
 
@@ -901,7 +915,8 @@ To be successful, you must have <strong>sufficient computing resources (CPUS, RA
 
 <p>.image-100[
   <img src="../../images/genome_assembly_introduction/fastq_format.png" alt="Fastq format description. " loading="lazy" />
-]</p>
+]
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span></p>
 
 <p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
 
@@ -921,24 +936,40 @@ To be successful, you must have <strong>sufficient computing resources (CPUS, RA
 
 <h1 id="bioinformatics-data-formats-3">Bioinformatics data formats</h1>
 
-<p>.left[
-<strong>SAM (Sequence Alignment Map)</strong>: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.</p>
+<p><strong>SAM (Sequence Alignment Map)</strong>: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.</p>
 
 <p><strong>BAM (Binary Alignment Map)</strong>: the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the SAM format. It’s the standard sequencing output for PacBio sequencers.</p>
 
-<p><strong>CRAM (Compressed Reference-oriented Alignment Map)</strong>: a compressed columnar file format for storing biological sequences aligned to a reference sequence.
-]</p>
+<p><strong>CRAM (Compressed Reference-oriented Alignment Map)</strong>: a compressed columnar file format for storing biological sequences aligned to a reference sequence.</p>
 
-<p>.image-100[
+<p>.pull-left[
+.image[
   <img src="../../images/genome_assembly_introduction/sam_format.png" alt="SAM format description. " loading="lazy" />
+]]</p>
+
+<p>.pull-right[
+Image licensed CC-BY 4.0 <span class="citation"><a href="#datacompression2016">Hosseini <i>et al.</i> 2016</a></span>
 ]</p>
 
 <p>.footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]</p>
 
 
-
 	<hr />
 
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>We learned the defintions of bioinformatics terms used in genomes assembly and annotation</li>
+
+<li>We have seen the bioinformatics file formats used for these analyses</li>
+
+<li>We learned the importance of preparing the project to ensure its success</li>
+
+<li>We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)</li>
+
+</ul>
 
 
 
@@ -957,6 +988,9 @@ This material is the result of a collaborative work. Thanks to the <a href="http
 This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 </section>
 
+
+<h2 id="bibliography">References</h2>
+<ol class="bibliography"><li id="datacompression2016">Hosseini, M., D. Pratas, and A. Pinho, 2016 <b>A Survey on Data Compression Methods for Biological Sequences</b>. Information 7: 56. <a href="https://doi.org/10.3390/info7040056">10.3390/info7040056</a></li></ol>
 
 
 
@@ -998,7 +1032,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/c3d9c94e55866f30af0ce422ad72a9119778a6fe">c3d9c94e55866f30af0ce422ad72a9119778a6fe</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/40817a7984773505bab04ae0883514afde203303">40817a7984773505bab04ae0883514afde203303</a></p>
     </div>
 </footer>
 

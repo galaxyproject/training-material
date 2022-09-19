@@ -112,6 +112,7 @@
   "learningResourceType": "slides",
   "name": "Slides for 'An introduction to get started in genome assembly and annotation' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides.html",
+  "timeRequired": "PT1H",
   "keywords": "assembly",
   "description": "The questions this  addresses are:\n - Definitions of bioinformatics terms for assembly and annotation\n - What are the guidelines before starting a Genome Assembly and Annotation project?\n - What file formats are used for assembly and annotation?\n\n",
   "inLanguage": {
@@ -233,7 +234,7 @@ class: center, middle, inverse
 </div>
 
 
-<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Aug 26, 2022</div>
+<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Sep 19, 2022</div>
 
 <div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
 <div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
@@ -432,7 +433,7 @@ The aim of a genome project is to **sequence the entire target genome** for a wi
 .pull-left[
 **How to collect informations?**
 
-- Experimentally : Flux cytometry
+- Experimentally : Flow cytometry
 - Databases:
   - Fungi: [http://www.zbi.ee/fungalgenomesize](http://www.zbi.ee/fungalgenomesize)
   - Animals: [http://www.genomesize.com](http://www.genomesize.com)
@@ -571,8 +572,15 @@ Most common source of assembly errors:
 ### Genome information: Tips
 
 .pull-left[
-- **Flux cytometry** :  genome size and ploidy level
-- **k-mer frequency from Illumina reads** : genome size, ploidy level, GC content, heterozygosity and even repeats composition!
+- **Flow cytometry** :
+   - Genome size
+   - Ploidy level
+- **k-mer frequency from Illumina reads** :
+   - Genome size
+   - Ploidy level
+   - GC content
+   - Heterozygosity
+   - Repeats composition
 ]
 
 ---
@@ -630,7 +638,7 @@ High Molecular Weight (**HMW**) for Nanopore/PacBio (obtained mainly from fresh 
 ### The best possible DNA: Tips
 
 .left[
-- Many *DNA extraction protocol* are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
+- Many **DNA extraction protocol** are available for a wide range of species/taxa (VGP, Darwin Tree of Life, Nanopore, PacBio, etc)
 - **Keep DNA samples** from the same individual in case of library preparation or sequencing failure, need more coverage, new sequencing technology, etc
 - Use a **single individual** and sequence a **haploid, a highly inbred diploid** organism, or an **isogenic** individual
 ]
@@ -720,7 +728,7 @@ Longer reads but less sequencing depth
 ### Appropriate sequencing technology: Short vs long reads
 
 .pull-left[
-Reads accuracy differs depending on the sequencing technology:
+**Reads accuracy differs depending on the sequencing technology:**
 - Illumina and PacBio HiFi: more accurate
 - ONT and PacBio CLR: less accurate (but longer)
 ]
@@ -799,6 +807,7 @@ To be successful, you must have **sufficient computing resources (CPUS, RAM, wal
 .image-100[
   ![Fasta format description](../../images/genome_assembly_introduction/fasta_format.png)
 ]
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
 
 .footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
 
@@ -813,6 +822,7 @@ To be successful, you must have **sufficient computing resources (CPUS, RAM, wal
 .image-100[
   ![Fastq format description](../../images/genome_assembly_introduction/fastq_format.png)
 ]
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
 
 .footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
 
@@ -832,22 +842,37 @@ To be successful, you must have **sufficient computing resources (CPUS, RAM, wal
 
 # Bioinformatics data formats
 
-.left[
 **SAM (Sequence Alignment Map)**: a text-based format originally for storing biological sequences aligned to a reference sequence developed by Heng Li and Bob Handsaker et al.
 
 **BAM (Binary Alignment Map)**: the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the SAM format. It's the standard sequencing output for PacBio sequencers.
 
 **CRAM (Compressed Reference-oriented Alignment Map)**: a compressed columnar file format for storing biological sequences aligned to a reference sequence.
-]
 
-.image-100[
+.pull-left[
+.image[
   ![SAM format description](../../images/genome_assembly_introduction/sam_format.png)
+]]
+
+.pull-right[
+Image licensed CC-BY 4.0 &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.3390/info7040056&quot;&gt;Hosseini &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
 ]
 
 .footnote[Hosseini, M., Pratas, D. &amp; Pinho, A. J. A Survey on Data Compression Methods for Biological Sequences. Information 7, 56 (2016).]
 
 
 
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- We learned the defintions of bioinformatics terms used in genomes assembly and annotation
+
+- We have seen the bioinformatics file formats used for these analyses
+
+- We learned the importance of preparing the project to ensure its success
+
+- We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)
 
 
 
