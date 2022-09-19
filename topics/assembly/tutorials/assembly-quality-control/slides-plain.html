@@ -271,10 +271,7 @@
 		<h2>Questions</h2>
 		<ul>
 		
-		<li><p>Assembly: Is my genome assembly ready for scaffolding?</p>
-</li>
-		
-		<li><p>Annotation: Is my genome assembly ready for structural annotation?</p>
+		<li><p>Is my genome assembly ready for annotation and/or scaffolding?</p>
 </li>
 		
 		</ul>
@@ -284,7 +281,7 @@
 
 		
 
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 19, 2022 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Aug 26, 2022 </div>
 
 	<hr />
 
@@ -330,8 +327,6 @@
 </ul>
 
 <p>]</p>
-
-<p><strong>Sequences</strong>, i.e. a set of contigs and/or scaffolds</p>
 
 <hr />
 
@@ -407,37 +402,23 @@ If we connect two sequences longer than N50 or connect two sequences shorter tha
 
 <hr />
 
-<h3 id="types-of-completeness">Types of completeness</h3>
-
-<ul>
-  <li>Assembly size</li>
-  <li>Known vs. unknown nucleotides</li>
-  <li>“Core” genes</li>
-  <li>Assembly kmer content</li>
-  <li>Assembly coverage and reads mapping</li>
-</ul>
-
-<hr />
-
 <h3 id="assembly-size-vs-estimated">Assembly size vs estimated</h3>
 
-<p>Proportion of the original genome represented by the assembly:</p>
+<p>Proportion of the original genome represented by the assembly:
+<br /></p>
 
 <p>.image-100[
 <img src="../../images/genome-qc/assembly-size-qc-formula.png" alt="Formula to estimate assembly size completeness. " loading="lazy" />
 ]</p>
 
-<p>“*” it’s an estimation, so not perfect. See <img src="/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides.html" alt="An introduction to get started in genome assembly and annotation. " loading="lazy" /> to find methods to determine the genome size.</p>
+<p><br /></p>
+<ul>
+  <li>“*” it’s an estimation, so not perfect</li>
+</ul>
 
 <hr />
 
-<h3 id="known-vs-unknown-nucleotides">Known vs. unknown nucleotides</h3>
-
-<p>Proportion of A, T, G, C versus N (unknown nucleotide).We expect an assembly without unknown nucleotides (N).</p>
-
-<hr />
-
-<h3 id="core-genes">“Core” genes</h3>
+<h3 id="core-genes">Core genes</h3>
 
 <p>.pull-left[
 Quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs.
@@ -458,17 +439,9 @@ Quantitative assessment of genome assembly based on evolutionarily informed expe
 
 <p><strong>BUSCO</strong>: Assessing genome assembly and annotation completeness with <strong>B</strong>enchmarking <strong>U</strong>niversal <strong>S</strong>ingle-<strong>C</strong>opy <strong>O</strong>rthologs</p>
 
-<p>.pull-left[
-.image-70[
-<img src="../../images/genome-qc/busco_sampling_universality.png" alt="Explanation of orthology classification for creation of BUSCO sets - Universality. " loading="lazy" />
-]]</p>
-
-<p>.pull-right[
-.image-60[
-<img src="../../images/genome-qc/busco_sampling_duplicability.png" alt="Explanation of orthology classification for creation of BUSCO sets - Duplicability. " loading="lazy" />
-]]</p>
-
-<p>Eukaryota: 255 single copy from 70 species; Arthropoda: 1013 single copy from 90 species; Fungi: 758 single copy from 549 species</p>
+<p>.image-40[
+<img src="../../images/genome-qc/busco_sampling.png" alt="Explanation of orthology classification for creation of BUSCO sets. " loading="lazy" />
+]</p>
 
 <p>.footnote[Waterhouse, R. M., Zdobnov, E. M. &amp; Kriventseva, E. V. Correlating Traits of Gene Retention, Sequence Divergence, Duplicability and Essentiality in Vertebrates, Arthropods, and Fungi. Genome Biol Evol 3, 75–86 (2011).]</p>
 
@@ -488,8 +461,6 @@ Example with BUSCO Eukaryotic set:
 .image-70[
 <img src="../../images/genome-qc/BUSCO_limitations_B.png" alt="Limitation of BUSCO orthoDB for eukaOrthoDB - part B. " loading="lazy" />
 ]]</p>
-
-<p>The use of transcriptome alignment of a closely related species or a de novo RNA-Seq assembly of the same species can be another proxy to assess the completeness of the assembly and adress BUSCO limitations.</p>
 
 <p>.footnote[Saary, P., Mitchell, A. L. &amp; Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]</p>
 
@@ -525,9 +496,20 @@ Example with BUSCO Eukaryotic set:
 
 <h3 id="assembly-kmer-content---homozygous-genomes">Assembly kmer content - Homozygous genomes</h3>
 
-<p>.image-70[
+<p><br />
+<br /></p>
+
+<p>K-mer spectra representation for Merqury (left) and KAT (rigth)</p>
+
+<p>.pull-left[
+.image-70[
 <img src="../../images/genome-qc/kmer-spectra-merqury-homozygous-good.png" alt="Merqury spectra-cn plot for S.cerevesiae S288C assembly. " loading="lazy" />
-]</p>
+]]</p>
+
+<p>.pull-right[
+.image-70[
+<img src="../../images/genome-qc/kmer-spectra-kat-homozygous-good.png" alt="KAT spectra-cn plot for S.cerevesiae S288C assembly. " loading="lazy" />
+]]</p>
 
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good kmer representation of reads in the assembly</p>
 
@@ -535,9 +517,17 @@ Example with BUSCO Eukaryotic set:
 
 <h3 id="assembly-kmer-content---homozygous-genomes-1">Assembly kmer content - Homozygous genomes</h3>
 
-<p>.image-70[
+<p>&lt;/br&gt;</p>
+
+<p>.pull-left[
+.image-70[
 <img src="../../images/genome-qc/kmer-spectra-merqury-homozygous-bad.png" alt="Merqury spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs. " loading="lazy" />
-]</p>
+]]</p>
+
+<p>.pull-right[
+.image-70[
+<img src="../../images/genome-qc/kmer-spectra-kat-homozygous-bad.png" alt="KAT spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs. " loading="lazy" />
+]]</p>
 
 <p><i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly</p>
 
@@ -545,9 +535,18 @@ Example with BUSCO Eukaryotic set:
 
 <h3 id="assembly-kmer-content---heterozygous-genomes">Assembly kmer content - Heterozygous genomes</h3>
 
-<p>.image-70[
+<p>&lt;/br&gt;
+&lt;/br&gt;</p>
+
+<p>.pull-left[
+.image-70[
 <img src="../../images/genome-qc/kmer-spectra-merqury-heterozygous-good.png" alt="Merqury spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed." loading="lazy" />
-]</p>
+]]</p>
+
+<p>.pull-right[
+.image-70[
+<img src="../../images/genome-qc/kmer-spectra-kat-heterozygous-good.png" alt="KAT spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed." loading="lazy" />
+]]</p>
 
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Good kmer representation of reads in the assembly</p>
 
@@ -557,9 +556,15 @@ Example with BUSCO Eukaryotic set:
 
 <h3 id="assembly-kmer-content---heterozygous-genomes-1">Assembly kmer content - Heterozygous genomes</h3>
 
-<p>.image-80[
+<p>.pull-left[
+.image-80[
 <img src="../../images/genome-qc/kmer-spectra-merqury-c.gigas-hap2.png" alt="Merqury spectra-cn plot for second haplotype of C. gigas." loading="lazy" />
-]</p>
+]]</p>
+
+<p>.pull-right[
+.image-80[
+<img src="../../images/genome-qc/kmer-spectra-kat-c.gigas-hap2.png" alt="KAT spectra-cn plot for second haplotype of C. gigas." loading="lazy" />
+]]</p>
 
 <p><i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly</p>
 
@@ -568,10 +573,6 @@ Example with BUSCO Eukaryotic set:
 <p>.image-30[
   <img src="../../images/genome-qc/correctness.png" alt="Illustration of genome assembly correctness. " loading="lazy" />
 ]</p>
-
-<hr />
-
-<h3 id="assembly-coverage-and-reads-mapping">Assembly coverage and reads mapping</h3>
 
 <hr />
 
@@ -619,19 +620,11 @@ Example with BUSCO Eukaryotic set:
 
 <h3 id="switch-and-hamming-errors-phased-assemblies">Switch and hamming errors (phased assemblies)</h3>
 
-<p>.pull-left[
-.image-70[
+<p>.image-50[
 <img src="../../images/genome-qc/switch-hamming-errors.png" alt="Illustration of switch and hamming errors in phased genome assembly." loading="lazy" />
-]
-In red, heterozygous locus from second haplotype. In blue, heterozygous locus from first haplotype.
 ]</p>
 
-<p>.pull-right[</p>
-<ul>
-  <li><strong>Switch error</strong>: a change from one parental allele to another parental allele on a contig. This terminology has been used for measuring reference-based phasing accuracy for two decades. A haplotig is supposed to have no switch errors.</li>
-  <li><strong>Yak hamming error</strong>: an allele not on the most supported haplotype of a contig. Its main purpose is to test how close a contig is to a haplotig. The yak definition is not widely accepted. The hamming error rate is arguably less important in practice.
-]</li>
-</ul>
+<p>In blue, heterozygous locus from first haplotype. In red, heterozygous locus from second haplotype.</p>
 
 <p>.footnote[http://lh3.github.io/2021/04/17/concepts-in-phased-assemblies]</p>
 
@@ -682,21 +675,8 @@ A non-exhaustive list of tools for making dot plots:</p>
 ]</p>
 
 
-
 	<hr />
 
-
-<h2>Key Points</h2>
-
-<ul>
-
-<li>We learned that it is essential to control the quality of an assembly</li>
-
-<li>We learned that there are several quality criteria and tools to enable this assessment</li>
-
-<li>Certain quality criteria are expected at the time of publication</li>
-
-</ul>
 
 
 
@@ -732,7 +712,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/40817a7984773505bab04ae0883514afde203303">40817a7984773505bab04ae0883514afde203303</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1aa36240b674d602e9b2103ddb1f617d22850d8e">1aa36240b674d602e9b2103ddb1f617d22850d8e</a></p>
     </div>
 </footer>
 
