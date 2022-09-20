@@ -44,7 +44,7 @@ In this tutorial we will briefly cover what [Wireguard](https://www.wireguard.co
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,4 @@
+>    @@ -0,0 +1,6 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
@@ -77,7 +77,7 @@ In this tutorial we will briefly cover what [Wireguard](https://www.wireguard.co
 >    > > ```diff
 >    > > --- /dev/null
 >    > > +++ b/hosts
->    > > @@ -0,0 +1,2 @@
+>    > > @@ -0,0 +1,5 @@
 >    > > +[wireguard]
 >    > > +1-wg.galaxy.training wireguard_ip=192.168.0.1
 >    > > +2-wg.galaxy.training wireguard_ip=192.168.0.2
@@ -104,10 +104,13 @@ First lets set up the playbook and install Wireguard, without configuring it.
 >    ```diff
 >    --- /dev/null
 >    +++ b/wg.yml
->    @@ -0,0 +1,13 @@
+>    @@ -0,0 +1,16 @@
 >    +---
 >    +- hosts: all
 >    +  become: yes
+>    +  vars:
+>    +    wireguard_mask_bits: 24
+>    +    wireguard_port: 51871
 >    +  tasks:
 >    +    - name: update packages
 >    +      apt:
@@ -142,7 +145,7 @@ Now we can start configuring it. Wireguard relies on each node having a private/
 >    ```diff
 >    --- a/wg.yml
 >    +++ b/wg.yml
->    @@ -13,3 +13,8 @@
+>    @@ -14,3 +14,8 @@
 >           apt:
 >             name: wireguard
 >             state: present
@@ -151,7 +154,6 @@ Now we can start configuring it. Wireguard relies on each node having a private/
 >    +      shell: wg genkey | tee /etc/wireguard/privatekey | wg pubkey | tee /etc/wireguard/publickey
 >    +      args:
 >    +        creates: /etc/wireguard/privatekey
->    
 >    {% endraw %}
 >    ```
 >    {: data-commit="Generate the keys"}
@@ -178,7 +180,7 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >    ```diff
 >    --- a/wg.yml
 >    +++ b/wg.yml
->    @@ -18,3 +18,13 @@
+>    @@ -19,3 +19,13 @@
 >           shell: wg genkey | tee /etc/wireguard/privatekey | wg pubkey | tee /etc/wireguard/publickey
 >           args:
 >             creates: /etc/wireguard/privatekey
@@ -201,7 +203,7 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >    ```diff
 >    --- a/wg.yml
 >    +++ b/wg.yml
->    @@ -28,3 +28,29 @@
+>    @@ -29,3 +29,28 @@
 >           shell: cat /etc/wireguard/publickey
 >           register: wireguard_public_key
 >           changed_when: false
@@ -246,9 +248,10 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >    --- a/wg.yml
 >    +++ b/wg.yml
 >    @@ -54,3 +54,16 @@
+>             group: systemd-network
 >             mode: 0640
 >           notify: systemd network restart
->    
+>    +
 >    +    - name: Setup wg0 network
 >    +      copy:
 >    +        content: |
@@ -261,8 +264,6 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >    +        group: systemd-network
 >    +        mode: 0640
 >    +      notify: systemd network restart
->    +
->    
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup the network"}
@@ -275,10 +276,11 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >    ```diff
 >    --- a/wg.yml
 >    +++ b/wg.yml
->    @@ -67,3 +67,9 @@
+>    @@ -67,3 +67,10 @@
+>             group: systemd-network
 >             mode: 0640
 >           notify: systemd network restart
->    
+>    +
 >    +  handlers:
 >    +    - name: systemd network restart
 >    +      service:
