@@ -121,65 +121,58 @@ It is often necessary to remove adapter and barcodes sequences as well as UMIs. 
 
 ## Removal of adapter sequences with **Cutadapt**
 
-In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](https://doi.org/10.1038/nmeth.3810)). Because **Cutadapt** can only process one site of the read pair, we have to trigger **Cutadapt** twice, i.e., for the forward and the reverse pair.
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](https://doi.org/10.1038/nmeth.3810)).
 
 > ### {% icon hands_on %} Hands-on: Adapter Removal
 >
-> 1. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `FASTQ R1`
->    - *"Track Paired Reads"*: `Yes`
->    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `FASTQ R2`
->    - In *"3' Adapters"*:
->        - Click on *"Insert 3' Adapters"*:
->        - In *"1: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
->        - Click on *"Insert 3' Adapters"*:
->        - In *"2: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
->    - In *"5' (Front) Adapters"*:
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"1: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"2: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Minimum overlap length"*: `5`
->    - *"Output filtering options"*: `Set Filters`
->        - *"Minimum length"*: `10`
->    - *"Additional output options"*: `Default`
->    - *"Additional modifications to reads"*: `Set Modification Options`
->        - *"Cut bases from reads before adapter trimming"*: `-5`
-> 2. **Cutadapt (v. 1.6)** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Fastq file to trim"*: `FASTQ R2` (output from the **first** **Cutadapt** call {% icon tool %})
->    - *"Track Paired Reads"*: `Yes`
->    - {% icon param-file %} *"Paired fastq file (NOT trimmed)"*: `FASTQ R1` (output from the **first** **Cutadapt** call {% icon tool %})
->    - In *"3' Adapters"*:
->        - Click on *"Insert 3' Adapters"*:
->        - In *"1: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
->        - Click on *"Insert 3' Adapters"*:
->        - In *"2: 3' Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
->    - In *"5' (Front) Adapters"*:
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"1: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
->        - Click on *"Insert 5' (Front) Adapters"*:
->        - In *"2: 5' (Front) Adapters"*:
->            - *"Source"*: `Enter custom sequence`
->                - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
->    - *"Minimum overlap length"*: `5`
->    - *"Output filtering options"*: `Set Filters`
->        - *"Minimum length"*: `10`
->    - *"Additional output options"*: `Default`
->    - *"Additional modifications to reads"*: `No Read Modifications`
+> **Cutadapt (v. 4.0)** {% icon tool %} with the following parameters:
+>    - *"Single-end or Paired-end reads?"*: `Paired-end`
+>    - {% icon param-file %} *"FASTQ/A file #1"*: `FASTQ R1`
+>    - {% icon param-file %} *"FASTQ/A file #2"*: `FASTQ R2`
+>    - *"Read 1 Options"*:
+>       - In *"3' Adapters"*:
+>            - Click on *"Insert 3' Adapters"*:
+>            - In *"1: 3' Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
+>            - Click on *"Insert 3' Adapters"*:
+>            - In *"2: 3' Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
+>        - In *"5' (Front) Adapters"*:
+>            - Click on *"Insert 5' (Front) Adapters"*:
+>            - In *"1: 5' (Front) Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
+>            - Click on *"Insert 5' (Front) Adapters"*:
+>            - In *"2: 5' (Front) Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
+>       - *"Cut bases from reads before adapter trimming"*: `-5`
+>    - *"Read 2 Options"*:
+>       - In *"3' Adapters"*:
+>            - Click on *"Insert 3' Adapters"*:
+>            - In *"1: 3' Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 3' adapter sequence"*: `AACTTGTAGATCGGA`
+>            - Click on *"Insert 3' Adapters"*:
+>            - In *"2: 3' Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 3' adapter sequence"*: `AGGACCAAGATCGGA`
+>        - In *"5' (Front) Adapters"*:
+>            - Click on *"Insert 5' (Front) Adapters"*:
+>            - In *"1: 5' (Front) Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTACAAGTT`
+>            - Click on *"Insert 5' (Front) Adapters"*:
+>            - In *"2: 5' (Front) Adapters"*:
+>                - *"Source"*: `Enter custom sequence`
+>                    - *"Enter custom 5' adapter sequence"*: `CTTCCGATCTTGGTCCT`
+>    - *"Adapter Options"*:
+>        - *"Minimum overlap length"*: `5`
+>    - *"Filter Options"*:
+>        - *"Minimum length (R1)"*: `10`
+>        - *"Specify a minimum/maximum length for reverse reads (R2)"*: `Disabled`
 >
 >   > ### {% icon comment %} Why do we remove 5 bp from the first read?
 >   > In eCLIP it can happen that the sequencing goes over the first read into the UMI, which is at the 3' end of the first read. The UMI is 5 bp long in our data. To make sure our first read in the read pair does not contain the UMI, we simply remove the last 5 bp from it. The UMI that we actually need for the de-duplication is located on the 5' end of our second read in the read pair.
@@ -200,8 +193,8 @@ In this task we are going to remove the UMI at the 5' end of the second read. We
 >
 > 1. **UMI-tools extract** {% icon tool %} with the following parameters:
 >    - *"Library type"*: `Paired-end`
->     - {% icon param-file %} *"Reads in FASTQ format"*: `FASTQ R2` (output from the **second** **Cutadapt** call {% icon tool %})
->     - {% icon param-file %} *"Reads in FASTQ format"*: `FASTQ R1`  (output from the **second** **Cutadapt** call {% icon tool %})
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `FASTQ R2` (output from the **Cutadapt** call {% icon tool %})
+>     - {% icon param-file %} *"Reads in FASTQ format"*: `FASTQ R1`  (output from the **Cutadapt** call {% icon tool %})
 >     - *"Barcode on both reads?"*: `Barcode on first read only`
 >    - *"Use Known Barcodes?"*: `No`
 >    - *"Method to extract barcodes"*: `String`
