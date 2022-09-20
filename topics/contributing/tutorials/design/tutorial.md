@@ -6,44 +6,58 @@ subtopic: pedagogy
 time_estimation: 60m
 enable: false
 questions:
-  - Is the structured approach to course design?
-  - How to articulate learning outcomes commensurate with the cognitive
-    complexity of the target learning?
-  - How to devise learning experiences and course content?
-  - What are the steps that can help trainers devise and deploy effective
-    courses?
+- Is the structured approach to course design?
+- How to articulate learning outcomes commensurate with the cognitive
+  complexity of the target learning?
+- How to devise learning experiences and course content?
+- What are the steps that can help trainers devise and deploy effective
+  courses?
 objectives:
-  - List five key phases of curriculum & course development
-  - Explain the primary role of learning outcomes
-  - Write learning outcomes for a course
-  - Identify the Bloom’s-level accomplishments that different types of learning
-    experience are likely to support
-  - Describe the role of learning outcomes in selecting relevant content
-  - Distinguish different types of assessment & their role in supporting learner
-    progression towards learning outcomes
-  - Summarise the benefits of course evaluation
+- List five key phases of curriculum & course development
+- Explain the primary role of learning outcomes
+- Write learning outcomes for a course
+- Identify the Bloom’s-level accomplishments that different types of learning
+  experience are likely to support
+- Describe the role of learning outcomes in selecting relevant content
+- Distinguish different types of assessment & their role in supporting learner
+  progression towards learning outcomes
+- Summarise the benefits of course evaluation
 key_points:
-  - Course development is a multi-step, iterative process
-  - The first step is to identify intended (SMART) LOs
-  - Identification  of  key  content  only  becomes  relevant  after  LOs  &
-    suitable LEs have been identified
-  - Bloom's taxonomy can facilitate the articulation of measurable LOs, &
-    support the development of cognitive complexity through them
-  - Messick's questions help to align KSAs, instruction & assessment
-  - For  successful  outcomes,  learners  &  the  course  must  be  evaluated
-    (it isn't sufficient simply to note 'completers' or learner satisfaction)
-  - A successful course guides learners from entry-level performance to the
-    minimum performance level for achieving its target LOs
-  - In a course designed to support learners & LOs, the instruction that's
-    delivered & learning that's intended are more likely to align, thereby
-    providing the optimal circumstances for learner success.
+- Course development is a multi-step, iterative process
+- The first step is to identify intended (SMART) LOs
+- Identification  of  key  content  only  becomes  relevant  after  LOs  &
+  suitable LEs have been identified
+- Bloom's taxonomy can facilitate the articulation of measurable LOs, &
+  support the development of cognitive complexity through them
+- Messick's questions help to align KSAs, instruction & assessment
+- For  successful  outcomes,  learners  &  the  course  must  be  evaluated
+  (it isn't sufficient simply to note 'completers' or learner satisfaction)
+- A successful course guides learners from entry-level performance to the
+  minimum performance level for achieving its target LOs
+- In a course designed to support learners & LOs, the instruction that's
+  delivered & learning that's intended are more likely to align, thereby
+  providing the optimal circumstances for learner success.
 requirements:
+-
+  type: "internal"
+  topic_name: contributing
+  tutorials:
+  - learning-principles
 contributors:
-  - bebatut
-  - fpsom
-  - allegravia
-  - ppalagi
-#- elixir_ttt
+- bebatut
+- fpsom
+- allegravia
+- ppalagi
+- elixir-goblet-ttt
+contributions:
+  authorship:
+    - bebatut
+    - fpsom
+    - allegravia
+    - ppalagi
+    - elixir-goblet-ttt
+  funding:
+    - erasmusplus
 ---
 
 # Introduction
@@ -765,7 +779,7 @@ For example, to answer the questions *"What are the FAIR principles?"*
 Research models, Findable, Accessible, Interoperable, Re-usable
 2. we link them together in a concept map:
 
-  ![](images/fair_concept_map.png "Example of concept map to explain the FAIR principles")
+  ![It starts on the top with a box "What are FAIR principles?". An arrow goes from this box to a box below "Set of guiding principles". From the 2nd box, an arrow goes down with "to make" written and then splits toward 2 boxes: "Research data" on the left, "Research models" on the right. A line connects these 2 boxes with "and" written on it. An arrow starts from research data and splits into 4 arrows pointing to boxes (from left to right): "Findable", "Accessible", "Interoperable", "Re-usable"](images/fair_concept_map.png "Example of concept map to explain the FAIR principles")
 
 Concept maps try to objective but they depend on their creators. Everyone has
 their own concept map, like the way to go from point A to point B from 2 persons
@@ -1201,7 +1215,7 @@ LOs/LEs/content/assessments failed, and why.
 > > - Gitter / Matrix channel
 > > - GitHub Pull Request
 > > - Details box in tutorials
-> > - [Feedback page]({ link feedback.md %})
+> > - [Feedback page]({% link feedback.md %})
 > > - [Workshop Instructor Feedback](https://github.com/galaxyproject/training-material/discussions/1452)
 > {: .solution }
 >

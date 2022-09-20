@@ -6,11 +6,12 @@ title: Teaching experiences
 subtopic: practises
 time_estimation: 1h
 questions:
-  -
+  - How to teach using Galaxy?
+  - What are the different practises?
 objectives:
   - Learn how others teach using Galaxy
 key_points:
-  -
+  - Every instructor has their prefered way to teach using Galaxy
 contributors:
   - bebatut
   - fpsom

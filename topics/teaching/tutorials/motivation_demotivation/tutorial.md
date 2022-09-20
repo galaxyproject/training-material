@@ -6,19 +6,35 @@ time_estimation: 60m
 subtopic: pedagogy
 enable: false
 questions:
--
+- What is motivation and demotivation?
+- How do motivation and demotivation impact learning processes?
+- What can instructors do to motivate learners?
 objectives:
 - List factors of motivation and demotivation
 - Identify what instructors can do to motivate and avoid demotivating learners
 key_points:
 - To have fully MOTIVATED learners, it is important that learners see the value, learner self-efficacy is high and the environment is supportive
 requirements:
+-
+    type: "internal"
+    topic_name: contributing
+    tutorials:
+    - learning-principles
 contributors:
 - bebatut
 - fpsom
 - allegravia
 - ppalagi
-#- elixir_ttt
+- elixir-goblet-ttt
+contributions:
+  authorship:
+    - bebatut
+    - fpsom
+    - allegravia
+    - ppalagi
+    - elixir-goblet-ttt
+  funding:
+    - erasmusplus
 ---
 
 # Introduction
