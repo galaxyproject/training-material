@@ -4,16 +4,24 @@ layout: tutorial_hands_on
 title: "Deploying Wireguard for private mesh networking"
 zenodo_link: ""
 questions:
- - What is wireguard?
- - When is it useful?
- - Is it right for me?
+  - What is wireguard?
+  - When is it useful?
+  - Is it right for me?
 objectives:
- - Setup a wireguard mesh across a few nodes
+  - Setup a wireguard mesh across a few nodes
 time_estimation: "60m"
 key_points:
- - wireguard is incredibly easy to deploy, and very secure.
-contributors:
- - hexylena
+  - Wireguard is incredibly easy to deploy, and very secure.
+contributions:
+  authorship:
+  - hexylena
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+  - type: "none"
+    title: "Three or more VMs (they can be tiny, 1 CPU, <1GB RAM)"
 subtopic: cloud
 tags:
   - wireguard
@@ -31,8 +39,17 @@ In this tutorial we will briefly cover what [Wireguard](https://www.wireguard.co
 
 # What is Wireguard?
 
+Wireguard is a VPN like OpenVPN or IPSec, but instead of the hub and spoke model of those where all traffic must go through a central node, Wireguard creates a mesh network where machines can all talk individually to each other. Wireguard also uses modern encryption only, ensuring your data stays safe.
 
 ## Is it right for me?
+
+If you have machines that need to talk to each other privately, and you don't
+have a better way to do it like a local network team, then yes, it's a great
+solution to private, secure, fast networking.
+It has [excellent performance](https://www.wireguard.com/performance/)
+despite the encryption, and is built directly into the kernel.
+
+By using wireguard, you can let services listen only on the wireguard interface, and thus only known and trusted machines can access those services.
 
 # Setting up the infrastructure
 

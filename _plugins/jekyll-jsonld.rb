@@ -81,13 +81,13 @@ module Jekyll
         # I guess these are identical?
         "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         "mainEntityOfPage": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
-        "name": contributor.fetch('name', id),
+        "name": contributor.nil? ? id : contributor.fetch('name', id),
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
-        "description": contributor.fetch("bio", "A contributor to the GTN project."),
+        "description": contributor.nil? ? "A contributor to the GTN project." : contributor.fetch("bio", "A contributor to the GTN project."),
         "memberOf": [GTN],
       }
-      if contributor.has_key?('orcid')
+      if ! contributor.nil? && contributor.has_key?('orcid')
         person['identifier'] = "https://orcid.org/" + contributor['orcid']
         person['orcid'] = "https://orcid.org/" + contributor['orcid']
       end
