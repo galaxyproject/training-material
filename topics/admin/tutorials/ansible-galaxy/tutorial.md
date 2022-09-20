@@ -12,12 +12,24 @@ time_estimation: "2h30m"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
-contributors:
+contributions:
+  authorship:
   - hexylena
   - natefoo
   - slugger70
+  editing:
   - shiltemann
   - nsoranzo
+  - gmauro
+  - mvdbeek
+  - martenson
+  - jmchilton
+  - davebx
+  - nsoranzo
+  - lecorguille
+  - abretaud
+  testing:
+  - mira-miracoli
 tags:
   - ansible
   - deploying
@@ -32,8 +44,9 @@ requirements:
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 ---
 
-# Overview
-{:.no_toc}
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
@@ -48,6 +61,8 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}
 
 {% snippet topics/admin/faqs/admin-testing.md %}
 
@@ -210,7 +225,7 @@ To proceed from here it is expected that:
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
 >    {: .comment}
 >
-> 2. Your `ansible` version is `>=2.7`, you can check this by running `ansible --version`
+> 2. Your `ansible` version is `>=2.10`, you can check this by running `ansible --version`
 > 3. You have an [inventory file](../ansible/tutorial.html#inventory-file) with the VM or host specified where you will deploy Galaxy. We will refer to this group of hosts as "galaxyservers."
 > 4. Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.
 > 5. Your VM has `python3` installed.
@@ -240,6 +255,10 @@ To proceed from here it is expected that:
 {: .comment}
 
 
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -256,7 +275,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.3
+>    +  version: 0.10.4
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
@@ -439,7 +458,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
->    - Add a pre-task to install the necessary dependency, `python3-psycopg2`
+>    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
@@ -455,7 +474,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +  pre_tasks:
 >    +    - name: Install Dependencies
 >    +      package:
->    +        name: 'python3-psycopg2'
+>    +        name: ['acl', 'python3-psycopg2']
 >    +  roles:
 >    +    - galaxyproject.postgresql
 >    +    - role: natefoo.postgresql_objects
@@ -756,7 +775,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `acl`, `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
@@ -767,7 +786,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >       pre_tasks:
 >         - name: Install Dependencies
 >           package:
->    -        name: 'python3-psycopg2'
+>    -        name: ['acl', 'python3-psycopg2']
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
@@ -1706,11 +1725,12 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 >    > ### {% icon tip %} Using Galaxy 21.01?
 >    > For versions of Galaxy older than 22.05, using `gravity` was not the default. There you'll need to set these additional variables:
->    >
->    >```diff
->    >+galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
->    >+galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
->    >```
+>    > {% raw %}
+>    > ```diff
+>    > +galaxy_manage_gravity: "{{ false if __galaxy_major_version is version('22.01', '<') else true }}"
+>    > +galaxy_systemd_mode: "{{ 'mule' if __galaxy_major_version is version('22.01', '<') else 'gravity' }}"
+>    > ```
+>    > {% endraw %}
 >    {: .tip}
 >
 > 2. Run the playbook
@@ -1840,7 +1860,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,3 +60,33 @@ galaxy_config:
+>    @@ -60,3 +60,55 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true
@@ -1871,6 +1891,28 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
+>    +  # gzip: "on" # This is enabled by default in Ubuntu, and the duplicate directive will cause a crash.
+>    +  gzip_proxied: "any"
+>    +  gzip_static: "on"   # The ngx_http_gzip_static_module module allows sending precompressed files with the ".gz" filename extension instead of regular files.
+>    +  gzip_vary: "on"
+>    +  gzip_min_length: 128
+>    +  gzip_comp_level: 6  # Tradeoff of better compression for slightly more CPU time.
+>    +  gzip_types: |
+>    +      text/plain
+>    +      text/css
+>    +      text/xml
+>    +      text/javascript
+>    +      application/javascript
+>    +      application/x-javascript
+>    +      application/json
+>    +      application/xml
+>    +      application/xml+rss
+>    +      application/xhtml+xml
+>    +      application/x-font-ttf
+>    +      application/x-font-opentype
+>    +      image/png
+>    +      image/svg+xml
+>    +      image/x-icon
 >    +nginx_ssl_role: usegalaxy_eu.certbot
 >    +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem

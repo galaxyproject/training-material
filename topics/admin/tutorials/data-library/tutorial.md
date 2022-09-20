@@ -46,6 +46,7 @@ of a sequencing run or similar project to a group of users on the servers.
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="data-library" %}
 
 # Setup
 

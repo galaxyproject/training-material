@@ -41,9 +41,6 @@ requirements:
 ---
 
 
-# Overview
-{:.no_toc}
-
 Pulsar is the Galaxy Project's remote job running system. It was written by John Chilton ([@jmchilton](https://github.com/jmchilton)) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.
 
 More details on Pulsar can be found at:
@@ -64,6 +61,8 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="pulsar" %}
 
 **This tutorial assumes that:**
 
@@ -268,7 +267,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -158,6 +160,34 @@ slurm_config:
+>    @@ -180,6 +182,34 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     

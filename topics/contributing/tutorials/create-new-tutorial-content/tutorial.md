@@ -542,6 +542,7 @@ The available icons are:
 >    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
 >    - {% icon param-select %} *"My select menu"*: `my choice`
 >    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}
@@ -558,6 +559,7 @@ which, when rendered, look like:
 >    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
 >    - {% icon param-select %} *"My select menu"*: `my choice`
 >    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}

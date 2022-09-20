@@ -35,13 +35,12 @@ requirements:
       - connect-to-compute-cluster
 ---
 
-# Mapping Jobs
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first.
 
 Now that you have a working scheduler, we will start configuring which jobs are sent to which destinations.
+
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -49,6 +48,8 @@ Now that you have a working scheduler, we will start configuring which jobs are 
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}
 
 # Galaxy and Slurm - Statically Mapping a Job
 

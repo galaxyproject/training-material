@@ -313,11 +313,15 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 2. Rename your output file `chr prefix added`.
 >
-> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with
+> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with two more replacements
 >    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `1`
->    - *"Find pattern"*: `chr20`
->    - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Replacement
+>      - *"Find pattern"*: `chr20`
+>      - *"Replace with"*: `chrX`
+>    - {% icon param-repeat %} Insert Replacement
+>      - *"Find pattern"*: `chr21`
+>      - *"Replace with"*: `chrY`
 >
 >    > ### {% icon tip %} Tip: Rerunning a tool
 >    >
@@ -325,15 +329,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > * Press the {% icon galaxy-refresh %} icon (**Run this job again**)
 >    {: .tip}
 >
-> 4. Rename your output file `chrX fixed`
->
-> 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Rerun this tool to do the same for chromosome Y
->    - *"File to process"*: `chrX fixed`, the output from the last run
->    - *"in column"*: `1`
->    - *"Find pattern"*: `chr21`
->    - *"Replace with"*: `chrY`
->
-> 6. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
+> 4. Inspect the latest file through the {% icon galaxy-eye %} (eye) icon. Have we been successful?
 >
 >    We have quite a few files now and need to take care to select the correct ones at each step.
 >
@@ -347,7 +343,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >    > {: .solution }
 >    {: .question}
 >
-> 7. Rename the file to something more recognizable, e.g. `Peak regions`
+> 5. Rename the file to something more recognizable, e.g. `Peak regions`
 {: .hands_on}
 
 ## Analysis
@@ -395,8 +391,8 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 >
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
 > 2. Switch to the **Convert** tab
-> 3. Select `Convert Genomic Intervals to BED`
-> 4. Press **Convert datatype**
+> 3. Under *"Target datatype"*: `bed (using 'interval-to-bed')`
+> 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
 {: .hands_on}
@@ -424,7 +420,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
-> 1. {% tool [Group](Grouping1) %}  data by a column and perform aggregate operation on other columns with the following settings:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns, with the following settings:
 >     - *"Select data"* to the result of the intersection
 >     - *"Group by column"*:`Column 1`
 >     - Press **Insert Operation** and choose:
@@ -438,7 +434,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used because Galaxy can store all parameters but inputs may change e.g. the annotation from UCSC.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -446,17 +442,41 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 ## Visualization
 
-Since we have some nice data, let's draw a barchart out of it!
+We have some nice aggregated data, so why not draw a barchart of it?
+
+Before we do that we should polish our grouped data a bit more though.
+
+You may have noticed that the mouse chromosomes are not listed in their correct
+order in that dataset (the **Group** tool tried to sort them, but did so
+alphabetically).
+
+We can fix this by running a dedicated tool for sorting on our data.
+
+> ### {% icon hands_on %} Hands-on: Fix sort order of gene counts table
+>
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order, with the following settings:
+>     - *"Sort Query"*: result of running the Group tool
+>     - in {% icon param-repeat %} *"Column selections"*
+>       - *"on column"*: `Column 1`
+>       - *"in"*: `Ascending order`
+>       - *"Flavor"*: `Natural/Version sort (-V)`
+>
+{: .hands_on}
+
+Great, we are ready to plot things!
 
 > ### {% icon hands_on %} Hands-on: Draw barchart
 >
 > 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
-> 2. Select `Bar diagram`
-> 3. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
-> 4. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
-> 5. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
+> 2. Select `Bar diagram (NVD3)`
+> 3. Click on the **<<** in the upper right corner
+> 4. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
+> 5. Switch to the {% icon galaxy-chart-select-data %} **Select data** tab and play around with the settings
+> 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
 >
->    This will store it to your saved visualisations where you can later view, download, or share it with others.
+>    This will store it to your saved visualisations. Later you can view,
+>    download, or share it with others from **User -> Visualizations** in the
+>    top menu of Galaxy.
 >
 {: .hands_on}
 
@@ -554,25 +574,25 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 
 ## Create peak summit file
 
-We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5). As the end of the peak region, we will simply define `start + 1`.
+We need to generate a new BED file from the original peak file that contains the positions of the peak summits. The start of the summit is the start of the peak (column 2) plus the location within the peak that has the highest hypothetical DNA fragment coverage (column 5, rounded down to the next smallest integer because some peak summits fall in between to bases). As the end of the peak region, we will simply define `start + 1`.
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
->   - *"Add expression"*: `c2+c5`
->   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
->   - *"Round result?"*: `YES`
+> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+>   - *"Input file"*: our peak file `Peak regions` (the interval format file)
+>   - *"Input has a header line with column names?": `No`
+>   - In *"Expressions"*:
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c2 + int(c5)`
+>           - *"Mode of the operation"*: Append
+>       - {% icon param-repeat %} *"Expressions"*
+>           - *"Add expression"*: `c8 + c1`
+>           - *"Mode of the operation"*: Append
 >
->   This will create an 8th column in our table, which we will use in our next step:
+>   This will create an 8th and a 9th column in our table, which we will use in our next step:
 >
-> 2. Rename the output `Peak regions new column`
+> 2. Rename the output `Peak summit regions`
 >
-> 3. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} rerun this tool on the last result with:
->   - *"Add expression"*: `c8+1`
->   - *"as a new column to"*: the `Peak regions new column` file we just created
->   - *"Round result?"*: `YES`
->
-> 4. Rename this file `Peak summit regions`
 {: .hands_on}
 
 Now we cut out just the chromosome plus the start and end of the summit:
