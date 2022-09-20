@@ -113,7 +113,7 @@
   "name": "Slides for 'Genome assembly quality control.' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-quality-control/slides.html",
   "keywords": "assembly",
-  "description": "The questions this  addresses are:\n - Is my genome assembly ready for annotation and/or scaffolding?\n\n",
+  "description": "The questions this  addresses are:\n - Assembly: Is my genome assembly ready for scaffolding?\n - Annotation: Is my genome assembly ready for structural annotation?\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -514,7 +514,7 @@ class: center, middle, inverse
 </div>
 
 
-<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Aug 26, 2022</div>
+<div class="footnote" style="bottom: 4 em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: Sep 19, 2022</div>
 
 <div class="footnote" style="bottom: 2.5em;"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a></div>
 <div class="footnote" style="bottom: 1em;"><strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes</div>
@@ -573,7 +573,9 @@ Before diving into this slide deck, we recommend you to have a look at:
 ### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
-- Is my genome assembly ready for annotation and/or scaffolding?
+- Assembly: Is my genome assembly ready for scaffolding?
+
+- Annotation: Is my genome assembly ready for structural annotation?
 
 
 ---
@@ -619,6 +621,8 @@ Before diving into this slide deck, we recommend you to have a look at:
 - Number and proportion of bases that are N
 
 ]
+
+**Sequences**, i.e. a set of contigs and/or scaffolds
 
 ---
 
@@ -689,21 +693,35 @@ It also includes:
 
 ---
 
+### Types of completeness
+
+- Assembly size
+- Known vs. unknown nucleotides
+- &quot;Core&quot; genes
+- Assembly kmer content
+- Assembly coverage and reads mapping
+
+---
+
 ### Assembly size vs estimated
 
 Proportion of the original genome represented by the assembly:
-&lt;br&gt;
 
 .image-100[
 ![Formula to estimate assembly size completeness](../../images/genome-qc/assembly-size-qc-formula.png)
 ]
 
-&lt;br&gt;
-- &quot;*&quot; it’s an estimation, so not perfect
+&quot;*&quot; it’s an estimation, so not perfect. See ![An introduction to get started in genome assembly and annotation](/training-material/topics/assembly/tutorials/get-started-genome-assembly/slides.html) to find methods to determine the genome size.
 
 ---
 
-### Core genes
+### Known vs. unknown nucleotides
+
+Proportion of A, T, G, C versus N (unknown nucleotide).We expect an assembly without unknown nucleotides (N).
+
+---
+
+### &quot;Core&quot; genes
 
 
 .pull-left[
@@ -725,9 +743,17 @@ Quantitative assessment of genome assembly based on evolutionarily informed expe
 
 **BUSCO**: Assessing genome assembly and annotation completeness with **B**enchmarking **U**niversal **S**ingle-**C**opy **O**rthologs
 
-.image-40[
-![Explanation of orthology classification for creation of BUSCO sets](../../images/genome-qc/busco_sampling.png)
-]
+.pull-left[
+.image-70[
+![Explanation of orthology classification for creation of BUSCO sets - Universality](../../images/genome-qc/busco_sampling_universality.png)
+]]
+
+.pull-right[
+.image-60[
+![Explanation of orthology classification for creation of BUSCO sets - Duplicability](../../images/genome-qc/busco_sampling_duplicability.png)
+]]
+
+Eukaryota: 255 single copy from 70 species; Arthropoda: 1013 single copy from 90 species; Fungi: 758 single copy from 549 species
 
 .footnote[Waterhouse, R. M., Zdobnov, E. M. &amp; Kriventseva, E. V. Correlating Traits of Gene Retention, Sequence Divergence, Duplicability and Essentiality in Vertebrates, Arthropods, and Fungi. Genome Biol Evol 3, 75–86 (2011).]
 
@@ -747,6 +773,8 @@ Example with BUSCO Eukaryotic set:
 .image-70[
 ![Limitation of BUSCO orthoDB for eukaOrthoDB - part B](../../images/genome-qc/BUSCO_limitations_B.png)
 ]]
+
+The use of transcriptome alignment of a closely related species or a de novo RNA-Seq assembly of the same species can be another proxy to assess the completeness of the assembly and adress BUSCO limitations.
 
 .footnote[Saary, P., Mitchell, A. L. &amp; Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]
 
@@ -780,20 +808,9 @@ The aim is to check assembly coherence against the content within reads that wer
 
 ### Assembly kmer content - Homozygous genomes
 
-&lt;br&gt;
-&lt;br&gt;
-
-K-mer spectra representation for Merqury (left) and KAT (rigth)
-
-.pull-left[
 .image-70[
 ![Merqury spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-merqury-homozygous-good.png)
-]]
-
-.pull-right[
-.image-70[
-![KAT spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-kat-homozygous-good.png)
-]]
+]
 
 &lt;i class=&quot;far fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;congratulations&lt;/span&gt; Good kmer representation of reads in the assembly
 
@@ -801,17 +818,9 @@ K-mer spectra representation for Merqury (left) and KAT (rigth)
 
 ### Assembly kmer content - Homozygous genomes
 
-&lt;/br&gt;
-
-.pull-left[
 .image-70[
 ![Merqury spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-merqury-homozygous-bad.png)
-]]
-
-.pull-right[
-.image-70[
-![KAT spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-kat-homozygous-bad.png)
-]]
+]
 
 &lt;i class=&quot;fa fa-thumbs-down&quot;&gt;&lt;/i&gt; Bad kmer representation of reads in the assembly
 
@@ -819,18 +828,9 @@ K-mer spectra representation for Merqury (left) and KAT (rigth)
 
 ### Assembly kmer content - Heterozygous genomes
 
-&lt;/br&gt;
-&lt;/br&gt;
-
-.pull-left[
 .image-70[
 ![Merqury spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-merqury-heterozygous-good.png)
-]]
-
-.pull-right[
-.image-70[
-![KAT spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-kat-heterozygous-good.png)
-]]
+]
 
 &lt;i class=&quot;far fa-thumbs-up&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;congratulations&lt;/span&gt; Good kmer representation of reads in the assembly
 
@@ -840,15 +840,9 @@ The lost content (the black peak) represents the half of the heterozygous conten
 
 ### Assembly kmer content - Heterozygous genomes
 
-.pull-left[
 .image-80[
 ![Merqury spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-spectra-merqury-c.gigas-hap2.png)
-]]
-
-.pull-right[
-.image-80[
-![KAT spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-spectra-kat-c.gigas-hap2.png)
-]]
+]
 
 &lt;i class=&quot;fa fa-thumbs-down&quot;&gt;&lt;/i&gt; Bad kmer representation of reads in the assembly
 
@@ -857,6 +851,12 @@ The lost content (the black peak) represents the half of the heterozygous conten
 .image-30[
   ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
 ]
+
+---
+
+### Assembly coverage and reads mapping
+
+
 
 ---
 
@@ -902,11 +902,17 @@ The lost content (the black peak) represents the half of the heterozygous conten
 
 ### Switch and hamming errors (phased assemblies)
 
-.image-50[
+.pull-left[
+.image-70[
 ![Illustration of switch and hamming errors in phased genome assembly.](../../images/genome-qc/switch-hamming-errors.png)
 ]
+In red, heterozygous locus from second haplotype. In blue, heterozygous locus from first haplotype.
+]
 
-In blue, heterozygous locus from first haplotype. In red, heterozygous locus from second haplotype.
+.pull-right[
+- **Switch error**: a change from one parental allele to another parental allele on a contig. This terminology has been used for measuring reference-based phasing accuracy for two decades. A haplotig is supposed to have no switch errors.
+- **Yak hamming error**: an allele not on the most supported haplotype of a contig. Its main purpose is to test how close a contig is to a haplotig. The yak definition is not widely accepted. The hamming error rate is arguably less important in practice.
+]
 
 .footnote[http://lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
 
@@ -954,6 +960,18 @@ A non-exhaustive list of tools for making dot plots:
 ]
 
 
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- We learned that it is essential to control the quality of an assembly
+
+- We learned that there are several quality criteria and tools to enable this assessment
+
+- Certain quality criteria are expected at the time of publication
 
 
 
