@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "1. Principles of learning and how they apply to training and teaching"
+title: "Principles of learning and how they apply to training and teaching"
 subtopic: pedagogy
 enable: false
 time_estimation: 2h
@@ -10,7 +10,7 @@ questions:
   - How can these principles be applied to training and teaching?
 objectives:
   - Describe how learning works according to a few learning models
-  - Explain how learning models can help you improve your teaching in the classroom 
+  - Explain how learning models can help you improve your teaching in the classroom
   - List learning strategies and principles suggested by evidence-based research results
 key_points:
   - Teaching and training is not only a matter of knowledge
@@ -53,7 +53,7 @@ Since this material cannot cover the broad literature on the subject of learning
 
 The first starting point in this road is a discussion about the learning outcomes; what they are, and why these are important for any instructional design. In this context, and by the end of this session, learners will be able to:
 - Describe how learning works according to a few learning models
-- Explain how learning models can help you improve your teaching in the classroom 
+- Explain how learning models can help you improve your teaching in the classroom
 - List learning strategies and principles suggested by evidence-based research results
 
 The "Learning outcomes" (LOs) are essentially statements that tell what the learners will be to do at the end of the session. For this reason, every well-designed training should start with LOs.
@@ -250,39 +250,39 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 > ### {% icon details %} More details on the key ideas from each of these perspectives
 >
 > We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners’ learning.
-> 
+>
 > ## Behaviourism
 > In Behaviourism, Learning is viewed as changes in overt behavior. In this cntext, learning is acquiring new behaviours by > conditioning, reflex response to stimuli, reward/punishment / (learning as changes in overt behavior → perspective on learning > that focusesfouses on changes in individuals’ observable behaviours)
-> 
+>
 > **Operant conditioning**: a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
-> 
+>
 > It is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen > more or less frequently.
-> 
+>
 > * learning and behaviour changes are acquired by linking stimuli and responses
 > * Learner is passive; they learn via external processes, i.e., positive reinforcement.
 > * Behaviorists look at learning as an aspect of conditioning (looking at the environment of the learner).
 > * Cognitivism
 >     * Learning is internal and is the result of a student processing and organising new information (short and long term memory)
 >     * Educators who embrace cognitive theory believe that the definition of learning as a change in behaviour is too narrow, and study the learner (complexities of the memory) rather than their environment.
-> 
+>
 > ## Constructivism
-> 
+>
 > Under Constructivism, Learning is viewed as changes in thinking, that is how learners actively create (or “construct”) knowledge out of experience.
-> 
+>
 > Behaviorist models of learning may be helpful in understanding and influencing what students do, but teachers usually also want to know what students are thinking, and how to enrich what students are thinking. For this goal of teaching, some of the best help comes from constructivism, which is a perspective on learning focused on how students actively create (or "construct") knowledge out of experiences. Constructivist models of learning differ about how much a learner constructs knowledge independently, compared to how much he or she takes cues from people who may be more of an expert and who help the learner’s efforts (Fosnot, 2005; Rockmore, 2005).
-> 
+>
 > * Knowledge is constructed by adapting new information based on previous individual experience
 > * Learners build on personal experience, active & social in the learning process
 > * Constructivists believe that a learner's ability to learn relies largely on what they already know and understand, and the acquisition of knowledge should be an individually tailored process of construction.
-> 
+>
 > **Psychological constructivism**: changes in thinking resulting from individual experiences. A person learns by mentally organising and reorganising new information or experiences.
-> 
+>
 > **Social constructivism**: changes in thinking due to assistance from / interaction with others
-> 
+>
 > For convenience these are called psychological constructivism and social constructivism (or sometimes sociocultural theory). As explained in the next section, both focus on individuals’ thinking rather than their behavior, but they have distinctly different implications for teaching.
-> 
+>
 > ## The socio-constructivist perspective
-> 
+>
 > Learning is an active process that essentially takes place within an interaction with others and with objects belonging to the culture in which we live (Bruner, Vygotskij, Dewey ......)
 >
 {: .details}
