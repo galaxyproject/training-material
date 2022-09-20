@@ -6,21 +6,31 @@ subtopic: practises
 enable: false
 time_estimation: 1h
 questions:
-  -
+- What is hybrid training?
+- How to deliver hybrid training using Galaxy?
+- What should be prepared for an hybrid training event?
 objectives:
-  -
+- Describe hybrid training
+- Organize an hybrid training event using Galaxy
 key_points:
-  -
+- With hybrid training events, remote instructors pair up with on-site helpers to deliver 1 training across multiple sites simultaneously
+- Hybrid training events reduce costs and improve accessibility
 contributors:
-  - bebatut
-  - fpsom
+- bebatut
+- fpsom
+contributions:
+  authorship:
+    - bebatut
+    - fpsom
+  funding:
+    - erasmusplus
 ---
 
 **Combine with Australia Biocommon paper: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008715**
 
 **hybrid training events**, i.e. pairing-up on-site helpers with remote instructors across multiple sites simultaneously:
 
-![Hybrid training diagram, a single remote instructor broadcasts training to multiple sites](images/hybrid_training.png)
+![Hybrid training diagram, a single remote instructor broadcasts training to multiple sites](./images/hybrid_training.png)
 
 With this model, we aim to bring training events to the trainees while reducing the environmental impact of instructor travel.
 

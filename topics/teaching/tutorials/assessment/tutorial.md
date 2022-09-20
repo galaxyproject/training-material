@@ -6,36 +6,39 @@ subtopic: pedagogy
 enable: false
 time_estimation: 3h30m
 questions:
-  - What are the different types of feedback?
-  - When do get and receive feedback?
-  - For which purpose do we need feedback?
+- What are the different types of feedback?
+- When do get and receive feedback?
+- For which purpose do we need feedback?
 objectives:
-  - Describe the differences between formative and summative assessment
-  - Tell why frequent feedback is important
-  - List and describe a few techniques for formative feedback
+- Describe the differences between formative and summative assessment
+- Explain why frequent feedback is important
+- Describe a few techniques for formative feedback
+- List a few techniques to cope with feedback on your teaching efforts
 key_points:
-  -
-
+- Formative assessment should be frequent
+- Feedback is hard
 requirements:
-    -
-        type: "internal"
-        topic_name: teaching
-        tutorials:
-            -
-
-follow_up_training:
-    -
-        type: "internal"
-        topic_name: teaching
-        tutorials:
-            -
-
+-
+    type: "internal"
+    topic_name: contributing
+    tutorials:
+    - learning-principles
+    - design
 contributors:
-  - bebatut
-  - fpsom
-  - ppalagi
-  - allegravia
-#- elixir_ttt
+- bebatut
+- fpsom
+- allegravia
+- ppalagi
+- elixir-goblet-ttt
+contributions:
+  authorship:
+    - bebatut
+    - fpsom
+    - allegravia
+    - ppalagi
+    - elixir-goblet-ttt
+  funding:
+    - erasmusplus
 ---
 
 # Introduction
@@ -120,7 +123,7 @@ Formative assessment / feedback can be used to collect information about learner
 > - For each, write an example.
 {: .hands_on}
 
-It should be highlighted that the best practice for teaching is to constantly monitor what is happening to students 
+It should be highlighted that the best practice for teaching is to constantly monitor what is happening to students
 as they set about learning and investigate when things do not proceed as planned or expected.
 
 ## Collecting data from learners through formative assessment
