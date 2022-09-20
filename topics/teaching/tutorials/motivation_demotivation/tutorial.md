@@ -80,20 +80,24 @@ What is motivation?
 
 Motivation influences **direction**, **intensity**, **persistence** and **quality** of the learning behaviors.
 
-> ### {% icon hands_on %} Recall a motivating learning experience (5 min - Silent reflection)
+<!-- >> ### {% icon hands_on %} Recall a motivating learning experience (5 min - Silent reflection)
 >
 > Write in the shared notes about a **motivating** experience in your life (as a learner) and how it impacted you
 >
-> > ### {% icon tip %} For trainer
-> >
-> > The trainer will comment learners' motivating experiences, trying to identify and highlight "patterns of motivation". Key features of motivation (value, expectancy, environment) could be introduced starting from learners' experiences.
-> >
-> > Example:
-> > - Learner's experience: "I felt very much motivated by a teacher saying that, based on my performance during classes, I would have been perfectly able to achieve all the course learning outcomes.""
-> > - Trainer takes the opportunity to introduce the concept of "expectancy""' as one of the three pillars of motivation.
-> >
-> {: .tip }
-{: .hands_on}
+>
+{: .hands_on}-->
+
+{% include _includes/quiz.html id="motivating_learning_experience.yaml" %}
+
+> ### {% icon tip %} For trainer
+>
+> The trainer will comment learners' motivating experiences, trying to identify and highlight "patterns of motivation". Key features of motivation (value, expectancy, environment) could be introduced starting from learners' experiences.
+>
+> Example:
+> - Learner's experience: "I felt very much motivated by a teacher saying that, based on my performance during classes, I would have been perfectly able to achieve all the course learning outcomes.""
+> - Trainer takes the opportunity to introduce the concept of "expectancy""' as one of the three pillars of motivation.
+>
+{: .tip }
 
 ## Goals
 
@@ -132,7 +136,7 @@ Learners' goals for themselves may **differ** from teachers' goals for them. Pow
 
 What is also playing an important role in motivation? The importance of the goals, the **subjective value** of the goals, i.e. the value a learner attributes to the goals. A lack of of perceived value leads to a lack of motivation-
 
-![3 main boxes: a grey one with "Goals" written in it, a green one with "Motivation" in it,, an blue one with "Value. A goal's importance" written in it. 5 smaller boxes stacked on each other on the left of the "Goals" box with "Performance goals", "Social goals", "Learning goals", "Work-avoidant goals", "Affective goals" written inside. "Basic features of" written between "Goals" and "Motivation". 1 arrow from "Value" to "Motivation"](images/motivation_concept_map_l3.png)
+![3 main boxes: a grey one with "Goals" written in it, a green one with "Motivation" in it,, an blue one with "Value. A goal's importance" written in it. 5 smaller boxes stacked on each other on the left of the "Goals" box with "Performance goals", "Social goals", "Learning goals", "Work-avoidant goals", "Affective goals" written inside. "Basic features of" written between "Goals" and "Motivation". 1 arrow from "Value" to "Motivation"](./images/motivation_concept_map_l3.png)
 
 There are 3 main sources of values
 - **Attainment value**: satisfaction that one gains from mastery and accomplishment of a goal
@@ -166,7 +170,7 @@ Conversely, if they do not expect to successfully achieve a desired goal or outc
 
 **Expectancies**, or expectations for successful attainment of that goal, are the goals and outcomes that people believe they can achieve. It has to do with the feeling of achieving a goal. When you have goals, value and expectancy, you can achieve motivation:
 
-![4 main boxes: a grey one with "Goals" written in it, a green one with "Motivation" in it, an blue one with "Value. A goal's importance" written in it, an orange one with "Expectancy / Efficacy" in it. 5 smaller boxes stacked on each other on the left of the "Goals" box with "Performance goals", "Social goals", "Learning goals", "Work-avoidant goals", "Affective goals" written inside. "Basic features of" written between "Goals" and "Motivation". 2 arrows from "Value" and "Expectancy" to "Motivation"](images/motivation_concept_map_l4.png)
+![4 main boxes: a grey one with "Goals" written in it, a green one with "Motivation" in it, an blue one with "Value. A goal's importance" written in it, an orange one with "Expectancy / Efficacy" in it. 5 smaller boxes stacked on each other on the left of the "Goals" box with "Performance goals", "Social goals", "Learning goals", "Work-avoidant goals", "Affective goals" written inside. "Basic features of" written between "Goals" and "Motivation". 2 arrows from "Value" and "Expectancy" to "Motivation"](./images/motivation_concept_map_l4.png)
 
 We describe two forms of expectancies that help inform our understanding of motivated behavior:
 - **Outcome expectancies**: the belief that specific actions will bring about a desired outcome ({% cite carver1998self %})
@@ -253,11 +257,14 @@ Motivation can go both ways: motivation and de-motivation are strictly connected
 Adult learners usually come motivated to courses and the point is to not demotivate them.
 In many cases, to not de-motivate learners is an excellent way to support motivation.
 
-> ### {% icon hands_on %} Recall a demotivating experience (5 min - Silent reflection)
+<!-- >> ### {% icon hands_on %} Recall a demotivating experience (5 min - Silent reflection)
 >
 > Write in the shared notes about a **demotivating** experience in your life (as a learner) and how it impacted you
 >
-{: .hands_on}
+{: .hands_on}-->
+
+{% include _includes/quiz.html id="demotivating_learning_experience.yaml" %}
+
 
 **Things you should not do as instructors**
 - Tell learners they are rubbish because they use a technology, etc
@@ -420,9 +427,9 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-> ### {% icon hands_on %} Strategies to improve motivation (15 min - Groups of 2 people)
+> ### {% icon hands_on %} Strategies to improve motivation - _{% icon time %} 15 min - Groups of 2 people_
 >
-> - Pick on strategies associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
+> - Pick 1 strategy associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
 >
 >   > ### {% icon details %} Strategies
 >   >

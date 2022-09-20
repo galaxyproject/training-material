@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "1: Design and plan session, course, materials"
+title: "Design and plan session, course, materials"
 subtopic: pedagogy
 time_estimation: 60m
 enable: false
@@ -132,13 +132,13 @@ Emphasis is placed on teaching and learning, and mechanisms for collecting
 evidence that learners have changed over time
 ({% cite tractenberg2020guidelines %}). In this latter sense, the concept of
 'curriculum' differentiates formal teaching from training, as formal programmes
-usually afford time for learners both to be able to progress and to _demonstrate
-their progression_.
+usually afford time for learners both to be able to progress and to **demonstrate
+their progression**.
 
 By contrast, training courses are much shorter (measured in days or weeks,
 rather than years); they hence necessarily focus on acquiring specific KSAs in
 limited time-frames, generally without consideration of learner progression
-beyond the course. However, the essential features of _effective curricula_
+beyond the course. However, the essential features of **effective curricula**
 (i.e., those that achieve their stated LOs for the majority of learners) pertain
 to instruction on any time-scale; they are thus also relevant for short courses,
 and provide important considerations for those involved in, or embarking upon,
@@ -247,14 +247,14 @@ and courses.
 ## Structuring curriculum design
 
 Curriculum design benefits from being systematic: structured approaches help to
-orchestrate and clarify what will be taught, _why it will be taught_ and how;
+orchestrate and clarify what will be taught, **why it will be taught** and how;
 they also afford opportunities to evaluate what does and doesn't work, and hence
 what needs to change, ultimately leading to improvements in learning outcomes
 ({% cite fink2013creating %}, {% cite diamond2008designing %},
 {% cite nilson2016teaching %}). Several different frameworks have been devised to
 facilitate the design process, but each is motivated by the same underlying
-philosophy: to help formulate programmes that promote _meaningful and enduring
-learning_. If we're to understand whether we've really achieved this, we must
+philosophy: to help formulate programmes that promote **meaningful and enduring
+learning**. If we're to understand whether we've really achieved this, we must
 
 1. determine the purpose of the programme (what needs it addresses, why it's
    being developed, what learners will gain from it, why it's important),
@@ -280,8 +280,8 @@ in teaching and learning – Bloom's taxonomy ({% cite bloom1956taxonomy %}).
 Learning taxonomies are useful tools that can help both to formulate and clarify
 LOs, and to arrange them on a scale of increasing complexity. Bloom’s taxonomy
 ({% cite bloom1956taxonomy %}), probably the most easily understood and widely
-used today, features a _six-level hierarchy of cognitive complexity_, ranging
-from _Remember_ (being able to recall facts and basic concepts) to _Evaluate_
+used today, features a **six-level hierarchy of cognitive complexity**, ranging
+from **Remember** (being able to recall facts and basic concepts) to **Evaluate**
 being able to defend opinions or decisions), as illustrated in the following
 figure:
 
@@ -289,18 +289,18 @@ figure:
 
 As can be seen from the figure, each Bloom's level is accompanied by a set of
 active verbs that express expected, measurable learner behaviours at that level:
-*e.g.*, achieving the level _Understand_ means to be able to classify, select or
+*e.g.*, achieving the level **Understand** means to be able to classify, select or
 explain a piece of information: here, _classify, select, explain_ are
 observable, assessable behaviours that can be readily encapsulated in coherent
 LOs.
 
 Typical illustrations of the taxonomy, like that in the figure, depict
 successive cognitive levels, suggesting that learners must achieve one level
-before advancing to the next, implying a _developmental trajectory_ from lower-
+before advancing to the next, implying a **developmental trajectory** from lower-
 to higher-order cognitive skills. However, this structure should not be regarded
 as completely rigid; indeed, {% cite anderson2001taxonomy %} published a revised
-version in 2001 in which they placed _Synthesise_ (the ability to create new or
-original work) at the top of the hierarchy in place of _Evaluate_.
+version in 2001 in which they placed **Synthesise** (the ability to create new or
+original work) at the top of the hierarchy in place of **Evaluate**.
 Notwithstanding the minutiae, it is perhaps more fruitful to regard the taxonomy
 as a continuum or spectrum of cognitive levels, where each merges into the next,
 providing a structured tool to help express measurable, assessable LOs, in which
@@ -316,7 +316,7 @@ learning activities and materials, and ensuring that LOs reflect the lowest to
 the highest levels of cognitive complexity realistically achievable on
 completing those activities or having engaged with those materials (realistic
 aims are key, especially for short courses: *e.g.*, expecting learners with no
-prior subject knowledge to achieve the level _Evaluate_, say in a 1-day course,
+prior subject knowledge to achieve the level **Evaluate**, say in a 1-day course,
 will guarantee failure and frustration for learners and instructors alike).
 
 # Nicholl's five phases of curriculum design
@@ -344,8 +344,8 @@ successive phases are mutually consistent with, and supportive of, the LOs).
 Thus, the role of LOs is pivotal: they must have specific characteristics to
 function, and support each of the other phases as they do.
 
-[Figure 2](#figure-2) illuminates an important feature of the model: that _LOs are the
-starting point, and drive all decision-making_. This is just as true for courses
+[Figure 2](#figure-2) illuminates an important feature of the model: that **LOs are the
+starting point, and drive all decision-making**. This is just as true for courses
 as it is for programmes ({% cite diamond2008designing %}). Missing from the model,
 however, is the dependence of LOs on a hierarchy of cognitive complexity that
 establishes a developmental trajectory, like that seen in Bloom's taxonomy. We
@@ -377,8 +377,8 @@ succinct questions:
 These questions were originally posed in 1994 in the context of assessment.
 Their focus on KSAs – the LOs – thus guides not only the creation of relevant
 tasks (to reveal the target KSAs) but also the rational development of
-_appropriate_ assessments: i.e., they provide a framework for, and clarify,
-_what to assess_. The questions can thus support all phases of course
+**appropriate** assessments: i.e., they provide a framework for, and clarify,
+**what to assess**. The questions can thus support all phases of course
 development, starting with the selection of intended KSAs stated in a set of
 LOs.
 
@@ -406,8 +406,8 @@ LOs.
 
 Writing coherent LOs is challenging: they must contain appropriate (Bloom's)
 verbs ([Figure 1](#figure-1)) that express measurable, observable and assessable actions,
-accurately describing what successful learners will be able to do – _and at what
-level of cognitive complexity_ – after instruction.
+accurately describing what successful learners will be able to do – **and at what
+level of cognitive complexity** – after instruction.
 
 Various characteristics of, and principles for articulating, LOs have been
 published (e.g. {% cite stanford-institutional-research-decision-support %} or
@@ -456,30 +456,26 @@ target LOs meet, or are consistent with, the characteristics outlined in the box
 below helps to promote better alignment of instructional inputs and learner
 outcomes.
 
-> ### {% icon question %} Evaluate Learning outcomes
+{% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}
+
+> ### {% icon solution %} Evaluate Learning outcomes - Solution
 >
 > "By the end of the course learners will know the Pythagora's theorem"
 >
-> What do you think about this LO?
+>  This LO is not good:
 >
-> > ### {% icon solution %} Solution
-> >
-> > This LO is not good:
-> >
-> > - How to assess whether learners know the Pythagora's theorem?
-> > - What do we mean by "knowing" the Pythagorean theorem?
-> >   - They are able state it?
-> >   - They are able explain it?
-> >   - They are able apply it?
-> >   - They are able demonstrate it?
-> >   - They are able to use it in solving problem?
-> >
-> > It would make more sense to ask: "What will learners be able to do to show
-> > they know the Pythagorean theorem?"
-> >
-> {: .solution}
+> - How to assess whether learners know the Pythagora's theorem?
+> - What do we mean by "knowing" the Pythagorean theorem?
+>   - They are able state it?
+>   - They are able explain it?
+>   - They are able apply it?
+>   - They are able demonstrate it?
+>   - They are able to use it in solving problem?
 >
-{: .question}
+> It would make more sense to ask: "What will learners be able to do to show
+> they know the Pythagorean theorem?"
+>
+{: .solution}
 
 In short, when defining LOs, the key question to ask is, are they SMART?
 
@@ -498,8 +494,7 @@ content and **create assessments**.
 >
 > 1. Take the LOs you created
 > 2. Consider if your LOs are SMART
->
->    If any of them do not meet the SMART criteria, try revising them as
+> 3. Try to revise any of them that do not meet the SMART criteria as
 >    follows:
 >
 >    1. Select an active verb that can (in principle) be observed & assessed
@@ -546,8 +541,8 @@ content and **create assessments**.
 
 -->
 
-Ultimately, _LOs provide the necessary structure and context for decision-making
-by instructors (and learners), hence their primary role in course design_.
+Ultimately, **LOs provide the necessary structure and context for decision-making
+by instructors (and learners), hence their primary role in course design**.
 
 ## Select LEs that will lead to the LOs
 
@@ -624,10 +619,10 @@ teaching scenario may not allow for an ideal LE. Even if you’re not in a
 position to select the most appropriate LEs, the LOs must still be consistent
 with the given LEs; and if those LEs won’t help learners to achieve the LOs,
 then the LOs should be revised – i.e., LOs are still the most important feature
-to consider. _The key is to determine exactly what specific LEs can contribute
-to learning or how they will help move learners towards the LOs._
+to consider.**The key is to determine exactly what specific LEs can contribute
+to learning or how they will help move learners towards the LOs.**
 
-> ### {% icon question %} Evaluate LEs
+<!-- >> ### {% icon question %} Evaluate LEs in GTN tutorials
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -637,7 +632,7 @@ to learning or how they will help move learners towards the LOs._
 >
 >   > ### {% icon solution %} Solution for GTN tutorial, including the dummy one
 >   >
->   > Most of the GTN tutorials are using Practical and Exercises
+>   > Most of the GTN tutorials are using Practical and Exercises as LEs.
 >   >
 >   {: .solution}
 >
@@ -661,7 +656,21 @@ to learning or how they will help move learners towards the LOs._
 >   >
 >   {: .solution}
 >
-{: .question}
+{: .question} -->
+
+{% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}
+
+> ### {% icon solution %} LEs in GTN tutorials
+>
+> Most of the GTN tutorials are using Practical and Exercises as LEs.
+>
+> They are most likely to show how to do things and give an idea of how a tool works.
+>
+> In the [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}),
+> the LO "Determine the best strategy to get data into Galaxy" may not be achieved
+> with only practical
+>
+{: .solution}
 
 ## Select and develop content relevant to the LOs
 
@@ -681,7 +690,7 @@ content is drawn from, what matters is how it supports the LOs.
 To this end, content selection should be judicious: it shouldn't try to be all-encompassing
 ({% cite nilson2016teaching %}), but should consider the target Bloom’s levels in
 the LOs, and the preparation of learners. Once content that's considered to be
-the core of a course has been identified, additional _auxiliary_ materials can
+the core of a course has been identified, additional **auxiliary** materials can
 also be selected, and offered, say, as 'further reading'. Using LOs to drive
 content selection in this way thereby both provides focus (avoiding the
 temptation to squeeze as much as possible into a course to ensure coverage
@@ -692,9 +701,9 @@ Sometimes, specific content may be deemed essential ({% cite de2017curriculum %}
 Nevertheless, this must still support the LEs and promote achievement of the
 LOs; if it doesn't, then additional content and/or LEs should be considered that
 will, or the LOs themselves should be revised, to prevent misalignment of
-instructional inputs and learning outcomes. Overall, the role of _LOs here is to
+instructional inputs and learning outcomes. Overall, the role of **LOs here is to
 help focus on relevant content, and avoid material that's either
-non-essential/too broad or too narrow_.
+non-essential/too broad or too narrow**.
 
 If content is, or seems, fixed, it can be difficult to make the shift from
 content- to LO-driven decisions. In this case, Messick and Bloom's can be used to make
@@ -705,7 +714,7 @@ considered that will; otherwise, it may be necessary to discuss the feasibility 
 content or revising the LOs with those who are able to make changes, to avoid misalignment of
 intended and actual curricula
 
-> ### {% icon question %} Evaluate content
+<!-- >> ### {% icon question %} Evaluate content
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -748,7 +757,7 @@ intended and actual curricula
 >   >
 >   {: .solution}
 >
-{: .question}
+{: .question}-->
 
 Defining content can be complicated, specially to identify how it can cover the
 different LOs. Trainers may need to tools to help them defining content,
@@ -831,9 +840,9 @@ material.
 >
 >    The structure should be something like:
 >
->    - 0:20 min - Introduction
->    - 2:20 min - Topic
->    - 0:20 min - Conclusion
+>    - 0:20 sec - Introduction
+>    - 2:20 sec - Topic
+>    - 0:20 sec - Conclusion
 >
 > - Use your concept map and adapt as needed
 {: .hands_on}
@@ -867,15 +876,15 @@ progressing. Generally, this is done using various types of assessment,
 including tests, feedback surveys, and so on. Nicholls' model includes two
 different types of assessment, to evaluate:
 
-1. _learning_, to detect changes in learner performance during instruction, to
+1. **learning**, to detect changes in learner performance during instruction, to
    identify their strengths, and diagnose their weaknesses – i.e., **formative
    assessment** (or feedback). This can inform decisions about how to modify
    instruction to better promote learning; it can also inform learners about
    changes they may need to make to improve their learning;
-2. _instructional outcomes_, to verify whether learners achieved the stated LOs
+2. **instructional outcomes**, to verify whether learners achieved the stated LOs
    after instruction – i.e., **summative assessment**. This can help to inform
    decisions both about learners (e.g., ranking their performances) and about
-   the course (i.e., whether any of its LOs, LEs, etc. need to be redesigned).
+   the course (*i.e.*, whether any of its LOs, LEs, etc. need to be redesigned).
 
 > ### {% icon comment %} Definitions of key terms
 >
@@ -910,23 +919,23 @@ complex or time-consuming (just informative about learning at a given point).
 > it's important to seize the moment, and deal with potential misunderstandings
 > as soon as they arise. These in-class tips may be helpful:
 >
-> - _reflection_: towards the end of a training session, ask learners to reflect
+> - **reflection**: towards the end of a training session, ask learners to reflect
 >   on, and write down, a list of new concepts and skills they've learned. Ask
 >   them to consider how they'd apply these concepts or skills in a practical
 >   setting;
-> - _agreed signals_: gauge learners' satisfaction with a training session by
+> - **agreed signals**: gauge learners' satisfaction with a training session by
 >   asking them to use agreed signals (*e.g.*, raising coloured post-it notes to
 >   indicate that the pace is too fast/ slow, etc.). This engages all learners,
 >   and allows you to check their confi- dence with the content and its
 >   delivery, even in large groups;
-> - _3-2-1_: at the end of a training session, ask learners to note 3 things
+> - **3-2-1**: at the end of a training session, ask learners to note 3 things
 >   they learned, 2 things they want to know more about, and 1 question they
 >   have. This stimulates reflection on the session, and helps to process their
 >   learning;
-> - _misconception check_: present some common or predictable misconceptions
+> - **misconception check**: present some common or predictable misconceptions
 >   about a concept you've covered. Ask learners whether they agree or disagree,
 >   and to explain why;
-> - _diagnostic questions/questionnaires (which may be anonymous)_: ask learners
+> - **diagnostic questions/questionnaires (which may be anonymous)**: ask learners
 >   to note one thing they didn't understand or that they missed, and one thing
 >   that was very clear to them, or make them complete a multiple choice quiz,
 >   then display and discuss the answers with them.
@@ -950,39 +959,24 @@ be built in (e.g., _"if you chose option C, you might want to re-read the
 handout"_); formative assessments can therefore also support self-instruction.
 
 Using actionable formative and summative assessment can help to ensure that LOs,
-and progress towards them, are explicitly supported. _LOs clarify what
-specifically needs to be assessed and why._
+and progress towards them, are explicitly supported. **LOs clarify what
+specifically needs to be assessed and why.**
 
-> ### {% icon question %} Evaluate assessment
+<!-- >> ### {% icon question %} Evaluate assessment
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
 >
 > - How much formative assessment have been used?
->
->   > ### {% icon solution %} Solution for the dummy tutorial
->   >
->   >
->   {: .solution}
->
 > - Does it paint a consistent picture of learning levels for the course?
->
->   > ### {% icon solution %} Solution for the dummy tutorial
->   >
->   >
->   {: .solution}
->
 > - To what extent are the tests aligned with the KSAs & Bloom's levels
 >   expressed in the LOs?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
->   >
->   >
->   {: .solution}
->
-{: .question}
+{: .question} -->
 
-> ### {% icon hands_on %} Assessment in mini-training
+{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}
+
+> ### {% icon hands_on %} Assessment in mini-training - _{% icon time %} 5 min_
 >
 > - Take the content of your 3 min training
 > - Analyse the flow of the lesson, identify points where you could introduce
@@ -1035,11 +1029,11 @@ impact of the course on their organisation.
 > ({% cite kirkpatrick1979techniques %}, {% cite kirkpatrick2006evaluating %}).
 > The Kirkpatrick-Katzell method proposes a four-level strategy:
 >
-> 1. _Reaction_ – what do learners feel about the training?
-> 2. _Learning_ – what did learners retain from the training?
-> 3. _Behaviour_ – did learners put their learning into practice
+> 1. **Reaction** – what do learners feel about the training?
+> 2. **Learning** – what did learners retain from the training?
+> 3. **Behaviour** – did learners put their learning into practice
 >   on-the-job (did their working behaviour change)?
-> 4. _Results_ – did their behavioural changes have an overall impact on
+> 4. **Results** – did their behavioural changes have an overall impact on
 >   their organisation (e.g., greater productivity)?
 >
 > Surveying each level helps collect qualitative and quantitative data to
@@ -1069,11 +1063,11 @@ remediated and why ({% cite worthen1997program %}). Designing meaningful
 evaluations requires thought; in some cases, it may help to appoint independent
 evaluators or advisory boards, as external reviewers can give objective
 appraisals, and may also help to frame the course against national/international
-standards. _Ultimately, the evaluation should identify what works in a course,
+standards. **Ultimately, the evaluation should identify what works in a course,
 and what needs remediation, to better support the achievement of the intended
-LOs_.
+LOs**.
 
-> ### {% icon question %} Evaluate assessment
+<!-- >> ### {% icon question %} Evaluate effectiveness
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -1111,7 +1105,17 @@ LOs_.
 >   >
 >   {: .solution}
 >
-{: .question}
+{: .question}-->
+
+{% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}
+
+> ### {% icon solution %} Evaluate effectiveness in GTN tutorials
+>
+> Tutorials are evaluated using
+> - Embeded feedback forms at the
+> - Collecting feedback at the end of courses
+>
+{: .solution}
 
 <!-- Challenges and options in implementing Nicholl's curriculum-development model-->
 
@@ -1160,7 +1164,7 @@ LOs_.
 >
 > - Describe your own feedback on your delivery
 > - Provide feedback to the presenter
-> - Write here any insights/thoughts/comments to share from your breakout room
+> - Share with the group any insights/thoughts/comments to share from your breakout room
 >
 {: .hands_on}
 
@@ -1210,7 +1214,7 @@ LOs/LEs/content/assessments failed, and why.
 > What are the provided resources by the Galaxy Training Network to document
 > training resources?
 >
-> > ### {% icon solution %} Solution for the dummy tutorial
+> > ### {% icon solution %} Solution
 > >
 > > - Gitter / Matrix channel
 > > - GitHub Pull Request
@@ -1261,9 +1265,9 @@ training materials (slides, exercises, datasets, etc) should also be FAIR
 >
 {: .question }
 
-_Creating and sharing documentation with instructors and learners fosters the
+**Creating and sharing documentation with instructors and learners fosters the
 development of communities of best practice, and can support both learning and
-the success of a course._
+the success of a course.**
 
 <!--
 >> ### {% icon hands_on %} Apply - _{% icon time %} 5 min_
@@ -1292,7 +1296,7 @@ defining LOs that are measurable, and whose cognitive complexity increases along
 a developmental trajectory; and Messick's questions help both to select KSAs and
 LOs, and to ensure alignment of instruction and assessment. Crucially, informed
 choices need to be made about the LEs (and the content they use) that best align
-with the goal of achieving specific LOs _in the time available_. General topic
+with the goal of achieving specific LOs **in the time available**. General topic
 areas (life sciences, computer science, data science, etc.) may provide the
 overarching framework, but your goals for learners should drive how content is
 selected, taught and assessed. In terms of assessment approaches, formative
