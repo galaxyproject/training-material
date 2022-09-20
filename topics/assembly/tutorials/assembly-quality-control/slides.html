@@ -64,28 +64,40 @@ level: Introductory
 
 ---
 
-### N50
+### N50 & L50
 
-**N50: given a set of sequences of varying lengths, the N50 is defined as the length L of the shortest contig for which longer and equal length contigs cover at least 50% of the assembly**
+.left[
+**N50**: given a set of sequences of varying lengths, the N50 is defined as **the length L of the shortest contig** for which **longer and equal length contigs cover at least 50% of the assembly**.
+
+**L50**: given a set of sequences of varying lengths, the L50 is defined as **count of smallest number of sequences** whose **length sum makes up 50% of the assembly**.
+]
+
+**N50 describes a sequence length whereas L50 describes a number of sequences.**
+
+---
+
+### N50 & L50
 
 .pull-left[
 Example:
 - Genome size = 100
 - Sequence sorted by size list L = (25, 10, 10, 8 , 7, 7 , 6 , 5, 5, 5, 5, 3, 2, 2 ) = 100
 - 50% of the total length is contained within sequences of at least 8bp: 25 + 10 + 10 + 8 ≥ 50
-- **N50 = 8**
 ]
 
 .image-100[
   ![Schematic explanation of N50](../../images/genome-qc/N50.png)
 ]
+
+**N50 = 8** and **L50 = 4**
+
 .footnote[Alhakami, H., Mirebrahim, H., & Lonardi, S. (2017). A comparative evaluation of genome assembly reconciliation tools. Genome biology, 18(1), 1-14.]
 
 ---
 
-### N50
+### N50 & L50
 
-However, the N50 statistic may not reflect some assembly improvements.
+However, the theses statistics may not reflect some assembly improvements.
 If we connect two sequences longer than N50 or connect two sequences shorter than N50, N50 is not changed. N50 is only improved if we connect a sequence shorter than N50 and a sequence longer than N50.
 
 .image-40[
@@ -201,7 +213,7 @@ Eukaryota: 255 single copy from 70 species; Arthropoda: 1013 single copy from 90
 
 **The value of the BUSCO is only as good as its reference database.**
 <br>
-<br>
+
 Example with BUSCO Eukaryotic set:
 .pull-left[
 .image-70[
@@ -212,9 +224,14 @@ Example with BUSCO Eukaryotic set:
 ![Limitation of BUSCO orthoDB for eukaOrthoDB - part B](../../images/genome-qc/BUSCO_limitations_B.png)
 ]]
 
-The use of transcriptome alignment of a closely related species or a de novo RNA-Seq assembly of the same species can be another proxy to assess the completeness of the assembly and adress BUSCO limitations.
 
 .footnote[Saary, P., Mitchell, A. L. & Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]
+
+---
+
+### BUSCO limitations
+
+The use of transcriptome alignment of a closely related species or a de novo RNA-Seq assembly of the same species can be another proxy to assess the completeness of the assembly and adress BUSCO limitations.
 
 ---
 
@@ -265,6 +282,7 @@ The aim is to check assembly coherence against the content within reads that wer
 ---
 
 ### Assembly kmer content - Heterozygous genomes
+<br>
 
 .image-70[
 ![Merqury spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-merqury-heterozygous-good.png)
@@ -286,15 +304,22 @@ The lost content (the black peak) represents the half of the heterozygous conten
 
 ---
 
-.image-30[
-  ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
+### Reads mapping and assembly coverage
+<br>
+
+- **Proportion of mapped vs. unmapped reads** i.e. proportion of missing parts in the assembly
+- **Coverage in terms of redundancy (A)**: number of reads that align to, or "cover," a known reference. 
+- **Coverage in terms of the percentage coverage of a reference by reads (B)**: E.g. if 90% of a reference is covered by reads (and 10% not) it is a 90% coverage.
+
+.image-60[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/read-coverage.gif)
 ]
 
 ---
 
-### Assembly coverage and reads mapping
-
-
+.image-30[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
+]
 
 ---
 
@@ -396,4 +421,16 @@ A non-exhaustive list of tools for making dot plots:
 ![Interpret Dot Plots here based on great explanation by Michael Schatz.](../../images/dotplot.png)
 ]
 ]
+
+---
+
+# Tips
+
+- The quality of an assembly is often validated by using other data from the same individual or from other individuals (RNA-Seq alignment, Hi-C alignment, DNA-Seq alignment,...).
+
+- The positions of the telomeric repeats in the chromosome assemblies are also of interesting to evaluate the correctness.
+
+- The identification of organelles (mitochondria, chloroplast,...) can also inform us about the quality of the assembly in terms of completness. However, the structure of the organelles may lead the assembler to think that they are repeats and he discards them.
+
+- In the case of diploid organisms, one of the classical problems of assemblies is the conservation of the two haplotypes. We obtains particular BUSCO / kmer / assembly size metrics that can be corrected by removing, "purging", the haplotigs.
 
