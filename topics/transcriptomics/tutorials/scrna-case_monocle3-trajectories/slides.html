@@ -22,20 +22,24 @@ contributors:
 ---
 
 ### What is trajectory analysis?
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
-According to [Deconinck et al.](https://doi.org/10.1016/j.coisb.2021.05.005) ‘Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:
+Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:
 
 cellular development    | differentiation      | immune responses
 :---:| :---:| :---:
 .image-40[ ![development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![differentiation](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![immune](../../images/scrna-casestudy-monocle/3_immune.png) ]
 
 --
-TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.' 
+TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
 
 .image-40[ ![process](../../images/scrna-casestudy-monocle/4_process.png) ]
 ---
 
 ### Clustering, trajectory and pseudotime
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
 .pull-left[
 **Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster. 
@@ -53,9 +57,10 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ]
 
 ---
-### Trajectory inference approaches: Clustering-based (tree based)
+### Trajectory inference approaches: **Clustering-based (tree based)**
 
 .footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
 - Try to find stable cell states in the data and afterward connect these states to form a trajectory and map the cells to the formed graph structure 
 
@@ -71,8 +76,9 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 .image-25[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
 ---
-### Trajectory inference approaches: Graph-based
+### Trajectory inference approaches: **Graph-based**
 .footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
 - Construct a graph representation of the cells and either use graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
 
@@ -80,7 +86,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 - Most methods start by building a **k-nearest neighbors (kNN) ** graph using the Euclidean distance
 
-.image-25[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
+.image-50[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
 --
 
 - Diffusion peudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
@@ -90,6 +96,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 ### Trajectory inference approaches: **Manifold learning-based**
 .footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
 - Based on the assumption that data lie on a low-dimentional manifold embedded in a higher-dimentional space
 
@@ -99,56 +106,114 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 --
 
-- Usually used dimentionality reduction methods: t-SNE (t-distributed stochastic neighbor embedding), UMAP (Uniform Manifold Approximation and Projection), PCA (Principal component analysis), ICA (Independent Component Analysis), LSA (Latent semantic analysis)
+- Usually used dimentionality reduction methods: **t-SNE** (t-distributed stochastic neighbor embedding), **UMAP** (Uniform Manifold Approximation and Projection), **PCA** (Principal component analysis), **ICA** (Independent Component Analysis), **LSA** (Latent semantic analysis)
 
-.image-40[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+.image-60[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
 
 ---
 
-### MST 
-.image-40[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
+### Extensions of trajectory inference: **RNA velocity methods**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+--
 
-## Formatting: Basic
+- RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation. 
+
+--
+
+- scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method. 
+
+--
+
+- This has the advantage that root cell specification is not necessary, and adds directional information to the trajectory.
+
+--
+
+.image-60[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
+
+---
+### Assumptions
+--
+
+- It would be quite difficult to analyse the sample every several seconds to see how the cells are changing. Therefore, we assume that snapshot data encompass all naïve, intermediate, and mature cell states with sufficient sampling coverage to allow the reconstruction of differentiation trajectories.    
+[Sagar and Grün, 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7115822/)
+
+--
+
+- As different TI methods make different assumptions about the data, a first choice to make is based on which biological process is to be expected: **not all TI methods are designed to infer all kinds of biological processes.**  
+[Deconinck et al., 2021](https://doi.org/10.1016/j.coisb.2021.05.005)
+
+---
+### Why not all TI methods are designed to infer all kinds of biological processes?
+--
+
+Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlinelibrary.wiley.com/doi/10.1002/eji.201646347)
+
+--
+
+.image-100[ ![pipeline](../../images/scrna-casestudy-monocle/7_methods.jpg) ]        
+--
+
+There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
+
+---
+### When analysing your data, consider the following: 
+
+--
+
+- Tissue from which the cells come from  
+
+--
+
+- Branching points  
+
+--
+
+- Supervised / unsupervised learning
+
+--
+
+- Format of the data
+
+--
+
+- Number of cells and features
+
+--
+
+- Computing power & running time
+
+--
+To help you evaluate which method would work best for your data, check out this [awesome comparision site - dynguidelines](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).
+---
+
+### When analysing your data, consider the following: **Tissue from which the cells come from**
+--
 
 .pull-left[
-<span style="font-size: 35px;font-family: 'Yanone Kaffeesatz';font-weight: normal;text-align: center;">Slide Title</span>
+  
 
-A list
+- Gives an idea about the topology you expect and the priors you can feed the method with, as well as expected cell types and potential contaminants  
 
-- Item 1
-- Item 2
+- You need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information  
 
-and numbered list
+- Trajectory analysis is quite a sensitive method, so always check if the obtained computational results make biological sense!
 
-1. Item
-2. Item
-
-Some text with a [link](https://example.org/) and an image:
-
-![Description of the image]({{ site.baseurl }}/assets/images/GTN-60px.png)
 ]
 
-.pull-right[
-```markdown
-### Slide Title
+.pull-right[  
+  
 
-A list
+![scheme](../../images/scrna-casestudy-monocle/8_scheme.png)  
+<sub><sub><sub> Reprinted from “Heterogeneity of Murine Lymph Node Stromal Cell Subsets”, by BioRender.com (2022) </sub></sub></sub>
+]
 
-- Item 1
-- Item 2
-
-and numbered list
-
-1. Item
-2. Item
-
-Some text with a [link](https://example.org/) and an image:
-
-![Description of the image]({{ site.baseurl }}/assets/images/GTN-60px.png)
 ---
-```
-]
+### When analysing your data, consider the following: **Branching points**
+--
+Cells can differentiate or develop in various way, so they may exhibit different topologies. 
 
+
+---
 Slides begin with a title `### ...` and should end with a `---`
 
 ???
