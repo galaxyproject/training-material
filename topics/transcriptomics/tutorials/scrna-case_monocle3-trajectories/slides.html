@@ -1,764 +1,402 @@
----
-layout: tutorial_hands_on
+layout: trajectory_analysis_slides
+logo: "GTN"
+class: enlarge120
 
-title: 'Trajectory Analysis using Monocle3 '
-subtopic: single-cell-CS
-priority: 5
-zenodo_link: 'https://zenodo.org/record/7078524'
-
+title: "Trajectory analysis"
 questions:
-
+  - "What is trajectory analysis?"
+  - "What are the methods of trajectory inference and trajectories patterns?"
+  - "How are the decisions about the trajectory made?"
+  - "What to take into account when choosing the method for your data?" 
 objectives:
-
-time_estimation: 1H
-
+  - "Becoming familiar with the methods of trajectory inference"
+  - "Learning how the decisions are made by the algorithms"
+  - "Being able to choose the method appropriate for specific data"
+  - "Insight into methods available in Galaxy"
+time_estimation:
+subtopic: writing
 key_points:
-
-requirements:
--
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-case_alevin
-        - scrna-case_alevin-combine-datasets
-        - scrna-case_basic-pipeline
-tags:
-- single-cell
-- trajectory-analysis
-- paper-replication
-
+  - ""
 contributors:
-- wee-snufkin
-- nomadscientist
+  - wee-snufkin
+---
+
+### What is trajectory analysis?
+
+According to [Deconinck et al.](https://doi.org/10.1016/j.coisb.2021.05.005) ‘Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as
+
+- cellular development ![cellular development]({{ site.baseurl }}/assets/images/fig1)
+- differentiation ![differentiation]({{ site.baseurl }}/assets/images/fig2)
+- immune responses ![immune responses]({{ site.baseurl }}/assets/images/fig3)
+
+TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.' 
+![evolving]({{ site.baseurl }}/assets/images/fig4)
 
 ---
 
-# Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
-
-This tutorial is a follow-up to the 'Single-cell RNA-seq: Case Study' (find it [here](https://training.galaxyproject.org/training-material/topics/transcriptomics/)), we will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html), [combine datasets](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) or [filter, plot and process scRNA-seq data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) to get the data in the form we’ll be working on today.
-
-In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis here /slides/. We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
-
-***tip: using tutorial mode***
-
-## Get data
-We still work on data from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.html#Bacon2018) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)), making this case study even more comprehensive. 
-Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
-You can find both datasets in this [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files) or download from Zenodo below.  
-
->### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Create a new history for this tutorial
-> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
->
->    ```
->    {{ page.zenodo_link }}/files/AnnData_before_processing.h5ad
->    {{ page.zenodo_link }}/files/Annotated_AnnData.h5ad
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Check that the datatype is `h5ad`
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
->
-{: .hands_on}
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Preparing the input files
-
-## Extracting annotations
-
- As we want to use Monocle for the trajectory analysis, we will have to feed it with cell metadata, gene annotation and expression matrix files (in theory expression matrix alone could do, but then we wouldn’t have all those useful annotations that we were working on so hard!). In order to get those files, we will extract the gene and cell annotations from our AnnData object. 
-
- > ### {% icon question %} Questions
->
-> How many lines do you expect to be in gene annotations and cell metadata files?
->
-> > ### {% icon solution %} Solution
-> >
-> > If you click on the step with uploaded annotated AnnData file, you will see on a small preview that this object has 8605 observations and 15395 variables, so we expect to get a cell metadata file with 8605 lines and gene annotations file with 15395 lines (without headers of course!).
-> >
-> {: .solution}
->
-{: .question}
-
-> ### {% icon hands_on %} Hands-on: Extracting annotations
->
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Annotated_AnnData` 
->    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 2. Rename {% icon galaxy-pencil %} the observations annotation `Extracted cell annotations (obs)`
->
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Annotated_AnnData` 
->    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
->
-> 4. Rename {% icon galaxy-pencil %} the annotation of variables `Extracted gene annotations (var)`
->
->
-{: .hands_on}
-
-Quick and easy, isn’t it? However, there are some minor changes that we have to make to our files first. 
-
-## Cell metadata
-Our current dataset is not just T-cells: as you might remember from the last tutorial, we identified a cluster of macrophages as well. This might be a problem, because the trajectory algorithm will try to find relationships between all the cells (even if they are not necessarily related!), and not only the T-cells that we are interested in. We need to remove those unwanted cell types to make the analysis more biologically relevant.
-
-Manipulate AnnData tool allows you to filter observations or variables and that would be the easiest way to do it! However, we have to think ahead. As we want to use Monocle later on, we will have to provide it with cell metadata, gene annotation and expression matrix files anyway. This is why we extract the annotations first, make changes to them and finally we adjust the expression matrix to the filtered annotations. In that way, we’ll end up with three separate files, ready to be passed onto Monocle3.
-
- > ### {% icon question %} Questions
->
-> Where is the information about cell types stored?
->
-> > ### {% icon solution %} Solution
-> >
-> > We have already extracted the cell annotations file - in one of the columns you can find the information about cell type, assigned to each cell. 
-> >
-> {: .solution}
->
-{: .question}
-
-Click on `Extracted cell annotations (obs)` file to see a small preview window. This shows you that the column containing the cell types has number 22.  We’ll need that to filter out unwanted cell types!
-
-> ### {% icon warning %} Check the column number!
-> If you are working on a different dataset, the number of the ‘cell_type’ column might be different, so make sure you check it on a preview and use the correct number! 
-{: .warning}
-
-> ### {% icon hands_on %} Hands-on: Filter out macrophages
->
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `Extracted cell annotations (obs)`
->    - *"With following condition"*: `c22!='Macrophages'`
->    - *"Number of header lines to skip"*: `1`
->    - That’s it - our cell annotation file is ready for Monocle! Let’s rename it accordingly. 
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Cells input data for Monocle3`
->
->    > ### {% icon details %} Details: Parameters
->    >
->    > - `c22` means column no. 22 - that's the column with cell types, and it will be filtered for the macrophages
->    > - `!=` means 'not equal to' - we want to keep the cell types which ARE NOT macrophages
->    {: .details}
->
->    > ### {% icon tip %} Other unwanted cell types
->    >
->    > It might happen that during clustering you’ll find another cell type that you want to get rid of for the trajectory analysis. Then simply re-run this tool on already filtered file and change ‘Macrophages’ to another unwanted cell type.
->    {: .tip}
-{: .hands_on}
-
-## Gene annotations
-Sometimes certain functionalities require specific indication where the data should be taken from. In case of Monocle3, to allow further genes analysis using one of its functions, it is essential that the names of the genes are stored in a column called ‘gene_short_name’. Therefore, we need to check what is the name of that column in our dataset. 
-
-> ### {% icon question %} Questions
->
-> 1. Where can you check the header of a column containing genes names?
-> 2. What is the name of this column?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Our extracted gene annotations file! Either by clicking on the eye icon {% icon solution %} or having a look at the small preview window. 
-> > 2. In our dataset the gene names are stored in a column called ‘Symbol’ - we need to change that!
-> >
-> {: .solution}
->
-{: .question}
-
-Let’s click on the `Extracted gene annotations (var)` file to see a small preview. We can see that the gene names are in the third column with a header ‘Symbol’. Keep that in mind - we’ll use that in a second!
-
-> ### {% icon hands_on %} Hands-on: Changing the colname
->
-> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `Extracted gene annotations (var)` 
->    - *"using column"*: `c3`
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Symbol`
->            - *"Replacement"*: `gene_short_name`
->     - Voila! That’s the gene input for Monocle! Just a quick rename...
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Genes input data for Monocle3`
->
-{: .hands_on}
-
-## Expression matrix
-Last, but not least! I would even dare to say that last, but the most important! Actually the expression matrix contains all the values representing expression level of a particular gene in a cell. This is why in theory the expression matrix is the only input file required by Monocle3 - without annotation files the CDS data can still be generated - in fact it will be quite bare, but at least it could be processed. 
-
-So, the values in the expression matrix are just some numbers. But do you remember that we have already done some processing such as normalisation and calculation of principal components on AnnData in the previous tutorial? That affected our expression matrix. Preprocessing is one of the steps in the Monocle3 workflow, so we want to make sure that the calculations are done on a ‘clean’ expression matrix. If we apply too many operations on our raw data, it will be too ‘deformed’ to be reliable. The point of the analysis is to use algorithms that make the enormous amount of data understandable in order to draw meaningful conclusions in accordance with biology. 
-
-So how do we do that?
-> ### {% icon question %} Questions
->
-> 1. How many cells and genes are there in the `Anndata_before_processing` file? 
-> 2. How many lines are there in `Cells input data for Monocle3`?
-> 3. How many lines are there in `Genes input data for Monocle3`?
->
-> > ### {% icon solution %} Solution
-> > You can answer all the questions just by clicking on the given file and looking at the preview window.
-> > 1. [n_obs x n_vars] = 31178 x 35734, so there are 31178 cells and 35734 genes.
-> > 2. 8570 lines, including a header, which makes 8569 cells. 
-> > 3. 15396 lines, including a header, which makes 15395 genes.
-> >
-> {: .solution}
->
-{: .question}
-
-As you can see, there are way more genes and cells in the unprocessed AnnData file, so the expression matrix is much bigger than we need it to be. If the genes and cells we prepared for Monocle3 are not the same as in the expression matrix, Monocle3 will crash. Therefore, we have to filter that big, clean matrix and adjust it to our already prepared genes and cells files. But first, let’s extract this matrix from the unprocessed AnnData object. 
-
-> ### {% icon hands_on %} Hands-on: Extracting matrix
->
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_before_processing` 
->    - *"What to inspect?"*: `The full data matrix`
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Unprocessed expression matrix`
->
-{: .hands_on}
-
-If you have a look at the preview of `Unprocessed expression matrix`, you’ll see that the first column contains the cell barcodes, while the first row - the gene IDs. We would like to keep only the values corresponding to the cells and genes that are included in `Cells input data for Monocle3` and `Genes input data for Monocle3`. How do we do it? First, we compare the cell barcodes from `Cells input data for Monocle3` to those in `Unprocessed expression matrix` and ask Galaxy to keep the values of the matrix for which the barcodes in both files are the same. Then, we’ll do the same for gene IDs. So we have to cut the first columns from `Cells input data for Monocle3` and `Genes input data for Monocle3` to be able to compare those columns side by side with the matrix file.
-
-> ### {% icon hands_on %} Hands-on: Cutting out the columns
->
-> 1. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `Cells input data for Monocle3`
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Cells IDs`
-> 3. {% tool [Cut](Cut1) %} with the following parameters:
->    - *"Cut columns"*: `c1`
->    - {% icon param-file %} *"From"*: `Genes input data for Monocle3`
-> 4. **Rename** {% icon galaxy-pencil %} the output: `Genes IDs`
->
-{: .hands_on}
-
-> ### {% icon hands_on %} Hands-on:  Filter matrix values by cell barcodes
->
-> 1. {% tool [Join two Datasets](join1) %} with the following parameters:
->    - {% icon param-file %} *"Join"*: `Cells IDs` 
->    - *"using column"*: `c1`
->    - {% icon param-file %} *"with"*: `Unprocessed expression matrix`
->    - *"and column"*: `c1`
->    - *"Keep lines of first input that do not join with second input"*: `Yes`
->    - *"Keep lines of first input that are incomplete"*: `Yes`
->    - *"Fill empty columns"*: `No`
->    - *"Keep the header lines"*: `Yes`
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Pre-filtered matrix (by cells)`
->
-{: .hands_on}
-
-Look at the preview of the output file. First of all, you can see that there are 8570 lines (8569 cells) instead of 31178 cells that were present in the matrix. That’s exactly what we wanted to achieve - now we have information for the T-cells that we had filtered. However, the step that we have already performed left us with the matrix whose first and second columns are the same - let’s get rid of one of those! 
-
-> ### {% icon hands_on %} Hands-on: Remove duplicate column (cells IDs)
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Pre-filtered matrix (by cells)`
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c1`
-> 2. **Rename** {% icon galaxy-pencil %} the output: `Filtered matrix (by cells)`
->
-{: .hands_on}
-
-Now we will perform the same steps, but for gene IDs. But gene IDs are currently in the first row, so we need to transpose the matrix, and from there we can repeat the same steps as above, but for gene IDs of course. 
-
-> ### {% icon hands_on %} Hands-on: Filter matrix by gene IDs
->
-> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `Filtered matrix (by cells)` 
->    - The matrix is now ready to be filtered by gene IDs!
-> 2. {% tool [Join two Datasets](join1) %} with the following parameters:
->    - {% icon param-file %} *"Join"*: `Genes IDs`
->    - *"using column"*: `c1`
->    - {% icon param-file %} *"with"*: output of **Transpose** {% icon tool %}
->    - *"and column"*: `c1`
->    - *"Keep lines of first input that do not join with second input"*: `Yes`
->    - *"Keep lines of first input that are incomplete"*: `Yes`
->    - *"Fill empty columns"*: `No`
->    - *"Keep the header lines"*: `Yes`
-> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: output of **Join two Datasets** {% icon tool %}
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c1`
->    -  Monocle3 requires that in the matrix rows are genes, and columns are cells - that is what we've got, so there is no need to transpose matrix again. The expression matrix is ready! Let's just rename it...
-> 4. **Rename** {% icon galaxy-pencil %} the output: `Expression matrix for Monocle3`
->
-{: .hands_on}
-
-{% icon trophy %} Finally! We have prepared all the files to pass them onto the Monocle3 workflow!
-
-# Monocle3 workflow
-
-What will happen with those files that we have been preparing so far? Well, Monocle3 turns the expression matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds single-cell expression data. 
-
-> ### {% icon details %} Details: Input files
-> 
-> That’s what [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/) says about the required three input files:
->    - expression_matrix, a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.
->    - cell_metadata, a data frame, where rows are cells, and columns are cell attributes (such as cell type, culture condition, day captured, etc.)
->    - gene_metadata, a data frame, where rows are features (e.g. genes), and columns are gene attributes, such as biotype, gc content, etc. One of its columns should be named "gene_short_name", which represents the gene symbol or simple name (generally used for plotting) for each gene.
->
-{: .details}
-
-Here’s how the Monocle3 workflow looks like:
-
-![Alternative text](../../images/image_name "Workflow provided by Monocle3 documentation")
-
-We will follow those steps and see how it all works in practice. 
-
-> ### {% icon hands_on %} Hands-on: Create CDS object
->
->    > ### {% icon details %} Details: Data format
->    >
->    > You can provide expression matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.
->    {: .details}
-> 1. {% tool [Monocle3 create](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_create/monocle3_create/0.1.4+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Expression matrix, genes as rows, cells as columns. Required input. Provide as TSV, CSV or RDS."*: `Expression matrix for Monocle3`
->    - *"Format of expression matrix"*: `TSV`
->    - {% icon param-file %} *"Per-cell annotation, optional. Row names must match the column names of the expression matrix. Provide as TSV, CSV or RDS."*: `Cells input data for Monocle3`
->    - *"Format of cell metadata"*: `TSV`
->    - {% icon param-file %} *"Per-gene annotation, optional. Row names must match the row names of the expression matrix. Provide as TSV, CSV or RDS."*: `Genes input data for Monocle3`
->    - *"Format of gene annotation"*: `TSV`
->
-{: .hands_on}
-
-> ### {% icon question %} Questions
->
-> What are the dimensions of the created CDS object?
->
-> > ### {% icon solution %} Solution
-> >
-> > Just click on the performed step - on the preview you’ll see that the dimensions are 15395 x 8569 - so exactly as we predicted genes x cells! 
-> >
-> {: .solution}
-{: .question}
-
-> ### {% icon hands_on %} Hands-on: Pre-processing
->
-> 1. {% tool [Monocle3 preprocess](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 create** {% icon tool %}
->    - *"The dimensionality of the reduced space."*: `250`
- >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 reduceDim**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 reduceDim](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 preprocess** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 plotCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 reduceDim** {% icon tool %})
->    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `cell_type`
->    - *"A list of gene IDs/short names to plot."*: `Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 partition**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 partition](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 reduceDim** {% icon tool %})
->    - *"The q-value threshold used to determine the partition of cells."*: `100.0`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 plotCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 partition** {% icon tool %})
->    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `partition`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 plotCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 partition** {% icon tool %})
->    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `cluster`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 learnGraph**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 learnGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 partition** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 plotCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 learnGraph** {% icon tool %})
->    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `cell_type`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 orderCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 orderCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 learnGraph** {% icon tool %})
->    - *"The cell phenotype (column in pdata) used to identify root principal nodes."*: `cell_type`
->    - *"The value in the cell phenotype column used to extract root nodes."*: `DN`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 plotCells**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 orderCells** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 diffExp**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 diffExp](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in RDS format"*: `output_rds` (output of **Monocle3 orderCells** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Monocle3 top markers**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Monocle3 top markers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input Object"*: `output_rds` (output of **Monocle3 orderCells** {% icon tool %})
->    - *"Reference cells source"*: `File`
->    - *"Group cell by"*: `cell_type`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-{:.no_toc}
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+### Clustering, trajectory and pseudotime
 
+**Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster. 
+![clustering]({{ site.baseurl }}/assets/images/fig5)
+
+--
+**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as **pseudotime**. Pseudotime measures the cells’ progress through the transition.
+![trajectory]({{ site.baseurl }}/assets/images/fig6)
+
+---
+
+
+### Trajectory inference approaches
+
+.pull-left[
+<span style="font-size: 35px;font-family: 'Yanone Kaffeesatz';font-weight: normal;text-align: center;">Slide Title</span>
+
+A list
+
+- Item 1
+- Item 2
+
+and numbered list
+
+1. Item
+2. Item
+
+Some text with a [link](https://example.org/) and an image:
+
+![Description of the image]({{ site.baseurl }}/assets/images/GTN-60px.png)
+]
+
+.pull-right[
+```markdown
+### Slide Title
+
+A list
+
+- Item 1
+- Item 2
+
+and numbered list
+
+1. Item
+2. Item
+
+Some text with a [link](https://example.org/) and an image:
+
+![Description of the image]({{ site.baseurl }}/assets/images/GTN-60px.png)
+---
+```
+]
+
+Slides begin with a title `### ...` and should end with a `---`
+
+???
+
+- Slides are written with standard markdown, and begin with a header, and end with three dashes.
+- Lists, links, and images are all written with their normal syntax.
+- If you're familiar with markdown and already writing your tutorial in it, this should be an easy addition.
+- The only differences are the dashes to separate slides, and speaker notes which we'll cover later.
+
+---
+
+
+
+### Formatting: Alignment
+
+.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[![Left-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+.center[![Centered image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+.right[![Right-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+
+```markdown
+.left[Left-aligned text]
+.center[Centered text]
+.right[Right-aligned text]
+.left[![Left-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+.center[![Centered image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+.right[![Right-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
+```
+
+???
+
+- Everything can be aligned using several CSS classes which are provided, left, right, and center.
+- The classes are added with a dot followed by the class, and then the contents within square brackets.
+
+---
+
+
+
+### Formatting: Incremental Text
+
+1. Item
+
+???
+
+- Incremental text can be added
+
+--
+
+2. Appears
+
+???
+
+- And appears incrementally on every slide.
+
+--
+
+
+Just separate every item with two dashes (`--`)
+
+```markdown
+1. Item
+
+--
+
+2. Appears
+```
+
+???
+
+- You can accomplish this with two dashes instead of three for incremental slides.
+- The dashes should be on their own line, just like the slide separating dashes.
+
+---
+
+
+
+### Formatting: Images
+
+.pull-left[
+Demo:
+
+10%
+
+.image-10[ ![GTN Logo (tiny)]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
+
+50%
+
+.image-50[ ![GTN Logo (slightly larger)]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
+
+]
+.pull-right[
+Source:
+
+```markdown
+10%
+.image-10[
+  ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
+]
+
+50%
+.image-50[
+  ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
+]
+```
+]
+
+
+There are [other CSS classes available](https://github.com/galaxyproject{{ site.baseurl }}/blob/main/assets/css/slides.css#L67) for other sizes
+
+???
+
+- There are a number of CSS classes available to use for styling the content you show on your slides.
+- Here you can see images scaled to 10% and 50%.
+- There are a number of other classes that you can find in the GTN's codebase.
+
+
+---
+### Formatting: Tables
+
+.pull-left[
+Demo:
+
+column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+]
+
+.pull-right[
+Source:
+
+```markdown
+column1    | column2      | column3
+---        | ---          | ---
+aaaaaaaaaa | bbbb         | cccc
+dddd       | eeeeeeeeeeee | ffff
+gggg       | hhhh         | iiiiiiiiii
+```
+]
+
+By default, tables are left-aligned with text left-aligned.
+
+???
+
+- Tables can be written in the simplified markdown syntax, or using a more complex one that allows for alignment.
+- Here a simple table is shown with several columns.
+- The tables do not need to be aligned, we just did that in this slide for clarity.
+
+---
+
+
+
+### Formatting: Tables with Aligned Text
+
+Different alignments for the individual columns can be controlled with the `:` character
+
+.pull-left[
+Demo:
+
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
+| left-aligned | centered | right-aligned |
+| row2         | row2     | row2          |
+
+]
+
+.pull-right[
+Source:
+```markdown
+| Tables       | Are      | Cool          |
+|:-------------|:--------:|--------------:|
+| left-aligned | centered | right-aligned |
+| row2         | row2     | row2          |
+```
+]
+
+???
+
+- If you need more complex tables, you can use the colon character to control the alignment.
+- If you are presenting numeric data or similar then this can be useful to make the data more readable.
+
+---
+
+
+
+### Formatting: Footnotes
+
+Content with footnotes
+
+Source:
+```markdown
+.footnote[Normal footnote with plenty of text]
+```
+
+Demo:
+
+.footnote[Normal footnote with plenty of text]
+
+???
+
+- Footnotes can be used for explanatory notes or adding things like references.
+- References are ideal footnote content as they are not necessarily important for comprehension of the slides, but might be useful later for learners.
+
+---
+
+
+
+### Formatting: Two Columns
+
+This is achived with the `.pull-left` and `.pull-right` classes.
+
+```markdown
+.pull-left[
+Some text, as many texts as we want...
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[ ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
+```
+
+Will be rendered as:
+
+???
+
+- Two column layouts can easily be achieved with the pull left and pull right classes.
+- The result of this is demonstrated on the next slide.
+
+
+---
+
+
+
+### Formatting: Two Columns
+
+.pull-left[
+Some text, as many text as we want.....
+
+or even table
+
+column1 | column2 | column3
+--- | --- | ---
+row1 | r1c2 | r1c3
+row2 | r2c2 | r2c3
+row3 | r3c2 | r3c3
+]
+
+.pull-right[
+![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
+]
+
+???
+
+- Any content can be placed in the left and right columns
+- The addition of these classes will wrap all of their contents and place them on the left or right sides.
+- The two column layout is an especially good choice if you want to show a graphic and discuss some important points related to it.
+
+---
+
+
+
+## Presenter Notes
+
+Allows you to:
+
+- See the next slide before the audience
+- See notes you have made on your slides
+
+![Image showing presenter mode](../../images/presenter-mode.png)
+
+???
+
+- Presenter Mode lets you have two windows with the same slides, one with presenter notes and a preview of the upcoming slide.
+- When giving presentations with multiple screens or on a projector, this makes life less stressful.
+- You can use the presenter notes to remind you, and others, of important content to mention on each slide.
+
+---
+
+
+
+### Presenter Notes: Formatting
+
+.left[
+<br/>
+&#35;&#35;&#35; My Slide
+<br/><br/>
+Some text!
+<br/><br/>
+&#63;&#63;&#63;
+<br/><br/>
+Things written below the ??? are only shown in the
+presenter view. Press `p` to bring this up
+<br/><br/>
+&#45;&#45;&#45;
+<br/><br/>
+]
+
+???
+
+- Things written below the three question marks are only shown in the presenter view.
+- Press P to bring this up, and the question mark to show the presenter view shortcut keys.
+
+
+---
