@@ -1,6 +1,6 @@
-layout: trajectory_analysis_slides
+---
+layout: tutorial_slides
 logo: "GTN"
-class: enlarge120
 
 title: "Trajectory analysis"
 questions:
@@ -23,30 +23,92 @@ contributors:
 
 ### What is trajectory analysis?
 
-According to [Deconinck et al.](https://doi.org/10.1016/j.coisb.2021.05.005) ‘Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as
+According to [Deconinck et al.](https://doi.org/10.1016/j.coisb.2021.05.005) ‘Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:
 
-- cellular development ![cellular development]({{ site.baseurl }}/assets/images/fig1)
-- differentiation ![differentiation]({{ site.baseurl }}/assets/images/fig2)
-- immune responses ![immune responses]({{ site.baseurl }}/assets/images/fig3)
+cellular development    | differentiation      | immune responses
+:---:| :---:| :---:
+.image-40[ ![development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![differentiation](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![immune](../../images/scrna-casestudy-monocle/3_immune.png) ]
 
+--
 TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.' 
-![evolving]({{ site.baseurl }}/assets/images/fig4)
 
+.image-40[ ![process](../../images/scrna-casestudy-monocle/4_process.png) ]
 ---
 
 ### Clustering, trajectory and pseudotime
 
+.pull-left[
 **Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster. 
-![clustering]({{ site.baseurl }}/assets/images/fig5)
+
+.image-75[ ![clusters](../../images/scrna-casestudy-monocle/5_clusters.png) ]
+
+]
+--
+.pull-right[
+**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime. 
+**Pseudotime** measures the cells’ progress through the transition.
+
+.image-60[ ![trajectory](../../images/scrna-casestudy-monocle/6_trajectories.png) ]
+
+]
+
+---
+### Trajectory inference approaches: Clustering-based (tree based)
+
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+
+- Try to find stable cell states in the data and afterward connect these states to form a trajectory and map the cells to the formed graph structure 
 
 --
-**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as **pseudotime**. Pseudotime measures the cells’ progress through the transition.
-![trajectory]({{ site.baseurl }}/assets/images/fig6)
+
+- Clustering approaches: soft K-means, Louvain, non-negative matrix factorization, hierarchical clustering
+
+--
+
+- To connect the clusters to each other, usually a **minimum weight spanning tree (MST)** is constructed (connecting without any cycles and with the minimum possible total edge weight)
+
+--
+
+.image-25[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
+---
+### Trajectory inference approaches: Graph-based
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+
+- Construct a graph representation of the cells and either use graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
+
+--
+
+- Most methods start by building a **k-nearest neighbors (kNN) ** graph using the Euclidean distance
+
+.image-25[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
+--
+
+- Diffusion peudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
+
 
 ---
 
+### Trajectory inference approaches: **Manifold learning-based**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
 
-### Trajectory inference approaches
+- Based on the assumption that data lie on a low-dimentional manifold embedded in a higher-dimentional space
+
+--
+
+- Using principal curves and graphs to obtain smooth trajectories
+
+--
+
+- Usually used dimentionality reduction methods: t-SNE (t-distributed stochastic neighbor embedding), UMAP (Uniform Manifold Approximation and Projection), PCA (Principal component analysis), ICA (Independent Component Analysis), LSA (Latent semantic analysis)
+
+.image-40[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+
+---
+
+### MST 
+.image-40[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
+
+## Formatting: Basic
 
 .pull-left[
 <span style="font-size: 35px;font-family: 'Yanone Kaffeesatz';font-weight: normal;text-align: center;">Slide Title</span>
@@ -206,6 +268,9 @@ There are [other CSS classes available](https://github.com/galaxyproject{{ site.
 
 
 ---
+
+
+
 ### Formatting: Tables
 
 .pull-left[
@@ -400,3 +465,48 @@ presenter view. Press `p` to bring this up
 
 
 ---
+
+
+
+## Shortcut Keys
+
+- <kbd>?</kbd> activates help
+- <kbd>Escape</kbd> leaves help
+- <kbd>p</kbd> activates presenter mode
+- <kbd>f</kbd> activates full screen mode
+- <kbd>c</kbd> clones the slides into a popup
+
+???
+
+- The key to close the help isn't shown in the keyboard shortcuts, but it is the escape key.
+- There are a number of other shortcuts which can be useful to know about.
+- The clone window function creates a popup with a copy of the slides, this can be used to show the presenter notes on one screen, and the actual slides on another screen that learners can see.
+
+---
+
+## Videos
+
+.pull-left[
+- Slides with good speaker notes can be turned into videos
+- Enable this in the metadata of the slides:
+
+  ```markdown
+  title: "Creating Slides"
+  video: true
+  questions:
+    - "How to format slides?"
+  ```
+
+- automatically rendered into narrated videos by the GTN
+]
+
+.pull-right[
+.image-100[![Screenshot of GTN video player showing a set of slides with a play icon and a transcript](../../images/slides-to-video.png)]
+]
+
+???
+
+- The GTN automatically creates videos from selected slide decks.
+- Simply by setting video to true to the metadata, slides with sufficiently good speaker notes can be automatically turned into videos.
+- The slides have audio narration spoken from the script of the speaker notes by AWS Polly.
+- The audio clips, and slides are combined into a video which is then available in the GTN Video Library
