@@ -528,8 +528,9 @@ The data are now ready to detect hCNV. Control-FREEC detects copy-number alterat
 > 1. Import the DED file for the captured reagions from [Zenodo](https://doi.org/10.5281/zenodo.5697358):
 >
 >    ```
->    https://zenodo.org/record/5697358/files/capture_targets_chr5_12_17.bed?download=1
+>    https://zenodo.org/record/5697358/files/capture_targets_chr5_12_17.bed
 >    ```
+>
  > 2. Run {% tool [Control-FREEC](toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1) %}  with the following parameters
 >   -  *"Select the sequencing method of the input file(s)?"*: `whole-exome sequencing (WES)`
 >   -  {% icon param-file %} *"Sample file"*: The outpot of  `Extract Dataset` (**cancer reads**)
