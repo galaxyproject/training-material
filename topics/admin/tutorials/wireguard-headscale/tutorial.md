@@ -43,7 +43,7 @@ tags:
 
 # What is Tailscale?
 
-It's like wireguard but easier and they built a **lot** of nice features on top of it. It's networking that "Just Works™" even more than Wireguard.
+It's like Wireguard but easier and they built a **lot** of nice features on top of it. It's networking that "Just Works™" even more than Wireguard. If you prefer to use plain Wireguard without Headscale/Tailscale, or just want to get an understanding of the technology that Headscale/Tailscale build off of, [there is a tutorial for that]({% link topics/admin/tutorials/wireguard/tutorial.md %}) as well.
 
 ## Is it right for me?
 
@@ -65,9 +65,14 @@ connect directly to one another.
 
 You can go one step further than trusting individual machines, with Tailscale,
 as every device is tied to a single user, and you can ask Tailscale what is the
-authenticated identity of the specific TCP connection, allowing automaically
+authenticated identity of the specific TCP connection, allowing automatically
 logging in your users.
 
+In the context of Galaxy, this can be useful for components like [Interactive 
+Tools]({% link topics/admin/tutorials/interactive-tools/tutorial.md %}), which 
+require a web proxy between Galaxy and the cluster node where the tool runs. If 
+the cluster is not on the local network, Wireguard can be used to securely 
+bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 # Setting up the infrastructure
 
 {% include _includes/cyoa-choices.html option1="Tailscale" option2="Headscale" default="Tailscale" help="Here we provide a version of this tutorial that uses Headscale, if you want a more hands-on experience and feel like managing your own infrastructure." %}
@@ -140,9 +145,11 @@ logging in your users.
 <div class="Headscale" markdown="1">
 
 > ### {% icon details %} Consider using Tailscale
-> Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won't have to be responsible for. If you can get your university to pay for it, or grant money covering it, it's **probably worth it**. They add many new features often, and things like the mobile apps only work with their service.
+> Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won't have to be responsible for. If you can get your institution to pay for it, or grant money covering it, it's **probably worth it**. They add many new features often, and things like the mobile apps only work with their service. Tailscale is free for personal use (i.e. to test things out) and offers a free plan for open source projects that you may qualify for.
 >
 > For a training event obviously we want something free and quick to setup and destroy, so, we're using [Headscale](https://github.com/juanfont/headscale) since it's free and we're just going to destroy it immediately, and no one will accidentally get billed ;)
+>
+> Using Headscale will also teach you everything you need to know if you do choose to use Tailscale, which is simpler and has fewer components for you to manage yourself.
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Installing Headscale
