@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Deploying Tailscale/Headscale for private mesh networking</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Deploying Tailscale/Headscale for private mesh networking" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Deploying Tailscale/Headscale for private mesh networking" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/wireguard-headscale/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/wireguard-headscale/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/admin/tutorials/wireguard-headscale/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/admin/tutorials/wireguard-headscale/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/admin/tutorials/wireguard-headscale/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Deploying Tailscale/Headscale for private mesh networking",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Deploying Tailscale/Headscale for private mesh networking' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html",
+  "timeRequired": "PT60M",
+  "keywords": "admin, wireguard, networking",
+  "description": "The questions this  addresses are:\n - What is Tailscale?\n - When is it useful?\n - Is it right for me?\n\n\\nThe objectives are:\n - Setup a tailnet across a few nodes\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    "Three or more VMs (they can be tiny, 1 CPU, <1GB RAM)"
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-admin">
+    <h1 data-toc-skip>Deploying Tailscale/Headscale for private mesh networking</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is Tailscale?</p>
+</li>
+        
+        <li><p>When is it useful?</p>
+</li>
+        
+        <li><p>Is it right for me?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Setup a tailnet across a few nodes</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        Three or more VMs (they can be tiny, 1 CPU, <1GB RAM)
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 60 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 21, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <p><a href="https://tailscale.com/">Tailscale</a> makes secure networking easy, it really is like magic. If you’ve used wireguard before, you know it takes a bit to setup and some configuration if you need to do anything fancy.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#what-is-tailscale" id="markdown-toc-what-is-tailscale">What is Tailscale?</a>    <ol>
+      <li><a href="#is-it-right-for-me" id="markdown-toc-is-it-right-for-me">Is it right for me?</a></li>
+    </ol>
+  </li>
+  <li><a href="#setting-up-the-infrastructure" id="markdown-toc-setting-up-the-infrastructure">Setting up the infrastructure</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="what-is-tailscale">What is Tailscale?</h1>
+
+<p>It’s like Wireguard but easier and they built a <strong>lot</strong> of nice features on top of it. It’s networking that “Just Works™” even more than Wireguard. If you prefer to use plain Wireguard without Headscale/Tailscale, or just want to get an understanding of the technology that Headscale/Tailscale build off of, <a href="/training-material/topics/admin/tutorials/wireguard/tutorial.html">there is a tutorial for that</a> as well.</p>
+
+<h2 id="is-it-right-for-me">Is it right for me?</h2>
+
+<p>if you have machines that need to talk to each other privately, and you don’t
+have a better way to do it like a local network team, then yes, it’s a great
+solution to private, secure, fast networking. if you need auditing, tailscale
+will do that, rather than you having to build it out yourself.
+it has <a href="https://www.wireguard.com/performance/">excellent performance</a>
+despite the encryption, and is built directly into the kernel.</p>
+
+<p>By using wireguard, you can let services listen only on the wireguard
+interface, and thus only known and trusted machines can access those services.</p>
+
+<p>Tailscale makes wireguard setup even easier by removing the key management
+step, which normally requires distributing keys to every machine. Instead that
+step is handled centrally, and in the case of Tailscale enforceable with ACLs
+and SSO and 2FA policies, however the networking remains meshed, and machines
+connect directly to one another.</p>
+
+<p>You can go one step further than trusting individual machines, with Tailscale,
+as every device is tied to a single user, and you can ask Tailscale what is the
+authenticated identity of the specific TCP connection, allowing automatically
+logging in your users.</p>
+
+<p>In the context of <span class="notranslate">Galaxy</span>, this can be useful for components like <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">Interactive 
+Tools</a>, which 
+require a web proxy between <span class="notranslate">Galaxy</span> and the cluster node where the tool runs. If 
+the cluster is not on the local network, Wireguard can be used to securely 
+bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p>
+<h1 id="setting-up-the-infrastructure">Setting up the infrastructure</h1>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+  <h3><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Choose Your Own Tutorial</h3>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Tailscale" onclick="cyoaChoice('Tailscale')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Tailscale</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Headscale" onclick="cyoaChoice('Headscale')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Headscale</label>
+	
+	
+	
+
+	
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Tailscale");
+		})
+	</script>
+	
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configuration-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configuration files</h3>
+
+  <ol>
+    <li>
+      <p>Create a <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/2.9/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
+
+      <div data-commit="Add ansible.cfg" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/ansible.cfg
+</span><span class="p">@@ -0,0 +1,6 @@</span>
+<span class="gi">+[defaults]
++interpreter_python = /usr/bin/python3
++inventory = hosts
++retry_files_enabled = false
++[ssh_connection]
++pipelining = true
+</span>   
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so yet.</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+          <p>Your hostname is probably different:</p>
+          <div class="Headscale">
+            <p>Pick one to be the <code class="language-plaintext highlighter-rouge">head</code>, and the rest to be the <code class="language-plaintext highlighter-rouge">tail</code>. The head will act as the coordination server, the <code class="language-plaintext highlighter-rouge">tail</code> will be the nodes that should talk to each other.</p>
+
+            <div data-commit="Add hosts" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -0,0 +1,5 @@</span>
+<span class="gi">+[head]
++1-wg.<span class="notranslate">galaxy</span>.training
++[tail]
++2-wg.<span class="notranslate">galaxy</span>.training
++3-wg.<span class="notranslate">galaxy</span>.training
++4-wg.<span class="notranslate">galaxy</span>.training
+</span>
+</code></pre></div>            </div>
+          </div>
+
+          <div class="Tailscale">
+            <p>Place all of the nodes in a <code class="language-plaintext highlighter-rouge">tail</code> group</p>
+            <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/hosts
+</span><span class="p">@@ -0,0 +1,5 @@</span>
+<span class="gi">+[tail]
++1-wg.<span class="notranslate">galaxy</span>.training
++2-wg.<span class="notranslate">galaxy</span>.training
++3-wg.<span class="notranslate">galaxy</span>.training
++4-wg.<span class="notranslate">galaxy</span>.training
+</span></code></pre></div>            </div>
+          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<div class="Headscale">
+
+  <blockquote class="details">
+    <h3 id="details-consider-using-tailscale"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Consider using Tailscale</h3>
+    <p>Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won’t have to be responsible for. If you can get your institution to pay for it, or grant money covering it, it’s <strong>probably worth it</strong>. They add many new features often, and things like the mobile apps only work with their service. Tailscale is free for personal use (i.e. to test things out) and offers a free plan for open source projects that you may qualify for.</p>
+
+    <p>For a training event obviously we want something free and quick to setup and destroy, so, we’re using <a href="https://github.com/juanfont/headscale">Headscale</a> since it’s free and we’re just going to destroy it immediately, and no one will accidentally get billed ;)</p>
+
+    <p>Using Headscale will also teach you everything you need to know if you do choose to use Tailscale, which is simpler and has fewer components for you to manage yourself.</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="handson-hands-on-installing-headscale"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing Headscale</h3>
+
+    <ol>
+      <li>
+        <p>Install the role</p>
+
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles ckstevenson.headscale
+</code></pre></div>          </div>
+        </blockquote>
+      </li>
+      <li>
+        <p>Create and open <code class="language-plaintext highlighter-rouge">head.yml</code> which will be our playbook. Add the following:</p>
+
+        <div data-commit="Setup headscale" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/head.yml
+</span><span class="p">@@ -0,0 +1,16 @@</span>
+<span class="gi">+---
++- name: Headscale
++  hosts: head
++  become: true
++  vars:
++    headscale_user: 'headscale'
++    headscale_version: '0.15.0'
++    headscale_namespaces:
++    - <span class="notranslate">galaxy</span>
++  roles:
++    - ckstevenson.headscale
++  post_tasks:
++    - command: headscale --namespace <span class="notranslate">galaxy</span> preauthkeys create --reusable --expiration 1h
++      register: authkey
++    - debug:
++        msg: "{{ authkey.stdout.split('\n')[-1] }}"
+</span>   
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Run the playbook:</p>
+
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook headscale.yml
+</code></pre></div>          </div>
+        </blockquote>
+      </li>
+      <li>
+        <p>This will return a code in the debug output. Save this code, you’ll need it shortly</p>
+      </li>
+    </ol>
+  </blockquote>
+</div>
+
+<p>Now we can setup the nodes</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configure-the-nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure the nodes</h3>
+
+  <ol>
+    <li>
+      <p>Install the role</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles artis3n.tailscale
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Edit <code class="language-plaintext highlighter-rouge">tail.yml</code> and add the following.</p>
+
+      <div class="Headscale">
+
+        <div data-commit="Setup the clients" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/tail.yml
+</span><span class="p">@@ -0,0 +1,17 @@</span>
+<span class="gi">+---
++- name: Tailscale
++  hosts: tail
++  become: true
++  vars:
++    tailscale_args: "--advertise-exit-node --login-server http://{{ hostvars[groups['head'][0]].inventory_hostname }}:8080"
++  pre_tasks:
++ - sysctl:
++     name: net.ipv4.ip_forward
++     value: '1'
++     state: present
++ - sysctl:
++     name: net.ipv6.conf.all.forwarding
++     value: '1'
++     state: present
++  roles:
++    - artis3n.tailscale
+</span>   
+</code></pre></div>        </div>
+      </div>
+
+      <div class="Tailscale">
+        <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
+</span><span class="gi">+++ b/tail.yml
+</span><span class="p">@@ -0,0 +1,17 @@</span>
+<span class="gi">+---
++- name: Tailscale
++  hosts: tail
++  become: true
++  vars:
++    tailscale_args: "--advertise-exit-node"
++  pre_tasks:
++ - sysctl:
++     name: net.ipv4.ip_forward
++     value: '1'
++     state: present
++ - sysctl:
++     name: net.ipv6.conf.all.forwarding
++     value: '1'
++     state: present
++  roles:
++    - artis3n.tailscale
+</span></code></pre></div>        </div>
+      </div>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook tail.yml <span class="nt">-e</span> <span class="nv">tailscale_authkey</span><span class="o">=</span>YOUR_CODE
+</code></pre></div>        </div>
+
+        <div class="Headscale">
+          <p>Remember, you can find this code from the output of the first playbook</p>
+        </div>
+        <div class="Tailscale">
+          <p>You can generate an authentication key under your <a href="https://login.tailscale.com/admin/authkeys">Tailscale account page</a></p>
+        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Go check out your tailnet! Play around with the tailscale command and pinging other nodes with the suffix <code class="language-plaintext Headscale highlighter-rouge">.<span class="notranslate">galaxy</span>.example.com</code> <code class="language-plaintext Tailscale highlighter-rouge">&lt;use<span class="notranslate">rna</span>me&gt;.org.github.beta.tailscale.net</code></p>
+
+      <blockquote class="Tailscale">
+        <p>Note that you’ll need to enable <a href="https://login.tailscale.com/admin/dns">MagicDNS</a> in your acount settings.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-exit-nodes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Exit Nodes</h3>
+  <p>We’ve configured <code class="language-plaintext highlighter-rouge">--advertise-exit-node</code>, which means you can direct ALL of your traffic to use one of your tailscale endpoints as an exit node, just run <code class="language-plaintext highlighter-rouge">tailscale up --exit-node=...</code></p>
+
+  <p>Note that:</p>
+  <ul>
+    <li>If you’re using headscale you need to manually enable that route (check the node list via <code class="language-plaintext highlighter-rouge">headscale nodes list</code> and then enable the specific route via <code class="language-plaintext highlighter-rouge">headscale nodes routes enable -i ...</code>), this is automatic in Tailscale</li>
+    <li>If you enable it, on a remote machine, it will immediately become unresponsive. Only do this on your local machine, e.g. a laptop connected to your tailnet.</li>
+  </ul>
+</blockquote>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Tailscale is a fantastic bit of software that Just Works™</p>
+</li>
+                        
+                        <li><p>We use headscale, an open source reimplementation of Tailscale’s control server because it’s easy to use in training</p>
+</li>
+                        
+                        <li><p>But if you can afford Tailscale, just use that.</p>
+</li>
+                        
+                        <li><p>There is a FOSS plan, go check it out!</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Deploying Tailscale/Headscale for private mesh networking (Galaxy Server administration)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Deploying Tailscale/Headscale for private mesh networking (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-wireguard-headscale,
+author = "Helena Rasche",
+title = "Deploying Tailscale/Headscale for private mesh networking (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "21"
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
