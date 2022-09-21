@@ -15,14 +15,22 @@ level: Introductory
 key_points:
   - RepeatMasker can be used to soft-mask a genome  - It is an essential first step before running structural annotation pipelines
 contributors:
-  - abretaud  - alexcorm  - lleroi  - r1corre  - stephanierobin  - erasmusplus  - jkreplak
+  - abretaud
+  - alexcorm  
+  - lleroi
+  - r1corre
+  - stephanierobin
+  - erasmusplus
+  - jkreplak
 
 abbreviations:
-    SINEs: Short Interspersed Nuclear Elements    LINEs: Long Interspersed Nuclear Elements
+    SINEs: Short Interspersed Nuclear Elements    
+    LINEs: Long Interspersed Nuclear Elements
 
 follow_up_training:
 - type: "internal"
-  topic_name: genome-annotation  tutorials:
+  topic_name: genome-annotation
+  tutorials:
     - funannotate
 subtopic: eukaryote
 priority: 1
@@ -73,11 +81,11 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 >   the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >    -> `{{ page.title }}`):
 >   
->   ```
->  https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
-   https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_RM2.fasta
-   https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_EDTA.fasta
->   ```
+  ```
+  https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/genome_raw.fasta
+  https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_RM2.fasta
+  https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_EDTA.fasta
+  ```
 >   
 >   {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >   
@@ -86,7 +94,7 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 
 {: .hands_on}
 
-# # Soft-masking using Red
+# Soft-masking using Red
 
 First let's try Red, a tool than can mask repeats *de novo*. For that, select the input assembly in fasta format.
 
