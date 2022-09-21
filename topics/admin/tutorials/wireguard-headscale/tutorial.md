@@ -18,6 +18,8 @@ key_points:
 contributions:
   authorship:
   - hexylena
+  editing:
+  - natefoo
 requirements:
   - type: "internal"
     topic_name: admin
