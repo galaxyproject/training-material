@@ -128,7 +128,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 --
 
-.image-60[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
+.image-25[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
 
 ---
 ### Assumptions
@@ -156,42 +156,47 @@ Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlin
 There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
 
 ---
+
 ### When analysing your data, consider the following: 
-
 --
 
-- Tissue from which the cells come from  
+.pull-left[  
+  
 
---
+- Tissue from which the cells come from   
 
 - Branching points  
 
---
+- Supervised and unsupervised learning  
 
-- Supervised / unsupervised learning
+- Format of the data  
 
---
+- Number of cells and features  
 
-- Format of the data
+- Computing power & running time   
 
---
-
-- Number of cells and features
+]
 
 --
 
-- Computing power & running time
+.pull-right[
+    
+ 
+To help you evaluate which method would work best for your data, check out this [**awesome comparision site - dynguidelines**](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).     
+  
+.image-100[ ![zouter](../../images/scrna-casestudy-monocle/zouter.jpg) ]
 
---
-To help you evaluate which method would work best for your data, check out this [awesome comparision site - dynguidelines](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).
+]
+
 ---
 
 ### When analysing your data, consider the following: **Tissue from which the cells come from**
 --
 
 .pull-left[
+    
   
-
+  
 - Gives an idea about the topology you expect and the priors you can feed the method with, as well as expected cell types and potential contaminants  
 
 - You need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information  
@@ -209,11 +214,81 @@ To help you evaluate which method would work best for your data, check out this 
 
 ---
 ### When analysing your data, consider the following: **Branching points**
+
 --
+
 Cells can differentiate or develop in various way, so they may exhibit different topologies. 
 
+--
+
+![table](../../images/scrna-casestudy-monocle/table.jpg)  
 
 ---
+### When analysing your data, consider the following: **Branching points**
+
+explain more, add binning
+
+---
+
+### When analysing your data, consider the following: **Supervised and unsupervised learning**
+--
+
+.pull-left[  
+  
+
+![root_cells](../../images/scrna-casestudy-monocle/root_cells.jpg)  
+
+]
+
+--
+
+.pull-right[
+    
+ 
+- Some algorithms work fully unsupervised, ie. the user is not required to input any priors.  
+
+- However, many of them take the ‘starting cell’, or ‘end cell’ as information that helps to infer the trajectory which best represents the actual biological processes.  
+
+- On the other hand, priors can bias the outcome of the method, but if chosen appropriately, they are really helpful.  
+
+]
+
+---
+### When analysing your data, consider the following: **Supervised and unsupervised learning**
+
+If you know which cells are root cells, you should enter this inforamtion to the method to make the computations more precise. However, some methods use unsupervised algorithms, so you will get a trajectory based on the tools they use and topology they can infer.    
+
+--
+
+Unsupervised | Priors needed: start cells | Priors needed: end cells | Priors needed: both start and end cells 
+ :---:| :---:| :---: | :---: 
+Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID/StemID, Monocle DDRTree | PAGA Tree, PAGA, Wanderlust, Wishbone, topslam, URD, CellRouter, SLICER | MFA, GrandPrix, GPfates, MERLoT | Monocle ICA
+
+---
+### When analysing your data, consider the following: **Format of the data**
+--
+
+- You have to check that your chosen method is compatible with the format of your data. If not, consider converting it or even contacting the developers to implement this into the pipeline.  
+
+--
+
+- Other possible inputs: 
+ - Raw (FASTQ); 
+ - MMformat (output of 10x); 
+ - EBI-SCXA; 
+ - AnnData   
+   
+--
+
+- Powerful [SCEasy tool](https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=a4381cd7162476d9&render_repository_actions_for=tool_shed&tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F004%2Frepo_4830%2Fsceasy_convert.xml&changeset_revision=f62bc418173f) in Galaxy to convert between formats
+
+- Implementations  
+
+![implementation](../../images/scrna-casestudy-monocle/implementation.jpg)  
+
+---
+
+
 Slides begin with a title `### ...` and should end with a `---`
 
 ???
