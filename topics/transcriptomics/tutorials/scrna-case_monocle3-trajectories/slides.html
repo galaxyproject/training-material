@@ -49,7 +49,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ]
 --
 .pull-right[
-**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime. 
+**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime.   
 **Pseudotime** measures the cells’ progress through the transition.
 
 .image-60[ ![trajectory](../../images/scrna-casestudy-monocle/6_trajectories.png) ]
@@ -209,6 +209,7 @@ To help you evaluate which method would work best for your data, check out this 
   
 
 ![scheme](../../images/scrna-casestudy-monocle/8_scheme.png)  
+
 <sub><sub><sub> Reprinted from “Heterogeneity of Murine Lymph Node Stromal Cell Subsets”, by BioRender.com (2022) </sub></sub></sub>
 ]
 
@@ -282,9 +283,25 @@ Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID
 
 - Powerful [SCEasy tool](https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=a4381cd7162476d9&render_repository_actions_for=tool_shed&tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F004%2Frepo_4830%2Fsceasy_convert.xml&changeset_revision=f62bc418173f) in Galaxy to convert between formats
 
+--
+
 - Implementations  
 
 ![implementation](../../images/scrna-casestudy-monocle/implementation.jpg)  
+
+---
+### When analysing your data, consider the following: **Number of cells and features**
+--
+
+- The more cells and features you have, the more dimensions are there in your dataset. Therefore, it may be more computationally difficult for the particular method to reduce the dimensionality and infer the correct trajectory.   
+
+--
+
+- For example, PAGA generally performs better than RaceID or Monocle when the dataset contains huge number of cells. (PAGA is graph-based, Monocle is tree based).  
+
+--
+
+- Also, the more cells you have, the more insightful data you can get, but it is often associated with more noise as well. Therefore, the number of cells also impacts how you pre-process your data and how ‘pure’ it will be for trajectory analysis. 
 
 ---
 
