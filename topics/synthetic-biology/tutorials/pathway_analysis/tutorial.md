@@ -102,7 +102,7 @@ Within the workflow, the purpose of the _Flux Balance Analysis_ tool is to predi
 
 We first perform an FBA (with COBRApy) optimizing the biomass reaction and record its maximal theoretical flux. The upper and lower bounds of the biomass reaction are then set to a same amount, equals to a fraction of its previously recorded optimum (default is 75% of its optimum). The method then performs a second FBA where biomass flux is enforced to this fraction of its optimum while optimizing the target production flux. Simulated fluxes are recorded directly into the SBML file and all changed flux bounds are reset to their original values before saving the output file.
 
-![Flux Balance Analysis](../../images/fba_calculation.png)
+<img src="../../images/fba_calculation.png" alt="This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway." loading="lazy">
 
 > ### {% icon details %} Comment
 >
