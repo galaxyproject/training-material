@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="CLIP-Seq data analysis from pre-processing to motif detection" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:21 +0000" />
 <meta name="DC.creator" content="Florian Heyl" />
 <meta name="DC.creator" content="Daniel Maticzka" />
 <meta name="DC.creator" content="Bérénice Batut" />
@@ -276,7 +276,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:42 +0000",
+  "dateModified": "1970-01-01 00:00:21 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "CLIP-Seq data analysis from pre-processing to motif detection",
   "interactivityType": "mixed",
@@ -958,7 +958,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 9, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 21, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1163,17 +1163,18 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 <h2 id="removal-of-adapter-sequences-with-cutadapt">Removal of adapter sequences with <strong>Cutadapt</strong></h2>
 
-<p>In this task we are going to remove two 3’ and two 5’ adapters from the <span class="notranslate">reads</span> (Note: The eCLIP protocol uses more adapter sequences, for more information take a look <a href="https://doi.org/10.1038/nmeth.3810">here</a>). Because <strong>Cutadapt</strong> can only process one site of the read pair, we have to trigger <strong>Cutadapt</strong> twice, i.e., for the forward and the reverse pair.</p>
+<p>In this task we are going to remove two 3’ and two 5’ adapters from the <span class="notranslate">reads</span> (Note: The eCLIP protocol uses more adapter sequences, for more information take a look <a href="https://doi.org/10.1038/nmeth.3810">here</a>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-adapter-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adapter Removal</h3>
 
-  <ol>
-    <li><strong>Cutadapt (v. 1.6)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+  <p><strong>Cutadapt (v. 4.0)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code></li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R1</code></li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R2</code></li>
+    <li><em>“Read 1 Options”</em>:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fastq file to trim”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R1</code></li>
-        <li><em>“Track Paired <span class="notranslate">Reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paired fastq file (NOT trimmed)”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R2</code></li>
         <li>In <em>“3’ Adapters”</em>:
           <ul>
             <li>Click on <em>“Insert 3’ Adapters”</em>:</li>
@@ -1222,25 +1223,11 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
             </li>
           </ul>
         </li>
-        <li><em>“Minimum overlap length”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-        <li><em>“Output filtering options”</em>: <code class="language-plaintext highlighter-rouge">Set Filters</code>
-          <ul>
-            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-          </ul>
-        </li>
-        <li><em>“Additional output options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
-        <li><em>“Additional modifications to <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Set Modification Options</code>
-          <ul>
-            <li><em>“Cut bases from <span class="notranslate">reads</span> before adapter trimming”</em>: <code class="language-plaintext highlighter-rouge">-5</code></li>
-          </ul>
-        </li>
+        <li><em>“Cut bases from <span class="notranslate">reads</span> before adapter trimming”</em>: <code class="language-plaintext highlighter-rouge">-5</code></li>
       </ul>
     </li>
-    <li><strong>Cutadapt (v. 1.6)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><em>“Read 2 Options”</em>:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fastq file to trim”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R2</code> (output from the <strong>first</strong> <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Track Paired <span class="notranslate">Reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paired fastq file (NOT trimmed)”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R1</code> (output from the <strong>first</strong> <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“3’ Adapters”</em>:
           <ul>
             <li>Click on <em>“Insert 3’ Adapters”</em>:</li>
@@ -1289,17 +1276,20 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
             </li>
           </ul>
         </li>
-        <li><em>“Minimum overlap length”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-        <li><em>“Output filtering options”</em>: <code class="language-plaintext highlighter-rouge">Set Filters</code>
-          <ul>
-            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
-          </ul>
-        </li>
-        <li><em>“Additional output options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
-        <li><em>“Additional modifications to <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">No Read Modifications</code></li>
       </ul>
     </li>
-  </ol>
+    <li><em>“Adapter Options”</em>:
+      <ul>
+        <li><em>“Minimum overlap length”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+      </ul>
+    </li>
+    <li><em>“Filter Options”</em>:
+      <ul>
+        <li><em>“Minimum length (R1)”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+        <li><em>“Specify a minimum/maximum length for reverse <span class="notranslate">reads</span> (R2)”</em>: <code class="language-plaintext highlighter-rouge">Disabled</code></li>
+      </ul>
+    </li>
+  </ul>
 
   <blockquote class="comment">
     <h3 id="comment-why-do-we-remove-5-bp-from-the-first-read"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Why do we remove 5 bp from the first read?</h3>
@@ -1325,8 +1315,8 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     <li><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Library type”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R2</code> (output from the <strong>second</strong> <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R1</code>  (output from the <strong>second</strong> <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R2</code> (output from the <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">FASTQ R1</code>  (output from the <strong>Cutadapt</strong> call <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Barcode on both <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Barcode on first read only</code></li>
         <li><em>“Use Known Barcodes?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Method to extract barcodes”</em>: <code class="language-plaintext highlighter-rouge">String</code></li>
@@ -2078,7 +2068,7 @@ author = "Florian Heyl and Daniel Maticzka and Bérénice Batut",
 title = "CLIP-Seq data analysis from pre-processing to motif detection (Galaxy Training Materials)",
 year = "2022",
 month = "09",
-day = "09"
+day = "21"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
