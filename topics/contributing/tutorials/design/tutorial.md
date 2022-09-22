@@ -4,7 +4,6 @@ layout: tutorial_hands_on
 title: "Design and plan session, course, materials"
 subtopic: pedagogy
 time_estimation: 60m
-enable: false
 questions:
 - Is the structured approach to course design?
 - How to articulate learning outcomes commensurate with the cognitive

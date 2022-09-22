@@ -4,7 +4,6 @@ layout: tutorial_hands_on
 title: "Motivation and Demotivation"
 time_estimation: 60m
 subtopic: pedagogy
-enable: false
 questions:
 - What is motivation and demotivation?
 - How do motivation and demotivation impact learning processes?

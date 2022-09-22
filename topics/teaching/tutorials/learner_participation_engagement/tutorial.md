@@ -4,7 +4,6 @@ layout: tutorial_hands_on
 title: "Training techniques to enhance learner participation and engagement"
 time_estimation: 60m
 subtopic: pedagogy
-enable: false
 questions:
 - What does make a training effective?
 - How can instructors enhance learner participation and engagement?
