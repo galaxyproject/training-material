@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "Assessment and feedback in training and teachings"
 subtopic: pedagogy
-enable: false
 time_estimation: 3h30m
 questions:
 - What are the different types of feedback?

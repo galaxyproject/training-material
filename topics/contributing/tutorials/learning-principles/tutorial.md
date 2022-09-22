@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "Principles of learning and how they apply to training and teaching"
 subtopic: pedagogy
-enable: false
 time_estimation: 2h
 questions:
 - What are the main principles that drive learning?
