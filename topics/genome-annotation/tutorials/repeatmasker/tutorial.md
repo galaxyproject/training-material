@@ -1,4 +1,4 @@
-```yaml
+---
 layout: tutorial_hands_on
 
 title: Masking repeats with RepeatMasker
@@ -13,10 +13,11 @@ objectives:
 time_estimation: 1H
 level: Introductory
 key_points:
-  - RepeatMasker can be used to soft-mask a genome  - It is an essential first step before running structural annotation pipelines
+  - RepeatMasker can be used to soft-mask a genome
+  - It is an essential first step before running structural annotation pipelines
 contributors:
   - abretaud
-  - alexcorm  
+  - alexcorm
   - lleroi
   - r1corre
   - stephanierobin
@@ -24,8 +25,8 @@ contributors:
   - jkreplak
 
 abbreviations:
-    SINEs: Short Interspersed Nuclear Elements    
-    LINEs: Long Interspersed Nuclear Elements
+SINEs: Short Interspersed Nuclear Elements    
+LINEs: Long Interspersed Nuclear Elements
 
 follow_up_training:
 - type: "internal"
@@ -34,7 +35,7 @@ follow_up_training:
     - funannotate
 subtopic: eukaryote
 priority: 1
-```
+---
 
 # Introduction
 
