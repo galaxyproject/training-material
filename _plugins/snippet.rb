@@ -87,6 +87,11 @@ module Jekyll
                 box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
                 box_end   = "\n{: .question}"
             end
+            if box_type == 'details'
+                icon_text = icons['details']
+                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
+                box_end   = "\n{: .details}"
+            end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
           #if y =~ /contribute/
