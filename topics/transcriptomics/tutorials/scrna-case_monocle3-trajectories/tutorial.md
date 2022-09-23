@@ -678,7 +678,6 @@ Once the trajectory has been inferred, you might want to return to the gene expr
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 
 {% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monoce3-tutorial-workflow), or check out the [full workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-anndata-to-monocle-right-1) for this tutorial. I also split this workflow into two separate workflows: [preparing the input files for Monocle3, starting from AnnData](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3), and [Monocle3 only workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1). You can use them to accelerate analysis of your own data, paying attention to the requirements of the input data, mentioned in this tutorial.
 
