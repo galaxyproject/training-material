@@ -437,4 +437,8 @@ Each of the techniques presented here will make your classes better, but **you s
 # Conclusion
 {:.no_toc}
 
+<<<<<<< HEAD
 {% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}
+=======
+{% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}
+>>>>>>> main
