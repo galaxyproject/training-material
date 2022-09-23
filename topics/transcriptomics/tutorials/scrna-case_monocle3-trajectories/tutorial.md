@@ -52,7 +52,7 @@ In this tutorial we will perform trajectory analysis using [monocle3](https://co
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 ## Get data
-We still work on data from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial.html#Bacon2018) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)), making this case study even more comprehensive. 
+We still work on data from a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)), making this case study even more comprehensive. 
 Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
 You can find both datasets in this [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files) or download from Zenodo below.  
 
