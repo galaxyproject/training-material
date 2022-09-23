@@ -116,7 +116,7 @@ StringTie takes as input a SAM, BAM or CRAM file sorted by coordinate (genomic l
 
 A reference annotation file in GTF or GFF3 format can be provided to StringTie which can be used as 'guides' for the assembly process and help improve the transcript structure recovery for those transcripts.
 
-> ### {% icon hands_on %} Transcripts assembly
+> ### {% icon hands_on %} Hands-on: Transcripts assembly
 >
 > {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.7+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
@@ -156,8 +156,8 @@ FEELnc is a pipeline which is composed of 3 steps. These 3 steps run directly wh
 To use FEELnc, we need to have a reference annotation file in gtf format, which contains protein-coding genes annotation. Presently, we downloaded only the reference annotation file in gff3 format (annotation.gff3). To generate gtf format, we will use **gffread** which converts GFF3/GT2 records.
 
 
-> ### {% icon hands_on %} Hands-on
-
+> ### {% icon hands_on %} Hands-on: FEELnc
+>
 > 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file"*: `genome_annotation.gff3`
 >    - *"Feature File Output"*: `GTF`
@@ -192,6 +192,18 @@ FEELnc provides also summary file in stdout.
 > {: .solution}
 >
 {: .question}
+
+For future analysis, it will be interesting to use an updated annotation containing mRNAs and lncRNAs annotations. Thus, we will merge the reference annotation with those obtained with FEELnc.
+
+> ### {% icon hands_on %} Hands-on: Merge the annotations
+>
+> {% tool [concatenate](https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/f46f0e4f75c4) %} with the following parameters:
+>    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf`
+>    - Insert Dataset
+>    - {% icon param-file %} *"Dataset"*: `lncRNA annotation with FEELnc`
+>
+{: .hands_on}
+
 
 # Conclusion
 {:.no_toc}
