@@ -37,23 +37,27 @@ tags:
 - trajectory-analysis
 - paper-replication
 
-contributors:
-- wee-snufkin
-- nomadscientist
-
+contributions:
+  authorship:
+    - wee-snufkin
+  editing:
+    - hexylena
+    - nomadscientist
+  funding:
+    - EPSRC Training Grant
 ---
 
 # Introduction
 
 This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/transcriptomics/index.md %}), we will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) or [filter, plot and process scRNA-seq data]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today.
 
-In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis here /slides/. We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
+In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis here /slides/. We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 ## Get data
-We still work on data from a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)), making this case study even more comprehensive. 
-Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
+We still work on data from a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)), making this case study even more comprehensive. 
+Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
 You can find both datasets in this [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files) or download from Zenodo below.  
 
 >### {% icon hands_on %} Hands-on: Data upload
@@ -378,7 +382,7 @@ However, PCA is more commonly used, and it also allows us to perform further ste
 
 Now it’s time for the proper dimensionality reduction so that instead of the initial thousands of dimensions, we can get only 2 and hence plot all the cells on one 2D graph. Again, there are several algorithms to do that: UMAP, tSNE, PCA and LSI (only possible when preprocess_method is set to 'LSI'), but due to the same reasons as above, we’ll use UMAP (most common + allows further operations + best results). But I’ll let you see how the output from other algorithms look to convince you that **UMAP** is indeed the best in this case. Of course it might happen that by choosing different pre-processing values, tSNE or PCA plots would look better, so don't be afriad to play around the parameters and test them!
 
-![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "Different outputs depending on the algorithm of dimentionality reduction, applied to the output of the previous step (except LSI method which was called on LSI-preprocessed data).")
+![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of generated clusters, depending on the algorithm of dimentionality reduction that was chosen and applied to the output of the preprocessing step (except LSI method which was called on LSI-preprocessed data).")
 
 > ### {% icon hands_on %} Hands-on: Dimensionality reduction
 >
@@ -420,7 +424,7 @@ Thanks to the fact that we provided Monocle3 with annotated data, we can now col
 >
 {: .hands_on}
 
-[Previous tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions. 
+[Previous tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions. 
 
 As a reminder, here's the comparision between cell type annotation done in the other tutorial using Scanpy, and the output from the previous step of this tutorial. The main difference is that Scanpy was used to identify the cell types and assign them to clusters. That data was then passed on to Force-Directed + PAGA algorithms to infer trajectory, and then the arrangement of the cell groups changed a bit. In Monocle, trajectory analysis will be based on the clustering you see now. Therefore, the fact that on the Monocle plot we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
 
