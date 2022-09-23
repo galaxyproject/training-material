@@ -202,7 +202,7 @@ data, but instead have a special `None` entry:
 we'll return to these missing values.
 
 For now,
-let's write an SQL query that displays scientists' names.
+let's write an [SQL query](https://www.scaler.com/topics/sql/sql-query-execution-order/) that displays scientists' names.
 We do this using the SQL command `SELECT`,
 giving it the names of the columns we want and the table we want them from.
 Our query and its output look like this:
