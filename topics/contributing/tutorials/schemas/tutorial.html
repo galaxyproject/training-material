@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="GTN Metadata" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 
         
@@ -274,7 +274,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:33:42 +0000",
+  "dateModified": "1970-01-01 00:00:23 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "GTN Metadata",
   "interactivityType": "mixed",
@@ -508,7 +508,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 20, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1447,13 +1447,13 @@
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -2551,13 +2551,13 @@ switch pages.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -4919,22 +4919,54 @@ switch pages.</p>
 
 
 
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>GTN</code></li>
+
+	<li><code>assets/images/gat.png</code></li>
+
+	<li><code>assets/images/gga.png</code></li>
+
+	<li><code>assets/images/ncbi.png</code></li>
+
+	<li><code>/assets/images/elixir-uk.png</code></li>
+
+</ul>
+</p>
+
 
 
 
 
 <p>
 	<b>Example(s)</b>
+	
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s">GTN</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">GTN"</span>
 </code></pre></div>        </div>
       </div>
 	
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s">assets/images/gat.png</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">assets/images/gat.png"</span>
 </code></pre></div>        </div>
       </div>
 	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">assets/images/gga.png"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">assets/images/ncbi.png"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">logo</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/assets/images/elixir-uk.png"</span>
+</code></pre></div>        </div>
+      </div>
 	</p>
 
 
@@ -5212,13 +5244,13 @@ switch pages.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -6033,13 +6065,13 @@ the slides.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -7017,7 +7049,7 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 <b>Free Text</b>
 
 <p>
-<p>The type of box that should be used when rendering this FAQ.</p>
+<p>The type of box that should be used when rendering this FAQ. Use <code class="language-plaintext highlighter-rouge">none</code> if it should not be in a box, but just plain text.</p>
 
 </p>
 
@@ -7035,6 +7067,8 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 	<li><code>question</code></li>
 
 	<li><code>comment</code></li>
+
+	<li><code>none</code></li>
 
 </ul>
 </p>
@@ -7063,6 +7097,11 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 	
 <div>
         <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">comment"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">box_type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">none"</span>
 </code></pre></div>        </div>
       </div>
 	</p>
@@ -7855,13 +7894,13 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -8107,13 +8146,13 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="comment">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	 <b>required</b></h3>
 
@@ -8330,13 +8369,13 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 
 
 	
-		
+	
 		
 		
 		<blockquote class="tip">
 <h3>
 	
-		<code>Sequence Value</code>
+		<code>Sequence Value (List of items)</code>
 	
 	</h3>
 
@@ -8591,6 +8630,37 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 
 </blockquote>
 
+<blockquote class="tip">
+<h3>
+	
+		<code>Quiz Schema</code>
+	
+	</h3>
+
+<b></b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
 
 
                 
@@ -8663,8 +8733,8 @@ If enabled, you must provide good speaker notes for every single slide.</p>
 author = "Helena Rasche",
 title = "GTN Metadata (Galaxy Training Materials)",
 year = "2022",
-month = "05",
-day = "20"
+month = "09",
+day = "23"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/schemas/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

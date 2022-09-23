@@ -325,57 +325,6 @@
 					<li>
 						
 						
-						<a href="/training-material/topics/assembly">
-							Assembly
-						</a>
-						/
-						<a href="/training-material//topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html">
-						Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/transcriptomics">
-							Transcriptomics
-						</a>
-						/
-						<a href="/training-material//topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html">
-						Pre-processing of Single-Cell RNA Data
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/galaxy-interface">
-							Using Galaxy and Managing your Data
-						</a>
-						/
-						<a href="/training-material//topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">
-						Automating Galaxy workflows using the command line
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
 						<a href="/training-material/topics/sequence-analysis">
 							Sequence analysis
 						</a>
@@ -393,12 +342,12 @@
 					<li>
 						
 						
-						<a href="/training-material/topics/variant-analysis">
-							Variant Analysis
+						<a href="/training-material/topics/assembly">
+							Assembly
 						</a>
 						/
-						<a href="/training-material//topics/variant-analysis/tutorials/somatic-variants/tutorial.html">
-						Identification of somatic and germline variants from tumor and normal sample pairs
+						<a href="/training-material//topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html">
+						Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads
 						</a>
 						
 						
@@ -431,23 +380,6 @@
 							Variant Analysis
 						</a>
 						/
-						<a href="/training-material//topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
-						Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/variant-analysis">
-							Variant Analysis
-						</a>
-						/
 						<a href="/training-material//topics/variant-analysis/tutorials/exome-seq/tutorial.html">
 						Exome sequencing data analysis for diagnosing a genetic disease
 						</a>
@@ -465,8 +397,76 @@
 							Variant Analysis
 						</a>
 						/
+						<a href="/training-material//topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
+						Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/variant-analysis">
+							Variant Analysis
+						</a>
+						/
 						<a href="/training-material//topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html">
 						Mapping and molecular identification of phenotype-causing mutations
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/variant-analysis">
+							Variant Analysis
+						</a>
+						/
+						<a href="/training-material//topics/variant-analysis/tutorials/somatic-variants/tutorial.html">
+						Identification of somatic and germline variants from tumor and normal sample pairs
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/galaxy-interface">
+							Using Galaxy and Managing your Data
+						</a>
+						/
+						<a href="/training-material//topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">
+						Automating Galaxy workflows using the command line
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/transcriptomics">
+							Transcriptomics
+						</a>
+						/
+						<a href="/training-material//topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.html">
+						Pre-processing of Single-Cell RNA Data
 						</a>
 						
 						
@@ -533,9 +533,13 @@
                 
                 </div>
 				
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
 
-				<script type="text/javascript">
+<script type="text/javascript">
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');
@@ -544,11 +548,31 @@ var topics = [
 
 	
 	
+	"Sequence analysis",
+
+	
+	
 	"Assembly",
 
 	
 	
-	"Transcriptomics",
+	"Variant Analysis",
+
+	
+	
+	"Variant Analysis",
+
+	
+	
+	"Variant Analysis",
+
+	
+	
+	"Variant Analysis",
+
+	
+	
+	"Variant Analysis",
 
 	
 	
@@ -556,27 +580,7 @@ var topics = [
 
 	
 	
-	"Sequence analysis",
-
-	
-	
-	"Variant Analysis",
-
-	
-	
-	"Variant Analysis",
-
-	
-	
-	"Variant Analysis",
-
-	
-	
-	"Variant Analysis",
-
-	
-	
-	"Variant Analysis",
+	"Transcriptomics",
 
 
 ];
@@ -693,7 +697,7 @@ var chart2 = new Chart(ctx2, {
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/5ebbb4712a5e6c81af9493669cf2ce66d768d5af">5ebbb4712a5e6c81af9493669cf2ce66d768d5af</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1957b525e767dea15c04bf5c79d3c30d45d3ed44">1957b525e767dea15c04bf5c79d3c30d45d3ed44</a></p>
     </div>
 </footer>
 

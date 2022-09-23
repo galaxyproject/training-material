@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Overview of the Galaxy Training Material for Instructors</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Overview of the Galaxy Training Material for Instructors" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Overview of the Galaxy Training Material for Instructors" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/teaching/faqs/" title="Check our FAQs for the Teaching and Hosting Galaxy training topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/teaching/tutorials/gtn-for-instructors/slides-plain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/teaching/tutorials/gtn-for-instructors/slides-plain.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/teaching/tutorials/gtn-for-instructors/slides.html">View markdown source on GitHub</a>
+	<h1>Overview of the Galaxy Training Material for Instructors</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>How can I use the GTN for teaching?</p>
+</li>
+		
+		<li><p>What resources are available?</p>
+</li>
+		
+		<li><p>Why is it a good choice?</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 23, 2022 </div>
+
+	<hr />
+
+
+	<h3 id="some-questions">Some questions</h3>
+
+<ul>
+  <li>Are you an instructor, giving training/workshop?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Are you an instructor, giving training or workshops?</li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>Are you using Galaxy for training?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Are you using Galaxy for training?</li>
+</ul>
+
+<p>–</p>
+
+<ul>
+  <li>Do you know the resources of the Galaxy Training Network?</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Do you know the resources of the Galaxy Training Network?</li>
+</ul>
+
+<hr />
+
+<h3 id="galaxy-training-material">Galaxy Training Material</h3>
+
+<p>.image-75[<img src="/training-material/topics/contributing/images/website_screenshot.png" alt="Screenshot of the website" />]</p>
+
+<p>https://training.galaxyproject.org</p>
+
+<p>One website, aggregating training material covering many current research topics.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We have just the resource for you</li>
+  <li>The Galaxy Training Network is a central hub for Galaxy related training materials</li>
+  <li>One website, with hundreds of tutorials and training resources.</li>
+</ul>
+
+<hr />
+
+<h3 id="interactive-learning-via-hands-on-tutorials-built-around-a-research-story">Interactive learning via hands-on tutorials built around a “research story”</h3>
+
+<p><img src="/training-material/topics/contributing/images/interactive_hands_on.png" alt="Screenshot with 2 web-browsers open side-by-side: one pointed at the current tutorial and the other at a Galaxy instance" /></p>
+
+<p>Usable by individual users &amp; instructors</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The GTN is structured as hands-on, interactive tutorials.</li>
+  <li>These promote better learning as students can immediately apply their knowledge.</li>
+  <li>By basing our tutorials around research stories we ensure science is reproducible, and students are doing real world analyses.</li>
+  <li>The materials are usable as self-study, as well as for instructors in front of a classroom.</li>
+</ul>
+
+<hr />
+
+<h3 id="many-tutorials-large-community">Many Tutorials, Large Community</h3>
+
+<!--SNIPPET-->
+<!-- tutorial stats -->
+<div class="row"><div class="col-md-4"> <div class="gtn-card color-agenda">   <div class="card-title">28</div>   <div class="card-text">Topics</div> </div></div><div class="col-md-4"> <div class="gtn-card color-tip">   <div class="card-title">285</div>   <div class="card-text">Tutorials</div> </div></div><div class="col-md-4"> <div class="gtn-card color-details">   <div class="card-title">349</div>   <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div> </div></div><div class="col-md-6"> <div class="gtn-card color-comment">   <div class="card-title">270</div>   <div class="card-text">Contributors</div> </div></div><div class="col-md-6"> <div class="gtn-card color-handson">   <div class="card-title">7.2</div>   <div class="card-text">Years</div> </div></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We have curated over 250 tutorials from as many contributors, over the past years of the GTN.</li>
+  <li>These tutorials cover a wide range of scientific domains, from genomics, to machine learning, to climate sciences.</li>
+</ul>
+
+<hr />
+
+<h3 id="public-peer-reviewed-community-maintained">Public, Peer-Reviewed, Community Maintained</h3>
+
+<p>.image-75[<img src="/training-material/topics/contributing/images/github_screenshot.png" alt="Screenshot of github repo" />]</p>
+
+<p>https://github.com/galaxyproject/training-material</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The GTN is hosted on GitHub, and all changes need to be reviewed before they are accepted.</li>
+  <li>This way, we have peer-reviewed tutorials that are checked by multiple reviewers before being accepted.</li>
+  <li>Our fantastic volunteer community and topic moderators make this process possible.</li>
+</ul>
+
+<hr />
+
+<h1 id="galaxy--gtn-ecosystem-features">Galaxy + GTN Ecosystem Features</h1>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Galaxy and the GTN’s ecosystems work together for an optimised learning experience.</li>
+</ul>
+
+<hr />
+
+<h2 id="tutorial-mode">Tutorial Mode</h2>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/0EYbE4zJqik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Tutorial mode is a recently added feature, wherein you can use the training materials from directly inside Galaxy.</li>
+  <li>No more need to split your screen between a tutorial, and Galaxy.</li>
+  <li>Additionally this adds the important feature of click-to-run tools.</li>
+  <li>All tools used in the tutorials are hyperlinked to the Galaxy server you’re using, just click a tool to activate it in Galaxy.</li>
+</ul>
+
+<hr />
+
+<h2 id="training-infrastructure-as-a-service-tiaas">Training Infrastructure as a Service (TIaaS)</h2>
+
+<p>.pull-left[
+If you’re using a Public Galaxy</p>
+<ul>
+  <li>Sometimes the server is busy</li>
+  <li>It’s too popular, and someone else is running Big Jobs™</li>
+  <li>I need my jobs to complete <strong>fast</strong></li>
+</ul>
+
+<p>If you’re using a Private Galaxy</p>
+<ul>
+  <li>What are my students doing?</li>
+  <li>Are they keeping up?</li>
+  <li>Or goofing off?
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>If you have ever given a training using a Public galaxy server, maybe you have encountered the situation where the server is extremely busy, and your students jobs cannot run.</li>
+  <li>In training you need these to complete quickly.</li>
+  <li>Or if you’re using a private server, you might want to keep an eye on your students.</li>
+</ul>
+
+<p>–</p>
+
+<p>.pull-right[
+TIaaS Provides:</p>
+
+<p>On public servers:</p>
+<ul>
+  <li>Free resources for your events/classes/etc</li>
+  <li>Private Queues on the big servers, <em>only</em> for your class/event.</li>
+</ul>
+
+<p>Everywhere:</p>
+<ul>
+  <li>A live dashboard showing how students are progressing
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>TIaaS provides answers to both of these scenarios.</li>
+  <li>On public Galaxies like Galaxy Europe or Australia, TIaaS provides a private queue to let your jobs run fast</li>
+  <li>But everywhere, it gives you a dashboard to track student progress.</li>
+</ul>
+
+<hr />
+
+<h3 id="the-tiaas-dashboard">The TIaaS Dashboard</h3>
+
+<p><img src="/training-material/topics/teaching/images/tiaas-status.png" alt="screenshot of tiaas dashboard showing a few jobs queued in grey, and a few completed successfully in green" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>This dashboard was developed during a hybrid training event, pre-pandemic.</li>
+  <li>Here we gave a training broadcast into three classrooms, and found we could not feel how fast or slow students were going.</li>
+  <li>Were they completing jobs successfully? Or were they encountering issues?</li>
+  <li>Thus the dashboard was born.</li>
+  <li>It provides an anonymised list of students in the class, and shows which tools have been run recently.</li>
+  <li>If a tool fails, you can know you may need to address this issue with the students.</li>
+  <li>Or you can tell when you see 20 green jobs, that all of your students are done successfully!</li>
+  <li>This allows you to be confident that you can move on with teaching.</li>
+</ul>
+
+<hr />
+
+<h3 id="the-video-library">The Video Library</h3>
+
+<p><img src="/training-material/topics/contributing/images/video-library.png" alt="video library homepage showing some descriptive text and big buttons leading to video library contents" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The video library was a recent pandemic addition to the ecosystem.</li>
+  <li>We gave several remote training events, namely the Smörgåsbord series.</li>
+  <li>There we asked instructors to record themselves teaching a tutorial, and we uploaded these online for students to watch.</li>
+</ul>
+
+<hr />
+
+<p><img src="/training-material/topics/contributing/images/video-library-stats.png" alt="video library stats graphic showing 101 hours and 175 videos" /></p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>These events were a great success, and a wealth of content was produced.</li>
+  <li>Over 100 hours spread across 175 videos.</li>
+  <li>All videos are fully captioned and checked by a human.</li>
+</ul>
+
+<p>–</p>
+
+<p><img src="/training-material/topics/contributing/images/video-library-list.png" alt="video library all videos page listing several categories of tutorials with multiple videos covering Assembly, Climate, and Community" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>So we have collected all of the videos in a central location.</li>
+  <li>You can re-use these freely in your lessons.</li>
+  <li>We have heard that instructors love to include these in their lessons as preperatory videos for students to follow.</li>
+  <li>Students can hear from experts, and come to class prepared for lessons.</li>
+</ul>
+
+<hr />
+
+<h3 id="reusable-videos-with-teaching-resources">Reusable Videos with Teaching Resources</h3>
+
+<p>.pull-left[
+<img src="/training-material/topics/contributing/images/video-library-detail.png" alt="video library detail showing an embedded youtube video, and large metadata box below covering advanced video metadata" />
+]</p>
+
+<p>.pull-right[</p>
+
+<p>Videos with Metadata</p>
+<ul>
+  <li>Description</li>
+  <li>Who Captioned It</li>
+  <li>Associated Materials</li>
+  <li>Support Resources</li>
+  <li>Length</li>
+  <li>License</li>
+</ul>
+
+<p>Embeddable! (E.g. BrightSpace, Blackboard, Moodle, etc.)</p>
+
+<p>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>All of these videos track extensive metadata including who produced and captioned it, associated learning materials like the tutorial or slides, and support resources</li>
+  <li>All of the content is openly licensed for re-use.</li>
+  <li>You can embed it in your classroom software for students to follow!</li>
+</ul>
+
+<hr />
+
+<h2 id="course-builder">Course Builder</h2>
+
+<ul>
+  <li>Want to give a workshop?</li>
+  <li>Don’t want to make a course website?</li>
+  <li>Or embed a bunch of YouTube videos?</li>
+  <li>Based on the video library, build a schedule</li>
+  <li><a href="https://gallantries.github.io/course-builder/">Try it Today!</a></li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>An in-development tool is being produced based on the video library.</li>
+  <li>It will let you easily host a workshop, by selecting which videos and tutorials you want to include.</li>
+  <li>A website is automatically produced that you can use to announce your course.</li>
+  <li>Test it out today, and let us know what bugs you find!</li>
+</ul>
+
+<hr />
+
+<h1 id="tutorial-features">Tutorial Features</h1>
+
+<p>A wide array of tutorial features help you and your learners. The GTN builds features directly into the tutorial framework to <strong>enhance your trainings</strong> and tutorials, with <strong>no extra effort</strong> from yourself.</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Tutorial features are features we build directly into the GTN to enhance the learning experience for students, that come at low or no time cost to you.</li>
+  <li>We’ll go into detail on a few of the great things the GTN provides.</li>
+</ul>
+
+<hr />
+
+<h2 id="keeps-training-fair">Keeps Training FAIR</h2>
+
+<p>GTN is a completely FAIR Training platform, meeting <strong>all 10</strong> criteria of the “Ten simple rules for making training materials FAIR” (<span class="citation"><a href="#Garcia2020">Garcia <i>et al.</i> 2020</a></span>)</p>
+
+<p><a href="/training-material/faqs/gtn/fair_training.html"><em>Read more in the FAQ</em></a></p>
+
+<ul>
+  <li>Rich machine-readable metadata, exposed for search engines</li>
+  <li><a href="https://tess.elixir-europe.org/materials?content_provider=Galaxy+Training">Tracked in TeSS’s Training Repository</a></li>
+  <li>Persistent URLs and DOIs</li>
+  <li>Collaborative infrastructure</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Keeping training FAIR, or findable, accessible, interoperable, and reusable is a hot buzzword these days.</li>
+  <li>Endless papers and resources are produced on how to make your training fair, but implementing that is a lot of work.</li>
+  <li>By using the GTN you are getting FAIR for free!</li>
+  <li>Rich metadata about tutorials and resources are tracked within the GTN’s framework, and exposed in machine readable ways that help us stay fair.</li>
+  <li>All of our tutorials are additionally ingested and tracked by TeSS, the training e-support system of elixir.</li>
+  <li>So get FAIR for free, and use the GTN.</li>
+</ul>
+
+<hr />
+
+<h2 id="keeps-training-accessible-automatically">Keeps Training Accessible (Automatically!)</h2>
+
+<p>The GTN community cares about accessible training for students with disabilities.</p>
+
+<p><strong>Visual</strong></p>
+
+<ul>
+  <li>Screenreader friendly
+    <ul>
+      <li>Alternative slide deck views specifically for screen readers</li>
+    </ul>
+  </li>
+  <li>All images have (overall good) alt text</li>
+</ul>
+
+<p><strong>Auditory</strong></p>
+
+<ul>
+  <li>No sound used outside automated videos</li>
+  <li>Those have transcripts + SRT captions available</li>
+</ul>
+
+<p><strong>Cognitive</strong></p>
+
+<ul>
+  <li>Animations respond to <code class="language-plaintext highlighter-rouge">prefers-reduced-motion</code></li>
+  <li>No auto-playing videos</li>
+  <li>No sounds used</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The GTN community cares about accessibility, and works explicitly to ensure that all of our training resources are automatically accessible.</li>
+  <li>This includes things like our framework generating more-accessible versions of existing training resources automatically.</li>
+  <li>Or ensuring that we require alt text for every image.</li>
+  <li>We cover a broad range of disabilities and accomodations that can be made, and are always open to hearing if there are ways we can improve what we are doing.</li>
+  <li>If you or one of your students needs additional accomodations, please let us know, we will do our best.</li>
+</ul>
+
+<hr />
+
+<h2 id="frequently-asked-questions-library">Frequently Asked Questions Library</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Massive library of common questions</li>
+  <li>Questions over Galaxy</li>
+  <li>Questions over the GTN</li>
+  <li>Reusable snippets that can be used in tutorials!</li>
+  <li><a href="/training-material/faqs/">See them here!</a>
+]</li>
+</ul>
+
+<p>.pull-right[
+<strong>Example FAQs</strong></p>
+<ul>
+  <li>How do I upload via link?</li>
+  <li>How to troubleshoot a failed job</li>
+  <li>Why not use Excel?</li>
+  <li>How to manage histories</li>
+  <li>How to share a history</li>
+  <li>Which Galaxy should I use?
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>One of the things that is only possible at the scale of the GTN is a large FAQ library.</li>
+  <li>With hundreds of training materials, and thousands of trained students, we’ve identified many common questions and stored them as FAQs that can be reused in materials, or provided to students via URL.</li>
+  <li>We use this large resource for all of our common questions for trainings, for answering student questions, and so on.</li>
+</ul>
+
+<hr />
+
+<h2 id="automatic-notebooks">Automatic Notebooks</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>Do you use Jupyter or RStudio notebooks?</li>
+  <li>Do you use them as tutorials, where students can follow along?</li>
+  <li>Check out the GTN’s Automatic Notebook Generation</li>
+</ul>
+
+<p>It’s quite easy:</p>
+
+<ol>
+  <li>Write a GTN tutorial like normal</li>
+  <li>Enable the feature.</li>
+  <li>Select your programming language.</li>
+  <li>Automatic Notebooks are generated!
+]</li>
+</ol>
+
+<p>.pull-right[
+<img src="/training-material/topics/contributing/images/jupyter-notebook-tutorial.png" alt="screenshot of a jupyter notebook showing the tutorial contents, including normal question and solution boxes." />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>If you’ve ever written tutorials that cover programming topics like python or R, you might have wanted to use a notebook</li>
+  <li>Producing a web version of that requires additional steps, and new tools to learn!</li>
+  <li>So the GTN built a way to automatically generate notebooks from plain markdown, just like other GTN tutorials.</li>
+  <li>If you write your lesson, you can easily convert it into a notebook compatible tutorial</li>
+  <li>It will be visible online, for those who just want to read the text</li>
+  <li>And it can be run in jupyter or rstudio via the automatic export of notebooks.</li>
+  <li>Essentially no effort is required on your part.</li>
+</ul>
+
+<hr />
+
+<h2 id="choose-your-own-tutorial">Choose Your Own Tutorial</h2>
+
+<p>.pull-left[
+Do your students choose <strong>Path A</strong> (fresh data access)</p>
+
+<p><img src="/training-material/topics/contributing/images/cyoa-a.png" alt="gtn tutorial showing a CYOA box with EGA-Archive selected, and a big heading about getting DAC access" />
+]</p>
+
+<p>.pull-right[
+Or <strong>Path B</strong> (archived data copies)</p>
+
+<p><img src="/training-material/topics/contributing/images/cyoa-b.png" alt="same tutorial but with the second option selected, accessing data stored on Zenodo and a hands on box instructing the student to download from URL" />
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>A new feature of the GTN is choose your own tutorials.</li>
+  <li>Here we have additional syntax you can use in your tutorial text, which lets you have multiple paths through your tutorial.</li>
+  <li>We use this currently to have an alternative tool for a single step in a longer tutorial.</li>
+  <li>The students can choose between either one assembler, or another.</li>
+  <li>In the above graphic, students choose between a lengthy process to acquire data access, or using a public dataset now.</li>
+</ul>
+
+<hr />
+
+<h2 id="autogenerated-videos">Autogenerated Videos</h2>
+
+<p>Do you hate re-recording slide decks, once you’ve updated a single number, on a single slide?</p>
+
+<p>.pull-right[</p>
+<ul>
+  <li>Try automated videos!</li>
+  <li>By using the GTN’s slide deck platform</li>
+  <li>And adding speaker notes with exactly what you want to say</li>
+  <li>We’ll auto-generate a video</li>
+  <li>Updating ALL visual + spoken portions
+]</li>
+</ul>
+
+<p>.pull-left[
+<img src="/training-material/topics/contributing/images/gtn-videos.png" alt="screenshot of the GTN's video player showing a slide about configuration management, with a transcript and recommended other video below" />
+<a href="https://training.galaxyproject.org/videos/watch.html?v=introduction/tutorials/galaxy-intro-short/slides"><strong>Demo</strong></a>
+]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The GTN has a large library of great slide decks!</li>
+  <li>Many of these already had good speaker notes to help other trainers teach a given topic.</li>
+  <li>So we automatically generate videos from these slides.</li>
+  <li>The speaker notes are read off from the slide and combined with the images, to produce a video.</li>
+  <li>This is one such slide deck, which you may be listening to via an automated video currently! If not, check it out now.</li>
+</ul>
+
+<hr />
+
+<h2 id="feedback">Feedback</h2>
+
+<p>.pull-left[</p>
+<ul>
+  <li>We automatically collect feedback on trainings</li>
+  <li>And aggregate it for tutorial authors to see
+]
+.pull-right[
+<img src="/training-material/topics/contributing/images/feedback.png" alt="two charts show a growth in responses over time, and a heavily 5-star distributino of ratings of a particular tutorial. Below is a section of detailed feedback listing positive and negative aspects." />
+]</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>To support our amazing trainer community, we collect feedback on every tutorial.</li>
+  <li>Students are encouraged to fill out a very short form which records any parts they loved, and what they thought needs improvement.</li>
+  <li>We aggregate these reports for trainers to see, and use them to improve tutorials.</li>
+</ul>
+
+<hr />
+
+<h2 id="page-view-metrics">Page View Metrics</h2>
+
+<p>For every training page, the view metrics are public to see how well training is doing</p>
+
+<p><img src="/training-material/topics/contributing/images/plausible.png" alt="plausible interface screenshot showing that we've drilled down into an introduction tutorial that had 7.1k unique visitors over the last 12 months, with 12k total page views. Below is a top sources table, most come from google, and a top pages table which only shows our selected training page." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Additionally one of the most requested features was the ability to see how often a tutorial was viewed.</li>
+  <li>We used to use google analytics and obtaining that data required a specific person to access it for us.</li>
+  <li>We have replaced that with a public metrics dashboard, where anyone can see the GTN’s page views over time.</li>
+  <li>This particular tutorial was has 7.1 thousand unique views over the last 12 months, and we can see that many viewers came from google and a few university websites.</li>
+</ul>
+
+<hr />
+
+<h2 id="integrated-quizzes">Integrated Quizzes</h2>
+
+<ul>
+  <li>Love Kahoot in theory?</li>
+  <li>But not in practice?</li>
+  <li>The GTN has a built-in Kahoot-like quiz interface</li>
+</ul>
+
+<p><img src="/training-material/topics/contributing/images/quiz.png" alt="image of the gtn section on quizzes with a SQL basics recap quiz, offering self study and classroom modes." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Another feature built into the GTN from teacher frustration was kahoot quizzes.</li>
+  <li>We wanted a similar interface, but not full of adverts or using proprietary infrastructure.</li>
+  <li>Additionally we wanted something we could track and version control, allowing us to review changes to quizzes like we review changes to tutorials.</li>
+  <li>So we built it.</li>
+</ul>
+
+<hr />
+
+<p><img src="/training-material/topics/contributing/images/quiz-view.png" alt="Image of the quiz with the question &quot;What keyword do you use to retrieve data in SQL&quot; and four options in pastel colours." /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Here is what the interface looks like, students see an identical one and can click on the large colourful buttons.</li>
+  <li>A teacher view is available that is kept in-sync with student views.</li>
+  <li>After a question is completed you can review what percentage got it correct.</li>
+  <li>Some of the explicitly competitive features like answering more quickly for more points are not present.</li>
+</ul>
+
+<hr />
+
+<h2 id="planemo-training-development-kit">Planemo Training Development Kit</h2>
+
+<ul>
+  <li>Tutorials require a lot of writing to setup</li>
+  <li>Automates the boring parts!</li>
+</ul>
+
+<p>Steps:</p>
+
+<ol>
+  <li>Build a workflow in Galaxy</li>
+  <li>Publish it</li>
+  <li>Use <a href="http://ptdk.apps.galaxyproject.eu">ptdk.apps.galaxyproject.eu</a> to create a skeleton</li>
+  <li>All steps, tools, parameters are filled out for you!</li>
+</ol>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>We found that writing tutorials was a lot of work, on a lot of routine tasks like describing how to execute Galaxy tools.</li>
+  <li>So the Planemo Training Development Kit or PTDK for short was born.</li>
+  <li>It converts a workflow in Galaxy, into a tutorial ready to be added to the GTN.</li>
+  <li>All workflow steps are converted into text descriptions that students can use to follow the workflow</li>
+  <li>It’s just up to you to add in any formative assessments or explanations you need to help your students understand the background of the analysis.</li>
+</ul>
+
+<hr />
+
+<h2 id="running-a-workshop">Running a workshop</h2>
+
+<p>Lots of resources for new teachers as well:</p>
+
+<ul>
+  <li>Set up a Galaxy for Training (<a href="/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html">tutorial</a>)</li>
+  <li>Good practices to run a workshop (<a href="/training-material/topics/teaching/">tutorials</a>)</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For teachers getting into Galaxy training, we have a large library of resources available to you.</li>
+  <li>We encourage you to check out the “How to teach with Galaxy” topic in the GTN.</li>
+</ul>
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>GTN offers many, many resources for instructors</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+
+<h2 id="bibliography">References</h2>
+<ol class="bibliography"><li id="Garcia2020">Garcia, L., B. Batut, M. L. Burke, M. Kuzak, F. Psomopoulos <i>et al.</i>, 2020 <b>Ten simple rules for making training materials FAIR</b> (S. Markel, Ed.). PLOS Computational Biology 16: e1007854. <a href="https://doi.org/10.1371/journal.pcbi.1007854">10.1371/journal.pcbi.1007854</a></li></ol>
+
+
+
+
+
+
+
+        </div>
+        
+            <footer>
+    <div class="container">
+        <br><br>
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+        The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
+        </p>
+
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/1957b525e767dea15c04bf5c79d3c30d45d3ed44">1957b525e767dea15c04bf5c79d3c30d45d3ed44</a></p>
+    </div>
+</footer>
+
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
