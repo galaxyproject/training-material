@@ -153,7 +153,7 @@ Assembly contains 14,877 transcripts (corresponding to the lines number of the f
 FEELnc is a pipeline which is composed of 3 steps. These 3 steps run directly when running FEELnc in Galaxy. The first step (FEELnc_filter) consists in filtering out unwanted/spurious transcripts and/or transcripts overlapping (in sense) exons of the reference annotation and especially protein_coding exons as they more probably correspond to new mRNA isoforms.
 
 
-To use FEELnc, we need to have a reference annotation file in gtf format, which contains protein-coding genes annotation. Presently, we downloaded only the reference annotation file in gff3 format (annotation.gff3). To generate gtf format, we will use **gffread** which converts GFF3/GT2 records.
+To use FEELnc, we need to have a reference annotation file in gtf format, which contains protein-coding genes annotation. Presently, we downloaded only the reference annotation file in gff3 format (annotation.gff3). To generate gtf format, we will use [*gffread*](https://github.com/gpertea/gffread) which converts GFF3/GT2 records.
 
 
 > ### {% icon hands_on %} Hands-on: FEELnc
