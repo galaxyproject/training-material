@@ -39,7 +39,8 @@ module Jekyll
       "hands-on", "details", "question", "solution", "tip",
     ]
 
-    CLASSES = ICONS.keys.join "|"
+    BOX_CLASSES = ICONS.keys.join "|"
+    TITLE_CLASSES = ICONS.keys.map{|x| "#{x}-title" }.join "|"
 
     def initialize(config)
       @config = config['boxify'] ||= {}
@@ -62,35 +63,40 @@ module Jekyll
        end
     end
 
-    def generate_collapsible_box(box_type, count, title)
+    def generate_collapsible_title(box_type, count, title)
       title_fmted = (title ? ": #{title}" : "")
       return %Q(
-        <div class="box #{box_type}" markdown=0>
         <button class="box-title" type="button" aria-controls="box-#{box_type}-#{count}" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
           #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
           <span role="button" class="fold-unfold fa fa-plus-square"></span>
         </button>
-        <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
-    def generate_static_box(box_type, count, title)
+    def generate_static_title(box_type, count, title)
       title_fmted = (title ? ": #{title}" : "")
       return %Q(
-        <div class="box #{box_type}" markdown=0>
         <div class="box-title" aria-label="#{box_type} box: #{title}">
           #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
         </div>
-        <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
-    def generate_box(box_type, count, title)
+    def generate_title(box_type, count, title)
       if COLLAPSIBLE_BOXES.include?(box_type)
-        return generate_collapsible_box(box_type, count, title)
+        generate_collapsible_title(box_type, count, title)
       else
-        return generate_static_box(box_type, count, title)
+        generate_static_title(box_type, count, title)
       end
+    end
+
+    def generate_box(box_type, count, title)
+      box_title = generate_title(box_type, count, title)
+      return %Q(
+        <div class="box #{box_type}" markdown=0>
+        #{box_title}
+        <div id="box-#{box_type}-#{count}" class="box-content" markdown=1>
+      ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
     def boxify(page, site)
@@ -99,6 +105,16 @@ module Jekyll
       end
       count = 0
 
+      # Interim solution, fancier box titles
+      page.content = page.content.gsub(/<(#{TITLE_CLASSES})>([^<]*)<\/\s*\1>/) {
+        box_type = $1
+        count += 1
+        box = generate_title(box_type, count, nil)
+        puts "BOX #{box}"
+        box
+      }
+
+      # Long term solution, proper new boxes
       page.content = page.content.gsub(/<(#{CLASSES})>/) {
         box_type = $1
         box = generate_box(box_type, 0, nil)
