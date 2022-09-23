@@ -184,7 +184,7 @@ There are multiple methods using particular algorithms, or even their combinatio
  
 To help you evaluate which method would work best for your data, check out this [**awesome comparision site - dynguidelines**](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).     
   
-.image-100[ ![zouter](../../images/scrna-casestudy-monocle/zouter.jpg) ]
+![zouter](../../images/scrna-casestudy-monocle/zouter.jpg) 
 
 ]
 
@@ -204,6 +204,8 @@ To help you evaluate which method would work best for your data, check out this 
 - Trajectory analysis is quite a sensitive method, so always check if the obtained computational results make biological sense!
 
 ]
+
+--
 
 .pull-right[  
   
@@ -231,7 +233,8 @@ Cells can differentiate or develop in various way, so they may exhibit different
   
   
 .pull-left[
-    
+<br />
+<br />
 - diffusion pseudotime (DPT) and branch points
  - DPT does not rely on dimension reduction and can thus detect subtle changes in high-dimensional gene expression patterns
  - DPT-based analysis proceeds by identifying branching points that occur after cells progress from a root cell through a common ‘trunk trajectory’   
@@ -248,8 +251,14 @@ Cells can differentiate or develop in various way, so they may exhibit different
 --
 
 .pull-right[ 
-  
-  
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 ![branch](../../images/scrna-casestudy-monocle/branch.jpg)  
 
 ]
@@ -261,8 +270,7 @@ Cells can differentiate or develop in various way, so they may exhibit different
 --
 
 .pull-left[  
-  
-
+<br />
 ![root_cells](../../images/scrna-casestudy-monocle/root_cells.jpg)  
 
 ]
@@ -270,8 +278,8 @@ Cells can differentiate or develop in various way, so they may exhibit different
 --
 
 .pull-right[
-    
- 
+<br />
+<br />
 - Some algorithms work fully unsupervised, ie. the user is not required to input any priors.  
 
 - However, many of them take the ‘starting cell’, or ‘end cell’ as information that helps to infer the trajectory which best represents the actual biological processes.  
@@ -313,7 +321,7 @@ Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID
 
 - Implementations  
 
-![implementation](../../images/scrna-casestudy-monocle/implementation.jpg)  
+.image-100[ ![implementation](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
 
 ---
 ### When analysing your data, consider the following: **Number of cells and features**
@@ -335,367 +343,110 @@ Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID
 It doesn't directly affect your analysis, however do bear in mind that calculations performed during dimensionality reduction, especially on large datasets, can be really time-consuming. Therefore, you might consider if you won't be limited by any of those factors.
 
 ---
+### Trajectory analysis methods used in Galaxy
+--
 
-
-
-Slides begin with a title `### ...` and should end with a `---`
-
-???
-
-- Slides are written with standard markdown, and begin with a header, and end with three dashes.
-- Lists, links, and images are all written with their normal syntax.
-- If you're familiar with markdown and already writing your tutorial in it, this should be an easy addition.
-- The only differences are the dashes to separate slides, and speaker notes which we'll cover later.
-
----
-
-
-
-### Formatting: Alignment
-
-.left[Left-aligned text]
-.center[Centered text]
-.right[Right-aligned text]
-.left[![Left-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-.center[![Centered image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-.right[![Right-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-
-```markdown
-.left[Left-aligned text]
-.center[Centered text]
-.right[Right-aligned text]
-.left[![Left-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-.center[![Centered image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-.right[![Right-aligned image]({{ site.baseurl }}/assets/images/GTN-60px.png)]
-```
-
-???
-
-- Everything can be aligned using several CSS classes which are provided, left, right, and center.
-- The classes are added with a dot followed by the class, and then the contents within square brackets.
-
----
-
-
-
-### Formatting: Incremental Text
-
-1. Item
-
-???
-
-- Incremental text can be added
+- PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}))   
 
 --
 
-2. Appears
+- RaceID ([Downstream Single-cell RNA analysis with RaceID]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}))  
 
-???
+--
 
-- And appears incrementally on every slide.
+- Monocle3 ([Trajectory Analysis using Monocle3]({% link topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial.md %})) 
+
+--
+
+- scVelo (coming soon) 
+
+---
+### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
+.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+
+--
+
+-  Provides an interpretable graph-like map of the arising data manifold, based on estimating connectivity of manifold partitions. The graph nodes correspond to cell groups and whose edge weights quantify the connectivity between groups  
+
+--
+
+- By following high-confidence paths in the abstracted graph and ordering cells within each group in the path according to their distance from a progenitor cell, we trace gene changes at single-cell resolution. Hence, PAGA covers both aspects of clustering and pseudotemporal ordering by providing a coordinate system that allows us to explore variation in data while preserving its topology
+
+--
+
+- Provides a natural way of abstracting both topological information and information about RNA velocity  
+
+--
+
+- Available within [Scanpy](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.paga.html)  
+
+--
+
+![paga](../../images/scrna-casestudy-monocle/paga.jpg)  
+
+---
+### Trajectory analysis methods used in Galaxy: **RaceID**
+.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+
+--
+
+-  An algorithm for rare cell type identification in complex populations of single cells 
+
+--
+
+- The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric
+
+--
+
+- An initial clustering is followed by an outlier identification based on a backgorund model of combined technical and biological variability in single-cell RNA-seq data obtained by quantification with unique molecular identifiers  
+
+
+![raceID](../../images/scrna-casestudy-monocle/raceid.jpg)  
+
+---
+### Trajectory analysis methods used in Galaxy: **Monocle3**
+.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+
+--
+
+- Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress  
+
+--
+
+- Orders cells by learning an explicit principal graph from the single cell genomics data with advanced machine learning techniques (Reversed Graph Embedding), which robustly and accurately resolves complicated biological processes  
+
+--
+
+- Performs clustering (i.e. using t-SNE and density peaks clustering), differential gene expression testing, identifies key marker genes to discover and characterise cell types, infers trajectories
 
 --
 
 
-Just separate every item with two dashes (`--`)
+![monocle](../../images/scrna-casestudy-monocle/monocle.jpg)  
 
-```markdown
-1. Item
+---
+### Trajectory analysis methods used in Galaxy: **scVelo**
+.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
 
 --
 
-2. Appears
-```
+- Estimates RNA velocity to study cellular dynamics, reaction rates of transcription, splicing and degradation     
 
-???
+--
 
-- You can accomplish this with two dashes instead of three for incremental slides.
-- The dashes should be on their own line, just like the slide separating dashes.
+- Identifies putative driver genes and regimes of regulatory changes and uses statistical tests, e.g., to detect different kinetics regimes     
 
----
+--
 
+- Infers a latent time to reconstruct the temporal sequence of transcriptomic events     
 
+--
 
-### Formatting: Images
+- Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models    
 
-.pull-left[
-Demo:
-
-10%
-
-.image-10[ ![GTN Logo (tiny)]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
-
-50%
-
-.image-50[ ![GTN Logo (slightly larger)]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
-
-]
-.pull-right[
-Source:
-
-```markdown
-10%
-.image-10[
-  ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
-]
-
-50%
-.image-50[
-  ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
-]
-```
-]
+--
 
 
-There are [other CSS classes available](https://github.com/galaxyproject{{ site.baseurl }}/blob/main/assets/css/slides.css#L67) for other sizes
-
-???
-
-- There are a number of CSS classes available to use for styling the content you show on your slides.
-- Here you can see images scaled to 10% and 50%.
-- There are a number of other classes that you can find in the GTN's codebase.
-
+![scvelo](../../images/scrna-casestudy-monocle/scvelo.jpg)  
 
 ---
-
-
-
-### Formatting: Tables
-
-.pull-left[
-Demo:
-
-column1    | column2      | column3
----        | ---          | ---
-aaaaaaaaaa | bbbb         | cccc
-dddd       | eeeeeeeeeeee | ffff
-gggg       | hhhh         | iiiiiiiiii
-]
-
-.pull-right[
-Source:
-
-```markdown
-column1    | column2      | column3
----        | ---          | ---
-aaaaaaaaaa | bbbb         | cccc
-dddd       | eeeeeeeeeeee | ffff
-gggg       | hhhh         | iiiiiiiiii
-```
-]
-
-By default, tables are left-aligned with text left-aligned.
-
-???
-
-- Tables can be written in the simplified markdown syntax, or using a more complex one that allows for alignment.
-- Here a simple table is shown with several columns.
-- The tables do not need to be aligned, we just did that in this slide for clarity.
-
----
-
-
-
-### Formatting: Tables with Aligned Text
-
-Different alignments for the individual columns can be controlled with the `:` character
-
-.pull-left[
-Demo:
-
-| Tables       | Are      | Cool          |
-|:-------------|:--------:|--------------:|
-| left-aligned | centered | right-aligned |
-| row2         | row2     | row2          |
-
-]
-
-.pull-right[
-Source:
-```markdown
-| Tables       | Are      | Cool          |
-|:-------------|:--------:|--------------:|
-| left-aligned | centered | right-aligned |
-| row2         | row2     | row2          |
-```
-]
-
-???
-
-- If you need more complex tables, you can use the colon character to control the alignment.
-- If you are presenting numeric data or similar then this can be useful to make the data more readable.
-
----
-
-
-
-### Formatting: Footnotes
-
-Content with footnotes
-
-Source:
-```markdown
-.footnote[Normal footnote with plenty of text]
-```
-
-Demo:
-
-.footnote[Normal footnote with plenty of text]
-
-???
-
-- Footnotes can be used for explanatory notes or adding things like references.
-- References are ideal footnote content as they are not necessarily important for comprehension of the slides, but might be useful later for learners.
-
----
-
-
-
-### Formatting: Two Columns
-
-This is achived with the `.pull-left` and `.pull-right` classes.
-
-```markdown
-.pull-left[
-Some text, as many texts as we want...
-
-or even table
-
-column1 | column2 | column3
---- | --- | ---
-row1 | r1c2 | r1c3
-row2 | r2c2 | r2c3
-row3 | r3c2 | r3c3
-]
-
-.pull-right[ ![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png) ]
-```
-
-Will be rendered as:
-
-???
-
-- Two column layouts can easily be achieved with the pull left and pull right classes.
-- The result of this is demonstrated on the next slide.
-
-
----
-
-
-
-### Formatting: Two Columns
-
-.pull-left[
-Some text, as many text as we want.....
-
-or even table
-
-column1 | column2 | column3
---- | --- | ---
-row1 | r1c2 | r1c3
-row2 | r2c2 | r2c3
-row3 | r3c2 | r3c3
-]
-
-.pull-right[
-![GTN Logo]({{ site.baseurl }}/assets/images/GTN-60px.png)
-]
-
-???
-
-- Any content can be placed in the left and right columns
-- The addition of these classes will wrap all of their contents and place them on the left or right sides.
-- The two column layout is an especially good choice if you want to show a graphic and discuss some important points related to it.
-
----
-
-
-
-## Presenter Notes
-
-Allows you to:
-
-- See the next slide before the audience
-- See notes you have made on your slides
-
-![Image showing presenter mode](../../images/presenter-mode.png)
-
-???
-
-- Presenter Mode lets you have two windows with the same slides, one with presenter notes and a preview of the upcoming slide.
-- When giving presentations with multiple screens or on a projector, this makes life less stressful.
-- You can use the presenter notes to remind you, and others, of important content to mention on each slide.
-
----
-
-
-
-### Presenter Notes: Formatting
-
-.left[
-<br/>
-&#35;&#35;&#35; My Slide
-<br/><br/>
-Some text!
-<br/><br/>
-&#63;&#63;&#63;
-<br/><br/>
-Things written below the ??? are only shown in the
-presenter view. Press `p` to bring this up
-<br/><br/>
-&#45;&#45;&#45;
-<br/><br/>
-]
-
-???
-
-- Things written below the three question marks are only shown in the presenter view.
-- Press P to bring this up, and the question mark to show the presenter view shortcut keys.
-
-
----
-
-
-
-## Shortcut Keys
-
-- <kbd>?</kbd> activates help
-- <kbd>Escape</kbd> leaves help
-- <kbd>p</kbd> activates presenter mode
-- <kbd>f</kbd> activates full screen mode
-- <kbd>c</kbd> clones the slides into a popup
-
-???
-
-- The key to close the help isn't shown in the keyboard shortcuts, but it is the escape key.
-- There are a number of other shortcuts which can be useful to know about.
-- The clone window function creates a popup with a copy of the slides, this can be used to show the presenter notes on one screen, and the actual slides on another screen that learners can see.
-
----
-
-## Videos
-
-.pull-left[
-- Slides with good speaker notes can be turned into videos
-- Enable this in the metadata of the slides:
-
-  ```markdown
-  title: "Creating Slides"
-  video: true
-  questions:
-    - "How to format slides?"
-  ```
-
-- automatically rendered into narrated videos by the GTN
-]
-
-.pull-right[
-.image-100[![Screenshot of GTN video player showing a set of slides with a play icon and a transcript](../../images/slides-to-video.png)]
-]
-
-???
-
-- The GTN automatically creates videos from selected slide decks.
-- Simply by setting video to true to the metadata, slides with sufficiently good speaker notes can be automatically turned into videos.
-- The slides have audio narration spoken from the script of the speaker notes by AWS Polly.
-- The audio clips, and slides are combined into a video which is then available in the GTN Video Library
