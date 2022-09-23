@@ -219,7 +219,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 > > You may have to login again to [live.usegalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
 > > and switch to the correct history.
 > >
-> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
+> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > {: .tip}
 >
 > 1. Open the {% tool [Panoply](interactive_tool_panoply) %}
