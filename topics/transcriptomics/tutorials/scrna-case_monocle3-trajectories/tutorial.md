@@ -44,14 +44,14 @@ contributions:
     - hexylena
     - nomadscientist
   funding:
-    - EPSRC Training Grant
+    - epsrc-training-grant
 ---
 
 # Introduction
 
 This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/transcriptomics/index.md %}), we will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) or [filter, plot and process scRNA-seq data]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today.
 
-In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis here /slides/. We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
+In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis in our [slide deck]({% link topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/slides.html %}). We have already analysed the trajectory of our sample using ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. Now you can go through the same steps but using a different method to compare the results, usability and the final outcome! Sounds exciting, let’s dive into that! 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
@@ -382,7 +382,7 @@ However, PCA is more commonly used, and it also allows us to perform further ste
 
 Now it’s time for the proper dimensionality reduction so that instead of the initial thousands of dimensions, we can get only 2 and hence plot all the cells on one 2D graph. Again, there are several algorithms to do that: UMAP, tSNE, PCA and LSI (only possible when preprocess_method is set to 'LSI'), but due to the same reasons as above, we’ll use UMAP (most common + allows further operations + best results). But I’ll let you see how the output from other algorithms look to convince you that **UMAP** is indeed the best in this case. Of course it might happen that by choosing different pre-processing values, tSNE or PCA plots would look better, so don't be afriad to play around the parameters and test them!
 
-![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of generated clusters, depending on the algorithm of dimentionality reduction that was chosen and applied to the output of the preprocessing step (except LSI method which was called on LSI-preprocessed data).")
+![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them nicely.")
 
 > ### {% icon hands_on %} Hands-on: Dimensionality reduction
 >
