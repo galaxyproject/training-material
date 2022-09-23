@@ -17,12 +17,6 @@ key_points:
 - Educators help learners make connections
 - Educators should be aware of the limitations of expertise, e.g. the expert blind spot or fluid representations
 - Educators should detect and remediate misconceptions
-contributors:
-- bebatut
-- fpsom
-- allegravia
-- ppalagi
-- elixir-goblet-ttt
 contributions:
   authorship:
     - bebatut

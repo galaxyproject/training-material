@@ -13,9 +13,6 @@ objectives:
 - Use Galaxy to teach online
 key_points:
 - There are different ways of teaching online
-contributors:
-- bebatut
-- fpsom
 contributions:
   authorship:
     - bebatut

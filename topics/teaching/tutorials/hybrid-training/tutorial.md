@@ -15,9 +15,6 @@ objectives:
 key_points:
 - With hybrid training events, remote instructors pair up with on-site helpers to deliver 1 training across multiple sites simultaneously
 - Hybrid training events reduce costs and improve accessibility
-contributors:
-- bebatut
-- fpsom
 contributions:
   authorship:
     - bebatut
@@ -182,4 +179,8 @@ Debrief
 
 ### After the workshop
 
+<<<<<<< HEAD
 {% include {{ page.dir }}instructor-after.md %}
+=======
+{% include {{ page.dir }}instructor-after.md %}
+>>>>>>> main

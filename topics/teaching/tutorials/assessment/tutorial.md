@@ -23,12 +23,6 @@ requirements:
     tutorials:
     - learning-principles
     - design
-contributors:
-- bebatut
-- fpsom
-- allegravia
-- ppalagi
-- elixir-goblet-ttt
 contributions:
   authorship:
     - bebatut

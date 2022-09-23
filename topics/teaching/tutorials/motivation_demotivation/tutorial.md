@@ -19,12 +19,6 @@ requirements:
     topic_name: contributing
     tutorials:
     - learning-principles
-contributors:
-- bebatut
-- fpsom
-- allegravia
-- ppalagi
-- elixir-goblet-ttt
 contributions:
   authorship:
     - bebatut

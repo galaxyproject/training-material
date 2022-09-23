@@ -21,12 +21,9 @@ tags:
   - cyoa
 ---
 
-# Introduction
-{:.no_toc}
+UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use Galaxy with a private queue for your training event. Your trainees' jobs won't wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the Galaxy admins, rather than feeling the stress of debugging and fixing your private Galaxy.
 
 ![TIaaS Logo](../../images/tiaas-logo.png){: width="500px"}
-
-UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use Galaxy with a private queue for your training event. Your trainees' jobs won't wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the Galaxy admins, rather than feeling the stress of debugging and fixing your private Galaxy.
 
 > ### Agenda
 >
@@ -127,6 +124,3 @@ It shows:
    - Jobs are failing unexpectedly
 2. Remind your participants to submit bug reports if they experience any tool errors
 3. Follow the rest of the training material's [guide to running a workshop]({% link topics/teaching/tutorials/running-workshop/tutorial.md %})
-
-# Conclusion
-{:.no_toc}
