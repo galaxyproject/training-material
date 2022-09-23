@@ -1,6 +1,8 @@
 ---
 username: tklingstrom
 layout: training_philosophy
+redirect_from:
+  - /topics/instructors/philosophies/2018-11-02-tklingstrom
 ---
 
 I have been working in three very different training environments.
