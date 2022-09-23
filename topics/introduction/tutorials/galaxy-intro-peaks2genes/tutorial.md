@@ -102,7 +102,7 @@ Let's start with a fresh history.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
-> 2. Click on the upload button in the upper left ot the interface
+> 2. Click on the upload button in the upper left of the interface
 >
 >![Upload Data Icon](../../images/Upload_Data.PNG)
 >
