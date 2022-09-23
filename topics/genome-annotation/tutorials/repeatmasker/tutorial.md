@@ -92,7 +92,6 @@ In this tutorial you will learn how to soft-mask the genome sequence of a small 
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-
 {: .hands_on}
 
 # Soft-masking using Red
