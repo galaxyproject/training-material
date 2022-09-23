@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Long non-coding RNAs (lncRNAs) annotation with FEELnc
-zenodo_link: https://zenodo.org/record/5726818
+zenodo_link: https://zenodo.org/record/7107050
 tags:
   - eukaryote
 questions:
@@ -77,7 +77,7 @@ FEELnc (FlExible Extraction of Long non-coding RNA) is a pipeline to annotate ln
 
 # Data upload
 
-To assemble transcriptome with StringTie and annotate lncRNAs with FEELnc, we will use the following files (the same data than the Apollo tutorial):
+To assemble transcriptome with StringTie and annotate lncRNAs with FEELnc, we will use the following files :
 
 - The **genome sequence** in fasta format. For this tutorial, we will use the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}).
 - The **genome annotation** in gff3 format. For this tutorial, we will use the genome annotation obtained in the [Funannotate tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
@@ -99,9 +99,9 @@ To assemble transcriptome with StringTie and annotate lncRNAs with FEELnc, we wi
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/genome.fasta
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/annotation.gff3
->    https://zenodo.org/api/files/042ff43f-cd53-45ec-90cf-781fe53e3771/rnaseq.bam
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_assembly.fasta
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_annotation.gff3
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/all_RNA_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -120,11 +120,11 @@ A reference annotation file in GTF or GFF3 format can be provided to StringTie w
 >
 > {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.7+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->    - {% icon param-file %} *"Input short mapped reads"*: `rnaseq.bam`
+>    - {% icon param-file %} *"Input short mapped reads"*: `all_RNA_mapped.bam`
 >    - *"Specify strand information"*: Unstranded
 >    - *"Use a reference file to guide assembly?"*: Use reference GTF/GFF3
 >    - *"Reference file"*: Use a file from history
->        - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `annotation.gff3`
+>        - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `genome_annotation.gff3`
 >    - *"Use Reference transcripts only?"*: `No`
 >    - *"Output files for differential expression?"*: `No additional output`
 >    - *"Output coverage file"*: `No`
@@ -159,14 +159,14 @@ To use FEELnc, we need to have a reference annotation file in gtf format, which 
 > ### {% icon hands_on %} Hands-on
 
 > 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file"*: `annotation.gff3`
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file"*: `genome_annotation.gff3`
 >    - *"Feature File Output"*: `GTF`
 > Rename output in
 >
 > 2. {% tool [FEELnc](toolshed.g2.bx.psu.edu/repos/iuc/feelnc/feelnc/0.2) %} with the following parameters:
 >    - {% icon param-file %} *"Transcripts assembly"*: `Assembled transcript` (output of **StringTie** {% icon tool %})
->    - {% icon param-file %} *"Reference annotation"*: `annotation.gtf` (Output of **gffread** {% icon tool %})
->    - {% icon param-file %} *"Genome sequence"*: `genome.fasta`
+>    - {% icon param-file %} *"Reference annotation"*: `genome_annotation.gtf` (Output of **gffread** {% icon tool %})
+>    - {% icon param-file %} *"Genome sequence"*: `genome_assembly.fasta`
 >
 {: .hands_on}
 
