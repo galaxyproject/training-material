@@ -40,9 +40,9 @@ abbreviations:
 
 requirements:
  - type: internal
-   topic_name: lncrna-annotation
+   topic_name: genome-annotation
    tutorials:
-     - lncrna
+     - funannotate
 
 subtopic: eukaryote
 priority: 2
@@ -52,16 +52,16 @@ priority: 2
 # Introduction
 {:.no_toc}
 
-Messenger RNAs (mRNAs) are not the only type of RNAs present in different organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vaste repertoire of small (miRNAs, snRNAs) and long non-coding RNAs (lncRNAs) are also present. LncRNAs are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. LncRNAs are important because of their major roles in cellular machinery and their presence in large numbers. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the GENCODE project (https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
+Messenger RNAs (mRNAs) are not the only type of RNAs present in different organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vaste repertoire of small (miRNAs, snRNAs) and long non-coding RNAs (lncRNAs) are also present. LncRNAs are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. LncRNAs are important because of their major roles in cellular machinery and their presence in large numbers. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
 
 Using RNASeq data, we can reconstruct assembled transcripts (with ou without any reference genome) which must then be annotated and identified in particular as mRNAs or lncRNAs.
 
-In this tutorial, we will use a software tool called StringTie ({% cite XXX %}) to assemble the transcripts and a software tool called FEELnc ({% cite XXX %}) to annotate the assembled transcripts of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
+In this tutorial, we will use a software tool called StringTie({% cite Pertea %}) to assemble the transcripts and a software tool called FEELnc ({% cite Wucher %}) to annotate the assembled transcripts of a small eukaryote: [*Mucor mucedo*](https://en.wikipedia.org/wiki/Mucor_mucedo) (a fungal plant pathogen).
 
-StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts
-http://ccb.jhu.edu/software/stringtie/
+[*StringTie*](https://github.com/gpertea/stringtie) is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts
 
-FEELnc (FlExible Extraction of Long non-coding RNA) is a pipeline to annotate lncRNAs from RNASeq assembled transcripts. As explained on https://github.com/tderrien/FEELnc, FEELnc is composed of 3 modules:
+
+[*FEELnc (FlExible Extraction of Long non-coding RNA)*](https://github.com/tderrien/FEELnc) is a pipeline to annotate lncRNAs from RNASeq assembled transcripts. FEELnc is composed of 3 modules:
 * FEELnc_filter.pl	: Extract, filter candidate transcripts.
 * FEELnc_codpot.pl	: Compute the coding potential of candidate transcripts.
 * FEELnc_classifier.pl: Classify lncRNAs based on their genomic localization wrt others transcripts.
