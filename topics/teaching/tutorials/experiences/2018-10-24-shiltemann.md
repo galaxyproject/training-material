@@ -1,6 +1,8 @@
 ---
 layout: training_philosophy
 username: shiltemann
+redirect_from:
+  - /topics/instructors/philosophies/2018-10-24-shiltemann
 ---
 
 First off, I really like this idea of collecting different instructor's experiences, and love hearing about other people's styles, I am still trying to find what works best in which situations and this is great!
