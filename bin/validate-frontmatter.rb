@@ -109,13 +109,13 @@ def lint_faq_file(fn)
   begin
     data = YAML.load_file(fn)
   rescue
-    puts "Skipping #{fn}"
+    $stderr.puts "Skipping #{fn}"
     return nil
   end
 
   # Check this is something we actually want to process
   if ! data.is_a?(Hash) then
-    puts "Skipping #{fn}"
+    $stderr.puts "Skipping #{fn}"
     return nil
   end
   errs.push(*validate_document(data, $faq_validator))
@@ -129,20 +129,25 @@ def lint_file(fn)
   begin
     data = YAML.load_file(fn)
   rescue
-    puts "Skipping #{fn}"
+    $stderr.puts "Skipping #{fn}"
     return nil
   end
 
   # Check this is something we actually want to process
   if ! data.is_a?(Hash) then
-    puts "Skipping #{fn}"
+    $stderr.puts "Skipping #{fn}"
     return nil
   end
 
   if not fn.include?('metadata.yaml') then
     # Load topic metadata
     topic = fn.split('/')[2]
-    topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+    begin
+      topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+    rescue
+      puts "Could not load topics/#{topic}/metadata.yaml"
+      return nil
+    end
 
     # Load subtopic titles
     if data.key?('subtopic') then
@@ -183,18 +188,20 @@ def lint_file(fn)
     if not (data.has_key?('contributors') or data.has_key?('contributions'))
       errs.push("Document lacks EITHER contributors OR contributions key")
     end
+    if (data.has_key?('contributors') and data.has_key?('contributions'))
+      errs.push("Document has duplicated contributors AND contributions key")
+    end
   end
 
-  # If we had no errors, validated successfully
-  if errs.length == 0 then
-    #puts "\e[38;5;40m#{fn} validated succesfully\e[m"
-  else
-    # Otherwise, print errors and exit non-zero
-    puts "\e[48;5;09m#{fn} has errors\e[m"
-    errs.each {|x| puts "  #{x}" }
-  end
   return errs
 end
+
+require 'optparse'
+
+options = {}
+OptionParser.new do |opt|
+  opt.on('-l', '--list') { |o| options[:list] = o }
+end.parse!
 
 
 ec = 0
@@ -211,13 +218,17 @@ Find.find('./topics') do |path|
       errs = lint_file(path)
       if !errs.nil? && errs.length > 0 then
         ec = 1
-        puts path
-        puts errs
+        if options[:list] then
+          puts "#{path}"
+        else
+          # Otherwise, print errors and exit non-zero
+          puts "\e[48;5;09m#{path} has errors\e[m"
+          errs.each {|x| puts "  #{x}" }
+        end
       end
     end
   end
 end
-
 
 Dir.glob("**/faqs/**/*.md") do |path|
   if FileTest.directory?(path)
@@ -233,8 +244,13 @@ Dir.glob("**/faqs/**/*.md") do |path|
         errs = lint_faq_file(path)
         if !errs.nil? && errs.length > 0 then
           ec = 1
-          puts path
-          puts errs
+          if options[:list] then
+            puts "#{path}"
+          else
+            # Otherwise, print errors and exit non-zero
+            puts "\e[48;5;09m#{path} has errors\e[m"
+            errs.each {|x| puts "  #{x}" }
+          end
         end
       end
     end
