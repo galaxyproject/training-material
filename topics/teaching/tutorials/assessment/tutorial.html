@@ -1,0 +1,1406 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Assessment and feedback in training and teachings</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Assessment and feedback in training and teachings" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Bérénice Batut" />
+<meta name="DC.creator" content="Fotis E. Psomopoulos" />
+<meta name="DC.creator" content="Allegra Via" />
+<meta name="DC.creator" content="Patricia Palagi" />
+<meta name="DC.creator" content="ELIXIR Goblet Train the Trainers" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Assessment and feedback in training and teachings" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/teaching" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Teaching and Hosting Galaxy training
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/assessment/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/teaching/faqs/" title="Check our FAQs for the Teaching and Hosting Galaxy training topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/teaching/tutorials/assessment/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/teaching/tutorials/assessment/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/teaching/tutorials/assessment/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/teaching/tutorials/assessment/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/teaching/tutorials/assessment/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Assessment and feedback in training and teachings",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Teaching and Hosting Galaxy training",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Assessment and feedback in training and teachings' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html",
+  "timeRequired": "PT3H30M",
+  "keywords": "teaching",
+  "description": "The questions this  addresses are:\n - What are the different types of feedback?\n - When do get and receive feedback?\n - For which purpose do we need feedback?\n\n\\nThe objectives are:\n - Describe the differences between formative and summative assessment\n - Explain why frequent feedback is important\n - Describe a few techniques for formative feedback\n - List a few techniques to cope with feedback on your teaching efforts\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html",
+      "name": "Principles of learning and how they apply to training and teaching",
+      "description": "Hands-on for 'Principles of learning and how they apply to training and teaching' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html",
+      "name": "Design and plan session, course, materials",
+      "description": "Hands-on for 'Design and plan session, course, materials' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Teaching and Hosting Galaxy training",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-teaching">
+    <h1 data-toc-skip>Assessment and feedback in training and teachings</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+
+<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/fpsom?s=27" alt="Avatar">Fotis E. Psomopoulos</a>
+
+
+
+<a href="/training-material/hall-of-fame/allegravia/" class="contributor-badge contributor-allegravia"><img src="https://avatars.githubusercontent.com/allegravia?s=27" alt="Avatar">Allegra Via</a>
+
+
+
+<a href="/training-material/hall-of-fame/ppalagi/" class="contributor-badge contributor-ppalagi"><img src="https://avatars.githubusercontent.com/ppalagi?s=27" alt="Avatar">Patricia Palagi</a>
+
+
+
+<a href="/training-material/hall-of-fame/elixir-goblet-ttt/" class="contributor-badge contributor-elixir-goblet-ttt"><img src="https://avatars.githubusercontent.com/elixir-goblet-ttt?s=27" alt="Avatar">ELIXIR Goblet Train the Trainers</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are the different types of feedback?</p>
+</li>
+        
+        <li><p>When do get and receive feedback?</p>
+</li>
+        
+        <li><p>For which purpose do we need feedback?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Describe the differences between formative and summative assessment</p>
+</li>
+        
+        <li><p>Explain why frequent feedback is important</p>
+</li>
+        
+        <li><p>Describe a few techniques for formative feedback</p>
+</li>
+        
+        <li><p>List a few techniques to cope with feedback on your teaching efforts</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/contributing">Contributing to the Galaxy Training Material</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Principles of learning and how they apply to training and teaching:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Design and plan session, course, materials:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/contributing/tutorials/design/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours 30 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<ul>
+  <li><strong>Assessment</strong>: evaluation or estimation of the nature, quality, or ability of someone or something</li>
+  <li><strong>Feedback</strong>: integrate the output of the assessment in the learning process</li>
+</ul>
+
+<p>Teaching goal for this session is to develop an understanding of <strong>different types of feedback</strong>,when to give and receive feedback, and for which <strong>purpose</strong>.
+By the end of this session, you will be able to:</p>
+<ul>
+  <li><strong>Describe</strong> the differences between formative and summative assessment</li>
+  <li><strong>Tell</strong> why frequent feedback is important</li>
+  <li><strong>List</strong> and <strong>describe</strong> a few techniques for formative feedback</li>
+</ul>
+
+<p>The flowchart below highlights where the assessment and feedback phase falls in the overall Nicholls process (<span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span> and <span class="citation"><a href="#nicholls2002developing">Nicholls 2002</a></span>):</p>
+
+<figure id="figure-1"><img src="images/NichollsPhases.png" alt="A flow chart of the five phases of the instructional design. The 1st phase is to select the Learning Outcomes, followed by the selection of the corresponding Learning Experiences. The third phase is to select the content that is relevant to the LO. The fourth phase is the development of the necessary assessments for the learners, with the final phase being the evaluation of the effectiveness of the LE and the LO, at which point the flow connects back to the first phase for the refinement of the process." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> 5 phases of instructional design described by Nicholls et al in Developing teaching and learning in higher education. London, UK: Routledge. pp 51-75</figcaption></figure>
+
+<h1 id="assessments">Assessments</h1>
+
+<p>There are different types of assessments:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Assessment</th>
+      <th>Timing</th>
+      <th>Objectives</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Pre-course assessment</strong></td>
+      <td>Before the course</td>
+      <td>verify the target audience of the course</td>
+    </tr>
+    <tr>
+      <td><strong>Preventive assessment</strong></td>
+      <td>Beginning of the course</td>
+      <td>final adjustments of the course to the reality of the participants</td>
+    </tr>
+    <tr>
+      <td><strong>Formative assessment</strong></td>
+      <td>During the course</td>
+      <td>pilot in real time if learning is taking place</td>
+    </tr>
+    <tr>
+      <td><strong>Summative assessment</strong></td>
+      <td>Right after the course</td>
+      <td>measure and evaluate the knowledge and skills acquired</td>
+    </tr>
+    <tr>
+      <td><strong>Strategic evaluation</strong></td>
+      <td>After the course, long time after the course</td>
+      <td>measure the adequacy, quality and impact of the course</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>and different ways that we can categorise them:</p>
+
+<p><img src="images/assessment-categories.png" alt="A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process." loading="lazy" /></p>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Diagnostic Assessment - Break-out room discussion  - *<i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 15 min*
+>
+> - Split into groups of 4, depending on the number of participants.
+> - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
+> - Write it in a notebook and discuss with the rest of the group.
+{: .hands_on}-->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-diagnostic-assessment"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Diagnostic Assessment</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/diagnostic_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/diagnostic_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<h2 id="formative-vs-summative-assessment">Formative vs summative assessment</h2>
+
+<ul>
+  <li>
+    <p><strong>Formative</strong> assessment takes place <strong>during</strong> teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to <strong>improve the quality of students’ learning</strong>, not to provide evidence for evaluating or grading students.</p>
+  </li>
+  <li>
+    <p><strong>Summative</strong> assessment takes place <strong>at the end</strong> of teaching and learning. Its purpose is to evaluate learners’ learning by comparing it against a standard or benchmark, and provide evidence for evaluating or grading students.</p>
+
+    <blockquote class="comment">
+      <h3 id="comment-at-the-end-of-teaching"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> At the end of teaching</h3>
+
+      <p>For summative assessment, ‘the end’ does not necessarily mean the end of an entire course or module of study.
+Summative assessments may be distributed throughout a course, after a particular unit (or collection of topics) has been taught, but graded any how.</p>
+    </blockquote>
+
+    <p>What are the methods for summative assessment? You do remember some of the methods used in summative assessment when you are a student (1-5) or from being a teacher:</p>
+    <ul>
+      <li>Questionnaires</li>
+      <li>Interviews</li>
+      <li>Observations</li>
+      <li>Testing: specific test created by the teacher or establishment made to include all points of a unit or specific information taught in a given time frame</li>
+      <li>Projects: a culminating project that synthesizes knowledge</li>
+    </ul>
+
+    <p>Summative assessment should be</p>
+    <ul>
+      <li>Aligned to LOs (levels of complexity, what you taught, the level you taught it)</li>
+      <li>Objective</li>
+      <li>Feasible</li>
+    </ul>
+  </li>
+</ul>
+
+<figure id="figure-2"><img src="images/FormativeSummativeAssessment.png" alt="A cartoon figure showing the main difference between formative and summative assessment, when making soup. When the chef tastes the soup while preparing, it's formative assessment. When the guests taste the soup after its done, it's summative asssessment." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Allegorie to explain formative and summative assessment. When the chef tastes the soup and notices that there is not enough salt or spices, she can still add more. When the guests taste the soup, what's done is done (the chef can't change anything in the recipe for these guests). But she can still change the recipe for the future guests (future students). In formative assessment, the instructor can direct the learning on the fly, correct the direction, address mistakes/misconceptions/missing knowledged. In summative assessment, the learners have passed a test and they can't go back in time to do it better. The mark was decided. A summative assessment can indicate how the teaching was (if the instructor realises that the whole class of learners did poorly in the exam, this indicates that the teaching may be a cause), but in the best case scenario she can improve her course for the next cohort of learners (not for those who had finished the course/semester/year)</figcaption></figure>
+
+<p>In training, the scope here,  the focus is on formative assessment (collect information / feedback on how learning is progressing). We will from now on only talk about formative assessment.</p>
+
+<p>Formative assessment takes place <strong>during</strong> teaching and learning. Its purpose is to help both instructors and learners to become aware of what the focus should be. Its purpose is to <strong>improve the quality of student learning</strong>, <em>not</em> to provide evidence for evaluating or grading students.</p>
+
+<p>Formative assessment collect feedback (information) from learners’ on their learning progress :</p>
+<ul>
+  <li><strong>Goals and objectives</strong>: if learners goals and objectives are aligned to the course’s goals and outcomes</li>
+  <li><strong>Prior knowledge</strong>: which knowledge gaps need to be filled before moving on</li>
+  <li><strong>Mental models</strong>: whether their mental models are correct</li>
+  <li><strong>Frequent mistakes</strong>: which types of mistakes need special attention</li>
+  <li><strong>Ability to perform a task</strong></li>
+</ul>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Collecting formative assessment - Break-out room discussion  - *<i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 10 min*
+>
+> - Split into groups of 4, depending on the number of participants.
+>
+> - Discuss how you could collect information on learners’
+>	* mental models
+>   * goals and objectives
+>   * frequent mistakes
+> - For each, write an example.
+{: .hands_on} -->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-collecting-formative-assessment"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Collecting formative assessment</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<p>It should be highlighted that the <strong>best practice</strong> for teaching is to:</p>
+<ul>
+  <li>Constantly <strong>monitor</strong> what is happening to students’ learning</li>
+  <li>Investigate when things do not <strong>proceed as planned</strong> or expected</li>
+  <li>Act upon to <strong>improve</strong> learning</li>
+  <li>Provide feedback to learners on how to progress</li>
+</ul>
+
+<h2 id="collecting-data-from-learners-through-formative-assessment">Collecting data from learners through formative assessment</h2>
+
+<p>Formative assessment &amp; feedback can be done in many different ways:</p>
+<ul>
+  <li>Providing <strong>diagnostic questionnaires</strong></li>
+  <li>Asking <strong>questions</strong> to learners and getting responses orally</li>
+  <li>Asking them to <strong>describe the strategy</strong> they would adopt to solve a problem</li>
+  <li>Asking them to <strong>solve a problem</strong> in groups, or individually but in front of the class</li>
+  <li>Using <strong>brainstorming</strong> and <strong>discussions</strong></li>
+</ul>
+
+<h3 id="diagnostic-questionnaires">Diagnostic questionnaires</h3>
+
+<h4 id="questionnaires">Questionnaires</h4>
+
+<p><strong>Anonymous questionnaires</strong> allow to have an idea of the level of knowledge of the whole group of learners.<strong>Non-anonymous</strong> and personal questionnaires allow to find out if the learner has a necessary pre-required knowledge. in the negative case indicate an appropriate teaching choice to palliate this lack.</p>
+
+<h4 id="instant-feedbacks-or-minute-cards">Instant feedbacks or minute cards</h4>
+
+<p>Before each long break, for example lunch or between days, we have learners complete <strong>minute cards</strong> to share anonymous feedback. At an in-person workshop, paper sticky notes double as minute cards, with the two different colors used for positive and constructive feedback. At an online workshop, this may be done by making a copy of the <a href="https://docs.google.com/forms/d/1p7iOV5HNvy4POS4g6eottY8RSfKq4kaoKz1-jIFYTMI/template/preview">Virtual Minute Card Template</a> from the Carpentries on Google Forms. Other tools can work as well, but we do recommend making sure that feedback is private and anonymous. A public-facing sticky note board will receive different (and less useful) feedback.</p>
+
+<p>During long breaks, instructors read through the minute cards and look for patterns. At the start of each half day, the Instructors take a few minutes to address commonly raised issues with the whole class. The non-teaching Instructor can also type answers to the questions in the Etherpad.</p>
+
+<p>Another way to get instant feedback is the <strong>Fist of five</strong>. It is a simple format for asking for agreement or disagreement, or understanding on a topic by a show of hands. Each hand signal has a different meaning:</p>
+<ul>
+  <li>Fist: “I do not understand”</li>
+  <li>1 finger – index finger: “I have (major) concerns that need to be heard and resolved immediately.”</li>
+  <li>2 Fingers – index finger and middle finger or thumb and index finger: “I have (minor) concerns that we need to resolve now.”</li>
+  <li>3 fingers – thumb, index finger and middle finger or index finger, middle finger and ring finger: “I have (minor) concerns but can live with the continuying. My concerns should be resolved soon.”</li>
+  <li>4 Fingers – Index finger, middle finger, ring finger and little finger or thumb, index finger, middle finger and ring finger: “I got it.”</li>
+  <li>5 fingers (Five) – Showing open hand: “I am enthusiastic and we can continue”</li>
+</ul>
+
+<h4 id="multiple-choice-question-mcq-to-evaluate-mental-models">Multiple Choice Question (MCQ) to evaluate mental models</h4>
+
+<p>Look at this example of a MCQ</p>
+
+<ul>
+  <li>Question: “What is 27+15 ?”</li>
+  <li>Possible answers
+    <ul>
+      <li>42</li>
+      <li>32</li>
+      <li>312</li>
+      <li>33</li>
+    </ul>
+  </li>
+  <li>Correct answer: 42, but each of the other answers provides valuable insights</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-multiple-choice-questions-and-mental-models"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Multiple Choice Questions and mental models</h3>
+
+  <p>In the previous MCQ, which misconception is associated with</p>
+  <ol>
+    <li>32</li>
+    <li>312</li>
+    <li>33</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>If they answer 32, they are throwing away the carry completely.</li>
+      <li>If they answer 312, they know that they can’t just discard the carried ‘1’, but doesn’t understand that it’s actually a ten and needs to be added into the next column. In other words, they are treating each column of numbers as unconnected to its neighbors.</li>
+      <li>If they answer 33 then they know they have to carry the 1, but are carrying it back into the same column it came from.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h3 id="group-activities">Group activities</h3>
+
+<p>Many group activities are possible</p>
+<ul>
+  <li>Solve problems in groups</li>
+  <li>Do exercises in front of the class</li>
+  <li>Asking to describe the strategy they would adopt to solve a problem</li>
+  <li>
+    <p>Using brainstorming</p>
+
+    <p>Brainstorming should address a specific question; sessions addressing multiple questions are inefficient. The brainstorming technique can be used to build a concept map as a group.</p>
+  </li>
+  <li>Shared notes for
+    <ul>
+      <li>Collaborative note taking</li>
+      <li>Output of group activities</li>
+      <li>Exercises</li>
+      <li>Opinions, ideas, comments, thoughts</li>
+      <li>Questions, answers</li>
+    </ul>
+
+    <p>Tools like Google docs, Etherpad or HackMD could be used</p>
+  </li>
+</ul>
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-how-to-integrate-the-result-of-formative-assessment--feedback-in-your-course"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: How to integrate the result of formative assessment / feedback in your course?</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/integrate_formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/integrate_formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<h2 id="how-frequent-should-be-formative-feedback">How frequent should be formative feedback</h2>
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-how-frequent-should-formative-feedback-be"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: How frequent should formative feedback be?</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/frequency_formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/assessment/quiz/frequency_formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Self-reflect  (5 min)
+>
+> - Think about this session: how many feedback opportunities have you had so far?
+>
+> > <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Get feedback often
+> > In this tutorial so far, there were at least 3 feedback opportunities
+> > {: .tip}
+{: .hands_on} -->
+
+<figure id="figure-3"><img src="images/AttentionCurve.jpg" alt="A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Attention Curve</figcaption></figure>
+
+<p>Formative assessment should be frequent: ideally <strong>every 5 min</strong>, at least every 10-15 min. Indeed, the attention span is 10-15 min and attention should be refocused after that.</p>
+
+<h1 id="dealing-with-feedback">Dealing with feedback</h1>
+
+<p>Feedback is hard.</p>
+
+<figure id="figure-4"><img src="images/gettingFeedback.jpg" alt="A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Getting feedback</figcaption></figure>
+
+<p>Humans focus more on negative feedback than on positive (you are not alone). How to deal with (bad) feedback received from trainees:</p>
+<ul>
+  <li><strong>Breath deeply</strong></li>
+  <li>Try to see the point in the criticism, <strong>learn from it</strong></li>
+  <li><strong>Don’t take it personally</strong></li>
+</ul>
+
+<p>Trainees feedback should be considered along other forms of quality evidence:</p>
+<ul>
+  <li>Review what they have effectively learned (in exams)</li>
+  <li>Consider your own experience of teaching</li>
+  <li>Discuss with colleagues and friends</li>
+  <li>Look at the feedback from past sessions of the same course</li>
+  <li>Look at the response rates</li>
+  <li>Look at the counter examples (contradictions)</li>
+  <li>Look at the repetitive patterns (not at only one single answer)</li>
+</ul>
+
+<figure id="figure-5"><img src="images/givingGoodFeedback.jpg" alt="A humorous cartoon showing a parent teaching a child on how to provide constructive feedback when playing with other children." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Learn and teach others to give good feedback</figcaption></figure>
+
+<h1 id="conclusions">Conclusions</h1>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Formative assessment should be frequent</p>
+</li>
+                        
+                        <li><p>Feedback is hard</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/teaching/faqs/">FAQ page for the Teaching and Hosting Galaxy training topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    
+                    <h2>How frequent should formative feedback be?</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/frequency_formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/frequency_formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Diagnostic Assessment</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/diagnostic_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/diagnostic_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>How to integrate the result of formative assessment / feedback in your course?</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/integrate_formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/integrate_formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Collecting formative assessment</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/formative_assessment.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/assessment/quiz/formative_assessment.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="nicholls2002developing">Nicholls, G., 2002 <b>Developing teaching and learning in higher education</b>. <i>Routledge</i>.</li>
+<li id="via2020course">Via, A., P. M. Palagi, J. M. Lindvall, R. E. Tractenberg, T. K. Attwood <i>et al.</i>, 2020 <b>Course design: Considerations for trainers–a Professional Guide</b>. F1000Research 9:</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Assessment and feedback in training and teachings (Teaching and Hosting Galaxy training)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Bérénice Batut, Fotis E. Psomopoulos, Allegra Via, Patricia Palagi, ELIXIR Goblet Train the Trainers, 2022 <b>Assessment and feedback in training and teachings (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html">https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{teaching-assessment,
+author = "Bérénice Batut and Fotis E. Psomopoulos and Allegra Via and Patricia Palagi and ELIXIR Goblet Train the Trainers",
+title = "Assessment and feedback in training and teachings (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/erasmusplus/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" /></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

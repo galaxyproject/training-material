@@ -1,0 +1,2937 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Design and plan session, course, materials</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Design and plan session, course, materials" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Bérénice Batut" />
+<meta name="DC.creator" content="Fotis E. Psomopoulos" />
+<meta name="DC.creator" content="Allegra Via" />
+<meta name="DC.creator" content="Patricia Palagi" />
+<meta name="DC.creator" content="ELIXIR Goblet Train the Trainers" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Design and plan session, course, materials" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/contributing/tutorials/design/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/design/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/contributing/tutorials/design/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/contributing/tutorials/design/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/contributing/tutorials/design/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/contributing/tutorials/design/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Design and plan session, course, materials",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Contributing to the Galaxy Training Material",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Design and plan session, course, materials' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html",
+  "timeRequired": "PT60M",
+  "keywords": "contributing",
+  "description": "The questions this  addresses are:\n - Is the structured approach to course design?\n - How to articulate learning outcomes commensurate with the cognitive complexity of the target learning?\n - How to devise learning experiences and course content?\n - What are the steps that can help trainers devise and deploy effective courses?\n\n\\nThe objectives are:\n - List five key phases of curriculum & course development\n - Explain the primary role of learning outcomes\n - Write learning outcomes for a course\n - Identify the Bloom’s-level accomplishments that different types of learning experience are likely to support\n - Describe the role of learning outcomes in selecting relevant content\n - Distinguish different types of assessment & their role in supporting learner progression towards learning outcomes\n - Summarise the benefits of course evaluation\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html",
+      "name": "Principles of learning and how they apply to training and teaching",
+      "description": "Hands-on for 'Principles of learning and how they apply to training and teaching' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Contributing to the Galaxy Training Material",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-contributing">
+    <h1 data-toc-skip>Design and plan session, course, materials</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+
+<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/fpsom?s=27" alt="Avatar">Fotis E. Psomopoulos</a>
+
+
+
+<a href="/training-material/hall-of-fame/allegravia/" class="contributor-badge contributor-allegravia"><img src="https://avatars.githubusercontent.com/allegravia?s=27" alt="Avatar">Allegra Via</a>
+
+
+
+<a href="/training-material/hall-of-fame/ppalagi/" class="contributor-badge contributor-ppalagi"><img src="https://avatars.githubusercontent.com/ppalagi?s=27" alt="Avatar">Patricia Palagi</a>
+
+
+
+<a href="/training-material/hall-of-fame/elixir-goblet-ttt/" class="contributor-badge contributor-elixir-goblet-ttt"><img src="https://avatars.githubusercontent.com/elixir-goblet-ttt?s=27" alt="Avatar">ELIXIR Goblet Train the Trainers</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Is the structured approach to course design?</p>
+</li>
+        
+        <li><p>How to articulate learning outcomes commensurate with the cognitive complexity of the target learning?</p>
+</li>
+        
+        <li><p>How to devise learning experiences and course content?</p>
+</li>
+        
+        <li><p>What are the steps that can help trainers devise and deploy effective courses?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>List five key phases of curriculum &amp; course development</p>
+</li>
+        
+        <li><p>Explain the primary role of learning outcomes</p>
+</li>
+        
+        <li><p>Write learning outcomes for a course</p>
+</li>
+        
+        <li><p>Identify the Bloom’s-level accomplishments that different types of learning experience are likely to support</p>
+</li>
+        
+        <li><p>Describe the role of learning outcomes in selecting relevant content</p>
+</li>
+        
+        <li><p>Distinguish different types of assessment &amp; their role in supporting learner progression towards learning outcomes</p>
+</li>
+        
+        <li><p>Summarise the benefits of course evaluation</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/contributing">Contributing to the Galaxy Training Material</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Principles of learning and how they apply to training and teaching:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 60 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/contributing/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/contributing/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><strong>Teaching and training</strong>, core elements of academic life, can be enormously
+rewarding but also quite challenging. Instructors are often required to perform
+under various constraints, and frequently have to accommodate, engage and
+motivate student cohorts with very different backgrounds and aptitudes in
+limited time-frames. This can be daunting for experienced teachers, but
+especially so for those who’re relatively new to teaching and training.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Training</strong>: instruction delivered via short courses designed to expand or
+build knowledge &amp; practical skills in a given field, often conducted in the
+workplace or training centre to ‘up-skill’ members of a workforce</p>
+
+  <p><strong>Teaching</strong>: usually, instruction delivered over long time-scales via a
+series of courses (in schools, colleges, universities, etc.) designed to
+contribute to a formal programme that, if completed successfully, yields an
+accredited qualification in a given field (e.g., a degree)</p>
+
+</blockquote>
+
+<p>Formal education enterprises generally begin with <strong>curriculum</strong>
+(<span class="citation"><a href="#european2008terminology">for the Development of Vocational Training 2008</a></span>) design: this involves specifying</p>
+
+<ol>
+  <li>its purpose or <strong>Teaching Goals (TGs)</strong>;</li>
+  <li>its duration;</li>
+  <li>the <strong>Knowledge, Skills and Abilities (KSAs)</strong> intended to be achieved,
+expressed as a set of <strong>Learning Outcomes (LOs)</strong>;</li>
+  <li>how learners will demonstrate achievement of those LOs;</li>
+  <li>the materials, <strong>Learning Experiences (LEs)</strong> and assignments instructors
+will use to support learner progression towards the LOs;</li>
+  <li>the assessments for evaluating student learning and teaching effectiveness.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Curriculum</strong>: the inventory of tasks involving the design, organisation &amp;
+planning of an education or training enterprise, including specification of
+learning outcomes, content, materials &amp; assessments, &amp; arrangements for
+training teachers &amp; trainers</p>
+
+  <p><strong>Knowledge, Skills and Abilities (KSAs)</strong>: list of special qualifications and
+personal attributes that learners should to have after a training</p>
+  <ul>
+    <li><strong>Knowledge</strong>: the subjects, topics, and items of information that learners
+should know</li>
+    <li><strong>Skills</strong>: technical or manual proficiencies which are usually learned or
+acquired through training.</li>
+    <li><strong>Abilities</strong>_ the present demonstrable capacity to apply several knowledge
+and skills simultaneously in order to complete a task or perform an
+observable behaviour.</li>
+  </ul>
+
+  <p><strong>Learning Outcomes (LOs)</strong>: the KSAs that learners should be able to
+demonstrate after instruction, the tangible evidence that the teaching goals
+have been achieved; LOs are learner-centric</p>
+
+  <p><strong>Learning Experience (LE)</strong>: any setting or interaction in or via which
+learning takes place: e.g., a lecture, game, exercise, role-play, etc.
+Teaching Goal (TG): the intentions of an instructor regarding the pur- pose of
+a curriculum/course/lesson/activity/set of materials; TGs are
+instructor-centric (also termed instructional objectives)</p>
+
+  <p><strong>Teaching Goal (TG)</strong>: the intentions of an instructor regarding the purpose
+of a curriculum/course/lesson/activity/set of materials; TGs are
+instructor-centric (also termed instructional objectives)</p>
+
+</blockquote>
+
+<p>Emphasis is placed on teaching and learning, and mechanisms for collecting
+evidence that learners have changed over time
+(<span class="citation"><a href="#tractenberg2020guidelines">Tractenberg <i>et al.</i> 2020</a></span>). In this latter sense, the concept of
+‘curriculum’ differentiates formal teaching from training, as formal programmes
+usually afford time for learners both to be able to progress and to <strong>demonstrate
+their progression</strong>.</p>
+
+<p>By contrast, training courses are much shorter (measured in days or weeks,
+rather than years); they hence necessarily focus on acquiring specific KSAs in
+limited time-frames, generally without consideration of learner progression
+beyond the course. However, the essential features of <strong>effective curricula</strong>
+(i.e., those that achieve their stated LOs for the majority of learners) pertain
+to instruction on any time-scale; they are thus also relevant for short courses,
+and provide important considerations for those involved in, or embarking upon,
+course design (whether face-to-face or online).</p>
+
+<p>With this in mind, this tutorial outlines key steps of curriculum development –
+and the role of Bloom’s taxonomy (<span class="citation"><a href="#bloom1956taxonomy">Bloom 1956</a></span>) – that can be
+used to inform the design of effective courses.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-sources"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Sources</h3>
+
+  <p>This tutorial is significantly based on <span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span>, one session
+of ELIXIR-GOBLET Train the Trainer curriculum and
+<span class="citation"><a href="#tractenberg2020guidelines">Tractenberg <i>et al.</i> 2020</a></span></p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-select-a-topic-for-a-3-minute-training---time-1-min---silent-reflection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Select a topic for a 3 minute training - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 1 min - Silent reflection</em></h3>
+
+  <ul>
+    <li>
+      <p>Choose a topic for a 3 minutes training related to <span class="notranslate">Galaxy</span></p>
+
+      <p>Examples:</p>
+      <ul>
+        <li>Introduction to <span class="notranslate">Galaxy</span> interface</li>
+        <li>How to upload data to <span class="notranslate">Galaxy</span></li>
+        <li><span class="notranslate">Galaxy</span> Training Network</li>
+      </ul>
+    </li>
+    <li>Identify the target audience</li>
+    <li>Identify the prerequisites</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-check-the-tutorial-on-principles-of-learning"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Check the tutorial on principles of learning</h3>
+
+  <p>For more details about how learning works and values, check our
+<a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">tutorial</a></p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#formal-curriculum-design" id="markdown-toc-formal-curriculum-design">Formal curriculum design</a>    <ol>
+      <li><a href="#different-types-of-curriculum" id="markdown-toc-different-types-of-curriculum">Different types of curriculum</a></li>
+      <li><a href="#structuring-curriculum-design" id="markdown-toc-structuring-curriculum-design">Structuring curriculum design</a></li>
+    </ol>
+  </li>
+  <li><a href="#nicholls-five-phases-of-curriculum-design" id="markdown-toc-nicholls-five-phases-of-curriculum-design">Nicholl’s five phases of curriculum design</a>    <ol>
+      <li><a href="#define-intended-los" id="markdown-toc-define-intended-los">Define intended LOs</a></li>
+      <li><a href="#select-les-that-will-lead-to-the-los" id="markdown-toc-select-les-that-will-lead-to-the-los">Select LEs that will lead to the LOs</a></li>
+      <li><a href="#select-and-develop-content-relevant-to-the-los" id="markdown-toc-select-and-develop-content-relevant-to-the-los">Select and develop content relevant to the LOs</a></li>
+      <li><a href="#develop-assessments-to-ensure-progression" id="markdown-toc-develop-assessments-to-ensure-progression">Develop assessments to ensure progression</a></li>
+      <li><a href="#evaluate-course-effectiveness" id="markdown-toc-evaluate-course-effectiveness">Evaluate course effectiveness</a></li>
+    </ol>
+  </li>
+  <li><a href="#testing-the-mini-training" id="markdown-toc-testing-the-mini-training">Testing the mini-training</a></li>
+  <li><a href="#training-material-sharing-and-making-re-use-possible" id="markdown-toc-training-material-sharing-and-making-re-use-possible">Training material: sharing and making re-use possible</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="formal-curriculum-design">Formal curriculum design</h1>
+
+<h2 id="different-types-of-curriculum">Different types of curriculum</h2>
+
+<p>To set the scene for our considerations of course design, we examine some of the
+foundations for effective curriculum development, drawing heavily on the
+curriculum- and course- development guidelines developed by
+<span class="citation"><a href="#tractenberg2020guidelines">Tractenberg <i>et al.</i> 2020</a></span>. Notable here is the fact that different
+types of curriculum have been defined: <em>i.e.</em>, <strong>intended</strong>, <strong>implemented</strong>,
+<strong>attained</strong> and <strong>hidden curricula</strong>. Recognising the existence of different
+curriculum types (or, perhaps, different curricular outcomes) is important
+because, while the intended curriculum is the starting point, it may not be the
+curriculum actually attained: <em>i.e.</em>, what you aimed to teach and what students
+actually learned may not be the same.</p>
+
+<p>To improve outcomes, differences between the intended and attained curricula
+need to be minimised. The only way to discover the attained curriculum is to
+find out what learning actually occurred. This requires <strong>actionable</strong>
+evaluation, to assess whether the teaching goals (TGs) and learning outcomes (LOs) were achieved, to identify
+weaknesses in the implementation and to highlight improvements needed to
+remediate them. These considerations are key to developing effective curricula
+and courses.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Actionable</strong>: supportive of a decision, or the taking of some action by a
+learner, instructor or institution</p>
+
+  <p><strong>Attained curriculum</strong>: what learners actually acquire &amp; can demonstrate
+having followed the implemented curriculum (<span class="citation"><a href="#unesco-ibe-glossary">“<b>UNESCO IBE Glossary of Curriculum-Related Terminology</b>”</a></span>)</p>
+
+  <p><strong>Hidden curriculum</strong>: unintended curricular effects: unofficial norms,
+behaviours &amp; values that are transferred (not necessarily consciously) by the
+school culture or ethos; this recognises that schooling happens in broad
+social &amp; cultural environments that influence learning (<span class="citation"><a href="#glossary-education-reform">“<b>The glossary of Education Reform</b>”</a></span>)</p>
+
+  <p><strong>Implemented curriculum</strong>: or taught curriculum, how the intended curriculum
+is delivered in practice: <em>i.e.</em>, the teaching &amp; learning activities, &amp; the
+interactions between learners &amp; teachers, &amp; among learners</p>
+
+  <p><strong>Intended curriculum</strong>: the formal specification of KSAs that students are
+expected to achieve &amp; be able to demonstrate having followed the implemented
+curriculum</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-define-audience-and-teaching-goal---time-10-min---silent-reflection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Define audience and teaching goal - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 10 min - Silent reflection</em></h3>
+
+  <ol>
+    <li>Take the topic you choose before</li>
+    <li>
+      <p>Define teaching objectives</p>
+
+      <p>Describe your goals and intentions as instructor:</p>
+      <ul>
+        <li>stakeholders</li>
+        <li>potential professions</li>
+        <li>desired performance an/or competences of course completers</li>
+        <li>duration</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="structuring-curriculum-design">Structuring curriculum design</h2>
+
+<p>Curriculum design benefits from being systematic: structured approaches help to
+orchestrate and clarify what will be taught, <strong>why it will be taught</strong> and how;
+they also afford opportunities to evaluate what does and doesn’t work, and hence
+what needs to change, ultimately leading to improvements in learning outcomes
+(<span class="citation"><a href="#fink2013creating">Fink 2013</a></span>, <span class="citation"><a href="#diamond2008designing">Diamond 2008</a></span>,
+<span class="citation"><a href="#nilson2016teaching">Nilson 2016</a></span>). Several different frameworks have been devised to
+facilitate the design process, but each is motivated by the same underlying
+philosophy: to help formulate programmes that promote <strong>meaningful and enduring
+learning</strong>. If we’re to understand whether we’ve really achieved this, we must</p>
+
+<ol>
+  <li>determine the purpose of the programme (what needs it addresses, why it’s
+being developed, what learners will gain from it, why it’s important),</li>
+  <li>define the intended LOs, and</li>
+  <li>develop <strong>assessment</strong> and evaluation mechanisms that will allow us to
+measure whether the programme successfully met its goals.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Assessment</strong>: the evaluation or estimation of the nature, quality or ability
+of someone or something</p>
+
+</blockquote>
+
+<p>Not surprisingly, the same principles apply to course design. The process may
+seem daunting, but for the sake of simplicity, we focus here on one model: <em>i.e.</em>,
+that proposed by <span class="citation"><a href="#nicholls2002developing">Nicholls 2002</a></span>. Before discussing
+this further, however, it’s helpful to consider another very important tool used
+in teaching and learning – Bloom’s taxonomy (<span class="citation"><a href="#bloom1956taxonomy">Bloom 1956</a></span>).</p>
+
+<h3 id="blooms-taxonomy-of-cognitive-complexity">Bloom’s taxonomy of cognitive complexity</h3>
+
+<p>Learning taxonomies are useful tools that can help both to formulate and clarify
+LOs, and to arrange them on a scale of increasing complexity. Bloom’s taxonomy
+(<span class="citation"><a href="#bloom1956taxonomy">Bloom 1956</a></span>), probably the most easily understood and widely
+used today, features a <strong>six-level hierarchy of cognitive complexity</strong>, ranging
+from <strong>Remember</strong> (being able to recall facts and basic concepts) to <strong>Evaluate</strong>
+being able to defend opinions or decisions), as illustrated in the following
+figure:</p>
+
+<figure id="figure-1"><img src="images/bloom_taxonomy.png" alt="6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make &amp; defend judgements, assess theories &amp; outcomes) with critique, compare ideas, solve, recommend, rate. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Bloom’s taxonomy of cognitive complexity, &amp; a sample of associated verbs that can be used to create LOs. The verbs reflect a developmental trajectory, from lower- to higher-order thinking skills; they should be concretely observable &amp; relate to how achievement of target LOs will be assessed. Source: <span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span></figcaption></figure>
+
+<p>As can be seen from the figure, each Bloom’s level is accompanied by a set of
+active verbs that express expected, measurable learner behaviours at that level:
+<em>e.g.</em>, achieving the level <strong>Understand</strong> means to be able to classify, select or
+explain a piece of information: here, <em>classify, select, explain</em> are
+observable, assessable behaviours that can be readily encapsulated in coherent
+LOs.</p>
+
+<p>Typical illustrations of the taxonomy, like that in the figure, depict
+successive cognitive levels, suggesting that learners must achieve one level
+before advancing to the next, implying a <strong>developmental trajectory</strong> from lower-
+to higher-order cognitive skills. However, this structure should not be regarded
+as completely rigid; indeed, <span class="citation"><a href="#anderson2001taxonomy">Anderson <i>et al.</i> 2001</a></span> published a revised
+version in 2001 in which they placed <strong>Synthesise</strong> (the ability to create new or
+original work) at the top of the hierarchy in place of <strong>Evaluate</strong>.
+Notwithstanding the minutiae, it is perhaps more fruitful to regard the taxonomy
+as a continuum or spectrum of cognitive levels, where each merges into the next,
+providing a structured tool to help express measurable, assessable LOs, in which
+the cognitive levels are made explicit.</p>
+
+<p>The cognitive aspects embodied in LOs are important. Teaching should promote
+more complex behaviours than just recall or recognition (unless remembering is
+the intended LO), and push learners to achieve greater cognitive complexity
+(<span class="citation"><a href="#nilson2016teaching">Nilson 2016</a></span>, <span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span>,
+<span class="citation"><a href="#weinstein2018understanding">Weinstein <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#roediger2006power">Roediger III and Karpicke 2006</a></span>,
+<span class="citation"><a href="#jensen2014teaching">Jensen <i>et al.</i> 2014</a></span>). This can be done by embedding development in
+learning activities and materials, and ensuring that LOs reflect the lowest to
+the highest levels of cognitive complexity realistically achievable on
+completing those activities or having engaged with those materials (realistic
+aims are key, especially for short courses: <em>e.g.</em>, expecting learners with no
+prior subject knowledge to achieve the level <strong>Evaluate</strong>, say in a 1-day course,
+will guarantee failure and frustration for learners and instructors alike).</p>
+
+<h1 id="nicholls-five-phases-of-curriculum-design">Nicholl’s five phases of curriculum design</h1>
+
+<p>The backdrop for our considerations of course design is Nicholls’ paradigm for
+curriculum development, illustrated in:</p>
+
+<figure id="figure-2"><img src="images/nicholl_paradigme.png" alt="(in a clockwise direction) Phase 1: Learning Outcomes (Los) --&gt; Simple, measurable, achievable, realistic, time-bound? --&gt; Phase 2: Learning Experiences (LEs) --&gt; LEs aligned with LOs? --&gt; Phase 3: Content --&gt; Support LEs? Promote LOs? --&gt; Phase 4: Assessment --&gt; Aligned with LEs? Support progress towards LOs? --&gt; Phase 5: Evaluation --&gt; LOs achievable by most learners? Content, LEs &amp; assessments support LOs?" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Nicholls’ phases of curriculum design &amp; their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: <span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span></figcaption></figure>
+
+<p>Its five-phase structure has been briefly summarised by
+<span class="citation"><a href="#tractenberg2020guidelines">Tractenberg <i>et al.</i> 2020</a></span>, as follows:</p>
+
+<ol>
+  <li>Select LOs;</li>
+  <li>Select or develop LEs that will help learners achieve the LOs;</li>
+  <li>Select or develop content relevant to LOs;</li>
+  <li>Develop assessments to ensure learners progress toward LOs;</li>
+  <li>Evaluate the effectiveness of LEs for leading learners to LOs.</li>
+</ol>
+
+<p>As can be seen from <a href="#figure-2">Figure 2</a>, the model’s phases are interdependent; all are
+ultimately dependent on the first – defining LOs. Moreover, the phases are
+iterative: this means that LOs influence later decisions, but later decisions
+may also reflect backwards, thereby providing opportunities to check for
+alignment of each phase to the target LOs (in other words, to ensure that
+successive phases are mutually consistent with, and supportive of, the LOs).
+Thus, the role of LOs is pivotal: they must have specific characteristics to
+function, and support each of the other phases as they do.</p>
+
+<p><a href="#figure-2">Figure 2</a> illuminates an important feature of the model: that <strong>LOs are the
+starting point, and drive all decision-making</strong>. This is just as true for courses
+as it is for programmes (<span class="citation"><a href="#diamond2008designing">Diamond 2008</a></span>). Missing from the model,
+however, is the dependence of LOs on a hierarchy of cognitive complexity that
+establishes a developmental trajectory, like that seen in Bloom’s taxonomy. We
+reflect on this crucial point, and its relevance for course design, in the
+discussion of each of the five phases below.</p>
+
+<h2 id="define-intended-los">Define intended LOs</h2>
+
+<blockquote class="comment">
+  <h3 id="comment-what-are-learning-outcomes-los"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What are Learning Outcomes (LOs)?</h3>
+
+  <ul>
+    <li>Statements expressing which KSAs learners will be able to demonstrate upon
+completion of a learning experience or a sequence of learning experiences</li>
+    <li>What learners will be able to do for the end of a lesson and the teacher can
+in principle evaluate</li>
+  </ul>
+
+</blockquote>
+
+<p>Just as for curricula, Phase 1 of course design begins with stating the LOs. To
+help formulate LOs, it’s important to take a step back and think about what you
+aim to achieve (i.e., what are your TGs and the KSAs you intend to be achieved?),
+how you propose to get there, and how you’ll know you succeeded.
+<span class="citation"><a href="#messick1994interplay">Messick 1994</a></span> encapsulated this process in the form of three
+succinct questions:</p>
+
+<ol>
+  <li>What KSAs are the targets of instruction (and assessment)?</li>
+  <li>What learner actions/behaviours will reveal these KSAs?</li>
+  <li>What tasks will elicit these specific actions or behaviours?</li>
+</ol>
+
+<p>These questions were originally posed in 1994 in the context of assessment.
+Their focus on KSAs – the LOs – thus guides not only the creation of relevant
+tasks (to reveal the target KSAs) but also the rational development of
+<strong>appropriate</strong> assessments: i.e., they provide a framework for, and clarify,
+<strong>what to assess</strong>. The questions can thus support all phases of course
+development, starting with the selection of intended KSAs stated in a set of
+LOs.</p>
+
+<blockquote class="question">
+  <h3 id="question-evaluate-los"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Evaluate LOs</h3>
+
+  <ol>
+    <li>
+      <p>Select a tutorial or a course</p>
+
+      <p>Several possibilities:</p>
+      <ol>
+        <li>Take a course you currently run, plan to run or have run in the
+past</li>
+        <li>Take your favorite tutorial from the <a href="/training-material">GTN Material</a></li>
+        <li>Take the <a href="/training-material/topics/introduction/tutorials/dummy/tutorial.html">dummy tutorial</a>
+introducing to data import, that we created for this lesson</li>
+      </ol>
+    </li>
+    <li>Check the content</li>
+    <li>
+      <p>Are its intended LOs stated?</p>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-for-any-gtn-tutorials-including-the-dummy-one"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for any GTN tutorials, including the dummy one</h3>
+
+        <p>LOs are always stated on the top for the tutorial, in the Overview box</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Writing coherent LOs is challenging: they must contain appropriate (Bloom’s)
+verbs (<a href="#figure-1">Figure 1</a>) that express measurable, observable and assessable actions,
+accurately describing what successful learners will be able to do – <strong>and at what
+level of cognitive complexity</strong> – after instruction.</p>
+
+<p>Various characteristics of, and principles for articulating, LOs have been
+published (e.g. <span class="citation"><a href="#stanford-institutional-research-decision-support">“<b>Stanford Institutional Research &amp; Decision Support</b>”</a></span> or
+<span class="citation"><a href="#national2016higher">for Learning Outcomes Assessment 2016</a></span>): some of these are listed briefly in the box
+below.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-learning-outcomes-should"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Learning outcomes should</h3>
+
+  <ul>
+    <li><strong>be specific &amp; well defined</strong>: LOs should concisely state the specific KSAs
+that learners should develop as a result of instruction;</li>
+    <li><strong>be realistic</strong>: LOs must be attainable given the context and resources
+available for instruction, and consistent with learners’ abilities,
+developmental levels, prerequisite KSAs, and the time needed vs. time
+available to achieve them;</li>
+    <li><strong>rely on active verbs, phrased in the future tense</strong>: LOs should be stated
+in terms of what successful learners will be able to do as a result of
+instruction;</li>
+    <li><strong>focus on learning products, not the learning process</strong>: LOs should not
+state what instructors will do during instruction, but what learners will be
+able to do as result of instruction;</li>
+    <li><strong>be simple, not compound</strong>: LOs shouldn’t include compound statements that
+join two or more KSAs into one statement;</li>
+    <li><strong>be appropriate in number</strong>: LOs should be deliverable and assessable
+within the time available for instruction;</li>
+    <li><strong>support assessment that generates actionable evidence</strong>: here, actionable
+means supportive of a decision, or taking some action by a learner or
+instructor.</li>
+  </ul>
+
+</blockquote>
+
+<!-- NILOA five principles for articulating LOs -->
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-learning-outcomes---time-2-min---silent-working"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Learning outcomes - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 2 min - Silent working</em></h3>
+
+  <ol>
+    <li>Take the small lesson you selected at the beginning</li>
+    <li>Try to jot a few LOs down</li>
+  </ol>
+
+</blockquote>
+
+<p>Given their detail and complexity, and the importance of aligning the
+instructional inputs you devise with the outcomes for learners you intend, it
+can be hard to know where to start. This possibly explains why it may feel
+easier to begin developing a course by selecting its content rather than first
+trying to understand its impact on student learning. Nevertheless, ensuring that
+target LOs meet, or are consistent with, the characteristics outlined in the box
+below helps to promote better alignment of instructional inputs and learner
+outcomes.</p>
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-evaluate-learning-outcomes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Evaluate Learning outcomes</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/evaluate_learning_outcomes.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/evaluate_learning_outcomes.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<blockquote class="solution">
+  <h3 id="solution-evaluate-learning-outcomes---solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Evaluate Learning outcomes - Solution</h3>
+
+  <p>“By the end of the course learners will know the Pythagora’s theorem”</p>
+
+  <p>This LO is not good:</p>
+
+  <ul>
+    <li>How to assess whether learners know the Pythagora’s theorem?</li>
+    <li>What do we mean by “knowing” the Pythagorean theorem?
+      <ul>
+        <li>They are able state it?</li>
+        <li>They are able explain it?</li>
+        <li>They are able apply it?</li>
+        <li>They are able demonstrate it?</li>
+        <li>They are able to use it in solving problem?</li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>It would make more sense to ask: “What will learners be able to do to show
+they know the Pythagorean theorem?”</p>
+
+</blockquote>
+
+<p>In short, when defining LOs, the key question to ask is, are they SMART?</p>
+
+<ul>
+  <li><strong>S</strong>pecific / <strong>S</strong>imple</li>
+  <li><strong>M</strong>easurable</li>
+  <li><strong>A</strong>chievable / <strong>A</strong>ttainable</li>
+  <li><strong>R</strong>ealistic / <strong>R</strong>elevant</li>
+  <li><strong>T</strong>ime-bound / <strong>T</strong>ransferable</li>
+</ul>
+
+<p>If they do not satisfy this test, they should be revised; only when they meet
+these criteria is it safe to progress to Phase 2, as shown in <a href="#figure-2">Figure 2</a>.
+SMART LOs will be the roadmap as we plan out instructional strategies, write the
+content and <strong>create assessments</strong>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-create-smart-los---time-10-min---silent-working"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Create SMART LOs - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 10 min - Silent working</em></h3>
+
+  <ol>
+    <li>Take the LOs you created</li>
+    <li>Consider if your LOs are SMART</li>
+    <li>
+      <p>Try to revise any of them that do not meet the SMART criteria as
+follows:</p>
+
+      <ol>
+        <li>Select an active verb that can (in principle) be observed &amp; assessed</li>
+        <li>
+          <p>Complete the sentence</p>
+
+          <p><em>“At the end of this course, learners will be able to…”</em></p>
+
+          <p>If it helps, review the verbs of the Bloom’s taxonomy listed in <a href="#figure-1">Figure 1</a>.</p>
+
+          <p>It’s important to:</p>
+
+          <ul>
+            <li>Focus here on what learners will be able to do at the end of
+instruction, <em>e.g.</em> <em>will they be able to…</em>
+              <ul>
+                <li><em>… describe its content?</em>,</li>
+                <li><em>… explain a concept?</em>,</li>
+                <li>*… implement an algorithm?,</li>
+                <li><em>… solve a problem?</em>,</li>
+                <li><em>… evaluate results?</em></li>
+              </ul>
+            </li>
+            <li>Avoid verbs open to multiple interpretation</li>
+            <li>Use a verb that describes an observable action</li>
+          </ul>
+        </li>
+      </ol>
+    </li>
+    <li>
+      <p>Determine how well you have structured your LOs</p>
+
+      <ol>
+        <li>Visit the <a href="https://web.cs.manchester.ac.uk/iloadvisor">Intended Learning Outcome Advisor</a></li>
+        <li>Paste each LOs into the input box</li>
+        <li>Press the <strong>SUBMIT</strong> button</li>
+      </ol>
+
+      <p>How well did you do?</p>
+    </li>
+    <li>Consider revising your LOs if the Advisor identified any issues</li>
+  </ol>
+
+</blockquote>
+
+<!-- ELIXIR TtT
+
+> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Define audience, goal and outcomes (10 min)
+>
+> 5. Identify the learning experiences
+> 6. Start thinking about the content - but don’t spend time in preparing this
+>    yet
+>
+{: .hands_on}
+
+-->
+
+<p>Ultimately, <strong>LOs provide the necessary structure and context for decision-making
+by instructors (and learners), hence their primary role in course design</strong>.</p>
+
+<h2 id="select-les-that-will-lead-to-the-los">Select LEs that will lead to the LOs</h2>
+
+<p>Phase 2 involves identifying the most appropriate LEs to lead learners to the
+intended LOs. It is important to appreciate that different LEs can lead learners
+to demonstrate different Bloom’s-level accomplishments: <em>e.g.</em>,</p>
+<ul>
+  <li>lectures differ from problem-sets – solving problems helps learners to work
+with, and manipulate, information rather than passively listening to it;</li>
+  <li>similarly, lab exercises differ from writing computer programs – writing
+original code affords learners the opportunity to create something new rather
+than simply following instructions.</li>
+</ul>
+
+<p>Some example LEs are listed in Table 1, together with the Bloom’s level and the
+kinds of TG (Teaching Goals) and LO that each may support.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Learning experience</th>
+      <th>Highest Bloom’s levels supported</th>
+      <th>Example TG(s) <em>“This LE will allow me to…“</em></th>
+      <th>Example LO(s) <em>“Learners will be able to…“</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lecture, webinar</td>
+      <td>Remember, Comprehend</td>
+      <td>Inspire learners, ignite learners’ enthusiasm, clarify/explain a concept, provide an overview, give context, summarise content</td>
+      <td><em>list</em> the key points of the lecture/webinar, <em>summarise</em> take home message(s)</td>
+    </tr>
+    <tr>
+      <td>Exercise, practical</td>
+      <td>Apply, Analyse</td>
+      <td>Help learners digest course materials, solve typical problems, apply knowledge, show how to do things with appropriate guidance, give an idea of how a tool works</td>
+      <td><em>follow</em> a set of instructions or protocol, <em>calculate</em> a set of results or outcomes from a given protocol</td>
+    </tr>
+    <tr>
+      <td>Flipped class</td>
+      <td>Apply, Analyse</td>
+      <td>Teach learners how to formulate questions, help learners to memorise new information &amp; concepts, or analyse &amp; understand course materials</td>
+      <td><em>summarise</em> the content material, *ask* appropriate questions</td>
+    </tr>
+    <tr>
+      <td>Peer instruction</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Prepare learners to defend an argument, give learners opportunities to explain things, thereby helping to develop critical thinking &amp; awareness</td>
+      <td><em>explain</em> how they solved an exercise, <em>evaluate</em> others’ choices/decisions, <em>diagnose</em> errors in the exercise-solving task</td>
+    </tr>
+    <tr>
+      <td>Group discussion</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Give learners opportunities to practice questioning, develop new ideas &amp; critical thinking</td>
+      <td><em>communicate</em> their own ideas, <em>defend</em> their own opinions</td>
+    </tr>
+    <tr>
+      <td>Group work</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Promote collaborative work &amp; peer instruction, provide opportunities for giving/receiving feedback, &amp; digesting course materials</td>
+      <td><em>provide</em> feedback on their peers’ work, <em>share</em> ideas, <em>explain</em> the advantages of team-work</td>
+    </tr>
+    <tr>
+      <td>Problem-solving</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Promote learner abilities to identify &amp; evaluate solutions, develop new ideas, make decisions, evaluate decision effectiveness, troubleshoot</td>
+      <td><em>diagnose</em> faulty reasoning or an underperforming result, <em>correct</em> errors</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Exercise</strong>: an activity designed to help learners to mentally put into
+practice learned skills &amp; knowledge</p>
+
+  <p><strong>Flipped class</strong>: a learner-centred approach in which students are introduced
+to new topics prior to class; class time is then used to explore those topics
+in greater depth via interactive activities</p>
+
+  <p><strong>Group discussion</strong>: an in-class, learner-centred approach in which students
+discuss ideas, solve problems &amp;/or answer questions, guided by the instructor</p>
+
+  <p><strong>Group work</strong>: a learner-centred approach in which students are organised
+into groups (&amp; perhaps assigned specific roles) &amp; are given tasks to perform
+collaboratively</p>
+
+  <p><strong>Lecture</strong>: a didactic approach in which oral presentation is used to
+describe &amp; explain concepts &amp; to impart facts</p>
+
+  <p><strong>Peer-instruction</strong>: an interactive, in-class, learner-centred approach in
+which groups of two or more students briefly discuss a question or assignment
+given by the instructor</p>
+
+  <p><strong>Practical</strong>: an activity to put into practice learned skills &amp; knowledge,
+generally in a lab setting</p>
+
+  <p><strong>Problem-solving</strong>: a learner-centred approach in which students are required
+to systematically investigate a problem by building or determining the best
+strategy to solve it (using what is known to discover what is not known)</p>
+
+  <p><strong>Webinar</strong>: a lecture delivered online</p>
+
+</blockquote>
+
+<p>Having defined SMART LOs in Phase 1, Phase 2 thus hinges on choosing the most
+appropriate LEs to best lead learners towards them: if LOs include, for example,
+being able to write a computer program, then the LEs must allow learners to
+apply the knowledge they have acquired and to demonstrate that they’ve written a
+piece of functional code: i.e., LEs and LOs must be aligned (if they are not,
+this can lead directly to a gap between instructional inputs and intended
+outcomes, which is one reason why course evaluation to detect such misalignments
+is so crucial). If LEs don’t satisfy this criterion, alte<span class="notranslate">rna</span>tive LEs should be
+found, or the LOs should be revisited and revised before progressing to Phase 3
+(as shown in Figure 2).</p>
+
+<p>Sometimes, it may be necessary to use specific LEs: e.g., if a course is
+lecture-based, it may not be possible to choose alte<span class="notranslate">rna</span>tives; or a particular
+teaching scenario may not allow for an ideal LE. Even if you’re not in a
+position to select the most appropriate LEs, the LOs must still be consistent
+with the given LEs; and if those LEs won’t help learners to achieve the LOs,
+then the LOs should be revised – i.e., LOs are still the most important feature
+to consider.<strong>The key is to determine exactly what specific LEs can contribute
+to learning or how they will help move learners towards the LOs.</strong></p>
+
+<!-- >> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Evaluate LEs in GTN tutorials
+>
+> - Think of the course or tutorial you selected before (*e.g.*, the
+>   [dummy tutorial](/training-material/topics/introduction/tutorials/dummy/tutorial.html))
+>
+> - Are any of the LEs listed in Table 1 used in the course or tutorial you
+>   selected?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for GTN tutorial, including the dummy one
+>   >
+>   > Most of the GTN tutorials are using Practical and Exercises as LEs.
+>   >
+>   {: .solution}
+>
+> - What kinds of achievement or learning are they most likely to promote?
+>   Is this consistent with the stated LOs?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for GTN tutorial, including the dummy one
+>   >
+>   > They are most likely to show how to do things and give an idea of how a tool
+>   > work.
+>   >
+>   {: .solution}
+>
+> - Does the course or tutorial have any LO that can't be achieved through the
+>   LEs that the course currently uses?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   > "Determine the best strategy to get data into Galaxy" may not be achieved
+>   > with only practical
+>   >
+>   {: .solution}
+>
+{: .question} -->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-les-in-gtn-tutorials"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: LEs in GTN tutorials</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/LEs_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/LEs_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<blockquote class="solution">
+  <h3 id="solution-les-in-gtn-tutorials"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> LEs in GTN tutorials</h3>
+
+  <p>Most of the GTN tutorials are using Practical and Exercises as LEs.</p>
+
+  <p>They are most likely to show how to do things and give an idea of how a tool works.</p>
+
+  <p>In the <a href="/training-material/topics/introduction/tutorials/dummy/tutorial.html">dummy tutorial</a>,
+the LO “Determine the best strategy to get data into <span class="notranslate">Galaxy</span>” may not be achieved
+with only practical</p>
+
+</blockquote>
+
+<h2 id="select-and-develop-content-relevant-to-the-los">Select and develop content relevant to the LOs</h2>
+
+<h3 id="select-content">Select content</h3>
+
+<p>With LOs and LEs aligned, Phase 3 involves finding the most appropriate
+<strong>content</strong> to support learners to achieve the intended LOs. Regardless of where
+content is drawn from, what matters is how it supports the LOs.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Content</strong>: a specific subject or topic item (e.g., <span class="notranslate">DNA</span>, <span class="notranslate">RNA</span>, proteins, a
+biochemical pathway, R programming) that is the target of learning</p>
+
+</blockquote>
+
+<p>To this end, content selection should be judicious: it shouldn’t try to be all-encompassing
+(<span class="citation"><a href="#nilson2016teaching">Nilson 2016</a></span>), but should consider the target Bloom’s levels in
+the LOs, and the preparation of learners. Once content that’s considered to be
+the core of a course has been identified, additional <strong>auxiliary</strong> materials can
+also be selected, and offered, say, as ‘further reading’. Using LOs to drive
+content selection in this way thereby both provides focus (avoiding the
+temptation to squeeze as much as possible into a course to ensure coverage
+(<span class="citation"><a href="#mckeachie2013mckeachie">McKeachie and Svinicki 2013</a></span>, <span class="citation"><a href="#lujan2006too">Lujan and DiCarlo 2006</a></span>)), and increases the
+likelihood of accomplishing those LOs.</p>
+
+<p>Sometimes, specific content may be deemed essential (<span class="citation"><a href="#de2017curriculum">De Veaux <i>et al.</i> 2017</a></span>).
+Nevertheless, this must still support the LEs and promote achievement of the
+LOs; if it doesn’t, then additional content and/or LEs should be considered that
+will, or the LOs themselves should be revised, to prevent misalignment of
+instructional inputs and learning outcomes. Overall, the role of <strong>LOs here is to
+help focus on relevant content, and avoid material that’s either
+non-essential/too broad or too narrow</strong>.</p>
+
+<p>If content is, or seems, fixed, it can be difficult to make the shift from
+content- to LO-driven decisions. In this case, Messick and Bloom’s can be used to make
+adjustments so that what it means to learn that content or what it looks like to have learned that
+content can be made concrete and observable. If such fixed content does not lead to observable
+behaviors that are, or support the achievement of, LOs, then additional content should be
+considered that will; otherwise, it may be necessary to discuss the feasibility of modifying the
+content or revising the LOs with those who are able to make changes, to avoid misalignment of
+intended and actual curricula</p>
+
+<!-- >> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Evaluate content
+>
+> - Think of the course or tutorial you selected before (*e.g.*, the
+>   [dummy tutorial](/training-material/topics/introduction/tutorials/dummy/tutorial.html))
+>
+> - Review the LOs and identify which parts of the course content support the
+>   LOs
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - Map out the relationships between the LOs, the LEs via which they will be
+>   delivered & those specific items of content (e.g., item A supports LO 1, &
+>   will be delivered using a lecture)
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - Is there any piece of content that doesn't support any LO(s)?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - Is there at least one piece of content for each LO?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - Is there at least one LE for each piece of content?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+{: .question}-->
+
+<p>Defining content can be complicated, specially to identify how it can cover the
+different LOs. Trainers may need to tools to help them defining content,
+<em>e.g.</em> concept maps.</p>
+
+<h3 id="concept-maps">Concept maps</h3>
+
+<p>Concept maps are rough and visual scheme on how the different concepts are linked.
+They begin with a main idea (or concept) and then branch out to show how
+that main idea can be broken down into specific topics.</p>
+
+<p>For example, the concepts around the nucleus could be represented using the
+following concept map:</p>
+
+<figure id="figure-3"><img src="images/nucleus_concept_map.jpg" alt="Example of concept map to explain the nucleus. It start on the top with &quot;Nucleus&quot;, two arrows leave from this. On the left &quot;Nucleus -- has function --&gt;&quot; links to &quot;has function --&gt; performing chemical activities&quot; and &quot;has function --&gt; cellular reproduction&quot;. On the right, &quot;Nucleus -- consist of --&gt; chromosomes&quot;, which splits into: on the left &quot;chromosomes -- has function --&gt; inheritance&quot;; on the right &quot;chromosomes -- composed of --&gt;&quot; with 2 arrows to the left &quot;-- composed of --&gt; DNA&quot; which then split into &quot;DNA -- composed of --&gt; genes&quot; and &quot;DNA --&gt; has function --&gt; carrying of information&quot;, to the right &quot;-- composed of --&gt; proteins&quot;. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Example of concept map to explain the nucleus. 9 nodes and 6 edges, so 15 concepts in total</figcaption></figure>
+
+<p><strong><em>Why concept maps?</em></strong> Concept maps are graphical tools for organizing and
+representing knowledge. They include concepts and the relationships between them.</p>
+
+<p><strong><em>How to use concept maps?</em></strong> Concept maps can be used by trainers to help building
+content, by breaking training in small pieces (7+/2 concepts) and by helping
+trainers and helpers to connect things together. A good concept map usually
+starts with a focused question, a context, and is built with iteration and
+feedback.</p>
+
+<p>For example, to answer the questions <em>“What are the FAIR principles?”</em></p>
+<ol>
+  <li>we start by listing the keywords that should be discussed: Research data,
+Research models, Findable, Accessible, Interoperable, Re-usable</li>
+  <li>we link them together in a concept map:</li>
+</ol>
+
+<figure id="figure-4"><img src="images/fair_concept_map.png" alt="It starts on the top with a box &quot;What are FAIR principles?&quot;. An arrow goes from this box to a box below &quot;Set of guiding principles&quot;. From the 2nd box, an arrow goes down with &quot;to make&quot; written and then splits toward 2 boxes: &quot;Research data&quot; on the left, &quot;Research models&quot; on the right. A line connects these 2 boxes with &quot;and&quot; written on it. An arrow starts from research data and splits into 4 arrows pointing to boxes (from left to right): &quot;Findable&quot;, &quot;Accessible&quot;, &quot;Interoperable&quot;, &quot;Re-usable&quot;. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of concept map to explain the FAIR principles</figcaption></figure>
+
+<p>Concept maps try to objective but they depend on their creators. Everyone has
+their own concept map, like the way to go from point A to point B from 2 persons
+living in the same city.</p>
+
+<p>In curriculum/lesson/session planning, concept maps present key concepts in a
+highly concise manner. They can take into account the existing knowledge of
+learners and new concepts This helps in the teaching plan to measure how much
+can be covered, and the hierarchical organization suggests a sequence to cover
+material.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-draw-a-concept-map---time-15-min---silent-working"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Draw a concept map - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 15 min - Silent working</em></h3>
+
+  <ul>
+    <li>Draw a concept map of your topic of interest</li>
+    <li>Start with a question</li>
+    <li>Include 7 (+/- 2) concepts</li>
+    <li>Include relationships and cross-links between these concepts</li>
+    <li>Arrange it in a hierarchical structure with the key concepts on top</li>
+    <li>Count the items (concepts and links)</li>
+  </ul>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-give--receive-feedback-on-concept-maps---time-10-min---group-of-2-persons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Give / receive feedback on concept maps - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 10 min - Group of 2 persons</em></h3>
+
+  <ul>
+    <li>Pair with someone</li>
+    <li>Check the concept name of your partner</li>
+    <li>Write to your partner
+      <ul>
+        <li>One thing you are confuse/not sure about the map</li>
+        <li>One thing you like/it is clear about the map</li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-further-reading"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Further reading</h3>
+
+  <p>For more details about concept maps, we recommend you <span class="citation"><a href="#novak2008theory">Novak and Cañas 2008</a></span>
+(<a href="http://cmap.ihmc.us/publications/researchpapers/TheoryUnderlyingConceptMaps.pdf">PDF</a>)</p>
+
+</blockquote>
+
+<h3 id="content">Content</h3>
+
+<ul>
+  <li><strong>Content collection</strong>: collecting appropriate content to the needs and
+capabilities of your target audience</li>
+  <li><strong>Content reduction</strong>: one of the biggest challenges in designing training
+courses is the reduction of content to the training format. key points!</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-producing-the-content-and-the-training-material---time-15-min"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Producing the content and the training material - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 15 min</em></h3>
+
+  <ul>
+    <li>
+      <p>Prepare the content for your 3 min training</p>
+
+      <p>The structure should be something like:</p>
+
+      <ul>
+        <li>0:20 sec - Introduction</li>
+        <li>2:20 sec - Topic</li>
+        <li>0:20 sec - Conclusion</li>
+      </ul>
+    </li>
+    <li>
+      <p>Use your concept map and adapt as needed</p>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-from-a-2-min-presentation-to-a-lessonsession-a-plan"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> From a 2-min presentation to a lesson/session: a plan</h3>
+
+  <p>Template to help developing plan:</p>
+
+  <blockquote class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Activity</th>
+          <th>Description</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+        <tr>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+
+  <p>For example: for a 1h15 session</p>
+
+  <blockquote class="matrix">
+    <table>
+      <thead>
+        <tr>
+          <th>Time</th>
+          <th>Activity</th>
+          <th>Description</th>
+          <th>Goal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>9:00 - 9:15</td>
+          <td>Warm-up</td>
+          <td>Learners summaries the key points of each session from the previous day and answer questions from the audience. The instructor describes the plan of the day in detail</td>
+          <td>Retrieval from memory, repetition, get prepared for new topics, expose learners</td>
+        </tr>
+        <tr>
+          <td>9:15 - 9:25</td>
+          <td>Lecture</td>
+          <td>Python functions</td>
+          <td>Learning to write a function, about function input and output, and how to call a the function</td>
+        </tr>
+        <tr>
+          <td>9:20 - 10:00</td>
+          <td>Practical activity</td>
+          <td>Two exercises to be solved in pairs on a single computer. After solving the 1st exercise, the “driver” andr”navigator” will swap. 2 learners (1 / exercise) will display their solutions to the audience. Questions and discussion</td>
+          <td>Learners will be able to write and call a function calculating the distance between 2 points in the 3D  space and a function taking the base and height of a triangle as input and returning its area</td>
+        </tr>
+        <tr>
+          <td>10:00 - 10:15</td>
+          <td>Wrap-up</td>
+          <td>Group test on functions (match input and output with specific functions: fill gaps in pieces of code). Game: repetition using ball throwing</td>
+          <td>Assess learning. Do we need to work more on functions? Repeat meaning and usage of all Python objects introduced so far</td>
+        </tr>
+      </tbody>
+    </table>
+  </blockquote>
+</blockquote>
+
+<h2 id="develop-assessments-to-ensure-progression">Develop assessments to ensure progression</h2>
+
+<p>In any course, learners benefit from having opportunities to show that they’re
+progressing. Generally, this is done using various types of assessment,
+including tests, feedback surveys, and so on. Nicholls’ model includes two
+different types of assessment, to evaluate:</p>
+
+<ol>
+  <li><strong>learning</strong>, to detect changes in learner performance during instruction, to
+identify their strengths, and diagnose their weaknesses – i.e., <strong>formative
+assessment</strong> (or feedback). This can inform decisions about how to modify
+instruction to better promote learning; it can also inform learners about
+changes they may need to make to improve their learning;</li>
+  <li><strong>instructional outcomes</strong>, to verify whether learners achieved the stated LOs
+after instruction – i.e., <strong>summative assessment</strong>. This can help to inform
+decisions both about learners (e.g., ranking their performances) and about
+the course (<em>i.e.</em>, whether any of its LOs, LEs, etc. need to be redesigned).</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-definitions-of-key-terms-6"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Definitions of key terms</h3>
+
+  <p><strong>Formative assessment</strong>: formal or informal assessments (or feedback) made
+during learning so that instruction or practice can be better targeted for
+learners to be able to fully achieve target LOs</p>
+
+  <p><strong>Summative assessment</strong>: assessments made after a period of instruction in
+order to monitor whether LOs have been achieved</p>
+
+</blockquote>
+
+<p>Formative and summative assessments (<span class="citation"><a href="#walvoord2010assessment">Walvoord 2010</a></span>) are
+important for determining whether and what learning has occurred. Summative
+assessment doesn’t generally yield information about learners’ progress: it sums
+up what learning has been achieved after instruction relative to the intended
+outcomes (via written tests, practical tasks, or other measurable activities),
+and gives valuable data about learning attainment at the level of individuals
+and entire learner cohorts. This can be tricky for short courses, but may be
+necessary for those that give credits or offer certificates of completion.</p>
+
+<p>Formative assessments are applied throughout a course; planned thoughtfully,
+they can improve the performance of learners and instructors. Ideally, they
+should be used often (say, every 15-20 minutes), thereby also yielding
+opportunities to change pace and refocus learners’ attention. It may be hard to
+conceive how to integrate such assessments into a course, but they need not be
+complex or time-consuming (just informative about learning at a given point).</p>
+
+<blockquote class="details">
+  <h3 id="details-simple-formative-assessment-strategies"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Simple formative assessment strategies</h3>
+
+  <p>The most effective way to test student understanding is to do so in class:
+it’s important to seize the moment, and deal with potential misunderstandings
+as soon as they arise. These in-class tips may be helpful:</p>
+
+  <ul>
+    <li><strong>reflection</strong>: towards the end of a training session, ask learners to reflect
+on, and write down, a list of new concepts and skills they’ve learned. Ask
+them to consider how they’d apply these concepts or skills in a practical
+setting;</li>
+    <li><strong>agreed signals</strong>: gauge learners’ satisfaction with a training session by
+asking them to use agreed signals (<em>e.g.</em>, raising coloured post-it notes to
+indicate that the pace is too fast/ slow, etc.). This engages all learners,
+and allows you to check their confi- dence with the content and its
+delivery, even in large groups;</li>
+    <li><strong>3-2-1</strong>: at the end of a training session, ask learners to note 3 things
+they learned, 2 things they want to know more about, and 1 question they
+have. This stimulates reflection on the session, and helps to process their
+learning;</li>
+    <li><strong>misconception check</strong>: present some common or predictable misconceptions
+about a concept you’ve covered. Ask learners whether they agree or disagree,
+and to explain why;</li>
+    <li><strong>diagnostic questions/questionnaires (which may be anonymous)</strong>: ask learners
+to note one thing they didn’t understand or that they missed, and one thing
+that was very clear to them, or make them complete a multiple choice quiz,
+then display and discuss the answers with them.</li>
+  </ul>
+
+  <p>These, and many other simple assessments, may be found in
+<a href="http://www.opencolleges.edu.au/informed/features/21-ways-to-check-for-student-understanding/">Briggs’ online list of 21 ways to check for student understanding</a>.</p>
+
+</blockquote>
+
+<p>If formative assessments are used frequently, and lead to specific decisions by
+learners and instructors, then instruction (or learner preparation) can be
+modified to better develop the target LOs (<span class="citation"><a href="#dylan2008integrating">Dylan and Thompson 2008</a></span>,
+<span class="citation"><a href="#trumbull2013understanding">Trumbull and Lash 2013</a></span>). Such assessments can be designed to
+anticipate, and identify which learners are experiencing, common
+misunderstandings, and gauge their readiness to move ahead; they can also help
+learners to identify their own strengths and weaknesses by encouraging
+reflection on what they do/don’t know or are/aren’t confident about, honing
+their abilities to self-assess (<span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span>). Furthermore,
+ideas for how to address any issues they’ve found, or for further learning, can
+be built in (e.g., <em>“if you chose option C, you might want to re-read the
+handout”</em>); formative assessments can therefore also support self-instruction.</p>
+
+<p>Using actionable formative and summative assessment can help to ensure that LOs,
+and progress towards them, are explicitly supported. <strong>LOs clarify what
+specifically needs to be assessed and why.</strong></p>
+
+<!-- >> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Evaluate assessment
+>
+> - Think of the course or tutorial you selected before (*e.g.*, the
+>   [dummy tutorial](/training-material/topics/introduction/tutorials/dummy/tutorial.html))
+>
+> - How much formative assessment have been used?
+> - Does it paint a consistent picture of learning levels for the course?
+> - To what extent are the tests aligned with the KSAs & Bloom's levels
+>   expressed in the LOs?
+>
+{: .question} -->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-evaluate-assessment-in-gtn-tutorials"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Evaluate assessment in GTN tutorials</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/assessments_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/assessments_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-assessment-in-mini-training---time-5-min"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Assessment in mini-training - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 5 min</em></h3>
+
+  <ul>
+    <li>Take the content of your 3 min training</li>
+    <li>Analyse the flow of the lesson, identify points where you could introduce
+formative-feedback sessions</li>
+    <li>For each portion of the lesson between two sets of feedback, imagine (&amp;
+write down) a quick activity – an exercise, a question, a reflection – that
+learners could carry out that would help you understand whether they’re
+following the lesson &amp; that learning is occurring, or whether they’re
+lagging behind or are lost.</li>
+  </ul>
+
+</blockquote>
+
+<h2 id="evaluate-course-effectiveness">Evaluate course effectiveness</h2>
+
+<p>The final step is to perform an actionable evaluation by collecting qualitative
+and quantitative course data to assess its effectiveness in leading learners to
+the stated LOs. Summative assessments can be useful here: <em>e.g.</em>, if they reveal
+uniformly low levels of achievement, it may indicate that future revisions are
+needed to ensure that LEs, assessments and LOs are aligned; it could also flag
+problems with the assessment – it’s vital to understand whether performance
+reflects student learning levels or issues with the assessment itself (poorly
+worded test questions, ambiguous response options, etc.), and, if not, to take
+steps to ensure that it does.</p>
+
+<p>Even if a full quantitative course evaluation isn’t possible, it may still be
+possible to solicit actionable evidence of its impact via short- or long-term
+feedback surveys. It’s tempting to use completion rates or learner satisfaction
+as proxies for success; however, although simple to collate, these outcomes
+aren’t informative about learners’ growth or course effectiveness. Satisfaction
+surveys often use pre- and post-course questionnaires
+(<span class="citation"><a href="#jordan_kari_2018_1325464">Jordan <i>et al.</i> 2018</a></span>, <span class="citation"><a href="#gurwitz2020framework">Gurwitz <i>et al.</i> 2020</a></span>) to collect
+demographic details, and solicit learners’ self-evaluations and reactions to a
+course. Reviewing learners’ perceptions can help to identify whether the
+conditions for learning were present, but alone will not shed light on whether
+the intended LOs were achieved: learner perceptions may be affected by factors
+unrelated to course effectiveness, and their self-assessments may be biased
+(e.g., less-skilled learners notoriously overestimate their abilities – the
+Dunning-Kruger effect (<span class="citation"><a href="#kruger1999unskilled">Kruger and Dunning 1999</a></span>)).</p>
+
+<p>There are many evaluation methods, each with advantages and disadvantages; all
+concur that multiple features need to be considered. One framework collates
+learner reactions, their actual learning, changes in their behaviour, and the
+impact of the course on their organisation.</p>
+
+<blockquote class="details">
+  <h3 id="details-methods-to-evaluate-training-effectiveness"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Methods to evaluate training effectiveness</h3>
+
+  <p>Evaluation methods provide systematic frameworks for analysing the
+effectiveness of training courses. The first approach was introduced by
+Raymond Katzell in 1956 and later popularised by Kirkpatrick
+(<span class="citation"><a href="#kirkpatrick1979techniques">Kirkpatrick 1979</a></span>, <span class="citation"><a href="#kirkpatrick2006evaluating">Kirkpatrick and Kirkpatrick 2006</a></span>).
+The Kirkpatrick-Katzell method proposes a four-level strategy:</p>
+
+  <ol>
+    <li><strong>Reaction</strong> – what do learners feel about the training?</li>
+    <li><strong>Learning</strong> – what did learners retain from the training?</li>
+    <li><strong>Behaviour</strong> – did learners put their learning into practice
+  on-the-job (did their working behaviour change)?</li>
+    <li><strong>Results</strong> – did their behavioural changes have an overall impact on
+  their organisation (e.g., greater productivity)?</li>
+  </ol>
+
+  <p>Surveying each level helps collect qualitative and quantitative data to
+evaluate training effectiveness. Note: this isn’t a real taxonomy, as there’s
+no evidence that outcomes at successive levels are linked (<em>e.g.</em>, no
+correlation has been found between the reaction and learning stages
+<span class="citation"><a href="#gessler2009correlation">Gessler 2009</a></span>). However, if level 2 results indicate that
+learning didn’t occur, those from level 1 may identify aspects of a course
+that disappointed learners and help understand what should be improved. Many
+other approaches to training evaluation have been developed,
+<a href="https://kodosurvey.com/blog/training-evaluations-models-complete-guide">each focusing on slightly different levels or stages</a>.</p>
+
+</blockquote>
+
+<p>Such features can be explicitly targeted in short- or long-term surveys: <em>e.g.</em>,
+end-of-course, summative quizzes can be used to test achievement of intended
+LOs; longer-term questions (say, 6-12 months after a course) can focus on the
+extent to which learners have put their acquired KSAs into working practice; and
+so on. Overall, it’s important to choose an appropriate evaluation method for your
+circumstances, and, alongside learner reactions to the course, for your
+evaluation to consider what results you expected to achieve, whether the LOs
+were achieved, and whether learners’ on-the-job practices changed.</p>
+
+<p>Actionable evaluation is essential for identifying aspects of a course that may
+benefit from intervention, leading to concrete decisions about what needs to be
+remediated and why (<span class="citation"><a href="#worthen1997program">Worthen <i>et al.</i> 1997</a></span>). Designing meaningful
+evaluations requires thought; in some cases, it may help to appoint independent
+evaluators or advisory boards, as exte<span class="notranslate">rna</span>l reviewers can give objective
+appraisals, and may also help to frame the course against national/inte<span class="notranslate">rna</span>tional
+standards. <strong>Ultimately, the evaluation should identify what works in a course,
+and what needs remediation, to better support the achievement of the intended
+LOs</strong>.</p>
+
+<!-- >> ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Evaluate effectiveness
+>
+> - Think of the course or tutorial you selected before (*e.g.*, the
+>   [dummy tutorial](/training-material/topics/introduction/tutorials/dummy/tutorial.html))
+>
+> - Do you evaluate its effectiveness?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   > - Embeded feedback form
+>   > - Collecting feedback at the end of courses
+>   >
+>   {: .solution}
+>
+>   If so, how do you do this? How do you determine its effectiveness in leading
+>   learners to your intended LOs?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - Consider the Kirkpatrick-Katzell framework. What level(s) does your
+>   evaluation incorporate?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+> - What adjustments would you need to make, if any, in order to align your
+>   evaluation with the Kirkpatrick-Katzell strategy?
+>
+>   > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution for the dummy tutorial
+>   >
+>   >
+>   {: .solution}
+>
+{: .question}-->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-evaluate-effectiveness-in-gtn-tutorials"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Evaluate effectiveness in GTN tutorials</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/effectiveness_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/contributing/tutorials/design/quiz/effectiveness_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<blockquote class="solution">
+  <h3 id="solution-evaluate-effectiveness-in-gtn-tutorials"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Evaluate effectiveness in GTN tutorials</h3>
+
+  <p>Tutorials are evaluated using</p>
+  <ul>
+    <li>Embeded feedback forms at the</li>
+    <li>Collecting feedback at the end of courses</li>
+  </ul>
+
+</blockquote>
+
+<!-- Challenges and options in implementing Nicholl's curriculum-development model-->
+
+<!-- ELIXIR TtT -->
+<h1 id="testing-the-mini-training">Testing the mini-training</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-delivery-planning---time-10-min---silent-working"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Delivery planning - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 10 min - Silent working</em></h3>
+
+  <ul>
+    <li>Think if you want to make your training interactive</li>
+    <li>Think whether you need or want to use a visual support (images)</li>
+    <li>Think whether you need to distribute material in advance to the audience</li>
+    <li>Prepare for your choices</li>
+    <li>Be creative!</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-deliver-mini-training-and-give--receive-feedback-on-its-delivery---time-15-min---groups-of-2-persons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Deliver mini-training and Give / receive feedback on its delivery - <em><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 15 min - Groups of 2 persons</em></h3>
+
+  <ul>
+    <li>
+      <p>Deliver each one your 3 minute session to others with 1 person noting down
+feedback in real-time</p>
+
+      <blockquote class="details">
+        <h3 id="details-how-to-give-feedback-on-training"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to give feedback on training</h3>
+
+        <ul>
+          <li>Listen actively and attentively</li>
+          <li>Ask for clarification if you are confused</li>
+          <li>Do not interrupt one another</li>
+          <li>
+            <p>Collect constructive feedback on content and presentation: positive and
+ negative feedback using the following matrix as template:</p>
+
+            <blockquote class="matrix">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Content</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                  <tr>
+                    <td>Presentation</td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                </tbody>
+              </table>
+            </blockquote>
+          </li>
+          <li>Challenge one another, but do so respectfully</li>
+          <li>Critique ideas, not people</li>
+          <li>Do not offer opinions without supporting evidence</li>
+          <li>Take responsibility for the quality of the discussion</li>
+          <li>Build on one another’s comments; work toward shared understanding.</li>
+          <li>Do not monopolise discussion.</li>
+          <li>Speak from your own experience, without generalizing.</li>
+          <li>If you are offended by anything said during discussion, acknowledge it
+immediately.</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Describe your own feedback on your delivery</li>
+    <li>Provide feedback to the presenter</li>
+    <li>Share with the group any insights/thoughts/comments to share from your breakout room</li>
+  </ul>
+
+</blockquote>
+
+<!--
+## Logistics that will help or hinder learning
+
+Reproducibility of compute environments
+
+- Identical installation setup on every computer and sufficient hardware (power
+  and memory) to run the tools
+- Different courses, different compute requirements: Unix, R, Python,
+  metagenomics, long read sequencing
+- Installation process time-consuming and technically challenging
+- Virtual machines, cloud computing, containers, software images
+  - Allocate time (pre-sessions) to make sure installations are up and running
+
+Training rooms for bioinformatics
+
+Physical environment
+
+- Room geometry: seats’ quality, the lighting, the room temperature control, the
+  stability of power and network connections
+- Functionality : video, audio, drawing surfaces (whiteboard, flipchart paper),
+  a corkboard to pin materials
+- Hardware needs: power suppliers, network connections with a good quality wifi
+  access
+ -->
+
+<h1 id="training-material-sharing-and-making-re-use-possible">Training material: sharing and making re-use possible</h1>
+
+<p>When developing a course, it’s helpful to document the design process, including
+details of how it was conceptualised, the assumptions and decisions made along
+the way, the assessment criteria, etc., and to share that documentation with
+instructors and learners (this can be done via community mailing lists, through
+blog posts, collaborative repositories, social channels, using GitHub, Slack,
+etc.). By way of example, <a href="https://carpentries.org/">The Carpentries</a> provide
+<a href="https://swcarpentry.github.io/shell-novice/guide/">instructor note</a> for most of
+their courses. These are collectively-written documents that reflect on the
+strengths and weaknesses of the course design (and its materials), what
+did/didn’t work, suggested improvements, tips for teaching, challenges
+encountered, learner feedback, and indications of where alignment of
+LOs/LEs/content/assessments failed, and why.</p>
+
+<blockquote class="question">
+  <h3 id="question-resources-in-the-galaxy-training-network"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Resources in the <span class="notranslate">Galaxy</span> Training Network</h3>
+
+  <p>What are the provided resources by the <span class="notranslate">Galaxy</span> Training Network to document
+training resources?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ul>
+      <li>Gitter / Matrix channel</li>
+      <li>GitHub Pull Request</li>
+      <li>Details box in tutorials</li>
+      <li><a href="/training-material/feedback.html">Feedback page</a></li>
+      <li><a href="https://github.com/galaxyproject/training-material/discussions/1452">Workshop Instructor Feedback</a></li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>Best practices like this help course designers and communities of trainers to
+understand what was intended, what was done, and why those might be different,
+if they are. This is particularly valuable for courses whose materials are not
+developed by its instructors. Such documentation can thus facilitate reflection
+and promote good practice, and can help new instructors prepare to deliver the
+course. If made available to learners, it can help them to understand what they
+can expect from a course, and make informed decisions about whether it will help
+them to achieve their learning goals; it may also help them to better gauge their
+performance, and to identify what will help them perform better – it may therefore
+also improve learning outcomes.</p>
+
+<p>As data and models should be FAIR (Findable, Accessible, Interoperable &amp; Re-usable),
+training materials (slides, exercises, datasets, etc) should also be FAIR</p>
+
+<ul>
+  <li><strong>Findable</strong> - can be searched and found by the trainers community</li>
+  <li><strong>Accessible</strong> - can be read/downloaded by other trainers</li>
+  <li><strong>Interoperable</strong> - can be understood clearly in the context of the original
+course</li>
+  <li><strong>Re-usable</strong> - can be used by other trainers</li>
+</ul>
+
+<p><strong><em>How to make training material FAIR?</em></strong> You can follow the recommendations from
+<span class="citation"><a href="#garcia2020ten">Garcia <i>et al.</i> 2020</a></span>:</p>
+
+<figure id="figure-5"><img src="images/fair_training_material.png" alt="It is like a circle with in the middle &quot;1 - Share&quot; then turning clock wise from left middle: &quot;2 - Describe properly&quot;, &quot;3 - Give unique identity&quot;, &quot;4 - Register online&quot;, &quot;5 - Define access rules&quot;, &quot;6 - Use interoperable format&quot;, &quot;7 - Make (re)usable for trainers&quot;, &quot;8 - Make usable for trainees&quot;, &quot;9 - Welcome contributions&quot;, &quot;10 - Keep material up-to-date&quot;. On the top of rules, &quot;Findable&quot; for 2, 3, 4, &quot;Accessible&quot; for 3, 4, 5, &quot;Interroperable&quot; for 6, &quot;Reusable&quot; for 7, 8, 9, 10. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Ten simple rules for making training materials FAIR. The first rule—to share—is the central starting point; the Findability rules include description, identity, and registration; the latter two, together with access rules, correspond to Accessibility; Interoperability stands on its own, with one rule about formats; the remaining four rules cover different aspects of Reusability. Illustration from Luc Wiegers and Celia van Gelder (<span class="citation"><a href="#garcia2020ten">Garcia <i>et al.</i> 2020</a></span>, <span class="citation"><a href="#wiegers2019">Wiegers and van Gelder 2019</a></span>)</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-is-gtn-material-fair"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Is GTN material FAIR?</h3>
+
+  <ul>
+    <li>
+      <p>Look at the any GTN tutorial (<em>e.g.</em>, the
+<a href="/training-material/topics/introduction/tutorials/dummy/tutorial.html">dummy tutorial</a>)</p>
+    </li>
+    <li>
+      <p>Is this training material FAIR ? If so, how?</p>
+    </li>
+  </ul>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-does-the-gtn-ensure-our-training-materials-are-fair"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How does the GTN ensure our training materials are FAIR?</h3>  <p>This infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) principles for training materials <span class="citation"><a href="#Garcia2020">Garcia <i>et al.</i> 2020</a></span>. Following these principles enables trainers and trainees to find, reuse, adapt, and improve the available tutorials.</p>  <table>  <thead>    <tr>      <th>10 Simple Rules</th>      <th>Implementation in GTN framework</th>    </tr>  </thead>  <tbody>    <tr>      <td>Plan to share your training materials online</td>      <td>Online <a href="https://training.galaxyproject.org/">training material portfolio</a>, managed via <a href="https://github.com/galaxyproject/training-material">a public GitHub repository</a></td>    </tr>    <tr>      <td>Improve findability of your training materials by properly describing them</td>      <td>Rich metadata associated with each tutorial that are visible and accessible via schema.org on each tutorial webpage.</td>    </tr>    <tr>      <td>Give your training materials a unique identity</td>      <td>URL persistency with redirection in case of renaming of tutorials. Data used for tutorials stored on Zenodo and associated with a Digital Object Identifiers (DOI)</td>    </tr>    <tr>      <td>Register your training materials online</td>      <td>Tutorials automatically registered on TeSS, the <a href="https://tess.elixir-europe.org/">ELIXIR’s Training e-Support System</a></td>    </tr>    <tr>      <td>If appropriate, define access rules for your training materials</td>      <td>Online and free to use without registration</td>    </tr>    <tr>      <td>Use an interoperable format for your training materials</td>      <td>Content of the tutorials and slides written in Markdown. Metadata associated with tutorials stored in YAML, and workflows in JSON. All of this metadata is available <a href="https://training.galaxyproject.org/training-material/api/">from the GTN’s API</a></td>    </tr>    <tr>      <td>Make your training materials (re-)usable for trainers</td>      <td>Online. Rich metadata associated with each tutorial: title, contributor details, license, description, learning outcomes, audience, requirements, tags/keywords, duration, date of last revision. Strong technical support for each tutorial: <span class="notranslate">workflow</span>, data on Zenodo and also available as data libraries on Use<span class="notranslate">Galaxy</span>.*, tools installable via the <span class="notranslate">Galaxy</span> Tool Shed, list of possible <span class="notranslate">Galaxy</span> instances with the needed tools.</td>    </tr>    <tr>      <td>Make your training materials (re-)usable for trainees</td>      <td>Online and easy to follow hands-on tutorials. Rich metadata with “Specific, Measurable, Attainable, Realistic and Time bound” (SMART) learning outcomes following Bloom’s taxonomy. Requirements and follow-up tutorials to build learning path. List of <span class="notranslate">Galaxy</span> instances offering needed tools, data on Zenodo and also available as data libraries on Use<span class="notranslate">Galaxy</span>.*. Support chat embedded in tutorial pages.</td>    </tr>    <tr>      <td>Make your training materials contribution friendly and citable</td>      <td>Open and collaborative infrastructure with contribution guidelines, a CONTRIBUTING file and a chat. Details to cite tutorials and give credit to contributors available at the end of each tutorial.</td>    </tr>    <tr>      <td>Keep your training materials up-to-date</td>      <td>Open, collaborative and transparent peer-review and curation process. Short time between updates.</td>    </tr>  </tbody></table></blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<p><strong>Creating and sharing documentation with instructors and learners fosters the
+development of communities of best practice, and can support both learning and
+the success of a course.</strong></p>
+
+<!--
+>> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Apply - _<i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> 5 min_
+>
+> - Articulate a goal of good teaching practice that you are ready to apply for
+>   your next training
+> - Share in the shared notes
+{: .hands_on}
+-->
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>Course design is prefaced by determining the purpose of the programme, analysing
+the context in which the course will be delivered and who will benefit.
+Fundamental to this process is to identify the needs the course will address,
+its target audience, and the prerequisite KSAs that learners must have in order
+to profit most from the course. Identifying the target audience and learner
+prerequisites helps to define criteria for selecting participants, should a
+limit be needed to maximise course effectiveness.</p>
+
+<p>Once such ‘situational analysis’ has been completed, the starting point, and
+pivotal reference for all subsequent stages of the course-design process, is to
+articulate SMART LOs. As part of this process, Bloom’s taxonomy is useful for
+defining LOs that are measurable, and whose cognitive complexity increases along
+a developmental trajectory; and Messick’s questions help both to select KSAs and
+LOs, and to ensure alignment of instruction and assessment. Crucially, informed
+choices need to be made about the LEs (and the content they use) that best align
+with the goal of achieving specific LOs <strong>in the time available</strong>. General topic
+areas (life sciences, computer science, data science, etc.) may provide the
+overarching framework, but your goals for learners should drive how content is
+selected, taught and assessed. In terms of assessment approaches, formative
+assessment is generally more relevant for short courses, but summative
+assessment may be necessary for accredited courses. Ultimately, it’s important
+to understand what each type of assessment contributes to the course-design
+process and to build your practice to maximise the effectiveness of each.</p>
+
+<p>Evaluating course effectiveness should be the final stage of a robust design
+process, and the first step towards course re-design and improvement, should the
+course be delivered regularly. To do this rigorously, it’s helpful to employ a
+multi-level evaluation strategy, in which learner satisfaction is just one
+strand (used alone, learner satisfaction is not a reliable metric of success).</p>
+
+<p>Course design requires thought and time. Successful courses support learners as
+they develop from entry-level performance to the minimum performance level for
+achieving the target LOs. If designed specifically to support learners and LOs,
+and evaluated against that objective, the instruction that’s delivered and
+learning that’s intended are more likely to match. This can’t guarantee success
+for all learners, but does create the optimal circumstances for success.</p>
+
+<p>Structured approaches benefit course design by leveraging what’s already known
+about learning, and providing a framework for decision-making. The process can
+be challenging, but investing in it is likely to pay dividends. Ultimately,
+everything in the design should lead to, and support development of, the LOs
+that learners should possess, and be able to demonstrate, on completion of a
+course. For ease of reference, the approach outlined here can be distilled into
+the simple set of recommendations summarised:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>N</th>
+      <th>Recommendation</th>
+      <th>Benefits</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>1</strong></td>
+      <td>Follow a structured paradigm for course design.</td>
+      <td>Leverages what’s known about education &amp; learning; provides a framework for decision-making.</td>
+    </tr>
+    <tr>
+      <td><strong>2</strong></td>
+      <td>Focus on LOs first, to inform all other course-design decisions</td>
+      <td>LOs provide context for decision-making by instructors &amp; learners.</td>
+    </tr>
+    <tr>
+      <td>2.1</td>
+      <td>Leverage LOs to determine appropriate LEs</td>
+      <td>LOs help to choose LEs that support learners to achieve the LOs.</td>
+    </tr>
+    <tr>
+      <td>2.2</td>
+      <td>Leverage LOs to select content that promotes achievement of the LOs.</td>
+      <td>LOs help to focus on relevant content, &amp; to avoid material that is non-essential &amp;/or too narrow</td>
+    </tr>
+    <tr>
+      <td>2.3</td>
+      <td>Assess learners’ progress towards LOs &amp; the achievement of LOs using formative &amp; summative assessment, respectively</td>
+      <td>LOs clarify what specifically needs to be assessed &amp; why.</td>
+    </tr>
+    <tr>
+      <td><strong>3</strong></td>
+      <td>Plan &amp; execute an actionable course evaluation.</td>
+      <td>Helps identify what works &amp; what to remedy in the course to better support achievement of LOs.</td>
+    </tr>
+    <tr>
+      <td><strong>4</strong></td>
+      <td>Document &amp; share the course features with learners.</td>
+      <td>Helps to support learning &amp; promotes success of the course.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!--
+Considerations for training and self-directed learning
+Designing instruction is challenging, requiring thought, attention and time; this is just as true for
+short-form and self-instruction as it is for curricula and programs of study (Diamond, 2008). Self-
+directed learners need to make informed decisions about which training sessions will be most likely
+to help them achieve their own learning goals; they therefore need to develop a sense of whether
+  14
+particular learning opportunities or LEs can actually support the stated LOs (e.g., in order to be
+able to choose between several different offerings of a ‘data science’ course that appear
+superficially similar). Similarly, trainers need to focus on, and make informed choices about, the
+LEs that best align with the objective of achieving specific LOs in the time available.
+Assessment presents greater challenges for training and self-directed learning. Trainers can use
+short- and longer-term evaluations to determine, say, interest in, or consistency in implementing,
+the training material; but formative assessment is generally the most relevant assessment tool for
+this context. Self-directed learners may be unlikely to create formative assessments, but they may
+formulate LOs for themselves and then try to determine whether they have met them, or whether
+they need to augment their learning with supplemental reading or exercises/activities. Job
+descriptions and published descriptors (the European Qualifications Framework (European
+Communities, 2008), etc.) can be leveraged by self-directed learners and trainers; these concretely
+describe specific KSAs that can be used as targets, against which to compare the LOs or LEs they
+are considering.
+
+
+-->
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Course development is a multi-step, iterative process</p>
+</li>
+                        
+                        <li><p>The first step is to identify intended (SMART) LOs</p>
+</li>
+                        
+                        <li><p>Identification  of  key  content  only  becomes  relevant  after  LOs  &amp; suitable LEs have been identified</p>
+</li>
+                        
+                        <li><p>Bloom’s taxonomy can facilitate the articulation of measurable LOs, &amp; support the development of cognitive complexity through them</p>
+</li>
+                        
+                        <li><p>Messick’s questions help to align KSAs, instruction &amp; assessment</p>
+</li>
+                        
+                        <li><p>For  successful  outcomes,  learners  &amp;  the  course  must  be  evaluated (it isn’t sufficient simply to note ‘completers’ or learner satisfaction)</p>
+</li>
+                        
+                        <li><p>A successful course guides learners from entry-level performance to the minimum performance level for achieving its target LOs</p>
+</li>
+                        
+                        <li><p>In a course designed to support learners &amp; LOs, the instruction that’s delivered &amp; learning that’s intended are more likely to align, thereby providing the optimal circumstances for learner success.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/contributing/faqs/">FAQ page for the Contributing to the Galaxy Training Material topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    
+                    <h2>Evaluate Learning outcomes</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/design/quiz/evaluate_learning_outcomes.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/design/quiz/evaluate_learning_outcomes.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Evaluate assessment in GTN tutorials</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/design/quiz/assessments_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/design/quiz/assessments_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Evaluate effectiveness in GTN tutorials</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/design/quiz/effectiveness_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/design/quiz/effectiveness_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>LEs in GTN tutorials</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/contributing/tutorials/design/quiz/LEs_GTN_tutorials.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/contributing/tutorials/design/quiz/LEs_GTN_tutorials.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="unesco-ibe-glossary"><b>UNESCO IBE Glossary of Curriculum-Related Terminology</b>. Accessed 2022-03-02. <a href="http://www.ibe.unesco.org/en/glossary-curriculum-terminology/a/attained-curriculum">http://www.ibe.unesco.org/en/glossary-curriculum-terminology/a/attained-curriculum</a></li>
+<li id="glossary-education-reform"><b>The glossary of Education Reform</b>. Accessed 2022-03-02. <a href="http://www.edglossary.org/hidden-curriculum">http://www.edglossary.org/hidden-curriculum</a></li>
+<li id="stanford-institutional-research-decision-support"><b>Stanford Institutional Research &amp; Decision Support</b>. Accessed 2022-03-02. <a href="http://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf">http://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf</a></li>
+<li id="bloom1956taxonomy">Bloom, B. S., 1956 <b>Taxonomy of educational objectives: The classification of educational goals</b>. Cognitive domain.</li>
+<li id="kirkpatrick1979techniques">Kirkpatrick, D. L., 1979 <b>Techniques for evaluating training programs</b>. Training and development journal.</li>
+<li id="messick1994interplay">Messick, S., 1994 <b>The interplay of evidence and consequences in the validation of performance assessments</b>. Educational researcher 23: 13–23.</li>
+<li id="worthen1997program">Worthen, B. R., J. R. Sanders, and J. L. Fitzpatrick, 1997 <b>Program evaluation</b>. Alternative approaches and practical guidelines 2:</li>
+<li id="kruger1999unskilled">Kruger, J., and D. Dunning, 1999 <b>Unskilled and unaware of it: how difficulties in recognizing one’s own incompetence lead to inflated self-assessments.</b> Journal of personality and social psychology 77: 1121.</li>
+<li id="anderson2001taxonomy">Anderson, L. W., D. R. Krathwohl, P. W. Airasian, K. A. Cruikshank, R. E. Mayer <i>et al.</i>, 2001 <b>A taxonomy for learning, teaching, and assessing: A revision of Bloom’s taxonomy of educational objectives, abridged edition</b>. White Plains, NY: Longman 5:</li>
+<li id="nicholls2002developing">Nicholls, G., 2002 <b>Developing teaching and learning in higher education</b>. <i>Routledge</i>.</li>
+<li id="kirkpatrick2006evaluating">Kirkpatrick, D., and J. Kirkpatrick, 2006 <b>Evaluating training programs: The four levels</b>. <i>Berrett-Koehler Publishers</i>.</li>
+<li id="lujan2006too">Lujan, H. L., and S. E. DiCarlo, 2006 <b>Too much teaching, not enough learning: what is the solution?</b> Advances in Physiology Education 30: 17–22.</li>
+<li id="roediger2006power">Roediger III, H. L., and J. D. Karpicke, 2006 <b>The power of testing memory: Basic research and implications for educational practice</b>. Perspectives on psychological science 1: 181–210.</li>
+<li id="diamond2008designing">Diamond, R. M., 2008 <b>Designing and assessing courses and curricula: A practical guide</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="dylan2008integrating">Dylan, W., and M. Thompson, 2008 <b>Integrating assessment with instruction: what will it take to make it work</b>. The future of assessment: shaping teaching and learning. New York: Lawrence Erlbaum Associates 9781315086545–3.</li>
+<li id="novak2008theory">Novak, J. D., and A. J. Cañas, 2008 <b>The theory underlying concept maps and how to construct and use them</b>.</li>
+<li id="european2008terminology">Vocational Training, E. C. for the Development of, 2008 <b>Terminology of European education and training policy: A selection of 100 key terms</b>. <i>Office for Official Publ. of the Europ. Communities</i>.</li>
+<li id="gessler2009correlation">Gessler, M., 2009 <b>The correlation of participant satisfaction, learning success and learning transfer: an empirical investigation of correlation assumptions in Kirkpatrick’s four-level model</b>. International Journal of Management in Education 3: 346–358.</li>
+<li id="ambrose2010learning">Ambrose, S. A., M. W. Bridges, M. DiPietro, M. C. Lovett, and M. K. Norman, 2010 <b>How learning works: Seven research-based principles for smart teaching</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="walvoord2010assessment">Walvoord, B. E., 2010 <b>Assessment clear and simple: A practical guide for institutions, departments, and general education</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="fink2013creating">Fink, L. D., 2013 <b>Creating significant learning experiences: An integrated approach to designing college courses</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="mckeachie2013mckeachie">McKeachie, W., and M. Svinicki, 2013 <b>McKeachie’s teaching tips</b>. <i>Cengage Learning</i>.</li>
+<li id="trumbull2013understanding">Trumbull, E., and A. Lash, 2013 <b>Understanding formative assessment</b>. Insights form learning theory and measurement theory. San Francisco: WestEd 1–20.</li>
+<li id="jensen2014teaching">Jensen, J. L., M. A. McDaniel, S. M. Woodard, and T. A. Kummer, 2014 <b>Teaching to the test… or testing to teach: Exams requiring higher order thinking skills encourage greater conceptual understanding</b>. Educational Psychology Review 26: 307–329.</li>
+<li id="nilson2016teaching">Nilson, L. B., 2016 <b>Teaching at its best: A research-based resource for college instructors</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="national2016higher">Learning Outcomes Assessment, N. I. for, 2016 <b>Higher Education Quality: Why Documenting Learning Matters</b>.</li>
+<li id="de2017curriculum">De Veaux, R. D., M. Agarwal, M. Averett, B. S. Baumer, A. Bray <i>et al.</i>, 2017 <b>Curriculum guidelines for undergraduate programs in data science</b>. Annual Review of Statistics and Its Application 4: 15–30.</li>
+<li id="jordan_kari_2018_1325464">Jordan, K., F. Michonneau, and B. Weaver, 2018 <b>Analysis of Software and Data Carpentry’s Pre- and Post-Workshop Surveys</b>. <a href="https://doi.org/10.5281/zenodo.1325464">10.5281/zenodo.1325464</a></li>
+<li id="weinstein2018understanding">Weinstein, Y., M. Sumeracki, and O. Caviglioli, 2018 <b>Understanding how we learn: A visual guide</b>. <i>Routledge</i>.</li>
+<li id="wiegers2019">Wiegers, L., and C. W. G. van Gelder, 2019 <b>Illustration for "Ten simple rules for making training materials FAIR"</b>. <a href="https://doi.org/10.5281/ZENODO.3593257">10.5281/ZENODO.3593257</a> <a href="https://zenodo.org/record/3593257">https://zenodo.org/record/3593257</a></li>
+<li id="garcia2020ten">Garcia, L., B. Batut, M. L. Burke, M. Kuzak, F. Psomopoulos <i>et al.</i>, 2020 <b>Ten simple rules for making training materials FAIR</b>.</li>
+<li id="Garcia2020">Garcia, L., B. Batut, M. L. Burke, M. Kuzak, F. Psomopoulos <i>et al.</i>, 2020 <b>Ten simple rules for making training materials FAIR</b> (S. Markel, Ed.). PLOS Computational Biology 16: e1007854. <a href="https://doi.org/10.1371/journal.pcbi.1007854">10.1371/journal.pcbi.1007854</a></li>
+<li id="gurwitz2020framework">Gurwitz, K. T., P. Singh Gaur, L. J. Bellis, L. Larcombe, E. Alloza <i>et al.</i>, 2020 <b>A framework to assess the quality and impact of bioinformatics training across ELIXIR</b>. PLoS computational biology 16: e1007976.</li>
+<li id="tractenberg2020guidelines">Tractenberg, R. E., J. M. Lindvall, T. Attwood, and A. Via, 2020 <b>Guidelines for curriculum and course development in higher education and training</b>.</li>
+<li id="via2020course">Via, A., P. M. Palagi, J. M. Lindvall, R. E. Tractenberg, T. K. Attwood <i>et al.</i>, 2020 <b>Course design: Considerations for trainers–a Professional Guide</b>. F1000Research 9:</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Design and plan session, course, materials (Contributing to the Galaxy Training Material)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Bérénice Batut, Fotis E. Psomopoulos, Allegra Via, Patricia Palagi, ELIXIR Goblet Train the Trainers, 2022 <b>Design and plan session, course, materials (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{contributing-design,
+author = "Bérénice Batut and Fotis E. Psomopoulos and Allegra Via and Patricia Palagi and ELIXIR Goblet Train the Trainers",
+title = "Design and plan session, course, materials (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/erasmusplus/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" /></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+                <blockquote class="agenda">
+                    <h3>Developing GTN training material</h3>
+                    This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                    
+                    <ol>
+                    
+                        
+                            
+                    <li><a href="/training-material/topics/contributing/slides/introduction.html">Overview of the Galaxy Training Material</a></li>
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/gitpod/tutorial.html">Running the GTN website online using GitPod</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                                
+                            
+                        
+                    
+                        
+                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">Updating diffs in admin training</a></li>
+                                
+                            
+                        
+                    
+                    </ol>
+                </blockquote>
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

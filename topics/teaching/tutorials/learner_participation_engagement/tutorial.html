@@ -1,0 +1,1729 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Training techniques to enhance learner participation and engagement</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Training techniques to enhance learner participation and engagement" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Bérénice Batut" />
+<meta name="DC.creator" content="Fotis E. Psomopoulos" />
+<meta name="DC.creator" content="Allegra Via" />
+<meta name="DC.creator" content="Patricia Palagi" />
+<meta name="DC.creator" content="ELIXIR Goblet Train the Trainers" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Training techniques to enhance learner participation and ..." />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/teaching" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Teaching and Hosting Galaxy training
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/learner_participation_engagement/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/teaching/faqs/" title="Check our FAQs for the Teaching and Hosting Galaxy training topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/teaching/tutorials/learner_participation_engagement/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/teaching/tutorials/learner_participation_engagement/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/teaching/tutorials/learner_participation_engagement/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/teaching/tutorials/learner_participation_engagement/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Training techniques to enhance learner participation and engagement",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Teaching and Hosting Galaxy training",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Training techniques to enhance learner participation and engagement' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html",
+  "timeRequired": "PT60M",
+  "keywords": "teaching",
+  "description": "The questions this  addresses are:\n - What does make a training effective?\n - How can instructors enhance learner participation and engagement?\n\n\\nThe objectives are:\n - Describe what makes training effective\n - Describe what makes a trainer effective\n - Identify some strategies that facilitate active, interactive and collaborative learning\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html",
+      "name": "Principles of learning and how they apply to training and teaching",
+      "description": "Hands-on for 'Principles of learning and how they apply to training and teaching' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html",
+      "name": "Design and plan session, course, materials",
+      "description": "Hands-on for 'Design and plan session, course, materials' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/",
+      "name": "Fotis E. Psomopoulos",
+      "image": "https://avatars.githubusercontent.com/fpsom",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-0222-4273",
+      "orcid": "https://orcid.org/0000-0002-0222-4273"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/",
+      "name": "Allegra Via",
+      "image": "https://avatars.githubusercontent.com/allegravia",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/",
+      "name": "Patricia Palagi",
+      "image": "https://avatars.githubusercontent.com/ppalagi",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/",
+      "name": "ELIXIR Goblet Train the Trainers",
+      "image": "https://avatars.githubusercontent.com/elixir-goblet-ttt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Teaching and Hosting Galaxy training",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-teaching">
+    <h1 data-toc-skip>Training techniques to enhance learner participation and engagement</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+
+<a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/fpsom?s=27" alt="Avatar">Fotis E. Psomopoulos</a>
+
+
+
+<a href="/training-material/hall-of-fame/allegravia/" class="contributor-badge contributor-allegravia"><img src="https://avatars.githubusercontent.com/allegravia?s=27" alt="Avatar">Allegra Via</a>
+
+
+
+<a href="/training-material/hall-of-fame/ppalagi/" class="contributor-badge contributor-ppalagi"><img src="https://avatars.githubusercontent.com/ppalagi?s=27" alt="Avatar">Patricia Palagi</a>
+
+
+
+<a href="/training-material/hall-of-fame/elixir-goblet-ttt/" class="contributor-badge contributor-elixir-goblet-ttt"><img src="https://avatars.githubusercontent.com/elixir-goblet-ttt?s=27" alt="Avatar">ELIXIR Goblet Train the Trainers</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What does make a training effective?</p>
+</li>
+        
+        <li><p>How can instructors enhance learner participation and engagement?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Describe what makes training effective</p>
+</li>
+        
+        <li><p>Describe what makes a trainer effective</p>
+</li>
+        
+        <li><p>Identify some strategies that facilitate active, interactive and collaborative learning</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/contributing">Contributing to the Galaxy Training Material</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Principles of learning and how they apply to training and teaching:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Design and plan session, course, materials:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/contributing/tutorials/design/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 60 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Effective training</p>
+
+<blockquote class="comment">
+  <h3 id="comment-resources--reading-recommendation"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Resources / Reading recommendation</h3>
+
+  <p>This tutorial is significantly based on the 3rd session of ELIXIR Train the Trainer curriculum, but also:</p>
+  <ul>
+    <li><a href="https://teachtogether.tech">Teaching Tech Together <span class="citation"><a href="#wilson2019teaching">Wilson 2019</a></span></a></li>
+    <li><a href="https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer">How Learning works, <span class="citation"><a href="#ambrose2010learning">Ambrose <i>et al.</i> 2010</a></span></a></li>
+    <li>Understanding how we learn <span class="citation"><a href="#weinstein2018understanding">Weinstein <i>et al.</i> 2018</a></span></li>
+    <li><a href="https://carpentries.github.io/instructor-training/08-motivation/index.html">Instructor Training, The Carpentries</a></li>
+  </ul>
+
+  <p>To get ready to teach this tutorial</p>
+  <ul>
+    <li>Read the chapter “In the Classroom” from <a href="https://teachtogether.tech/en/index.html#s:classroom">Teaching Tech Together</a></li>
+  </ul>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#effective-training--good-trainer" id="markdown-toc-effective-training--good-trainer">Effective training &amp; good trainer</a></li>
+  <li><a href="#effective-training-practices-for-effective-learning" id="markdown-toc-effective-training-practices-for-effective-learning">Effective training practices for effective learning</a>    <ol>
+      <li><a href="#active-interactive-and-collaborative-learning" id="markdown-toc-active-interactive-and-collaborative-learning">Active, interactive and collaborative learning</a></li>
+      <li><a href="#peer-instruction" id="markdown-toc-peer-instruction">Peer instruction</a></li>
+      <li><a href="#flipped-classroom" id="markdown-toc-flipped-classroom">Flipped classroom</a></li>
+    </ol>
+  </li>
+  <li><a href="#other-teaching-practices-for-active-learning" id="markdown-toc-other-teaching-practices-for-active-learning">Other teaching practices for active learning</a></li>
+  <li><a href="#practices-and-behaviors-to-improve-delivery-and-learning" id="markdown-toc-practices-and-behaviors-to-improve-delivery-and-learning">Practices and behaviors to improve delivery and learning</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="effective-training--good-trainer">Effective training &amp; good trainer</h1>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> What makes training effective and a good trainer? (10 min - Discussion in groups of 2)
+>
+> - Recall concrete examples of your past training experience
+> - Share with your colleague
+> - List 3 keywords for effective training
+> - List 3 keywords for a good trainer
+>
+{: .hands_on} -->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-what-makes-training-effective-and-a-good-trainer"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: What makes training effective and a good trainer?</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/effective_training_trainer.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/effective_training_trainer.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<p><strong>Training / teaching is effective</strong> if</p>
+<ul>
+  <li>brings learners to Learning Objectives (LO)</li>
+  <li>is engaging</li>
+  <li>is well designed</li>
+</ul>
+
+<p>A <strong>trainer / teacher is effective</strong> when they</p>
+<ul>
+  <li>facilitates learning</li>
+  <li>sets clear LOs</li>
+  <li>identifies appropriate LEs</li>
+  <li>is engaging</li>
+  <li>is inspiring</li>
+  <li>is empathetic</li>
+  <li>is accessible</li>
+</ul>
+
+<p>To help trainers, GOBLET (<a href="https://www.mygoblet.org/">Global Organisation for <em>Bioinformatics</em> Learning, Education &amp; Training (GOBLET)</a>) developed this skill matrix:</p>
+
+<figure id="figure-1"><img src="images/goblet_matrix.png" alt="Skill matrix with 2 rows and 2 columns. Top-left - Communication: Verbal communication skills, Written communication skills, Presentation Skill. Top-right - Planning &amp; management: Session planning, Curriculum planning, Event management. Bottom-left: Expertise &amp; knowledge: Subject area knowledge, User application awareness, Knowledge of training methodology. Bottom-right - Trainee engagement: Flexibility in delivery, Empathy with trainees, Understanding &amp; knowledge of trainees. . " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Skills matrix for a good trainer. Source: <a href="https://www.mygoblet.org/sites/default/files/goblet_events/GOBLET-TTT-061113.pdf">Global Organisation for Bioinformatics Learning, Education and Training (GOBLET)</a></figcaption></figure>
+
+<p>The idea is that there are <strong>four areas in which a good trainer should be or become skilled</strong>. In many cases, trainers focus on the area of communication and are less aware about their “level” in the other areas.</p>
+
+<p>This matrix is then a <strong>tool for self evaluation</strong>:</p>
+<ul>
+  <li>In which area(s) do you feel you would need improvement?</li>
+  <li>In which area(s) do you feel you are ok?</li>
+</ul>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Reflect on your skills as a trainer? (5 min - Silent reflection)
+>
+> - Look at the GOBLET Skill Matrix
+> - Reflect on which areas do you need to develop in
+> - Write in the shared notes which skills you need to improve in each area of the GOBLET matrix
+>
+{: .hands_on}-->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-reflect-on-your-skills-as-a-trainer"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Reflect on your skills as a trainer</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/trainer_skills.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/trainer_skills.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<blockquote class="details">
+  <h3 id="details-goblet"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> GOBLET</h3>
+
+  <p><a href="https://www.mygoblet.org/">Global Organisation for <em>Bioinformatics</em> Learning, Education &amp; Training (GOBLET)</a> aims to coordinate world-wide bioinformatics training activities:</p>
+  <ul>
+    <li>to share, not duplicate, effort;</li>
+    <li>to share, not duplicate, cost;</li>
+    <li>to work together in a mutually respectful way towards common solutions and a sustainable future</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="effective-training-practices-for-effective-learning">Effective training practices for effective learning</h1>
+
+<p>We are now going to watch a short video (13 min) from Eric Mazur, professor at the Harvard University,</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z9orbxoRofI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+<p>In this video, Eric Mazur discusses some of these teaching practices and a <strong>paradigm change: from the traditional lecture to active learning-based approaches</strong>. Can you recognise the main features of this change of paradigm?</p>
+
+<!-- >> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Reflect on Mazur's interview (5 min - Silent reflection)
+>
+> - Write something that really impressed you in Mazur’s interview
+>
+{: .hands_on}
+-->
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-reflect-on-mazurs-interview"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Reflect on Mazur’s interview</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/mazur_interview.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/mazur_interview.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<p>From the Eric Mazur’s interview but also as Mitchell Waldrop pointed out in <span class="citation"><a href="#waldrop2015we">Waldrop 2015</a></span>, learners who <strong>actively interact with the material, the teacher, and other learners</strong>:</p>
+<ul>
+  <li>will <strong>learn better and more</strong></li>
+  <li>will <strong>better remember</strong> what they learn</li>
+  <li>will be <strong>more able to apply</strong> their knowledge to different fields</li>
+</ul>
+
+<p>In other words, for learning to actually occur, instructors should select <strong>teaching practices (learning experiences)</strong> that <strong>promote active, interactive and collaborative learning</strong>, what Mazur expresses as <strong>“learning by doing”</strong>.</p>
+
+<p>Let’s discuss a few more insights about active learning and stress the main differences between the most used technique worldwide (Lecturing) and the active learning approach. You will see that we are talking about an actual change of paradigm.</p>
+
+<h2 id="active-interactive-and-collaborative-learning">Active, interactive and collaborative learning</h2>
+
+<p>From <span class="citation"><a href="#felder2009active">Felder and Brent 2009</a></span>, <strong>Active Learning</strong> (also called “Guide on the side”) is anything course-related that all students in a class session are called upon to do other than simply watching, listening and taking notes (aka typical teachning practice or “Sage on stage” approach):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Typical teaching practice: lecturing</th>
+      <th>Active learning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Teacher-centered</td>
+      <td>Student-centered</td>
+    </tr>
+    <tr>
+      <td>Teaching by telling</td>
+      <td>Teaching by questioning</td>
+    </tr>
+    <tr>
+      <td>Teacher speaks and students listen</td>
+      <td>Collaborative learning</td>
+    </tr>
+    <tr>
+      <td>Few interactions student/teacher and student/student</td>
+      <td>High interactivity (student/teacher, and student/student)</td>
+    </tr>
+    <tr>
+      <td>Few questions</td>
+      <td>Discussion with teacher follows, not precedes</td>
+    </tr>
+    <tr>
+      <td>The same few students engaged</td>
+      <td>All students engaged</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Do you recognise the paradigm change proposed by Eric Mazur?</p>
+
+<p>With the help of Mazur, you hopefully started believing that active, interactive and collaborative learning is worth considering and deserves you give it a go in one of your future training courses.Should this be the case, you may have questions like:</p>
+<ul>
+  <li>how do I choose the active learning techniques for my lessons?</li>
+  <li>what “active learning” means in terms of “teaching / training practices”?</li>
+  <li>which is the most effective technique I can incorporate in my teaching?</li>
+  <li>is there any “ideal” teaching technique I should absolutely learn?</li>
+</ul>
+
+<p><strong>There is not “the” ideal teaching technique nor the “most effective” teaching technique.</strong></p>
+
+<p>You may remember from the <a href="">Nichols’ steps of curriculum design</a>, that it is <strong>essential that you align learning experiences to the learning outcomes</strong> of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.</p>
+
+<p>More generally, to decide how to teach and choose the <strong>most appropriate learning experience(s)</strong>, you may use <strong>three criteria</strong>:</p>
+<ul>
+  <li>What is your <strong>purpose / goal</strong> (is it to inspire learners? is it to ensure they will remember a concept?)</li>
+  <li>The <strong>Bloom’s level</strong> at which you intend to teach (a specific topic; this may change from topic to topic)</li>
+  <li>
+    <p>The <strong>learning outcome(s)</strong> the learning experience is designed for</p>
+
+    <p>For example, a lecture is not suitable to teach learners implement an algorithm. It may show how to do it, so that they may be able to describe how to do it, but if you want them to be able to do it, you will have to choose a learning experience where learners will have the chance to practice algorithm implementation.</p>
+  </li>
+</ul>
+
+<p>Inspired by Eric Mazur and the idea of active learning, <span class="citation"><a href="#via2020course">Via <i>et al.</i> 2020</a></span> created this useful table to reinforce the concepts discussed in previously and provide with criteria to choose the <strong>most suitable learning experience(s) for the Bloom’s level, TG(s) and LO(s)</strong>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Learning experience</th>
+      <th>Highest Bloom’s levels supported</th>
+      <th>Example TG(s) <em>“This LE will allow me to…“</em></th>
+      <th>Example LO(s) <em>“Learners will be able to…“</em></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lecture, webinar</td>
+      <td>Remember, Comprehend</td>
+      <td>Inspire learners, ignite learners’ enthusiasm, clarify/explain a concept, provide an overview, give context, summarise content</td>
+      <td><em>list</em> the key points of the lecture/webinar, <em>summarise</em> take home message(s)</td>
+    </tr>
+    <tr>
+      <td>Exercise, practical</td>
+      <td>Apply, Analyse</td>
+      <td>Help learners digest course materials, solve typical problems, apply knowledge, show how to do things with appropriate guidance, give an idea of how a tool works</td>
+      <td><em>follow</em> a set of instructions or protocol, <em>calculate</em> a set of results or outcomes from a given protocol</td>
+    </tr>
+    <tr>
+      <td>Flipped class</td>
+      <td>Apply, Analyse</td>
+      <td>Teach learners how to formulate questions, help learners to memorise new information &amp; concepts, or analyse &amp; understand course materials</td>
+      <td><em>summarise</em> the content material, *ask* appropriate questions</td>
+    </tr>
+    <tr>
+      <td>Peer instruction</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Prepare learners to defend an argument, give learners opportunities to explain things, thereby helping to develop critical thinking &amp; awareness</td>
+      <td><em>explain</em> how they solved an exercise, <em>evaluate</em> others’ choices/decisions, <em>diagnose</em> errors in the exercise-solving task</td>
+    </tr>
+    <tr>
+      <td>Group discussion</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Give learners opportunities to practice questioning, develop new ideas &amp; critical thinking</td>
+      <td><em>communicate</em> their own ideas, <em>defend</em> their own opinions</td>
+    </tr>
+    <tr>
+      <td>Group work</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Promote collaborative work &amp; peer instruction, provide opportunities for giving/receiving feedback, &amp; digesting course materials</td>
+      <td><em>provide</em> feedback on their peers’ work, <em>share</em> ideas, <em>explain</em> the advantages of team-work</td>
+    </tr>
+    <tr>
+      <td>Problem-solving</td>
+      <td>Synthesise, Evaluate</td>
+      <td>Promote learner abilities to identify &amp; evaluate solutions, develop new ideas, make decisions, evaluate decision effectiveness, troubleshoot</td>
+      <td><em>diagnose</em> faulty reasoning or an underperforming result, <em>correct</em> errors</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="comment">
+  <h3 id="comment-learning-experience-vs-teaching-practice"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Learning experience vs Teaching practice</h3>
+
+  <p>In the table, Learning experience (from the learner point of view) is the Teaching practice (from the teacher point of view).</p>
+
+</blockquote>
+
+<p>You should be kind of familiar with some of the learning experiences listed in the table, e.g., lecture/webinar, group discussion, work in groups, problem solving. Some of you might not be familiar with the techniques of “peer instruction” and “flipped classroom”.</p>
+
+<p>These two techniques can be implemented in many different ways and incorporated into your course in a “light way” or very extensively. This will depend on your familiarity with the technique. At the beginning, our suggestion is that you try with something “minima”, test it, see how you feel and how learners receive it, and then you increase the amount of learning experiences involving peer instruction and flipped classroom.</p>
+
+<h2 id="peer-instruction">Peer instruction</h2>
+
+<p>Peer instruction is a 1-to-1 instruction done in a scalable way by <strong>interleaving formative assessment with learner discussion</strong>.</p>
+
+<blockquote class="details">
+  <h3 id="details-peer-to-peer-or-peer-learning-what-is-it-2-min-video"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Peer-to-peer or peer-learning: what is it? (2-min video)</h3>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/MYa4hgcMRNc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+</blockquote>
+
+<p>In its “traditional” form, the teacher</p>
+<ol>
+  <li>Gives a brief introduction to the topic.</li>
+  <li>Gives learners a multiple choice question (MCQ) that probes for their misconceptions</li>
+  <li>Has all the learners vote on their answers to the MCQ
+    <ol>
+      <li>If the learners all have the <strong>right</strong> answer, move on</li>
+      <li>If they all have the same wrong answer, <strong>address</strong> that specific misconception</li>
+      <li>If they have a mix of right and wrong answers, give them several minutes to argue with each other in groups of 2–4, then vote again</li>
+    </ol>
+  </li>
+</ol>
+
+<p>You may also be creative and implement this technique in your own way.</p>
+
+<blockquote class="details">
+  <h3 id="details-concept-tests-at-avantis-learning-centre-in-kanpur-2-min-video"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Concept Tests at Avanti’s Learning Centre in Kanpur (2-min video)</h3>
+
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/2LbuoxAy56o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-does-that-work"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Does that work?</h3>
+
+  <p>It has been studied extensively in a wide variety of contexts, including programming (references??). Learners value peer instruction even at first contact.</p>
+
+  <p>Group discussion significantly improves learners’ understanding. It uncovers gaps in their reasoning and forces them to clarify their thinking. Re-polling the class then lets the teacher know if they can move on or if further explanation is necessary. A final round of additional explanation after the correct answer is presented gives learners one more chance to solidify their understanding.</p>
+
+  <p>Peer discussion actually does enhance understanding. Even when none of the learners in a discussion group originally knew the correct answer. As long as there is a diversity of opinion within the group, their misconceptions cancel out.</p>
+
+</blockquote>
+
+<h2 id="flipped-classroom">Flipped classroom</h2>
+
+<p>In its standard approach,</p>
+
+<ol>
+  <li>Before the course, out of class, students prepare to participate in class activities</li>
+  <li>During the course in the class, students practice applying key concepts with feedback</li>
+  <li>After the course, out of class, students check their understanding and extend their learning</li>
+</ol>
+
+<p>Flipping class requires a <strong>lot of preparation</strong>. The teacher need to explain the method to learners and make an “agreement” with them: they have to commit to work on the materials you will give them prior the flipped class and you will commit to give them “manageable” materials.</p>
+
+<p>Don’t start by flipping an entire course. Start small. Test. Add up.</p>
+
+<h1 id="other-teaching-practices-for-active-learning">Other teaching practices for active learning</h1>
+
+<ul>
+  <li>
+    <p><strong>Brief question-and-answer sessions</strong>: a classic to distribute attention</p>
+
+    <blockquote class="details">
+      <h3 id="details-recommendation-for-brief-question-and-answer-sessions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Recommendation for brief question-and-answer sessions</h3>
+
+      <p>When doing, the teachers should <strong>make sure that everybody has a voice and that attention is fairly distributed</strong></p>
+
+      <p>Tools like sticky notes could be used. Each learners write their name on a sticky note and put it on their laptop. Each time the teacher calls on them or answers one of their questions, they take their sticky note down. Once all the sticky notes are down, everyone puts theirs up again. It makes it easy for the teacher to see who they haven’t spoken with recently and to avoid unconscious bias and interacting preferentially with their most extroverted learners</p>
+
+      <p>Without a check like this, it is too easy to create a feedback loop in which&lt;&gt;</p>
+      <ul>
+        <li>Extroverts get more attention, leads to them doing better and leads to them getting more attention</li>
+        <li>Quieter, less confident, or marginalized learners are left behind</li>
+      </ul>
+
+      <p>Such tools shows learners that attention is being distributed fairly. When they <em>are</em> called on, they won’t feel like they’re being picked on</p>
+
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Think, pair, share</strong>: a lightweight technique that helps people improve ideas through discussion with their peers</p>
+
+    <blockquote class="details">
+      <h3 id="details-think-pair-share"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Think, pair, share</h3>
+
+      <p>In this form of peer instruction, Teacher proposes an activity, a question, a problem and then follow 3 steps&gt;</p>
+
+      <ol>
+        <li><strong>THINK</strong>: Each person starts by thinking individually about it and jotting down a few notes</li>
+        <li><strong>PAIR</strong>: students explain their ideas to each other in pairs, merging them or selecting the most promising</li>
+        <li><strong>SHARE</strong>: a few pairs present their ideas to the whole group</li>
+      </ol>
+
+      <p>For example, a teacher asks a question (a problem to solve)</p>
+      <ol>
+        <li>Students <strong>THINKS</strong> singularly. The teacher can check results (technology can be used for that)</li>
+        <li>Students talks in <strong>PAIRS</strong> and find an agreement. The teacher can check results</li>
+        <li>Students <strong>SHARE</strong> their answers under the teacher’s guide</li>
+      </ol>
+
+      <p>Why does it work?
+It forces people to exte<span class="notranslate">rna</span>lize their cognition and gives a chance to spot and resolve gaps or contradictions in their ideas <em>before</em> exposing them to a larger group</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Take notes together / shared notes</strong></p>
+
+    <blockquote class="details">
+      <h3 id="details-shared-notes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Shared notes</h3>
+
+      <p>This form of real-time elaboration forces to organize and reflect on material as it’s coming in, which in turn increases the likelihood of transfer it to long-term memory</p>
+
+      <p>It also allows people to compare what they think they’re hearing with what other people are hearing, and helps to fill in gaps and correct misconceptions right away.</p>
+
+      <p>It gives the more advanced learners in the class something useful to do. Rather than getting bored and doing something else during class, they take the lead in recording what’s being said. They are kept engaged.</p>
+
+      <p>It allows less advanced learners to focus more of their attention on new material.</p>
+
+      <p>Finally, it provides the notes that are usually more helpful <em>to learners</em> than those the teacher would prepare in advance. Learners are more likely to write down what they actually found new rather than what the teacher predicted would be new.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Work in groups</strong>, e.g. with projects</p>
+  </li>
+  <li>
+    <p><strong>Pair programming</strong></p>
+
+    <blockquote class="details">
+      <h3 id="details-pair-programming"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Pair programming</h3>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/vgkahOzFH2Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+      <p>Used for Software development, two programmers work together on one computer:</p>
+      <ul>
+        <li>One person (the driver) does the typing</li>
+        <li>The other (the navigator) offers comments and suggestions
+The two switch roles several times per hour. This practice is found effective in professional work</li>
+      </ul>
+
+      <p>For learning, 2 learners work together on 1 computer. They can help each other during practical exercises, clarify each other’s misconceptions when solution is presented and also discuss common interests during breaks.</p>
+
+      <p>It is a good way to teach. It increases success rate in introductory courses, leads better software, higher learner confidence in their solutions and more benefits for learners from underrepresented groups</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Discussions / debate</strong> with all learners (as for brief Q&amp;A session, teachers should make sure that everybody has a voice)</p>
+  </li>
+  <li>
+    <p><strong>Brainstorming</strong> with all learners (as for brief Q&amp;A session, teachers should make sure that everybody has a voice)</p>
+  </li>
+  <li>
+    <p><strong>Hands-on activities</strong>, e.g. running tools on their own, commands, analysis</p>
+
+    <p><span class="notranslate">Galaxy</span> is a great tool for that. That is why tutorials from the GTN are developed around that ideas.</p>
+
+    <blockquote class="details">
+      <h3 id="details-recommendation-for-brief-question-and-answer-sessions-1"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Recommendation for brief question-and-answer sessions</h3>
+
+      <p>During training session, teachers could use sticky notes as status flags. They Give each learner two sticky notes of different colors, such as orange and green.</p>
+
+      <p>If someone has completed an exercise and wants it checked, they put the green sticky note on their laptop. If they run into a problem and need help, they put up the orange one</p>
+
+      <p>It is much better than having people raise their hands. It is more discreet and so students are more likely to actually do it. They keep working while their flag is raised rather than trying to type one-handed
+And teacher can quickly see from the front of the room what state the class is in.</p>
+
+      <p>It is particularly helpful when people in mixed-ability classes are working through material at their own speed</p>
+
+    </blockquote>
+  </li>
+  <li>
+    <p>Have learners <strong>make predictions</strong></p>
+
+    <p>Research has shown that people learn more from demonstrations if they are asked to predict what’s going to happen. It fits naturally into live coding / analysis: after adding or changing a few lines of a program, the teacher asks the class what is going to happen when it runs.</p>
+
+    <p>If the example is even moderately complex, prediction can serve as a motivating question for a round of peer instruction.</p>
+  </li>
+  <li>
+    <p><strong>Build an artefact</strong>, e.g. concept map</p>
+  </li>
+</ul>
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-which-strategies-for-active-learning-training-did-you-use"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: Which strategies for active learning training did you use?</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+<h1 id="practices-and-behaviors-to-improve-delivery-and-learning">Practices and behaviors to improve delivery and learning</h1>
+
+<p>About teaching practices / learning experiences, we learned to</p>
+<ol>
+  <li><strong>Select learning experiences according to the criteria discussed earlier</strong>
+    <ul>
+      <li>reflect on your TG(s)</li>
+      <li>write LOs AND identify the corresponding Bloom’s level</li>
+    </ul>
+  </li>
+  <li><strong>Select learning experiences allowing learners to achieve LOs</strong></li>
+  <li><strong>Always remember that learning occurs BY DOING</strong></li>
+  <li><strong>Be aware of other practices and behaviours supporting:</strong>
+    <ul>
+      <li>interactivity</li>
+      <li>a positive and engaging learning environment</li>
+      <li>active and collaborative learning</li>
+      <li>stimulating lessons</li>
+      <li>frequent feedback</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Other teaching practices that can improve content delivery. Specially supporting</p>
+<ul>
+  <li><strong>interactivity</strong></li>
+  <li>a <strong>positive and engaging learning environment</strong></li>
+  <li><strong>active and collaborative</strong> learning</li>
+  <li><strong>stimulating</strong> lessons</li>
+  <li><strong>frequent feedback</strong></li>
+</ul>
+
+<p>Here are some examples of practices to achieve goals above. None of the practices described here are essential</p>
+
+<ul>
+  <li><strong>Start with introductions</strong>
+    <ul>
+      <li>
+        <p><strong>Begin by introducing yourself</strong>: If you’re an expert, tell them a bit about how you got to where you are. If you’re only two steps ahead of them, emphasize what you and they have in common. Whatever you say, the goals are to make yourself more approachable and encourage their belief that they can succeed.</p>
+      </li>
+      <li>
+        <p><strong>Introduction of learners to each other</strong></p>
+        <ul>
+          <li>In a class of a dozen, it can be done verbally</li>
+          <li>In a larger class or if they are strangers to one another, you can have them each write a line or two about themselves in the shared notes or split into small groups or breakout rooms.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Pay attention on how you set up the learning environment</strong> (both in presence and online)</p>
+
+    <ul>
+      <li><strong>Learners environment</strong>: Send setup instructions per email before and have everyone run some tests at the beginning to check</li>
+      <li><strong>Yours</strong>: Same as learners and food / drinks</li>
+    </ul>
+
+    <blockquote class="tip">
+      <h3 id="tip-check-our-dedicated-tutorials-to-set-up-galaxy-for-teaching"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Check our dedicated tutorials to set up <span class="notranslate">Galaxy</span> for teaching</h3>
+
+      <ul>
+        <li><a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">Organizing a workshop</a></li>
+        <li><a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">Running a workshop as instructor</a></li>
+        <li><a href="/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html">Set up a <span class="notranslate">Galaxy</span> for Training</a></li>
+        <li><a href="/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html">Use<span class="notranslate">Galaxy</span>.eu’s Training Infrastructure as a Service</a></li>
+      </ul>
+
+    </blockquote>
+  </li>
+  <li><strong>Introduce blended multimedia materials to create engaging activities</strong></li>
+  <li><strong>Collect instant feedback</strong> (see <a href="/training-material/topics/teaching/tutorials/assessment/tutorial.html">dedicated tutorial</a>)</li>
+  <li>
+    <p><strong>Let learners do recaps</strong>: Organise recap sessions at the end of lessons or at the beginning of the following ones where learners are actively involved. You may ask them to do the recaps.</p>
+  </li>
+  <li>
+    <p><strong>Repeat each questions</strong> aloud back to them before answering  to ensure you and all the other learners understood the question and gives you a a chance to redirect the question to something you’re more comfortable answering</p>
+  </li>
+  <li>
+    <p><strong>Introduce physical exercises, short, relaxing breaks</strong>: In day-long training courses, you may introduce very short sessions of stretching (or even one moment meditation and then doing 1 minute meditation together). You might feel ridiculous, but you have no idea of how learners appreciate these types of activities and how these create a relaxed climate in the class.</p>
+  </li>
+  <li>
+    <p><strong>Introduce challenges or games</strong>: Gamification can be a very powerful and engaging technique.   Before using gamification, it is though better to learn how to do it.</p>
+  </li>
+  <li>
+    <p><strong>Never teach alone. Teach together</strong>. Whenever possible: With two or more trainers in the classroom, the class can be observed from different angles, it is easier to detect learners who are not comfortable or struggling or lagging behind. It is possible to provide one-to-one support without stopping the lesson flow. It is also important that trainers teaching together provide feedback to each other.</p>
+
+    <blockquote class="details">
+      <h3 id="details-different-models-to-teach-together-or-co-teaching"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Different models to teach together or <strong><a href="https://teachtogether.tech/en/index.html#g:co-teaching">co-teaching</a></strong></h3>
+
+      <ul>
+        <li><strong>Team teaching</strong>: Both teachers deliver a single stream of content in tandem, taking turns like musicians taking solos.</li>
+        <li><strong>Teach and assist</strong>: Teacher A teaches while Teacher B moves around the classroom to help struggling learners.</li>
+        <li><strong>Alte<span class="notranslate">rna</span>tive teaching</strong>: Teacher A provides a small set of learners with more intensive or specialized instruction while Teacher B delivers a general lesson to the main group.</li>
+        <li><strong>Teach and observe</strong>: Teacher A teaches while Teacher B observes the learners, collecting data on their understanding to help plan future lessons.</li>
+        <li><strong>Parallel teaching</strong>: The class is divided in two and the teachers present the same material simultaneously to each.</li>
+        <li><strong>Station teaching</strong>: The learners are divided into small groups that rotate from one station or activity to the next while teachers supervise where needed.</li>
+      </ul>
+
+    </blockquote>
+
+    <blockquote class="tip">
+      <h3 id="tip-recommendations-for-co-teaching"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Recommendations for co-teaching</h3>
+
+      <p>If you and a partner are co-teaching:</p>
+      <ul>
+        <li>Take 2–3 minutes before the start of each class to confirm who’s teaching what. If you have time, try drawing or reviewing a concept map together.</li>
+        <li>Use that time to work out a couple of hand signals as well. “You’re going too fast”, “speak up”, “that learner needs help”, and, “It’s time for a bathroom break” are all useful.</li>
+        <li>Each person should teach for at least 10–15 minutes at a stretch, since learners will be distracted by more frequent switch-ups.</li>
+        <li>The person who isn’t teaching shouldn’t interrupt, offer corrections or elaborations, or do anything else to distract from what the person teaching is doing or saying. The one exception is to ask leading questions if the learners seem lethargic or  unsure of themselves.</li>
+        <li>Each person should take a couple of minutes before they start teaching to see what their partner is going to teach after they’re done, and then <em>not</em> present any of that material.</li>
+        <li>The person who isn’t teaching should stay engaged with the class, not catch up on their email. Monitoring the shared notes, keeping an eye on the learners to see who’s struggling, jotting down some feedback to give your teaching partner at the next break—anything that contributes to the lesson is better than anything that doesn’t.</li>
+        <li>Take a few minutes when the class is over to congratulate or commiserate with each other</li>
+      </ul>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Assess prior knowledge and mental models</strong> to tailor the lesson on learners’ actual needs, to address misconceptions, to learn about your learners (see <a href="/training-material/topics/teaching/tutorials/assessment/tutorial.html">dedicated tutorial</a>). The more you know about your learners before you start teaching, the more you will be able to help them.</p>
+  </li>
+  <li>
+    <p><strong>Learn learners names and use them</strong></p>
+  </li>
+  <li><strong>Avoid homework in All-day formats</strong>: Learners who have spent an entire day programming will be tired. If you give them homework to do after hours, they’ll start the next day tired as well.</li>
+</ul>
+
+<p>Each of the techniques presented here will make your classes better, but <strong>you shouldn’t try to adopt them all at once</strong>. The reason is that every new practice increases <em>your</em> cognitive load as well as your learners’, since you are all now trying to learn a new way to learn as well as the lesson’s subject matter. If you are working with a group repeatedly, you can introduce one new technique every few lessons; if you only have them for a one-day workshop, it’s best to pick just one method they haven’t seen before and get them comfortable with that.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<div>
+  <blockquote class="question">
+    <h3 id="question-quiz-what-is-the-highest-blooms-level-supported-by-each-teaching-technique"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Quiz: What is the highest Bloom’s level supported by each teaching technique?</h3>
+    <p>Check your knowledge with a quiz!</p>
+
+    <ul>
+      <li><a href="/training-material/quiz/quiz.html?mode=self&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies_bloom_levels.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.</li>
+      <li><a href="/training-material/quiz/quiz.html?mode=teacher&amp;quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies_bloom_levels.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.</li>
+    </ul>
+  </blockquote>
+</div>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Select learning experiences according to the Training Goals, write the Learning Objectives and identify the corresponding Bloom’s level</p>
+</li>
+                        
+                        <li><p>Select teaching practices (learning techniques) that will allow learners to achieve the LOs</p>
+</li>
+                        
+                        <li><p>Always remember that learning occurs BY DOING, which means that learners will be able to DESCRIBE something if and only if they will have the chance to practice it; they will be able to APPLY a rule only after having applied themselves the rule, and that, in order to successfully practice the APPLICATION of the rule, they must remember the rule, they must have understood it and how it can be used for applications, and they must have seen examples of how to apply it.</p>
+</li>
+                        
+                        <li><p>Be aware of other practices and behaviours supporting interactivity, a positive and engaging learning environment, active and collaborative learning, stimulating lessons, frequent feedback</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/teaching/faqs/">FAQ page for the Teaching and Hosting Galaxy training topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    
+                    <h2>Reflect on Mazur's interview</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/mazur_interview.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/mazur_interview.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>What makes training effective and a good trainer?</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/effective_training_trainer.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/effective_training_trainer.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Reflect on your skills as a trainer</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/trainer_skills.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/trainer_skills.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>Which strategies for active learning training did you use?</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                    <h2>What is the highest Bloom's level supported by each teaching technique?</h2>
+                    <div class="contributors-line">
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+</div>
+                    <ul>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=self&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies_bloom_levels.yaml">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="/training-material/quiz/quiz.html?mode=teacher&quiz=/training-material/topics/teaching/tutorials/learner_participation_engagement/quiz/active_learning_strategies_bloom_levels.yaml">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="felder2009active">Felder, R. M., and R. Brent, 2009 <b>Active learning: An introduction</b>. ASQ higher education brief 2: 1–5.</li>
+<li id="ambrose2010learning">Ambrose, S. A., M. W. Bridges, M. DiPietro, M. C. Lovett, and M. K. Norman, 2010 <b>How learning works: Seven research-based principles for smart teaching</b>. <i>John Wiley &amp; Sons</i>.</li>
+<li id="waldrop2015we">Waldrop, M. M., 2015 <b>Why we are teaching science wrong, and how to make it right</b>. Nature News 523: 272.</li>
+<li id="weinstein2018understanding">Weinstein, Y., M. Sumeracki, and O. Caviglioli, 2018 <b>Understanding how we learn: A visual guide</b>. <i>Routledge</i>.</li>
+<li id="wilson2019teaching">Wilson, G., 2019 <b>Teaching Tech Together: How to Make your lessons work and build a teaching community around them</b>. <i>CRC Press</i>.</li>
+<li id="via2020course">Via, A., P. M. Palagi, J. M. Lindvall, R. E. Tractenberg, T. K. Attwood <i>et al.</i>, 2020 <b>Course design: Considerations for trainers–a Professional Guide</b>. F1000Research 9:</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Training techniques to enhance learner participation and engagement (Teaching and Hosting Galaxy training)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Bérénice Batut, Fotis E. Psomopoulos, Allegra Via, Patricia Palagi, ELIXIR Goblet Train the Trainers, 2022 <b>Training techniques to enhance learner participation and engagement (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html">https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{teaching-learner_participation_engagement,
+author = "Bérénice Batut and Fotis E. Psomopoulos and Allegra Via and Patricia Palagi and ELIXIR Goblet Train the Trainers",
+title = "Training techniques to enhance learner participation and engagement (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "22"
+url = "\url{https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/erasmusplus/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" /></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

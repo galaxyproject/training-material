@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Training Infrastructure as a Service</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Training Infrastructure as a Service" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Training Infrastructure as a Service" />
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/teaching" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Teaching and Hosting Galaxy training
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/teaching/faqs/" title="Check our FAQs for the Teaching and Hosting Galaxy training topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Training Infrastructure as a Service",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Teaching and Hosting Galaxy training",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Training Infrastructure as a Service' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html",
+  "timeRequired": "PT10M",
+  "keywords": "teaching, cyoa",
+  "description": "The questions this  addresses are:\n - Is this service appropriate for my event?\n\n\\nThe objectives are:\n - Identify if it is appropriate\n - Interact with the service administrators to arrange for infrastructure\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Teaching and Hosting Galaxy training",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts:\nnumerous bioinformatics tools are available (almost 5,000 in the ToolShed), it\ncan be used by people without any computer science skills, it trains to use\ntechnology, outlining available resources and efforts that have made them\naccessible to researchers, it is scalable.<br>\n\nThe Galaxy community via the Galaxy Training Network supports instructors and\nworkshop organizers using with a series of recommandations (tutorials below) and\nregular discussion meetings.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/teaching/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-teaching">
+    <h1 data-toc-skip>Training Infrastructure as a Service</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Is this service appropriate for my event?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Identify if it is appropriate</p>
+</li>
+        
+        <li><p>Interact with the service administrators to arrange for infrastructure</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 10 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p><img src="../../images/tiaas-logo.png" alt="TIaaS Logo. " width="500px" loading="lazy" /></p>
+
+<p>Use<span class="notranslate">Galaxy</span>.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use <span class="notranslate">Galaxy</span> with a private queue for your training event. Your trainees’ jobs won’t wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private <span class="notranslate">Galaxy</span> combined with a public <span class="notranslate">Galaxy</span> that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the <span class="notranslate">Galaxy</span> admins, rather than feeling the stress of debugging and fixing your private <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will see:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#where-are-you" id="markdown-toc-where-are-you">Where are you</a></li>
+  <li><a href="#identify-if-tiaas-is-appropriate-for-your-training" id="markdown-toc-identify-if-tiaas-is-appropriate-for-your-training">Identify if TIaaS is Appropriate For Your Training</a></li>
+  <li><a href="#how-tiaas-works" id="markdown-toc-how-tiaas-works">How TIaaS Works</a></li>
+  <li><a href="#the-application-process" id="markdown-toc-the-application-process">The Application Process</a></li>
+  <li><a href="#the-students-process" id="markdown-toc-the-students-process">The Student’s Process</a></li>
+  <li><a href="#the-status-dashboard" id="markdown-toc-the-status-dashboard">The Status Dashboard</a></li>
+  <li><a href="#before-your-training" id="markdown-toc-before-your-training">Before Your Training</a></li>
+  <li><a href="#during-your-training" id="markdown-toc-during-your-training">During Your Training</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="where-are-you">Where are you</h1>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+  <h3><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Choose Your Own Tutorial</h3>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		<span class="notranslate">Galaxy</span> has servers across the world, but it's best to choose one close to you. Here we customise this tutorial based on where you are, so, pick the location closest to where you'll be running your training.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Europe-the-Middle-East-and-Africa-EMEA" onclick="cyoaChoice('Europe-the-Middle-East-and-Africa-EMEA')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Europe, the Middle East, and Africa (EMEA)</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="AsiaPacific-APAC" onclick="cyoaChoice('AsiaPacific-APAC')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Asia/Pacific (APAC)</label>
+	
+	
+		<input id="cyoa-opt3" type="radio" name="cyoa" value="the-Americas-AMER" onclick="cyoaChoice('the-Americas-AMER')" />
+		<label for="cyoa-opt3" class="select btn btn-secondary">the Americas (AMER)</label>
+	
+	
+
+	
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Europe-the-Middle-East-and-Africa-EMEA");
+		})
+	</script>
+	
+</blockquote>
+
+<h1 id="identify-if-tiaas-is-appropriate-for-your-training">Identify if TIaaS is Appropriate For Your Training</h1>
+
+<p>First consider the requirements for your training to see if TIaaS is a good fit for you:</p>
+
+<ul>
+  <li>Do you need really special tools that are not already available on <span class="Europe-the-Middle-East-and-Africa-EMEA"><a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a></span><span class="AsiaPacific-APAC"><a href="https://usegalaxy.org.au">Use<span class="notranslate">Galaxy</span>.org.au</a></span><span class="the-Americas-AMER"><a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></span>?
+    <ul>
+      <li>The Use<span class="notranslate">Galaxy</span>.* servers support most training workflows.</li>
+      <li>But we only install publicly available and open tools: <span class="Europe-the-Middle-East-and-Africa-EMEA"><a href="https://github.com/usegalaxy-eu/usegalaxy-eu-tools">EU Tool Repository</a></span><span class="AsiaPacific-APAC"><a href="https://github.com/usegalaxy-au/usegalaxy-au-tools">Australian Tool Repository</a></span><span class="the-Americas-AMER"><a href="https://github.com/galaxyproject/usegalaxy-tools/">American Tool Repository</a></span></li>
+    </ul>
+  </li>
+  <li>Do you need extra guarantees that the server will be online?
+    <ul>
+      <li>The big Use<span class="notranslate">Galaxy</span>.* servers have good uptime, for services run by academic groups, but it cannot make promises regarding availability.</li>
+      <li>Additionally this server can experience occasional slow downs due to usage by other groups and users. If you need more guarantees, please find an alte<span class="notranslate">rna</span>tive.</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="how-tiaas-works">How TIaaS Works</h1>
+
+<p class="Europe-the-Middle-East-and-Africa-EMEA">
+We have several groups of virtual machines (VMs) attached to Use<span class="notranslate">Galaxy</span>.eu that run user jobs. For trainings we attach a new group of VMs that is specially labelled for that training. When normal users run tools on our server, these jobs are instructed to avoid the training pools by default.
+</p>
+<p class="AsiaPacific-APAC">
+We have a pool of virtual machines (VMs) dedicated to training, that run training specific jobs only.
+</p>
+<p class="the-Americas-AMER">
+Jobs submitted while in a TIaaS group have an artificially capped memory limited, and walltime. By lowering these parameters we can be sure the jobs will execute more quickly, but this only works for training data. If you run a training with "real data" it may require too much memory or computation time, and those jobs will be killed.
+</p>
+
+<p>When your users join a training, using a special URL provided to you, they then are placed in a special training group. Their jobs will then preferentially run on a training machine, and, in the event there is no more capacity, they will run on the main queue. If a spot on a training VM opens up first, they will run there rather than continuing to wait in the main queue.</p>
+
+<h1 id="the-application-process">The Application Process</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-apply-for-tiaas-training"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Apply for TIaaS Training</h3>
+
+  <ol>
+    <li>
+      <p><span class="Europe-the-Middle-East-and-Africa-EMEA"><a href="https://usegalaxy.eu/tiaas/new/">Fill out the form</a></span><span class="AsiaPacific-APAC"><a href="https://usegalaxy.org.au/tiaas/new/">Fill out the form</a></span><span class="the-Americas-AMER"><a href="https://usegalaxy.org/tiaas/new/">Fill out the form</a></span></p>
+    </li>
+    <li>
+      <p>The admin team will review the request and get in touch with you as needed to identify the compute resources you need for your training</p>
+    </li>
+    <li>
+      <p>The admin team will inform you of the URL you should provide to your participants during the training. They can open this URL and they will be added to the special training group</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="the-students-process">The Student’s Process</h1>
+
+<p>We have a “test” TIaaS training setup on Use<span class="notranslate">Galaxy</span>.eu, which will never have compute resources associated with it, but you can use it to test the process of signing up, if you wish:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-join-a-tiaas-training"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Join a TIaaS Training</h3>
+
+  <ol>
+    <li>
+      <p>Click on this link: <a href="https://usegalaxy.eu/join-training/test">https://use<span class="notranslate">galaxy</span>.eu/join-training/test</a></p>
+    </li>
+    <li>
+      <p>In the background you are added to a group in <span class="notranslate">Galaxy</span>. If you were to run jobs they would be tagged with this special queue.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>That’s it, you’re now in the “test” TIaaS group. It’s really that easy for students.</p>
+
+<h1 id="the-status-dashboard">The Status Dashboard</h1>
+
+<p>Once your students are registered, and you’re running your training, a common question instructors ask are “Are you all done?” and students are often not as vocal or repsonsive as we would like. So the TIaaS service now has a dashboard you can view which shows you the queue status for everyone in your training group. This works by finding all of the members of that training group, and checking all jobs that were created in the last 3 hours. For all of those jobs, this is displayed as a simple dashboard with the status of these jobs:</p>
+
+<p>It shows:</p>
+
+<ul>
+  <li>Overview of queue (how many are in state new/queued/ok/error)</li>
+  <li>Overview split by tools (how many people are done running Fastqc?)</li>
+  <li>A full listing of the queue</li>
+</ul>
+
+<figure id="figure-1"><img src="../../images/tiaas-status.png" alt="TIaaS Queue Status. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The TIaaS Status dashboard gives you an overview of all jobs states (are they ok or not), as well as a breakdown by tool. This is useful for finding out if everyone is finished running FastQC this morning and if they mostly worked OK. Finally it gives you a detailed breakdown, shown in the order they were submitted. This can give you a more detailed feeling for how the students are progressing through the tutorial.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-view-the-dashboard"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View the dashboard</h3>
+
+  <ol>
+    <li>The status dashboard is just the same URL as to join the group, with <code class="language-plaintext highlighter-rouge">/status</code> at the end: <a href="https://usegalaxy.eu/join-training/test/status">https://use<span class="notranslate">galaxy</span>.eu/join-training/test/status</a></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="before-your-training">Before Your Training</h1>
+
+<p><strong>At least 2 weeks</strong> before your training:</p>
+
+<ol>
+  <li>Run through your planned trainings on the Use<span class="notranslate">Galaxy</span>.eu server to ensure everything is available including data libraries and tools.</li>
+  <li>If anything is missing, contact the admins and they will work to resolve the missing training material resources.</li>
+  <li>Follow the rest of the training material’s <a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">guide to preparing a workshop</a></li>
+</ol>
+
+<h1 id="during-your-training">During Your Training</h1>
+
+<ol>
+  <li>Check out your status dashboard</li>
+  <li>Watch for problems and contact the admins if
+    <ul>
+      <li>Jobs are spending abnormally long in the queue</li>
+      <li>Jobs are failing unexpectedly</li>
+    </ul>
+  </li>
+  <li>Remind your participants to submit bug reports if they experience any tool errors</li>
+  <li>Follow the rest of the training material’s <a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">guide to running a workshop</a></li>
+</ol>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Infrastructure is available for running Galaxy trainings for free from UseGalaxy.eu, UseGalaxy.org, and UseGalaxy.org.au</p>
+</li>
+                        
+                        <li><p>This can be easier than setting up a local Galaxy and may have more resources available</p>
+</li>
+                        
+                        <li><p>But have a backup plan</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/teaching/faqs/">FAQ page for the Teaching and Hosting Galaxy training topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Training Infrastructure as a Service (Teaching and Hosting Galaxy training)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Helena Rasche, 2022 <b>Training Infrastructure as a Service (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html">https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{teaching-setup-tiaas-for-training,
+author = "Helena Rasche",
+title = "Training Infrastructure as a Service (Galaxy Training Materials)",
+year = "2022",
+month = "06",
+day = "29"
+url = "\url{https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
