@@ -19,7 +19,7 @@ objectives:
 time_estimation: 8h
 level: Intermediate
 key_points:
-  - Funannotate allows to perform structural annotatation of a eukaryotic genome.
+  - Funannotate allows to perform structural annotation of an eukaryotic genome.
   - Functional annotation can be performed using EggNOG-mapper and InterProScan.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
@@ -35,7 +35,7 @@ contributions:
     - erasmusplus
 
 abbreviations:
-    NMDS: Non-metric multidimensional scaling
+  NMDS: Non-metric multidimensional scaling
 
 requirements:
  - type: internal
@@ -184,7 +184,7 @@ Before we move on to the next step, we need to make sure that the mapping went w
 >
 {: .question}
 
-# Strutural annotation
+# Structural annotation
 
 We can now run **Funannotate predict annotation** to perform the structural annotation of the genome.
 
