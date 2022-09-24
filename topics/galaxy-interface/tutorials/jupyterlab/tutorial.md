@@ -22,20 +22,19 @@ tags:
   - interactive-tools
 key_points:
 - How to work with JupyterLab interactively within Galaxy
-contributors:
+contributions:
+  authorship:
   - annefou
+  editing:
+  - hexylena
 subtopic: analyse
 ---
-
-
-# Introduction
-{:.no_toc}
-
-{% include topics/galaxy-interface/tutorials/jupyterlab/tutorial_origin.md %}
 
 [JupyterLab](https://jupyterlab.readthedocs.io/en/stable) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment).
 Like most IDEs, it provides a graphical interface for R/Python, making it more user-friendly, and providing dozens of useful features.
 We will introduce additional benefits of using JupyterLab as you cover the lessons.
+
+{% include topics/galaxy-interface/tutorials/jupyterlab/tutorial_origin.md %}
 
 > ### Agenda
 >
@@ -121,9 +120,14 @@ By default, a **Python notebook** is started. Don't worry if you are not familia
 
 > ### {% icon hands_on %} Hands-on: Import Python libraries
 >
-> 1. Click on a cell of your notebook to edit it (verify that it is defined as a `Code` cell)
-> 2. Enter the following lines : `import numpy as np` and `import matplotlib.pyplot as plt`.
-> 3. `shift`+`return` to run the cell or click on the run cell button.
+> 1. Click on a cell of your notebook to edit it (verify that it is defined as a "Code" cell)
+> 2. Enter the following lines:
+>    ```python
+>    import numpy as np
+>    import matplotlib.pyplot as plt
+>    ```
+>
+> 3. <kbd>Shift+Return</kbd> to run the cell or click on the run cell button.
 >
 {: .hands_on}
 
@@ -133,12 +137,28 @@ In this tutorial we are going to simply plot a simple graph using generated data
 
 > ### {% icon hands_on %} Hands-on: Draw a simple plot
 >
-> 1. Generate a simple dataset `x = np.linspace(0, 2, 100)` and `y = x**2`
-> 2. Create your figure with the command `fig, ax = plt.subplots( nrows=1, ncols=1 ,figsize=(15, 10) )`
->   -  `nrows=1, ncols=1` means you will have one plot in your figure (one row and one column)
->   -  `figsize` parameter determine the size of the figure
-> 3. Draw the plot with the command `plt.plot(x, y);` ![Simple plot in Jupyter](../../images/jupyterlab_plot.png)
+> 1. Generate a simple dataset
+>   
+>    ```python
+>    x = np.linspace(0, 2, 100)
+>    y = x**2
+>    ```
 >
+> 2. Create your figure with the command:
+>
+>    ```python
+>    fig, ax = plt.subplots( nrows=1, ncols=1 ,figsize=(15, 10) )
+>    ```
+>
+>    - `nrows=1, ncols=1` means you will have one plot in your figure (one row and one column)
+>    - `figsize` parameter determine the size of the figure
+> 3. Draw the plot with the command
+>
+>    ```python
+>    plt.plot(x, y);
+>    ```
+>
+>    ![Simple plot in Jupyter](../../images/jupyterlab_plot.png)
 {: .hands_on}
 
 # Interaction between JupyterLab and Galaxy
@@ -170,6 +190,3 @@ This will create a new notebook `.pynb` file in your history every time you clic
 > 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
 >
 {: .hands_on}
-
-# Conclusion
-{:.no_toc}

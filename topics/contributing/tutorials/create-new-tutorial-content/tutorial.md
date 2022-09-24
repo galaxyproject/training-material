@@ -17,10 +17,10 @@ subtopic: writing
 contributions:
   authorship:
   - bebatut
+  - hexylena
   editing:
   - bgruening
   - shiltemann
-  - hexylena
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
@@ -281,7 +281,8 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![proper alt text describing the image for visually impaired learners](../../images/image.png)`.
+
+To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`![proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -289,9 +290,11 @@ We have also added a small plugin to handle captions for each image:
 
 The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
+{% raw %}
 ```markdown
 ![A textual description of the image](../images/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
@@ -309,10 +312,11 @@ As an example for this image:
 
 ![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
-
+{% raw %}
 ```markdown
 ![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
 Field          | Appropriate Contents
 ----           | -----
@@ -380,7 +384,7 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 
-# Improving the learning experience
+# Improving the learning experience with Boxes
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content.
 
@@ -559,46 +563,6 @@ which, when rendered, look like:
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}
-
-## Tool Links
-
-With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
-
-![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
-
-To enable these in your tutorial you can use the following syntax:
-
-{% raw %}
-```
-- {% tool MultiQC %}
-- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
-- {% tool [Import some data](upload1) %}
-```
-{% endraw %}
-
-Which will be rendered as:
-
-- {% tool MultiQC %}
-- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
-- {% tool [Import some data](upload1) %}
-
-When viewed through Galaxy, students will see:
-
-<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
-
-### How to find these IDs?
-
-The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
-
-The alternative is to figure out the ID for the tool you want to use:
-
-1. Find your tool in Galaxy, and click to access the tool form.
-2. Click on Options at the top right
-3. Click on Share
-4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
-5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
-
-![Finding the tool ID](../../images/tool-id.png)
 
 ## **Questions** and **solution** boxes
 
@@ -849,6 +813,51 @@ Rendered:
 > ```
 {: .code-out}
 
+# Additional Features to Improve Learning
+
+Here we cover additional features you can use throughout your tutorials to improve the learning experience.
+
+## Tool Links
+
+With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
+
+![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
+
+To enable these in your tutorial you can use the following syntax:
+
+{% raw %}
+```
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+
+### How to find these IDs?
+
+The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+
+The alternative is to figure out the ID for the tool you want to use:
+
+1. Find your tool in Galaxy, and click to access the tool form.
+2. Click on Options at the top right
+3. Click on Share
+4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
+
+![Finding the tool ID](../../images/tool-id.png)
+
+
 
 ## FAQs (snippets)
 
@@ -867,7 +876,6 @@ These are available in folders named `faqs`, either at the project level, topic 
 - **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
   - for questions pertaining to that specific tutorial
   - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
-
 
 
 ### Including FAQs/snippets in your tutorials

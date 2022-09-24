@@ -29,3 +29,7 @@ contributors:
 {% assign kid_key = "Topic Schema" %}
 {% assign kid_val = site.data['schema-topic'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "Quiz Schema" %}
+{% assign kid_val = site.data['schema-quiz'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}

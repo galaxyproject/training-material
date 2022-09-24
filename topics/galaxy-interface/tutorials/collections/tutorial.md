@@ -311,9 +311,7 @@ The tool allow extracting datasets based on position (**The first dataset** and 
 
 This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when downstream tools require datasets to have content.
 
-.. image:: ${static_path}/images/tools/collection_ops/filter_empty.svg
-  :width: 500
-  :alt: Filtering empty datasets
+![Filtering empty datasets](../../images/collections/filter_empty.svg)
 
 ### Filter failed datasets
 
@@ -455,7 +453,7 @@ the tool will return:
 
 ### Sort collection
 
-{% icon tool %} **Sort collection** ... well .. sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
+{% icon tool %} **Sort collection** sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
 
 **Numeric sort**
 

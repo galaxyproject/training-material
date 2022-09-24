@@ -223,6 +223,8 @@ function join(evt, joinId) {
 			showQuestion(data);
 		} else if (data.type === "poll") {
 			showQuestion(data);
+		} else if (data.type === "free-text") {
+			showQuestion(data);
 		} else if (data.type === "setup") {
 			document.getElementById("title").innerHTML = data.title;
 			document.getElementsByTagName("title")[0].innerHTML = data.title;
@@ -247,9 +249,18 @@ function join(evt, joinId) {
 						<h2>Congratulations</h2>
 					`
 				} else {
-					questionArea.innerHTML = `
-						<h2>Too bad :(</h2>
-					`
+					console.log(data)
+					if(data.slide_type === "free-text") {
+						questionArea.innerHTML = `
+							<h2>Answer</h2>
+							${data.answer}
+						`
+					}
+					else {
+						questionArea.innerHTML = `
+							<h2>Too bad :(</h2>
+						`
+					}
 				}
 			}
 		} else {
@@ -305,6 +316,8 @@ function showResult(result, score){
 function showQuestion(data){
 	if(data.type === "choose-many"){
 		showQuestionMany(data)
+	} else if(data.type === "free-text"){
+		showQuestionText(data)
 	} else {
 		showQuestionOne(data);
 	}
@@ -395,6 +408,42 @@ function showQuestionOne(data){
 	}
 }
 
+function showQuestionText(data){
+	var show = '';
+	if(data.image){
+		show += `<div style="display: flex;flex-direction: column"><h2>${data.title}</h2><img src="${data.image}" /></div>`
+		questionArea.style['flex-wrap'] = 'unset';
+	} else {
+		show += `<h2>${data.title}</h2>`
+		questionArea.style['flex-wrap'] = 'wrap';
+	}
+
+	if(mode !== 'teacher'){
+		show += `<div class="answer-group"><textarea rows="8" cols="32" id="answer-${data.id}-text"></textarea></div>`;
+		show += `<div class="answer-group">`;
+		show += `<button id="answer-${data.id}-submit" value="answered" class="btn answer-button">Submit</button>`
+		show += `</div>`;
+	}
+	questionArea.innerHTML = show;
+
+	if(mode !== 'teacher'){
+		var e = document.getElementById(`answer-${data.id}-submit`);
+		console.log(e)
+		e.addEventListener('click', function () {
+			var answer = document.getElementById(`answer-${data.id}-submit`).value
+			safeSend({
+				"event": "answer",
+				"question": data.id,
+				"result": answer,
+			})
+			answersGiven[data.id] = answer
+			document.getElementById(`answer-${data.id}-submit`).disabled = true
+			document.getElementById(`answer-${data.id}-text`).disabled = true
+			console.log(data);
+		})
+	}
+}
+
 function updateStudentList(){
 	status.innerHTML = `${conns.length} connections`;
 	if(currentSlide === -1) {
@@ -420,6 +469,8 @@ function processStudentMessage(connId, message){
 
 		if(slides[currentSlide].type === "choose-many"){
 			slides[currentSlide].results[connId] = message.result.map(ans => slides[currentSlide].answers.indexOf(ans))
+		} else if(slides[currentSlide].type === "free-text"){
+			slides[currentSlide].results[connId] = message.result // TODO: will people submit crappy answers here?
 		} else {
 			slides[currentSlide].results[connId] =
 				slides[currentSlide].answers.indexOf(message.result)
@@ -469,10 +520,16 @@ function showResults(){
 
 		asdf.forEach(theirAnswer => {
 			var answerKey = "";
-			if(theirAnswer < 0){
-				answerKey = "SOMETHING ODD";
+			if(slide.type !== 'free-text'){
+				if(theirAnswer < 0){
+					answerKey = "SOMETHING ODD";
+				} else {
+					answerKey = slide.answers[theirAnswer]
+					final_count += 1;
+				}
 			} else {
-				answerKey = slide.answers[theirAnswer]
+				// We'll give everyone a pass.
+				answerKey = slide.correct
 				final_count += 1;
 			}
 
@@ -492,9 +549,13 @@ function showResults(){
 	console.log(players)
 
 	show += '<table class="table table-striped">'
-	slide.answers.forEach(x => {
-		show += `<tr ${isCorrectAnswer(x) ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
-	})
+	if(slide.type === 'free-text'){
+			show += `<tr class="correct-answer"><td>${slide.correct}</td> <td>n/a</td></tr>`
+	} else {
+		slide.answers.forEach(x => {
+			show += `<tr ${isCorrectAnswer(x) ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
+		})
+	}
 	show += '</table>'
 	questionArea.innerHTML = show;
 }
@@ -623,7 +684,9 @@ function handleCurrentSlide(){
 			if(!haveBroadcast){
 				haveBroadcast = true;
 				broadcast(studentSlide)
-				document.getElementsByClassName("answer-group")[0].style.display = '';
+				if(currentSlide.answers !== null) {
+					document.getElementsByClassName("answer-group")[0].style.display = '';
+				}
 			}
 		} else {
 			progressBar.style.width = ((displayTime - showQuestionLeft) / 50) + "vw"
@@ -644,9 +707,10 @@ function handleCurrentSlide(){
 			showResults(studentSlide);
 			if(studentSlide.type !== "poll"){
 				broadcast({
-					"type": "answer",
-					"question": currentSlide,
-					"answer": slides[currentSlide].correct
+					type: "answer",
+					question: currentSlide,
+					answer: slides[currentSlide].correct,
+					slide_type: slides[currentSlide].type,
 				});
 			}
 		} else {
