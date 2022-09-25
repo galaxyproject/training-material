@@ -361,7 +361,7 @@ We will follow those steps and see how it all works in practice.
 In Galaxy, there are currently 2 methods of initial dimensionality reduction which is included in the pre-processing step: principal component analysis (PCA) and latent semantic indexing (LSI). 
 However, PCA is more commonly used, and it also allows us to perform further steps on CDS object, so we’ll use this method. There is one parameter here that has a great impact on how our analysis will look like, namely - the `dimensionality of the initially reduced space`. After many trials and errors, we were finally able to find the value that gave the best results. You can have a look at the image below to see how different values affect the outcome.
 
-![Preprocessing num-dim](../../images/scrna-casestudy-monocle/num_dim.png "Different outputs depending on the number of dimensions that the space was reduced to during pre-processing.")
+![Preprocessing num-dim](../../images/scrna-casestudy-monocle/num_dim_legend.jpg "Different outputs depending on the number of dimensions that the space was reduced to during pre-processing. Currently the label size in Monocle graphs in Galaxy is a nightmare, so for clarity additional legend was added to this image. We're working on the label size so that you can generate clear, readable and pretty graphs. However in this particular figure, the main point is to show the differences in shapes depending on the num-dim.")
 
 > ### {% icon question %} Questions
 >
@@ -430,9 +430,9 @@ Thanks to the fact that we provided Monocle3 with annotated data, we can now col
 
 [Previous tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions. 
 
-As a reminder, here's the comparision between cell type annotation done in the other tutorial using Scanpy, and the output from the previous step of this tutorial. The main difference is that Scanpy was used to identify the cell types and assign them to clusters. That data was then passed on to Force-Directed + PAGA algorithms to infer trajectory, and then the arrangement of the cell groups changed a bit. In Monocle, trajectory analysis will be based on the clustering you see now. Therefore, the fact that on the Monocle plot we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
+![cell_types](../../images/scrna-casestudy-monocle/cell_types.png "Cells coloured in Monocle by their type.")
 
-![scanpy vs monocle](../../images/scrna-casestudy-monocle/scanpy_monocle.png "Cell type annotation in Scanpy and Monocle.")
+In the mentioned tutorial, we annotated the cells so that we know what type they are. Above you can see how Monocle used this information to colour cells by their type. It is important to see the 'form' of the graph and how the cell types are arranged within its confines. But why is it important? Well, in Monocle, our trajectory analysis will be based on the same arrangement of the cells that you see now. And if you now recall our choice of the number of dimensions during pre-processing, you'll understand why it was crucial - choosing the right value at the beginning determines the 'shape' of the graph that is then retained for the trajectory analysis. Therefore, the fact that on the plot above we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
 
 > ### {% icon question %} Question - Genotype
 > Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?
@@ -628,6 +628,12 @@ As you can see, the learned trajectory path is just a line connecting the cluste
 
 
 ![learned graph](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory path")
+
+> ### {% icon tip %} Comparing the trajectories
+>
+> As a reminder, here's the comparision between our trajectory and the one from the previous tutorial, where we used Scanpy for clustering, and then appplied Force-Directed + PAGA algorithms to infer trajectory. As you remember from those tutorials, the arrangement of the cell groups changed a bit during these steps. Indeed - by using the mentioned methods, we get different graphs for clusters and trajectory, while in Monocle the general 'shape' of the graph stays the same from the beginning. 'Leranig the trajectory' step in Monocle is about finding a path, along which the cells can be then ordered in pseudotime. 
+> ![scanpy_monocle_trajectory](../../images/scrna-casestudy-monocle/scanpy_monocle_trajectories.png "Comparison between the trajectory inferred in the previous 'case study' tutorials (Scanpy + Force-Directed + PAGA) and the trajectory obtained in Monocle.")
+{: .question}
 
 ## Pseudotime analysis
 
