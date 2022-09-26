@@ -41,7 +41,7 @@ contributions:
 
 <!-- This is a comment. -->
 
-What is a microbiome? There are collections of small living creatures.
+What is a microbiome? It is a collection of small living creatures.
 These small creatures are called **micro-organisms** and they are **everywhere**. In our gut,
 in the soil, on vending machines, and even inside the beer. Most of these micro-organisms are
 actually very good for us, but some can make us very ill.
@@ -81,7 +81,7 @@ In this tutorial, we will use data of beer microbiome generated via the
 > Beer is alive! It contains microorganisms, in particular **yeasts**.
 >
 > Indeed, grain and water create a sugary liquid (called wort). The beer brewer
-> adds yeasts to it. By eating the sugar, yeasts creates alcohol, carbonation,
+> adds yeasts to it. By eating the sugar, yeasts creates alcohol.
 > and other compounds (esters, phenols, etc.) that give beer its particular
 > flavor.
 >
