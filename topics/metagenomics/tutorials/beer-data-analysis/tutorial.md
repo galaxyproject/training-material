@@ -91,9 +91,9 @@ In this tutorial, we will use data of beer microbiome generated via the
 > are the most commonly used:
 >
 > - ***Saccharomyces cerevisiae***: a top-fermenting (*i.e.* yeast which rise
-> up to the top of the beer as it eats and creates alcohol) ale yeast, responsible
-> for a huge range of beer styles like witbiers, stouts, ambers, tripels, saisons,
-> IPAs, and many more. It is most likely the yeast that the early brewers were
+> up to the top of the beer as it metabolizes sugars, delivering alcohol as a by-product), 
+> ale yeast responsible for a huge range of beer styles like witbiers, stouts, ambers, 
+> tripels, saisons, IPAs, and many more. It is most likely the yeast that the early brewers were
 > inadvertently brewing with over 3,000 years ago.
 > - ***Saccharomyces pastorianus***: a bottom-fermenting (*i.e.* it sits on the
 > bottom of the tank as it ferments) lager yeast, responsible for beer styles
