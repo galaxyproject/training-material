@@ -317,9 +317,9 @@ Monocle3 turns the expression matrix, cell and gene annotations into an object c
 > ### {% icon details %} Details: Input files
 > 
 > Here is what [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/) says about the required three input files:
->    - **expression_matrix**, a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.
->    - **cell_metadata**, a data frame, where rows are cells, and columns are cell attributes (such as cell type, culture condition, day captured, etc.)
->    - **gene_metadata**, a data frame, where rows are features (e.g. genes), and columns are gene attributes, such as biotype, gc content, etc. One of its columns should be named "gene_short_name", which represents the gene symbol or simple name (generally used for plotting) for each gene.
+>    - **expression_matrix**: a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.
+>    - **cell_metadata**: a data frame, where rows are cells, and columns are cell attributes (such as cell type, culture condition, day captured, etc.)
+>    - **gene_metadata**: a data frame, where rows are features (e.g. genes), and columns are gene attributes, such as biotype, gc content, etc. One of its columns should be named "gene_short_name", which represents the gene symbol or simple name (generally used for plotting) for each gene.
 >
 {: .details}
 
@@ -352,14 +352,15 @@ We will follow those steps and see how it all works in practice.
 > > ### {% icon solution %} Solution
 > >
 > > Just click on the performed step - on the preview you’ll see that the dimensions are 15395 x 8569 - so exactly as we predicted genes x cells! 
+> > ![The dataset preview shows class: cell_data_set, dim: 15395 8569](../../images/scrna-casestudy-monocle/monocle_dimensions.png "Monocle Object Dimensions")
 > >
 > {: .solution}
 {: .question}
 
 ## Pre-processing
 
-In Galaxy, there are currently 2 methods of initial dimensionality reduction which is included in the pre-processing step: principal component analysis (PCA) and latent semantic indexing (LSI). 
-However, PCA is more commonly used, and it also allows us to perform further steps on CDS object, so we’ll use this method. There is one parameter here that has a great impact on how our analysis will look like, namely - the `dimensionality of the initially reduced space`. After many trials and errors, we were finally able to find the value that gave the best results. You can have a look at the image below to see how different values affect the outcome.
+In Galaxy, there are currently 2 methods of initial dimensionality reduction included in the pre-processing step: principal component analysis (PCA) and latent semantic indexing (LSI). 
+Given that PCA is more commonly used, and it allows us to perform further steps on the CDS object, we’ll use this method. There is one parameter here that has a great impact on how our analysis will look - the `dimensionality of the initially reduced space`. This is a highly subjective choice - you will want to test a lot of different parameters on your dataset. After much trial and error, we were able to find the value that made the most sense biologically. Have a look at the image below to see how different values affect the outcomes.
 
 ![Preprocessing num-dim](../../images/scrna-casestudy-monocle/num_dim_legend.jpg "Different outputs depending on the number of dimensions that the space was reduced to during pre-processing. Currently the label size in Monocle graphs in Galaxy is a nightmare, so for clarity additional legend was added to this image. We're working on the label size so that you can generate clear, readable and pretty graphs. However in this particular figure, the main point is to show the differences in shapes depending on the num-dim.")
 
@@ -384,9 +385,9 @@ However, PCA is more commonly used, and it also allows us to perform further ste
 
 ##  Dimensionality reduction
 
-Now it’s time for the proper dimensionality reduction so that instead of the initial thousands of dimensions, we can get only 2 and hence plot all the cells on one 2D graph. Again, there are several algorithms to do that: UMAP, tSNE, PCA and LSI (only possible when preprocess_method is set to 'LSI'), but due to the same reasons as above, we’ll use UMAP (most common + allows further operations + best results). But I’ll let you see how the output from other algorithms look to convince you that **UMAP** is indeed the best in this case. Of course it might happen that by choosing different pre-processing values, tSNE or PCA plots would look better, so don't be afriad to play around the parameters and test them!
+Now it’s time for the proper dimensionality reduction, to turn the original thousands of dimensions (genes), into a 2-dimensional graph. There are several algorithms to do this: UMAP, tSNE, PCA and LSI (only possible when preprocess_method is set to `LSI`), but due to the same reasons as above, we’ll use UMAP (most common + allows further operations + best results). But I’ll let you see how the outputs from the other algorithms look to convince you that **UMAP** is indeed the best for this dataset. Of course, it's possible that by choosing different pre-processing values, tSNE or PCA plots would look better, so don't be afraid to play around with the parameters and test them!
 
-![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them nicely.")
+![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them in a way that makes sense biologically - DN to T-mat.")
 
 > ### {% icon hands_on %} Hands-on: Dimensionality reduction
 >
@@ -397,15 +398,16 @@ Now it’s time for the proper dimensionality reduction so that instead of the i
 
 ## Plotting
  
-Alright, now let's have a look at our output! Above you got a sneak peek of how the plot would look like, but now you’ll generate them on your own! 
+Alright, now let's have a look at our output! Above you got a sneak peek of how the plot would look, but now you’ll generate the plots on your own! 
 
-Thanks to the fact that we provided Monocle3 with annotated data, we can now color the cells by any attribute that was in the cell metadata file! So, similarly to the previous tutorial, we’ll color them by cell type, genotype, batch and sex. At least for now. 
+Thanks to the fact that we provided Monocle3 with annotated data, we can now color the cells by any attribute that was in the cell metadata file! Similarly to the previous tutorial, we’ll color them by cell type, genotype, batch and sex. At least for now... 
 
 > ### {% icon hands_on %} Hands-on: Plotting
 >
 > 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
 >    - *"The cell attribute (e.g. the column of pData(cds)) to map to each cell's color, or one of {cluster, partition, pseudotime}."*: `cell_type`
+>    - *"If set, display the cell group names directly on the plot. Otherwise include a color legend on the side of the plot."*: {% icon history-share %} `No`
 > 2. Rename {% icon galaxy-pencil %} the output: `Cell type plot`
 >
 > 3. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
@@ -428,7 +430,10 @@ Thanks to the fact that we provided Monocle3 with annotated data, we can now col
 >
 {: .hands_on}
 
-[Previous tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions. 
+The [Previous tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}) discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions. 
+
+
+As a reminder, here's the comparision between cell type annotation done in the other tutorial using Scanpy, and the output from the previous step of this Monocle tutorial. The main difference is that Scanpy was used to identify the cell types and assign them to clusters. That data was then passed on to Force-Directed + PAGA algorithms to infer trajectory, and then the arrangement of the cell groups changed a bit. In Monocle, trajectory analysis will be based on the clustering you see now. Therefore, the fact that on the Monocle plot we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
 
 ![cell_types](../../images/scrna-casestudy-monocle/cell_types.png "Cells coloured in Monocle by their type.")
 
@@ -440,37 +445,37 @@ In the mentioned tutorial, we annotated the cells so that we know what type they
 >
 > > ### {% icon solution %} Solution
 > >
-> > Indeed, that's what we see in our graph! But look closer, there is something more! Additionally, we also discovered that the vast majority of DP-M1 is only wildtype cells! That's interesting, isn't it?
+> > Indeed, that's what we see in our graph! But look closer, there is something more...Additionally, we also discovered that the vast majority of DP-M1 is only wildtype cells. That's interesting, isn't it?
 > >
 > {: .solution}
 {: .question}
 
 > ### {% icon question %} Question - Batch effect
-> Again, can we confirm the previous findings that DP-L looks to be mainly comprised of N705?
+> Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?
 > ![batch](../../images/scrna-casestudy-monocle/batch_1.png "Checking for batch effect")
 >
 > > ### {% icon solution %} Solution
 > >
-> > Both DP-L and DP-M1 seem to consist mostly of N705 and N706. There might be indeed a bit of batch effect, so you could consider using batch correction on this dataset (you can easily do it in R, using monocle3 library!). However, if look on the other clusters, where there is batch mixing, we can still assess this biologically even without batch correction. Additionally, we will also look at the confounding effect of sex.
+> > Both DP-L and DP-M1 seem to consist mostly of N705 and N706. There might be indeed a bit of batch effect, so you could consider using batch correction on this dataset. In the absence of batch correction, we will focus on those clusters where there is batch mixing for biological interpretation. Finally, we will look at the confounding effect of sex.
 > > ![sex](../../images/scrna-casestudy-monocle/sex_1.png "Sex distribution across the sample")
-> >  Look at this - there are also no female cells in DP-L and DP-M1. The one female sample was one of the mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data.
+> >  There are also no female cells in DP-L and DP-M1. The one female sample - which is one of the mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large. Luckily, this doesn’t seem to be a confounding factor and we can still learn from our data.
 > >
 > {: .solution}
 {: .question}
 
 ## Clustering
 
-Don't get confused - we haven't clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it's time for creating clusters, which - ideally - would cover the same areas as cell types. It would mean that clustering in Scanpy during previous tutorial to assign the cell types is consistent with Monocle clustering. 
+Don't get confused - we haven't clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it's time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?
 >
-Before inferring the trajectory, we have to group cells into clusters. Monocle uses a technique called [community detection](https://doi.org/10.1038/s41598-019-41695-z)  to group cells. This approach was introduced by [Levine et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4508757/) as part of the phenoGraph algorithm. 
+Monocle uses a technique called [community detection](https://doi.org/10.1038/s41598-019-41695-z) to group cells. This approach was introduced by [Levine et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4508757/) as part of the phenoGraph algorithm. 
 >
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from [Alex Wolf et al](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1663-x), introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
 > ### {% icon details %} Details: Clusters vs partitions
 > 
-> Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene expression. While inferring the trajectory, we will be analysing the relationships between clusters.
+> Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene expression. The relationships between different clusters are analysed to identify possible trajectories.
 >
-> Partitions are larger groups of cells, usually containing several clusters. Trajectory inference is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. 
+> Partitions, meanwhile, are larger groups of cells that usually contain several clusters. Trajectory inference is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. 
 >
 {: .details}
 
@@ -493,20 +498,20 @@ Monocle also divides the cells into larger, more well separated groups called pa
 > 5. Rename {% icon galaxy-pencil %} the output: `Cluster plot`
 >
 {: .hands_on}
-> ### {% icon tip %} If the partition does not contain all cells of interest...
+> ### {% icon tip %} If the partition does not contain all your cells of interest...
 >
 > Sometimes it might happen that cells are grouped into several partitions, while you want them all to be in just one in order to perform trajectory analysis on all of them. Then, you can try to increase the `q-value` threshold that is used to determine the partition of cells.
 > ![partition q-value](../../images/scrna-casestudy-monocle/partition_qval.png "q-value threshold affecting the span of partition. Note that 0.05 is the default value.")
 >
 {: .tip}
-> ### {% icon tip %} If the granularity of clusters is not satisfying...
+> ### {% icon tip %} If the granularity of clusters does not make sense...
 >
-> If you are not satisfied with the results of the standard igraph louvain clustering algorithm, you may set the `resolution` of clustering, which specifies the granularity of clusters. 
+> If you are not satisfied with the results of the standard igraph louvain clustering algorithm, you may set the `resolution` of clustering, which specifies the granularity of the clustering. 
 > ![clustering resolution](../../images/scrna-casestudy-monocle/clusters_resolution.png "Different granularity of clusters based on the algorithm and resolution used.")
 {: .tip}
 
 > ### {% icon warning %} Ambiguous clusters!
-> Standard igraph louvain clustering algorithm works in a way that it sometimes returns slightly different outputs. It might happen that initially it finds perfect clustering and during the second run, those perfect clusters merge! To ensure that your clusters are reproducible, you might want to use the `resolution` parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility. 
+> Standard igraph louvain clustering algorithm works in a way that it sometimes returns slightly different outputs. To ensure that your clusters are reproducible, you might want to use the `resolution` parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility. 
 > ![igraph louvain clustering](../../images/scrna-casestudy-monocle/igraph.png "Standard igraph louvain clustering algorithm giving different results despite the same input.")
 > 
 {: .warning}
@@ -544,7 +549,7 @@ If we compare the annotated cell types and the clusters that were just formed, w
 >
 > > ### {% icon solution %} Solution
 > >
-> > - `Il2ra`: expressed in the cluster where DN cells are - an indication where the trajectory should start
+> > - `Il2ra`: expressed in the cluster where DN cells are - an indication of where the trajectory should start
 > > - `Cd8b1, Cd8a`: expressed in the areas where middle DP were assigned - great
 > > - high `Cd4`: mostly in late DP cluster - as expected
 > > - `Itm2a`: expressed in mature T-cells - tells us where the trajectory should end
@@ -556,21 +561,21 @@ If we compare the annotated cell types and the clusters that were just formed, w
 
 > ### {% icon tip %} Purity of the sample - Hba-a1 gene
 >
-> Hba-a1 gene is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms clearly visible, distinct, little branch. It means that hemoglobin - a red blood cell marker appears there, even more - those cells were gathered there. Obviously, that should NOT be found in T-cells. However, if you remember the expression of that gene in the previous tutorial where Scanpy was used (just look on the image below) - that marker appeared throughout the entire sample in low numbers. This suggests some background in the media the cells were in. Monocle allowed us to gather the cells expressing that gene into a distinct group! That's great! Thanks to that, we wouldn't have to play with filtering settings (which would be the solution in the previous tutorial and which might cause the loss of many other cells as well) - we could just remove that small group. This is just a note for the future reference - for now we'll continue with the data we already have. At least we know what this tiny branch exactly is. 
+> The Hba-a1 gene creates hemoglobin which is found in red blood cells. This is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms a a clearly visible, distinct, little branch. Hemoglobin should NOT be found in T-cells. However, if you remember, the gene was found to be expressed in the previous Scanpy tutorial (see the image below). That marker appeared throughout the entire sample in low numbers, suggesting some background contamination of red blood cell debris in the cell samples during library generation. Unlike Scanpy, Monocle algorithms allowed us to gather the cells expressing that gene into a distinct group! That's great!
 > ![Hemoglobin](../../images/scrna-casestudy-monocle/hb.png "Hemoglobin across clusters - comparision between Scanpy and Monocle")
 {: .question}
 
 ## Top marker genes 
 
-Here we used a priori knowledge regarding the marker genes. If we wanted to approach this problem in an unsupervised manner, we could use Monocle to tell us what would be the top marker genes in each group of cells. This is very useful if we don’t know the type of the cells in a specific cluster and we want to identify it, based on common marker genes. Or when we want to find other marker genes than those currently known.
+Here we used a priori knowledge regarding the marker genes. If we wanted to approach this problem in an unsupervised manner, we could use Monocle to tell us the top marker genes in each group of cells. This is very useful if we are trying to identify a cell type, or if we want to find novel marker genes for known cell types.
 
 > ### {% icon question %} Questions
 >
-> If I cluster cells that are not annotated, can I assign clusters to cell type based on gene expression using Monocle3?
+> If I cluster cells that are not annotated, can I assign clusters to a cell type based on gene expression using Monocle3?
 >
 > > ### {% icon solution %} Solution
 > >
-> > Of course you can! That’s the point of clustering and gene expression analysis. However currently this function hasn’t been turned into a Galaxy tool yet, so in order to do so, you have to use the piece of code in R which performs this annotation. 
+> > Theoretically...yes! That’s the point of the clustering and gene expression analysis. However, as of the writing of this tutorial, this function hasn’t been turned into a Galaxy tool yet and is only available in R. 
 > >
 > {: .solution}
 >
@@ -586,25 +591,23 @@ Here we used a priori knowledge regarding the marker genes. If we wanted to appr
 >
 {: .hands_on}
 
-The table output is quite self-explanatory and it's useful to get details about the top marker genes in each cluster. Another output visually presents what how different genes are expressed across all the clusters, which is a good overiew of gene expression over the whole sample. 
-
 ![top_markers](../../images/scrna-casestudy-monocle/top_markers.jpg "Identification of the genes most specifically expressed in groups of cells.")
 
 > ### {% icon question %} Questions
 >
-> What genes are the most specifically expressed in DP-M1?
+> What genes are uniquely expressed in DP-M1?
 >
 > > ### {% icon solution %} Solution
 > >
-> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. 
-> > The pdf output also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1. 
+> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three! 
+> > The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1. 
 > >
-> > Every time when you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, then checking the top markers for that cluster is really helpful and allows you to draw biological conclusions. Thank you Maths! 
+> > Whenever you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, check the top markers for that cluster to draw biological conclusions. Thank you Maths! 
 > {: .solution}
 >
 {: .question}
 
-There is also one more tool that allows you to get a better insight into gene expression, namely - identifying differentially expressed genes along the inferred trajectory. But in order to do that, we have to infer that trajectory first!
+But what if you want to know how gene expression changes across a trajectory? This is where Monocle is particularly powerful. But in order to do that, we have to infer that trajectory first!
 
 ## Learn the trajectory graph
 
@@ -623,8 +626,8 @@ We’re getting closer and closer! The next step is to learn the trajectory grap
 
 As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here. 
 > If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There's a danger here that we might start seeing things that don't really exist.
-> You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small 'dot' classified as another partition. Hence, we didn't want to make connections between those partitions via trajectory path. 
-> There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, checking the right box in {% tool Monocle3 plotCells %}.
+> You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small 'dot' classified as another partition. 
+> There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, {% icon history-share %} checking the correct box in {% tool Monocle3 plotCells %}.
 
 
 ![learned graph](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory path")
@@ -637,11 +640,11 @@ As you can see, the learned trajectory path is just a line connecting the cluste
 
 ## Pseudotime analysis
 
-Finally it's time to see our cells in pseudotime! We have already learned trajectory, now we only have to order cells along it. Monocle3 requires information where to start ordering the cells, so we need to provide it with this information. We annotated early T-cells as double negative (DN), so those will be our root cells! 
+Finally, it's time to see our cells in pseudotime! We have already learned a trajectory, now we only have to order the cells along it. Monocle3 requires information on where to start ordering the cells, so we need to provide it with this information. We annotated early T-cells as double negative (DN), so those will be our root cells! 
 
 > ### {% icon details %} Details: Pseudotime
 > 
-> To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
+> To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
 [Read more](https://doi.org/10.1093%2Fbioinformatics%2Fbtw372)
 >
 {: .details}
@@ -672,16 +675,13 @@ Finally it's time to see our cells in pseudotime! We have already learned trajec
 >    -  fill *(--root-pr-nodes)* with the root_pr_node (you can plot them in the same way as branch points) that corresponds to the root cells 
 {: .tip}
 
-Now we can see how all those things that we were working on come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn't it beautiful? But wait, don't be too enthusiastic - why on earth DP-M1 group branches out? We didn't expect that... 
->
-By using the gene expression plots we made sure that `Itm2a` gene is not expressed in the DP-M1 cluster, so it is not mature T-cells. Interestingly, also genes `Cd8b1, Cd8a, Cd4` are not expressed in DP-M1 as significantly as in other DP-M clusters. We also checked top markers for DP-M1 and discovered that most of them are just ribosomal. Those cells might be maturing, but we’re not certain why they don’t go into the Itm2a group, so maybe there’s a trajectory we don’t know about? 
+Now we can see how all our hard work has come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn't it beautiful? But wait, don't be too enthusiastic - why on earth DP-M1 group branches out? We didn't expect that... What could that mean?
 > 
-There are a lot of such questions in bioinformatics and we're always get excited when we try to answer them, hoping that we will be able to make a groundbreaking discovery. However, with analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimentionality reduction during pre-processing. It also requires a understanding of the underlying biology (we have to choose the root cells, for instance, or recognise when certain cell arrangements don't make sense). The mysterious branching of DP-M1 is a great example how cautious you must be during scRNA-seq data analysis (particularly trajectory analysis) and check it with the biological knowledge - this branching might be just a misleading algorithm's anomaly or something new, still undiscovered! 
-
+There are a lot of such questions in bioinformatics, and we're always get excited to try to answer them. However, with analysing scRNA-seq data, it's almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimentionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.
 
 ![pseudotime](../../images/scrna-casestudy-monocle/pseudotime.png "Trajectory analysis - pseudotime")
 
-Once the trajectory has been inferred, you might want to return to the gene expression analysis and dive into that in more depth. Here is a powerful tool that would give you even more information about the genes. 
+Last but not least, you can now identify genes that define the inferred trajectories.
 
 > ### {% icon hands_on %} Hands-on: Differentially expressed genes
 >
@@ -693,7 +693,7 @@ Once the trajectory has been inferred, you might want to return to the gene expr
 
 # Conclusion
 
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monoce3-tutorial-workflow), or check out the [full workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-anndata-to-monocle-right-1) for this tutorial. I also split this workflow into two separate workflows: [preparing the input files for Monocle3, starting from AnnData](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3), and [Monocle3 only workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1). You can use them to accelerate analysis of your own data, paying attention to the requirements of the input data, mentioned in this tutorial.
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monoce3-tutorial-workflow), or check out the [full workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-anndata-to-monocle-right-1) for this tutorial. I also split this workflow into two separate workflows: [preparing the input files for Monocle3, starting from AnnData](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3), and [Monocle3 only workflow](https://humancellatlas.usegalaxy.eu/u/j.jakiela/w/copy-of-trajectory-analysis-using-monocle3-1). You can use them to accelerate analysis of your own data, paying attention to the requirements of the input data that are mentioned in this tutorial.
 
 ![pseudotime](../../images/scrna-casestudy-monocle/workflow.jpg "Full workflow for this tutorial.")
 
