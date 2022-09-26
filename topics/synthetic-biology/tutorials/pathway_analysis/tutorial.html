@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Evaluating and ranking a set of pathways based on multiple metrics</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Evaluating and ranking a set of pathways based on multiple metrics" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Kenza Bazi-Kabbaj" />
+<meta name="DC.creator" content="Thomas Duigou" />
+<meta name="DC.creator" content="Joan Hérisson" />
+<meta name="DC.creator" content="Guillaume Gricourt" />
+<meta name="DC.creator" content="Ioana Popescu" />
+<meta name="DC.creator" content="Jean-Loup Faulon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Synthetic Biology is the engineering of biology : the del..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Evaluating and ranking a set of pathways based on multipl..." />
+        <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/synthetic-biology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Synthetic Biology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/synthetic-biology/faqs/" title="Check our FAQs for the Synthetic Biology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Evaluating and ranking a set of pathways based on multiple metrics",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Synthetic Biology",
+    "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Evaluating and ranking a set of pathways based on multiple metrics' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html",
+  "timeRequired": "PT20M",
+  "keywords": "synthetic-biology",
+  "description": "The questions this  addresses are:\n - How to evaluate a set of heterologous pathways ?\n\n\\nThe objectives are:\n - Calculate the production flux of the lycopene target molecule using _Flux Balance Analysis_ tool.\n - Compute thermodynamics values to optimize the yield of the reaction producing the lycopene using _Thermo_ tool.\n - Compute the global score for the previous annotated pathways.\n - Rank the computed heterologous pathways depending on their score.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/",
+      "name": "Kenza Bazi-Kabbaj",
+      "image": "https://avatars.githubusercontent.com/kenza12",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4319-5616",
+      "orcid": "https://orcid.org/0000-0002-4319-5616"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/",
+      "name": "Thomas Duigou",
+      "image": "https://avatars.githubusercontent.com/tduigou",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2649-2950",
+      "orcid": "https://orcid.org/0000-0002-2649-2950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/",
+      "name": "Joan Hérisson",
+      "image": "https://avatars.githubusercontent.com/breakthewall",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9741-0847",
+      "orcid": "https://orcid.org/0000-0001-9741-0847"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/",
+      "name": "Guillaume Gricourt",
+      "image": "https://avatars.githubusercontent.com/guillaume-gricourt",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0143-5535",
+      "orcid": "https://orcid.org/0000-0003-0143-5535"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/",
+      "name": "Ioana Popescu",
+      "image": "https://avatars.githubusercontent.com/ioanagry",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-2547-8935",
+      "orcid": "https://orcid.org/0000-0003-2547-8935"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/",
+      "name": "Jean-Loup Faulon",
+      "image": "https://avatars.githubusercontent.com/jfaulon",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4274-2953",
+      "orcid": "https://orcid.org/0000-0003-4274-2953"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Synthetic Biology",
+      "description": "Synthetic Biology is the engineering of biology : the deliberate (re)design and construction of novel biological and biologically based parts, devices and systems to perform new functions for useful purposes, that draws on principles elucidated from biology and engineering.\nBy applying these principles to living systems, Synthetic Biology overcomes mimicry and optimisation-led research and introduces a rationale and systematic approach to the construction and (re)design.\nSynthetic Biology is at the intersection of engineering, bioscience, chemistry, and information technology.\nThe goal of synthetic biology is to extend or modify the behavior of organisms and engineer them to perform new tasks. \nIn this section, the tutorials shows how to design metabolic pathways for producing the desired chemical targets.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-synthetic-biology">
+    <h1 data-toc-skip>Evaluating and ranking a set of pathways based on multiple metrics</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/kenza12/" class="contributor-badge contributor-kenza12"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/kenza12?s=27" alt="Avatar">Kenza Bazi-Kabbaj</a>
+
+
+
+<a href="/training-material/hall-of-fame/tduigou/" class="contributor-badge contributor-tduigou"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/tduigou?s=27" alt="Avatar">Thomas Duigou</a>
+
+
+
+<a href="/training-material/hall-of-fame/breakthewall/" class="contributor-badge contributor-breakthewall"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/breakthewall?s=27" alt="Avatar">Joan Hérisson</a>
+
+
+
+<a href="/training-material/hall-of-fame/guillaume-gricourt/" class="contributor-badge contributor-guillaume-gricourt"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/guillaume-gricourt?s=27" alt="Avatar">Guillaume Gricourt</a>
+
+
+
+<a href="/training-material/hall-of-fame/ioanagry/" class="contributor-badge contributor-ioanagry"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/ioanagry?s=27" alt="Avatar">Ioana Popescu</a>
+
+
+
+<a href="/training-material/hall-of-fame/jfaulon/" class="contributor-badge contributor-jfaulon"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/jfaulon?s=27" alt="Avatar">Jean-Loup Faulon</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to evaluate a set of heterologous pathways ?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Calculate the production flux of the lycopene target molecule using <em>Flux Balance Analysis</em> tool.</p>
+</li>
+        
+        <li><p>Compute thermodynamics values to optimize the yield of the reaction producing the lycopene using <em>Thermo</em> tool.</p>
+</li>
+        
+        <li><p>Compute the global score for the previous annotated pathways.</p>
+</li>
+        
+        <li><p>Rank the computed heterologous pathways depending on their score.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 20 minutes</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/synthetic-biology/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6628296">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/" title="Workflows" alt="Evaluating and ranking a set of pathways based on multiple metrics workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/synthetic-biology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first <span class="notranslate">Galaxy</span> set of tools for synthetic biology and metabolic engineering (<span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
+
+<p>In this tutorial, we will use a set of tools from the <strong>Pathway Analysis <span class="notranslate">workflow</span></strong> which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis <span class="notranslate">workflow</span> in a chassis organism (<em>E. coli</em> iML1515). These workflows are available in the <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>. The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.</p>
+
+<p>We recommend that you follow the Retrosynthesis tutorial before starting the current tutorial which will enable you to find pathways to synthesize heterologous compounds producing Lycopene in the <em>E. coli</em> chassis organism.</p>
+
+<p>Four main steps will be run using the following <span class="notranslate">workflow</span>:</p>
+
+<p>To rank the computed heterologous pathways, we need to calculate some metrics. This is why an in-house Flux Balance Analysis (FBA) was developed to calculate the production flux of a given target (e.g. lycopene). The method forces a fraction of its maximal flux through the biomass reaction while optimizing for the target molecule. This is achieved by the <em>Flux Balance Analysis</em> tool.</p>
+
+<p>Secondly, we will use the <em>Thermo</em> tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions. The contribution of individual reactions to the final pathway thermodynamic is balanced solving a linear equation system.</p>
+
+<p>After that, the <em>Score Pathway</em> tool is used to calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability.</p>
+
+<p>Finally, the pathway are ranked based on the global score using the <em>Rank Pathways</em> tool.</p>
+
+<p><img src="../../images/pathway_analysis_workflow.jpg" alt="This image shows the pathway analysis workflow viewed from the Galaxy editor interface. The pathway analysis workflow will evaluate and rank pathways based on multiple metrics. First, Flux Balance Analysis (FBA) node will take as inputs a collection of SBMLs representing the heterologous pathways to be evaluated, another SBML representing the chassis, and 2 additional inputs are expected for indicating the biomass reaction ID and the cell compartment ID that will be used during the FBA analysis. The FBA method will optimize the production of the target under the constraint that the model should still produce some level biomass. Then, the Thermo tool is used to estimate thermodynamics values for each pathway to know whether it is favorable towards target production in physiological conditions. After that the Score Pathway tool will calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability. Finally, the pathways are ranked based on the global score using the Rank Pathways tool. All exchange files are SBMLs. The output is a CSV file which contains the pathway IDs and their corresponding global score." loading="lazy" /></p>
+
+<p>Note that we will run the steps of this <span class="notranslate">workflow</span> individually so as not to neglect the understanding of the intermediate steps. Then, we will run the <span class="notranslate">workflow</span> automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#data-preparation" id="markdown-toc-data-preparation">Data Preparation</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#compute-the-target-product-flux" id="markdown-toc-compute-the-target-product-flux">Compute the target product flux</a>    <ol>
+      <li><a href="#compute-thermodynamics-values" id="markdown-toc-compute-thermodynamics-values">Compute thermodynamics values</a></li>
+      <li><a href="#compute-the-global-score-of-pathways" id="markdown-toc-compute-the-global-score-of-pathways">Compute the global score of pathways</a></li>
+      <li><a href="#rank-annotated-pathways" id="markdown-toc-rank-annotated-pathways">Rank annotated pathways</a></li>
+    </ol>
+  </li>
+  <li><a href="#run-the-pathway-analysis-workflow" id="markdown-toc-run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="data-preparation">Data Preparation</h1>
+
+<p>First we need to upload and prepare the following inputs to analyze:</p>
+
+<ul>
+  <li>
+    <p>A set of pathways provided in the SBML format (Systems Biology Markup Language) to be ranked, modeling heterologous pathways such as those outputted by the <strong>RetroSynthesis <span class="notranslate">workflow</span></strong> (available in <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>).</p>
+  </li>
+  <li>
+    <p>The GEM (Genome-scale Metabolic Models) which is a formalized representation of the metabolism of the host organism (the model is <em>E. coli</em> iML1515), provided in the SBML format.</p>
+  </li>
+</ul>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial named <em>Pathway Analysis</em>.</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/6628296">Zenodo</a> :</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0001.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0006.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0011.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0001.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0006.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0011.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0001.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0116.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0231.xml
+https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML1515.xml
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Create a list or collection named <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> and composed of the 9 rpSBML pathways.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection</h3>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="compute-the-target-product-flux">Compute the target product flux</h1>
+
+<p>Notice that the starting compounds (in other words, <em>the precursors</em>) of the predicted pathways (also referred as the <em>heterologous pathways</em>) are compounds that have been initially extracted from the genome-scale metabolic model (GEM) of the organism we are interested in (also referred as <em>chassis</em>). While this step is out of the scope of the present Pathway Analysis tutorial, this means that the precursors of predicted pathways are also present in the chassis model. Hence, predicted pathways and the chassis organism model can be merged to construct “augmented” whole-cell models, enabling flux analysis of these metabolic systems. This is what we’ll do here to predict the production flux of a compound of interest.</p>
+
+<p>Within the frame of this tutorial, we’ll use the <em>E. coli</em> iML1515 GEM (downloaded from the <a href="http://bigg.ucsd.edu/">BiGG database</a>) to model the chassis metabolism of <em>E. coli</em> and the target compound is the lycopene. The provided <em>E. coli</em> model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis <span class="notranslate">workflow</span> (available in <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>).</p>
+
+<p>The FBA (Flux Balance Analysis) method used to calculate the flux is a mathematical approach (as decribed in section Methods in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) which uses the COBRApy package (<span class="citation"><a href="#Ebrahim2013">Ebrahim <i>et al.</i> 2013</a></span>) and proposes 3 different analysis methods (standard FBA, parsimonious FBA, fraction of reaction). The first two methods are specific to the COBRApy package and the last one <code class="language-plaintext highlighter-rouge">Fraction of Reaction</code> is an in-house analysis method (as decribed in section Methods in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) to consider the cell needs for its own maintenance while producing the target compound.</p>
+
+<p>Within the <span class="notranslate">workflow</span>, the purpose of the <em>Flux Balance Analysis</em> tool is to predict the production flux of the targeted compound, while considering the cellular needs. Under such simulation conditions, the analysis that returns a low production flux may be due to some precursor compounds having a limiting production flux, nor cofactor fluxes involved not being sufficiently balanced by the chassis native metabolism. Pathways with high flux would be caused by both the precursor compounds and the cofactors being in abundance. In either case, bottlenecks that limit the flux of the pathway may be investigated (this is outside of the scope of the <span class="notranslate">workflow</span>) and pathways that do not theoretically generate high yields can be filtered out.</p>
+
+<p>We first perform an FBA (with COBRApy) optimizing the biomass reaction and record its maximal theoretical flux. The upper and lower bounds of the biomass reaction are then set to a same amount, equals to a fraction of its previously recorded optimum (default is 75% of its optimum). The method then performs a second FBA where biomass flux is enforced to this fraction of its optimum while optimizing the target production flux. Simulated fluxes are recorded directly into the SBML file and all changed flux bounds are reset to their original values before saving the output file.</p>
+
+<p><img src="../../images/fba_calculation.png" alt="This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway." loading="lazy" /></p>
+
+<blockquote class="details">
+  <h3 id="details-comment"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Comment</h3>
+
+  <p>Blocking compounds that cannot provide any flux are temporarily removed from heterologous reactions for the FBA evaluation. Such cases can happen due to side substrates or products of predicted reactions that do not match any chassis compound, representing dead-end paths.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculating-the-flux-of-a-target-using-flux-balance-analysis-fba"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)</h3>
+
+  <ol>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1"><strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Pathway (rpSBML)”</em>: Select <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> (Input dataset collection) from your current history.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Model (SBML)”</em>: Select <code class="language-plaintext highlighter-rouge">SBML_Model_iML1515.xml</code> (Input dataset) from your current history.</li>
+        <li><em>“SBML compartment ID”</em>: Leave the default value <code class="language-plaintext highlighter-rouge">c</code>.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-choose-a-compartment-corresponding-to-your-model"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Choose a compartment corresponding to your model</h3>
+
+        <p>You can specify the compartment from which the chemical species were extracted.
+The default is <code class="language-plaintext highlighter-rouge">c</code>, the BiGG code for the cytoplasm.</p>
+      </blockquote>
+
+      <ul>
+        <li><em>“biomass reaction ID”</em>: Specify the biomass reaction ID that will be used for the “fraction” simulation, type <code class="language-plaintext highlighter-rouge">R_BIOMASS_Ec_iML1515_core_75p37M</code>.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-how-to-select-the-biomass-reaction-id-"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> How to select the biomass reaction ID ?</h3>
+
+        <p>The biomass reaction ID objective is extracted from the current model <em>E.Coli iML1515</em>. You can search the term <code class="language-plaintext highlighter-rouge">biomass</code> in your XML model and pick the ID where the term <code class="language-plaintext highlighter-rouge">core</code> appears.</p>
+      </blockquote>
+
+      <ul>
+        <li><em>“Constraint based simulation type”</em>: <code class="language-plaintext highlighter-rouge">Fraction of Reaction</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is the FBA score for <code class="language-plaintext highlighter-rouge">rp_003_0001</code> pathway ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>View the SBML rp_003_0001 file and look for <code class="language-plaintext highlighter-rouge">fba_fraction</code> value in <code class="language-plaintext highlighter-rouge">&lt;groups:listOfGroups&gt;</code> section: value= <code class="language-plaintext highlighter-rouge">0.23693089430893874</code>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="compute-thermodynamics-values">Compute thermodynamics values</h2>
+
+<p>The goal of the thermodynamic analysis is to estimate the feasibility of the predicted pathways toward target production, in physiological conditions. The eQuilibrator libraries (<span class="citation"><a href="#Flamholz_2011">Flamholz <i>et al.</i> 2011</a></span>) are used to calculate the formation energy of compounds by either using public database IDs (when referenced within the tools inte<span class="notranslate">rna</span>l database) or by decomposing the chemical structure and calculating its energy of formation using the component contribution method.</p>
+
+<p>The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients).</p>
+
+<p>Finally, the thermodynamic of a pathway is estimated by combining the Gibbs energy of reactions involved in it. The contribution of individual reactions to the final pathway thermodynamic is balanced using a linear equation system, according to the relative uses of intermediate compounds across the pathway (See Thermodynamics in Methods section for further details: <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>). A pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target.</p>
+
+<p><img src="../../images/rpthermo.png" alt="This image describe the process of computing thermodynamics values of a pathway, to assess whether a pathway is favorable towards target production in physiological conditions. rpThermo tool takes as input the output of rpFBA, which corresponds to the pathway to be analyzed (as an SBML file). rpThermo relies on eQuilibrator libraries to calculate the formation energy of compounds. The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients). From this, the thermodynamic of a pathway is estimated by combining the Gibbs energy of all reactions taking part in it. The individual contribution of reactions to the final pathway thermodynamic is weighted using a linear equation system, to take into consideration of the relative needs of intermediate compounds across the pathway. For the record, a pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target." loading="lazy" /></p>
+
+<p>Secondly, we will use the <em>Thermo</em> tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-thermodynamics-values-for-each-pathway-using-rpthermo-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute thermodynamics values for each pathway using rpThermo tool</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1"><strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input File”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_fba</code> (output of <strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The tool takes as input pathways in SBML format and returns annotated pathways (with thermodynamics information for each reaction) in SBML format too.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is the thermodynamic score attributed to the reaction with the following <em>EC (Enzyme Commission) number</em> <em>2.5.1.29</em> for <code class="language-plaintext highlighter-rouge">rp_001_0001</code> pathway ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>View the SBML rp_001_0001 file and search the reaction ID <code class="language-plaintext highlighter-rouge">2.5.1.29</code> contained in <code class="language-plaintext highlighter-rouge">&lt;listOfReactions&gt;</code>. The corresponding value is indicated in <code class="language-plaintext highlighter-rouge">thermo_dGm_prime</code> field : <code class="language-plaintext highlighter-rouge">-242.348</code>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="compute-the-global-score-of-pathways">Compute the global score of pathways</h2>
+
+<p>The <em>Pathway Score</em> tool provides a global score for a given pathway previously annotated by the <em>Flux Balance Analysis</em> and <em>Thermo</em> tools. This score is computed by a machine learning (ML) model (cf. Machine Learning Global Scoring in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>). The model takes as input features describing the pathway (thermodynamic feasibility, target flux with fixed biomass, length) and the reactions within the pathway (reaction SMARTS, Gibbs free energy, enzyme availability score) and prints out the probability for the pathway to be a valid pathway. The ML model has been trained on literature data (cf. section Benchmarking with literature data in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) and by a validation trial (cf. section Benchmarking by expert validation trial in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-the-global-score-using-the-pathway-score-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute the global score using the <em>Pathway Score</em> tool</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1"><strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathway (rpSBML)”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_thermo</code> (output of <strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>This tool will output a new annotated SBML file representing the pathway, containing the <code class="language-plaintext highlighter-rouge">global_score</code> annotation.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is the computed global score for the <code class="language-plaintext highlighter-rouge">rp_001_0001</code> pathway ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>View the SBML file <code class="language-plaintext highlighter-rouge">rp_001_0001</code> and search for <code class="language-plaintext highlighter-rouge">global_score</code> : value=<code class="language-plaintext highlighter-rouge">0.975147980451584</code>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="rank-annotated-pathways">Rank annotated pathways</h2>
+
+<p>Finally, <em>Rank Pathways</em> ranks the previous set of heterologous pathways, based on their global score, to reveal what are the most likely pathways to produce the target molecule (here it is <em>lycopene</em>) in a given organism of interest (<em>E. coli</em> in this tutorial).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-rank-annotated-pathways-using-rpranker-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank annotated pathways using rpRanker tool</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1"><strong>Rank Pathways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathways”</em>: <code class="language-plaintext highlighter-rouge">scored_pathway</code> (output of <strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>This tool will output a CSV file which contains the pathway IDs and their corresponding global score.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What are the 3 top-ranked pathways ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li><code class="language-plaintext highlighter-rouge">002_0011</code>, <code class="language-plaintext highlighter-rouge">001_0011</code> ,<code class="language-plaintext highlighter-rouge">002_0006</code>.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></h1>
+
+<p>In this section, you can run the Pathway Analysis <span class="notranslate">Workflow</span> more easily and fastly following these instructions:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-execute-the-entire-workflow-in-one-go"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Execute the entire <span class="notranslate">workflow</span> in one go.</h3>
+
+  <ol>
+    <li>
+      <p>Import your <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong> by uploading the <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga"><strong><span class="notranslate">workflow</span> file</strong></a>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span></h3>  <ul>  <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>  <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>  <li>Provide your <span class="notranslate">workflow</span>    <ul>      <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>      <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>    </ul>  </li>  <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li></ul></blockquote>
+    </li>
+    <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></li>
+    <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>
+    <li>Provide the <span class="notranslate">workflow</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Heterologous pathways”:</em> Select <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> (Input dataset collection) from your current history.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Chassis where to produce target from”</em>: Select <code class="language-plaintext highlighter-rouge">SBML_Model_iML1515.xml</code> (Input dataset) from your current history.</li>
+        <li><em>“Cell compartment ID”</em>: Enter value <code class="language-plaintext highlighter-rouge">c</code>.</li>
+        <li><em>“biomass reaction ID”</em>: Specify the biomass reaction ID that will be restricted in the “fraction” simulation type <code class="language-plaintext highlighter-rouge">R_BIOMASS_Ec_iML1515_core_75p37M</code>.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>All the outputs will be automatically generated and identical to the previous ones.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>To select the best pathways for producing the lycopene in <em>E. coli</em>, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis <span class="notranslate">workflow</span>.</p>
+
+<p><img src="../../images/pathway_analysis_scheme.png" alt="This scheme represents the pathway analysis workflow enabling the identification of the best pathways for producing a molecule of interest. To do that the workflow takes as input the collection of pathways to be scored and the metabolic model of the chassis (all files are SBMLs). Iteratively, each pathway is merged with the chassis model, and several metrics are evaluated such as the target production flux (using the rpFBA tool) and the thermodynamics of the pathway (using the rpThermo tool). A global score of each pathway combining these metrics with others is computed using a machine learning method (with the rpScore tool). Finally, the pathways are ranked from best to worst according to their global score (using the rpRanker tool). During the workflow, all metrics are stored as SBML annotations. The final output is a CSV file which contains the pathway IDs and their corresponding global score." loading="lazy" /></p>
+
+
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/synthetic-biology/faqs/">FAQ page for the Synthetic Biology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Flamholz_2011">Flamholz, A., E. Noor, A. Bar-Even, and R. Milo, 2011 <b>eQuilibrator–the biochemical thermodynamics calculator</b>. Nucleic Acids Research 40: D770–D775. <a href="https://doi.org/10.1093/nar/gkr874">10.1093/nar/gkr874</a></li>
+<li id="Ebrahim2013">Ebrahim, A., J. A. Lerman, B. O. Palsson, and D. R. Hyduke, 2013 <b>COBRApy: COnstraints-Based Reconstruction and Analysis for Python</b>. BMC Systems Biology 7: <a href="https://doi.org/10.1186/1752-0509-7-74">10.1186/1752-0509-7-74</a></li>
+<li id="Hrisson2022">Hérisson, J., T. Duigou, M. du Lac, K. Bazi-Kabbaj, M. S. Azad <i>et al.</i>, 2022 <b>Galaxy-SynBioCAD: Automated Pipeline for Synthetic Biology Design and Engineering</b>. <a href="https://doi.org/10.1101/2022.02.23.481618">10.1101/2022.02.23.481618</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Evaluating and ranking a set of pathways based on multiple metrics (Synthetic Biology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Kenza Bazi-Kabbaj, Thomas Duigou, Joan Hérisson, Guillaume Gricourt, Ioana Popescu, Jean-Loup Faulon, 2022 <b>Evaluating and ranking a set of pathways based on multiple metrics (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html">https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{synthetic-biology-pathway_analysis,
+author = "Kenza Bazi-Kabbaj and Thomas Duigou and Joan Hérisson and Guillaume Gricourt and Ioana Popescu and Jean-Loup Faulon",
+title = "Evaluating and ranking a set of pathways based on multiple metrics (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "23"
+url = "\url{https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
