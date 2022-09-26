@@ -583,7 +583,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 25, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 26, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -775,12 +775,17 @@
   <li><strong>genome:</strong> <code class="language-plaintext highlighter-rouge">Human</code></li>
   <li><strong>assembly:</strong> <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
   <li><strong>group:</strong> <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
-  <li><strong>track:</strong> <code class="language-plaintext highlighter-rouge">GENCODE v32</code></li>
+  <li><strong>track:</strong> <code class="language-plaintext highlighter-rouge">GENCODE v41</code></li>
 </ul>
 
 <p><strong>clade</strong> and <strong>genome</strong> seem pretty clear.  <strong>assembly</strong> asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting <code class="language-plaintext highlighter-rouge">hg38</code>, which is also the most recent.)  <strong>group</strong> is set to <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code> which sounds like what we want. So far so good.</p>
 
-<p><strong>track</strong> has a bewildering list of options. UCSC suggests <code class="language-plaintext highlighter-rouge">GENCODE v32</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
+<p><strong>track</strong> has a bewildering list of options. UCSC suggests <code class="language-plaintext highlighter-rouge">GENCODE v41</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
+
+<blockquote class="warning">
+  <h3 id="warning-all-gencode-is-different-from-gencode"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> ALL GENCODE is different from GENCODE</h3>
+  <p><strong>Warning</strong> The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong.</p>
+</blockquote>
 
 <blockquote class="quote">
   <p>The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence…</p>
@@ -812,7 +817,7 @@
 
 <p>The <strong>track</strong> option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren’t even genes or gene predictions.)</p>
 
-<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="language-plaintext highlighter-rouge">GENCODE V32</code>.</p>
+<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="language-plaintext highlighter-rouge">GENCODE V41</code>.</p>
 
 <p>So far we haven’t changed <em>anything</em> from the defaults.  Lets change something.  The default  <strong>region</strong> is the whole genome, which can be done, but it’s a lot of information. For this exercise lets use just one (small) chromosome.</p>
 
@@ -1367,7 +1372,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
 <p>And your new history appears in the history panel with the copied <em>genes</em> dataset.  What we need is <em>exons.</em> How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.</p>
 
-<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v32, and just <code class="language-plaintext highlighter-rouge">chr22</code>. The second form is what changes.  Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
+<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v41, and just <code class="language-plaintext highlighter-rouge">chr22</code>. The second form is what changes.  Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
 
 <p>The second method is to use the <strong>Gene <span class="notranslate">BED</span> To Exon/Intron/Codon <span class="notranslate">BED</span> expander</strong> tool in the <strong>Operate on Genomic Intervals</strong> toolbox to extract the exon information from the genes <span class="notranslate">BED</span> file we already have. (<em>Of course!</em> you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)</p>
 
@@ -1527,8 +1532,8 @@ In humans (and in all plants and animals) the molecules that are built from gene
 author = "Dave Clements and Cristóbal Gallardo",
 title = "Introduction to Genomics and Galaxy (Galaxy Training Materials)",
 year = "2022",
-month = "02",
-day = "25"
+month = "09",
+day = "26"
 url = "\url{https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
