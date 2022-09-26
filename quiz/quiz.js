@@ -430,7 +430,7 @@ function showQuestionText(data){
 		var e = document.getElementById(`answer-${data.id}-submit`);
 		console.log(e)
 		e.addEventListener('click', function () {
-			var answer = document.getElementById(`answer-${data.id}-submit`).value
+			var answer = document.getElementById(`answer-${data.id}-text`).value
 			safeSend({
 				"event": "answer",
 				"question": data.id,
@@ -507,6 +507,7 @@ function showResults(){
 	var show = '<h1>Results</h1>';
 	var counts = {}
 	var final_count = 0;
+	if(slide.answer === undefined){ slide.answers = []; }
 	Object.keys(slide.results).forEach(connId => {
 		var tmp = slide.results[connId];
 
@@ -521,6 +522,7 @@ function showResults(){
 		asdf.forEach(theirAnswer => {
 			var answerKey = "";
 			if(slide.type !== 'free-text'){
+				console.log('showResults');
 				if(theirAnswer < 0){
 					answerKey = "SOMETHING ODD";
 				} else {
@@ -529,7 +531,8 @@ function showResults(){
 				}
 			} else {
 				// We'll give everyone a pass.
-				answerKey = slide.correct
+				slide.answers.push(theirAnswer);
+				answerKey = null;
 				final_count += 1;
 			}
 
@@ -549,13 +552,9 @@ function showResults(){
 	console.log(players)
 
 	show += '<table class="table table-striped">'
-	if(slide.type === 'free-text'){
-			show += `<tr class="correct-answer"><td>${slide.correct}</td> <td>n/a</td></tr>`
-	} else {
-		slide.answers.forEach(x => {
-			show += `<tr ${isCorrectAnswer(x) ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
-		})
-	}
+	slide.answers.forEach(x => {
+		show += `<tr ${isCorrectAnswer(x) ? 'class="correct-answer"' : ''}><td>${x}</td> <td><div class="bar-chart" style="width: ${25 * (counts[x] || 0) / final_count}em">${counts[x] || 0}</div></td></tr>`
+	})
 	show += '</table>'
 	questionArea.innerHTML = show;
 }
@@ -685,7 +684,10 @@ function handleCurrentSlide(){
 				haveBroadcast = true;
 				broadcast(studentSlide)
 				if(currentSlide.answers !== null) {
-					document.getElementsByClassName("answer-group")[0].style.display = '';
+					var e = document.getElementsByClassName("answer-group")[0]
+					if(e !== undefined){
+						e.style.display = '';
+					}
 				}
 			}
 		} else {
