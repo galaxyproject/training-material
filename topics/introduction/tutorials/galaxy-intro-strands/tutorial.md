@@ -158,7 +158,9 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 
 **track** has a bewildering list of options. UCSC suggests `GENCODE v41`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
-**Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong. 
+> ### {% icon warning %} ALL GENCODE is different from GENCODE
+> **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong. 
+{: .warning}
 
 >The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence...
 {: .quote}
