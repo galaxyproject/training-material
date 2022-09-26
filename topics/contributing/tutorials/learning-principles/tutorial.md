@@ -513,7 +513,7 @@ Working memory | Make room in the working memory (chunking and extraneous cognit
 Mental model | Help learners to build and enrich them
 Dreyfuss model for skill acquisition | Differences between novices and experts. Expert blind spot
 
-#  learning
+# Evidence-based research on how learning works learning
 
 > ### {% icon details %} Resources to learn more about evidence-based research on how learning works
 >
@@ -530,7 +530,7 @@ Dreyfuss model for skill acquisition | Differences between novices and experts. 
 >    The book is organised around seven learning principles. Each principle is based on research evidence from the science of learning and the science of instruction.
 >
 > - ["Small Teaching"](https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555) ({% cite smallTeaching2021 %})
-
+>
 >    Cognitive psychologists, neuroscientists, and biologists all have produced a revealing body of research over the past several decades on how human beings learn, but often translating these findings into the classroom is overwhelming for busy instructors.
 >
 >    "Small Teaching" bridges the gap between research and practice  by providing a fully developed strategy for making deliberate, structured, and incremental steps towards tuning into how students are hardwired to learn.
