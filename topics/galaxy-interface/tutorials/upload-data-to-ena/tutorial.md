@@ -36,6 +36,7 @@ tags:
   - covid19
 contributors:
 - roncoronimiguel
+- bedroesb
 
 ---
 
