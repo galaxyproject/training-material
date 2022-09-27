@@ -673,8 +673,12 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 >    -  fill *(--root-type)* with the name of the cell type that you want to start ordering from
 > 2. **Cell ID as root cell**
 >    -  fill *(--root-cells)* with the cell ID that you want to start ordering from
-> 3. **Starting principal points**
->    -  fill *(--root-pr-nodes)* with the root_pr_node (you can plot them in the same way as branch points) that corresponds to the root cells 
+> {% comment %} 
+>   3. **Starting principal points**
+>     - repeat the plotting step, find the parameter *label_principal_points* and set its value to {% icon history-share %} `Yes`
+>     - have a look at the plot and note which principal point best corresponds to the root cells
+>     - fill *(--root-pr-nodes)* with the noted value from *label_principal_points* 
+> {% endcomment %}
 {: .tip}
 
 Now we can see how all our hard work has come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn't it beautiful? But wait, don't be too enthusiastic - why on earth DP-M1 group branches out? We didn't expect that... What could that mean?
