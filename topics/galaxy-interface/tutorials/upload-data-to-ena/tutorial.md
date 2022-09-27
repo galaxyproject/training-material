@@ -189,7 +189,7 @@ For this tutorial, we provide you with a pre-filled template and encourage you t
 >
 >    > ### {% icon warning %} Paired collection names
 >    > It is very important that the paired collection names contain no suffix (e.g. _1, _R1, etc.) or file extensions (.fastq, .fastq.gz). The submission tool will add these at runtime and leaving them in the paired collection names will cause a mismatch with the filenames in the metadata table.
->
+>    {: .warning }
 >    - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
 >    - Give your collection a name
 >    - Click *Create Collection*
