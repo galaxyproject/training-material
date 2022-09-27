@@ -139,7 +139,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 >    - *"Select the sequencing platform used"*: `Oxford Nanopore`
 >    - *"Instrument model"*: `minION`
 >    - *"Runs executed within this experiment"*
->      - *"File(s) associated with this run"*: `SRR10902284_ONT.fq.gz`
+>      - {% icon param-files %} *"File(s) associated with this run"*: `SRR10902284_ONT.fq.gz`
 >    - *"Affiliation center"*: your institution
 >
 {: .hands_on}
