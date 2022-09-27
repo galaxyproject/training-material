@@ -47,7 +47,7 @@ contributors:
 <!-- This is a comment. -->
 
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
-Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic [Maier 2021]{% cite Maier2021 %}.
+Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic ({% cite Maier2021 %}).
 
 The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
