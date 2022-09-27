@@ -42,6 +42,8 @@ requirements:
       - ansible
   - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+abbreviations:
+    DVCS: Distributed Version Control System
 ---
 
 > ### {% icon warning %} Warning: 22.05 not yet released
@@ -1025,7 +1027,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
 >    {: .tip}
 >
->    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public <abbr title="distributed version control system">DVCS</abbr>) now that you've got the secrets safely encrypted.
+>    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public {DVCS}) now that you've got the secrets safely encrypted.
 >
 >    {% raw %}
 >    ```diff

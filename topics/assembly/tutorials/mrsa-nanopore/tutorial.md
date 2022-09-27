@@ -46,6 +46,9 @@ follow_up_training:
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
+
+abbreviations:
+ SVs: Structural Variations
 ---
 
 
@@ -216,7 +219,7 @@ Before | After
 > > 3. Coverage is a measure of, on average, how many reads 'cover' a single base in the genome. If you divide the total reads, by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.
 > > 4. Before $$ \frac{621,945,741}{2,900,000} = 214.4$$ and after $$ \frac{609,657,642}{2,900,000} = 210.2$$. This is *not* a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.
 > >
-> > Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large <abbr title="structural variations">SVs</abbr> rather than having high quality reads and base-level variation analyses.
+> > Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large {SVs} rather than having high quality reads and base-level variation analyses.
 > {: .solution}
 {: .question}
 

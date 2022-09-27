@@ -41,6 +41,8 @@ requirements:
       - annotation-with-prokka
 
 subtopic: prokaryote
+abbreviations:
+  OGS: Official Gene Set
 ---
 
 > ### {% icon warning %} Only works on UseGalaxy.eu
@@ -72,7 +74,7 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 - A set of prior gene predictions or other genomic feature predictions
 - The output of a bioinformatics analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
-- If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
+- If you are not doing a *de novo* annotation, then a previous released {OGS}
 
 In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655), and we will visualise this data and use it to make some annotations in order to familiarise you with the process.
 

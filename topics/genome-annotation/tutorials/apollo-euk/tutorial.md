@@ -40,6 +40,8 @@ requirements:
 
 subtopic: eukaryote
 priority: 6
+abbreviations:
+  OGS: Official Gene Set
 ---
 
 > ### {% icon warning %} Only works on UseGalaxy.eu
@@ -84,7 +86,7 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 - A set of prior gene predictions or other genomic feature predictions
 - The output of a bioinformatics analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
-- If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
+- If you are not doing a *de novo* annotation, then a previous released {OGS}.
 
 In this tutorial we use the same data as in the [Funannotate](../funannotate/tutorial.html) tutorial: the genome sequence, the annotation produced by **Funannotate** {% icon tool %}, and the mapping of RNA-Seq data along the genome using **RNA star** {% icon tool %}. We will visualise this data and use it to make some manual annotations in order to familiarise you with the process.
 
