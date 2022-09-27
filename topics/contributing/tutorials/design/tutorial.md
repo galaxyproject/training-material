@@ -223,13 +223,13 @@ and courses.
 
 > ### {% icon hands_on %} Define audience and teaching goal - _{% icon time %} 10 min - Silent reflection_
 >
-> 1. Take the topic you choose before
+> 1. Take the topic you chose before
 > 2. Define teaching objectives
 >
 >    Describe your goals and intentions as instructor:
 >    - stakeholders
 >    - potential professions
->    - desired performance an/or competences of course completers
+>    - desired performance and/or competences of course completers
 >    - duration
 >
 {: .hands_on}
