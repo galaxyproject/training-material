@@ -183,7 +183,7 @@ Sometimes certain functionalities require a specific indication of where the dat
 > >
 > > 1. Our extracted gene annotations file! Either by clicking on the eye icon {% icon solution %} or having a look at the small preview window. 
 > > 2. In our dataset the gene names are stored in a column called ‘Symbol’ - we need to change that!
-> > ![The dataset in the history has a preview window showing the columns of the extracted gene annotation with each gene as a row and the metadata - index, ID, symbol - as the column names](/workspace/training-material/topics/transcriptomics/images/scrna-casestudy-monocle/window_in_history.png "Preview window in the history")
+> > ![The dataset in the history has a preview window showing the columns of the extracted gene annotation with each gene as a row and the metadata - index, ID, symbol - as the column names](../../images/scrna-casestudy-monocle/window_in_history.png "Preview window in the history")
 > >
 > {: .solution}
 >
@@ -506,15 +506,17 @@ Monocle also divides the cells into larger, more well separated groups called pa
 > ![partition q-value](../../images/scrna-casestudy-monocle/partition_qval.png "q-value threshold affecting the span of partition. Note that 0.05 is the default value.")
 >
 {: .tip}
-> ### {% icon tip %} If the granularity of clusters is not satisfying...
+> ### {% icon tip %} If the granularity of clusters does not make sense...
+>
 >
 > When using standard igraph louvain clustering, the value of `resolution` parameter is by default set to `NULL`, which means that it is determined automatically. If you are not satisfied with the results of the standard igraph louvain clustering, you may set the `resolution` value manually, and thus specify the granularity of the clustering. 
 > ![clustering resolution](../../images/scrna-casestudy-monocle/clusters_resolution.png "Different granularity of clusters based on the resolution set automatically and manually.")
 {: .tip}
 
 > ### {% icon warning %} Ambiguous clusters!
-> As mentioned, standard igraph louvain clustering determines the resolution automatically, unless the specific value is provided by the user. Therefore, it sometimes returns slightly different outputs. To ensure that your clusters are reproducible, you might want to pass a certain value to the `resolution` parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility. 
+> As mentioned above, standard igraph louvain clustering determines the resolution automatically, unless the specific value is provided by the user. Therefore, it sometimes returns slightly different outputs. To ensure that your clusters are reproducible, you might want to pass a certain value to the `resolution` parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility. 
 > ![igraph louvain clustering](../../images/scrna-casestudy-monocle/igraph.png "Standard igraph louvain clustering giving different results despite the same input becasue of the automatic determination of resolution vaule.")
+>
 > 
 {: .warning}
 
@@ -564,7 +566,9 @@ If we compare the annotated cell types and the clusters that were just formed, w
 > ### {% icon tip %} Purity of the sample - Hba-a1 gene
 >
 > The Hba-a1 gene creates hemoglobin which is found in red blood cells. This is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms a a clearly visible, distinct, little branch. Hemoglobin should NOT be found in T-cells. However, if you remember, the gene was found to be expressed in the previous Scanpy tutorial (see the image below). That marker appeared throughout the entire sample in low numbers, suggesting some background contamination of red blood cell debris in the cell samples during library generation. Unlike Scanpy, Monocle algorithms allowed us to gather the cells expressing that gene into a distinct group! That's great!
+>
 > ![Hemoglobin](../../images/scrna-casestudy-monocle/hb.png "Hemoglobin across clusters - comparision between Monocle and Scanpy")
+>
 {: .question}
 
 ## Top marker genes 
