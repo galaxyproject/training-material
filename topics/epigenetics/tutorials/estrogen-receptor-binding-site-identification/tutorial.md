@@ -321,7 +321,7 @@ The plotFingerprint tool generates a fingerprint plot. You need to intepret it t
 > {: .solution }
 {: .question}
 
-> <hands-on-title>(Optional) Hands-on: IP strength estimation (other samples)</hands-on-title>
+> <hands-on-title>(Optional) IP strength estimation (other samples)</hands-on-title>
 >
 > 1. Run the same analysis on data of the 3 other patients
 {: .hands_on}

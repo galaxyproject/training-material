@@ -104,7 +104,7 @@ add more advanced features.
 
 We're now ready to add a first tool and connect it to our input dataset.
 
-> <hands-on-title>Add **tac reverse a file (reverse cat)** {% icon tool %} to your workflow</hands-on-title>
+> <hands-on-title>Add <b>tac reverse a file (reverse cat)</b> to your workflow</hands-on-title>
 >
 > 1. Find **tac reverse a file (reverse cat)** {% icon tool %} in the tool panel and click on it
 > 2. A new box labeled **tac** {% icon tool %} will appear in the center panel
@@ -147,7 +147,7 @@ an authentic workflow experience. From now on we'll contract steps 1 to 4 and
 just mention the tool and parameters to insert, since the procedure is always
 the same.
 
-> <hands-on-title>Add **Select first lines from a dataset** {% icon tool %} to your workflow</hands-on-title>
+> <hands-on-title>Add <b>Select first lines from a dataset</b> to your workflow</hands-on-title>
 >
 > 1. **Select first lines from a dataset** {% icon tool %}
 >    - *Label*: `Select first lines`

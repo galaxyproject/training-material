@@ -73,7 +73,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 # Statistical analysis with **MSstats**
 
-> <hands-on-title>Performing statistical analysis using **MSstats** and the tabular output from **PyProphet export**</hands-on-title>
+> <hands-on-title>Performing statistical analysis using <b>MSstats</b> and the tabular output from <b>PyProphet export</b></hands-on-title>
 >
 > 1. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %} with the following parameters:
 >    - *"input source"*: `OpenSWATH`
@@ -157,7 +157,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 # Statistical analysis with **MSstats**
 
-> <hands-on-title>Performing statistical analysis using **MSstats** and the msstats_input from **PyProphet export**</hands-on-title>
+> <hands-on-title>Performing statistical analysis using <b>MSstats</b> and the msstats_input from <b>PyProphet export</b></hands-on-title>
 >
 > 1. {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %} with the following parameters:
 >    - *"input source"*: `MStats 10 column format`

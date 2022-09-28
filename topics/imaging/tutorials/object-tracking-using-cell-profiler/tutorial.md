@@ -39,7 +39,7 @@ Tracking is done by first segmenting objects then linking objects between consec
 > It is expected that you are already familiar with the Galaxy interface and the workflow editor. If this is not the case, we recommend you to complete the requirements listed at the start of this tutorial.
 {: .tip}
 
-> <warning-title>**Important information: CellProfiler in Galaxy**</warning-title>
+> <warning-title>Important information: CellProfiler in Galaxy</warning-title>
 > The Galaxy {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %}  tool takes two inputs: a CellProfiler pipeline and an image collection.
 > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:
 >  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.

@@ -1367,7 +1367,7 @@ So with that said, let's go with option three, duplicate our fastqc rule to have
 
 Ok! That's hopefully went successfully. Run your pipeline to check.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Dry-run snakemake
 >    > <code-in-title>CLI</code-in-title>

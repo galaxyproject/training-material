@@ -29,7 +29,7 @@ module Jekyll
       end
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>([^<]*)<\/\s*\1-title>/) {
+      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*)<\/\s*\1-title>/) {
         box_type = $1
         title = $2
         count += 1

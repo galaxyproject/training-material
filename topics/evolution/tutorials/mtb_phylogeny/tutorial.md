@@ -58,7 +58,7 @@ As branch lengths reflect evolutionary distances, they can also be used to ident
 ![Phylogeny](./images/eldholm2016_tree.png "Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016."){:width="200"}
 
 
-> <comment-title>Phylogenetics with *Mycobacterium tuberculosis*</comment-title>
+> <comment-title>Phylogenetics with <i>Mycobacterium tuberculosis</i></comment-title>
 >
 > Phylogenetics with MTB has some particularities rarely encountered with other organisms.
 >

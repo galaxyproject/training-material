@@ -223,7 +223,7 @@ During sequencing, errors are introduced, such as incorrect nucleotides being ca
 
 Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the ["Quality control" tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and Cutadapt ({% cite marcel2011cutadapt %}).
 
-> <hands-on-title>Check raw reads with **FastQC**</hands-on-title>
+> <hands-on-title>Check raw reads with <b>FastQC</b></hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
@@ -253,7 +253,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC ({% cite ewels2016multiqc %}) that can summarise QC information for multiple samples into a single report. We'll generate a few MultiQC outputs in this tutorial so we'll add name tags so we can differentiate them.
 
-> <hands-on-title>Aggregate FastQC reports with **MultiQC**</hands-on-title>
+> <hands-on-title>Aggregate FastQC reports with <b>MultiQC</b></hands-on-title>
 >
 > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters to aggregate the FastQC reports
 >      - In *"Results"*
@@ -303,7 +303,7 @@ The Cutadapt tool Help section provides the sequence we can use to trim this sta
 
 ## Trim reads
 
-> <hands-on-title>Trim reads with **Cutadapt**</hands-on-title>
+> <hands-on-title>Trim reads with <b>Cutadapt</b></hands-on-title>
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0) %}
 >    - {% icon param-select %} *"Single-end or Paired-end reads?"*: `Single-end`
@@ -327,7 +327,7 @@ We can take a look at the reads again now that they've been trimmed.
 
 ## Trimmed reads QC
 
-> <hands-on-title>QC of trimmed reads with **FastQC**</hands-on-title>
+> <hands-on-title>QC of trimmed reads with <b>FastQC</b></hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
 >    - {% icon param-collection %} *"Short read data from your current history"*: `RawData` (output of **Cutadapt** {% icon tool %})
@@ -356,7 +356,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 
 ## Map reads to reference genome
 
-> <hands-on-title>Map reads to reference with **HISAT2**</hands-on-title>
+> <hands-on-title>Map reads to reference with <b>HISAT2</b></hands-on-title>
 >
 > 1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0) %} with the following parameters:
 >    - {% icon param-select %} *"Source for the reference genome"*: `Use a built-in genome`
@@ -413,7 +413,7 @@ The alignment produces a set of BAM files, where each file contains the read ali
 
 ## Count reads mapped to genes
 
-> <hands-on-title>Count reads mapped to genes with **featureCounts**</hands-on-title>
+> <hands-on-title>Count reads mapped to genes with <b>featureCounts</b></hands-on-title>
 >
 > 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Alignment file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
@@ -458,7 +458,7 @@ The counts for the samples are output as tabular files. Take a look at one. The 
 
 The counts files are currently in the format of one file per sample. However, it is often convenient to have a count matrix. A count matrix is a single table containing the counts for all samples, with the genes in rows and the samples in columns. The counts files are all within a collection so we can use the Galaxy **Column Join on multiple datasets** tool to easily create a count matrix from the single counts files.
 
-> <hands-on-title>Create count matrix with **Column Join on multiple datasets**</hands-on-title>
+> <hands-on-title>Create count matrix with <b>Column Join on multiple datasets</b></hands-on-title>
 >
 > 1. {% tool [Column Join on multiple datasets](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >    - {% icon param-collection %} *"Tabular files"*: `Counts` (output of **featureCounts** {% icon tool %})
@@ -510,7 +510,7 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 
 As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to "guess" the strandness, as explained in the [RNA-seq ref-based tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}). This is done through comparing the "strandness of reads" with the "strandness of transcripts". For this tool, and many of the other RSeQC ({% cite wang2012rseqc %}) tools, a reference bed file of genes (`reference genes`) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download` (and rename to `reference genes`) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the [Peaks to Genes tutorial]({% link topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.md %}). Or the **Convert GTF to BED12** tool can be used to convert a GTF into a BED file.
 
-> <hands-on-title>Check strandness with **Infer Experiment**</hands-on-title>
+> <hands-on-title>Check strandness with <b>Infer Experiment</b></hands-on-title>
 >
 > 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
@@ -544,7 +544,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 Duplicate reads are usually kept in RNA-seq differential expression analysis as they can come from highly-expressed genes but it is still a good metric to check. A high percentage of duplicates can indicate a problem with the sample, for example, PCR amplification of a low complexity library (not many transcripts) due to not enough RNA used as input. FastQC gives us an idea of duplicates in the reads before mapping (note that it just takes a sample of the data). We can assess the numbers of duplicates in all mapped reads using the **Picard MarkDuplicates** tool. Picard considers duplicates to be reads that map to the same location, based on the start position of where the read maps. In general, we consider normal to obtain up to 50% of duplication.
 
-> <hands-on-title>Check duplicate reads with **MarkDuplicates**</hands-on-title>
+> <hands-on-title>Check duplicate reads with <b>MarkDuplicates</b></hands-on-title>
 >
 > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
 >    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
@@ -576,7 +576,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 You can check the numbers of reads mapped to each chromosome with the **Samtools IdxStats** tool. This can help assess the sample quality, for example, if there is an excess of mitochondrial contamination. It could also help to check the sex of the sample through the numbers of reads mapping to X/Y or to see if any chromosomes have highly expressed genes.
 
-> <hands-on-title>Count reads mapping to each chromosome with **IdxStats**</hands-on-title>
+> <hands-on-title>Count reads mapping to each chromosome with <b>IdxStats</b></hands-on-title>
 >
 > 1. {% tool [IdxStats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4) %} with the following parameters:
 >    - {% icon param-collection %} *"BAM file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
@@ -611,7 +611,7 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 
 The coverage of reads along gene bodies can be assessed to check if there is any bias in coverage. For example, a bias towards the 3' end of genes could indicate degradation of the RNA. Alternatively, a 3' bias could indicate that the data is from a 3' assay (e.g. oligodT-primed, 3'RNA-seq). You can use the RSeQC **Gene Body Coverage (BAM)** tool to assess gene body coverage in the BAM files.
 
-> <hands-on-title>Check coverage of genes with **Gene Body Coverage (BAM)**</hands-on-title>
+> <hands-on-title>Check coverage of genes with <b>Gene Body Coverage (BAM)</b></hands-on-title>
 >
 > 1. {% tool [Gene Body Coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3) %} with the following parameters:
 >    - *"Run each sample separately, or combine mutiple samples into one plot"*: `Run each sample separately`
@@ -651,7 +651,7 @@ The plot below from the RSeQC website shows what samples with 3'biased coverage 
 
 We can also check the distribution of reads across known gene features, such as exons (CDS, 5'UTR, 3'UTR), introns and intergenic regions. In RNA-seq we expect most reads to map to exons rather than introns or intergenic regions. It is also the reads mapped to exons that will be counted so it is good to check what proportions of reads have mapped to those. High numbers of reads mapping to intergenic regions could indicate the presence of DNA contamination.
 
-> <hands-on-title>Check distribution of reads with **Read Distribution**</hands-on-title>
+> <hands-on-title>Check distribution of reads with <b>Read Distribution</b></hands-on-title>
 >
 > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input .bam/.sam file"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})

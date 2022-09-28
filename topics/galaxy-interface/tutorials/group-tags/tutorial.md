@@ -182,7 +182,7 @@ The tool interface will prompt you with the group tags that are available for yo
 
 ![Group tags in the tool UI](../../images/group-tags/tool-ui.png)
 
-> <hands-on-title>Running **DESeq2** with group tags</hands-on-title>
+> <hands-on-title>Running <b>DESeq2</b> with group tags</hands-on-title>
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`

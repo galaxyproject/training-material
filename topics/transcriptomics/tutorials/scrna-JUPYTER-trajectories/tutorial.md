@@ -176,7 +176,7 @@ Cool! Now you know how to create a file! Helpfully, however, we have created one
 >
 {: .hands_on}
 
-> <warning-title>You should {% icon galaxy-save %} **Save** frequently!</warning-title>
+> <warning-title>You should <b>Save</b> frequently!</warning-title>
 > This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.
 {: .warning}
 

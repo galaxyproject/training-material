@@ -55,7 +55,7 @@ Of note, a recent study focusing on the area of clinical pediatric neurology
 indicates that the costs of exome sequencing may actually not be higher even
 today than the costs of conventional genetic testing ([Vissers et al., 2017](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5589982/)).
 
-> <details-title>Exome sequencing *vs* whole-genome sequencing</details-title>
+> <details-title>Exome sequencing <i>vs</i> whole-genome sequencing</details-title>
 >
 > In principle, the steps illustrated in this tutorial are suitable also for
 > the analysis of whole-genome sequencing (WGS) data. At comparable mean
@@ -578,7 +578,7 @@ This will result in three new datasets, one for each sample in the analysis.
 > detect structural variants in this tutorial) instead of just filtering for
 > mapped reads with a mapped mate, you could run the alternative:
 >
-> > <hands-on-title>Hands-on:</hands-on-title>
+> > <hands-on-title></hands-on-title>
 > >
 > > 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %}:
 > >   - {% icon param-files %} *"SAM or BAM file to filter"*: all 3 mapped
@@ -1155,7 +1155,7 @@ you think could plausibly be causative for the child's disease.
 >          `chrom, start, ref, alt, impact, gene, clinvar_sig,
 >          clinvar_disease_name, clinvar_gene_phenotype, rs_ids`
 >
->    > <comment-title>Variant- *vs* gene-centric ClinVar information</comment-title>
+>    > <comment-title>Variant- <i>vs</i> gene-centric ClinVar information</comment-title>
 >    > Most annotation data offered by GEMINI is variant-centric, *i.e.*,
 >    > annotations reported for a variant are specific to this exact variant.
 >    > A few annotation sources, however, also provide gene-centric

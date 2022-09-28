@@ -223,7 +223,7 @@ produced, the transcriptomic alignment positions are first converted to their co
 merging is also done on reads defining which parts of the reads are mapping that indicates potential interacting segments
 of read.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **ChiRA merge** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input BED file of alignments"*: `ChiRA aligned BED` (output of **ChiRA map** {% icon tool %})

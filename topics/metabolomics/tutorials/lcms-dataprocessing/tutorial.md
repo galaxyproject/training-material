@@ -160,7 +160,7 @@ Then we may want to exclude ions that may be found at theses specific retention 
 A quick check at the variableMetadata reveals that a retention time column is available ("rt") with values in minutes.
 We can then use this column to filter the dataset. 
 
-> <hands-on-title>Using **Generic_filter** to filter ions found at specific retention times</hands-on-title>
+> <hands-on-title>Using <b>Generic_filter</b> to filter ions found at specific retention times</hands-on-title>
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: the `dataMatrix` file
@@ -234,7 +234,7 @@ In this tutorial, we will choose to calculate a mean fold change between blanks 
 
 The mean fold change ("fold") for each ion can be calculated using the **Intensity Check** {% icon tool %} tool. 
 
-> <hands-on-title>Using **Intensity Check** to generate the information needed to filter</hands-on-title>
+> <hands-on-title>Using <b>Intensity Check</b> to generate the information needed to filter</hands-on-title>
 >
 > 1. {% tool [Intensity Check](toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `GF_dataMatrix` (output of the previous **Generic Filter** {% icon tool %} job)
@@ -284,7 +284,7 @@ Here we will use a threshold value of "4". What we want is to remove ions having
 meaning that the mean values of biological samples' intensities for theses ions are not sufficiently high compared to blanks to be considered
 to be resulting from relevant compounds. 
 
-> <hands-on-title>Using **Generic_filter** to filter ions with insuffisant mean contrast with blank samples</hands-on-title>
+> <hands-on-title>Using <b>Generic_filter</b> to filter ions with insuffisant mean contrast with blank samples</hands-on-title>
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `GF_dataMatrix` (output of the previous **Generic Filter** {% icon tool %} job)
@@ -334,7 +334,7 @@ Thus, there are some assumptions we can begin to make, that we can try to check 
 
 Here, we will use a tool that is called **Quality Metrics** to have an overview of our dataset through the generation of a pdf file containing some plots. 
 
-> <hands-on-title>Using **Quality Metrics** to get an overview of the dataset</hands-on-title>
+> <hands-on-title>Using <b>Quality Metrics</b> to get an overview of the dataset</hands-on-title>
 >
 > 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `GF_GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
@@ -370,7 +370,7 @@ In this tutorial dataset, no atypical sample is observed, so no special attentio
 Since the blank samples are of no use anymore, we can remove them from the dataset. 
 Again, this can be done running the **Generic Filter** {% icon tool %} tool, using the *sampletype* column of the sampleMetadata table. 
 
-> <hands-on-title>Using **Generic_filter** to remove blank samples from the dataset</hands-on-title>
+> <hands-on-title>Using <b>Generic_filter</b> to remove blank samples from the dataset</hands-on-title>
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `GF_GF_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
@@ -442,7 +442,7 @@ one could suppose that the groups may have something to do with it.
 Let's confirm it by performing a PCA, with the specificity to colour the sample projections according to the supposed effect: the batch information. 
 This can be done using the **Multivariate** {% icon tool %} tool. 
 
-> <hands-on-title>Using **Multivariate** to get a coloured score plot from a PCA</hands-on-title>
+> <hands-on-title>Using <b>Multivariate</b> to get a coloured score plot from a PCA</hands-on-title>
 >
 > 1. {% tool [Multivariate](toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `RT_blank_Filter_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
@@ -520,7 +520,7 @@ In this tutorial, we have all the information we need to perform the correction:
 
 We can then use the **Batch correction** {% icon tool %} tool to perform the correction. 
 
-> <hands-on-title>Using **Batch correction** to correct the data from signal drift and batch effet</hands-on-title>
+> <hands-on-title>Using <b>Batch correction</b> to correct the data from signal drift and batch effet</hands-on-title>
 >
 > 1. {% tool [Batch_correction](toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `RT_blank_Filter_dataMatrix` (output of the last **Generic Filter** {% icon tool %} job)
@@ -624,7 +624,7 @@ These two indicators are automatically calculated as long as the input datasets 
 (a *sampleType* column in the sampleMetadata file with the information of *pool* and *sample*).
 Thus, for these two cindicators the tool can be run without specific parameters to set.
 
-> <hands-on-title>Using **Quality Metrics** to compute the CV indicators</hands-on-title>
+> <hands-on-title>Using <b>Quality Metrics</b> to compute the CV indicators</hands-on-title>
 >
 > 1. {% tool [Quality Metrics](toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `BC_linear_RT_blank_Filter_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
@@ -657,7 +657,7 @@ But first, you need to determine the thresholds you want to use.
 Here we have two indicators we want to use. One is the pool CVs, the other is the ratio between pool CVs and sample CVs.
 This means that we will need to set two distinct thresholds, and to add two numerical filters in **Generic Filter** {% icon tool %}. 
 
-> <hands-on-title>Using **Generic Filter** to filter the dataset</hands-on-title>
+> <hands-on-title>Using <b>Generic Filter</b> to filter the dataset</hands-on-title>
 >
 > 1. {% tool [Generic_Filter](toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01) %} with the following parameters:
 >    - {% icon param-file %} *"Data Matrix file"*: `BC_linear_RT_blank_Filter_dataMatrix` (output of the **Batch_correction** {% icon tool %} job)
@@ -766,7 +766,7 @@ In the sampleMetadata file provided in this tutorial, you can find a column name
 one way to represent the overall concentration of urine samples. 
 Let's try to colour the PCA score plots according to that variable. For this, we will use the **Multivariate** {% icon tool %} Galaxy module.
 
-> <hands-on-title>Using **Multivariate** {% icon tool %} to visualise the two first components of a PCA</hands-on-title>
+> <hands-on-title>Using <b>Multivariate</b> to visualise the two first components of a PCA</hands-on-title>
 >
 > 1. {% tool [Multivariate](toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `Filtered_dataMatrix` (output of the last **Generic_Filter** {% icon tool %} job)
@@ -830,7 +830,7 @@ The approach of this module is to apply the normalisation operation to each samp
 It provides different normalisation strategies, some of them particularly of interest for NMR-based metabolomic datasets. 
 In our example, what we are interested in is a normalisation based on the *Osmo* variable, which is one of the possibilities provided by the module. 
 
-> <hands-on-title>Using **Normalization** {% icon tool %} to handle the total concentration effect</hands-on-title>
+> <hands-on-title>Using <b>Normalization</b> to handle the total concentration effect</hands-on-title>
 >
 > 1. {% tool [Normalization](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/normalization/normalization/1.0.7) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix of preprocessed data"*: `Filtered_dataMatrix` (output of the last **Generic_Filter** {% icon tool %} job)
@@ -861,7 +861,7 @@ This check can be conducted trying to highlight the unwanted effect the same way
 In our tutorial example we observed the *Osmo* effect on the two first components of a PCA.
 Thus, we can compute a similar PCA using the normalised intensities and see whether the two first components still cary the unwanted variability. 
 
-> <hands-on-title>Using **Multivariate** {% icon tool %} to visualise the two first components of a PCA</hands-on-title>
+> <hands-on-title>Using <b>Multivariate</b> to visualise the two first components of a PCA</hands-on-title>
 >
 > 1. {% tool [Multivariate](toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `Normalization_dataMatrix` (output of the **Normalization** {% icon tool %} job)
@@ -893,7 +893,7 @@ We could be curious and wonder whether these groups would reflect a biological s
 In the sampleMetadata we have, there is a *Group* column, supposedly representing two biological groups A and B. 
 Let's see how theses groups are projected on the final PCA we have. 
 
-> <hands-on-title>Using **Multivariate** {% icon tool %} to visualise the two first components of a PCA</hands-on-title>
+> <hands-on-title>Using <b>Multivariate</b> to visualise the two first components of a PCA</hands-on-title>
 >
 > 1. {% tool [Multivariate](toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix file"*: `Normalization_dataMatrix` (output of the **Normalization** {% icon tool %} job)

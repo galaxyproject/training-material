@@ -329,7 +329,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 >
 > If you are working with more than one species, you should follow the next steps
 >
-> > <hands-on-title>Hands-on:</hands-on-title>
+> > <hands-on-title></hands-on-title>
 > > 1. **Paste two files side by side** {% icon tool %} with the following parameters:
 > >     -  *"Paste"*: `the output` from **Merge Columns together** (with the dataset for species 1)
 > >     -  *"and"*: `the output` from **Merge Columns together** (with the dataset for species 2)
@@ -348,7 +348,7 @@ With this graph, we can see that *Pyronia tithonus* records are always around th
 >
 > If your input dataset contains information about more than one species, you can now generate a chart for the multi-species dataset:
 >
-> > <hands-on-title>Hands-on:</hands-on-title>
+> > <hands-on-title></hands-on-title>
 > > 1. Inspect and expand the output data from **flight curve** {% icon tool %}
 > > 2. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
 > > 3. Select a visualization: `line chart (NVD3)`

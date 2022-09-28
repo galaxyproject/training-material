@@ -64,7 +64,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 
 [NCBI](https://www.ncbi.nlm.nih.gov/) is the resource that would store [all complete *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167). This list contains over 500 genomes and so uploading them by hand will likely result in carpal tunnel syndrome, which we want to prevent. Galaxy has several features that are specifically designed for uploading and managing large sets of similar types of data. The following two **Hands-on** sections show how they can be used to import all completed *E. coli* genomes into Galaxy.
 
-> <hands-on-title>Preparing a list of all complete *E. coli* genomes</hands-on-title>
+> <hands-on-title>Preparing a list of all complete <i>E. coli</i> genomes</hands-on-title>
 >
 > 1. Import the genome list from Zenodo:
 >
@@ -108,7 +108,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 {: .details}
 
 
-> <hands-on-title>Preparing a list of all complete *E. coli* genomes</hands-on-title>
+> <hands-on-title>Preparing a list of all complete <i>E. coli</i> genomes</hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
@@ -210,7 +210,7 @@ Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do
 
 Before starting any analyses we need to upload the assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo:
 
-> <hands-on-title>Uploading *E. coli* assembly into Galaxy</hands-on-title>
+> <hands-on-title>Uploading <i>E. coli</i> assembly into Galaxy</hands-on-title>
 >
 > 1. {% tool [Upload](upload1) %}  :
 >   - Click **Paste/Fetch data** button (Bottom of the interface box)
@@ -732,7 +732,7 @@ Column 13 of the fields chosen by us for [LASTZ run](#hands_on-hands-on-aligning
 >    > To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7, 9, 10, 14, 12, 8 will be cut.
 >    {: .details}
 >
->    > <warning-title>There are multiple **CUT** tools!</warning-title>
+>    > <warning-title>There are multiple <b>CUT</b> tools!</warning-title>
 >    > The Hands-On box below uses **Cut** tool. Beware that some Galaxy instances contain multiple **Cut** tools. The one that is used below is called **Cut columns from a table** while the other one, which we will NOT use is called **Cut columns from a table (cut)**. It is a small difference, but the tools are different.
 >    {: .warning}
 >
@@ -989,7 +989,7 @@ It can be useful to have the complement of the aligned regions, to know which re
 
 You will notice that all three genomes have a region starting past 3,200,000 and only `CP020543.1` has another region starting at 1,668,702. However, this region reflects some unique feature of `CP020543.1` rather than that of our assembly. This is why we will concentrate on the *common* region which is deleted in our genome, but is present in the three closely related *E. coli* strains:
 
-> <hands-on-title>Restricting list of deleted regions to the *common* deletion</hands-on-title>
+> <hands-on-title>Restricting list of deleted regions to the <i>common</i> deletion</hands-on-title>
 >
 > 1. {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
 >  - *"Filter"*: dataset from the last step (`Filter on data...`)

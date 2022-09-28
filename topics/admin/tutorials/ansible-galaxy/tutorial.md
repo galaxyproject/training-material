@@ -1962,7 +1962,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
->    > <details-title>Running this tutorial *without* SSL</details-title>
+>    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
 >    > If you want, you can run this tutorial without SSL. We will provide a sketch of the configuration changes needed, but this is of course not recommended for production, so we will not go into detail here:
 >    >
@@ -2093,7 +2093,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    You'll notice that we have set a 24 hour cache timeout on static content served by NGINX. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any additional compression or caching improvements you can make.
 >
->    > <details-title>Running this tutorial *without* SSL</details-title>
+>    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
 >    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >

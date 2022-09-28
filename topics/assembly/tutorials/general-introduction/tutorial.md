@@ -313,7 +313,7 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 
 # Discussion
 
-> <hands-on-title>(Optional) Hands-on: Rerun for values *k* ranging from 31 to 101</hands-on-title>
+> <hands-on-title>(Optional) Rerun for values <i>k</i> ranging from 31 to 101</hands-on-title>
 >
 > 1. **velveth** {% icon tool %} with the same parameters as before except
 >    - *"Hash Length"*: a value between 31 and 101

@@ -63,7 +63,7 @@ The Jupyter notebook can be started from different points. You can either open a
 {: .hands_on}
 
 
-> <hands-on-title>Lauching a Jupyter notebook from the *Visualize* tab</hands-on-title>
+> <hands-on-title>Lauching a Jupyter notebook from the <i>Visualize</i> tab</hands-on-title>
 >
 > 1. Click on the *Visualize* tab on the upper menu and select `Interactive Environments`
 > 2. To open a notebook, set the parameters as follows :

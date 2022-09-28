@@ -1059,7 +1059,7 @@ Later on the tutorial we will need to get the size of each gene. This is one of 
 
 Here we counted reads mapped to genes for two samples. It is really interesting to redo the same procedure on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).
 
-> <hands-on-title>(Optional) Hands-on: Re-run on the other datasets</hands-on-title>
+> <hands-on-title>(Optional) Re-run on the other datasets</hands-on-title>
 >
 > You can do the same process on the other sequence files available on [Zenodo]({{ page.zenodo_link }}) and on the data library.
 >

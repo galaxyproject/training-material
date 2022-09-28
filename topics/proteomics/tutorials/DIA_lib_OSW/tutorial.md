@@ -155,7 +155,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 ## **Filter** for unique peptides in the *evidence* and *msms* output
 
-> <hands-on-title>Filtering the **MaxQuant** search results for unique peptides</hands-on-title>
+> <hands-on-title>Filtering the <b>MaxQuant</b> search results for unique peptides</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >        - {% icon param-file %} *"Infile"*: `MaxQuant_Evidence`
@@ -188,7 +188,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # **diapysef library generation**
 
-> <hands-on-title>Generation of a spectral library using the unique **MaxQuant** search results and indexed retention time *iRT* peptides</hands-on-title>
+> <hands-on-title>Generation of a spectral library using the unique <b>MaxQuant</b> search results and indexed retention time <i>iRT</i> peptides</hands-on-title>
 >
 > 1. {% tool [diapysef library generation](toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0) %} with the following parameters:
 >    - In *"MaxQuant output file msms.txt*:
@@ -198,7 +198,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >    - In *"Retention time alignment method"*:
 >        - {% icon param-file %} *"Infile"*: `iRTassays.tsv`
 >
->    > <comment-title>Indexed retention time *iRT* peptides</comment-title>
+>    > <comment-title>Indexed retention time <i>iRT</i> peptides</comment-title>
 >    >To allow for improved alignement of the different measurements, synthetic (non-endogenous) peptides which were spiked-in to all samples prior to the MS measurement. First the measured retention times (RTs) of those spiked-in peptides are extracted in the **MaxQuant** search results. Using the measured RTs as well as arbitrary assigned values (ranging from -26 to 99) a linear regression through the 11 synthetic peptides is applied.  Based on this linear regression fit *indexed* retention times (iRTs) are assigned to all other peptides.
 >    {: .comment}
 >
@@ -221,7 +221,7 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # Spectral library refinement with **OpenSwathAssayGenerator**
 
-> <hands-on-title>Spectral library optimization and refinement using **OpenSwathAssayGenerator**</hands-on-title>
+> <hands-on-title>Spectral library optimization and refinement using <b>OpenSwathAssayGenerator</b></hands-on-title>
 >
 > 1. {% tool [OpenSwathAssayGenerator](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `tabular (tsv)`
@@ -251,14 +251,14 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 
 # Adding decoy sequences with **OpenSwathDecoyGenerator**
 
-> <hands-on-title>Adding *decoy* transitions to the spectral library</hands-on-title>
+> <hands-on-title>Adding <i>decoy</i> transitions to the spectral library</hands-on-title>
 >
 > 1. {% tool [OpenSwathDecoyGenerator](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `tabular (tsv)`
 >    - *"Advanced Options"*: `Show Advanced Options`
 >        - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
 >
->    > <comment-title>*Decoy* transitions</comment-title>
+>    > <comment-title><i>Decoy</i> transitions</comment-title>
 >    >To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those "non-observed" sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either **shuffle** (randomly altering the amino acid sequence of each observed transition) or **reverse** (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as **decoy** and are later on considered as known false positives.
 Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.
 >    {: .comment}
@@ -279,7 +279,7 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 
 # Converting the spectral library with **TargetedFileConverter**
 
-> <hands-on-title>Converting the final spectral library from *.tsv* to the sqlite *.pqp* format</hands-on-title>
+> <hands-on-title>Converting the final spectral library from <i>.tsv</i> to the sqlite <i>.pqp</i> format</hands-on-title>
 >
 > 1. {% tool [TargetedFileConverter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0) %} with the following parameters:
 >    - *"Output file type -- default: determined from file extension or content"*: `pqp`

@@ -418,7 +418,7 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
->    > <comment-title>Defaults of **MarkDuplicates** {% icon tool %}</comment-title>
+>    > <comment-title>Defaults of MarkDuplicates</comment-title>
 >    >
 >    > By default, the tool will only "Mark" the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"* to directly remove the duplicates.
 >    {: .comment}

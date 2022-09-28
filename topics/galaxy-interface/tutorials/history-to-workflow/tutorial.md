@@ -67,7 +67,7 @@ But what if you want to run that analysis again, maybe on updated datasets, or m
 
 Galaxy *workflows* enable this, and this tutorial shows how you can create one from the analysis you have already done, and then run the analysis exactly as you did before, but on the new datasets.
 
-> <tip-title>Confused about *Histories* and *Workflows?*</tip-title>
+> <tip-title>Confused about <i>Histories</i> and <i>Workflows?</i></tip-title>
 >
 > Well, you are not alone.  This analogy may help.
 >

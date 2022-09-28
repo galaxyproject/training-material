@@ -317,7 +317,7 @@ In `info file` output file, we can identify 4 different sections:
 >    - {% icon param-file %} *"Netcdf file"*: `CAMS-PM2_5-20211222_fc0-23h.netcdf`
 > 5. Check the generated outputs and in particular `time`. We see that the tabular file `time` only contains **24** lines with times from `0 days 00:00:00` to `0 days 23:00:00`
 >
->    > <comment-title>slice *threshold2* not included in selection</comment-title>
+>    > <comment-title>slice <i>threshold2</i> not included in selection</comment-title>
 >    >
 >    > You may have noticed already but when selecting a range with `slice` the upper limit (here `1 days 00:00:00`) is not included.
 >    {: .comment}

@@ -88,7 +88,7 @@ Before continue to BAM to BED conversion we need to sort the alignments in the i
 
 ## BAM to BED of tags
 Now it is time to do the actual conversion.
-> <hands-on-title>**BlockClust** preprocessing</hands-on-title>
+> <hands-on-title><b>BlockClust</b> preprocessing</hands-on-title>
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Pre-processing `
 >    - {% icon param-file %} *"BAM file containing alignments"*: output of **Samtools sort** {% icon tool %}

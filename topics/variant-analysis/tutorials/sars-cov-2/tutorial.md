@@ -173,7 +173,7 @@ The Run Selector window is divided into several panels:
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
 ![sra run selector](../../images/sra_run_selector.png)
 
-> <comment-title>Why did the number of found items *go up?*</comment-title>
+> <comment-title>Why did the number of found items <i>go up?</i></comment-title>
 >
 > Recall that the Entrez interface lists SRA experiments (SRX entries).  Run Selector lists *runs* &mdash; sequencing datasets &mdash; and there are *one or more* runs per experiment. We have the same data as before, we are now just seeing it in finer detail.
 {: .comment}

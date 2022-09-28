@@ -148,7 +148,7 @@ This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutori
 
 # Visualization
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > In this step we want to visualize the methylation level around all TSS of our data. When located at gene promoters, DNA methylation is usually a repressive mark.
 >

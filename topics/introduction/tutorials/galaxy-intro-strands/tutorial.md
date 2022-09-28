@@ -120,7 +120,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
-> <hands-on-title>Open **Get Data** toolbox</hands-on-title>
+> <hands-on-title>Open Get Data toolbox</hands-on-title>
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
 >
@@ -447,7 +447,7 @@ What tool can we use to combine the two datasets into one?  Try *searching* for 
 
 It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
 
-> <hands-on-title>*Concatenate* two datasets</hands-on-title>
+> <hands-on-title>Concatenate two datasets</hands-on-title>
 >
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
@@ -492,7 +492,7 @@ Galaxy knows about several visualization options for lots of different dataset t
 
 Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track / User Supplied Track**). That track shows a line of small black boxes, sometimes connected with a line.
 
-> <hands-on-title>Zoom in on an area of the chromosome that shows a set of *linked* black boxes</hands-on-title>
+> <hands-on-title>Zoom in on an area of the chromosome that shows a set of linked black boxes</hands-on-title>
 > To zoom in,
 > * *Click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
 > * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.

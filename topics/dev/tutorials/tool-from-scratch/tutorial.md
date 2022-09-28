@@ -403,7 +403,7 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 Initializing a tool wrapper to be run in Galaxy is simple
 
-> <hands-on-title> Hands-on: Creating a Tool Wrapper Skeleton</hands-on-title>
+> <hands-on-title>Creating a Tool Wrapper Skeleton</hands-on-title>
 > 1. Go to the "tools" directory in your Galaxy instance.
 > 2. Make a new directory for tools you will be wrapping.
 > 3. Use `planemo` to initialize a new tool wrapper with basic formatting.

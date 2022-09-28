@@ -290,7 +290,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
 so that we can reuse it for any simulations.
 
-> <hands-on-title>Select and plot **LEAFC**</hands-on-title>
+> <hands-on-title>Select and plot <b>LEAFC</b></hands-on-title>
 >
 > 1. {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} to select the total carbon in live plant leaves (**LEAFC**)
 >      - {% icon param-file %} *"Input netcdf file"*: ALP1_exp.nc

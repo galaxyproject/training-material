@@ -151,7 +151,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >        - *"Use the retention time normalization peptide MS2 masses to perform a mass correction (linear, weighted by intensity linear or quadratic) of all spectra"*: `regression_delta_ppm`
 >    - *"Optional outputs"*: `out_osw`
 >
->    > <comment-title>Mass tolerances and *"Minimal number of bins required to be covered"*</comment-title>
+>    > <comment-title>Mass tolerances and "Minimal number of bins required to be covered"</comment-title>
 >    >Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Therefore, we allow for 10 ppm mass tolerance for both the MS1 and the MS2 level. If larger mass deviation are expected the mass tolerances can be adjusted. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements. In case only a few iRT peptides are identified in the DIA measurements, the mass tolerance for the iRT extraction can be increased to 20 ppm. We than recommend to increase the extraction window for the MS2 level to 20 ppm. For more information see also [OpenSwathWorkflow](http://openswath.org/en/latest/docs/openswath.html).
 >    {: .comment}
 >

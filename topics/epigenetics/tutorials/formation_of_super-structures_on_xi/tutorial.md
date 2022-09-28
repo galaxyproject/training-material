@@ -381,7 +381,7 @@ An ideal 'input' with perfect uniform distribution of reads along the genome (i.
 > {: .solution }
 {: .question}
 
-> <hands-on-title>(Optional) Hands-on: IP strength estimation (other samples)</hands-on-title>
+> <hands-on-title>(Optional) IP strength estimation (other samples)</hands-on-title>
 >
 > Run the same analysis on the other ChIP-seq data along with their corresponding input and compare the output
 {: .hands_on}
@@ -654,7 +654,7 @@ When we look at this graph, it seems that less but larger peaks are found for `H
 
 So far, we have only analyzed 2 samples, but we can do the same for all the 6 samples:
 
-> <hands-on-title>(Optional) Hands-on: Plot the heatmap for all the samples</hands-on-title>
+> <hands-on-title>(Optional) Plot the heatmap for all the samples</hands-on-title>
 >
 > 1. **bamCompare** {% icon tool %} for each combination input - ChIP data:
 >     1. `wt_CTCF_rep1` - `wt_input_rep1` (already done)

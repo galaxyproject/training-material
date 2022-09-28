@@ -97,7 +97,7 @@ pre-processing in parallel, since the initial actions in the extraction process 
 Since the first steps can be run on each file independently, the use of **Dataset collections** in Galaxy is recommended, to avoid
 having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into Galaxy.
 
-> <hands-on-title>Data upload the mzXML with **Get data**</hands-on-title>
+> <hands-on-title>Data upload the mzXML with <b>Get data</b></hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -189,7 +189,7 @@ Note that you can either:
   2. Fill it using your favorite table editor (Excel, LibreOffice etc.)
   3. Upload it within Galaxy
 
-> <tip-title>Optional: Generate the right template with **xcms get a sampleMetadata file** {% icon tool %}</tip-title>
+> <tip-title>Optional: Generate the right template with <b>xcms get a sampleMetadata file</b></tip-title>
 >
 > In the case of this tutorial, we already prepared a *sampleMetadata* file with all the necessary information. Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:
 >
@@ -225,7 +225,7 @@ use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
 Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)
 
-> <tip-title>Optional: Filling the *sampleMetadata* using the template obtained from Galaxy</tip-title>
+> <tip-title>Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy</tip-title>
 >
 > For this tutorial, we already provide the *sampleMetadata* file, so you only have to upload it to Galaxy. Below we
 explain how we filled this file from the template we generated in Galaxy.
@@ -792,7 +792,7 @@ such dataset may not be an easy task, but getting a glimpse of it is possible us
 analysis. One of the most commonly used method is the **Principal Components Analysis** (PCA). You can get a basic PCA along with
 over useful information using the **Quality Metrics** {% icon tool %} tool.
 
-> <hands-on-title>Using **Quality Metrics** to get an overview of your data</hands-on-title>
+> <hands-on-title>Using <b>Quality Metrics</b> to get an overview of your data</hands-on-title>
 >
 > 1. **Quality Metrics** {% icon tool %} with the following parameters:
 >    - *"Data matrix file"*: `dataMatrix.tsv`

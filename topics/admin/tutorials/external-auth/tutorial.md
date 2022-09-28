@@ -64,7 +64,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
->    > <tip-title>Running this tutorial *just* for Reports?</tip-title>
+>    > <tip-title>Running this tutorial <i>just</i> for Reports?</tip-title>
 >    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
 >    {: .tip}
 >
@@ -123,7 +123,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
 >
->    > <tip-title>Running this tutorial *just* for Reports?</tip-title>
+>    > <tip-title>Running this tutorial <i>just</i> for Reports?</tip-title>
 >    > You don't need to make the above changes for Galaxy then.
 >    {: .tip}
 >

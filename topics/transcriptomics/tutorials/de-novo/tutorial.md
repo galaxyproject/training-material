@@ -32,7 +32,7 @@ The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data 
 
 The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a *de novo* transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.
 
-> <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -45,7 +45,7 @@ The goal of this exercise is to identify what transcripts are present in the G1E
 
 Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at [`Zenodo`](https://zenodo.org/record/583140#.WSW3NhPyub8), where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this RNA-seq exercise
 >
@@ -87,7 +87,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 
 For quality control, we use similar tools as described in [NGS-QC tutorial]({{site.baseurl}}/topics/sequence-analysis/): [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) and [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic).
 
-> <hands-on-title>Quality control</hands-on-title>
+> <hands-on-title>Quality control</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %}: Run `FastQC` on the forward and reverse read files to assess the quality of the reads.
 >
@@ -163,7 +163,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 >
 {: .comment}
 
-> <hands-on-title>Spliced mapping</hands-on-title>
+> <hands-on-title>Spliced mapping</hands-on-title>
 >
 > 1. **HISAT2** {% icon tool %}: Run `HISAT2` on one forward/reverse read pair and modify the following settings:
 >    - *"Source for the reference genome"*: `Use a built-in genome`
@@ -187,7 +187,7 @@ Spliced mappers have been developed to efficiently map transcript-derived reads 
 # De novo transcript reconstruction
 Now that we have mapped our reads to the mouse genome with `HISAT`, we want to determine transcript structures that are represented by the aligned reads. This is called *de novo* transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the *de novo* transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is `Stringtie`. Here, we will use `Stringtie` to predict transcript structures based on the reads aligned by `HISAT`.
 
-> <hands-on-title>Transcriptome reconstruction</hands-on-title>
+> <hands-on-title>Transcriptome reconstruction</hands-on-title>
 >
 > 1. **Stringtie** {% icon tool %}: Run `Stringtie` on the `HISAT2` alignments using the default parameters.
 >    - Use batch mode to run all four samples from one tool form.
@@ -199,7 +199,7 @@ Now that we have mapped our reads to the mouse genome with `HISAT`, we want to d
 
 We just generated four transcriptomes with `Stringtie` representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a **transcriptome database**. We will use the tool `Stringtie - Merge` to combine redundant transcript structures across the four samples and the RefSeq reference. Once we have merged our transcript structures, we will use `GFFcompare` to annotate the transcripts of our newly created transcriptome so we know the relationship of each transcript to the RefSeq reference.
 
-> <hands-on-title>Transcriptome assembly</hands-on-title>
+> <hands-on-title>Transcriptome assembly</hands-on-title>
 >
 > 1. **Stringtie-merge** {% icon tool %}: Run `Stringtie-merge` on the `Stringtie` assembled transcripts along with the RefSeq annotation file we imported earlier.
 >    - {% icon param-file %} *"Transcripts"*: `all four `Stringtie` assemblies`
@@ -216,7 +216,7 @@ We just generated four transcriptomes with `Stringtie` representing each of the 
 >
 {: .hands_on}
 
-> <comment-title>Note: Transcript categorization used by `GFFcompare`</comment-title>
+> <comment-title>Note: Transcript categorization used by `GFFcompare`</comment-title>
 >
 > |**Class code** | **Transcript category**|
 > |:---:|:---|
@@ -246,7 +246,7 @@ To compare the abundance of transcripts between different cellular states, the f
 
 The recommended mode is "union", which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.
 
-> <hands-on-title>Counting the number of reads per transcript</hands-on-title>
+> <hands-on-title>Counting the number of reads per transcript</hands-on-title>
 >
 > 1. **FeatureCounts** {% icon tool %}: Run `FeatureCounts` on the aligned reads (`HISAT2` output) using the `GFFCompare` transcriptome database as the annotation file.
 >
@@ -271,7 +271,7 @@ Transcript expression is estimated from read counts, and attempts are made to co
 - Division of every gene count by the geometric mean
 - Use of the median of these ratios as sample's size factor for normalization
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **DESeq2** {% icon tool %}: Run `DESeq2` with the following parameters:
 >    - *"1: Factor"*
@@ -300,7 +300,7 @@ The first output of `DESeq2` is a tabular file. The columns are:
 7.	*p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](http://www.biostathandbook.com/multiplecomparisons.html))
 
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >1. **Filter** {% icon tool %}: Run `Filter` to extract genes with a significant change in gene expression (adjusted *p*-value less than 0.05) between treated and untreated samples
 >
@@ -363,7 +363,7 @@ Now that we have a list of transcript expression levels and their differential e
 
 In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We'll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.
 
-> <hands-on-title>Converting aligned read files to bigWig format</hands-on-title>
+> <hands-on-title>Converting aligned read files to bigWig format</hands-on-title>
 >
 > 1. **bamCoverage** {% icon tool %}: Run `bamCoverage` on all four aligned read files (`HISAT2` output) with the following parameters:
 >    - *"Bin size in bases"*: '1'
@@ -379,7 +379,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 4. **Rename** {% icon tool %}: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.
 {: .hands_on}
 
-> <hands-on-title>Trackster based visualization</hands-on-title>
+> <hands-on-title>Trackster based visualization</hands-on-title>
 >
 > 1. **Viz** {% icon tool %}: On the center console at the top of the Galaxy interface, choose " Visualization" -> "New track browser"
 >    - Name your visualization someting descriptive under "Browser name:"

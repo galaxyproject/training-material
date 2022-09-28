@@ -121,7 +121,7 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
 >
->         > <tip-title>Can't find *List Identifier*?</tip-title>
+>         > <tip-title>Can't find <i>List Identifier</i>?</tip-title>
 >         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
 >         {: .tip}
 >

@@ -71,7 +71,7 @@ The appropriate statistical test is the one-tailed variant of Fisher’s exact t
 
 For this first exercise we will use data from [Trapnell et al. 2014](https://www.ncbi.nlm.nih.gov/pubmed/22383036 "Trapnell et al. data"). In this work, the authors created an artificial dataset of gene expression in *Drosophila melanogaster*, where 300 random genes were set (insilico) to be differentially expressed between two conditions.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > The data for this tutorial is available at [Zenodo](https://zenodo.org/record/2565417#.XGXUXlz7TIU) to download. For convenience and reproducibility of results, we already added the GO ontology and annotations in the Zenodo repository.
 >
@@ -166,7 +166,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 
 Let's remove the irrelevant genes from the background population (`trapnellPopulation.tab`), to see the differences in results.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `trapnellPopulation.tab`
@@ -205,7 +205,7 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 
 Graphical views are essential, but sometimes the graph view can become overwhelming due to the size of the results. To exemplify this issue, we will next perform functional enrichment analysis using a more realistic dataset from a study using the mouse model organism. The original dataset can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE30352). In this [study](https://www.nature.com/articles/nature10532), the authors compared the gene expression of several tissues. Here, we will use results from the comparison between heart and brain.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > For the first exercise we will use as a study set the differential genes (padjusted<0.05).
 > 1. **Upload to Galaxy** the mouse_brain_vs_heart.txt, Mus_musculus_annotations_biomart_e92.tab and mouse_brain_vs_heart.difgenes.txt files.
@@ -233,7 +233,7 @@ As you see, the number of enriched GO Terms is very high, with graphs that are t
 
 The Summarize Output option in the GOEnrichment tool addresses this problem by conflating branches/families of enriched GO terms and selecting the most representative term(s) from them (usually 1-2 term per family). The greatly simplifies the results while retaining branch information, and thus ensuring that every enriched family of functions is present in the results. Some specificity is necessarily lost, but the trade-off is that the results become easier and more intuitive to analyze.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **GOEnrichment** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Gene Ontology File"*: `GO`
@@ -259,7 +259,7 @@ Another approach to reduce the complexity of the results is to use a shallower v
 
 To test the GO slim approach, let us use the mouse dataset again. First, however, we need to use GOSlimmer tool to convert the annotations file from full GO to GO slim (as GO annotations are typically made to terms that are too specific to be in the GO slim, and thus need to be extended by the true path rule).
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **Upload to the Galaxy** the goslim_generic.obo file.
 > 2. **Rename** the *goslim_generic.obo* file to `GO Slim`.
@@ -275,7 +275,7 @@ To test the GO slim approach, let us use the mouse dataset again. First, however
 
 Now we will go use the GOEnrichment tool with the new Slim Annotations file and the same study set.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **GOEnrichment** {% icon tool %} with the following parameters:
 >    - Use the `GO Slim`, `Slim Annotations`, `Mouse diff` and `Mouse population` files.
@@ -308,7 +308,7 @@ Terms that are very generic tend to be difficult to interpret, because the meani
 
 For the second exercice, we will continue to work with the same study set as before but now we analyze separately genes that are over- and under-expressed, and see the enriched GO terms presents in the brain and heart from the mouse.
 
-> <hands-on-title>Hands-on:</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **Upload to Galaxy** the mouseOverexpressed.txt and the mouseUnderexpressed.txt files.
 >

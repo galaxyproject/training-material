@@ -110,7 +110,7 @@ There is nothing in the database that results from direct manipulation of the ta
 
 ## Start Docker and Galaxy
 
-> <hands-on-title>***Hands on!***</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   1. Start the Galaxy Docker Image -  this time as an interactive session
 >
@@ -133,7 +133,7 @@ There is nothing in the database that results from direct manipulation of the ta
 
 ## Important tables
 
-> <hands-on-title>***Hands on!***</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   1. Connect to the PostgreSQL database (change to user galaxy first)
 >
@@ -307,7 +307,7 @@ The following example is from the development server at the FMI
 
 ## All users running a job using a certain parameter
 
-> <hands-on-title>***Hands on!***</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select jp.name, jp.value  from job_parameter jp

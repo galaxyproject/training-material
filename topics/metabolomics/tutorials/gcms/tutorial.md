@@ -344,7 +344,7 @@ In both cases, the result is a list containing a set of patterns corresponding w
 That file can be used for database search online (as Golm ({% cite Kopka2005 %}) and MassBank ({% cite Horai2010 %})) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.
 {: .text-justify}
 
-> <hands-on-title>Hands-on : metaMS.runGC {% icon tool %}</hands-on-title>
+> <hands-on-title>metaMS.runGC</hands-on-title>
 > 
 > We now know each step of this *runGC* function. So, please open the **metaMS.runGC {% icon tool %} too** to run it. You should enter the following parameters for our tutorial : 
 >   - **Rdata from xcms and merged** : here you have to select your file from **XCMS** where you made the peak picking, grouping and all the pre-processing. It should be named `xset.merged.groupdChromPeaks.RData`.
@@ -381,7 +381,7 @@ Concerning EICs, it is possible to choose for which compound you want to draw an
 
 ![TIC](../../images/tuto_gcms_eic.png "Example of EIC of the 'Unknown 1' in sample 'alg2'")
 
-> <hands-on-title>Hands-on : metaMS.plot {% icon tool %}</hands-on-title>
+> <hands-on-title>metaMS.plot</hands-on-title>
 > 
 > This tool is very easy to run. It is an obligation to process **metaMS.runGC {% icon tool %}** before this one. After that, you just have to choose if you want or not to draw your TIC, BPC or EIC : 
 >   - **Rdata from new_metaMS_runGC** : the file you obtained with the **metaMS.runGC {% icon tool %}** tool. It should be named `runGC.RData`.
