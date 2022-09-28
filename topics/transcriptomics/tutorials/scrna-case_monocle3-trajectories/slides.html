@@ -77,7 +77,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ]
 
 ???
-
+_______________________________________
 - axes labels - here UMAP was used as the method of dimentionality reduction
 - plot: usually pseudotime goes through range of colours to depict progress through the transition: here dark blue = root cells, yellow = end cells
 - plot: also here's the example of disjoint trajectories - you might choose if you want to learn single tree structure for all the partitions or learn the disjoint trajectory within each partition
@@ -115,45 +115,31 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ### Trajectory inference approaches: **Clustering-based (tree based)**
 
 .footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
 
-- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
---
+- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure  
 
-- Clustering methods: soft K-means (fuzzy clustering), Louvain, non-negative matrix factorization, hierarchical clustering
+
+- Clustering methods: [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}), non-negative matrix factorization, [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %})
 
 ???
 
 - introducing some examples to show the variety of clustering methods
-  - soft K-means: each data point can belong to more than one cluster (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
-  - Louvain: extracts communities from large networks (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
+  - soft K-means: each data point can belong to more than one cluster (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}))
+  - Louvain: extracts communities from large networks (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}))
   - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
-  - hierarchical clustering: builds a hierarchy of clusters (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
+  - hierarchical clustering: builds a hierarchy of clusters (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %}))
+
 ---
 ### Trajectory inference approaches: **Clustering-based (tree based)**
 
 .footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
+
 
 - Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
 
-???
 
-- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
-- think about 'graph structure' as if the nodes were cell states and arrows were transitions
-- cell state with a particular function can be called a cell type
-- https://mbernste.github.io/posts/cell_types_cell_states/ 
----
-### Trajectory inference approaches: **Clustering-based (tree based)**
+- Clustering methods: [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}), non-negative matrix factorization, [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %})  
 
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
-
-- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
---
-
-- Clustering methods: soft K-means (fuzzy clustering), Louvain, non-negative matrix factorization, hierarchical clustering  
---
 
 - Connecting the clusters to each other to find a trajectory path: usually a **minimum weight spanning tree (MST)** is constructed (connecting clusters without any cycles and with the minimum possible total edge weight (cost))  
 
@@ -162,7 +148,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ???
 
 - MST is the method used to connect the clusters that were found
-- each dot represents a cluster - MST aims to connect all dots without creating any cycles, while minimising the total edge cost
+- plot: each dot represents a cluster - MST aims to connect all dots without creating any cycles, while minimising the total edge cost
 - edge cost is often calculated as the Euclidean distance between clusters
 - this ensures that the most similar clusters are connected
 ---
@@ -174,18 +160,27 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 ???
 
-- graph representation: a technique to store graph, usually as a matrix (distance/adjacency matrix)
+- graph representation: a technique to store graph, usually as a matrix ([distance/adjacency matrix]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#45 %}))
 - 'complex operations' include: graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods (those fall within the graph theory, a big topic for another presentation!)
 --
 
-- Most methods start by building a **k-nearest neighbors (kNN) ** graph using the Euclidean distance
+- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}) graph using the Euclidean distance
 
 .image-50[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
+
+???
+- (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}))
+- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells.
+- If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.
+- Graph: when trying to classify a new point (cell), the distance between this point and others is measured. The point is classified to the cluster corresponding to the nearest neighbouring points (cells), based on the smallest distance
 --
 
 - Diffusion pseudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
 
-
+???
+- random walks between data points — in this case, between cells in distinct stages of the differentiation process
+- short walk => higher probability that the cells are connected
+- finding path (pseudotime) based on those probabilities
 ---
 
 ### Trajectory inference approaches: **Manifold learning-based**
@@ -194,6 +189,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 - Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
 
+???
 --
 
 - Uses principal curves and graphs to obtain smooth trajectories
