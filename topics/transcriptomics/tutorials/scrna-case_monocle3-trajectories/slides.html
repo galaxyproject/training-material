@@ -31,7 +31,8 @@ requirements:
 ---
 
 ### What is trajectory analysis?
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]  
+
 --
 
 Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:
@@ -44,10 +45,14 @@ cellular development    | differentiation      | immune responses
 TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
 
 .image-40[ ![process](../../images/scrna-casestudy-monocle/4_process.png) ]
+
+???
+
+- TI helps to understand - 'visualise' - the biological process that the green cell went into
 ---
 
 ### Clustering, trajectory and pseudotime
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
 .pull-left[
@@ -56,6 +61,12 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 .image-75[ ![clusters](../../images/scrna-casestudy-monocle/5_clusters.png) ]
 
 ]
+
+???
+
+- axes labels - here t-SNE - the method of dimentionality reduction that was used
+- each coloured group of cells => different clusters
+- combine clusters and you get partition(s)
 --
 .pull-right[
 **Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime.   
@@ -65,32 +76,106 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 
 ]
 
+???
+
+- axes labels - here UMAP was used as the method of dimentionality reduction
+- plot: usually pseudotime goes through range of colours to depict progress through the transition: here dark blue = root cells, yellow = end cells
+- plot: also here's the example of disjoint trajectories - you might choose if you want to learn single tree structure for all the partitions or learn the disjoint trajectory within each partition
+
+---
+### Trajectory inference approaches:
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+--
+
+- Clustering-based (tree based)
+- Graph-based
+- Manifold learning-based
+- RNA velocity methods
+
+???
+
+- that's not a formal classification, it's based on the cited paper
+- there are so many methods available that putting them into those groups might make it a little bit clearer
+- we'll briefly discuss each of these approaches
 ---
 ### Trajectory inference approaches: **Clustering-based (tree based)**
 
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
 - Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
 
+???
+
+- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
+- think about 'graph structure' as if the nodes were cell states and arrows were transitions
+- cell state with a particular function can be called a cell type
+- https://mbernste.github.io/posts/cell_types_cell_states/ 
+---
+### Trajectory inference approaches: **Clustering-based (tree based)**
+
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
-- Clustering approaches: soft K-means, Louvain, non-negative matrix factorization, hierarchical clustering
-
+- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
 --
 
-- To connect the clusters to each other, usually a **minimum weight spanning tree (MST)** is constructed (connecting without any cycles and with the minimum possible total edge weight)
+- Clustering methods: soft K-means (fuzzy clustering), Louvain, non-negative matrix factorization, hierarchical clustering
 
+???
+
+- introducing some examples to show the variety of clustering methods
+  - soft K-means: each data point can belong to more than one cluster (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
+  - Louvain: extracts communities from large networks (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
+  - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
+  - hierarchical clustering: builds a hierarchy of clusters (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}))
+---
+### Trajectory inference approaches: **Clustering-based (tree based)**
+
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
+
+- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
+
+???
+
+- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
+- think about 'graph structure' as if the nodes were cell states and arrows were transitions
+- cell state with a particular function can be called a cell type
+- https://mbernste.github.io/posts/cell_types_cell_states/ 
+---
+### Trajectory inference approaches: **Clustering-based (tree based)**
+
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+--
+
+- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
+--
+
+- Clustering methods: soft K-means (fuzzy clustering), Louvain, non-negative matrix factorization, hierarchical clustering  
+--
+
+- Connecting the clusters to each other to find a trajectory path: usually a **minimum weight spanning tree (MST)** is constructed (connecting clusters without any cycles and with the minimum possible total edge weight (cost))  
 
 .image-25[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
+
+???
+
+- MST is the method used to connect the clusters that were found
+- each dot represents a cluster - MST aims to connect all dots without creating any cycles, while minimising the total edge cost
+- edge cost is often calculated as the Euclidean distance between clusters
+- this ensures that the most similar clusters are connected
 ---
 ### Trajectory inference approaches: **Graph-based**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
-- Constructs a graph representation of the cells and either uses graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
+- Constructs a graph representation of the cells and performs complex operations to construct the trajectory topology
 
+???
+
+- graph representation: a technique to store graph, usually as a matrix (distance/adjacency matrix)
+- 'complex operations' include: graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods (those fall within the graph theory, a big topic for another presentation!)
 --
 
 - Most methods start by building a **k-nearest neighbors (kNN) ** graph using the Euclidean distance
@@ -98,13 +183,13 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 .image-50[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
 --
 
-- Diffusion peudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
+- Diffusion pseudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
 
 
 ---
 
 ### Trajectory inference approaches: **Manifold learning-based**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
 - Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
@@ -122,7 +207,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ---
 
 ### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005.)]
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
 --
 
 - RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation. 
