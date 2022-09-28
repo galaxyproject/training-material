@@ -8,7 +8,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 		button = $(event.target).parents("button");
 	}
 	// Then we can collapse specifically things based on the button's ancestry
-	var parentBlockquote = button.parents("blockquote");
+	var parentBlockquote = button.parents("blockquote")[0];
 
 	// Collapse every child of the blockquote, that is NOT a box-title
     $(">*:not(.box-title)", parentBlockquote).toggle();
@@ -26,7 +26,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 // NEW
 $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
-    $(">.box-title", this).click();
+    $(">.box-title>button", this).click();
 });
 
 $("section.tutorial .hands_on,section.tutorial .hands-on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
