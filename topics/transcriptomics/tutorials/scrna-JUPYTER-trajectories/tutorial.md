@@ -47,7 +47,7 @@ Traditionally, we thought that differentiating or changing cells jumped between 
 
 We will use the same sample from the previous two tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it's time to look further!
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -60,7 +60,7 @@ We will use the same sample from the previous two tutorials, which contains larg
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial.html#neighborhood-graph) (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/trajectories---input) or download from Zenodo below.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
@@ -92,7 +92,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> ### {% icon hands_on %} Hands-on: Removing macrophages and RBCs
+> <hands-on-title>Removing macrophages and RBCs</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final cell annotated object`
@@ -124,7 +124,7 @@ Take note of what # this dataset is in your history, as you will need that short
 
 ## Launching Jupyter
 
-> ### {% icon hands_on %} Hands-on: Downloading the directions
+> <hands-on-title>Downloading the directions</hands-on-title>
 >
 > 1. Click the **Trajectories_Instructions.ipynb** dataset and the download {% icon galaxy-save %} button to get the file onto your computer
 >
@@ -134,7 +134,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
 
-> ### {% icon hands_on %} Hands-on: Launching JupyterLab
+> <hands-on-title>Launching JupyterLab</hands-on-title>
 >
 > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
@@ -150,11 +150,11 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 Welcome!
 
-> ### {% icon warning %} Danger: You can lose data!
+> <warning-title>Danger: You can lose data!</warning-title>
 > Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: Creating a notebook
+> <hands-on-title>Creating a notebook</hands-on-title>
 >
 > 1. Click the **Python 3** icon under **Notebook**
 >
@@ -168,7 +168,7 @@ Welcome!
 
 Cool! Now you know how to create a file! Helpfully, however, we have created one for you, and you've downloaded it onto your computer already!
 
-> ### {% icon hands_on %} Hands-on: Uploading the tutorial notebook
+> <hands-on-title>Uploading the tutorial notebook</hands-on-title>
 >
 > 1. In the folder window, {% icon galaxy-upload %} Upload the `Trajectories_Instructions.ipynb` from your computer. It should appear in the file window.
 >
@@ -176,7 +176,7 @@ Cool! Now you know how to create a file! Helpfully, however, we have created one
 >
 {: .hands_on}
 
-> ### {% icon warning %} You should {% icon galaxy-save %} **Save** frequently!
+> <warning-title>You should {% icon galaxy-save %} **Save** frequently!</warning-title>
 > This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.
 {: .warning}
 
@@ -206,7 +206,7 @@ Just in case, we've put the plots you should generate in the tutorial here. If t
 
 {% icon congratulations %} Congratulations! You've made it through Jupyter!
 
-> ### {% icon hands_on %} Hands-on: Closing JupyterLab
+> <hands-on-title>Closing JupyterLab</hands-on-title>
 >
 > 1. Click **User**: **Active Interactive Tools**
 >

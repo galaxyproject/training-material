@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Example of tests for the `ByteSize.to_unit` method:
 > 

@@ -35,7 +35,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 > This tutorial is intended for those who are new to Galaxy.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -46,7 +46,7 @@ This practical shows how to create a reusable analysis pipeline, called a *workf
 
 # Pretreatments
 
-> ### {% icon requirements %} Requirements
+> <comment-title>Requirements</comment-title>
 >
 > To run this practical you will need
 >
@@ -67,7 +67,7 @@ But what if you want to run that analysis again, maybe on updated datasets, or m
 
 Galaxy *workflows* enable this, and this tutorial shows how you can create one from the analysis you have already done, and then run the analysis exactly as you did before, but on the new datasets.
 
-> ### {% icon tip %} Tip: Confused about *Histories* and *Workflows?*
+> <tip-title>Confused about *Histories* and *Workflows?*</tip-title>
 >
 > Well, you are not alone.  This analogy may help.
 >
@@ -84,7 +84,7 @@ Galaxy *workflows* enable this, and this tutorial shows how you can create one f
 
 By this time, you may have multiple histories under your Galaxy account.  You'll need to make the history that you want create a recipe/workflow for be your *current* history.  Your current history is the one shown in the History panel on the right.
 
-> ### {% icon hands_on %} Hands-on: Managing your histories
+> <hands-on-title>Managing your histories</hands-on-title>
 >
 >  1. Make sure you are *logged in*.
 >    - If you haven't yet created an account, now is an ideal time to that.  Your current history will be saved as your first history under your new account.
@@ -97,7 +97,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 >    - This returns you to the Galaxy home page with the selected history as your current history.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Always name your histories
+> <tip-title>Always name your histories</tip-title>
 >
 >If you just saw multiple `Unnamed history` entries in your histories view, then now you know why.
 >
@@ -109,7 +109,7 @@ By this time, you may have multiple histories under your Galaxy account.  You'll
 Now that we have the history we want, let's use Galaxy to create a reusable workflow from it.  To do this we'll use the history's **gear / history options** pull-down list.
 
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> <hands-on-title>Extract workflow</hands-on-title>
 >
 > 1. *Click* on the **gear icon** at the top of your history.
 >    - This opens a pull-down menu showing lots of actions that you can perform on this history.  Right now, we are interested in only one of them:
@@ -141,7 +141,7 @@ While we could run this workflow right now, here are a few cleanup steps we shou
 
 The *extract workflow* step assigns the name of input datasets in your history to the corresponding inputs in your workflow.  This is very helpful in the short term because it makes it clear which of the boxes are which datasets.  But, for a workflow, we want a more general (but still helpful) name for input datasets.
 
-> ### {% icon hands_on %} Hands-on: Rename inputs
+> <hands-on-title>Rename inputs</hands-on-title>
 >
 > 1. *Click* on the first input dataset.
 >    - This changes the right panel to show information about the selected dataset.  In this example, this dataset is a set of genomic features (like genes or exons or repeats) that exist in an organism.
@@ -159,20 +159,20 @@ There are several other things we could do in the workflow editor, but let's foc
 
 First, your history might contain several false starts or tool runs where the parameters weren't quite right. Lets get rid of those now.
 
-> ### {% icon hands_on %} Hands-on: Drop unused input datasets and tool boxes
+> <hands-on-title>Drop unused input datasets and tool boxes</hands-on-title>
 >
 > 1. *Delete* unwanted steps
 >    - If your history contained any false starts or tool runs that didn't contribute to your final result, then *delete* them from the workflow by clicking the black **x** in the corner of those datasets/tools' boxes.
 >    - This will remove them from the workflow.
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Removing unnecessary steps before creating workflow
+> <tip-title>Removing unnecessary steps before creating workflow</tip-title>
 > You can also delete these steps when you are first extracting the workflow from your history, by unchecking them.  However, it is often easier to identify the steps to drop in the workflow view, where connections and dead-ends are more obvious.
 {: .tip}
 
 Second, you might want to give your output datasets meaningful names too.
 
-> ### {% icon hands_on %} Hands-on: Name output datasets
+> <hands-on-title>Name output datasets</hands-on-title>
 >
 > 1. *Click* on a step that produces an output file.
 >    - This brings up information about that step in the right panel.
@@ -186,7 +186,7 @@ We could add annotation to each step in the process as well, and if this workflo
 
 Now that our edits are done, let's save our work and run the workflow.
 
-> ### {% icon hands_on %} Hands-on: Save the workflow edits
+> <hands-on-title>Save the workflow edits</hands-on-title>
 >
 >  1. *Click* on the **gear icon** at the top right of the central panel, *select* **Save** from the pull-down menu.
 {: .hands_on}
@@ -196,7 +196,7 @@ Now that our edits are done, let's save our work and run the workflow.
 
 Now that we have finished creating our workflow, it is time to test it.
 
-> ### {% icon hands_on %} Hands-on: Run the workflow
+> <hands-on-title>Run the workflow</hands-on-title>
 >
 > 1. *Click* on the **gear icon** and this time select **Run**.
 > 2. *Examine* the workflow run form.

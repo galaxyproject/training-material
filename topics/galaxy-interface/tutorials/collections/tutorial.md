@@ -41,7 +41,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_1.fq.gz
 https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
-> ### {% icon hands_on %} Hands-on: Set format to `fastqsanger.gz`
+> <hands-on-title>Set format to `fastqsanger.gz`</hands-on-title>
 > The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.  
 >
 > {% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
@@ -106,7 +106,7 @@ By now we see that a collection can be used to bundle a large number of items in
 https://zenodo.org/record/5119008/files/chrM.fa.gz
 ```
 
-> ### {% icon hands_on %} Hands-on: Set format to `fasta.gz`
+> <hands-on-title>Set format to `fasta.gz`</hands-on-title>
 > The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. 
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md reset_form="True" link="https://zenodo.org/record/5119008/files/chrM.fa.gz" format="fasta.gz" %}
@@ -116,7 +116,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 
 **BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing `BWA MEM` in the search box at the top left corner of Galaxy interface).
 
-> ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
+> <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
 > Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -146,7 +146,7 @@ You will see jobs being submitted and new datasets appearing in the history. Bec
 
 After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets. 
 
-> ### {% icon hands_on %} Hands-on: Call variants  
+> <hands-on-title>Call variants  </hands-on-title>
 >
 > Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `Map with BWA-MEM...` (output of **BWA-MEM** {% icon tool %})
@@ -172,7 +172,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with `SNPSift`: a tool specifically designed for manipulation of tab-delimited data. 
 
 
-> ### {% icon hands_on %} Hands-on: Create table of variants
+> <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Variant input file in VCF format"*: `Call variants on collection...` (output of **Call variants with lofreq** {% icon tool %})
@@ -200,7 +200,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-> ### {% icon hands_on %} Hands-on: Collapse a collection
+> <hands-on-title>Collapse a collection</hands-on-title>
 >
 > Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `SnpSift Extract Fields ...` (output of **SnpSift Extract Fields** {% icon tool %})
@@ -222,7 +222,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:
 
-> ### {% icon code-in %} Input: A collection with two items
+> <code-in-title>A collection with two items</code-in-title>
 > A collection element named `M117-bl.fq`
 >
 >```
@@ -256,7 +256,7 @@ chrM 16519 T C 36574.0 1039 0.99 2 3,0,713,321
 
 We will have a single dataset as the output:
 
-> ### {% icon code-out %} Output: A single dataset
+> <code-out-title>A single dataset</code-out-title>
 >
 >then the **Collapse Collection** {% icon tool %} will produce this:
 >
@@ -511,7 +511,7 @@ To create name: or group: tags prepend them with `#` (you can also use `name:`) 
 
 More about tags
 
-> ### {% icon tip %} Tip: More about tags
+> <tip-title>More about tags</tip-title>
 > Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. **Simple** tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. **Name** tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, **group** tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as "treatment" and "control".
 >
 >To learn mote about tags go to [training site](https://training.galaxyproject.org/training-material/search?query=tags).

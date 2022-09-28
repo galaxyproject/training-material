@@ -31,7 +31,7 @@ abbreviations:
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -103,7 +103,7 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
 - `contributions`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
-> ### {% icon hands_on %} Hands-on: Fill the basic metadata
+> <hands-on-title>Fill the basic metadata</hands-on-title>
 >
 > 1. Update the tutorial information in the header section of your tutorial:
 >
@@ -124,13 +124,13 @@ We also define metadata related to the pedagogical content of the tutorial, whic
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
-> ### {% icon hands_on %} Hands-on: Fill out the pedagogical metadata
+> <hands-on-title>Fill out the pedagogical metadata</hands-on-title>
 >
 > 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
 > 2. Define 2 learning objectives for the tutorial and add them to the metadata
 {: .hands_on}
 
-> ### {% icon comment %} When filling the pedagogical metadata
+> <comment-title>When filling the pedagogical metadata</comment-title>
 > We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
 >
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
@@ -217,7 +217,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
 
 The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
-> ### {% icon comment %} Markdown
+> <comment-title>Markdown</comment-title>
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .comment}
@@ -226,7 +226,7 @@ The Markdown content is then transformed into a user friendly webpage through a 
 
 To help developing the tutorial, we recommend to create a workflow of the different steps of the tutorial inside Galaxy first, and then you can create the structure of the tutorial automatically from that:
 
-> ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
+> <hands-on-title>Create the structure of the tutorial from a workflow</hands-on-title>
 >
 > 1. Create a small workflow with one or two steps on a running Galaxy instance
 > 2. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
@@ -250,7 +250,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >             --zenodo_link "URL to the Zenodo record (Optional)"
 >    ```
 >
->    > ### {% icon comment %} Using a local workflow
+>    > <comment-title>Using a local workflow</comment-title>
 >    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
 >    >
 >    > ```
@@ -271,7 +271,7 @@ The generated tutorial is structured with:
 - Multiple sections representing the steps of the analysis, complete with automatically generated hands-on blocks, as practicing is a vital part of the learning process
 - A conclusion to summarize what has been done in the tutorial (with a graphic)
 
-> ### {% icon hands_on %} Hands-on: Filling out the structure of the tutorial
+> <hands-on-title>Filling out the structure of the tutorial</hands-on-title>
 >
 > 1. Fill out the "Introduction" with a general introduction of the tutorial and a small description of the dataset (goals)
 > 2. Rename/restructure the sections with several levels and more explication
@@ -388,13 +388,13 @@ These boxes are defined always with the same structure:
 
 {% raw %}
 ```markdown
-> ### {% icon an_icon %} Type of box: Name of the box
-> list
-{: .type_of_box}
+> <type-title>Name of the box</type-title>
+> text goes here!
+{: .type}
 ```
 {% endraw %}
 
-You must follow this structure exactly for it to be rendered correctly.
+where type is something like `tip`, so `<tip-title>` and `{: .tip}`. You must follow this structure **exactly** for it to be rendered correctly.
 
 ## **Overview** box
 
@@ -419,15 +419,15 @@ This box at the top of each tutorial is automatically generated using the metada
 >
 {: .overview}
 
-> ### {% icon hands_on %} Hands-on: Checking the metadata
+> <hands-on-title>Checking the metadata</hands-on-title>
 >
 > 1. Check that the metadata added previously are correctly filling the overview box
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > What metadata hasn't been added to this box?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The take-home messages are not added to this box but into the last box of the tutorial
 >    > {: .solution}
@@ -441,7 +441,7 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 
 {% raw %}
 ```markdown
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial we will deal with:
 >
@@ -456,7 +456,7 @@ There is no need to fill out the list; this will be done automatically based off
 
 To avoid adding the "Introduction" and "Conclusion" sections in the agenda, you can add `{:.no_toc}` below the section name. This will be rendered as follows:
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial we will deal with:
 >
@@ -471,7 +471,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 {% raw %}
 ```markdown
-> ### {% icon hands_on %} Hands-on: Spliced mapping
+> <hands-on-title>Spliced mapping</hands-on-title>
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
@@ -503,7 +503,7 @@ For consistency please use:
 This will be rendered like:
 
 
-> ### {% icon hands_on %} Hands-on: Spliced mapping
+> <hands-on-title>Spliced mapping</hands-on-title>
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
@@ -530,7 +530,7 @@ The available icons are:
 
 {% raw %}
 ```markdown
-> ### {% icon hands_on %} Hands-on: My Step
+> <hands-on-title>My Step</hands-on-title>
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
 >    - {% icon param-text %} *"My text parameter"*: `my value`
@@ -547,7 +547,7 @@ The available icons are:
 
 which, when rendered, look like:
 
-> ### {% icon hands_on %} Hands-on: My Step
+> <hands-on-title>My Step</hands-on-title>
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
 >    - {% icon param-text %} *"My text parameter"*: `my value`
@@ -607,12 +607,12 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 
 {% raw %}
 ```markdown
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Sol for the first question
 > > 2. Sol for the second question
@@ -624,12 +624,12 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 
 Which will be rendered as:
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Sol for the first question
 > > 2. Sol for the second question
@@ -649,7 +649,7 @@ Tips boxes are really just for 'tips', usually hints regarding Galaxy operations
 
 {% raw %}
 ```markdown
-> ### {% icon tip %} Tip: Importing data via links
+> <tip-title>Importing data via links</tip-title>
 >
 > * Copy the link location
 > * Open the Galaxy Upload Manager
@@ -662,7 +662,7 @@ Tips boxes are really just for 'tips', usually hints regarding Galaxy operations
 
 Rendered:
 
-> ### {% icon tip %} Tip: Importing data via links
+> <tip-title>Importing data via links</tip-title>
 >
 > * Copy the link location
 > * Open the Galaxy Upload Manager
@@ -675,7 +675,7 @@ Rendered:
 
 {% raw %}
 ```markdown
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > - Edit the "Database/Build" to select "dm3"
 > - Rename the datasets according to the samples
 {: .comment}
@@ -684,7 +684,7 @@ Rendered:
 
 Rendered:
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > - Edit the "Database/Build" to select "dm3"
 > - Rename the datasets according to the samples
 {: .comment}
@@ -695,7 +695,7 @@ The detail box is used to give more background explanation on the subject. By de
 
 {% raw %}
 ```markdown
-> ### {% icon details %} More details on the ....
+> <details-title>More details on the ....</details-title>
 >
 > Add more details in Markdown...
 >
@@ -705,7 +705,7 @@ The detail box is used to give more background explanation on the subject. By de
 
 Rendered:
 
-> ### {% icon details %} More details on the ....
+> <details-title>More details on the ....</details-title>
 >
 > Add more details in Markdown...
 >
@@ -721,7 +721,7 @@ To render the boxes correctly, the syntax needs to be correct. If it doesn't wor
 
 {% raw %}
 ```markdown
-> ### {% icon warning %} Danger: You can lose data!
+> <warning-title>Danger: You can lose data!</warning-title>
 > Something really bad can happen here!
 {: .warning}
 ```
@@ -729,7 +729,7 @@ To render the boxes correctly, the syntax needs to be correct. If it doesn't wor
 
 Rendered:
 
-> ### {% icon warning %} Danger: You can lose data!
+> <warning-title>Danger: You can lose data!</warning-title>
 > Something really bad can happen here!
 {: .warning}
 
@@ -740,16 +740,16 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 {% raw %}
 ```markdown
-> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
+> <hands-on-title>Defining the topic for the tutorial</hands-on-title>
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it is
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 >    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
@@ -767,13 +767,13 @@ Normally a single column, with the boxes above one another, it will automaticall
 
 {% raw %}
 ```markdown
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```bash
 > > cat /tmp/test.ini
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > The file should look like:
 > >
 > > ```ini
@@ -789,13 +789,13 @@ Normally a single column, with the boxes above one another, it will automaticall
 
 Rendered (try it! resize your browser)
 
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```bash
 > > cat /tmp/test.ini
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > The file should look like:
 > >
 > > ```ini
@@ -811,13 +811,13 @@ If you leave off the `{: .code-2col}`, it will render as a single column always.
 
 {% raw %}
 ```markdown
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > cat /tmp/test.ini
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > The file should look like:
 >
 > ```ini
@@ -832,13 +832,13 @@ If you leave off the `{: .code-2col}`, it will render as a single column always.
 
 Rendered:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > cat /tmp/test.ini
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > The file should look like:
 >
 > ```ini
@@ -956,7 +956,7 @@ If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/i
 
 ## Footnotes
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > >
 > > ```
 > > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
@@ -964,7 +964,7 @@ If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/i
 > > {: .pre-break-lines}
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
 > {: .code-out}
 {: .code-2col}
@@ -1005,13 +1005,13 @@ abbreviations:
 
 And in your text you can use braces to refer to the term
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > <code>
 > > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
 > > </code>
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > The `/jobs` {API} will return {JSON}. When we call the {API} we'll get back this result {JSON}.
 > >
@@ -1028,7 +1028,7 @@ Sometimes you're writing a large tutorial and at one small step there are multip
 
 Include this markdown where you want your user to choose between the multiple paths:
 
-> ### {% icon code-in %} Input: Markdown
+> <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```
 > {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
@@ -1042,7 +1042,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 
 **NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > ```
 > > <div class="Ananas" markdown="1">
 > > - 🍍 are fantastic
@@ -1060,7 +1060,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > >
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > <div class="Ananas" markdown="1">
 > > - 🍍 are fantastic
@@ -1135,7 +1135,7 @@ For more information please look at this great article {% cite bebatut2018commun
 
 A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#bibliography))
 
-> ### {% icon tip %} Tip: Getting a bibtex citation from a doi
+> <tip-title>Getting a bibtex citation from a doi</tip-title>
 > If you have a DOI for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
 {: .tip}
 

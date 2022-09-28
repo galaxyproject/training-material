@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Monkeypatch the email lists: return `None` for both, then override as needed:
 > 

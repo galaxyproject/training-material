@@ -13,12 +13,12 @@ We can perform a test to determine whether the clustering within the tree is sta
 using by choosing from the `parsimony`, `unifrac.unweighted`, or `unifrac.weighted` commands. To run these we
 will first need to create a design file that indicates which treatment each sample belongs to.
 
-> ### {% icon hands_on %} Hands-on: Obtain design file
+> <hands-on-title>Obtain design file</hands-on-title>
 >
 > - Find the file `mouse.time.design` in your history (you imported this file at the start of this tutorial)
 > - Make sure the datatype is set to `mothur.design`.
 >
-> > ### {% icon tip %} Changing datatype of a datasets
+> > <tip-title>Changing datatype of a datasets</tip-title>
 > >  - Click on the **pencil icon** of the dataset
 > >  - Click on the **Datatypes** tab
 > >  - Select the new datatype from dropdown menu
@@ -55,7 +55,7 @@ F3D9     Early
 Using the `parsimony` command let's look at the pairwise comparisons. Specifically, let's focus on the
 early vs. late comparisons for each mouse:
 
-> ### {% icon hands_on %} Hands-on: Compare Early-vs-Late
+> <hands-on-title>Compare Early-vs-Late</hands-on-title>
 > - **Parsimony** {% icon tool %} with the following parameters
 >   - "tree" to the `tre` output from Tree.Shared (collection)
 >   - "group" to the design file described above
@@ -78,7 +78,7 @@ The two distance matrices that we generated earlier (i.e. `jclass.0.03.lt.ave.di
 Principal Coordinates (PCoA) uses an eigenvector-based approach to represent multidimensional
 data in as few dimensions as possible. Our data is highly dimensional (~9 dimensions).
 
-> ### {% icon hands_on %} Hands-on: PCoA
+> <hands-on-title>PCoA</hands-on-title>
 >
 > - **Pcoa** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
@@ -115,7 +115,7 @@ Alternatively, non-metric multidimensional scaling (NMDS) tries to preserve the 
 a user defined number of dimensions. We can run our data through NMDS with 2 dimensions with the following
 tool:
 
-> ### {% icon hands_on %} Hands-on: Nmds
+> <hands-on-title>Nmds</hands-on-title>
 >
 > - **Nmds** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
@@ -140,11 +140,11 @@ tool:
 >   - "maxdim" to `3`
 >   - "output logfile?" to `yes`
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > What are stress and R-squared values when using 3 dimensions?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > The stress value drops to 0.05 and the R2 value goes up to 0.99 (see logfile). Not bad.
 > > {: .solution }
 > {: .question}
@@ -163,7 +163,7 @@ The first analysis of molecular variance (AMOVA), tests whether the centers of t
 are more separated than the variation among samples of the same treatment. This is done using the distance
 matrices we created earlier and does not actually use ordination.
 
-> ### {% icon hands_on %} Hands-on: Amova
+> <hands-on-title>Amova</hands-on-title>
 >
 > - **Amova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
@@ -188,7 +188,7 @@ for this mouse. Thus, the observed separation in early and late samples is stati
 also see whether the variation in the early samples is significantly different from the variation in the late
 samples using the `Homova` command:
 
-> ### {% icon hands_on %} Hands-on: Homova
+> <hands-on-title>Homova</hands-on-title>
 >
 > - **Homova** {% icon tool %} with the following parameters
 >   - "phylip" to dist files from Dist.shared (collection)
@@ -209,7 +209,7 @@ Next, we might ask which OTUs are responsible for shifting the samples along the
 this by measuring the correlation of the relative abundance of each OTU with the two axes in the NMDS dataset.
 We do this with the `corr.axes` tool:
 
-> ### {% icon hands_on %} Hands-on: Correlation
+> <hands-on-title>Correlation</hands-on-title>
 >
 > - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension (collection)
@@ -279,7 +279,7 @@ F3D8     8
 F3D9     9
 ```
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension
@@ -336,11 +336,11 @@ Otu0019    2.07     3.48     2.90    4.18    0.94     0.63    1.40    2.54      
 Again we can cross reference these OTU labels with the consensus classifications in the taxonomy file to get
 the names of these organisms.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What organisms were the top 5 contributing OTUs classified as?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Note down the names of the top 5 OTUs as output by thesummary output of get.communitytype.
 > > Then look at the taxonomy file output by Classify.otu.
 > >
@@ -355,7 +355,7 @@ In addition to the use of `corr.axes` and `get.communitytype` we have several to
 different groupings of samples. The first we'll demonstrate is `metastats`, which is a non-parametric T-test
 that determines whether there are any OTUs that are differentially represented between the samples from early and late in this study.
 
-> ### {% icon hands_on %} Hands-on: T-test
+> <hands-on-title>T-test</hands-on-title>
 >
 > - **Metastats** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
@@ -375,11 +375,11 @@ Otu0005    0.068139      0.000087          0.002957        0.070058      0.00016
 
 These data tell us that OTUs 1, 2, and 3 was significantly different between the early and late samples.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 >  Which of the top 10 OTUs in your output were significantly different between early and late samples?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Looking at the p-value cut-off and using your favorite cutoff threshold (say 0.01).
 > > Answer to the question is all OTUs with a value lower than this threshold. Note that these OTU labels may
 > > be different for you and may very between one repetition of this tutorial to the next, and therefore may
@@ -389,7 +389,7 @@ These data tell us that OTUs 1, 2, and 3 was significantly different between the
 
 Another non-parametric tool we can use as an alternative to metastats is lefse:
 
-> ### {% icon hands_on %} Hands-on: Lefse
+> <hands-on-title>Lefse</hands-on-title>
 >
 > - **Lefse** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared
@@ -413,7 +413,7 @@ late samples
 Finally, Mothur has an implementation of the random forest algorithm build into her as classify.rf. This will tell
 us which features (i.e. OTUs) are useful in discriminating between the two groups of samples:
 
-> ### {% icon hands_on %} Hands-on: Classify.rf
+> <hands-on-title>Classify.rf</hands-on-title>
 >
 > - **Classify.rf** {% icon tool %} with the following parameters
 >   - "shared" to Subsample.shared

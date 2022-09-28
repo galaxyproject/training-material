@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Final code listing (excluding the 2 added imports).
 > 

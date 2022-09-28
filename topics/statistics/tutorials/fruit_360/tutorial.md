@@ -34,7 +34,7 @@ training data, DL techniques have become very popular in recent years. In this t
 we will use Galaxy's ML toolkit to build a DL model to classify fruit and vegetable 
 images. Our DL model is trained and evaluated on Fruit 360 dataset ({% cite Murean2018 %})  
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -183,7 +183,7 @@ Orange:8, Peach:9.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -191,7 +191,7 @@ Orange:8, Peach:9.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename a history
+>    > <tip-title>Rename a history</tip-title>
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
@@ -250,7 +250,7 @@ its OHE representation.
 
 ### **Extract the Label column from train_y_10**
 
-> ### {% icon hands_on %} Hands-on: Advanced Cut
+> <hands-on-title>Advanced Cut</hands-on-title>
 >
 > - {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
 >    - *"File to cut"* : Select `train_y_10`
@@ -264,7 +264,7 @@ its OHE representation.
 
 ### **Create One-Hot Encoding (OHE) representation of training labels**
 
-> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+> <hands-on-title>One-Hot Encoding</hands-on-title>
 >
 > - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
 >    - *"Input file"* : Select the output of the previous step.
@@ -276,7 +276,7 @@ its OHE representation.
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
@@ -339,7 +339,7 @@ highest probability is predicted by CNN. The model config can be downloaded as a
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -364,7 +364,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
 > - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
 >    - *"Select a scheme"*: `Train and Validate`
@@ -384,7 +384,7 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
@@ -402,7 +402,7 @@ in the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
+> <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`

@@ -33,7 +33,7 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 > This tutorial teaches the same basic content as [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %}), but requires less knowledge of biology to understand the questions this tutorial addresses.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -44,7 +44,7 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 
 # Introduction
 
-> ### {% icon requirements %} Requirements
+> <comment-title>Requirements</comment-title>
 >
 > To run this practical you will need
 >
@@ -54,13 +54,13 @@ This practical aims to familiarize you with the Galaxy user interface. It will t
 {: .comment}
 
 
-> ### {% icon question %} Our Motivating Question
+> <question-title>Our Motivating Question</question-title>
 > *I wonder if genes on opposite strands ever overlap with each other, and if so, how common is that?*
 {: .question}
 
 To explore this question we need a basic understanding of *genomes, chromosomes, strands,* and  *genes.*
 
-> ### {% icon comment %} Definitions 1
+> <comment-title>Definitions 1</comment-title>
 >
 > - **Genome**
 >
@@ -100,7 +100,7 @@ To answer this question we need to know where genes start and stop on human chro
 
 It turns out that for this particular question (and for many others), most **Galaxy** instances can help us find this information.
 
-> ### {% icon hands_on %} Hands-on: Log in to Galaxy
+> <hands-on-title>Log in to Galaxy</hands-on-title>
 > In your web browser, *go to* **your Galaxy instance** and *log in or register*.
 {: .hands_on}
 
@@ -108,7 +108,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ![Galaxy interface showing history panel on the right, tools panel on the left and main panel at the center](../../images/galaxy_interface.png)
 
-> ### {% icon hands_on %} Hands-on: Start with an empty history
+> <hands-on-title>Start with an empty history</hands-on-title>
 >
 > - At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets
 >
@@ -120,7 +120,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
-> ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
+> <hands-on-title>Open **Get Data** toolbox</hands-on-title>
 >
 > 1. *Click* on the **Get Data** toolbox to expand it.
 >
@@ -132,7 +132,7 @@ The **Get Data** toolbox contains a list of data sources that this Galaxy instan
 
 ### Get genes
 
-> ### {% icon hands_on %} Hands-on: Go to UCSC
+> <hands-on-title>Go to UCSC</hands-on-title>
 >
 > 1. *Click* on the tool {% tool [UCSC Main table browser](ucsc_table_direct1) %} to go to UCSC.
 >
@@ -163,7 +163,7 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 
 Time for a few more definitions.
 
-> ### {% icon comment %} Definitions 2
+> <comment-title>Definitions 2</comment-title>
 >
 > - **Reference genome**
 >
@@ -184,7 +184,7 @@ GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing 
 
 So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
 
-> ### {% icon hands_on %} Hands-on: Limit the region and get the data.
+> <hands-on-title>Limit the region and get the data.</hands-on-title>
 >
 > 1. Say that we just want chromosome 22
 >    - For **region** select `position`.
@@ -222,7 +222,7 @@ You can find more information in the [Undestanding Galaxy history system](https:
 
 ## Examine the data
 
-> ### {% icon hands_on %} Hands-on: Look at the data.
+> <hands-on-title>Look at the data.</hands-on-title>
 > Once the dataset is green, *click* on the dataset name (something like **UCSC Main on Human...**)
 {: .hands_on}
 
@@ -238,18 +238,18 @@ From this preview we can obtain a huge amount of useful information:
 
 The dataset preview is informative, but you can't see much of the actual dataset.  Lets use one of the dataset icons to see the whole dataset:
 
-> ### {% icon hands_on %} Hands-on: Look at all the data.
+> <hands-on-title>Look at all the data.</hands-on-title>
 > 1. Click on the {% icon galaxy-eye %} (eye) icon to view the contents of the dataset. This displays all of the data.
 >
 >    ![Full dataset in central panel](../../images/genes_human_chr22_dataset_view.png)
 >
 > 2. Use the side scroll bars to move through the file.
 >
-> > ### {% icon question %} Questions
+> > <question-title></question-title>
 > >
 > > How many columns include the BED file?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > Our BED file includes 12 columns, on which the information about the genes distribution along the genome in the chromosome 12 is summarized.
 > > {: .solution}
@@ -258,7 +258,7 @@ The dataset preview is informative, but you can't see much of the actual dataset
 >
 {: .hands_on}
 
-> ### {% icon details %} Additional information about BED files
+> <details-title>Additional information about BED files</details-title>
 >
 >[BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) is one of several well-established tabular formats for genomic data.  Other formats include GFF3 and GTF.  For the type of analysis we are doing today, BED format is easiest to work with.  BED was created to power the UCSC Genome Browser.  BED files contain between 3 and 15 columns.  Our example BED file describes genes and contains 12 columns.
 >
@@ -286,7 +286,7 @@ Galaxy allows you to name your analyses (your histories) and your datasets.  We 
 
 You don't have to do this.  Galaxy is quite happy for you to have an infinite number of "Unnamed history" histories, and to have all your datasets be obscurely named.  However, once you've run your first 5 unnamed analyses, all with obscurely named datasets, you'll might wish you would have named everything.
 
-> ### {% icon hands_on %} Hands-on: Name your stuff
+> <hands-on-title>Name your stuff</hands-on-title>
 >
 > 1. **Name your history** to be meaningful and easy to find.
 >    - *Click* on the title of the history and enter something like **Intro - Strands** as the name.  Hit the `enter` key on your keyboard to save it.
@@ -318,7 +318,7 @@ It turns out that all of these steps are easy in Galaxy!
 How might we do this?  Column 6 contains the strand information.  Can we split genes into two datasets based on the value of Column 6.  How?  Lets take a look at our available tools.  And *whoa! There are over 40 toolboxes, and several hundred tools.* How are we going to find a tool that can do the split?
 
 
-> ### {% icon hands_on %} Searching for and launching a tool
+> <hands-on-title>Searching for and launching a tool</hands-on-title>
 >
 > 1. Try the **tools search box**.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
 > 2. If you haven't already searched with it, *enter* `filter` in the **tool search box**.  Among the results you should see
@@ -332,7 +332,7 @@ How might we do this?  Column 6 contains the strand information.  Can we split g
 
 It doesn't say anything about **Filter** being able to split a file into multiple files.  It does look like we can use Filter to get only genes on the forward strand, or only genes on the reverse strand.  We would have to run Filter twice, once for forward strand genes, and once for reverse strand genes. Let's do that.
 
-> ### {% icon hands_on %} Hands-on: Run the Filter tool to get genes on the forward strand.
+> <hands-on-title>Run the Filter tool to get genes on the forward strand.</hands-on-title>
 >
 > * The filter tool has 3 fields:
 >
@@ -353,7 +353,7 @@ This adds another dataset to your history. This one should contain only genes on
 
 Now we want to get the genes on the reverse strand.  There are actually many ways to get this.  Here are two of them.
 
-> ### {% icon hands_on %} Hands-on: Get genes on the reverse strand
+> <hands-on-title>Get genes on the reverse strand</hands-on-title>
 >
 > **Method 1**
 >
@@ -376,7 +376,7 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 
 The rerun button can be a huge help as you run more complex tools.
 
-> ### {% icon comment %} Empty result?
+> <comment-title>Empty result?</comment-title>
 >
 > If you used Method 2 and didn't explicitly set the dataset, then you ran Filter on the `Genes, forward strand` dataset. None of the genes in the forward strand dataset have "-" in column 6 so all of them were filtered out from the result.
 >
@@ -396,7 +396,7 @@ The number of genes in the `forward` plus `reverse` datasets should be the same 
 
 Genes are an example of a *genomic interval*.
 
-> ### {% icon comment %} Definitions 3
+> <comment-title>Definitions 3</comment-title>
 >
 > - **Genomic interval**
 >   In Galaxy, a *genomic interval* is a something that spans part of a chromosome (or some other linear frame of reference like a contig).  Genes are a common example of a genomic interval.  Even a chromosome is a genomic interval, albeit a very long one.
@@ -404,7 +404,7 @@ Genes are an example of a *genomic interval*.
 
 Galaxy excels at answering questions about genomic intervals and different sets of genomic intervals relate to each other.  Lets take a look.
 
-> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
+> <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
 > * The next step is finding overlapping intervals, so type `interval` in the tool search box. There are many results from this search, so you might want to click the *Show sections* button (available on Galaxy servers) to see which sections the tools are organised into.
 > * *Explore* the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.
@@ -412,7 +412,7 @@ Galaxy excels at answering questions about genomic intervals and different sets 
 
 Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and particularly **Intersect** have the most promise.  Let's try **Intersect**.
 
-> ### {% icon hands_on %} Hands-on: Genomic Interval Tools
+> <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
 > 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
 >     - *"Return"*:  `Overlapping Intervals`.
@@ -447,7 +447,7 @@ What tool can we use to combine the two datasets into one?  Try *searching* for 
 
 It turns out that **Lift-Over** and **Collection Operations** are not what we want.  (But, take a look at them: if you are going to work with genomic data it won't take long before you'll need both.)
 
-> ### {% icon hands_on %} Hands-on: *Concatenate* two datasets
+> <hands-on-title>*Concatenate* two datasets</hands-on-title>
 >
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
@@ -470,7 +470,7 @@ Once the concatenate operation is finished, preview the dataset in your history 
 
 Galaxy knows about several visualization options for lots of different dataset types, including BED.  Whenever you preview a dataset in the history panel, Galaxy provides links to these visualizations.  For BED files (which is the format we have), options include **IGB, IGV,** and **UCSC main.**  IGB and IGV are widely used desktop applications and eventually you may want to install one or both of them.  For now, let's visualize the data at UCSC, using the UCSC *Genome* Browser.
 
-> ### {% icon hands_on %} Hands-on: Display data in Genome Browser
+> <hands-on-title>Display data in Genome Browser</hands-on-title>
 >
 > 1. *Click* on your `Overlapping genes` dataset in your history panel. This will show the dataset preview in the history panel.
 > 2. *Click* on the **display at UCSC main** link.
@@ -481,7 +481,7 @@ Galaxy knows about several visualization options for lots of different dataset t
 {: .hands_on}
 
 
-> ### {% icon comment %} Background: UCSC Genome Browser
+> <comment-title>Background: UCSC Genome Browser</comment-title>
 >
 > * *Genome browsers* are software for viewing genomic information graphically.  The [UCSC Genome Browser](https://genome.ucsc.edu/cgi-bin/hgGateway) (and most genome browsers) typically display different types of *annotation* about a region of a genome.  This is displayed as a stack of *tracks* and each track contains a different type of information.
 >
@@ -492,7 +492,7 @@ Galaxy knows about several visualization options for lots of different dataset t
 
 Now, take a look at one of our results.  (Any pair of overlapping genes will do.)  Our data is in the second to top track (**User Track / User Supplied Track**). That track shows a line of small black boxes, sometimes connected with a line.
 
-> ### {% icon hands_on %} Zoom in on an area of the chromosome that shows a set of *linked* black boxes
+> <hands-on-title>Zoom in on an area of the chromosome that shows a set of *linked* black boxes</hands-on-title>
 > To zoom in,
 > * *Click* on the **Scale** track (the top track) just to the left of the start of the black boxes.
 > * Now *drag* the mouse across the Scale track to just to the right of the  black boxes and let go.
@@ -511,7 +511,7 @@ The black boxes connected by lines represent genes, and each set of connected bo
 
 Um, *what's up with the boxes and the lines connecting them?*
 
-> ### {% icon comment %} Definitions 4
+> <comment-title>Definitions 4</comment-title>
 >
 > - **Exon**
 >   In humans (and in all plants and animals) the molecules that are built from genes are often only built from a part of the DNA in the gene. The sections of DNA that can produce the molecules are called *exons*.
@@ -529,7 +529,7 @@ But, our conclusion may not be as *significant* as we had hoped. If only parts o
 
 Let's refine our question slightly
 
-> ### {% icon question %} Our Revised Motivating Question
+> <question-title>Our Revised Motivating Question</question-title>
 > *I wonder if **exons** on opposite strands ever overlap with each other, and if so, how common is that?*
 {: .question}
 
@@ -546,7 +546,7 @@ Run the [Create a reusable workflow from a history]({% link topics/galaxy-interf
 
 We want to run the same analysis, but this time only look for overlaps that happen in *exons*, the parts of genes that produce stuff our body uses.  Before we start looking at exons, let's start a new history, one that contains only the genes file we got from UCSC. We could go back to UCSC and refetch the file, but there is an easier way.
 
-> ### {% icon hands_on %} Hands-on: Create a new history that contains some data from current history
+> <hands-on-title>Create a new history that contains some data from current history</hands-on-title>
 >
 > 1. *Click* on the **gear icon** at the top of the current history.
 > 2. *Select* the **Copy Datasets** option from the pull down menu.  This launches the copy datasets form.
@@ -569,7 +569,7 @@ The first method involves going back to the UCSC Table Browser.  Everything on t
 
 The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
 
-> ### {% icon hands_on %} Get the exon data
+> <hands-on-title>Get the exon data</hands-on-title>
 >
 > 1. Get the exon information, either by revisiting UCSC, or by using the {% tool [Gene BED To Exon/Intron/Codon BED expander](gene2exon1) %} tool.  If you use the expander tool select **Coding Exons only** from the **Extract** pull-down.
 > 2. Give the resulting dataset a meaningful name.
@@ -586,7 +586,7 @@ Your history should now have two datasets: one describing entire genes, and one 
 
 When you did the *History to Workflow* tutorial you created a new workflow that was then added to your list of defined workflows.
 
-> ### {% icon hands_on %} Run the workflow on the exon data.
+> <hands-on-title>Run the workflow on the exon data.</hands-on-title>
 >
 > 1. *Click* the **Workflow** tab in the menu at the top of the Galaxy page.
 >

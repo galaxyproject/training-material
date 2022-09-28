@@ -62,7 +62,7 @@ Multiple tools exist to perform the masking: [RepeatMasker](https://www.repeatma
 
 In this tutorial you will learn how to soft mask the genome sequence of a small eukaryote: Mucor mucedo (a fungal plant pathogen). You can learn how this genome sequence was assembled by following the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}). We will use RepeatMasker, which is probably the simplest solution giving an acceptable result before annotating the genome in the [Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -73,7 +73,7 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 
 # Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -94,12 +94,12 @@ In this tutorial you will learn how to soft mask the genome sequence of a small 
 
 Let's run RepeatMasker, by selected the input assembly in fasta format. We select the soft masking option, and we choose to use the Dfam database.
 
-> ### {% icon comment %} Choosing the right species
+> <comment-title>Choosing the right species</comment-title>
 >
 > We select the `Human (Homo sapiens)` species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
@@ -117,11 +117,11 @@ RepeatMasker produces 4 output files:
 - `output log`: this is a tabular file listing all repeats.
 - `repeat catalogue`: this one contains the list of all repeat sequences that were identified, with their position, and their similarity with known repeats from the Dfam database.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What proportion of the whole genome sequence is masked?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You should find it in the `repeat statistics` output. It should be ~2.41%.
 > >

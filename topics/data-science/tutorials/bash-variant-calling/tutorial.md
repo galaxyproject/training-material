@@ -25,13 +25,13 @@ In this tutorial we are working with files from a long-term evolution study of a
 
 The whole proccess is designed to be run in RStudio as an Interactive Tool, directly in Galaxy.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is significantly based on [the Carpentries](https://carpentries.org) ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/) lesson
 >
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -43,14 +43,14 @@ The whole proccess is designed to be run in RStudio as an Interactive Tool, dire
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
-> ### {% icon hands_on %} Software to use
+> <hands-on-title>Software to use</hands-on-title>
 >
 > The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 > We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
 > Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
-> > ### {% icon code-in %} Environment and Packages
+> > <code-in-title>Environment and Packages</code-in-title>
 > > ```bash
 > > $ conda create -n name_of_your_env bwa samtools bcftools
 > > $ conda activate name_of_your_env
@@ -85,7 +85,7 @@ The alignment process consists of two steps:
 
 # Setting up
 
-> ### {% icon hands_on %} Download Genome
+> <hands-on-title>Download Genome</hands-on-title>
 >
 > First we download the reference genome for *E. coli* REL606. Although we could copy or move the file with `cp` or `mv`, most genomics workflows begin with a download step, so we will practice that here.
 >
@@ -117,7 +117,7 @@ The alignment process consists of two steps:
 >
 > We will also download a set of trimmed FASTQ files to work with that will enable us to run our variant calling workflow quite quickly.
 >
-> > ### {% icon code-in %} Getting easy-to-work FASTQ files
+> > <code-in-title>Getting easy-to-work FASTQ files</code-in-title>
 > > ```bash
 > > $ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 > > $ tar xvf sub.tar.gz
@@ -127,7 +127,7 @@ The alignment process consists of two steps:
 > >
 > You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because `mkdir` can accept multiple new directory names as input.
 >
-> > ### {% icon code-in %} Create result directories
+> > <code-in-title>Create result directories</code-in-title>
 > > ```bash
 > > $ mkdir -p results/sam results/bam results/bcf results/vcf
 > > ```
@@ -138,7 +138,7 @@ The alignment process consists of two steps:
 > ### {%icon hands_on%} Index the reference genome
 > Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 >
-> > ### {% icon code-in %} Indexing with `bwa`
+> > <code-in-title>Indexing with `bwa`</code-in-title>
 > > ```bash
 > > $ bwa index data/ref_genome/ecoli_rel606.fasta
 > > ```
@@ -146,7 +146,7 @@ The alignment process consists of two steps:
 >
 > While the index is created, you will see output that looks something like this:
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > [bwa_index] Pack FASTA... 0.04 sec
 > > [bwa_index] Construct BWT for the packed sequence...
@@ -190,7 +190,7 @@ is faster and more accurate.
 > > ```
 > {: .code-in}
 > >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > [M::bwa_idx_load_from_disk] read 0 ALT contigs
 > > [M::process] read 77446 sequences (10000033 bp)...
@@ -248,7 +248,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > ### {%icon hands_on%} Sort BAM file by coordinates
 >
 > Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
-> > ### {% icon code-in%} `sort` command
+> > <code-in-title>`sort` command</code-in-title>
 > > ```bash
 > > $ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 > > ```
@@ -266,7 +266,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 >
 > You can use samtools to learn more about this bam file as well.
 >
-> > ### {% icon code-in%} `flagstat` command
+> > <code-in-title>`flagstat` command</code-in-title>
 > > ```bash
 > > samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 > > ```
@@ -311,12 +311,12 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
 use the command `mpileup`. The flag `-O b` tells bcftools to generate a
 bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
-> > ### {% icon code-in%} `mpileup` command
+> > <code-in-title>`mpileup` command</code-in-title>
 > > ```bash
 > > $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 > > ```
 > {: .code-in}
-> > ### {% icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > [mpileup] 1 samples in 1 input files
 > > ```
@@ -329,7 +329,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 > ### {%icon hands_on%} Step 2: Detect the single nucleotide variants (SNVs)
 >
 > Identify SNVs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
-> > ### {% icon code-in%} `call` command
+> > <code-in-title>`call` command</code-in-title>
 > > ```bash
 > > $ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf
 > > ```
@@ -340,7 +340,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 > ### {%icon hands_on %} Step 3: Filter and report the SNV variants in variant calling format (VCF)
 >
 > Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
-> > ### {% icon code-in%} Filtering with `vcfutils.pl` command
+> > <code-in-title>Filtering with `vcfutils.pl` command</code-in-title>
 > > ```bash
 > > $ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
 > > ```
@@ -349,7 +349,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Explore the VCF format:
+> <hands-on-title>Explore the VCF format:</hands-on-title>
 >
 > > {% icon code-in%}
 > > ```bash
@@ -450,11 +450,11 @@ For our file, the metrics presented are GT:PL:GQ.
 The Broad Institute's [VCF guide](https://www.broadinstitute.org/gatk/guide/article?id=1268) is an excellent place
 to learn more about the VCF file format.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Use the `grep` and `wc` commands you have learned to assess how many variants are in the vcf file.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > > {% icon code-in%}
 > > > ```bash
@@ -471,7 +471,7 @@ to learn more about the VCF file format.
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Assess the alignment (visualization) - optional step
+> <hands-on-title>Assess the alignment (visualization) - optional step</hands-on-title>
 >
 > It is often instructive to look at your data in a genome browser. Visualization will allow you to get a "feel" for
 > the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
@@ -480,7 +480,7 @@ to learn more about the VCF file format.
 > Institute's Integrative Genomics Viewer (IGV) which requires
 > software installation and transfer of files.
 >
-> > ### {% icon code-in %}  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:
+> > <code-in-title> In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</code-in-title>
 > >
 > > ```bash
 > > $ samtools index results/bam/SRR2584866.aligned.sorted.bam
@@ -495,14 +495,14 @@ to learn more about the VCF file format.
 >
 > In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file:
 >
-> > ### {% icon code-in%} Visualize with `tview`
+> > <code-in-title>Visualize with `tview`</code-in-title>
 > >
 > > ```bash
 > > $ samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > 1         11        21        31        41        51        61        71        81        91        101       111       121
 > > AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
@@ -542,12 +542,12 @@ to learn more about the VCF file format.
 > this box, type the name of the "chromosome" followed by a colon and the position of the variant you would like to view
 > (e.g. for this sample, type `CP000819.1:50` to view the 50th base. Type `Ctrl^C` or `q` to exit `tview`.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > Visualize the alignment of the reads for our `SRR2584866` sample. What variant is present at
 > > position 4377265? What is the canonical nucleotide in that position?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > ```bash
 > > > $ samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
@@ -599,7 +599,7 @@ to learn more about the VCF file format.
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: BWA alignment options
+> <tip-title>BWA alignment options</tip-title>
 > BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
 > reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
 > as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it

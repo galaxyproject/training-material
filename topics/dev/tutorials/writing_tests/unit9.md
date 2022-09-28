@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Factor out the logic for obtaining both lists:
 > 1. Create 2 functions that take a transaction object as an argument and return the lists.

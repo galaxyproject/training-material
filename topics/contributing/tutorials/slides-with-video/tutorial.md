@@ -22,7 +22,7 @@ contributors:
 
 Based on the work by Delphine Larivière and James Taylor with their [COVID-19 Lectures](https://github.com/galaxyproject/video-lectures/) we have implemented a similar feature in the Galaxy Training Network.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -112,7 +112,7 @@ Oftentimes the services don't understand part of speech, so by adding adjectives
 
 Lastly, we need to tell the GTN framework we would like videos to be generated.
 
-> ### {% icon hands_on %} Hands-on: Enable video
+> <hands-on-title>Enable video</hands-on-title>
 >
 > 1. Edit the `slides.html` for your tutorial
 > 2. Add `video: true` to the top

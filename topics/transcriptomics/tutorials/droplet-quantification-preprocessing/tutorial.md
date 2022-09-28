@@ -53,7 +53,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining FASTQ files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -87,7 +87,7 @@ We've provided you with some example data to play with, a small subset of the re
 Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl [here](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
 
-> ### {% icon hands_on %} Hands-on: Data upload - Part 1
+> <hands-on-title>Data upload - Part 1</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the Experimental Design table, sequencing reads 1 & 2, the GTF and fasta files from [Zenodo]({{ page.zenodo_link }})
@@ -106,14 +106,14 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Have a look at the files you now have in your history.
 > 1. Which of the FASTQ files do you think contains the barcode sequences?
 > 2. Given the chemistry this study should have, are the barcode/UMI reads the correct length?
 > 3. What is the 'N701' referring to?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, rename these files N701-Read1 and N701-Read2.
 > > 2. You can see Read 1 is only 20 bp long, which for original Drop-Seq is 12 bp for cell barcode and 8 bp for UMI. This is correct! Be warned - 10x Chromium (and many technologies) change their chemistry over time, so particularly when you are accessing public data, you want to check and make sure you have your numbers correct!
@@ -130,17 +130,17 @@ To generate gene-level quantifications based on transcriptome quantification, Al
 
 In your example data you will see the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript/ gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Which of the 'attributes' in the last column of the GTF files contains the transcript and gene identifiers?
 >
 >
->   > ### {% icon tip %} Hint
+>   > <tip-title>Hint</tip-title>
 >   >
 >   > The file is organised such that the last column (headed 'Group') contains a wealth of information in the format: attribute1 "information associated with attribute 1";attribute2 "information associated with attribute 2" etc.
 >   {: .tip}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > *gene_id* and *transcript_id* are each followed by "ensembl gene_id" and "ensembl transcript_id"
 > {: .solution}
 {: .question}
@@ -149,7 +149,7 @@ It's now time to parse the GTF file using the [rtracklayer](https://bioconductor
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> ### {% icon hands_on %} Hands-on: Generate a filtered FASTA and transcript-gene map
+> <hands-on-title>Generate a filtered FASTA and transcript-gene map</hands-on-title>
 >
 > 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
 >    - {% icon param-file %} *"Ensembl GTF file"*: `GTF file in the history` {% icon galaxy-history %}
@@ -171,7 +171,7 @@ It's now time to parse the GTF file using the [rtracklayer](https://bioconductor
 
 Alevin collapses the steps involved in dealing with dscRNA-seq into a single process. Such tools need to compare the sequences in your sample to a reference containing all the likely transcript sequences (a 'transcriptome'). This will contain the biological transcript sequences known for a given species, and perhaps also technical sequences such as 'spike ins' if you have those.
 
-> ### {% icon details %} How does Alevin work?
+> <details-title>How does Alevin work?</details-title>
 >
 > To be able to search a transcriptome quickly, Alevin needs to convert the text (FASTA) format sequences into something it can search quickly, called an 'index'. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often. Making these indices is time-consuming! Have a look at the uncompressed FASTA to see what it starts with.
 >
@@ -190,20 +190,20 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 ![Accessing tools in the tutorial option within Galaxy](../../images/wab-tutorial-option-filler.png "Click the tool in the tutorial with Galaxy")
 
-> ### {% icon hands_on %} Hands-on: Running Alevin
+> <hands-on-title>Running Alevin</hands-on-title>
 >
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
 >
->     > ### {% icon question %} Questions
+>     > <question-title></question-title>
 >     >
 >     > Try to fill in the parameters of Alevin using what you know!
 >     >
->     >   > ### {% icon tip %} Tip: Strandedness?
+>     >   > <tip-title>Strandedness?</tip-title>
 >     >   >
 >     >   > The Salmon documentation on 'Fragment Library Types' and running the Alevin command ([salmon.readthedocs.io/en/latest/library_type.html](https://salmon.readthedocs.io/en/latest/library_type.html]) and [salmon.readthedocs.io/en/latest/alevin.html](https://salmon.readthedocs.io/en/latest/alevin.html)) will help here, although keep in mind the image there is drawn with the RNA 5' on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3' tail and thus effectively the bottom or reverse strand...)
 >     >   {: .tip}
 >     >
->     >   > ### {% icon solution %} Solution
+>     >   > <solution-title></solution-title>
 >     >   >    - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
 >     >   >       - You are going to generate the binary index using your filtered FASTA!
 >     >   >    - {% icon param-file %} *"Transcripts FASTA file"*: `Filtered FASTA`
@@ -222,7 +222,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     {: .question}
 {: .hands_on}
 
-> ### {% icon comment %} What if I'm running a 10x sample?
+> <comment-title>What if I'm running a 10x sample?</comment-title>
 >
 > The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead.
 {: .comment}
@@ -235,13 +235,13 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 
 This is the matrix market (MTX) format.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > After you've run Alevin, {% icon galaxy-eye %} look through all the different files. Can you find:
 > 1. The Mapping Rate?
 > 2. How many cells are present in the matrix output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} meta_info.json. You can see the mapping rate is a paltry `24.75%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
 > > 2. Inspect {% icon galaxy-eye %} the file {% icon param-file %} 'quants_mat_rows.txt', and you can see it has `2163` lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!
@@ -250,7 +250,7 @@ This is the matrix market (MTX) format.
 >
 {: .question}
 
-> ### {% icon warning %} Warning!: Choose the appropriate input going forward!
+> <warning-title>Warning!: Choose the appropriate input going forward!</warning-title>
 > Make certain to use **quants_mat.mtx.gz**  and NOT **quants_tier.mtx.gz** going forward.
 {: .warning}
 
@@ -260,7 +260,7 @@ This is the matrix market (MTX) format.
 
 The question we're looking to answer here, is: "do we have mostly a have a single cell per droplet"? That's what experimenters are normally aiming for, but it's not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.
 
-> ### {% icon hands_on %} Hands-on: Generate a raw barcode QC plot
+> <hands-on-title>Generate a raw barcode QC plot</hands-on-title>
 >
 > 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `No`
@@ -284,7 +284,7 @@ In that plot, you can see the clearer 'knee' bend, showing the cut-off between e
 
 The right hand plots are density plots from the first one, and the thresholds are generated either using [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) or by the method described in the discussion mentioned above. We could use any of these thresholds to select cells, assuming that anything with fewer counts is not a valid cell. By default, Alevin does something similar, and we can learn something about that by plotting just the barcodes Alevin retains.
 
-> ### {% icon hands_on %} Hands-on: Generate Alevin's barcode QC plot
+> <hands-on-title>Generate Alevin's barcode QC plot</hands-on-title>
 >
 > 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `Yes`
@@ -316,7 +316,7 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 
 ## Generate an unprocessed matrix in a usable format
 
-> ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
+> <hands-on-title>Stopping Alevin from thresholding</hands-on-title>
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Click re-run on the last Alevin output)
 >    - *"Optional commands"*
 >    - *"keepCBFraction"*: '1' - i.e. keep them all!
@@ -325,11 +325,11 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 > {% snippet faqs/galaxy/tools_rerun.md %}
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many cells are in the output now?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `22539` cells are in the quants_mat_rows now! Far more than the Alevin-filtered `2163`. This needs some serious filtering with EmptyDrops!
 > >
@@ -339,11 +339,11 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 
 Alevin outputs MTX format, which we can pass to the dropletUtils package and run emptyDrops. Unfortunately the matrix is in the wrong orientation for tools expecting files like those produced by 10X software (which dropletUtils does). We need to 'transform' the matrix such that cells are in columns and genes are in rows.
 
-> ### {% icon warning %} Be careful!
+> <warning-title>Be careful!</warning-title>
 > Don't mix up files from the different Alevin runs! Use the later run, which has higher numbers in the history!
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: Transform matrix
+> <hands-on-title>Transform matrix</hands-on-title>
 >
 > 1. {% tool [salmonKallistoMtxTo10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5) %} with the following parameters:
 >    - {% icon param-file %} *".mtx-format matrix"*: `quants_mat.mtx.gz` (output of **Alevin** {% icon tool %})
@@ -359,11 +359,11 @@ The output is a matrix in the correct orientation for the rest of our tools. How
 
 ## Adding in Gene metadata
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Where can we find this gene information?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Our old friend the GTF file!
 > >
@@ -371,11 +371,11 @@ The output is a matrix in the correct orientation for the rest of our tools. How
 >
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Which of the 'attributes' in the last column of that file contains the gene acronym?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > gene_name
 > >
@@ -385,7 +385,7 @@ The output is a matrix in the correct orientation for the rest of our tools. How
 
 We're now going to re-run {% icon galaxy-refresh %} the tool that extracts information from our GTF file.
 
-> ### {% icon hands_on %} Hands-on: Generate gene information
+> <hands-on-title>Generate gene information</hands-on-title>
 >
 > 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
 >    - *"Feature type for which to derive annotation"*: `gene`
@@ -401,7 +401,7 @@ We're now going to re-run {% icon galaxy-refresh %} the tool that extracts infor
 
 Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output 'Gene table'. But we need to keep 'Gene table' in the same order, since it is referenced in the 'Matrix table' by row.
 
-> ### {% icon hands_on %} Hands-on: Combine MTX Gene Table with Gene Information
+> <hands-on-title>Combine MTX Gene Table with Gene Information</hands-on-title>
 >
 > 1. {% tool [Join two Datasets](join1) %} with the following parameters:
 >    - *"Join"*: `Gene Table`
@@ -431,7 +431,7 @@ Inspect {% icon galaxy-eye %} your `Annotated Gene Table`. That's more like it! 
 
 emptyDrops {% cite article-emptyDrops %} works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:
 
-> ### {% icon hands_on %} Hands-on: Converting to SingleCellExperiment format
+> <hands-on-title>Converting to SingleCellExperiment format</hands-on-title>
 >
 > 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `Matrix table`
@@ -444,7 +444,7 @@ emptyDrops {% cite article-emptyDrops %} works with a specific form of R object 
 
 Fantastic! Now that our matrix is combined into an object, specifically the SingleCellExperiment format, we can now run emptyDrops! Let's get rid of those background droplets containing no cells!
 
-> ### {% icon hands_on %} Hands-on: Emptydrops
+> <hands-on-title>Emptydrops</hands-on-title>
 >
 > 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
@@ -455,17 +455,17 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 > 3. Rename {% icon galaxy-pencil %} `tabular output` as `Stringent-Tabular Output`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many cell barcodes remain after the emptyDrops treatment? Why might that be?
 >
->   > ### {% icon tip %} Hint
+>   > <tip-title>Hint</tip-title>
 >   > If you click on the `Stringent-Object` in the {% icon galaxy-history %} history, the text in that window says `22 barcodes` or something similar to that. Why is this so low?? And why might the number be different?
 >   > Consider...is this a complete set of data?
 >   {: .tip}
 >
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you'll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you'll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield `3011` barcodes for the total sample. Also, the number may vary slightly as the output depends on a large number of random iterations.
 > >
@@ -475,14 +475,14 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 
 Let's go back and tweak parameters, re-running the tool with a looser threshold minimum.
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Variable: **UMI count lower bound**
 > - Control:  `5`
 > - Everyone else: Consider the droplet barcode rank plots and choose (different) appropriate lower bounds.
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: emptyDrops - do-over!
+> <hands-on-title>emptyDrops - do-over!</hands-on-title>
 >
 > 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
@@ -496,7 +496,7 @@ Let's go back and tweak parameters, re-running the tool with a looser threshold 
 
 You should now have `111` barcodes! You now have an annotated expression matrix ready to go for further processing and analysis! Well done! However, the next tutorials we will link to use a tool called Scanpy. You need to convert this SingleCellExperiment object into a format called `annData`, which is a variant of a file format called `hdf5`.
 
-> ### {% icon hands_on %} Hands-on: Converting to AnnData format
+> <hands-on-title>Converting to AnnData format</hands-on-title>
 >
 > 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} with the following parameters:
 >    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
@@ -517,7 +517,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 
 ## Data
 
-> ### {% icon hands_on %} Hands-on: Data upload - Combining files
+> <hands-on-title>Data upload - Combining files</hands-on-title>
 >
 > 1. Create a new history for this tutorial (if you're not importing the history above)
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/4574153#.YD56YS-l2uU)
@@ -545,7 +545,7 @@ This sample was originally one of seven. So to run the other [12 downsampled FAS
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
 
 ## Concatenating objects
-> ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
+> <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k-AnnData`
@@ -558,7 +558,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 
 Now let's look at what we've done! Unfortunately, AnnData objects are quite complicated, so the {% icon galaxy-eye %} won't help us too much here. Instead, we're going to use a tool to look into our object from now on.
 
-> ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
+> <hands-on-title>Inspecting AnnData Objects</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
@@ -573,12 +573,12 @@ Now let's look at what we've done! Unfortunately, AnnData objects are quite comp
 
 Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many cells do you have now?
 > 2. Where is `batch` information stored?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `4079 cells`, as the matrix is now 4079 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
 > > 2. Under **Key-indexed observations annotation (obs)**. Different version of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course has the `9th` column at the farthest right is `batch`. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this!
@@ -608,7 +608,7 @@ If you used Zenodo to import files, they may not have imported in order (i.e. N7
 
 The two critical pieces of metadata in this experiment are **sex** and **genotype**. I will later want to color my cell plots by these parameters, so I want to add them in now!
 
-> ### {% icon hands_on %} Hands-on: Labelling sex
+> <hands-on-title>Labelling sex</hands-on-title>
 >
 > 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
@@ -642,7 +642,7 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 
 That was so fun, let's do it all again but for genotype!
 
-> ### {% icon hands_on %} Hands-on: Labelling genotype
+> <hands-on-title>Labelling genotype</hands-on-title>
 >
 > 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %}
@@ -676,7 +676,7 @@ That was so fun, let's do it all again but for genotype!
 
 You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've added all your metadata columns, we can add them together before plugging them into the AnnData object itself.
 
-> ### {% icon hands_on %} Hands-on: Combining metadata columns
+> <hands-on-title>Combining metadata columns</hands-on-title>
 >
 > 1. {% tool [Paste two files side by side](Paste1) %} with the following parameters:
 >    - {% icon param-file %} *"Paste"*: `Genotype metadata`
@@ -687,7 +687,7 @@ You might want to do this with all sorts of different metadata - which labs hand
 
 Let's add it to the AnnData object!
 
-> ### {% icon hands_on %} Hands-on: Adding metadata to AnnData object
+> <hands-on-title>Adding metadata to AnnData object</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of previous **Manipulate AnnData** {% icon tool %}
@@ -698,7 +698,7 @@ Let's add it to the AnnData object!
 
 Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
 
-> ### {% icon hands_on %} Hands-on: Labelling batches
+> <hands-on-title>Labelling batches</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
@@ -714,7 +714,7 @@ Huzzah! We are JUST about there. However, while we've been focussing on our cell
 
 Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one (and thus skipping sections 4 & 5).
 
-> ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
+> <hands-on-title>Calculating mitochondrial RNA in cells</hands-on-title>
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: output of **Manipulate AnnData - Rename categories** {% icon tool %}
@@ -733,7 +733,7 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 
 If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which rather skips forward all these steps in one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
-> ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
+> <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
 > 1. {% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
 >      - *"SC-Atlas experiment accession"*: `E-MTAB-6945`

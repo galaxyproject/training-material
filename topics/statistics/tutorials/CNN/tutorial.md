@@ -36,7 +36,7 @@ image and video processing tasks. This gave way to the development of convolutio
 tailored to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss
 their architecture, and solve an image classification problem using MNIST digit classification dataset using a CNN in Galaxy.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -200,7 +200,7 @@ to compare various Machine Learning techniques.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -208,7 +208,7 @@ to compare various Machine Learning techniques.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename a history
+>    > <tip-title>Rename a history</tip-title>
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
@@ -259,7 +259,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 
 ### **Create One-Hot Encoding (OHE) representation of training labels**
 
-> ### {% icon hands_on %} Hands-on: One-Hot Encoding
+> <hands-on-title>One-Hot Encoding</hands-on-title>
 >
 > - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
 >    - *"Input file"* : Select `y_train`
@@ -271,7 +271,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
@@ -316,7 +316,7 @@ probability is predicted by CNN. The model config can be downloaded as a JSON fi
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -341,7 +341,7 @@ The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
 > - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
 >    - *"Select a scheme"*: `Train and Validate`
@@ -361,7 +361,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
@@ -378,7 +378,7 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 
 ### **Machine Learning Visualization Extension**
 
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
+> <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
 > - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`

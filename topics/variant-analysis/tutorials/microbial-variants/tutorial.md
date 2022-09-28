@@ -38,7 +38,7 @@ The Galaxy wrapper for Snippy has the ability to change some of the underlying t
 
 More can be read about SNP calling [here](https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -66,7 +66,7 @@ The files we will be using are:
 
 This data is available at Zenodo using the following [link](https://doi.org/10.5281/zenodo.582600).
 
-> ### {% icon hands_on %} Hands-on: Get the data
+> <hands-on-title>Get the data</hands-on-title>
 >
 > 1. Import all of the following files into a new history:
 >     - [mutant_R1.fastq](https://zenodo.org/record/582600/files/mutant_R1.fastq)
@@ -97,7 +97,7 @@ If we give Snippy an annotated reference, it will silently run a tool called Snp
 
 We have an annotated reference and so will use it in this case.
 
-> ### {% icon hands_on %} Hands-on: Run Snippy
+> <hands-on-title>Run Snippy</hands-on-title>
 >
 > 1. **Snippy** {% icon tool %} with the following parameters
 >   - "Reference File" to the `wildtype.gbk` file (if the genbank file is not selectable, make sure to change its datatype to 'genbank')
@@ -149,14 +149,14 @@ Wildtype    160552  del CTA CA  CA:20 CTA:0
 Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_variant c.28delA p.Asn10fs   WILD_00166  brnQ    Branched-chain amino acid transport system 2 carrier protein
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Which types of variants have been found?
 > 2. What is the third variant called?
 > 3. What is the product of the mutation?
 > 4. What might be the result of such a mutation?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >  1. In the 3rd column, you have "snp" for SNP, "del" for deletion, "mnp" for
 > >  2. This is a T→A mutation, causing a stop codon
 > >  3. On the 14th column, we see that The product of this gene is a methicillin resistance protein. Methicillin is an antibiotic.
@@ -168,7 +168,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
 
 We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
-> ### {% icon hands_on %} Hands-on: Run JBrowse
+> <hands-on-title>Run JBrowse</hands-on-title>
 >
 > 1. **JBrowse** {% icon tool %} with the following parameters
 >    - "Reference genome to display" to `Use a genome from history`
@@ -210,7 +210,7 @@ We could go through all of the variants like this and read them out of a text ta
 
 A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
-> ### {% icon hands_on %} Hands-on: Inspecting the SNPs using JBrowse
+> <hands-on-title>Inspecting the SNPs using JBrowse</hands-on-title>
 > 1. Display all the tracks and practice maneuvering around
 >    1. Click on the tick boxes on the left to display the tracks
 >    1. Zoom out by clicking on the `minus` button to see sequence reads and their coverage (the grey graph)
@@ -226,12 +226,12 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 >
 >    ![JBrowse screenshot](../../images/jbrowse2.png "Inspection of the STOP SNP using JBrowse")
 >
->     > ### {% icon question %} Questions
+>     > <question-title></question-title>
 >     >
 >     > 1. What is the correct codon at this position?
 >     > 2. What is the mutation found here?
 >     >
->     > > ### {% icon solution %} Solution
+>     > > <solution-title></solution-title>
 >     > > 1. The correct codon at this position is TGT, coding for the amino acid Cysteine (middle row of the amino acid translations).
 >     > > 2. The mutation of T → A turns this triplet into TGA, a stop codon.
 >     > {: .solution}

@@ -67,7 +67,7 @@ The templates for the tutorials are different from the other pages to help users
 
 The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) from a Markdown file and some metadata (e.g. the requirements, the Zenodo link, the questions) defined inside the metadata of the related topic.
 
-> ### {% icon comment %} Contributing
+> <comment-title>Contributing</comment-title>
 > Want to contribute to a tutorial? Check out [our training materials about that]({% link topics/contributing/index.md %}).
 {: .comment}
 
@@ -85,7 +85,7 @@ The `docker` image will also integrate the Galaxy tours available for each topic
 # Creating a new topic
 {:.no_toc}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -99,16 +99,16 @@ The `docker` image will also integrate the Galaxy tours available for each topic
 
 When we structured the repository, we decided to use as topics the categories that are used in the [ToolShed](https://toolshed.g2.bx.psu.edu/). The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed's category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.
 
-> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
+> <hands-on-title>Defining the topic for the tutorial</hands-on-title>
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it has been placed
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > In which topic will you put the new tutorial?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is placed in 2 categories (bottom): "Next Gen Mappers", and "Sequence Analysis".
 >    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
@@ -122,7 +122,7 @@ In this tutorial, we want to add a new topic called about "my-favorite-topic".
 
 Once the topic name has been chosen, we can create it.
 
-> ### {% icon hands_on %} Hands-on: Create all the required files and folders structures automatically
+> <hands-on-title>Create all the required files and folders structures automatically</hands-on-title>
 >
 > 1. Open a terminal
 > 2. Run (by adapting the information between the quotes)
@@ -139,7 +139,7 @@ Once the topic name has been chosen, we can create it.
 > 4. Check that a YAML file with your topic name has been generated in `metadata` folder
 > 5. Make sure that Jekyll is running
 >
->    > ### {% icon comment %} Jekyll
+>    > <comment-title>Jekyll</comment-title>
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
 >
@@ -167,13 +167,13 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
   ```
   tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
 
-> ### {% icon hands_on %} Hands-on: Update the new topic to the website
+> <hands-on-title>Update the new topic to the website</hands-on-title>
 >
 > 1. Open the `metadata.yaml` file in your topic folder
 > 2. Fill the correct metadata of the topic
 > 3. Make sure that Jekyll is running
 >
->    > ### {% icon comment %} Jekyll
+>    > <comment-title>Jekyll</comment-title>
 >    > Want to learn how to start Jekyll? [Check out our tutorial to serve the website locally]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
 >
