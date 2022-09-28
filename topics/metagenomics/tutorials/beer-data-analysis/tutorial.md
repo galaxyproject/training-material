@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: Identification of yeasts in a beer using Nanopore sequencing
-zenodo_link: https://doi.org/10.5281/zenodo.6620778
+title: Identification of the micro-organisms in a beer using Nanopore sequencing
+zenodo_link: https://doi.org/10.5281/zenodo.7093173
 level: Introductory
 questions:
 - How can yeast strains in a beer sample be identified?
@@ -23,11 +23,6 @@ tags:
 - beer
 - citizen science
 - metagenomics
-contributors:
-- plushz
-- chensy96
-- bebatut
-- teresa-m
 contributions:
     authorship:
     - plushz
@@ -48,7 +43,7 @@ actually very good for us, but some can make us very ill.
 
 Micro-organisms come in different shapes and sizes, but they have the same components.
 One crucial component is the **DNA**, the blueprint of life. The DNA encodes the
-shape and size and many other characteristics unique to a species. Because DNA is so species-specific, 
+shape and size and many other characteristics unique to a species. Because DNA is so species-specific,
 reading the DNA can be used to identify what kind of micro-organism
 the it is from. Therefore, within a metagenomic specimen, *e.g.* a sample form soil, gut,
 or beer, one can identify what kind of species are inside the sample.
@@ -81,7 +76,7 @@ In this tutorial, we will use data of beer microbiome generated via the
 > Beer is alive! It contains microorganisms, in particular **yeasts**.
 >
 > Indeed, grain and water create a sugary liquid (called wort). The beer brewer
-> adds yeasts to it. By eating the sugar, yeasts creates alcohol.
+> adds yeasts to it. By eating the sugar, yeasts creates alcohol,
 > and other compounds (esters, phenols, etc.) that give beer its particular
 > flavor.
 >
@@ -91,8 +86,8 @@ In this tutorial, we will use data of beer microbiome generated via the
 > are the most commonly used:
 >
 > - ***Saccharomyces cerevisiae***: a top-fermenting (*i.e.* yeast which rise
-> up to the top of the beer as it metabolizes sugars, delivering alcohol as a by-product), 
-> ale yeast responsible for a huge range of beer styles like witbiers, stouts, ambers, 
+> up to the top of the beer as it metabolizes sugars, delivering alcohol as a by-product),
+> ale yeast responsible for a huge range of beer styles like witbiers, stouts, ambers,
 > tripels, saisons, IPAs, and many more. It is most likely the yeast that the early brewers were
 > inadvertently brewing with over 3,000 years ago.
 > - ***Saccharomyces pastorianus***: a bottom-fermenting (*i.e.* it sits on the
@@ -107,7 +102,7 @@ In this tutorial, we will use data of beer microbiome generated via the
 {: .comment}
 
 During one BeerDEcoded workshop, we extracted yeasts out of a bottle of
-[La Trappe beer](https://en.wikipedia.org/wiki/De_Koningshoeven_Brewery). We then
+[Chimay](https://en.wikipedia.org/wiki/Chimay_Brewery). We then
 extracted the DNA of these yeasts and sequenced it using a MinION to obtain the DNA
 sequences. Now, we would like to **identify the yeast species** sequenced there, and
 thereby **outline the diversity of microorganisms** (the microbiome community) in the beer
@@ -156,7 +151,7 @@ The Galaxy homepage is divided into three panels:
 * Viewing panel in the middle
 * History of analysis and files on the right
 
-![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center](./images/galaxy_interface.png "The Galaxy interface")
+![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center]({% link topics/introduction/images/galaxy_interface.png %} "The Galaxy interface")
 
 The first time you use Galaxy, there will be no files in your history panel.
 
@@ -180,7 +175,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 
 > ### {% icon hands_on %} Hands-on: Upload your dataset
 >
-> 1. Import the sequenced data
+> 1. Import the sequenced data including fastq in the name
 >
 >    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): Your own local data using **Upload Data** (recommended for 1-10 datasets).
 >
@@ -189,7 +184,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    - Option 2: From Zenodo, an external server, via URL
 >
 >      ```text
->      {{ page.zenodo_link }}
+>      {{ page.zenodo_link }}/files/ABJ044_c38189e89895cdde6770a18635db438c8a00641b.fastq
 >      ```
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -225,7 +220,10 @@ Before starting to work on our data, it is necessary to assess its quality. This
 
 > ### {% icon question %} Questions
 >
-> Given the Basic Statistics table on the top,
+> Given the Basic Statistics table on the top of the page:
+>
+> ![Screenshot of the FastQC Basic Statistics with filename, file type (Conventional base calls), encoding (Sanger / Illumina 1.9), total Sequences (1876), sequences flagged as poor quality (0), sequence length (130-2327) and %GC (29)](./images/fastqc_top_table.png)
+>
 > 1. How many sequences are in the FASTQ file?
 > 2. How long are the sequences?
 >
@@ -240,9 +238,9 @@ Before starting to work on our data, it is necessary to assess its quality. This
 
 **FastQC** provides information on various parameters, such as the range of quality values across all bases at each position:
 
-![FastQC Per base sequence quality with scores below 200](./images/fastqc_1.png "Per base sequence quality")
+![FastQC Per base sequence quality with scores below 20](./images/fastqc_1.png "Per base sequence quality. X-axis: position in the reads (in base pair). Y-axis: quality score, between 0 and 40 - the higher the score, the better the base call. For each position, a boxplot is drawn with: the median value, represented by the central red line;the inter-quartile range (25-75%), represented by the yellow box; the 10% and 90% values in the upper and lower whiskers; and the mean quality, represented by the blue line. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and reads of poor quality (red)")
 
-We can see that the quality of our sequencing data grows after the first few bases, stays around a score of 18, which is a relatively low value compared to other sequencing technologies, and then decreases again at the end of the sequences.
+We can see that the quality of our sequencing data grows after the first few bases, stays around a score of 18 and then decreases again at the end of the sequences. MinION and Oxford Nanopore Technologies (ONT) are known to have a higher error rate compared to other sequencing techniques and platforms ({% cite delahaye2021sequencing %}).
 
 For more detailed information about the other plots in the FASTQC report, check out our [dedicated tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
@@ -326,7 +324,7 @@ Taxonomic assignment or classification is the process of assigning an **Operatio
 >
 > In the $$k$$-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
 >
-> **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database and make the classification with the most probable position.  the maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
+> **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
 >
 > ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
 >
