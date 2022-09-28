@@ -1,4 +1,5 @@
 # Settings
+UNAME := $(shell uname)
 JEKYLL=jekyll
 PORT?=4000
 HOST?=0.0.0.0
@@ -20,6 +21,12 @@ ifeq ($(shell uname -s),Darwin)
 	MINICONDA_URL=https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
 endif
 
+ifeq ($(UNAME),Darwin)
+	ENV_FILE=environment-osx.yml
+else
+	ENV_FILE=environment.yml
+endif
+
 CONDA=$(shell which conda)
 ifeq ($(CONDA),)
 	CONDA=${HOME}/miniconda3/bin/conda
@@ -34,9 +41,9 @@ install-conda: ## install Miniconda
 
 create-env: ## create conda environment
 	if ${CONDA} env list | grep '^${CONDA_ENV}'; then \
-	    ${CONDA} env update -f environment.yml; \
+	    ${CONDA} env update -f ${ENV_FILE}; \
 	else \
-	    ${CONDA} env create -f environment.yml; \
+	    ${CONDA} env create -f ${ENV_FILE}; \
 	fi
 .PHONY: create-env
 
@@ -61,7 +68,7 @@ serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --trace --strict_front_matter -d _site/training-material ${FLAGS}
+		${JEKYLL} serve --trace --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
 serve-quick: api/swagger.json ## run a local server (faster, some plugins disabled for speed)
@@ -69,7 +76,7 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml ${FLAGS} --trace
+		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
@@ -242,14 +249,14 @@ video: ## Build all videos
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
 	bash bin/workflow_to_tool_yaml.sh && \
-	python bin/add_galaxy_instance_annotations.py && \
-	python bin/add_galaxy_instance_badges.py
+	python bin/add_galaxy_instance_annotations.py
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index
 	node bin/lunr-index.js > search.json
 
 api/swagger.json: metadata/swagger.yaml
+	$(ACTIVATE_ENV) && \
 	cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
 
 clean: ## clean up junk files
