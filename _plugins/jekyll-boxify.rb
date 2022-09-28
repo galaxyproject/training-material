@@ -64,7 +64,7 @@ module Jekyll
     end
 
     def generate_collapsible_title(box_type, count, title)
-      title_fmted = (title ? ": #{title}" : "")
+      title_fmted = (title.length > 0 ? ": #{title}" : "")
       return %Q(
         <div class="box-title">
         <button type="button" aria-controls="box-#{box_type}-#{count}" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
@@ -76,7 +76,7 @@ module Jekyll
     end
 
     def generate_static_title(box_type, count, title)
-      title_fmted = (title ? ": #{title}" : "")
+      title_fmted = (title.length > 0 ? ": #{title}" : "")
       return %Q(
         <div class="box-title" aria-label="#{box_type} box: #{title}">
           #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
