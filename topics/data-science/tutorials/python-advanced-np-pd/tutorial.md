@@ -577,8 +577,8 @@ print(summarised_data)
 > > data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 > > ```
 > >
-> > {: .solution}
-> > {: .question}
+> {: .solution}
+{: .question}
 
 
 > ### {% icon question %} Question: Grouping with multiple variables

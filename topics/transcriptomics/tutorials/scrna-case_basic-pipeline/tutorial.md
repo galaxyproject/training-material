@@ -40,15 +40,10 @@ tags:
 contributions:
   authorship:
     - nomadscientist
-
   editing:
     - hexylena
-
   testing:
     - wee-snufkin
-
-contributors:
-- nomadscientist
 translations:
   - es
 ---

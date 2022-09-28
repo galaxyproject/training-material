@@ -28,11 +28,12 @@ tags:
 
 contributions:
   authorship:
-  - miaomiaozhou88
+  - bazante1
   editing:
   - hexylena
   - bazante1
   - shiltemann
+  - miaomiaozhou88
   funding:
   - avans-atgm
 
