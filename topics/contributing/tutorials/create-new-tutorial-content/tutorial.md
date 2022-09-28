@@ -388,7 +388,7 @@ These boxes are defined always with the same structure:
 
 {% raw %}
 ```markdown
-> <type-title>Name of the box</type-title>
+> <type​-title>Name of the box</type​-title>
 > text goes here!
 {: .type}
 ```
@@ -400,7 +400,7 @@ where type is something like `tip`, so `<tip-title>` and `{: .tip}`. You must fo
 
 This box at the top of each tutorial is automatically generated using the metadata we defined in the topic's metadata file:
 
-> ### Overview
+> <overview-title>Overview</overview-title>
 >
 > **{% icon question %} Questions**
 > - Which biological questions are addressed by the tutorial?
@@ -441,7 +441,7 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 
 {% raw %}
 ```markdown
-> <agenda-title></agenda-title>
+> <agenda​-title></agenda​-title>
 >
 > In this tutorial we will deal with:
 >
@@ -471,7 +471,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 {% raw %}
 ```markdown
-> <hands-on-title>Spliced mapping</hands-on-title>
+> <hands​-on-title>Spliced mapping</hands​-on-title>
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
@@ -530,7 +530,7 @@ The available icons are:
 
 {% raw %}
 ```markdown
-> <hands-on-title>My Step</hands-on-title>
+> <hands​-on-title>My Step</hands​-on-title>
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
 >    - {% icon param-text %} *"My text parameter"*: `my value`
@@ -607,7 +607,7 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 
 {% raw %}
 ```markdown
-> <question-title></question-title>
+> <question​-title></question​-title>
 >
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
@@ -649,7 +649,7 @@ Tips boxes are really just for 'tips', usually hints regarding Galaxy operations
 
 {% raw %}
 ```markdown
-> <tip-title>Importing data via links</tip-title>
+> <tip​-title>Importing data via links</tip​-title>
 >
 > * Copy the link location
 > * Open the Galaxy Upload Manager
@@ -675,7 +675,7 @@ Rendered:
 
 {% raw %}
 ```markdown
-> <comment-title></comment-title>
+> <comment​-title></comment​-title>
 > - Edit the "Database/Build" to select "dm3"
 > - Rename the datasets according to the samples
 {: .comment}
@@ -695,7 +695,7 @@ The detail box is used to give more background explanation on the subject. By de
 
 {% raw %}
 ```markdown
-> <details-title>More details on the ....</details-title>
+> <details​-title>More details on the ....</details​-title>
 >
 > Add more details in Markdown...
 >
@@ -721,7 +721,7 @@ To render the boxes correctly, the syntax needs to be correct. If it doesn't wor
 
 {% raw %}
 ```markdown
-> <warning-title>Danger: You can lose data!</warning-title>
+> <warning​-title>Danger: You can lose data!</warning​-title>
 > Something really bad can happen here!
 {: .warning}
 ```
@@ -740,16 +740,16 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 
 {% raw %}
 ```markdown
-> <hands-on-title>Defining the topic for the tutorial</hands-on-title>
+> <hands​-on-title>Defining the topic for the tutorial</hands​-on-title>
 >
 > 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it is
 >
->    > <question-title></question-title>
+>    > <question​-title></question​-title>
 >    >
 >    > In which topic will you put the tutorial?
 >    >
->    > > <solution-title></solution-title>
+>    > > <solution​-title></solution​-title>
 >    > >
 >    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 >    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
@@ -811,13 +811,13 @@ If you leave off the `{: .code-2col}`, it will render as a single column always.
 
 {% raw %}
 ```markdown
-> <code-in-title>Bash</code-in-title>
+> <code​-in-title>Bash</code​-in-title>
 > ```bash
 > cat /tmp/test.ini
 > ```
 {: .code-in}
 
-> <code-out-title></code-out-title>
+> <code​-out-title></code​-out-title>
 > The file should look like:
 >
 > ```ini
@@ -1251,3 +1251,7 @@ Would you like to add a different language to the GTN? Please contact us first (
 [^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
 
 
+<script type="text/javascript">
+// Replace all ZWSPs with nothing, to prevent users copying them and them not working.
+document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML.replaceAll("​", "")
+</script>
