@@ -461,9 +461,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
-> <warning-title>Beware of **Cut**s</warning-title>
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface.
-{: .warning}
+{% snippet faqs/galaxy/analysis_cut.md %}
 
 > <hands-on-title>Creating a subset of data</hands-on-title>
 >

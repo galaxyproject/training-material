@@ -416,10 +416,7 @@ So in order to convert this to Circos format, we need to
 - Select the columns containing the chromosomes and positions of the breaks (junctions)
 
 
-> <warning-title>Beware of **Cut**s</warning-title>
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table** (without `(cut)`). The difference is that this version allows cutting columns in any order and with repetitions. 
-{: .warning}
-
+{% snippet faqs/galaxy/analysis_cut.md %}
 
 > <hands-on-title>Prepare input data</hands-on-title>
 >
