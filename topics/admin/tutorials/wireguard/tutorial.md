@@ -30,7 +30,7 @@ tags:
 
 In this tutorial we will briefly cover what [Wireguard](https://www.wireguard.com/) is and how you can leverage it for your needs. This will not make you an expert on Wireguard but will give you the tools you need in order to setup a local Wireguard network.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -53,7 +53,7 @@ By using wireguard, you can let services listen only on the wireguard interface,
 
 # Setting up the infrastructure
 
-> ### {% icon hands_on %} Hands-on: Configuration files
+> <hands-on-title>Configuration files</hands-on-title>
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
@@ -72,7 +72,7 @@ By using wireguard, you can let services listen only on the wireguard interface,
 >    ```
 >    {: data-commit="Add ansible.cfg"}
 >
->    > ### {% icon tip %} CentOS7
+>    > <tip-title>CentOS7</tip-title>
 >    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
 >    {: .tip}
 >
@@ -80,13 +80,13 @@ By using wireguard, you can let services listen only on the wireguard interface,
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining an `[wireguard]` group with every host you want to be part of the cluster. For each machine, also set a variable `wireguard_ip` with an address from `192.168.0.0/24`
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat hosts
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > Your hostname is probably different:
 >    > >
@@ -113,7 +113,7 @@ Wireguard can use any of the [private network](https://en.wikipedia.org/wiki/Pri
 
 First lets set up the playbook and install Wireguard, without configuring it.
 
-> ### {% icon hands_on %} Hands-on: Installing Wireguard
+> <hands-on-title>Installing Wireguard</hands-on-title>
 >
 > 1. Create and open `wg.yml` which will be our playbook. Add the following:
 >
@@ -144,7 +144,7 @@ First lets set up the playbook and install Wireguard, without configuring it.
 >
 > 2. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook wg.yml
 >    > ```
@@ -154,7 +154,7 @@ First lets set up the playbook and install Wireguard, without configuring it.
 
 Now we can start configuring it. Wireguard relies on each node having a private/public keypair which is used for encrypting communications between the nodes. By default this uses modern elliptic cryptography which is quite simple and provably secure, wireguard only has ~4k LOC compared to 400k+ LOC for most VPN solutions. Let's generate those keys now:
 
-> ### {% icon hands_on %} Hands-on: Generating a keypair
+> <hands-on-title>Generating a keypair</hands-on-title>
 >
 > 1. Edit `wg.yml` and add
 >
@@ -177,7 +177,7 @@ Now we can start configuring it. Wireguard relies on each node having a private/
 >
 > 2. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook wg.yml
 >    > ```
@@ -189,7 +189,7 @@ Now we can start configuring it. Wireguard relies on each node having a private/
 
 Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, systemd added built in support for wireguard and we'll use that to setup the network devices, and the network itself.
 
-> ### {% icon hands_on %} Hands-on: Setting up the network
+> <hands-on-title>Setting up the network</hands-on-title>
 >
 > 1. Edit `wg.yml` and add the following. We want to register the contents of these keys, as they'll be used to configure our networks later.
 >
@@ -310,7 +310,7 @@ Ok, that's got wireguard setup, but it still isn't running. As of 2018 or so, sy
 >
 > 2. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook wg.yml
 >    > ```

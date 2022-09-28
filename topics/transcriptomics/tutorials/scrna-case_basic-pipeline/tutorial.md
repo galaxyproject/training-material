@@ -767,7 +767,7 @@ Note that the cluster numbering is based on size alone - clusters 0 and 1 are no
 
 The authors weren't interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn't really require such granularity of clusters.
 
-> ### {% icon details %} Working in a group? Important!
+> <details-title>Working in a group? Important!</details-title>
 > If you have deviated from any of the original parameters in this tutorial, you will likely have a different number of clusters. You will, therefore, need to change the 'Annotating clusters' *"Comma-separated list of new categories"* accordingly. Best of luck!
 >
 {: .details}

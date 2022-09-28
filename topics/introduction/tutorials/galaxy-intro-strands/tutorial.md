@@ -158,7 +158,7 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 
 **track** has a bewildering list of options. UCSC suggests `GENCODE v41`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
 
-> ### {% icon warning %} ALL GENCODE is different from GENCODE
+> <warning-title>ALL GENCODE is different from GENCODE</warning-title>
 > **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong. 
 {: .warning}
 

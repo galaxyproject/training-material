@@ -154,7 +154,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
 
-> ### {% icon tip %} Tip: Metadata ticket
+> <tip-title>Metadata ticket</tip-title>
 > Upon successful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
 {: .tip}
 
@@ -187,7 +187,7 @@ For this tutorial, we provide you with a pre-filled template and encourage you t
 >
 >      All datasets should now be moved to the *paired section* of the dialog, and the middle column there should show that only the sample accession numbers, *i.e.* `SRR10903401` and `SRR10903402`, will be used as the pair names.
 >
->    > ### {% icon warning %} Paired collection names
+>    > <warning-title>Paired collection names</warning-title>
 >    > It is very important that the paired collection names contain no suffix (e.g. _1, _R1, etc.) or file extensions (.fastq, .fastq.gz). The submission tool will add these at runtime and leaving them in the paired collection names will cause a mismatch with the filenames in the metadata table.
 >    {: .warning }
 >    - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
@@ -240,7 +240,7 @@ As before, the submission is done to the test server before submitting to the pu
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
 
-> ### {% icon tip %} Tip: Metadata ticket
+> <tip-title>Metadata ticket</tip-title>
 > Upon succesful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
 {: .tip}
 
@@ -252,7 +252,7 @@ In this step we will submit one consensus sequence to ENA.
 We will link it to the reads submitted in the first step using the accession numbers given to those submissions. Galaxy's 'ENA Upload tool' captures and stores metadata on a metadata ticket.
 
 
-> ### {% icon hands_on %} Hands-on: submit consensus sequences to ENA
+> <hands-on-title>submit consensus sequences to ENA</hands-on-title>
 >
 > 1. Upload the consensus sequence to Galaxy from Zenodo via URLs:
 >    ```

@@ -98,13 +98,13 @@ In this tutorial you will learn how to soft-mask the genome sequence of a small 
 
 First let's try Red, a tool than can mask repeats *de novo*. For that, select the input assembly in fasta format.
 
-> ### {% icon comment %} *Ab initio* tool
+> <comment-title>*Ab initio* tool</comment-title>
 >
 > Red is an *ab initio* tool, it means that it will try to predict repeat elements using only the genomic sequence. It's perfect when you know nothing about the organism that you are working on.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > 1. {% tool [Red](toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genome sequence to mask"*: `genome_raw.fasta` (Input dataset)
@@ -116,11 +116,11 @@ Red produces 2 output files :
 - A *fasta* file: this is the soft-masked genome that you can use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats
 - A *bed* file: this one contains the coordinates on the genome of each repeated loci
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What proportion of the whole genome sequence is masked?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You need to click on the {% icon galaxy-info %} on one of the output. You should find it at the end of the extended `Tool Standard Output` in **Job Information**. It should be ~ 30.62%
 > >
@@ -128,15 +128,15 @@ Red produces 2 output files :
 >
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How to hard-mask a genome with **Red** ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > As you can see **Red** has no option to hard-mask your genome. However, one of the output is a `bed` file, so you can use {% tool bedtools MaskFastaBed %} to replace repeated regions with stretches of N:
 > >
-> > > ### {% icon hands_on %} Hands-on
+> > > <hands-on-title>Hands-on</hands-on-title>
 > > >
 > > > 1. {% tool [bedtools MaskFastaBed](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0) %} with the following parameters:
 > > >   - {% icon param-file %} *"BED/bedGraph/GFF/VCF/EncodePeak file"*: `Red on data` (`bed` file produced by red)
@@ -199,7 +199,7 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 - `Muco_library_EDTA.fasta` using [EDTA](https://doi.org/10.1186/s13059-019-1905-y)
 
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
@@ -210,11 +210,11 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 >   - *"Perform soft-masking instead of hard-masking"*: `Yes`
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Compare the different `repeat statistics` files produced, what is the highest library for RepeatMasker?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The RepeatModeler library seems to have the highest percentage of repeats found with ~ 34.89%. It could be explained as RepeatModeler is specifically made to work with RepeatMasker.
 > {: .solution}

@@ -36,7 +36,7 @@ tags:
 [Tailscale](https://tailscale.com/) makes secure networking easy, it really is like magic. If you've used wireguard before, you know it takes a bit to setup and some configuration if you need to do anything fancy.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -79,7 +79,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 
 {% include _includes/cyoa-choices.html option1="Tailscale" option2="Headscale" default="Tailscale" help="Here we provide a version of this tutorial that uses Headscale, if you want a more hands-on experience and feel like managing your own infrastructure." %}
 
-> ### {% icon hands_on %} Hands-on: Configuration files
+> <hands-on-title>Configuration files</hands-on-title>
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
@@ -100,13 +100,13 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 >
 > 2. Create the `hosts` inventory file if you have not done so yet.
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat hosts
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > Your hostname is probably different:
 >    > > <div class="Headscale" markdown="1">
@@ -146,7 +146,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 
 <div class="Headscale" markdown="1">
 
-> ### {% icon details %} Consider using Tailscale
+> <details-title>Consider using Tailscale</details-title>
 > Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won't have to be responsible for. If you can get your institution to pay for it, or grant money covering it, it's **probably worth it**. They add many new features often, and things like the mobile apps only work with their service. Tailscale is free for personal use (i.e. to test things out) and offers a free plan for open source projects that you may qualify for.
 >
 > For a training event obviously we want something free and quick to setup and destroy, so, we're using [Headscale](https://github.com/juanfont/headscale) since it's free and we're just going to destroy it immediately, and no one will accidentally get billed ;)
@@ -154,11 +154,11 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 > Using Headscale will also teach you everything you need to know if you do choose to use Tailscale, which is simpler and has fewer components for you to manage yourself.
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Installing Headscale
+> <hands-on-title>Installing Headscale</hands-on-title>
 >
 > 1. Install the role
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles ckstevenson.headscale
 >    > ```
@@ -194,7 +194,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 >
 > 2. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook headscale.yml
 >    > ```
@@ -207,11 +207,11 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.
 
 Now we can setup the nodes
 
-> ### {% icon hands_on %} Hands-on: Configure the nodes
+> <hands-on-title>Configure the nodes</hands-on-title>
 >
 > 1. Install the role
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles artis3n.tailscale
 >    > ```
@@ -275,7 +275,7 @@ Now we can setup the nodes
 >
 > 2. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook tail.yml -e tailscale_authkey=YOUR_CODE
 >    > ```
@@ -295,7 +295,7 @@ Now we can setup the nodes
 >    {:.Tailscale}
 {:.hands_on}
 
-> ### {% icon tip %} Tip: Exit Nodes
+> <tip-title>Exit Nodes</tip-title>
 > We've configured `--advertise-exit-node`, which means you can direct ALL of your traffic to use one of your tailscale endpoints as an exit node, just run `tailscale up --exit-node=...`
 >
 > Note that:

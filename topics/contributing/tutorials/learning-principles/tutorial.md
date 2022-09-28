@@ -44,7 +44,7 @@ In this lesson, we want to share with you what we have collectively learnt about
 
 Since this material cannot cover the broad literature on the subject of learning we strongly invite you to commit to read at least one book on how learning works ({% cite ambrose2010learning %}, {% cite smallTeaching2021 %}), have a look at the [Software Carpentry Instructor training materials](http://swcarpentry.github.io/instructor-training/) and explore the material available through the [ELIXIR Train-the-Trainer course]().
 
-> ### {% icon comment %} Sources
+> <comment-title>Sources</comment-title>
 >
 > This tutorial is significantly based on {% cite via2020course %}, session one
 > of ELIXIR-GOBLET Train the Trainer curriculum.
@@ -71,7 +71,7 @@ The first step of good instructional design consists is identifying the set of K
 
 ### Learning objectives and learning outcomes
 
-> ### {% icon comment %} Sources
+> <comment-title>Sources</comment-title>
 >
 > The following section is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research).
 {: .comment}
@@ -121,7 +121,7 @@ In order to write learning outcomes, you can use the following scheme:
 
 Identify observable and non observable actions (verbs)
 
-<!-- >> ### {% icon hands_on %} Identify observable and non observable actions (verbs) - *{% icon time %} 3 min*
+<!-- >> <hands-on-title>Identify observable and non observable actions (verbs) - *{% icon time %} 3 min*</hands-on-title>
 >
 > Here is a list of verbs: Compare, classify, distinguish, explain, believe, give examples of, define, learn, describe, list, recognize, know, connect, measure, identify, have faith in
 > * Write in the shared notes which ones describe observable actions
@@ -139,7 +139,7 @@ Identify observable and non observable actions (verbs)
 
 {% include _includes/quiz.html id="verbs.yaml" %}
 
-> ### {% icon tip %} Observable and non observable actions (verbs)
+> <tip-title>Observable and non observable actions (verbs)</tip-title>
 >
 > In classifying verbs, it may help to focus on how you would assess the corresponding action / behaviour.
 > Example: "identify"
@@ -216,7 +216,7 @@ How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? 
 
 {% include _includes/quiz.html id="learning_metaphors.yaml" %}
 
-<!-- >> ### {% icon hands_on %} Challenge- *{% icon time %} 5 min*
+<!-- >> <hands-on-title>Challenge- *{% icon time %} 5 min*</hands-on-title>
 >
 > - Think about the following metaphors:
 >	* A mind is a fire to be kindled
@@ -251,7 +251,7 @@ Existing theories can be grouped according to whether they focus on changes in b
 
 The distinction is rough and inexact, but a good place to begin. Let’s consider two perspectives about learning, called **behaviorism**, **connectivism** and **constructivism**. This latter can be further divided into **psychological constructivism** and **social constructivism**.
 
-> ### {% icon details %} More details on the key ideas from each of these perspectives
+> <details-title>More details on the key ideas from each of these perspectives</details-title>
 >
 > We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners' learning.
 >
@@ -293,7 +293,7 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 {: .details}
 
 
-> ### {% icon hands_on %} How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*
+> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*</hands-on-title>
 >
 > - Order the following approaches (from the most to the less effective one) for you when you want to learn something new
 >	* Read about it
@@ -370,7 +370,7 @@ In a simple model from cognitive science (quite involved in constructivism), lea
 5. Long term: slow
 	* How much effort to remember a full poem-->
 
-<!-- >> ### {% icon hands_on %} How short is your short term memory? - *{% icon time %} 10 min*
+<!-- >> <hands-on-title>How short is your short term memory? - *{% icon time %} 10 min*</hands-on-title>
 >
 > Based on {% cite Willingham2009 %}.
 >
@@ -412,7 +412,7 @@ To facilitate learning, we as instructors have to make room in working memory.
 
 {% include _includes/quiz.html id="short_term_memory.yaml" %}
 
-<!-- >> ### {% icon hands_on %} How can you avoid to overload learners working memory?  - *{% icon time %} 5 min - Groups of 2/3 persons*
+<!-- >> <hands-on-title>How can you avoid to overload learners working memory?  - *{% icon time %} 5 min - Groups of 2/3 persons*</hands-on-title>
 >
 > - Discuss one thing a teacher could do to avoid overloading their students' working memory.
 > - Write your proposal in the shared notes
@@ -439,7 +439,7 @@ There are 3 cognitive loads recognized by cognitive science:
 
 Split-attention occurs when learners are required to **split their attention** between **at least two sources of information** that have been separated either spatially or temporally
 
-> ### {% icon hands_on %} Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*
+> <hands-on-title>Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*</hands-on-title>
 >
 > * Pick one task you teach in your lessons/courses
 > * Think and discuss within the room about the following questions
@@ -477,7 +477,7 @@ The Carpentries (a global organization building global capacity in essential dat
 
     Example: An expert in a Carpentries workshop may have experience writing and running shell scripts and, when presented with a problem, immediately sees how these skills can be used to solve the problem.
 
-> ### {% icon details %} The Carpentries
+> <details-title>The Carpentries</details-title>
 >
 > [The Carpentries](https://carpentries.org/) was started by Greg Wilson and Brent Gorda and they coined the term "The Carpentries" for enabling researchers to do "computational thinking" and use tools of computation effectively.
 >
@@ -515,7 +515,7 @@ Dreyfuss model for skill acquisition | Differences between novices and experts. 
 
 # Evidence-based research on how learning works learning
 
-> ### {% icon details %} Resources to learn more about evidence-based research on how learning works
+> <details-title>Resources to learn more about evidence-based research on how learning works</details-title>
 >
 > There is a great deal of literature on how learning works.
 >
@@ -554,7 +554,7 @@ Dreyfuss model for skill acquisition | Differences between novices and experts. 
 {: .details}
 
 
-<!-- >> ### {% icon hands_on %} What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*
+<!-- >> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
 >
 > _Break-out_ room (2 ppl per room)
 >
@@ -605,7 +605,7 @@ Our learning model is based on such evidence-based learning principles and strat
 
     Concept maps are examples of a retrieval practice when you bring out knowledge/memories from long-term memory
 
-> ### {% icon hands_on %} How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*
+> <hands-on-title>How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*</hands-on-title>
 >
 > - Pick up one strategy per group
 > - Discuss about the strategy
@@ -660,7 +660,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
     - plan appropriate approaches to complete the task,
     - apply strategies to monitor their performance, while making adjustments to the selected approach.
 
-<!-- >> ### {% icon hands_on %} How do you understand the 7 principles of learning?  (15 min - Groups of 2/3 persons)
+<!-- >> <hands-on-title>How do you understand the 7 principles of learning?  (15 min - Groups of 2/3 persons)</hands-on-title>
 >
 > * Read and reflect together the principles
 > * Pick one principle that is not (fully) clear to you
