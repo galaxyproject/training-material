@@ -108,32 +108,31 @@ module Jekyll
       count = 0
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{TITLE_CLASSES})>([^<]*)<\/\s*\1>/) {
+      page.content = page.content.gsub(/<(#{BOX_CLASSES})-title>([^<]*)<\/\s*\1-title>/) {
         box_type = $1
+        title = $2
         count += 1
-        box = generate_title(box_type, count, nil)
-        puts "BOX #{box}"
+        box = generate_title(box_type, count, title)
         box
       }
 
       # Long term solution, proper new boxes
-      page.content = page.content.gsub(/<(#{CLASSES})>/) {
+      page.content = page.content.gsub(/<(#{BOX_CLASSES})>/) {
         box_type = $1
+        count += 1
         box = generate_box(box_type, 0, nil)
-        puts "BOX #{box}"
         box
       }
 
-      page.content = page.content.gsub(/<(#{CLASSES}) title="([^"]*)">/) {
+      page.content = page.content.gsub(/<(#{BOX_CLASSES}) title="([^"]*)">/) {
         box_type = $1
         title = $2
         count += 1
         box = generate_box(box_type, count, title)
-        puts "BOX #{box}"
         box
       }
 
-      page.content = page.content.gsub(/<\/\s*(#{CLASSES})\s*>/) {
+      page.content = page.content.gsub(/<\/\s*(#{BOX_CLASSES})\s*>/) {
         box_type = $1
         "\n</div></div><!--#{box_type}-->"
       }
