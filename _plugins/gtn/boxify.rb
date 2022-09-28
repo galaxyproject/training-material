@@ -35,12 +35,12 @@ module Gtn
       "es" => {
         # Just google translated these.
         "agenda" => "Agenda",
-        "code-in" => "entrada",
-        "code-out" => "salida",
-        "comment" => "comentario",
-        "details" => "detalles",
-        "solution" => "solución",
-        "warning" => "aviso",
+        "code-in" => "Entrada",
+        "code-out" => "Salida",
+        "comment" => "Comentario",
+        "details" => "Detalles",
+        "solution" => "Solución",
+        "warning" => "Aviso",
 
         # The only ones we have translations for??
         "hands-on" => "Práctica",
