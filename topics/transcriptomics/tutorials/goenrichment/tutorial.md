@@ -25,7 +25,7 @@ When we have a large list of genes of interest, such as a list of differentially
 
 One way to do so is to perform functional enrichment analysis. This method consists of applying statistical tests to verify if genes of interest are more often associated to certain biological functions than what would be expected in a random set of genes. In this tutorial you will learn about enrichment analysis and how to perform it.
 
-**What is the Gene Ontology?** <br/>
+## What is the Gene Ontology?
 The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
 
 ![GO Example](../../images/goenrichment_GOexample.png "QuickGO - http://www.ebi.ac.uk/QuickGO")
@@ -38,7 +38,7 @@ The GO Ontology, like other ontologies, are usually coded in the [OBO](http://ww
 {: .comment}
 
 
-**What are GO annotations?** <br/>
+## What are GO annotations?
 Genes are associated to GO terms via GO annotations. Each gene can have multiple annotations, even of the same GO type. An important notion to take into account when using GO is that, according to the **true path rule**, a gene annotated to a term is also implicitly annotated to each ancestor of that term in the GO graph. GO annotations have evidence codes that encode the type of evidence supporting them: only a small minority of genes have experimentally verified  annotations; the large majority have annotations inferred electronically based on sequence homology or known patterns.
 
 GO annotations can be obtained from the [Gene Ontology website](http://geneontology.org/page/download-go-annotations), or from species-specific databases. One useful resource to obtain GO annotations is [Ensembl biomart](http://www.ensembl.org/biomart/martview). Again, take note to when and from where you obtained your annotations. For example, if you obtained your data from Ensembl, record the release you used.
@@ -123,14 +123,13 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 > ![GO Enrichment Trapnell](../../images/goenrichment_galaxyTrapnell.png)
 >
 >
->    > ### {% icon question %} Questions
+>    > ### {% icon question %} Question
 >    >
 >    > What were the results from running GOEnrichment?
->    > <details>
 >    >
->    > <summary>Click to view answers</summary>
->    > This will generate 6 files with the respective default names: `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy BP Table', `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy MF Graph', `goenrichment on trapnellStudy BP Graph' and `goenrichment on trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > This will generate 6 files with the respective default names: `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy BP Table', `goenrichment on trapnellStudy MF Table', `goenrichment on trapnellStudy MF Graph', `goenrichment on trapnellStudy BP Graph' and `goenrichment on trapnellStudy CC Graph'. The three Table files list the results of the statistical test for each GO Term, ordered by p-value, and the three Graph files are image files displaying a graph view of the enriched GO terms.
+>    > {: .solution}
 >    {: .question}
 >
 >    > ### {% icon comment %} Comments
@@ -141,10 +140,9 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    >
 >    > How many significant terms do we get?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > When we ask how many significant terms, we want to see GO terms that have a p-value < 0.05. According to the results, for Molecular Function we have 5 GO terms, Biological Process we have 43 GO terms and Component Cellular we have 10 GO terms.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > When we ask how many significant terms, we want to see GO terms that have a p-value < 0.05. According to the results, for Molecular Function we have 5 GO terms, Biological Process we have 43 GO terms and Component Cellular we have 10 GO terms.
+>    > {: .solution}
 >    {: .question}
 >
 > If you press the {% icon galaxy-eye %} (eye) icon of the *Molecular Function* file (`MF Trapnell`) you should see something like this:
@@ -155,10 +153,9 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >    >
 >    > Did you expect to see significant terms?
 >    >
->    > <details>
->    > <summary>Click to view answers</summary>
->    > The ~300 genes should be random, so we wouldn't expect to see any enriched term. Nonetheless we still have significant terms.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > The ~300 genes should be random, so we wouldn't expect to see any enriched term. Nonetheless we still have significant terms.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
@@ -195,14 +192,11 @@ Let's remove the irrelevant genes from the background population (`trapnellPopul
 >    >
 >    > 1. How many significant terms do we get now?
 >    > 2. Why do you see these differences?
->    > <details>
 >    >
->    > <summary>Click to view answers</summary>
->    > <ol type="1">
->    > <li> According to the results, in *Molecular Function* and *Biological Process* we have 0 GO terms and *Component Cellular* just 1 GO term. </li>
->    > <li> The background population genes that we removed are not random, they are usually genes that are expressed in specific conditions, tissues or time points. If they are included in the test, we will obtain false enrichments, as we saw.</li>
->    > </ol>
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > - According to the results, in *Molecular Function* and *Biological Process* we have 0 GO terms and *Component Cellular* just 1 GO term.
+>    > > - The background population genes that we removed are not random, they are usually genes that are expressed in specific conditions, tissues or time points. If they are included in the test, we will obtain false enrichments, as we saw.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
@@ -255,11 +249,9 @@ The Summarize Output option in the GOEnrichment tool addresses this problem by c
 >
 >    > ### {% icon question %} Questions
 >    > 1. Are there differences in complexity comparing the graph with and without the summarize output option?
->    > <details>
->    >
->    > <summary>Click to view answers</summary>
->    > 1. Yes, there are differences. As you can see, the activation of the Summarize option reduces the size of the graph because this parameter causes families of GO terms to be conflated. Each major branch in the full results is still present in the summarized results, but now is reduced to 1 or 2 most representative terms, leading to a graph that is much easier to interpret while still containing all the key functional information.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > 1. Yes, there are differences. As you can see, the activation of the Summarize option reduces the size of the graph because this parameter causes families of GO terms to be conflated. Each major branch in the full results is still present in the summarized results, but now is reduced to 1 or 2 most representative terms, leading to a graph that is much easier to interpret while still containing all the key functional information.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
@@ -298,11 +290,10 @@ Now we will go use the GOEnrichment tool with the new Slim Annotations file and 
 >    > ![GO Enrichment Mouse Summarize CC](../../images/goenrichment_ccSum.png)
 >    > *Component Cellular* with GO Slim
 >    > ![GO Enrichment Mouse Slim CC](../../images/goenrichment_ccSlimSum.png)
->    > <details>
 >    >
->    > <summary>Click to view answers</summary>
->    > 1. The differences that you observe are due to the ontology used. When we apply the summarize option with the full GO, the GOEnrichment tool will return a summarized output (as we have seen previously). When we opted for GO Slim, the original annotation was already summarized, resulting in an even more summarized output, but with a consequent loss of specificity.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > 1. The differences that you observe are due to the ontology used. When we apply the summarize option with the full GO, the GOEnrichment tool will return a summarized output (as we have seen previously). When we opted for GO Slim, the original annotation was already summarized, resulting in an even more summarized output, but with a consequent loss of specificity.
+>    > {: .solution}
 >    {: .question}
 >
 {: .hands_on}
@@ -338,11 +329,10 @@ For the second exercice, we will continue to work with the same study set as bef
 >    > ### {% icon question %} Questions
 >    >
 >    > Analyze both Biological Process tables. According to the study, which tissues are over- and underexpressed?
->    > <details>
 >    >
->    > <summary>Click to view answers</summary>
->    > The samples correspond to the expressions that occur in the tissues referring to the brain and heart, so the results in the tables (and also in the graphs) should correspond to the specific functions of each organ. When we analyze the tables of enriched functional terms, we can see that the results from underexpressed genes reveal functions related to the brain. While in the case of the genes overexpressed, we identify functions related to muscle / heart function.
->    > </details>
+>    > > ### {% icon solution %} Solution
+>    > > The samples correspond to the expressions that occur in the tissues referring to the brain and heart, so the results in the tables (and also in the graphs) should correspond to the specific functions of each organ. When we analyze the tables of enriched functional terms, we can see that the results from underexpressed genes reveal functions related to the brain. While in the case of the genes overexpressed, we identify functions related to muscle / heart function.
+>    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
