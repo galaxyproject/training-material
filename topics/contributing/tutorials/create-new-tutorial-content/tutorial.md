@@ -27,7 +27,6 @@ abbreviations:
 ---
 
 # Introduction
-{:.no_toc}
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
@@ -66,10 +65,15 @@ contributors:
 - contributor1
 - contributor2
 ---
-# Introduction
-{:.no_toc}
 
-blabla
+introduction text
+
+> <agenda​-title></agenda​-title>
+>
+> In this tutorial we will deal with:
+>
+> 1. TOC
+> {:toc}
 
 # Section 1
 
@@ -88,7 +92,6 @@ blabla
 blabla
 
 # Conclusion
-{:.no_toc}
 
 blabla
 ```
@@ -959,16 +962,17 @@ If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/i
 > > <code-in-title>Markdown</code-in-title>
 > >
 > > ```
-> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > Footnotes[^test] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^test]
 > > ```
 > > {: .pre-break-lines}
 > {: .code-in}
 >
 > > <code-out-title></code-out-title>
-> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > Footnotes[^test] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^test]
 > {: .code-out}
 {: .code-2col}
 
+[^test]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
 
 ## Icons
 
@@ -1243,12 +1247,9 @@ If all worked well, it should look something like this, with a dropdown menu on 
 Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
 
 # Conclusion
-{:.no_toc}
 
 
 ## Footnotes (Rendered)
-
-[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
 
 
 <script type="text/javascript">
