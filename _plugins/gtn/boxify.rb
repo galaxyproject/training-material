@@ -50,7 +50,7 @@ module Gtn
     }
 
     @@COLLAPSIBLE_BOXES = [
-      "hands-on", "details", "question", "solution", "tip",
+      "details", "solution", "tip",
     ]
 
     @@BOX_CLASSES = @@ICONS.keys.join "|"
