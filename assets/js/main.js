@@ -89,21 +89,19 @@ function cyoaDefault(defaultOption){
     onDocumentReady(function () {
         // If you pass `?with-answers` to an URL, it will automatically open
         // the `<details>` blocks (i.e. the Q&A sections most of the time).
-        if (window.location.search.match(/\?with-answers/gi)) {
+        var withAnswers = (new URL(document.location)).searchParams.get("with-answers");
+        if (withAnswers !== null) {
             // Same as above selector
-            $(".solution>h3,.details>h3,.tip>h3").click();
-            $(".solution>.box-title,.details>.box-title,.tip>.box-title").click();
-
+            $(".solution>h3,.details>h3").click();
         }
-        if (window.location.search.match(/\?with-answers/gi)) {
-            // Same as above selector
-            $(".solution>h3,.details>h3,.tip>h3,.hands_on>h3,.question>h3").click();
-            $(".solution>.box-title,.details>.box-title,.tip>.box-title,.hands_on>.box-title,.question>.box-title").click();
+
+        var expandAll = (new URL(document.location)).searchParams.get("expand-all");
+        if (expandAll !== null) {
+            $(".solution>.box-title,.details>.box-title,.tip>.box-title").click();
 
         }
         // collapse all boxes on the faq overview pages
         if (window.location.href.indexOf("faqs") > -1) {
-            $(".hands_on>h3,.question>h3,.comment>h3").click();
             $(".hands_on>.box-title,.question>.box-title,.comment>.box-title").click();
         }
     });

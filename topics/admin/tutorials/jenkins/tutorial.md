@@ -28,6 +28,8 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+abbreviations:
+  CI: Continuous Integration
 ---
 
 
@@ -35,7 +37,7 @@ requirements:
 {:.no_toc}
 
 Automation is a key component for making your life easier. There are dozens of regular, boring tasks involved in server administration, and many of these can be automated in order to make your life easier.
-<abbr title="Continuous Integration">CI</abbr> systems provide one way to accomplish this.
+{CI} systems provide one way to accomplish this.
 Many of these systems focus on testing and deploying code, and provide some built-in shortcuts to accomplish this.
 Testing and deploying code boils down to "please run this command, when X happens", and they tend to function as "commands as a service".
 You can often configure them to "test code when it is pushed to a branch on GitHub", or "test this code daily" or "deploy this code daily".
@@ -53,7 +55,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 
 # Comparison of CI Systems
 
-There are dozens of CI systems available meeting different needs, which CI system you want to use depends largely on the task you are trying to automate. A couple of key factors you may wish to consider are:
+There are dozens of {CI} systems available meeting different needs, which CI system you want to use depends largely on the task you are trying to automate. A couple of key factors you may wish to consider are:
 
 - How long will jobs run for? Free services often have time and log-output limits.
 - Are you concerned about secret storage? Self-hosted can be a better option here, but it depends on your security posture and threat matrix.
@@ -396,7 +398,7 @@ The "Branches to build" section allows you to specify which branches. Whenever y
 
 ### Build Triggers
 
-The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier. Consider if that is an option. It is not a bad thing to use multiple CI systems, it provides some degree of redundancy where if one system is experiencing an outage it may not affect all CI jobs.
+The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier. Consider if that is an option. It is not a bad thing to use multiple {CI} systems, it provides some degree of redundancy where if one system is experiencing an outage it may not affect all CI jobs.
 
 ### Credential Binding
 

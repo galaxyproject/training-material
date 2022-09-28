@@ -38,7 +38,7 @@ abbreviations:
   CRISPR: Clustered Regularly Interspaced Short Palindromic Repeats
   MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 subtopic: eukaryote
-priority: 7
+priority: 8
 ---
 
 

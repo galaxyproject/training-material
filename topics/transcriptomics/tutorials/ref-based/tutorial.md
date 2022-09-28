@@ -398,11 +398,11 @@ The BAM file contains information for all our reads, making it difficult to insp
 > <hands-on-title>Inspection of mapping results</hands-on-title>
 >
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
-> 2. Start IGV locally
+> 2. Start IGV locally 
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > 4. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
-> 5. Click on the `local` in `display with IGV local D. melanogaster (dm6)` to load the reads into the IGV browser
->
+> 5. Click on the {% icon galaxy-barchart %} visualize icon in the `GSM461177` file block.
+> 6. In the center panel click on the `local` in `display with IGV local D. melanogaster (dm6)`to load the reads into the IGV browser
 >    > <comment-title></comment-title>
 >    >
 >    > In order for this step to work, you will need to have either IGV or [Java Web Start](https://www.java.com/en/download/faq/java_webstart.xml)
