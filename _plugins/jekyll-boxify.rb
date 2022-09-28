@@ -66,10 +66,12 @@ module Jekyll
     def generate_collapsible_title(box_type, count, title)
       title_fmted = (title ? ": #{title}" : "")
       return %Q(
-        <button class="box-title" type="button" aria-controls="box-#{box_type}-#{count}" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
+        <div class="box-title">
+        <button type="button" aria-controls="box-#{box_type}-#{count}" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
           #{get_icon(ICONS[box_type])} #{BOX_TITLES[box_type]}#{title_fmted}
           <span role="button" class="fold-unfold fa fa-plus-square"></span>
         </button>
+        </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
