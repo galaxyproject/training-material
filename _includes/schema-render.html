@@ -1,11 +1,12 @@
 <blockquote class="{% if include.value.required %}comment{% else %}tip{% endif %}">
-<h3>
+	<{% if include.value.required %}comment{% else %}tip{% endif %}-title>
 	{% if include.key == "=" %}
 		Any key permitted
 	{% else %}
 		<code>{{ include.key }}</code>
 	{% endif %}
-	{% if include.value.required %} <b>required</b>{% endif %}</h3>
+	{% if include.value.required %} <b>required</b>{% endif %}
+	</{% if include.value.required %}comment{% else %}tip{% endif %}-title>
 
 <b>{{ include.value.type | humanize_types }}</b>
 
