@@ -420,7 +420,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-> <hands-on-title>Strategies to improve motivation - _{% icon time %} 15 min - Groups of 2 people_</hands-on-title>
+> <hands-on-title>Strategies to improve motivation - _⏰ 15 min - Groups of 2 people_</hands-on-title>
 >
 > - Pick 1 strategy associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
 >

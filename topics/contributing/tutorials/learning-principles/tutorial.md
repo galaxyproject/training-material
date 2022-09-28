@@ -121,7 +121,7 @@ In order to write learning outcomes, you can use the following scheme:
 
 Identify observable and non observable actions (verbs)
 
-<!-- >> <hands-on-title>Identify observable and non observable actions (verbs) - *{% icon time %} 3 min*</hands-on-title>
+<!-- >> <hands-on-title>Identify observable and non observable actions (verbs) - *⏰ 3 min*</hands-on-title>
 >
 > Here is a list of verbs: Compare, classify, distinguish, explain, believe, give examples of, define, learn, describe, list, recognize, know, connect, measure, identify, have faith in
 > * Write in the shared notes which ones describe observable actions
@@ -216,7 +216,7 @@ How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? 
 
 {% include _includes/quiz.html id="learning_metaphors.yaml" %}
 
-<!-- >> <hands-on-title>Challenge- *{% icon time %} 5 min*</hands-on-title>
+<!-- >> <hands-on-title>Challenge- *⏰ 5 min*</hands-on-title>
 >
 > - Think about the following metaphors:
 >	* A mind is a fire to be kindled
@@ -293,7 +293,7 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 {: .details}
 
 
-> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*</hands-on-title>
+> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *⏰ 5 min*</hands-on-title>
 >
 > - Order the following approaches (from the most to the less effective one) for you when you want to learn something new
 >	* Read about it
@@ -370,7 +370,7 @@ In a simple model from cognitive science (quite involved in constructivism), lea
 5. Long term: slow
 	* How much effort to remember a full poem-->
 
-<!-- >> <hands-on-title>How short is your short term memory? - *{% icon time %} 10 min*</hands-on-title>
+<!-- >> <hands-on-title>How short is your short term memory? - *⏰ 10 min*</hands-on-title>
 >
 > Based on {% cite Willingham2009 %}.
 >
@@ -412,7 +412,7 @@ To facilitate learning, we as instructors have to make room in working memory.
 
 {% include _includes/quiz.html id="short_term_memory.yaml" %}
 
-<!-- >> <hands-on-title>How can you avoid to overload learners working memory?  - *{% icon time %} 5 min - Groups of 2/3 persons*</hands-on-title>
+<!-- >> <hands-on-title>How can you avoid to overload learners working memory?  - *⏰ 5 min - Groups of 2/3 persons*</hands-on-title>
 >
 > - Discuss one thing a teacher could do to avoid overloading their students' working memory.
 > - Write your proposal in the shared notes
@@ -439,7 +439,7 @@ There are 3 cognitive loads recognized by cognitive science:
 
 Split-attention occurs when learners are required to **split their attention** between **at least two sources of information** that have been separated either spatially or temporally
 
-> <hands-on-title>Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*</hands-on-title>
+> <hands-on-title>Extraneous cognitive load - *⏰ 10 min - Groups of 2/3 persons*</hands-on-title>
 >
 > * Pick one task you teach in your lessons/courses
 > * Think and discuss within the room about the following questions
@@ -554,7 +554,7 @@ Dreyfuss model for skill acquisition | Differences between novices and experts. 
 {: .details}
 
 
-<!-- >> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
+<!-- >> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *⏰ 5 min*</hands-on-title>
 >
 > _Break-out_ room (2 ppl per room)
 >
@@ -605,7 +605,7 @@ Our learning model is based on such evidence-based learning principles and strat
 
     Concept maps are examples of a retrieval practice when you bring out knowledge/memories from long-term memory
 
-> <hands-on-title>How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*</hands-on-title>
+> <hands-on-title>How do you understand the 6 strategies for effective learning? - *⏰ 15 min - Groups of 2 persons*</hands-on-title>
 >
 > - Pick up one strategy per group
 > - Discuss about the strategy
