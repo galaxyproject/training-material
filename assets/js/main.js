@@ -1,15 +1,21 @@
 // make boxes collapsible
-//LEGACY
-$("blockquote.solution>h3,blockquote.details>h3,blockquote.tip>h3,blockquote.question>h3,blockquote.hands_on>h3,blockquote.comment>h3").click(function(event) {
-    $(">*:not(h3)", $(this).parent()).toggle(400);
-    $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
-});
+$("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,blockquote.tip>.box-title>button,blockquote.question>.box-title>button,blockquote.hands_on>.box-title>button,blockquote.comment>.box-title>button").click(function(event) {
+	// If they click the icons, we need to make sure we have a reference to the button properly
+	var button;
+	if(event.target.nodeName === "BUTTON"){
+		button = $(event.target)
+	} else {
+		button = $(event.target).parents("button");
+	}
+	// Then we can collapse specifically things based on the button's ancestry
+	var parentBlockquote = button.parents("blockquote");
 
-//NEW
-$("div.solution>.box-title,div.details>.box-title,div.tip>.box-title,div.question>.box-title,div.hands-on>.box-title,div.comment>.box-title").click(function(event) {
-    $(">.box-content", $(this).parent()).toggle(400);
-    $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
+	// Collapse every child of the blockquote, that is NOT a box-title
+    $(">*:not(.box-title)", parentBlockquote).toggle();
+	// And toggle our icon
+    $(">span.fold-unfold", button).toggleClass("fa-plus-square fa-minus-square");
 
+	// Naturally we also need to toggle the aria-expanded attribute to make sure we're accessible
     $(this).attr("aria-expanded",
 		// if it's collapsed
 		$(">span.fold-unfold", this).hasClass("fa-plus-square") ? 
@@ -18,22 +24,8 @@ $("div.solution>.box-title,div.details>.box-title,div.tip>.box-title,div.questio
 	);
 });
 
-// collapse some box types by default
-// LEGACY
- $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
-    $(">*:not(h3)", this).toggle();
-    var h3 = $("h3:first", this);
-    h3.append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
-});
-
-// don't collapse the others by default
-$("blockquote.question,blockquote.hands_on,blockquote.comment").each(function() {
-    var h3 = $("h3:first", this);
-    h3.append("<span role='button' class='fold-unfold fa fa-minus-square'></span>");
-});
-
 // NEW
-$("div.solution,div.details,div.tip").each(function() {
+$("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title", this).click();
 });
 
