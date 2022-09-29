@@ -1,0 +1,1523 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Identification of the micro-organisms in a beer using Nanopore sequencing</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Identification of the micro-organisms in a beer using Nanopore sequencing" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
+<meta name="DC.creator" content="Polina Polunina" />
+<meta name="DC.creator" content="Siyu Chen" />
+<meta name="DC.creator" content="Bérénice Batut" />
+<meta name="DC.creator" content="Teresa Müller" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Identification of the micro-organisms in a beer using Nan..." />
+        <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/metagenomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Metagenomics
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/metagenomics/faqs/" title="Check our FAQs for the Metagenomics topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/metagenomics/tutorials/beer-data-analysis/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-07-01/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html" title="Version 2022-07-01">2022-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:28 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identification of the micro-organisms in a beer using Nanopore sequencing",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metagenomics",
+    "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+    "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Identification of the micro-organisms in a beer using Nanopore sequencing' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "metagenomics, nanopore, beer, citizen science, metagenomics",
+  "description": "The questions this  addresses are:\n - How can yeast strains in a beer sample be identified?\n - How can we process metagenomic data sequenced using Nanopore?\n\n\\nThe objectives are:\n - Inspect metagenomics data\n - Run metagenomics tools\n - Identify yeast species contained in a sequenced beer sample using DNA\n - Visualize the microbiome community of a beer sample\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metagenomics",
+      "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+      "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    }
+  ],
+  "educationalLevel": "Beginner"
+}
+</script>
+
+<section class="tutorial topic-metagenomics">
+    <h1 data-toc-skip>Identification of the micro-organisms in a beer using Nanopore sequencing</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/plushz/" class="contributor-badge contributor-plushz"><img src="https://avatars.githubusercontent.com/plushz?s=27" alt="Avatar">Polina Polunina</a>
+
+
+
+<a href="/training-material/hall-of-fame/chensy96/" class="contributor-badge contributor-chensy96"><img src="https://avatars.githubusercontent.com/chensy96?s=27" alt="Avatar">Siyu Chen</a>
+
+
+
+<a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a>
+
+
+
+<a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="https://avatars.githubusercontent.com/teresa-m?s=27" alt="Avatar">Teresa Müller</a>
+
+
+
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <h3>Overview</h3>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can yeast strains in a beer sample be identified?</p>
+</li>
+        
+        <li><p>How can we process metagenomic data sequenced using Nanopore?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Inspect metagenomics data</p>
+</li>
+        
+        <li><p>Run metagenomics tools</p>
+</li>
+        
+        <li><p>Identify yeast species contained in a sequenced beer sample using DNA</p>
+</li>
+        
+        <li><p>Visualize the microbiome community of a beer sample</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default supporting_material"><a href="/training-material/topics/metagenomics/slides/introduction.html" title="Topic Overview slides">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Topic Overview slides
+                </a></li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.7093173">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/metagenomics/tutorials/beer-data-analysis/workflows/" title="Workflows" alt="Identification of the micro-organisms in a beer using Nanopore sequencing workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/metagenomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- This is a comment. -->
+
+<p>What is a microbiome? It is a collection of small living creatures.
+These small creatures are called <strong>micro-organisms</strong> and they are <strong>everywhere</strong>. In our gut,
+in the soil, on vending machines, and even inside the beer. Most of these micro-organisms are
+actually very good for us, but some can make us very ill.</p>
+
+<p>Micro-organisms come in different shapes and sizes, but they have the same components.
+One crucial component is the <strong><span class="notranslate">DNA</span></strong>, the blueprint of life. The <span class="notranslate">DNA</span> encodes the
+shape and size and many other characteristics unique to a species. Because <span class="notranslate">DNA</span> is so species-specific,
+reading the <span class="notranslate">DNA</span> can be used to identify what kind of micro-organism
+the it is from. Therefore, within a metagenomic specimen, <em>e.g.</em> a sample form soil, gut,
+or beer, one can identify what kind of species are inside the sample.</p>
+
+<p>In this tutorial, we will use data of beer microbiome generated via the
+<a href="https://streetscience.community/projects/beerdecoded/">BeerDEcoded project</a>.</p>
+
+<blockquote class="details">
+  <h3 id="details-the-beerdecoded-project"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> The BeerDEcoded project</h3>
+
+  <p>The BeerDEcoded Project is a series of workshops organized with and for schools as well as the general
+audience, aiming to introduce biology and genomic science. People learn in an interactive way
+about <span class="notranslate">DNA</span>, sequencing technologies, bioinformatics, open science, how these technologies
+and concepts are applied and how they are impacting their daily life.</p>
+
+  <p>Beer is alive and contains many microorganisms. It can be found in many places
+and there are many of them. It is a fun media to bring the people to the
+contact of molecular biology, data-analysis, and open science.</p>
+
+  <p>A BeerDEcoded workshop includes the following steps:</p>
+  <ol>
+    <li>Extract yeasts and their <span class="notranslate">DNA</span> from beer bottle,</li>
+    <li>Sequence the extracted <span class="notranslate">DNA</span> using a MinION sequencer to obtain the sequence of bases/nucleotides (A, T, C and G) for each <span class="notranslate">DNA</span> fragment in the sample,</li>
+    <li>Analyze the sequenced data in order to know which organisms this <span class="notranslate">DNA</span> is from</li>
+  </ol>
+
+  <p><img src="./images/beerprocess.png" alt="The image represents a BeerDEcoded workshop. On the left, there is a beer glass. An arrow goes from the bottle to DNA with &quot;Extraction&quot; written on the below. An arrow goes from DNA to DNA sequences with &quot;Sequencing&quot; written on the below. An arrow goes from the DNA sequences to Yeasts with &quot;Data analysis&quot; written on the below. " loading="lazy" /></p>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-beer-microbiome"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Beer microbiome</h3>
+
+  <p>Beer is alive! It contains microorganisms, in particular <strong>yeasts</strong>.</p>
+
+  <p>Indeed, grain and water create a sugary liquid (called wort). The beer brewer
+adds yeasts to it. By eating the sugar, yeasts creates alcohol,
+and other compounds (esters, phenols, etc.) that give beer its particular
+flavor.</p>
+
+  <p>Yeasts are microorganisms, more precisely <strong>unicellular fungi</strong>. The majority
+of beers use a yeast genus called <strong><em>Saccharomyces</em></strong>, which in Greek means
+“sugar fungus”. Within that genus, two specific species of <em>Saccharomyces</em>
+are the most commonly used:</p>
+
+  <ul>
+    <li><strong><em>Saccharomyces cerevisiae</em></strong>: a top-fermenting (<em>i.e.</em> yeast which rise
+up to the top of the beer as it metabolizes sugars, delivering alcohol as a by-product),
+ale yeast responsible for a huge range of beer styles like witbiers, stouts, ambers,
+tripels, saisons, IPAs, and many more. It is most likely the yeast that the early brewers were
+inadvertently brewing with over 3,000 years ago.</li>
+    <li><strong><em>Saccharomyces pastorianus</em></strong>: a bottom-fermenting (<em>i.e.</em> it sits on the
+bottom of the tank as it ferments) lager yeast, responsible for beer styles
+like Pilsners, lagers, märzens, bocks, and more. This yeast was originally
+found, and cultivated, by Bavarian brewers a little over 200 years ago. It is
+the most commonly used yeast in terms of the raw amount of beer produced around the world.</li>
+  </ul>
+
+  <p>But yeast is actually all around us. And we can actually brew spontaneously
+fermented beer with wild yeast and souring microbiota floating through the air.</p>
+
+</blockquote>
+
+<p>During one BeerDEcoded workshop, we extracted yeasts out of a bottle of
+<a href="https://en.wikipedia.org/wiki/Chimay_Brewery">Chimay</a>. We then
+extracted the <span class="notranslate">DNA</span> of these yeasts and sequenced it using a MinION to obtain the <span class="notranslate">DNA</span>
+sequences. Now, we would like to <strong>identify the yeast species</strong> sequenced there, and
+thereby <strong>outline the diversity of microorganisms</strong> (the microbiome community) in the beer
+sample.</p>
+
+<p>To get this information, we need to process the sequenced data in a few steps:</p>
+<ol>
+  <li>Check the quality of the data</li>
+  <li>Assign a taxonomic label, <em>i.e.</em> assign ‘species’ to each sequence</li>
+  <li>Visualize the distribution of the different species</li>
+</ol>
+
+<p>This type of data analysis requires running several bioinformatics tools and
+usually requires a computer science background. <a href="https://galaxyproject.org/"><span class="notranslate">Galaxy</span></a> is
+an open-source platform for data analysis that enables anyone to use bioinformatics
+tools through its graphical web interface, accessible via any Web browser.</p>
+
+<p>So, in this tutorial, we will use <span class="notranslate">Galaxy</span> to extract and visualize the community
+of yeasts from a bottle of beer.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#prepare-galaxy-and-data" id="markdown-toc-prepare-galaxy-and-data">Prepare <span class="notranslate">Galaxy</span> and data</a>    <ol>
+      <li><a href="#get-familiar-with-galaxy" id="markdown-toc-get-familiar-with-galaxy">Get familiar with <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-quality" id="markdown-toc-data-quality">Data quality</a>    <ol>
+      <li><a href="#assess-data-quality" id="markdown-toc-assess-data-quality">Assess data quality</a></li>
+      <li><a href="#improve-the-dataset-quality" id="markdown-toc-improve-the-dataset-quality">Improve the dataset quality</a></li>
+    </ol>
+  </li>
+  <li><a href="#assign-taxonomic-classification" id="markdown-toc-assign-taxonomic-classification">Assign taxonomic classification</a></li>
+  <li><a href="#visualize-the-community" id="markdown-toc-visualize-the-community">Visualize the community</a></li>
+  <li><a href="#optional-sharing-your-history" id="markdown-toc-optional-sharing-your-history">(Optional) Sharing your history</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-galaxy-and-data">Prepare <span class="notranslate">Galaxy</span> and data</h1>
+
+<p>First of all, this tutorial will get you hands on with some basic <span class="notranslate">Galaxy</span> tasks, including creating a history and importing data.</p>
+
+<h2 id="get-familiar-with-galaxy">Get familiar with <span class="notranslate">Galaxy</span></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-open-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Open <span class="notranslate">Galaxy</span></h3>
+
+  <ol>
+    <li>Open your favorite browser (Works on Chrome, Firefox, Safari but not Internet Explorer!)</li>
+    <li>
+      <p>Create a <span class="notranslate">Galaxy</span> account if you do not have one</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-how-to-create-an-account-on-a-public-galaxy-instance"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to create an account on a public <span class="notranslate">Galaxy</span> instance?</h3>  <ol>  <li>    <p>To create an account at any public <span class="notranslate">Galaxy</span> instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of <span class="notranslate">Galaxy</span> Platform</a>.</p>    <p>There are 3 main public <span class="notranslate">Galaxy</span> servers: <a href="https://usegalaxy.org/">Use<span class="notranslate">Galaxy</span>.org</a>, <a href="https://usegalaxy.eu/">Use<span class="notranslate">Galaxy</span>.eu</a>, and <a href="https://usegalaxy.org.au/">Use<span class="notranslate">Galaxy</span>.org.au</a>.</p>  </li>  <li>    <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>    <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>  </li>  <li>Click on <strong>Register here</strong> and fill in the required information.</li>  <li>Click on the <strong>Create</strong> button, your account is successfully created.</li>  <li>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</li>  <li>Click on the <strong>Email confirmation link</strong> to fully activate your account.</li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The <span class="notranslate">Galaxy</span> homepage is divided into three panels:</p>
+<ul>
+  <li>Tools on the left</li>
+  <li>Viewing panel in the middle</li>
+  <li>History of analysis and files on the right</li>
+</ul>
+
+<figure id="figure-1"><img src="/training-material/topics/introduction/images/galaxy_interface.png" alt="Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The <span class="notranslate">Galaxy</span> interface</figcaption></figure>
+
+<p>The first time you use <span class="notranslate">Galaxy</span>, there will be no files in your history panel.</p>
+
+<p>Any analysis should get its own <span class="notranslate">Galaxy</span> history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare the <span class="notranslate">Galaxy</span> history</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history</h3>  <ol>  <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>  <li>Type the new name</li>  <li>Press <kbd>Enter</kbd></li></ol></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="get-data">Get data</h2>
+
+<p>Before we can begin any <span class="notranslate">Galaxy</span> analysis, we need to upload the input data: FASTQ files</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-upload-your-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload your dataset</h3>
+
+  <ol>
+    <li>
+      <p>Import the sequenced data including fastq in the name</p>
+
+      <ul>
+        <li>
+          <p>Option 1 <a href="https://youtu.be/FFCDx1rMGAQ"><i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span></a>: Your own local data using <strong>Upload Data</strong> (recommended for 1-10 datasets).</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-upload-few-files-1-10"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload few files (1-10)</h3>  <ol>  <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>  <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>  <li>Click on <strong>Start</strong></li>  <li>Click on <strong>Close</strong></li></ol></blockquote>
+        </li>
+        <li>
+          <p>Option 2: From Zenodo, an exte<span class="notranslate">rna</span>l server, via URL</p>
+
+          <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://doi.org/10.5281/zenodo.7093173/files/ABJ044_c38189e89895cdde6770a18635db438c8a00641b.fastq
+</code></pre></div>          </div>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+        </li>
+      </ul>
+
+      <p>Your uploaded file is now in your current history. When the file is fully uploaded to <span class="notranslate">Galaxy</span>, it will turn green. But, what is this file?</p>
+    </li>
+    <li>
+      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon next to the dataset name to look at the file contents.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The contents of the file will be displayed in the central <span class="notranslate">Galaxy</span> panel.</p>
+
+<p>This file contains the sequences, also called <strong><span class="notranslate">reads</span></strong>, of <span class="notranslate">DNA</span>, <em>i.e.</em> succession of nucleotides, for all fragments from the yeasts in the beer, in FASTQ format.</p>
+
+<!--SNIPPET-->
+<blockquote class="details">  <h3 data-toc-skip="" id="-fastq-format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> FASTQ format</h3>  <p>Although it looks complicated (and maybe it is), the FASTQ format is easy to understand with a little decoding. Each read, representing a fragment of <span class="notranslate">DNA</span>, is encoded by 4 lines:</p>  <table>  <thead>    <tr>      <th>Line</th>      <th>Description</th>    </tr>  </thead>  <tbody>    <tr>      <td>1</td>      <td>Always begins with <code class="language-plaintext highlighter-rouge">@</code> followed by the information about the read</td>    </tr>    <tr>      <td>2</td>      <td>The actual nucleic sequence</td>    </tr>    <tr>      <td>3</td>      <td>Always begins with a <code class="language-plaintext highlighter-rouge">+</code> and contains sometimes the same info in line 1</td>    </tr>    <tr>      <td>4</td>      <td>Has a string of characters which represent the quality scores associated with each base of the nucleic sequence; must have the same number of characters as line 2</td>    </tr>  </tbody></table>  <p>So for example, the first sequence in our file is:</p>  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@03dd2268-71ef-4635-8bce-a42a0439ba9a runid=8711537cc800b6622b9d76d9483ecb373c6544e5 read=252 ch=179 start_time=2019-12-08T11:54:28Z flow_cell_id=FAL10820 protocol_group_id=la_trappe sample_id=08_12_2019<br />AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA<br />+<br />$'())#$$%#$%%'-$&amp;$%'%#$%('+;&lt;&gt;&gt;&gt;18.?ACLJM7E:CFIMK&lt;=@0/.4&lt;9&lt;&amp;$007:,3&lt;IIN&lt;3%+&amp;$(+#$%'$#$.2@401/5=49IEE=CH.20355&gt;-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:&lt;?9B522.(&amp;%%(9:3E99&lt;BIL?:&gt;RB--**5,3(/.-8B&gt;F@@=?,9'36;:87+/19BAD@=8*''&amp;''7752'$%&amp;,5)AM&lt;99$%;EE;BD:=9&lt;@=9+%$<br /></code></pre></div></div>  <p>It means that the fragment named <code class="language-plaintext highlighter-rouge">@03dd2268-71ef-4635-8bce-a42a0439ba9a</code> (ID given in line1) corresponds to:</p>  <ul>  <li>the <span class="notranslate">DNA</span> sequence <code class="language-plaintext highlighter-rouge">AGTAAGTAGCGAACCGGTTTCGTTTGGGTGTTTAACCGTTTTCGCATTTATCGTGAAACGCTTTCGCGTTTTCGTGCGGAAGGCGCTTCACCCAGGGCCTCTCATGCTTTGTCTTCCTGTTTATTCAGGATCGCCCAAAGCGAGAATCATACCACTAGACCACACGCCCGAATTATTGTTGCGTTAATAAGAAAAGCAAATATTTAAGATAGGAAGTGATTAAAGGGAATCTTCTACCAACAATATCCATTCAAATTCAGGCA</code> (line2)</li>  <li>this sequence has been sequenced with a quality <code class="language-plaintext highlighter-rouge">$'())#$$%#$%%'-$&amp;$%'%#$%('+;&lt;&gt;&gt;&gt;18.?ACLJM7E:CFIMK&lt;=@0/.4&lt;9&lt;&amp;$007:,3&lt;IIN&lt;3%+&amp;$(+#$%'$#$.2@401/5=49IEE=CH.20355&gt;-@AC@:B?7;=C4419)*$$46211075.$%..#,529,''=CFF@:&lt;?9B522.(&amp;%%(9:3E99&lt;BIL?:&gt;RB--**5,3(/.-8B&gt;F@@=?,9'36;:87+/19BAD@=8*''&amp;''7752'$%&amp;,5)AM&lt;99$%;EE;BD:=9&lt;@=9+%$</code> (line 4).</li></ul>  <p>But what does this quality score mean?</p>  <p>The quality score for each sequence is a string of characters, one for each base of the nucleotide sequence, used to characterize the probability of misidentification of each base. The score is encoded using the ASCII character table (with <a href="https://en.wikipedia.org/wiki/FASTQ_format#Encoding">some historical differences</a>):</p>  <p><img src="/training-material/topics/sequence-analysis/faqs/images/fastq-quality-encoding.png" alt="Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina" /></p>  <p>So there is an ASCII character associated with each nucleotide, representing its <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Phred quality score</a>, the probability of an incorrect base call:</p>  <table>  <thead>    <tr>      <th>Phred Quality Score</th>      <th>Probability of incorrect base call</th>      <th>Base call accuracy</th>    </tr>  </thead>  <tbody>    <tr>      <td>10</td>      <td>1 in 10</td>      <td>90%</td>    </tr>    <tr>      <td>20</td>      <td>1 in 100</td>      <td>99%</td>    </tr>    <tr>      <td>30</td>      <td>1 in 1000</td>      <td>99.9%</td>    </tr>    <tr>      <td>40</td>      <td>1 in 10,000</td>      <td>99.99%</td>    </tr>    <tr>      <td>50</td>      <td>1 in 100,000</td>      <td>99.999%</td>    </tr>    <tr>      <td>60</td>      <td>1 in 1,000,000</td>      <td>99.9999%</td>    </tr>  </tbody></table></blockquote>
+
+<h1 id="data-quality">Data quality</h1>
+
+<h2 id="assess-data-quality">Assess data quality</h2>
+
+<p>Before starting to work on our data, it is necessary to assess its quality. This is an essential step if we aim to obtain a <strong>meaningful <span class="notranslate">downstream</span> analysis</strong>.</p>
+
+<p><strong>FastQC</strong> is one of the most widely used tools to <strong>check the quality</strong> of data generated by High Throughput Sequencing (HTS) technologies.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality check</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0"><strong>FASTQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Raw read data from your current history”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span></code></li>
+      </ul>
+    </li>
+    <li>Inspect the generated HTML file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>Given the Basic Statistics table on the top of the page:</p>
+
+  <p><img src="./images/fastqc_top_table.png" alt="Screenshot of the FastQC Basic Statistics with filename, file type (Conventional base calls), encoding (Sanger / Illumina 1.9), total Sequences (1876), sequences flagged as poor quality (0), sequence length (130-2327) and %GC (29). " loading="lazy" /></p>
+
+  <ol>
+    <li>How many sequences are in the FASTQ file?</li>
+    <li>How long are the sequences?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>There are 1876 sequences.</li>
+      <li>The sequences range from 130 nucleotides to 2327 nucleotides. Not all sequences have then the same length.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p><strong>FastQC</strong> provides information on various parameters, such as the range of quality values across all bases at each position:</p>
+
+<figure id="figure-2"><img src="./images/fastqc_1.png" alt="FastQC Per base sequence quality with scores below 20. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Per base sequence quality. X-axis: position in the <span class="notranslate">reads</span> (in base pair). Y-axis: quality score, between 0 and 40 - the higher the score, the better the base call. For each position, a boxplot is drawn with: the median value, represented by the central red line;the inter-quartile range (25-75%), represented by the yellow box; the 10% and 90% values in the upper and lower whiskers; and the mean quality, represented by the blue line. The background of the graph divides the y-axis into very good quality scores (green), scores of reasonable quality (orange), and <span class="notranslate">reads</span> of poor quality (red)</figcaption></figure>
+
+<p>We can see that the quality of our sequencing data grows after the first few bases, stays around a score of 18 and then decreases again at the end of the sequences. MinION and Oxford Nanopore Technologies (ONT) are known to have a higher error rate compared to other sequencing techniques and platforms (<span class="citation"><a href="#delahaye2021sequencing">Delahaye and Nicolas 2021</a></span>).</p>
+
+<p>For more detailed information about the other plots in the FASTQC report, check out our <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">dedicated tutorial</a>.</p>
+
+<h2 id="improve-the-dataset-quality">Improve the dataset quality</h2>
+
+<p>In order to improve the quality of our data, we will use two tools:</p>
+<ul>
+  <li><strong>porechop</strong> (<span class="citation"><a href="#rrwick2017">Wick 2017</a></span>) to remove adapters that were added for sequencing and chimera (contaminant)</li>
+  <li><strong>fastp</strong> (<span class="citation"><a href="#Chen_2018">Chen <i>et al.</i> 2018</a></span>) to filter sequences with low quality scores (below 10)</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-improve-the-dataset-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Improve the dataset quality</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA/FASTQ”</em>:  <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span></code></li>
+        <li><em>“Output format for the <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">fastq</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Single-end or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset collection”</em>: output of <strong>Porechop</strong></li>
+        <li>In <em>“Adapter Trimming Options”</em>:
+          <ul>
+            <li><em>“Disable adapter trimming”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Filter Options”</em>:
+          <ul>
+            <li>In <em>“Quality filtering options”</em>:
+              <ul>
+                <li><em>“Qualified quality phred”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Read Modification Options”</em>:
+          <ul>
+            <li><em>“PolyG tail trimming”</em>: <code class="language-plaintext highlighter-rouge">Disable polyG tail trimming</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the HTML report of <strong>fastp</strong> to see how the quality has been improved</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many sequences are there before filtering? Is it the same number as in FASTQC report?</li>
+    <li>How many sequences are there after filtering? How many sequences have then been removed by filtering?</li>
+    <li>What is the mean length before filtering? And after filtering?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>There are 1,869 <span class="notranslate">reads</span> before filtering. The number is lower than in the FASTQC report. Some <span class="notranslate">reads</span> may have been discarded via Porechop</li>
+      <li>There are 1,350 <span class="notranslate">reads</span> after filtering. So the filtering step has removed \(1869-1350 = 519\) sequences.</li>
+      <li>The mean length is 314 nucleotide before filtering and 316bp after filtering.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="assign-taxonomic-classification">Assign taxonomic classification</h1>
+
+<p>One of the main aims in microbiome data analysis is to identify the organisms sequenced. For that we try to <strong>identify the taxon</strong> to which each individual <span class="notranslate">reads</span> belong.</p>
+
+<!--SNIPPET-->
+<blockquote class="details">  <h3 data-toc-skip="" id="-what-is-taxonomy"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> What is Taxonomy?</h3>  <p>Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, <span class="notranslate">DNA</span> data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.</p>  <p>Defined groups of organisms are known as <strong>taxa</strong>. Taxa are given a taxonomic rank and are aggregated into super groups of higher rank to create a taxonomic hierarchy. The taxonomic hierarchy includes eight levels: <strong>Domain, Kingdom, Phylum, Class, Order, Family, Genus and Species.</strong></p>  <p><img src="/training-material/topics/metagenomics/faqs/images/taxonomy.png" alt="Example of taxonomy. It starts, top to bottom, with Kingdom &quot;Animalia&quot;, Phylum &quot;Chordata&quot;, Class &quot;Mammalia&quot;, and Order &quot;Carnivora&quot;. Then it splits in 3. On the left, Family &quot;Felidae&quot;, with 2 genus &quot;Felis&quot; and &quot;Panthera&quot; and below 3 species &quot;F. catus&quot; and &quot;F. pardalis&quot; below &quot;Felis&quot;, &quot;P. pardus&quot; below &quot;Panthera&quot;. In the middle, Family &quot;Canidae&quot;, genus &quot;Canis&quot; and 2 species &quot;C. familiaris&quot; and &quot;C. lupus&quot;. On the right, Family &quot;Ursidae&quot;, Genus &quot;Ursus&quot; and 2 species &quot;U. arctos&quot; and &quot;U. horribilus&quot;. Below each species is a illustration of the species" /></p>  <p>The classification system begins with <strong>3 domains</strong> that encompass all living and extinct forms of life</p>  <ul>  <li>The <strong>Bacteria</strong> and <strong>Archae</strong> are mostly microscopic, but quite widespread.</li>  <li>Domain <strong>Eukarya</strong> contains more complex organisms</li></ul>  <p>When new species are found, they are assigned into taxa in the taxonomic hierarchy. For example for the cat:</p>  <table>  <thead>    <tr>      <th>Level</th>      <th>Classification</th>    </tr>  </thead>  <tbody>    <tr>      <td>Domain</td>      <td>Eukaryota</td>    </tr>    <tr>      <td>Kingdom</td>      <td>Animalia</td>    </tr>    <tr>      <td>Phylum</td>      <td>Chordata</td>    </tr>    <tr>      <td>Class</td>      <td>Mammalia</td>    </tr>    <tr>      <td>Order</td>      <td>Carnivora</td>    </tr>    <tr>      <td>Family</td>      <td>Felidae</td>    </tr>    <tr>      <td>Genus</td>      <td><em>Felis</em></td>    </tr>    <tr>      <td>Species</td>      <td><em>F. catus</em></td>    </tr>  </tbody></table>  <p>Let’s explore taxonomy in the Tree of Life, using <a href="https://lifemap.univ-lyon1.fr/">Lifemap</a></p>  <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameborder="0" width="100%" height="600px"></iframe></blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which microorganisms do we expect to identify in our data?</li>
+    <li>What is the taxonomy of main expected microorganism?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p>The sequences are supposed to be yeasts extracted from a bottle of beer. The majority of beers contain a yeast genus called <strong><em>Saccharomyces</em></strong> and 2 species in that genus: <em>Saccharomyces cerevisiae</em> (ale yeast) and <em>Saccharomyces pastorianus</em> (lager yeast). The used beer is an ale beer, so we expect to find <strong><em>Saccharomyces cerevisiae</em></strong>. But other yeasts can also have been used and then found. We could also have some <span class="notranslate">DNA</span> left from other beer components, but also contaminations by other microorganisms and even human <span class="notranslate">DNA</span> from people who manipulated the beer or did the extraction.</p>
+      </li>
+      <li>
+        <p>The main expected microorganism is <strong><em>Saccharomyces cerevisiae</em></strong> with its taxonomy:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Classification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Domain</td>
+              <td>Eukaryota</td>
+            </tr>
+            <tr>
+              <td>Kingdom</td>
+              <td>Fungi</td>
+            </tr>
+            <tr>
+              <td>Phylum</td>
+              <td>Ascomycota</td>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>Saccharomycetes</td>
+            </tr>
+            <tr>
+              <td>Order</td>
+              <td>Saccharomycetales</td>
+            </tr>
+            <tr>
+              <td>Family</td>
+              <td>Saccharomycetaceae</td>
+            </tr>
+            <tr>
+              <td>Genus</td>
+              <td><em>Saccharomyces</em></td>
+            </tr>
+            <tr>
+              <td>Species</td>
+              <td><em>S. cerevisiae</em></td>
+            </tr>
+          </tbody>
+        </table>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Taxonomic assignment or classification is the process of assigning an <strong>Operational Taxonomic Unit</strong> (OTUs, that is, groups of related individuals / taxon) to sequences. To assign an OTU to a sequence it is compared against a database, but this comparison can be done in different ways, with different bioinformatics tools. Here we will use <strong>Kraken2</strong> (<span class="citation"><a href="#wood2019improved">Wood <i>et al.</i> 2019</a></span>).</p>
+
+<blockquote class="details">
+  <h3 id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Kraken2 and the k-mer approach for taxonomy classification</h3>
+
+  <p>In the \(k\)-mer approach for taxonomy classification, we use a database containing <span class="notranslate">DNA</span> sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length \(k\) (called \(k\)-mers), usually 30bp.</p>
+
+  <p><strong>Kraken</strong> examines the \(k\)-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps \(k\)-mers to the lowest common ancestor (LCA) of all genomes known to contain the given \(k\)-mer.</p>
+
+  <figure id="figure-3"><img src="../../images/metagenomics-nanopore/kmers-kraken.jpg" alt="Kraken2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: <span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span></figcaption></figure>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Kraken2</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Single or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequences”</em>: Output of <strong>fastp</strong></li>
+          </ul>
+        </li>
+        <li><em>“Print scientific names instead of just taxids”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Create Report”</em>:
+          <ul>
+            <li><em>“Print a report with aggregrate counts/clade to file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Format report output like Kraken 1’s kraken-mpa-report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>
+          <p><em>“Select a Kraken2 database”</em>: <code class="language-plaintext highlighter-rouge">Prebuilt Refseq indexes: PlusPF</code></p>
+
+          <p>The database here contains reference sequences and taxonomies. We need to
+be sure it contains yeasts, i.e. fungi.</p>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the report file</li>
+  </ol>
+</blockquote>
+
+<p>The Kraken report in MPA format is a tabular file with 2 columns:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d__Eukaryota	756
+d__Eukaryota|k__Metazoa	402
+d__Eukaryota|k__Metazoa|p__Chordata	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo	402
+d__Eukaryota|k__Metazoa|p__Chordata|c__Mammalia|o__Primates|f__Hominidae|g__Homo|s__Homo sapiens	402
+d__Eukaryota|k__Fungi	342
+d__Eukaryota|k__Fungi|p__Ascomycota	341
+d__Eukaryota|k__Fungi|p__Ascomycota|c__Saccharomycetes	336
+...
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>The first column lists clades, ranging from taxonomic domains (Bacteria, Archaea, etc.) through species.</p>
+
+    <p>The taxonomic level of each clade is prefixed to indicate its level:</p>
+    <ul>
+      <li>Domain: <code class="language-plaintext highlighter-rouge">d__</code></li>
+      <li>Kingdom: <code class="language-plaintext highlighter-rouge">k__</code></li>
+      <li>Phylum: <code class="language-plaintext highlighter-rouge">p__</code></li>
+      <li>Class: <code class="language-plaintext highlighter-rouge">c__</code></li>
+      <li>Order: <code class="language-plaintext highlighter-rouge">o__</code></li>
+      <li>Family: <code class="language-plaintext highlighter-rouge">f__</code></li>
+      <li>Genus: <code class="language-plaintext highlighter-rouge">g__</code></li>
+      <li>Species: <code class="language-plaintext highlighter-rouge">s__</code></li>
+    </ul>
+  </li>
+  <li>
+    <p>The second column gives the number of <span class="notranslate">reads</span> assigned to the clade rooted at that taxon</p>
+  </li>
+</ol>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many taxons have been identified?</li>
+    <li>How many <span class="notranslate">reads</span> have been classified?</li>
+    <li>Which domains were found and with how many <span class="notranslate">reads</span>?</li>
+    <li>Which yeasts have been identified? Are they the expected ones?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>
+        <p>The file contains 215 lines (<em>information visible when expanding the report
+dataset in the history panel</em>). So 215 taxons have been identified.</p>
+      </li>
+      <li>
+        <p>On the 1350 sequences in the input, 837 (62%) were classified (or identified as a taxon) and 513 unclassified (38%). <em>Information visible when expanding the report dataset in the history panel, and scrolling in the small box starting with “Loading database information” below the format information.</em></p>
+      </li>
+      <li>The 3 domains were found:
+        <ul>
+          <li>Eukaryota with 756 <span class="notranslate">reads</span> assigned to it</li>
+          <li>Bacteria with 17 <span class="notranslate">reads</span></li>
+          <li>Archaea with 2 <span class="notranslate">reads</span></li>
+        </ul>
+      </li>
+      <li>
+        <p>Yeasts do not form a single taxonomic group (<span class="citation"><a href="#kurtzman1994molecular">Kurtzman 1994</a></span>). They are parts on fungi kingdom but belong two separate phyla: the Ascomycota and the Basidiomycota. <a href="https://web.archive.org/web/20090226151906/http://www.yeastgenome.org/VL-what_are_yeast.html">But the “true yeasts” are classified in the order Saccharomycetales</a>.</p>
+
+        <p>In the data, 6 species from the Saccharomycetales order have been identified:</p>
+        <ul>
+          <li>Saccharomycetaceae family
+            <ul>
+              <li><em>Saccharomyces</em> genus
+                <ul>
+                  <li><em>Saccharomyces cerevisiae</em> species, the most abundant identified yeast species with 293 <span class="notranslate">reads</span> and the one expected given the type of beers</li>
+                  <li>
+                    <p><em>Saccharomyces paradoxus</em> species, a wild yeast and the closest known species to <em>Saccharomyces cerevisiae</em></p>
+
+                    <p>These <span class="notranslate">reads</span> might have been misidentified to <em>Saccharomyces paradoxus</em> instead of <em>Saccharomyces cerevisiae</em> because of some errors in the sequences, as <em>Saccharomyces cerevisiae</em> and <em>Saccharomyces paradoxus</em> are close species and should share then a lot of similarity in their sequences.</p>
+                  </li>
+                  <li>
+                    <p><em>Saccharomyces eubayanus</em> species, most likely the parent of the lager brewing yeast, <em>Saccharomyces pastorianus</em> (<span class="citation"><a href="#sampaio2018microbe">Sampaio 2018</a></span>)</p>
+
+                    <p>Similar to <em>Saccharomyces paradoxus</em>, these <span class="notranslate">reads</span> might have been misassigned.</p>
+                  </li>
+                </ul>
+              </li>
+              <li><em>Kluyveromyces</em> genus - <em>Kluyveromyces marxianus</em> species: only 1 read</li>
+            </ul>
+          </li>
+          <li>Trichomonascaceae family - <em>Sugiyamaella</em> genus - <em>Sugiyamaella lignohabitans</em> species: only 1 read</li>
+          <li>Debaryomycetaceae family - <em>Candida</em> genus - <em>Candida dubliniensis</em> species: only 1 read</li>
+        </ul>
+
+        <p>Everything except <em>Saccharomyces cerevisiae</em> are probably misindentified <span class="notranslate">reads</span>.</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Other taxons than yeast have been identified. They could be contamination or misidentification of <span class="notranslate">reads</span>. Indeed, many taxons have less than 5 <span class="notranslate">reads</span> assigned. We will filter these <span class="notranslate">reads</span> out to get a better view of the possible contaminations.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-taxons-with-low-assignements"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter taxons with low assignements</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: report outpout of <strong>Kraken2</strong></li>
+        <li>
+          <p><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2&gt;5</code></p>
+
+          <p>We want to keep only taxons with the number of <span class="notranslate">reads</span> assigned, <em>i.e.</em> the value in the 2nd column, is higher than 5.</p>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the output</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many taxons have been removed? How many were kept?</li>
+    <li>What are the possible contaminations?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>
+        <p>27 lines are now in the file so \(215 - 27 = 188\) taxons have been removed because low assignment rates.</p>
+      </li>
+      <li>
+        <p>Most of the <span class="notranslate">reads</span> (402) were assigned to humans (<em>Homo sapiens</em>). This is likely a contamination either during the beer production or more likely during <span class="notranslate">DNA</span> extraction.</p>
+
+        <p>Bacteria were also found: Firmicutes, Proteobacteria and Bacteroidetes. But the identified taxons are not really precise (not below order level). So difficult to identify the possible source of contamination.</p>
+      </li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h1 id="visualize-the-community">Visualize the community</h1>
+
+<p>Once we have assigned the corresponding taxa to the sequences, the next step is to properly visualize the data: visualize the diversity of taxons at different levels.</p>
+
+<p>To do that, we will use the tool <strong>Krona</strong> (<span class="citation"><a href="#Ondov_2011">Ondov <i>et al.</i> 2011</a></span>). But before that, we need to adjust the output from Kraken2 to the requirements of <strong>Krona</strong>. Indeed, <strong>Krona</strong> expects as input a table with the first column containing a count and the remaining columns describing the hierarchy. Currently, we have a report tabular file with the first column containing the taxonomy and the second column the number of <span class="notranslate">reads</span>. We will now use another tool, which also provides taxonomic classification, but it produces the exact formatting Krona needs.</p>
+
+<!--
+So we need to work on the file by:
+1. Reversing the columns so the 1st column contains the number of reads and the second the taxon
+2. Splitting the taxonomy description into different columns, each being a different level. For that we replace the `|` with tabular (`\t` character)
+
+> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare dataset for Krona
+>
+> 1. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0"><strong>Reverse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0</span></span>  with the following parameters:
+>    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"Input tabular dataset"*: output of **Filter** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
+>
+> 2. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
+>    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *"File to process"*: `out_file` (output of **Reverse** <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
+>    - In *"Replacement"*:
+>        - <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> *"Insert Replacement"*
+>            - *"Find pattern"*: `\|`
+>            - *"Replace with:"*: `\t`
+> 3. Inspect the output file
+>
+>    > ### <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions
+>    >
+>    > How many columns are now in the file?
+>    >
+>    > > ### <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution
+>    > > 9 columns: one with the number of reads and one for each of the 8 levels of taxonomy.
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+-->
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-prepare-dataset-for-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Prepare dataset for Krona</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0"><strong>Format MetaPhlAn2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/metaphlan2krona/metaphlan2krona/2.6.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file (MetaPhlAN2 output)”</em>: report output of <strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the output file</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>How many columns are now in the file?</li>
+          <li>How many taxons were now found?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>9 columns: one with the number of <span class="notranslate">reads</span> and one for each of the 8 levels of taxonomy.</li>
+            <li>With this new formatting, each row represents 1 detected taxon (to the most precise level). So 55 lines mean 55 identified taxons.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<p>We can now run <strong>Krona</strong>. This tool creates an interactive report that allows hierarchical data (like taxonomy) to be explored with zooming, as multi-layered pie charts. With this tool, we can easily visualize the composition of a microbiome community.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-krona-pie-chart"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Krona pie chart</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“What is the type of your input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>:  output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Inspect the generated file</li>
+  </ol>
+</blockquote>
+
+<p>Let’s take a look at the result.</p>
+
+<iframe id="krona" src="krona.html" frameborder="0" width="100%" height="900px"> <img src="./images/krona.png" alt="Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). " loading="lazy" /> </iframe>
+
+<blockquote class="question">
+  <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What is the percentage of identified <span class="notranslate">reads</span> assigned to <em>Homo sapiens</em>? To Archaea?</li>
+    <li>Click on <em>Saccharomyces</em> in the graph. What are the percentages of identified <span class="notranslate">reads</span> assigned to <em>Saccharomyces</em> for different levels?</li>
+    <li>Click a second time on <em>Saccharomyces</em> in the graph. What is the repartition between the different <em>Saccharomyces</em> species?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>52% of identified <span class="notranslate">reads</span> are assigned to <em>Homo sapiens</em>, and 0.3% of Archaea</li>
+      <li><span class="notranslate">Reads</span> are assigned to <em>Saccharomyces</em>
+        <ul>
+          <li>41% out of total identified <span class="notranslate">reads</span> (root)</li>
+          <li>43% out of identified <span class="notranslate">reads</span> for Eukaryota domain</li>
+          <li>98% out of identified <span class="notranslate">reads</span> for Ascomycota phylum</li>
+          <li>99% out of identified <span class="notranslate">reads</span> for Saccharomycetales order</li>
+          <li>100% out of identified <span class="notranslate">reads</span> for Saccharomycetaceae family</li>
+        </ul>
+
+        <p><img src="./images/krona_saccharomyces_1.png" alt="Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). *Saccharomyces* is highligthed with on the right the percentages of identified reads assigned to *Saccharomyces* for the different taxonomic levels. " loading="lazy" /></p>
+      </li>
+      <li>
+        <p>92% of <em>Saccharomyces</em> <span class="notranslate">reads</span> are assigned to <em>Saccharomyces cerevisiae</em>, 5% to <em>Saccharomyces paradoxus</em> and 3% to <em>Saccharomyces eubayanus</em>,.</p>
+
+        <p><img src="./images/krona_saccharomyces_2.png" alt="Krona chart with the community profile for *Saccharomyces* with the different species. " loading="lazy" /></p>
+      </li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="optional-sharing-your-history">(Optional) Sharing your history</h1>
+
+<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis: sharing your histories with others so they can review them.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <h3 data-toc-skip="" id="-tip-sharing-your-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Sharing your History</h3>  <p>Sharing your history allows others to import and access the datasets, parameters, and steps of your history.</p>  <ol>  <li><strong>Share via link</strong>    <ul>      <li>Open the <strong>History Options</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> menu (gear icon) at the top of your history panel        <ul>          <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-toggle</span> <strong>Make History accessible</strong></li>          <li>A <strong>Share Link</strong> will appear that you give to others</li>        </ul>      </li>      <li>Anybody who has this link can view and copy your history</li>    </ul>  </li>  <li><strong>Publish your history</strong>    <ul>      <li><i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-toggle</span> <strong>Make History publicly available in Published Histories</strong></li>      <li>Anybody on this <span class="notranslate">Galaxy</span> server will see your history listed under the <em>Shared Data</em> menu</li>    </ul>  </li>  <li><strong>Share only with another user</strong>.    <ul>      <li>Click the <strong>Share with a user</strong> button at the bottom</li>      <li>Enter an email address for the user you want to share with</li>      <li>Your history will be shared only with this user.</li>    </ul>  </li>  <li><strong>Finding histories others have shared with me</strong>    <ul>      <li>Click on <strong>User</strong> menu on the top bar</li>      <li>Select <strong>Histories shared with me</strong></li>      <li>Here you will see all the histories others have shared with you directly</li>    </ul>  </li></ol>  <p><strong>Note:</strong> If you want to make changes to your history without affecting the shared version, make a copy by going to <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <em>History options</em> icon in your history and clicking <em>Copy</em></p></blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+
+                
+                <blockquote class="key_points">
+                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <ul>
+                        
+                        <li><p>Data obtained by sequencing needs to be checked for quality and cleaned before further processing</p>
+</li>
+                        
+                        <li><p>Yeast species but also contamination can be identified and visualized directly from the sequences using several bioinformatics tools</p>
+</li>
+                        
+                        <li><p>With its graphical interface, Galaxy makes it easy to use the needed bioinformatics tools</p>
+</li>
+                        
+                        <li><p>Beer microbiome is not just made of yeast and can be quite complex</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/metagenomics/faqs/">FAQ page for the Metagenomics topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/metagenomics#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="kurtzman1994molecular">Kurtzman, C. P., 1994 <b>Molecular taxonomy of the yeasts</b>. Yeast 10: 1727–1740.</li>
+<li id="Ondov_2011">Ondov, B. D., N. H. Bergman, and A. M. Phillippy, 2011 <b>Interactive metagenomic visualization in a Web browser</b>. BMC Bioinformatics 12: <a href="https://doi.org/10.1186/1471-2105-12-385">10.1186/1471-2105-12-385</a></li>
+<li id="Wood2014">Wood, D. E., and S. L. Salzberg, 2014 <b>Kraken: ultrafast metagenomic sequence classification using exact alignments</b>. Genome Biology 15: R46. <a href="https://doi.org/10.1186/gb-2014-15-3-r46">10.1186/gb-2014-15-3-r46</a></li>
+<li id="rrwick2017">Wick, R., 2017 <b>Porechop</b>. <i>GitHub</i>. <a href="https://github.com/rrwick/Porechop">https://github.com/rrwick/Porechop</a></li>
+<li id="Chen_2018">Chen, S., Y. Zhou, Y. Chen, and J. Gu, 2018 <b>fastp: an ultra-fast all-in-one FASTQ preprocessor</b>. <a href="https://doi.org/10.1101/274100">10.1101/274100</a></li>
+<li id="sampaio2018microbe">Sampaio, J. P., 2018 <b>Microbe profile: Saccharomyces eubayanus, the missing link to lager beer yeasts</b>. Microbiology 164: 1069.</li>
+<li id="wood2019improved">Wood, D. E., J. Lu, and B. Langmead, 2019 <b>Improved metagenomic analysis with Kraken 2</b>. Genome biology 20: 1–13.</li>
+<li id="delahaye2021sequencing">Delahaye, C., and J. Nicolas, 2021 <b>Sequencing DNA with nanopores: Troubles and biases</b>. PLoS One 16: e0257521.</li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Identification of the micro-organisms in a beer using Nanopore sequencing (Metagenomics)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Identification of the micro-organisms in a beer using Nanopore sequencing (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html">https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+
+                <blockquote class="details">
+                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <p style="display: none;">
+
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{metagenomics-beer-data-analysis,
+author = "Polina Polunina and Siyu Chen and Bérénice Batut and Teresa Müller",
+title = "Identification of the micro-organisms in a beer using Nanopore sequencing (Galaxy Training Materials)",
+year = "2022",
+month = "09",
+day = "28"
+url = "\url{https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/beer-data-analysis/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                </pre></div></div>
+                </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
