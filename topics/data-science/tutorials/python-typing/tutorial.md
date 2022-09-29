@@ -32,7 +32,7 @@ notebook:
   language: python
 ---
 
-In some languages type annotations are a core part of the language and types are checked at compile time, to ensure your code can never use the incorrect type of object. Python, and a few other dynamic languages, instead use "Duck Typing" wherein the type of the object is less important than whether or not the correct methods or attributes are available.
+In some languages type annotations are a core part of the language and types are checked at compile time, to ensure your code can never use the incorrect type of object. Python, and a few other dynamic languages, instead use ["Duck Typing"](https://en.wikipedia.org/wiki/Duck_typing) wherein the type of the object is less important than whether or not the correct methods or attributes are available.
 
 However, we can provide type hints as we write python which will allow our editor to type check code as we go, even if it is not typically enforced at any point.
 
@@ -55,7 +55,7 @@ str
 int
 float
 bool
-NoneType
+None
 ...
 ```
 
@@ -191,7 +191,7 @@ def reverse_list(a: List[Any]) -> List[Any]:
 Now this will allow the function to accept a list of any type of value, int, float, etc. But it will also accept types you might not have intended:
 
 ```python
-w: List[Tuple[int, int]] = [(1, 2), (3, 4), (5, 8)]
+w: list[tuple[int, int]] = [(1, 2), (3, 4), (5, 8)]
 reverse_list(w)
 ```
 
