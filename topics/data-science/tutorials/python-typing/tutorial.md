@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Python - Typing
+title: Python - Type annotations
 level: Intermediate
 requirements: []
 follow_up_training: []
@@ -12,7 +12,7 @@ questions:
 
 objectives:
 - Understand the utility of annotating types on one's code
-- Understand the limits of typing in python
+- Understand the limits of type annotations in python
 
 time_estimation:  30M
 key_points:
@@ -32,9 +32,9 @@ notebook:
   language: python
 ---
 
-In some, better, languages typing is a core part of the language and types are checked at compile time, to ensure your code can never use the incorrect type of object. Python, and a few other dynamic languages, instead use "Duck Typing" wherein the type of the object is less important than whether or not the correct methods or attributes are available.
+In some languages type annotations are a core part of the language and types are checked at compile time, to ensure your code can never use the incorrect type of object. Python, and a few other dynamic languages, instead use "Duck Typing" wherein the type of the object is less important than whether or not the correct methods or attributes are available.
 
-However, we can provide type hints as we write python which will allow our editor to type check code as we go, even if it is not enforced at any point.
+However, we can provide type hints as we write python which will allow our editor to type check code as we go, even if it is not typically enforced at any point.
 
 > ### Agenda
 >
