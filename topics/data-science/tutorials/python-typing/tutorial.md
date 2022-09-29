@@ -59,7 +59,7 @@ NoneType
 ...
 ```
 
-or they can be relabelings of existing types, letting you create new types as needed to represent your internal data structures
+or they can be relabeling of existing types, letting you create new types as needed to represent your internal data structures
 
 ```python
 from typing import NewType, Tuple
@@ -195,7 +195,7 @@ w: List[Tuple[int, int]] = [(1, 2), (3, 4), (5, 8)]
 reverse_list(w)
 ```
 
-We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your funciton can only accept strings, integers, or floats:
+We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your function can only accept strings, integers, or floats:
 
 ```python
 def reverse_list(a: List[Union[int, float, str]]) -> List[Union[int, float, str]]:
@@ -249,3 +249,15 @@ pretty(lines, "★")
 ```
 
 While this superficially *looks* like a keyword argument with a default value, however it's subtly different. Here an explicit value of None is allowed, and we still know that it will either be a string, or it will be None. Not something that was possible with just a keyword argument.
+
+## Testing for Types
+
+You can use `mypy` to ensure that these type annotations are working in a project, this is a step you could add to your automated testing, if you have that. Using the `HistoryId`/`UserId` example from above, we can write that out into a script and test it out by running `mypy` on that file:
+
+```console
+$ mypy tmp.py
+tmp.py:15: error: Incompatible types in assignment (expression has type "UserId", variable has type "HistoryId")
+tmp.py:15: error: Incompatible types in assignment (expression has type "HistoryId", variable has type "UserId")
+```
+
+Here it reports the errors in the console, and you can use this to prevent bad code from being committed.
