@@ -68,6 +68,10 @@ NameType = NewType("NameType", str)
 Point2D = NewType("Point2D", tuple[float, float])
 ```
 
+> ### {% icon tip %} Tip: Does `tuple` cause an issue?
+> You might be on a python earlier than 3.9. Please update.
+{: .tip}
+
 ## But why?
 
 Imagine for a minute you have a situation like the following, take a minute to read and understand the code:
