@@ -96,12 +96,12 @@ Formal education enterprises generally begin with **curriculum**
 > training teachers & trainers
 >
 > **Knowledge, Skills and Abilities (KSAs)**: list of special qualifications and
-> personal attributes that learners should to have after a training
+> personal attributes that learners should have after a training
 > - **Knowledge**: the subjects, topics, and items of information that learners
 >   should know
 > - **Skills**: technical or manual proficiencies which are usually learned or
 >   acquired through training.
-> - **Abilities**_ the present demonstrable capacity to apply several knowledge
+> - **Abilities**: the present demonstrable capacity to apply several knowledge
 >   and skills simultaneously in order to complete a task or perform an
 >   observable behaviour.
 >
@@ -111,9 +111,6 @@ Formal education enterprises generally begin with **curriculum**
 >
 > **Learning Experience (LE)**: any setting or interaction in or via which
 > learning takes place: e.g., a lecture, game, exercise, role-play, etc.
-> Teaching Goal (TG): the intentions of an instructor regarding the pur- pose of
-> a curriculum/course/lesson/activity/set of materials; TGs are
-> instructor-centric (also termed instructional objectives)
 >
 > **Teaching Goal (TG)**: the intentions of an instructor regarding the purpose
 > of a curriculum/course/lesson/activity/set of materials; TGs are
@@ -226,13 +223,13 @@ and courses.
 
 > ### {% icon hands_on %} Define audience and teaching goal - _{% icon time %} 10 min - Silent reflection_
 >
-> 1. Take the topic you choose before
+> 1. Take the topic you chose before
 > 2. Define teaching objectives
 >
 >    Describe your goals and intentions as instructor:
 >    - stakeholders
 >    - potential professions
->    - desired performance an/or competences of course completers
+>    - desired performance and/or competences of course completers
 >    - duration
 >
 {: .hands_on}
