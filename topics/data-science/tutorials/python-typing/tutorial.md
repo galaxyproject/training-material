@@ -188,6 +188,17 @@ def reverse_list(a: List[Any]) -> List[Any]:
     return a[::-1]
 ```
 
+But this will lose the type information from the start of the function to the end. You said it was a `List[Any]` so your editor might not provide any type hints there, even though you could know, that calling it with a `List[int]` would always return the same type. Instead you can do
+
+```python
+from typing import TypeVar
+
+T = TypeVar("T") # Implicitly any
+
+def reverse_list(a: List[T]) -> List[T]:
+    return a[::-1]
+```
+
 Now this will allow the function to accept a list of any type of value, int, float, etc. But it will also accept types you might not have intended:
 
 ```python
@@ -195,7 +206,7 @@ w: List[Tuple[int, int]] = [(1, 2), (3, 4), (5, 8)]
 reverse_list(w)
 ```
 
-We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your funciton can only accept strings, integers, or floats:
+We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your function can only accept strings, integers, or floats:
 
 ```python
 def reverse_list(a: List[Union[int, float, str]]) -> List[Union[int, float, str]]:
