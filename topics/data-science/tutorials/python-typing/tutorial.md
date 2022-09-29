@@ -62,10 +62,10 @@ None
 or they can be relabeling of existing types, letting you create new types as needed to represent your internal data structures
 
 ```python
-from typing import NewType, Tuple
+from typing import NewType
 
 NameType = NewType("NameType", str)
-Point2D = NewType("Point2D", Tuple[float, float])
+Point2D = NewType("Point2D", tuple[float, float])
 ```
 
 ## But why?
@@ -108,7 +108,7 @@ However, if we have type definitions for the `UserId` and `HistoryId` that decla
 
 
 ```python
-from typing import Tuple, NewType
+from typing import NewType
 
 UserId = NewType("UserId", int)
 HistoryId = NewType("HistoryId", int)
@@ -117,7 +117,7 @@ HistoryId = NewType("HistoryId", int)
 And then defined on our function, e.g.
 
 ```python
-def GetUserAndCurrentHistory(username: str) -> Tuple[UserId, HistoryId]:
+def GetUserAndCurrentHistory(username: str) -> tuple[UserId, HistoryId]:
     x = UserId(1) # Pretend this is fetching from the database
     y = HistoryId(2) # Likewise
     return (x, y)
@@ -162,14 +162,12 @@ d: bool = True
 
 ### Complex Types
 
-But you can go further than this with things like `Tuple` and `List` types:
+But you can go further than this with things like `tuple` and `list` types:
 
 ```python
-from typing import List, Tuple
-
-e: List[int] = [1, 2, 3]
-f: Tuple[int, str] = (3, "Hi.")
-g: List[Tuple[int, int]] = [(1, 2), (3, 4)]
+e: list[int] = [1, 2, 3]
+f: tuple[int, str] = (3, "Hi.")
+g: list[tuple[int, int]] = [(1, 2), (3, 4)]
 ```
 
 ### Typing Functions
@@ -177,25 +175,25 @@ g: List[Tuple[int, int]] = [(1, 2), (3, 4)]
 Likewise you've seen an example of adding type hints to a function:
 
 ```python
-def reverse_list_of_ints(a: List[int]) -> List[int]:
+def reverse_list_of_ints(a: list[int]) -> list[int]:
     return a[::-1]
 ```
 
 But this is a very specific function, right? We can reverse lists with more than just integers. For this, you can use `Any`:
 
 ```python
-def reverse_list(a: List[Any]) -> List[Any]:
+def reverse_list(a: list[Any]) -> list[Any]:
     return a[::-1]
 ```
 
-But this will lose the type information from the start of the function to the end. You said it was a `List[Any]` so your editor might not provide any type hints there, even though you could know, that calling it with a `List[int]` would always return the same type. Instead you can do
+But this will lose the type information from the start of the function to the end. You said it was a `list[Any]` so your editor might not provide any type hints there, even though you could know, that calling it with a `list[int]` would always return the same type. Instead you can do
 
 ```python
 from typing import TypeVar
 
 T = TypeVar("T") # Implicitly any
 
-def reverse_list(a: List[T]) -> List[T]:
+def reverse_list(a: list[T]) -> list[T]:
     return a[::-1]
 ```
 
@@ -209,7 +207,7 @@ reverse_list(w)
 We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your function can only accept strings, integers, or floats:
 
 ```python
-def reverse_list(a: List[Union[int, float, str]]) -> List[Union[int, float, str]]:
+def reverse_list(a: list[Union[int, float, str]]) -> list[Union[int, float, str]]:
     return a[::-1]
 ```
 
@@ -220,8 +218,8 @@ Here we have used a `Union[A, B, ...]` to declare that it can only be one of the
 > 1. Are both of these valid definitions?`
 > 
 >    ```python
->    q1: List[Union[int, float, str]] = [1, 2, 3]
->    q2: List[Union[int, float, str]] = [1, 2.3214, "asdf"]
+>    q1: list[Union[int, float, str]] = [1, 2, 3]
+>    q2: list[Union[int, float, str]] = [1, 2.3214, "asdf"]
 >    ```
 > 
 > 2. If that wasn't what you expected, how would you define it so that it would be?
@@ -229,8 +227,8 @@ Here we have used a `Union[A, B, ...]` to declare that it can only be one of the
 > > Yes, both are valid, but maybe you expected a homogeneous list. If you wanted that, you could instead do
 > > 
 > > ```python
-> > q3: Union[List[int], List[float], List[str]] = [1, 2, 3]
-> > q4: Union[List[int], List[float], List[str]] = [1, 2.3243, "asdf"] # Fails
+> > q3: Union[list[int], list[float], list[str]] = [1, 2, 3]
+> > q4: Union[list[int], list[float], list[str]] = [1, 2.3243, "asdf"] # Fails
 > > ```
 > {: .solution}
 {: .question}
@@ -241,9 +239,9 @@ Here we have used a `Union[A, B, ...]` to declare that it can only be one of the
 Sometimes you have an argument to a function that is truly optional, maybe you have a different code path if it isn't there, or you simply process things differently but still correctly. You can explicitly declare this by defining it as `Optional`
 
 ```python
-from typing import Optional, List
+from typing import Optional
 
-def pretty(lines: List[str], padding: Optional[str] = None) -> None:
+def pretty(lines: list[str], padding: Optional[str] = None) -> None:
     for line in lines:
         if padding:
             print(f"{padding} {line}")
