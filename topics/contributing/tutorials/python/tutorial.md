@@ -3,11 +3,17 @@ layout: tutorial_hands_on
 
 title: Teaching Python
 questions:
-  -
+  - What methods can I incorporate to improve student material uptake within my python courses?
+  - How do I write problems that use these methodologies
 objectives:
-  -
+  - Learn about four different problem design ideas, and one teaching methodology.
 key_points:
-  -
+  - Debugging code is an absolutely critical skill for students that they need ot become familiar with early on.
+  - There are a lot of strategies you can teach students to give them the necessary skills for this, such as Wolf Fence debugging.
+  - Or simply adding print statements so they can trace the code's execution.
+  - Fading examples helps students become more independent as they work onwards through problems.
+  - Conversely compounding problems are sometimes a good fit for homework to give numerous "easy" problems followed by some "stretch" goals that students can reach for, combining their previous work.
+  - Pair progarmming is proven to improve student learning outcomes, when applied correctly.
 
 time_estimation: 2h
 subtopic: writing
