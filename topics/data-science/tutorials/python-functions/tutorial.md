@@ -25,6 +25,8 @@ time_estimation:  30M
 key_points:
 - Functions are foundational in Python
 - Everything you do will require functions
+- Functions keep your code DRY (don't repeat yourself), reducing your copying and pasting or rewriting the same block of code.
+- Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
 contributors:
