@@ -83,145 +83,12 @@ _______________________________________
 - plot: also here's the example of disjoint trajectories - you might choose if you want to learn single tree structure for all the partitions or learn the disjoint trajectory within each partition
 
 ---
-### Trajectory inference approaches:
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
 
-- Clustering-based (tree based)
-- Graph-based
-- Manifold learning-based
-- RNA velocity methods
-
-???
-
-- that's not a formal classification, it's based on the cited paper
-- there are so many methods available that putting them into those groups might make it a little bit clearer
-- we'll briefly discuss each of these approaches
----
-### Trajectory inference approaches: **Clustering-based (tree based)**
-
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
-
-- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
-
-???
-
-- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
-- think about 'graph structure' as if the nodes were cell states and arrows were transitions
-- cell state with a particular function can be called a cell type
-- https://mbernste.github.io/posts/cell_types_cell_states/ 
----
-### Trajectory inference approaches: **Clustering-based (tree based)**
-
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
-
-- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure  
-
-
-- Clustering methods: [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}), non-negative matrix factorization, [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %})
-
-???
-
-- introducing some examples to show the variety of clustering methods
-  - soft K-means: each data point can belong to more than one cluster (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}))
-  - Louvain: extracts communities from large networks (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}))
-  - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
-  - hierarchical clustering: builds a hierarchy of clusters (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %}))
-
----
-### Trajectory inference approaches: **Clustering-based (tree based)**
-
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
-
-
-- Tries to find stable cell states in the data, then connect these states to form a trajectory and map the cells to the formed graph structure 
-
-
-- Clustering methods: [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#56 %}), non-negative matrix factorization, [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#55 %})  
-
-
-- Connecting the clusters to each other to find a trajectory path: usually a **minimum weight spanning tree (MST)** is constructed (connecting clusters without any cycles and with the minimum possible total edge weight (cost))  
-
-.image-25[ ![mst](../../images/scrna-casestudy-monocle/mst.png) ]
-
-???
-
-- MST is the method used to connect the clusters that were found
-- plot: each dot represents a cluster - MST aims to connect all dots without creating any cycles, while minimising the total edge cost
-- edge cost is often calculated as the Euclidean distance between clusters
-- this ensures that the most similar clusters are connected
----
-### Trajectory inference approaches: **Graph-based**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
-
-- Constructs a graph representation of the cells and performs complex operations to construct the trajectory topology
-
-???
-
-- graph representation: a technique to store graph, usually as a matrix ([distance/adjacency matrix]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#45 %}))
-- 'complex operations' include: graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods (those fall within the graph theory, a big topic for another presentation!)
---
-
-- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}) graph using the Euclidean distance
-
-.image-50[ ![knn](../../images/scrna-casestudy-monocle/knn.png) ]
-
-???
-- (explained in ['An introduction to scRNA-seq data analysis']({% link topics/transcriptomics/tutorials/scrna-intro/slides.html#54 %}))
-- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells.
-- If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.
-- Graph: when trying to classify a new point (cell), the distance between this point and others is measured. The point is classified to the cluster corresponding to the nearest neighbouring points (cells), based on the smallest distance
---
-
-- Diffusion pseudotime (DPT) calculates the probability of cells transitioning into each other using random walks from a user-provided root cell and uses the differences between these probabilities as pseudotime
-
-???
-- random walks between data points — in this case, between cells in distinct stages of the differentiation process
-- short walk => higher probability that the cells are connected
-- finding path (pseudotime) based on those probabilities
----
-
-### Trajectory inference approaches: **Manifold learning-based**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
-
-- Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
-
-???
---
-
-- Uses principal curves and graphs to obtain smooth trajectories
-
---
-
-- Usually used dimentionality reduction methods: **t-SNE** (t-distributed stochastic neighbor embedding), **UMAP** (Uniform Manifold Approximation and Projection), **PCA** (Principal component analysis), **ICA** (Independent Component Analysis), **LSA** (Latent semantic analysis)
-
-.image-60[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
-
----
-
-### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
---
-
-- RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation. 
-
---
-
-- scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method. 
-
---
-
-- This has the advantage that root cell specification is not necessary, and adds directional information to the trajectory.
-
---
-
-.image-25[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
-
----
 ### Assumptions
+
+???
+- snapshot data with cells in different stages of differentiaiton
+- multiple methods and how they work in biological context
 --
 
 - It would be quite difficult to analyse a sample every few seconds to see how the cells are changing. Therefore, we assume that snapshot data encompass all naïve, intermediate, and mature cell states with sufficient sampling coverage to allow the reconstruction of differentiation trajectories.    
@@ -234,6 +101,10 @@ _______________________________________
 
 ---
 ### Why different TI methods are designed to infer different kinds of biological processes?
+
+???
+There are multiple algorithms used to analyse scRNA-seq data to make it more readable. 
+Note that this is a graph from 2016 - many new approaches has been developed since then, but this scheme shows how those methods are built.
 --
 
 Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlinelibrary.wiley.com/doi/10.1002/eji.201646347)
@@ -244,6 +115,182 @@ Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlin
 --
 
 There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
+
+???
+We will consider some aspects shown here to better understand similarities and differences of TI methods. Those are also the things that highly affect the output or are quite important to be aware of.
+
+---
+
+### Similarity 
+
+.pull-left[  
+  
+.image-100[ ![similarity](../../images/scrna-casestudy-monocle/similarity.jpg) ]  
+
+]
+
+--
+
+.pull-right[
+    
+- Think of similarity as a distance between cells (nearer cells - more similar)
+- Euclidean distance is usually used, it's just mathematically defined distance between two points
+
+![A count matrix of genes vs cells is plotted in N-dimensional space with each gene representing the different axes. A distance formula for 3 dimensions is shown, and then a final table is shown from the count matrix with the distances between each of the cells, based on their genes.](../../images/scrna-intro/raceid_distance.svg)
+
+]
+
+???
+- distance matrix details: [intro, slide 45]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})
+
+---
+
+### Manifold learning / dimentionality reduction
+
+.pull-left[  
+  
+.image-100[ ![manifold](../../images/scrna-casestudy-monocle/manifold.jpg) ]  
+
+]
+
+--
+
+.pull-right[
+    
+- Making a manifold is like making a flat map of a sphere (the Earth)
+- We try to 'flatten' our data, changing it from high-dimensional to low-dimentional
+- UMAP (Uniform Manifold Approximation and Projection) is another often used dimentionality reduction method  
+
+.image-100[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+
+]
+
+???
+- Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
+- Uses principal curves and graphs to obtain smooth trajectories
+- figure shows how using different dimentionality reduction methods in Monocle3 affects the outcome  
+
+---
+
+### Clustering
+
+.pull-left[  
+  
+.image-100[ ![clustering](../../images/scrna-casestudy-monocle/clustering.jpg) ]  
+
+]
+
+--
+
+.pull-right[
+    
+- Tries to find stable **cell states** in the data, then connect these states to form a trajectory
+- [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), non-negative matrix factorization  
+
+.image-60[ ![clusters](../../images/scrna-casestudy-monocle/clusters.jpg) ]
+
+]
+
+???
+- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
+- [cell state with a particular function can be called a cell type](https://mbernste.github.io/posts/cell_types_cell_states/)  
+- methods explained in [intro, slides 54 - 57]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})   
+- soft K-means: number of clusters are defined before hand, and initialised in random positions
+- Louvain: extracts communities from large networks 
+- non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
+- hierarchical clustering: builds a hierarchy of clusters 
+
+---
+
+### Graph-based approach
+
+.pull-left[  
+  
+.image-100[ ![graph](../../images/scrna-casestudy-monocle/graph.jpg) ]  
+
+]
+
+--
+
+.pull-right[
+    
+- think of 'graph structure' as the nodes (clusters with cell states) and edges (similarity, based on eg. Euclidean distance)
+- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}) graph using the Euclidean distance
+- **Minimum weight spanning tree (MST)** is often used to connect the clusters to each other
+
+.image-25[ ![mst](../../images/scrna-casestudy-monocle/clusters_mst.png) ]    
+
+]
+
+???
+- General idea is to construct a graph representation of the cells and perform graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
+- kNN explained in [intro, slide 46]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})]
+- MST connects clusters without any cycles and minimises the total total edge weight (cost)) to ensure that the most similar clusters are connected
+---
+
+### Graph-based approach
+.footnote[[Haghverdi et al. Diffusion pseudotime robustly reconstructs lineage branching, 2016](https://doi.org/10.1101/041384)]
+
+.pull-left[  
+  
+.image-100[ ![graph](../../images/scrna-casestudy-monocle/graph.jpg) ]  
+
+]
+
+--
+
+.pull-right[
+    
+- Diffusion pseudotime (DPT) uses random walks from a user-provided root cell
+  - random walks between data points — path created between cells in distinct stages of the differentiation process
+  - short walk => higher probability that the cells are connected
+  - finding path (pseudotime) based on those probabilities
+
+.image-100[ ![dpt](../../images/scrna-casestudy-monocle/dpt.png) ]  
+]
+
+---
+
+{% comment %}
+### Trajectory inference approaches:
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+
+- Graph-based
+- Manifold learning-based
+- RNA velocity methods
+
+- that's not a formal classification, it's based on the cited paper
+- it will help to understand the pipeline shown later on
+- there are so many methods available that putting them into those groups might make it a little bit clearer
+- we'll briefly discuss each of these approaches  
+
+---
+{% endcomment %}
+
+### Extensions of trajectory inference: **RNA velocity methods**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+--
+
+- RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation. 
+  - assuming that the cells with the highest unspliced : spliced reads are in the steady state
+  - high amount of unspliced reads and low amount of spliced reads => gene is likely being turned on => higher positive velocity  
+
+.image-25[ ![velo](../../images/scrna-casestudy-monocle/velo.jpg) ]
+
+---
+
+### Extensions of trajectory inference: **RNA velocity methods**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+
+- scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method. 
+
+--
+
+- This has the advantage that root cell specification is not necessary, and adds directional information to the trajectory.
+
+--
+
+.image-25[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
 
 ---
 
@@ -287,7 +334,7 @@ To help you evaluate which method would work best for your data, check out this 
     
   
   
-- Gives an idea about the topology you expect and the priors you can feed the method with, as well as expected cell types and potential contaminants  
+- Gives an idea of the type of cell relationships you would expect and the prior biological knowledge you can feed the method with, as well as expected cell types and potential contaminants  
 
 - You need to know about 75% of your data and verify that your analysis shows that, before you can then identify the 25% new information  
 
@@ -452,6 +499,123 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 - scVelo (coming soon) 
 
 ---
+
+### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
+.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+
+--
+
+.pull-left[  
+  
+- [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups (clusters)  
+-  Provides an interpretable graph-like map. The graph nodes correspond to cell groups and whose edge weights quantify the connectivity between groups  
+- Available within [Scanpy](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.paga.html)  
+
+![paga_graph](../../images/scrna-casestudy-monocle/paga_plot.png) 
+
+]
+
+--
+
+.pull-right[
+   
+![paga_galaxy](../../images/scrna-casestudy-monocle/paga_galaxy.jpg) 
+
+]
+
+???
+Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %})
+
+---
+
+### Trajectory analysis methods used in Galaxy: **RaceID**
+.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+
+--
+.pull-left[  
+  
+- **StemID** is a tool (part of the **RaceID** package) that aims to derive a hierarchy of the cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+- Specific Trajectory Lineage Analysis (StemID) and Specific Trajectory Fate Analysis (FateID) in Galaxy
+- **FateID** tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
+- Where StemID utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, FateID uses top-down approach that starts from the progenitor and works its way down.
+
+![race_mst](../../images/scrna-casestudy-monocle/race_mst.jpg) 
+
+]
+
+???
+Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %})
+
+--
+
+.pull-right[
+   
+![paga_galaxy](../../images/scrna-casestudy-monocle/paga_galaxy.jpg) 
+
+]
+-  An algorithm for rare cell type identification in complex populations of single cells 
+
+--
+
+- The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric
+
+--
+
+- An initial clustering is followed by an outlier identification based on a background model of combined technical and biological variability in single-cell RNA-seq data obtained by quantification with unique molecular identifiers   
+
+--
+
+.image-50[ ![raceID](../../images/scrna-casestudy-monocle/raceid.jpg) ]
+
+---
+### Trajectory analysis methods used in Galaxy: **Monocle3**
+.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+
+--
+
+- Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress  
+
+--
+
+- Orders cells by learning an explicit principal graph from the single cell transcriptomics data with advanced machine learning techniques (Reversed Graph Embedding), which robustly and accurately resolves complicated biological processes  
+
+--
+
+- Performs clustering (i.e. using t-SNE and density peaks clustering), differential gene expression testing, identifies key marker genes to discover and characterise cell types, infers trajectories
+
+--
+
+
+![monocle](../../images/scrna-casestudy-monocle/monocle.jpg)  
+
+---
+### Trajectory analysis methods used in Galaxy: **scVelo**
+.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
+
+--
+
+- Estimates RNA velocity to study cellular dynamics, reaction rates of transcription, splicing and degradation     
+
+--
+
+- Identifies putative driver genes and regimes of regulatory changes and uses statistical tests, e.g., to detect different kinetics regimes     
+
+--
+
+- Infers a latent time to reconstruct the temporal sequence of transcriptomic events     
+
+--
+
+- Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models    
+
+--
+
+
+.image-25[ ![scvelo](../../images/scrna-casestudy-monocle/scvelo.png) ]
+
+---
+
+{% comment %}
 ### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
 .footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
 
@@ -542,3 +706,4 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 .image-25[ ![scvelo](../../images/scrna-casestudy-monocle/scvelo.png) ]
 
 ---
+{% endcomment %}
