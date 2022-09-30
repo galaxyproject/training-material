@@ -39,12 +39,12 @@ Trajectory inference (TI) methods have emerged as a novel subfield within comput
 
 cellular development    | differentiation      | immune responses
 :---:| :---:| :---:
-.image-40[ ![development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![differentiation](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![immune](../../images/scrna-casestudy-monocle/3_immune.png) ]
+.image-40[ ![Petri dish with a magnified scheme of embryonic development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![Scheme of one cell differentiating into three different types](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![Different types of immune cells taking part in inflammation](../../images/scrna-casestudy-monocle/3_immune.png) ]
 
 --
 TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
 
-.image-40[ ![process](../../images/scrna-casestudy-monocle/4_process.png) ]
+.image-40[ ![A cell changing its shape in three steps (showing the evolution from one state to another)](../../images/scrna-casestudy-monocle/4_process.png) ]
 
 ???
 
@@ -58,7 +58,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 .pull-left[
 **Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster. 
 
-.image-75[ ![clusters](../../images/scrna-casestudy-monocle/5_clusters.png) ]
+.image-75[ ![A graph with axis labels ‘t-SNE’, showing the cells being clustered into several groups – each group marked in a  different colour.](../../images/scrna-casestudy-monocle/5_clusters.png) ]
 
 ]
 
@@ -72,7 +72,7 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 **Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime.   
 **Pseudotime** measures the cells’ progress through the transition.
 
-.image-60[ ![trajectory](../../images/scrna-casestudy-monocle/6_trajectories.png) ]
+.image-60[ ![A graph with axis labels ‘UMAP’, showing the cells ordered in pseudotime along learned trajectory path. Pseudotime goes through range of colours to depict progress through the transition: dark blue meaning root cells, yellow meaning end cells.](../../images/scrna-casestudy-monocle/6_trajectories.png) ]
 
 ]
 
@@ -111,7 +111,7 @@ Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlin
 
 --
 
-.image-100[ ![pipeline](../../images/scrna-casestudy-monocle/7_methods.jpg) ]        
+.image-100[ ![A scheme showing a pipeline how single cell expression data is being processed: 1) similarity: cosine and Euclidean, 2) manifold learning:  t-SNE, diffusion maps, LLE, PCA, ICA, 3) clustering: Mclust, k-Means, Hierarchical, 4) graph: Bootstrap, KNN, MST, 5) pathfinding: principal curve, shortest path from origin, longest path, binary tree, 6) cell ordering: principal curve, average orderings, mutual disagreement, detect branches, OU process, project cells to path, optimize tree, 7) method: SCUBA pseudotime, Wanderlust, Wishbone, SLICER, SCOUP, Waterfall, Mpath, TSCAN, Monocle, SCUBA](../../images/scrna-casestudy-monocle/7_methods.jpg) ]        
 --
 
 There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
@@ -125,7 +125,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-![similarity](../../images/scrna-casestudy-monocle/similarity.jpg)
+![Fragment cut from the pipeline - similarity: cosine and Euclidean (additionally Pearson, Spearman)](../../images/scrna-casestudy-monocle/similarity.jpg)
 
 ]
 
@@ -149,7 +149,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-![manifold](../../images/scrna-casestudy-monocle/manifold.jpg)
+![Fragment cut from the pipeline - manifold learning:  t-SNE, diffusion maps, LLE, PCA, ICA (additionally CAP, GPLVM, Isomap, MDS)](../../images/scrna-casestudy-monocle/manifold.jpg)
 
 ]
 
@@ -161,7 +161,7 @@ We will consider some aspects shown here to better understand similarities and d
 - We try to 'flatten' our data, changing it from high-dimensional to low-dimentional
 - UMAP (Uniform Manifold Approximation and Projection) is another often used dimentionality reduction method  
 
-.image-100[ ![dim red](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+.image-100[ ![Four graphs showing the alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together.](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
 
 ]
 
@@ -176,7 +176,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-![clustering](../../images/scrna-casestudy-monocle/clustering.jpg)
+![Fragment cut from the pipeline - clustering: Mclust, k-Means, Hierarchical (additionally SOM, PAM, Mean shift)](../../images/scrna-casestudy-monocle/clustering.jpg)
 
 ]
 
@@ -187,7 +187,7 @@ We will consider some aspects shown here to better understand similarities and d
 - Tries to find stable **cell states** in the data, then connect these states to form a trajectory
 - [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), non-negative matrix factorization  
 
-![clusters](../../images/scrna-casestudy-monocle/clusters.png)
+![Grey set of cells getting clustered into several distinct groups, each group marked in different colour](../../images/scrna-casestudy-monocle/clusters.png)
 
 ]
 
@@ -206,7 +206,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-![graph](../../images/scrna-casestudy-monocle/graph.jpg)
+![Fragment cut from the pipeline - graph: Bootstrap, KNN, MST](../../images/scrna-casestudy-monocle/graph.jpg)
 
 ]
 
@@ -218,7 +218,7 @@ We will consider some aspects shown here to better understand similarities and d
 - Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}) graph using the Euclidean distance
 - **Minimum weight spanning tree (MST)** is often used to connect the clusters to each other
 
-![mst](../../images/scrna-casestudy-monocle/clusters_mst.png) 
+![Grey set of cells getting clustered into several distinct groups, each group marked in a different colour. Coloured clusters are connected by straight lines with weights, but the chosen path is the one that minimises the total total edge weight.](../../images/scrna-casestudy-monocle/clusters_mst.png) 
 
 ]
 
@@ -233,7 +233,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-![graph](../../images/scrna-casestudy-monocle/graph.jpg) 
+![Fragment cut from the pipeline - graph: Bootstrap, KNN, MST](../../images/scrna-casestudy-monocle/graph.jpg) 
 
 ]
 
@@ -245,7 +245,7 @@ We will consider some aspects shown here to better understand similarities and d
   - short walk => higher probability that the cells are connected
   - finding path (pseudotime) based on those probabilities
 
-![dpt](../../images/scrna-casestudy-monocle/dpt.png) 
+![Multi-dimensional plane with cells projected onto it. From there the construction of transition matrix is performed: the smallest distance between points means higher probability than for longer distance between points. From there the diffusion pseudotime is performed which means scale-free average over random walks](../../images/scrna-casestudy-monocle/dpt.png) 
 ]
 
 ---
@@ -274,7 +274,7 @@ We will consider some aspects shown here to better understand similarities and d
   - assuming that the cells with the highest unspliced : spliced reads are in the steady state
   - high amount of unspliced reads and low amount of spliced reads => gene is likely being turned on => higher positive velocity  
 
-.image-40[ ![velo](../../images/scrna-casestudy-monocle/velo.jpg) ]
+.image-40[ ![A graph showing unspliced vs spliced reads for any given gene with two plots: one goes like e^x (state likelihood off) and the other one: ln(x) (state likelihood: on)](../../images/scrna-casestudy-monocle/velo.jpg) ]
 
 ---
 
@@ -289,7 +289,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 --
 
-.image-25[ ![velocity](../../images/scrna-casestudy-monocle/velocity.png) ]
+.image-25[ ![Pseudotime plot with arrows going from root cells towards branches](../../images/scrna-casestudy-monocle/velocity.png) ]
 
 ---
 
@@ -320,7 +320,7 @@ We will consider some aspects shown here to better understand similarities and d
  
 To help you evaluate which method would work best for your data, check out this [**awesome comparision site - dynguidelines**](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).     
   
-![zouter](../../images/scrna-casestudy-monocle/zouter.jpg) 
+![Screenshot of the user interface of dynguidelines, comparing multiple trajectory analysis methods](../../images/scrna-casestudy-monocle/zouter.jpg) 
 
 ]
 
@@ -346,7 +346,7 @@ To help you evaluate which method would work best for your data, check out this 
 .pull-right[  
   
 
-![scheme](../../images/scrna-casestudy-monocle/8_scheme.png)  
+![Experimental workflow summarising the identification of diverse lymph node stromal cells by single-cell RNA sequencing. 1) taking sample from a mouse, 2) CD45 depletion, 3) FACS sorting, 4) scRNA seq analysis (a graph showing clustered cells), 5) magnified scheme showing the multiplicity of cells that can be identified, in this case within llymphatic endothelial cells, vascular endothelial cells, fibrobastic reticular cells](../../images/scrna-casestudy-monocle/8_scheme.png)  
 
 <sub><sub><sub> Reprinted from “Heterogeneity of Murine Lymph Node Stromal Cell Subsets”, by BioRender.com (2022) </sub></sub></sub>
 ]
@@ -360,7 +360,7 @@ Cells can differentiate or develop in various way, so they may exhibit different
 
 --
 
-![table](../../images/scrna-casestudy-monocle/table.jpg)  
+![A table showing trajectory topologies: cycle, linear, bifurcation, multifurcation, tree, connected graph, disconnected graph] (../../images/scrna-casestudy-monocle/table.jpg)  
 
 ---
 
@@ -395,10 +395,13 @@ Cells can differentiate or develop in various way, so they may exhibit different
 <br />
 <br />
 <br />
-![branch](../../images/scrna-casestudy-monocle/branch.jpg)  
+![Branching points are identified as points where anticorrelated distances from branch ends become correlated](../../images/scrna-casestudy-monocle/branch.jpg)  
 
 ]
 
+???
+- Branching points are determined by comparing two independent DPT orderings over cells, one starting at the root cell x and the other at its maximally distant cell y. The two sequences of pseudotimes are anticorrelated until the two orderings merge in a new branch, where they become correlated. This criterion robustly identifies branching points
+- Branching points are identified as points where anticorrelated distances from branch ends become correlated
 
 ---
 
@@ -407,7 +410,7 @@ Cells can differentiate or develop in various way, so they may exhibit different
 
 .pull-left[  
 <br />
-![root_cells](../../images/scrna-casestudy-monocle/root_cells.jpg)  
+![Biologist with a speech bubble, saying ‘What are my root cells? Where should the trajectory start?](../../images/scrna-casestudy-monocle/root_cells.jpg)  
 
 ]
 
@@ -458,7 +461,7 @@ Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID
 
 - Implementations  
 
-.image-100[ ![implementation](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
+.image-100[ ![A table showing implementations for different methods. R: Monocle, SLICE, TSCAN, Waterfall, SLICER, StemID, Slingshot, RNA velocity, FateID, DPT. Python: Wanderlust, Wishbone, PAGA, P-creode, RNA velocity, GPfates, DPT, Waddington-OT. Matlab: SCUBA, Wishbone, Pseudo-dynamics. Java: GRAND-SLAM.](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
 
 ---
 ### When analysing your data, consider the following: **Number of cells and features**
@@ -514,7 +517,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 -  Provides an interpretable graph-like map. The graph nodes correspond to cell groups and whose edge weights quantify the connectivity between groups  
 - Available within [Scanpy](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.paga.html)  
 
-![paga_graph](../../images/scrna-casestudy-monocle/paga_plot.png) 
+![Plots generated using PAGA based on cell types,  CD4 and Cd8a genes expression. Graph nodes connected to each other.](../../images/scrna-casestudy-monocle/paga_plot.png) 
 
 ]
 
@@ -527,7 +530,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 .pull-right[
    
-![paga_galaxy](../../images/scrna-casestudy-monocle/paga_galaxy.jpg) 
+![Screenshot of the interface of ‘Scanpy PAGA’ Galaxy tool](../../images/scrna-casestudy-monocle/paga_galaxy.jpg) 
 
 ]
 
@@ -552,7 +555,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 .pull-right[
    
-![dpt_galaxy](../../images/scrna-casestudy-monocle/dpt_galaxy.jpg) 
+![Screenshot of the interface of ‘Scanpy DPT’ Galaxy tool](../../images/scrna-casestudy-monocle/dpt_galaxy.jpg) 
 
 ]
 
@@ -574,7 +577,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 .pull-right[
    
-![raceid_galaxy](../../images/scrna-casestudy-monocle/raceid_galaxy.jpg) 
+![Screenshot of the interface of ‘Lineage Branch Analysis using StemID’ Galaxy tool](../../images/scrna-casestudy-monocle/raceid_galaxy.jpg) 
 
 ]
 
@@ -597,8 +600,8 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 
 .pull-right[
-   
-![raceid_mst](../../images/scrna-casestudy-monocle/race_mst.jpg) 
+
+![Lineage Computation Plots](../../images/scrna-raceid/stemid_lineage.png) 
 
 ]
 
@@ -634,7 +637,7 @@ From the mentioned tutorial:
 
 .pull-right[
    
-![monocle_galaxy](../../images/scrna-casestudy-monocle/monocle_galaxy.jpg) 
+![Screenshot of the Monocle3 tools available in Galaxy](../../images/scrna-casestudy-monocle/monocle_galaxy.jpg) 
 
 ]
 
@@ -665,7 +668,7 @@ From the mentioned tutorial:
 
 .pull-right[
    
-![monocle_example](../../images/scrna-casestudy-monocle/pseudotime.png) 
+![Pseudotime plot, showing the development of T-cells – starting in dark blue on double negative cells and ending up on mature T-cells, marked in yellow on pseudotime scale.](../../images/scrna-casestudy-monocle/pseudotime.png) 
 
 ]
 
@@ -684,9 +687,8 @@ From the mentioned tutorial:
 - Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models  
 The originally proposed framework obtains velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
   
-.image-25[ ![scvelo](../../images/scrna-casestudy-monocle/scvelo.png) ]
+.image-25[ ![scVelo plot showing arrows going in ordered directions both within the cell types and between them](../../images/scrna-casestudy-monocle/scvelo.png) ]
 
----
 
 {% comment %}
 ### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
