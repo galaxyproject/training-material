@@ -43,27 +43,43 @@ abbreviations:
 >
 {: .agenda}
 
-Let's dive straight into an example:
+## Threads vs Processes
+
+For many languages, threads can be extremely efficient, as they are rather light weight and don't require many resources to create new threads. "Threads are cheap". However Python has a major limitation with the {GIL}. Only one thread can be executing at once, whether it's the main thread, or one of the others you've spawned. So we look to alternative concurrency mechanisms like processes for sharing the load across multiple CPU cores.
+
+For **threads**, if you are doing "lightweight" work like fetching data from the web where a lot of time is spent waiting for the server to respond, but very little computational work within Python is required, then threads are a great fit!
+
+However if you are doing computationally intensive work (imagine calculating prime numbers or similar complex tasks) then each thread will be contending for CPU time. Python is a single processes and can only have one thread running at a time due to the {GIL}. So it will switch between multiple threads and try and make progress on each, but it cannot execute them truly simultaneously. Here we need to switch to processes.
+
+**Processes** are relatively heavier weight as they essentially start a new python process, before executing the individual function. This is part of the reason for a "Pool", to amortise the expensive cost of setting up processes, before allowing them to do a lot of work quickly. Here each process can be using it's own CPU core fully, and thus make more sense for computationally expensive tasks.
+
+
+Let's dive straight into an example: here we're using the `multiprocessing` library which uses processes and is relatively simple to understand:
 
 ```python
-# We use multiprocessing,
-# rather than threading due to the GIL
 from multiprocessing import Pool
+```
 
-# Define a *pure* function,
-# without side effects (printing is ok.)
+Importantly we should define a *pure* function, i.e. a function that only works on the inputs available to it, and doesn't use or affect global state (i.e.  without side effects). (printing is ok.)
+
+```python
 def f(x):
     return x * x
+```
 
-# We spawn a process Pool, with 5 processes
+We spawn a process Pool, with 5 processes And then use the convenient map
+function to send inputs multiply to the specified function `f`
+
+```python
 with Pool(5) as p:
-    # And then use the convenient map function 
-    # to send inputs multiply to the specified
-    # function f
     print(p.map(f, range(10)))
 ```
 
+This will create 5 new python processes, and they will begin to consume tasks from the queue as quickly as they can. As soon as a process has finished handling one task, it will begin work on the next task.
+
 ## Pools & Paralellism
+
+Let's do another example, the classic "print time", to see how the threads are actually executing across 4 processes.
 
 ```python
 import time
@@ -76,7 +92,6 @@ with Pool(4) as p:
     print(p.map(g, range(12)))
 ```
 
-
 > ### {% icon question %} Question
 > What did you see here?
 >
@@ -85,7 +100,7 @@ with Pool(4) as p:
 > > It prints four timestamps immediately, all around the same time. Then one second later it prints 4 more, and one second later, a final four.
 > > Our Pool of 4 processes processes the function the maximal amount of times possible concurrently. Once each of those functions returns, then it can move on to processing the next tasks.
 > > This is precisely the situation of e.g. 4 queues at the grocery; as soon as one customer is processed, they immediately begin on the next, until no more remain.
-> > 
+> >
 > > You might also see a situation where the numbers are interleaved in a completely unreadable way. Here they write immediately, but there is no synchronisation or limiting on who can write at one time, and the result is a mess of interleaved print statements.
 > {: .solution}
 {: .question}
@@ -99,7 +114,9 @@ Some guidelines:
 - That do not modify global state (pure!)
 - That take a significant amount of time, relative to the time it takes to rewrite your code to support parallelising.
 
-Some common examples of this are slow tasks like requesting data from multiple websites, e.g. using the `requests` library. Or doing some computationally expensive calculation. Let's parallelize this program which fetches some metadata from multiple Galaxy servers:
+Some common examples of this are slow tasks like requesting data from multiple websites, e.g. using the `requests` library. Or doing some computationally expensive calculation. The last point however is especially important, as it is not always trivial to rearchitect your code to handle being spread across multiple threads or processes.
+
+Let's parallelize this program which fetches some metadata from multiple Galaxy servers:
 
 ```python
 import requests
@@ -203,12 +220,6 @@ You might see a result similar to the following:
 
 ![graph of the above, showing a decrease in runtime from 2.6 seconds to approximately 1.1 seconds as the pool size increases from 1 to 5. As the pool size increases from 1-2 there is a large improvement, but as it increases from 4-5 the improvement is very small, on the order of milliseconds.](../../images/pool-vs-runtime.png)
 
-
-## Threads vs Processes
-
-For many languages, threads can be extremely efficient, as they are rather light weight and don't require many resources to create new threads. However Python has a major limitation with the {GIL}. As such, we instead choose to you processes which are relatively heavier weight as they essentially clone the parent process, before executing the individual function. This is part of the reason for a "Pool", to amortise the expensive cost of setting up processes, before allowing them to do a lot of work.
-
-If you want to try threads, you can use the `threading` module in a similar way to `multiprocessing`, but reading the [`threading`](https://docs.python.org/3/library/threading.html#module-threading) documentation points us to [`concurrent.futures`](https://docs.python.org/3/library/concurrent.futures.html#concurrent.futures.ThreadPoolExecutor) as a better option for easily achieving the desired behaviour.
 
 ## Threads
 
