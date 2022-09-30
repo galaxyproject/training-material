@@ -125,7 +125,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-.image-100[ ![similarity](../../images/scrna-casestudy-monocle/similarity.jpg) ]  
+![similarity](../../images/scrna-casestudy-monocle/similarity.jpg)
 
 ]
 
@@ -149,7 +149,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-.image-100[ ![manifold](../../images/scrna-casestudy-monocle/manifold.jpg) ]  
+![manifold](../../images/scrna-casestudy-monocle/manifold.jpg)
 
 ]
 
@@ -176,7 +176,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-.image-100[ ![clustering](../../images/scrna-casestudy-monocle/clustering.jpg) ]  
+![clustering](../../images/scrna-casestudy-monocle/clustering.jpg)
 
 ]
 
@@ -187,7 +187,7 @@ We will consider some aspects shown here to better understand similarities and d
 - Tries to find stable **cell states** in the data, then connect these states to form a trajectory
 - [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), non-negative matrix factorization  
 
-.image-60[ ![clusters](../../images/scrna-casestudy-monocle/clusters.jpg) ]
+![clusters](../../images/scrna-casestudy-monocle/clusters.png)
 
 ]
 
@@ -195,10 +195,10 @@ We will consider some aspects shown here to better understand similarities and d
 - cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
 - [cell state with a particular function can be called a cell type](https://mbernste.github.io/posts/cell_types_cell_states/)  
 - methods explained in [intro, slides 54 - 57]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})   
-- soft K-means: number of clusters are defined before hand, and initialised in random positions
-- Louvain: extracts communities from large networks 
-- non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
-- hierarchical clustering: builds a hierarchy of clusters 
+  - soft K-means: number of clusters are defined before hand, and initialised in random positions
+  - Louvain: extracts communities from large networks 
+  - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
+  - hierarchical clustering: builds a hierarchy of clusters 
 
 ---
 
@@ -206,7 +206,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-.image-100[ ![graph](../../images/scrna-casestudy-monocle/graph.jpg) ]  
+![graph](../../images/scrna-casestudy-monocle/graph.jpg)
 
 ]
 
@@ -218,14 +218,14 @@ We will consider some aspects shown here to better understand similarities and d
 - Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}) graph using the Euclidean distance
 - **Minimum weight spanning tree (MST)** is often used to connect the clusters to each other
 
-.image-25[ ![mst](../../images/scrna-casestudy-monocle/clusters_mst.png) ]    
+![mst](../../images/scrna-casestudy-monocle/clusters_mst.png) 
 
 ]
 
 ???
 - General idea is to construct a graph representation of the cells and perform graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
-- kNN explained in [intro, slide 46]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})]
-- MST connects clusters without any cycles and minimises the total total edge weight (cost)) to ensure that the most similar clusters are connected
+- kNN explained in [intro, slide 46]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})
+- MST connects clusters without any cycles and minimises the total total edge weight (cost) to ensure that the most similar clusters are connected
 ---
 
 ### Graph-based approach
@@ -233,11 +233,10 @@ We will consider some aspects shown here to better understand similarities and d
 
 .pull-left[  
   
-.image-100[ ![graph](../../images/scrna-casestudy-monocle/graph.jpg) ]  
+![graph](../../images/scrna-casestudy-monocle/graph.jpg) 
 
 ]
 
---
 
 .pull-right[
     
@@ -246,7 +245,7 @@ We will consider some aspects shown here to better understand similarities and d
   - short walk => higher probability that the cells are connected
   - finding path (pseudotime) based on those probabilities
 
-.image-100[ ![dpt](../../images/scrna-casestudy-monocle/dpt.png) ]  
+![dpt](../../images/scrna-casestudy-monocle/dpt.png) 
 ]
 
 ---
@@ -275,7 +274,7 @@ We will consider some aspects shown here to better understand similarities and d
   - assuming that the cells with the highest unspliced : spliced reads are in the steady state
   - high amount of unspliced reads and low amount of spliced reads => gene is likely being turned on => higher positive velocity  
 
-.image-25[ ![velo](../../images/scrna-casestudy-monocle/velo.jpg) ]
+.image-40[ ![velo](../../images/scrna-casestudy-monocle/velo.jpg) ]
 
 ---
 
@@ -484,7 +483,11 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ### Trajectory analysis methods used in Galaxy
 --
 
-- PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}))   
+- Scanpy PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}))   
+
+--
+
+- Scanpy DPT  
 
 --
 
@@ -515,6 +518,11 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 ]
 
+???
+- The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric  
+
+- Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) where PAGA was used from the Scanpy toolkit
+
 --
 
 .pull-right[
@@ -524,7 +532,29 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ]
 
 ???
-Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %})
+- But PAGA is also available as a tool in Galaxy
+
+---
+
+### Diffusion Pseudotime in Scanpy
+
+--
+
+.pull-left[  
+  
+- There is another Scanpy tool in Galaxy, which allows you to calculate diffusion pseudotime
+- Based on single cell KNN graphs
+- Requires to run Scanpy DiffusionMap and Scanpy FindCluster first
+
+]
+
+--
+
+.pull-right[
+   
+![dpt_galaxy](../../images/scrna-casestudy-monocle/dpt_galaxy.jpg) 
+
+]
 
 ---
 
@@ -535,82 +565,125 @@ Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy t
 .pull-left[  
   
 - **StemID** is a tool (part of the **RaceID** package) that aims to derive a hierarchy of the cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
-- Specific Trajectory Lineage Analysis (StemID) and Specific Trajectory Fate Analysis (FateID) in Galaxy
 - **FateID** tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
 - Where StemID utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, FateID uses top-down approach that starts from the progenitor and works its way down.
 
-![race_mst](../../images/scrna-casestudy-monocle/race_mst.jpg) 
-
 ]
-
-???
-Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %})
 
 --
 
 .pull-right[
    
-![paga_galaxy](../../images/scrna-casestudy-monocle/paga_galaxy.jpg) 
+![raceid_galaxy](../../images/scrna-casestudy-monocle/raceid_galaxy.jpg) 
 
 ]
--  An algorithm for rare cell type identification in complex populations of single cells 
 
---
-
-- The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric
-
---
-
-- An initial clustering is followed by an outlier identification based on a background model of combined technical and biological variability in single-cell RNA-seq data obtained by quantification with unique molecular identifiers   
-
---
-
-.image-50[ ![raceID](../../images/scrna-casestudy-monocle/raceid.jpg) ]
+???
+- Specific Trajectory Lineage Analysis (StemID) and Specific Trajectory Fate Analysis (FateID) in Galaxy
+- Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %})
 
 ---
+
+### Trajectory analysis methods used in Galaxy: **RaceID**
+.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+
+.pull-left[  
+  
+- **StemID** is a tool (part of the **RaceID** package) that aims to derive a hierarchy of the cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+- **FateID** tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
+- Where StemID utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, FateID uses top-down approach that starts from the progenitor and works its way down.
+
+]
+
+
+.pull-right[
+   
+![raceid_mst](../../images/scrna-casestudy-monocle/race_mst.jpg) 
+
+]
+
+???
+From the mentioned tutorial:
+- StemID Lineage Tree and Branches of significance.
+  - (Top-Left) Minimum spanning tree showing most likely connections between clusters
+  - (Top-Right) Minimum spanning tree with projected time series
+  - (Bottom-Left) Significance between clusters
+  - (Bottom-Right) Link scores between cluster-cluster pairs
+
+---
+
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
 .footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
 
 --
-
+.pull-left[  
+  
 - Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress  
+- Monocle uses an algorithm to learn the sequence of gene expression changes each cell must go through as part of a dynamic biological process  
+- General workflow: 
+  - Pre-process the data
+  - Reduce dimensionality
+  - Cluster cells
+  - Learn the trajectory graph
+  - Order the cells in pseudotime
+- All those steps (and more) can be done using Galaxy tools!
+
+]
 
 --
 
+.pull-right[
+   
+![monocle_galaxy](../../images/scrna-casestudy-monocle/monocle_galaxy.jpg) 
+
+]
+
+???
 - Orders cells by learning an explicit principal graph from the single cell transcriptomics data with advanced machine learning techniques (Reversed Graph Embedding), which robustly and accurately resolves complicated biological processes  
-
---
-
 - Performs clustering (i.e. using t-SNE and density peaks clustering), differential gene expression testing, identifies key marker genes to discover and characterise cell types, infers trajectories
-
---
-
-
-![monocle](../../images/scrna-casestudy-monocle/monocle.jpg)  
+- The use of those tools was shown in ([Trajectory Analysis using Monocle3 tutorial]({% link topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial.md %})) 
 
 ---
+
+### Trajectory analysis methods used in Galaxy: **Monocle3**
+.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+
+.pull-left[  
+  
+- Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress  
+- Monocle uses an algorithm to learn the sequence of gene expression changes each cell must go through as part of a dynamic biological process  
+- General workflow: 
+  - Pre-process the data
+  - Reduce dimensionality
+  - Cluster cells
+  - Learn the trajectory graph
+  - Order the cells in pseudotime
+- All those steps (and more) can be done using Galaxy tools!
+
+]
+
+
+.pull-right[
+   
+![monocle_example](../../images/scrna-casestudy-monocle/pseudotime.png) 
+
+]
+
+???
+- Example of T-cells development in pseudotime, from the mentioned Monocle3 tutorial
+
+---
+
 ### Trajectory analysis methods used in Galaxy: **scVelo**
 .footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
 
 --
-
-- Estimates RNA velocity to study cellular dynamics, reaction rates of transcription, splicing and degradation     
-
---
-
-- Identifies putative driver genes and regimes of regulatory changes and uses statistical tests, e.g., to detect different kinetics regimes     
-
---
-
-- Infers a latent time to reconstruct the temporal sequence of transcriptomic events     
-
---
-
-- Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models    
-
---
-
-
+  
+- scVelo infers gene-specific rates of transcription, splicing and degradation, and recovers the latent time of the underlying cellular processes
+- think of velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
+- Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models  
+The originally proposed framework obtains velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
+  
 .image-25[ ![scvelo](../../images/scrna-casestudy-monocle/scvelo.png) ]
 
 ---
