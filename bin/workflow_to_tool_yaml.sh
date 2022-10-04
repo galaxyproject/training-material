@@ -11,7 +11,6 @@ do
         if [ -d "${tutorial}/workflows" ]
         then
             wf_files=$(find "${tutorial}/workflows/" -name '*.ga' | paste -sd " ")
-            echo "wf_files: $wf_files"
             num_wf_files=$(find "${tutorial}/workflows/" -name '*.ga' | wc -l)
             if (( num_wf_files > 0 )); then
                 workflow-to-tools -w ${wf_files} -o "${tutorial}/tools.yaml" -l "$(basename "${tutorial}")"
