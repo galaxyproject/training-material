@@ -16,11 +16,11 @@ key_points:
 - Follow best practices for read mapping, quality control and mapped reads postprocessing
   to minimize false-positive hCNVs.
 contributors:
-- Khaled Jum'ah
-- Katarzyna Kamieniecka
-- Wolfgang Maier
-- David Salgado
-- Krzysztof Poterlowicz
+- Khaled196
+- kpbioteam
+- wm75
+- davidsalgado
+- kpoterlowicz
 
 ---
 
