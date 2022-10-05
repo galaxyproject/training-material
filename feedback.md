@@ -346,11 +346,13 @@ layout: base
                                             </div>
                                         </div>
                                     </div>
+                                    <a href="{{site.baseurl}}/topics/{{topic_name}}/tutorials/{{tuto_name}}/tutorial.html">View this Tutorial</a>
 
                                     <div class="row">
                                         <div class="col">
                                             <div class="card">
                                                 <div class="card-body">
+
                                                     <h5 class="card-title">Detailed feedback</h5>
                                                     <table class="table table-striped">
                                                         <thead>
