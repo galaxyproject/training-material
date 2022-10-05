@@ -19,7 +19,14 @@ time_estimation: 45M
 contributors:
 - Sophia120199
 ---
-
+> ### Agenda
+>
+> In this tutorial, we will deal with:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 # Introduction
  
 The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" (Whipps et al. 1988). 
@@ -48,7 +55,7 @@ The comparison of reads to database sequences can be done in different ways, lea
  
 - For the **k-mer based** analysis, databases as well as the samples DNA are broken into k-mers about 30 bp length for comparison. From all the genomes in the database, where a specific k-mer is found, a lowest common ancestor (LCA) tree is derived and the abundance of k-mers within the tree is counted. This is the basis for a root-to-leaf path calculation, where the path with the highest score is used for classification of the sample. By counting the abundance of k-mers, also an estimation of relative abundance of taxa is possible. The major advantage of k-mer based analysis is the low compute cost. Major disadvantages are the low detection accuracy, that the unclassified percentage is unknown and that there is no gene detection, no SNVs detection and no genomic comparison possible. An example for a k-mer based analysis tool is Kraken2, which will be used in this tutorial
  
-![Kraken functionality](../../images/taxonomic-assignment/Kraken_algorithm.PNG "Kraken functionality.")  {% cite Wood.2014 %}
+![Kraken functionality](../../taxonomic-assignment/images/Kraken_algorithm.png "Kraken functionality.")  {% cite Wood.2014 %}
  
 - For the **gene based** analysis, reads are aligned to reference genes about 1 kbp length. Next, marker genes are used to estimate species abundance. Furthermore, genes can be analyzed in isolation for presence or absence in a specific condition.
 The major advantage is the detection of the pangenome (entire set of genes within a species). Major disadvantages are the high compute cost, low detection accuracy and that the unclassified percentage is unknown. At least intragenic SNVs can be detected and low-resolution genomic comparison is possible.
@@ -57,36 +64,38 @@ The major advantage is the detection of the pangenome (entire set of genes withi
  
 After this theoretical introduction, let's now get hands on analyzing an actual dataset! 
 
-> ### Agenda
->
-> In this tutorial, we will deal with:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
+
  
 # Background on data
  
 The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas, that is studied because of its special environmental conditions {% cite Okie.2020 %}. It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using [__cutadapt__ ](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#trim-and-filter---short-reads)
 
-## Hands on: Importing the data (xxx copy the Data upload chapter of other tutorials? use snippet?) 
-
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import the following files from [Zenodo](zenodo link)
+> 1. Create a new history for this exercise
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >    - `JP4D_R1.fastq.gz`
 >    - `JP4D_R2.fastq.gz`
+    -`JC1A_R1.fastq.gz`
+    - `JC1A_R2.fastq.gz`
+>    ``
 >
+>    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
->    >
->    > * Copy the link location
->    > * Open the Galaxy Upload Manager
->    > * Select **Paste/Fetch Data**
->    > * Paste the link into the text field
->    > * Press **Start**
->    {: .tip}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+
+>
+> 3. Create a paired collection.
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
+{: .hands_on}
+
+
  
 # Hands on: k-mer based taxonomic assignment of metagenomic data
 
@@ -122,7 +131,7 @@ Let's have a look at the classification file. It has 5 columns:
 5. indicates LCA mapping of each k-mer in the sequence |:| indicates end of first read, start of second read for paired reads --> example: "n k-mers assigned to taxon xxx"
  
  
-![Kraken2 Classification Output](../../images/taxonomic-assignment/Kraken2_classification_screenshot.PNG "Kraken2 Classification Output.")
+![Kraken2 Classification Output](../../taxonomic-assignment/images/Kraken2_classification_screenshot.png "Kraken2 Classification Output.")
 
 > ### {% icon question %} Questions
 >Let's have a look at the first line of the Kraken2 classification output.
@@ -148,7 +157,7 @@ Let's also have a look at the report file. It has 2 columns:
 1. taxon name grouped into d_domain, p_phylum, c_class, o_order, f_family, g_genus, s_species
 2. number of reads assigned to specific taxon
  
-![Kraken2 Report Output](../../images/taxonomic-assignment/Kraken2_report_screenshot.PNG "Kraken2 Report Output.")
+![Kraken2 Report Output](../../taxonomic-assignment/images/Kraken2_report_screenshot.png "Kraken2 Report Output.")
 
 > ### {% icon question %} Questions
 >
@@ -168,7 +177,7 @@ Let's also have a look at the report file. It has 2 columns:
  
 As both files contain a lot of information, we will use __Krona__ {% cite Ondov.2011 %}to visualize the data.
  
-# Analyze taxonomic assigment
+# Visualization of taxonomic assignment
  
 Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the __Krona pie chart__ tool ({% cite Ondov.2011 %}). But first, we need to convert the output generated by Kraken2 so it can be used as an input from the Krona tool.
  
@@ -207,7 +216,7 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
 > ### {% icon question %} Questions
 >
 > 1. How many percent of the bacteria consists of the genus "paracoccus"?
-> 2. Is there any Escherichia coli present? If yes, how many reads were found?
+> 2. Is there any *Escherichia coli* present? If yes, how many reads were found?
 > 3. Where might the eukaryotic DNA come from?
 >
 >
@@ -228,7 +237,7 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
  
 # Discussion: Choosing the right tool
 
-When it comes to taxonomic assignment while analyzing metagenomic data, in this tutorial presented Kraken2 is not the only tool available. Several papers do benchmarking of different tools and their results are presented in the following section, with focus on tools that are available in Galaxy ({% cite Meyer.2022 %},{% cite Sczyrba.2017 %},{% cite Ye.2019 %}).
+When it comes to taxonomic assignment while analyzing metagenomic data, in this tutorial presented Kraken2 is not the only tool available. Several papers do benchmarking of different tools ({% cite Meyer.2022 %},{% cite Sczyrba.2017 %},{% cite Ye.2019 %}) and their results are presented in the following section, with focus on tools that are available in Galaxy.
 When it comes to taxonomic profiling, thus investigating the abundance of specific taxa, the biggest problem is the abundance bias. It is introduced during isolation of DNA (which might work for some organisms better then for others) and by PCR duplicates during PCR amplification.
  
 When benchmarking different classification tools, several metrics are used to compare their performance:
@@ -238,19 +247,7 @@ When benchmarking different classification tools, several metrics are used to co
  
 4. **L2 distance**: representation of abundance profiles → how accurately the abundance of each species or genera in the resulting classification reflects the abundance of each species in the original biological sample (“ground truth”)
  
-## Binning tools (“Critical Assessment of Metagenome Interpretation (CAMI) – a benchmark of metagenomics software”)
-As mentioned earlier, taxonomic binning is the classification of individual sequence reads to reference taxa by grouping sequences into bins with a taxonomic label attached. All investigated binning tools have some characteristics in common:
-- Small bins are not reliable
-- High purity can be reached for higher ranks
-- Below family level, all programs performed poorly
-(either assigning very little data
-or assigning more, but substantial misclassification)
-- Completeness degrades at lower ranks and for low-abundant bins
-- At increasing taxonomic distances to the reference, purity and completeness drop substantially
-- Presence of plasmids and viral sequences doesn’t have any effect on binning performance
- 
-MEGAN and Kraken perform similarly, as they rely on similar algorithms but utilize different data properties.
- 
+
 ## Profiling tools
  
 Profilers, which are tools that investigate relative abundances of taxa within a dataset, fall into three groups depending on their performance:
@@ -270,7 +267,7 @@ MetaPhlAn 2.0 belongs to the group of precise profilers. On the basis of the ave
  
 
  
-![CAMI II software ranking](../../images/taxonomic-assignment/CAMI_software_ranking.PNG "CAMI II software ranking") {% cite Meyer.2022 %}
+![CAMI II software ranking](../../taxonomic-assignment/images/CAMI_software_ranking.png "CAMI II software ranking") {% cite Meyer.2022 %}
  
  
  
