@@ -19,6 +19,15 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
+    # todo migrate somewhere more generic
+    def filter_authors(contributors, contributions)
+      if not contributors.nil?
+        return contributors
+      else
+        return contributions["authorship"]
+      end
+    end
+
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return
@@ -33,7 +42,6 @@ module Jekyll
 
       material['last_modified_at'].format = '%s'
       begin
-        puts "#{material['last_modified_at']} #{Time.at(material['last_modified_at'].to_s.to_i)} #{material.fetch('path')}"
         attributes += [
           ["DC.date", Time.at(material['last_modified_at'].to_s.to_i)],
         ]
@@ -73,13 +81,13 @@ module Jekyll
         # I guess these are identical?
         "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         "mainEntityOfPage": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
-        "name": contributor.fetch('name', id),
+        "name": contributor.nil? ? id : contributor.fetch('name', id),
         "image": "https://avatars.githubusercontent.com/#{id}",
         # No clue what to put here it's a person.
-        "description": contributor.fetch("bio", "A contributor to the GTN project."),
+        "description": contributor.nil? ? "A contributor to the GTN project." : contributor.fetch("bio", "A contributor to the GTN project."),
         "memberOf": [GTN],
       }
-      if contributor.has_key?('orcid')
+      if ! contributor.nil? && contributor.has_key?('orcid')
         person['identifier'] = "https://orcid.org/" + contributor['orcid']
         person['orcid'] = "https://orcid.org/" + contributor['orcid']
       end

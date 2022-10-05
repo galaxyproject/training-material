@@ -380,11 +380,11 @@ render.
 Assume a VueJS component will be available called
 ``FavoriteExtensions`` in the file
 ``components/User/FavoriteExtensions/index.js``.  In
-``client/src/entry/analysis/AnalysisRouter.js`` respond to the route
+``client/src/entry/analysis/router.js`` respond to the route
 added above in ``buildapp.py`` and render the fictitious VueJS component
 ``FavoriteExtensions``.
 
-{% include topics/dev/tutorials/core-contributing/AnalysisRouter.js_diff.md %}
+{% include topics/dev/tutorials/core-contributing/router.js_diff.md %}
 
 There are many ways to perform the next steps, but like the API entry-point lets
 start with a test case describing the UI component we want to write. Below is a

@@ -42,7 +42,13 @@ requirements:
       - ansible
   - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+abbreviations:
+    DVCS: Distributed Version Control System
 ---
+
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
@@ -57,6 +63,8 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}
 
 {% snippet topics/admin/faqs/admin-testing.md %}
 
@@ -249,6 +257,10 @@ To proceed from here it is expected that:
 {: .comment}
 
 
+> ### {% icon warning %} Warning: 22.05 not yet released
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -265,7 +277,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.3
+>    +  version: 0.10.4
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
@@ -1015,7 +1027,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
 >    {: .tip}
 >
->    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public <abbr title="distributed version control system">DVCS</abbr>) now that you've got the secrets safely encrypted.
+>    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public {DVCS}) now that you've got the secrets safely encrypted.
 >
 >    {% raw %}
 >    ```diff

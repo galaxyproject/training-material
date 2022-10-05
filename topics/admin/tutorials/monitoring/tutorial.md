@@ -33,11 +33,10 @@ requirements:
       - ansible
       - ansible-galaxy
       - gxadmin
+abbreviations:
+    TSDB: Time Series Database
 ---
 
-
-# Overview
-{:.no_toc}
 
 Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 
@@ -48,6 +47,8 @@ Monitoring is an incredibly important part of server monitoring and maintenance.
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}
 
 This tutorial explicitly assumes you are starting with a setup like that created in the *Galaxy installation with Ansible* tutorial
 
@@ -66,7 +67,7 @@ Setting up the infrastructure is quite simple thanks to the automation provided 
 
 ## InfluxDB
 
-[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a <abbr title="Time Series Database">TSDB</abbr>, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
+[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a {TSDB}, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
 
 The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains [several modules](https://docs.ansible.com/ansible/2.9/modules/list_of_database_modules.html#influxdb) you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote [their own role](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml) for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.
 

@@ -32,6 +32,8 @@ Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file 
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}
+
 # TUS and Galaxy
 
 To allow your user to upload via TUS, you will need to:

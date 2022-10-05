@@ -26,9 +26,6 @@ requirements:
       - ansible-galaxy
 ---
 
-# Overview
-{:.no_toc}
-
 In this tutorial you will learn how to configure Galaxy to run jobs using [Singularity](https://sylabs.io/singularity/) containers provided by the [BioContainers](https://biocontainers.pro/) community.
 
 ## Background
@@ -51,6 +48,8 @@ Singularity is an alternative to Docker that is much friendlier for HPCs
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
 
 # Installing Singularity
 

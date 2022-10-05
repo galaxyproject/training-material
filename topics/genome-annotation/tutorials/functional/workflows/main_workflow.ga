@@ -1,0 +1,197 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Functional annotation of protein sequences",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-0914-2470",
+            "name": "Anthony Bretaudeau"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Functional annotation",
+    "steps": {
+        "0": {
+            "annotation": "Some protein sequences to functionally annotate",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Some protein sequences to functionally annotate",
+                    "name": "Protein sequences"
+                }
+            ],
+            "label": "Protein sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 315.5999984741211,
+                "height": 65.76666259765625,
+                "left": 726.3958740234375,
+                "right": 886.3958740234375,
+                "top": 249.83333587646484,
+                "width": 160,
+                "x": 726.3958740234375,
+                "y": 249.83333587646484
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "abb56aaf-5988-4fb8-a68f-0edaee00f445",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool eggNOG Mapper",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "eggNOG Mapper",
+            "outputs": [
+                {
+                    "name": "seed_orthologs",
+                    "type": "tabular"
+                },
+                {
+                    "name": "annotations",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 435.17499923706055,
+                "height": 196.8000030517578,
+                "left": 1194.4791412353516,
+                "right": 1354.4791412353516,
+                "top": 238.37499618530273,
+                "width": 160,
+                "x": 1194.4791412353516,
+                "y": 238.37499618530273
+            },
+            "post_job_actions": {
+                "HideDatasetActionseed_orthologs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "seed_orthologs"
+                },
+                "RenameDatasetActionannotations": {
+                    "action_arguments": {
+                        "newname": "EggNOG Mapper annotations"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "annotations"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8",
+            "tool_shed_repository": {
+                "changeset_revision": "5a30ae278db0",
+                "name": "eggnog_mapper",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation_options\": {\"tax_scope\": null, \"target_orthologs\": \"all\", \"go_evidence\": \"non-electronic\"}, \"eggnog_data\": \"5.0.2\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"input_trans\": {\"itype\": \"proteins\", \"__current_case__\": 0}, \"output_options\": {\"no_file_comments\": \"false\", \"no_annot\": \"false\", \"report_orthologs\": \"false\"}, \"seed_ortho_options\": {\"ortho_method\": {\"m\": \"diamond\", \"__current_case__\": 0, \"matrix_gapcosts\": {\"matrix\": \"BLOSUM62\", \"__current_case__\": 2, \"gap_costs\": \"--gapopen 11 --gapextend 1\"}, \"sensmode\": \"sensitive\", \"dmnd_iterate\": \"false\", \"dmnd_ignore_warnings\": \"false\"}, \"query_cover\": null, \"subject_cover\": null, \"pident\": null}, \"seed_ortholog_options\": {\"seed_ortholog_evalue\": \"0.001\", \"seed_ortholog_score\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.8+galaxy2.1.8",
+            "type": "tool",
+            "uuid": "0d9f93f0-88b3-406b-b8f9-ecb2d74c61e9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "annotations",
+                    "uuid": "bc64d801-036f-4608-8ba1-74f16fddb574"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool InterProScan",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "InterProScan",
+            "outputs": [
+                {
+                    "name": "outfile_tsv",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outfile_xml",
+                    "type": "xml"
+                }
+            ],
+            "position": {
+                "bottom": 646.2666473388672,
+                "height": 131.51666259765625,
+                "left": 1197.1041870117188,
+                "right": 1357.1041870117188,
+                "top": 514.7499847412109,
+                "width": 160,
+                "x": 1197.1041870117188,
+                "y": 514.7499847412109
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile_xml": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile_xml"
+                },
+                "RenameDatasetActionoutfile_tsv": {
+                    "action_arguments": {
+                        "newname": "InterProScan annotations (tsv)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "98cafcbd2578",
+                "name": "interproscan",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"applications\": [\"TIGRFAM\", \"SFLD\", \"SUPERFAMILY\", \"PANTHER\", \"Gene3D\", \"Hamap\", \"PrositeProfiles\", \"Coils\", \"SMART\", \"CDD\", \"PRINTS\", \"PIRSR\", \"PrositePatterns\", \"Pfam\", \"MobiDBLite\", \"PIRSF\"], \"database\": \"5.55-88.0\", \"goterms\": \"true\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"iprlookup\": \"false\", \"licensed\": {\"use\": \"true\", \"__current_case__\": 1, \"applications_licensed\": [\"Phobius\", \"SignalP_EUK\", \"TMHMM\"]}, \"oformat\": [\"TSV\", \"XML\"], \"pathways\": \"true\", \"seqtype\": \"p\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.55-88.0+galaxy3",
+            "type": "tool",
+            "uuid": "cb7a1910-3c31-47d9-835b-f1bd16a1c3ff",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile_tsv",
+                    "uuid": "b5a0e608-3bed-4fb2-9d47-d6bd521aee14"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation"
+    ],
+    "uuid": "65bc0159-acd3-4172-87da-a6fdd8c2ea81",
+    "version": 7
+}

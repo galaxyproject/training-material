@@ -25,12 +25,17 @@ tags:
 - nanopore
 - assembly
 - amr
-contributors:
-- bazante1
-- miaomiaozhou88
-- shiltemann
-- hexylena
-- avans-atgm
+
+contributions:
+  authorship:
+  - bazante1
+  editing:
+  - hexylena
+  - bazante1
+  - shiltemann
+  - miaomiaozhou88
+  funding:
+  - avans-atgm
 
 follow_up_training:
 - type: "internal"
@@ -41,6 +46,9 @@ follow_up_training:
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
+
+abbreviations:
+ SVs: Structural Variations
 ---
 
 
@@ -211,7 +219,7 @@ Before | After
 > > 3. Coverage is a measure of, on average, how many reads 'cover' a single base in the genome. If you divide the total reads, by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.
 > > 4. Before $$ \frac{621,945,741}{2,900,000} = 214.4$$ and after $$ \frac{609,657,642}{2,900,000} = 210.2$$. This is *not* a very big decrease in coverage, so no cause for concern. Generally in sequencing experiments you have some minimum coverage you expect to see based on how much of your sample you sequenced. If it falls below that threshold it might be cause for concern.
 > >
-> > Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large <abbr title="structural variations">SVs</abbr> rather than having high quality reads and base-level variation analyses.
+> > Additionally many people do not do any filtering or QC steps with their NanoPore data, it is expected that the quality is low, and often the focus is on assembling large {SVs} rather than having high quality reads and base-level variation analyses.
 > {: .solution}
 {: .question}
 
@@ -427,8 +435,6 @@ from prokka as an information track.
 >        - *"Qualifier value column or raw text"*: `11`
 >
 > 4. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters:
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `consensus` (output of **Flye assembly** {% icon tool %})
 >    - *"Single or Paired-end reads"*: `Single`

@@ -152,6 +152,10 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 >    For the Copernicus tutorial:
 >    - **Annotation**: `Retrieve climate data from Copernicus`
 >    - **Tag**: `climate`
+>
+> 4. Make the workflow accessible (publishing is not necessary)
+>
+>    {% snippet faqs/galaxy/workflows_publish.md %}
 >     
 {: .hands_on}
 
@@ -217,7 +221,7 @@ Once we have the workflows and toy dataset (optionally already on Zenodo), we ca
 
 Writing the tutorial while adding the different tools and their parameters and following good formatting can be quite cumbersome. To help in that process, we developed a training development kit available with [Planemo](https://planemo.readthedocs.io/en/latest/index.html). The tool has several commands. But the main one can be used to create the skeleton of a tutorial (folder, well located, with good structure). It can also take a workflow as input, add it to the `workflows` folder. But more interestingly, the tool can extract from the workflow and add in the `tutorial.md` file the different steps with which tools to run and which parameters to select. If a Zenodo URL is provided, it also creates the `data-library.yaml` file.
 
-This tool can be used via the command-line but also via a [webserver](https://ptdk.herokuapp.com/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
+This tool can be used via the command-line but also via a [webserver](https://ptdk.apps.galaxyproject.eu/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
 
 > ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial using the webserver
 >
@@ -226,7 +230,7 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >    {% snippet faqs/galaxy/workflows_publish.md %}
 >
 > 2. Copy the workflow id that can be found in the URL of the current page (after `?id=`)
-> 3. Open the [PTDK webserver](https://ptdk.herokuapp.com/)
+> 3. Open the [PTDK webserver](https://ptdk.apps.galaxyproject.eu/)
 > 4. Fill in the information
 >    - Tutorial name (the name will be the name of the folder of the tutorial)
 >    - Tutorial title
@@ -388,7 +392,7 @@ For the next times, you can make it quicker.
 > 4. Create a Zenodo record with the input data
 > 5. Generate the skeleton of your tutorial
 >
->    - Option 1: from the [PTDK webserver](https://ptdk.herokuapp.com/) and get the skeleton in the training material
+>    - Option 1: from the [PTDK webserver](https://ptdk.apps.galaxyproject.eu/) and get the skeleton in the training material
 >    - Option 2: from a workflow located on a Galaxy
 >
 >      ```
