@@ -977,6 +977,118 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Somatic Variant Discovery from WES Data Using Control-FREEC",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.2582555",
+      "questions": [
+        "What are the specific challenges in locating human Copy Number Variances (hCNVs)?",
+        "How to preprocess the sequenced reads for hCNVs detection?",
+        "How can you detect the hCNVs in/from tumor and normal tissue of the same individual?",
+        "How can you visualise the hCNVs' findings and compare them for specific regions?"
+      ],
+      "objectives": [
+        "Use Control-Freec for hCNV Identefication in tumor tissue.",
+        "Visualise the detected hCNVs in specific chromosomes."
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Follow best practices for read mapping, quality control and mapped reads postprocessing to minimize false-positive hCNVs."
+      ],
+      "contributors": [
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "joined": "2022-09",
+          "id": "Khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Khaled196.json"
+        },
+        {
+          "name": "Katarzyna Murat",
+          "joined": "2018-08",
+          "id": "kpbioteam",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kpbioteam.json"
+        },
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        },
+        {
+          "name": "David Salgado",
+          "joined": "2022-10",
+          "id": "davidsalgado",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/davidsalgado.json"
+        },
+        {
+          "name": "Krzysztof Poterlowicz",
+          "twitter": "bioinfbrad",
+          "orcid": "0000-0001-6173-5674",
+          "joined": "2017-09",
+          "elixir_node": "uk",
+          "id": "kpoterlowicz",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kpoterlowicz.json"
+        }
+      ],
+      "last_modified_at": "05-Oct-22",
+      "url": "/topics/variant-analysis/tutorials/somatic-variant-discovery/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "somatic-variant-discovery",
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Control-FREEC_MIRACUM_-_somatic_variant_discovery_from_WES_data.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "Grep1",
+        "__BUILD_LIST__",
+        "__EXTRACT_DATASET__",
+        "__RELABEL_FROM_FILE__",
+        "https://usegalaxy.eu/root?tool_id=Grep1",
+        "https://usegalaxy.eu/root?tool_id=__BUILD_LIST__",
+        "toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_text_file_with_recurring_lines%2F1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam samtools_calmd/samtools_calmd/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/control_freec/control_freec/11.6+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//variant-analysis/tutorials/somatic-variant-discovery/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//variant-analysis/tutorials/somatic-variant-discovery/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
       "zenodo_link": "https://doi.org/10.5281/zenodo.6483454",
       "questions": [
