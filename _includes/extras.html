@@ -16,12 +16,12 @@
         <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}" title="Show view statistics of this page">
             {% icon galaxy-barchart %} Page Metrics
         </a>
-
-        {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
+        {% if page.layout == 'topic' %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
                 {% icon galaxy-barchart %} Topic feedback
             </a>
-        {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
+        {% elsif page.layout == 'tutorial_hands_on' %}
+
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
                 {% icon galaxy-barchart %} Tutorial feedback
             </a>
