@@ -68,21 +68,24 @@
           </div>
 
           <div class="duplicate">
+          <!-- m.t:{{ material.type }} -->
           {% if material.type == "introduction" %}
             {% if material.slides %}
               {% include _includes/resource-slides.html material=material topic=topic.name %}
             {% endif %}
           {% elsif material.type == "tutorial" %}
-            {% include _includes/resource-slides.html material=material topic=topic.name %} 
-            {% include _includes/resource-handson.html material=material topic=topic.name %} 
+            <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+            {% include _includes/resource-slides.html material=material topic=topic.name %}
+            {% include _includes/resource-handson.html material=material topic=topic.name %}
+            <!-- video  {{ topic.type }} {{topic.name}} -->
             {% include _includes/resource-video-library.html material=material topic=topic.name %}
-            {% if topic.type == "use" %}
-              {% include _includes/resource-zenodo.html material=material topic=topic.name %} 
-              {% include _includes/resource-workflows.html material=material topic=topic.name %} 
-            {% endif %}
+            <!--  {{ topic.type }} {{topic.name}} -->
+            {% include _includes/resource-zenodo.html material=material topic=topic.name %}
+            {% include _includes/resource-workflows.html material=material topic=topic.name %}
             {% if instances[topic.name].supported %}
-              {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} 
+              {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
             {% endif %}
+            </div>
           {% endif %}
           </div>
 
