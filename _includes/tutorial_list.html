@@ -38,17 +38,10 @@
 
         <tr>
           <td class="tutorial_title">
-            {% if material.slides and material.hands_on %}
-            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html">
+            {% assign default_resource_url = material | get_default_link %}
+            {% if default_resource_url %}
+            <a href="{{ site.baseurl }}/{{ default_resource_url }}">
                 {{ material.title }}
-            </a>
-            {% elsif material.slides %}
-            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/{{subfolder}}/{{ material.tutorial_name }}{% unless material.type == 'introduction' %}/slides{% endunless %}.html">
-                {{ material.title }}
-            </a>
-            {% elsif material.hands_on %}
-            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html">
-                {{ material.title}}
             </a>
             {% else %}
                 {{ material.title }}
