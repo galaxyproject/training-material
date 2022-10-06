@@ -70,7 +70,6 @@ module Jekyll
             if lang != "en" and lang != "es"
               lang = "en"
             end
-
             if box_type != 'none' and !box_type.nil?
               box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang, context.registers[:page]['path'])
               box_start = '> ' + box_title

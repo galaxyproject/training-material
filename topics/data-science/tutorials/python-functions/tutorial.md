@@ -25,6 +25,8 @@ time_estimation:  30M
 key_points:
 - Functions are foundational in Python
 - Everything you do will require functions
+- Functions keep your code DRY (don't repeat yourself), reducing your copying and pasting or rewriting the same block of code.
+- Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
 contributors:
@@ -176,7 +178,7 @@ def fahr_to_kelvin(temp_f):
 print(f'boiling point of water in Kelvin: {fahr_to_kelvin(212.0)}')
 ```
 
-For a function this small, with such a descriptive name (`fahr_to_kelvin`) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However
+For a function this small, with such a descriptive name (`fahr_to_kelvin`) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However, you will thank yourself in the future if you do this now. You may think you will remember what the code does, but, be kind to your future self who is busy and stressed and may not want to spend time reading the code over again to figure out what every single function does.
 
 > <question-title>Converting statements to functions</question-title>
 > A lot of what you'll do in programing is to turn a procedure that you want to do, into statements and a function.
@@ -189,6 +191,7 @@ For a function this small, with such a descriptive name (`fahr_to_kelvin`) it fe
 > >     c = (a + b) / 2
 > >     return c
 > > ```
+> > We call it "average2" here because it will only average two numbers. It will not work for three numbers or a list of them.
 > {: .solution}
 {: .question}
 

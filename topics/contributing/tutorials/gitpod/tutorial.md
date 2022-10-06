@@ -46,8 +46,8 @@ If you are working on your own training materials and want preview them online w
 >    > If you already have a fork, fantastic! But a common issue is that the `main` branch gets outdated, or your fork was from before we renamed the `master` branch to `main`.
 >    >
 >    > - Start by browsing to your fork in GitHub
->    > - Check the default branch that is shown? Does it say `master`? Then you need to update it.
->    >     1. Go to your fork's settings
+>    > - Check the default branch that is shown? Does it say `master`? Then you need to update it. (Note - don't just switch branches from "master" to "main", follow the instructions below to reset the default branch to "main".)
+>    >     1. Go to your fork's settings (Click on the gear icon called "Settings")
 >    >     2. Find "Branches" on the left
 >    >     3. If it says master you can click on the ⇆  icon to switch branches.
 >    >     4. Select `main` (it may not be present).
