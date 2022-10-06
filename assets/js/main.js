@@ -1,4 +1,11 @@
 // make boxes collapsible
+//LEGACY
+$(".solution>h3,.details>h3,.tip>h3,.question>h3,.hands_on>h3,.comment>h3").click(function(event) {
+    $(">*:not(h3)", $(this).parent()).toggle(400);
+    $(">span.fold-unfold", this).toggleClass("fa-plus-square fa-minus-square");
+});
+
+//NEW
 $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,blockquote.tip>.box-title>button,blockquote.question>.box-title>button,blockquote.hands_on>.box-title>button,blockquote.comment>.box-title>button").click(function(event) {
 	// If they click the icons, we need to make sure we have a reference to the button properly
 	var button;
@@ -23,6 +30,14 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 		"true" : "false"
 	);
 });
+
+// collapse some box types by default
+// LEGACY
+ $(".solution>h3,.details>h3,.tip>h3").each(function() {
+    $(">*:not(h3)", $(this.parent)).toggle();
+    $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
+});
+
 
 // NEW
 $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
