@@ -235,7 +235,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 ## Filtering consensuses
 
-You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position (in the [above hands-on](#hands_on-hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
+You may have realized that when calling a "consensus" between two sequences, if the two disagree on a base, there's no way to know which is correct. So in these situations, Du Novo uses the [IUPAC ambiguity letter](https://en.wikipedia.org/wiki/Nucleic_acid_notation) for the two different bases (e.g. `W` = `A` or `T`). Also, when calling single-stranded consensus sequences, if there aren't enough high-quality bases to call a position (in the [above hands-on](#hands-on-making-consensus-sequences), we set this threshold to 70%), it gives an `N`.
 
 This information could be useful for some analyses, but not for our variant calling. The tool {% icon tool %} **Sequence Content Trimmer** will help with filtering these out. With the settings below, it will move along the read, tracking the frequency of ambiguous (non-ACGT) bases in a 10bp window. If it sees more than 2 ambiguous bases in a window, it will remove the rest of the read, starting with the first offending base in the window. We'll also tell it to remove entirely any read pair containing a read that got trimmed to less than 50bp.
 

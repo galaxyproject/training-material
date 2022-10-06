@@ -786,7 +786,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 
 # Trajectory and Lineage Analysis
 
-It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
+It was [mentioned previously](#details-continuous-phenotypes-vs-discrete-clustering-methods) that the clusters displayed are not discrete entities, but are related through some continuous topology as inferred by intermediate cell types.
 
 **StemID** is a tool (part of the **RaceID** package) that makes use of this topology to derive a hierarchy of these cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types. Cell trajectories are identified as a sequence of links between the medoids of different clusters, where the links between clusters are assigned scores that reflect the level of multipotency of the cell type indicated by the cluster.
 

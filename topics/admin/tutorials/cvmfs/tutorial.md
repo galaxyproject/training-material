@@ -164,7 +164,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > Okay, so let's get started. If we go back to our
 > tutorial here, it says that we need to install a CVMFS role into our
 > requirements.yml and then add it to our Ansible.
-{: .spoken data-visual="gtn" data-target="#hands_on-hands-on-installing-cvmfs-with-ansible"}
+{: .spoken data-visual="gtn" data-target="#hands-on-installing-cvmfs-with-ansible"}
 
 > <hands-on-title>Installing CVMFS with Ansible</hands-on-title>
 >
