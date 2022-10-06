@@ -70,32 +70,11 @@ module Jekyll
             if lang != "en" and lang != "es"
               lang = "en"
             end
-            count += 1
 
-            if box_type == 'tip'
-                icon_text = icons['tip']
-                box_start = '> ' + Gtn::Boxify.generate_title('tip', count, metadata['title'], lang)
-                box_end   = "\n{: .tip}"
-            end
-            if box_type == 'hands_on'
-                icon_text = icons['hands_on']
-                box_start = '>' + Gtn::Boxify.generate_title('hands-on', count, metadata['title'], lang)
-                box_end   = "\n{: .hands_on}"
-            end
-            if box_type == 'comment'
-                icon_text = icons['comment']
-                box_start = '> ' + Gtn::Boxify.generate_title('comment', count, metadata['title'], lang)
-                box_end   = "\n{: .comment}"
-            end
-            if box_type == 'question'
-                icon_text = icons['question']
-                box_start = '> ' + Gtn::Boxify.generate_title('question', count, metadata['title'], lang)
-                box_end   = "\n{: .question}"
-            end
-            if box_type == 'warning'
-                icon_text = icons['warning']
-                box_start = '> ' + Gtn::Boxify.generate_title('warning', count, metadata['title'], lang)
-                box_end   = "\n{: .warning}"
+            if box_type != 'none' and !box_type.nil?
+              box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang, context.registers[:page]['path'])
+              box_start = '> ' + box_title
+              box_end = "\n{: ." + box_type + "}"
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
