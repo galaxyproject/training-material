@@ -86,13 +86,15 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-> 4. Check that the datatype of the 2 FASTQ files is `fastqsanger.gz` and the peak file (ENCFF933NTR.bed.gz) is `bed`. If they are not then change the datatype as described below.
+> 4. Check that the datatype of the 4 FASTQ files is `fastqsanger` and the peak file (chip_seq_peaks.bed) is `bed`. If they are not then change the datatype as described below.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `Rep1` and `Rep2`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>
+> 6. Rename the bed file `GATA1 ChIP-Seq peaks`.
 >
 {: .hands_on}
 
@@ -113,19 +115,19 @@ We first have to check if our data contains adapter sequences that we have to re
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->       - *"Short read data from your current history"*: Choose here either only the `SRR891268_R1` file with {% icon param-file %} or use {% icon param-files %} **Multiple datasets** to choose both `SRR891268_R1` and `SRR891268_R2`.
-> 3. Inspect the web page output of **FastQC** {% icon tool %} for the `SRR891268_R1` sample. Check what adapters are found at the end of the reads.
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>       - *"Short read data from your current history"*: Choose the output of **Flatten collection** {% icon tool %}selected as **Dataset collection**.
+> 3. Inspect the web page output of **FastQC** {% icon tool %} for the `Rep1_forward` sample. Check what adapters are found at the end of the reads.
 >
 > > ### {% icon question %} Questions
 > >
 > > 1. How many reads are in the FASTQ?
-> > 2. Which sections have a warning?
+> > 2. Which sections have a warning or an error?
 > >
 > > > ### {% icon solution %} Solution
 > > >
 > > > 1. There are 300,000 reads.
-> > > 2. The 3 steps below have warnings:
+> > > 2. The 4 steps below have warnings:
 > > >
 > > >    1. **Per base sequence content**
 > > >
@@ -136,7 +138,11 @@ We first have to check if our data contains adapter sequences that we have to re
 > > >       The read library quite often has PCR duplicates that are introduced
 > > >       simply by the PCR itself. We will remove these duplicates later on.
 > > >
-> > >    3. **Adapter Content**
+> > >    3. **Overrepresented sequences**
+> > >
+> > >       Our data contains TruSeq adapter, Illumina PCR Primer and a read from the mitochondrial chromosome.
+> > >
+> > >    4. **Adapter Content**
 > > >
 > > >       Our data contains adapter that we still have to remove.
 > > >
@@ -159,25 +165,25 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
->    - *"Is this library paired- or single-end?"*: `Paired-end`
->        - {% icon param-file %} *"Reads in FASTQ format"*: select `SRR891268_R1`
->        - {% icon param-file %} *"Reads in FASTQ format (second)"*: select `SRR891268_R2`
+>    - *"Is this library paired- or single-end?"*: `Paired Collection`
+>        - *"Select a paired collection"*: select `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`
+>    - *Avanced settings*: `Full parameter list` 
 >    - In *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: `30`
 >    - In *"Discard reads that became shorter than length N"*: `15`
 >    - In *"Generate a report file"*:   `Yes`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the report for `Rep1` and read the first lines.
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
 > 1. What percentage of reads contain adapters?
-> 2. What percentage of reads are still longer than 20bp after the trimming?
+> 2. What percentage of reads are still longer than 15bp after the trimming?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. ~31% and ~34%
+> > 1. ~55% and ~57%
 > > 2. 100%
 > >
 > {: .solution}
@@ -210,10 +216,9 @@ Next we map the trimmed reads to the human reference genome. Here we will use **
 
 > ### {% icon hands_on %} Hands-on: Mapping reads to reference genome
 >
-> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0) %} with the following parameters:
->    - *"Is this single or paired library"*: `Paired-end`
->        - {% icon param-file %} *"FASTQ/A file #1"*: select the output of **Trim Galore!** {% icon tool %} *"Read 1 Output"*
->        - {% icon param-file %} *"FASTQ/A file #2"*: select the output of **Trim Galore!** {% icon tool %} *"Read 2 Output"*
+> 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy1) %} with the following parameters:
+>    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
+>        - *"FASTQ Paired Dataset*: select the output of **Trim Galore!** {% icon tool %} *"paired reads"*
 >        - *"Do you want to set paired-end options?"*: `Yes`
 >            - *"Set the maximum fragment length for valid paired-end alignments"*: `1000`
 >            - *"Allow mate dovetailing"*: `Yes`
@@ -225,7 +230,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use **
 >    - *"Do you want to tweak SAM/BAM Options?"*: `No`
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
-> 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats.
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of the mapping stats `Rep1`.
 {: .hands_on}
 
 > ### {% icon comment %} Bowtie2 Results
@@ -239,7 +244,7 @@ Next we map the trimmed reads to the human reference genome. Here we will use **
 >
 > > ### {% icon solution %} Solution
 > >
-> > 46.09+52.04=98.13%
+> > 41.46+57.51=98.97%
 > >
 > {: .solution}
 >
@@ -253,8 +258,8 @@ We apply some filters to the reads after the mapping. CUT&RUN datasets can have 
 
 > ### {% icon hands_on %} Hands-on: Filtering of uninformative reads
 >
-> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
->    - {% icon param-file %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
+> 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.5.1+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"BAM dataset(s) to filter"*: Select the output of  **Bowtie2** {% icon tool %} *"alignments"*
 >    - In *"Condition"*:
 >        - {% icon param-repeat %} *"Insert Condition"*
 >            - In *"Filter"*:
@@ -262,10 +267,10 @@ We apply some filters to the reads after the mapping. CUT&RUN datasets can have 
 >                    - *"Select BAM property to filter on"*: `mapQuality`
 >                        - *"Filter on read mapping quality (phred scale)"*: `>=30`
 >                - {% icon param-repeat %} *"Insert Filter"*
->                    - *"Select BAM property to filter on"*: `isProperPair`
+>                    - *"Select BAM property to filter on"*: `Proper Pair`
 >                        - *"Select properly paired reads"*: `Yes`
 >                - {% icon param-repeat %} *"Insert Filter"*
->                    - *"Select BAM property to filter on"*: `reference`
+>                    - *"Select BAM property to filter on"*: `Reference name of the read`
 >                        - *"Filter on the reference name for the read"*: `!chrM`
 >    - *"Would you like to set rules?"*: `No`
 >
@@ -295,8 +300,8 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
->    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
+> 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
+>    - {% icon param-collection %} *"Select SAM/BAM dataset or dataset collection"*: Select the output of  **Filter** {% icon tool %} *"BAM"*
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
 >    > ### {% icon comment %} Comment: Default of  **MarkDuplicates** {% icon tool %}
@@ -309,21 +314,21 @@ Because of the PCR amplification, there might be read duplicates (different read
 
 > ### {% icon comment %} MarkDuplicates Results
 > You should get similar output to this from MarkDuplicates:
-> ![Metrics of MarkDuplicates](../../images/atac-seq/Screenshot_picardRemoveDup.png "Metrics of MarkDuplicates")
+> ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_screen.png "Metrics of MarkDuplicates")
 {: .comment}
 
 > ### {% icon tip %} Tip: Formatting the MarkDuplicate metrics for readability
 >
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
+>    - {% icon param-collection %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
 > 2. Check that the datatype is tabular. If not, change it.
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 > 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
->    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
+>    - {% icon param-collection %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >
-> ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_screen.png "Metrics of MarkDuplicates")
+> ![Metrics of MarkDuplicates](../../images/cut_and_run/mark_duplicates_transpose.png "Metrics of MarkDuplicates")
 >
 {: .tip}
 
@@ -334,21 +339,21 @@ Because of the PCR amplification, there might be read duplicates (different read
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. 80734
-> > 2. 940
+> > 1. 81466
+> > 2. 983
 > >
 > {: .solution}
 >
 {: .question}
 
-Once again, if you have a high number of replicates it does not mean that your data are not good, it just means that you sequenced too much compared to the diversity of the library you generated. Consequently, libraries with a high portion of duplicates should not be re-sequenced as this would not increase the amount of data.
+Once again, if you have a high number of duplicates it does not mean that your data are not good, it just means that you sequenced too much compared to the diversity of the library you generated. Consequently, libraries with a high portion of duplicates should not be re-sequenced as this would not increase the amount of data.
 
 ## Check Deduplication and Adapter Removal
 
 > ### {% icon hands_on %} Hands-on: Check Adapter Removal with FastQC
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->       - *"Short read data from your current history"*: select the output of **MarkDuplicates** {% icon param-files %} **Multiple datasets** to choose both `Read 1 Output` and `Read 2 Output`.
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>       - {% icon param-collection %} *"Short read data from your current history"*: select the output of **MarkDuplicates** .
 >
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of the report and read the first lines.
 {: .hands_on}
@@ -368,7 +373,7 @@ We will check the insert sizes with **Paired-end histogram** of insert size freq
 > ### {% icon hands_on %} Hands-on: Plot the distribution of fragment sizes.
 >
 > 1. {% tool [Paired-end histogram](toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
+>    - {% icon param-collection %} *"BAM file"*: Select the output of  **MarkDuplicates** {% icon tool %} *"BAM output"*
 >    - *"Lower bp limit (optional)"*: `0`
 >    - *"Upper bp limit (optional)"*: `1000`
 >
@@ -412,11 +417,8 @@ We convert the BAM file to BED format because when we set the extension size in 
 
 > ### {% icon hands_on %} Hands-on: Convert the BAM to BED
 >
-> 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
->     - *"Input Collection"*: Select output of **MarkDuplicates**
->
-> 2. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"Convert the following BAM file to BED"*: Select the output of **Flatten collection** {% icon tool %}
+> 1. {% tool [bedtools BAM to BED converter](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2) %} with the following parameters:
+>    - {% icon param-collection %} *"Convert the following BAM file to BED"*: Select the output of **MarkDuplicates** {% icon tool %} BAM output
 >
 {: .hands_on}
 
@@ -425,9 +427,9 @@ We call peaks with MACS2. To get the coverage centered on the 5' extended 100bp 
 
 > ### {% icon hands_on %} Hands-on: Call peaks with MACS2
 >
-> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6) %} with the following parameters:
+> 1. {% tool [MACS2 callpeak](toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.2.7.1+galaxy0) %} with the following parameters:
 >    - *"Are you pooling Treatment Files?"*: `No`
->        - {% icon param-file %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
+>        - {% icon param-collection %} Select the output of **bedtools BAM to BED** converter {% icon tool %}
 >    - *"Do you have a Control File?"*: `No`
 >    - *"Format of Input Files"*: `Single-end BED`
 >    - *"Effective genome size"*: `H. sapiens (2.7e9)`
@@ -461,30 +463,17 @@ In the following step we want to apply a tool to identify robust peaks between o
 
 > ### {% icon hands_on %} Hands-on: Extract replicates from a dataset collection:
 >
-> 1. {% tool [Apply rules](https://usegalaxy.eu/root?tool_id=__APPLY_RULES__) %} with the following parameters:
->    - {% icon param-file %} *"Input Collection"*: Select the output of **MACS2 callpeak** {% icon tool %}
->    - *"Rules"*: `Edit`
->        - *"+Rules"*: `Add / Modify Column Definitions`
->         - *"+Add definiton"*: `List identifiers`
->           - *"Select a column"*: `A`
->        - *"+Column"*: `Add Column from Metadata`
->           - *"For"*: `Tags`
->        - *"+Filter"*: `Matching a Supplied Value`
->           - *"For Column"*: `B`
->           - `name:rep1`
+> 1. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
+>    - {% icon param-collection %} *"Input List"*: `MACS2 callpeak on collection N (narrow Peaks)`
+>    - *"How should a dataset be selected?"*: `Select by index`
+>    - *"Element index:"*: `0`
 >
-> 2. {% tool [Apply rules](https://usegalaxy.eu/root?tool_id=__APPLY_RULES__) %} with the following parameters:
->    - {% icon param-file %} *"Input Collection"*: Select the output of **MACS2 callpeak** {% icon tool %}
->    - *"Rules"*: `Edit`
->        - *"+Rules"*: `Add / Modify Column Definitions`
->         - *"+Add definiton"*: `List identifiers`
->           - *"Select a column"*: `A`
->        - *"+Column"*: `Add Column from Metadata`
->           - *"For"*: `Tags`
->        - *"+Filter"*: `Matching a Supplied Value`
->           - *"For Column"*: `B`
->           - `name:rep2`
+> You can use the arrow to rerun the same tool just changing the last parameter:  
 >
+> 2. {% tool [Extract Dataset](__EXTRACT_DATASET__) %} with:
+>    - {% icon param-collection %} *"Input List"*: `MACS2 callpeak on collection N (narrow Peaks)`
+>    - *"How should a dataset be selected?"*: `Select by index`
+>    - *"Element index:"*: `1`
 {: .hands_on}
 
 ### Extract Robust Peaks
@@ -492,50 +481,31 @@ MACS helped us to identify potential bindings sites for GATA1. Yet, our peak set
 
 > ### {% icon hands_on %} Hands-on: Select robust GATA1 peaks:
 >
-> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"File A to intersect with B"*: Select the **first** output of **Apply rules** {% icon tool %}
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"File A to intersect with B"*: Select `Rep1`
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
->        - {% icon param-file %} *"File B to intersect with A"*:  Select the **second** output of **Apply rules** {% icon tool %}
+>        - {% icon param-file %} *"File B to intersect with A"*:  Select `Rep2`
 >    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
 >    - *"Required overlap"*: `Specify minimum overlap(s)`
 >        - *"Minimum overlap required as a fraction of A"*: `0.5`
 >        - *"Require that the fraction of overlap be reciprocal for A and B"*: `Yes`
 >    - *"Write the original A entry _once_ if _any_ overlaps found in B.": `Yes`
 >
-> 2. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"File A to intersect with B"*: Select the **second** output of **Apply rules** {% icon tool %}
->    - *"Combined or separate output files"*: `One output file per 'input B' file`
->        - {% icon param-file %} *"File B to intersect with A"*:  Select the **first** output of **Apply rules** {% icon tool %}
->    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
->    - *"Required overlap"*: `Specify minimum overlap(s)`
->        - *"Minimum overlap required as a fraction of A"*: `0.5`
->        - *"Require that the fraction of overlap be reciprocal for A and B"*: `Yes`
->    - *"Write the original A entry _once_ if _any_ overlaps found in B.": `Yes`
->
-> 3. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
->    - {% icon param-file %} *"File A to intersect with B"*: Select the **first** output of **bedtools Intersect intervals** find overlapping intervals in various ways {% icon tool %}
->    - *"Combined or separate output files"*: `One output file per 'input B' file`
->        - {% icon param-file %} *"File B to intersect with A"*:  Select the **second** output of **bedtools Intersect intervals** find overlapping intervals in various ways {% icon tool %}
->    - *"Calculation based on strandedness?"*: `Overlaps occurring on either strand`
->    - *"Write the original A entry _once_ if _any_ overlaps found in B.": `Yes`
->
-> 4. Rename the datasets `Robust GATA1 CUT and RUN peaks`.
+> 2. Rename the datasets `Robust GATA1 CUT and RUN peaks`.
 >
 > > ### {% icon question %} Questions
 > >
-> > > How many potential true positives do we gain?
+> > > How many potential true positives do we obtained?
 > > > How many potential false positives have we removed?
 > > > Why have we set specified an overlap fraction of A with `0.5`?
-> > > Why have we executed bedtools intersect twice, first file 1 intersecting file 2, and then file 2 intersecting file 1?
 > > > Why have we set **"Require that the fraction of overlap be reciprocal for A and B"**?
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. 2,812 peaks
-> > > 2. We started with 6,222 and 7,577 peaks. Thus, we could remove 3,410 and 4765 peaks.
+> > > 1. 2,863 peaks
+> > > 2. We started with 6,314 and 7,683 peaks. Thus, we could remove 3,410 and 4765 peaks.
 > > > 3. Finding robust peaks is a tricky process and not as simple as you think. Our approach defines a robust peak as an entity that is covered by two similar peaks in either one of the peak files of our two replicates. Our measurement for similarity is simply the amount of bases the peaks overlap. Yet, ask yourself, how much overlap do you need to state that they are similar? Is 1 base enough or maybe 10? The answer is not true or false and like so often needs more investigation. We define the overlap by a 50% fraction of each of the peak files. That means, if our peak in A is 100 bases then A have to overlap with 50 bases with the peak in file B.
-> > > 4. Overlapping peak files is a non-symmetric operation (A overlapping B ≠ B overlapping A), because the peaks of A have different sizes than the peaks in B.
-> > > 5. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
+> > > 4. **"Require that the fraction of overlap be reciprocal for A and B"** means that 50% of the peak in file A overlaps with the peak in file B and also 50% of the peak in file B overlaps with the peak in file A. We set this to make our filtering very conservative and filter for peaks that we can be sure are true positives. For example, A has a 10 bp peak that overlaps a peak in B with 100 bp. **Viewpoint of file A:** An overlap-fraction of 0.5 for A means that we accept peak A if it overlaps with 5 bp with the peak in B. This is very likely because the peak in B is 100 bp long. **Viewpoint of file B**: An overlap-fraction of 0.5 for B means that we reject A no matter what, even if A completely overlaps B because 10 bp are not enough to cover 50% of B. That is to say the option **"Require that the fraction of overlap be reciprocal for A and B"** takes care that we trust peaks that have in file A **and** in file B a fair overlap.
 > > {: .solution}
 > >
 > {: .question}
@@ -549,7 +519,7 @@ We can further remove some noise with a positive control, that is why we have do
 
 > ### {% icon hands_on %} Hands-on: Select GATA1 peaks from ChIP-Seq data:
 >
-> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0) %} with the following parameters:
+> 1. {% tool [bedtools Intersect intervals find overlapping intervals in various ways](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File A to intersect with B"*: Select **Robust GATA1 CUT and RUN peaks**
 >    - *"Combined or separate output files"*: `One output file per 'input B' file`
 >        - {% icon param-file %} *"File B to intersect with A"*:  Select the dataset `GATA1 ChIP-Seq peaks`
@@ -568,9 +538,9 @@ We can further remove some noise with a positive control, that is why we have do
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. 2,771 peaks
-> > > 2. 41 peaks
-> > > 3. Our precision is ~ 98.54%. A high precision is an indicator that we can predict true binding regions with a high confidence.
+> > > 1. 2,409 peaks
+> > > 2. 454 peaks
+> > > 3. Our precision is ~ 84%. A high precision is an indicator that we can predict true binding regions with a high confidence.
 > > {: .solution}
 > >
 > {: .question}
@@ -580,7 +550,7 @@ We can further remove some noise with a positive control, that is why we have do
 
 > ### {% icon hands_on %} Hands-on: Obtain DNA sequences from a BED file.
 >
-> 1. {% tool [Extract Genomic DNA using coordinates from assembled/unassembled genomes](toolshed.g2.bx.psu.edu/view/iuc/extract_genomic_dna/5cc8e93ee98f) %} with the following parameters:
+> 1. {% tool [Extract Genomic DNA using coordinates from assembled/unassembled genomes](toolshed.g2.bx.psu.edu/repos/iuc/extract_genomic_dna/Extract genomic DNA 1/3.0.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Fetch sequences for intervals in"*: Select **True GATA1 CUT and RUN peaks**
 >    - *"Interpret features when possible"*: `No`
 >    - *"Choose the source for the reference genome": `locally cached`
@@ -596,7 +566,7 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 
 > ### {% icon hands_on %} Hands-on: Motif detection
 >
-> 1.  {% tool [MEME-ChIP](toolshed.g2.bx.psu.edu/view/iuc/meme_chip/cc100e0f61f4) %} with the following parameters:
+> 1.  {% tool [MEME-ChIP](toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Primary sequences"*: Select the output of **Extract Genomic DNA** using coordinates from assembled/unassembled genomes {% icon tool %})
 >    - *"Sequence alphabet"*: `DNA`
 >    - *"Options Configuration"*: `Advanced`
@@ -619,8 +589,8 @@ Let's find out the sequence motifs of the TF GATA1. Studies have revealed that G
 > >
 > > > ### {% icon solution %} Solution
 > > >
-> > > 1. 1961 peaks
-> > > 2. E-value = 1.2e-456
+> > > 1. !!!!  Where is this info? !!!
+> > > 2. E-value = 5.0e-383
 > > {: .solution}
 > >
 > {: .question}
@@ -632,7 +602,7 @@ Let us first investigate the result of MEME-ChIP. **First column:** The x-axis o
 
 The results of MEME-ChIP endorse the findings about the DNA binding motif (T/A)GATA(A/G) {% cite Hasegawa2017 %}. We also found other motifs, that might be secondary sequence motifs. This, we could test with a deeper analysis.
 
-# Conclusion    
+# Conclusion
 
 In this training you have learned the general principles of CUT&RUN data analysis. CUT&RUN is a method to analyse DNA-associated proteins. In contrast to ChIP-seq, CUT&RUN couples the antibody with a pA(G)-MNase to reduce the size of the obtained sequences to increase the accuracy for the detection of the protein interaction. Based on this training material, you gained some insights into the quality control of the data. You should know some pitfalls of CUT&RUN and look for adapter contamination and PCR duplicates, which disrupt the later enrichment analysis. You learned about **Bowtie2** to do the alignment, and how to filter for properly paired, good quality and reads that do not map to the mitochondrial genome. Furthermore, you learned that an indicator for a good CUT&RUN experiment is the fragment size plot and that you optimize your protocol based on this parameter. With **MACS2** we identified enriched regions, but we had to remove some noise. We performed some robust peak analysis with **bedtools intersect** and performed a check with a ChIP-Seq experiment to remove some false positives. Finally, we used **MEME-ChIP** to identify our binding motifs.
 
