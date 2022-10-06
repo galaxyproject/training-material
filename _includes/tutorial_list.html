@@ -1,3 +1,27 @@
+<style type="text/css">
+/* Big */
+@media (min-width:768px) {
+    .duplicate {
+        display: none;
+    }
+}
+
+/* Skinny */
+@media (max-width:767px) {
+    table.table.table-responsive {
+        display: inline-table;
+    }
+    tr th:not(:first-child) {
+        display: none;
+    }
+    tr td:not(:first-child) {
+        display: none;
+    }
+    .duplicate {
+        display: unset;
+    }
+}
+</style>
 <table class="table table-responsive table-striped" >
   <thead>
     <tr>
@@ -30,9 +54,31 @@
 
     {% if include.sub == nil or show == true %}
       {% if material.enable != false or jekyll.environment != "production" %}
+        {% if material.type == 'introduction' %}
+          {% assign subfolder = 'slides' %}
+        {% else %}
+          {% assign subfolder = 'tutorials' %}
+        {% endif %}
+
         <tr>
           <td class="tutorial_title">
-          {{ material.title}}
+            {% if material.slides and material.hands_on %}
+            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html">
+                {{ material.title }}
+            </a>
+            {% elsif material.slides %}
+            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/{{subfolder}}/{{ material.tutorial_name }}{% unless material.type == 'introduction' %}/slides{% endunless %}.html">
+                {{ material.title }}
+            </a>
+            {% elsif material.hands_on %}
+            <a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/tutorial.html">
+                {{ material.title}}
+            </a>
+            {% else %}
+                {{ material.title }}
+            {% endif %}
+
+
           <div class="">
           {% if material.level %}
             {% include _includes/difficulty-indicator.html level=material.level %}
@@ -43,6 +89,26 @@
             {% endfor %}
           {% endif %}
           </div>
+
+          <div class="duplicate">
+          {% if material.type == "introduction" %}
+            {% if material.slides %}
+              {% include _includes/resource-slides.html material=material topic=topic.name %}
+            {% endif %}
+          {% elsif material.type == "tutorial" %}
+            {% include _includes/resource-slides.html material=material topic=topic.name %} 
+            {% include _includes/resource-handson.html material=material topic=topic.name %} 
+            {% include _includes/resource-video-library.html material=material topic=topic.name %}
+            {% if topic.type == "use" %}
+              {% include _includes/resource-zenodo.html material=material topic=topic.name %} 
+              {% include _includes/resource-workflows.html material=material topic=topic.name %} 
+            {% endif %}
+            {% if instances[topic.name].supported %}
+              {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} 
+            {% endif %}
+          {% endif %}
+          </div>
+
           </td>
           {% if material.type == "introduction" %}
             <td>
