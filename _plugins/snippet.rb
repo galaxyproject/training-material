@@ -92,6 +92,11 @@ module Jekyll
                 box_start = '> ' + Gtn::Boxify.generate_title('question', count, metadata['title'], lang)
                 box_end   = "\n{: .question}"
             end
+            if box_type == 'warning'
+                icon_text = icons['warning']
+                box_start = '> ' + Gtn::Boxify.generate_title('warning', count, metadata['title'], lang)
+                box_end   = "\n{: .warning}"
+            end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
           #if y =~ /contribute/
