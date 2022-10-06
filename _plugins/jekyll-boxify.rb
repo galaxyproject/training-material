@@ -8,12 +8,8 @@ module Jekyll
     end
 
     def generate(site)
-      site.pages
-        .select { |page| not skip_layout? page.data['layout'] }
-        .each { |page| boxify page,site }
-      site.posts.docs
-        .select { |post| not skip_layout? post.data['layout'] }
-        .each { |post| boxify post, site }
+      site.pages.each { |page| boxify page,site }
+      site.posts.docs.each { |post| boxify post, site }
     end
 
     def boxify(page, site)

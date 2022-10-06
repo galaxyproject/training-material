@@ -124,6 +124,7 @@ module Gtn
     end
 
     def self.generate_title(box_type, title, lang="en", key)
+      title = title.gsub(/"/, '&quot;')
       if @@COLLAPSIBLE_BOXES.include?(box_type)
         self.generate_collapsible_title(box_type, title, lang, key)
       else
@@ -132,6 +133,7 @@ module Gtn
     end
 
     def self.generate_box(box_type, title, lang="en", key)
+      title = title.gsub(/"/, '&quot;')
       box_id, box_title = generate_title(box_type, title, lang, key)
       return %Q(
         <div class="box #{box_type}" markdown=0>
