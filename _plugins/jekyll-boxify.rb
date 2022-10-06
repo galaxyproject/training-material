@@ -2,7 +2,7 @@ require 'jekyll'
 require './_plugins/gtn.rb'
 
 module Jekyll
-  class Figurify < Jekyll::Generator
+  class Boxify < Jekyll::Generator
     def initialize(config)
       @config = config['boxify'] ||= {}
     end
