@@ -20,7 +20,6 @@ module Jekyll
       if page.content.nil?
         return
       end
-      count = 0
 
       if page['lang']
         lang = page['lang']
@@ -32,24 +31,21 @@ module Jekyll
       page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*)<\/\s*\1-title>/) {
         box_type = $1
         title = $2
-        count += 1
-        box = Gtn::Boxify.generate_title(box_type, count, title, lang)
+        _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path)
         box
       }
 
       # Long term solution, proper new boxes
       page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})>/) {
         box_type = $1
-        count += 1
-        box = Gtn::Boxify.generate_box(box_type, 0, nil, lang)
+        box = Gtn::Boxify.generate_box(box_type, nil, lang, page.path)
         box
       }
 
       page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes}) title="([^"]*)">/) {
         box_type = $1
         title = $2
-        count += 1
-        box = Gtn::Boxify.generate_box(box_type, count, title, lang)
+        box = Gtn::Boxify.generate_box(box_type, title, lang, page.path)
         box
       }
 
