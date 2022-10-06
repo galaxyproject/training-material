@@ -126,7 +126,7 @@ There are several ways to import data into R. For our purpose here, we will focu
 > {: .solution}
 {: .question}
 
-Now, let's read the file with the annotated differentially expressed genes that was produced in the "[Reference-based RNA-Seq data analysis](https://galaxyproject.github.io/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html)" tutorial.
+Now, let's read the file with the annotated differentially expressed genes that was produced in the "[Reference-based RNA-Seq data analysis]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %})" tutorial.
 
 <!--
 > <hands-on-title>Import dataset into Galaxy</hands-on-title>

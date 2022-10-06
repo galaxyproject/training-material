@@ -67,7 +67,7 @@ So, you can **import your files directly in Galaxy from Zenodo (see hands-on bel
 
 
 Then, to be able to pre-process our GC-MS data, we need to **start with the peakpicking of MS data**. 
-One Galaxy Training material already explains how to act with MS data. We encourage you to **follow this link and complete the corresponding tutorial**: [Mass spectrometry: LC-MS preprocessing with XCMS](https://galaxyproject.github.io/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). 
+One Galaxy Training material already explains how to act with MS data. We encourage you to **follow this link and complete the corresponding tutorial**: [Mass spectrometry: LC-MS preprocessing with XCMS]({% link topics/metabolomics/tutorials/lcms-preprocessing/tutorial.md %}). 
 For GC-MS analysis you **don't really need to follow all of this previous tutorial** but for a better understanding of your data, it is recommanded to try it with their test dataset.
 Concerning the current GC-MS tutorial, you **just have to compute the following steps and specific parameters** described in the hands-on part below (please follow parameters values to have the same results during the training).
 {: .text-justify}
