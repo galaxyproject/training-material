@@ -46,10 +46,6 @@ abbreviations:
     DVCS: Distributed Version Control System
 ---
 
-> ### {% icon warning %} Warning: 22.05 not yet released
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
-
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -72,15 +68,16 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 This tutorial will walk you through a robust Galaxy installation on a bare bones VM or machine running linux. It assumes that there is nothing already installed.
 
-The tutorial will show you how to use ansible to:
+It will show you how to use ansible to:
 1. Install and configure **Postgresql** database server
 2. Configure Postgresql suitable for Galaxy
 3. Install and configure **Galaxy** with a basic configuration
-4. Install and configure **nginx** to proxy Galaxy's web server
+4. Configure Galaxy to start and stop with **Systemd**
+5. Install and configure **nginx** to proxy Galaxy's web server
+6. Configure Galaxy to use separate processes as **job handlers**
+7. Configure Galaxy to manage jobs using a simple **job_conf** file
 
-If the server/VM/machine already has Postgresql installed, then the sections can be skipped.
-
-However, certain settings must be configured for Galaxy to work with Postgresql.
+If you are using this tutorial to install Galaxy on a system where you already have parts of the configuration available (for example you already have a Postgres database server installed and have access to it), then we will describe how to configure existing installations in clearly marked sections of this tutorial.
 
 # Playbook Overview
 
@@ -91,14 +88,14 @@ We'll be using the [official Galaxy role](https://github.com/galaxyproject/ansib
 
 The official role is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [role documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.
 
-The important variables for this tutorial are:
+The important variables in the galaxyproject.galaxy role for this tutorial are:
 
 - `galaxy_root`
 - `galaxy_commit_id`
 - `galaxy_config`
 - `galaxy_server_dir` (automatically set based on `galaxy_root`)
 
-These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
+These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration respectively. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
 The official recommendation is that you should have a variables file such as a `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
 
@@ -271,10 +268,6 @@ To proceed from here it is expected that:
 {: .comment}
 
 
-> ### {% icon warning %} Warning: 22.05 not yet released
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
-
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -418,6 +411,10 @@ We have codified all of the dependencies you will need into a YAML file that `an
 {: .hands_on}
 
 ## PostgreSQL
+
+One of the key components of any Galaxy setup is the database. It contains every last detail of what a Galaxy has been doing, who has used it and when it all happened. It is vital that this database be accessible and stable for Galaxy to perform it's functions.
+
+This section of the tutorial concentrates on installing and configuring a database server for Galaxy to use. If you already have access to a database server (we highly recommend PostgreSQL), there is a clearly marked section lower down explaining Galaxy's required db configuration.
 
 Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. SQLite is the development database, but PostgreSQL (/ˈpoʊstɡrɛs ˌkjuː ˈɛl/, POHST-gres kyoo el) is recommended in production. MySQL is a possibility, but does not receive the same testing or bugfixes from the main development team as PostgreSQL, so we will only show installation with PostgreSQL.
 
