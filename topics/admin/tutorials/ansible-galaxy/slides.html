@@ -35,7 +35,7 @@ contributors:
 ???
 
 - Galaxy is deployed, and attached to the database.
-- Next, Gunicorn is setup to run the Galaxy app.
+- Next, gunicorn is setup to run the Galaxy app.
 - Storage is attached to Galaxy for storing data.
 - And lastly compute is attached to Galaxy and the storage.
 
@@ -43,11 +43,11 @@ contributors:
 
 ## Configure NGINX
 
-![NGINX is added to proxy Gunicorn](../../images/ansible-galaxy-intro-2.png)
+![NGINX is added to proxy gunicorn](../../images/ansible-galaxy-intro-2.png)
 
 ???
 
-- Next, nginx is attached to UWSGI to proxy connections and speed up access.
+- Next, nginx is attached to gunicorn to proxy connections and speed up access.
 
 ---
 
@@ -70,6 +70,7 @@ contributors:
 
 - Slurm is a much more intelligent resource manager than Galaxy.
 - The job handlers are configured to connect to Slurm.
+- Slurm then manages the running of the jobs on the compute.
 - Slurm deployment is explained in a separate tutorial.
 
 ---
@@ -88,12 +89,24 @@ contributors:
 
 ## Setup Remote Compute
 
-![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-intro-6.png)
+![RabbitMQ is attached to the job handlers, Remote compute site, with Pulsar and compute is attached to the RabbitMQ](../../images/ansible-galaxy-intro-6.png)
 
 ???
 
-- Lastly, we can scale Galaxy further with remote compute.
-- Pulsar connected at a remote site will handle this.
+- We can scale Galaxy further with remote compute.
+- We install a remote queue controller called Rabbit MQ.
+- Pulsar connected at a remote site will handle these jobs.
+
+---
+
+## Setup Database Backups
+
+![Another remote site is added containing DB backup which is attached to Postgresql DB](../../images/ansible-galaxy-intro-7.png)
+
+???
+
+- Lastly, we should forget to backup the database.
+- DB backups need to be stored somewhere else securely.
 
 ---
 

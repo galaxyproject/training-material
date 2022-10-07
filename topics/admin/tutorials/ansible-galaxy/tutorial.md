@@ -68,6 +68,20 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 {% snippet topics/admin/faqs/admin-testing.md %}
 
+# TL;DR
+
+This tutorial will walk you through a robust Galaxy installation on a bare bones VM or machine running linux. It assumes that there is nothing already installed.
+
+The tutorial will show you how to use ansible to:
+1. Install and configure **Postgresql** database server
+2. Configure Postgresql suitable for Galaxy
+3. Install and configure **Galaxy** with a basic configuration
+4. Install and configure **nginx** to proxy Galaxy's web server
+
+If the server/VM/machine already has Postgresql installed, then the sections can be skipped.
+
+However, certain settings must be configured for Galaxy to work with Postgresql.
+
 # Playbook Overview
 
 
@@ -277,17 +291,17 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.4
+>    +  version: 0.10.5
 >    +- src: galaxyproject.nginx
->    +  version: 0.7.0
+>    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
->    +  version: 1.0.3
+>    +  version: 1.1.1
 >    +- src: natefoo.postgresql_objects
 >    +  version: 1.1
 >    +- src: geerlingguy.pip
->    +  version: 2.0.0
->    +- src: uchida.miniconda
->    +  version: 0.3.0
+>    +  version: 2.2.0
+>    +- src: galaxyproject.miniconda
+>    +  version: 0.3.1
 >    +- src: usegalaxy_eu.certbot
 >    +  version: 0.1.5
 >    {% endraw %}
@@ -306,7 +320,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
 >    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
 >    >  |`geerlingguy.pip` | Ensures that pip is available|
->    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
+>    >  |`galaxyproject.miniconda` | Installs miniconda, which is used by Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
@@ -523,7 +537,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── galaxyproject.postgresql
 >    > > >     ├── geerlingguy.pip
 >    > > >     ├── natefoo.postgresql_objects
->    > > >     ├── uchida.miniconda
+>    > > >     ├── galaxyproject.miniconda
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
 >    > > > 9 directories, 5 files
@@ -550,100 +564,123 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ### {% icon code-out %} Output: Bash
 >    >
 >    > ```ini
->    > PLAY [galaxyservers] ************************************************************************************
->    >
->    > TASK [Gathering Facts] **********************************************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [Install Dependencies] *****************************************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.training.galaxyproject.eu
->    >
->    > TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] *********************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] *******************************************
->    > changed: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Get installed version] *************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] ******************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] ******************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set OS-specific variables] *********************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set pgdata fact] *******************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set conf dir fact] *****************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Create conf.d] *********************************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ***************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] *********************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] ******************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Set config options] ****************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Install pg_hba.conf] ***************************************************
->    > changed: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] *********************************************************
->    > skipping: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] ******************************************
->    > ok: [gat-0.training.galaxyproject.eu]
->    >
->    > TASK [natefoo.postgresql_objects : Revoke extra privileges] *********************************************
->    >
->    > TASK [natefoo.postgresql_objects : Drop databases] ******************************************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
->    >
->    > TASK [natefoo.postgresql_objects : Create and drop users] ***********************************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
->    > [WARNING]: Module did not set no_log for no_password_changes
->    >
->    > TASK [natefoo.postgresql_objects : Create groups] *******************************************************
->    >
->    > TASK [natefoo.postgresql_objects : Add or remove users from groups] *************************************
->    >
->    > TASK [natefoo.postgresql_objects : Drop groups] *********************************************************
->    >
->    > TASK [natefoo.postgresql_objects : Create databases] ****************************************************
->    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
->    >
->    > TASK [natefoo.postgresql_objects : Grant user database privileges] **************************************
->    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
->    >
->    > TASK [natefoo.postgresql_objects : Grant extra privileges] **********************************************
->    >
->    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] ******************************************
->    > changed: [gat-0.training.galaxyproject.eu]
->    >
->    > PLAY RECAP **********************************************************************************************
->    > gat-0.training.galaxyproject.eu : ok=17   changed=7    unreachable=0    failed=0    skipped=14   rescued=0    ignored=0
->    >
+>   >PLAY [galaxyservers] ***************************************************************************************************************************************************************************************
+>	>
+>	>TASK [Gathering Facts] *************************************************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [Install Dependencies] ********************************************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : include_tasks] ************************************************************************************************************************************************************
+>	>included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.training.galaxyproject.eu
+>	>
+>	>TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ***************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] ************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] **********************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Get installed version] ****************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set version fact] *********************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set version fact] *********************************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set OS-specific variables] ************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set pgdata fact] **********************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set conf dir fact] ********************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : include_tasks] ************************************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Create conf.d] ************************************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ******************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] ************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] *********************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Set config options] *******************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Install pg_hba.conf] ******************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : include_tasks] ************************************************************************************************************************************************************
+>	>included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/backup.yml for gat-0.training.galaxyproject.eu
+>	>
+>	>TASK [galaxyproject.postgresql : Create backup directories] ************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu] => (item=/var/lib/postgresql/backups)
+>	>changed: [gat-0.training.galaxyproject.eu] => (item=/var/lib/postgresql/backups/bin)
+>	>
+>	>TASK [galaxyproject.postgresql : Create backup output directory] *******************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Install backup script templates] ******************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu] => (item=archive_wal.sh)
+>	>
+>	>TASK [galaxyproject.postgresql : Install backup script files] **********************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu] => (item=backup.py)
+>	>
+>	>TASK [galaxyproject.postgresql : Set WAL archive config options] *******************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Schedule backups] *********************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Remove PostgreSQL working WAL backup cron job] ****************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *********************************************************************************************************************************************
+>	>ok: [gat-0.training.galaxyproject.eu]
+>	>
+>	>TASK [natefoo.postgresql_objects : Revoke extra privileges] ************************************************************************************************************************************************
+>	>
+>	>TASK [natefoo.postgresql_objects : Drop databases] *********************************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
+>	>
+>	>TASK [natefoo.postgresql_objects : Create and drop users] **************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
+>	>[WARNING]: Module remote_tmp /var/lib/postgresql/.ansible/tmp did not exist and was created with a mode of 0700, this may cause issues when running as another user. To avoid this, create the remote_tmp
+>	>dir with the correct permissions manually
+>	>
+>	>TASK [natefoo.postgresql_objects : Create groups] **********************************************************************************************************************************************************
+>	>
+>	>TASK [natefoo.postgresql_objects : Add or remove users from groups] ****************************************************************************************************************************************
+>	>
+>	>TASK [natefoo.postgresql_objects : Drop groups] ************************************************************************************************************************************************************
+>	>
+>	>TASK [natefoo.postgresql_objects : Create databases] *******************************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
+>	>
+>	>TASK [natefoo.postgresql_objects : Grant user database privileges] *****************************************************************************************************************************************
+>	>skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
+>	>
+>	>TASK [natefoo.postgresql_objects : Grant extra privileges] *************************************************************************************************************************************************
+>	>
+>	>RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] *********************************************************************************************************************************************
+>	>changed: [gat-0.training.galaxyproject.eu]
+>	>
+>	>PLAY RECAP *************************************************************************************************************************************************************************************************
+>	>gat-0.training.galaxyproject.eu                  : ok=25   changed=13   unreachable=0    failed=0    skipped=13   rescued=0    ignored=0
+>	>
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -778,7 +815,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
 >    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
->    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
+>    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order) at the end, with `galaxyproject.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
 >    ```diff
@@ -797,7 +834,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >           become_user: postgres
 >    +    - geerlingguy.pip
 >    +    - galaxyproject.galaxy
->    +    - role: uchida.miniconda
+>    +    - role: galaxyproject.miniconda
 >    +      become: true
 >    +      become_user: "{{ galaxy_user.name }}"
 >    {% endraw %}
@@ -805,7 +842,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {: data-commit="Add pip, miniconda, galaxy to playbook"}
 >
 >    > ### {% icon tip %} Miniconda fails to work
->    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
+>    > The Galaxy user is created to separate privileges. Then we add `galaxyproject.miniconda`, which is run as the Galaxy user.
 >    >
 >    > The miniconda role attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.
 >     {: .tip}
@@ -855,7 +892,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_commit_id: release_22.05
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 4.7.12
+>    +miniconda_version: 4.12.0
 >    +miniconda_manage_dependencies: false
 >    {% endraw %}
 >    ```
@@ -972,10 +1009,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      loglevel: DEBUG
 >    +    handlers:
 >    +      handler:
->    +        processes: 3
+>    +        processes: 2
 >    +        pools:
->    +          - job-handler
->    +          - workflow-scheduler
+>    +          - job-handlers
+>    +          - workflow-schedulers
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gravity"}
@@ -1508,32 +1545,32 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > TASK [galaxyproject.galaxy : Include error document setup tasks] ******************************************************************************************************************************************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : miniconda installer is downloaded] ***********************************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : miniconda installer is downloaded] ***********************************************************************************************************************************************************************************
 >    > [WARNING]: Module remote_tmp /home/galaxy/.ansible/tmp did not exist and was created with a mode of 0700, this may cause issues when running as another user. To avoid this, create the remote_tmp dir with the correct permissions manually
 >    > changed: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : directory /srv/galaxy/var/dependencies exists] ***********************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : directory /srv/galaxy/var/dependencies exists] ***********************************************************************************************************************************************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : tar is installed] ****************************************************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : tar is installed] ****************************************************************************************************************************************************************************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : bzip2 is installed] **************************************************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : bzip2 is installed] **************************************************************************************************************************************************************************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : miniconda is installed] **********************************************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : miniconda is installed] **********************************************************************************************************************************************************************************************
 >    > changed: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : miniconda is up-to-date] *********************************************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : miniconda is up-to-date] *********************************************************************************************************************************************************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : conda environment file /tmp/{{ miniconda_env.name }}-environment.yml is created] *************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : conda environment file /tmp/{{ miniconda_env.name }}-environment.yml is created] *************************************************************************************************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : conda environment {{ miniconda_env.name }} is created] ***************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : conda environment {{ miniconda_env.name }} is created] ***************************************************************************************************************************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [uchida.miniconda : conda environment {{ miniconda_env.name }} is up-to-date] ************************************************************************************************************************************************************
+>    > TASK [galaxyproject.miniconda : conda environment {{ miniconda_env.name }} is up-to-date] ************************************************************************************************************************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu]
 >    >
 >    > RUNNING HANDLER [galaxyproject.galaxy : default restart galaxy handler] ***********************************************************************************************************************************************************************
@@ -1639,66 +1676,41 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     handlers:
 >    >         handler:
 >    >             pools:
->    >             - job-handler
->    >             - workflow-scheduler
->    >             processes: 3
+>    >             - job-handlers
+>    >             - workflow-schedulers
+>    >             processes: 2
 >    >
->    > uwsgi:
->    >     buffer-size: 16384
->    >     die-on-term: true
->    >     enable-threads: true
->    >     farm: job-handlers:1,2
->    >     hook-master-start: unix_signal:2 gracefully_kill_them_all
->    >     hook-master-start: unix_signal:15 gracefully_kill_them_all
->    >     socket: 127.0.0.1:5000
->    >     master: true
->    >     module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->    >     mule: lib/galaxy/main.py
->    >     mule: lib/galaxy/main.py
->    >     offload-threads: 2
->    >     processes: 1
->    >     py-call-osafterfork: true
->    >     pythonpath: /srv/galaxy/server/lib
->    >     static-map: /static=/srv/galaxy/server/static
->    >     static-map: /favicon.ico=/srv/galaxy/server/static/favicon.ico
->    >     static-safe: client/galaxy/images
->    >     threads: 4
->    >     thunder-lock: true
->    >     virtualenv: /srv/galaxy/venv
 >    >
 >    > galaxy:
->    >     admin_users: admin@example.org
->    >     brand: 🧬🔬🚀
->    >     builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
->    >     citation_cache_data_dir: /srv/galaxy/var/cache/citations/data
->    >     citation_cache_lock_dir: /srv/galaxy/var/cache/citations/locks
->    >     data_manager_config_file: /srv/galaxy/server/config/data_manager_conf.xml.sample
->    >     database_connection: postgresql:///galaxy?host=/var/run/postgresql
->    >     datatypes_config_file: /srv/galaxy/server/config/datatypes_conf.xml.sample
->    >     external_service_type_config_file: /srv/galaxy/server/config/external_service_types_conf.xml.sample
->    >     file_path: /data
->    >     integrated_tool_panel_config: /srv/galaxy/var/config/integrated_tool_panel.xml
->    >     job_working_directory: /srv/galaxy/jobs
->    >     mulled_resolution_cache_data_dir: /srv/galaxy/var/mulled/data
->    >     mulled_resolution_cache_lock_dir: /srv/galaxy/var/mulled/lock
->    >     new_file_path: /srv/galaxy/var/tmp
->    >     object_store_cache_path: /srv/galaxy/var/cache/object_store_cache
->    >     openid_config_file: /srv/galaxy/server/config/openid_conf.xml.sample
->    >     openid_consumer_cache_path: /srv/galaxy/var/cache/openid_consumer_cache
->    >     shed_data_manager_config_file: /srv/galaxy/var/config/shed_data_manager_conf.xml
->    >     shed_tool_config_file: /srv/galaxy/var/config/shed_tool_conf.xml
->    >     shed_tool_data_table_config: /srv/galaxy/var/config/shed_tool_data_table_conf.xml
->    >     template_cache_path: /srv/galaxy/var/cache/template_cache
->    >     tool_cache_data_dir: /srv/galaxy/var/cache/tool_cache
->    >     tool_config_file: /srv/galaxy/server/config/tool_conf.xml.sample
->    >     tool_data_path: /srv/galaxy/var/tool-data
->    >     tool_data_table_config_path: /srv/galaxy/server/config/tool_data_table_conf.xml.sample
->    >     tool_dependency_dir: /srv/galaxy/var/dependencies
->    >     tool_search_index_dir: /srv/galaxy/var/cache/tool_search_index
->    >     tool_sheds_config_file: /srv/galaxy/server/config/tool_sheds_conf.xml.sample
->    >     ucsc_build_sites: /srv/galaxy/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
->    >     visualization_plugins_directory: config/plugins/visualizations
->    >     whoosh_index_dir: /srv/galaxy/var/cache/whoosh_cache
+>    >    admin_users: admin@example.org
+>    >    brand: "\U0001F9EC\U0001F52C\U0001F680"
+>    >    builds_file_path: /srv/galaxy/server/tool-data/shared/ucsc/builds.txt.sample
+>    >    check_migrate_tools: false
+>    >    container_resolvers_config_file: ''
+>    >    data_dir: /srv/galaxy/var
+>    >    data_manager_config_file: /srv/galaxy/server/config/data_manager_conf.xml.sample
+>    >    database_connection: postgresql:///galaxy?host=/var/run/postgresql
+>    >    datatypes_config_file: /srv/galaxy/server/config/datatypes_conf.xml.sample
+>    >    dependency_resolvers_config_file: /srv/galaxy/config/dependency_resolvers_conf.xml
+>    >    external_service_type_config_file: /srv/galaxy/server/config/external_service_types_conf.xml.sample
+>    >    file_path: /data
+>    >    id_secret: d6iJOOcK+iep5wxPojo+om+Z+cpwdLgX
+>    >    integrated_tool_panel_config: /srv/galaxy/var/config/integrated_tool_panel.xml
+>    >    job_metrics_config_file: /srv/galaxy/config/job_metrics_conf.xml
+>    >    job_working_directory: /srv/galaxy/jobs
+>    >    migrated_tools_config: /srv/galaxy/var/config/migrated_tools_conf.xml
+>    >    object_store_store_by: uuid
+>    >    openid_config_file: /srv/galaxy/server/config/openid_conf.xml.sample
+>    >    shed_data_manager_config_file: /srv/galaxy/var/config/shed_data_manager_conf.xml
+>    >    shed_tool_config_file: /srv/galaxy/var/config/shed_tool_conf.xml
+>    >    shed_tool_data_table_config: /srv/galaxy/var/config/shed_tool_data_table_conf.xml
+>    >    tool_config_file: /srv/galaxy/server/config/tool_conf.xml.sample
+>    >    tool_data_path: /srv/galaxy/var/tool-data
+>    >    tool_data_table_config_path: /srv/galaxy/server/config/tool_data_table_conf.xml.sample
+>    >    tool_dependency_dir: /srv/galaxy/var/dependencies
+>    >    tool_sheds_config_file: /srv/galaxy/server/config/tool_sheds_conf.xml.sample
+>    >    ucsc_build_sites: /srv/galaxy/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample
+>    >    visualization_plugins_directory: config/plugins/visualizations
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -1847,7 +1859,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
 >    @@ -18,3 +18,4 @@
->         - role: uchida.miniconda
+>         - role: galaxyproject.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - galaxyproject.nginx
@@ -2164,7 +2176,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `natefoo.postgresql_objects` | None
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
->  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
+>  `galaxyproject.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
