@@ -41,9 +41,9 @@ module ReviewDogEmitter
       path: path,
       idx: idx,
       match_start: 0,
-      match_end: text.length, 
-      replacement: "", 
-      message: message, 
+      match_end: text.length,
+      replacement: "",
+      message: message,
       code: code,
       full_line: full_line,
     )
@@ -54,9 +54,9 @@ module ReviewDogEmitter
       path: path,
       idx: 0,
       match_start: 0,
-      match_end: 1, 
-      replacement: nil, 
-      message: message, 
+      match_end: 1,
+      replacement: nil,
+      message: message,
       code: code,
       full_line: "",
     )
@@ -66,10 +66,10 @@ module ReviewDogEmitter
     self.message(
       path: path,
       idx: idx,
-      match_start: match_start, 
-      match_end: match_end, 
-      replacement: replacement, 
-      message: message, 
+      match_start: match_start,
+      match_end: match_end,
+      replacement: replacement,
+      message: message,
       level:"WARNING",
       code: code,
       full_line: full_line,
@@ -80,10 +80,10 @@ module ReviewDogEmitter
     self.message(
       path: path,
       idx: idx,
-      match_start: match_start, 
-      match_end: match_end, 
-      replacement: replacement, 
-      message: message, 
+      match_start: match_start,
+      match_end: match_end,
+      replacement: replacement,
+      message: message,
       level:"ERROR",
       code: code,
       full_line: full_line,
@@ -92,7 +92,7 @@ module ReviewDogEmitter
 
   def self.message(path: "", idx: 0, match_start: 0, match_end: 1, replacement: nil, message: "No message", level: "WARNING", code: "GTN000", full_line: "")
     end_area = { "line" => idx + 1, "column" => match_end}
-    if match_end == full_line.length 
+    if match_end == full_line.length
       end_area = { "line" => idx + 2, "column" => 1}
     end
 
@@ -107,7 +107,7 @@ module ReviewDogEmitter
       },
       "severity" => level
     }
-    if !code.nil? 
+    if !code.nil?
       res["code"] = {
         "value" => code,
         "url" => @CODE_URL + "#" + code.gsub(/:/, '').downcase,
@@ -140,7 +140,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.delete_text(
         path: @path,
-        idx: idx, 
+        idx: idx,
         text: text,
         message: "Setting  is discouraged, these headings provide useful places for readers to jump to.",
         code: "GTN:001",
@@ -155,7 +155,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.warning(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0) + 1,
         replacement: "",
@@ -173,7 +173,7 @@ module GtnLinter
     .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         # We wrap the entire URL (inside the explicit () in a matching group to make it easy to select/replace)
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
@@ -192,7 +192,7 @@ module GtnLinter
     .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement:"{% link #{selected[3]} %}",
@@ -208,7 +208,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.warning(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0) + 2,
         replacement: "{% cite ... %}",
@@ -223,7 +223,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0) + 1,
         replacement: "[Something better here]",
@@ -240,7 +240,7 @@ module GtnLinter
             .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(2),
         match_end: selected.end(2) + 1,
         replacement: "{#{selected[2]}",
@@ -252,7 +252,7 @@ module GtnLinter
             .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "%#{selected[1]}",
@@ -265,7 +265,7 @@ module GtnLinter
             .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 2,
         replacement: "#{selected[1]}}#{selected[2]}",
@@ -278,7 +278,7 @@ module GtnLinter
             .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "#{selected[1]}%",
@@ -295,7 +295,7 @@ module GtnLinter
       if CITATION_LIBRARY[selected[1].strip].nil?
         ReviewDogEmitter.error(
           path: @path,
-          idx: idx, 
+          idx: idx,
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
@@ -314,7 +314,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0),
         replacement: nil,
@@ -329,7 +329,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0) + 1,
         replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
@@ -434,7 +434,7 @@ module GtnLinter
       key = selected[2].strip.gsub(/_/, '-')
       ReviewDogEmitter.error(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: "<#{key}-title>#{selected[3].strip}</#{key}-title>",
@@ -449,7 +449,7 @@ module GtnLinter
         .map { |idx, text, selected|
       ReviewDogEmitter.warning(
         path: @path,
-        idx: idx, 
+        idx: idx,
         match_start: selected.begin(0),
         match_end: selected.end(0),
         replacement: nil,
@@ -465,7 +465,7 @@ module GtnLinter
       if ! File.exist?(selected[1])
         ReviewDogEmitter.error(
           path: @path,
-          idx: idx, 
+          idx: idx,
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
@@ -544,14 +544,14 @@ module GtnLinter
   end
 
   def self.fix_bib(contents, bib)
-    bad_keys = bib_missing_mandatory_fields(bib)
+    bad_keys = [] #bib_missing_mandatory_fields(bib)
     results = []
     bad_keys.each { |key, reason|
       results += self.find_matching_texts(contents, /^\s*@.*{#{key},/)
                      .map { |idx, text, selected|
         ReviewDogEmitter.error(
           path: @path,
-          idx: idx, 
+          idx: idx,
           match_start: 0,
           match_end: text.length,
           replacement:  nil,
@@ -572,7 +572,15 @@ module GtnLinter
   def self.format_reviewdog_output(message)
     if !message.nil? and message != []
       if $stdout.tty? or @PLAIN_OUTPUT
-        puts "#{message['location']['path']}:#{message['location']['range']['start']['line']}:#{message['location']['range']['start']['column']}:#{message['message']}"
+        parts = [
+          message['location']['path'],
+          message['location']['range']['start']['line'],
+          message['location']['range']['start']['column'],
+          message['location']['range']['end']['line'],
+          message['location']['range']['end']['column'],
+          message['message']
+        ]
+        puts parts.join(":")
       else
         puts JSON.generate(message)
       end
@@ -614,7 +622,7 @@ module GtnLinter
             emit_results([
               ReviewDogEmitter.error(
                 path: @path,
-                idx: linenumber, 
+                idx: linenumber,
                 match_start: 0,
                 match_end: text.length,
                 replacement: nil,

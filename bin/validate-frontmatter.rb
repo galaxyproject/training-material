@@ -21,7 +21,7 @@ module SchemaValidator
   @SLIDES_SCHEMA = automagic_loading(@SLIDES_SCHEMA_UNSAFE)
   @TOPIC_SCHEMA = automagic_loading(@TOPIC_SCHEMA_UNSAFE)
   @FAQ_SCHEMA = automagic_loading(@FAQ_SCHEMA_UNSAFE)
-  @QUIZ_SCHEMA = automagic_loading(QUIZ_SCHEMA_UNSAFE)
+  @QUIZ_SCHEMA = automagic_loading(@QUIZ_SCHEMA_UNSAFE)
 
   @TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
   @SLIDES_SCHEMA['mapping']['contributions']['required'] = false
@@ -32,7 +32,7 @@ module SchemaValidator
   $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
   $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
   $faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
-  $quiz_validator = Kwalify::Validator.new(QUIZ_SCHEMA)
+  $quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
   $requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
   $requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
 
@@ -192,6 +192,46 @@ module SchemaValidator
     return errs
   end
 
+  def self.lint_quiz_file(fn)
+    errs = []
+
+    begin
+      data = YAML.load_file(fn)
+    rescue
+      $stderr.puts "Skipping #{fn}"
+      return nil
+    end
+
+    if ! data.is_a?(Hash) then
+      $stderr.puts "Skipping #{fn}"
+      return nil
+    end
+
+    data['questions'].select{|q| q.has_key? "correct"}.each{|q|
+      if q["correct"].is_a?(Array) then
+        if q["type"] != "choose-many" then
+          errs.push("There are multiple answers for this question, but it is not a choose-many #{q['title']}")
+        end
+
+        q["correct"].each{|c|
+          if ! q["answers"].include?(c)
+            errs.push("Answer #{c} not included in options for question #{q['title']}")
+          end
+        }
+      else
+        if q["type"] != "choose-1" then
+          errs.push("There is only a single textual answer, it must be a list for a choose-many question #{q['title']}")
+        end
+
+        if ! q["answers"].include?(q["correct"])
+          errs.push("Answer #{q["correct"]} not included in options for question #{q['title']}")
+        end
+      end
+    }
+
+    errs.push(*validate_document(data, $quiz_validator))
+    return errs
+  end
 
   def self.run
     errors = []

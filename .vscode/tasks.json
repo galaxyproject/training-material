@@ -16,16 +16,24 @@
         {
             "label": "GTN: Fancy Linting",
             "command": "ruby",
-            "args": ["bin/lint.rb", "--plain"],
+            "args": [
+                "bin/lint.rb",
+                "--plain"
+            ],
             "problemMatcher": {
                 "owner": "ruby",
-                "fileLocation": ["relative", "${workspaceFolder}"],
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
                 "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):(.*)$",
+                    "regexp": "^(.*):(\\d+):(\\d+):(\\d+):(\\d+):(.*)$",
                     "file": 1,
                     "line": 2,
                     "column": 3,
-                    "message": 5
+                    "endLine": 4,
+                    "endColumn": 5,
+                    "message": 6
                 }
             }
         },
@@ -35,7 +43,7 @@
             "command": "make lint ACTIVATE_ENV=pwd",
             "problemMatcher": [],
             "group": {
-                "kind": "test",
+                "kind": "test"
             }
         }
     ]
