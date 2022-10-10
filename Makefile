@@ -120,14 +120,6 @@ check-html: build ## validate HTML
 	$(MAKE) _check-html
 .PHONY: check-html
 
-check-workflows: ## validate Workflows
-	find topics -name '*.ga' -print0 | xargs -0 -P8 -n1 bash bin/validate-workflow.sh
-.PHONY: check-workflows
-
-check-references: build ## validate no missing references
-	bash bin/validate-references.sh
-.PHONY: check-references
-
 _check-html-internal: # Internal
 	$(ACTIVATE_ENV) && \
 		htmlproofer \
@@ -158,17 +150,13 @@ check-slides: build  ## check the markdown-formatted links in slides
 				-f {}"
 .PHONY: check-slides
 
-check-yaml: ## lint yaml files
-	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
-.PHONY: check-yaml
-
 check-diffs: ## lint diffs in tutorials
 	find ./topics/admin/ -name '*.md' -type f -print0 | xargs -n 1 -0 python3 bin/lint-diffs.py
 .PHONY: check-diffs
 
-check-tool-links: ## lint tool links
-	@bash ./bin/check-broken-tool-links.sh
-.PHONY: check-tool-links
+check-yaml: ## lint yaml files
+	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
+.PHONY: check-yaml
 
 check-framework:
 	$(ACTIVATE_ENV) && \
@@ -182,7 +170,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
+lint: check-frontmatter ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)

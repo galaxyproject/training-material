@@ -35,6 +35,4 @@ if __name__ == '__main__':
             handle.write("\n".join(fixed))
     if failures:
         print(f'ERROR: Linting diffs failed with {failures} failures')
-        sys.exit(1)
     print('All diffs OK!')
-    sys.exit(0)

@@ -12,6 +12,31 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "GTN: Fancy Linting",
+            "command": "ruby",
+            "args": ["bin/lint.rb", "--plain"],
+            "problemMatcher": {
+                "owner": "ruby",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "GTN: Lint",
+            "type": "shell",
+            "command": "make lint ACTIVATE_ENV=pwd",
+            "problemMatcher": [],
+            "group": {
+                "kind": "test",
+            }
         }
     ]
 }
