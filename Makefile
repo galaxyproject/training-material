@@ -79,11 +79,11 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
-serve-gitpod: bundle-install api/swagger.json  ## run a server on a gitpod.io environment
+serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
 	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
 
-build-gitpod: bundle-install api/swagger.json  ## run a build on a gitpod.io environment
+build-gitpod: bundle-install  ## run a build on a gitpod.io environment
 	bundle exec jekyll build --config _config.yml
 .PHONY: build-gitpod
 
