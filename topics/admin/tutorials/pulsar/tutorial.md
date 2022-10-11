@@ -669,7 +669,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    manager: _default_
 >     
 >     execution:
->       default: singularity
+>       default: slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
