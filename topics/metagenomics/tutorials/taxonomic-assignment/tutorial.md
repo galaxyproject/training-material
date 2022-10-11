@@ -29,7 +29,7 @@ contributors:
 {: .agenda}
 # Introduction
  
-The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" (Whipps et al. 1988). 
+The term **"microbiome"** describes "a characteristic microbial community occupying a reasonably well-defined habitat which has distinct physio-chemical properties. The term thus not only refers to the microorganisms involved but also encompasses their theatre of activity" ({% cite whipps1988fungi %}). 
 
 Microbiome data can be gathered from different environments such as soil, water or the human gut. The biological interest lies in general in the question how the microbiome present at a specific site influences this environment. **Metagenomic samples** contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms. 
 
@@ -68,7 +68,9 @@ After this theoretical introduction, let's now get hands on analyzing an actual 
  
 # Background on data
  
-The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas, that is studied because of its special environmental conditions {% cite Okie.2020 %}. It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using [__cutadapt__ ](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#trim-and-filter---short-reads)
+The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas, that is studied because of its special environmental conditions {% cite Okie.2020 %}. The researchers collected samples directly from the pond (= control mesocosm, called JC1A in this tutorial) and fertilized some of the samples later on to receive nutrient enrichment (=Lagunita Fertilized Pond, called JP4D in this tutorial). In this way, they investigated the impact of nutrient enchriment on the microbial community.
+The datafiles are named according to the first four characters of the filenames.
+It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using [__cutadapt__ ](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#trim-and-filter---short-reads)
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -264,10 +266,22 @@ Precision and recall of the taxonomic binners were comparable to that of the pro
 abundance estimation at higher ranks was more problematic for the binners
  
 MetaPhlAn 2.0 belongs to the group of precise profilers. On the basis of the average of precision and recall, over all samples and taxonomic ranks, MetaPhlAn 2.0 performed second best of all 10 profilers tested.
- 
 
- 
-![CAMI II software ranking](../../taxonomic-assignment/images/CAMI_software_ranking.png "CAMI II software ranking") {% cite Meyer.2022 %}
- 
+
+> | Tool                | Best method across metrics for* :   | additional features           | available in Galaxy   |
+> | -----------------   |-------------------------------------|
+> | mOTUs 1.1.1         | -                                   |most memory efficient          | no                    |
+> | mOTUs 2.5.1         |marine; plant-associated             | -                             | no                    |
+> | mOTUs v.cami1       |strain-madness                       | -                             | no                    |
+> | MetaPhlAn 2.9.21    |plant-associated                     | -                             | yes
+> | MetaPhlAn 2.9.22    |marine; strain-madness               | -                             | yes
+> | DUDes v.cami1       |strain-madness                       | -                             | no
+> | FOCUS 1.5           | -                                   |fastest; most memory efficient | no                    |
+> | Bracken 2.2         | -                                   |fastest                        | yes (version 2.7)     |
+> | Bracken 2.6         |plant-associated                     | -                             | yes (version 2.7)     |
+{: .matrix}
+
+*metagenome benchmark datasets created by {% cite Meyer.2022 %} representing a marine, a high strain diversity environment (‘strain-madness’) and a plant-associated environment including fungal genomes and host plant material
+
  
  
