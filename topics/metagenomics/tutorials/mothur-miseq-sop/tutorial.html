@@ -769,11 +769,11 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
-        
-    
         
     
         
@@ -1399,6 +1399,11 @@ report both the number of unique <em>representative sequences</em> as well as th
 <p>We are now ready to align our sequences to the reference. This is an important
 step to improve the clustering of your OTUs <span class="citation"><a href="#Schloss2012">Schloss 2012</a></span>.</p>
 
+<p>In mothur this is done by determining for each unique sequence the entry of the reference database that
+has the most k-mers in common (i.e. the most substring of fixed length k). For the reference sequence
+with the most common k-mers and the unique sequence a standard global sequence alignment is computed
+(using the Needleman-Wunsch algorithm).</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-align-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequences</h3>
 
@@ -1862,7 +1867,7 @@ the <span class="notranslate">reads</span> from our mock sample back to their kn
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pick.fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output log?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1891,6 +1896,15 @@ are also of high quality, and we can continue with our analysis.</p>
 
 <p>We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.</p>
+
+<p>For this a distance matrix is calculated (i.e. the distances between all pairs of sequences). From this distance matrix
+a clustering is derived using the OptiClust algorithm:</p>
+
+<ol>
+  <li>OptiClust starts with a random OTU clustering</li>
+  <li>Then iteratively sequences are moved to all other OTUs or new clusters and the option is chosen that improved the mathews correlation coefficient (MCC)</li>
+  <li>Step 2 is repeated until the MCC converges</li>
+</ol>
 
 <blockquote class="comment">
   <h3 id="comment-background-what-are-operational-taxonomic-units-otus"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: What are Operational Taxonomic Units (OTUs)?</h3>
