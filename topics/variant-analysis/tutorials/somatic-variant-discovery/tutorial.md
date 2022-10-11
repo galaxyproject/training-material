@@ -339,7 +339,7 @@ After the mapping step, the data are ready to the hCNV detection step. This tuto
 The remaining data preprocessing until the Control-FreeC step is the same for Normal and Tumor reads.  Create a data collection to include those two files.
 
 > ### {% icon hands_on %} Hands-on: Filtrate the mapped reads
-> 1. Use {% tool [Build list](https://usegalaxy.eu/root?tool_id=__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
+> 1. Use {% tool [Build list](__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for normal tissue`
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
