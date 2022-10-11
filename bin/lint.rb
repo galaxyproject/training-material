@@ -578,7 +578,7 @@ module GtnLinter
           message['location']['range']['start']['column'],
           message['location']['range']['end']['line'],
           message['location']['range']['end']['column'],
-          message['message']
+          "#{message['code']['value'].gsub(/:/, '')} #{message['message']}"
         ]
         puts parts.join(":")
       else
