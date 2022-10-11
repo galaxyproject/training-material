@@ -394,8 +394,8 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
 >     
 >     execution:
->     - default: singularity
->     + default: slurm
+>    -  default: singularity
+>    +  default: slurm
 >       environments:
 >         local_dest:
 >           runner: local_runner
