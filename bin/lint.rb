@@ -462,7 +462,8 @@ module GtnLinter
   def self.check_bad_link(contents)
     self.find_matching_texts(contents, /{%\s*link\s+([^%]*)\s*%}/i)
     .map { |idx, text, selected|
-      if ! File.exist?(selected[1])
+      path = selected[1].to_s.strip
+      if ! File.exist?(path)
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
