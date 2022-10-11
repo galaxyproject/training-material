@@ -46,6 +46,7 @@ of a sequencing run or similar project to a group of users on the servers.
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="data-library" %}
 
 # Setup
 
@@ -73,6 +74,10 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
+> 2. Take a minute to explore the [folders in our sample library.](https://github.com/usegalaxy-eu/libraries-training-repo). These will be important when we start loading data.
+>
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:
 >
 >    {% raw %}
@@ -85,12 +90,14 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >       galaxy:
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}
+>
+>    Note that the `/libraries/admin` will refer to a folder within the libraries-training-repo that we cloned in the pre-task, and likewise for `/libraries/user`
 >
 > 5. Run the playbook:
 >
@@ -130,6 +137,10 @@ There are multiple options for importing data from your server, we'll go through
 > > ```
 > {: .code-out}
 {: .code-2col}
+
+> ### {% icon tip %} Tip: admin@example.org
+> Note that in the user directories, admin@example.com and example.org are used, if you've used a different email address for *your* admin user, you'll need to copy one of these directories.
+{: .tip}
 
 > ```bash
 > 1.sh

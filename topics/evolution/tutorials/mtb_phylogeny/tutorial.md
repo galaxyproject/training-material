@@ -12,7 +12,7 @@ questions:
 - What information can I get from a phylogenetic tree?
 - How do I estimate a phylogeny?
 objectives:
-- Understand the basic concepts behind phylogenetic trees, as applied to M. tuberculosis
+- Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*
 - Be able to read and interrogate a phylogeny encountered in the literature
 time_estimation: 1H
 contributors:
@@ -26,17 +26,17 @@ contributors:
 # Introduction
 {:.no_toc}
 
-*Nothing in biology makes sense except in the light of evolution.* --- Theodosius Dobzhansky, 1973
+*"Nothing in biology makes sense except in the light of evolution."* --- Theodosius Dobzhansky, 1973
 
 Phylogenetic trees are a tool for organizing biological diversity. Just as maps provide a spatial framework to the geographer, phylogenies provide an evolutionary context to the biologist: they capture the relationship among "things" (species, individuals, genes), represented as tips in the tree, based on common ancestry.
 
-In evolutionary and epidemiological studies of *Mycobacterium tuberculosis*, it is now common to encounter large phylogenetic trees. Being able to read and critically examine them is extremely useful. Phylogenies can be used to understand the origin of a disease or the onset of an epidemic, to distinguish ongoing transmission from imported cases, to investigate how specific traits like antiobiotic resistance evolve *et cetera et cetera*. Many research ideas originate from looking at and discussing patterns present in phylogenies.
+In evolutionary and epidemiological studies of *Mycobacterium tuberculosis*, it is now common to encounter large phylogenetic trees. Being able to read and critically examine them is extremely useful. Phylogenies can be used to understand the origin of a disease or the onset of an epidemic, to distinguish ongoing transmission from imported cases, to investigate how specific traits like antibiotic resistance evolve *et cetera et cetera*. Many research ideas originate from looking at and discussing patterns present in phylogenies.
 
 This tutorial provides an introduction to phylogenetic trees in the context of whole genome sequencing of *Mycobacterium tuberculosis* strains. Phylogenetics is a vast topic, and we can only scratch its surface here. For those motivated to delve deeper into the topic, the [Resources section](#resources) contains links and reading suggestions.
 
 
 # Basic concepts: How to read a phylogeny
-Here are two phylogenies of the *Mycobacterium tuberculosis* complex (MTBC) to illustrate some basic vocabulary and concepts. If the following sounds a bit too esoteric, revisit the previous step of the course, the [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
+Below are two phylogenies of the *Mycobacterium tuberculosis* complex (MTBC) to illustrate some basic vocabulary and concepts. If the following sounds a bit too esoteric, revisit the previous step of the course, the [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
 ## Rooted trees and tree topology
 These trees look rather different at a first glance, but they are identical except for one key aspect: tree A is **rooted** while tree B is not.
@@ -51,7 +51,7 @@ The best way to root a tree is by including an **outgroup**: a species or lineag
 
 
 ## Branch lengths
-Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch length usually reflects the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.
+Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.
 
 As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 ({% cite Eldholm2016 %}). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.
 
@@ -60,22 +60,21 @@ As branch lengths reflect evolutionary distances, they can also be used to ident
 
 > ### {% icon comment %} Phylogenetics with *Mycobacterium tuberculosis*
 >
-> Phylogenetics with MTB has some particularities not encountered with other organisms. Here are four points to keep in mind when doing phylogenetics with this organism.
+> Phylogenetics with MTB has some particularities rarely encountered with other organisms.
 >
-> a) There seems to be **no horizontal gene transfer** (HGT) in the MTBC. HGT complicates phylogenetic inference in many bacteria because a piece of DNA introduced by HGT has a different history and thus phylogeny than genes not affected by HGT.
+> 1. There seems to be **no horizontal gene transfer** (HGT) in the MTBC. HGT complicates phylogenetic inference in many bacteria because a piece of DNA introduced by HGT has a different history and thus phylogeny than genes not affected by HGT.
 >
-> b) There is **little genetic diversity** in the MTBC: any two strains differ by only around 2,500 SNPs over the whole genome. To achieve a good resolution of recent evolution (e.g. during an outbreak), whole genome sequences are thus extremely useful. With whole genome sequences, resolution can be further increased by not only considering SNPs, but also other types of mutations, in particular short insertions and deletions (as e.g. shown in [this study]( https://doi.org/10.1371/journal.ppat.1008357)).
+> 2. There is **little genetic diversity** in the MTBC: any two strains differ by only around 2,500 SNPs over the whole genome. To achieve a good resolution of recent evolution (e.g. during an outbreak), whole genome sequences are thus extremely useful.
 >
-> c) A large proportion of DNA polymorphisms in the MTBC are **singletons**, that is, variants present only in a single strain. This adds to the problem of low diversity, since singletons are not informative about tree topology.
+> 3. A large proportion of DNA polymorphisms in the MTBC are **singletons**, that is, variants present only in a single strain. This adds to the problem of low diversity, since singletons are not informative about tree topology.
 >
-> d) In this workshop, and indeed in many studies of the MTBC, SNPs are called not against H37Rv, but against a reconstructed ancestral genome. This means that the number of SNPs identified does not reflect the evolutionary distance from some random strain like H37Rv, but from the most recent common ancestor of the MTBC. Take a look at Figure 3 in {% cite Goig2018 %} to see how this affects the number of SNPs identified in a genome.
-Below we will see that this has implications for the interpretation of a tree.
+> 4. In this workshop, and indeed in many studies of the MTBC, SNPs are called not against the reference strain H37Rv, but against a reconstructed ancestral genome. This means that the number of SNPs identified does not reflect the evolutionary distance from some random strain like H37Rv, but from the most recent common ancestor of the MTBC. Take a look at Figure 3 in {% cite Goig2018 %} to see how this affects the number of SNPs identified in a genome. Below we will see that this has implications for the interpretation of a tree.
 >
 {: .comment}
 
 
 # The alignment
-Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous tutorial on [transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}), reflecting the diversity of 19 MTBC strains and 1 strain of **M. canettii**. The latter is included as outgroup, allowing us to root the phylogeny.
+Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous [tutorial on transmission clusters]({% link topics/evolution/tutorials/mtb_transmission/tutorial.md %}), reflecting the diversity of 19 MTBC strains and 1 strain of *M. canettii*. The latter is included as outgroup, allowing us to root the phylogeny.
 
 Recall that the alignment here was generated using SNPs called from reference-aligned short reads. Below is a snapshot of a SNP alignment. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains *only variable positions*. This is important to keep in mind. Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation. In exercise 6 below, we will see a way to correct for this.
 
@@ -105,7 +104,7 @@ Recall that the alignment here was generated using SNPs called from reference-al
 >
 > 3. Take a look at the alignment
 >
->   Once the file is loaded, select it in the history on the right. Click on the 'Visualize' icon and and try both, the 'Editor' and the 'Multiple Sequence Alignment'. Can you see one of the MTBC particularities mentioned above, the predominance of singletons? Also take a look at the M. canetti sequence: being the outgroup, it has a large number of SNPs. How many sites are there in the alignment?
+>   Once the file is loaded, select it in the history on the right. Click on the 'Visualize' icon and and try both, the 'Editor' and the 'Multiple Sequence Alignment'. Can you see one of the MTBC particularities mentioned above, the predominance of singletons? How many sites are there in the alignment? Also take a look at the M. canettii sequence: being the outgroup, it has a large number of SNPs.
 >
 {: .hands_on}
 
@@ -114,7 +113,7 @@ There are numerous methods to infer phylogenetic trees, but the most frequently 
 
 In this tutorial, we will use the maximum likelihood method [RAxML](https://cme.h-its.org/exelixis/web/software/raxml/) to estimate a phylogenetic tree for the 20 strains.
 
-An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through **bootstrapping**, a procedure where are large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny...
+An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through **bootstrapping**, a procedure where a large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny...
 
 ## Hands-on
 > ### {% icon hands_on %} Hands-on: Estimate a phylogeny for 20 MTBC strains
@@ -130,26 +129,19 @@ An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic
 
 
 # Visualize and manipulate the tree
-Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples. Here, to obtain an overview of the different strains present in the country (given the limitations of the sampling), our goal is to create a rooted tree in which colors indicate different MTB lineages.
+Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually "see" biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.
 
-We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy. This is **not required to finish this tutorial**, the different trees resulting from executing the code are displayed below. But if you have used R before, it might be worthwile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
+We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained in the box below. This is **not required to finish this tutorial**, the different trees resulting from executing the code are shown below. But if you have used R before, it might be worthwhile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.
 
 > ### {% icon hands_on %} Hands-on: Starting RStudio
 >
-> 1. Note the history IDs of the "Best-scoring ML tree"
+> 1. Note the history number of the "Best-scoring ML tree"
 >
 > 2. {% tool [RStudio](interactive_tool_rstudio) %} in Galaxy provides some special functions such as `gx_get` to import and export files from your history.
 >
 >    {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 >
-> 3. Copy the files we need into our workspace so we can see them in the Files pane.
->
->    ```R
->    treefile <- gx_get(1)
->    ```
->    **Note:** the `1` in this command refers to dataset 1 in your active Galaxy history. If this dataset has a different number in your history, please change it in the command.
->
-> 4. Install the [ape R package](https://cran.r-project.org/web/packages/ape/index.html)
+> 3. Install the [ape R package](https://cran.r-project.org/web/packages/ape/index.html)
 >    - Click on the **Terminal** tab (top of the Rstudio window)
 >         - Execute the command: `conda install r-ape`
 >    - Once done, switch back to the **Console** tab
@@ -165,7 +157,8 @@ The RAxML output includes the "Best-scoring ML tree" in your Galaxy history. The
 # Load ape, an R package for phylogenetics
 library(ape)
 
-# Load the tree from Galaxy: in the first line below, enter the id of your "Best-scoring ML tree" in the Galaxy history
+# Load the tree from Galaxy: in the first line below, replace x with the number of the "Best-scoring ML tree" in your Galaxy history (see box above).
+treefile <- gx_get(x)
 tree <- read.tree(treefile)
 
 # Plot the tree
@@ -180,7 +173,7 @@ plot(tree)
 >
 > > ### {% icon solution %} Solution 1
 > >
-> > 1. The tree is unrooted, and the outlier strain is **M. canettii**, our outgroup. The much longer branch leading to this strange shows that many SNPs separate **M. canettii** from the common ancestor of the MTBC.
+> > 1. The tree is unrooted, and the outlier strain is *M. canettii*, our outgroup. The much longer branch leading to this strange shows that many SNPs separate *M. canettii* from the common ancestor of the MTBC.
 > >
 > {: .solution}
 >
@@ -188,7 +181,7 @@ plot(tree)
 
 
 ## Root the tree
-To make the phylogeny better interpretable, will now root it and add some additional information. First, we root the tree and then exclude the canettii strain, such that patterns within the MTBC become more clear. This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
+To make the phylogeny better interpretable, we will now root it and add some additional information. First, we root the tree and then exclude the canettii strain, such that patterns within the MTBC become more clear.
 
 ```r
 # Root the tree
@@ -202,11 +195,12 @@ plot(tree_rooted, root.edge = T, cex=0.6)
 
 ![Rooted tree](./images/tree_rooted.svg){:width="600"}
 
+This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.
+
 ## Show the different lineages present in the sample
-A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our samples. The information to which lineage a strain belongs can be found in the output of TB-profiler.
+A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our sample. The information to which lineage a strain belongs can be found in the output of TB-profiler, as obtained in the [tutorial on TB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
 
 ```r
-
 # Assign lineages to samples, as identified by TB-profiler
 
 mtbc_lineages <- c(
@@ -250,7 +244,7 @@ color_code_lineages = c(
   bovis="black",
   orygis="black")
 
-pal_lineages <- as.character(color_code[tree_lineages$tip.label])
+pal_lineages <- as.character(color_code_lineages[tree_lineages$tip.label])
 
 par(mfrow = c(1, 2))
 plot(tree_rooted,cex = 0.7, root.edge = T)
@@ -267,7 +261,7 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 >
 > > ### {% icon solution %} Solution 2
 > >
-> > There is indeed a problem with our phylogeny: one L2 and one L5 strain do not cluster with the other strains of these lineages. Instead, they appear near the root of the tree, with very short (ERR5987300) to non-existent (ERR1203059) branches. Other parts of the tree are consistent with Fig. 1A, suggesting that we can focus our first round of trouble shooting on these two strains.
+> > There is indeed a problem with our phylogeny: one L2 and one L5 strain do not cluster with the other strains of these lineages. Instead, they appear near the root of the tree, with very short (ERR5987300) to non-existent (ERR1203059) branches. Other parts of the tree are consistent with Fig. 1A, suggesting that we can focus our first round of troubleshooting on these two strains.
 > >
 > {: .solution}
 >
@@ -275,11 +269,11 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 
 > ### {% icon question %} Exercise 3
 >
-> An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance - or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, and compare them with "normal" strains. Do you notice something?
+> An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance --- or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, which should be present in your Galaxy history from the previous tutorials. Compare them with "normal" strains. Do you notice something?
 >
 > > ### {% icon solution %} Solution 3
 > >
-> > The VCF files hold the key to explain our puzzling observation: ERR1203059.vcf contains not a single SNP, ERR5987300.vcf only 81 SNPs. By contrast, the other strains have between 750 and 1250 SNPs. What happened here? To find out, we would have to take a closer look at the steps leading from BAM to VCF files. One possibility is that the sequencig depth for these samples was so low that most SNPs were filtered out because they did not pass the quality filtering.
+> > The VCF files hold an important hint to explain our puzzling observation: ERR1203059.vcf contains not a single SNP, ERR5987300.vcf only 81 SNPs. By contrast, the other strains have between 750 and 1250 SNPs. What happened here? To find out, we would have to take a closer look at the steps leading from BAM to VCF files. One possibility is that the sequencing depth for these samples was so low that most SNPs were filtered out because they did not pass the quality filtering.
 > >
 > {: .solution}
 >
@@ -299,7 +293,7 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 >
 > > ### {% icon solution %} Solution 4
 > >
-> > Clusters 10 and 12 appear as clades of closely related strains in the phylogeny: cluster 12 being part of lineage 2, cluster 10 of lineage 4. The phylogeny additionally reveals that cluster 12 is part of a larger clade of rather closely related lineage 2 strains. While clustering with a fixed SNP threshold produces a binary outcome (clustered/unclustered), the phylogeny reveals the gradual nature of relatedness.
+> > Clusters 10 and 12 appear as clades of closely related strains in the phylogeny: cluster 12 being part of lineage 2, cluster 10 of lineage 4. The phylogeny additionally reveals that cluster 12 is part of a larger clade of rather closely related lineage 2 strains. While clustering with a fixed SNP threshold produces a binary outcome (clustered/unclustered), the phylogeny reveals the gradual nature of relatedness. With a more permissive SNP threshold for clustering, or a different pipeline to call SNPs, we might well identify a larger cluster of L2 strains.
 > >
 > {: .solution}
 >
@@ -310,11 +304,10 @@ plot(tree_lineages,cex = 0.8, tip.color = pal_lineages, root.edge = TRUE)
 
 Phylogenies are particularly useful when combined with additional information. For our 19 MTB strains, for example, we might know such things as the country of origin, the sampling date, or various phenotypes determined in the lab, for example the virulence of the strains in an animal model. By mapping this additional information onto the phylogeny, we can gain insights into how, where and when these traits evolved.
 
-For our 20 samples, a trait you previously identifed is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.
+For our 20 samples, a trait you previously identified is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.
 
 
 ```r
-
 # Same as above, but with DR profiles instead of lineages
 
 mtbc_dr <- c(
@@ -366,7 +359,7 @@ plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 >
 > > ### {% icon solution %} Solution 5
 > >
-> > MDR would have evolved three times according to the clustering perspective mentioned above. The phylogeny suggest a simpler alternative: MDR could have been already present in the common ancestor of the six strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might completely change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2. As for the interpretation of clustering, sampling design is crucial for the interpretation of phylogenies and should always be kept in mind in order to avoid overinterpretation.
+> > MDR would have evolved three times according to the clustering perspective mentioned above: once in cluster 12, once in ERR6362078, and once in ERR6362653. The phylogeny suggest a simpler alternative: MDR could have been already present in the common ancestor of the six L2 strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2. As for the interpretation of clustering, sampling design is crucial for the interpretation of phylogenies and should always be kept in mind in order to avoid overinterpretation.
 > >
 > {: .solution}
 >
@@ -375,25 +368,26 @@ plot(tree_dr,cex = 0.8, tip.color = pal_dr, root.edge = TRUE)
 
 ## Date the phylogeny (advanced)
 
-As a last exercise, we are going to put a timescale on our phylogeny, assuming that mutations accumulate in a regular, clock-wise manner. In the tree, phylogenetic distance = time X rate. As we know the phylogenetic distance, we can get an estimate of time by assuming a mutation rate. This sounds simple in theory, but will require some big assumptions:
+As a last exercise, we are going to put a timescale on our phylogeny, assuming that mutations accumulate in a regular, clock-wise manner. In the tree, phylogenetic distance = time*rate. As we know the phylogenetic distance, we can get an estimate of time by assuming a mutation rate. This sounds simple in theory, but will require some big assumptions:
 
-- As noted above, the starting alignment only contains variable positions, phylogenetic distances in the trees are thus overestimated. To correct for this, we assume that all other sites in the genome are invariant, and rescale branch lengths  according to ``rescaled branch lengths = (branch lengths * alignment length) / genome size``, as in {% cite Menardo2019 %}.
+- As noted above, the starting alignment only contains variable positions, phylogenetic distances in the trees are thus overestimated. To correct for this, we assume that all other sites in the genome are invariant, and rescale branch lengths according to ``rescaled branch lengths = (branch lengths * alignment length) / genome size``, as in {% cite Menardo2019 %}.
 
 - We assume that all strains were sampled at time point 0, in the present.
 
-- We assume a mutation rate of 2.01 X $10^-10$ mutations per site per generation ({% cite Ford2013 %})
+- We assume a mutation rate of 2.01e-10 mutations per site per generation ({% cite Ford2013 %})
 
 - To translate generations into years, we assume 200 generations per year.
 
 
 ```r
-# Rescale branch lengths
+# Rescale branch lengths (here called edge lenghts)
 genome_size = 4411532
 alignment_length = 18077
 invariant_sites = genome_size - alignment_length
 
 tree_rescaled <- tree_rooted
 tree_rescaled$edge.length <- ((tree_rescaled$edge.length * alignment_length) / genome_size )
+tree_rescaled$root.edge <- ((tree_rescaled$root.edge * alignment_length) / genome_size )
 
 par(mfrow = c(1, 2))
 plot(tree_rooted,cex = 0.7, root.edge = T, main = "original")
@@ -416,7 +410,7 @@ tree_rescaled <- drop.tip(tree_rescaled, c("ERR1203059.fastq.vcf", "ERR5987300.f
 mutation_rate = 2.01e-10
 generations_per_year = 200
 
-## Ape has a function, estimate.dates(), to do what we have in mind
+## Ape has a function, estimate.dates(), to date a tree by assuming a specific mutation rate
 node.date <- estimate.dates(
   tree_rescaled,
   node.dates = rep(0, length(tree_rescaled$tip.label)), # set sampling dates to 0
@@ -434,15 +428,15 @@ axisPhylo()
 
 > ### {% icon question %} Exercise 6 (advanced)
 >
-> 1. What could be the problem with the assumption that all sites in the reference genome which to not appear in our SNP alignment are invariable?
+> 1. What could be the problem with the assumption that all sites in the reference genome which do not appear in our SNP alignment are invariable?
 >
 > 2. Imagine that a recent breakthrough study has found that the mutation rate in MTB is 10 times higher than we assumed. How would this change the estimated dates?
 >
 > > ### {% icon solution %} Solution 6
 > >
-> > 1. About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should substract them from our calculations. By not doint this, genomes seem more similar than they are; we underestimate phylogenetic distances.
+> > 1. About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should ignore them in our calculations. By not doing this, genomes seem more similar than they are; we underestimate phylogenetic distances.
 > >
-> > 2. A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see {% cite Menardo2019 %} for a recent discussion of molecular dating with MTB).
+> > 2. A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span, or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see {% cite Menardo2019 %} for a recent discussion of molecular dating with MTB).
 > >
 > {: .solution}
 >
@@ -453,12 +447,12 @@ axisPhylo()
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic in your own mind's pace.
 
 ## Books
+- *Phylogenetics in the genomics era*, 2020. An [open access book](https://hal.inria.fr/PGE) covering a variety of contemporary topics.
 - *Tree Thinking*, 2013, by David A. Baum & Stacey D. Smith
 - *Molecular Evolution*, 2014, by Ziheng Yang
-- *Phylogenetics in the genomics era*, 2020. An [open access book](https://hal.inria.fr/PGE) covering a variety of contemporary topics.
 
 ## Useful links
 - [MEGA Software](https://megasoftware.net/)
-- [How to read a tree](https://artic.network/how-to-read-a-tree.html)
+- [Tutorial on how to read a tree, with a virus example](https://artic.network/how-to-read-a-tree.html)
 - [Tree Of Life web project](http://tolweb.org)
-- [Phylogenetic Inference](https://plato.stanford.edu/entries/phylogenetic-inference/)
+- [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)

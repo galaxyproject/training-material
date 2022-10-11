@@ -152,11 +152,15 @@ The Table Browser has a daunting number of options. Fortunately, they are all se
 * **genome:** `Human`
 * **assembly:** `Dec. 2013 (GRCh38/hg38)`
 * **group:** `Genes and Gene Predictions`
-* **track:** `GENCODE v32`
+* **track:** `GENCODE v41`
 
 **clade** and **genome** seem pretty clear.  **assembly** asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting `hg38`, which is also the most recent.)  **group** is set to `Genes and Gene Predictions` which sounds like what we want. So far so good.
 
-**track** has a bewildering list of options. UCSC suggests `GENCODE v32`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
+**track** has a bewildering list of options. UCSC suggests `GENCODE v41`.  A web search leads us to the [GENCODE web site](https://www.gencodegenes.org/) which prominently states:
+
+> ### {% icon warning %} ALL GENCODE is different from GENCODE
+> **Warning** The Table browser only provides the most recent release of GENCODE which is updated several times per year. ALL GENCODE does not contain the same data as GENCODE and you should select the GENCODE track even if the version number is wrong. 
+{: .warning}
 
 >The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence...
 {: .quote}
@@ -180,7 +184,7 @@ Time for a few more definitions.
 
 The **track** option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren't even genes or gene predictions.)
 
-GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V32`.
+GENCODE is "high-quality" and  "gene annotation." That sounds like a good thing to use.  Lets stay with the default: `GENCODE V41`.
 
 So far we haven't changed *anything* from the defaults.  Lets change something.  The default  **region** is the whole genome, which can be done, but it's a lot of information. For this exercise lets use just one (small) chromosome.
 
@@ -565,7 +569,7 @@ We want to run the same analysis, but this time only look for overlaps that happ
 
 And your new history appears in the history panel with the copied *genes* dataset.  What we need is *exons.* How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.
 
-The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v32, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
+The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v41, and just `chr22`. The second form is what changes.  Instead of getting the **Whole Gene**, we need to retrieve the **Coding Exons** only.
 
 The second method is to use the **Gene BED To Exon/Intron/Codon BED expander** tool in the **Operate on Genomic Intervals** toolbox to extract the exon information from the genes BED file we already have. (*Of course!* you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)
 

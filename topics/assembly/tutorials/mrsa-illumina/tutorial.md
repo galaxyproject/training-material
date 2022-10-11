@@ -25,12 +25,17 @@ tags:
 - illumina
 - assembly
 - amr
-contributors:
-- bazante1
-- miaomiaozhou88
-- shiltemann
-- hexylena
-- avans-atgm
+
+contributions:
+  authorship:
+  - bazante1
+  editing:
+  - hexylena
+  - bazante1
+  - shiltemann
+  - miaomiaozhou88
+  funding:
+  - avans-atgm
 
 follow_up_training:
 - type: "internal"

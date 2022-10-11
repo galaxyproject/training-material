@@ -518,7 +518,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 
 > ### {% icon comment %} A note on the OS
 > This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems.
-> If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try <a href="https://docs.microsoft.com/en-us/windows/wsl/install" target="_blank">Windows subsystem for Linux</a>).
+> If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try [Windows subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install).
 {: .comment}
 
 ## Docker installation
@@ -578,7 +578,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 >
 > Finally, copy your GxIT wrapper to the Interactive Tool directory:
 > ```sh
-> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/server/tools/interactive/
+> cp ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/tools/interactive/
 > ```
 {: .hands_on}
 

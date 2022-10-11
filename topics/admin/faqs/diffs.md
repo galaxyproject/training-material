@@ -48,7 +48,7 @@ $ diff old new
 > 🍍
 ```
 
-Here we see that 'pears' is only in a, and 'ananas' is only in b. But otherwise the files are identical.
+Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.
 
 There are a couple different formats to diffs, one is the 'unified diff'
 
@@ -122,7 +122,7 @@ $ diff -U2 /dev/null old
 +🥑
 ```
 
-And removed files are similar, except with the the new file being /dev/null
+And removed files are similar, except with the new file being /dev/null
 
 ```bash
 --- old	2022-02-16 14:06:19.697132568 +0100

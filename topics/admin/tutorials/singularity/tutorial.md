@@ -26,9 +26,6 @@ requirements:
       - ansible-galaxy
 ---
 
-# Overview
-{:.no_toc}
-
 In this tutorial you will learn how to configure Galaxy to run jobs using [Singularity](https://sylabs.io/singularity/) containers provided by the [BioContainers](https://biocontainers.pro/) community.
 
 ## Background
@@ -52,6 +49,8 @@ Singularity is an alternative to Docker that is much friendlier for HPCs
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
+
 # Installing Singularity
 
 First, we will install Singularity using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you're on CentOS7/8, it is available through the EPEL repository.
@@ -68,10 +67,10 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,7 @@
->       version: 0.1.5
->     - name: galaxyproject.tusd
+>    @@ -16,3 +16,7 @@
 >       version: 0.0.1
+>     - src: galaxyproject.cvmfs
+>       version: 0.2.13
 >    +- src: cyverse-ansible.singularity
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
@@ -79,6 +78,8 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
@@ -95,7 +96,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -125,6 +125,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -143,6 +143,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
@@ -188,12 +189,12 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -91,6 +93,10 @@ galaxy_config:
+>    @@ -87,6 +89,10 @@ galaxy_config:
 >     galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
@@ -201,7 +202,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
@@ -245,34 +246,40 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >    {: data-commit="Configure the container resolver"}
 >
-> 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
+> 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.yml.j2`, by adding the `singularity_enabled` parameter:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -2,8 +2,17 @@
->         <plugins workers="4">
->             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->         </plugins>
->    -    <destinations default="local_destination">
->    +    <destinations default="singularity">
->             <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="singularity" runner="local_plugin">
->    +            <param id="singularity_enabled">true</param>
->    +            <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    +            <env id="LC_ALL">C</env>
->    +            <!-- The cache directory holds the docker containers that get converted. -->
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <!-- Singularity uses a temporary directory to build the squashfs filesystem. -->
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->         </destinations>
->         <tools>
->         </tools>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -4,10 +4,23 @@ runners:
+>         workers: 4
+>     
+>     execution:
+>    -  default: local_dest
+>    +  default: singularity
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    +    singularity:
+>    +      runner: local_runner
+>    +      singularity_enabled: true
+>    +      env:
+>    +      # Ensuring a consistent collation environment is good for reproducibility.
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      # The cache directory holds the docker containers that get converted
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      # Singularity uses a temporary directory to build the squashfs filesystem
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>     
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
 >    ```
->    {: data-commit="Update the job_conf.xml with singularity destination"}
+>    {: data-commit="Update the job_conf.yml with singularity destination"}
 >
 > 4. Re-run the playbook
 >
@@ -315,15 +322,15 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    > ### {% icon code-out %} Output
 >    > ```
->    > uwsgi[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
->    > uwsgi[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version > /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2>&1; ln -f -s '/data/000/dataset_22.dat' reference.fa && minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' > '/data/000/dataset_23.dat']
->    > uwsgi[1190010]: galaxy.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
->    > uwsgi[1190010]: if [ -d _working ]; then
->    > uwsgi[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
->    > uwsgi[1190010]: else
->    > uwsgi[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
->    > uwsgi[1190010]: fi
->    > uwsgi[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__GALAXY_JOB_HOME_DIR=$_GALAXY_JOB_HOME_DIR SINGULARITYENV__GALAXY_JOB_TMP_DIR=$_GALAXY_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/galaxy/server:/srv/galaxy/server:ro -B /srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/galaxy/jobs/000/23:/srv/galaxy/jobs/000/23 -B /srv/galaxy/jobs/000/23/outputs:/srv/galaxy/jobs/000/23/outputs -B /srv/galaxy/jobs/000/23/configs:/srv/galaxy/jobs/000/23/configs -B /srv/galaxy/jobs/000/23/working:/srv/galaxy/jobs/000/23/working -B /data:/data -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/galaxy/jobs/000/23/tool_script.sh > ../outputs/tool_stdout 2> ../outputs/tool_stderr; return_code=$?; cd '/srv/galaxy/jobs/000/23';
+>    > gunicorn[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
+>    > gunicorn[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version > /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2>&1; ln -f -s '/data/000/dataset_22.dat' reference.fa && minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' > '/data/000/dataset_23.dat']
+>    > gunicorn[1190010]: galaxy.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
+>    > gunicorn[1190010]: if [ -d _working ]; then
+>    > gunicorn[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
+>    > gunicorn[1190010]: else
+>    > gunicorn[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
+>    > gunicorn[1190010]: fi
+>    > gunicorn[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__GALAXY_JOB_HOME_DIR=$_GALAXY_JOB_HOME_DIR SINGULARITYENV__GALAXY_JOB_TMP_DIR=$_GALAXY_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/galaxy/server:/srv/galaxy/server:ro -B /srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/galaxy/jobs/000/23:/srv/galaxy/jobs/000/23 -B /srv/galaxy/jobs/000/23/outputs:/srv/galaxy/jobs/000/23/outputs -B /srv/galaxy/jobs/000/23/configs:/srv/galaxy/jobs/000/23/configs -B /srv/galaxy/jobs/000/23/working:/srv/galaxy/jobs/000/23/working -B /data:/data -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/galaxy/jobs/000/23/tool_script.sh > ../outputs/tool_stdout 2> ../outputs/tool_stderr; return_code=$?; cd '/srv/galaxy/jobs/000/23';
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -356,6 +363,17 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 {: .tip}
 
 
+> ### {% icon tip %} Gateway Time-out (504) in Dependencies view
+> When you open "Admin -> Tool Management -> Manage Dependencies -> Containers", it sometimes shows "Gateway Time-out (504)"
+>
+> Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `uwsgi_read_timeout` setting in `templates/nginx/galaxy.j2`
+{:.tip}
+
+> ### {% icon tip %} Resolution is "unresolved"
+> In "Admin -> Tool Management -> Manage Dependencies -> Dependencies", the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is "unresolved". How can I resolve this issue?
+>
+> Because our training uses containers for resolution it is expected that the non-container dependencies show as "unresolved". There is not currently a view which indicates if the containers have been resolved.
+{: .tip}
 
 
 

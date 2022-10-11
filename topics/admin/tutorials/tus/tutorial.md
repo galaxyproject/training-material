@@ -32,6 +32,8 @@ Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file 
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}
+
 # TUS and Galaxy
 
 To allow your user to upload via TUS, you will need to:
@@ -60,6 +62,8 @@ To allow your user to upload via TUS, you will need to:
 >    ```
 >    {: data-commit="Add requirement"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Install the role with:
 >
 >    > ### {% icon code-in %} Input: Bash
@@ -81,10 +85,10 @@ To allow your user to upload via TUS, you will need to:
 >         outputs_to_working_directory: true
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
->    @@ -122,3 +124,16 @@ nginx_conf_http:
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
+>    @@ -139,3 +141,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -111,8 +115,8 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -16,6 +16,22 @@ server {
->             include uwsgi_params;
+>    @@ -28,6 +28,22 @@ server {
+>             proxy_set_header Upgrade $http_upgrade;
 >         }
 >     
 >    +    location /api/upload/resumable_upload {
@@ -132,7 +136,7 @@ To allow your user to upload via TUS, you will need to:
 >    +    }
 >    +
 >         # Static files can be more efficiently served by Nginx. Why send the
->         # request to uWSGI which should be spending its time doing more useful
+>         # request to Gunicorn which should be spending its time doing more useful
 >         # things like serving Galaxy!
 >    {% endraw %}
 >    ```
@@ -174,7 +178,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 2. Check the active status of tusd by `systemctl status tusd-main`.
 >
-> 3. Upload a file! (Or paste text, even a small file will go via TUS)
+> 3. Upload a small file! (Pasted text will not pass via TUS)
 >
 > 4. Check the directory `/data/tus/` has been created and it's contents
 >

@@ -23,9 +23,6 @@ tags:
   - git-gat
 ---
 
-# Overview
-{:.no_toc}
-
 We will just briefly cover the features available in `gxadmin`, there are lots of queries that may or may not be useful for your Galaxy instance and you will have to read the documentation before using them.
 
 It started life as a small shell script that Helena wrote because she couldn't remember what [Gravity](https://github.com/galaxyproject/gravity) was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to UseGalaxy.eu and not generally useful.
@@ -38,6 +35,8 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="gxadmin" %}
 
 ## Installing gxadmin
 
@@ -60,6 +59,8 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. Install the role with:
 >
@@ -160,7 +161,7 @@ id  |        update-time         | user-id | email |           name           | 
 315 | 2013-02-22 15:50:51.398894 |     xxx | xxxx  | day5 practical           | f         | f       | f      |          90
 314 | 2013-02-22 15:45:47.75967  |     xxx | xxxx  | 5. Tag Galaxy-Kurs       | f         | f       | f      |          78
 
-**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be. The query can
+**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
 
 hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted | d-purged | object-store-id
 -------- | --------- | ----------- | ---------- | ------- | ------- | --------- | -------- | ----------------

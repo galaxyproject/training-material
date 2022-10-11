@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Refining Genome Annotations with Apollo
+title: Refining Genome Annotations with Apollo (prokaryotes)
 zenodo_link: https://zenodo.org/record/3270822
 tags:
   - prokaryote
@@ -39,6 +39,10 @@ requirements:
     topic_name: genome-annotation
     tutorials:
       - annotation-with-prokka
+
+subtopic: prokaryote
+abbreviations:
+  OGS: Official Gene Set
 ---
 
 > ### {% icon warning %} Only works on UseGalaxy.eu
@@ -48,7 +52,7 @@ requirements:
 # Introduction
 {:.no_toc}
 
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html), it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 
@@ -70,7 +74,7 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 - A set of prior gene predictions or other genomic feature predictions
 - The output of a bioinformatics analysis like BLAST or InterProScan
 - Sequencing reads from RNA-Seq or another HTS analysis
-- If you are not doing a *de novo* annotation, then a previous released <abbr title="Official Gene Set">OGS</abbr>
+- If you are not doing a *de novo* annotation, then a previous released {OGS}
 
 In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655), and we will visualise this data and use it to make some annotations in order to familiarise you with the process.
 
@@ -154,7 +158,7 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
-> ### {% icon comment %} Why bother?
+> ### {% icon comment %} Reduced data
 >
 > To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
 {: .comment}
@@ -449,96 +453,16 @@ You can add other types of alterations like insertions or deletions.
 
 Once you have added some alterations, Apollo will automatically display the effect it has on the overlapping genes.
 
-## Exporting annotation
+# Exporting and collaborating
 
-You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from Galaxy:
-
-> ### {% icon hands_on %} Export data to Galaxy
->
-> 1. {% tool [Retrieve Data from Apollo into Galaxy](toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5) %} with the following parameters:
->    - *"Organism Common Name Source"*: `Direct Entry`
->        - *"Organism Common Name"*: `E. coli K12`
->
-{: .hands_on}
-
-This tool will create new datasets in your history:
-
-* the whole content of the **User-created Annotation** track, in GFF3 format
-* the cDNA sequence of all the genes from this same track
-* the CDS sequence of all the genes from this same track
-* the peptide sequences of all the genes from this same track
-* sequence alterations
-
-You can then do any other analysis using normal Galaxy tools.
-
-If you prefer, the same data can be downloaded directly from the Apollo right panel, in the **Ref Sequence** tab.
-
-Note that if you have inserted some sequence alterations, the fasta sequences will take them into account.
-
-# Collaborating with other annotators
-
-As explained at the beginning of this tutorial, Apollo is a collaborative annotation tool, which means you can work with other people from anywhere in the world. By default the organisms you create in Apollo are only accessible by yourself. But you can easily open the access to other people by creating a group of users on Apollo, and then allowing this group to access one or several of your organisms. This works for users hving an account on the same Galaxy  (most probably usegalaxy.eu).
-
-Click on the **Sharing** tab in the Apollo right panel.
-
-![Apollo right hand menu has a number of tabs, Annotations, Tracks, Ref Sequence, Sharing, and GGA are shown. Sharing is active.](../../images/apollo/sharing.png)
-
-You should see a screen like this:
-
-![Screenshot of the sharing tab with a blue bar reading Your Permissions, with group management below. A large header reads "Shareable organisms" and lists organisms that can be shared. A "Group membership" section shows that they are not a member of any group.](../../images/apollo/perm_home.png)
-
-It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: `E. coli K12`.
-
-> ### {% icon hands_on %} Create a user group
->
-> 1. Click on the **Group management** tab
->
-> 2. Click on the **New** button
->
-> 3. Give a name to your new group, and then click on the **Create group** button
->
-> ![Group creation dialog with one field, the group name set to 'my_friends'](../../images/apollo/perm_group_create.png)
->
-{: .hands_on}
-
-Now you should see a screen like this:
-
-![Screenshot of the group detail interface showing no allowed organisms, but one available organism that can be added to this group.](../../images/apollo/perm_group_added.png)
-
-Let's add a colleague to our newly created group.
-
-> ### {% icon hands_on %} Adding a user in the group
->
-> 1. Click on the **Group members** tab
->
-> 2. Click on the **Add user** button
->
-> 3. Enter the email address of a user you want to work with (the one used to register on the same Galaxy server)
->
-> 4. Click on the **Add user** button
->
-> ![Screenshot of adding a user in the permapol to the previous group, my_friends. The user email is filled out to an example value.](../../images/apollo/perm_add_user.png)
->
-{: .hands_on}
-
-And now allow the user group to access our `E. coli K12` organism.
-
-> ### {% icon hands_on %} Giving access to an organism
->
-> 1. Click on the **Organisms** tab (if not already selected)
->
-> 2. Click on the **+** button next to the `E. coli K12` organism
->
-> 3. Confirm that you want to give access
->
-{: .hands_on}
-
-Now the other user should be able to access your organism, and make any modifications to the annotation (creating genes, structural changes, functional annotation, ...). In each gene history, Apollo keeps track of which user performed which operation, so you will always be able to know who did what on the annotation, and blame or credit them. Of course, using the same **Sharing** tab, you can stop at any time sharing an organism to a whole group or a specific users in a few clicks.
+{% include {{ page.dir }}collab.md eukaryote=false %}
 
 # Conclusion
 {:.no_toc}
 
 Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.
+
+A [similar tutorial for eukaryote genomes]({% link topics/genome-annotation/tutorials/apollo-euk/tutorial.md %}) exists, using different types of evidence tracks, feel free to have a look at it to learn more.
 
 When refinement is sufficient an updated or new version of the annotation may be exported as GFF3 as well as published as a new JBrowse directory for inspection.
 

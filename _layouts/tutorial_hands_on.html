@@ -61,9 +61,7 @@ footer: no
     </div>
     {% endif %}
 
-
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}</div>
-
+    {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
         <h3>{{ locale['overview'] | default: "Overview"}}</h3>
@@ -175,6 +173,9 @@ footer: no
             <div class="col-sm-10">
                  {% if page.notebook %}
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
+                     {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
+                     {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
+                     {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                     {% if page.notebook.snippet %}
                         {% assign pagesnippet = page.notebook.snippet %}
                         {% snippet pagesnippet %}
@@ -207,7 +208,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                             </ol>
                             <p><b>Alternative Formats</b></p>
                             <ol>
-                                <li>This tutorial is also available as a <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
+                                <li>This tutorial is also available as a <a href="{{ ipynbpath }}">Jupyter Notebook (With Solutions)</a>, <a href="{{ ipynbpathnosoln }}">Jupyter Notebook (Without Solutions)</a></li>
                             </ol>
                         </blockquote>
 
@@ -216,7 +217,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <blockquote class="comment">
                             <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
                             <p>
-                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
                             <!--
                             <p><b>Launching on MyBinder</b>
@@ -224,6 +225,13 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                                 <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
                             </p>
                             -->
+                            {% if page.notebook.pyolite %}
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="{{ site.baseurl }}/jupyter/lab/index.html?path={{ ipynbpathsimple }}">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            {% endif %}
                             <p><b>Launching the notebook in Jupyter in Galaxy</b>
                                 <ol>
                                     <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
@@ -234,7 +242,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                             </p>
                             <p><b>Downloading the notebook</b>
                                 <ol>
-                                    <li>Right click this link: <a href="{{ ipynbpath }}">Jupyter Notebook</a></li>
+                                    <li>Right click one of these links: <a href="{{ ipynbpath }}">Jupyter Notebook (With Solutions)</a>, <a href="{{ ipynbpathnosoln }}">Jupyter Notebook (Without Solutions)</a></li>
                                     <li>Save Link As..</li>
                                 </ol>
                             </p>
@@ -262,10 +270,28 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
+                {% if own_material.quiz %}
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    {% for q in own_material.quiz %}
+                    <h2>{{ q.title }}</h2>
+                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true %}</div>
+                    <ul>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ q.path }}">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ q.path }}">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
                 {% if topic.references %}
                 <h1 data-toc-skip>Useful literature</h1>
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
                 {% endif %}
+
 
                 {% if material.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
@@ -284,7 +310,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
                 <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
-                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
+                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
@@ -316,8 +342,6 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     })(window, document);
                 </script>
 
-
-
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
                     <ol>
@@ -337,7 +361,8 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
+{% assign authors = page.contributors | filter_authors:page.contributions -%}
+author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",
@@ -361,6 +386,10 @@ note = "[Online; accessed TODAY]"
                 </pre></div></div>
                 </p>
                 </blockquote>
+
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% endif %}
 
 
 <script type="text/javascript">

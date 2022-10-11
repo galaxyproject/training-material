@@ -293,7 +293,7 @@ Next, we want to improve the quality of our data. To this end we will run a work
    We know that the V4 region of the 16S gene is around 250 bp long. Anything significantly longer
    was likely a poorly assembled contig. We will remove any contigs longer than 275 base pairs using the **Screen.seqs** {% icon tool %} tool.
 2. **Remove low quality contigs** \\
-   We will also remove any contigs containing too many ambiguous base calls.
+   We will also remove any contigs containing too many ambiguous base calls. This is also done in the **Screen.seqs** {% icon tool %} tool.
 3. **Deduplicate sequences** \\
    Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
 
@@ -310,6 +310,7 @@ Next, we want to improve the quality of our data. To this end we will run a work
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Contigs"*: the `trim.contigs.fasta` output from **Make.contigs** {% icon tool %}
 >    - {% icon param-file %} *"2: Groups"*: the `group file` from **Make.contigs** {% icon tool%}
+>    - {% icon param-text %} *"3: max seq len"*: Set a maximum sequence length of 275
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -494,6 +495,10 @@ For more information on the topic of alignment, please see our training material
 We are now ready to align our sequences to the reference. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 
+In mothur this is done by determining for each unique sequence the entry of the reference database that
+has the most k-mers in common (i.e. the most substring of fixed length k). For the reference sequence
+with the most common k-mers and the unique sequence a standard global sequence alignment is computed
+(using the Needleman-Wunsch algorithm).
 
 > ### {% icon hands_on %} Hands-on: Align sequences
 >
@@ -957,7 +962,7 @@ the reads from our mock sample back to their known sequences, to see how many fa
 
 > ### {% icon hands_on %} Hands-on: Assess error rates based on a mock community
 > - {% tool [Seq.error](toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0) %} with the following parameters
->   - {% icon param-file %} *"pick.fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
+>   - {% icon param-file %} *"fasta"*: the `fasta` output from **Get.groups** {% icon tool %}
 >   - {% icon param-file %} *"reference"*: `HMP_MOCK.v35.fasta` file from your history
 >   - {% icon param-file %} *"count"*: the `count table` from **Get.groups** {% icon tool %}
 >   - {% icon param-check %} *"output log?"*: `yes`
@@ -985,6 +990,13 @@ are also of high quality, and we can continue with our analysis.
 
 We will now estimate the accuracy of our sequencing and analysis pipeline by clustering the Mock sequences into OTUs,
 and comparing the results with the expected outcome.
+
+For this a distance matrix is calculated (i.e. the distances between all pairs of sequences). From this distance matrix
+a clustering is derived using the OptiClust algorithm:
+
+1. OptiClust starts with a random OTU clustering
+2. Then iteratively sequences are moved to all other OTUs or new clusters and the option is chosen that improved the mathews correlation coefficient (MCC)
+3. Step 2 is repeated until the MCC converges
 
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/background_otus.md %}
 

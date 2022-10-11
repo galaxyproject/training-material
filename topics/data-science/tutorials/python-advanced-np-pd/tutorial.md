@@ -33,6 +33,7 @@ contributors:
 priority: 2
 notebook:
   language: python
+  pyolite: true
 ---
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the "Introduction to Python" tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the [usegalaxy.eu](https://usegalaxy.eu/) and [usegalaxy.org](https://usegalaxy.org/) sites.
@@ -576,8 +577,8 @@ print(summarised_data)
 > > data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 > > ```
 > >
-> > {: .solution}
-> > {: .question}
+> {: .solution}
+{: .question}
 
 
 > ### {% icon question %} Question: Grouping with multiple variables

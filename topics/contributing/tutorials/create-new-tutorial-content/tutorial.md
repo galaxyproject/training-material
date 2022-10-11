@@ -14,11 +14,13 @@ key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
 subtopic: writing
-contributors:
+contributions:
+  authorship:
   - bebatut
+  - hexylena
+  editing:
   - bgruening
   - shiltemann
-  - hexylena
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
@@ -98,8 +100,8 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `layout: tutorial_hands_on`: keep the default
 - `title`: title of the tutorial (it will appear on the tutorial page and the topic page)
 - `level`: `Introductory`, `Intermediate` or `Advanced`
-- `enable`: `false` to hide your tutorial from the topic page (optional)
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
+- `contributions`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
 > ### {% icon hands_on %} Hands-on: Fill the basic metadata
 >
@@ -116,40 +118,9 @@ This information is used to display the data from the topic and tutorial page. T
 
 We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
-- `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-- `time_estimation`: an estimation of the time needed to complete the hands-on
-- `questions`: list of questions that will be addressed in the tutorial
-- `objectives`: list of learning objectives for the tutorial
-
-    A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial
-
-- `key_points`: list of take-home messages
-
-    This information will appear at the end of the tutorial
-
-- `follow_up_training`: list of resources that the reader of the material could follow at the end of the tutorial
-
-    - `type`: the type of link (`internal` or `external`)
-
-    For internal, i.e. inside the Galaxy Training Material:
-    - `topic_name`: name of the topic
-    - `tutorials`: list of required tutorials inside of the topic
-
-    For external:
-    - `title`: title of the external resource
-    - `link`: URL to the external resource
-
-    They will be displayed at the end of the tutorial.
-- `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
+{% assign kid_key = "Tutorial Schema" %}
+{% assign kid_val = site.data['schema-tutorial'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
@@ -165,6 +136,82 @@ For this category of metadata, we have taken inspiration from what Software Carp
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
 {: .comment}
 
+
+## Listing contributors
+
+All tutorials and slides must give credit to all contributors. This can be any type of contribution, adding them in GitHub, creating images for it, etc.
+
+1. Make sure all contributors are listed in the [`CONTRIBUTORS.yaml`](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTORS.yaml) file.
+   Each contributor is defined in this file like:
+
+   ```yaml
+   contributor-username:                 # GitHub username (if the contributor has one)
+     name: Full Name                     # mandatory
+     joined: 2020-06                     # mandatory
+     email: saskia.hiltemann@gmail.com   # optional
+     twitter: shiltemann                 # optional
+     linkedin: shiltemann                # optional
+     gitter: shiltemann                  # optional
+     orcid: 0000-0003-3803-468X          # optional
+     bio: Researcher at EMC              # optional
+   ```
+
+2. Add all contributors to the metadata of the tutorial or slide deck:
+
+   ```yaml
+   contributors:
+     - contributor-username
+     - shiltemann
+     - hexylena
+   ```
+
+   Make sure these names match the usernames you used in the `CONTRIBUTORS.yaml` file.
+
+3. **Optional:** Specifying types of contributions. If you want to give more detailed credit for conributions, you can do the following (instead of step 2 above)
+
+   ```yaml
+   contributions:
+     authorship:
+       - shiltemann
+     editing:
+       - bebatut
+       - hexylena
+     funding:
+       - carpentries
+     testing:
+       - userX
+     ux:
+       - userY
+     infrastructure:
+       - userZ
+   ```
+
+   To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
+
+   ```yaml
+   erasmusplus:
+     name: Erasmus+ Programme
+     joined: 2020-09
+     avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
+     github: false
+     funder: true
+     funding_id: 2020-1-NL01-KA203-064717
+     funding_statement: |
+        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
+   ```
+
+   Funding bodies will be credited at the bottom of the tutorial with the appropriate funding statement, and will get a page in the hall of fame listing all tutorials that list them as a funder.
+
+   For an example of how this all looks, see the [R basics tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) (top and bottom of the tutorial).
+
+{% assign kid_key = "Contributions Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['contributions'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "CONTRIBUTORS Schema" %}
+{% assign kid_val = site.data['schema-contributors'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 # Content
 
@@ -234,7 +281,8 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![proper alt text describing the image for visually impaired learners](../../images/image.png)`.
+
+To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`![proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -242,9 +290,11 @@ We have also added a small plugin to handle captions for each image:
 
 The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
+{% raw %}
 ```markdown
 ![A textual description of the image](../images/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
@@ -262,10 +312,11 @@ As an example for this image:
 
 ![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
-
+{% raw %}
 ```markdown
 ![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
 Field          | Appropriate Contents
 ----           | -----
@@ -333,7 +384,7 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 
-# Improving the learning experience
+# Improving the learning experience with Boxes
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content.
 
@@ -491,6 +542,7 @@ The available icons are:
 >    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
 >    - {% icon param-select %} *"My select menu"*: `my choice`
 >    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}
@@ -507,49 +559,10 @@ which, when rendered, look like:
 >    - {% icon param-files %} *"My multiple file input or collection"*: `my collection`
 >    - {% icon param-select %} *"My select menu"*: `my choice`
 >    - {% icon param-check %} *"My check box"*: `yes`
+>    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}
-
-## Tool Links
-
-With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
-
-![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
-
-To enable these in your tutorial you can use the following syntax:
-
-{% raw %}
-```
-- {% tool MultiQC %}
-- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
-- {% tool [Import some data](upload1) %}
-```
-{% endraw %}
-
-Which will be rendered as:
-
-- {% tool MultiQC %}
-- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
-- {% tool [Import some data](upload1) %}
-
-When viewed through Galaxy, students will see:
-
-<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
-
-### How to find these IDs?
-
-The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
-
-The alternative is to figure out the ID for the tool you want to use:
-
-1. Find your tool in Galaxy, and click to access the tool form.
-2. Click on Options at the top right
-3. Click on Share
-4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
-5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
-
-![Finding the tool ID](../../images/tool-id.png)
 
 ## **Questions** and **solution** boxes
 
@@ -800,6 +813,51 @@ Rendered:
 > ```
 {: .code-out}
 
+# Additional Features to Improve Learning
+
+Here we cover additional features you can use throughout your tutorials to improve the learning experience.
+
+## Tool Links
+
+With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
+
+![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
+
+To enable these in your tutorial you can use the following syntax:
+
+{% raw %}
+```
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+
+### How to find these IDs?
+
+The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+
+The alternative is to figure out the ID for the tool you want to use:
+
+1. Find your tool in Galaxy, and click to access the tool form.
+2. Click on Options at the top right
+3. Click on Share
+4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
+
+![Finding the tool ID](../../images/tool-id.png)
+
+
 
 ## FAQs (snippets)
 
@@ -818,7 +876,6 @@ These are available in folders named `faqs`, either at the project level, topic 
 - **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
   - for questions pertaining to that specific tutorial
   - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
-
 
 
 ### Including FAQs/snippets in your tutorials
@@ -874,6 +931,10 @@ Here you can write the snippet / answer to the FAQ in Markdown
 - ..
 
 ```
+
+{% assign kid_key = "FAQ Schema" %}
+{% assign kid_val = site.data['schema-faq'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
 
 ### FAQ pages
 
@@ -965,6 +1026,74 @@ And in your text you can use braces to refer to the term
 > {: .code-out}
 {: .code-2col}
 
+{% assign kid_key = "Abbreviations Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['abbreviations'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+## Choose Your Own Tutorial
+
+Sometimes you're writing a large tutorial and at one small step there are multiple paths or multiple ways to get the data you want, and you'd like to showcase them all! You could write them all out in order, Option 1...2...etc, however maybe you want it to be a bit more interactive and focus only on one option at a time, so a user doesn't get distracted by the other options.
+
+Include this markdown where you want your user to choose between the multiple paths:
+
+> ### {% icon code-in %} Input: Markdown
+> {% raw %}
+> ```
+> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+>        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
+> ```
+{: .code-in}
+
+{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+
+And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+
+**NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
+
+> > ### {% icon code-in %} Input: Markdown
+> > ```
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > ```
+> >
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> >
+> > <div class="Ananas" markdown="1">
+> > - 🍍 are fantastic
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> > <div class="Avocados" markdown="1">
+> > - 🥑 are amazing
+> > - hands on!
+> > - questions!
+> > - solutions!
+> > </div>
+> >
+> {: .code-out}
+{: .code-2col}
+
+This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+
+### URL Parameter
+
+The branch can be selected via URL parameter e.g. for courses, to prevent users selecting the wrong path. Just supply `?gtn-cyoa=Ananas` (or your preferred value) on the tutorial URL.
+
+- [See this page with Ananas](?gtn-cyoa=Ananas#choose-your-own-tutorial)
+- [See this page with Avocados](?gtn-cyoa=Avocados#choose-your-own-tutorial)
 
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
@@ -1029,6 +1158,12 @@ If your tutorial is primarily focused on teaching students how to write code (Ba
     some_code += f"that students {should execute}"
     ```
 
+## Notebook Schema
+
+{% assign kid_key = "Notebook Schema" %}
+{% assign kid_val = site.data['schema-tutorial']['mapping']['notebook'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
 ## Currently Supported Languages
 
 Language | Jupyter | RMarkdown
@@ -1064,6 +1199,25 @@ notebook:
 
 Supported values are python, sql, r, and bash. The notebook will be generated automatically as part of the site build process.
 
+## JupyterLite & Pyodide
+
+The GTN has support for JupyterLite and the Pyodide kernel which runs [Python in the browser via webassembly/javascript](https://pyodide.org/en/stable/). This comes with some restrictions:
+
+- Python only[^pyonly]
+- No filesystem access (so no `wget` prep steps)
+- Little to no cell magic
+
+However, it means we can run a lot of our Python training directly in the GTN! And in the future, hopefully, we will be able to embed individual cells of the notebook directly in the Python training, so the user doesn't even need to switch pages.
+
+To enable this feature, set:
+
+```
+notebook:
+  language: python
+  pyolite: true
+```
+
+[^pyonly]: Not entirely true, other kernels are supported, see their [demo repo](https://github.com/jupyterlite/demo), but e.g. the SQLite kernel comes with severe restrictions like no downloading databases or connecting to ones online.
 
 # Spanish Translation Project
 

@@ -300,7 +300,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} (operations on tabular data):
 >
 >    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
 >    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)
@@ -338,7 +338,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 >
 > 1. {% tool [Sort](sort1) %} data in ascending or descending order:
 >
->    - *"Sort Dataset"*: Output from **Group** {% icon tool %}
+>    - *"Sort Dataset"*: Output from **Datamash** {% icon tool %}
 >    - *"on column"*: `Column: 2`
 >    - *"with flavor"*: `Numerical sort`
 >    - *"everything in"*: `Descending order`
@@ -368,10 +368,11 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset:
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %} lines from a dataset (head):
 >
->    - *"Select first"*: `5`
->    - *"from"*: The output from **Sort** {% icon tool %}
+>    - *"File to select"*: The output from **Sort** {% icon tool %}
+>    - "*Operation*": `Keep first lines`
+>    - *"Number of lines"*: `5`
 >
 > 2. Click **Execute**
 >
