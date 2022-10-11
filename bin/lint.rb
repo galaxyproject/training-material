@@ -340,7 +340,8 @@ module GtnLinter
   end
 
   ALLOWED_SHORT_IDS = [
-      'intermine',
+      'ChangeCase',
+      'Convert characters1',
       'Count1',
       'Cut1',
       'Filter1',
@@ -354,15 +355,15 @@ module GtnLinter
       'cat1',
       'comp1',
       'gene2exon1',
+      'intermine',
       'join1',
+      'param_value_from_file',
       'random_lines1',
+      'sort1',
       'ucsc_table_direct1',
       'upload1',
-      'sort1',
+      'wc_gnu',
       'wig_to_bigWig',
-      'ChangeCase',
-      'param_value_from_file',
-      'Convert characters1'
   ]
 
   def self.check_tool_link(contents)
@@ -411,15 +412,17 @@ module GtnLinter
           end
 
           if not ALLOWED_SHORT_IDS.include?(link) and not link.match(/^interactive_tool_/) and not link.match(/__[A-Z_]+__/)
-            errs.push(ReviewDogEmitter.error(
-              path: @path,
-              idx: idx,
-              match_start: selected.begin(2),
-              match_end: selected.end(2) + 1,
-              replacement: nil,
-              message: "Unknown short tool ID. Please use the full tool ID, or check bin/lint.rb if you believe this is correct.",
-              code: "GTN:009",
-            ))
+            if not link.match(/^{{.*}}$/)
+              errs.push(ReviewDogEmitter.error(
+                path: @path,
+                idx: idx,
+                match_start: selected.begin(2),
+                match_end: selected.end(2) + 1,
+                replacement: nil,
+                message: "Unknown short tool ID. Please use the full tool ID, or check bin/lint.rb if you believe this is correct.",
+                code: "GTN:009",
+              ))
+            end
           end
         end
 
