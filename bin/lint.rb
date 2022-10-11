@@ -545,7 +545,7 @@ module GtnLinter
   end
 
   def self.fix_bib(contents, bib)
-    bad_keys = [] #bib_missing_mandatory_fields(bib)
+    bad_keys = bib_missing_mandatory_fields(bib)
     results = []
     bad_keys.each { |key, reason|
       results += self.find_matching_texts(contents, /^\s*@.*{#{key},/)
