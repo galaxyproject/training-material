@@ -25,7 +25,7 @@ contributions:
   - dirowa
   - bazante1
 
-priority: 3
+priority: 20
 notebook:
   language: python
 

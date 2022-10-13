@@ -27,7 +27,7 @@ contributions:
   - dirowa
   - bazante1
 
-priority: 3
+priority: 10
 notebook:
   language: python
 ---
@@ -69,14 +69,14 @@ Point2D = NewType("Point2D", tuple[float, float])
 ```
 
 > ### {% icon tip %} Tip: Does `tuple` cause an issue?
-> You might be on a python earlier than 3.9. Please update.
+> You might be on a python earlier than 3.9. Please update, or rewrite these as Tuple and List which must be imported.
 {: .tip}
 
 ## But why?
 
 Imagine for a minute you have a situation like the following, take a minute to read and understand the code:
 
-```
+```python
 # Fetch the user and history list
 (history_id, user_id) = GetUserAndCurrentHistory("hexylena")
 
