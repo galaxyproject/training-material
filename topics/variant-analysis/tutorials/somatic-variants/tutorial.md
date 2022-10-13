@@ -37,7 +37,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
 When sequencing genomic material from a human tumor, the underlying clinical or
 research question typically is **what spectrum of mutations distinguishes this
@@ -1401,7 +1400,6 @@ issues and rearrange to get a fully annotated gene report.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 
 In addition to merely calling variants, *somatic variant calling* tries to
 distinguish *somatic mutations*, which are private to tumor tissue, from
