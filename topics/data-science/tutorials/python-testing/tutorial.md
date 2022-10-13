@@ -14,7 +14,7 @@ objectives:
 - "Explain the reasons why testing is important"
 - "Describe the three main types of tests and what each are used for"
 - "Implement and run unit tests to verify the correct behaviour of program functions"
-keypoints:
+key_points:
 - "The three main types of automated tests are **unit tests**, **functional tests** and **regression tests**."
 - "We can write unit tests to verify that functions generate expected output given a set of specific inputs."
 - "It should be easy to add or change tests, understand and run them, and understand their results."
@@ -105,7 +105,7 @@ def rle_decode(lst):
     for character, count in zip(lst[::2], lst[1::2]):
         q += character * int(count)
     return q
-````
+```
 
 This is a simple run length encoding and decoding function. It does not handle a lot of corner cases or odd input, but it may do what we need: compressing long strings of repetitive texts. It could potentially provide good genomic data compression. (Spoilers, it generally doesn't. There are better compression algorithms.)
 
