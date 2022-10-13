@@ -23,7 +23,6 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: transparent !important',
   }
 
   ICONS = {
@@ -497,9 +496,6 @@ module GTNNotebooks
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
         cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
-
-        # add a 'hint' to the solution boxes which have blanked out text.
-        cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')
 
         # There is some weirdness in the processing of $s in Jupyter. After a
         # certain number of them, it will give up, and just render everything
