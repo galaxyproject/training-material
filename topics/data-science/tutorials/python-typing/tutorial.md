@@ -24,6 +24,8 @@ contributions:
   authorship:
   - hexylena
   editing:
+  - mvdbeek
+  - pvanheus
   - dirowa
   - bazante1
 
