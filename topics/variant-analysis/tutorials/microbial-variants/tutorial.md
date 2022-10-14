@@ -76,11 +76,11 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 >     - [wildtype.gff](https://zenodo.org/record/582600/files/wildtype.gff)
 >
 >     ```
->     https://zenodo.org/record/582600/files/mutant_R1.fastq
->     https://zenodo.org/record/582600/files/mutant_R2.fastq
->     https://zenodo.org/record/582600/files/wildtype.fna
->     https://zenodo.org/record/582600/files/wildtype.gbk
->     https://zenodo.org/record/582600/files/wildtype.gff
+>    https://zenodo.org/record/582600/files/mutant_R1.fastq
+>    https://zenodo.org/record/582600/files/mutant_R2.fastq
+>    https://zenodo.org/record/582600/files/wildtype.fna
+>    https://zenodo.org/record/582600/files/wildtype.gbk
+>    https://zenodo.org/record/582600/files/wildtype.gff
 >     ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
