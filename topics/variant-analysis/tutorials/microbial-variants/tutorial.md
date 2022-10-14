@@ -30,13 +30,13 @@ Variant calling is the process of identifying differences between two genome sam
 
 Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.
 
-In this tutorial, we will use the tool “Snippy” ([link](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
+In this tutorial, we will use the tool “Snippy” (see [author development repository](https://github.com/tseemann/snippy)) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.
 
 For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Snippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.
 
 The Galaxy wrapper for Snippy has the ability to change some of the underlying tool settings in the advanced section but it is not recommended.
 
-Read more about SNP calling [link](https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data)
+Read more about SNP calling [at Wikipedia](https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data).
 
 > ### Agenda
 >
