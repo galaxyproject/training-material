@@ -18,7 +18,7 @@ key_points:
 - "The three main types of automated tests are **unit tests**, **functional tests** and **regression tests**."
 - "We can write unit tests to verify that functions generate expected output given a set of specific inputs."
 - "It should be easy to add or change tests, understand and run them, and understand their results."
-- "We can use a unit testing framework like `pytest` to structure and simplify the writing of tests."
+- "We can use a unit testing framework like `unittest` to structure and simplify the writing of tests."
 - "We should test for expected errors in our code."
 - "Testing program behaviour against both valid and invalid inputs is important and is known as **data validation**."
 
@@ -259,14 +259,24 @@ class ExpectedFailureCase(unittest.TestCase):
     def test_bad_input():
         from main import rle_decode
 
+        # invalid input, we expect pairs of symbols and numbers.
         rle_decode("a1b")
 ```
 
-
 Run all your tests as before.
 
-> ## Why Should We Test Invalid Input Data?
+> ### {% icon tip %} Why Should We Test Invalid Input Data?
 >
 > Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as *data validation*. Even if you are developing command line software that cannot be exploited by malicious data entry, testing behaviour against invalid inputs prevents generation of erroneous results that could lead to serious misinterpretation (as well as saving time and compute cycles which may be expensive for longer-running applications). It is generally best not to assume your user's inputs will always be rational.
 >
 {: .tip}
+
+### Testing Frameworks
+
+There are many, many testing frameworks for Python that solve similar problems. Look around and see what fits well with your project!
+
+- [unittest](https://docs.python.org/3/library/unittest.html) is built into Python's stdlib.
+- [pytest](https://docs.pytest.org/en/7.1.x/) is a heavily recommended framework.
+- [nose](https://nose.readthedocs.io/en/latest/) is an alternative to pytest that does many of the same things.
+- [hypothesis](https://hypothesis.readthedocs.io/en/latest/index.html) does property testing, the author's favourite.
+- [doctest](https://docs.python.org/3/library/doctest.html) tests examples written directly in the documentation, which keeps test cases close to functions.
