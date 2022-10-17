@@ -276,3 +276,148 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 ```
 
 Here it reports the errors in the console, and you can use this to prevent bad code from being committed.
+
+## Exercise
+
+Here is an example module that would be stored in `corp/__init__.py`
+
+```python
+def repeat(x, n):
+    """Return a list containing n references to x."""
+    return [x]*n
+
+
+def print_capitalized(x):
+    """Print x capitalized, and return x."""
+    print(x.capitalize())
+    return x
+
+
+def concatenate(x, y) :
+    """Add two strings together."""
+    return x + y
+```
+
+And here are some example invocations of that module, as found in `test.py`
+
+```python
+from corp import *
+
+x = repeat("A", 3) # Should return ["A", "A", "A"]
+y = print_capitalized("hElLo WorLd") # Should print Hello World
+z = concatenate("Hi", "Bob") # HiBob
+```
+
+> ### {% icon hands_on %} Hands-on: Add type annotations
+> 1. Add type annotations to each of those functions AND the variables `x`, `y`, `z`
+> 2. How did you know which types were appropriate? 
+> 3. Does `mypy` approve of your annotations? (Run `mypy test.py`, once you've written the above files out to their appropriate locations.)
+> > ### {% icon solution %} Solution
+> > 
+> > ```python
+> > def repeat(x: str, n: int) -> list[str]:
+> > # Or
+> > from typing import TypeVar
+> > T = TypeVar("T")
+> > def repeat(x: T, n: int) -> list[T]:
+> > 
+> > def print_capitalized(x: str) -> str:
+> > 
+> > def concatenate(x: str, y:str) -> str:
+> > ```
+> > 
+> > and
+> > 
+> > ```python
+> > x: list[str] = ...
+> > y: str = ...
+> > z: str = ...
+> > ```
+> > 
+> > 2. You might have discovered this by a combination of looking at the function definitions and their documentation, and perhaps also the sample invocations and what types were passed there.
+> > 3. We hope so!
+> >
+> {: .solution}
+{: .hands_on}
+
+## Automation with MonkeyType
+
+You can use MonkeyType to automatically apply type annotations to your code. Based on the execution of the code, it will make a best guess about what types are supported.
+
+> ### {% icon hands_on %} Hands-on: Using MonkeyType to generate automatic annotations
+> 
+> 1. Create a folder for a module named `some`
+> 2. Touch `some/__init__.py` to ensure it's importable as a python module
+> 3. Create `some/module.py` and add the following contents:
+> 
+>    ```python
+>    def add(a, b):
+>        return a + B
+>    ```
+> 
+> 4. Create a script that uses that module:
+> 
+>    ```
+>    from some.module import add
+>    
+>    add(1, 2)
+>    ```
+> 
+> 5. `pip install monkeytype`
+> 6. Run MonkeyType to generate the annotations
+> 
+>    ```console
+>    monkeytype run myscript.py
+>    ```
+> 
+> 7. View the generated annotations
+> 
+>    ```console
+>    monkeytype stub myscript.py
+>    ```
+{: .hands_on}
+
+> ### {% icon question %} Question
+> 1. What was the output of that command?
+> 2. This function will accept strings as well, add a statement to exercise that in `myscript.py` and re-run `monkeytype run` and `monkeytype stub`. What is the new output?
+>
+> > ### {% icon solution %} Solution
+> > 1. The expected output is:
+> > 
+> >    ```python
+> >    def add(a: int, b: int) -> int: ...
+> >    ```
+> > 
+> > 2. You can add a statement like `add("a", "b")` below `add(1, 2)` to see:
+> > 
+> >    ```python
+> >    def add(a: Union[int, str], b: Union[int, str]) -> Union[int, str]: ...
+> >    ```
+> > 
+{: .question}
+
+> ### {% icon question %} Question
+> Why is it different?
+>
+> > ### {% icon solution %} Solution
+> > Because MonkeyType works by running the code provided (`myscript.py`) and annotating based on what executions it saw. In the first invocation it had not seen any calls to `add()` with strings, so it only reported `int` as acceptable types. However, the second time it saw `str`s as well. Can you think of another type that would be supported by this operation, that was not caught? (list!)
+> {: .solution} 
+{: .question}
+
+> ### {% icon question %} Question
+> 1. Does that type annotation make sense based on what you've learned today?
+> 2. Can you write a better type annoation based on what you know?
+>
+> > ### {% icon solution %} Solution
+> > 1. It works, but it's not a great type annotation. Here the description looks like it can accept two `int`s and return a `str` which isn't correct.
+> > 2. Here is a better type annotation
+> > 
+> >    ```python
+> >    from typing import TypeVar
+> >    T = TypeVar("T", int, str, list)
+> >    
+> >    def add(a: T, b: T) -> T:
+> >        return a + b
+> >    ```
+> {: .solution} 
+{: .question}
