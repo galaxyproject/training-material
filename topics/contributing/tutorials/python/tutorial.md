@@ -179,7 +179,7 @@ There are two alternative ways to further design the problem:
 - Provide it broken down, precise small functions they should implement.
 - Describe the problem and let students determine the optimal way to break it down into small, manageable components.
 
-Which option is prefgerrable depends strongly on how advanced your students are.
+Which option is prefgerrable depends strongly on how advanced your students are. See the example homework [FastQ_trimmer.html](homework/FastQ_trimmer.html) and it's [associated ipynb file](homework/FastQ_trimmer.ipynb).
 
 ### Debugging
 
