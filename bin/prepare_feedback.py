@@ -30,7 +30,10 @@ new_tutorial_name = {
     'Exome sequencing data analysis': 'Exome sequencing data analysis for diagnosing a genetic disease',
     'Galaxy Tool Management': 'Galaxy Tool Management with Ephemeris',
     'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring',
-    'Refining Genome Annotations with Apollo':'Refining Genome Annotations with Apollo (prokaryotes)'
+    'Refining Genome Annotations with Apollo':'Refining Genome Annotations with Apollo (prokaryotes)',
+    'Mass spectrometry imaging 1: Loading and exploring MSI data':'Mass spectrometry imaging: Loading and exploring MSI data',
+    'Trajectory Analysis using Python (Jupyter Notebook) in Galaxy':'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy',
+    'Submitting raw sequencing reads to ENA':'Submitting sequence data to ENA'
 }
 new_topic_for_tuto = {
     'Formation of the Super-Structures on the Inactive X': 'Epigenetics',
