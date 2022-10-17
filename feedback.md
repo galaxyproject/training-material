@@ -346,7 +346,8 @@ layout: base
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="{{site.baseurl}}/topics/{{topic_name}}/tutorials/{{tuto_name}}/tutorial.html">View this Tutorial</a>
+                                    {% if lang %} {% assign tuto_link = tuto_name | replace: 'tutorial_' , '/tutorial_' %} {% else %} {% assign tuto_link = tuto_name %} {% endif %}
+                                    <a href="{{site.baseurl}}/topics/{{topic_name}}/tutorials/{{tuto_link}}/tutorial.html">View this Tutorial</a>
 
                                     <div class="row">
                                         <div class="col">
