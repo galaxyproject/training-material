@@ -29,7 +29,8 @@ new_tutorial_name = {
     'Workflows: Using Workflow Parameters': 'Using Workflow Parameters',
     'Exome sequencing data analysis': 'Exome sequencing data analysis for diagnosing a genetic disease',
     'Galaxy Tool Management': 'Galaxy Tool Management with Ephemeris',
-    'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring'
+    'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring',
+    'Refining Genome Annotations with Apollo':'Refining Genome Annotations with Apollo (prokaryotes)'
 }
 new_topic_for_tuto = {
     'Formation of the Super-Structures on the Inactive X': 'Epigenetics',
