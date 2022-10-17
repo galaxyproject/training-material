@@ -24,7 +24,6 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
 
 Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
 
@@ -64,7 +63,7 @@ The files we will be using are:
 - `wildtype.gbk` - The reference strain with gene and other annotations in genbank format.
 - `wildtype.gff` - The reference strain with gene and other annotations in gff3 format.
 
-This data is available at Zenodo using the following [link](https://doi.org/10.5281/zenodo.582600).
+[This data is available at Zenodo](https://doi.org/10.5281/zenodo.582600).
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
@@ -240,6 +239,5 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 
 By running a tool such as Snippy on your read files and reference genome, we can find where the biologically important changes between genomes of different strains occur and perhaps what they mean to the phenotype.
