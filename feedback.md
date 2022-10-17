@@ -292,8 +292,10 @@ layout: base
                             <p>Tutorial "{{ tun.name }}" is not available anymore.</p>
                         </div>
                     {% else %}
+                        {% assign lang = '' %}
                         {% if tuto_metadata['name'] != 'tutorial.md' %}
                             {% assign lang = tuto_metadata['name'] | split: "." | first %}
+                            {% assign tuto_base = tuto_name %}
                             {% assign tuto_name = tuto_name | append: lang %}
                         {% endif %}
                         <div class="accordion-card card" id="tutorial-{{ tuto_name }}">
@@ -346,8 +348,11 @@ layout: base
                                             </div>
                                         </div>
                                     </div>
-                                    {% if lang %} {% assign tuto_link = tuto_name | replace: 'tutorial_' , '/tutorial_' %} {% else %} {% assign tuto_link = tuto_name %} {% endif %}
-                                    <a href="{{site.baseurl}}/topics/{{topic_name}}/tutorials/{{tuto_link}}/tutorial.html">View this Tutorial</a>
+                                    {% if lang != '' %}
+                                    <a href="{% link topics/{{topic_name}}/tutorials/{{tuto_base}}/{{tuto_metadata['name']}} %}">View this Tutorial</a>
+                                    {% else %}
+                                    <a href="{% link topics/{{topic_name}}/tutorials/{{tuto_name}}/tutorial.md %}">View this Tutorial</a>
+                                    {% endif %}
 
                                     <div class="row">
                                         <div class="col">
