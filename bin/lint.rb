@@ -142,7 +142,7 @@ module GtnLinter
         path: @path,
         idx: idx,
         text: text,
-        message: "Setting  is discouraged, these headings provide useful places for readers to jump to.",
+        message: "Setting no_toc is discouraged, these headings provide useful places for readers to jump to.",
         code: "GTN:001",
         full_line: text,
       )
@@ -563,6 +563,20 @@ module GtnLinter
           code: "GTN:012",
         )
       }
+    }
+
+    # 13:  doi = {https://doi.org/10.1016/j.cmpbup.2021.100007},
+    results += self.find_matching_texts(contents, /doi\s*=\s*{(https?:\/\/doi.org\/)/)
+        .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: "",
+        message: "Unnecessary use of URL in DOI-only field.",
+        code: "GTN:020",
+      )
     }
     results
   end
