@@ -55,7 +55,7 @@ In this lesson, we will be using Python 3 with some of its most popular scientif
 
 # Plot data using matplotlib
 
-For the purposes of this tutorial, we will use a file with the annotated differentially expressed genes that was produced in the [Reference-based RNA-Seq data analysis](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html) tutorial.
+For the purposes of this tutorial, we will use a file with the annotated differentially expressed genes that was produced in the [Reference-based RNA-Seq data analysis]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial.
 
 Firstly, we read the file with the data.
 

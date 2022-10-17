@@ -31,7 +31,7 @@ The whole proccess is designed to be run in RStudio as an Interactive Tool, dire
 >
 {: .comment}
 
-> <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -43,14 +43,14 @@ The whole proccess is designed to be run in RStudio as an Interactive Tool, dire
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
-> <hands-on-title>Software to use</hands-on-title>
+> <hands-on-title>Software to use</hands-on-title>
 >
 > The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 > We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
 > Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
-> > <code-in-title>Environment and Packages</code-in-title>
+> > <code-in-title>Environment and Packages</code-in-title>
 > > ```bash
 > > $ conda create -n name_of_your_env bwa samtools bcftools
 > > $ conda activate name_of_your_env
@@ -85,7 +85,7 @@ The alignment process consists of two steps:
 
 # Setting up
 
-> <hands-on-title>Download Genome</hands-on-title>
+> <hands-on-title>Download Genome</hands-on-title>
 >
 > First we download the reference genome for *E. coli* REL606. Although we could copy or move the file with `cp` or `mv`, most genomics workflows begin with a download step, so we will practice that here.
 >
@@ -117,7 +117,7 @@ The alignment process consists of two steps:
 >
 > We will also download a set of trimmed FASTQ files to work with that will enable us to run our variant calling workflow quite quickly.
 >
-> > <code-in-title>Getting easy-to-work FASTQ files</code-in-title>
+> > <code-in-title>Getting easy-to-work FASTQ files</code-in-title>
 > > ```bash
 > > $ curl -L -o sub.tar.gz https://ndownloader.figshare.com/files/14418248
 > > $ tar xvf sub.tar.gz
@@ -127,7 +127,7 @@ The alignment process consists of two steps:
 > >
 > You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because `mkdir` can accept multiple new directory names as input.
 >
-> > <code-in-title>Create result directories</code-in-title>
+> > <code-in-title>Create result directories</code-in-title>
 > > ```bash
 > > $ mkdir -p results/sam results/bam results/bcf results/vcf
 > > ```
@@ -138,7 +138,7 @@ The alignment process consists of two steps:
 > <hands-on-title>Index the reference genome</hands-on-title>
 > Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 >
-> > <code-in-title>Indexing with `bwa`</code-in-title>
+> > <code-in-title>Indexing with `bwa`</code-in-title>
 > > ```bash
 > > $ bwa index data/ref_genome/ecoli_rel606.fasta
 > > ```
@@ -248,7 +248,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > <hands-on-title>Sort BAM file by coordinates</hands-on-title>
 >
 > Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
-> > <code-in-title>`sort` command</code-in-title>
+> > <code-in-title>`sort` command</code-in-title>
 > > ```bash
 > > $ samtools sort -o results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 > > ```
@@ -266,7 +266,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 >
 > You can use samtools to learn more about this bam file as well.
 >
-> > <code-in-title>`flagstat` command</code-in-title>
+> > <code-in-title>`flagstat` command</code-in-title>
 > > ```bash
 > > samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 > > ```
@@ -311,7 +311,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
 use the command `mpileup`. The flag `-O b` tells bcftools to generate a
 bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
-> > <code-in-title>`mpileup` command</code-in-title>
+> > <code-in-title>`mpileup` command</code-in-title>
 > > ```bash
 > > $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 > > ```
@@ -326,10 +326,10 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 >
 {: .hands_on}
 
-> <hands-on-title>Step 2: Detect the single nucleotide variants (SNVs)</hands-on-title>
+> <hands-on-title>Step 2: Detect the single nucleotide variants (SNVs</hands-on-title>
 >
 > Identify SNVs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
-> > <code-in-title>`call` command</code-in-title>
+> > <code-in-title>`call` command</code-in-title>
 > > ```bash
 > > $ bcftools call --ploidy 1 -m -v -o results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf
 > > ```
@@ -337,10 +337,10 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 >
 {: .hands_on}
 
-> <hands-on-title>Step 3: Filter and report the SNV variants in variant calling format (VCF)</hands-on-title>
+> <hands-on-title>Step 3: Filter and report the SNV variants in variant calling format (VCF</hands-on-title>
 >
 > Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
-> > <code-in-title>Filtering with `vcfutils.pl` command</code-in-title>
+> > <code-in-title>Filtering with `vcfutils.pl` command</code-in-title>
 > > ```bash
 > > $ vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  > results/vcf/SRR2584866_final_variants.vcf
 > > ```
@@ -349,7 +349,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 {: .hands_on}
 
 
-> <hands-on-title>Explore the VCF format:</hands-on-title>
+> <hands-on-title>Explore the VCF format:</hands-on-title>
 >
 > > {% icon code-in%}
 > > ```bash
@@ -364,31 +364,31 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 > > {% icon code-out%} Output
 > > ```
 > > ##fileformat=VCFv4.2
-> > ##FILTER=<ID=PASS,Description="All filters passed">
+> > ##FILTER<ID=PASS,Description="All filters passed">
 > > ##bcftoolsVersion=1.8+htslib-1.8
 > > ##bcftoolsCommand=mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 > > ##reference=file://data/ref_genome/ecoli_rel606.fasta
-> > ##contig=<ID=CP000819.1,length=4629812>
-> > ##ALT=<ID=*,Description="Represents allele(s) other than observed.">
-> > ##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
-> > ##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
-> > ##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
-> > ##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
-> > ##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version=
-> > ##INFO=<ID=RPB,Number=1,Type=Float,Description="Mann-Whitney U test of Read Position Bias (bigger is better)">
-> > ##INFO=<ID=MQB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality Bias (bigger is better)">
-> > ##INFO=<ID=BQB,Number=1,Type=Float,Description="Mann-Whitney U test of Base Quality Bias (bigger is better)">
-> > ##INFO=<ID=MQSB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality vs Strand Bias (bigger is better)">
-> > ##INFO=<ID=SGB,Number=1,Type=Float,Description="Segregation based metric.">
-> > ##INFO=<ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)">
-> > ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
-> > ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
-> > ##INFO=<ID=ICB,Number=1,Type=Float,Description="Inbreeding Coefficient Binomial test (bigger is better)">
-> > ##INFO=<ID=HOB,Number=1,Type=Float,Description="Bias in the number of HOMs number (smaller is better)">
-> > ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
-> > ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
-> > ##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
-> > ##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
+> > ##contig<ID=CP000819.1,length=4629812>
+> > ##ALT<ID=*,Description="Represents allele(s) other than observed.">
+> > ##INFO<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+> > ##INFO<ID=IDV,Number=1,Type=Integer,Description="Maximum number of reads supporting an indel">
+> > ##INFO<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of reads supporting an indel">
+> > ##INFO<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+> > ##INFO<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version=
+> > ##INFO<ID=RPB,Number=1,Type=Float,Description="Mann-Whitney U test of Read Position Bias (bigger is better)">
+> > ##INFO<ID=MQB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality Bias (bigger is better)">
+> > ##INFO<ID=BQB,Number=1,Type=Float,Description="Mann-Whitney U test of Base Quality Bias (bigger is better)">
+> > ##INFO<ID=MQSB,Number=1,Type=Float,Description="Mann-Whitney U test of Mapping Quality vs Strand Bias (bigger is better)">
+> > ##INFO<ID=SGB,Number=1,Type=Float,Description="Segregation based metric.">
+> > ##INFO<ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)">
+> > ##FORMAT<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+> > ##FORMAT<ID=GT,Number=1,Type=String,Description="Genotype">
+> > ##INFO<ID=ICB,Number=1,Type=Float,Description="Inbreeding Coefficient Binomial test (bigger is better)">
+> > ##INFO<ID=HOB,Number=1,Type=Float,Description="Bias in the number of HOMs number (smaller is better)">
+> > ##INFO<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+> > ##INFO<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+> > ##INFO<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
+> > ##INFO<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
 > > ##bcftools_callVersion=1.8+htslib-1.8
 > > ##bcftools_callCommand=call --ploidy 1 -m -v -o results/bcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf; Date=Tue Oct  9 18:48:10 2018
 > > ```
@@ -471,7 +471,7 @@ to learn more about the VCF file format.
 > {: .solution}
 {: .question}
 
-> <hands-on-title>Assess the alignment (visualization) - optional step</hands-on-title>
+> <hands-on-title>Assess the alignment (visualization) - optional step</hands-on-title>
 >
 > It is often instructive to look at your data in a genome browser. Visualization will allow you to get a "feel" for
 > the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
@@ -480,7 +480,7 @@ to learn more about the VCF file format.
 > Institute's Integrative Genomics Viewer (IGV) which requires
 > software installation and transfer of files.
 >
-> > <code-in-title> In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</code-in-title>
+> > <code-in-title> In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</code-in-title>
 > >
 > > ```bash
 > > $ samtools index results/bam/SRR2584866.aligned.sorted.bam
@@ -495,7 +495,7 @@ to learn more about the VCF file format.
 >
 > In order to visualize our mapped reads, we use `tview`, giving it the sorted bam file and the reference file:
 >
-> > <code-in-title>Visualize with `tview`</code-in-title>
+> > <code-in-title>Visualize with `tview`</code-in-title>
 > >
 > > ```bash
 > > $ samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
@@ -599,7 +599,7 @@ to learn more about the VCF file format.
 >
 {: .hands_on}
 
-> <tip-title>BWA alignment options</tip-title>
+> <tip-title>BWA alignment options</tip-title>
 > BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
 > reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
 > as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it

@@ -8,7 +8,7 @@
 > **Some R skills we will *not* cover in these lessons**
 >
 > - How to create and work with R matrices and R lists
-> - How to create and work with loops and conditional statements, and the "apply" of functions (which are super useful, read more [here](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/))
+> - How to create and work with loops and conditional statements, and the "apply" of functions (which are super useful, read more [on this blog about apply functions](https://www.r-bloggers.com/r-tutorial-on-the-apply-family-of-functions/))
 > - How to do basic string manipulations (e.g. finding patterns in text using grep, replacing text)
 > - How to plot using the default R graphic tools (we *will* cover plot creation, but will do so using the popular plotting package `ggplot2`)
 > - How to use advanced R statistical functions

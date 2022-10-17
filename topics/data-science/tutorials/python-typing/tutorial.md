@@ -190,6 +190,8 @@ def reverse_list_of_ints(a: list[int]) -> list[int]:
 But this is a very specific function, right? We can reverse lists with more than just integers. For this, you can use `Any`:
 
 ```python
+from typing import Any
+
 def reverse_list(a: list[Any]) -> list[Any]:
     return a[::-1]
 ```
@@ -215,12 +217,13 @@ reverse_list(w)
 We can lock down what types we'll accept by using a `Union` instead of `Any`. With a `Union`, we can define that a type in that position might be any one of a few more specific types. Say your function can only accept strings, integers, or floats:
 
 ```python
+from typing import Union
+
 def reverse_list(a: list[Union[int, float, str]]) -> list[Union[int, float, str]]:
     return a[::-1]
 ```
 
 Here we have used a `Union[A, B, ...]` to declare that it can only be one of these three types.
-
 
 > ### {% icon question %} Question
 > 1. Are both of these valid definitions?`
