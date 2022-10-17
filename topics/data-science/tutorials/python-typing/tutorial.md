@@ -312,33 +312,35 @@ z = concatenate("Hi", "Bob") # HiBob
 > 1. Add type annotations to each of those functions AND the variables `x`, `y`, `z`
 > 2. How did you know which types were appropriate? 
 > 3. Does `mypy` approve of your annotations? (Run `mypy test.py`, once you've written the above files out to their appropriate locations.)
-> > ### {% icon solution %} Solution
-> > 
-> > ```python
-> > def repeat(x: str, n: int) -> list[str]:
-> > # Or
-> > from typing import TypeVar
-> > T = TypeVar("T")
-> > def repeat(x: T, n: int) -> list[T]:
-> > 
-> > def print_capitalized(x: str) -> str:
-> > 
-> > def concatenate(x: str, y:str) -> str:
-> > ```
-> > 
-> > and
-> > 
-> > ```python
-> > x: list[str] = ...
-> > y: str = ...
-> > z: str = ...
-> > ```
-> > 
-> > 2. You might have discovered this by a combination of looking at the function definitions and their documentation, and perhaps also the sample invocations and what types were passed there.
-> > 3. We hope so!
-> >
-> {: .solution}
 {: .hands_on}
+
+> ### {% icon solution %} Solution
+> 1. The proper annotations: 
+>
+>    ```python
+>    def repeat(x: str, n: int) -> list[str]:
+>    # Or
+>    from typing import TypeVar
+>    T = TypeVar("T")
+>    def repeat(x: T, n: int) -> list[T]:
+> 
+>    def print_capitalized(x: str) -> str:
+> 
+>    def concatenate(x: str, y:str) -> str:
+>    ```
+> 
+>    and
+> 
+>    ```python
+>    x: list[str] = ...
+>    y: str = ...
+>    z: str = ...
+>    ```
+> 
+> 2. You might have discovered this by a combination of looking at the function definitions and their documentation, and perhaps also the sample invocations and what types were passed there.
+> 3. We hope so!
+>
+{: .solution}
 
 ## Automation with MonkeyType
 
@@ -393,7 +395,7 @@ You can use MonkeyType to automatically apply type annotations to your code. Bas
 > >    ```python
 > >    def add(a: Union[int, str], b: Union[int, str]) -> Union[int, str]: ...
 > >    ```
-> > 
+> {: .solution}
 {: .question}
 
 > ### {% icon question %} Question

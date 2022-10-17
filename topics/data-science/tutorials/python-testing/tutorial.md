@@ -30,7 +30,7 @@ contributions:
   - dirowa
   - bazante1
 
-priority: 3
+priority: 10 
 notebook:
   language: python
 ---
