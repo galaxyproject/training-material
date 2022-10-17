@@ -28,6 +28,8 @@ contributions:
   - pvanheus
   - dirowa
   - bazante1
+  funding:
+  - avans-atgm
 
 priority: 10
 notebook:

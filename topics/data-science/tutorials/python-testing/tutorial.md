@@ -25,10 +25,14 @@ key_points:
 subtopic: python-modular
 contributions:
   authorship:
+  - carpentries
   - hexylena
   editing:
   - dirowa
   - bazante1
+  funding:
+  - carpentries
+  - avans-atgm
 
 priority: 10 
 notebook:

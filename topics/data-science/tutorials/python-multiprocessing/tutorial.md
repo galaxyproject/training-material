@@ -24,6 +24,8 @@ contributions:
   editing:
   - dirowa
   - bazante1
+  funding:
+  - avans-atgm
 
 priority: 20
 notebook:
