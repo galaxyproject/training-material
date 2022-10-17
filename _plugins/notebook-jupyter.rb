@@ -31,7 +31,7 @@ module Jekyll
             if cell['source'].is_a? String
               m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
               if m
-                cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, "<br/><details><summary>👁 View answer</summary>")
+                cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, "<br/><details style=\"border: 2px solid #B8C3EA; margin: 1em 0.2em; padding: 0.5em;\"><summary>👁 View solution</summary>")
 
                 idx = m.begin(0)
                 q = cell['source'][0..idx]
