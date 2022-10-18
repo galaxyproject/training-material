@@ -493,7 +493,7 @@ module GtnLinter
       *non_existent_snippet(contents),
       *bad_tool_links(contents),
       *check_tool_link(contents),
-      # *new_more_accessible_boxes(contents),
+      *new_more_accessible_boxes(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
     ]
