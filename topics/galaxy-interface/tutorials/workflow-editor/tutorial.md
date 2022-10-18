@@ -271,7 +271,7 @@ of each workflow together.
 This is a very contrived example, but this technique can be used to separate
 re-useable steps in real world scenarios.
 
-> ### {%icon comment %} Comment: Workflow versions
+> <comment-title></comment-title>: Workflow versions
 > Every time a workflow is saved a new version is created, so that you can go
 > back and forth between new and old versions of a workflow. Click on the pencil
 > symbol to bring up the workflow attributes. You can freely select different
@@ -279,13 +279,13 @@ re-useable steps in real world scenarios.
 > will become the newest version.
 {: .comment}
 
-> ### {%icon comment %} Comment: Importing workflows
+> <comment-title></comment-title>: Importing workflows
 >
 > Workflows can be imported via URL, through `Shared Data -> Workflows` or
 > from a local file on your computer.
 {: .comment}
 
-> ### {%icon comment %} Comment: Managing tool versions
+> <comment-title></comment-title>: Managing tool versions
 >
 > Versions of a tool in a workflow can be changed by clicking on a tool step in
 > the center panel and on the right side clicking on `Select another tool

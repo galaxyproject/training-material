@@ -63,7 +63,7 @@ We will continue to work on the case study data from a mouse model of fetal grow
 Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial]({% link topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.md %}). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
 You can find both datasets in this [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files) or download from Zenodo below.  
 
->### {% icon hands_on %} Hands-on: Data upload
+><hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
@@ -81,7 +81,7 @@ You can find both datasets in this [input history](https://humancellatlas.usegal
 >
 {: .hands_on}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -96,11 +96,11 @@ You can find both datasets in this [input history](https://humancellatlas.usegal
 
 To run Monocle, we need cell metadata, gene metadata, and an expression matrix file of genes by cells. (In theory, the expression matrix alone could do, but then we wouldn’t have all those useful annotations that we worked on so hard in the previous tutorials!). In order to get these files, we will extract the gene and cell annotations from our AnnData object. 
 
- > ### {% icon question %} Questions
+ > <question-title></question-title>
 >
 > How many lines do you expect to be in the gene and cell metadata files?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > If you click on the step with uploaded annotated AnnData file, you will see on a small preview that this object has 8605 observations and 15395 variables, so we expect to get a cell metadata file with 8605 lines and gene metadata file with 15395 lines (without headers of course!).
 > >
@@ -108,7 +108,7 @@ To run Monocle, we need cell metadata, gene metadata, and an expression matrix f
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Extracting annotations
+> <hands-on-title>Extracting annotations</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Annotated_AnnData` 
@@ -131,11 +131,11 @@ Our current dataset is not just T-cells: as you might remember from the last tut
 
 The Manipulate AnnData tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don't need an AnnData object, it's a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and expression matrix files that have macrophages remove, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.
 
- > ### {% icon question %} Questions
+ > <question-title></question-title>
 >
 > Where is the information about cell types stored?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We have already extracted the cell annotations file - in one of the columns you can find the information about cell type, assigned to each cell. 
 > > ![Cell annotations along the top, n_genes, n_counts, louvain, cell_type with a cell barcode and subsequent metadata as each row](../../images/scrna-casestudy-monocle/example_cell_annotations.png "Example cell annotations")
@@ -146,11 +146,11 @@ The Manipulate AnnData tool allows you to filter observations or variables, and 
 
 Click on `Extracted cell annotations (obs)` file to see a small preview window. This shows you that the column containing the cell types has number 22.  We’ll need that to filter out unwanted cell types!
 
-> ### {% icon warning %} Check the column number!
+> <warning-title>Check the column number!</warning-title>
 > If you are working on a different dataset, the number of the ‘cell_type’ column might be different, so make sure you check it on a preview and use the correct number! 
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: Filter out macrophages
+> <hands-on-title>Filter out macrophages</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Extracted cell annotations (obs)`
@@ -159,13 +159,13 @@ Click on `Extracted cell annotations (obs)` file to see a small preview window. 
 >    - That’s it - our cell annotation file is ready for Monocle! Let’s rename it accordingly. 
 > 2. **Rename** {% icon galaxy-pencil %} the output: `Cells input data for Monocle3`
 >
->    > ### {% icon details %} Details: Parameters
+>    > <details-title>Parameters</details-title>
 >    >
 >    > - `c22` means column no. 22 - that's the column with cell types, and it will be filtered for the macrophages
 >    > - `!=` means 'not equal to' - we want to keep the cell types which ARE NOT macrophages
 >    {: .details}
 >
->    > ### {% icon tip %} Other unwanted cell types
+>    > <tip-title>Other unwanted cell types</tip-title>
 >    >
 >    > It might happen that during clustering you’ll find another cell type that you want to get rid of for the trajectory analysis. Then simply re-run this tool on already filtered file and change ‘Macrophages’ to another unwanted cell type.
 >    {: .tip}
@@ -174,12 +174,12 @@ Click on `Extracted cell annotations (obs)` file to see a small preview window. 
 ## Gene annotations
 Sometimes certain functionalities require a specific indication of where the data should be taken from. Monocle3 tools expect that the genes column is named ‘gene_short_name’. Let's check what the name of that column is in our dataset currently. 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Where can you check the header of a column containing genes names?
 > 2. What is the name of this column?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Our extracted gene annotations file! Either by clicking on the eye icon {% icon solution %} or having a look at the small preview window. 
 > > 2. In our dataset the gene names are stored in a column called ‘Symbol’ - we need to change that!
@@ -191,7 +191,7 @@ Sometimes certain functionalities require a specific indication of where the dat
 
 Let’s click on the `Extracted gene annotations (var)` file to see a small preview. We can see that the gene names are in the third column with a header `Symbol`. Keep that in mind - we’ll use that in a second!
 
-> ### {% icon hands_on %} Hands-on: Changing the column name
+> <hands-on-title>Changing the column name</hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `Extracted gene annotations (var)` 
@@ -214,13 +214,13 @@ Last, but not least! And in fact, the most important! The expression matrix cont
 So, the values in the expression matrix are just numbers. But do you remember that we have already done some processing such as normalisation and the calculation of principal components in the AnnData object in the previous tutorial? That affected our expression matrix. Preprocessing is one of the steps in the Monocle3 workflow, so we want to make sure that the calculations are done on a ‘clean’ expression matrix. If we apply too many operations on our raw data, it will be too ‘deformed’ to be reliable. The point of the analysis is to use algorithms that make the enormous amount of data understandable in order to draw meaningful conclusions in accordance with biology. 
 
 So how do we do that?
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many cells and genes are there in the `Anndata_before_processing` file? 
 > 2. How many lines are there in `Cells input data for Monocle3`?
 > 3. How many lines are there in `Genes input data for Monocle3`?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > You can answer all the questions just by clicking on the given file and looking at the preview window.
 > > 1. [n_obs x n_vars] = 31178 x 35734, so there are 31178 cells and 35734 genes.
 > > 2. 8570 lines, including a header, which makes 8569 cells. 
@@ -232,7 +232,7 @@ So how do we do that?
 
 As you can see, there are way more genes and cells in the unprocessed AnnData file, so the expression matrix is much bigger than we need it to be. If the genes and cells we prepared for Monocle3 are not the same as in the expression matrix, Monocle3 will crash. Therefore, we have to filter that big, clean matrix and adjust it to our already prepared genes and cells files. But first, let’s extract the matrix from the unprocessed AnnData object. 
 
-> ### {% icon hands_on %} Hands-on: Extracting matrix
+> <hands-on-title>Extracting matrix</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_before_processing` 
@@ -243,7 +243,7 @@ As you can see, there are way more genes and cells in the unprocessed AnnData fi
 
 If you have a look at the preview of `Unprocessed expression matrix`, you’ll see that the first column contains the cell barcodes, while the first row - the gene IDs. We would like to keep only the values corresponding to the cells and genes that are included in `Cells input data for Monocle3` and `Genes input data for Monocle3`. How do we do it? First, we compare the cell barcodes from `Cells input data for Monocle3` to those in `Unprocessed expression matrix` and ask Galaxy to keep the values of the matrix for which the barcodes in both files are the same. Then, we’ll do the same for gene IDs. We will cut the first columns from `Cells input data for Monocle3` and `Genes input data for Monocle3` to be able to compare those columns side by side with the matrix file.
 
-> ### {% icon hands_on %} Hands-on: Cutting out the columns
+> <hands-on-title>Cutting out the columns</hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
@@ -256,7 +256,7 @@ If you have a look at the preview of `Unprocessed expression matrix`, you’ll s
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on:  Filter matrix values by cell barcodes
+> <hands-on-title> Filter matrix values by cell barcodes</hands-on-title>
 >
 > 1. {% tool [Join two Datasets](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: `Cells IDs` 
@@ -273,7 +273,7 @@ If you have a look at the preview of `Unprocessed expression matrix`, you’ll s
 
 Look at the preview of the output file. First of all, you can see that there are 8570 lines (8569 cells) instead of 31178 cells that were present in the matrix. That’s exactly what we wanted to achieve - now we have raw information for the T-cells that we have filtered. However, the step that we have already performed left us with the matrix whose first and second columns are the same - let’s get rid of one of those! 
 
-> ### {% icon hands_on %} Hands-on: Remove duplicate column (cells IDs)
+> <hands-on-title>Remove duplicate column (cells IDs)</hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Pre-filtered matrix (by cells)`
@@ -286,7 +286,7 @@ Look at the preview of the output file. First of all, you can see that there are
 
 Now we will perform the same steps, but for gene IDs. But gene IDs are currently in the first row, so we need to transpose the matrix, and from there we can repeat the same steps as above for Gene IDs. 
 
-> ### {% icon hands_on %} Hands-on: Filter matrix by gene IDs
+> <hands-on-title>Filter matrix by gene IDs</hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `Filtered matrix (by cells)` 
@@ -316,7 +316,7 @@ Now we will perform the same steps, but for gene IDs. But gene IDs are currently
 
 Monocle3 turns the expression matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds single-cell expression data. 
 
-> ### {% icon details %} Details: Input files
+> <details-title>Input files</details-title>
 > 
 > Here is what [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/) says about the required three input files:
 >    - **expression_matrix**: a numeric matrix of expression values, where rows are genes, and columns are cells. Must have the same number of columns as the cell_metadata has rows and the same number of rows as the gene_metadata has rows.
@@ -331,9 +331,9 @@ The Monocle3 workflow looks like the following, which should seem pretty similar
 
 We will follow those steps and see how it all works in practice. 
 
-> ### {% icon hands_on %} Hands-on: Create CDS object
+> <hands-on-title>Create CDS object</hands-on-title>
 >
->    > ### {% icon details %} Details: Data format
+>    > <details-title>Data format</details-title>
 >    >
 >    > You can provide expression matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.
 >    {: .details}
@@ -347,11 +347,11 @@ We will follow those steps and see how it all works in practice.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What are the dimensions of the created CDS object?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Just click on the performed step - on the preview you’ll see that the dimensions are 15395 x 8569 - so exactly as we predicted genes x cells! 
 > > ![The dataset preview shows class: cell_data_set, dim: 15395 8569](../../images/scrna-casestudy-monocle/monocle_dimensions.png "Monocle Object Dimensions")
@@ -366,18 +366,18 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 
 ![Six graphs showing the output of depending on the number of dimensions that the space was reduced to during pre-processing. Chosen numbers: 10 (really disjoint cell groups), 50 (disjoint cell groups), 150 (two bigger groups), 200 (cell groups start to come together), 250 (cell groups well aligned into a semicircle), 300 (cell groups start to fold and become biologically irrelevant)](../../images/scrna-casestudy-monocle/num_dim_legend.jpg "Different outputs depending on the number of dimensions that the space was reduced to during pre-processing. Currently the label size in Monocle graphs in Galaxy is a nightmare, so for clarity additional legend was added to this image. We're working on the label size so that you can generate clear, readable and pretty graphs. However in this particular figure, the main point is to show the differences in shapes depending on the num-dim.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Looking at the image above, which value would you choose?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > It might be hard to tell at this point without any explanation! Don’t worry, after a few more steps you’ll understand what all those colors mean and how to generate those plots. But look - we want to infer trajectories and find relationships between cells, ideally we would see the development of cells or transition from one type to another. In the graphs where num-dim is from 10 to 200, you see that the clusters are quite disjoint, while we want to see smooth transitions from one to another. I can tell you now that we’ll go ahead with the value of **250**. We're not choosing 300, because the arrangement of the cells on that graph is not really biologically relevant. 
 > >
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Pre-processing
+> <hands-on-title>Pre-processing</hands-on-title>
 >
 > 1. {% tool [Monocle3 preprocess](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 create** {% icon tool %}
@@ -391,7 +391,7 @@ Now it’s time for the proper dimensionality reduction, to turn the original th
 
 ![Four graphs showing the alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together.](../../images/scrna-casestudy-monocle/dim_red_methods.png "The preview of alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them in a way that makes sense biologically - DN to T-mat.")
 
-> ### {% icon hands_on %} Hands-on: Dimensionality reduction
+> <hands-on-title>Dimensionality reduction</hands-on-title>
 >
 > 1. {% tool [Monocle3 reduceDim](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 preprocess** {% icon tool %}
@@ -404,7 +404,7 @@ Alright, now let's have a look at our output! Above you got a sneak peek of how 
 
 Thanks to the fact that we provided Monocle3 with annotated data, we can now color the cells by any attribute that was in the cell metadata file! Similarly to the previous tutorial, we’ll color them by cell type, genotype, batch and sex. At least for now... 
 
-> ### {% icon hands_on %} Hands-on: Plotting
+> <hands-on-title>Plotting</hands-on-title>
 >
 > 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
@@ -441,22 +441,22 @@ As a reminder, here's the comparision between cell type annotation done in the o
 
 In the mentioned tutorial, we annotated the cells so that we know what type they are. Above you can see how Monocle used this information to colour cells by their type. It is important to see the 'form' of the graph and how the cell types are arranged within its confines. But why is it important? Well, in Monocle, our trajectory analysis will be based on the same arrangement of the cells that you see now. And if you now recall our choice of the number of dimensions during pre-processing, you'll understand why it was crucial - choosing the right value at the beginning determines the 'shape' of the graph that is then retained for the trajectory analysis. Therefore, the fact that on the plot above we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
 
-> ### {% icon question %} Question - Genotype
+> <question-title></question-title> - Genotype
 > Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?
 > ![Genotype data plotted on the obtained graph, compared with the cell types graph. Cell types DP-M1, DP-L and T-mat are mainly wildtypes, while for other cell types the distribution is fairly even.](../../images/scrna-casestudy-monocle/genotypes.png "Genotype differences")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Indeed, that's what we see in our graph! But look closer, there is something more...Additionally, we also discovered that the vast majority of DP-M1 is only wildtype cells. That's interesting, isn't it?
 > >
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question - Batch effect
+> <question-title></question-title> - Batch effect
 > Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?
 > ![Batch data plotted on the obtained graph, compared with the cell types graph. DP-L and DP-M1 seem to consist mostly of N705 and N706, while other cell types have quite even batch distribution.](../../images/scrna-casestudy-monocle/batch_1.png "Checking for batch effect")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Both DP-L and DP-M1 seem to consist mostly of N705 and N706. There might be indeed a bit of batch effect, so you could consider using batch correction on this dataset. In the absence of batch correction, we will focus on those clusters where there is batch mixing for biological interpretation. Finally, we will look at the confounding effect of sex.
 > > ![Sex data plotted on the obtained graph, compared with the cell types and genotype graphs. No female cells in DP-L and DP-M1 can be observed, but they appear in other cell types.](../../images/scrna-casestudy-monocle/sex_1.png "Sex distribution across the sample")
@@ -473,7 +473,7 @@ Monocle uses a technique called [community detection](https://doi.org/10.1038/s4
 >
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from [Alex Wolf et al](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1663-x), introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
-> ### {% icon details %} Details: Clusters vs partitions
+> <details-title>Clusters vs partitions</details-title>
 > 
 > Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene expression. The relationships between different clusters are analysed to identify possible trajectories.
 >
@@ -481,7 +481,7 @@ Monocle also divides the cells into larger, more well separated groups called pa
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Clustering 
+> <hands-on-title>Clustering </hands-on-title>
 >
 > 1. {% tool [Monocle3 partition](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 reduceDim** {% icon tool %}
@@ -500,20 +500,20 @@ Monocle also divides the cells into larger, more well separated groups called pa
 > 5. Rename {% icon galaxy-pencil %} the output: `Cluster plot`
 >
 {: .hands_on}
-> ### {% icon tip %} If the partition does not contain all your cells of interest...
+> <tip-title>If the partition does not contain all your cells of interest...</tip-title>
 >
 > Sometimes it might happen that cells are grouped into several partitions, while you want them all to be in just one in order to perform trajectory analysis on all of them. Then, you can try to increase the `q-value` threshold that is used to determine the partition of cells.
 > ![Two graphs showing the difference between q-value used. For q-value=0.05 there are two partitions formed and for q-value=1.0 all cells were assigned to one partition so that there is only one in total.](../../images/scrna-casestudy-monocle/partition_qval.png "q-value threshold affecting the span of partition. Note that 0.05 is the default value.")
 >
 {: .tip}
-> ### {% icon tip %} If the granularity of clusters does not make sense...
+> <tip-title>If the granularity of clusters does not make sense...</tip-title>
 >
 >
 > When using standard igraph louvain clustering, the value of `resolution` parameter is by default set to `NULL`, which means that it is determined automatically. If you are not satisfied with the results of the standard igraph louvain clustering, you may set the `resolution` value manually, and thus specify the granularity of the clustering. 
 > ![Three graphs showing the difference between the resolution of clustering. During automatic determination of this value, there were 6 clusters formed, corresponding to cell types. Manually set resolution=0.001 resulted in 11 clusters so that more than one cluster corresponds to one cell type, and resolution=0.1 resulted in almost 200 very small clusters.](../../images/scrna-casestudy-monocle/clusters_resolution.png "Different granularity of clusters based on the resolution set automatically and manually.")
 {: .tip}
 
-> ### {% icon warning %} Ambiguous clusters!
+> <warning-title>Ambiguous clusters!</warning-title>
 > As mentioned above, standard igraph louvain clustering determines the resolution automatically, unless the specific value is provided by the user. Therefore, it sometimes returns slightly different outputs. To ensure that your clusters are reproducible, you might want to pass a certain value to the `resolution` parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility. 
 > ![Four graphs showing slight changes in clustering: 1) 5 clusters, 2) 5 clusters but with other cells assigned, 3) 4 clusters, 4) 6 clusters.](../../images/scrna-casestudy-monocle/igraph.png "Standard igraph louvain clustering giving different results despite the same input becasue of the automatic determination of resolution vaule.")
 >
@@ -537,7 +537,7 @@ If we compare the annotated cell types and the clusters that were just formed, w
 | Aif1    | Macrophages    |
 | Hba-a1    | RBC    |
 
-> ### {% icon hands_on %} Hands-on: Gene expression
+> <hands-on-title>Gene expression</hands-on-title>
 >
 > 1. {% tool [Monocle3 plotCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 partition** {% icon tool %}
@@ -548,10 +548,10 @@ If we compare the annotated cell types and the clusters that were just formed, w
 
 ![Expression on the genes: Il2ra expressed in DN, Cd8b1, Cd8a expressed in the areas where middle DP, Cd4 mostly expressed in late DP cluster, Itm2a expressed in mature T-cells, Aif1 – no expression, Hba-a1 - very high expression in small branch of DP-M4.](../../images/scrna-casestudy-monocle/gene_expression.png "Expression of the genes across analysed sample")
 
-> ### {% icon question %} Question - Genes and cell types
+> <question-title></question-title> - Genes and cell types
 > Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorial, how would you interpret the results?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > - `Il2ra`: expressed in the cluster where DN cells are - an indication of where the trajectory should start
 > > - `Cd8b1, Cd8a`: expressed in the areas where middle DP were assigned - great
@@ -563,7 +563,7 @@ If we compare the annotated cell types and the clusters that were just formed, w
 > {: .solution}
 {: .question}
 
-> ### {% icon tip %} Purity of the sample - Hba-a1 gene
+> <tip-title>Purity of the sample - Hba-a1 gene</tip-title>
 >
 > The Hba-a1 gene creates hemoglobin which is found in red blood cells. This is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms a a clearly visible, distinct, little branch. Hemoglobin should NOT be found in T-cells. However, if you remember, the gene was found to be expressed in the previous Scanpy tutorial (see the image below). That marker appeared throughout the entire sample in low numbers, suggesting some background contamination of red blood cell debris in the cell samples during library generation. Unlike Scanpy, Monocle algorithms allowed us to gather the cells expressing that gene into a distinct group! That's great!
 >
@@ -575,11 +575,11 @@ If we compare the annotated cell types and the clusters that were just formed, w
 
 Here we used a priori knowledge regarding the marker genes. If we wanted to approach this problem in an unsupervised manner, we could use Monocle to tell us the top marker genes in each group of cells. This is very useful if we are trying to identify a cell type, or if we want to find novel marker genes for known cell types.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > If I cluster cells that are not annotated, can I assign clusters to a cell type based on gene expression using Monocle3?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Theoretically...yes! That’s the point of the clustering and gene expression analysis. However, as of the writing of this tutorial, this function hasn’t been turned into a Galaxy tool yet and is only available in R. 
 > >
@@ -587,7 +587,7 @@ Here we used a priori knowledge regarding the marker genes. If we wanted to appr
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Top marker genes
+> <hands-on-title>Top marker genes</hands-on-title>
 >
 > 1. {% tool [Monocle3 top markers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Object"*: output of **Monocle3 partition** {% icon tool %}
@@ -599,11 +599,11 @@ Here we used a priori knowledge regarding the marker genes. If we wanted to appr
 
 ![A table showing top markers - which genes (and their percentage) are the most expressed in each cell type.](../../images/scrna-casestudy-monocle/top_markers.jpg "Identification of the genes most specifically expressed in groups of cells.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What genes are uniquely expressed in DP-M1?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three! 
 > > The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1. 
@@ -619,7 +619,7 @@ But what if you want to know how gene expression changes across a trajectory? Th
 
 We’re getting closer and closer! The next step is to learn the trajectory graph, which means to fit a principal graph within each partition. In that way, we’ll ‘connect’ the existing clusters by creating a path between them.
 
-> ### {% icon hands_on %} Hands-on: Learn graph
+> <hands-on-title>Learn graph</hands-on-title>
 >
 > 1. {% tool [Monocle3 learnGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 partition** {% icon tool %}
@@ -638,7 +638,7 @@ As you can see, the learned trajectory path is just a line connecting the cluste
 
 ![A trajectory path, branching out to connect all the clusters and thus show their relationships.](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory path")
 
-> ### {% icon tip %} Comparing the trajectories
+> <tip-title>Comparing the trajectories</tip-title>
 >
 > As a reminder, here's the comparision between our trajectory and the one from the previous tutorial, where we used Scanpy for clustering, and then appplied Force-Directed + PAGA algorithms to infer trajectory. As you remember from those tutorials, the arrangement of the cell groups changed a bit during these steps. Indeed - by using the mentioned methods, we get different graphs for clusters and trajectory, while in Monocle the general 'shape' of the graph stays the same from the beginning. 'Leranig the trajectory' step in Monocle is about finding a path, along which the cells can be then ordered in pseudotime. 
 > ![First graph shows the trajectory inferred by using Scanpy + Force-Directed + PAGA (DN connecting equally with DP-M2 and DP-M3, then going to DP-M1, and branching out to DP-M4, then going down to DP-L and finally turning into T-mat).  Second graph shows the trajectory inferred by using Monocle (DN connected to DP-M2 and DP-M3, then DP-M4 has DP-M1 on the right and DP-L on the left, and DP-L comes to T-mat).](../../images/scrna-casestudy-monocle/scanpy_monocle_trajectories.png "Comparison between the trajectory inferred in the previous 'case study' tutorials (Scanpy + Force-Directed + PAGA) and the trajectory obtained in Monocle.")
@@ -648,14 +648,14 @@ As you can see, the learned trajectory path is just a line connecting the cluste
 
 Finally, it's time to see our cells in pseudotime! We have already learned a trajectory, now we only have to order the cells along it. Monocle3 requires information on where to start ordering the cells, so we need to provide it with this information. We annotated early T-cells as double negative (DN), so those will be our root cells! 
 
-> ### {% icon details %} Details: Pseudotime
+> <details-title>Pseudotime</details-title>
 > 
 > To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
 [Read more](https://doi.org/10.1093%2Fbioinformatics%2Fbtw372)
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Ordering the cells along trajectory
+> <hands-on-title>Ordering the cells along trajectory</hands-on-title>
 >
 > 1. {% tool [Monocle3 orderCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 learnGraph** {% icon tool %}
@@ -669,7 +669,7 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 >
 {: .hands_on}
 
-> ### {% icon tip %} Other ways to specify the root cells
+> <tip-title>Other ways to specify the root cells</tip-title>
 >
 > The method to specify the root cells shown above is not the only one available in Galaxy! However, it is probably the most intuitive one.
 > 1. **Annotated cell type as root cells**
@@ -693,7 +693,7 @@ There are a lot of such questions in bioinformatics, and we're always get excite
 
 Last but not least, you can now identify genes that define the inferred trajectories.
 
-> ### {% icon hands_on %} Hands-on: Differentially expressed genes
+> <hands-on-title>Differentially expressed genes</hands-on-title>
 >
 > 1. {% tool [Monocle3 diffExp](toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in RDS format"*: output of **Monocle3 orderCells** {% icon tool %}

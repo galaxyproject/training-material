@@ -306,7 +306,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```
 >    {: data-commit="Configure RabbitMQ"}
 >
->    > ### {% icon tip %} RabbitMQ installation errors?
+>    > <tip-title>RabbitMQ installation errors?</tip-title>
 >    > RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of `rabbitmq_version:` in the configuration above. [Information on the RabbitMQ Erlag version requirements.](https://www.rabbitmq.com/which-erlang.html)
 >    {: .tip}
 >

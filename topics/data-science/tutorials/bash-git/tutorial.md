@@ -123,7 +123,7 @@ collaboration among different people.
 > the same files concurrently.
 {: .tip}
 
-> ### {%icon question%} Paper Writing
+> <question-title>Paper Writing</question-title>
 >
 > *   Imagine you drafted an excellent paragraph for a paper you are writing, but later ruin
 >     it. How would you retrieve the *excellent* version of your conclusion? Is it even possible?
@@ -133,7 +133,7 @@ collaboration among different people.
 >     you accept changes made using the `Track Changes` option? Do you have a
 >     history of those changes?
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > *   Recovering the excellent version is only possible if you created a copy
 > >     of the old version of the paper. The danger of losing good versions
@@ -1186,7 +1186,7 @@ repository (`git commit`):
 
 # Let's put us to the test
 
-> ### {%icon question%} Choosing a Commit Message
+> <question-title>Choosing a Commit Message</question-title>
 >
 > Which of the following commit messages would be most appropriate for the
 > last commit made to `colonel.txt`?
@@ -1195,14 +1195,14 @@ repository (`git commit`):
 > 2. "Added line 'Fingerprints on victims glasses.' to colonel.txt"
 > 3. "Make notes about colonel's fingerprints"
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > > Answer 1 is not descriptive enough, and the purpose of the commit is unclear;
 > > and answer 2 is redundant to using "git diff" to see what changed in this commit;
 > > but answer 3 is good: short, descriptive, and imperative.
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} Committing Changes to Git
+> <question-title>Committing Changes to Git</question-title>
 >
 > Which command(s) below would save the changes of `myfile.txt`
 > to my local Git repository?
@@ -1223,7 +1223,7 @@ repository (`git commit`):
 >    $ git commit -m myfile.txt "my recent changes"
 >    ```
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Would only create a commit if files have already been staged.
 > > 2. Would try to create a new repository.
@@ -1232,7 +1232,7 @@ repository (`git commit`):
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} Committing Multiple Files
+> <question-title>Committing Multiple Files</question-title>
 >
 > The staging area can hold changes from any number of files
 > that you want to commit as a single snapshot.
@@ -1243,7 +1243,7 @@ repository (`git commit`):
 > 3. Add changes from both files to the staging area,
 > and commit those changes.
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > The output below from `cat colonel.txt` reflects only content added during
 > > this exercise. Your output may vary.
@@ -1303,7 +1303,7 @@ repository (`git commit`):
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} `bio` Repository
+> <question-title>`bio` Repository</question-title>
 >
 > 1. Create a new Git repository on your computer called `bio`.
 > 2. Write a three-line biography for yourself in a file called `me.txt`,
@@ -1312,7 +1312,7 @@ repository (`git commit`):
 > 4. Display the differences
 > between its updated state and its original state.
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > If needed, move out of the `suspects` folder:
 > > > <code-in-title>Change directory</code-in-title>
@@ -1715,7 +1715,7 @@ If the introduction and conclusion are stored in separate files,
 on the other hand,
 moving backward and forward in time becomes much easier.
 
-> ### {%icon question%} Recovering Older Versions of a File
+> <question-title>Recovering Older Versions of a File</question-title>
 >
 > Jennifer has made changes to the Python script that she has been working on for weeks, and the
 > modifications she made this morning "broke" the script and it no longer runs. She has spent
@@ -1736,7 +1736,7 @@ moving backward and forward in time becomes much easier.
 > 5. Both 2 and 4
 >
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > The answer is (5)-Both 2 and 4.
 > >
@@ -1757,7 +1757,7 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} Reverting a Commit
+> <question-title>Reverting a Commit</question-title>
 >
 > Jennifer is collaborating with colleagues on her Python script.  She
 > realizes her last commit to the project's repository contained an error, and
@@ -1783,7 +1783,7 @@ moving backward and forward in time becomes much easier.
 > 5. Save and close
 >
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > The command `git log` lists project history with commit IDs.
 > >
@@ -1793,7 +1793,7 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} Understanding Workflow and History
+> <question-title>Understanding Workflow and History</question-title>
 >
 > What is the output of the last command in
 >
@@ -1821,7 +1821,7 @@ moving backward and forward in time becomes much easier.
 >    Error because you have changed judge.txt without committing the changes
 >    ```
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > >
 > > The answer is 2.
 > >
@@ -1844,7 +1844,7 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> ### {%icon question%} Checking Understanding of `git diff`
+> <question-title>Checking Understanding of `git diff`</question-title>
 >
 > Consider this command: `git diff HEAD~9 colonel.txt`. What do you predict this command
 > will do if you execute it? What happens when you do execute it? Why?
@@ -1854,7 +1854,7 @@ moving backward and forward in time becomes much easier.
 > and what does happen?
 {: .question }
 
-> ### {%icon question%} Getting Rid of Staged Changes
+> <question-title>Getting Rid of Staged Changes</question-title>
 >
 > `git checkout` can be used to restore a previous commit when unstaged changes have
 > been made, but will it also work for changes that have been staged but not committed?
@@ -1862,7 +1862,7 @@ moving backward and forward in time becomes much easier.
 > you can remove your change.
 {: .question }
 
-> ### {%icon question%} Explore and Summarize Histories
+> <question-title>Explore and Summarize Histories</question-title>
 >
 > Exploring history is an important part of Git, and often it is a challenge to find
 > the right commit ID, especially if the commit is from several months ago.
@@ -1872,7 +1872,7 @@ moving backward and forward in time becomes much easier.
 > When you type `git log`, a very long list appeared.
 > How can you narrow down the search?
 >
-> > ### {%icon solution%} Solution
+> > <solution-title></solution-title>
 > > Recall that the `git diff` command allows us to explore one specific file,
 > > e.g., `git diff colonel.txt`. We can apply a similar idea here.
 > >

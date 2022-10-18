@@ -98,12 +98,12 @@ The alignment process consists of two steps:
 > > ```
 > {: .code-in}
 >
-> > ### {%icon question%} Question
+> > <question-title></question-title>
 > >
 > > We saved this file as `data/ref_genome/ecoli_rel606.fasta.gz` and then decompressed it.
 > > What is the real name of the genome?
 > >
-> > > ### {%icon solution%} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > ```bash
 > > > $ head data/ref_genome/ecoli_rel606.fasta
@@ -135,7 +135,7 @@ The alignment process consists of two steps:
 {: .hands_on}
 
 
-> ### {%icon hands_on%} Index the reference genome
+> <hands-on-title>Index the reference genome</hands-on-title>
 > Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.
 >
 > > <code-in-title>Indexing with `bwa`</code-in-title>
@@ -162,7 +162,7 @@ The alignment process consists of two steps:
 >
 {: .hands_on}
 
-> ### {%icon hands_on%} Align reads to reference genome
+> <hands-on-title>Align reads to reference genome</hands-on-title>
 >
 > The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
 aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
@@ -184,7 +184,7 @@ is faster and more accurate.
 > samples in our dataset (`SRR2584866`). Later, we will be
 > iterating this whole process on all of our sample files.
 >
-> > ### {%icon code-in%} Aligning with bwa
+> > <code-in-title>Aligning with bwa</code-in-title>
 > > ```bash
 > > $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 > > ```
@@ -229,15 +229,15 @@ Image from [Data Wrangling and Processing for Genomics](https://datacarpentry.or
 
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
-> ### {%icon hands_on%} SAM to BAM
-> > ### {%icon code-in%} Input: bash
+> <hands-on-title>SAM to BAM</hands-on-title>
+> > <code-in-title>bash</code-in-title>
 > > We will convert the SAM file to BAM format using the `samtools` program with the `view` command and tell this command that the input is in SAM format (`-S`) and to output BAM format (`-b`):
 > >
 > > ```bash
 > > $ samtools view -S -b results/sam/SRR2584866.aligned.sam > results/bam/SRR2584866.aligned.bam
 > > ```
 > {: .code-in}
-> > ### {%icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > [samopen] SAM header is present: 1 sequences.
 > > ```
@@ -245,7 +245,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 >
 {: .hands_on}
 
-> ### {%icon hands_on%} Sort BAM file by coordinates
+> <hands-on-title>Sort BAM file by coordinates</hands-on-title>
 >
 > Next we sort the BAM file using the `sort` command from `samtools`. `-o` tells the command where to write the output.
 > > <code-in-title>`sort` command</code-in-title>
@@ -255,7 +255,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > {: .code-in}
 >
 > Our files are pretty small, so we will not see this output. If you run the workflow with larger files, you will see something like this:
-> > ### {%icon code-out%} Output
+> > <code-out-title></code-out-title>
 > >
 > > ```
 > > [bam_sort_core] merging from 2 files...
@@ -274,7 +274,7 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 >
 > This will give you the following statistics about your sorted bam file:
 >
-> > ### {%icon code-out%} Output
+> > <code-out-title></code-out-title>
 > > ```
 > > 351169 + 0 in total (QC-passed reads + QC-failed reads)
 > > 0 + 0 secondary
@@ -305,7 +305,7 @@ variants.
 
 Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.org/wrangling-genomics/)
 
-> ### {%icon hands_on%} Step 1: Calculate the read coverage of positions in the genome
+> <hands-on-title>Step 1: Calculate the read coverage of positions in the genome</hands-on-title>
 >
 > Do the first pass on variant calling by counting read coverage with
 [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
@@ -326,7 +326,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 >
 {: .hands_on}
 
-> ### {%icon hands_on%} Step 2: Detect the single nucleotide variants (SNVs)
+> <hands-on-title>Step 2: Detect the single nucleotide variants (SNVs)</hands-on-title>
 >
 > Identify SNVs using bcftools `call`. We have to specify ploidy with the flag `--ploidy`, which is one for the haploid *E. coli*. `-m` allows for multiallelic and rare-variant calling, `-v` tells the program to output variant sites only (not every site in the genome), and `-o` specifies where to write the output file:
 > > <code-in-title>`call` command</code-in-title>
@@ -337,7 +337,7 @@ bcf format output file, `-o` specifies where to write the output file, and `-f` 
 >
 {: .hands_on}
 
-> ### {%icon hands_on %} Step 3: Filter and report the SNV variants in variant calling format (VCF)
+> <hands-on-title>Step 3: Filter and report the SNV variants in variant calling format (VCF)</hands-on-title>
 >
 > Filter the SNVs for the final output in VCF format, using `vcfutils.pl`:
 > > <code-in-title>Filtering with `vcfutils.pl` command</code-in-title>

@@ -276,7 +276,7 @@ Four histograms are generated with the top line giving the raw expression data f
 >
 {: .details}
 
-> ### {%icon comment %} Comment: Choosing Filtering Thresholds
+> <comment-title></comment-title>: Choosing Filtering Thresholds
 >
 > The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}).
 >
@@ -375,7 +375,7 @@ Here we assume that there is no unwanted technical or biological variability in 
 {: .hands_on}
 
 
-> ### {%icon details %} Clustering on a Distance Matrix
+> <details-title>Clustering on a Distance Matrix</details-title>
 >
 >
 > In order to perform clustering, the proximity of cells to one another are first defined by a distance metric
