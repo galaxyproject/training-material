@@ -386,7 +386,7 @@ Galaxy can be configured to use pre-made Singularity containers available from /
 In order to do so, you will first need to set up CVMFS by doing the [CVMFS]({{ site.baseurl }}/topics/admin/tutorials/cvmfs/tutorial.html) tutorial.
 After finishing the CVMFS tutorial, come back, and do this hands-on.
 
-> <hands-on-title>Optional: Hands-on: Configure Galaxy to use Singularity containers from CVMFS</hands-on-title>
+> <hands-on-title>Optional: Configure Galaxy to use Singularity containers from CVMFS</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
 >{% raw %}
