@@ -52,8 +52,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
-
 
 The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.
 
@@ -144,7 +142,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 > Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
 is tutorial.
 >
-> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
+> 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} or opening directly on [live.usegalaxy](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
 > 2. Click Execute
 > 3. The tool will start running and will stay running permanently
 > 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the JupyterLab instance you started.
@@ -203,7 +201,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > <comment-title>Using JupyterLab Terminal</comment-title>
 >
 > Most of the tutorial (except visualization) can be executed from a JupyterLab Terminal. In that case,
-> you should not add `%%bash` to your commands. More on JupyterLab Terminal can be found [here](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html).
+> you should not add `%%bash` to your commands. More on JupyterLab Terminal can be found on [Read the Docs](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html).
 {:  .comment}
 
 ## Get CLM-FATES EMERALD release
@@ -269,7 +267,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![Snap
     - **River runoff**:MOSART: MOdel for Scale Adaptive River Transport
     - **Land Ice**: SGLC Stub Glacier (land ice) component
     - **Wave**-   SWAV Stub wave component
-   The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html).
+   See also the [list of available component sets](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html).
 - **mach**: specifies the machine where CLM-FATES will be compiled and run. We use `espresso` which is the local setup (see `$HOME/.cime/` folder).
 
 ## Setup, build and submit your first simulation
@@ -565,7 +563,5 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {:  .comment}
 
 # Conclusion
-
-{:.no_toc}
 
 We have learnt to run single-point simulations with FATES-CLM through the Galaxy Climate JupyterLab.
