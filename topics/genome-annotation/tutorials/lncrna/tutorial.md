@@ -81,10 +81,6 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 - The **genome annotation** in GFF3 format. We will use the genome annotation obtained in the [Funannotate tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 - Some aligned **RNASeq data** in bam format. Here, we will use some mapped RNASeq data where mapping was done using STAR.
 
-> <hands-on-title>Data upload</hands-on-title>
->
-### Get data
-
 
 > <hands-on-title>Data upload</hands-on-title>
 >
