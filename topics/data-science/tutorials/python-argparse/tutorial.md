@@ -266,7 +266,7 @@ Using argparse can be a big change to your tool but there are some benefits to u
 
 With the `argparse2tool` project, and eventually `pyGalGen` which will be merged into `planemo`, you can generate Galaxy tools automatically from `argparse` based Python scripts.
 
-> ### {% icon hands_on %} Hands-on: Generate a Galaxy tool wrapper from your script
+> <hands-on-title>Generate a Galaxy tool wrapper from your script</hands-on-title>
 > 1. Write out the python script to a file named `main.py`
 >
 >    ```python
@@ -295,13 +295,13 @@ With the `argparse2tool` project, and eventually `pyGalGen` which will be merged
 >
 > 4. Generate the tool interface:
 >
->    > ### {% icon code-in %} Input: Command
+>    > <code-in>Command</code-in>
 >    > ```
 >    > PYTHONPATH=$(argparse2tool) python main.py --generate_galaxy_xml
 >    > ```
 >    {: .code-in }
 >
->    > ### {% icon code-out %} Output: Galaxy XML
+>    > <code-out>Galaxy XML</code-out>
 >    > ```xml
 >    > <tool name="main.py" id="main.py" version="1.0">
 >    >   <description>Sum some numbers</description>

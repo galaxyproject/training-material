@@ -72,7 +72,7 @@ NameType = NewType("NameType", str)
 Point2D = NewType("Point2D", tuple[float, float])
 ```
 
-> ### {% icon tip %} Tip: Does `tuple` cause an issue?
+> <tip-title>Does `tuple` cause an issue?</tip-title>
 > You might be on a python earlier than 3.9. Please update, or rewrite these as Tuple and List which must be imported.
 {: .tip}
 
@@ -313,13 +313,13 @@ y = print_capitalized("hElLo WorLd") # Should print Hello World
 z = concatenate("Hi", "Bob") # HiBob
 ```
 
-> ### {% icon hands_on %} Hands-on: Add type annotations
+> <hands-on-title>Add type annotations</hands-on-title>
 > 1. Add type annotations to each of those functions AND the variables `x`, `y`, `z`
 > 2. How did you know which types were appropriate? 
 > 3. Does `mypy` approve of your annotations? (Run `mypy test.py`, once you've written the above files out to their appropriate locations.)
 {: .hands_on}
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 1. The proper annotations: 
 >
 >    ```python
@@ -351,7 +351,7 @@ z = concatenate("Hi", "Bob") # HiBob
 
 You can use MonkeyType to automatically apply type annotations to your code. Based on the execution of the code, it will make a best guess about what types are supported.
 
-> ### {% icon hands_on %} Hands-on: Using MonkeyType to generate automatic annotations
+> <hands-on-title>Using MonkeyType to generate automatic annotations</hands-on-title>
 > 
 > 1. Create a folder for a module named `some`
 > 2. Touch `some/__init__.py` to ensure it's importable as a python module

@@ -175,8 +175,8 @@ We go to "Tools" and pick the "Shell..." option and we are good to go. Our works
 >
 >| Software | Version | Manual | Available for | Description |
 >| -------- | ------------ | ------ | ------------- | ----------- |
->| [git](https://git-scm.com/) | 2.35.3 | [Link](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
->| [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Link](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
+>| [git](https://git-scm.com/) | 2.35.3 | [git Manual](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
+>| [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Nano manual](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
 >
 {: .hands_on}
 

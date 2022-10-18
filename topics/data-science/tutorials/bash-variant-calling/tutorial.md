@@ -60,10 +60,10 @@ The whole proccess is designed to be run in RStudio as an Interactive Tool, dire
 >
 > | Software | Version | Manual | Available for | Description |
 > | -------- | ------------ | ------ | ------------- | ----------- |
-> | [BWA](http://bio-bwa.sourceforge.net/) | 0.7.17 | [Link](http://bio-bwa.sourceforge.net/bwa.shtml) | Linux, MacOS | Mapping DNA sequences against reference genome. |
-> | [SAMtools](http://samtools.sourceforge.net/) | 1.15.1 | [Link](http://www.htslib.org/doc/samtools.html) | Linux, MacOS | Utilities for manipulating alignments in the SAM format. |
-> | [BCFtools](https://samtools.github.io/bcftools/) | 1.15.1 | [Link](https://samtools.github.io/bcftools/bcftools.html) | Linux, MacOS | Utilities for variant calling and manipulating VCFs and BCFs. |
-> | [IGV](http://software.broadinstitute.org/software/igv/home) | [Link](https://software.broadinstitute.org/software/igv/download) | [Link](https://software.broadinstitute.org/software/igv/UserGuide) | Linux, MacOS, Windows | Visualization and interactive exploration of large genomics datasets. |
+> | [BWA](http://bio-bwa.sourceforge.net/) | 0.7.17 | [BWA Manual](http://bio-bwa.sourceforge.net/bwa.shtml) | Linux, MacOS | Mapping DNA sequences against reference genome. |
+> | [SAMtools](http://samtools.sourceforge.net/) | 1.15.1 | [SAMtools Manual](http://www.htslib.org/doc/samtools.html) | Linux, MacOS | Utilities for manipulating alignments in the SAM format. |
+> | [BCFtools](https://samtools.github.io/bcftools/) | 1.15.1 | [BCFtools manual](https://samtools.github.io/bcftools/bcftools.html) | Linux, MacOS | Utilities for variant calling and manipulating VCFs and BCFs. |
+> | [IGV](http://software.broadinstitute.org/software/igv/home) | [IGV Download](https://software.broadinstitute.org/software/igv/download) | [IGV User Guide](https://software.broadinstitute.org/software/igv/UserGuide) | Linux, MacOS, Windows | Visualization and interactive exploration of large genomics datasets. |
 >
 {: .hands_on}
 

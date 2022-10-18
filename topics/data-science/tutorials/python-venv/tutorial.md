@@ -115,7 +115,7 @@ You do not have to worry too much about specific versions of external libraries 
 Virtual environments enable you to always use the latest available version without specifying it explicitly.
 They also enable you to use a specific older version of a package for your project, should you need to.
 
-> ### {% icon tip %} Tip: A Specific Python or Package Version is Only Ever Installed Once
+> <tip-title>A Specific Python or Package Version is Only Ever Installed Once</tip-title>
 > Note that you will not have a separate Python or package installations for each of your projects - they will only
 ever be installed once on your system but will be referenced from different virtual environments.
 {: .tip}
@@ -142,7 +142,7 @@ on your system. The Python package manager tool `pip` is most commonly used for 
  and obtains the packages from the central repository called [Python Package Index (PyPI)](https://pypi.org/).
 `pip` can now be used with all Python distributions (including Anaconda).
 
-> ### {% icon tip %} Tip: A Note on Anaconda and `conda`
+> <tip-title>A Note on Anaconda and `conda`</tip-title>
 > Anaconda is an open source Python
 > distribution commonly used for scientific programming - it conveniently installs Python, package and environment management `conda`, and a 
 > number of commonly used scientific computing packages so you do not have to obtain them separately. 
@@ -204,7 +204,7 @@ environment and the standard Python library,
 - `lib/pythonX.Y/site-packages` subdirectory (called `Lib\site-packages` on Windows) to contain its own independent set of installed Python packages isolated from other projects,
 - various other configuration and supporting files and subdirectories.
 
-> ### {% icon tip %} Tip: Naming Virtual Environments
+> <tip-title>Naming Virtual Environments</tip-title>
 > What is a good name to use for a virtual environment? Using "venv" or ".venv" as the
 name for an environment and storing it within the project's directory seems to be the recommended way -
 this way when you come across such a subdirectory within a software project,
@@ -279,7 +279,7 @@ or like this to install multiple packages at once for short:
 pip3 install numpy matplotlib
 ```
 
-> ### {% icon tip %} Tip: How About `python3 -m pip install`?
+> <tip-title>How About `python3 -m pip install`?</tip-title>
 > Why are we not using `pip` as an argument to `python3` command, in the same way we did with `venv` 
 > (i.e. `python3 -m venv`)? `python3 -m pip install` should be used according to the 
 > [official Pip documentation](https://pip.pypa.io/en/stable/user_guide/#running-pip); other official documentation
@@ -348,7 +348,7 @@ packages that are no longer needed from your virtual environment) is update the 
 accordingly by re-issuing `pip freeze` command and propagate the updated `requirements.txt` file to your collaborators
 via your code sharing platform (e.g. GitHub).
 
-> ### {% icon tip %} Tip: Official Documentation
+> <tip-title>Official Documentation</tip-title>
 > For a full list of options and commands, consult the [official `venv` documentation](https://docs.python.org/3/library/venv.html)
 > and the [Installing Python Modules with `pip` guide](https://docs.python.org/3/installing/index.html#installing-index). Also check out the guide ["Installing packages using `pip` and virtual environments"](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/#installing-packages-using-pip-and-virtual-environments).
 {: .tip}

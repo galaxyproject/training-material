@@ -235,7 +235,7 @@ So here, although we have specified our tests as separate functions in a class, 
 
 And here, we're defining each of these things for a test case we can run independently that requires no manual intervention.
 
-> ### {% icon hands_on %} Hands-on: Run this locally
+> <hands-on-title>Run this locally</hands-on-title>
 > 1. Create a new folder somewhere
 > 2. Save the RLE encode/decode functions as `main.py` in that folder
 > 3. Save the unittests above as `test.py` in that folder
@@ -244,7 +244,7 @@ And here, we're defining each of these things for a test case we can run indepen
 
 Going back to our list of requirements, how easy is it to run these tests? We can do this using a Python package called `unittest`. This is a built-in testing framework that allows you to write test cases using Python. You can use it to test things like Python functions, database operations, or even things like service APIs - essentially anything that has inputs and expected outputs. 
 
-> ### {% icon tip %} Tip: What About Unit Testing in Other Languages?
+> <tip-title>What About Unit Testing in Other Languages?</tip-title>
 >
 > Other unit testing frameworks exist for Python, including Nose and pyunit, and the approach to unit testing can be translated to other languages as well, e.g. FRUIT for Fortran, JUnit for Java (the original unit testing framework), Catch for C++, etc.
 {: .tip}
