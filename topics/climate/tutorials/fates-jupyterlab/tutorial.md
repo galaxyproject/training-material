@@ -104,7 +104,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 
 # Step-1: Get data
 
-> ## {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates-jupyterlab*.
 >
@@ -139,7 +139,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 
 # Step-2: Opening up Climate JupyterLab
 
-> ## {% icon hands_on %} Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy
+> <hands-on-title> Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy </hands-on-title>
 >
 > Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
 is tutorial.
