@@ -177,7 +177,7 @@ the file if it doesn't exist. If the file exists, it will be
 silently overwritten, which may lead to data loss and thus requires
 some caution.
 
-> ### {% icon tip %} Tip: No `>` on an AZERTY keyboard?
+> <tip-title>No <code>&gt;</code> on an AZERTY keyboard?</tip-title>
 > You can rewrite this using the tee command which writes out a file, while also showing the output to `stdout`.
 > ```bash
 > wc -l *.pdb | tee lengths.txt
