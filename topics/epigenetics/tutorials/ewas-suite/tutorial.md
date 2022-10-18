@@ -17,7 +17,7 @@ contributors:
   - kpbioteam
   - kpoterlowicz
 ---
-> ### Agenda
+> <agenda-title></agenda-title>
 > In this tutorial we will do:
 > 1. TOC
 > {:toc}
@@ -60,7 +60,7 @@ The workflow combines 5 main steps, starting with raw intensity data loading (.i
 
 The first step of the Infinium Human Methylation BeadChip array analysis is raw methylation data loading (intensity information files for each two colour micro array)
 
-> ### {% icon hands_on %} Hands-on: Data Loading
+> <hands-on-title>Data Loading</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
@@ -76,7 +76,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
 >    - `GSM1588707_8795207119_R06C02_Grn.idat`
 >
->    > ### {% icon details %} List of Zenodo URLs
+>    > <details-title>List of Zenodo URLs</details-title>
 >    > ```
 >    > https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
 >    > https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
@@ -105,13 +105,13 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 
 ![quality_control](../../images/quality_control.png)
 
-> ### {% icon hands_on %} Hands-on: Preprocessing
+> <hands-on-title>Preprocessing</hands-on-title>
 > Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and disrupt downstream analysis of results.  {% cite Hansen %} It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
 > ![idat_preprocessing](../../images/2idat_preprocessing.png)
 >
 {: .hands_on}
 
-> ### {% icon comment %}(optional) Normalisation of the data
+> <comment-title>Normalisation of the data</comment-title>
 > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
 >
 {: .comment}
@@ -119,11 +119,11 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 # Differentially methylated regions and positions analysis
 
 The main goal of the **Infinium Human Methylation BeadChip** analysis is to simplify the way differentially methylated loci sites are detected. The **Infinium Human Methylation BeadChip** pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
-> ### {% icon comment %} Phenotype table
+> <comment-title>Phenotype table</comment-title>
 > Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
 {: .comment}
 However, for the purpose of this tutorial we would like you to upload phenotype table from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) repository.
-> ### {% icon hands_on %} Hands-on: Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:
+> <hands-on-title>Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</hands-on-title>
 >    ```
 >    https://zenodo.org/record/1251211/files/phenotypeTable.txt
 >    ```
@@ -177,9 +177,9 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 
 ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > How do we define phenotype covariate?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions
 > {: .solution}
 {: .question}
@@ -188,7 +188,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 
 In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function descriptions, and relationships between these concepts.
 
-> ### {% icon hands_on %} Hands-on:  Annotate Differentially Methylated Position
+> <hands-on-title> Annotate Differentially Methylated Position</hands-on-title>
 > 1. Run **chipeakanno annopeaks** {% icon tool %}on the output of minfi_dmp with the following parameters
 >   - {% icon param-file %} *"Differentialy methylated data"*: output of **minfi dmp** {% icon tool %}
 >   - *"bindingType"*: `StartSite`

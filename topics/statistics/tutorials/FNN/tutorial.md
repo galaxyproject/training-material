@@ -44,7 +44,7 @@ functions, classification/regression problems solved by neural networks, and the
 learning algorithm. Finally, we construct a FNN to solve a regression problem using car purchase
 price prediction dataset.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -297,7 +297,7 @@ why ReLU is so popular in deep networks).
 
 # Get Data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -337,7 +337,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.4.2) %}
 >    - *"Select keras model type"*: `sequential`
@@ -364,7 +364,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.4.2) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -389,7 +389,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
 > - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
 >    - *"Select a scheme"*: `Train and Validate`
@@ -411,7 +411,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
 > - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
@@ -429,7 +429,7 @@ The prediction step generates 1 dataset. It's a file that has the predicted car 
 
 ### **Plot actual vs predicted curves and residual plots**
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
 >
 > - {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}
 >    - *"Select input data file"*: `y_test`

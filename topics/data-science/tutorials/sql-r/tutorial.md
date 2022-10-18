@@ -45,7 +45,7 @@ tags:
 - R
 ---
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
@@ -56,7 +56,7 @@ tags:
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -205,7 +205,7 @@ and translates any special characters in the values
 into their escaped equivalents
 so that they are safe to use.
 
-> ### {% icon question %} Question: Filling a Table vs. Printing Values
+> <question-title>Filling a Table vs. Printing Values</question-title>
 >
 > Write an R program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -215,7 +215,7 @@ so that they are safe to use.
 > random numbers to a file?
 {: .question}
 
-> ### {% icon question %} Question: Filtering in SQL vs. Filtering in R
+> <question-title>Filtering in SQL vs. Filtering in R</question-title>
 >
 > Write an R program that creates a new database called
 > `backup.db` with the same structure as `original.db` and copies all

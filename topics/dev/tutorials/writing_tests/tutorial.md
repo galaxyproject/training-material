@@ -33,7 +33,7 @@ requirements:
 subtopic: core
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -60,12 +60,12 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 
 {% snippet topics/dev/faqs/contributing.md %}
 
-> ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
+> <hands-on-title>Setup your local Galaxy instance</hands-on-title>
 >
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
 > 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git clone https://github.com/<your-username>/galaxy GALAXY_ROOT
 >    > cd GALAXY_ROOT
@@ -74,7 +74,7 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 >
 > 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > bash scripts/common_startup.sh --dev-wheels
 >    > ```
@@ -84,7 +84,7 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 >
 > 4. Activate your new virtual environment:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > . .venv/bin/activate
 >    > ```
@@ -94,7 +94,7 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 >
 > 5. Finally, let's create a new branch for your edits:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git checkout -b my-training
 >    > ```
@@ -102,13 +102,13 @@ Finally, nothing can substitute studying Galaxy's test code - we encourage you t
 >
 >    Now when you run `git branch` you'll see that your new branch is activated:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > git branch
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > > ```bash
 >    > >   training
 >    > > * my-training
@@ -264,7 +264,7 @@ We'll start with the `parse_bytesize` function. Look at the code of the function
 
 Run the tests to verify they pass. You can use the `pytest` command:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > pytest test/unit/util/test_bytesize.py
 > ```
@@ -320,13 +320,13 @@ First, let's test the case when the function returns early - when the email argu
 
 Now run the tests for this module:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > pytest test/unit/data/security/test_validate_user_input.py
 > ```
 {: .code-in}
 
-> ### {% icon warning %} Warning
+> <warning-title>Warning</warning-title>
 > As a word of caution, mocking (or any kind of patching to accommodate testing) may lead to brittle tests: by relying too much on *how* the logic is implemented, we'll be forced to adjust the test each time that implementation changes. It's a tradeoff between having narrowly-scoped tests that will point to the exact location of the problem but may lock the code under test into a given state, and higher-level integration-type tests that test the end result without "looking under the hood", but may be less helpful when pinpointing the exact cause of a failed test. So, use sparingly and keep it simple.
 {: .warning}
 

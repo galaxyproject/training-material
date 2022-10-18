@@ -45,7 +45,7 @@ Bulk RNA-seq data contains a mixture of transcript signatures from several types
 
 In this tutorial, we will use bulk and single-cell RNA-seq data, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk RNA-seq.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -58,7 +58,7 @@ In this tutorial, we will use bulk and single-cell RNA-seq data, including matri
 
 The heterogeneity that exists in the cellular composition of bulk RNA-seq can add bias to the results from differential expression analysis. In order to circumvent this limitation, RNA-seq deconvolution aims to infer cell type abundances by modelling the gene expressions levels as 'weighted sums' of cell type specific expression profiles.
 
-> ### {% icon details %} More details on 'Sums'
+> <details-title>More details on 'Sums'</details-title>
 >
 > **So...** You fancy some maths do you? Good! This is important, as you'll see variations of the phrase 'weighted sums' if you ever look at any papers in the field! Let's think about just the 'sums' here.
 > If we think about the total expression of a given gene you might get from bulk RNA-seq, you could also think about it as the sum of the expression of each cell, for example,
@@ -88,11 +88,11 @@ Many different computational methods have been developed to estimate these cell 
 
 MuSiC uses cell-type specific gene expression from single-cell RNA seq data to characterize cell type compositions (proportions) from bulk RNA-seq data in complex tissues. By appropriate weighting of genes showing cross-subject (sample to sample) and cross-cell (cells of the same cell type within a sample) consistency, MuSiC enables the transfer of cell type-specific gene expression information from one dataset to another.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What is a weighted sum? *Hint*: What kinds of genes would be best for distinguishing cell types, and what kinds of genes would make it difficult?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. So you know what the *Sum* is from above - the total expression of a given gene in a bulk RNA-seq sample depends on the proportion of cell types and the average expression level of each of those cell types (**T = C x P**). However, single cell RNA-seq data is highly variable. Cell-type specific expression in genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample) will be the least useful in accurately distinguishing cells. Therefore, to accurately use the mean expression level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.
 > >
@@ -109,7 +109,7 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Cell Type inference of Human Pancreas Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -152,7 +152,7 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
   But what does this actually look like in the data?
 
-> ### {% icon comment %} Comment: Inspecting Datasets
+> <comment-title>Inspecting Datasets</comment-title>
 >
 > Note that at any time you can visually inspect the input datasets yourself by either:
 > * Expanding the dataset in the history panel clicking on the name of the dataset
@@ -161,18 +161,18 @@ Here we will extract cell proportions from a bulk data of human pancreas data fr
 
 Let's start exploring the datasets.
 
-> ### {% icon hands_on %} Hands-on: Exploring the Datasets
+> <hands-on-title>Exploring the Datasets</hands-on-title>
 >
 > 1. Inspect the `#scrna` expression file
 >  
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What do the rows and columns correspond to?
 >    > 2. What do the values at each position mean?
 >    > 3. Has the data been normalised?
 >    > 4. Why are there so many zeroes?
 >    >
->    > > ### {% icon solution  %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ![expr_tab](../../images/bulk-music/peek_tabular_scrna_expr.png "Peeking at the tabular scRNA expression dataset")
 >    > >
@@ -186,12 +186,12 @@ Let's start exploring the datasets.
 >
 > 2. Inspect the `#bulk` expression file
 >  
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What do the rows and columns correspond to?
 >    > 2. In which field is there likely to be overlap with the `#scrna` dataset?
 >    >
->    > > ### {% icon solution  %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ![bulk_tab](../../images/bulk-music/peek_tabular_bulk_expr.png "Peeking at the tabular bulk RNA-seq expression dataset")
 >    > >
@@ -203,13 +203,13 @@ Let's start exploring the datasets.
 >
 > 3. Inspect the `#scrna` phenotype file
 >  
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Does the phenotypes file describe genes or cells?
 >    > 2. What does the `SubjectName` field describe?
 >    > 3. What does the `cellType` field describe?
 >    >
->    > > ### {% icon solution  %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ![peek_tabular_scrna_pheno.png](../../images/bulk-music/peek_tabular_scrna_pheno.png "Peeking at the tabular scRNA phenotype dataset")
 >    > >
@@ -222,14 +222,14 @@ Let's start exploring the datasets.
 >
 > 4. Inspect the `#bulk` phenotype file
 >  
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Does the phenotypes file describe genes or samples?
 >    > 2. Is the `SubjectName` field related to the `SubjectName` field in the `#scrna` phenotypes file?
 >    > 3. What other factors are in the phenotypes file?
 >    > 4. Is the `tissue` field related to the `cellType` field in the `#scrna` phenotypes file?
 >    >
->    > > ### {% icon solution  %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ![peek_tabular_bulk_pheno.png](../../images/bulk-music/peek_tabular_bulk_pheno.png "Peeking at the tabular bulk RNA-seq phenotype dataset")
 >    > >
@@ -249,7 +249,7 @@ Let's start exploring the datasets.
 
 For now we need to construct our Expression set objects that will be consumed by MuSiC.
 
-> ### {% icon details %} Details: Expression Set
+> <details-title>Expression Set</details-title>
 >
 > ![expression_set](../../images/bulk-music/expressionset.png "Image from Stefano Monti")
 >
@@ -275,13 +275,13 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 
 ### **Construct Expression Set Object**
 
-> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
+> <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `GSE50244bulkeset.expression.tabular` (Input dataset)
 >    - {% icon param-file %} *"Phenotype Data"*: `GSE50244bulkeset.phenotype.tabular` (Input dataset)
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
 >    {: .comment}
@@ -296,18 +296,18 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 
 We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
-> ### {% icon hands_on %} Hands-on: Inspect and Describe the scRNA ExpressionSet Object
+> <hands-on-title>Inspect and Describe the scRNA ExpressionSet Object</hands-on-title>
 >
 > 1. Obtain General Info about the data set
 >    - {% icon galaxy-eye %} Click on the `#scrna` *General Info* dataset in the history view (output of **Construct Expression Set Object** {% icon tool %})
 > 1. Obtain Feature Information about the data set
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3) %} with the following parameters:
->         > ### {% icon warning %} Danger: This tool has needs!
+>         > <warning-title>Danger: This tool has needs!</warning-title>
 >         > You may need to click the dataset from your history and drag it into the input of this tool. Some browsers don't allow this.
 >         {: .warning}  
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >       - *"Inspect"*: `Feature Data Table`
->         > ### {% icon comment %} Comment: Features or Genes?
+>         > <comment-title>Features or Genes?</comment-title>
 >         >
 >         > "Features" are synonymous with "Genes" in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.
 >         >
@@ -321,12 +321,12 @@ We will now inspect these objects we just created to see what information we can
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many samples are in the dataset, and how many genes?
 > 2. Does this agree with the original input tabular expression data set?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 1097 samples and 25 453 genes
 > > 2. Yes!
@@ -351,11 +351,11 @@ Here we will use one of the factors from the bulk RNA-seq phenotypes related to 
 
 It's also important that input scRNA-seq datasets (ideally) have some representation of cell populations from diseased patients.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why should the scRNA-seq dataset contain diseased cells and healthy cells?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. For instance, there might be a weird extra cell type that appears in the disease phenotype. Or perhaps there is a missing cell type in the disease phenotype. Without both healthy & diseased datasets, the cells in the bulk datasets might not be fully identifiable. Saying that, such datasets are not always available - something to keep in mind when interpreting the results!
 > >
@@ -364,7 +364,7 @@ It's also important that input scRNA-seq datasets (ideally) have some representa
 {: .question}
 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3) %} with the following parameters:
 >    - *MuSiC sometimes does not show up from the tool search box. You may need to look for it under the **Single Cell** heading
@@ -384,7 +384,7 @@ It's also important that input scRNA-seq datasets (ideally) have some representa
 >          - *"scRNA Sample Disease Group"*: `T2D` (**Ideally a Factor from scRNA Phenotype**)
 >          - *"scRNA Sample Disease Group (Scale)"*: `5`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > It's important to set a phenotype target threshold, otherwise no cells will be matched for the phenotype target. In this case, when the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D.
 >    {: .comment}
@@ -402,7 +402,7 @@ In the above image you can see (a) the estimated proportion of cells for each of
 As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that from patients with T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with HbA1c expression, where we see that there is a significant negative correlation between HbA1c level and beta cell proportions.
 
 
-> ### {%icon comment %} Comment
+> <comment-title></comment-title>
 >
 >  We can extract the coefficients of this fitting by looking at the `Log of Music Fitting Data` in the `Summaries and Logs` output collection:
 >
@@ -429,12 +429,12 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 ![subject_heatmap](../../images/bulk-music/subject_heatmap.png "Heatmap of cell type proportions at the RNA sample level.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which cell types are under-represented in the NNLS method?
 > 2. Which cell types do not appear to be present in both?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Here it is evident that the previous NNLS method over-represents the Alpha cell type compared to the MuSiC method which gives more weight to the Beta and Ductal cell types, which were under-represented in the NNLS method.
 > > 2. The Delta and Gamma cell types appear empty in both.
@@ -456,7 +456,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Dendrogram of Mouse Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -491,7 +491,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 >
 {: .hands_on}
 
-> ### {% icon details %} Exploring the Datasets
+> <details-title>Exploring the Datasets</details-title>
 >
 > As before, you may choose to explore the bulk and scrna datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.
 >
@@ -501,13 +501,13 @@ You will need to again create ExpressionSet objects, as before.
 
 ### **Construct Expression Set Object**
 
-> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
+> <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `Mousebulkeset.expression.tabular` (Input dataset)
 >    - {% icon param-file %} *"Phenotype Data"*: `Mousebulkeset.phenotype.tabular` (Input dataset)
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
 >    {: .comment}
@@ -522,7 +522,7 @@ You will need to again create ExpressionSet objects, as before.
 
  Determining cell type similarities requires first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-based clustering method of the cell types we wish to cluster.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
@@ -538,12 +538,12 @@ You will need to again create ExpressionSet objects, as before.
 
 ![dendrogram](../../images/bulk-music/dendrogram.png "Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What do you notice about the cells clustering?
 > 2. How many clusters can you see with a height threshold above 650 in the "Cluster log(Design Matrix)"?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping.
 > > 2. The cut-off of 650. Here we cut 13 cell types into 4 groups:
@@ -564,7 +564,7 @@ You will need to again create ExpressionSet objects, as before.
 
 We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.
 
-> ### {% icon hands_on %} Hands-on: Upload marker genes and generate heatmap
+> <hands-on-title>Upload marker genes and generate heatmap</hands-on-title>
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
@@ -579,7 +579,7 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >
 > 2. {% tool [MuSiC](toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3) %} with the following parameters:
 >    - **Note**
->      > ### {% icon warning %} Shortcut!
+>      > <warning-title>Shortcut!</warning-title>
 >      >
 >      > Here we need to re-use all the inputs from the previous **MuSiC** {% icon tool %} step, plus add a few extra. To speed this up, you can simply click on the re-run icon {% icon galaxy-refresh %} under any of its outputs.
 >      {: .warning}
@@ -612,7 +612,7 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >                - *"Marker Gene Group Name"*:`Immune`
 >                - {% icon param-file %} *"List of Gene Markers"*: `immune.markers` (Input dataset)
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The C1 (Neutrophil) and C2 (Podocyte) clusters do not use marker genes for the dendrogram clustering in this dataset.
 >    {: .comment}
@@ -622,14 +622,14 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 
 ![dendro_jitboxheat](../../images/bulk-music/dendro_jitboxheat.png "Jitter and Boxplots of all cell types followed by a heatmap of each RNA sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Most of the expression in the above plot appears to be derived from one cell type.
 >
 > 1. Which cell type dominates the plot?
 > 2. What does this tell you about the bulk RNA?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The PT cells appear to dominate.
 > > 2. Most of the expression in the bulk RNA dataset is derived solely from the PT cells, and could be a monogenic cell line.

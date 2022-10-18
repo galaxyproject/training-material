@@ -36,7 +36,7 @@ notebook:
 
 Here we'll give a quick tutorial on how to read and write files within Python.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -83,13 +83,13 @@ Here we introduce a new bit of syntax, the `with` block. Technically `with` begi
 
 In the above code snippet after the second line, the file (referred to by `handle`) is automatically closed.
 
-> > ### {% icon code-in %} Using `with`
+> > <code-in-title>Using `with`</code-in-title>
 > > ```
 > > with open('file.txt', 'r') as handle:
 > >     print(handle.readlines())
 > > ```
 > {: .code-in}
-> > ### {% icon code-out %} Not using `with`
+> > <code-out-title>Not using `with`</code-out-title>
 > > ```
 > > handle = open('file.txt', 'r')
 > > print(handle.readlines())
@@ -272,7 +272,7 @@ with open('example-converted.fasta', 'w') as handle:
 
 That's it! Check if your `fasta` file looks correct.
 
-> ### {% icon tip %} Tip: `enumerate`
+> <tip-title>`enumerate`</tip-title>
 > If you want to know which item number you're on while you're looping over a list, you can use the function `enumerate()`
 > Try out this code to see how it works:
 >
@@ -403,11 +403,11 @@ print(subset[0:10])
 That should be easier to work with, now we only have one country's data. Let's do some exercises with this data:
 
 
-> ### {% icon question %} Question: Which vaccines were given?
+> <question-title>Which vaccines were given?</question-title>
 >
 > Which vaccines were given? Use the `subset` to examine which vaccines were given in the Netherlands. *Tip*: if `x` is a list, `set(x)` will return the unique values in that list.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > To figure out which vaccines were given, we can look at column 12:
 > >
 > > ```python
@@ -425,14 +425,14 @@ That should be easier to work with, now we only have one country's data. Let's d
 # Try things out here!
 ```
 
-> ### {% icon question %} Question: How many of each vaccine were given?
+> <question-title>How many of each vaccine were given?</question-title>
 >
 > How many of each were given?
 >
 > *Tip*: use the accumulator pattern.
 > *Tip*: Columns 5, 7, and 8 have doses being given out to patients.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > doses = {}
 > > for row in subset:
@@ -449,14 +449,14 @@ That should be easier to work with, now we only have one country's data. Let's d
 # Try things out here!
 ```
 
-> ### {% icon question %} Question: How many of each vaccine were exported? received?
+> <question-title>How many of each vaccine were exported? received?</question-title>
 >
 > How many of each were exported? received?
 >
 > *Tip*: you only need to loop once.
 > *Tip*: you will need to handle an edge case here. Try and find it out!
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > export = {}
 > > received = {}
@@ -480,11 +480,11 @@ That should be easier to work with, now we only have one country's data. Let's d
 # Try things out here!
 ```
 
-> ### {% icon question %} Question: When was the first dose received?
+> <question-title>When was the first dose received?</question-title>
 >
 > *Tip*: use `break`, and check how many doses were given!
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > for row in subset:
 > >     if row[5] and int(row[5]) > 0:
@@ -498,7 +498,7 @@ That should be easier to work with, now we only have one country's data. Let's d
 # Try things out here!
 ```
 
-> ### {% icon question %} Question: Transform the data for plotting
+> <question-title>Transform the data for plotting</question-title>
 >
 > Let's say you want to plot the fraction of the population that has been vaccinated by the various points in time.
 >
@@ -508,7 +508,7 @@ That should be easier to work with, now we only have one country's data. Let's d
 >
 > The output should be a list of percentages ranging from [0.0 to 1.0].
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > total_doses = 0
 > > percent_vaccinated_per_week = []
@@ -539,14 +539,14 @@ plt.ylabel('Percent Vaccinated')
 ```
 
 
-> ### {% icon question %} Question: Which vaccines were given?
+> <question-title>Which vaccines were given?</question-title>
 >
 > Write this out to a new file, with two columns. The index and the Percent Vaccinated. It should be a comma separated file, and should have a header. Save this as a csv file named `weekly-percent-vax.csv`
 >
 > *Tip*: use a `csvwriter`, it works exactly like a `csvreader`. You can use the `writerow()` function to write out a row.
 > *Tip*: Use `enumerate()` to get a list of items with indexes.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > with open('weekly-percent-vax.csv', 'w') as handle:

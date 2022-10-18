@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Factoring out the database call.
 > 

@@ -23,7 +23,7 @@ contributors:
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >

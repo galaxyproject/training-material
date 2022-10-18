@@ -10,7 +10,7 @@
 
 **EggNOG Mapper** compares each protein sequence of the annotation to a huge set of ortholog groups from the [EggNOG database](http://eggnog5.embl.de). In this database, each ortholog group is associated with functional annotation like [Gene Ontology (GO)](http://www.geneontology.org/) terms or [KEGG pathways](https://www.genome.jp/kegg/pathway.html). When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > 1. {% tool [eggNOG Mapper](toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8) %} with the following parameters:
 >    - {% icon param-file %} *"Fasta sequences to annotate"*: {{ input_dataset }}
@@ -32,7 +32,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 
 **InterProScan** itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Protein FASTA File"*: {{ input_dataset }}
@@ -42,7 +42,7 @@ Display the file and explore which kind of identifiers were found by EggNOG Mapp
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 >
 > To speed up the processing by InterProScan during this tutorial, you can disable `Pfam` and `PANTHER` applications. When analysing real data, it is adviced to keep them enabled.
 >

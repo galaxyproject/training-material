@@ -41,7 +41,7 @@ resources, thus reducing queue times on the day of the training.
 This tutorial will go cover how to set up such a service on your own Galaxy server.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -53,7 +53,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 
 # Setting up TIaaS
 
-> ### {% icon hands_on %} Hands-on: Setup TIaaS
+> <hands-on-title>Setup TIaaS</hands-on-title>
 >
 > 1. In your `requirements.yml` add the TIaaS ansible role:
 >
@@ -73,7 +73,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    And run the install step:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -154,7 +154,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
->    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > <tip-title>Why does TIaaS get `DELETE` privileges on Galaxy's Database?</tip-title>
 >    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
 >    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 >    > users who participated in a training return to using normal (non-training) resources after the training ends.
@@ -211,7 +211,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -242,7 +242,7 @@ TIaaS should be available now! The following routes on your server are now confi
 
 Let's see it in action!
 
-> ### {% icon hands_on %} Hands-on: Using TIaaS
+> <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
 >    - Go to https://\<server\>/tiaas/new/
@@ -292,7 +292,7 @@ Let's see it in action!
 {: .hands_on}
 
 
-> ### {% icon comment %} Note: GDPR assistance
+> <comment-title>Note: GDPR assistance</comment-title>
 >
 > Since this setup tracks additional personal information (submitter name & email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.
 >
@@ -311,7 +311,7 @@ While observability for teachers or trainers is already a huge benefit, one of t
 In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
 
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+> <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
 > 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
 >
@@ -397,7 +397,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```

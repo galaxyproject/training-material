@@ -34,7 +34,7 @@ priority: 10
 
 [`argparse`](https://docs.python.org/3/library/argparse.html) is an argument parsing library for Python that's part of the stdlib. It lets you make command line tools significantly nicer to work with.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -49,14 +49,14 @@ Unlike previous modules, this lesson won't use a Jupyter/CoCalc notebook, and th
 
 In the coding world, whenever you run a Python script on the command line, it has a special variable available to it named `argv`. This is a list of all of the arguments used when you run a command line program.
 
-> ### {% icon hands_on %} Hands-on: Print out argv
+> <hands-on-title>Print out argv</hands-on-title>
 >
 > 1. Create / open the file `run.py` in your text editor of choice
 > 2. There we'll create a simple Python script that:
 >   1. imports `sys`, the system module needed to access argv.
 >   2. Prints out `sys.argv`
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > import sys
 > >
@@ -74,9 +74,9 @@ In the coding world, whenever you run a Python script on the command line, it ha
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What did you notice about the output? There are two main points.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The name of the script (`run.py`) is included as the first value every time.
 > > 2. All of the arguments are passed as strings, no numbers.
 > {: .solution}
@@ -86,7 +86,7 @@ In the coding world, whenever you run a Python script on the command line, it ha
 
 Let's sum up all of the numbers passed on the command line. We'll do this by hand, and then we'll replace it with `argparse` to see how much effort that saves us.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 > Update your script to sum up every number passed to it on the command line.
 >
 > It should handle:
@@ -97,9 +97,9 @@ Let's sum up all of the numbers passed on the command line. We'll do this by han
 > Hints:
 > - Skip the program name
 > - Use `try` and `except` to try converting the string to a number.
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > > How does your updated script look?
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > >
 > > > ```python
 > > > import sys
@@ -180,7 +180,7 @@ args.accumulate # Actually a function!
 
 Let's go back to our script, and replace `sys` with argparse.
 
-> ### {% icon hands_on %} Hands-on: Replacing argv.
+> <hands-on-title>Replacing argv.</hands-on-title>
 >
 > 1. Given the following script, replace the use of `argv` with argparse.
 >
@@ -206,9 +206,9 @@ Let's go back to our script, and replace `sys` with argparse.
 >
 >    And print out the sum of those numbers.
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > > How does your final script look?
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > ```python
 > > > import argparse
 > > >

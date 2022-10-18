@@ -36,7 +36,7 @@ Setting up and running a Galaxy Admin Training is not a very complicated process
 
 This tutorial has multiple audiences who are all adressed within this one tutorial. We encourage everyone involved in hosting a GAT event to read this, so you are aware of all of the moving parts which are required for such an event.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will see:
 >
@@ -72,7 +72,7 @@ Skip to the section on setting up below that is appropriate for you
 
 ## [EU admins] Setting up VMs
 
-> ### {% icon hands_on %} EU: Setting up VMs
+> <hands-on-title>EU: Setting up VMs</hands-on-title>
 >
 > 1. Open a PR editing the [count variable](https://github.com/usegalaxy-eu/infrastructure/blob/master/gat.tf#L1) and increasing it to the desired number of VMs.
 >
@@ -92,7 +92,7 @@ Skip to the section on setting up below that is appropriate for you
 
 ## [Non-EU admins] Setting up the VMs
 
-> ### {% icon hands_on %} Non-EU: Setting up VMs
+> <hands-on-title>Non-EU: Setting up VMs</hands-on-title>
 >
 > 1. If you have your own cloud, setup VMs per student. We strongly recommend:
 >
@@ -131,7 +131,7 @@ ansible_ssh_private_key_file = ~/admintraining.key
 set_password = true      # Generate a random password
 ```
 
-> ### {% icon hands_on %} Everyone: Setting up VMs
+> <hands-on-title>Everyone: Setting up VMs</hands-on-title>
 >
 > 1. `git clone https://github.com/galaxyproject/admin-training/` and change into that repo
 >

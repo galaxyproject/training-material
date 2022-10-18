@@ -54,11 +54,11 @@ translations:
 
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
-> ### {% icon comment %} Tutorials everywhere?
+> <comment-title>Tutorials everywhere?</comment-title>
 > This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -71,7 +71,7 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
@@ -95,15 +95,15 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What information is stored in your AnnData object? The last tool to generate this object counted the mitochondrial associated genes in your matrix. Where is that data stored?
 > 2. While you are figuring that out, how many genes and cells are in your object?
 >
->   > ### {% icon tip %} Hint
+>   > <tip-title>Hint</tip-title>
 >   > You want to use the same tool you used in the previous tutorial to examine your AnnData, since it's not necessarily as simple as examining the Anndata dataset in the history!
 >   >
->   >   > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
+>   >   > <hands-on-title>Inspecting AnnData Objects</hands-on-title>
 >   >   >
 >   >   > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >   >   >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -116,7 +116,7 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 >   >   >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >   >   {: .hands_on}
 >   {: .tip}
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. If you examine your AnnData object, you'll find a number of different quality control metrics for both cells {% icon tool %} **obs** and {% icon tool %} genes **var**.
 > >   - For instance, you can see a `n_cells` under **var**, which counts the number of cells that gene appears in.
@@ -140,7 +140,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 ### Creating the plots
 
-> ### {% icon hands_on %} Hands-on: Making QC plots
+> <hands-on-title>Making QC plots</hands-on-title>
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Mito-counted AnnData`
@@ -205,13 +205,13 @@ That's a lot of information! Let's attack this in sections and see what question
 
 {% snippet faqs/galaxy/features_scratchbook.md %}
 
-> ### {% icon question %} Question - Batch Variation
+> <question-title>Batch Variation</question-title>
 >
 > Are there differences in sequencing depth across the samples?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret it?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The plot `violin - batch - log` will have what you're looking for!
 > >     ![Violin - batch - log](../../images/scrna-casestudy/wab-violin-batch-log.png "Violin - batch - log (Raw)")
@@ -224,14 +224,14 @@ That's a lot of information! Let's attack this in sections and see what question
 >
 {: .question}
 
-> ### {% icon question %} Question - Biological Variables
+> <question-title>Biological Variables</question-title>
 >
 > Are there differences in sequencing depth across sex? Genotype?
 > 1. Which plot(s) addresses this?
 > 2. How do you interpret the `sex` differences?
 > 3. How do you interpret the `genotype` differences?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Similar to above, the plots `violin - sex - log` and `violin - genotype - log` will have what you're looking for!
 > >      ![Violin - sex - log](../../images/scrna-casestudy/wab-violin-sex-log.png "Violin - sex - log (Raw)")
@@ -251,13 +251,13 @@ That's a lot of information! Let's attack this in sections and see what question
 
 Now that we've assessed the differences in our samples, we will look at the libraries overall to identify appropriate thresholds for our analysis.
 
-> ### {% icon question %} Question - Filter Thresholds
+> <question-title>Filter Thresholds</question-title>
 >
 > What threshold should you set for `log1p_n_genes_by_counts`?
 > 1. Which plot(s) addresses this?
 > 2. What number would you pick?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Any plot with `log1p_n_genes_by_counts` would do here, actually! Some people prefer scatterplots to violins.
 > > ![Scatter-genesxmito](../../images/scrna-casestudy/wab-scatter-genesxmito.png "Scatter - mito x genes (Raw)")
@@ -273,7 +273,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > 1. Which plot(s) addresses this?
 > 2. What number would you pick?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. As before, any plot with `log1p_total_counts` will do! Again, we'll use a scatterplot here, but you can use a violin plot if you wish!
 > > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
@@ -287,7 +287,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > 1. Which plot(s) addresses this?
 > 2. What number would you pick?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Any plot with `pct_counts_mito` would do here, however the scatterplots are likely the easiest to interpret. We'll use the same as last time.
 > > ![Scatter-countsxmito](../../images/scrna-casestudy/wab-scatter-countsxmito.png "Scatterplot - mito x UMIs (Raw)")
@@ -302,7 +302,7 @@ Now that we've assessed the differences in our samples, we will look at the libr
 
 It's now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: `31178 cells` and `35734 genes`. Let's see how that changes each time!
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **log1p_n_genes_by_counts** > `5.7`
@@ -311,7 +311,7 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 > - Everyone else: Choose your own thresholds and compare results!
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Filter cells by log1p_n_genes_by_counts
+> <hands-on-title>Filter cells by log1p_n_genes_by_counts</hands-on-title>
 >
 > 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-counted AnnData`
@@ -341,12 +341,12 @@ It's now time to apply these thresholds to our data! First, a reminder of how ma
 
 Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon param-repeat %} multiple parameters at the same time (i.e. filter `log1p_total_counts`, `log1p_n_genes_by_counts`,and `pct_counts_mito`) in the same step. The only reason we aren't doing that here is so you can see what each filter accomplishes. As such, examine your plot and general information.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Interpret the violin plot
 > 2. How many genes & cells do you have in your object now?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ![Violinplot-filteronce](../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
 > > 1. The only part that seems to change is the `log1p_n_genes_by_counts`.  You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.
@@ -356,7 +356,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Filter cells by log1p_total_counts
+> <hands-on-title>Filter cells by log1p_total_counts</hands-on-title>
 >
 > 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Genes-filtered Object`
@@ -384,12 +384,12 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 > 6. **Rename** {% icon galaxy-pencil %} output `General - Filterbycounts`
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Interpret the violin plot
 > 2. How many genes & cells do you have in your object now?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ![Violinplot-filtertwice](../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png "1st filter vs 2nd filter - counts/cell")
 > > 1. We will focus on the `log1p_total_counts` as that shows the biggest change. Similar to above, the bottom of the violin shape has flattered due to the threshold.
@@ -399,7 +399,7 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 >
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Filter cells by pct_counts_mito
+> <hands-on-title>Filter cells by pct_counts_mito</hands-on-title>
 >
 > 1. {% tool [Scanpy FilterCells](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Counts-filtered Object`
@@ -431,12 +431,12 @@ Note that the {% icon tool %} **Scanpy Filtercells** allows you to put {% icon p
 > 6. **Rename** {% icon galaxy-pencil %} output `General - Filterbymito`
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Interpret the violin plot
 > 2. How many genes & cells do you have in your object now?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ![Violinplot-filtermito](../../images/scrna-casestudy/wab-violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
 > > 1. If we carefully check the axes, we can see that the `pct_counts_mito` has shrunk.
@@ -451,7 +451,7 @@ Here's a quick overall summary for easy visualisation if you fancy it.
 
 Fantastic work! However, you've now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let's remove them! Note that `3` is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Variable: **n_cells**
 > - Control > `3`
@@ -459,7 +459,7 @@ Fantastic work! However, you've now removed a whole heap of cells, and since the
 {: .details}
 
 
-> ### {% icon hands_on %} Hands-on: Filter genes
+> <hands-on-title>Filter genes</hands-on-title>
 >
 > 1. {% tool [Scanpy FilterGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Mito-filtered Object`
@@ -496,7 +496,7 @@ Using the final `General - Filtered object`, we can summarise the results of our
 
 So currently, you have a matrix that is 8605 cells by 15395 genes. This is still quite big data. We have two issues here - firstly, you already know there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. Secondly, we like to plot things on x/y plots, so for instance *Gapdh* could be on one axis, and *Actin* can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in this case, 15393 more dimensions), is a bit trickier! So our next steps are to transform our big data object into something that is easy to analyse and easy to visualise.
 
-> ### {% icon hands_on %} Hands-on: Normalisation
+> <hands-on-title>Normalisation</hands-on-title>
 >
 > 1. {% tool [Scanpy NormaliseData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Filtered Object`
@@ -506,7 +506,7 @@ Normalisation helps reduce the differences between gene and UMI counts by fittin
 
 Now we need to look at reducing our gene dimensions. We have loads of genes, but not all of them are different from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify the dataset. We will flag genes that vary across the cells for future analysis.
 
-> ### {% icon hands_on %} Hands-on: Find variable genes
+> <hands-on-title>Find variable genes</hands-on-title>
 >
 > 1. {% tool [Scanpy FindVariableGenes](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
@@ -518,7 +518,7 @@ Now we need to look at reducing our gene dimensions. We have loads of genes, but
 
 Next up, we're going to scale our data so that all genes have the same variance and a zero mean. This is important to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a '0' when you calculate gene differences between clusters.
 
-> ### {% icon hands_on %} Hands-on: Scaling data
+> <hands-on-title>Scaling data</hands-on-title>
 >
 > 1. {% tool [Scanpy ScaleData](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_FVG` (output of **Scanpy FindVariableGenes** {% icon tool %})
@@ -535,15 +535,15 @@ We still have too many dimensions. Transcript changes are not usually singular -
 ## Principal components
 Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, `3248` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first `x` principal components in our data to drastically reduce the number of dimensions.
 
-> ### {% icon comment %} 3248???
+> <comment-title>3248???</comment-title>
 > Where did the `3248` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
-> ### {% icon warning %} Danger: Check your AnnData object!
+> <warning-title>Check your AnnData object!</warning>
 > Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '3248'.
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: Calculate Principal Components
+> <hands-on-title>Calculate Principal Components</hands-on-title>
 >
 > 1. {% tool [Scanpy RunPCA](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Use_me_Scaled` (output of **Scanpy ScaleData** {% icon tool %})
@@ -567,7 +567,7 @@ We can see that there is really not much variation explained past component 19. 
 
 We're still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): "Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default".
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **Number of PCs to use** = `20`
@@ -575,7 +575,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 > - Everyone else: Use the PC variance plot to pick your own PC number, and choose your own neighbour maximum as well!b
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: ComputeGraph
+> <hands-on-title>ComputeGraph</hands-on-title>
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
@@ -589,14 +589,14 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 
 Two major visualisations for this data are tSNE and UMAP. We must calculate the coordinates for both prior to visualisation. For tSNE, the parameter [**perplexity**](https://www.nature.com/articles/s41467-019-13056-x) can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, by changing the **neighbours**.
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Control
 >      - **Perplexity** = `30`
 > - Everyone else: Choose your own perplexity, between 5 and 50!
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Calculating tSNE & UMAP
+> <hands-on-title>Calculating tSNE & UMAP</hands-on-title>
 >
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
@@ -613,11 +613,11 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 # Cell clusters & gene markers
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Let's take a step back here. What is it, exactly, that you are trying to get from your data? What do you want to visualise, and what information do you need from your data to gain insight?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Really we need two things - firstly, we need to make sure our experiment was set up well. This is to say, our biological replicates should overlap and our variables should, ideally, show some difference. Secondly, we want insight - we want to know which cell types are in our data, which genes drive those cell types, and in this case, how they might be affected by our biological variable of growth restriction. How does this affect the developing cells, and what genes drive this? So let's add in information about cell clusters and gene markers!
 > >
@@ -627,7 +627,7 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 
 Finally, let's identify clusters! Unfortunately, it's not as majestic as biologists often think - the maths doesn't necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab. Sigh. So, we're going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a **resolution** parameter for how granular you want to be.
 
-> ### {% icon details %} Working in a group? Decision-time!
+> <details-title>Working in a group? Decision-time!</details-title>
 > Oh yes, yet another decision! Single cell analysis is sadly not straight forward.
 > - Control
 >      - **Resolution, high value for more and smaller clusters** = `0.6`
@@ -636,7 +636,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 > - Everyone else: Consider the newer **Leiden** clustering method. Note that in future parameters, you will likely need to specify 'leiden' rather than 'louvain', which is the default, if you choose this clustering method.
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: FindClusters
+> <hands-on-title>FindClusters</hands-on-title>
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
@@ -648,7 +648,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 
 ## FindMarkers
 
-> ### {% icon hands_on %} Hands-on: FindMarkers
+> <hands-on-title>FindMarkers</hands-on-title>
 >
 > 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
@@ -673,7 +673,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 
 Now, there's a small problem here, which is that if you {% icon galaxy-eye %} inspect the output marker tables, you won't see gene names, you'll see Ensembl IDs. While this is a more bioinformatically accurate way of doing this (not every ID has a gene name!), we might want to look at more well-recognised gene names, so let's pop some of that information in!
 
-> ### {% icon hands_on %} Hands-on: Adding in Gene Names
+> <hands-on-title>Adding in Gene Names</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
@@ -707,7 +707,7 @@ Now, there's a small problem here, which is that if you {% icon galaxy-eye %} in
 It's time! Let's plot it all!
 But first, let's pick some marker genes from the `Markers-cluster` list that you made as well. I'll be honest, in practice, you'd now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (a well annotated dataset that you'll use as the ideal). In the mean time, let's do this the old-fashioned way, and just copy a bunch of the markers in the original paper.
 
-> ### {% icon hands_on %} Hands-on: Plot the cells!
+> <hands-on-title>Plot the cells!</hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
@@ -740,12 +740,12 @@ Now it's the fun bit! We can see where genes are expressed, and start considerin
 
 ## Biological Interpretation
 
-> ### {% icon question %} Question - Appearance is everything
+> <question-title>Appearance is everything</question-title>
 >
 > Which visualisation is the most useful for getting an overview of our data, *pca*, *tsne*, or *umap*?
 > ![PCA-tSNE-UMAP](../../images/scrna-casestudy/wab-3visualisations.png "Louvain clustering by dimension reduction")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You can see why a PCA is generally not enough to see clusters in samples - keep in mind, you're only seeing components 1 and 2! - and therefore why the tSNE and UMAP visualisation dimensionality reductions are so useful. But there is not necessarily a clear winner between tSNE and UMAP, but I think UMAP is slightly clearer with its clusters, so we'll stick with that for the rest of the analysis.
 > >
@@ -767,14 +767,14 @@ Note that the cluster numbering is based on size alone - clusters 0 and 1 are no
 
 The authors weren't interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn't really require such granularity of clusters.
 
-> ### {% icon details %} Working in a group? Important!
+> <details-title>Working in a group? Important!</details-title>
 > If you have deviated from any of the original parameters in this tutorial, you will likely have a different number of clusters. You will, therefore, need to change the 'Annotating clusters' *"Comma-separated list of new categories"* accordingly. Best of luck!
 >
 {: .details}
 
 ### Annotating Clusters
 
-> ### {% icon hands_on %} Hands-on: Annotating clusters
+> <hands-on-title>Annotating clusters</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
@@ -816,13 +816,13 @@ The authors weren't interested in further annotation of the DP cells, so neither
 
 Now that we know what we're dealing with, let's examine the effect of our variable, proper science!
 
-> ### {% icon question %} Question - Genotype
+> <question-title>Genotype</question-title>
 >
 > Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?
 >
 > ![Genotype Images](../../images/scrna-casestudy/wab-genotypedifferences.png "Genotype differences")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table... So much to investigate! But before we set you off to explore to your heart's delight, let's also look at this a bit more technically.
 > >
@@ -834,13 +834,13 @@ Now that we know what we're dealing with, let's examine the effect of our variab
 
 Is our analysis real? Is it right? Well, we can assess that a little bit.
 
-> ### {% icon question %} Question - Batch effect
+> <question-title>Batch effect</question-title>
 >
 > Is there a batch effect?
 >
 > ![Batch effect](../../images/scrna-casestudy/wab-batcheffect.png "Batch effect?")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > While some shifts are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
 > > Additionally, we will also look at the confounding effect of sex.
@@ -853,13 +853,13 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 {: .question}
 
-> ### {% icon question %} Question - Depth effect
+> <question-title>Depth effect</question-title>
 >
 > Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 >
 > ![Sequencing depth](../../images/scrna-casestudy/wab-umap-totalcounts.png "Counts across clusters")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we're seeing in that splurge. Importantly, we don't see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn't seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
 > >
@@ -867,13 +867,13 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 {: .question}
 
-> ### {% icon question %} Question - Sample purity
+> <question-title>Sample purity</question-title>
 >
 > Do you think we processed these samples good enough?
 >
 > ![Sequencing depth](../../images/scrna-casestudy/wab-hba.png "Hemoglobin across clusters")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Additionally, hemoglobin - a red blood cell marker that should NOT be found in T-cells - appears throughout the entire sample in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
 > >
@@ -881,13 +881,13 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 >
 {: .question}
 
-> ### {% icon question %} Question - Clustering resolution
+> <question-title>Clustering resolution</question-title>
 >
 > Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
 >
 > ![Itm2a Expression](../../images/scrna-casestudy/wab-umap-itm2a.png "Itm2a across clusters")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn't look like a cluster by eye is NOT enough to say it's not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That's a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
 > > If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
@@ -903,7 +903,7 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your *final publishable* plots takes a lot of time and testing. Luckily, there is a helpful interactive viewer {% cite Cakir2020 %} export tool {% cite Moreno2020.04.08.032698 %} that can help you explore without having to produce new plots over and over!
 
-> ### {% icon hands_on %} Hands-on: Cellxgene
+> <hands-on-title>Cellxgene</hands-on-title>
 >
 > 1. {% tool [Interactive CellXgene Environment](interactive_tool_cellxgene) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate dataset"*: `Final cell annotated object`
@@ -923,7 +923,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 # Conclusion
 {:.no_toc}
 
-> ### {% icon details %} Working in a group? The finale!
+> <details-title>Working in a group? The finale!</details-title>
 > Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was 'wrong' or 'ill-advised', and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation...
 > For those that did not take the 'control' options, please
 > > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`

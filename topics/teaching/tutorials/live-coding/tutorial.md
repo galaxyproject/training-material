@@ -35,7 +35,7 @@ We do not use slides in our lessons. Instead, instructors plug their laptop into
 
 However, the instructor is not live coding in a vacuum. Importantly, learners are strongly encouraged to "code-along" with the instructor. We refer to the practice of having the instructor live code and the learners code along as "participatory live coding" or, less formally, 'code-along sessions'.
 
-> ### {% icon hands_on %} Up and Down (5 min)
+> <hands-on-title>Up and Down (5 min)</hands-on-title>
 >
 > List some advantages and challenges of participatory live coding from both a learner's and an instructor's point of view.
 >
@@ -59,7 +59,7 @@ Live coding fits well into the practice-feedback model we have been discussing -
 Many error messages are obscure and not written with novices in mind. Continue to use the strategies for error framing that
 [was discussed in the motivation tutorial]({% link topics/teaching/tutorials/learner_participation_engagement/tutorial.md %}) to make sure this feedback is useful to learners.
 
-> ### {% icon hands_on %} Compare and Contrast (15 min)
+> <hands-on-title>Compare and Contrast (15 min)</hands-on-title>
 >
 > Watch this first participatory live coding demo video: [https://youtu.be/bXxBeNkKmJE](https://youtu.be/bXxBeNkKmJE) and this second demo video: [https://youtu.be/SkPmwe_WjeY](https://youtu.be/SkPmwe_WjeY) as a group and then summarize your feedback on both. Use the 2x2 rubric for feedback that was [discussed in the feedback tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %}).
 >
@@ -90,7 +90,7 @@ Some instructors use printouts of the lesson material during teaching. Others us
 Read more in [Ten quick tips for teaching with participatory live-coding] {% cite Nederbragt2020 %}, as well as the excellent section on "Live Coding" from the book "Teaching Tech Together" by Greg Wilson {% cite Wilson2019 %}.
 
 
-> ### {% icon hands_on %} Practice Teaching (25 min)
+> <hands-on-title>Practice Teaching (25 min)</hands-on-title>
 >
 > 1. Split into groups of three.
 > 1. Assign roles, which will rotate: presenter, timekeeper, note-taker.
