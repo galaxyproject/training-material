@@ -19,7 +19,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github_repository }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
@@ -219,7 +219,7 @@ Because this was just a practice pull request, let's close it again.
 
 
 # Conclusion
-{:.no_toc}
+
 
 With this tutorial, you learn how to use GitHub to change a file, create a pull request and then contribute to the training material. What you have learned here can be applied to any file.
 

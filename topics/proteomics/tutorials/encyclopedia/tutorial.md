@@ -29,7 +29,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Data Independent Acquisition (DIA) was introduced as a method to provide reproducible quantitative information as an improvement over the Data Dependent Acquisition (DDA) {% cite Gillet2012 %}. Despite benefits of DIA, such as increased depth of coverage and lesser missing values, the computational analysis of the complicated and multiplexed data presents challenges. Therefore, with the rise of usage of this technique, rises a need for new and robust methods of data analysis.
 
@@ -417,7 +417,7 @@ Sample output of the Protein Quantitation Output:
 {: .comment}
 
 # **Conclusion**
-{:.no_toc}
+
 
 This completes the walkthrough of the EncyclopeDIA Standard workflow.
 

@@ -29,7 +29,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 Although Galaxy has thousands of tools readily available, new software and packages will always be useful.
@@ -1385,4 +1385,4 @@ It is also easy to setup a github tool repository on your own that has the same 
 In order to setup your own tool repository the Galaxy community created a [template repository](https://github.com/bernt-matthias/galaxy-tool-repository-template). By clicking `Use this template` and follow the instructions in the README file you get you own tool repository.
 
 # Conclusion
-{:.no_toc}
+

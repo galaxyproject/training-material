@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
@@ -264,7 +264,7 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 To select the best pathways for producing the lycopene in *E. coli*, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis workflow.
 

@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial is based on the analysis described in [publication](http://www.genetics.org/content/188/4/799).
 Further information about the pipeline is available from [the official STACKS website](http://catchenlab.life.illinois.edu/stacks).
@@ -247,7 +247,7 @@ One line by locus, one column by individual (aa, ab, AB if automatic correction 
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as genotypes and haplotypes to generate input files for downstream genetic map creation. This approach can be summarized with the following scheme:
 

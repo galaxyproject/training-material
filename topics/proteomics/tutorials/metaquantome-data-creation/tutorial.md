@@ -36,7 +36,7 @@ tags: [microbiome]
 
 
 # Introduction
-{:.no_toc}
+
 
 Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental
 or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
@@ -667,7 +667,7 @@ This step is used to filter out the GO terms with molecular function and the cor
 ![Molecular-Function](../../images/molecularfunction.png){: width="60%"}
 
 # **Conclusion**
-{:.no_toc}
+
 
 This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.
 

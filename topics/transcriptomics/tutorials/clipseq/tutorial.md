@@ -27,7 +27,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
@@ -635,12 +635,12 @@ Next we are going to use the generated bigWig files of our alignment ends and th
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial you imported raw eCLIP data, evaluated the quality of the read library before the read processing, removed adapter sequences and unique molecular identifier from the reads, aligned the reads to a reference genome, de-duplicated the read library, analysed the quality of the de-duplication and read mapping, found significantly enriched regions (peaks) for the protein RBFOX2 and finally scrutinised the peaks on potential conserved motifs and target RNAs. In addition, you took a short glimpse on the quality of the peak calling. Keep in mind, the read library for CLIP-Seq data might have different formats for different protocols (e.g, PAR-CLIP). However, the overall analysis you learned in this tutorial stays nearly the same.
 
-# Remark to Workflow
-{:.no_toc}
+### Remark about Workflow
+
 
 In order to use the workflow linked to this tutorial, you have to create two lists of dataset pairs; one for you control and one for your CLIP experiment.
 

@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In the studies performed by [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), biomarkers are examined to predict the chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damage that happens with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to select useful biomarkers from DNA methylation dataset. The [CpGs sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.
 
@@ -433,6 +433,6 @@ The [residual plot](http://docs.statwing.com/interpreting-residual-plots-to-impr
 Figure [6](#figure-6) shows that we achieved an R2 score of `0.94` and root mean square score of `3.76` for the test set using the Gradient boosting regressor. The study of [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) also mentions a similar root mean square score (`3.93`), derived using the random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (`0.94`) is close to the best achievable score of `1.0` which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in Galaxy, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.
 
 # Conclusion
-{:.no_toc}
+
 
 In our tutorial, we were able to use machine learning tools in Galaxy to reproduce the results reported in these scientific studies - [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub). We also learned how to work with high-dimensional datasets, perform a hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in Galaxy which can also be tried out on these datasets to verify whether the accuracy can be improved.

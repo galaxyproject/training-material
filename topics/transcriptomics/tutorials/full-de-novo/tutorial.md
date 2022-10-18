@@ -28,7 +28,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -566,7 +566,7 @@ Why do we need to correct those?
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.

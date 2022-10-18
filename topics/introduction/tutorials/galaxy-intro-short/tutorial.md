@@ -34,7 +34,7 @@ contributors:
 ---
 
 # Overview
-{:.no_toc}
+
 
 * This is a short introduction to the Galaxy user interface - the web page that you interact with.
 * We will cover key tasks in Galaxy: uploading files, using tools, viewing histories, and running workflows.
@@ -375,6 +375,6 @@ Now that we have built our workflow, let's use it to re-create our small analysi
 
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, viewed results and run a workflow. Additional tutorials are available for a more in-depth introduction to Galaxy's features.

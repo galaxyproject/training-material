@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.
 
@@ -267,7 +267,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 You can now for example filter this dataset to only keep FST'=1 loci for further analysis...
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed real RAD sequencing data to extract useful information, such as which loci are candidate regarding the genetic differentiation between freshwater and oceanic Stickelback populations. To answer these questions, we analyzed RAD sequence datasets using a de novo RAD-seq data analysis approach. This approach can be sum up with the following scheme:
 

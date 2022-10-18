@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - *e.g.* microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in *Drosophila melanogaster*.
 
@@ -74,7 +74,7 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastq
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 >    ![History section with all the loaded datasets](../../images/sRNA/Fig3_dataset_lists_made.png)
-> 
+>
 > 3. Import the remaining files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
@@ -117,10 +117,10 @@ Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one
 >    >    ![The output of FastQC stats adapted](../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png)
 >    >
 >    > > <solution-title></solution-title>
->    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert. 
->    > > 2. All samples have a read length of 50 nt. 
->    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part). 
->    > > 4. Yes, the "Illumina Universal Adapter" is present. 
+>    > > 1. All samples use the Illumina 1.9 quality encoding scheme, so we do **not** need to convert.
+>    > > 2. All samples have a read length of 50 nt.
+>    > > 3. The base quality across the entire length of the reads is good (phred score > 28 for the most part).
+>    > > 4. Yes, the "Illumina Universal Adapter" is present.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -370,8 +370,8 @@ For more information about `DESeq2` and its outputs, have a look at [`DESeq2` do
 
 Coming soon!
 
-## Conclusion
-{:.no_toc}
+# Conclusion
+
 
 Analysis of small RNAs is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small RNA subclasses. The goal of this tutorial is to introduce you to a common small RNA workflow that specifically identifies changes in endogenous siRNA abundances that target protein-coding mRNAs and transposable elements. The steps presented here can be rearranged and modified based on small RNA features of specific systems and the needs of the user.
 

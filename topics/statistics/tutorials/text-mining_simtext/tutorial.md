@@ -27,7 +27,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Literature exploration in [PubMed](https://pubmed.ncbi.nlm.nih.gov/) on a large number of biomedical entities (e.g., genes, diseases, or experiments) can be time-consuming and challenging, especially when assessing associations between entities. Here, we use SimText, a toolset for literature research that allows you to collect text from PubMed for any given set of biomedical entities, extract associated terms, and analyze similarities among them and their key characteristics in an interactive tool.
 
@@ -135,5 +135,5 @@ The following features are generated:
 ![Clustering](images/simtextapp_clustering.gif "Hierarchical clustering of the matrix. Different clustering methods can be selected and the adjusted rand index be calculated.")
 
 # Conclusion
-{:.no_toc}
+
 

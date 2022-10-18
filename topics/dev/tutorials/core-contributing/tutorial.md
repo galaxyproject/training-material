@@ -31,7 +31,7 @@ requirements:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.
 

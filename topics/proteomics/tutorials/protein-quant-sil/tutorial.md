@@ -34,7 +34,7 @@ tags: [DDA, SILAC]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 There are two types of chemical tags:
@@ -49,7 +49,7 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 ![ms1 feature](../../images/protein-quant-sil_ms1feature.png "MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.")
 
 ## Prerequisites
-{:.no_toc}
+
 
 If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 

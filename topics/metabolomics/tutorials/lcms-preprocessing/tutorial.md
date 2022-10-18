@@ -26,7 +26,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.
 It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.
@@ -1028,7 +1028,7 @@ or anything not too long that you may find convenient.
 
 
 # Conclusion
-{:.no_toc}
+
 
 This tutorial allowed you to get a glance at what data pre-processing in Metabolomics could look like when dealing with LC-MS data.
 The workflow used here as an example is only one glance at what you can construct using Galaxy.

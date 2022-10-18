@@ -14,7 +14,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.
 
@@ -45,4 +45,4 @@ To generate the PDFs, a command `make pdf` is given. This command:
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

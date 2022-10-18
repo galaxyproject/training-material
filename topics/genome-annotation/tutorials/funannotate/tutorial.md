@@ -49,7 +49,7 @@ priority: 2
 
 
 # Introduction
-{:.no_toc}
+
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
@@ -442,7 +442,7 @@ The output is a web page with different tabs:
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse, and how to compare it with another annotation.
 

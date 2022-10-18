@@ -31,7 +31,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
 The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
@@ -488,7 +488,7 @@ ptionally, you can also use `plotProfile`to create a profile plot using to compu
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 ![Summary of the different steps of the tutorial and the generated files](../../images/estrogen-receptor-binding-site-identification/tutorial-scheme.png "Different steps of the tutorials with the generated files")
 

@@ -22,7 +22,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 [Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
 
@@ -274,7 +274,7 @@ In this section, you can run the RetroSynthesis Workflow more easily and fastly 
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we produced candidates pathways to produce Lycopene in an Esherichia Coli strain.
 Three main steps were involved:

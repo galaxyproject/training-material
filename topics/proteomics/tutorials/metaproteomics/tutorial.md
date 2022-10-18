@@ -26,7 +26,7 @@ tags: [microbiome]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
 For this MS/MS data will be matched to peptide sequences provided through a FASTA file.

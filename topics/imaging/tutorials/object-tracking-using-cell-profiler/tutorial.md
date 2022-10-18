@@ -26,7 +26,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.
 
@@ -491,6 +491,6 @@ As mentioned in the introduction, the tool {% tool [CellProfiler](toolshed.g2.bx
 
 
 # Conclusion
-{:.no_toc}
+
 
 We've run a CellProfiler pipeline on Galaxy to segment and track dividing nuclei in a Drosophila embryo. We've exported images to visually inspect the outcome and saved tables of computed object features in comma-separated text files for future analysis.

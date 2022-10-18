@@ -49,7 +49,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
 The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.
@@ -90,7 +90,7 @@ More information can be found in the [reagent kit documentation](https://support
 
 
 # Analysis Strategy
-{:.no_toc}
+
 
 The tutorial is structured into two parts:
 
@@ -524,7 +524,7 @@ Here we recover 278 high quality cells instead of the 272 detected via the defau
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 

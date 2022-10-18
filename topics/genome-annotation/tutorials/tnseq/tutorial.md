@@ -29,12 +29,12 @@ priority: 4
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limited by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
 ## Transposon insertion Sequencing
-{:.no_toc}
+
 
 Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
@@ -55,7 +55,7 @@ Two type of transposon insertion methods exist:
 - Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. This method will be the subject of another tutorial.
 
 ## Building a TnSeq library
-{:.no_toc}
+
 
 Different types of transposons can be used depending of the goal of your analysis.
 
@@ -91,7 +91,7 @@ The transposon inserts itself at TA site at the ITR junctions. These ITR junctio
 Because of this complex transposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several steps of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.
 
 ## Tnseq analysis
-{:.no_toc}
+
 
 Once the genomic sequences are extracted from the initial reads (*i.e.* remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
 
@@ -773,7 +773,7 @@ Let's now get the list of essential gene that are different between the two cond
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 In this tutorial, we learned how to predict essential genes in different conditions. Although it seems to be a long process, keep in mind that the steps allowing to get the list of TA site does not need to be repeated for each analysis as long as you study the same genome.
 For repetitive analyses, the steps are fewer : mapping, coverage, attribution to TA sites, merging of strands and Transit analysis.
 

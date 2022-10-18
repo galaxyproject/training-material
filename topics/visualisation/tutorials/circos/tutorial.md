@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 
 Circos ({% cite krzywinski2009circos %}) is a software package for visualizing data in a circular layout. This makes Circos ideal for exploring relationships between objects or positions. Circos plots have appeared in thousands of scientific publications. Although originally designed for visualizing genomic data, it can create figures from data in any field.
@@ -1388,6 +1388,6 @@ Hopefully this helps you take your Circos plots from 90% to 100% publication rea
 
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations on finishing this tutorial! You have now seen how you can create Circos plots within Galaxy. Circos is a very flexible tool, but this flexibility also comes with a certain degree of complexity and a steep learning curve. When you are making your own plots, remember that Circos is an iterative process, don't try to do too much at once, but build your plot up step by step, and check the output often.

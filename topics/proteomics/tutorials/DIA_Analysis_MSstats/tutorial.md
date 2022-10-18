@@ -30,7 +30,7 @@ tags: [DIA]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html) as well as the [DIA analysis tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html), which teach the principles and characteristics of DIA data analysis.
 
@@ -236,7 +236,7 @@ Here we will use **MSstats**, which enables the statistical analysis and process
 
 
 # Conclusion
-{:.no_toc}
+
 
 ![DIA_MSstats_pipe](../../images/DIA_MSstats_sum.png "All-in one workflow for DIA analysis in Galaxy. The statistical analysis using MSstats is highlighted in green.")
 

@@ -17,7 +17,7 @@ tags: []
 ---
 
 # Introduction
-{:.no_toc}
+
 
 
  Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.
@@ -223,7 +223,7 @@ Tool `PDAUG Basic Plots` will be used to compare two peptide libraries based on 
 In this tutorial, we learned how to utilize inbuild data, calculate features, and utilize descriptors or features to assess biological properties. We also learned how to utilize various utilities of `PDAUG` to generate useful plots to include in our peptide research.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we learned an example flexible and extensible analysis of peptide data using PDAUG tools. We generated various plots based on the quantitative properties of amino acids and peptide sequences.
 

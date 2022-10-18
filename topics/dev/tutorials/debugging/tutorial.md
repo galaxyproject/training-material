@@ -40,7 +40,7 @@ subtopic: core
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy's GitHub Actions, to identifying their cause, developing a solution and committing your edits
 

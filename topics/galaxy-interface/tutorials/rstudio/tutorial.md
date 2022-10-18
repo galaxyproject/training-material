@@ -30,7 +30,7 @@ subtopic: analyse
 
 
 # Introduction
-{:.no_toc}
+
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
@@ -369,4 +369,4 @@ Getting data in and out from Galaxy
 
 
 # Conclusion
-{:.no_toc}
+

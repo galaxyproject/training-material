@@ -20,7 +20,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 There are several ways to get data into Galaxy:
 - Uploading a file by pasting in a URL

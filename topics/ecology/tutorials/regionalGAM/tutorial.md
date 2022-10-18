@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial will show you how to study species abundance through the computation of a flight curve, abundance index, and trends. It will explain you how to use different [regionalGAM](https://github.com/RetoSchmucki/regionalGAM) tools on Galaxy allowing you to deal with datasets containing abundance information for various species per site and per date through a couple of years.
 
@@ -506,6 +506,6 @@ We can now represent the data with the trend line from the model.
 You can see the trends is an apparent decrease. Here results are statistically significant so we can say that there is a significant decrease of the abundance.
 
 # Conclusions
-{:.no_toc}
+
 
 In this tutorial, you have analyzed regional GAM data to extract useful information in order to be able to show different tendencies of a chosen species. Therefore, you are now able to treat the dataset so that it shows only the data for one specific species of your choice. From there, you can show the phenology of this species through the years first on a dataset and then on a visual chart. You have also learned how to represent on a single chart the phenology of various species. Afterwards, we have shown you how to create a dataset containing the information on the abundance of a species per year and per site. Based on which you can henceforth visually represent the annual abundance trend on a chart. Thereafter, you have the possibility of showing the expected temporal trend, based on which you will be able to assess the abundance of species. The last part of this tutorial has shown you how to calculate the linear regression allowing you to determinate whether the year has an influence on the abundance of a species or not.

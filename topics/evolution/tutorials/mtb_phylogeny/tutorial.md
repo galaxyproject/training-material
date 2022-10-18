@@ -24,7 +24,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 *"Nothing in biology makes sense except in the light of evolution."* --- Theodosius Dobzhansky, 1973
 

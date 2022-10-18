@@ -41,7 +41,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
 
@@ -245,7 +245,7 @@ As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong
 
 
 # Conclusion
-{:.no_toc}
+
 We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
 The workflow available from the "Supporting Materials" of this tutorial can be directly imported and used or adapted to a specific analysis.
 

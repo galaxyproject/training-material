@@ -24,7 +24,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Visualizations may be very helpful in understanding data better. There is a whole
 range of visualizations, from rather simple scatter and barplots up to projections
@@ -594,7 +594,7 @@ For more examples of visualization plugins, you can browse this
 [GitHub repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
 
 # Conclusion
-{:.no_toc}
+
 
 We have just created a visualization plugin in Galaxy to visualize the number of alignments
 per `RNAME` (chromosome) in a BAM file.

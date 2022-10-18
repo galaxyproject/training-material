@@ -21,7 +21,7 @@ subtopic: manage
 
 
 # Introduction
-{:.no_toc}
+
 
 Advanced uses of Galaxy often require the use of dataset collections,
 which can contain between one and tens of thousands of datasets.
@@ -212,6 +212,6 @@ The tool interface will prompt you with the group tags that are available for yo
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We can select a subset of Collections using the special group tag.

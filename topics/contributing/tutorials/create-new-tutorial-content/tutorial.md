@@ -459,9 +459,11 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 ```
 {% endraw %}
 
-There is no need to fill out the list; this will be done automatically based off of your tutorial's section title.
+There is no need to fill out the list; this will be done automatically based off of your tutorial's section titles. First and second level headings (lines starting with `#` and `##` in markdown) will be shown in the agenda.
 
-To avoid adding the "Introduction" and "Conclusion" sections in the agenda, you can add `{:.no_toc}` below the section name. This will be rendered as follows:
+To avoid adding a particular section in the agenda, you can add `{:.no_toc}` below the section name. However, it is not recommended to use this too often; if a section is not important enough to be shown in the agenda, consider making it a third-level heading (`###`) instead.
+
+The agenda will be rendered as follows:
 
 > <agenda-title></agenda-title>
 >

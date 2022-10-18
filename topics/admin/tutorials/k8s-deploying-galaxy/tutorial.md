@@ -33,7 +33,7 @@ priority: 2
 # Galaxy Helm Chart
 
 ## Overview
-{:.no_toc}
+
 
 Galaxy has a minimal number of required dependencies, which makes its basic
 installation quick for both users and developers. However, configuring a

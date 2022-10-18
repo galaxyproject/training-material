@@ -250,5 +250,5 @@ The image below shows [confusion matrix](https://en.wikipedia.org/wiki/Confusion
 ## Conclusion
 The tutorial presents a case-study to predict labels (ALL and AML) of 34 new cancer patients after learning gene expression profiles of 38 cancer patients through multiple steps of a deep learning pipeline. All these steps show how to create a neural network architecture using Galaxy's deep learning tools and analyse results using a confusion matrix visualisation. Similarly, multiple different architectures of neural networks can be created well-suited to datasets and aim of particular experiments. Moreover, it should be noted that one architecture of neural network giving promising results on a dataset may not work at all with another dataset. It is essential to perform multiple experiments with a dataset to formulate an optimal neural network architecture.
 
-{:.no_toc}
+
 

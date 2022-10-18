@@ -29,7 +29,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 ---
 > *Learning results from what the student does and thinks and only from what the student does and thinks. The teacher can advance learning only by influencing what the student does to learn*
