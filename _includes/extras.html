@@ -17,11 +17,16 @@
             {% icon galaxy-barchart %} Page Metrics
         </a>
 
-        {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
+        <!-- link to feedback -->
+        {% assign fdbk= site.data['feedback'] %}
+        {% assign fdbk_by_topic = fdbk | group_by: 'topic' | where: "name", site.data[page.topic_name].title %}
+        {% assign fdbk_by_tutorial = fdbk | group_by: 'tutorial' | where: "name", page.title %}
+        {% if page.layout == 'topic' and fdbk_by_topic.size > 0 %}
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
                 {% icon galaxy-barchart %} Topic feedback
             </a>
-        {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
+        {% elsif page.layout == 'tutorial_hands_on' and fdbk_by_tutorial.size > 0 %}
+
             <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
                 {% icon galaxy-barchart %} Tutorial feedback
             </a>
