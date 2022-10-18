@@ -28,7 +28,7 @@ contributors:
 ---
 
 # Building a Galaxy instance specifically for your training
-{:.no_toc}
+
 
 To be able to run the tutorial, we need a Galaxy instance where all of the needed tools and data are available. Thus we need to describe the needed technical infrastructure.
 
@@ -319,4 +319,4 @@ Once we have defined all the requirements for running the tutorial, we can test 
 
 
 # Conclusion
-{:.no_toc}
+

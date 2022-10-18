@@ -648,7 +648,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 
 
 # **Conclusion**
-{:.no_toc}
+
 
 This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 

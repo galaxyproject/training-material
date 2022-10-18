@@ -22,7 +22,7 @@ subtopic: analyse
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial we are going to explore the basics of using Jupyter in Galaxy. We will use a RNA seq count file as a test set to get a hang of the Jupyter notebooks.
 The file is available in [Zenodo](https://zenodo.org/record/1185122#.WzlCQNhKgWo) or in the *Tutorial* section of *Data Libraries*.
@@ -137,6 +137,6 @@ Once you are done with you analysis or anytime during the editing process, you c
 This will create a new notebook `.pynb` file in your history every time you click on this icon. You can later re-open it to continue to use it as described in the [open a notebook section](#open-a-notebook)
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} You have just performed your first analysis in Jupyter notebook integrated environment in Galaxy. You generated an distribution plot that you saved in your history along with the notebook to generate it.

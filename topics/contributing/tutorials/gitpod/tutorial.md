@@ -17,7 +17,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitPod!
 

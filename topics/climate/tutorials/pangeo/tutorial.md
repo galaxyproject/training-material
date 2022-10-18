@@ -32,7 +32,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -556,6 +556,6 @@ In `info file` output file, we can identify 4 different sections:
 
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! In this tutorial, Xarray Galaxy Tools have been introduced and we learned to use these tools on a real dataset from Copernicus Atmosphere Monitoring Service. We encourage you to try with your own datasets. 

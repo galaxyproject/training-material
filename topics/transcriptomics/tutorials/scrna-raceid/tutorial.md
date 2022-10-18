@@ -54,7 +54,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 <!-- TODO: Replace sort/unique with datamash -->
 
 # Introduction
-{:.no_toc}
+
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
@@ -1027,7 +1027,7 @@ The heatmaps generated depict the same data, but at different "heat" scales to b
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have learned to filter, normalise, and cluster cells from heterogeneous single-cell RNA-seq data. We have explored the expression of marker genes and performed a differential gene expression analysis between two sets of clusters. We have also constructed a lineage tree from these clusters, and analysed different branching points of interest to infer a pseudo-time ordering of cells as determined by the regulation of their genes.
 

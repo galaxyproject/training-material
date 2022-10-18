@@ -1192,7 +1192,7 @@ you think could plausibly be causative for the child's disease.
 {: .details}
 
 # Conclusion
-{:.no_toc}
+
 
 It was not hard to find the most likely causative mutation for the child's
 disease (you did find it, right?).

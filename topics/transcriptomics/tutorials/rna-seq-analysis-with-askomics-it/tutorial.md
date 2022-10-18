@@ -34,7 +34,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- AskOmics intro -->
 AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into "RDF triples" and store them in a specific kind of database: an "RDF triplestore". Under this form, data can then be queried using a specific language: "SPARQL". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.
@@ -465,6 +465,6 @@ Now that you have used AskOmics to generate this final tabular file, you can con
 If you are done, don't forget to close the AskOmics instance by going to the “User” > “Active Interactive Tools” page.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how to use AskOmics Interactive Tool. We launch the tools with a set of input files, then we have integrated these files into RDF and finally, we built complex queries over this local datasets and neXtProt to answer a biological question.

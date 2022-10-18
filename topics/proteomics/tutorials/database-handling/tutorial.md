@@ -26,7 +26,7 @@ tags: [DDA]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.
 
@@ -167,7 +167,7 @@ The most common method of peptide and protein False Discovery Rate (FDR) calcula
 
 
 # Concluding remarks
-{:.no_toc}
+
 
 In order to keep your protein databases up-to-date, it is recommended to create a workflow out of the hands-on sections (to learn about workflows see [this tutorial]({{site.baseurl}}/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)). You might also want to combine the mycoplasma databases to a single file, which you then easily can add to each of your main databases.
 

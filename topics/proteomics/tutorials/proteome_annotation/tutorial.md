@@ -32,7 +32,7 @@ tags: [DDA, human]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled "Proteomic characterization of human exhaled breath condensate" {% cite Lacombe2018 %}.
 The goal of this study was to identify proteins secreted in the respiratory tract (lung, bronchi). Samples were obtained non-invasively by condensation of exhaled air that contains submicron droplets of airway lining fluid. Two pooled samples of EBC, each obtained from 10 healthy donors, were processed. Two 'technical' control samples were processed in parallel to the pooled samples to correct for exogenous protein contamination.
@@ -264,7 +264,7 @@ Here you can explore the Reactome map of your IDs to see the context of your bio
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 ProteoRE offers a panel of tools to annotate a protein list.
 We showed that it is possible to make ID conversion, perform tissu-expression annotation, but also

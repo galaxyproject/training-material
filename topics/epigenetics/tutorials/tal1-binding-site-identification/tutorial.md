@@ -40,7 +40,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial uses ChIP-seq datasets from a study published by {% cite Wu_2014 %}. The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
@@ -521,6 +521,6 @@ Additional information on how to interpret computeGCbias plots can be found [her
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported raw Illumina sequencing data, evaluated the quality before and after you trimmed reads with low confidence scores, aligned the trimmed reads, identified TAL1 peaks relative to the negative control (background), and visualized the aligned reads and TAL1 peaks relative to gene structures and positions. Additional, you assessed the "goodness" of the experiments by looking at metrics such as GC bias and IP enrichment.

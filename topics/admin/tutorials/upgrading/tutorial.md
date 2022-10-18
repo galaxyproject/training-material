@@ -30,7 +30,7 @@ requirements:
 ---
 
 # Overview
-{:.no_toc}
+
 
 One of the most important and recurring tasks for a Galaxy server admin is to keep the server up to date with security patches, minor fixes and major version upgrades.
 

@@ -22,7 +22,7 @@ contributors:
 ---
 
 # Overview
-{:.no_toc}
+
 
 The human microbiome plays a key role in health and disease. Thanks to comparative metatranscriptomics,
 the cellular functions that are deregulated by the microbiome in disease can now be computationally

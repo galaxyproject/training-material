@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 The aim of this tutorial is to introduce you to the processing of next generation sequencing data in Galaxy.  This tutorial uses a COVID-19 variant calling from Illumina data, but it isn't about variant calling *per se*.
 
@@ -547,6 +547,6 @@ We will now summarize our analysis with MultiQC, which generates a beautiful rep
 
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.

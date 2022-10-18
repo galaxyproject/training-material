@@ -50,7 +50,7 @@ abbreviations:
 {: .warning}
 
 # Introduction
-{:.no_toc}
+
 
 After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
@@ -458,7 +458,7 @@ Once you have added some alterations, Apollo will automatically display the effe
 {% include {{ page.dir }}collab.md eukaryote=false %}
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.
 

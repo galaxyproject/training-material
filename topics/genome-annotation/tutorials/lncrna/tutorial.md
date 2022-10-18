@@ -48,7 +48,7 @@ priority: 7
 
 
 # Introduction
-{:.no_toc}
+
 
 {mRNAs} are not the only type of RNAs present in organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vast repertoire of small (miRNAs, snRNAs) and {lncRNAs} are also present. {LncRNAs} are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. They are important because of their major roles in cellular machinery and their presence in large number. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
 
@@ -84,7 +84,7 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 > <hands-on-title>Data upload</hands-on-title>
 >
 ### Get data
-{:.no_toc}
+
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -202,6 +202,6 @@ For future analyses, it would be interesting to use an updated annotation contai
 
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations for reaching the end of this tutorial! Now you know how to perform an annotation of {lncRNAs} by using RNASeq data.

@@ -29,7 +29,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 
@@ -310,7 +310,7 @@ A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a 
 ![GROMACS workflow]({% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
 
 # Conclusion
-{:.no_toc}
+
 
 After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 

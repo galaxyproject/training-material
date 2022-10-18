@@ -22,7 +22,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:
  * the OBITools on Galaxy
@@ -527,6 +527,6 @@ In this step, we are going to use *obigrep* in order to keep only the sequences 
 
 
 # Conclusion
-{:.no_toc}
+
 
 You just did a ecological analysis, finding diet from wolves faeces ! So now you know how to preprocess metabarcoding data on Galaxy, producing quantitative informations with quality checks and filtering results to interpret it and to have a synthesis table you can share broadly!

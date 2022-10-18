@@ -43,7 +43,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 
@@ -553,7 +553,7 @@ We have also now successfully *de*-multiplexed our data, by decoding each pair o
 
 
 # Conclusion
-{:.no_toc}
+
 
 With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using **UMI-tools** so that we can perform mapping without losing any context of where the reads are derived from.
 

@@ -34,7 +34,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 This practical aims at familiarizing you with the Galaxy user interface.
 It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows and sharing your work.
@@ -756,7 +756,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy. Additionally you can share your results and methods with others.
 

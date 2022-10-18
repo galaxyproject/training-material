@@ -19,7 +19,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?
 
@@ -338,6 +338,6 @@ For the second exercice, we will continue to work with the same study set as bef
 
 
 # Conclusion
-{:.no_toc}
+
 Functional enrichment is a good way to look for patterns in gene lists, but interpretation of results can become a complicated process. One way to reduce this complexity is to use the GOEnrichment tool. This tool not only performs the GO Enrichment test, showing us enriched GO terms from our sets, but also contains functionality to simplify the results and make them more easily interpretable. Independently of this, we need to be careful when choosing our genes of interest, but also the background set of genes against which we want to compare.
 

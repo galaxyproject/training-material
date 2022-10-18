@@ -17,7 +17,7 @@ subtopic: analyse
 ---
 
 # Introduction
-{:.no_toc}
+
 
 InterMine ({% cite Smith2012 %}) is a well-establish platform to integrate and access life sciences data.
 It provides the integrated data via a web interface and RESTful web services.

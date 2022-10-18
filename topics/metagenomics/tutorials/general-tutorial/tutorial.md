@@ -24,7 +24,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In metagenomics, information about micro-organisms in an environment can be extracted with two main techniques:
 
@@ -729,7 +729,7 @@ The RPK for the gene families are quite difficult to interpret in term of relati
 With the previous analyses, we investigate "Which micro-organims are present in my sample?" and "What function are performed by the micro-organisms in my sample?". We can go further in these analyses (for example, with a combination of functional and taxonomic results). We did not detail that in this tutorial but you can find more analyses in our tutorials on shotgun metagenomic data analyses.
 
 # Conclusion
-{:.no_toc}
+
 
 We can summarize the analyses with amplicon and shotgun metagenomic data:
 

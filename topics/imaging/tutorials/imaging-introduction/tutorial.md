@@ -31,7 +31,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.
 
@@ -264,6 +264,6 @@ We see the segmentation mask overlayed; each detected object (nucleus) is labele
 We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported images into Galaxy, extracted meta information from an image, converted between file formats, learned how to visualize microscopy images, filtered the image, and segmented cells using Galaxy.

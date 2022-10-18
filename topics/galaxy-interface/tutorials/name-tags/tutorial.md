@@ -22,7 +22,7 @@ subtopic: manage
 
 
 # Introduction
-{:.no_toc}
+
 
 Long ad hoc data analysis sessions in Galaxy can leave you with a multitude of
 datasets named things like "1724: Summarize taxa on data 1628 and data 1629" or "1853: Pick

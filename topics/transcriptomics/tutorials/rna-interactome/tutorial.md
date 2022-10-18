@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -369,6 +369,6 @@ corresponds to 4 different transcripts of the target gene `Myo5a`.
 {: .hands_on}
 >
 # Conclusion
-{:.no_toc}
+
 
 Though chimeric reads look normal when inspected in a FASTQ file, the origin of each read is from two different RNA fragments. Limitations of the current sequencing protocols limit the length of each sequenced interacting RNA fragment. These smaller RNA fragments are often harder to map considering that the boundaries of each RNA fragment in the read are unknown. In this tutorial, we have seen how to map these reads and infer the true origins of them by quantifying the mapped loci. The visualization framework gives flexibility in filtering and searching output files, visualize the summaries of filtered data as well as exporting them.

@@ -34,7 +34,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
 However, the list of genes is neither in the supplement of the paper, nor part of the GEO submission.
@@ -716,6 +716,6 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

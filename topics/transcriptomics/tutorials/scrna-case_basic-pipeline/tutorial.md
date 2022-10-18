@@ -50,7 +50,7 @@ translations:
 
 
 # Introduction
-{:.no_toc}
+
 
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
@@ -921,7 +921,7 @@ Before we leave you to explore the unknown, you might have noticed that the abov
 Be warned - this visualisation tool is a powerful option for exploring your data, but it takes some time to get used to. Consider exploring it as your own tutorial for another day!
 
 # Conclusion
-{:.no_toc}
+
 
 > <details-title>Working in a group? The finale!</details-title>
 > Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was 'wrong' or 'ill-advised', and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation...

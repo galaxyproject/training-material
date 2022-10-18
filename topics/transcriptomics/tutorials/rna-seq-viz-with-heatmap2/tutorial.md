@@ -16,7 +16,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Heatmaps are commonly used to visualize RNA-Seq results. They are useful for visualizing the expression of genes across the samples. In this tutorial we show how the **heatmap2** tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the [RNA-seq ref-based tutorial]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}). We will also show how a heatmap for a custom set of genes an be created.
 
@@ -258,6 +258,6 @@ You should see a heatmap like below.
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how heatmaps can be used to visualize RNA-seq results using the **heatmap2** tool in Galaxy. We use the same dataset from the tutorials, [RNA-seq reads to counts]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}), [RNA-seq counts to genes]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}), [RNA-seq genes to pathways]({% link topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.md %}) and [Visualization of RNA-Seq results with Volcano Plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}).

@@ -37,7 +37,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Molecular dynamics simulations return highly complex data. The Cartesian positions of each atom of the system (thousands or even millions) are recorded at every time step of the trajectory; this may again be thousands to millions of steps in length. Therefore, some kind of further analysis is needed to extract useful information from the data.
 
@@ -203,5 +203,5 @@ Further analyses are available; try out the [MDAnalysis workflow]({% link topics
 ![MDAnalysis workflow]({% link topics/computational-chemistry/images/workflow_mdanalysis.png %} "MD analysis workflow")
 
 # Conclusion
-{:.no_toc}
+
 

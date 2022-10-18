@@ -26,7 +26,7 @@ subtopic: workflows
 
 
 # Introduction
-{:.no_toc}
+
 
 
 Workflows are a powerful feature in Galaxy that allow you to link multiple steps of complex analysis.
@@ -293,7 +293,7 @@ re-useable steps in real world scenarios.
 {: .comment}
 
 # Conclusion
-{:.no_toc}
+
 
 You now know the ins and outs of Workflows in Galaxy and should be able to
 make your analyses more efficient and less manual!
