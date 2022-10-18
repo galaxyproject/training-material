@@ -43,7 +43,7 @@ notebook:
 
 "Virtual Environments" allow you to easily manage your installed Python packages and prevent conflicts between different project's dependencies. In general most modern projects should use `conda` for dependency management, but `venv` can be convenient for Python-only projects.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is significantly based on [the Carpentries](https://carpentries.org) lesson ["Intermediate Research Software Development"](https://carpentries-incubator.github.io/python-intermediate-development/).
 >
@@ -75,7 +75,7 @@ Virtual environments are not just a feature of Python - all modern programming l
 of a specific project and make it easier to develop, run, test and share code with others. In this episode, we learn how
 to set up a virtual environment to develop our code and manage our external dependencies.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >

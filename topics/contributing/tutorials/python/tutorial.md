@@ -28,7 +28,7 @@ contributions:
 
 Improving student learning and out comes should always be a goal of teaching. Here we present several strategies to improve student experiences during courses by focusing on how they approach specific problems, and giving them real world applicable solutions to those problems.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to run a local instance of the GTN website:
 >

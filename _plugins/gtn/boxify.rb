@@ -133,6 +133,9 @@ module Gtn
     end
 
     def self.generate_box(box_type, title, lang="en", key)
+      if title.nil?
+        title = ""
+      end
       title = title.gsub(/"/, '&quot;')
       box_id, box_title = generate_title(box_type, title, lang, key)
       return %Q(

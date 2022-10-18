@@ -40,7 +40,7 @@ In some languages type annotations are a core part of the language and types are
 
 However, we can provide type hints as we write python which will allow our editor to type check code as we go, even if it is not typically enforced at any point.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -90,14 +90,14 @@ history.share_with(user_id)
 history.save()
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > 1. Can you be sure the `history_id` and `user_id` are in the correct order? It
 >    seems like potentially not, given the ordering of "user" and "history" in the
 >    function name, but without inspecting the definition of that function we
 >    won't know.
 > 2. What happens if `history_id` and `user_id` are swapped?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. This is unanswerable without the code.
 > > 2. Depending on the magnitude of `history_id` and `user_id`, those may be within allowable ranges. Take for example
 > > 
@@ -147,9 +147,9 @@ If we're using a code editor with typing hints, e.g. VSCode with PyLance, we'll 
 
 Here we see that we're not allowed to call this function this way, it's simply impossible.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What happens if you execute this code?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > It executes happily. Types are **not enforced at runtime**. So this case where they're both custom types around an integer, Python sees that it expects an int in both versions of the function call, and that works fine for it. That is why we are repeatedly calling them "type hints", they're hints to your editor to show suggestions and help catch bugs, but they're not enforced.
 > > If you modified the line `y = HistoryId(2)` to be something like `y = "test"`, the code will also execute fine. Python doesn't care that there's suddenly a string where you promised and asked for, an int. It simply does not matter.
 > >
@@ -225,7 +225,7 @@ def reverse_list(a: list[Union[int, float, str]]) -> list[Union[int, float, str]
 
 Here we have used a `Union[A, B, ...]` to declare that it can only be one of these three types.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > 1. Are both of these valid definitions?`
 > 
 >    ```python
@@ -234,7 +234,7 @@ Here we have used a `Union[A, B, ...]` to declare that it can only be one of the
 >    ```
 > 
 > 2. If that wasn't what you expected, how would you define it so that it would be?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Yes, both are valid, but maybe you expected a homogeneous list. If you wanted that, you could instead do
 > > 
 > > ```python
@@ -384,11 +384,11 @@ You can use MonkeyType to automatically apply type annotations to your code. Bas
 >    ```
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > 1. What was the output of that command?
 > 2. This function will accept strings as well, add a statement to exercise that in `myscript.py` and re-run `monkeytype run` and `monkeytype stub`. What is the new output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The expected output is:
 > > 
 > >    ```python
@@ -403,19 +403,19 @@ You can use MonkeyType to automatically apply type annotations to your code. Bas
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > Why is it different?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Because MonkeyType works by running the code provided (`myscript.py`) and annotating based on what executions it saw. In the first invocation it had not seen any calls to `add()` with strings, so it only reported `int` as acceptable types. However, the second time it saw `str`s as well. Can you think of another type that would be supported by this operation, that was not caught? (list!)
 > {: .solution} 
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > 1. Does that type annotation make sense based on what you've learned today?
 > 2. Can you write a better type annoation based on what you know?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. It works, but it's not a great type annotation. Here the description looks like it can accept two `int`s and return a `str` which isn't correct.
 > > 2. Here is a better type annotation
 > > 

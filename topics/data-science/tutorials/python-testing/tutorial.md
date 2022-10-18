@@ -41,7 +41,7 @@ notebook:
 
 Here we will cover the basics of testing, an important part of software development. Testing lets you know that your code is correct in many situations that matter to you.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is significantly based on [the Carpentries](https://carpentries.org) lesson ["Intermediate Research Software Development"](https://carpentries-incubator.github.io/python-intermediate-development/).
 >
@@ -58,7 +58,7 @@ If we are unable to demonstrate that our software fulfills these criteria, why w
 Automation can help, and automation where possible is a good thing - it enables us to define a potentially complex process in a repeatable way that is far less prone to error than manual approaches. Once defined, automation can also save us a lot of effort, particularly in the long run. In this episode we'll look into techniques of automated testing to improve the predictability of a software change, make development more productive, and help us produce code that works as expected and produces desired results.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -269,7 +269,7 @@ class ExpectedFailureCase(unittest.TestCase):
 
 Run all your tests as before.
 
-> ### {% icon tip %} Why Should We Test Invalid Input Data?
+> <tip-title>Why Should We Test Invalid Input Data?</tip-title>
 >
 > Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as *data validation*. Even if you are developing command line software that cannot be exploited by malicious data entry, testing behaviour against invalid inputs prevents generation of erroneous results that could lead to serious misinterpretation (as well as saving time and compute cycles which may be expensive for longer-running applications). It is generally best not to assume your user's inputs will always be rational.
 >

@@ -36,7 +36,7 @@ abbreviations:
 ---
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -94,11 +94,11 @@ with Pool(4) as p:
     print(p.map(g, range(12)))
 ```
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What did you see here?
 >
 > Was it clear and easy to read?
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > It prints four timestamps immediately, all around the same time. Then one second later it prints 4 more, and one second later, a final four.
 > > Our Pool of 4 processes processes the function the maximal amount of times possible concurrently. Once each of those functions returns, then it can move on to processing the next tasks.
 > > This is precisely the situation of e.g. 4 queues at the grocery; as soon as one customer is processed, they immediately begin on the next, until no more remain.
@@ -188,9 +188,9 @@ As such, we can probably set our pool size to be very large, a multiple of our s
 
 If however this were a more complicated task (e.g. calculating a large number, machine learning, etc.), then we might wish to set our pool size to the number of CPUs - 1, as each process will potentially consume it's CPU allocation completely, and we wish to have some left over for the managing program and any other work going on, on the system.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > Try changing the pool size and see what effect it has on runtime. Start from a value of 1, and go up to 5, the number of servers in our list.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Given the small sample size (5 servers), and the variability of response times (in local testing between 3-8 seconds for the single-pool version), you can see varying results but *generally* it should decrease as the pool size increases. However, sometimes you will see the Pool=5 version take the same or longer than Pool=4.
 > >
 > > Especially in the case that 1 server (or 1 request one time) dominates the request time, this can "hide" the improvements as the others complete quickly on the remaining N-1 processes.
@@ -251,6 +251,6 @@ for k, v in data.items():
 
 This is a bit more complicated to write, but again, if you're not blocking on CPU resources, then this is potentially approximately as effecient as thread pools.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > What result did you get? Was it slower, faster, or about the same as processes?
 {: .question}

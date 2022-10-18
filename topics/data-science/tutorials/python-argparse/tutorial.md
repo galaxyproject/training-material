@@ -295,13 +295,13 @@ With the `argparse2tool` project, and eventually `pyGalGen` which will be merged
 >
 > 4. Generate the tool interface:
 >
->    > <code-in>Command</code-in>
+>    > <code-in-title>Command</code-in-title>
 >    > ```
 >    > PYTHONPATH=$(argparse2tool) python main.py --generate_galaxy_xml
 >    > ```
 >    {: .code-in }
 >
->    > <code-out>Galaxy XML</code-out>
+>    > <code-out-title>Galaxy XML</code-out-title>
 >    > ```xml
 >    > <tool name="main.py" id="main.py" version="1.0">
 >    >   <description>Sum some numbers</description>
