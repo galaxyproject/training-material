@@ -28,6 +28,35 @@ module Jekyll
       end
     end
 
+    # todo: migrate somewhere else
+    def get_default_link(material)
+      url = nil
+
+      if material['type'] == "introduction"
+        subfolder = 'slides'
+      else
+        subfolder = 'tutorials'
+      end
+
+      if material['slides']
+        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
+        if material['type'] != "introduction"
+          url += "/slides.html"
+        else
+          url += ".html"
+        end
+      end
+
+      if material['hands_on']
+        if material['hands_on'] != "external" && material['hands_on'] != ""
+          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
+        end
+      end
+
+      puts "url=#{url}"
+      url
+    end
+
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
         return

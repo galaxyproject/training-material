@@ -300,7 +300,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > <hands-on-title>Counting SNPs</hands-on-title>
 >
-> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} (operations on tabular data):
 >
 >    - *"Input tabular dataset"*: select the output dataset from **bedtools intersect intervals** {% icon tool %}
 >    - *"Group by fields"*: `Column: 4` (the column with the exon IDs)

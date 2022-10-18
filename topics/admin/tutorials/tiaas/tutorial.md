@@ -373,7 +373,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >         manager: _default_
 >     
 >     execution:
->    -  default: singularity
+>    -  default: slurm
 >    +  default: sorting_hat
 >       environments:
 >         local_dest:

@@ -70,8 +70,8 @@ elif [[ "$op" == "import" ]]; then
 	cd "${CURRENT_DIR}" || exit
 
 	# Import all of the patches
-	for i in "${tutorials[@]}"; do
-		if [[ "$i" != "admin/tool-management" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		if [[ "${tutorials[$idx]}" != "admin/tool-management" ]]; then
 		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
 		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
 

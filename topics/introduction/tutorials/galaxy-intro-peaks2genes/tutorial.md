@@ -586,7 +586,7 @@ We need to generate a new BED file from the original peak file that contains the
 >           - *"Add expression"*: `c2 + int(c5)`
 >           - *"Mode of the operation"*: Append
 >       - {% icon param-repeat %} *"Expressions"*
->           - *"Add expression"*: `c8 + c1`
+>           - *"Add expression"*: `c8 + 1`
 >           - *"Mode of the operation"*: Append
 >
 >   This will create an 8th and a 9th column in our table, which we will use in our next step:

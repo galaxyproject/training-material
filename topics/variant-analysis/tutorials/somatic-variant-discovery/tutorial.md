@@ -26,7 +26,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
 
 Human Copy Number Variations (hCNVs) are the result of structural genomic rearrangements that result in the duplication or deletion of DNA segments. These changes contribute significantly to human genetic variability, diseases, and somatic genome variations in cancer and other diseases {% cite Nam2015 %}. hCNVs can be routinely investigated by genomic hybridisation and sequencing technologies
@@ -339,12 +338,12 @@ After the mapping step, the data are ready to the hCNV detection step. This tuto
 The remaining data preprocessing until the Control-FreeC step is the same for Normal and Tumor reads.  Create a data collection to include those two files.
 
 > <hands-on-title>Filtrate the mapped reads</hands-on-title>
-> 1. Use {% tool [Build list](https://usegalaxy.eu/root?tool_id=__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
+> 1. Use {% tool [Build list](__BUILD_LIST__) %} to creat a list from the maped reads of the **normal tissue** and **tumor tissue**
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for normal tissue`
 >    -  {% icon param-file %} *"Dataset"*: `Insert dataset`
 >       - *"Input dataset"*: `The output of map with BWA-MEM for cancer tissue`
-> 2. Run {% tool [Create text file](toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftext_processing%2Ftp_text_file_with_recurring_lines%2F1.1.0) %}  with the following parameters
+> 2. Run {% tool [Create text file](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_text_file_with_recurring_lines/1.1.0) %}  with the following parameters
 >   -  *"Characters to insert"*: `normal reads`
 >   -  *"Specify the number of iterations by"*: `User defined number`
 >   -  *"How many times?"*: `1`
@@ -405,7 +404,7 @@ To detect hCNVs expression accurately. The reads must go through the lift alignm
 >   -  *"Using reference genome"*: `hg19`
 >   -  *"Maximum number of iterations"*: `5`
 >
-> 2. Run {% tool [Samtools calmd](toolshed.g2.bx.psu.edu/repos/devteam samtools_calmd/samtools_calmd/2.0.2) %}  with the following parameters
+> 2. Run {% tool [Samtools calmd](toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2) %}  with the following parameters
 >   -  {% icon param-collection %} *"BAM file to recalculate"*: The outpot of  `BamLeftAlign`.
 >   -  *"Choose the source for the reference genome"*: `Use a built-in genome`
 >   -  *"Using reference genome"*: `hg19`
@@ -427,7 +426,7 @@ After the Homogenizing step, it is now to extract the reads which hold indels fr
 >   -  *"What would you like to have reported?"*: `The header in ...`
 >   -  *"Output format"*: `SAM`
 >   -  *"Reference data"*: `No, see help (-output-fmt-option no_ref)`  
-> 2. Run {% tool [ Select ](https://usegalaxy.eu/root?tool_id=Grep1) %}  with the following parameters
+> 2. Run {% tool [Select](Grep1) %}  with the following parameters
 >   -  {% icon param-collection %} *"Select lines from"*: The outpot of  `Samtools view`.
 >   -  *"that"*: `Matching`
 >   -  *"the pattern"*: `^@SQ\tSN:(chr[0-9]+|chrM|chrX|chrY)\tLN:[0-9]+`

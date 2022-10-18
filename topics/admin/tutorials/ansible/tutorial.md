@@ -26,7 +26,6 @@ tags:
 ---
 
 # Overview
-{:.no_toc}
 
 In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
 
