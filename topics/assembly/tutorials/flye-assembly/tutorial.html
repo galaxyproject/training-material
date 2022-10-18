@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Genome assembly using PacBio data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:14 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Anthony Bretaudeau" />
 <meta name="DC.creator" content="Alexandre Cormier" />
 <meta name="DC.creator" content="Erwan Corre" />
@@ -284,7 +284,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:14 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Genome assembly using PacBio data",
   "interactivityType": "mixed",
@@ -715,7 +715,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -1080,7 +1080,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1103,7 +1103,7 @@
 <p>In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, <em>Mucor mucedo</em>, from PacBio sequencing data. These data were obtained from NCBI (<a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534473">SRR8534473</a>, <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534474">SRR8534474</a> and <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534475">SRR8534475</a>). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on the <a href="https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html">JGI website</a>.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1131,7 +1131,7 @@
 <h2 id="get-data-from-zenodo">Get data from Zenodo</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload from Zenodo</h3>
+  <div id="hands-on-data-upload-from-zenodo" class="box-title" aria-label="hands-on box: Data upload from Zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload from Zenodo</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1144,14 +1144,14 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
     </li>
     <li>Rename the datasets</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
   </ol>
 
@@ -1160,7 +1160,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 <h2 id="get-data-from-jgi-website">Get data from JGI website</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload-from-jgi-website"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload from JGI website</h3>
+  <div id="hands-on-data-upload-from-jgi-website" class="box-title" aria-label="hands-on box: Data upload from JGI website"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload from JGI website</div>
 
   <ol>
     <li>Create a JGI account in registration page of JGI: <a href="https://contacts.jgi.doe.gov/registration/new">JGI registration</a></li>
@@ -1172,7 +1172,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fasta</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
   </ol>
 
@@ -1183,7 +1183,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 <p>We will use <em>Flye</em>, a de novo assembler for single molecule sequencing <span class="notranslate">reads</span>, such as those produced by PacBio and Oxford Nanopore Technologies. It is designed for a wide range of datasets, from small bacterial projects to large mammalian-scale assemblies. The package represents a complete pipeline: it takes raw PacBio / ONT <span class="notranslate">reads</span> as input and outputs polished contigs. Flye also has a special mode for metagenome assembly. All informations about Flye assembler are here: <a href="https://github.com/fenderglass/Flye/">Flye</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assembly</h3>
+  <div id="hands-on-assembly" class="box-title" aria-label="hands-on box: Assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assembly</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1200,12 +1200,12 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What are the different output datasets?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs). You may notice that the result (contigs number) you obtained is sligthy different from the one presented here. This is due to the Flye assembly algorithm which doesn’t always give the eact same results.</li>
@@ -1224,7 +1224,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 <p><strong><em>Fasta statistics</em></strong> displays the summary statistics for a fasta file. In the case of a genome assembly, we need to calculate different metrics such as assembly size, scaffolds number or N50 value. These metrics will allow us to evaluate the quality of this assembly.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-fasta-statistics-on-flye-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fasta statistics on Flye assembly</h3>
+  <div id="hands-on-fasta-statistics-on-flye-assembly" class="box-title" aria-label="hands-on box: Fasta statistics on Flye assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fasta statistics on Flye assembly</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
@@ -1237,7 +1237,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-fasta-statistics-on-the-reference-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fasta statistics on the reference assembly</h3>
+  <div id="hands-on-fasta-statistics-on-the-reference-assembly" class="box-title" aria-label="hands-on box: Fasta statistics on the reference assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fasta statistics on the reference assembly</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
@@ -1250,7 +1250,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Compare the different metrics obtained for Flye assembly and reference genome.</li>
@@ -1258,7 +1258,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>We compare the metrics of the two genome assembly:
@@ -1279,7 +1279,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 <p>Another way to calculate metrics assembly is to use <strong><em>QUAST = QUality ASsessment Tool</em></strong>. Quast is a tool to evaluate genome assemblies by computing various metrics and to compare genome assembly with a reference genome. The manual of Quast is here: <a href="http://quast.sourceforge.net/docs/manual.html#sec3">Quast</a></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <div id="hands-on-task-description" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
@@ -1303,12 +1303,12 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What additional informations are generated by Quast, compared to the <strong>Fasta Statistics</strong> outputs?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>Quast allows us to compare Flye assembly to the reference genome:</p>
     <ol>
@@ -1333,7 +1333,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 <p><strong><em>BUSCO (Benchmarking Universal Single-Copy Orthologs)</em></strong> allows a measure for quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content. Details for this tool are here: <a href="https://busco.ezlab.org/">Busco website</a></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-busco-on-flye-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: BUSCO on Flye assembly</h3>
+  <div id="hands-on-busco-on-flye-assembly" class="box-title" aria-label="hands-on box: BUSCO on Flye assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: BUSCO on Flye assembly</div>
 
   <p><strong>First on the Flye assembly:</strong></p>
   <ol>
@@ -1367,12 +1367,12 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Compare the number of BUSCO genes identified in the Flye assembly and the reference genome. What do you observe ?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>Short summary generated by BUSCO indicates that reference genome contains:</p>
     <ol>
@@ -1401,7 +1401,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>PacBio data allows to perform good quality genome assembly</p>
@@ -1464,7 +1464,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Erwan Corre, Laura Leroi, Stéphanie Robin, Erasmus+ Programme, 2021 <b>Genome assembly using PacBio data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Anthony Bretaudeau, Alexandre Cormier, Erwan Corre, Laura Leroi, Stéphanie Robin, Erasmus+ Programme, 2022 <b>Genome assembly using PacBio data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1474,16 +1474,16 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{assembly-flye-assembly,
 author = "Anthony Bretaudeau and Alexandre Cormier and Erwan Corre and Laura Leroi and Stéphanie Robin and Erasmus+ Programme",
 title = "Genome assembly using PacBio data (Galaxy Training Materials)",
-year = "2021",
-month = "12",
-day = "14"
+year = "2022",
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1514,7 +1514,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

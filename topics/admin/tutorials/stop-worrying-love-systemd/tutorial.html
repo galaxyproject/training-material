@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="How I learned to stop worrying and love the systemd" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:04 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 
         
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:04 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "How I learned to stop worrying and love the systemd",
   "interactivityType": "mixed",
@@ -442,7 +442,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -651,7 +651,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 4, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -674,7 +674,7 @@
 <p>This tutorial assumes a working knowledge of unix systems (files, directories, services, logging, <code class="language-plaintext highlighter-rouge">/var/log</code>, etc.).</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#systemd" id="markdown-toc-systemd">systemd</a>    <ol>
@@ -890,7 +890,7 @@ graphical.target reached after 11.547s in userspace
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <h3 id="code-out-pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <div id="code-out-pros" class="box-title" aria-label="code-out box: Pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Pros</div>
     <ul>
       <li>CGroups, to reap children!</li>
       <li>CGroups, for hard memory/cpu limits</li>
@@ -901,7 +901,7 @@ graphical.target reached after 11.547s in userspace
   </blockquote>
 
   <blockquote class="code-in">
-    <h3 id="code-in-cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <div id="code-in-cons" class="box-title" aria-label="code-in box: Cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Cons</div>
     <ul>
       <li>It’s new and requires time to learn
         <ul>
@@ -938,7 +938,7 @@ graphical.target reached after 11.547s in userspace
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <h3 id="code-out-pros-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <div id="code-out-pros-1" class="box-title" aria-label="code-out box: Pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Pros</div>
     <ul>
       <li>Easier testing, you can trigger units any time</li>
       <li>Cgroups!</li>
@@ -949,7 +949,7 @@ graphical.target reached after 11.547s in userspace
   </blockquote>
 
   <blockquote class="code-in">
-    <h3 id="code-in-cons-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <div id="code-in-cons-1" class="box-title" aria-label="code-in box: Cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Cons</div>
     <ul>
       <li>Two files, instead of a single line. It <em>is</em> annoying, you’re not wrong. Maybe write an ansible role that translates it.</li>
       <li>No <code class="language-plaintext highlighter-rouge">MALITO</code> functionality built in.</li>
@@ -1059,7 +1059,7 @@ OnFailure=failure-notification@%n
 <h2 id="per-unit-logs">Per Unit Logs</h2>
 
 <blockquote class="code-out">
-  <h3 id="code-out-the-journalctl-way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+  <div id="code-out-the-journalctl-way" class="box-title" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-u</span> <span class="notranslate">galaxy</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -1072,7 +1072,7 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <h3 id="code-out-pros-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <div id="code-out-pros-2" class="box-title" aria-label="code-out box: Pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Pros</div>
     <p>You did not need to know or remember:</p>
 
     <ul>
@@ -1082,7 +1082,7 @@ OnFailure=failure-notification@%n
   </blockquote>
 
   <blockquote class="code-in">
-    <h3 id="code-in-cons-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <div id="code-in-cons-2" class="box-title" aria-label="code-in box: Cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Cons</div>
     <ul>
       <li>Can’t just <code class="language-plaintext highlighter-rouge">cat</code> it.</li>
     </ul>
@@ -1102,7 +1102,7 @@ OnFailure=failure-notification@%n
 <p>And then you can simply</p>
 
 <blockquote class="code-out">
-  <h3 id="code-out-the-journalctl-way-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+  <div id="code-out-the-journalctl-way-1" class="box-title" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-f</span> <span class="nt">-u</span> <span class="notranslate">galaxy</span><span class="k">*</span> <span class="nt">-u</span> nginx <span class="nt">-u</span> postgresql
 </code></pre></div>  </div>
 </blockquote>
@@ -1111,7 +1111,7 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <h3 id="code-out-pros-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Pros</h3>
+    <div id="code-out-pros-3" class="box-title" aria-label="code-out box: Pros"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Pros</div>
     <ul>
       <li>Tail multiple units at once</li>
       <li>Again don’t have to know where the files are</li>
@@ -1120,7 +1120,7 @@ OnFailure=failure-notification@%n
   </blockquote>
 
   <blockquote class="code-in">
-    <h3 id="code-in-cons-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Cons</h3>
+    <div id="code-in-cons-3" class="box-title" aria-label="code-in box: Cons"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Cons</div>
     <p>?</p>
   </blockquote>
 </blockquote>
@@ -1140,14 +1140,14 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <h3 id="code-in-the-old-way"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> The Old Way</h3>
+    <div id="code-in-the-old-way" class="box-title" aria-label="code-in box: The Old Way"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: The Old Way</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zcat /var/log/<span class="k">*</span> | egrep <span class="s2">"(Jul</span><span class="se">\s</span><span class="s2">*1 11:4.:..|2022-07-01 11:4.:..)"</span>
 </code></pre></div>    </div>
     <p>Hope everything logs in the same timezone! And no one uses UTC when there’s a different system time configured.</p>
   </blockquote>
 
   <blockquote class="code-out">
-    <h3 id="code-out-the-journalctl-way-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> The jou<span class="notranslate">rna</span>lctl Way</h3>
+    <div id="code-out-the-journalctl-way-2" class="box-title" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s2">"2022-07-01 11:40 CEST"</span> <span class="nt">--until</span> <span class="s2">"2022-07-01 11:50 CEST"</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1298,7 +1298,7 @@ PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>systemd units are actually kinda nice</p>
@@ -1380,7 +1380,7 @@ PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -1388,8 +1388,8 @@ PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81
 author = "Helena Rasche",
 title = "How I learned to stop worrying and love the systemd (Galaxy Training Materials)",
 year = "2022",
-month = "07",
-day = "04"
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1423,7 +1423,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

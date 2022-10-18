@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Single-cell quality control with scater" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:26 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Graham Etherington" />
 <meta name="DC.creator" content="Nicola Soranzo" />
 
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:26 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Single-cell quality control with scater",
   "interactivityType": "mixed",
@@ -565,7 +565,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -1035,7 +1035,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 26, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1077,7 +1077,7 @@
 <p>We will use <em>scater</em> (<span class="citation"><a href="#10.1093/bioinformatics/btw777">McCarthy <i>et al.</i> 2017</a></span>) to visualise sc<span class="notranslate">RNA</span>-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that filtering has worked. We’ll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1102,7 +1102,7 @@
 <h1 id="data-upload">Data upload</h1>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1115,9 +1115,9 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
     </li>
   </ol>
 
@@ -1134,7 +1134,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-calculate-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate QC metrics</h3>
+  <div id="hands-on-calculate-qc-metrics" class="box-title" aria-label="hands-on box: Calculate QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate QC metrics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2"><strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2</span></span>   with the following parameters:
@@ -1145,7 +1145,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The output of this tool is a SingleCellExperiment object in <a href="http://loompy.org/">Loom</a> format, which contains all the information from the input files, along with a host of other quality control metrics, calculated from the input data.</p>
       </blockquote>
@@ -1157,7 +1157,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 <p>Next, lets take a look at the data by plotting various properties to see what our data looks like.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-library-qc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot library QC</h3>
+  <div id="hands-on-plot-library-qc" class="box-title" aria-label="hands-on box: Plot library QC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
@@ -1170,7 +1170,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
       <figure id="figure-2"><img src="../../images/scrna-scater-qc/raw_data.png" alt="Raw data QC plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Raw data QC plots</figcaption></figure>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>There are four plots, two distribution bar plots and two scatter plots.
 The first distribution plot is the number of <span class="notranslate">reads</span> in each library (from a <span class="notranslate">single cell</span>).
@@ -1199,7 +1199,7 @@ The final scatterplot is the <strong>% MT genes</strong>, which plots the number
 Here, we’ll use the manual filtering method.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filtering-with-scater"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering with scater</h3>
+  <div id="hands-on-filtering-with-scater" class="box-title" aria-label="hands-on box: Filtering with scater"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering with scater</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
@@ -1216,7 +1216,7 @@ Here, we’ll use the manual filtering method.</p>
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Let’s have a look at the parameters and their values:</p>
         <ol>
@@ -1232,7 +1232,7 @@ Here, we’ll use the manual filtering method.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-library-qc-after-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot library QC after filtering</h3>
+  <div id="hands-on-plot-library-qc-after-filtering" class="box-title" aria-label="hands-on box: Plot library QC after filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC after filtering</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
@@ -1247,7 +1247,7 @@ Here, we’ll use the manual filtering method.</p>
 <figure id="figure-3"><img src="../../images/scrna-scater-qc/post_filter.png" alt="QC plots after manual filtering. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> QC plots after manual filtering</figcaption></figure>
 
 <blockquote class="comment">
-  <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>How did the filtering go? Do you think it’s done a good job? Have you removed too many cells? Too few cells? About right?</p>
 
@@ -1262,7 +1262,7 @@ Here, we’ll use the manual filtering method.</p>
 <p>As we are using a rather small test dataset, it’s unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <div id="hands-on-task-description" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
       <ul>
@@ -1271,7 +1271,7 @@ Here, we’ll use the manual filtering method.</p>
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The data will be normalised and then PCA ran on it using the following information from the data:</p>
         <ul>
@@ -1293,7 +1293,7 @@ Here, we’ll use the manual filtering method.</p>
 <p>As discussed previously, technical artefacts can bias sc<span class="notranslate">RNA</span>-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-pca-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: PCA plot</h3>
+  <div id="hands-on-pca-plot" class="box-title" aria-label="hands-on box: PCA plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA plot</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"><strong>Scater: PCA plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2</span></span>   with the following parameters:
       <ul>
@@ -1309,7 +1309,7 @@ Here, we’ll use the manual filtering method.</p>
 <figure id="figure-4"><img src="../../images/scrna-scater-qc/PCAplot.png" alt="PCA plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PCA plot</figcaption></figure>
 
 <blockquote class="question">
-  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Do you see any obvious batch effect?</li>
@@ -1317,7 +1317,7 @@ Here, we’ll use the manual filtering method.</p>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>We can see that the <strong>S</strong> and <strong>G2M</strong> categories in <strong>Cell_Cycle</strong> cluster away from the rest of the data. Spend some time thinking about whether this might be a batch effect or biologically significant.</li>
@@ -1336,7 +1336,7 @@ The <span class="notranslate">workflow</span> available from the “Supporting M
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Single-cell RNA-seq data is often noisy</p>
@@ -1407,7 +1407,7 @@ The <span class="notranslate">workflow</span> available from the “Supporting M
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Graham Etherington, Nicola Soranzo, 2021 <b>Single-cell quality control with scater (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Graham Etherington, Nicola Soranzo, 2022 <b>Single-cell quality control with scater (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1417,16 +1417,16 @@ The <span class="notranslate">workflow</span> available from the “Supporting M
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-scater-qc,
 author = "Graham Etherington and Nicola Soranzo",
 title = "Single-cell quality control with scater (Galaxy Training Materials)",
-year = "2021",
-month = "11",
-day = "26"
+year = "2022",
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scater-qc/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1457,7 +1457,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

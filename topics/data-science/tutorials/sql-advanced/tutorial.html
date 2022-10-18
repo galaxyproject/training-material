@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Advanced SQL" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:19 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="The Carpentries" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Avans Hogeschool" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:19 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Advanced SQL",
   "interactivityType": "mixed",
@@ -529,7 +529,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -789,7 +789,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -812,7 +812,7 @@
                      
                     
                         <blockquote class="comment">
-                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -855,7 +855,7 @@
 </div>
 
 <blockquote class="comment">
-  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://github.com/swcarpentry/sql-novice-survey/">Databases and SQL</a> lesson, which is licensed CC-BY 4.0.</p>
 
@@ -866,7 +866,7 @@
 </blockquote>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1034,7 +1034,7 @@ is picking an arbitrary one to display
 alongside the aggregated <code class="language-plaintext highlighter-rouge">reading</code> values.</p>
 
 <blockquote class="tip">
-  <h3 id="tip-know-excel-its-just-a-pivot-table"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Know Excel? It’s just a pivot table.</h3>
+  <div id="tip-know-excel-it-s-just-a-pivot-table" class="box-title"><button type="button" aria-controls="tip-know-excel-it-s-just-a-pivot-table-contents" aria-expanded="true" aria-label="Toggle tip box: Know Excel? It's just a pivot table."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Know Excel? It's just a pivot table.<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <p><code class="language-plaintext highlighter-rouge">GROUP BY</code> is basically just a pivot table for Excel users, it lets you build
 nice summary tables which aggregate your results.</p>
 
@@ -1077,13 +1077,13 @@ this query:</p>
 </ol>
 
 <blockquote class="question">
-  <h3 id="question-question-counting-temperature-readings"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Counting Temperature Readings</h3>
+  <div id="question-counting-temperature-readings" class="box-title" aria-label="question box: Counting Temperature Readings"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Counting Temperature Readings</div>
 
   <p>How many temperature readings did Frank Pabodie record,
 and what was their average value?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT count(reading), avg(reading) FROM Survey WHERE quant = 'temp' AND person = 'pb';
 </code></pre></div>    </div>
@@ -1117,7 +1117,7 @@ Does this mean that the <code class="language-plaintext highlighter-rouge">avg</
 when given the values 1.0, <code class="language-plaintext highlighter-rouge">null</code>, and 5.0?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <p>The answer is 3.0.
 <code class="language-plaintext highlighter-rouge">NULL</code> is not a value; it is the absence of a value.
 As such it is not included in the calculation.</p>
@@ -1136,7 +1136,7 @@ As such it is not included in the calculation.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-what-does-this-query-do"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: What Does This Query Do?</h3>
+  <div id="question-what-does-this-query-do" class="box-title" aria-label="question box: What Does This Query Do?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: What Does This Query Do?</div>
 
   <p>We want to calculate the difference between
 each individual radiation reading
@@ -1149,7 +1149,7 @@ We write the query:</p>
   <p>What does this actually produce, and can you think of why?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <p>The query produces only one row of results when we what we really want is a result for each of the readings.
 The <code class="language-plaintext highlighter-rouge">avg()</code> function produces only a single value, and because it is run first, the table is reduced to a single row.
 The <code class="language-plaintext highlighter-rouge">reading</code> value is simply an arbitrary one.</p>
@@ -1180,7 +1180,7 @@ The <code class="language-plaintext highlighter-rouge">reading</code> value is s
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-ordering-when-concatenating"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Ordering When Concatenating</h3>
+  <div id="question-ordering-when-concatenating" class="box-title" aria-label="question box: Ordering When Concatenating"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Ordering When Concatenating</div>
 
   <p>The function <code class="language-plaintext highlighter-rouge">group_concat(field, separator)</code>
 concatenates all the values in a field
@@ -1325,11 +1325,11 @@ and we can use those record numbers in queries:</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-listing-radiation-readings"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Listing Radiation Readings</h3>
+  <div id="question-listing-radiation-readings" class="box-title" aria-label="question box: Listing Radiation Readings"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Listing Radiation Readings</div>
 
   <p>Write a query that lists all radiation readings from the DR-1 site.</p>
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT Survey.reading
 FROM Site JOIN Visited JOIN Survey
@@ -1364,11 +1364,11 @@ AND Survey.quant = 'rad';
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-wheres-frank"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Where’s Frank?</h3>
+  <div id="question-where-s-frank" class="box-title" aria-label="question box: Where's Frank?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Where's Frank?</div>
 
   <p>Write a query that lists all sites visited by people named “Frank”.</p>
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT DISTINCT Site.name
 FROM Site JOIN Visited JOIN Survey JOIN Person
@@ -1397,7 +1397,7 @@ WHERE Person.personal = 'Frank';
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-reading-queries"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Reading Queries</h3>
+  <div id="question-reading-queries" class="box-title" aria-label="question box: Reading Queries"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Reading Queries</div>
 
   <p>Describe in your own words what the following query produces:</p>
 
@@ -1410,14 +1410,14 @@ ON Site.lat &lt; -49.0 AND Site.name = Visited.site AND Visited.dated &gt;= '193
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-who-has-been-where"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Who Has Been Where?</h3>
+  <div id="question-who-has-been-where" class="box-title" aria-label="question box: Who Has Been Where?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Who Has Been Where?</div>
 
   <p>Write a query that shows each site with exact location (lat, long) ordered by visited date,
 followed by personal name and family name of the person who visited the site
 and the type of measurement taken and its reading. Please avoid all null values.
 Tip: you should get 15 records with 8 fields.</p>
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT Site.name, Site.lat, Site.long, Person.personal, Person.family, Survey.quant, Survey.reading, Visited.dated
 FROM Site JOIN Visited JOIN Survey JOIN Person
@@ -1713,7 +1713,7 @@ As anthropologists say,
 the tool shapes the hand that shapes the tool.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-identifying-atomic-values"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Identifying Atomic Values</h3>
+  <div id="question-identifying-atomic-values" class="box-title" aria-label="question box: Identifying Atomic Values"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Identifying Atomic Values</div>
 
   <p>Which of the following are atomic values? Which are not? Why?</p>
 
@@ -1725,7 +1725,7 @@ the tool shapes the hand that shapes the tool.</p>
   </ul>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <p>New Zealand is the only clear-cut atomic value.</p>
 
     <p>The address and the XY coordinate contain more than one piece of information
@@ -1746,7 +1746,7 @@ If we need to work with the month, day, or year separately, we can use the SQL f
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-identifying-a-primary-key"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Identifying a Primary Key</h3>
+  <div id="question-identifying-a-primary-key" class="box-title" aria-label="question box: Identifying a Primary Key"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Identifying a Primary Key</div>
 
   <p>What is the primary key in this table?
 I.e., what value or combination of values uniquely identifies a record?</p>
@@ -1771,7 +1771,7 @@ I.e., what value or combination of values uniquely identifies a record?</p>
   </table>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <p>Latitude, longitude, and date are all required to uniquely identify the temperature record.</p>
   </blockquote>
 </blockquote>
@@ -1852,7 +1852,7 @@ and what names they give different data types,
 is an unending portability headache.</p>
 
 <blockquote class="tip">
-  <h3 id="tip-which-database-should-i-use"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Which database should I use?</h3>
+  <div id="tip-which-database-should-i-use" class="box-title"><button type="button" aria-controls="tip-which-database-should-i-use-contents" aria-expanded="true" aria-label="Toggle tip box: Which database should I use?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Which database should I use?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <p>SQLite is fantastic for small databases or embedded into applications where
 you want to be able to use SQL to query and process data.</p>
 
@@ -1862,7 +1862,7 @@ data type support.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <h3 id="tip-do-you-have-geographic-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Do you have geographic data?</h3>
+  <div id="tip-do-you-have-geographic-data" class="box-title"><button type="button" aria-controls="tip-do-you-have-geographic-data-contents" aria-expanded="true" aria-label="Toggle tip box: Do you have geographic data?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Do you have geographic data?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <p>Use Postgres. The <a href="https://postgis.net/">PostGIS</a> library is fantastic and industry standard for storing geographic data in a database.</p>
 </blockquote>
 
@@ -1950,7 +1950,7 @@ However,
 this technique is outside the scope of this chapter.</p>
 
 <blockquote class="tip">
-  <h3 id="tip-hybrid-storage-models"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hybrid Storage Models</h3>
+  <div id="tip-hybrid-storage-models" class="box-title"><button type="button" aria-controls="tip-hybrid-storage-models-contents" aria-expanded="true" aria-label="Toggle tip box: Hybrid Storage Models"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hybrid Storage Models<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <p>Many applications use a hybrid storage model
 instead of putting everything into a database:
@@ -1966,13 +1966,13 @@ but the files themselves live on disk.</p>
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-replacing-null"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Replacing NULL</h3>
+  <div id="question-replacing-null" class="box-title" aria-label="question box: Replacing NULL"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Replacing NULL</div>
 
   <p>Write an SQL statement to replace all uses of <code class="language-plaintext highlighter-rouge">null</code> in
 <code class="language-plaintext highlighter-rouge">Survey.person</code> with the string <code class="language-plaintext highlighter-rouge">'unknown'</code>.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UPDATE Survey SET person = 'unknown' WHERE person IS NULL;
 </code></pre></div>    </div>
   </blockquote>
@@ -1982,7 +1982,7 @@ but the files themselves live on disk.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-backing-up-with-sql"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Backing Up with SQL</h3>
+  <div id="question-backing-up-with-sql" class="box-title" aria-label="question box: Backing Up with SQL"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Backing Up with SQL</div>
 
   <p>SQLite has several administrative commands that aren’t part of the
 SQL standard.  One of them is <code class="language-plaintext highlighter-rouge">.dump</code>, which prints the SQL commands
@@ -1994,7 +1994,7 @@ What are the pros and cons of this approach?  (Hint: records aren’t
 stored in any particular order.)</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <h4 id="advantages">Advantages</h4>
     <ul>
       <li>A version control system will be able to show differences between versions
@@ -2019,7 +2019,7 @@ of the database</li>
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Use aggregation functions to combine multiple values.</p>
@@ -2198,7 +2198,7 @@ of the database</li>
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -2206,8 +2206,8 @@ of the database</li>
 author = "The Carpentries and Helena Rasche and Avans Hogeschool",
 title = "Advanced SQL (Galaxy Training Materials)",
 year = "2022",
-month = "05",
-day = "19"
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/sql-advanced/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -2238,7 +2238,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

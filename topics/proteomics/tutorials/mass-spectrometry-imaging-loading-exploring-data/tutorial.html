@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Mass spectrometry imaging: Loading and exploring MSI data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:31 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Melanie Föll" />
 <meta name="DC.creator" content="Björn Grüning" />
 
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:31 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry imaging: Loading and exploring MSI data",
   "interactivityType": "mixed",
@@ -492,7 +492,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -817,7 +817,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 31, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -851,7 +851,7 @@
 The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software (<a href="https://doi.org/10.1016/j.jprot.2012.07.026">Schramm et al., Jou<span class="notranslate">rna</span>l of Proteomics, 2012</a>). More and more vendors provide an imzML export option and there are <a href="https://ms-imaging.org/wp/imzml/software-tools/">software solutions</a> to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it’s quality and usefulness.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -873,20 +873,20 @@ The imzML file consists of two files: The first file contains the metadata in an
 <figure id="figure-2"><img src="../../images/MSI1_mouse_kidney.png" alt="mouse kidney image. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Mouse kidney sample before and after mass spectrometry measurement and H&amp;E staining</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-uploading-an-imzml-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Uploading an imzML file</h3>
+  <div id="hands-on-uploading-an-imzml-file" class="box-title" aria-label="hands-on box: Uploading an imzML file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading an imzML file</div>
 
   <ol>
     <li>
       <p><strong>Create a new history</strong> and give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
     <li>
       <p>Upload the data from <a href="https://zenodo.org/record/1560646">Zenodo</a> via the <strong>composite</strong> option</p>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-upload-via-the-composite-option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Upload via the composite option</h3>
+        <div id="tip-upload-via-the-composite-option" class="box-title"><button type="button" aria-controls="tip-upload-via-the-composite-option-contents" aria-expanded="true" aria-label="Toggle tip box: Upload via the composite option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Upload via the composite option<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <ul>
           <li>Open the <span class="notranslate">Galaxy</span> Upload Manager(<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>
           <li>Click on <strong>Composite</strong> on the top</li>
@@ -909,7 +909,7 @@ The imzML file consists of two files: The first file contains the metadata in an
       <figure id="figure-3"><img src="../../images/MSI1_upload_composite.png" alt="Upload imzML files. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Upload an imzML file via the composite upload</figcaption></figure>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-ftp-upload-for-large-files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: FTP upload for large files</h3>
+        <div id="tip-ftp-upload-for-large-files" class="box-title"><button type="button" aria-controls="tip-ftp-upload-for-large-files-contents" aria-expanded="true" aria-label="Toggle tip box: FTP upload for large files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: FTP upload for large files<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <ul>
           <li>In case one subfile is larger than 2 GB the uploading needs to be done via ftp.</li>
           <li>The necessary steps are explained in this tutorial <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting data into <span class="notranslate">Galaxy</span></a></li>
@@ -917,7 +917,7 @@ The imzML file consists of two files: The first file contains the metadata in an
       </blockquote>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-uploading-an-analyze75-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Uploading an Analyze7.5 file</h3>
+        <div id="tip-uploading-an-analyze7-5-file" class="box-title"><button type="button" aria-controls="tip-uploading-an-analyze7-5-file-contents" aria-expanded="true" aria-label="Toggle tip box: Uploading an Analyze7.5 file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Uploading an Analyze7.5 file<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <ul>
           <li><code class="language-plaintext highlighter-rouge">Analyze7.5</code> files are also supported by <span class="notranslate">Galaxy</span>.</li>
           <li>The file consists of three components and is therefore uploaded via the ‘composite’ function, analogously to the imzML upload.</li>
@@ -929,7 +929,7 @@ The imzML file consists of two files: The first file contains the metadata in an
       <p>Rename the data into <code class="language-plaintext highlighter-rouge">mouse_kidney_cut</code></p>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-rename-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Rename a dataset</h3>
+        <div id="tip-rename-a-dataset" class="box-title"><button type="button" aria-controls="tip-rename-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Rename a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Rename a dataset<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <ul>
           <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field to <code class="language-plaintext highlighter-rouge">mouse_kidney_cut</code></li>
@@ -953,7 +953,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 <em>Fibrinopeptide B</em> and <em>ACTH_18-39</em>. We furthermore spotted <em>Bombesin</em> peptides close to the tissue to monitor the digestion quality with the fold change of digested vs. undigested <em>Bombesin</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-running-the-msi-qualitycontrol-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the MSI Qualitycontrol tool</h3>
+  <div id="hands-on-running-the-msi-qualitycontrol-tool" class="box-title" aria-label="hands-on box: Running the MSI Qualitycontrol tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the MSI Qualitycontrol tool</div>
   <ol>
     <li>Create the tabular file with the m/z values of the inte<span class="notranslate">rna</span>l calibrants:
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>m/z       name
@@ -963,13 +963,13 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 2465.19    ACTH_18-39
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file</h3>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>From the Settings menu (<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span>) select <strong>Convert spaces to tabs</strong></li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-file" class="box-title"><button type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>From the Settings menu (<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span>) select <strong>Convert spaces to tabs</strong></li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
     </li>
     <li>
       <p><strong>Rename dataset</strong> to <code class="language-plaintext highlighter-rouge">Calibrants</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset</h3>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Calibrants</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Calibrants</code></li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
     <li>Run the <strong>MSI Qualitycontrol</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -991,7 +991,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 <p>Open the pdf by clicking on the eye icon (view data) and answer the following questions according to the summary table on the first page.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many m/z features does the dataset contain?</li>
@@ -1001,7 +1001,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <ol>
       <li>9013</li>
       <li>Centroided = FALSE means that the data were read in profile mode. The user has to define in every tool if the input data is in profile or centroided mode. The Centroid value reported here corresponds to the choice the user has made in the tool and not by automatic recognition. To find out what the correct choice is visit <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html#quality-control-of-the-data">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
@@ -1030,7 +1030,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
 <figure id="figure-5"><img src="../../images/MSI1_angiotensin_image.png" alt="Angiotensin heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Intensity distribution image of Angiotensin I</figcaption></figure>
 
 <blockquote class="comment">
-  <h3 id="comment-plotting-heatmaps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting heatmaps</h3>
+  <div id="comment-plotting-heatmaps" class="box-title" aria-label="comment box: Plotting heatmaps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Plotting heatmaps</div>
   <ul>
     <li>The <strong>MSI mz images</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to generate heatmaps with futher options such as contrast enhancement and smoothing functions. The usage of the tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
@@ -1066,7 +1066,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 <figure id="figure-8"><img src="../../images/MSI1_mz_error.png" alt="mz error. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plots that show the average and individual m/z errors</figcaption></figure>
 
 <blockquote class="comment">
-  <h3 id="comment-plotting-mass-spectra"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Plotting mass spectra</h3>
+  <div id="comment-plotting-mass-spectra" class="box-title" aria-label="comment box: Plotting mass spectra"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Plotting mass spectra</div>
   <ul>
     <li>The <strong>MSI plot spectra</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool allows to single, average or overlayed mass spectra plots and to zoom into m/z regions of interest. The tool is explained in more detail in the tutorial <a href="/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html">Mass spectrometry imaging: Examining the spatial distribution of analytes</a>.</li>
   </ul>
@@ -1080,7 +1080,7 @@ Both plots can also serve to check for spraying gradients or reduced machine per
 The spectra data output can be filtered for certain spectra to obtain some spectra properties such as the accurate value of its base peak that could not be accurately determined in the corresponding plot of the quality report before.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-export-and-explore-information-from-msi-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Export and explore information from MSI data</h3>
+  <div id="hands-on-export-and-explore-information-from-msi-data" class="box-title" aria-label="hands-on box: Export and explore information from MSI data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Export and explore information from MSI data</div>
 
   <ol>
     <li>Run <strong>MSI data exporter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1109,7 +1109,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many spectra does the dataset contain?</li>
@@ -1118,7 +1118,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <ol>
       <li>1581 - Clicking on pixel output file name reveals that it has 1582 lines, every line contains the information of one spectrum, but the first line is a header line (click on dataset “MSI data exporter on data 1: spectra” in the history, the line number of the file is written below the dataset name)</li>
       <li>7 - The feature file has 8 columns and except for the mz_names, all columns contain numeric properties, that can be used for further calculations.</li>
@@ -1134,7 +1134,7 @@ Exporting and filtering the spectra information for three pixel that have differ
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>imzML (continuous or processed file type) and Analyze7.5 can be uploaded into Galaxy via the composite upload.</p>
@@ -1203,7 +1203,7 @@ Exporting and filtering the spectra information for three pixel that have differ
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Melanie Föll, Björn Grüning, 2021 <b>Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Melanie Föll, Björn Grüning, 2022 <b>Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1213,16 +1213,16 @@ Exporting and filtering the spectra information for three pixel that have differ
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{proteomics-mass-spectrometry-imaging-loading-exploring-data,
 author = "Melanie Föll and Björn Grüning",
 title = "Mass spectrometry imaging: Loading and exploring MSI data (Galaxy Training Materials)",
-year = "2021",
-month = "05",
-day = "31"
+year = "2022",
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1253,7 +1253,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

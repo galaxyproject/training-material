@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Automation with Jenkins" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 
         
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:23 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Automation with Jenkins",
   "interactivityType": "mixed",
@@ -480,7 +480,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -803,7 +803,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 23, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -834,7 +834,7 @@ If you need to automatically run a command whenever some event happens, and then
 This tutorial will specifically cover automation with Jenkins as that is one of the tools <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code> use for a subset of their automation.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#comparison-of-ci-systems" id="markdown-toc-comparison-of-ci-systems">Comparison of CI Systems</a></li>
@@ -880,7 +880,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 <h2 id="jenkins">Jenkins</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-setting-up-jenkins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up Jenkins</h3>
+  <div id="hands-on-setting-up-jenkins" class="box-title" aria-label="hands-on box: Setting up Jenkins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up Jenkins</div>
 
   <ol>
     <li>
@@ -982,7 +982,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 <h2 id="a-simple-job">A simple job</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-create-a-simple-job"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a simple job</h3>
+  <div id="hands-on-create-a-simple-job" class="box-title" aria-label="hands-on box: Create a simple job"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a simple job</div>
 
   <ol>
     <li>
@@ -1013,7 +1013,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
       </ul>
 
       <blockquote class="details">
-        <h3 id="details-cron-syntax"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Cron syntax</h3>
+        <div id="details-cron-syntax" class="box-title"><button type="button" aria-controls="details-cron-syntax-contents" aria-expanded="true" aria-label="Toggle details box: Cron syntax"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Cron syntax<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <p>Jenkins uses the <a href="https://en.wikipedia.org/wiki/Cron#Overview">cron syntax</a>, with the addition that <code class="language-plaintext highlighter-rouge">H</code> can be used to randomly choose a value for that place, rather than running at precisely that minute or hour. This allows you to spread the load of multiple jobs over a period of time, rather than having maybe 10 jobs all attempting to run simultaneously if they do not need to.
 For the above example it will choose one value for the <code class="language-plaintext highlighter-rouge">H</code>, a random minute in the hour, and then run every hour, every day, at that minute.
 You can enter different <span class="notranslate">expression</span>s to see when Jenkins would run it next.</p>
@@ -1043,7 +1043,7 @@ env | sort
       </ul>
 
       <blockquote class="warning">
-        <h3 id="warning-danger"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Danger!</h3>
+        <div id="warning-danger" class="box-title" aria-label="warning box: Danger!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger!</div>
         <p>This field allows you to execute arbitrary bash scripts. This is a reason Jenkins <strong>must</strong> be secured with HTTPS and a good use<span class="notranslate">rna</span>me/password.</p>
       </blockquote>
     </li>
@@ -1068,7 +1068,7 @@ env | sort
 <p>Setting up Jenkins jobs is as simple as setting up a cron job, but the results are stored in a nice visual interface that may provide better visibility than a <code class="language-plaintext highlighter-rouge">cron</code> job.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-authors-commentary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Author’s commentary</h3>
+  <div id="comment-author-s-commentary" class="box-title" aria-label="comment box: Author's commentary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Author's commentary</div>
   <p>Cron jobs are great and often useful, but most people ignore the emails that cron sends them. I know I have mailboxes across N servers with dozens and dozens of unread emails from cron jobs. Jenkins is an improvement here because it shows “success” and “failure” messages that are clear, while storing the output in case you later decide that you want to look at it. For the most part, cron jobs write output that is never read, and we really only want to see the output if something has failed, but writing a cron job that behaves like this is unnecessarily complex.</p>
 </blockquote>
 
@@ -1077,7 +1077,7 @@ env | sort
 <p>We will now setup Jenkins to run Ansible on cron. In the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. Use<span class="notranslate">Galaxy</span>.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-jenkins-running-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Jenkins running Ansible</h3>
+  <div id="hands-on-jenkins-running-ansible" class="box-title" aria-label="hands-on box: Jenkins running Ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Jenkins running Ansible</div>
 
   <ol>
     <li>
@@ -1178,7 +1178,7 @@ ok: [gcc-3.training.<span class="notranslate">galaxy</span>project.eu]
 <p>You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible <span class="notranslate">Galaxy</span> deployment job we set the parameter <code class="language-plaintext highlighter-rouge">--diff</code>, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the <code class="language-plaintext highlighter-rouge">id_secret</code> or other secret variables, then this diff will be visible in the job’s console logs. This is useful to see for admins but needs to be restricted so that the whole world cannot see this.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-securing-jenkins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Securing Jenkins</h3>
+  <div id="hands-on-securing-jenkins" class="box-title" aria-label="hands-on box: Securing Jenkins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Securing Jenkins</div>
 
   <ol>
     <li>
@@ -1221,12 +1221,12 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
       <p>Save</p>
 
       <blockquote class="question">
-        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Try accessing your Jenkins from a private browsing session. How does it look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
           <p>It should appear as if there are no jobs, until you log in.</p>
         </blockquote>
       </blockquote>
@@ -1434,7 +1434,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Automate all the things!</p>
@@ -1519,7 +1519,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -1528,7 +1528,7 @@ author = "Helena Rasche",
 title = "Automation with Jenkins (Galaxy Training Materials)",
 year = "2022",
 month = "09",
-day = "23"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1559,7 +1559,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

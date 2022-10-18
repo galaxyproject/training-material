@@ -512,7 +512,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -625,7 +625,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -648,7 +648,7 @@
                      
                     
                         <blockquote class="comment">
-                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -680,7 +680,7 @@
                 <p>Here we’ll give a quick tutorial on how to read and write files within Python.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -748,13 +748,13 @@
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <h3 id="code-in-using-with"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Using <code class="language-plaintext highlighter-rouge">with</code></h3>
+    <div id="code-in-using-with" class="box-title" aria-label="code-in box: Using `with`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Using `with`</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>with open('file.txt', 'r') as handle:
     print(handle.readlines())
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <h3 id="code-out-not-using-with"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Not using <code class="language-plaintext highlighter-rouge">with</code></h3>
+    <div id="code-out-not-using-with" class="box-title" aria-label="code-out box: Not using `with`"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Not using `with`</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>handle = open('file.txt', 'r')
 print(handle.readlines())
 handle.close() # Important!
@@ -968,7 +968,7 @@ GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTAT
 <p>That’s it! Check if your <code class="language-plaintext highlighter-rouge">fasta</code> file looks correct.</p>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-enumerate"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: <code class="language-plaintext highlighter-rouge">enumerate</code></h3>
+  <div id="tip-enumerate" class="box-title"><button type="button" aria-controls="tip-enumerate-contents" aria-expanded="true" aria-label="Toggle tip box: `enumerate`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: `enumerate`<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <p>If you want to know which item number you’re on while you’re looping over a list, you can use the function <code class="language-plaintext highlighter-rouge">enumerate()</code>
 Try out this code to see how it works:</p>
 
@@ -1163,12 +1163,12 @@ Jane,"London, UK",Z86.16
 <p>That should be easier to work with, now we only have one country’s data. Let’s do some exercises with this data:</p>
 
 <blockquote class="question">
-  <h3 id="question-question-which-vaccines-were-given"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Which vaccines were given?</h3>
+  <div id="question-which-vaccines-were-given" class="box-title" aria-label="question box: Which vaccines were given?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Which vaccines were given?</div>
 
   <p>Which vaccines were given? Use the <code class="language-plaintext highlighter-rouge">subset</code> to examine which vaccines were given in the Netherlands. <em>Tip</em>: if <code class="language-plaintext highlighter-rouge">x</code> is a list, <code class="language-plaintext highlighter-rouge">set(x)</code> will return the unique values in that list.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <p>To figure out which vaccines were given, we can look at column 12:</p>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vaccines</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1185,7 +1185,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-how-many-of-each-vaccine-were-given"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: How many of each vaccine were given?</h3>
+  <div id="question-how-many-of-each-vaccine-were-given" class="box-title" aria-label="question box: How many of each vaccine were given?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: How many of each vaccine were given?</div>
 
   <p>How many of each were given?</p>
 
@@ -1193,7 +1193,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: Columns 5, 7, and 8 have doses being given out to patients.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">doses</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
     <span class="n">brand</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
@@ -1209,7 +1209,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-how-many-of-each-vaccine-were-exported-received"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: How many of each vaccine were exported? received?</h3>
+  <div id="question-how-many-of-each-vaccine-were-exported-received" class="box-title" aria-label="question box: How many of each vaccine were exported? received?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: How many of each vaccine were exported? received?</div>
 
   <p>How many of each were exported? received?</p>
 
@@ -1217,7 +1217,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: you will need to handle an edge case here. Try and find it out!</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">export</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">received</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
@@ -1240,12 +1240,12 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-when-was-the-first-dose-received"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: When was the first dose received?</h3>
+  <div id="question-when-was-the-first-dose-received" class="box-title" aria-label="question box: When was the first dose received?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: When was the first dose received?</div>
 
   <p><em>Tip</em>: use <code class="language-plaintext highlighter-rouge">break</code>, and check how many doses were given!</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"On </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s"> doses of </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="si">}</span><span class="s"> were given"</span><span class="p">)</span>
@@ -1258,7 +1258,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-transform-the-data-for-plotting"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Transform the data for plotting</h3>
+  <div id="question-transform-the-data-for-plotting" class="box-title" aria-label="question box: Transform the data for plotting"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Transform the data for plotting</div>
 
   <p>Let’s say you want to plot the fraction of the population that has been vaccinated by the various points in time.</p>
 
@@ -1271,7 +1271,7 @@ Jane,"London, UK",Z86.16
   <p>The output should be a list of percentages ranging from [0.0 to 1.0].</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total_doses</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">percent_vaccinated_per_week</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
@@ -1300,7 +1300,7 @@ Jane,"London, UK",Z86.16
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-which-vaccines-were-given-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Which vaccines were given?</h3>
+  <div id="question-which-vaccines-were-given-1" class="box-title" aria-label="question box: Which vaccines were given?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Which vaccines were given?</div>
 
   <p>Write this out to a new file, with two columns. The index and the Percent Vaccinated. It should be a comma separated file, and should have a header. Save this as a csv file named <code class="language-plaintext highlighter-rouge">weekly-percent-vax.csv</code></p>
 
@@ -1308,7 +1308,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: Use <code class="language-plaintext highlighter-rouge">enumerate()</code> to get a list of items with indexes.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>with open('weekly-percent-vax.csv', 'w') as handle:
     writer = csv.writer(csv_data, delimiter=",", quotechar='"')
@@ -1327,7 +1327,7 @@ Jane,"London, UK",Z86.16
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>File reading requires a mode: read, write, and append</p>
@@ -1406,7 +1406,7 @@ Jane,"London, UK",Z86.16
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -1414,7 +1414,7 @@ Jane,"London, UK",Z86.16
 author = "Helena Rasche and Donny Vrins and Bazante Sanders",
 title = "Python - Files & CSV (Galaxy Training Materials)",
 year = "2022",
-month = "06",
+month = "09",
 day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-files/tutorial.html}",
 note = "[Online; accessed TODAY]"
@@ -1446,7 +1446,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

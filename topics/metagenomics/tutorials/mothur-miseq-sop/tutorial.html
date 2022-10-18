@@ -538,7 +538,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -890,7 +890,7 @@
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <span class="citation"><a href="#Schloss2009">Schloss <i>et al.</i> 2009</a></span>.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-note-two-versions-of-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: Two versions of this tutorial</h3>
+  <comment-title>Note: Two versions of this tutorial</comment-title>
 
   <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
 
@@ -902,7 +902,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
 </blockquote>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <agenda-title></agenda-title>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -944,14 +944,14 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">  <h3 data-toc-skip="" id="-results-may-vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Results may vary</h3>  <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p></blockquote>
+<blockquote class="comment">  <div id="comment-results-may-vary" class="box-title" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>  <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p></blockquote>
 
 <h1 id="obtaining-and-preparing-data">Obtaining and preparing data</h1>
 
 <p>In this tutorial we use 16S r<span class="notranslate">RNA</span> data, but similar pipelines can be used for WGS data.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-the-16s-ribosomal-rna-gene"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: The 16S ribosomal <span class="notranslate">RNA</span> gene</h3>
+  <comment-title>Background: The 16S ribosomal <span class="notranslate">RNA</span> gene</comment-title>
   <p><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene" /> <br /><br /></p>
 
   <p>The 16S r<span class="notranslate">RNA</span> gene has several properties that make it ideally suited for our purposes</p>
@@ -991,7 +991,7 @@ additionally sequenced a mock community with a known composition (genomic <span 
 for this mock sample are contained in the file <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
-  <h3 id="comment-dataset-naming-scheme"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dataset naming scheme</h3>
+  <comment-title>Dataset naming scheme</comment-title>
   <p>For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
@@ -1011,14 +1011,14 @@ in this document differ slightly from the description on their website -->
 <p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI" /></a></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining our data</h3>
+  <hands-on-title>Obtaining our data</hands-on-title>
 
   <ol>
     <li>
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
     <li><strong>Import Sample Data.</strong>
       <ul>
@@ -1027,7 +1027,7 @@ in this document differ slightly from the description on their website -->
 using the URLs listed in the box below (click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> to expand):</p>
 
           <blockquote class="solution">
-            <h3 id="solution-list-of-zenodo-urls"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
+            <solution-title>List of Zenodo URLs</solution-title>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
@@ -1072,10 +1072,10 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
           </blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+          <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+          <blockquote class="tip">  <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
         </li>
       </ul>
     </li>
@@ -1092,7 +1092,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       </ul>
 
       <blockquote class="solution">
-        <h3 id="solution-list-of-zenodo-urls-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
+        <solution-title>List of Zenodo URLs</solution-title>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
@@ -1113,7 +1113,7 @@ which will differ only by <code class="language-plaintext highlighter-rouge">_R1
 convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-organizing-our-data-into-a-paired-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Organizing our data into a paired collection</h3>
+  <hands-on-title>Organizing our data into a paired collection</hands-on-title>
 
   <ol>
     <li>
@@ -1198,7 +1198,7 @@ the consensus base call. A new quality score is derived by combining the two ori
 the <span class="notranslate">reads</span> for all the overlapping positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combine forward and reverse <span class="notranslate">reads</span> into contigs</h3>
+  <hands-on-title>Combine forward and reverse <span class="notranslate">reads</span> into contigs</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span>  with the following parameters</li>
@@ -1228,7 +1228,7 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 <p>As the next step, we want to improve the quality of our data. But first, let’s get a feel of our dataset:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summarize data</h3>
+  <hands-on-title>Summarize data</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1278,7 +1278,7 @@ problematic <span class="notranslate">reads</span>.</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filter-reads-based-on-quality-and-length"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <span class="notranslate">reads</span> based on quality and length</h3>
+  <hands-on-title>Filter <span class="notranslate">reads</span> based on quality and length</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
@@ -1292,12 +1292,12 @@ problematic <span class="notranslate">reads</span>.</p>
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many <span class="notranslate">reads</span> were removed in this screening step? (Hint: run the summary.seqs tool again)</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>23,488.</p>
 
       <p>This can be determined by looking at the number of lines in bad.accnos output of screen.seqs
@@ -1315,7 +1315,7 @@ the unique <span class="notranslate">reads</span>, and then record how many time
 the original dataset. We do this by using the <strong>Unique.seqs</strong> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-duplicate-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicate sequences</h3>
+  <hands-on-title>Remove duplicate sequences</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1327,12 +1327,12 @@ the original dataset. We do this by using the <strong>Unique.seqs</strong> tool.
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many sequences were unique? How many duplicates were removed?</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>16,426 unique sequences and 112,446 duplicates.</p>
 
       <p>This can be determined from the number of lines in the fasta (or names) output, compared to the
@@ -1367,7 +1367,7 @@ read_name7    read_name8
 the <em>group file</em> and the <em>names file</em> into a single <em>count table</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-generate-count-table"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate count table</h3>
+  <hands-on-title>Generate count table</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0"><strong>Count.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1393,7 +1393,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 the number of duplicates of this sequence observed in each sample.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-representative-sequences-vs-total-sequences"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Representative sequences vs Total sequences</h3>
+  <comment-title>Representative sequences vs Total sequences</comment-title>
   <p>From now on, we will only work with the set of <em>unique sequences</em>, but it’s important to remember that these represent a larger
 number of <em>total sequences</em>, which we keep track of in the <em>count table</em>.</p>
 
@@ -1416,7 +1416,7 @@ with the most common k-mers and the unique sequence a standard global sequence a
 (using the Needleman-Wunsch algorithm).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-align-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequences</h3>
+  <hands-on-title>Align sequences</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1427,12 +1427,12 @@ with the most common k-mers and the unique sequence a standard global sequence a
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <question-title></question-title>
 
         <p>Have a look at the alignment output, what do you see?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <solution-title></solution-title>
           <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="language-plaintext highlighter-rouge">.</code> characters below it.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
 ............................................................................
@@ -1502,7 +1502,7 @@ homopolymer stretches.</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
+  <hands-on-title>Remove poorly aligned sequences</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
@@ -1517,11 +1517,11 @@ homopolymer stretches.</p>
       <p><strong>Note:</strong> we supply the count table so that it can be updated for the sequences we’re removing.</p>
 
       <blockquote class="question">
-        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <question-title></question-title>
 
         <p>How many sequences were removed in this step?</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <solution-title></solution-title>
           <p>128 sequences were removed. This is the number of lines in the bad.accnos output.</p>
         </blockquote>
       </blockquote>
@@ -1568,7 +1568,7 @@ trimmed our alignment down to a length of 376.</p>
 the <strong>Unique.seqs</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-re-obtain-unique-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Re-obtain unique sequences</h3>
+  <hands-on-title>Re-obtain unique sequences</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1580,12 +1580,12 @@ the <strong>Unique.seqs</strong> tool:</p>
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many duplicate sequences did our filter step produce?</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>3: The number of unique sequences was reduced from 16298 to 16295</p>
     </blockquote>
   </blockquote>
@@ -1598,7 +1598,7 @@ by around 1 in every 100 bases are likely to represent sequencing errors, not tr
 our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-perform-preliminary-clustering-of-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform preliminary clustering of sequences</h3>
+  <hands-on-title>Perform preliminary clustering of sequences</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0"><strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0</span></span>  with the following parameters
@@ -1611,11 +1611,11 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
   </ul>
 
   <blockquote class="question">
-    <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many unique sequences are we left with after this clustering of highly similar sequences?</p>
     <blockquote class="solution">
-      <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>5720: This is the number of lines in the fasta output</p>
     </blockquote>
   </blockquote>
@@ -1632,7 +1632,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
 <strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-chimeras"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Chimeras</h3>
+  <comment-title>Background: Chimeras</comment-title>
   <p><img src="../../images/chimeras.jpg" alt="Chemirec sequence" />
 (slide credit: <a href="http://slideplayer.com/slide/4559004/">http://slideplayer.com/slide/4559004/ </a>)</p>
 </blockquote>
@@ -1641,7 +1641,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
 way of doing this is to use the abundant sequences as our reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-chimeric-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove chimeric sequences</h3>
+  <hands-on-title>Remove chimeric sequences</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1"><strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1</span></span>  with the following parameters
@@ -1665,12 +1665,12 @@ way of doing this is to use the abundant sequences as our reference.</p>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many sequences were flagged as chimeric? what is the percentage? (Hint: summary.seqs)</p>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>Looking at the chimera.vsearch <code class="language-plaintext highlighter-rouge">accnos</code> output, we see that <strong>3,439 representative sequences</strong> were flagged as chimeric. If we run summary.seqs on the resulting fasta file and count table, we see that we went from 128,655
 sequences down to 118,091 total sequences in this step, for a reduction of <strong>10,564 total sequences</strong>, or 8.2%. This is a reasonable number of
 sequences to be flagged as chimeric.</p>
@@ -1687,7 +1687,7 @@ sequences to be flagged as chimeric.</p>
 set provided by the Schloss lab</a> based on the RDP (Ribosomal Database Project, <span class="citation"><a href="#Cole2013">Cole <i>et al.</i> 2013</a></span>) reference taxonomy.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-taxonomic-assignment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Taxonomic assignment</h3>
+  <comment-title>Background: Taxonomic assignment</comment-title>
 
   <p>In this tutorial we will use the RDP classifier and reference taxonomy for classification, but there are several different taxonomic
 assignment algorithms and reference databases available for this purpose.</p>
@@ -1727,7 +1727,7 @@ that have survived all the cleaning steps up to this point. We are generally not
 and want to remove them from our dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-taxonomic-classification-and-removal-of-undesired-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Taxonomic Classification and Removal of undesired sequences</h3>
+  <hands-on-title>Taxonomic Classification and Removal of undesired sequences</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0"><strong>Classify.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0</span></span>  with the following parameters
@@ -1754,7 +1754,7 @@ and want to remove them from our dataset.</p>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <question-title></question-title>
 
     <ol>
       <li>How many unique (representative) sequences were removed in this step?</li>
@@ -1762,7 +1762,7 @@ and want to remove them from our dataset.</p>
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <ol>
         <li>
           <p>20 representative sequences were removed.
@@ -1787,7 +1787,7 @@ our sequencing and bioinformatics pipeline is.</p>
 <p><a href="../mothur-miseq-sop-short/tutorial.html#optional-calculate-error-rates-based-on-our-mock-community"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
 <blockquote class="comment">
-  <h3 id="comment-skipping-the-mock-community-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Skipping the mock community analysis</h3>
+  <comment-title>Skipping the mock community analysis</comment-title>
 
   <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-clustering">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.
@@ -1801,7 +1801,7 @@ of which you know the exact composition and is something we recommend to do, bec
 accurate your sequencing and analysis protocol is.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-mock-communities"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Mock communities</h3>
+  <comment-title>Background: Mock communities</comment-title>
 
   <p><strong>What is a mock community?</strong></p>
 
@@ -1847,7 +1847,7 @@ exactly what we would expect the analysis to produce as a result.</p>
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-extract-mock-sample-from-our-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: extract mock sample from our dataset</h3>
+  <hands-on-title>extract mock sample from our dataset</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span>  with the following parameters
@@ -1874,7 +1874,7 @@ Selected 4046 sequences from your count file
 the <span class="notranslate">reads</span> from our mock sample back to their known sequences, to see how many fail to match.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-assess-error-rates-based-on-a-mock-community"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assess error rates based on a mock community</h3>
+  <hands-on-title>Assess error rates based on a mock community</hands-on-title>
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
       <ul>
@@ -1918,7 +1918,7 @@ a clustering is derived using the OptiClust algorithm:</p>
 </ol>
 
 <blockquote class="comment">
-  <h3 id="comment-background-what-are-operational-taxonomic-units-otus"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: What are Operational Taxonomic Units (OTUs)?</h3>
+  <comment-title>Background: What are Operational Taxonomic Units (OTUs)?</comment-title>
 
   <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S r<span class="notranslate">DNA</span> marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -1932,7 +1932,7 @@ separation.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-cluster-mock-sequences-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster mock sequences into OTUs</h3>
+  <hands-on-title>Cluster mock sequences into OTUs</hands-on-title>
 
   <p>First we calculate the pairwise distances between our sequences</p>
 
@@ -1970,11 +1970,11 @@ separation.</p>
   </ol>
 
   <blockquote class="question">
-    <h3 id="question-question-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
 
     <p>How many OTUs were identified in our mock community?</p>
     <blockquote class="solution">
-      <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <p>Answer: <strong>34</strong></p>
 
       <p>This can be determined by opening the shared file or OTU list and looking at the header line. You will see a column for each OTU</p>
@@ -2014,7 +2014,7 @@ something like this:</p>
 best efforts, some chimeras or other contaminations may have slipped through our filtering steps.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-rarefaction"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Rarefaction</h3>
+  <comment-title>Background: Rarefaction</comment-title>
 
   <p>To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -2039,7 +2039,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">mothur wiki page</a>.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-what-are-operational-taxonomic-units-otus-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: What are Operational Taxonomic Units (OTUs)?</h3>
+  <comment-title>Background: What are Operational Taxonomic Units (OTUs)?</comment-title>
 
   <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S r<span class="notranslate">DNA</span> marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
@@ -2060,7 +2060,7 @@ before we start, we should first remove the Mock dataset from our data, as we no
 the <strong>Remove.groups</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-mock-community-from-our-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Mock community from our dataset</h3>
+  <hands-on-title>Remove Mock community from our dataset</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0"><strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0</span></span>  with the following parameters
@@ -2089,7 +2089,7 @@ datasets.</p>
 <p>We’ll now use the <strong>Cluster</strong> tool, with <code class="language-plaintext highlighter-rouge">taxlevel</code> set to <code class="language-plaintext highlighter-rouge">4</code>, requesting that clustering be done at the <em>Order</em> level.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-cluster-our-data-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster our data into OTUs</h3>
+  <hands-on-title>Cluster our data into OTUs</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0"><strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0</span></span>  with the following parameters
@@ -2146,12 +2146,12 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/wiki/Alistipes">Alistipes</a></em>.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <question-title></question-title>
 
   <p>Which samples contained sequences belonging to an OTU classified as Staphylococcus?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <solution-title></solution-title>
     <p>Examine the <code class="language-plaintext highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
     <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
@@ -2167,7 +2167,7 @@ the microbiome and whether we could observe any change in community structure be
 dataset by subsampling.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-subsampling"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Subsampling</h3>
+  <hands-on-title>Subsampling</hands-on-title>
 
   <p>First we want to see how many sequences we have in each sample. We’ll do this with the
 <strong>Count.groups</strong> tool:</p>
@@ -2179,10 +2179,10 @@ dataset by subsampling.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <question-title></question-title>
         <p>How many sequences did the smallest sample consist of?</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <solution-title></solution-title>
           <p>The smallest sample is <code class="language-plaintext highlighter-rouge">F3D143</code>, and consists of 2389 sequences. This is a reasonable number, so we will now subsample all the other samples down to this level.</p>
         </blockquote>
       </blockquote>
@@ -2195,11 +2195,11 @@ dataset by subsampling.</p>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <question-title></question-title>
 
         <p>What would you expect the result of <code class="language-plaintext highlighter-rouge">count.groups</code> on this new shared output collection to be? Check if you are correct.</p>
         <blockquote class="solution">
-          <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <solution-title></solution-title>
           <p>all groups (samples) should now have 2389 sequences. Run count.groups again on the shared output collection by the sub.sample
 tool to confirm that this is indeed what happened.</p>
         </blockquote>
@@ -2219,7 +2219,7 @@ or between samples (beta diversity). However, diversity is not a physical quanti
 and many different metrics have been proposed to quantify diversity by <span class="citation"><a href="#Finotello2016">Finotello <i>et al.</i> 2016</a></span>.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-species-diversity"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Species Diversity</h3>
+  <comment-title>Background: Species Diversity</comment-title>
 
   <p>Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.</p>
 
@@ -2237,7 +2237,7 @@ smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, cov
 ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison of several different diversity metrics is discussed in <span class="citation"><a href="#BonillaRosso2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></p>
 
   <blockquote class="question">
-    <h3 id="question-question-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <question-title></question-title>
     <p>To understand the difference between richness and evenness, consider the following example:</p>
 
     <p><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness" /></p>
@@ -2248,7 +2248,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
     </ol>
 
     <blockquote class="solution">
-      <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <solution-title></solution-title>
       <ol>
         <li>Both communities have 4 different species, so they have same richness.</li>
         <li>Community B is more even, because each species has the same abundance.</li>
@@ -2277,7 +2277,7 @@ definition of diversity and as always, the metric you choose to use may influenc
 rarefaction measures the number of observed OTUs as a function of the subsampling size.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background-rarefaction-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background: Rarefaction</h3>
+  <comment-title>Background: Rarefaction</comment-title>
 
   <p>To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 plots the number of species as a function of the number of individuals sampled. The curve usually begins
@@ -2296,7 +2296,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 <p>We calculate rarefaction curves with the <strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-calculate-rarefaction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate Rarefaction</h3>
+  <hands-on-title>Calculate Rarefaction</hands-on-title>
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0"><strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0</span></span>  with the following parameters
       <ul>
@@ -2328,7 +2328,7 @@ we have covered our full diversity. This information would be easier to interpre
 Let’s plot the rarefaction curve for a couple of our sequences:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-rarefaction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot Rarefaction</h3>
+  <hands-on-title>Plot Rarefaction</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2"><strong>Plotting tool - for multiple series and graph types</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2</span></span>  with the following parameters
@@ -2361,7 +2361,7 @@ off so we are confident we cover a large part of our sample diversity:</p>
 will randomly subsample down to 2389 sequences, repeat this process 1000 times, and report several metrics:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-summarysingle"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Summary.single</h3>
+  <hands-on-title>Summary.single</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2"><strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2</span></span>  with the following parameters
@@ -2423,7 +2423,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
 <p>We calculate this with the <strong>Dist.shared</strong> tool, which will rarefy our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-beta-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Beta diversity</h3>
+  <hands-on-title>Beta diversity</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0"><strong>Dist.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0</span></span>  with the following parameters
@@ -2461,7 +2461,7 @@ heatmaps the red colors indicate communities that are more similar than those wi
 Let’s take a look at the Venn diagrams for the first 4 time points of female 3 using the <strong>Venn</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-venn-diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Venn diagram</h3>
+  <hands-on-title>Venn diagram</hands-on-title>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0"><strong>Venn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0</span></span>  with the following parameters
@@ -2487,7 +2487,7 @@ numerically rare or just had a low incidence.</p>
 dendrogram using the <code class="language-plaintext highlighter-rouge">jclass</code> and <code class="language-plaintext highlighter-rouge">thetayc</code> calculators within the <strong>Tree.shared</strong> tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-tree"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Tree</h3>
+  <hands-on-title>Tree</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0"><strong>Tree.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0</span></span>  with the following parameters
@@ -2522,7 +2522,7 @@ of the others.</p>
 <p>A tool we can use to visualize the composition of our community, is <a href="https://github.com/marbl/Krona/wiki">Krona</a></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Krona</h3>
+  <hands-on-title>Krona</hands-on-title>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
 
@@ -2547,12 +2547,12 @@ innermost ring labeled “Bacteroidetes” below:</p>
 <iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> ![Krona](../../images/krona.png) </iframe>
 
 <blockquote class="question">
-  <h3 id="question-question-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <question-title></question-title>
 
   <p>What percentage of your sample was labelled <code class="language-plaintext highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <solution-title></solution-title>
     <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
@@ -2573,7 +2573,7 @@ about the groups. But luckily we can get <strong>Classify.otu</strong> <i class=
 taxonomy files. In the following exercise, we will create a Krona plot with per-sample subplots.</p>
 
 <blockquote class="question">
-  <h3 id="question-exercise-per-sample-plots"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Exercise: per-sample plots</h3>
+  <question-title>Exercise: per-sample plots</question-title>
 
   <p>Try to create per-sample Krona plots. An few hints are given below, and the full answer
 is given in the solution box. <br /></p>
@@ -2589,7 +2589,7 @@ is given in the solution box. <br /></p>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-full-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Full Solution</h3>
+    <solution-title>Full Solution</solution-title>
 
     <ol>
       <li>Find the previous run of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in your history
@@ -2638,7 +2638,7 @@ is given in the solution box. <br /></p>
 view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-phinch"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Phinch</h3>
+  <hands-on-title>Phinch</hands-on-title>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0"><strong>Make.biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0</span></span>  with the following parameters
@@ -2666,7 +2666,7 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
  <img src="../../../../shared/images/phinch_overviewpage.png" alt="Phinch overview" /></p>
 
   <blockquote class="comment">
-    <h3 id="comment-no-link-to-phinch-on-your-dataset"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> No link to Phinch on your dataset?</h3>
+    <comment-title>No link to Phinch on your dataset?</comment-title>
 
     <p>If this visualisation link is not present on your <span class="notranslate">Galaxy</span> dataset, you can download the generated BIOM file from <span class="notranslate">Galaxy</span>,
 and upload it directly to the Phinch server at <a href="https://usegalaxy.eu/phinch/index.html">https://use<span class="notranslate">galaxy</span>.eu/phinch/</a>. <br /><br /></p>
@@ -2688,7 +2688,7 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>16S rRNA gene sequencing analysis results depend on the many algorithms used and their settings</p>
@@ -2786,7 +2786,7 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -2826,7 +2826,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

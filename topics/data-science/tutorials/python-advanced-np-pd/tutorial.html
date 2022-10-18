@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Advanced Python" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:22 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Maria Christina Maniou" />
 <meta name="DC.creator" content="Fotis E. Psomopoulos" />
 <meta name="DC.creator" content="The Carpentries" />
@@ -282,7 +282,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:22 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Advanced Python",
   "interactivityType": "mixed",
@@ -577,7 +577,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -780,7 +780,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 22, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -803,7 +803,7 @@
                      
                     
                         <blockquote class="comment">
-                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -841,14 +841,14 @@
                 <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using <span class="notranslate">Galaxy</span>. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">use<span class="notranslate">galaxy</span>.eu</a> and <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a> sites.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
 
   <p>Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1001,12 +1001,12 @@ An index like [25, 35] selects a single element of an array, but we can select w
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-selecting-and-stacking-arrays"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting and stacking arrays</h3>
+  <div id="question-selecting-and-stacking-arrays" class="box-title" aria-label="question box: Selecting and stacking arrays"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting and stacking arrays</div>
 
   <p>Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means <code class="language-plaintext highlighter-rouge">A[:, 0]</code> is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, <code class="language-plaintext highlighter-rouge">A[:, :1]</code> returns a two dimensional array with one singleton dimension (i.e. a column vector).</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D = np.hstack((A[:, :1], A[:, -1:]))
@@ -1018,13 +1018,13 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-selecting-with-conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting with conditionals</h3>
+  <div id="question-selecting-with-conditionals" class="box-title" aria-label="question box: Selecting with conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting with conditionals</div>
 
   <p>Given the followind array <code class="language-plaintext highlighter-rouge">A</code>, keep only the elements that are lower that <code class="language-plaintext highlighter-rouge">0.05</code>.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = A[A&lt;0.05]
 </code></pre></div>    </div>
@@ -1097,14 +1097,14 @@ print(D)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-using-pdhead-and-pdtail"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Using pd.head and pd.tail</h3>
+  <div id="question-using-pd-head-and-pd-tail" class="box-title" aria-label="question box: Using pd.head and pd.tail"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Using pd.head and pd.tail</div>
 
   <p>After reading the data, use <code class="language-plaintext highlighter-rouge">help(data.head)</code> and <code class="language-plaintext highlighter-rouge">help(data.tail)</code> to find out what <code class="language-plaintext highlighter-rouge">DataFrame.head</code> and <code class="language-plaintext highlighter-rouge">DataFrame.tail</code> do.
 	a. What method call will display the first three rows of the data?
 	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>a. We can check out the first five rows of the data by executing <code class="language-plaintext highlighter-rouge">data.head()</code> (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter <code class="language-plaintext highlighter-rouge">n</code> in our call to <code class="language-plaintext highlighter-rouge">data.head()</code>. To view the first three rows, execute:</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.head(n=3)
@@ -1197,12 +1197,12 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-saving-in-a-csv-file"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Saving in a csv file</h3>
+  <div id="question-saving-in-a-csv-file" class="box-title" aria-label="question box: Saving in a csv file"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Saving in a csv file</div>
 
   <p>As well as the <code class="language-plaintext highlighter-rouge">read_csv</code> function for reading data from a file, Pandas provides a <code class="language-plaintext highlighter-rouge">to_csv</code> function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called <code class="language-plaintext highlighter-rouge">processed.csv</code>. You can use <code class="language-plaintext highlighter-rouge">help</code> to get information on how to use <code class="language-plaintext highlighter-rouge">to_csv</code>.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.to_csv('processed.csv')
 </code></pre></div>    </div>
@@ -1289,7 +1289,7 @@ print(D)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-manipulating-dataframes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Manipulating dataframes</h3>
+  <div id="question-manipulating-dataframes" class="box-title" aria-label="question box: Manipulating dataframes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Manipulating dataframes</div>
 
   <p>Explain what each line in the following short program does: what is in first, second, etc.?</p>
 
@@ -1300,7 +1300,7 @@ fourth = third.drop('StdErr', axis = 1)
 fourth.to_csv('result.csv')
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>Let’s go through this piece of code line by line.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1331,7 +1331,7 @@ fourth.to_csv('result.csv')
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-finding-min-max-indexes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Finding min-max indexes</h3>
+  <div id="question-finding-min-max-indexes" class="box-title" aria-label="question box: Finding min-max indexes"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Finding min-max indexes</div>
 
   <p>Explain in simple terms what <code class="language-plaintext highlighter-rouge">idxmin</code> and <code class="language-plaintext highlighter-rouge">idxmax</code> do in the short program below. When would you use these methods?</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1341,7 +1341,7 @@ print(data['Base mean'].idxmax())
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">idxmin</code> will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.</p>
 
@@ -1355,7 +1355,7 @@ FBgn0026562</p>
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-selecting-with-conditionals-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Selecting with conditionals</h3>
+  <div id="question-selecting-with-conditionals-1" class="box-title" aria-label="question box: Selecting with conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting with conditionals</div>
 
   <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an <span class="notranslate">expression</span> to select each of the following:
 a. P-value of each gene
@@ -1363,7 +1363,7 @@ b. all the information of gene <code class="language-plaintext highlighter-rouge
 c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>a. <code class="language-plaintext highlighter-rouge">data['P-value']</code>
 b.<code class="language-plaintext highlighter-rouge">data.loc['FBgn0039178', :]</code>
@@ -1391,12 +1391,12 @@ c. <code class="language-plaintext highlighter-rouge">data[data['Chromosome'] ==
 </code></pre></div></div>
 
 <blockquote class="question">
-  <h3 id="question-question-finding-the-max-of-each-group"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Finding the max of each group</h3>
+  <div id="question-finding-the-max-of-each-group" class="box-title" aria-label="question box: Finding the max of each group"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Finding the max of each group</div>
 
   <p>Using the same dataset, try to find the longest genes in each chromosome.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data['Gene Length'] = data['End'] - data['Start']
 data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
@@ -1406,12 +1406,12 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-grouping-with-multiple-variables"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question: Grouping with multiple variables</h3>
+  <div id="question-grouping-with-multiple-variables" class="box-title" aria-label="question box: Grouping with multiple variables"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Grouping with multiple variables</div>
 
   <p>Using the same dataset, try to find how many genes are found on each strand of each chromosome.</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>You can group the data according to more than one column.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.groupby(['Chromosome', 'Strand']).size()
@@ -1426,7 +1426,7 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users</p>
@@ -1503,7 +1503,7 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -1512,7 +1512,7 @@ author = "Maria Christina Maniou and Fotis E. Psomopoulos and The Carpentries an
 title = "Advanced Python (Galaxy Training Materials)",
 year = "2022",
 month = "09",
-day = "22"
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-advanced-np-pd/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1543,7 +1543,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

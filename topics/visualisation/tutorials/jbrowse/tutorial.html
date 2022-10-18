@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Genomic Data Visualisation with JBrowse" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:14 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Saskia Hiltemann" />
 <meta name="DC.creator" content="Erasmus+ Programme" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:14 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Genomic Data Visualisation with JBrowse",
   "interactivityType": "mixed",
@@ -530,7 +530,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -643,7 +643,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -685,7 +685,7 @@ and HTML5, with optional run-once data formatting tools written in Perl.</p>
 <p>This tutorial covers version 1.16.5+ of the JBrowse tool, earlier versions will have different behaviour and tool layout.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -703,14 +703,14 @@ and HTML5, with optional run-once data formatting tools written in Perl.</p>
 <h1 id="data-upload">Data Upload</h1>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-getting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Getting the data</h3>
+  <div id="hands-on-getting-the-data" class="box-title" aria-label="hands-on box: Getting the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Getting the data</div>
 
   <ol>
     <li>
       <p>Create and name a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
     <li>
       <p>Import the datasets we will visualize:</p>
@@ -728,7 +728,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
     </li>
   </ol>
 
@@ -741,7 +741,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 <p>We will start by adding a couple of gene call tracks. In our case these are genes and gene predictions, but they don’t have to be. In the general case this can be any interesting region from an analysis, where a tool has pointed out some region for further inspection for some reason, then this data can be visualised with the “gene” track type.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-build-the-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build the JBrowse</h3>
+  <div id="hands-on-build-the-jbrowse" class="box-title" aria-label="hands-on box: Build the JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the JBrowse</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -785,7 +785,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
       <figure id="figure-1"><img src="../../images/jbrowse-gff-track.png" alt="Screenshot of JBrowse. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Screenshot of JBrowse</figcaption></figure>
 
       <blockquote class="tip">
-        <h3 id="tip-error-reading-from-name-store"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Error reading from name store</h3>
+        <div id="tip-error-reading-from-name-store" class="box-title"><button type="button" aria-controls="tip-error-reading-from-name-store-contents" aria-expanded="true" aria-label="Toggle tip box: Error reading from name store"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Error reading from name store<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
         <p><img src="../../images/jbrowse/error.png" alt="error message. " loading="lazy" /></p>
 
         <p>If you see this error message, click OK, this is a known bug.</p>
@@ -804,7 +804,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 </ul>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-naming-tracks"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Naming Tracks</h3>
+  <div id="tip-naming-tracks" class="box-title"><button type="button" aria-controls="tip-naming-tracks-contents" aria-expanded="true" aria-label="Toggle tip box: Naming Tracks"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Naming Tracks<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <ul>
     <li>The JBrowse tool takes track names directly from file names</li>
@@ -818,7 +818,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 <p>All of the track types in the JBrowse tool support a wide array of features. We’ve only looked at a simple track with default options, however there are more tools available to us to help create user-friendly JBrowse instances that can embed rich data.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-build-a-jbrowse-for-viewing-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Build a JBrowse for viewing Genes</h3>
+  <div id="hands-on-build-a-jbrowse-for-viewing-genes" class="box-title" aria-label="hands-on box: Build a JBrowse for viewing Genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build a JBrowse for viewing Genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -870,7 +870,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
                               <p>In <em>“JBrowse Contextual Menu options [Advanced]”</em>:</p>
 
                               <blockquote class="tip">
-                                <h3 id="tip-tip-contextual-menus"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Contextual Menus</h3>
+                                <div id="tip-contextual-menus" class="box-title"><button type="button" aria-controls="tip-contextual-menus-contents" aria-expanded="true" aria-label="Toggle tip box: Contextual Menus"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Contextual Menus<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
                                 <p>We’re going to add a “Contextual Menu” which deserves a little explanation first. In JBrowse
 terminology the right click menu of some features is called the contextual menus. You can customize
@@ -944,7 +944,7 @@ directly in your templating</p>
 <p>Next we will add a sequencing dataset, a BAM file which maps some sequencing <span class="notranslate">reads</span> against various locations along the genome. JBrowse helpfully highlights which <span class="notranslate">reads</span> have <span class="notranslate">mapping</span> issues, and any changes in bases between the <span class="notranslate">reads</span> and the genome. We “Autogenerate a SNP track”, which produces an extra track we can enable in JBrowse. This track <span class="notranslate">reads</span> the same BAM file used for visualising <span class="notranslate">reads</span>, and then produces a SNP and coverage visualisation. <strong>NB</strong>: This only works for small BAM files, if your files are large (&gt;200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. <code class="language-plaintext highlighter-rouge">bamCoverage</code> and <code class="language-plaintext highlighter-rouge">FreeBayes</code> or similar tools) as it will be significantly faster. You can learn more about generating these files in <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">the <span class="notranslate">Mapping</span> tutorial</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
+  <div id="hands-on-hands-on" class="box-title" aria-label="hands-on box: Hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1053,7 +1053,7 @@ directly in your templating</p>
 <p>The best way to accomplish this is through the <code class="language-plaintext highlighter-rouge">gffread</code> tool which can cleanup a gff3 file, and export various features, optionally translating them. With these outputs, the cleaned features and <code class="language-plaintext highlighter-rouge">fasta</code> formatted sequences, you can Blast the sequences, and then supply the resulting Blast XML outputs in addition to the cleaned features, allowing a script to re-associate these Blast results to their original locations along the genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-building-a-jbrowse-for-blast-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Building a JBrowse for Blast results</h3>
+  <div id="hands-on-building-a-jbrowse-for-blast-results" class="box-title" aria-label="hands-on box: Building a JBrowse for Blast results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Building a JBrowse for Blast results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1114,7 +1114,7 @@ directly in your templating</p>
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses</p>
@@ -1183,7 +1183,7 @@ directly in your templating</p>
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Helena Rasche, Saskia Hiltemann, Erasmus+ Programme, 2021 <b>Genomic Data Visualisation with JBrowse (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Helena Rasche, Saskia Hiltemann, Erasmus+ Programme, 2022 <b>Genomic Data Visualisation with JBrowse (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1193,16 +1193,16 @@ directly in your templating</p>
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{visualisation-jbrowse,
 author = "Helena Rasche and Saskia Hiltemann and Erasmus+ Programme",
 title = "Genomic Data Visualisation with JBrowse (Galaxy Training Materials)",
-year = "2021",
-month = "12",
-day = "14"
+year = "2022",
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1233,7 +1233,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

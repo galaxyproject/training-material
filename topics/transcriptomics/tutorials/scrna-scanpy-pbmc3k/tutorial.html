@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Clustering 3K PBMCs with Scanpy" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:23 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 <meta name="DC.creator" content="Hans-Rudolf Hotz" />
 <meta name="DC.creator" content="Mehmet Tekman" />
@@ -281,7 +281,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:23 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Clustering 3K PBMCs with Scanpy",
   "interactivityType": "mixed",
@@ -643,7 +643,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -1246,7 +1246,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 23, 2021 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1267,7 +1267,7 @@
                 <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <blockquote class="comment">
-  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html#Clustering-3K-PBMCs">“Clustering 3K PBMCs” tutorial from Scanpy</a>, <a href="https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html">“Seurat - Guided Clustering Tutorial”</a> and <a href="https://osca.bioconductor.org/">“Orchestrating <span class="notranslate">Single-Cell</span> Analysis with Bioconductor”</a> <span class="citation"><a href="#amezquita2019orchestrating">Amezquita <i>et al.</i> 2019</a></span>.</p>
 
@@ -1278,7 +1278,7 @@
 <p>In this tutorial, we will investigate clustering of <span class="notranslate">single-cell</span> data from 10x Genomics, including preprocessing, clustering and the identification of cell types via known marker genes, using <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>). It will be illustrated using a dataset of Peripheral Blood Mononuclear Cells (PBMC), containing 2,700 <span class="notranslate">single cell</span>s.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1338,7 +1338,7 @@
 <h2 id="data-upload">Data upload</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1351,9 +1351,9 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links</h3>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library</h3>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>  <ul>  <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>  <li>Navigate to the correct folder as indicated by your instructor</li>  <li>Select the desired files</li>  <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>  <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>  <li>Click on <strong>Import</strong></li></ul></blockquote>
     </li>
     <li>Rename the datasets</li>
     <li>Inspect the <code class="language-plaintext highlighter-rouge">matrix</code> file</li>
@@ -1361,7 +1361,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>32738	2700	2286884
 32709	1	4
@@ -1376,7 +1376,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>There are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).</li>
@@ -1398,7 +1398,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 <p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>), the tool suite for analyzing <span class="notranslate">single-cell</span> gene <span class="notranslate">expression</span> data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-transform-matrix-and-all-into-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Transform matrix and all into AnnData object</h3>
+  <div id="hands-on-transform-matrix-and-all-into-anndata-object" class="box-title" aria-label="hands-on box: Transform matrix and all into AnnData object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transform matrix and all into AnnData object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0"><strong>Import Anndata and loom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1429,7 +1429,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 <p>Because the <code class="language-plaintext highlighter-rouge">AnnData</code> format is an extension of the HDF5 format, i.e. a binary format, an <code class="language-plaintext highlighter-rouge">AnnData</code> object can not be inspected directly in <span class="notranslate">Galaxy</span> by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (<strong>View data</strong>) icon. Instead we need to use a dedicated tool from the <strong>AnnData</strong> suite.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-inspect-an-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect an AnnData object</h3>
+  <div id="hands-on-inspect-an-anndata-object" class="box-title" aria-label="hands-on box: Inspect an AnnData object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect an AnnData object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1442,7 +1442,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2700 × 32738
     var: 'gene_ids'
@@ -1454,7 +1454,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <ol>
             <li>There are 2,700 observations, representing the cells.</li>
@@ -1466,7 +1466,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
       </blockquote>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-faster-method-for-general-information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Faster Method for General Information</h3>
+        <div id="comment-faster-method-for-general-information" class="box-title" aria-label="comment box: Faster Method for General Information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Faster Method for General Information</div>
 
         <ul>
           <li>The <strong>ScanPy</strong> toolset in <span class="notranslate">Galaxy</span> produces <em>AnnData</em> formats as
@@ -1498,7 +1498,7 @@ output, where general information is provided for each dataset:
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index	MIR1302-10	FAM138A	OR4F5	RP11-34P13.7	RP11-34P13.8 ...
 AAACATACAACCAC-1	0.0	0.0	0.0	0.0
@@ -1511,7 +1511,7 @@ AAACCGTGTATGCG-1	0.0	0.0	0.0	0.0
         <p>What is stored in the generated file?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>The file is a table with 2,700 lines (observations or cells) and 32,738 columns (variables or genes): the count matrix for each of the 32,738 genes and 2,700 cells. The 1st row contains the gene symbol as annotation of the columns and the 1st column the barcodes of the cells as annotation of the rows.</p>
 
@@ -1529,7 +1529,7 @@ AAACCGTGTATGCG-1	0.0	0.0	0.0	0.0
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index
 AAACATACAACCAC-1
@@ -1542,7 +1542,7 @@ AAACCGTGTATGCG-1
         <p>What is stored in the generated file?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>The file is a tabular with annotations of the observations. i.e. the cells. Here there are only the barcodes as annotation, so only one column, being also the index for the count matrix.</p>
 
@@ -1560,7 +1560,7 @@ AAACCGTGTATGCG-1
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index	gene_ids
 MIR1302-10	ENSG00000243485
@@ -1573,7 +1573,7 @@ RP11-34P13.8	ENSG00000239945
         <p>What is stored in the generated file?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>The file is a tabular with annotations of the variables, i.e. the genes. Here the files has 2 columns: the gene symbols (also the index in the count matrix), <code class="language-plaintext highlighter-rouge">gene_ids</code> or the Ensemble gene ids.</p>
 
@@ -1611,7 +1611,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Genes that appear in less than a few cells can be considered noise and thus removed.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-genes-found-in-less-than-3-cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove genes found in less than 3 cells</h3>
+  <div id="hands-on-remove-genes-found-in-less-than-3-cells" class="box-title" aria-label="hands-on box: Remove genes found in less than 3 cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove genes found in less than 3 cells</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1633,7 +1633,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the dataset.</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2700 × 13714
@@ -1645,7 +1645,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How many genes have been removed because they are expressed in less than 3 expressed cells?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>There are now 13,714 genes. So 19,024 (32,738 - 13,714) genes have been removed.</p>
 
@@ -1659,7 +1659,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Low-quality cells may be due to a variety of sources such as cell damage during dissociation or failure in library preparation (e.g., inefficient reverse transcription or PCR amplification, <span class="citation"><a href="#ilicic2016classification">Ilicic <i>et al.</i> 2016</a></span>). Usually these low-quality cells have low total counts, few expressed genes and high mitochondrial or spike-in proportions. Low-quality cells are problematic for <span class="notranslate">downstream</span> analyses and may contribute to misleading results.</p>
 
 <blockquote class="details">
-  <h3 id="details-impact-of-low-quality-cells-on-the-downstream-analyses"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Impact of low-quality cells on the <span class="notranslate">downstream</span> analyses</h3>
+  <div id="details-impact-of-low-quality-cells-on-the-downstream-analyses" class="box-title"><button type="button" aria-controls="details-impact-of-low-quality-cells-on-the-downstream-analyses-contents" aria-expanded="true" aria-label="Toggle details box: Impact of low-quality cells on the downstream analyses"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Impact of low-quality cells on the <span class="notranslate">downstream</span> analyses<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <h4 id="formation-of-their-own-distinct-clusters">Formation of their own distinct cluster(s)</h4>
 
@@ -1706,7 +1706,7 @@ RP11-34P13.8	ENSG00000239945
 <p>The first 2 QC metrics (cell size and number of expressed genes) can be easily estimated from the count table. For the third metric (proportion of <span class="notranslate">reads</span> mapped to genes in the mitochondrial genome), we need the information about which genes are mitochondrial or not.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-extract-gene-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract gene annotation</h3>
+  <div id="hands-on-extract-gene-annotation" class="box-title" aria-label="hands-on box: Extract gene annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract gene annotation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1744,7 +1744,7 @@ RP11-34P13.8	ENSG00000239945
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-add-mitochondrial-gene-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add mitochondrial gene annotation</h3>
+  <div id="hands-on-add-mitochondrial-gene-annotation" class="box-title" aria-label="hands-on box: Add mitochondrial gene annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add mitochondrial gene annotation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters:
@@ -1757,12 +1757,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How many genes are found as mitochondrial?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>To evaluate the number of non mitochondrial, we need to extract all lines for which the 2nd column is 1. This can be done using the <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  tool:</p>
 
@@ -1822,7 +1822,7 @@ RP11-34P13.8	ENSG00000239945
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file</h3>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>    <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>  </li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-file" class="box-title"><button type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>    <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>  </li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
     </li>
     <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
       <ul>
@@ -1868,7 +1868,7 @@ RP11-34P13.8	ENSG00000239945
 <p>We can now compute QC metrics on the <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-compute-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute QC metrics</h3>
+  <div id="hands-on-compute-qc-metrics" class="box-title" aria-label="hands-on box: Compute QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compute QC metrics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1890,7 +1890,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the dataset</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2700 × 13714
@@ -1921,7 +1921,7 @@ RP11-34P13.8	ENSG00000239945
         <p>Which QC metrics have been computed?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>The tool computed several QC metrics at both cell and gene levels. These metrics are added to the annotation tables.</p>
 
@@ -1960,7 +1960,7 @@ RP11-34P13.8	ENSG00000239945
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-visualize-qc-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize QC metrics</h3>
+  <div id="hands-on-visualize-qc-metrics" class="box-title" aria-label="hands-on box: Visualize QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize QC metrics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1995,7 +1995,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-8" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p><img src="../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png" alt="QC violin plot. " loading="lazy" />
 <!-- To update... --></p>
@@ -2003,7 +2003,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How do the distributions of the 3 QC metrics look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>For the cell size, i.e. <code class="language-plaintext highlighter-rouge">total_counts</code>, most of the values are between 1,000 <span class="notranslate">reads</span> and 4,000 <span class="notranslate">reads</span>, with some extremely high values skewing the distribution.</p>
 
@@ -2035,14 +2035,14 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-9"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-9" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" alt="QC total_counts n_genes_by_counts. " loading="lazy" /></p>
 
         <p>Is there any relationship between the cell size and the number of expressed genes?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>On the plot, we can see a strong correlation between the total number of counts for a cell and the number of genes with positive counts.</p>
 
@@ -2070,7 +2070,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the generated file</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-10"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-10" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p><img src="../../images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" alt="QC total_counts pct_counts_mito. " loading="lazy" /></p>
 
@@ -2081,7 +2081,7 @@ RP11-34P13.8	ENSG00000239945
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-10"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <ol>
             <li>Cells with a high proportion of mitochondrial genes are not also cells that have many expressed genes. There is no visible correlation.</li>
@@ -2108,7 +2108,7 @@ RP11-34P13.8	ENSG00000239945
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-remove-low-quality-cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove low-quality cells</h3>
+  <div id="hands-on-remove-low-quality-cells" class="box-title" aria-label="hands-on box: Remove low-quality cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove low-quality cells</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2129,7 +2129,7 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the dataset</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-11"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-11" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2700 × 13714
@@ -2138,7 +2138,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How many cells have been removed because they have less than 200 expressed genes?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-11"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-11" class="box-title"><button type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>There are still 2,700 cells. So no cells have been removed because they have less than 200 expressed genes.</p>
 
@@ -2163,7 +2163,7 @@ RP11-34P13.8	ENSG00000239945
     <li>Inspect the dataset
       <blockquote class="question">
 
-        <h3 id="question-questions-12"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-12" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2695 × 13714
@@ -2172,7 +2172,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How many cells have been removed because they have more than 2,500 expressed genes?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-12"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-12" class="box-title"><button type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.</p>
 
@@ -2211,7 +2211,7 @@ RP11-34P13.8	ENSG00000239945
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-questions-13"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-13" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 13714
 </code></pre></div>        </div>
@@ -2219,7 +2219,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How many cells have been removed because they have more than 5% of <span class="notranslate">reads</span> mapped to mitochondrial genes?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-13"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-13" class="box-title"><button type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>There are now 2,638 cells. So 57 cells have been removed because they have more than 5% of <span class="notranslate">reads</span> mapped to mitochondrial genes.</p>
 
@@ -2241,7 +2241,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Here we would to normalize our count table such that each cell have 10,000 <span class="notranslate">reads</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-normalize-for-cell-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Normalize for cell size</h3>
+  <div id="hands-on-normalize-for-cell-size" class="box-title" aria-label="hands-on box: Normalize for cell size"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Normalize for cell size</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0"><strong>Normalize with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2267,7 +2267,7 @@ RP11-34P13.8	ENSG00000239945
 <p>With log-transformation, the differences in the log-values represent log-fold changes in <span class="notranslate">expression</span>. Log-transformation focuses on promoting contributions from genes with strong relative differences (e.g. a gene that is expressed at an average count of 50 in cell type A and 10 in cell type B rather than a gene that is expressed at an average count of 1100 in A and 1000 in B).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-log-transform-the-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Log-transform the counts</h3>
+  <div id="hands-on-log-transform-the-counts" class="box-title" aria-label="hands-on box: Log-transform the counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Log-transform the counts</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2282,7 +2282,7 @@ RP11-34P13.8	ENSG00000239945
 <p>We will freeze the current state of the AnnData object, i.e. the logarithmized raw gene <span class="notranslate">expression</span>, in the a <code class="language-plaintext highlighter-rouge">raw</code> attribute. This information will be used later in differential testing and visualizations of gene <span class="notranslate">expression</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-freeze-the-state-of-the-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Freeze the state of the AnnData object</h3>
+  <div id="hands-on-freeze-the-state-of-the-anndata-object" class="box-title" aria-label="hands-on box: Freeze the state of the AnnData object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Freeze the state of the AnnData object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2308,7 +2308,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Once the per-gene variation has been quantified, we need to select the subset of highly variable genes that we will use in <span class="notranslate">downstream</span> analyses. A large subset reduces the risk of discarding any interesting biological signal, but increases the noise from irrelevant genes on the signal. The optimal trade-off is difficult to determine but there are several common strategies routinely used. You can read the <a href="https://osca.bioconductor.org/feature-selection.html#hvg-selection">Chapter 8 from “Orchestrating <span class="notranslate">Single-Cell</span> Analysis with Bioconductor”</a> for a nice presentation of the different strategies. Here, we will define the set of highly variable genes as those which, after normalization, have a normalized dispersion amount higher than 0.5.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-identify-the-highly-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Identify the highly variable genes</h3>
+  <div id="hands-on-identify-the-highly-variable-genes" class="box-title" aria-label="hands-on box: Identify the highly variable genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identify the highly variable genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0"><strong>Filter with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2343,14 +2343,14 @@ RP11-34P13.8	ENSG00000239945
 <p>Both highly variable genes and other genes are still in the <code class="language-plaintext highlighter-rouge">AnnData</code> object. We can now actually keep only the highly variable genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-keep-the-highly-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Keep the highly variable genes</h3>
+  <div id="hands-on-keep-the-highly-variable-genes" class="box-title" aria-label="hands-on box: Keep the highly variable genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Keep the highly variable genes</div>
 
   <ol>
     <li>
       <p>Inspect the output of the last <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-14"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-14" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2638 × 13714
@@ -2390,7 +2390,7 @@ RP11-34P13.8	ENSG00000239945
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-14"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-14" class="box-title"><button type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <ol>
             <li>There are now 13,714 genes, as before.</li>
@@ -2431,7 +2431,7 @@ RP11-34P13.8	ENSG00000239945
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-questions-15"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-15" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AnnData object with n_obs × n_vars = 2638 × 1838
 </code></pre></div>        </div>
@@ -2439,7 +2439,7 @@ RP11-34P13.8	ENSG00000239945
         <p>How many genes have been removed?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-15"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-15" class="box-title"><button type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>Only 1,838 (over the 13,714) genes are kept.</p>
 
@@ -2460,7 +2460,7 @@ RP11-34P13.8	ENSG00000239945
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-scale-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Scale the data</h3>
+  <div id="hands-on-scale-the-data" class="box-title" aria-label="hands-on box: Scale the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Scale the data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0"><strong>Remove confounders with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2518,7 +2518,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Here we perform the PCA on the log-normalized <span class="notranslate">expression</span> values and compute the first 50 PCs.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-perform-the-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform the PCA</h3>
+  <div id="hands-on-perform-the-pca" class="box-title" aria-label="hands-on box: Perform the PCA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform the PCA</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span> 
@@ -2544,19 +2544,19 @@ RP11-34P13.8	ENSG00000239945
 </blockquote>
 
 <blockquote class="details">
-  <h3 id="details-storage-of-pca-information-in-anndata-objects"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Storage of PCA information in <code class="language-plaintext highlighter-rouge">AnnData</code> objects</h3>
+  <div id="details-storage-of-pca-information-in-anndata-objects" class="box-title"><button type="button" aria-controls="details-storage-of-pca-information-in-anndata-objects-contents" aria-expanded="true" aria-label="Toggle details box: Storage of PCA information in `AnnData` objects"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Storage of PCA information in `AnnData` objects<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <p>PCA information are stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object in a quite complex way.</p>
 
   <blockquote class="notranslate hands_on">
-    <h3 id="hands_on-hands-on-inspect-the-pca-inside-an-anndata-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect the PCA inside an <code class="language-plaintext highlighter-rouge">AnnData</code> object</h3>
+    <div id="hands-on-inspect-the-pca-inside-an-anndata-object" class="box-title" aria-label="hands-on box: Inspect the PCA inside an `AnnData` object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect the PCA inside an `AnnData` object</div>
 
     <ol>
       <li>
         <p>Inspect the <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling and PCA</code> dataset</p>
 
         <blockquote class="question">
-          <h3 id="question-questions-16"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <div id="question-16" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[n_obs × n_vars]
 -    2638 × 1838
@@ -2598,7 +2598,7 @@ RP11-34P13.8	ENSG00000239945
           <p>How is the PCA stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object?</p>
 
           <blockquote class="solution">
-            <h3 id="solution-solution-16"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+            <div id="solution-16" class="box-title"><button type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
             <p>3 new objects (<code class="language-plaintext highlighter-rouge">uns</code>, <code class="language-plaintext highlighter-rouge">obsm</code>, <code class="language-plaintext highlighter-rouge">varm</code>) have been added to the <code class="language-plaintext highlighter-rouge">AnnData</code> object with information that seem related to PCA.</p>
 
@@ -2618,12 +2618,12 @@ RP11-34P13.8	ENSG00000239945
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-questions-17"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <div id="question-17" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
           <p>What information is stored in <code class="language-plaintext highlighter-rouge">uns</code> regarding the PCA?</p>
 
           <blockquote class="solution">
-            <h3 id="solution-solution-17"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+            <div id="solution-17" class="box-title"><button type="button" aria-controls="solution-17-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
             <p><code class="language-plaintext highlighter-rouge">uns</code> is storing:</p>
 
@@ -2646,12 +2646,12 @@ RP11-34P13.8	ENSG00000239945
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-questions-18"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <div id="question-18" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
           <p>What are the information stored in <code class="language-plaintext highlighter-rouge">obsm</code> regarding the PCA?</p>
 
           <blockquote class="solution">
-            <h3 id="solution-solution-18"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+            <div id="solution-18" class="box-title"><button type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
             <p><code class="language-plaintext highlighter-rouge">obsm</code> is storing the PCA coordinates for the cells as a table with the rows being the cells, the columns the PCs and the values the PCs coordinate for cell and PC.</p>
           </blockquote>
@@ -2669,12 +2669,12 @@ RP11-34P13.8	ENSG00000239945
         </ul>
 
         <blockquote class="question">
-          <h3 id="question-questions-19"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+          <div id="question-19" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
           <p>What information is stored in <code class="language-plaintext highlighter-rouge">varm</code> regarding the PCA?</p>
 
           <blockquote class="solution">
-            <h3 id="solution-solution-19"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+            <div id="solution-19" class="box-title"><button type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
             <p><code class="language-plaintext highlighter-rouge">varm</code> is storing the PCA coordinates for the genes as a table with the rows being the genes, the columns the PCs and the values the PCs coordinate for gene and PC.</p>
           </blockquote>
@@ -2692,7 +2692,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Scanpy provides several useful ways of visualizing both cells and genes that define the PCA. The simplest approach for visualization is to plot the top 3 PCs on 2D plots (PC1 vs PC2 and PC2 vs PC3)</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-the-top-2-pcs-the-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the top 2 PCs the PCA</h3>
+  <div id="hands-on-plot-the-top-2-pcs-the-pca" class="box-title" aria-label="hands-on box: Plot the top 2 PCs the PCA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot the top 2 PCs the PCA</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2735,7 +2735,7 @@ RP11-34P13.8	ENSG00000239945
 <p>On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-visualize-the-top-genes-associated-with-pcs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize the top genes associated with PCs</h3>
+  <div id="hands-on-visualize-the-top-genes-associated-with-pcs" class="box-title" aria-label="hands-on box: Visualize the top genes associated with PCs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize the top genes associated with PCs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2749,14 +2749,14 @@ RP11-34P13.8	ENSG00000239945
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-questions-20"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-20" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings. " loading="lazy" /></p>
 
         <p>What are the top genes for each of the 3 first PCs? What do they represent?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-20"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-20" class="box-title"><button type="button" aria-controls="solution-20-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PF4 and PPBP for the 3rd PC (for consistency with the published <a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html">scanpy</a> and <a href="https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html">Seurat</a> documentation, we will use PPBP).</p>
 
@@ -2802,12 +2802,12 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" alt="PCA scatter for CST3, NKG7 and PPBP. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-21"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-21" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Where are the differences in <span class="notranslate">expression</span> for CST3, NKG7, and PPBP?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-21"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-21" class="box-title"><button type="button" aria-controls="solution-21-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot.</li>
@@ -2827,7 +2827,7 @@ RP11-34P13.8	ENSG00000239945
 <p>A simple heuristic for choosing the number of PCs generates an “Elbow plot”: a ranking of the PCs based on the percentage of variance they explain.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-generate-an-elbow-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate an Elbow plot</h3>
+  <div id="hands-on-generate-an-elbow-plot" class="box-title" aria-label="hands-on box: Generate an Elbow plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate an Elbow plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2849,12 +2849,12 @@ RP11-34P13.8	ENSG00000239945
 <p>To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-22"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-22" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How many PCs should we keep given the previous plot?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-22"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-22" class="box-title"><button type="button" aria-controls="solution-22-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>We choose here to keep 10 PCs.</p>
 
@@ -2896,7 +2896,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the Euclidian distance metrics and the UMAP method (<span class="citation"><a href="#mcinnes2018umap">McInnes <i>et al.</i> 2018</a></span>) to compute the connectivities. The values will change depending on the data and can not easily predefined: testing different values is the only solution.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-compute-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute the neighborhood graph</h3>
+  <div id="hands-on-compute-the-neighborhood-graph" class="box-title" aria-label="hands-on box: Compute the neighborhood graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compute the neighborhood graph</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2920,12 +2920,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Inspect the dataset</p>
 
       <blockquote class="question">
-        <h3 id="question-questions-23"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-23" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How is the neighborhood graph stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-23"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-23" class="box-title"><button type="button" aria-controls="solution-23-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>An extra object <code class="language-plaintext highlighter-rouge">neighbors</code> has been added to <code class="language-plaintext highlighter-rouge">uns</code> with 2 mtx objects (similar format to the original count table):</p>
 
@@ -2959,7 +2959,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Here, we will reduce the neighborhood to 2 UMAP components and then we will check to see how the cells are projected on them given the top genes</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-embed-and-plot-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Embed and plot the neighborhood graph</h3>
+  <div id="hands-on-embed-and-plot-the-neighborhood-graph" class="box-title" aria-label="hands-on box: Embed and plot the neighborhood graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Embed and plot the neighborhood graph</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -2972,12 +2972,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP</code></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-24"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-24" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How is the UMAP reduction stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-24"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-24" class="box-title"><button type="button" aria-controls="solution-24-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>An extra object <code class="language-plaintext highlighter-rouge">X_umap</code> has been added to <code class="language-plaintext highlighter-rouge">obsm</code> with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.</p>
 
@@ -3018,12 +3018,12 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" alt="UMAP coordinates before clustering. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-25"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-25" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Are clusters identifiable on these graphs? Might they be linked to PCs?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-25"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-25" class="box-title"><button type="button" aria-controls="solution-25-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>There seem to be at least 3 big clusters (the 3 blobs) before looking at the <span class="notranslate">expression</span> of some representative genes.</p>
 
@@ -3041,7 +3041,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Currently, the Louvain graph-clustering method (community detection based on optimizing modularity) is the one recommended. We need to define a value for the resolution parameter, i.e. the ‘granularity’ of the <span class="notranslate">downstream</span> clustering. High values lead to a greater number of clusters. For <span class="notranslate">single-cell</span> datasets of around 3K cells, we recommend to use a value between 0.4 and 1.2. For larger datasets, the optimal resolution will be higher.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-cluster-the-neighborhood-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cluster the neighborhood graph</h3>
+  <div id="hands-on-cluster-the-neighborhood-graph" class="box-title" aria-label="hands-on box: Cluster the neighborhood graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cluster the neighborhood graph</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3062,12 +3062,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering</code></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-26"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-26" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How is the clustering information stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-26"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-26" class="box-title"><button type="button" aria-controls="solution-26-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>An extra column <code class="language-plaintext highlighter-rouge">louvain</code> has been added to the <code class="language-plaintext highlighter-rouge">obs</code> object with the cluster id for each cell.</p>
 
@@ -3096,7 +3096,7 @@ RP11-34P13.8	ENSG00000239945
 <p>The cells in the same clusters should be co-localized in the UMAP coordinate plots.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-the-neighborhood-graph-and-the-clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot the neighborhood graph and the clusters</h3>
+  <div id="hands-on-plot-the-neighborhood-graph-and-the-clusters" class="box-title" aria-label="hands-on box: Plot the neighborhood graph and the clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot the neighborhood graph and the clusters</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3122,7 +3122,7 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" alt="UMAP coordinates after clustering. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-27"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-27" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many clusters have been identified? Do they fit with the ones quickly identified with UMAP plots?</li>
@@ -3130,7 +3130,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-27"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-27" class="box-title"><button type="button" aria-controls="solution-27-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.</li>
@@ -3158,7 +3158,7 @@ RP11-34P13.8	ENSG00000239945
 <p>The simplest and fastest method is the Welch <em>t</em>-test. It has good statistical properties for large numbers of cells (<span class="citation"><a href="#soneson2018bias">Soneson and Robinson 2018</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-t-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using t-test</h3>
+  <div id="hands-on-rank-the-highly-differential-genes-using-t-test" class="box-title" aria-label="hands-on box: Rank the highly differential genes using t-test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank the highly differential genes using t-test</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3183,12 +3183,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test</code></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-28"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-28" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How is the marker gene information stored in the <code class="language-plaintext highlighter-rouge">AnnData</code> object?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-28"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-28" class="box-title"><button type="button" aria-controls="solution-28-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>An extra object <code class="language-plaintext highlighter-rouge">rank_genes_groups</code> has been added to the <code class="language-plaintext highlighter-rouge">uns</code> object with 5 tables for the 100 top ranked genes (rows) for each cluster (column):</p>
 
@@ -3321,12 +3321,12 @@ RP11-34P13.8	ENSG00000239945
 </table>
 
 <blockquote class="question">
-  <h3 id="question-questions-29"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-29" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Are CST3, NKG7 and PPBP in the set of marker genes? If yes, are they assigned to the clusters we guessed before?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-29"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-29" class="box-title"><button type="button" aria-controls="solution-29-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>CST3 is a marker gene for clusters 1, 4, 6 (not 3 as guessed previously)</li>
@@ -3342,7 +3342,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Another widely used method for pairwise comparisons between groups of observations is the Wilcoxon rank sum test (also known as the Wilcoxon-Mann-Whitney test). This test directly assesses separation between the <span class="notranslate">expression</span> distributions of different clusters. It is the recommended approach to use in publication (<span class="citation"><a href="#soneson2018bias">Soneson and Robinson 2018</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-rank-the-highly-differential-genes-using-wilcoxon-rank-sum"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Rank the highly differential genes using Wilcoxon rank sum</h3>
+  <div id="hands-on-rank-the-highly-differential-genes-using-wilcoxon-rank-sum" class="box-title" aria-label="hands-on box: Rank the highly differential genes using Wilcoxon rank sum"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank the highly differential genes using Wilcoxon rank sum</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3491,14 +3491,14 @@ RP11-34P13.8	ENSG00000239945
 </table>
 
 <blockquote class="question">
-  <h3 id="question-questions-30"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-30" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <ol>
     <li>Are the 5 top ranked genes different than the one for the <em>t</em>-test?</li>
     <li>Are CST3, NKG7 and PPBP in the marker genes? If yes, are they assigned to the clusters we guessed before?</li>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-30"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-30" class="box-title"><button type="button" aria-controls="solution-30-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>The 5 top ranked genes are slightly different, at least in their order.</li>
@@ -3515,7 +3515,7 @@ RP11-34P13.8	ENSG00000239945
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-compare-differential-expression-for-cst3-nkg7-and-ppbp-in-the-different-clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare differential <span class="notranslate">expression</span> for CST3, NKG7 and PPBP in the different clusters</h3>
+  <div id="hands-on-compare-differential-expression-for-cst3-nkg7-and-ppbp-in-the-different-clusters" class="box-title" aria-label="hands-on box: Compare differential expression for CST3, NKG7 and PPBP in the different clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compare differential <span class="notranslate">expression</span> for CST3, NKG7 and PPBP in the different clusters</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3540,11 +3540,11 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-31"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-31" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Are CST3, NKG7 and PPBP more expressed in the clusters for which they are marker genes?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-31"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-31" class="box-title"><button type="button" aria-controls="solution-31-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.</li>
@@ -3564,7 +3564,7 @@ RP11-34P13.8	ENSG00000239945
 <p>The assumption should be even more true for the top marker genes. The first way to visualize the <span class="notranslate">expression</span> of the top marker genes is to look at the distribution of the <span class="notranslate">expression</span> of each marker gene in cells for each cluster.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-expression-probability-distributions-across-clusters-of-top-marker-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> probability distributions across clusters of top marker genes</h3>
+  <div id="hands-on-plot-expression-probability-distributions-across-clusters-of-top-marker-genes" class="box-title" aria-label="hands-on box: Plot expression probability distributions across clusters of top marker genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot <span class="notranslate">expression</span> probability distributions across clusters of top marker genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3598,11 +3598,11 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-32"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-32" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Are the top marker genes only expressed in the cluster for which they are markers?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-32"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-32" class="box-title"><button type="button" aria-controls="solution-32-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>
@@ -3622,7 +3622,7 @@ RP11-34P13.8	ENSG00000239945
 <p>Another approach consists of displaying the mean <span class="notranslate">expression</span> of the marker genes for the cells on the neighborhood graph.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-top-marker-gene-expression-on-an-umap-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot top marker gene <span class="notranslate">expression</span> on an UMAP plot</h3>
+  <div id="hands-on-plot-top-marker-gene-expression-on-an-umap-plot" class="box-title" aria-label="hands-on box: Plot top marker gene expression on an UMAP plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot top marker gene <span class="notranslate">expression</span> on an UMAP plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3649,11 +3649,11 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" alt="Top marker gene expression on a UMAP plot. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-33"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-33" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Are the top marker genes clearly associated to their clusters?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-33"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-33" class="box-title"><button type="button" aria-controls="solution-33-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>For most genes, we can clearly see for which cluster they are marker genes. But for physically close clusters, the differences are not so obvious.</p>
 
@@ -3665,7 +3665,7 @@ RP11-34P13.8	ENSG00000239945
 <p>We would like now to have a look at the <span class="notranslate">expression</span> of the top 20 marker genes in the different cells for each cluster</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-heatmap-of-the-gene-expression-in-cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot heatmap of the gene <span class="notranslate">expression</span> in cells</h3>
+  <div id="hands-on-plot-heatmap-of-the-gene-expression-in-cells" class="box-title" aria-label="hands-on box: Plot heatmap of the gene expression in cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot heatmap of the gene <span class="notranslate">expression</span> in cells</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3689,11 +3689,11 @@ RP11-34P13.8	ENSG00000239945
 <p>Each cells is shown in a row and in columns are the marker genes for each cluster.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-34"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-34" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>How are clusters close to each other in terms of <span class="notranslate">expression</span> of the top 20 marker genes?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-34"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-34" class="box-title"><button type="button" aria-controls="solution-34-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ul>
       <li>
@@ -3714,7 +3714,7 @@ RP11-34P13.8	ENSG00000239945
 <p>In some cases, it may also be interesting to find marker genes distinguishing one given cluster from one or several clusters. For example, the marker genes distinguishing cluster 0 from cluster 1.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-identify-the-marker-genes-distinguishing-cluster-0-from-cluster-1-using-wilcoxon-rank-sum"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum</h3>
+  <div id="hands-on-identify-the-marker-genes-distinguishing-cluster-0-from-cluster-1-using-wilcoxon-rank-sum" class="box-title" aria-label="hands-on box: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identify the marker genes distinguishing cluster 0 from cluster 1 using Wilcoxon rank sum</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and Manipulate with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -3761,12 +3761,12 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-35"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-35" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How can we interpret this plot?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-35"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-35" class="box-title"><button type="button" aria-controls="solution-35-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>In this graph are the marker genes distinguishing cluster 0 from cluster 1, ranked based on their difference of <span class="notranslate">expression</span> of the genes between cells in both clusters. So MALAT1 is the most differentially expressed gene between cells in cluster 0 and cells in cluster 1, even though it was not in the set of  top marker genes for cluster 0.</p>
 
@@ -3776,7 +3776,7 @@ RP11-34P13.8	ENSG00000239945
 <p>The marker genes distinguishing cluster 0 from cluster 1 are extracted based on their differences in <span class="notranslate">expression</span>, which can be easily visualized.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-expression-difference-for-the-marker-genes-distinguishing-cluster-0-from-cluster-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> difference for the marker genes distinguishing cluster 0 from cluster 1</h3>
+  <div id="hands-on-plot-expression-difference-for-the-marker-genes-distinguishing-cluster-0-from-cluster-1" class="box-title" aria-label="hands-on box: Plot expression difference for the marker genes distinguishing cluster 0 from cluster 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot <span class="notranslate">expression</span> difference for the marker genes distinguishing cluster 0 from cluster 1</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
@@ -3854,20 +3854,20 @@ RP11-34P13.8	ENSG00000239945
 </table>
 
 <blockquote class="tip">
-  <h3 id="tip-how-to-find-canonical-markers"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How to find canonical markers?</h3>
+  <div id="tip-how-to-find-canonical-markers" class="box-title"><button type="button" aria-controls="tip-how-to-find-canonical-markers-contents" aria-expanded="true" aria-label="Toggle tip box: How to find canonical markers?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to find canonical markers?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <p>Canonical markers are usually found in the literature and are also aggregated into dedicated database like the <a href="https://panglaodb.se/markers.html">PanglaoDB</a> <span class="citation"><a href="#franzen2019panglaodb">Franzén <i>et al.</i> 2019</a></span></p>
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-36"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-36" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Is it possible to match the clusters to cell types using the previous table?</p>
 
   <p><em>Hint</em>: search for the marker genes in the table in the <code class="language-plaintext highlighter-rouge">Ranked genes with Wilcoxon test</code> dataset</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-36"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-36" class="box-title"><button type="button" aria-controls="solution-36-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>By searching the marker genes in the the <code class="language-plaintext highlighter-rouge">Ranked genes with Wilcoxon test</code> dataset:</p>
 
@@ -4056,7 +4056,7 @@ RP11-34P13.8	ENSG00000239945
 </table>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-add-the-cell-type-as-cluster-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add the cell type as cluster names</h3>
+  <div id="hands-on-add-the-cell-type-as-cluster-names" class="box-title" aria-label="hands-on box: Add the cell type as cluster names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the cell type as cluster names</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -4079,12 +4079,12 @@ RP11-34P13.8	ENSG00000239945
       <p>Rename the generated output <code class="language-plaintext highlighter-rouge">3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation</code></p>
 
       <blockquote class="question">
-        <h3 id="question-questions-37"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+        <div id="question-37" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How can we check that the cell type has been correctly added?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-37"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <div id="solution-37" class="box-title"><button type="button" aria-controls="solution-37-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
           <p>The cluster information is available in the <code class="language-plaintext highlighter-rouge">obs</code> attribute of the AnnData object. So to check, we should run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
           <ul>
@@ -4120,12 +4120,12 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-38"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-38" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How well are the cell types clustered in the neighborhood graph?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-38"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-38" class="box-title"><button type="button" aria-controls="solution-38-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <p>T cells (CD4+ and CD8+) are clustered together with NK cells. Monocytes cells (CD14+ and FCGR3A+) are close to each others, with Dendritic and Megakaryocytes. B cells are physically independent.</p>
 
@@ -4135,7 +4135,7 @@ RP11-34P13.8	ENSG00000239945
 <p>With the annotated cell types, we can also visualize the <span class="notranslate">expression</span> of their canonical marker genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-plot-expression-of-canonical-marker-genes-for-the-annotated-cell-types"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot <span class="notranslate">expression</span> of canonical marker genes for the annotated cell types</h3>
+  <div id="hands-on-plot-expression-of-canonical-marker-genes-for-the-annotated-cell-types" class="box-title" aria-label="hands-on box: Plot expression of canonical marker genes for the annotated cell types"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot <span class="notranslate">expression</span> of canonical marker genes for the annotated cell types</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -4231,7 +4231,7 @@ RP11-34P13.8	ENSG00000239945
 <p><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <h3 id="question-questions-39"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <div id="question-39" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Are the canonical marker genes only expressed in their cell type?</li>
@@ -4239,7 +4239,7 @@ RP11-34P13.8	ENSG00000239945
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-39"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <div id="solution-39" class="box-title"><button type="button" aria-controls="solution-39-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
     <ol>
       <li>Some canonical marker genes like LYZ or CST3 are not only highly expressed in their cell type but also on closely related other cell types.</li>
@@ -4278,7 +4278,7 @@ RP11-34P13.8	ENSG00000239945
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>scRNA-seq data analysis is complex and exploratory process, still in development</p>
@@ -4361,7 +4361,7 @@ RP11-34P13.8	ENSG00000239945
                 <h1>Citing this Tutorial</h1>
                 <p>
                     <ol>
-                        <li id="citation-text">Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman, 2021 <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
+                        <li id="citation-text">Bérénice Batut, Hans-Rudolf Hotz, Mehmet Tekman, 2022 <b>Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html">https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -4371,16 +4371,16 @@ RP11-34P13.8	ENSG00000239945
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-scanpy-pbmc3k,
 author = "Bérénice Batut and Hans-Rudolf Hotz and Mehmet Tekman",
 title = "Clustering 3K PBMCs with Scanpy (Galaxy Training Materials)",
-year = "2021",
-month = "03",
-day = "23"
+year = "2022",
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -4411,7 +4411,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

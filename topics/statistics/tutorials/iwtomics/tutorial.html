@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Interval-Wise Testing for omics data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:02 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Marzia A Cremona" />
 <meta name="DC.creator" content="Fabio Cumbo" />
 
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:02 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Interval-Wise Testing for omics data",
   "interactivityType": "mixed",
@@ -487,7 +487,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -818,7 +818,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 2, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -852,7 +852,7 @@ The dataset contains two region datasets “ETn fixed”, “Control” and one 
 <p>The data we use in this tutorial is available at <a href="https://doi.org/10.5281/zenodo.5589610">Zenodo</a>.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>IWTomics is composed of three steps (corresponding to three tools):</p>
 
@@ -869,13 +869,13 @@ The dataset contains two region datasets “ETn fixed”, “Control” and one 
 <p>The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the data</h3>
+  <div id="hands-on-get-the-data" class="box-title" aria-label="hands-on box: Get the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the data</div>
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">  <h3 data-toc-skip="" id="-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history</h3>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
+      <blockquote class="tip">  <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>  <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>  <ol>  <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>  <li>Select the option <strong>Create New</strong> from the menu</li></ol></blockquote>
     </li>
     <li>Import datasets:
       <ul>
@@ -905,7 +905,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-pre-process-data-and-create-pointwise-boxplot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Pre-process data and create pointwise boxplot</h3>
+  <div id="hands-on-pre-process-data-and-create-pointwise-boxplot" class="box-title" aria-label="hands-on box: Pre-process data and create pointwise boxplot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pre-process data and create pointwise boxplot</div>
   <p><strong>Load, Smooth and Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Load, Smooth and Plot</strong> with:</p>
   <ul>
     <li>Select the two region datasets <code class="language-plaintext highlighter-rouge">ETn_fixed.<span class="notranslate">bed</span></code> and <code class="language-plaintext highlighter-rouge">Control.<span class="notranslate">bed</span></code>.</li>
@@ -927,7 +927,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 <p>It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-test-for-difference-between-etn-and-control-regions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Test for difference between ETn and Control regions</h3>
+  <div id="hands-on-test-for-difference-between-etn-and-control-regions" class="box-title" aria-label="hands-on box: Test for difference between ETn and Control regions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Test for difference between ETn and Control regions</div>
   <p><strong>Test and Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Test and Plot</strong> with:</p>
   <ul>
     <li>Select the <code class="language-plaintext highlighter-rouge">IWTomicsData Object</code>, <code class="language-plaintext highlighter-rouge">Region Dataset IDs</code>, and <code class="language-plaintext highlighter-rouge">Feature IDs</code> created during <strong>Step 1</strong>.</li>
@@ -945,7 +945,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 <p>The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the scale for the Interval-Wise Testing results. In particular it returns the p-value curves for the different tests performed at the selected scale, and it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) at the selected scale.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-change-scale-for-test-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change scale for test results</h3>
+  <div id="hands-on-change-scale-for-test-results" class="box-title" aria-label="hands-on box: Change scale for test results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Change scale for test results</div>
   <p><strong>Plot with Threshold on Test Scale</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Plot with Threshold on Test Scale</strong> with:</p>
   <ul>
     <li>Select the <code class="language-plaintext highlighter-rouge">IWTomicsData Object with Test Results</code>, <code class="language-plaintext highlighter-rouge">Test IDs</code>, and <code class="language-plaintext highlighter-rouge">Feature IDs</code> created during <strong>Step 2</strong>.</li>
@@ -957,7 +957,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 </blockquote>
 
 <blockquote class="details">
-  <h3 id="details-additional-resources"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Additional resources</h3>
+  <div id="details-additional-resources" class="box-title"><button type="button" aria-controls="details-additional-resources-contents" aria-expanded="true" aria-label="Toggle details box: Additional resources"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Additional resources<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
 
   <p>Read more about <strong>IWTomics</strong> <a href="https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf">here</a>.</p>
 </blockquote>
@@ -965,7 +965,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p>High-resolution omics data can be represented as curves along the genome</p>
@@ -1051,7 +1051,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -1059,8 +1059,8 @@ https://zenodo.org/record/5589610/files/features_header.tabular
 author = "Marzia A Cremona and Fabio Cumbo",
 title = "Interval-Wise Testing for omics data (Galaxy Training Materials)",
 year = "2022",
-month = "08",
-day = "02"
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/iwtomics/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1091,7 +1091,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 

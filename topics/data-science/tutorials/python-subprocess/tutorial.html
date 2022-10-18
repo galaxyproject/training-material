@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Python - Subprocess" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:25 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Donny Vrins" />
 <meta name="DC.creator" content="Bazante Sanders" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:25 +0000",
+  "dateModified": "1970-01-01 00:00:28 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Python - Subprocess",
   "interactivityType": "mixed",
@@ -512,7 +512,7 @@
 
 
     <blockquote class="overview">
-        <h3>Overview</h3>
+        <div class="box-title" aria-label="overview box">Overview</div>
         
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         
@@ -616,7 +616,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -639,7 +639,7 @@
                      
                     
                         <blockquote class="comment">
-                            <h3><i class="far fa-comment-dots" aria-hidden="true"></i> Best viewed in a Jupyter Notebook</h3>
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -672,7 +672,7 @@
 Here we’ll give a quick tutorial on how to read and write files within Python.</p>
 
 <blockquote class="agenda">
-  <h3 id="agenda">Agenda</h3>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -721,7 +721,7 @@ Here we’ll give a quick tutorial on how to read and write files within Python.
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-what-do-these-commands-look-like-on-the-cli"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What do these commands look like on the CLI?</h3>
+  <div id="tip-what-do-these-commands-look-like-on-the-cli" class="box-title"><button type="button" aria-controls="tip-what-do-these-commands-look-like-on-the-cli-contents" aria-expanded="true" aria-label="Toggle tip box: What do these commands look like on the CLI?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What do these commands look like on the CLI?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://ftp.ncbi.nlm.nih.gov/.... -O "Escherichia virus T4.fna.gz"
 gzip -d "Escherichia virus T4.fna.gz"
 </code></pre></div>  </div>
@@ -752,13 +752,13 @@ gzip -d "Escherichia virus T4.fna.gz"
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <h3 id="code-in-terminal"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Terminal</h3>
+    <div id="code-in-terminal" class="box-title" aria-label="code-in box: Terminal"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Terminal</div>
     <p>Here we manually quote the argument</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>glimmer3 "bow genome.txt"
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <h3 id="code-out-python"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Python</h3>
+    <div id="code-out-python" class="box-title" aria-label="code-out box: Python"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Python</div>
     <p>Here python handles that for us</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subprocess.check_call(['glimmer3', 'bow genome.txt'])
 </code></pre></div>    </div>
@@ -766,7 +766,7 @@ gzip -d "Escherichia virus T4.fna.gz"
 </blockquote>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-exploitation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Exploitation!</h3>
+  <div id="tip-exploitation" class="box-title"><button type="button" aria-controls="tip-exploitation-contents" aria-expanded="true" aria-label="Toggle tip box: Exploitation!"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Exploitation!<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <p>This is one of the major reasons we don’t use <code class="language-plaintext highlighter-rouge">os.system</code> or older Python interfaces for running commands.
 If you’re processing files, and a user supplies a file with a space, if your program isn’t expecting that space in that filename, then it could do something dangerous!
 Like exploit your system!</p>
@@ -790,7 +790,7 @@ Like exploit your system!</p>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-what-does-this-commands-look-like-on-the-cli"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What does this commands look like on the CLI?</h3>
+  <div id="tip-what-does-this-commands-look-like-on-the-cli" class="box-title"><button type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-contents" aria-expanded="true" aria-label="Toggle tip box: What does this commands look like on the CLI?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What does this commands look like on the CLI?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>augustus --species=E_coli_K12 'Escherichia virus T4.fna' --gff3=on
 </code></pre></div>  </div>
 </blockquote>
@@ -839,7 +839,7 @@ Like exploit your system!</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <h3 id="code-in-terminal-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Terminal</h3>
+    <div id="code-in-terminal-1" class="box-title" aria-label="code-in box: Terminal"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Terminal</div>
     <p>Here we pipe a file to a process named <code class="language-plaintext highlighter-rouge">build-icm</code> which takes one argument, the output name. It <span class="notranslate">reads</span> sequences from stdin.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat seq.fa | build-icm test.icm
 # OR
@@ -847,7 +847,7 @@ build-icm test.icm &lt; seq.fa
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <h3 id="code-out-python-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Python</h3>
+    <div id="code-out-python-1" class="box-title" aria-label="code-out box: Python"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Python</div>
     <p>Here we need to do a bit more.</p>
     <ol>
       <li>Open a file handle</li>
@@ -867,7 +867,7 @@ build-icm test.icm &lt; seq.fa
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-what-does-this-commands-look-like-on-the-cli-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What does this commands look like on the CLI?</h3>
+  <div id="tip-what-does-this-commands-look-like-on-the-cli-1" class="box-title"><button type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-1-contents" aria-expanded="true" aria-label="Toggle tip box: What does this commands look like on the CLI?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What does this commands look like on the CLI?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build-icm test.icm &lt; 'E. Coli CDSs.fna'
 </code></pre></div>  </div>
 </blockquote>
@@ -885,7 +885,7 @@ build-icm test.icm &lt; seq.fa
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <h3 id="tip-tip-what-does-this-commands-look-like-on-the-cli-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: What does this commands look like on the CLI?</h3>
+  <div id="tip-what-does-this-commands-look-like-on-the-cli-2" class="box-title"><button type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-2-contents" aria-expanded="true" aria-label="Toggle tip box: What does this commands look like on the CLI?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What does this commands look like on the CLI?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>glimmer3 'Escherichia virus T4.fna' test.icm t4-genes
 </code></pre></div>  </div>
 </blockquote>
@@ -907,7 +907,7 @@ build-icm test.icm &lt; seq.fa
 
                 
                 <blockquote class="key_points">
-                    <h3><i class="fas fa-key" aria-hidden="true"></i> Key points</h3>
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
                         <li><p><strong>DO NOT USE <code class="language-plaintext highlighter-rouge">os.system</code></strong></p>
@@ -989,7 +989,7 @@ build-icm test.icm &lt; seq.fa
 
 
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                  <div class="box-title" aria-label="details box">BibTeX</div>
                   <p style="display: none;">
 
                 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
@@ -997,8 +997,8 @@ build-icm test.icm &lt; seq.fa
 author = "Helena Rasche and Donny Vrins and Bazante Sanders",
 title = "Python - Subprocess (Galaxy Training Materials)",
 year = "2022",
-month = "04",
-day = "25"
+month = "09",
+day = "28"
 url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-subprocess/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
@@ -1029,7 +1029,7 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3><i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!</h3>
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
 
                 
 
