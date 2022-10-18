@@ -32,9 +32,6 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 What is a microbiome? It is a collection of small living creatures.
 These small creatures are called **micro-organisms** and they are **everywhere**. In our gut,
@@ -550,7 +547,5 @@ One of the most important features of Galaxy comes at the end of an analysis: sh
 
 {% snippet faqs/galaxy/histories_sharing.md %}
 
-# Conclusion
-{:.no_toc}
 
 
