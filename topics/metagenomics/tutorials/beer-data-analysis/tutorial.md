@@ -32,9 +32,6 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 What is a microbiome? It is a collection of small living creatures.
 These small creatures are called **micro-organisms** and they are **everywhere**. In our gut,
@@ -184,7 +181,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    - Option 2: From Zenodo, an external server, via URL
 >
 >      ```text
->      {{ page.zenodo_link }}/files/ABJ044_c38189e89895cdde6770a18635db438c8a00641b.fastq
+>      https://zenodo.org/record/7093173/files/ABJ044_c38189e89895cdde6770a18635db438c8a00641b.fastq
 >      ```
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -550,7 +547,5 @@ One of the most important features of Galaxy comes at the end of an analysis: sh
 
 {% snippet faqs/galaxy/histories_sharing.md %}
 
-# Conclusion
-{:.no_toc}
 
 
