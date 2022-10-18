@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Age prediction using machine learning" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:18 +0000" />
 <meta name="DC.creator" content="Ekaterina Polkh" />
 <meta name="DC.creator" content="Anup Kumar" />
 
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:28 +0000",
+  "dateModified": "1970-01-01 00:00:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Age prediction using machine learning",
   "interactivityType": "mixed",
@@ -734,6 +734,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -787,7 +789,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -805,7 +807,7 @@
             <div class="col-sm-10">
                  
 
-                <h1 class="no_toc" id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction</h1>
 
 <p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> is used to create predictive models by learning features from datasets. In the studies performed by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>, biomarkers are examined to predict the chronological age of humans by analysing the <span class="notranslate">RNA</span>-seq gene <span class="notranslate">expression</span> levels and <span class="notranslate">DNA</span> methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The <span class="notranslate">RNA</span>-seq gene <span class="notranslate">expression</span> (<a href="https://www.ebi.ac.uk/training/online/glossary/fpkm">FPKM</a>) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damage that happens with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/"><span class="notranslate">DNA</span> methylation</a> changes with age. This knowledge is used to select useful biomarkers from <span class="notranslate">DNA</span> methylation dataset. The <a href="https://en.wikipedia.org/wiki/CpG_site">CpGs sites</a> with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.</p>
 
@@ -829,6 +831,7 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#analyze-rna-seq-dataset" id="markdown-toc-analyze-rna-seq-dataset">Analyze <span class="notranslate">RNA</span>-seq dataset</a>    <ol>
       <li><a href="#get-dataset" id="markdown-toc-get-dataset">Get dataset</a></li>
       <li><a href="#create-data-processing-pipeline" id="markdown-toc-create-data-processing-pipeline">Create data processing pipeline</a></li>
@@ -848,6 +851,7 @@
       <li><a href="#summary-1" id="markdown-toc-summary-1">Summary</a></li>
     </ol>
   </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -1417,7 +1421,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 
 <p>Figure <a href="#figure-6">6</a> shows that we achieved an R2 score of <code class="language-plaintext highlighter-rouge">0.94</code> and root mean square score of <code class="language-plaintext highlighter-rouge">3.76</code> for the test set using the Gradient boosting regressor. The study of <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> also mentions a similar root mean square score (<code class="language-plaintext highlighter-rouge">3.93</code>), derived using the random forest regressor. The root mean square score shows the difference in the true and predicted age of humans. The R2 score (<code class="language-plaintext highlighter-rouge">0.94</code>) is close to the best achievable score of <code class="language-plaintext highlighter-rouge">1.0</code> which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in <span class="notranslate">Galaxy</span>, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.</p>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>In our tutorial, we were able to use machine learning tools in <span class="notranslate">Galaxy</span> to reproduce the results reported in these scientific studies - <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>. We also learned how to work with high-dimensional datasets, perform a hyperparameter search and cross-validation. Further, we can reuse the trained models to make predictions on a new dataset provided that this new dataset has the same features. There are numerous other machine learning algorithms available in <span class="notranslate">Galaxy</span> which can also be tried out on these datasets to verify whether the accuracy can be improved.</p>
 
@@ -1508,8 +1512,8 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 author = "Ekaterina Polkh and Anup Kumar",
 title = "Age prediction using machine learning (Galaxy Training Materials)",
 year = "2022",
-month = "09",
-day = "28"
+month = "10",
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

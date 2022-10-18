@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Including a new topic" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:18 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 
         
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:28 +0000",
+  "dateModified": "1970-01-01 00:00:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Including a new topic",
   "interactivityType": "mixed",
@@ -507,7 +507,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -525,9 +525,13 @@
             <div class="col-sm-10">
                  
 
-                <h1 class="no_toc" id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction</h1>
 
-<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
+<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis).</p>
+
+<h2 id="directory-structure">Directory structure</h2>
+
+<p>Each topic has the following structure:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
 ├── metadata.yaml
@@ -548,7 +552,7 @@
 │   │   │   ├── tour.yaml
 </code></pre></div></div>
 
-<h2 class="no_toc" id="images-directory"><code class="language-plaintext highlighter-rouge">images</code> directory</h2>
+<h3 id="images-directory"><code class="language-plaintext highlighter-rouge">images</code> directory</h3>
 
 <p>The <code class="language-plaintext highlighter-rouge">images</code> directory collects all images/pictures needed for the training materials related to the topic, <em>i.e</em> pictures for the slides or the tutorials.</p>
 
@@ -556,11 +560,11 @@
 
 <p>All images for the slides must be in <code class="language-plaintext highlighter-rouge">images</code> directory. The images must be in good quality. The sources (<code class="language-plaintext highlighter-rouge">svg</code> or other) of the images must also be added to the <code class="language-plaintext highlighter-rouge">images</code> directory. We encourage you to use <a href="https://www.yworks.com/products/yed">yEd</a> to easily generate diagrams and <a href="https://inkscape.org/en/">Inkscape</a> for any other images.</p>
 
-<h2 class="no_toc" id="slides-directory"><code class="language-plaintext highlighter-rouge">slides</code> directory</h2>
+<h3 id="slides-directory"><code class="language-plaintext highlighter-rouge">slides</code> directory</h3>
 
 <p>This directory contains introduction slide deck. There could be several slide decks, to cover different aspect. The slides are rendered using <code class="language-plaintext highlighter-rouge">remark.js</code> but written in Markdown to facilitate collaboration.</p>
 
-<h2 class="no_toc" id="tutorials-directory"><code class="language-plaintext highlighter-rouge">tutorials</code> directory</h2>
+<h3 id="tutorials-directory"><code class="language-plaintext highlighter-rouge">tutorials</code> directory</h3>
 
 <p>This directory collects the tutorials related to the topic, one per subdirectory.</p>
 
@@ -577,7 +581,7 @@
 
 <p>Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the <code class="language-plaintext highlighter-rouge">slides</code> directory.</p>
 
-<h2 class="no_toc" id="docker-directory"><code class="language-plaintext highlighter-rouge">docker</code> directory</h2>
+<h3 id="docker-directory"><code class="language-plaintext highlighter-rouge">docker</code> directory</h3>
 
 <p>For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official <span class="notranslate">Galaxy</span> Docker
@@ -585,7 +589,7 @@ images.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">docker</code> image will also integrate the <span class="notranslate">Galaxy</span> tours available for each topics and the workflows.</p>
 
-<h1 class="no_toc" id="creating-a-new-topic">Creating a new topic</h1>
+<h1 id="creating-a-new-topic">Creating a new topic</h1>
 
 <blockquote class="agenda">
   <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
@@ -593,9 +597,15 @@ images.</p>
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#directory-structure" id="markdown-toc-directory-structure">Directory structure</a></li>
+    </ol>
+  </li>
+  <li><a href="#creating-a-new-topic" id="markdown-toc-creating-a-new-topic">Creating a new topic</a></li>
   <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
   <li><a href="#creating-the-skeleton-for-the-topic" id="markdown-toc-creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</a></li>
   <li><a href="#adapt-the-metadata-for-your-topic" id="markdown-toc-adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -2168,7 +2178,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 </blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>We just created a new topic. We can now fill it by <a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">creating new tutorials</a></p>
 
@@ -2253,8 +2263,8 @@ We decided to put it in “Sequence analysis” because this is the most general
 author = "Bérénice Batut",
 title = "Including a new topic (Galaxy Training Materials)",
 year = "2022",
-month = "09",
-day = "28"
+month = "10",
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }

@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="ATAC-Seq data analysis" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="1970-01-01 00:00:28 +0000" />
+<meta name="DC.date" content="1970-01-01 00:00:18 +0000" />
 <meta name="DC.creator" content="Lucille Delisle" />
 <meta name="DC.creator" content="Maria Doyle" />
 <meta name="DC.creator" content="Florian Heyl" />
@@ -281,7 +281,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "1970-01-01 00:00:28 +0000",
+  "dateModified": "1970-01-01 00:00:18 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "ATAC-Seq data analysis",
   "interactivityType": "mixed",
@@ -933,6 +933,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -994,7 +996,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1012,7 +1014,7 @@
             <div class="col-sm-10">
                  
 
-                <h1 class="no_toc" id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction</h1>
 
 <p>In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of <span class="notranslate">DNA</span>. When the <span class="notranslate">DNA</span> is being actively transcribed into <span class="notranslate">RNA</span>, the <span class="notranslate">DNA</span> will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the <span class="notranslate">DNA</span>. Consequently, these factors are also important for the activation and inactivation of genes. <strong>A</strong>ssay for <strong>T</strong>ransposase-<strong>A</strong>ccessible <strong>C</strong>hromatin using <strong>seq</strong>uencing (<a href="https://en.wikipedia.org/wiki/ATAC-seq">ATAC-Seq</a>) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene <span class="notranslate">expression</span>. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the <span class="notranslate">DNA</span> region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the <span class="notranslate">RNA</span> polymerase. An enhancer is a <span class="notranslate">DNA</span> region that can be located up to 1 Mb <span class="notranslate">downstream</span> or <span class="notranslate">upstream</span> of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s <span class="notranslate">expression</span>. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alte<span class="notranslate">rna</span>tive techniques, such as FAIRE-Seq and <span class="notranslate">DNa</span>se-Seq.</p>
 
@@ -1022,7 +1024,8 @@
 
 <p>In this tutorial we will use data from the study of <span class="citation"><a href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a></span>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
 
-<h3 class="no_toc" id="when-working-with-real-data">When working with real data</h3>
+<h3 id="when-working-with-real-data">When working with real data</h3>
+
 <p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
 
 <blockquote class="agenda">
@@ -1031,6 +1034,7 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#preprocessing" id="markdown-toc-preprocessing">Preprocessing</a>    <ol>
       <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
       <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
@@ -2269,8 +2273,8 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>MA
 author = "Lucille Delisle and Maria Doyle and Florian Heyl",
 title = "ATAC-Seq data analysis (Galaxy Training Materials)",
 year = "2022",
-month = "09",
-day = "28"
+month = "10",
+day = "18"
 url = "\url{https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
