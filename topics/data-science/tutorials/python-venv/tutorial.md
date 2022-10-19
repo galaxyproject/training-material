@@ -172,7 +172,7 @@ and use them accordingly. As you become more familiar with them you will realise
 way even though the command syntax may be different (and that there are equivalent tools for other programming languages
 too to which your knowledge can be ported).
 
-![Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.)](https://imgs.xkcd.com/comics/python_environment.png 'Python Environment Hell' from XKCD 1987 (CC-BY-NC 2.5))
+![Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.)](../../images/xkcd/python_environment.png "Python Environment Hell from XKCD 1987 (CC-BY-NC 2.5)")
 
 Let us have a look at how we can create and manage virtual environments from the command line using `venv` and manage packages using `pip`.
 
@@ -255,7 +255,7 @@ If you've just done the `deactivate`, ensure you reactivate the environment read
 source venv/bin/activate
 ```
 
-> ### {% icon tip %} Tip: Python Within A Virtual Environment
+> <tip-title>Python Within A Virtual Environment</tip-title>
 > 
 > Within a virtual environment, commands `python` and `pip` will refer to the version of Python you created the environment with. If you create a virtual environment with `python3 -m venv venv`, `python` will refer to `python3` and `pip` will refer to `pip3`. 
 >

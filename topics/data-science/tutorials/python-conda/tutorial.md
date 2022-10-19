@@ -22,8 +22,8 @@ key_points:
 - "Use `conda install` to install and manage additional external (third-party) libraries."
 - "Conda allows you to declare all dependencies for a project in a separate
 file (by convention called `environment.yml`) which can be shared with collaborators/users and used to replicate an environment."
-- "Use `conda env export > environment.yaml` to take snapshot of your project's dependencies."
-- "Use `conda env create -f environment.yaml` to replicate someone else's environment on your machine from
+- "Use `conda env export > environment.yml` to take snapshot of your project's dependencies."
+- "Use `conda env create -f environment.yml` to replicate someone else's environment on your machine from
 the `environment.yml` file."
 
 subtopic: python-modular
@@ -174,7 +174,7 @@ and use them accordingly. As you become more familiar with them you will realise
 way even though the command syntax may be different (and that there are equivalent tools for other programming languages
 too to which your knowledge can be ported).
 
-![Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.)](https://imgs.xkcd.com/comics/python_environment.png 'Python Environment Hell' from XKCD 1987 (CC-BY-NC 2.5))
+![Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.)](../../images/xkcd/python_environment.png "Python Environment Hell from XKCD 1987 (CC-BY-NC 2.5)")
 
 Let us have a look at how we can create and manage environments and their packages from the command line using `conda`.
 
@@ -233,7 +233,7 @@ This will give us access to the vast repositories of BioConda (bioinformatics so
 Creating a new environment is done by executing the following command:
 
 ```bash
-conda create -n my-env
+conda create -y -n my-env
 ```
 
 where `my-env` is any arbitrary name for this Conda environment. Environment names are global, so pick something meaningful when you create one!
@@ -241,7 +241,7 @@ where `my-env` is any arbitrary name for this Conda environment. Environment nam
 For our project, let's create an environment called `hts`
 
 ```bash
-conda create -n hts
+conda create -y -n hts
 ```
 
 You can list all of the created environments with
@@ -346,7 +346,7 @@ get shipped as part of your software and shared with collaborators and/or users.
 install all the necessary packages from the project root as follows:
 
 ```bash
-conda env create -f environment.yaml
+conda env create -f environment.yml
 ```
 
 As your project grows - you may need to update your environment for a variety of reasons. For example, one of your project's dependencies has

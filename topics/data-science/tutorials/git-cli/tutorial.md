@@ -148,7 +148,7 @@ Let's add our first file, often a (pretty empty) readme file.
 >    > [A lot has been written](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) about good commit messages, search the internet and find ideas for what you think makes a good commit message!
 >    >
 >    > And beware of the trap we all fall into sometimes, [unhelpful commit messages](https://xkcd.com/1296/)
->    > ![xkcd comic with commits in a table from 14h to 2h ago, starting with extremely useful commits like "created main loop & timing control", and becoming extremely unhelpful messages for the latest commits, like 'AAAAAA' or "asdfasdf".](https://imgs.xkcd.com/comics/git_commit.png)
+>    > ![xkcd comic with commits in a table from 14h to 2h ago, starting with extremely useful commits like "created main loop & timing control", and becoming extremely unhelpful messages for the latest commits, like 'AAAAAA' or "asdfasdf".](../../images/xkcd/git_commit.png)
 >    > Even your author is [very](https://github.com/galaxyproject/gxadmin/commit/568adb703189d98da701e35c3414be35ea106184), [very](https://github.com/galaxyproject/training-material/commit/611f82d267f1426aa09863c2ac9c9006f38e3c4c) guilty of this, but you can do better!
 >    {: .tip}
 >
