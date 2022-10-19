@@ -14,7 +14,7 @@ Sometimes there are multiple tools with very similar names. If the parameters in
 
 2. Check that the **entire tool name** matches what you see in the tutorial.
    {% if include.toolname %} Please check that:
-   - **Full tool name** is: `{{ include.toolname }}`
+   - **Full tool name**: `{{ include.toolname }}`
    {% endif %}
    {% if include.toolversion %}
    - **Tool version**: `{{include.toolversion}}` (written after the tool name)
