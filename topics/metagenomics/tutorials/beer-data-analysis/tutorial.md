@@ -139,7 +139,7 @@ First of all, this tutorial will get you hands on with some basic Galaxy tasks, 
 > 1. Open your favorite browser (Works on Chrome, Firefox, Safari but not Internet Explorer!)
 > 2. Create a Galaxy account if you do not have one
 >
->    {% snippet faqs/galaxy/galaxy_creating_an_account.md %}
+>    {% snippet faqs/galaxy/account_create.md %}
 >
 {: .hands_on}
 
