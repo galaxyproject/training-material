@@ -461,7 +461,7 @@ We can fix this by running a dedicated tool for sorting on our data.
 >       - *"in"*: `Ascending order`
 >       - *"Flavor"*: `Natural/Version sort (-V)`
 >
->    {% snippet faqs/galaxy/tools_similar.md toolname="Sort data in ascending or descending order" %}
+>    {% snippet faqs/galaxy/tools_similar.md toolname="Sort data in ascending or descending order" toolversion="1.1.1" %}
 >
 {: .hands_on}
 

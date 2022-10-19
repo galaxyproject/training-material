@@ -12,7 +12,10 @@ Sometimes there are multiple tools with very similar names. If the parameters in
 
    {% snippet faqs/galaxy/tutorial_mode.md %}
 
-2. Check that the **entire tool name** matches what you see in the tutorial
-   {% if include.toolname %}
-   - In this case, make sure the full tool name is: **"{{ include.toolname }}"**
+2. Check that the **entire tool name** matches what you see in the tutorial.
+   {% if include.toolname %} Please check that:
+   - **Full tool name** is: `{{ include.toolname }}`
+   {% endif %}
+   {% if include.toolversion %}
+   - **Tool version**: `{{include.toolversion}}` (written after the tool name)
    {% endif %}
