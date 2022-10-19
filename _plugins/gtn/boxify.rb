@@ -129,7 +129,7 @@ module Gtn
         <div id="#{box_id}" class="box-title">
         <button type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
           #{self.get_icon(box_type)} #{box_title}
-          <span role="button" class="fold-unfold fa fa-plus-square"></span>
+          <span role="button" class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
