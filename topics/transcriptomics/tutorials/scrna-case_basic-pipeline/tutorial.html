@@ -1036,8 +1036,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -1910,13 +1908,10 @@
   <p>Where did the <code class="language-plaintext highlighter-rouge">3248</code> come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the <strong>Scanpy FindVariableGenes</strong> tool and select the parameter to <em>Remove genes not marked as highly variable</em>. Then you can Inspect your resulting object and you’ll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.</p>
 </blockquote>
 
-<blockquote>
-  <warning-title>Check your AnnData object!
-</warning-title>
-</blockquote>
-<p>&lt;/div&gt;&lt;/div&gt;<!--warning--></p>
 <blockquote class="warning">
-  <p>Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you’d have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled ‘3248’.</p>
+  <warning-title>Check your AnnData object!&lt;/warning&gt;
+Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '3248'.
+</warning-title>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -2567,6 +2562,7 @@ For those that did not take the ‘control’ options, please</p>
 
                 <!-- collapsible boxcontaining the BibTeX-formatted citation -->
                 <blockquote class="details">
+
                   <div id="citation-bibtex" class="box-title">
                     <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
                       <i class="fas fa-info-circle" aria-hidden="true"></i>
@@ -2576,6 +2572,7 @@ For those that did not take the ‘control’ options, please</p>
                    <p style="display: none;">
 
                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
 <code id="citation-code">@misc{transcriptomics-scrna-case_basic-pipeline,
 author = "Wendi Bacon",
 title = "Filter, Plot and Explore Single-cell RNA-seq Data (Galaxy Training Materials)",

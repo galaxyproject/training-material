@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Conda Environments For Software Development</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Conda Environments For Software Development" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:00:19 +0000" />
+<meta name="DC.creator" content="The Carpentries" />
+<meta name="DC.creator" content="Helena Rasche" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Conda Environments For Software Development" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-conda/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-conda/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-conda/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+        
+        
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-10-01/topics/data-science/tutorials/python-conda/tutorial.html" title="Version 2022-10-01">2022-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/data-science/tutorials/python-conda/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/data-science/tutorials/python-conda/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:00:19 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Conda Environments For Software Development",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Conda Environments For Software Development' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "data-science, conda, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - What are Conda environments in software development and why you should use them?\n - How can we manage Conda environments and external (third-party) libraries via Conda?\n\n\\nThe objectives are:\n - Set up a Conda environment for our software project using `conda`.\n - Run our software from the command line.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Conda Environments For Software Development</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=27" alt="Avatar">The Carpentries</a>
+
+
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Overview</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are Conda environments in software development and why you should use them?</p>
+</li>
+        
+        <li><p>How can we manage Conda environments and external (third-party) libraries via Conda?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Set up a Conda environment for our software project using <code class="language-plaintext highlighter-rouge">conda</code>.</p>
+</li>
+        
+        <li><p>Run our software from the command line.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-conda/data-science-python-conda.ipynb" title="Jupyter Notebook" alt="Conda Environments For Software Development Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 19, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-conda%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/data-science-python-conda.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/data-science-python-conda.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/data-science-python-conda-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                 
+
+                <p>Conda environments, like Python Virtual Environments allow you to easily manage your installed packages and prevent conflicts between different project’s dependencies. This tutorial follows an identical structure to the virtualenv tutorial, but with conda.</p>
+
+<blockquote class="comment">
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+
+  <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> lesson <a href="https://carpentries-incubator.github.io/python-intermediate-development/">“Intermediate Research Software Development”</a>.</p>
+
+</blockquote>
+
+<p>If you have a python project you are using, you will often see something like
+following two lines somewhere at the top.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</code></pre></div></div>
+
+<p>This means that our code requires two <em>exte<span class="notranslate">rna</span>l libraries</em> (also called third-party packages or dependencies) -
+<code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code>.</p>
+
+<p>Python applications often use exte<span class="notranslate">rna</span>l libraries that don’t come as part of the standard Python distribution. This means
+that you will have to use a <em>package manager</em> tool to install them on your system.</p>
+
+<p>Applications will also sometimes need a
+specific version of an exte<span class="notranslate">rna</span>l library (e.g. because they require that a particular
+bug has been fixed in a newer version of the library), or a specific version of Python interpreter.
+This means that each Python application you work with may require a different setup and a set of dependencies so it
+is important to be able to keep these configurations separate to avoid confusion between projects.
+The solution for this problem is to create a self-contained 
+<em>environment</em> per project, which contains a particular version of Python installation plus a number of
+additional exte<span class="notranslate">rna</span>l libraries.</p>
+
+<p>If you see something like</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pysam</span>
+</code></pre></div></div>
+
+<p>You know you’ll need additional packages installed on your system, as it relies on <a href="https://github.com/samtools/htslib">htslib, a C library for working with HTS data</a>. This usually means installing additional packages and things that are not always available from within Python’s packaging ecosystem.</p>
+
+<p>Conda environments go beyond virtual environments, and make it easier to develop, run, test and share code with others. In this tutorial, we learn how
+to set up an environment to develop our code and manage our exte<span class="notranslate">rna</span>l dependencies.</p>
+
+<blockquote class="agenda">
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#conda-environments" id="markdown-toc-conda-environments">Conda Environments</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="conda-environments">Conda Environments</h2>
+
+<p>So what exactly are conda environments, and why use them?</p>
+
+<p>A conda environment is an <strong>isolated working copy</strong> of specific versions of
+one of more packages and all of their dependencies.</p>
+
+<p>This is in fact simply a <em>directory with a particular structure</em> which includes
+links to and enables multiple side-by-side installations of different packages
+or different versions of the same exte<span class="notranslate">rna</span>l library to coexist on your machine
+and only one to be selected for each of our projects. This allows you to work on
+a particular project without worrying about affecting other projects on your
+machine.</p>
+
+<p>As more exte<span class="notranslate">rna</span>l libraries are added to your project over time, you can add them to
+its specific environment and avoid a great deal of confusion by having separate (smaller) environments
+for each project rather than one huge global environment with potential package version clashes. Another big motivator
+for using environments is that they make sharing your code with others much easier (as we will see shortly).
+Here are some typical scenarios where the usage of environments is highly recommended (almost unavoidable):</p>
+
+<ul>
+  <li>You have two dependencies with conflicting dependencies! You cannot install
+the specific version of software X alongside software Y, as they both depend
+on different versions of a dependency, that cannot co-exist. This is solved by
+having different environments for both.</li>
+  <li>You have an older project that only works under Python 2. You do not have the time to migrate the project to Python 3
+or it may not even be possible as some of the third party dependencies are not available under Python 3. You have to
+start another project under Python 3. The best way to do this on a single machine is to set up two separate Python
+environments.</li>
+  <li>One of your Python 3 projects is locked to use a particular older version of a third party dependency. You cannot use the
+latest version of the
+dependency as it breaks things in your project. In a separate branch of your project, you want to try and fix problems
+introduced by the new version of the dependency without affecting the working version of your project. You need to set up
+a separate conda environments for your branch to ‘isolate’ your code while testing the new feature.</li>
+</ul>
+
+<p>You do not have to worry too much about specific versions of exte<span class="notranslate">rna</span>l libraries that your project depends on most of the time.
+Conda environments enable you to always use the latest available version without specifying it explicitly.
+They also enable you to use a specific older version of a package for your project, should you need to.</p>
+
+<blockquote class="tip">
+  <div id="tip-a-specific-package-version-is-only-ever-installed-once" class="box-title"><button type="button" aria-controls="tip-a-specific-package-version-is-only-ever-installed-once-contents" aria-expanded="true" aria-label="Toggle tip box: A Specific Package Version is Only Ever Installed Once"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: A Specific Package Version is Only Ever Installed Once<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+  <p>Note that you will not have a separate package installations for each of your projects - they will only
+ever be installed once on your system (in <code class="language-plaintext highlighter-rouge">$CONDA/pkgs</code>) but will be referenced from different environments.</p>
+</blockquote>
+
+<h3 id="managing-conda-environments">Managing Conda Environments</h3>
+
+<p>There are several commonly used command line tools for managing environments:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">homebrew</code>, historically used on OSX to manage packages.</li>
+  <li><code class="language-plaintext highlighter-rouge">nix</code>, which has a steep learning curve but allows you to declare the state of your entire system</li>
+  <li><code class="language-plaintext highlighter-rouge">conda</code>, package and environment management system (also included as part of the Anaconda Python distribution often used by the scientific community)</li>
+  <li><code class="language-plaintext highlighter-rouge">docker</code> and <code class="language-plaintext highlighter-rouge">singularity</code> are somewhat similar to other environment managers, as they can have isolated images with software and dependencies.</li>
+  <li>Other, language specific managers</li>
+</ul>
+
+<p>While there are pros and cons for using each of the above, all will do the job of managing
+environments for you and it may be a matter of personal preference which one you go for. The <span class="notranslate">Galaxy</span> project is heavily invested in the Conda ecosystem and recommends it as an entry point as it is the most generally useful, and convenient. <a href="http://bioconda.github.io/">The BioConda ecosystem</a> provides an unbelievably large number of packages for bioinformatics specific purposes, which makes it a good choice in general.</p>
+
+<h3 id="managing-packages">Managing Packages</h3>
+
+<p>Part of managing your (virtual) working environment involves installing, updating and removing exte<span class="notranslate">rna</span>l packages
+on your system. The Conda command (<code class="language-plaintext highlighter-rouge">conda</code>) is most commonly used for this - it interacts
+ and obtains the packages from one or more Conda repositories (e.g. Conda Forge, BioConda, etc.)</p>
+
+<blockquote class="tip">
+  <div id="tip-a-note-on-anaconda-and-conda" class="box-title"><button type="button" aria-controls="tip-a-note-on-anaconda-and-conda-contents" aria-expanded="true" aria-label="Toggle tip box: A Note on Anaconda and `conda`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: A Note on Anaconda and `conda`<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+  <p>Anaconda is an open source Python
+distribution commonly used for scientific programming - it conveniently installs Python, package and environment management <code class="language-plaintext highlighter-rouge">conda</code>, and a 
+number of commonly used scientific computing packages so you do not have to obtain them separately. 
+<code class="language-plaintext highlighter-rouge">conda</code> is an independent command line tool (available separately from the Anaconda distribution too) with dual functionality: (1) it is a package manager that helps you find Python packages from
+remote package repositories and install them on your system, and (2) it is also a virtual environment manager. So, you can use <code class="language-plaintext highlighter-rouge">conda</code> for both tasks instead of using <code class="language-plaintext highlighter-rouge">venv</code> and <code class="language-plaintext highlighter-rouge">pip</code>.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">venv</code> and <code class="language-plaintext highlighter-rouge">pip</code> are considered the <em>de facto</em> standards for environment and package management for Python 3.
+However, the advantages of using Anaconda and <code class="language-plaintext highlighter-rouge">conda</code> are that you get (most of the) packages needed for
+scientific code development included with the distribution. If you are only collaborating with others who are also using
+Anaconda, you may find that <code class="language-plaintext highlighter-rouge">conda</code> satisfies all your needs.</p>
+
+<p>It is good, however, to be aware of all these tools (<code class="language-plaintext highlighter-rouge">pip</code>, <code class="language-plaintext highlighter-rouge">venv</code>, <code class="language-plaintext highlighter-rouge">pyenv</code>, etc.),
+and use them accordingly. As you become more familiar with them you will realise that equivalent tools work in a similar
+way even though the command syntax may be different (and that there are equivalent tools for other programming languages
+too to which your knowledge can be ported).</p>
+
+<figure id="figure-1"><img src="../../images/xkcd/python_environment.png" alt="Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.). " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Python Environment Hell from XKCD 1987 (CC-BY-NC 2.5)</figcaption></figure>
+
+<p>Let us have a look at how we can create and manage environments and their packages from the command line using <code class="language-plaintext highlighter-rouge">conda</code>.</p>
+
+<h3 id="instaling-miniconda">Instaling Miniconda</h3>
+
+<p>We will use Miniconda, a minimal conda installer that is commonly used, in place of the larger and slower to download full anaconda distribution.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-installing-conda-via-miniconda" class="box-title" aria-label="hands-on box: Installing Conda via Miniconda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Conda via Miniconda</div>
+  <ol>
+    <li>Go to the <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda installation page</a> and find the appropriate installer for your system.</li>
+    <li>Download and run the script.</li>
+    <li>You will probably need to close, and restart your terminal.</li>
+    <li>Check that you can run the <code class="language-plaintext highlighter-rouge">conda</code> command, otherwise something may have gone wrong.</li>
+  </ol>
+</blockquote>
+
+<p><em>If</em> you’re running on Linux <em>and</em> following this tutorial via a Jupyter/CoCalc notebook, and you agree to the <a href="https://legal.anaconda.com/policies/en/?name=terms-of-service">Anaconda terms of service</a>, you can simply run the following cell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-c</span> https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh <span class="nt">-b</span> 
+conda init bash
+</code></pre></div></div>
+
+<p>Here you will need to restart your kernel, or if you’re in a desktop environment, restart your terminal.</p>
+
+<h3 id="installing-our-first-package">Installing our First Package</h3>
+
+<p>Let’s install our first package, the new <code class="language-plaintext highlighter-rouge">libmamba</code> solver for Conda, as an example of how to install a package. A side benefit is that it will significant speed up your package installations!</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">-q</span> conda-libmamba-solver<span class="o">=</span>22.8
+</code></pre></div></div>
+
+<p>Here we see a few things:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-y</code> - installs without asking questions like “do you want to do this”. Generally people don’t use this, but in a Notebook environment it’s a bit nicer.</li>
+  <li><code class="language-plaintext highlighter-rouge">-q</code> - quiet installation, by default it prints a <em>lot</em> of progress update messages.</li>
+  <li><code class="language-plaintext highlighter-rouge">conda-libmamba-solver=22.8</code>, the package and version of that package that we wish to install.</li>
+</ul>
+
+<p>We’ll now configure conda to use <code class="language-plaintext highlighter-rouge">mamba</code> by default:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda config <span class="nt">--set</span> experimental_solver libmamba
+</code></pre></div></div>
+
+<p>While we’re at it, let’s configure Conda to use the same default repositories as <span class="notranslate">Galaxy</span>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda config <span class="nt">--add</span> channels bioconda
+conda config <span class="nt">--add</span> channels conda-forge
+</code></pre></div></div>
+
+<p>This will give us access to the vast repositories of BioConda (bioinformatics software) and Conda Forge (languages and libraries).</p>
+
+<h3 id="creating-a-new-environment">Creating a new Environment</h3>
+<p>Creating a new environment is done by executing the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">-y</span> <span class="nt">-n</span> my-env
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">my-env</code> is any arbitrary name for this Conda environment. Environment names are global, so pick something meaningful when you create one!</p>
+
+<p>For our project, let’s create an environment called <code class="language-plaintext highlighter-rouge">hts</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda create <span class="nt">-y</span> <span class="nt">-n</span> hts
+</code></pre></div></div>
+
+<p>You can list all of the created environments with</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">env </span>list 
+</code></pre></div></div>
+
+<p>You’ll notice that there is a <code class="language-plaintext highlighter-rouge">base</code> environment created by default, where you can install packages and play around with Conda. We do not recommend installing things into the <code class="language-plaintext highlighter-rouge">base</code> environment, if at all possible. Create a new environment for each tool you need to install</p>
+
+<blockquote class="tip">
+  <div id="tip-why-separate-environments" class="box-title"><button type="button" aria-controls="tip-why-separate-environments-contents" aria-expanded="true" aria-label="Toggle tip box: Why separate environments?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why separate environments?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+  <p>Conda’s package resolution takes into account every other package installed in an environment. Especially if you use R packages, this can result in environments taking an inreasing amount to time to install new packages and resolve all of the dependencies.</p>
+
+  <p>Thus by using isolated environments, you can be sure package resolution is quite fast.</p>
+</blockquote>
+
+<p>Once you’ve created an environment, you will need to activate it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate hts
+</code></pre></div></div>
+
+<p>Activating the environment will change your command line’s prompt to show what environment
+you are currently using (indicated by its name in round brackets at the start of the prompt),
+and modify the environment so that any packages you install will be available on the CLI.</p>
+
+<p>When you’re done working on your project, you can exit the environment with:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda deactivate
+</code></pre></div></div>
+
+<p>If you’ve just done the <code class="language-plaintext highlighter-rouge">deactivate</code>, ensure you reactivate the environment ready for the next part:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate hts
+</code></pre></div></div>
+
+<h3 id="installing-external-libraries-in-an-environment">Installing Exte<span class="notranslate">rna</span>l Libraries in an Environment</h3>
+
+<p>We noticed earlier that our code depends on two <em>exte<span class="notranslate">rna</span>l libraries</em> - <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> as well as <code class="language-plaintext highlighter-rouge">pysam</code> which depends on <code class="language-plaintext highlighter-rouge">htslib</code>. In order for the code to run on your machine, you need to
+install these dependencies into your environment.</p>
+
+<p>To install the latest version of a package with <code class="language-plaintext highlighter-rouge">conda</code> you use conda’s <code class="language-plaintext highlighter-rouge">install</code> command and specify the package’s name, e.g.:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">install</span> <span class="nt">-y</span> <span class="nt">-q</span> <span class="nv">python</span><span class="o">=</span>3 numpy matplotlib pysam
+</code></pre></div></div>
+
+<p>Note that we needed to pick a version of python that we’d use, here we specify  <code class="language-plaintext highlighter-rouge">python=3</code> meaning “any Python version that starts with 3”, so it won’t use Python 2.7 or a future Python 4.</p>
+
+<p>If you run the <code class="language-plaintext highlighter-rouge">conda install</code> command on a package that is already installed, <code class="language-plaintext highlighter-rouge">conda</code> will notice this and do nothing.</p>
+
+<p>To install a specific version of a package give the package name followed by <code class="language-plaintext highlighter-rouge">=</code> and the version number, e.g.
+<code class="language-plaintext highlighter-rouge">conda install numpy=1.21.1</code>.</p>
+
+<p>To specify a minimum version of a Python package, you can
+do <code class="language-plaintext highlighter-rouge">pip3 install 'numpy&gt;=1.20'</code>.</p>
+
+<p>To upgrade a package to the latest version, e.g. <code class="language-plaintext highlighter-rouge">conda update numpy</code>. (If it’s at the latest version it will attempt to downgrade the package)</p>
+
+<p>To display information about the current environment:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda info
+</code></pre></div></div>
+
+<p>To display information about a particular package installed in your current environment:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda list python
+</code></pre></div></div>
+
+<p>To list all packages installed with <code class="language-plaintext highlighter-rouge">pip</code> (in your current environment):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda list
+</code></pre></div></div>
+
+<p>To uninstall a package installed in the environment do: <code class="language-plaintext highlighter-rouge">conda remove package-name</code>.
+You can also supply a list of packages to uninstall at the same time.</p>
+
+<h3 id="exportingimporting-an-environment-with-conda">Exporting/Importing an Environment with <code class="language-plaintext highlighter-rouge">conda</code></h3>
+
+<p>You are collaborating on a project with a team so, naturally, you will want to share your environment with your
+collaborators so they can easily ‘clone’ your software project with all of its dependencies and everyone
+can replicate equivalent environments on their machines. <code class="language-plaintext highlighter-rouge">conda</code> has a handy way of exporting,
+saving and sharing environments.</p>
+
+<p>To export your active environment - use <code class="language-plaintext highlighter-rouge">conda env export</code> command to
+produce a list of packages installed in the environment.
+A common convention is to put this list in a <code class="language-plaintext highlighter-rouge">environment.yml</code> file:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">env export</span> <span class="o">&gt;</span> environment.yml
+<span class="nb">cat </span>environment.yml
+</code></pre></div></div>
+
+<p>The first of the above commands will create a <code class="language-plaintext highlighter-rouge">environment.yml</code> file in your current directory.
+The <code class="language-plaintext highlighter-rouge">environment.yml</code> file can then be committed to a version control system and
+get shipped as part of your software and shared with collaborators and/or users. They can then replicate your environment and
+install all the necessary packages from the project root as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda <span class="nb">env </span>create <span class="nt">-f</span> environment.yml
+</code></pre></div></div>
+
+<p>As your project grows - you may need to update your environment for a variety of reasons. For example, one of your project’s dependencies has
+just released a new version (dependency version number update), you need an additional package for data analysis
+(adding a new dependency) or you have found a better package and no longer need the older package (adding a new and
+removing an old dependency). What you need to do in this case (apart from installing the new and removing the
+packages that are no longer needed from your environment) is update the contents of the <code class="language-plaintext highlighter-rouge">environment.yml</code> file
+accordingly by re-issuing <code class="language-plaintext highlighter-rouge">conda env export</code> command and propagate the updated <code class="language-plaintext highlighter-rouge">environment.yml</code> file to your collaborators
+via your code sharing platform (e.g. GitHub).</p>
+
+<blockquote class="tip">
+  <div id="tip-official-documentation" class="box-title"><button type="button" aria-controls="tip-official-documentation-contents" aria-expanded="true" aria-label="Toggle tip box: Official Documentation"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Official Documentation<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+  <p>For a full list of options and commands, consult the <a href="https://docs.conda.io/projects/conda/en/latest/commands.html">official <code class="language-plaintext highlighter-rouge">conda</code> documentation</a></p>
+</blockquote>
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Environments keep Python versions and dependencies required by different projects separate.</p>
+</li>
+                        
+                        <li><p>An environment is itself a directory structure of software and libraries</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">conda create -n &lt;name&gt;</code> to create and manage environments.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">conda install</code> to install and manage additional external (third-party) libraries.</p>
+</li>
+                        
+                        <li><p>Conda allows you to declare all dependencies for a project in a separate file (by convention called <code class="language-plaintext highlighter-rouge">environment.yml</code>) which can be shared with collaborators/users and used to replicate an environment.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">conda env export &gt; environment.yml</code> to take snapshot of your project’s dependencies.</p>
+</li>
+                        
+                        <li><p>Use <code class="language-plaintext highlighter-rouge">conda env create -f environment.yml</code> to replicate someone else’s environment on your machine from the <code class="language-plaintext highlighter-rouge">environment.yml</code> file.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Conda Environments For Software Development (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">, 2022 <b>Conda Environments For Software Development (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+<code id="citation-code">@misc{data-science-python-conda,
+author = "The Carpentries and Helena Rasche",
+title = "Conda Environments For Software Development (Galaxy Training Materials)",
+year = "2022",
+month = "10",
+day = "19"
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-conda/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/carpentries" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/carpentries/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/avans-atgm" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/avans-atgm/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href="https://avans.nl/">avans.nl</a></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
