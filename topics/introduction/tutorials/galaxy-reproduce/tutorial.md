@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.
 
@@ -320,6 +320,6 @@ For this training, we have created a simpler dataset from the original, in which
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! You have just reproduced your first analysis in Galaxy.

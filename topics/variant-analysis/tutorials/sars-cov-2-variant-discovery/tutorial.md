@@ -28,7 +28,7 @@ tags:
 
 
 # Introduction
-{:.no_toc}
+
 
 Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
 
@@ -855,7 +855,7 @@ We can compare **Pangolin** and **Nextclade** clade assignments by extracting in
 We can see that **Pangolin** and **Nextclade** are globally coherent despite differences in lineage nomenclature.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2:
 

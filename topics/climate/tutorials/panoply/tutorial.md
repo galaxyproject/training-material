@@ -25,7 +25,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 > <comment-title></comment-title>
 >
@@ -267,7 +267,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We have now learnt how to analyze climate data using Panoply. We only use one of the two datasets so we strongly encourage you to do the same exercises with the second dataset **ecv_2018.nc**. Please note that when comparing surface temperature or sea-ice area fraction from 1979 and 2018, you would not be able to conclude anything regarding climate change. For any climate studies, long term timeseries (between 20 to 30 years) are necessary to establish climate trends.
 

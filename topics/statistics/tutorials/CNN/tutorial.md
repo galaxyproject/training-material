@@ -26,7 +26,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
 in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
@@ -428,7 +428,7 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we explained the motivation for convolutional neural networks, explained their architecture, and discussed convolution
 operator and its parameters. We then used Galaxy to solve an image classification problem using CNN on MNIST dataset.

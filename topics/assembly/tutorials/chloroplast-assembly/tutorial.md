@@ -25,7 +25,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 ## What is genome assembly?
 
@@ -340,4 +340,4 @@ We can assemble another chloroplast genome using sequence data from a different 
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

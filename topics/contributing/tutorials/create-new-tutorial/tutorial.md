@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Galaxy is a great solution to train bioinformatics concepts:
 
@@ -368,7 +368,7 @@ Sometimes, you may want to have slides to support a tutorial and introduce it du
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 To develop a new tutorial:
 

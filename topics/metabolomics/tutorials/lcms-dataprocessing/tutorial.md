@@ -24,7 +24,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Metabolomics is a *-omic* science known for being one of the most closely related to phenotypes.
 It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants.
@@ -943,7 +943,7 @@ but we reached the end of the example used to illustrate the meaning and importa
 through this tutorial.
 
 # Conclusion
-{:.no_toc}
+
 
 The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. 
 In particular, the removing of "trash" signals, the signal drift and batch effect correction and the filtering of signals of insufficient quality 

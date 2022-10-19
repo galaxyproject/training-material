@@ -50,7 +50,7 @@ follow_up_training:
 
 
 # Introduction
-{:.no_toc}
+
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant
@@ -504,4 +504,4 @@ If it takes too long to build the JBrowse instance, you can view an embedded one
 {% snippet topics/visualisation/faqs/visualizations_jbrowse.html datadir="data" loc="contig00018:5488..27391" tracks="DNA,14e421a8469880793f2a8d774224e10d_0,6851a9d3f5d62263e4e4b34f1513980c_0" %}
 
 # Conclusion
-{:.no_toc}
+

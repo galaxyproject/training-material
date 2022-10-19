@@ -29,7 +29,7 @@ follow_up_training:
 
 
 # Introduction
-{:.no_toc}
+
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: width="60%" style="float:right" } Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top. 
 
@@ -190,6 +190,6 @@ As in the previous plots, genes are coloured if they pass the thresholds for FDR
 {: .tip}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how a volcano plot can be generated from RNA-seq data and used to quickly visualize significant genes.

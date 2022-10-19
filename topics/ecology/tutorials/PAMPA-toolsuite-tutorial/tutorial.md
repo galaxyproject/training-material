@@ -30,7 +30,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial aims to present the PAMPA Galaxy workflow, how to use it to compute common
 biodiversity metrics from species abundance data and analyse it through generalized
@@ -928,7 +928,7 @@ CPUE abundance. For `Pleuronectes platessa` a second wave of increase occured be
 ![SWCIBTS population analysis plots](../../images/PAMPA-toolsuite-tutorial/SWCIBTS.png "SWCIBTS population analysis plots")
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, you analyzed abundance data from three trawl surveys with an ecological analysis workflow.
 You learned how to pre-process abundance data with Galaxy and compute Community and Population metrics.

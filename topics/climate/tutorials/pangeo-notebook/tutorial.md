@@ -67,7 +67,7 @@ notebook:
 
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, we will learn about [Xarray](https://xarray.pydata.org/), one of the most used Python library from the [Pangeo](https://pangeo.io/) ecosystem.
 
@@ -705,7 +705,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 
 
 # Conclusion
-{:.no_toc}
+
 
 Well done! [Pangeo](https://pangeo.io/) is a fantastic community with many more resources for learning and/or contributing! Please, if you use any Python packages from the Pangeo ecosystem, do not forget to cite Pangeo {% cite Abernathey2017 %}, {% cite Abernathey2021 %}, {% cite Gentemann2021 %} and {% cite Sambasivan2021 %}!
 

@@ -26,7 +26,7 @@ priority: 3
 ---
 
 # Overview
-{:.no_toc}
+
 
 In this tutorial we will briefly cover what [Terraform](https://www.terraform.io) is and how you can leverage it for your needs. This will not make you an expert on Terraform but will give you the tools you need in order to maintain your cloud infrastructure as code.
 

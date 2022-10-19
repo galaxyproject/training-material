@@ -31,7 +31,7 @@ subtopic: workflows
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 
@@ -520,6 +520,6 @@ The [Galaxy SARS-CoV-2 genome surveillance bot](https://github.com/usegalaxy-eu/
 
 
 # Conclusion
-{:.no_toc}
+
 
 You should now have a better idea about how to run Galaxy workflows from the command line and how to apply the ideas you have learnt to your own project.

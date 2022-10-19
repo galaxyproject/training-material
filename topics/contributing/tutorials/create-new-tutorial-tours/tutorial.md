@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Galaxy is a great solution to train the bioinformatics concepts:
 
@@ -126,4 +126,4 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

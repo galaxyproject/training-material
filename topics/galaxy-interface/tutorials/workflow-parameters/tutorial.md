@@ -25,7 +25,7 @@ subtopic: workflows
 
 
 # Introduction
-{:.no_toc}
+
 
 Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
 To make a workflow reusable with slightly different settings you can define and use workflow parameters.
@@ -254,7 +254,7 @@ the first column.
 {: .tip}
 
 # Conclusion
-{:.no_toc}
+
 
 Galaxy Workflows chain together different steps of an analysis. To make your workflows
 more useful to your colleagues you can add workflow parameters. Sometimes a parameter is not

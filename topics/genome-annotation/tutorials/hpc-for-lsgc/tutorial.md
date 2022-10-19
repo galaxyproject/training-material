@@ -32,7 +32,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -370,7 +370,7 @@ The header line describes each column. `xStart` and `xEnd` are the starting and 
 Besides providing a visual understanding of the large rearrangements that took place between two sequences, the detection of blocks can be further used to research evolutionary distances, for instance by incorporating the number of Large Scale Genome Rearrangements to generate richer metrics in phylogenetic studies.
 
 # Conclusion
-{:.no_toc}
+
 
 From a pratical perspective, we have shown how to run pairwise genome comparisons using Galaxy, from small to large-scale sequences (in particular bacterial mycoplasmas and plant chromosomes) throughout two levels of precision:
 

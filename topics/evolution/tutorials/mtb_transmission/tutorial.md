@@ -28,7 +28,7 @@ This tutorial assumes that you have watched the respective webinars about ([Drug
 based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
 
 # Introduction
-{:.no_toc}
+
 
 
 Now you are familiar with the process of genome sequencing, quality control of sequencing data, mapping and
@@ -788,7 +788,7 @@ We will be supporting our findings in the results of our analysis, and the conce
 
 
 # Conclusion
-{:.no_toc}
+
 
 You have learned how to perform a clustering analysis to identify patients that are linked by events of
 **recent transmission**. Clustering analysis is very useful in outbreak investigation and

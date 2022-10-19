@@ -30,7 +30,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
@@ -453,7 +453,7 @@ predicted values. The better our model's predictions, the closer the points to y
 ![Residual vs predicted values plot](../../images/FNN_residual_plot.png "Residual vs predicted values plot")
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural
 networks still in use today. We then discussed different activation functions, what supervised learning is, what are loss/cost functions,

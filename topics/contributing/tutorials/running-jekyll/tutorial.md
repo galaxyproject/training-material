@@ -19,7 +19,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 If you want to run the entire GTN material website locally or test your new training material you can do this!
 
@@ -127,4 +127,4 @@ Once you are done, you can stop the server and clean your repository.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

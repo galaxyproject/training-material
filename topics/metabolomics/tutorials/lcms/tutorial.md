@@ -26,7 +26,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 You may already know that there are different types of *-omic* sciences; out of these, metabolomics is most closely related to phenotypes.
 Metabolomics involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants. It  focuses on studying the very small molecules
@@ -1136,7 +1136,7 @@ For now, Galaxy4Metabolomics stops here but we have various perspectives of addi
 
 
 # Conclusion
-{:.no_toc}
+
 
 This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data.
 The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described

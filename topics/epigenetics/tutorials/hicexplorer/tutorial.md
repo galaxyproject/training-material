@@ -20,7 +20,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
 For this the following steps are necessary to be performed:
@@ -430,7 +430,7 @@ As an output we get a loop file containing the positions of both anchor points o
 ![Loops result_plot](../../images/loops_plot.png)
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we used HiCExplorer to analyze drosophila melanogaster cells. We mapped chimeric reads and created a contact matrix, to reduce noise this contact matrix was normalized. We showed how to visualize a contact matrix and how we can investigate topological associating domains and relate them to additional data like gene tracks. Moreover, we used a human Hi-C interaction matrix to compute loop structures.
 

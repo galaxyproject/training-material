@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial will guide you on the exploration of biodiversity data having taxonomic, spatial and temporal informations.
 
@@ -266,7 +266,7 @@ In order to clean unnecessary informations from the table we will now cut a few 
 
 
 # Conclusion
-{:.no_toc}
+
 
 Here, you just explored your biodiversity dataframe properly and you know a lot more about your data. You can now peacefully make your statiscal analyses as most of the red flags you can get have been revealed by this toolsuite ! Enjoy !
 

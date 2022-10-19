@@ -31,7 +31,7 @@ follow_up_training:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, we will assess the assembly quality of 2 assemblies generated with Hifiasm and Flye using PacBio HiFi reads of a species of fungi, *Saccharomyces cerevisiae* INSC1019 and compare the results with the actual reference genome [*Saccharomyces cerevisiae* S288C](https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae).
 
@@ -251,6 +251,6 @@ Chromeister is used to generate dotplots to quickly compare sequence sets, even 
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 This pipeline shows how to evaluate a genome assembly. Once you are satisfied with your genome sequence, you might want to purge it, make scaffolding and directly starting the annotation process!

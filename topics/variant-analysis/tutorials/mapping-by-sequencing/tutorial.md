@@ -19,7 +19,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In order to map and identify phenotype-causing mutations efficiently from a
 single experiment, modern genetic research aims to combine classical genetic
@@ -514,7 +514,7 @@ with predicted functional effects.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Mapping-by-sequencing can greatly speed up and facilitate the molecular
 identification of mutations recovered from mutagenesis screens. The method

@@ -34,7 +34,7 @@ abbreviations:
 
 
 # Overview
-{:.no_toc}
+
 
 Automation is a key component for making your life easier. There are dozens of regular, boring tasks involved in server administration, and many of these can be automated in order to make your life easier.
 {CI} systems provide one way to accomplish this.

@@ -21,7 +21,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 The classification of fruits and vegetables offers many useful applications such as 
 automated harvesting by robots, building up stocks for supermarkets, effective detection 
@@ -458,7 +458,7 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we briefly described convolutional neural networks (CNN) and their application to image classification problems.
 We then used Galaxy's ML toolkit to solve an image classification problem using CNN on fruit 360 dataset.

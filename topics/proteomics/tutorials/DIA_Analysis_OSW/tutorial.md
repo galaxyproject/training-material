@@ -30,7 +30,7 @@ tags: [DIA]
 
 
 # Introduction
-{:.no_toc}
+
 
 This training covers data independent acquisition (DIA) mass spectrometry (MS) applying spectral libraries for peptide identification and quantification.
 You can learn how to prepare and optimize a spectral library for the analysis of DIA data in the[DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html).
@@ -304,7 +304,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 
 
 # Conclusion
-{:.no_toc}
+
 
 ![DIA_analysis_pipe](../../images/DIA_analysis_sum.png "All-in one workflow for DIA analysis in Galaxy. The DIA data analysis using OpenSwathWorkflow is highlighted in yellow.")
 

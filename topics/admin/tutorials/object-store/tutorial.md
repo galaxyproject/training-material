@@ -33,7 +33,7 @@ requirements:
 
 # Expanding Storage
 
-{:.no_toc}
+
 
 You may find that your Galaxy files directory has run out of space, but you don't want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy's hierarchical object store to add an additional file space for Galaxy.
 

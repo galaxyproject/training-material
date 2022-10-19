@@ -20,7 +20,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 > <agenda-title></agenda-title>
 >
@@ -168,4 +168,4 @@ sitory_branch: "master"
 3. Update this document with anything that you did that wasn't listed.
 
 # Conclusion
-{:.no_toc}
+

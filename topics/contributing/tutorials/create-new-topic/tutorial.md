@@ -18,9 +18,13 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
 
-Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis). Each topic have the following structure:
+
+Each training material is related to a topic. All training materials (slides, tutorials, ...) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to exome sequencing analysis).
+
+## Directory structure
+
+Each topic has the following structure:
 
 ```
 ├── README.md
@@ -42,8 +46,9 @@ Each training material is related to a topic. All training materials (slides, tu
 │   │   │   ├── tour.yaml
 ```
 
-## `images` directory
-{:.no_toc}
+
+### `images` directory
+
 
 The `images` directory collects all images/pictures needed for the training materials related to the topic, *i.e* pictures for the slides or the tutorials.
 
@@ -51,13 +56,13 @@ Images shared between several topics are in the `shared/images` directory at the
 
 All images for the slides must be in `images` directory. The images must be in good quality. The sources (`svg` or other) of the images must also be added to the `images` directory. We encourage you to use [yEd](https://www.yworks.com/products/yed) to easily generate diagrams and [Inkscape](https://inkscape.org/en/) for any other images.
 
-## `slides` directory
-{:.no_toc}
+### `slides` directory
+
 
 This directory contains introduction slide deck. There could be several slide decks, to cover different aspect. The slides are rendered using `remark.js` but written in Markdown to facilitate collaboration.
 
-## `tutorials` directory
-{:.no_toc}
+### `tutorials` directory
+
 
 This directory collects the tutorials related to the topic, one per subdirectory.
 
@@ -73,8 +78,8 @@ The content of each tutorial is generated with [Jekyll](https://jekyllrb.com/) f
 
 Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the `slides` directory.
 
-## `docker` directory
-{:.no_toc}
+### `docker` directory
+
 
 For each topic, a flavored Docker image must integrate the tools needed for
 the tutorials. The corresponding image must be based on official Galaxy Docker
@@ -83,7 +88,7 @@ images.
 The `docker` image will also integrate the Galaxy tours available for each topics and the workflows.
 
 # Creating a new topic
-{:.no_toc}
+
 
 > <agenda-title></agenda-title>
 >
@@ -182,6 +187,6 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We just created a new topic. We can now fill it by [creating new tutorials]({% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %})

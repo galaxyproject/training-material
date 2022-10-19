@@ -30,7 +30,7 @@ tags: [DDA, human]
 
 
 # Introduction
-{:.no_toc}
+
 
 A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 response to therapeutic treatment, or other relevant biological state.
@@ -52,7 +52,7 @@ pipeline on a concrete example. This strategy is described by {% cite Nguyen2019
 
 
 # Global view of the strategy
-{:.no_toc}
+
 
 For this tutorial, no input data are required as the first steps will be to select data from
 public databases with ProteoRE tools.
@@ -395,7 +395,7 @@ Let's now keep only proteins that have already been seen by MS/MS in the plasma 
 
 
 # Conclusion
-{:.no_toc}
+
 At the end of the process we end up with a list of 22 biomarkers that are **highly enriched in heart muscle**, localized
 **in the cytosol** and **detectable by MS in the plasma**.
 *NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.*

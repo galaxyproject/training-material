@@ -34,7 +34,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -394,7 +394,7 @@ $$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}
 $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.84 * 0.89}{0.84 + 0.89} = 0.86 $$
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various
 RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment

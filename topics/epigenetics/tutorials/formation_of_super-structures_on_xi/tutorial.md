@@ -33,7 +33,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
 
@@ -723,7 +723,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Along this tutorial, we learn how to extract peaks and coverage information from raw data of ChIP experiments:
 

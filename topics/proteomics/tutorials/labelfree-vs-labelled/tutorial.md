@@ -22,7 +22,7 @@ tags: [DDA]
 ---
 
 # Purpose
-{:.no_toc}
+
 
 A basic question while planning any quantitative proteomic experiment is the choice between label-free versus labelled quantitation. Here, we would like to address and discuss benefits and drawbacks of each method.
 Finally, we will offer a guideline to arrive at a decision on which labeling method to use. We will not discuss various labelling methods here in detail, but focus on our basicquestion on the choice of quantitation method.
