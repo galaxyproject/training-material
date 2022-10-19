@@ -1,4 +1,6 @@
 ---
+redirect_from:
+- /faqs/galaxy/analysis_job_failure_walltime
 title: Understanding walltime error messages
 area: troubleshooting
 box_type: tip

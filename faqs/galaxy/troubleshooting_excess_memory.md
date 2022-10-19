@@ -1,4 +1,6 @@
 ---
+redirect_from:
+- /faqs/galaxy/analysis_job_failure_excess_memory
 title: Understanding 'exceeds memory allocation' error messages
 area: troubleshooting
 box_type: tip
