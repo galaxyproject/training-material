@@ -9,21 +9,21 @@ follow_up_training: []
 time_estimation:  30M
 
 questions:
-- "What are virtual environments in software development and why you should use them?"
-- "How can we manage Python virtual environments and external (third-party) libraries via Conda?"
+- "What are Conda environments in software development and why you should use them?"
+- "How can we manage Conda environments and external (third-party) libraries via Conda?"
 objectives:
-- "Set up a Python virtual environment for our software project using `venv` and `pip`."
+- "Set up a Conda environment for our software project using `conda`."
 - "Run our software from the command line."
 
 key_points:
-- "Virtual environments keep Python versions and dependencies required by different projects separate."
-- "A virtual environment is itself a directory structure of software and libraries"
-- "Use `conda create -n <name>` to create and manage virtual environments."
+- "Environments keep Python versions and dependencies required by different projects separate."
+- "An environment is itself a directory structure of software and libraries"
+- "Use `conda create -n <name>` to create and manage environments."
 - "Use `conda install` to install and manage additional external (third-party) libraries."
 - "Conda allows you to declare all dependencies for a project in a separate
-file (by convention called `environment.yml`) which can be shared with collaborators/users and used to replicate a virtual environment."
+file (by convention called `environment.yml`) which can be shared with collaborators/users and used to replicate an environment."
 - "Use `conda env export > environment.yaml` to take snapshot of your project's dependencies."
-- "Use `conda env create -f environment.yaml` to replicate someone else's virtual environment on your machine from
+- "Use `conda env create -f environment.yaml` to replicate someone else's environment on your machine from
 the `environment.yml` file."
 
 subtopic: python-modular
@@ -71,8 +71,8 @@ specific version of an external library (e.g. because they require that a partic
 bug has been fixed in a newer version of the library), or a specific version of Python interpreter.
 This means that each Python application you work with may require a different setup and a set of dependencies so it
 is important to be able to keep these configurations separate to avoid confusion between projects.
-The solution for this problem is to create a self-contained *virtual
-environment* per project, which contains a particular version of Python installation plus a number of
+The solution for this problem is to create a self-contained 
+*environment* per project, which contains a particular version of Python installation plus a number of
 additional external libraries.
 
 If you see something like 
@@ -84,7 +84,7 @@ import pysam
 You know you'll need additional packages installed on your system, as it relies on [htslib, a C library for working with HTS data](https://github.com/samtools/htslib). This usually means installing additional packages and things that are not always available from within Python's packaging ecosystem.
 
 Conda environments go beyond virtual environments, and make it easier to develop, run, test and share code with others. In this tutorial, we learn how
-to set up a virtual environment to develop our code and manage our external dependencies.
+to set up an environment to develop our code and manage our external dependencies.
 
 > <agenda-title></agenda-title>
 >
@@ -95,9 +95,9 @@ to set up a virtual environment to develop our code and manage our external depe
 >
 {: .agenda}
 
-## Virtual Environments
+## Conda Environments
 
-So what exactly are virtual environments, and why use them?
+So what exactly are conda environments, and why use them?
 
 A conda environment is an **isolated working copy** of specific versions of
 one of more packages and all of their dependencies.
@@ -127,7 +127,7 @@ Here are some typical scenarios where the usage of environments is highly recomm
   latest version of the
   dependency as it breaks things in your project. In a separate branch of your project, you want to try and fix problems
   introduced by the new version of the dependency without affecting the working version of your project. You need to set up
-  a separate virtual environment for your branch to 'isolate' your code while testing the new feature.
+  a separate conda environments for your branch to 'isolate' your code while testing the new feature.
 
 You do not have to worry too much about specific versions of external libraries that your project depends on most of the time.
 Conda environments enable you to always use the latest available version without specifying it explicitly.
@@ -138,17 +138,17 @@ They also enable you to use a specific older version of a package for your proje
 ever be installed once on your system (in `$CONDA/pkgs`) but will be referenced from different environments.
 {: .tip}
 
-### Managing Virtual Environments
+### Managing Conda Environments
 
-There are several commonly used command line tools for managing virtual environments:
+There are several commonly used command line tools for managing environments:
 - `homebrew`, historically used on OSX to manage packages.
 - `nix`, which has a steep learning curve but allows you to declare the state of your entire system
 - `conda`, package and environment management system (also included as part of the Anaconda Python distribution often used by the scientific community)
-- `docker` and `singularity` are somewhat similar to virtual environment managers, as they can have isolated images with software and dependencies.
+- `docker` and `singularity` are somewhat similar to other environment managers, as they can have isolated images with software and dependencies.
 - Other, language specific managers
 
 While there are pros and cons for using each of the above, all will do the job of managing
-virtual environments for you and it may be a matter of personal preference which one you go for. The Galaxy project is heavily invested in the Conda ecosystem and recommends it as an entry point as it is the most generally useful, and convenient. [The BioConda ecosystem](http://bioconda.github.io/) provides an unbelievably large number of packages for bioinformatics specific purposes, which makes it a good choice in general.
+environments for you and it may be a matter of personal preference which one you go for. The Galaxy project is heavily invested in the Conda ecosystem and recommends it as an entry point as it is the most generally useful, and convenient. [The BioConda ecosystem](http://bioconda.github.io/) provides an unbelievably large number of packages for bioinformatics specific purposes, which makes it a good choice in general.
 
 ### Managing Packages
 
@@ -164,7 +164,7 @@ on your system. The Conda command (`conda`) is most commonly used for this - it 
 > remote package repositories and install them on your system, and (2) it is also a virtual environment manager. So, you can use `conda` for both tasks instead of using `venv` and `pip`.
 {: .tip}
 
-`venv` and `pip` are considered the *de facto* standards for virtual environment and package management for Python 3.
+`venv` and `pip` are considered the *de facto* standards for environment and package management for Python 3.
 However, the advantages of using Anaconda and `conda` are that you get (most of the) packages needed for
 scientific code development included with the distribution. If you are only collaborating with others who are also using
 Anaconda, you may find that `conda` satisfies all your needs. 
@@ -176,7 +176,7 @@ too to which your knowledge can be ported).
 
 ![Python environment hell XKCD comic  showing boxes like pip, easy_install, homebrew 2.7, anaconda, homebrew 3.6, /usr/local/Cellar, ~/python/, and a chaotic mess of arrows moving between them all. At the bottom is the text: My python environment has become so degraded that my laptop has been declared a superfund site. (A superfund site is generally an environmental disaster area.)](https://imgs.xkcd.com/comics/python_environment.png 'Python Environment Hell' from XKCD 1987 (CC-BY-NC 2.5))
 
-Let us have a look at how we can create and manage virtual environments and their packages from the command line using `conda`.
+Let us have a look at how we can create and manage environments and their packages from the command line using `conda`.
 
 ### Instaling Miniconda
 
@@ -238,7 +238,7 @@ conda create -n my-env
 
 where `my-env` is any arbitrary name for this Conda environment. Environment names are global, so pick something meaningful when you create one!
 
-For our project, let's create a virtual environment called `hts`
+For our project, let's create an environment called `hts`
 
 ```bash
 conda create -n hts
@@ -258,7 +258,7 @@ You'll notice that there is a `base` environment created by default, where you c
 > Thus by using isolated environments, you can be sure package resolution is quite fast.
 {: .tip}
 
-Once you’ve created a virtual environment, you will need to activate it:
+Once you’ve created an environment, you will need to activate it:
 
 ```bash
 conda activate hts
@@ -283,7 +283,7 @@ conda activate hts
 ### Installing External Libraries in an Environment
 
 We noticed earlier that our code depends on two *external libraries* - `numpy` and `matplotlib` as well as `pysam` which depends on `htslib`. In order for the code to run on your machine, you need to
-install these dependencies into your virtual environment.
+install these dependencies into your environment.
 
 To install the latest version of a package with `conda` you use conda's `install` command and specify the package’s name, e.g.:
 
@@ -315,24 +315,24 @@ To display information about a particular package installed in your current envi
 conda list python
 ```
 
-To list all packages installed with `pip` (in your current virtual environment):
+To list all packages installed with `pip` (in your current environment):
 
 ```bash
 conda list
 ```
 
-To uninstall a package installed in the virtual environment do: `conda remove package-name`.
+To uninstall a package installed in the environment do: `conda remove package-name`.
 You can also supply a list of packages to uninstall at the same time.
 
 ### Exporting/Importing an Environment with `conda`
 
 You are collaborating on a project with a team so, naturally, you will want to share your environment with your
 collaborators so they can easily 'clone' your software project with all of its dependencies and everyone
-can replicate equivalent virtual environments on their machines. `conda` has a handy way of exporting,
-saving and sharing virtual environments.
+can replicate equivalent environments on their machines. `conda` has a handy way of exporting,
+saving and sharing environments.
 
 To export your active environment - use `conda env export` command to
-produce a list of packages installed in the virtual environment.
+produce a list of packages installed in the environment.
 A common convention is to put this list in a `environment.yml` file:
 
 ```bash
@@ -353,7 +353,7 @@ As your project grows - you may need to update your environment for a variety of
 just released a new version (dependency version number update), you need an additional package for data analysis
 (adding a new dependency) or you have found a better package and no longer need the older package (adding a new and
 removing an old dependency). What you need to do in this case (apart from installing the new and removing the
-packages that are no longer needed from your virtual environment) is update the contents of the `environment.yml` file
+packages that are no longer needed from your environment) is update the contents of the `environment.yml` file
 accordingly by re-issuing `conda env export` command and propagate the updated `environment.yml` file to your collaborators
 via your code sharing platform (e.g. GitHub).
 
