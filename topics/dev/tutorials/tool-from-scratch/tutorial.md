@@ -573,6 +573,7 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 >     <token name="@VERSION_SUFFIX@">0</token>
 > </macros>
 >
+> <import>bellerophon_macros.xml</import>
 > <expand macro="bio_tools"/>
 >
 > ```
