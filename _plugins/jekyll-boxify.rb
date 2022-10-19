@@ -25,14 +25,19 @@ module Jekyll
       end
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*)<\/\s*\1-title>/) {
+      page.content = page.content.gsub(/<(#{Gtn::Boxify.box_classes})-title>(.*?)<\/\s*\1-title\s*>/) {
         box_type = $1
         title = $2
-        _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path)
-
-        # Ugly hack needed, as this runs later in the pipeline than json generation.
-        box.gsub!(/\\&quot/, '&quot')
-        box.gsub!(/([^\\])"/, '\1\\"')
+        if page.data['citation_target'] == 'jupyter'
+          title = Gtn::Boxify.safe_title(title)
+          title = Gtn::Boxify.format_box_title(title, box_type, lang=lang)
+          icon = Gtn::Boxify.get_icon(box_type, emoji: true)
+          box = "<div class=\"box-title\" aria-label=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
+          box.gsub!(/\\&quot/, '&quot')
+          box.gsub!(/([^\\])"/, '\1\\"')
+        else
+          _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path)
+        end
 
         box
       }

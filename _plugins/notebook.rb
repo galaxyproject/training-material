@@ -33,7 +33,23 @@ module GTNNotebooks
     'solution' => '👁',
     'warning' => '⚠️',
     'comment' => '💬',
+    'feedback' => '⁉️',
+    'details' => '💬',
     'hands_on' => '✏️',
+  }
+
+  ICONS_FA = {
+    "far fa-keyboard" => "code-in",
+    "fas fa-laptop-code" => "code-out",
+    "far fa-comment-dots" => "comment",
+    "fas fa-info-circle" => "details",
+    "far fa-comments" => "feedback",
+    "fas fa-pencil-alt" => "hands_on",
+    "fas fa-pencil-alt" => "hands_on",
+    "far fa-question-circle" => "question",
+    "far fa-eye" => "solution",
+    "far fa-lightbulb" => "tip",
+    "fas fa-exclamation-triangle" => "warning",
   }
 
   def self.generate_css
@@ -309,6 +325,9 @@ module GTNNotebooks
 
     ICONS.each{ |key, val|
       content.gsub!(/{% icon #{key} %}/, val)
+    }
+    ICONS_FA.each{ |key, val|
+      content.gsub!(/<i class="#{key}" aria-hidden="true"><\/i>/, ICONS[val])
     }
 
     content = content + %Q(\n\n# References\n\n<div id="refs"></div>\n)
