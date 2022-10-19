@@ -47,12 +47,8 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- [VisualizationsRegistry](https://galaxyproject.org/visualizations-registry)
-- [VisualizationsRegistry/Cookbook](https://galaxyproject.org/visualizations-registry/cookbook)
-- [VisualizationsRegistry/Code](https://galaxyproject.org/visualizations-registry/code)
 - [DataProviders](https://galaxyproject.org/data-providers)
 - [DataProviders/Cookbook](https://galaxyproject.org/data-providers/cookbook)
-- [Develop/Visualizations](https://galaxyproject.org/develop/visualizations)
 
 > <agenda-title></agenda-title>
 >
