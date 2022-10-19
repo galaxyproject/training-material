@@ -1,0 +1,15 @@
+- doc: Test outline for Funannotate-(imported-from-uploaded-file)
+  job:
+    Alternate annotation gbk:
+      class: File
+      filetype: fasta
+      location: https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
+  outputs:
+    'EggNOG Mapper annotations':
+      asserts:
+        has_text:
+          text: 'MF_03122'
+    'InterProScan annotations (tsv)':
+      asserts:
+        has_text:
+          text: '36080.S2K1N8'

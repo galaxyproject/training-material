@@ -4,6 +4,11 @@ layout: base
 
 {% assign contributors = site.data['contributors'] %}
 
+<script type="application/ld+json">
+	{% assign c = contributors[page.contributor] %}
+	{{ page.contributor | to_person_jsonld: c,site }}
+</script>
+
 <style type="text/css" media="all">
 .card-title {
 	font-size: 2rem;
@@ -36,7 +41,7 @@ layout: base
 
 				{% if page.has_philosophy %}
 				<div class="contact-items">
-					<a href="{{ site.baseurl }}/topics/instructors/philosophies/#{{ page.contributor }}">
+					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
 						Training Philosophy
 					</a>
 				</div>
@@ -89,7 +94,13 @@ layout: base
 					</a>
 				</div>
 				{% endif %}
-				<br/>
+
+				{% if contributors[page.contributor].elixir_node %}
+				<div class="contact-items">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ contributors[page.contributor].elixir_node }}.svg" alt="elixir logo for {{ contributors[page.contributor].elixir_node | elixirnode2name }}">
+				</div>
+				{% endif %}
+
 				<h4>Favourite Topics</h4>
 				<canvas id="myChart" height="300px"></canvas>
 				<h4>Favourite Formats</h4>
@@ -169,9 +180,13 @@ layout: base
                 {% endfor %}
                 </div>
 				{% endif %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
 
-				<script type="text/javascript">
+<script type="text/javascript">
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var ctx2 = document.getElementById('slidesVsTutorials').getContext('2d');

@@ -11,7 +11,7 @@ If you haven't worked with diffs before, this can be something quite new or diff
 If we have two files, let's say a grocery list, in two files. We'll call them 'a' and 'b'.
 
 
-> > ### {% icon code-in %} Old
+> > <code-in-title>Old</code-in-title>
 > > ```
 > > $ cat old
 > > 🍎
@@ -23,7 +23,7 @@ If we have two files, let's say a grocery list, in two files. We'll call them 'a
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} New
+> > <code-out-title>New</code-out-title>
 > > ```
 > > $ cat new
 > > 🍎
@@ -48,7 +48,7 @@ $ diff old new
 > 🍍
 ```
 
-Here we see that 'pears' is only in a, and 'ananas' is only in b. But otherwise the files are identical.
+Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.
 
 There are a couple different formats to diffs, one is the 'unified diff'
 

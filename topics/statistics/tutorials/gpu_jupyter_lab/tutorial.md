@@ -36,7 +36,7 @@ contributors:
 
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -93,7 +93,7 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 
 ## Open Jupyterlab
 
-> ### {% icon hands_on %} Hands-on: GPU enabled Interactive Jupyter Notebook for Machine Learning
+> <hands-on-title>GPU enabled Interactive Jupyter Notebook for Machine Learning</hands-on-title>
 >
 > - {% tool [GPU enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
@@ -106,7 +106,7 @@ Now, we should wait for a few minutes until Galaxy creates the required compute 
 ## Clone Github repository
 To use Git version control for cloning any codebase from GitHub, the following steps should be performed.
 
-> ### {% icon hands_on %} Hands-on: Pull code
+> <hands-on-title>Pull code</hands-on-title>
 >
 > 1. Create a new folder named `covid_ct_segmentation` alongside other folders such as "data", "outputs", "elyra" or you can use your favourite folder name.
 > 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6.
@@ -127,25 +127,25 @@ Now, we have all the notebooks available for performing image segmentation and p
 
 ### Run notebooks in Jupyterlab
 
-> ### {% icon hands_on %} Hands-on: Run notebooks in Jupyterlab
+> <hands-on-title>Run notebooks in Jupyterlab</hands-on-title>
 >
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook. It creates all the necessary folders and then, downloads two datasets - one "h5" file containing many matrices as sub-datasets belonging to training data, training labels, validation data, validation labels, test data and test labels. 
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    >  Sub-datasets are stored as different variables after reading the original `h5` file once. For training, we only need these datasets/matrices - training data, training labels, validation data and validation labels. The matrices, test data and test labels, are used only for prediction. We use `h5` format for storing and retrieving datasets as all AI algorithms need input datasets in the form of matrices. Since, in the field of AI, there are many different types of datasets such as images, sequences, real numbers and so on, therefore, to converge all these different forms of datasets into one format, we use `h5` to store matrices. In any AI analysis, different forms of datasets can be stored as `h5` files. Therefore, for the image segmentation task, all the input datasets/matrices to the deep learning model are saved as sub-datasets in one `h5` file so that they can be easily created, stored, downloaded and used. This step may take a few minutes as it downloads around 450 MB of data from Zenodo ({% cite anupkumar20226091361 %}). Once these datasets are downloaded to the notebook, we can move to the next step to create a deep learning model and start training it.
 >    >
 >    {: .comment}
 >
 > 2. Create and train a deep learning Unet model using **"2_create_model_and_train.ipynb"** notebook. This will read the input `h5` dataset containing all images and train the model after creating deep learning model architecture.
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > This notebook first creates a deep learning architecture based on Unet including custom loss functions such as total variation and binary cross-entropy losses. After creating the deep learning architecture, all training datasets such as training data, training labels, validation data, validation labels are loaded from the combined `h5` file. In the next step, all the datasets and deep learning architecture are compiled together and training starts for 10 epochs (10 iterations over the entire training dataset). The training is fast as it runs on GPU and finishes in a few minutes and creates a trained model. In the last step, the trained model containing several files is converted to one `onnx` file. Once a trained model is ready, we can move to the next step to make predictions on unseen CT scan masks.
 >    >
 >    {: .comment}
 >
 > 3. Predict unseen masks using the trained model in **"3_predict_masks.ipynb"** notebook.
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > First, it reads test datasets from the combined "h5" file and then, loads the `onnx` model. Using this model, it predicts masks of unseen CT scans and then plots the ground truth and predicted masks in one plot (see Figure 7)
 >    >
 >    {: .comment}
@@ -161,12 +161,12 @@ Now, we have all the notebooks available for performing image segmentation and p
 
 The training task completed in the notebook above can also be sent to a Galaxy cluster by executing a Galaxy tool in the notebook itself. Using [Bioblend](https://bioblend.readthedocs.io/) APIs, datasets in the form of `h5` files and notebook are uploaded to a Galaxy history and then a Galaxy tool `run_jupyter_job` executes the notebook using the uploaded dataset on a Galaxy cluster and creates a trained model in the Galaxy history. Let's look at how to execute a notebook remotely on a Galaxy cluster.
 
-> ### {% icon hands_on %} Hands-on: Run Jupyterlab notebooks remotely on a Galaxy cluster
+> <hands-on-title>Run Jupyterlab notebooks remotely on a Galaxy cluster</hands-on-title>
 >
 > 1. Download and save datasets in the notebook using **"1_fetch_datasets.ipynb"** notebook in the same way as before. Ignore this step if this notebook has already been executed.
 > 2. Execute **"5_run_remote_training.ipynb"** notebook to dynamically execute code inside **"4_create_model_and_train_remote.ipynb"** notebook on a remote cluster using a different Galaxy tool (`run_jupyter_job`). The notebook **"5_run_remote_training.ipynb"** provides the path of a notebook to be executed remotely along with the datasets to the Galaxy tool by calling a custom function `run_script_job` which is part of the Jupyterlab notebook. 
 >
->    > ### {% icon comment %} Details
+>    > <comment-title></comment-title>
 >    > Executing **"5_run_remote_training.ipynb"** uploads datasets and dynamic Python script, extracted from the **"4_create_model_and_train_remote.ipynb"** notebook, to a newly created Galaxy history (Figure 8). When the task of uploading dataset and dynamic code is finished, the Galaxy tool (`run_jupyter_job`) executes the dynamically uploaded script with the uploaded dataset on a remote Galaxy cluster which is similar to running any other Galaxy tool. When the Galaxy tool (`run_jupyter_job`) finishes its execution, the resulting models and other datasets appear in the created Galaxy history. While the job is running on the Galaxy cluster, the Jupyter notebook can be closed as the model training task gets decoupled from the notebook and is entirely transferred to the Galaxy cluster. Specific history used for this job can be accessed in Galaxy. The Jupyterlab method `run_script_job` has multiple input parameters - `script_path`: relative path to the script that is to be executed remotely, `data_dict`: list of input datasets as `h5` files, `server`: Galaxy server URL, `key`: Galaxy API key and `new_history_name`: the name of the Galaxy history that is created). 
 >    >
 >    {: .comment}
@@ -185,7 +185,7 @@ When the Galaxy job finishes, it creates a history having a few datasets such as
 
 Google Deepmind’s AlphaFold2 has made a breakthrough in predicting the 3D structure of proteins with outstanding accuracy. However, due to their large database size (a few TB), it is not easily accessible to researchers. Therefore, a few approaches have been developed that replace the time-consuming steps of AlphaFold2 with slightly different steps to create input features and predict the 3D structure with comparable accuracy as AlphaFold2. One such approach is ColabFold which replaces the large database search in AlphaFold2 for finding homologous sequences by a significantly faster [MMseqs2 API](https://github.com/soedinglab/MMseqs2) call to generate input features based on the query protein sequence. ColabFold is approximately 16 times faster than AlphaFold2 in predicting 3D structures of protein sequences. To make it accessible in this Jupyterlab, it has been integrated into the Docker container by having two additional packages - ColabFold and the GPU enabled [JAX](https://github.com/google/jax) which is just-in-time compiler from Google used for mathematical transformations. In the following hands-on section, we will run a notebook and predict a 3D structure of a protein sequence. 
 
-> ### {% icon hands_on %} Hands-on: Predict 3D structure of protein using ColabFold
+> <hands-on-title>Predict 3D structure of protein using ColabFold</hands-on-title>
 >
 > 1. Clone a Github repository by following the steps described in the previous hands-on section `Clone Github repository`. Ignore this step if already done.
 > 2. Open **7_ColabFold_MMseq2.ipynb** notebook and execute it.

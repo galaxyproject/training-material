@@ -25,12 +25,14 @@ requirements:
 
 Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}
 
 # TUS and Galaxy
 
@@ -42,7 +44,7 @@ To allow your user to upload via TUS, you will need to:
 
 ## Installing and Configuring
 
-> ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
+> <hands-on-title>Setting up ftp upload with Ansible</hands-on-title>
 >
 > 1. In your playbook directory, add the `galaxyproject.tusd` role to your `requirements.yml`
 >
@@ -64,7 +66,7 @@ To allow your user to upload via TUS, you will need to:
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -83,10 +85,10 @@ To allow your user to upload via TUS, you will need to:
 >         outputs_to_working_directory: true
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
->       uwsgi:
->         socket: 127.0.0.1:5000
->         buffer-size: 16384
->    @@ -122,3 +124,16 @@ nginx_conf_http:
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
+>    @@ -139,3 +141,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -113,8 +115,8 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -16,6 +16,22 @@ server {
->             include uwsgi_params;
+>    @@ -28,6 +28,22 @@ server {
+>             proxy_set_header Upgrade $http_upgrade;
 >         }
 >     
 >    +    location /api/upload/resumable_upload {
@@ -134,7 +136,7 @@ To allow your user to upload via TUS, you will need to:
 >    +    }
 >    +
 >         # Static files can be more efficiently served by Nginx. Why send the
->         # request to uWSGI which should be spending its time doing more useful
+>         # request to Gunicorn which should be spending its time doing more useful
 >         # things like serving Galaxy!
 >    {% endraw %}
 >    ```
@@ -157,7 +159,7 @@ To allow your user to upload via TUS, you will need to:
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -170,7 +172,7 @@ Congratulations, you've set up TUS for Galaxy.
 
 ## Check it works
 
-> ### {% icon hands_on %} Hands-on: Check that it works.
+> <hands-on-title>Check that it works.</hands-on-title>
 >
 > 1. SSH into your machine
 >
@@ -180,7 +182,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 4. Check the directory `/data/tus/` has been created and it's contents
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > sudo tree /data/tus/
 >    > ```

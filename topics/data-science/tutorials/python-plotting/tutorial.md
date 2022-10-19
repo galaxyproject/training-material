@@ -37,13 +37,13 @@ notebook:
 
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of data analysis using the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the "Introduction to Python" and "Advanced Python" tutorials available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/) and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which is licensed CC-BY 4.0.
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -186,11 +186,11 @@ plt.xlabel('Gene name')
 
 ![A scatterplot is shown comparing gene name to base mean.](../../images/python-plotting/Figure14_Scatterplot.png)
 
-> ### {% icon question %} Question: Plotting
+> <question-title>Plotting</question-title>
 >
 >  Using the same dataset, create a scatterplot of the average P-value for every chromosome for the "+" and the "-" strand.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > First find the data and save it in a new dataframe. Then create the scatterplot. You can even go one step further and assign different colors for the different strands.Note the use of the `map` method that assigns the different colors using a dictionary as an input.
 > >

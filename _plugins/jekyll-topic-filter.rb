@@ -4,7 +4,7 @@ require 'yaml'
 
 module TopicFilter
   def self.list_topics(site)
-    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}.map{|k, v| k}
+    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('maintainers')}.map{|k, v| k}
   end
 
   def self.topic_filter(site, topic_name)
@@ -242,6 +242,7 @@ end
 
 module Jekyll
   module ImplTopicFilter
+
     def most_recent_contributors(contributors, count)
       # Remove non-hof
       hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
@@ -273,10 +274,78 @@ module Jekyll
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
+    def list_topics(site, category)
+      q = TopicFilter.list_topics(site).map{|k|
+        [k, site.data[k]]
+      }
+
+      # Alllow filtering by a category, or return "all" otherwise.
+      if category != "all"
+        q = q.select{|k, v| v['type'] == category }
+      end
+
+      # Sort alphabetically by titles
+      q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
+
+      # But move introduction to the start
+      q = q.select{|k, v| k == "introduction"} + q.select{|k, v| k != "introduction"}
+
+      q
+    end
+
     def topic_filter(site, topic_name)
       TopicFilter.topic_filter(site, topic_name)
     end
 
+    ELIXIR_NODES = {
+      "au" => "Australia",
+      "be" => "Belgium",
+      "ch" => "Switzerland",
+      "cz" => "Czechia",
+      "de" => "Germany",
+      "dk" => "Denmark",
+      "ee" => "Estonia",
+      "es" => "Spain",
+      "fi" => "Finland",
+      "fr" => "France",
+      "gr" => "Greece",
+      "hu" => "Hungary",
+      "ie" => "Ireland",
+      "il" => "Israel",
+      "it" => "Italy",
+      "lu" => "Luxembourg",
+      "nl" => "the Netherlands",
+      "no" => "Norway",
+      "pt" => "Portugal",
+      "se" => "Sweden",
+      "si" => "Slovenia",
+      "uk" => "United Kingdom",
+    }
+
+    def elixirnode2name(name)
+      ELIXIR_NODES[name]
+    end
+
+    def slugify_unsafe(text)
+      # Gets rid of *most* things without making it completely unusable?
+      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+    end
+
+    def humanize_types(type)
+      data = {
+        "seq" => "List of Items",
+        "str" => "Free Text",
+        "map" => "A dictionary/map",
+        "float" => "Decimal Number",
+        "int" => "Integer Number",
+        "bool" => "Boolean"
+      }
+      data[type]
+    end
+
+    def replace_newline_doublespace(text)
+      text.gsub(/\n/, "\n  ")
+    end
   end
 end
 

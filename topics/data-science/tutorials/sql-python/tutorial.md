@@ -40,7 +40,7 @@ tags:
 - Python
 ---
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
@@ -51,7 +51,7 @@ tags:
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -299,7 +299,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 ```
 
 
-> ### {% icon question %} Question: Filling a Table vs. Printing Values
+> <question-title>Filling a Table vs. Printing Values</question-title>
 >
 > Write a Python program that creates a new database in a file called
 > `original.db` containing a single table called `Pressure`, with a
@@ -308,7 +308,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > How long does it take to run a program that simply writes those
 > random numbers to a file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > import sqlite3
 > > # import random number generator
@@ -346,7 +346,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Filtering in SQL vs. Filtering in Python
+> <question-title>Filtering in SQL vs. Filtering in Python</question-title>
 >
 > Write a Python program that creates a new database called
 > `backup.db` with the same structure as `original.db` and copies all
@@ -354,7 +354,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > Which is faster: filtering values in the query, or reading
 > everything into memory and filtering in Python?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The first example reads all the data into memory and filters the
 > > numbers using the if statement in Python.
 > >
@@ -416,7 +416,7 @@ print("Full name for barrett:", get_name('survey.db', 'barrett'))
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question: Generating Insert Statements
+> <question-title>Generating Insert Statements</question-title>
 >
 > One of our colleagues has sent us a
 > CSV
