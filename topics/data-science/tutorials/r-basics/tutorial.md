@@ -46,7 +46,6 @@ contributions:
 
 # Introduction
 
-
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 {% include topics/data-science/tutorials/r-basics/r_introduction.md %}
 {% include topics/data-science/tutorials/r-basics/r_history.md %}

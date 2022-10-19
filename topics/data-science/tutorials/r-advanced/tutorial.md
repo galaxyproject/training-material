@@ -52,7 +52,6 @@ tags:
 
 # Introduction
 
-
 With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 
 Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.
@@ -1257,8 +1256,3 @@ We specify the names of the new columns, and here add `-Chromosome` as this colu
 >    Hint: think about the assumptions that we made about the data when writing this solution.
 {: .question}
 
-
-# Conclusion
-
-
-This tutorial

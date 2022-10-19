@@ -53,7 +53,6 @@ module Jekyll
         end
       end
 
-      puts "url=#{url}"
       url
     end
 

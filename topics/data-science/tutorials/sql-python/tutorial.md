@@ -184,7 +184,7 @@ without checking them carefully first.
 A very [relevant XKCD](https://xkcd.com/327/) that explains the
 dangers of using raw input in queries a little more succinctly:
 
-![A 4 panel comic, in the first panel a person is shown answering the phone, hearing that their son's school has some computer trouble. In panel 2 they apologises asking if their child broke something. In panel 3, the unseen person on the other end of the phone call asks if they really named their son Robert'); Drop table students;--? They respond saying 'oh yes. little bobby tables we call him.' In the 4th panel the caller says 'well we have lost this years student records, I hope you're happy.' They respond 'And I hope you've learned to sanitize your database inputs'.](https://imgs.xkcd.com/comics/exploits_of_a_mom.png)
+![A 4 panel comic, in the first panel a person is shown answering the phone, hearing that their son's school has some computer trouble. In panel 2 they apologises asking if their child broke something. In panel 3, the unseen person on the other end of the phone call asks if they really named their son Robert'); Drop table students;--? They respond saying 'oh yes. little bobby tables we call him.' In the 4th panel the caller says 'well we have lost this years student records, I hope you're happy.' They respond 'And I hope you've learned to sanitize your database inputs'.](../../images/xkcd/exploits_of_a_mom.png)
 
 Since a villain might try to smuggle commands into our queries in many different ways,
 the safest way to deal with this threat is
