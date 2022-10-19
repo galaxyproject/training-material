@@ -72,7 +72,7 @@ environment* per project, which contains a particular version of Python installa
 additional external libraries.
 
 Virtual environments are not just a feature of Python - all modern programming languages use them to isolate code
-of a specific project and make it easier to develop, run, test and share code with others. In this episode, we learn how
+of a specific project and make it easier to develop, run, test and share code with others. In this tutorial, we learn how
 to set up a virtual environment to develop our code and manage our external dependencies.
 
 > <agenda-title></agenda-title>
@@ -132,8 +132,13 @@ There are several commonly used command line tools for managing Python virtual e
 While there are pros and cons for using each of the above, all will do the job of managing Python
 virtual environments for you and it may be a matter of personal preference which one you go for.
 In this course, we will use `venv` to create and manage our
-virtual environment (which is the preferred way for Python 3.3+). The upside is that `venv` virtual environments created from the command line are
-also recognised and picked up automatically by PyCharm IDE, as we will see in the next episode.
+virtual environment (which is the preferred way for Python 3.3+).
+
+Until you encounter the needs of a project which goes beyond what is available
+in the Python ecosystem, e.g. when you depend on external packages like htslib
+or bioinformatics tools that are simply not distributed as part of PyPI, then
+`venv` is a good choice to get started with.
+
 
 ### Managing Python Packages
 
@@ -250,15 +255,12 @@ If you've just done the `deactivate`, ensure you reactivate the environment read
 source venv/bin/activate
 ```
 
-> ## Python Within A Virtual Environment
+> ### {% icon tip %} Tip: Python Within A Virtual Environment
 > 
 > Within a virtual environment, commands `python` and `pip` will refer to the version of Python you created the environment with. If you create a virtual environment with `python3 -m venv venv`, `python` will refer to `python3` and `pip` will refer to `pip3`. 
 >
 > On some machines with Python 2 installed, `python` command may refer to the copy of Python 2 installed outside of the virtual environment instead, which can cause confusion. You can always check which version of Python you are using in your virtual environment with the command `which python` to be absolutely sure. We continue using `python3` and `pip3` in this material to avoid confusion for those users, but commands `python` and `pip` may work for you as expected.
-{: .callout}
-
-Note that, since our software project is being tracked by Git, the newly created virtual environment will show up 
-in version control - we will see how to handle it using Git in one of the subsequent episodes.
+{: .tip}
 
 ### Installing External Libraries in an Environment with `pip`
 
@@ -331,8 +333,7 @@ cat requirements.txt
 ```
 
 The first of the above commands will create a `requirements.txt` file in your current directory.
-The `requirements.txt` file can then be committed to a version control system (we will see how to do this using Git in 
-one of the following episodes) and
+The `requirements.txt` file can then be committed to a version control system and
 get shipped as part of your software and shared with collaborators and/or users. They can then replicate your environment and
 install all the necessary packages from the project root as follows:
 
