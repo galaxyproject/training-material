@@ -8,6 +8,7 @@ module Jekyll
     end
 
     def generate(site)
+      puts "[GTN/Boxify]"
       site.pages.each { |page| boxify page,site }
       site.posts.docs.each { |post| boxify post, site }
     end
@@ -28,6 +29,11 @@ module Jekyll
         box_type = $1
         title = $2
         _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path)
+
+        # Ugly hack needed, as this runs later in the pipeline than json generation.
+        box.gsub!(/\\&quot/, '&quot')
+        box.gsub!(/([^\\])"/, '\1\\"')
+
         box
       }
 
