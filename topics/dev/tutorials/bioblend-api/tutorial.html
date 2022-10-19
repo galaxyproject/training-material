@@ -743,7 +743,7 @@
   <div id="question-initialise" class="box-title" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
   <p>First, define the connection parameters. What variables do you need?</p>
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
@@ -766,7 +766,7 @@
   <div id="question-new-history" class="box-title" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
   <p>Next, create a new <span class="notranslate">Galaxy</span> history via POST to the correct API.</p>
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"New history"</span><span class="p">}</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
@@ -791,7 +791,7 @@
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">"history_id"</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
     <span class="s">"tool_id"</span><span class="p">:</span> <span class="s">"upload1"</span>
@@ -814,7 +814,7 @@
   <div id="question-find-the-dataset-in-your-history" class="box-title" aria-label="question box: Find the dataset in your history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Find the dataset in your history</div>
   <p>Find the new uploaded dataset, either from the dict returned by the POST request above or from the history contents.</p>
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -835,7 +835,7 @@
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -855,7 +855,7 @@
   <div id="question-view-the-workflow-details" class="box-title" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> details</div>
   <p>View the details of the imported <span class="notranslate">workflow</span> by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
@@ -872,7 +872,7 @@
   <div id="question-invoke-the-workflow" class="box-title" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
   <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/WORKFLOW_ID/invocations</code>. The only needed data are <code class="language-plaintext highlighter-rouge">history</code> and <code class="language-plaintext highlighter-rouge">inputs</code>.</p>
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -1010,7 +1010,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-initialise-1" class="box-title" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
   <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
@@ -1031,7 +1031,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-new-history-1" class="box-title" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
   <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1051,7 +1051,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1066,7 +1066,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-find-the-dataset-in-your-history-1" class="box-title" aria-label="question box: Find the dataset in your history"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Find the dataset in your history</div>
   <p>Find the new uploaded dataset, either from the dict returned by <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> or from the history contents.</p>
   <blockquote class="solution">
-    <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1086,7 +1086,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-11" class="box-title"><button type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-11" class="box-title"><button type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_workflow_from_local_path</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">)</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1101,7 +1101,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-view-the-workflow-details-1" class="box-title" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> details</div>
   <p>View the details of the imported <span class="notranslate">workflow</span> using <code class="language-plaintext highlighter-rouge">workflows.show_<span class="notranslate">workflow</span>()</code></p>
   <blockquote class="solution">
-    <div id="solution-12" class="box-title"><button type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-12" class="box-title"><button type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">show_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1116,7 +1116,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-invoke-the-workflow-1" class="box-title" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
   <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_<span class="notranslate">workflow</span>()</code> .</p>
   <blockquote class="solution">
-    <div id="solution-13" class="box-title"><button type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-13" class="box-title"><button type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
 <span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">invoke_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
@@ -1231,7 +1231,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-initialise-2" class="box-title" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
   <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
   <blockquote class="solution">
-    <div id="solution-14" class="box-title"><button type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-14" class="box-title"><button type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
@@ -1252,7 +1252,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-new-history-2" class="box-title" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
   <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
   <blockquote class="solution">
-    <div id="solution-15" class="box-title"><button type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-15" class="box-title"><button type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
 <span class="n">new_hist</span>
 </code></pre></div>    </div>
@@ -1272,7 +1272,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-16" class="box-title"><button type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-16" class="box-title"><button type="button" aria-controls="solution-16-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
 <span class="n">hda</span>
 </code></pre></div>    </div>
@@ -1292,7 +1292,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-17" class="box-title"><button type="button" aria-controls="solution-17-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-17" class="box-title"><button type="button" aria-controls="solution-17-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
@@ -1308,7 +1308,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <blockquote class="question">
   <div id="question-view-the-workflow-inputs" class="box-title" aria-label="question box: View the workflow inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> inputs</div>
   <blockquote class="solution">
-    <div id="solution-18" class="box-title"><button type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-18" class="box-title"><button type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1322,7 +1322,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div id="question-invoke-the-workflow-2" class="box-title" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
   <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge"><span class="notranslate">Workflow</span></code> objects.</p>
   <blockquote class="solution">
-    <div id="solution-19" class="box-title"><button type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-19" class="box-title"><button type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="n">hda</span><span class="p">}</span>
 <span class="n">wf</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>

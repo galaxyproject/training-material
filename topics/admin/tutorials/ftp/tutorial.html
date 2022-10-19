@@ -871,7 +871,7 @@
 <p>If the terms “Ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a></p>
 
 <!--SNIPPET-->
-<blockquote class="tip">  <div id="tip-running-ansible-on-your-remote-machine" class="box-title"><button type="button" aria-controls="tip-running-ansible-on-your-remote-machine-contents" aria-expanded="true" aria-label="Toggle tip box: Running Ansible on your remote machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>  <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
+<blockquote class="tip">  <div id="tip-running-ansible-on-your-remote-machine" class="box-title"><button type="button" aria-controls="tip-running-ansible-on-your-remote-machine-contents" aria-expanded="true" aria-label="Toggle tip box: Running Ansible on your remote machine"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running Ansible on your remote machine<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>  <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>  <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p></blockquote>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-setting-up-ftp-upload-with-ansible" class="box-title" aria-label="hands-on box: Setting up ftp upload with Ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up ftp upload with Ansible</div>
@@ -1043,7 +1043,7 @@
       </table>
 
       <blockquote class="tip">
-        <div id="tip-why-nosessionreuserequired" class="box-title"><button type="button" aria-controls="tip-why-nosessionreuserequired-contents" aria-expanded="true" aria-label="Toggle tip box: Why NoSessionReuseRequired?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why NoSessionReuseRequired?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+        <div id="tip-why-nosessionreuserequired" class="box-title"><button type="button" aria-controls="tip-why-nosessionreuserequired-contents" aria-expanded="true" aria-label="Toggle tip box: Why NoSessionReuseRequired?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why NoSessionReuseRequired?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p><code class="language-plaintext highlighter-rouge">mod_tls</code> only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
 To relax the requirement that the SSL session from the control connection be reused for data connections we set <code class="language-plaintext highlighter-rouge">NoSessionReuseRequired</code>.</p>
       </blockquote>
@@ -1100,7 +1100,7 @@ To relax the requirement that the SSL session from the control connection be reu
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You should see all the ports used by the server. What interests us is the line with proftpd.
 You should see TCP *:21 (LISTEN).</p>
 
@@ -1230,7 +1230,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>As I uploaded a file called <code class="language-plaintext highlighter-rouge">CITATION</code> with the admin@example.org user I see:</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/uploads/
 └── admin@example.org
@@ -1268,7 +1268,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
       <p>Click again on Choose FTP files button. Your file has disappeared. By default, the files are removed from the FTP at import.</p>
 
       <blockquote class="tip">
-        <div id="tip-you-want-to-change-this-behaviour" class="box-title"><button type="button" aria-controls="tip-you-want-to-change-this-behaviour-contents" aria-expanded="true" aria-label="Toggle tip box: You want to change this behaviour?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: You want to change this behaviour?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+        <div id="tip-you-want-to-change-this-behaviour" class="box-title"><button type="button" aria-controls="tip-you-want-to-change-this-behaviour-contents" aria-expanded="true" aria-label="Toggle tip box: You want to change this behaviour?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: You want to change this behaviour?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You just need to add <code class="language-plaintext highlighter-rouge">ftp_upload_purge: false</code> to the <span class="notranslate">galaxy</span>_config/<span class="notranslate">galaxy</span> variables (next to <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>).</p>
       </blockquote>
     </li>

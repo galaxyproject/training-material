@@ -1293,7 +1293,7 @@
 <p>Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a <span class="notranslate">Galaxy</span> tools for that or the right parameters, we may need to use programming languages as R or Python.</p>
 
 <blockquote class="tip">
-  <div id="tip-prerequisites" class="box-title"><button type="button" aria-controls="tip-prerequisites-contents" aria-expanded="true" aria-label="Toggle tip box: Prerequisites"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Prerequisites<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+  <div id="tip-prerequisites" class="box-title"><button type="button" aria-controls="tip-prerequisites-contents" aria-expanded="true" aria-label="Toggle tip box: Prerequisites"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Prerequisites<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.</p>
 
   <p>If you are starting with this tutorial, you will need to import a dataset:</p>
@@ -1386,7 +1386,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div id="tip-didn-t-work" class="box-title"><button type="button" aria-controls="tip-didn-t-work-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+        <div id="tip-didn-t-work" class="box-title"><button type="button" aria-controls="tip-didn-t-work-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You might need to install ggplot2 first</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">)</span><span class="w">
@@ -1474,7 +1474,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The input file we used are the 130 genes with a significant adjusted p-values (below &lt; 0.05) and an absolute fold change higher than 2 (log2 FC &lt; -1 or log 2 FC &gt; 1).</p>
 
@@ -1571,7 +1571,7 @@
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
   geom_point() +
@@ -1629,7 +1629,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="details">
-        <div id="details-ggplot2-themes" class="box-title"><button type="button" aria-controls="details-ggplot2-themes-contents" aria-expanded="true" aria-label="Toggle details box: `ggplot2` themes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `ggplot2` themes<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+        <div id="details-ggplot2-themes" class="box-title"><button type="button" aria-controls="details-ggplot2-themes-contents" aria-expanded="true" aria-label="Toggle details box: `ggplot2` themes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `ggplot2` themes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>In addition to <code class="language-plaintext highlighter-rouge">theme_bw()</code>, which changes the plot background to white, <code class="language-plaintext highlighter-rouge">ggplot2</code> comes with several other themes which can be useful to quickly change the look of your visualization.</p>
 
@@ -1665,7 +1665,7 @@
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
  geom_point() +
@@ -1706,7 +1706,7 @@
   <p>The chromosome is labeled on the individual plot facets so we don’t need the legend. Use the help file for <code class="language-plaintext highlighter-rouge">geom_bar</code> and any other online resources to remove the legend from the plot.</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
  geom_bar(show.legend = F) +

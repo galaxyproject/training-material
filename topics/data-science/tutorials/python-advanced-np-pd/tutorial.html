@@ -1016,7 +1016,7 @@ An index like [25, 35] selects a single element of an array, but we can select w
   <p>Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means <code class="language-plaintext highlighter-rouge">A[:, 0]</code> is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, <code class="language-plaintext highlighter-rouge">A[:, :1]</code> returns a two dimensional array with one singleton dimension (i.e. a column vector).</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D = np.hstack((A[:, :1], A[:, -1:]))
@@ -1034,7 +1034,7 @@ print(D)
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = A[A&lt;0.05]
 </code></pre></div>    </div>
@@ -1114,7 +1114,7 @@ print(D)
 	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. We can check out the first five rows of the data by executing <code class="language-plaintext highlighter-rouge">data.head()</code> (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter <code class="language-plaintext highlighter-rouge">n</code> in our call to <code class="language-plaintext highlighter-rouge">data.head()</code>. To view the first three rows, execute:</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.head(n=3)
@@ -1212,7 +1212,7 @@ print(D)
   <p>As well as the <code class="language-plaintext highlighter-rouge">read_csv</code> function for reading data from a file, Pandas provides a <code class="language-plaintext highlighter-rouge">to_csv</code> function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called <code class="language-plaintext highlighter-rouge">processed.csv</code>. You can use <code class="language-plaintext highlighter-rouge">help</code> to get information on how to use <code class="language-plaintext highlighter-rouge">to_csv</code>.</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.to_csv('processed.csv')
 </code></pre></div>    </div>
@@ -1310,7 +1310,7 @@ fourth = third.drop('StdErr', axis = 1)
 fourth.to_csv('result.csv')
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Let’s go through this piece of code line by line.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1351,7 +1351,7 @@ print(data['Base mean'].idxmax())
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">idxmin</code> will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.</p>
 
@@ -1373,7 +1373,7 @@ b. all the information of gene <code class="language-plaintext highlighter-rouge
 c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. <code class="language-plaintext highlighter-rouge">data['P-value']</code>
 b.<code class="language-plaintext highlighter-rouge">data.loc['FBgn0039178', :]</code>
@@ -1406,7 +1406,7 @@ c. <code class="language-plaintext highlighter-rouge">data[data['Chromosome'] ==
   <p>Using the same dataset, try to find the longest genes in each chromosome.</p>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data['Gene Length'] = data['End'] - data['Start']
 data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
@@ -1421,7 +1421,7 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
   <p>Using the same dataset, try to find how many genes are found on each strand of each chromosome.</p>
 
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-plus-square"></span></button></div>
+    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can group the data according to more than one column.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.groupby(['Chromosome', 'Strand']).size()
