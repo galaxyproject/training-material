@@ -285,44 +285,9 @@
 
 
 
-<h4 class="faq-area"> Including custom modifications into MaxQuant in <span class="notranslate">Galaxy</span>? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+<h4 class="faq-area"> Does MaxQuant in <span class="notranslate">Galaxy</span> support TMT, iTRAQ, etc.? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="comment">  <div id="comment-including-custom-modifications-into-maxquant-in-galaxy" class="box-title" aria-label="comment box: Including custom modifications into MaxQuant in Galaxy?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Including custom modifications into MaxQuant in <span class="notranslate">Galaxy</span>?</div>  <p>Unfortunately the inclusion of custom modifications is not possible by the user because it requires profound changes in the underlying code. Please let us know the modification you need by creating a new issue: https://github.com/<span class="notranslate">galaxy</span>proteomics/tools-<span class="notranslate">galaxy</span>p/issues entitled MaxQuant new modification request.</p></blockquote>
-
-
-
-
-<h4 class="faq-area"> Which isobaric labeled quantification methods does MaxQuant in <span class="notranslate">Galaxy</span> support? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-
-<!--SNIPPET--><blockquote class="question">  <div id="question-which-isobaric-labeled-quantification-methods-does-maxquant-in-galaxy-support" class="box-title" aria-label="question box: Which isobaric labeled quantification methods does MaxQuant in Galaxy support?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Which isobaric labeled quantification methods does MaxQuant in <span class="notranslate">Galaxy</span> support?</div>  <p>The current MaxQuant version supports: iTRAQ 4 and 8 plex; TMT 2,6,8,10,11 plex; iodoTMT6plex. Includion of TMT16 plex is in preparation.</p></blockquote>
-
-
-
-
-<h4 class="faq-area"> What is the advantage of breaking down protein to peptides before mass spec? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-
-<!--SNIPPET--><blockquote class="question">  <div id="question-what-is-the-advantage-of-breaking-down-protein-to-peptides-before-mass-spec" class="box-title" aria-label="question box: What is the advantage of breaking down protein to peptides before mass spec?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: What is the advantage of breaking down protein to peptides before mass spec?</div>  <p>Mass spectrometry works better for peptides: LC separation and ionization is working better on peptides than on proteins and proteins generate too complex and overlaying mass spectra due to their isotopes and their mass might be shifted due to posttranslational modifications or point mutations.</p></blockquote>
-
-
-
-
-<h4 class="faq-area"> When can you use (or cannot use) Match between runs in MaxQuant? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-
-<!--SNIPPET--><blockquote class="question">  <div id="question-when-can-you-use-or-cannot-use-match-between-runs-in-maxquant" class="box-title" aria-label="question box: When can you use (or cannot use) Match between runs in MaxQuant?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: When can you use (or cannot use) Match between runs in MaxQuant?</div>  <p>No golden rule here. For quantitative comparison of different sample groups it can be valuable to use MBR to increase the number of identified + quantified proteins in all samples and then have more proteins that occur in most of the samples to compare them.</p></blockquote>
-
-
-
-
-<h4 class="faq-area"> If you use a mqpar file, can you include modifications that are not in the <span class="notranslate">Galaxy</span> version? For instance, propionamide (Cys alkylation by acrylamide). <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-
-<!--SNIPPET--><blockquote class="question">  <div id="question-if-you-use-a-mqpar-file-can-you-include-modifications-that-are-not-in-the-galaxy-version-for-instance-propionamide-cys-alkylation-by-acrylamide" class="box-title" aria-label="question box: If you use a mqpar file, can you include modifications that are not in the Galaxy version? For instance, propionamide (Cys alkylation by acrylamide)."><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: If you use a mqpar file, can you include modifications that are not in the <span class="notranslate">Galaxy</span> version? For instance, propionamide (Cys alkylation by acrylamide).</div>  <p>No, one is limited to the modifications which are installed in MaxQuant. The mqpar only contains more parameters / options than the GUI in <span class="notranslate">galaxy</span>.Note: one must use an mqpar from the same version like MaxQuant!</p></blockquote>
-
-
-
-
-<h4 class="faq-area"> What does it mean to normalize the LFQ intensities? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html"><i class="fas fa-external-link-alt"></i></a> </h4>
-
-<!--SNIPPET--><blockquote class="question">  <div id="question-what-does-it-mean-to-normalize-the-lfq-intensities" class="box-title" aria-label="question box: What does it mean to normalize the LFQ intensities?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: What does it mean to normalize the LFQ intensities?</div>  <p>Median normalization typically refers to subtracting the median of all intensities within one sample from all of the intensities (e.g. Intensity of Protein A - Median of all intensities from Sample 1) , to account for measurement variations. Before normalization log2 transformation is required since many statistical tests demand that the data is actually normal distributed. (Non log intensities show very high values but have a minimum (limit of quantification) leading to a somehow right skewed distribution, after log-transformation the intensity distribution is more like a gaussian distribution. Beside the median (or median-polish) normalization there is also other e.g. the quantile  normalization.</p></blockquote>
+<!--SNIPPET--><blockquote class="question">  <div id="question-does-maxquant-in-galaxy-support-tmt-itraq-etc" class="box-title" aria-label="question box: Does MaxQuant in Galaxy support TMT, iTRAQ, etc.?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Does MaxQuant in <span class="notranslate">Galaxy</span> support TMT, iTRAQ, etc.?</div>  <p>Yes, iTRAQ 4 and 8 plex;  TMT 2,6,8,10,11 plex; iodoTMT6plex</p></blockquote>
 
 
 
@@ -341,6 +306,20 @@
 
 
 
+<h4 class="faq-area"> If you use a mqpar file, can you include modifications that are not in the <span class="notranslate">Galaxy</span> version? For instance, propionamide (Cys alkylation by acrylamide). <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">  <div id="question-if-you-use-a-mqpar-file-can-you-include-modifications-that-are-not-in-the-galaxy-version-for-instance-propionamide-cys-alkylation-by-acrylamide" class="box-title" aria-label="question box: If you use a mqpar file, can you include modifications that are not in the Galaxy version? For instance, propionamide (Cys alkylation by acrylamide)."><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: If you use a mqpar file, can you include modifications that are not in the <span class="notranslate">Galaxy</span> version? For instance, propionamide (Cys alkylation by acrylamide).</div>  <p>No, one is limited to the modifications which are installed in MaxQuant. The mqpar only contains more parameters / options than the GUI in <span class="notranslate">galaxy</span>.Note: one must use an mqpar from the same version like MaxQuant!</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Including custom modifications into MaxQuant in <span class="notranslate">Galaxy</span>? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="comment">  <div id="comment-including-custom-modifications-into-maxquant-in-galaxy" class="box-title" aria-label="comment box: Including custom modifications into MaxQuant in Galaxy?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Including custom modifications into MaxQuant in <span class="notranslate">Galaxy</span>?</div>  <p>Unfortunately the inclusion of custom modifications is not possible by the user because it requires profound changes in the underlying code. Please let us know the modification you need by creating a new issue: https://github.com/<span class="notranslate">galaxy</span>proteomics/tools-<span class="notranslate">galaxy</span>p/issues entitled MaxQuant new modification request.</p></blockquote>
+
+
+
+
 <h4 class="faq-area"> MSStats: what does ‘compare groups = yes’ mean? And the comparison matrix to define the contrast between the 2 groups? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/stats.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">  <div id="question-msstats-what-does-compare-groups-yes-mean-and-the-comparison-matrix-to-define-the-contrast-between-the-2-groups" class="box-title" aria-label="question box: MSStats: what does ‘compare groups = yes’ mean? And the comparison matrix to define the contrast between the 2 groups?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: MSStats: what does ‘compare groups = yes’ mean? And the comparison matrix to define the contrast between the 2 groups?</div>  <p>MSstats consists of three parts:</p>  <ul>  <li>Reading the input files and converting them into an MSstats compatible format, doing some processing of the data at the same time</li>  <li>Data processing: such as protein inference (summary), log2 transformation, normalization and missing value imputation</li>  <li><code class="language-plaintext highlighter-rouge">compare groups = yes</code>, means that the third step is performed, which is statistical analysis: Statistical modelling to find differentially abundant protein between different groups. The groups should be specified as “condition” in the annotation file and the group comparison matrix file specifies which groups to compare against each other. In the example this is quite simple because there are only 2 groups, with 3 or more groups the comparison matrix could become more complex.</li></ul></blockquote>
@@ -348,9 +327,30 @@
 
 
 
-<h4 class="faq-area"> Does MaxQuant in <span class="notranslate">Galaxy</span> support TMT, iTRAQ, etc.? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+<h4 class="faq-area"> What does it mean to normalize the LFQ intensities? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="question">  <div id="question-does-maxquant-in-galaxy-support-tmt-itraq-etc" class="box-title" aria-label="question box: Does MaxQuant in Galaxy support TMT, iTRAQ, etc.?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Does MaxQuant in <span class="notranslate">Galaxy</span> support TMT, iTRAQ, etc.?</div>  <p>Yes, iTRAQ 4 and 8 plex;  TMT 2,6,8,10,11 plex; iodoTMT6plex</p></blockquote>
+<!--SNIPPET--><blockquote class="question">  <div id="question-what-does-it-mean-to-normalize-the-lfq-intensities" class="box-title" aria-label="question box: What does it mean to normalize the LFQ intensities?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: What does it mean to normalize the LFQ intensities?</div>  <p>Median normalization typically refers to subtracting the median of all intensities within one sample from all of the intensities (e.g. Intensity of Protein A - Median of all intensities from Sample 1) , to account for measurement variations. Before normalization log2 transformation is required since many statistical tests demand that the data is actually normal distributed. (Non log intensities show very high values but have a minimum (limit of quantification) leading to a somehow right skewed distribution, after log-transformation the intensity distribution is more like a gaussian distribution. Beside the median (or median-polish) normalization there is also other e.g. the quantile  normalization.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> What is the advantage of breaking down protein to peptides before mass spec? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">  <div id="question-what-is-the-advantage-of-breaking-down-protein-to-peptides-before-mass-spec" class="box-title" aria-label="question box: What is the advantage of breaking down protein to peptides before mass spec?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: What is the advantage of breaking down protein to peptides before mass spec?</div>  <p>Mass spectrometry works better for peptides: LC separation and ionization is working better on peptides than on proteins and proteins generate too complex and overlaying mass spectra due to their isotopes and their mass might be shifted due to posttranslational modifications or point mutations.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> When can you use (or cannot use) Match between runs in MaxQuant? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">  <div id="question-when-can-you-use-or-cannot-use-match-between-runs-in-maxquant" class="box-title" aria-label="question box: When can you use (or cannot use) Match between runs in MaxQuant?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: When can you use (or cannot use) Match between runs in MaxQuant?</div>  <p>No golden rule here. For quantitative comparison of different sample groups it can be valuable to use MBR to increase the number of identified + quantified proteins in all samples and then have more proteins that occur in most of the samples to compare them.</p></blockquote>
+
+
+
+
+<h4 class="faq-area"> Which isobaric labeled quantification methods does MaxQuant in <span class="notranslate">Galaxy</span> support? <a href="/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">  <div id="question-which-isobaric-labeled-quantification-methods-does-maxquant-in-galaxy-support" class="box-title" aria-label="question box: Which isobaric labeled quantification methods does MaxQuant in Galaxy support?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Which isobaric labeled quantification methods does MaxQuant in <span class="notranslate">Galaxy</span> support?</div>  <p>The current MaxQuant version supports: iTRAQ 4 and 8 plex; TMT 2,6,8,10,11 plex; iodoTMT6plex. Includion of TMT16 plex is in preparation.</p></blockquote>
 
 
 
@@ -468,7 +468,7 @@ add a button, include configuration options:
         The content of the tutorials is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. The website and infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>.
         </p>
 
-        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/0c5986d54fcc0c246558977b1cabb5ab47a1f175">0c5986d54fcc0c246558977b1cabb5ab47a1f175</a></p>
+        <p>This is revision <a href="https://github.com/galaxyproject/training-material/commit/afb32cdecad37142cd1a9e5b98ac83055e606c03">afb32cdecad37142cd1a9e5b98ac83055e606c03</a></p>
     </div>
 </footer>
 
