@@ -432,7 +432,7 @@ module GtnLinter
 
   def self.new_more_accessible_boxes(contents)
     #  \#\#\#
-    self.find_matching_texts(contents, /> (### {% icon ([^%]*)%}[^:]*:(.*))/)
+    self.find_matching_texts(contents, /> (### {%\s*icon ([^%]*)\s*%}[^:]*:?(.*))/)
         .map { |idx, text, selected|
       key = selected[2].strip.gsub(/_/, '-')
       ReviewDogEmitter.error(
