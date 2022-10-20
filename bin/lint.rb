@@ -597,6 +597,10 @@ module GtnLinter
     end
   end
 
+  def self.should_ignore(contents)
+    contents.select{|x| x.match(/GTN:IGNORE:(\d\d\d)/)}.map{|x| "GTN:" + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
+  end
+
   def self.fix_file(path)
     @path = path
 
@@ -607,7 +611,12 @@ module GtnLinter
     if path.match(/md$/)
       handle = File.open(path)
       contents = handle.read.split("\n")
+      ignores = should_ignore(contents)
       results = fix_md(contents)
+      # Remove any empty lists
+      results = results.select!{|x| !x.nil? && x.length > 0 }
+      # Before ignoring anything matching GTN:IGNORE:###
+      results = results.select{|x| ignores.index(x['code']['value']).nil?}
       emit_results(results)
     elsif path.match(/.bib$/)
       handle = File.open(path)
