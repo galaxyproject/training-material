@@ -32,7 +32,7 @@ module Jekyll
             end
 
             if firstdef then
-              "#{page['abbreviations'][abbr]} (#{abbr})"
+              "#{definition} (#{abbr})"
             else
               "<abbr title=\"#{definition}\">#{abbr}</abbr>"
             end

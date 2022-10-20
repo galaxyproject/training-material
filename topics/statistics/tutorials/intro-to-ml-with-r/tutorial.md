@@ -12,13 +12,9 @@ requirements:
         - rstudio
   -
     type: "internal"
-    topic_name: introduction
+    topic_name: data-science
     tutorials:
         - r-basics
-  -
-    type: "internal"
-    topic_name: introduction
-    tutorials:
         - r-advanced
 
 follow_up_training:
@@ -47,6 +43,7 @@ key_points:
 - To be added
 contributors:
   - fpsom
+  - erasmusplus
 ---
 
 # Introduction to Machine Learning and Data mining
@@ -105,7 +102,7 @@ There are several biological domains where machine learning techniques are appli
 
 ![A series of overlapping boxes showing intersections of different topics like text mining and proteomics and evolution and microarrays, with various topics listed in the intersections. Unfortunately the source image is too low resolution even for sighted users.](../../images/intro-to-ml-with-r/bioinformatics-ml.png "Classification of the topics where machine learning methods are applied (<a href="https://doi.org/10.1093/bib/bbk007">https://doi.org/10.1093/bib/bbk007</a>)")
 
-> ### {% icon tip %} Tip: Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.
+> <tip-title>Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.</tip-title>
 > An extensive list of examples of applications of Machine Learning in Bioinformatics can be found in the {% cite Larra_aga_2006 %}
 {: .tip}
 
@@ -133,7 +130,7 @@ Before diving in the tutorial, we need to open {% tool [RStudio](interactive_too
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
-> ### {% icon hands_on %} Hands-on: Installing Required Packages
+> <hands-on-title>Installing Required Packages</hands-on-title>
 >
 > 1. Run the following code to install required packages
 >
@@ -172,7 +169,7 @@ The data that we will be using for this workshop are from the following sources:
 We will first load up the UCI dataset. The dataset itself does not contain column names, we've created a second file with only the column names, which we will use.
 We will be using [tidyverse](https://www.tidyverse.org), a collection of R packages for Data Science.
 
-> ### {% icon hands_on %} Hands-on: Load the UCI Dataset
+> <hands-on-title>Load the UCI Dataset</hands-on-title>
 >
 > 1. Load the data
 >
@@ -220,11 +217,11 @@ We will be using [tidyverse](https://www.tidyverse.org), a collection of R packa
 >    breastCancerData$Diagnosis <- as.factor(breastCancerData$Diagnosis)
 >    ```
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is a factor?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > TODO
 >    > >
@@ -239,18 +236,18 @@ Before thinking about modeling, have a look at your data. There is no point in t
 
 We will first remove the first column, which is the unique identifier of each row:
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Exploratory Data Analysis
+> <hands-on-title>Exploratory Data Analysis</hands-on-title>
 > 1. Remove the first column
 >
 >    ```r
@@ -357,11 +354,11 @@ We will first remove the first column, which is the unique identifier of each ro
 >
 >    ![ggpairs output of the first 5 variables of the recentered/rescaled data](../../images/intro-to-ml-with-r/ggpairs5variables_tr.png "ggpairs output of the first 5 variables of the recentered/rescaled data")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > Do you see any differences?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > TODO
 >    > >
@@ -387,7 +384,7 @@ Principal component analysis (PCA) is one of the most commonly used methods of d
 - The second step is the actual dimension reduction; what is really happening is that your decorrelation step (the first step above) transforms the features into new and uncorrelated features; this second step then chooses the features that contain most of the information about the data.
 
 
-> ### {% icon hands_on %} Hands-on: Dimensionality Reduction & PCA
+> <hands-on-title>Dimensionality Reduction & PCA</hands-on-title>
 >
 > 1. Let's have a look into the variables that we currently have, and apply PCA to them. As you can see, we will be using only the numerical variables (i.e. we will exclude the first two, `ID` and `Diagnosis`):
 >    ```r
@@ -432,7 +429,7 @@ Where many variables correlate with one another, they will all contribute strong
 
 Every eigenvector has a corresponding eigenvalue. Simply put, an eigenvector is a direction, such as "vertical" or "45 degrees", while an eigenvalue is a number telling you how much variance there is in the data in that direction. The eigenvector with the highest eigenvalue is, therefore, the first principal component. The number of eigenvalues and eigenvectors that exits is equal to the number of dimensions the data set has. In our case, we had 30 variables (32 original, minus the first two), so we have produced 30 eigenvectors / PCs. And we can see that we can address more than 95% of the variance (0.95157) using only the first 10 PCs.
 
-> ### {% icon hands_on %} Hands-on: Deeper look into PCA
+> <hands-on-title>Deeper look into PCA</hands-on-title>
 >
 > 1. We should also have a deeper look in our PCA object:
 >
@@ -484,12 +481,12 @@ Every eigenvector has a corresponding eigenvalue. Simply put, an eigenvector is 
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Try changing the parameters of the plot. For example, check the `choices` and the `var.scale`. Is there an impact? What does this mean?
 > 2. We have been using the entire table of data. What if we restrict our analysis on the `mean` values (i.e. columns 3-12)? Is there an impact?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
@@ -511,7 +508,7 @@ Essentially, this is the task of grouping your data points, based on something a
 
 What we are going to do is group the tumor data points into two clusters using an algorithm called `k-means`, which aims to cluster the data in order to minimize the variances of the clusters. The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation (known as total within-cluster variation) is minimized. There are several k-means algorithms available. However, the standard algorithm defines the total within-cluster variation as the sum of squared distances Euclidean distances between items and the corresponding centroid:
 
-> ### {% icon hands_on %} Hands-on: Let's cluster our data
+> <hands-on-title>Let's cluster our data</hands-on-title>
 >
 > 1. Let's cluster our data points (ignoring their know classes) using k-means and then we'll compare the results to the actual labels that we know:
 >
@@ -621,7 +618,7 @@ What we are going to do is group the tumor data points into two clusters using a
 
 One technique to choose the best `k` is called the **elbow method**. This method uses within-group homogeneity or within-group heterogeneity to evaluate the variability. In other words, you are interested in the percentage of the variance explained by each cluster. You can expect the variability to increase with the number of clusters, alternatively, heterogeneity decreases. Our challenge is to find the `k` that is beyond the diminishing returns. Adding a new cluster does not improve the variability in the data because very few information is left to explain.
 
-> ### {% icon hands_on %} Hands-on: Finding the optimal k
+> <hands-on-title>Finding the optimal k</hands-on-title>
 >
 > 1. First of all, let's create a function that computes the total within clusters sum of squares:
 >
@@ -670,11 +667,11 @@ One technique to choose the best `k` is called the **elbow method**. This method
 >
 >    ![Elbow plot for multiple values of k](../../images/intro-to-ml-with-r/elbow-plot-kmeans.png "Elbow plot for multiple values of k")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is the optimal `k` value?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > From the graph, you can see the optimal `k` is around 10, where the curve is starting to have a diminishing return.
 >    > >
@@ -683,12 +680,12 @@ One technique to choose the best `k` is called the **elbow method**. This method
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Try re-running the clustering step with the new k. Is there a significant difference?
 > 2. Try to think of alternative metrics that could be used as a "distance" measure, instead of the default "Euclidean". Do you think there might be an optimal for our case?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
@@ -712,7 +709,7 @@ Once this is done, it is usually represented by a dendrogram like structure. The
 4. **Centroid linkage clustering**: Find the centroid of each cluster and calculate the distance between centroids of two clusters.
 
 
-> ### {% icon hands_on %} Hands-on: k-means Clustering
+> <hands-on-title>k-means Clustering</hands-on-title>
 > 1. We will be applying Hierarchical clustering to our dataset, and see what the result might be. Remember that our dataset has some columns with nominal (categorical) values (columns `ID` and `Diagnosis`), so we will need to make sure we only use the columns with numerical values. There are no missing values in this dataset that we need to clean before clustering. But the scales of the features are different and we need to normalize it.
 >
 >    ```r
@@ -792,12 +789,12 @@ Once this is done, it is usually represented by a dendrogram like structure. The
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. The hierarchical clustering performed so far, only used two methods: `euclidean` and `average`. Try experimenting with different methods. Do the final results improve?
 > 2. Obviously the cut-off selection (k=2) was not optimal. Try using different cut-offs to ensure that the final clustering could provide some context to the original question.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
@@ -847,7 +844,7 @@ There are two types of decision trees:
 Regression trees are used when the dependent variable is continuous while classification trees are used when the dependent variable is categorical. In continuous, a value obtained is a mean response of observation. In classification, a value obtained by a terminal node is a mode of observations.
 
 
-> ### {% icon hands_on %} Hands-on: Decision Trees
+> <hands-on-title>Decision Trees</hands-on-title>
 > 1. Here, we will use the `rpart` and the `rpart.plot` package in order to produce and visualize a decision tree. First of all, we'll create the train and test datasets using a 70/30 ratio and a fixed seed so that we can reproduce the results.
 >
 >    ```r
@@ -918,11 +915,11 @@ Regression trees are used when the dependent variable is continuous while classi
 >
 >    ![Pruned decision tree](../../images/intro-to-ml-with-r/decisionTreePruned.png "Pruned decision tree")
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What does the above "Confusion Matrix" tells you?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > TODO
 >    > >
@@ -952,12 +949,12 @@ Regression trees are used when the dependent variable is continuous while classi
 >    ![Prediction Plot](../../images/intro-to-ml-with-r/predictionPlot.png "Prediction Plot")
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Can we improve the above model? What are the key parameters that have the most impact?
 > 2. We have been using only some of the variables in our model. What is the impact of using all variables / features for our prediction? Is this a good or a bad plan?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
@@ -983,7 +980,7 @@ Package `party: cforest()`
 
 In this exercise, we will be using the `randomForest`.
 
-> ### {% icon hands_on %} Hands-on: Random Forests
+> <hands-on-title>Random Forests</hands-on-title>
 > 1. First, let's train the model:
 >
 >    ```r
@@ -1118,7 +1115,7 @@ In this exercise, we will be using the `randomForest`.
 
 Linear regression is to predict response with a linear function of predictors. The most common function in R for this is `lm`. In our dataset, let's try to investigate the relationship between `Radius.Mean`, `Concave.Points.Mean` and `Area.Mean`.
 
-> ### {% icon hands_on %} Hands-on: Linear Regression
+> <hands-on-title>Linear Regression</hands-on-title>
 > 1. We can get a first impression by looking at the correlation of these variables:
 >
 >    ```r
@@ -1237,11 +1234,11 @@ Linear regression is to predict response with a linear function of predictors. T
 Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [here](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Try evaluating model using RMSE, but on the training set this time
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```r
 > > ##### Answer to exercise 1.
@@ -1263,13 +1260,13 @@ Now let's use the RMSE and the R_square metrics to evaluate our model on the tra
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Calculate RMSE for the test data and check if the model is not overfit.
 > 2. Evaluating model using R_square - on training set.
 > 3. Calculate R_square for the test data and check if the model is not overfit.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > TODO
 > >
@@ -1301,4 +1298,4 @@ With the rise in high-throughput sequencing technologies, the volume of omics da
 
 This tutorial was only a first introductory step into the main concepts and approaches in machine learning. We looked at some of the common methods being used to analyse a representative dataset, by providing a practical context through the use of basic but widely used R libraries. Hopefully, at this point, you will have acquired a first understanding of the standard ML processes, as well as the practical skills in applying them on familiar problems and publicly available real-world data sets.
 
-{:.no_toc}
+

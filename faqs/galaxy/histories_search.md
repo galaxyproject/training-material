@@ -3,6 +3,7 @@ title: Searching your history
 area: histories
 box_type: tip
 layout: faq
+contributors: [shiltemann,hexylena]
 ---
 
 

@@ -1,8 +1,9 @@
 ---
 title: Upload many files (>10) via FTP
-area: datasets
+area: data upload
 box_type: tip
 layout: faq
+contributors: [bebatut]
 ---
 
 1. Make sure to have an FTP client installed

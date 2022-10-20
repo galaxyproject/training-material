@@ -1,0 +1,434 @@
+---
+layout: tutorial_slides
+logo: GTN
+video: true
+title: "Una breve introducción a Galaxy"
+zenodo_link: ""
+questions:
+- "¿Qué es Galaxy?"
+- "¿Por qué debería usar Galaxy?"
+- "¿Cómo uso Galaxy?"
+- "¿Cómo puedo conectarme con la comunidad Galaxy?"
+objectives:
+key_points:
+- "Galaxy te permite realizar análisis de datos complejos directamente desde tu navegador"
+- "Estos análisis son reproducibles; Galaxy realiza un seguimiento de todos los detalles de su análisis"
+- "Galaxy tiene una comunidad de usuarios muy grande y activa"
+- "Hay muchos materiales de formación disponibles para aprender Galaxy"
+contributors:
+  - shiltemann
+  - hexylena
+  - nsoranzo
+  - nomadscientist
+lang: es # We're using the proper translations out of laziness
+translations:
+  - en
+  - es
+voice:
+    id: Lupe
+    lang: es-US
+    neural: true
+---
+
+# ¿Qué es Galaxy?
+
+???
+
+¿Qué es Galaxy?
+
+---
+
+![Galaxy Logo]({{site.baseurl}}/shared/images/galaxy_logo_25percent_transparent.png)
+
+** Análisis intensivo de datos * para todas **
+
+.pull-left[
+- Plataforma ** Análisis de datos **
+- Basado en web
+- **Fácil de usar
+- ** Gratis ** y de código abierto
+
+
+- Muchas herramientas (~8000)
+- Popular (&gt; 10.000 [publicaciones](https://www.zotero.org/groups/1732893/galaxy))
+- Amplios [tutoriales](https://training.galaxyproject.org) disponibles
+
+
+]
+
+.pull-right[
+![infografía de ciencia de datos]({{site.baseurl}}/topics/introduction/images/data_science.jpg) <!-- https://pixy.org/3013900/ CC0 license-->
+]
+
+.footnote[Página principal: [galaxyproject.org](https://galaxyproject.org)]
+
+???
+
+- Galaxy es una plataforma de análisis de datos basada en web.
+- Es fácil de usar y completamente gratis.
+- Galaxy ofrece más de ocho mil herramientas de análisis.
+- Galaxy es muy utilizado. Actualmente cuenta con más de diez mil publicaciones.
+
+
+---
+
+# ¿Por qué usar Galaxy?
+
+- Es fácil**!
+     - Sin instalación, todo lo que necesita es un navegador.
+     - Sin comandos complejos, ¡solo apunte y haga clic!
+
+
+- Hace que su investigación sea ** reproducible **
+     - Galaxy realiza un seguimiento de todos los detalles del análisis
+
+
+- ** Dominio cruzado **: bioinformática, química, ecología, ciencia del clima, ..
+
+![Banner de recursos Galaxy]({{site.baseurl}}/topics/introduction/images/titleless-use-resource-banner.png)
+
+???
+
+- El análisis de datos puede ser muy complejo.
+- A menudo requiere conocimientos de programación especializados o habilidades de línea de comandos.
+- Galaxy hace que esto sea mucho más fácil al proporcionar una interfaz de usuario basada en web para herramientas de análisis de datos populares.
+- Esto significa que no tiene que instalar nada, simplemente abra su navegador y vaya a Galaxy.
+- Galaxy también lo ayuda a hacer que su investigación sea reproducible al realizar un seguimiento de los pasos de su análisis.
+- Galaxy admite muchos dominios científicos diferentes.
+
+---
+
+# ¿Cómo uso Galaxy?
+
+???
+
+- ¿Cómo uso Galaxy?
+
+---
+
+# Encuentra un servidor Galaxy
+
+- ** Los tres grandes **: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+
+  .image-75[![usegalaxy.* servidores]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
+
+
+- Muchas otras galaxias más pequeñas, a menudo de dominio específico disponibles (125+)
+  - Lista de todas las galaxias públicas: [galaxyproject.org/use](https://galaxyproject.org/use/)
+
+???
+
+- Hay tres servidores Galaxy principales: Galaxy Main, Galaxy Europe y Galaxy Australia.
+- Estas tres galaxias cuentan con los equipos más grandes detrás de ellas y ofrecen la mayor cantidad de herramientas y recursos.
+- Puede registrar una cuenta de forma gratuita en cualquiera de estos servidores.
+- Además, hay muchos servidores Galaxy más pequeños para elegir.
+- Muchos de estos son específicos del dominio. Por ejemplo, Galaxy Proteomics se centra en herramientas y flujos de trabajo de proteómica.
+- Muchas universidades y otras instituciones tienen servidores privados locales.
+
+---
+
+# La interfaz Galaxy
+
+- Tres paneles principales
+   - ** Izquierda: ** Herramientas disponibles
+   - ** Medio: ** Vea sus datos y ejecute herramientas
+   - ** Derecha: ** Registro completo de su análisis ** historial **
+
+![Interfaz de usuario de Galaxy]({{site.baseurl}}/topics/introduction/images/galaxy_interface.png)
+
+???
+
+- La interfaz de usuario de Galaxy consta de tres partes principales.
+- A la izquierda está la lista de herramientas disponibles.
+- En el panel central, ejecutará sus herramientas de análisis y verá sus datos y resultados.
+- A la derecha hay un registro completo de su historial de análisis.
+
+---
+
+# Subiendo datos
+
+.pull-left[
+- Sube desde ** tu computadora **
+
+
+- Importar archivos ** desde URL **
+
+
+- Importar desde ** almacenes de datos públicos **
+   - UCSC, NCBI, ENA, muchos más ..
+
+
+]
+
+.pull-right[
+![Botón de carga de Galaxy]({{site.baseurl}}/topics/introduction/images/upload-data.png)
+]
+
+???
+
+- El primer paso de un análisis es introducir sus datos en Galaxy.
+- Esto se puede hacer de varias maneras.
+- Puede cargar archivos desde su computadora.
+- O puede ingresar una URL de Internet y Galaxy descargará los datos por usted.
+- Además, Galaxy puede importar datos directamente desde muchos almacenes de datos en línea como UCSC, NCBI y muchos más.
+
+---
+
+# Historia
+
+.pull-left[
+- El ** historial ** recopila todos los archivos de su análisis
+
+
+- Tres botones
+     - {% icon galaxy-eye %} ** Ver ** el archivo
+     - {% icon galaxy-pencil %} ** Editar atributos **
+         - p.ej. cambiar nombre
+     - {% icon galaxy-cross %} ** Eliminar archivo **
+
+
+- Haga clic para ampliar**
+    - informacion del archivo
+        - formato, tamaño, ..
+    - vista previa del documento
+    - opciones de archivo
+        - descargar, visualizar, ..
+]
+
+.pull-right[
+![expandiendo un conjunto de datos]({{site.baseurl}}/topics/introduction/images/galaxy_history_dataset_expand.gif)
+]
+
+???
+
+- Todos los archivos que cargue aparecerán en su historial.
+- Hay 3 botones en cada conjunto de datos de su historial.
+- El icono de ojo le permite ver el conjunto de datos. Esto se mostrará en el panel central de Galaxy.
+- El icono de lápiz le permite editar los atributos del archivo. Por ejemplo, puede cambiar el nombre del archivo aquí.
+- El icono de la cruz le permite eliminar el conjunto de datos de su historial.
+- También puede hacer clic en el conjunto de datos para expandirlo. Esto mostrará más información y más opciones.
+
+---
+
+# Encontrar una herramienta
+
+.pull-left[
+
+- Explore las secciones del panel de herramientas
+- Ingrese el nombre en el cuadro ** Búsqueda de herramientas **
+]
+
+.pull-right[
+![cuadro de búsqueda de herramientas]({{site.baseurl}}/topics/introduction/images/tool_search.png)
+]
+
+<br>
+
+- {% icon galaxy-star %} ** Destaca ** tus herramientas favoritas para que sea más fácil encontrarlas
+
+! [agregue una herramienta a sus favoritos haciendo clic en el ícono de estrella]({{site.baseurl}}/topics/introduction/images/tool_favorite.png)
+
+???
+
+- Una vez que se cargan sus datos, está listo para ejecutar herramientas.
+- Puede encontrar herramientas explorando la lista de herramientas de la izquierda.
+- Si ya conoce el nombre de la herramienta que desea utilizar, puede ingresarlo en el cuadro de búsqueda en la parte superior del panel de herramientas.
+- Si ha encontrado una herramienta que le gusta, puede agregarla a sus favoritos haciendo clic en la estrella en la parte superior de la herramienta.
+
+---
+
+# Ejecutando una herramienta
+
+.pull-left[
+- Elija ** archivos de entrada **
+- Establecer la herramienta ** parámetros **
+- ** Ejecutar **
+
+
+- Debajo del formulario de la herramienta:
+     - información de ayuda
+     - Cita de herramienta
+
+]
+
+.pull-right[
+![interfaz de herramienta]({{site.baseurl}}/topics/introduction/images/galaxy_tool.png)
+]
+
+???
+
+- Cuando haces clic en una herramienta, se mostrará en el panel central.
+- Aquí puede seleccionar sus archivos de entrada y establecer los parámetros de la herramienta.
+- Luego puede presionar el botón Ejecutar para iniciar la herramienta.
+- Las versiones anteriores de una herramienta generalmente se mantienen disponibles para garantizar la reproducibilidad.
+
+---
+
+# Resultados de analisis
+
+.pull-left[
+- Las salidas de herramientas se agregan al historial
+
+
+- Diferentes estados del conjunto de datos
+    - <span style="background-color: lightgrey"> esperando </span>, <span style="background-color: orange"> corriendo </span>, <span style="background-color: lightgreen">éxito</span>, <span style="background-color: red">fallido</span>
+
+
+- Expandir para ver más opciones
+     - {% icon galaxy-save%} ** Descargar ** conjunto de datos
+     - {% icon galaxy-info%} ** Información ** sobre la ejecución de la herramienta
+     - {% icon galaxy-refresh%} ** Reload ** herramienta con los mismos parámetros
+     - {% icon galaxy-barchart%} ** Visualizar ** conjunto de datos
+
+
+
+     - ¿Conjunto de datos rojo?
+          - {% icon galaxy-bug%} Haga clic en el icono de error
+            - ver mensaje de error
+            - enviar informe de error
+]
+
+.pull-right[
+![ejecución de herramienta de ejemplo]({{site.baseurl}}/topics/introduction/images/tool_run.gif)
+]
+
+???
+
+- Los resultados del análisis se agregarán a su historial.
+- Verá que estos archivos de salida pasan por varios estados.
+- Cuando un conjunto de datos está gris, significa que está esperando para ejecutarse.
+- Cuando se vuelve naranja, significa que la herramienta está funcionando.
+- Cuando la herramienta esté terminada, las salidas se volverán verdes si la herramienta se ejecutó correctamente.
+- A continuación, puede hacer clic en el elemento del historial para obtener más información y opciones.
+- Por ejemplo, puede descargar el archivo a su computadora.
+- O puede recargar la herramienta con los mismos parámetros.
+- También hay una opción para visualizar sus datos.
+- Si hubo un problema con la herramienta, se volverá roja.
+- Puede hacer clic en el icono de error para ver el mensaje de error o enviar un informe de error a los administradores de Galaxy.
+
+
+---
+
+# Visualizaciones
+
+- Galaxy tiene muchas opciones para visualizar datos
+
+![Ejemplos de 6 visualizaciones diferentes en galaxias con un MSA, un par de gráficos, estructura de ARN y visualizaciones en 3D de proteínas]({{site.baseurl}}/topics/dev/images/charts_examples2.png)
+
+???
+
+- Galaxy ofrece varias formas de visualizar sus conjuntos de datos según su formato.
+- Por ejemplo, los datos de proteínas PDB se pueden ver en un visor 3D.
+
+---
+
+# Análisis múltiples
+
+- ¿Comenzando un nuevo análisis? Crea un nuevo historial {% icon new-history%}
+- Puedes tener tantas historias como quieras
+- Descripción general de todas sus historias {% icon galaxy-history%}
+- Los buenos nombres para sus historias ayudan a realizar un seguimiento de sus análisis
+
+! [vista de historial múltiple]({{site.baseurl}}/topics/introduction/images/galaxy_interface_multiple_histories.png)
+
+???
+
+- Cuando desee iniciar un nuevo análisis, cree un nuevo historial utilizando el icono más en la parte superior del panel del historial.
+- Siempre puede volver a una historia antigua y no hay límite en la cantidad de historias que puede crear.
+- Hay disponible una descripción general de sus historiales donde puede copiar archivos fácilmente.
+- Copiar conjuntos de datos en lugar de volver a cargarlos le permite ahorrar en su cuota.
+- Dar buenos nombres a sus historias le ayudará a realizar un seguimiento de sus análisis '
+
+---
+
+# Flujos de trabajo
+
+- Ejecute ** análisis de un extremo a otro ** con un solo clic
+
+![Interfaz de flujo de trabajo]({{site.baseurl}}/topics/introduction/images/101_28.png)
+
+- ** Extracto ** de un historial
+- ** Construya manualmente ** con el editor de flujo de trabajo
+- ** Importar ** un flujo de trabajo compartido
+
+???
+
+- Los flujos de trabajo le permiten ejecutar sus análisis con mucha facilidad.
+- Hay varias formas de crear un flujo de trabajo.
+- Los flujos de trabajo se pueden extraer automáticamente de un historial.
+- Esto significa que realiza el análisis manualmente una vez y luego puede repetirlo fácilmente en diferentes datos de entrada.
+- También puede crear flujos de trabajo a mano utilizando el editor de flujo de trabajo para conectar las herramientas.
+- O puede importar un flujo de trabajo que otra persona haya compartido con usted.
+
+
+---
+
+# Intercambio
+
+- Puedes compartir todo lo que haces en Galaxy
+     - Historias, flujos de trabajo, visualizaciones
+
+
+- Opciones para compartir
+     - Compartir con usuarios específicos
+     - Compartir a través de un enlace
+     - * Publicar * para que sea visible para todos
+
+
+![menú de datos compartidos]({{site.baseurl}}/topics/introduction/images/shared_data.png)
+
+???
+
+- Todo lo que haces en Galaxy se puede compartir.
+- Puede compartir su historial, su flujo de trabajo y sus visualizaciones.
+- Hay diferentes formas de compartir tu trabajo.
+- Puede compartirlo con usuarios específicos de Galaxy.
+- O puede obtener un enlace para compartir que puede enviar a cualquier persona.
+- Si publica su trabajo, será visible para todos.
+
+---
+
+# Aprendiendo Galaxy
+
+- Materiales de formación Galaxy([training.galaxyproject.org](https://training.galaxyproject.org))
+
+![Captura de pantalla de la página de estadísticas de gtn con 21 temas, 170 tutoriales, 159 colaboradores, 16 temas científicos y una comunidad en crecimiento]({{site.baseurl}}/topics/introduction/images/gtn_stats.png)
+
+???
+
+- Si desea obtener más información sobre Galaxy, hay una gran cantidad de tutoriales disponibles.
+- Estos tutoriales cubren una amplia gama de dominios científicos.
+
+---
+
+# Obteniendo ayuda
+
+- ** Foro de ayuda **([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Ayuda de Galaxy]({{site.baseurl}}/topics/introduction/images/galaxy_help.png)
+
+
+  - ** Gitter Chat **
+       - [Chat principal](https://gitter.im/galaxyproject/Lobby)
+       - [Galaxy Training Chat](https://gitter.im/Galaxy-Training-Network/Lobby)
+       - Muchos más canales (dominios científicos, desarrolladores, administradores)
+???
+
+- Si se queda atascado, hay formas de obtener ayuda.
+- Puede hacer sus preguntas en el foro de ayuda.
+- O puede chatear con la comunidad en Gitter.
+
+---
+
+# Únete a un evento
+
+- Muchos eventos de Galaxy en todo el mundo.
+- Horizonte de eventos: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+! [Programación del evento]({{site.baseurl}}/topics/introduction/images/event_horizon.png)
+
+???
+
+- Hay eventos frecuentes de Galaxy en todo el mundo.
+- Puede encontrar los próximos eventos en Galaxy Event Horizon.

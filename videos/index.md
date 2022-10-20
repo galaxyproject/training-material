@@ -43,7 +43,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 {% assign t = site.data[topic_id] %}
 
 	{% assign has_video = false %}
-	{% assign topic_material = site.pages | topic_filter:topic[0] %}
+	{% assign topic_material = site | topic_filter:topic[0] %}
 	{% for material in topic_material %}
 		{% if material.video %}
 			{% assign has_video = true %}

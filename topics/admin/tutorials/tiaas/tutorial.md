@@ -17,8 +17,10 @@ contributors:
   - shiltemann
 subtopic: features
 tags:
+  - ansible
   - training
   - jobs
+  - git-gat
 requirements:
   - type: "internal"
     topic_name: admin
@@ -30,20 +32,6 @@ requirements:
       - pulsar
 ---
 
-
-# Overview
-{:.no_toc}
-
-
-> ### Agenda
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Introduction
-
 Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
 Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.
@@ -53,9 +41,19 @@ resources, thus reducing queue times on the day of the training.
 This tutorial will go cover how to set up such a service on your own Galaxy server.
 
 
+> <agenda-title></agenda-title>
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tiaas" %}
+
+
 # Setting up TIaaS
 
-> ### {% icon hands_on %} Hands-on: Setup TIaaS
+> <hands-on-title>Setup TIaaS</hands-on-title>
 >
 > 1. In your `requirements.yml` add the TIaaS ansible role:
 >
@@ -63,7 +61,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -36,3 +36,5 @@
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
@@ -75,12 +73,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    And run the install step:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
 >
 > 2. In your `galaxyservers` group variables file, add the following:
 >
@@ -88,11 +88,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -214,3 +214,12 @@ telegraf_plugins_extra:
->           - timeout = "10s"
+>    @@ -234,6 +234,15 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
->    +
+>     
 >    +# TIaaS setup
 >    +tiaas_dir: /opt/tiaas
 >    +tiaas_user: tiaas
@@ -101,6 +100,10 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
 >    +tiaas_listen_url: "127.0.0.1:6000"
+>    +
+>     # TUS
+>     galaxy_tusd_port: 1080
+>     tusd_instances:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure tiaas"}
@@ -151,7 +154,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
->    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > <tip-title>Why does TIaaS get `DELETE` privileges on Galaxy's Database?</tip-title>
 >    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
 >    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 >    > users who participated in a training return to using normal (non-training) resources after the training ends.
@@ -167,7 +170,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -34,3 +34,4 @@
+>    @@ -35,3 +35,4 @@
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
 >         - dj-wasabi.telegraf
@@ -182,8 +185,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -61,4 +61,19 @@ server {
->             proxy_pass http://127.0.0.1:3000/;
+>    @@ -90,4 +90,19 @@ server {
+>             proxy_set_header Host $http_host;
 >         }
 >     
 >    +    location /tiaas {
@@ -208,7 +211,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -239,7 +242,7 @@ TIaaS should be available now! The following routes on your server are now confi
 
 Let's see it in action!
 
-> ### {% icon hands_on %} Hands-on: Using TIaaS
+> <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
 >    - Go to https://\<server\>/tiaas/new/
@@ -289,7 +292,7 @@ Let's see it in action!
 {: .hands_on}
 
 
-> ### {% icon comment %} Note: GDPR assistance
+> <comment-title>Note: GDPR assistance</comment-title>
 >
 > Since this setup tracks additional personal information (submitter name & email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.
 >
@@ -308,7 +311,7 @@ While observability for teachers or trainers is already a huge benefit, one of t
 In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
 
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+> <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
 > 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
 >
@@ -348,61 +351,53 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -140,6 +140,7 @@ galaxy_local_tools:
+>    @@ -137,6 +137,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
 >    +- hogwarts.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
 >
-> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.xml.j2`):
+> 3. We next need to configure this plugin in our job configuration (`templates/galaxy/config/job_conf.yml.j2`):
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -13,7 +13,7 @@
->                 <param id="manager">_default_</param>
->             </plugin>
->         </plugins>
->    -    <destinations default="slurm">
->    +    <destinations default="sorting_hat">
->             <destination id="local_destination" runner="local_plugin"/>
->             <destination id="pulsar" runner="pulsar_runner" >
->                 <param id="default_file_action">remote_transfer</param>
->    @@ -25,6 +25,10 @@
->                 <param id="transport">curl</param>
->                 <param id="outputs_to_working_directory">False</param>
->             </destination>
->    +        <destination id="sorting_hat" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">sorting_hat</param>
->    +        </destination>
->             <destination id="slurm" runner="slurm">
->                 <param id="singularity_enabled">true</param>
->                 <env id="LC_ALL">C</env>
->    @@ -63,6 +67,7 @@
->             <group id="testing">cores,time</group>
->         </resources>
->         <tools>
->    +        <tool id="upload1" destination="slurm"/>
->             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -16,7 +16,7 @@ runners:
+>         manager: _default_
+>     
+>     execution:
+>    -  default: slurm
+>    +  default: sorting_hat
+>       environments:
+>         local_dest:
+>           runner: local_runner
+>    @@ -73,6 +73,10 @@ execution:
+>         dynamic_cores_time:
+>           runner: dynamic
+>           function: dynamic_cores_time
+>    +    # Next year this will be replaced with the TPV.
+>    +    sorting_hat:
+>    +      runner: dynamic
+>    +      function: sorting_hat
+>     
+>     resources:
+>       default: default
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -422,3 +417,5 @@ Congratulations! you have now set up TIaaS on your Galaxy server.
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=12 %}

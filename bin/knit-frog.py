@@ -155,7 +155,11 @@ for idx, diff in enumerate(diffs):
         for line in diff[0:-2]:
             cmdhandle.write("## Run command\n")
             if 'ansible-playbook' in line:
+                cmdhandle.write("if [[ -z ${GALAXY_VERSION} ]]; then\n")
                 cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt\n")
+                cmdhandle.write("else\n")
+                cmdhandle.write(line.strip() + " -i ~/.hosts --vault-password-file ~/.vault-password.txt -e galaxy_commit_id=${GALAXY_VERSION}\n")
+                cmdhandle.write("fi\n")
             else:
                 line = line.strip()
                 line = line.replace('https://your-galaxy', 'https://$(hostname -f)')

@@ -1,0 +1,554 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Visualize Climate data with Panoply netCDF viewer",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0002-1784-2920",
+            "name": "Anne Fouilloux"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Climate 101",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ts_cities.csv"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"ts_cities.csv\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "99e7d3bd-74d3-4651-81d0-7a468624d8aa",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0afa85cd-9b3e-44a1-a528-9e293f86b500",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Copernicus Essential Climate Variables",
+            "outputs": [
+                {
+                    "name": "ofilename",
+                    "type": "netcdf"
+                }
+            ],
+            "position": {
+                "left": 10,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
+            "tool_shed_repository": {
+                "changeset_revision": "9ee8db6ffba3",
+                "name": "cds_essential_variability",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": \"{\\\"resol\\\": \\\"r1440x720\\\"}\", \"__page__\": null, \"product_type\": \"{\\\"__current_case__\\\": 0, \\\"product\\\": \\\"monthly_mean\\\", \\\"year\\\": [\\\"1980\\\", \\\"2018\\\"]}\", \"__rerun_remap_job_id__\": null, \"month\": \"[\\\"07\\\"]\", \"variable\": \"[\\\"surface_air_relative_humidity\\\"]\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+            "tool_version": "0.1.4",
+            "type": "tool",
+            "uuid": "8ad75147-599e-4a25-a7d3-22ffe5b1d59b",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "ifilename": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "climate stripes",
+            "outputs": [
+                {
+                    "name": "ofilename",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 610
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "c6f2435d680b",
+                "name": "climate_stripes",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": \"{\\\"colormap\\\": \\\"RdBu_r\\\", \\\"format_date\\\": \\\"\\\", \\\"format_plot\\\": \\\"\\\", \\\"xname\\\": \\\"\\\"}\", \"__page__\": null, \"title\": \"\\\"Climate stripes for Paris (1950-2019)\\\"\", \"__rerun_remap_job_id__\": null, \"variable\": \"\\\"tg_anomalies_paris\\\"\", \"ifilename\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "a93ace4e-5cdd-462b-9d8a-6302b9506e46",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "Grep1",
+            "tool_state": "{\"__page__\": null, \"pattern\": \"\\\"2003-07-14\\\"\", \"invert\": \"\\\"false\\\"\", \"input\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.1",
+            "type": "tool",
+            "uuid": "6aae18c2-a237-480d-9a39-e76330833607",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "in_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"min\\\"}, {\\\"__index__\\\": 1, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"max\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"true\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"false\\\"\", \"print_full_line\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "cba81741-cc48-4d90-837a-2036602c5b53",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "in_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"min\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"true\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"false\\\"\", \"print_full_line\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "3f913558-ed2b-4df0-a9f0-9224b5d7b8e1",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "in_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 370
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"max\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"true\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"false\\\"\", \"print_full_line\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "4711bd26-bb3f-4bdb-9008-db98d0327deb",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "fb4ff3c42cd3",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"code\": \"\\\"gsub(/-/,\\\\\\\"\\\\\\\\t\\\\\\\",$1){$1=$1} {print}\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"infile\": \"null\"}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "76213868-23d6-4adc-8594-0ddf218fc351",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "ifilename": {
+                    "id": 2,
+                    "output_name": "ofilename"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "map plot",
+            "outputs": [
+                {
+                    "name": "ofilename",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 730
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "706666d912d5",
+                "name": "psy_maps",
+                "owner": "climate",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": \"{\\\"colormap\\\": \\\"PiYG\\\", \\\"multiple_plot\\\": {\\\"__current_case__\\\": 0, \\\"format\\\": \\\"%Y-%m-%d %H:%M:%S\\\", \\\"ncol\\\": \\\"1\\\", \\\"nrow\\\": \\\"2\\\", \\\"selector\\\": \\\"yes\\\", \\\"time\\\": \\\"0,1\\\", \\\"title\\\": \\\"relative humidity in percentage\\\"}, \\\"projection\\\": \\\"\\\"}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"variable\": \"\\\"R\\\"\", \"ifilename\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+            "tool_version": "1.2.1",
+            "type": "tool",
+            "uuid": "1a35305f-5aed-4a30-bc80-97e7e2576c8a",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "in_file": {
+                    "id": 8,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"4\\\", \\\"op_name\\\": \\\"mean\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"true\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"true\\\"\", \"print_full_line\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"2\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "669adba3-2449-484b-8361-beee41255980",
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "in_file": {
+                    "id": 8,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"4\\\", \\\"op_name\\\": \\\"mean\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"true\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"true\\\"\", \"print_full_line\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"1\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "f85cdb40-119d-4c61-aa2e-b3a7e7df3d91",
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "in_file": {
+                    "id": 10,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"min\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"false\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"true\\\"\", \"print_full_line\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "e732dab5-a9b7-4d04-91b0-1fd70f6da7f3",
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "in_file": {
+                    "id": 10,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": \"[{\\\"__index__\\\": 0, \\\"op_column\\\": \\\"2\\\", \\\"op_name\\\": \\\"max\\\"}]\", \"__page__\": null, \"ignore_case\": \"\\\"false\\\"\", \"header_out\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"header_in\": \"\\\"false\\\"\", \"in_file\": \"null\", \"need_sort\": \"\\\"true\\\"\", \"print_full_line\": \"\\\"true\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"grouping\": \"\\\"\\\"\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "bce13f76-0adb-4857-b3d6-6c77e0a3b720",
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input1": {
+                    "id": 11,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Scatterplot w ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 670,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "9cec81e1b90e",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": \"{\\\"axis_text_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"axis_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"factor\\\": {\\\"__current_case__\\\": 0, \\\"factoring\\\": \\\"Default\\\"}, \\\"gridlinecust\\\": \\\"default\\\", \\\"legend\\\": \\\"yes\\\", \\\"plot_title_customization\\\": {\\\"__current_case__\\\": 0, \\\"axis_customization\\\": \\\"default\\\"}, \\\"points\\\": {\\\"__current_case__\\\": 0, \\\"pointoptions\\\": \\\"default\\\"}, \\\"scaling\\\": {\\\"__current_case__\\\": 0, \\\"plot_scaling\\\": \\\"Automatic\\\"}, \\\"theme\\\": \\\"bw\\\", \\\"transform\\\": \\\"none\\\", \\\"type\\\": \\\"pointslines\\\"}\", \"xlab\": \"\\\"Year (YYYY)\\\"\", \"input1\": \"null\", \"title\": \"\\\"Yearly mean temperature in Paris from 1950 to 2019\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"\\\"1\\\"\", \"yplot\": \"\\\"2\\\"\", \"ylab\": \"\\\"Temperature (degrees celcius)\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"out\": \"{\\\"additional_output_format\\\": \\\"none\\\", \\\"dpi_output_dim\\\": \\\"300.0\\\", \\\"height_output_dim\\\": \\\"7.0\\\", \\\"unit_output_dim\\\": \\\"in\\\", \\\"width_output_dim\\\": \\\"7.0\\\"}\"}",
+            "tool_version": "2.2.1+galaxy1",
+            "type": "tool",
+            "uuid": "4d3c27cf-077c-4d74-a1ba-4ef2e35f7644",
+            "workflow_outputs": []
+        }
+    },
+    "tags": ["climate"],
+    "uuid": "7bd855ac-be1d-4fe0-ad87-3ef6bb9633f6",
+    "version": 0
+}

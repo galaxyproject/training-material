@@ -1,6 +1,0 @@
-{%- if include.contributors -%}
-{%- capture people -%}
-{% for id in include.contributors %} and {% assign name = contributors[id].name | default: id -%}{{ name -}}{%- endfor -%}
-{%- endcapture -%}
-{%- endif -%}
-{{- people | remove_first: ' and ' -}}

@@ -29,7 +29,11 @@ new_tutorial_name = {
     'Workflows: Using Workflow Parameters': 'Using Workflow Parameters',
     'Exome sequencing data analysis': 'Exome sequencing data analysis for diagnosing a genetic disease',
     'Galaxy Tool Management': 'Galaxy Tool Management with Ephemeris',
-    'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring'
+    'Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring': 'Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring',
+    'Refining Genome Annotations with Apollo':'Refining Genome Annotations with Apollo (prokaryotes)',
+    'Mass spectrometry imaging 1: Loading and exploring MSI data':'Mass spectrometry imaging: Loading and exploring MSI data',
+    'Trajectory Analysis using Python (Jupyter Notebook) in Galaxy':'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy',
+    'Submitting raw sequencing reads to ENA':'Submitting sequence data to ENA'
 }
 new_topic_for_tuto = {
     'Formation of the Super-Structures on the Inactive X': 'Epigenetics',
@@ -37,7 +41,9 @@ new_topic_for_tuto = {
     'Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)': 'Epigenetics',
     'RAD-Seq Reference-based data analysis': 'Ecology',
     'RAD-Seq de-novo data analysis': 'Ecology',
-    'RAD-Seq to construct genetic maps': 'Ecology'
+    'RAD-Seq to construct genetic maps': 'Ecology',
+    'Advanced R in Galaxy': 'Foundations of Data Science',
+    'R basics in Galaxy': 'Foundations of Data Science'
 }
 new_topics = {
     'User Interface and Features': 'Using Galaxy and Managing your Data',
@@ -54,6 +60,7 @@ acceptable_topics = [
     "Development in Galaxy",
     "Ecology",
     "Epigenetics",
+    "Foundations of Data Science",
     "Galaxy Server administration",
     "Genome Annotation",
     "Imaging",

@@ -2,6 +2,8 @@
 title: How can I contribute in "advanced" mode?
 area: contributors
 layout: faq
+box_type: tip
+contributors: [shiltemann,hexylena]
 ---
 
 
@@ -17,7 +19,7 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
     - a tutorial file written in Markdown with hands-on
     - an optional slides file in Markdown with slides to support the tutorial
     - a directory with Galaxy Interactive Tours to reproduce the tutorial
-    - a directory with workflows extracted from the tutoria
+    - a directory with workflows extracted from the tutorial
     - a YAML file with the links to the input data needed for the tutorial
     - a YAML file with the description of needed tools to run the tutorial
 
@@ -60,7 +62,7 @@ To learn how to add new content, check out our [series of tutorials on creating 
 
 {% assign topic = site.data["contributing"] %}
 <ol>
-{% assign topic_material = site.pages | topic_filter:'contributing' %}
+{% assign topic_material = site | topic_filter:'contributing' %}
 {% for material in topic_material %}
  {% if material.enable != "false" %}
   {% if material.type == "introduction" %}
