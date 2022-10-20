@@ -78,7 +78,7 @@ We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.
 {: .hands_on}
 
 > <comment-title>No fitting topic for the tools in your tutorial?</comment-title>
-> If the categories in ToolShed do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on [Gitter]({{ site.gitter }}) or raise an issue on [GitHub]({{ site.github }}) explaining the aim of the tutorial. We will be happy to help you there.
+> If the categories in ToolShed do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on [Gitter]({{ site.gitter_url }}) or raise an issue on [GitHub]({{ site.github_repository }}) explaining the aim of the tutorial. We will be happy to help you there.
 {: .comment}
 
 > <comment-title>Creating a new topic</comment-title>
@@ -156,7 +156,7 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 > 4. Make the workflow accessible (publishing is not necessary)
 >
 >    {% snippet faqs/galaxy/workflows_publish.md %}
->     
+>
 {: .hands_on}
 
 
@@ -333,7 +333,7 @@ Now that you have the structure in place, you can then fill the tutorial per se.
 >
 > 1. Open the `tutorial.md` file with your favorite text editor
 > 2. Fill out the tutorial by following the [dedicated tutorial]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
->    
+>
 >    1. Add metadata on the top of the tutorial
 >    2. Add a proper introduction
 >    3. Organize the tutorial in different sections
@@ -413,6 +413,6 @@ For the next times, you can make it quicker.
 >    > <comment-title>Serving the website locally</comment-title>
 >    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
-> 
+>
 > 9. Submit it to GitHub
 {: .hands_on}
