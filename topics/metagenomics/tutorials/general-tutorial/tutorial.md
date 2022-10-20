@@ -148,7 +148,7 @@ and create a *group file*, indicating which reads belong to which samples.
 
 > <comment-title>Note</comment-title>
 >
-> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
+> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [dedicated collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 {: .comment}
 
 Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case `pampa` or `anguil`.
