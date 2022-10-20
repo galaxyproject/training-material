@@ -166,7 +166,7 @@ With the help of Mazur, you hopefully started believing that active, interactive
 
 **There is not "the" ideal teaching technique nor the "most effective" teaching technique.**
 
-You may remember from the [Nichols' steps of curriculum design](), that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
+You may remember from the Nichols' steps of curriculum design, that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
 
 More generally, to decide how to teach and choose the **most appropriate learning experience(s)**, you may use **three criteria**:
 - What is your **purpose / goal** (is it to inspire learners? is it to ensure they will remember a concept?)

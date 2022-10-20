@@ -1,4 +1,4 @@
----
+n/---
 layout: tutorial_hands_on
 
 title: "Galaxy Interactive Tools"
@@ -595,7 +595,7 @@ Congrats!
 # Installing in Galaxy
 
 We now have all the required components, we can install the tool in our
-[configured Galaxy instance](#introduction).
+configured Galaxy instance.
 This is as simple as dropping the tool XML in the right location inside
 the Galaxy core application directory, and adding the tool to our
 `tool_conf_interactive.xml` file.
