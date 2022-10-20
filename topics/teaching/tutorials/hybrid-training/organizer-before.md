@@ -21,7 +21,7 @@
     - details about the venues, including travel details, accomodation and meal suggestions
     - details about the instructors, helpers, hosts
     - sponsors (if any)
-  
+
     We created a [template of such a page](https://github.com/galaxy-carpentries/workshop-template) that can easily adapted.
 
 - Identify places you can promote your event. [Galaxy Hub](https://github.com/galaxyproject/galaxy-hub) or [Carpentries Discuss List](https://carpentries.topicbox.com/groups/discuss) are the primary places to do this
@@ -32,7 +32,7 @@
 
 - Arrange the schedule given the content, the instructor availability and the different time zones
 
-    Days are usually full-days. Starting times will depend on audience, if they travel and the different time zones, and should be chosen with the local hosts. 
+    Days are usually full-days. Starting times will depend on audience, if they travel and the different time zones, and should be chosen with the local hosts.
 
 - Identify the tool for call, e.g. [Zoom](https://zoom.us/)
 
@@ -48,7 +48,7 @@
 - Request [TiaaS infrastructure](https://galaxyproject.eu/tiaas) if using usegalaxy.eu
 - Remind instructors to arrange microphone/headphones
 - Create name badges, with space for people to specify pronouns, and send them to local hosts
-  
+
     Name badges for attendees (and helpers) are important for participants as well. At busy venues, it can help attendees to find each other and remember each others' names. For the helpers, usually with a different color border so attendees can identify people who can help them with any issues they encounter.
 
 - Prepare sign-in sheet for each location
@@ -59,5 +59,5 @@
     - Wrap up slides for the end of the workshop, including 5 minutes dedicated for filling the general feedback, remind of gitter/help/etc
 - Create the collaborative document to collect questions from participants and document answers, e.g. by copying [our template](https://drive.google.com/open?id=1tN247JWpkpPl7FvEN9gsBcmVlZfRF_B0gnEWb5L3tMc)
 - Create the collaborative document for the communication between the instructors and helpers, in order to get direct feeback from sites, e.g. by copying [our template](https://docs.google.com/document/d/1X8V_frzVd5N87zaZ7PDCvtSZozaj8XnrYj9K6Ux9i_0/edit?usp=sharing)
-- Prepare the feedback form for participants, e.g. by copying [our template]()
-- Prepare the feedback form for hosts, helpers and instructors, e.g. by copying [our template]()
+- Prepare the feedback form for participants, e.g. by copying our template
+- Prepare the feedback form for hosts, helpers and instructors, e.g. by copying our template

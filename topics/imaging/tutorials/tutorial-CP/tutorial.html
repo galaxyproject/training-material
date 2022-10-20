@@ -794,7 +794,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 20, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -814,11 +814,10 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In <span class="notranslate">DNA</span> staining of cells, nucleoli can be identified as the absence of <span class="notranslate">DNA</span> in nuclei (<a href="#nucleoli">Fig. 1</a>).<br />
-Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alte<span class="notranslate">rna</span>tive to performing new experiments.<br />
+<p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In <span class="notranslate">DNA</span> staining of cells, nucleoli can be identified as the absence of <span class="notranslate">DNA</span> in nuclei (<a href="#figure-1">Fig. 1</a>).
+Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alte<span class="notranslate">rna</span>tive to performing new experiments.
 In particular, regardless of the targeted biological process, many screens include a <span class="notranslate">DNA</span> label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
-<p><a name="nucleoli"></a></p>
 <figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
 
 <p>In this tutorial, we will analyse <span class="notranslate">DNA</span> channel images of publicly available <span class="notranslate">RNA</span>i screens to extract numerical descriptors (i.e. features) of nucleoli.
@@ -830,11 +829,10 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>1) <strong>StartingModules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to initialise the pipeline,</p>
 
-<p>2) tools performing the analysis (<a href="#high_level_view">Fig. 2</a>): identification of the nuclei, nucleoli and background, together with the feature extraction,</p>
+<p>2) tools performing the analysis (<a href="#figure-2">Fig. 2</a>): identification of the nuclei, nucleoli and background, together with the feature extraction,</p>
 
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
-<p><a name="high_level_view"></a></p>
 <figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
 
 <p>In this tutorial, you will learn how to create a <span class="notranslate">workflow</span> that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
@@ -900,8 +898,8 @@ The images and associated metadata will be retrieved from the <a href="http://id
       <blockquote class="tip">
         <div id="tip-get-the-idr-link-from-a-manual-selection-of-images" class="box-title"><button type="button" aria-controls="tip-get-the-idr-link-from-a-manual-selection-of-images-contents" aria-expanded="true" aria-label="Toggle tip box: Get the IDR link from a manual selection of images"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Get the IDR link from a manual selection of images<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#IDR_interface">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#IDR_interface">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#IDR_interface">Fig. 3</a> - 3).
-<a name="IDR_interface"></a></p>
+        <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#figure-3">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#figure-3">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#figure-3">Fig. 3</a> - 3).</p>
+
         <figure id="figure-3"><img src="../../images/tutorial-CP/IDR_interface.jpg" alt="IDR interface. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> IDR interface</figcaption></figure>
       </blockquote>
 
@@ -1823,7 +1821,7 @@ author = "Beatriz Serrano-Solano and Jean-Karim Hériché",
 title = "Nucleoli segmentation and feature extraction using CellProfiler (Galaxy Training Materials)",
 year = "2022",
 month = "10",
-day = "18"
+day = "20"
 url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
