@@ -33,7 +33,7 @@ In metagenomics, information about micro-organisms in an environment can be extr
 
 In this tutorial, we will introduce the two main types of analyses with their general principles and differences. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis.
 
-We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, [see](https://doi.org/10.1186/2049-2618-1-21)).
+We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions {% cite Rascovan2013 %}.
 
 > <agenda-title></agenda-title>
 >
