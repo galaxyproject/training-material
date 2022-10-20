@@ -151,7 +151,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >     - Homogeneous percentage of the bases
 >    > >
->    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per base_sequence_content.png "Per base sequence content")
+>    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_content.png "Per base sequence content")
 >    > >
 >    > >     - No N in the reads
 >    > >

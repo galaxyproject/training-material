@@ -9,7 +9,6 @@ objectives:
   - "Creating a Galaxy tour from scratch"
   - "Deploying and running a tour"
 time_estimation: "15m"
-subtopic: extras
 key_points:
   - "The Interactive Tours are a good training object for self-learning at its own speed"
   - "It is now easy to create an Interactive Tour and test it"
@@ -101,7 +100,7 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 [A Web browser plugin](https://github.com/TailorDev/galaxy-tourbuilder) is available to help the creation and the test (on the fly) of an interactive tour.
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="//imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="https://imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote><script async src="https://s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 > <hands-on-title>Install and start the plugin</hands-on-title>
 >

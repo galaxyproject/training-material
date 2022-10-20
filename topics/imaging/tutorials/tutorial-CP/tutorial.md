@@ -34,12 +34,11 @@ zenodo_link: ''
 # Introduction
 
 
-The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei ([Fig. 1](#nucleoli)).  
-Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.  
-In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.  
+The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei ([Fig. 1](#figure-1)).
+Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.
+In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.
 
 
-<a name="nucleoli"></a>
 ![DNA channel](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli."){: width="50%"}
 
 In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
@@ -48,15 +47,15 @@ The images and associated metadata will be retrieved from the [Image Data Resour
 
 To process and analyse the images, we will use [CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html) ({% cite McQuin_2018 %}), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. Many of these modules are now also available as tools in Galaxy.
 
-To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts: 
+To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts:
 
 1) **StartingModules** {% icon tool %} to initialise the pipeline,
 
-2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the nuclei, nucleoli and background, together with the feature extraction,
+2) tools performing the analysis ([Fig. 2](#figure-2)): identification of the nuclei, nucleoli and background, together with the feature extraction,
 
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
-<a name="high_level_view"></a>
+
 ![High-level view of the workflow](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
 In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
@@ -96,8 +95,8 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 >
 >    > <tip-title>Get the IDR link from a manual selection of images</tip-title>
 >    >
->    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102) and select in the preview of a plate a few images ((figure [Fig. 3](#IDR_interface) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#IDR_interface) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#IDR_interface) - 3).
->    > <a name="IDR_interface"></a>
+>    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102) and select in the preview of a plate a few images ((figure [Fig. 3](#figure-3) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#figure-3) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#figure-3) - 3).
+>    >
 >    > ![IDR interface](../../images/tutorial-CP/IDR_interface.jpg "IDR interface")
 >    {: .tip}
 >
@@ -118,7 +117,7 @@ In this tutorial, you will learn how to create a workflow that downloads a selec
 > > 1. The `Cy3` dye was used in the study to stain DNA. Since we want to segment the abscence of DNA, `Cy3` is the only channel that we need to download from the IDR.
 > >
 > > 2. We could upload a text file with the image ids of interest.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -139,14 +138,14 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 >       - *"Select the pattern to extract metadata from the file name"*: `field1__field2__field3__field4__field5__field6`
 >       - *"Extract metadata from"*: `All images`
 >    - NamesAndTypes
->       - *"Process 3D"*: `No, do not process 3D data` 
->       - *"Assign a name to"*: `Give every image the same name` 
->       - *"Name to assign these images"*: `DNA` 
->       - *"Select the image type"*: `Grayscale image` 
->           - *"Set intensity range from"*: `Image metadata` 
+>       - *"Process 3D"*: `No, do not process 3D data`
+>       - *"Assign a name to"*: `Give every image the same name`
+>       - *"Name to assign these images"*: `DNA`
+>       - *"Select the image type"*: `Grayscale image`
+>           - *"Set intensity range from"*: `Image metadata`
 >    - Groups
->       - *"Do you want to group your images?"*: `Yes, group the images` 
->       - *"param"*: `field1` 
+>       - *"Do you want to group your images?"*: `Yes, group the images`
+>       - *"param"*: `field1`
 >
 >
 >
@@ -161,7 +160,7 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 
 ## Segment nuclei
 
-Since we are interested in segmenting the nucleoli, you may wonder why we need to segment nuclei first. There are several reasons for that: 
+Since we are interested in segmenting the nucleoli, you may wonder why we need to segment nuclei first. There are several reasons for that:
 
 - Get the nuclei features. The intensity, size, shape, number of nucleoli per nucleus, etc. can be informative to study the nucleoli.
 
@@ -207,7 +206,7 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 >
 > > <solution-title></solution-title>
 > >
-> > In the *global* methods we have `Manual`, `Measurement`, `Minimum cross entropy`, `Otsu` and `Robust background`. For the *adaptive* ones we only have `Otsu`. Check the parameters' help to get more information on each one. 
+> > In the *global* methods we have `Manual`, `Measurement`, `Minimum cross entropy`, `Otsu` and `Robust background`. For the *adaptive* ones we only have `Otsu`. Check the parameters' help to get more information on each one.
 > >
 > {: .solution}
 >
@@ -262,10 +261,10 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 >
 >    > <comment-title></comment-title>
 >    >
->    > The `Text color` parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei. 
+>    > The `Text color` parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei.
 >    {: .comment}
 {: .hands_on}
- 
+
 
 ## Segment nucleoli
 
@@ -491,7 +490,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 >
 {: .hands_on}
 
-  
+
 > <question-title></question-title>
 >
 > Why are we measuring the granularity, texture and intensity of the original image and the nuclei only?
@@ -549,7 +548,7 @@ In this section, we will measure the image quality, the area occupied by the nuc
 >            - *"Measure the area occupied in a binary image, or in objects?"*: `Objects`
 >                - *"Enter the name of the objects to measure"*: `Nucleoli`
 >
->     
+>
 > 3. **MeasureImageIntensity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageAreaOccupied** {% icon tool %})
 >    - In *"new image"*:

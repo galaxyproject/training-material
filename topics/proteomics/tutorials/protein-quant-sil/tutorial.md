@@ -57,7 +57,7 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 > <hands-on-title>Introduction</hands-on-title>
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
-> A detailed description of the full dataset is available in the [PRIDE archive]().
+> A detailed description of the full dataset is available in the [PRIDE archive](https://www.ebi.ac.uk/pride/).
 >
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 >

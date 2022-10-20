@@ -33,7 +33,7 @@ In metagenomics, information about micro-organisms in an environment can be extr
 
 In this tutorial, we will introduce the two main types of analyses with their general principles and differences. For a more in-depth look at these analyses, we recommend our detailed tutorials on each analysis.
 
-We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions, [see](https://doi.org/10.1186/2049-2618-1-21)).
+We will use two datasets (one amplicon and one shotgun) from the same [project on the Argentinean agricultural pampean soils](https://www.ebi.ac.uk/metagenomics/projects/SRP016633). In this project, three different geographic regions that are under different types of land uses and two soil types (bulk and rhizospheric) were analyzed using shotgun and amplicon sequencing. We will focus on data from the Argentina Anguil and Pampas Bulk Soil (the original study included one more geographical regions {% cite Rascovan2013 %}.
 
 > <agenda-title></agenda-title>
 >
@@ -148,7 +148,7 @@ and create a *group file*, indicating which reads belong to which samples.
 
 > <comment-title>Note</comment-title>
 >
-> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [this]() tutorial
+> Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in Galaxy, please see [dedicated collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 {: .comment}
 
 Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case `pampa` or `anguil`.
@@ -208,7 +208,7 @@ The first step in any analysis should be to check and improve the quality of our
 
 > <comment-title></comment-title>
 >
-> For more information on the topic of quality control, please see our training materials [here]({% link topics/sequence-analysis/index.md %}).
+> For more information on the topic of quality control, please see our [dedicated training materials]({% link topics/sequence-analysis/index.md %}).
 {: .comment}
 
 
