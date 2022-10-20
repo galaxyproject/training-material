@@ -46,7 +46,7 @@ These notebooks allow you to replace any in-house script you might need to compl
 
 ![Jupyter notebook](../../images/notebook_overview.png)
 
-You can find the complete manual for Jupyter commands [here](http://jupyter-notebook.readthedocs.io/en/stable/).
+You can find the complete manual for Jupyter commands [on Read the Docs](http://jupyter-notebook.readthedocs.io/en/stable/).
 
 # Use Jupyter notebook in Galaxy
 

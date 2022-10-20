@@ -208,7 +208,7 @@ The first step in any analysis should be to check and improve the quality of our
 
 > <comment-title></comment-title>
 >
-> For more information on the topic of quality control, please see our training materials [here]({% link topics/sequence-analysis/index.md %}).
+> For more information on the topic of quality control, please see our [dedicated training materials]({% link topics/sequence-analysis/index.md %}).
 {: .comment}
 
 
