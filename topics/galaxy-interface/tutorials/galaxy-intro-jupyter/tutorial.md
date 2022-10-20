@@ -76,7 +76,7 @@ The Jupyter notebook can be started from different points. You can either open a
 
 ## Install Libraries in Jupyter
 
-You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas]() and [seaborn]() respectively allowing to manipulate data as Dataframe and to create graphs.
+You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas](https://pandas.pydata.org/) and [seaborn](https://seaborn.pydata.org) respectively allowing to manipulate data as Dataframe and to create graphs.
 
 > <hands-on-title>Install from a Conda recipe</hands-on-title>
 >
