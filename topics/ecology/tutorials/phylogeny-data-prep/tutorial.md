@@ -62,9 +62,9 @@ For this training we will use a subset of the genome (chromosome 5) from four st
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ https://zenodo.org/record/6610704#.Ypn3FzlBw5k }}) or from
->    the shared data library (`GTN - Material` -> `{{ ecology }}`
->     -> `{{ phylogenetic-data-prep }}`):
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `ecology`
+>     -> `phylogenetic-data-prep`):
 >
 >    ```
 >    https://zenodo.org/record/6610704/files/BK006939.2.genbank
