@@ -59,7 +59,7 @@ The resulting dataset is ready to be used for phylogenetic reconstruction.
 # Get data
 For this training we will use a subset of the genome (chromosome 5) from four strains of *S. cerevisiae*. The GenBank annotated sequenced were produced using 'funannotate predict annotation' (Galaxy Version 1.8.9+galaxy2) on the nucleotide sequences sequences.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
