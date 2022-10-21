@@ -33,9 +33,29 @@ module Jekyll
 
       begin
         citation_text = site.config['cached_citeproc'].render(:citation, id: @text)
-        res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
-      rescue
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page}"
+        layout = page.fetch('layout', nil)
+        if ['tutorial_slides', 'base_slides', 'introduction_slides'].include? layout
+          doi = site.config['cached_citeproc'].items[@text].doi
+          url = site.config['cached_citeproc'].items[@text].url
+          if ! doi.nil?
+            furl = "https://doi.org/#{doi}"
+          elsif ! url.nil?
+            furl = url
+          else
+            furl = nil
+          end
+
+          if furl.nil?
+            res = %Q(<span class="citation">#{citation_text}</span>)
+          else
+            res = %Q(<span class="citation"><a href="#{furl}">#{citation_text}</a></span>)
+          end
+        else
+          res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
+        end
+
+      rescue => error
+        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{error})"
         res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
       end
 

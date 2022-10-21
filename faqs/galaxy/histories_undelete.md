@@ -1,6 +1,6 @@
 ---
 title: Undeleting history
-description: undelete your deleted histories
+description: Undelete your deleted histories
 area: histories
 box_type: tip
 layout: faq

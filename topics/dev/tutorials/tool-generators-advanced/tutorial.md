@@ -40,7 +40,7 @@ contributors:
 
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -103,7 +103,7 @@ on their own workstations, preparing them for sharing and deployment to producti
 system is damaged, the Appliance can be rebuilt from scratch in a few minutes.
 
 
-> ### {% icon tip %} Under the hood:
+> <tip-title>Under the hood:</tip-title>
 >
 >  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
 >  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs and then again to test newly generated code
@@ -149,7 +149,7 @@ automated code generator in a tailored, readily deployed appliance.
 
 ## Installation
 
-> ### {% icon warning %} Security advisory!
+> <warning-title>Security advisory!</warning-title>
 >- *Please do not install the ToolFactory on any public server*
 >- Although it will only run for administrative users, it allows unlimited scripting and that exposes unwise security weakness for any public facing machine.
 >- In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that's no reason to chance your arm. They keep inventing better mice.
@@ -158,9 +158,9 @@ automated code generator in a tailored, readily deployed appliance.
 {: .warning}
 
 
-> ### {% icon hands_on %} Hands-on: Launching the Appliance
+> <hands-on-title>Launching the Appliance</hands-on-title>
 >
-> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> > <warning-title>`Pull` the images first as shown below to save time.</warning-title>
 > >
 > > If they are not found locally the first time you run `docker-compose up`, docker will build them, taking half an hour or more instead of a couple of minutes.
 > >
@@ -172,7 +172,7 @@ automated code generator in a tailored, readily deployed appliance.
 >
 > 3. Clone/Download, Change to the compose directory, and launch it:
 >
->    > ### {% icon tip %} Tip: Installing the docker files, pulling and launching the Appliance
+>    > <tip-title>Installing the docker files, pulling and launching the Appliance</tip-title>
 >    > ```bash
 >    > git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    > cd toolfactory-galaxy-server/compose
@@ -182,7 +182,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon tip %} Appliance tips
+>    > <tip-title>Appliance tips</tip-title>
 >    >
 >    >  - `docker-compose pull` and making the local export directory *are only needed the first time*.
 >    >  - Add `-d` at the end of the `docker-compose up` command to detach the terminal so you can keep working - but only after watching the process the first time.
@@ -209,7 +209,7 @@ automated code generator in a tailored, readily deployed appliance.
 >      - Or more permanently in the docker-compose.yml if you prefer.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
->    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    > <tip-title>Demonstration tools are the functional documentation</tip-title>
 >    >
 >    > - At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down
 >    > - First run startup takes about 5 minutes. Subsequent starts take less than a minute.
@@ -220,7 +220,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Patience!
+>    > <tip-title>Patience!</tip-title>
 >    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 >    > Check for Conda or other processes if things seem stuck.
 >    {: .tip}
@@ -235,7 +235,7 @@ automated code generator in a tailored, readily deployed appliance.
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Brief Guide to ToolFactory Appliance Operation
+> <hands-on-title>Brief Guide to ToolFactory Appliance Operation</hands-on-title>
 >
 > ## Generating new tools - what happens when you press `execute` on a completed ToolFactory form?
 >
@@ -271,7 +271,7 @@ automated code generator in a tailored, readily deployed appliance.
 
 # Hands-on: Learning to use the ToolFactory
 
-> ### {% icon tip %} Using an Appliance involves dependency installation that may cause long pauses...
+> <tip-title>Using an Appliance involves dependency installation that may cause long pauses...</tip-title>
 >>- There will be delays as any new dependencies are installed for the first time
 >>        - the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.
 >>        - the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.
@@ -280,7 +280,7 @@ automated code generator in a tailored, readily deployed appliance.
 {: .tip}
 
 
-> ### {% icon hands_on %} Exploring the sample tools by regenerating their original ToolFactory forms
+> <hands-on-title>Exploring the sample tools by regenerating their original ToolFactory forms</hands-on-title>
 >
 > * With the ToolFactory working and the sample history active as described above
 > * Select any of the generated toolshed archive history items.
@@ -338,7 +338,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - The demonstration returns whatever the user chose to repeat.
 
 
-> ### {% icon details %} Repeats demonstration generated tool XML
+> <details-title>Repeats demonstration generated tool XML</details-title>
 > >
 > >
 > >```xml
@@ -455,7 +455,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - The script sends them into the the collection that appears in the history after the job runs.
 - The user's history shows only one new item after it runs - it must be viewed to see all the individual contents.
 
-> ### {% icon warning %} The default generated test for output collections always passes because it doesn't test anything.
+> <warning-title>The default generated test for output collections always passes because it doesn't test anything.</warning-title>
 >
 >    - Supplying a test over-ride is recommended for collections.
 >    - Example code is shown on the sample tool's form and in the original example code below - removed from the current sample.
@@ -467,7 +467,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 >
 {: .warning}
 
-> ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
+> <details-title>`plotter` collection output demonstration tool form, generated XML and outputs</details-title>
 > >
 > > - The ToolFactory form for the plotter example tool
 > > is configured as shown below, from "rerunning" the plotter job from the sample history.
@@ -597,7 +597,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - It is clumsy and suitable only for a limited number of options.
 - Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
 
-> ### {% icon details %} `select_test` select field demonstration tool generated XML
+> <details-title>`select_test` select field demonstration tool generated XML</details-title>
 >>
 >>The ToolFactory form section for user configurable command line settings is
 >> configured as shown here for the select demonstration
@@ -686,7 +686,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
      - A lot depends on the ingenuity and preferences of the developer.
      - For specialist use and complex tools, the project developer supported tool building infrastructure is recommended.
 
-> ### {% icon details %} `planemo lint` demonstration tool generated XML
+> <details-title>`planemo lint` demonstration tool generated XML</details-title>
 > > The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.
 > >```xml
 > ><tool name="planemo_lint" id="planemo_lint" version="0.01">
@@ -799,7 +799,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 - The Prolog tool has an inbuilt script. Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
 - The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program like the `hello world` example supplied. This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
 
-> ### {% icon details %} `Prolog` and `Lisp` demonstration tools
+> <details-title>`Prolog` and `Lisp` demonstration tools</details-title>
 > >```xml
 > ><tool name="prolog_demo" id="prolog_demo" version="0.01">
 > >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
@@ -940,7 +940,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 - It allows templating - `${reference_fasta_filename}` is replaced by the current value of the `reference_fasta_filename` parameter on the tool form.
 - The pasted over-ride completely replaces the galaxyxml generated ones.
 
-> ### {% icon details %} `bwa_test_command_override` sample - the command override
+> <details-title>`bwa_test_command_override` sample - the command override</details-title>
 >> ToolFactory command over-ride section adapted from the Planemo BWA example.
 >>
 >>```
@@ -962,7 +962,7 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
   - These and other extensions are welcomed as pull requests if there is a need for them.
   - But if a tool needs them, it probably needs an experienced tool developer.
 
-> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
+> <details-title>`bwa_test_toolfactory_positional_bash` sample alternative.</details-title>
 >> ToolFactory form bash script to replace above command over-ride section:
 >>
 >>```
@@ -1075,7 +1075,7 @@ It should be there if the XML for the new tool appeared without complaint. Pleas
 
 ## Why is the form so complex?
 
-> ### {% icon details %} Summary: details needed and how they are used to generate a new tool
+> <details-title>Summary: details needed and how they are used to generate a new tool</details-title>
 >
 > #### What information is needed to generate a tool ?
 >

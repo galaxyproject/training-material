@@ -6,7 +6,7 @@ box_type: tip
 contributors: [shiltemann]
 ---
 
-FASTQ files come in various flavours. They differ in the encoding scheme they use. See our [QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}#inspect-a-raw-sequence-file) for an more detailed explanation of encoding schemes.
+FASTQ files come in various flavours. They differ in the encoding scheme they use. See our [QC tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}#inspect-a-raw-sequence-file) for a more detailed explanation of encoding schemes.
 
 Nowadays, the most commonly used encoding scheme is sanger. In Galaxy, this is the `fastqsanger` datatype. If you are using older datasets, make sure to verify the FASTQ encoding scheme used in your data.
 

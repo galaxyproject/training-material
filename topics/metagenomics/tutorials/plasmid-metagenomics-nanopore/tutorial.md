@@ -30,7 +30,7 @@ tags:
 ---
 
 # Overview
-{:.no_toc}
+
 
 Pervasive use (and misuse) of antibiotics for human disease treatment, as well as for various agricultural purposes, has resulted in the evolution of multi-drug resistant (MDR) pathogenic bacteria. The [Center for Disease Control estimates](https://www.cdc.gov/drugresistance/) that in the U.S. alone, every year at least 2 million people get an antibiotic-resistant infection, and at least 23,000 people die. Antibiotic resistance poses a major public health challenge, and its causes and mitigations are widely studied.
 
@@ -56,7 +56,7 @@ A schematic view of the workflow we will perform in this tutorial is given below
 ![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -82,7 +82,7 @@ We will use the plasmid dataset created by {% cite LiXie2018 %} for their evalua
 
 For this tutorial, in order to speed up the analysis time, we will use 6 of the 12 samples from the original study.
 
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+> <hands-on-title>Obtaining our data</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
@@ -117,7 +117,7 @@ report page.
 
 ![NanoPlot example](../../images/plasmid-metagenomics-nanopore/NanoPlot.png)
 
-> ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
+> <hands-on-title>Plotting scripts for long read sequencing data</hands-on-title>
 >
 > 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
 >    - {% icon param-select %} *"Select multifile mode"*: `batch`
@@ -133,11 +133,11 @@ plot the read length distribution of each sample:
 ![NanoPlot Output](../../images/plasmid-metagenomics-nanopore/NanoPlot_output.png)
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What was the mean read length for this (RB01) sample?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 4906.3
 > >
 > > This can be determined by looking at the NanoStats or HTML output of NanoPlot RB01.
@@ -170,7 +170,7 @@ the Minimap2 publication ({% cite Li2018 %}).
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Minimap2.png)
 
 
-> ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
+> <hands-on-title>Pairwise sequence alignment</hands-on-title>
 >
 > 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters
 >    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -224,7 +224,7 @@ Thus the per-base error rate is similar to the raw input reads.
 
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png "Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.")
 
-> ### {% icon hands_on %} Hands-on: De novo assembly
+> <hands-on-title>De novo assembly</hands-on-title>
 >
 > 1. {% tool [miniasm](toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0) %} with the following parameters
 >    - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
@@ -249,18 +249,18 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 
 The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.
 
-> ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
+> <hands-on-title>Pairwise sequence alignment</hands-on-title>
 >
 > 1. {% tool [GFA to Fasta](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1) %} with the following parameters
 >   - {% icon param-collection %} *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
 >
->     > ### {% icon question %} Question
+>     > <question-title></question-title>
 >     >
 >     > How many contigs do we have for the RB05 sample after de novo assembly?
 >     > <br><br>
 >     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
 >     >
->     > > ### {% icon solution %} Solution
+>     > > <solution-title></solution-title>
 >     > > 25
 >     > >
 >     > > This can be determined by looking at the NanoStats output of NanoPlot.
@@ -290,7 +290,7 @@ It supports data produced by both Pacific Biosciences and Oxford Nanopore Techno
 ![Consensus Module](../../images/plasmid-metagenomics-nanopore/Racon.png)
 
 
-> ### {% icon hands_on %} Hands-on: Consensus module
+> <hands-on-title>Consensus module</hands-on-title>
 >
 > 1. {% tool [Racon](toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13) %} with the following parameters
 >   - {% icon param-collection %} *"Sequences"*: The `Plasmids` dataset collection
@@ -320,20 +320,20 @@ By visualizing these assembly graphs, Bandage allows users to better understand,
 ![Bandage GUI](../../images/plasmid-metagenomics-nanopore/Bandage.png)
 
 
-> ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
+> <hands-on-title>Visualising de novo assembly graphs</hands-on-title>
 >
 > 1. {% tool [Bandage image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters
 >   - {% icon param-collection %} *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
 >
 > 2. Explore {% icon galaxy-eye %} the output images
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > In how many samples were the full plasmid sequences assembled?
 > >
 > > Hint: what shape do you expect plasmid molecules to be?
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > Ideally, we want to see circular assemblies, indicating the full plasmid sequence was resolved.
 > > > This is not the case for most of the samples, but we will improve our assemblies in the next section!
 > > {: .solution }
@@ -366,7 +366,7 @@ The assembly tools we used in this tutorial are all implemented in **Unicycler**
 
 Let's try it on our data!
 
-> ### {% icon hands_on %} Hands-on: Unicycler assembly
+> <hands-on-title>Unicycler assembly</hands-on-title>
 >
 > 1. {% tool [Create assemblies with Unicycler](toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0) %} with the following parameters
 >   - {% icon param-select %} *"Paired or Single end data"*: `None`
@@ -389,11 +389,11 @@ Let's try it on our data!
 >
 > 5. Repeat this comparison for the other samples.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > For which samples has the plasmid assembly improved?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
 >    > {: .solution }
 >    {: .question}
@@ -416,16 +416,16 @@ It relies on the neural network models trained on full genome and plasmid sequen
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/PlasFlow.png)
 
 
-> ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
+> <hands-on-title>Prediction of plasmid sequences</hands-on-title>
 >
 > 1. {% tool [PlasFlow](toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0) %} with the following parameters
 >   - {% icon param-collection %} *"Sequence Reads"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > What is the classification of contig_id 0 in RB10? (Hint: Check the probability table created by PlasFlow)
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > plasmid.Proteobacteria
 > > >
 > > > This can be determined by looking at the 5th column of the probability table.
@@ -462,18 +462,18 @@ and compiles a summary report of detected antimicrobial resistance genes.
 ![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/StarAmr.png)
 
 
-> ### {% icon hands_on %} Hands-on: Prediction of AMR genes
+> <hands-on-title>Prediction of AMR genes</hands-on-title>
 >
 > 1. {% tool [staramr](toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2) %} with the following parameters
 >   - {% icon param-collection %} *"genomes"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
 >
-> > ### {% icon question %} Question
+> > <question-title></question-title>
 > >
 > > Which samples contained the resistance gene: dfrA17?
 > >
 > > Hint: Check the resfinder.tsv created by staramr
 > >
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > RB01, RB02, and RB10
 > > >
 > > > This can be determined by looking at the 2nd column of the resfinder.tsv output (and the first column for the sample names).
@@ -498,11 +498,11 @@ To get more information about these antibiotic resistant genes, you can check th
 
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the resistance mechanism of the *dfrA17* gene?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > antibiotic target replacement
 > >
 > > This can be determined by searching for [the gene on the CARD database](https://card.mcmaster.ca/ontology/39294)

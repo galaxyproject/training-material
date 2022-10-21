@@ -20,7 +20,7 @@ function findResources(startPath) {
 				resources.push(x);
 			});
 		} else {
-			if(filename.indexOf('.') != 0 && filename.indexOf('_site') != 0){
+			if(filename.indexOf('.') != 0 && filename.indexOf('_site') != 0 && !stat.isSymbolicLink()){
 				resources.push(filename);
 			}
 		}

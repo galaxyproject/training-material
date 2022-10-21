@@ -1,17 +1,18 @@
 #!/usr/bin/env ruby
 require 'yaml'
 require 'kwalify'
+require './bin/gtn.rb'
 
-contributors_schema = YAML.load_file('bin/schema-contributors.yaml')
 
 # Any error messages
 errs = []
 
-# Contributors
-CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+
+CONTRIBUTORS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-contributors.yaml')
+CONTRIBUTORS_SCHEMA = automagic_loading(CONTRIBUTORS_SCHEMA_UNSAFE)
 
 # Build validators now that we've filled out the subtopic enum
-$contribs_validator = Kwalify::Validator.new(contributors_schema)
+$contribs_validator = Kwalify::Validator.new(CONTRIBUTORS_SCHEMA)
 
 
 def validate_document(document, validator)
