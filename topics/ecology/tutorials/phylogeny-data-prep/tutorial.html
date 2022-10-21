@@ -1,0 +1,1516 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Preparing genomic data for phylogeny reconstruction</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Preparing genomic data for phylogeny reconstruction" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="1970-01-01 00:33:42 +0000" />
+<meta name="DC.creator" content="Miguel Roncoroni" />
+<meta name="DC.creator" content="Brigida Gallone" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Preparing genomic data for phylogeny reconstruction" />
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/phylogeny-data-prep/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+        
+        
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-10-01/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html" title="Version 2022-10-01">2022-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-08-01/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html" title="Version 2022-08-01">2022-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "1970-01-01 00:33:42 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Preparing genomic data for phylogeny reconstruction",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Preparing genomic data for phylogeny reconstruction' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html",
+  "timeRequired": "PT3H",
+  "keywords": "ecology",
+  "description": "The questions this  addresses are:\n - How do I find a set of common proteins (orthologs) across related species or strains?\n - How do I organize a set of orthologs to infer evolutionary relations between species or strains (phylogenetic reconstruction)?\n\n\\nThe objectives are:\n - Mask repetitive elements from a genome\n - Annotate (predict protein-coding genes) the genomes of the samples to compare\n - Find a set of common proteins across the samples (orthologs)\n - Align orthologs across samples\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/general-introduction/slides.html",
+      "name": "An Introduction to Genome Assembly",
+      "description": "Slides for 'An Introduction to Genome Assembly' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/general-introduction/tutorial.html",
+      "name": "An Introduction to Genome Assembly",
+      "description": "Hands-on for 'An Introduction to Genome Assembly' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/",
+      "name": "Miguel Roncoroni",
+      "image": "https://avatars.githubusercontent.com/roncoronimiguel",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/brigidagallone/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/brigidagallone/",
+      "name": "Brigida Gallone",
+      "image": "https://avatars.githubusercontent.com/brigidagallone",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3045-5949",
+      "orcid": "https://orcid.org/0000-0003-3045-5949"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/",
+      "name": "Miguel Roncoroni",
+      "image": "https://avatars.githubusercontent.com/roncoronimiguel",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/brigidagallone/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/brigidagallone/",
+      "name": "Brigida Gallone",
+      "image": "https://avatars.githubusercontent.com/brigidagallone",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3045-5949",
+      "orcid": "https://orcid.org/0000-0003-3045-5949"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-ecology">
+    <h1 data-toc-skip>Preparing genomic data for phylogeny reconstruction</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/roncoronimiguel/" class="contributor-badge contributor-roncoronimiguel"><img src="https://avatars.githubusercontent.com/roncoronimiguel?s=27" alt="Avatar">Miguel Roncoroni</a>
+
+
+
+<a href="/training-material/hall-of-fame/brigidagallone/" class="contributor-badge contributor-brigidagallone"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/brigidagallone?s=27" alt="Avatar">Brigida Gallone</a>
+
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Overview</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do I find a set of common proteins (orthologs) across related species or strains?</p>
+</li>
+        
+        <li><p>How do I organize a set of orthologs to infer evolutionary relations between species or strains (phylogenetic reconstruction)?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Mask repetitive elements from a genome</p>
+</li>
+        
+        <li><p>Annotate (predict protein-coding genes) the genomes of the samples to compare</p>
+</li>
+        
+        <li><p>Find a set of common proteins across the samples (orthologs)</p>
+</li>
+        
+        <li><p>Align orthologs across samples</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/assembly">Assembly</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> An Introduction to Genome Assembly:
+                            
+                                <a href="/training-material/topics/assembly/tutorials/general-introduction/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/assembly/tutorials/general-introduction/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/6610704">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/phylogeny-data-prep/workflows/" title="Workflows" alt="Preparing genomic data for phylogeny reconstruction workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 4, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <p>A robust and well-resolved phylogenetic classification is essential to understand genetic relationships within and between species and the evolution of their phenotypic diversity. In the last decade the genomic revolution has represented a drastic change in the amount of data used for phylogenetic inference. The single-gene approach using universal phylogenetic markers for the different lineages across the tree of life, is now being replaced by the assembly of taxon-rich and genome-scale data matrices, the so called phylogenomic approach.</p>
+
+<p>Molecular sequence data can be used to construct a phylogeny by comparing differences between nucleotide or amino acid sequences across species or strains, a technique called phylogenomics. <span class="citation"><a href="#Young2019">Young and Gillung 2019</a></span> have written a comprehensive review on the topic of phylogenomics.</p>
+
+<p>In this tutorial we prepare genetic sequence data for phylogenetic reconstruction, using sequences from chromosome 5 of five strains of the yeast <em>Saccharomyces cerevisiae</em>.</p>
+
+<p>To prepare the data, we will:</p>
+<ol>
+  <li>Predict protein coding genes from the genome using Funannotate</li>
+  <li>Find the proteins that are present in more than one genome, called orthologs, using Proteinortho and extract a subset with orthologs that are present in all samples.</li>
+  <li>Align each set of orthologs using ClustalW.</li>
+</ol>
+
+<p>The resulting dataset is ready to be used for phylogenetic reconstruction.</p>
+
+<p><strong>If you are starting from sequence <span class="notranslate">reads</span>, please follow
+<a href="/training-material/topics/assembly/tutorials/general-introduction/tutorial.html">An Introduction to Genome Assembly</a>, and the appropriate genome assembly training for your sequencing technology from GTN’s <a href="/training-material/topics/assembly/">Assembly</a> section</strong></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#protein-coding-gene-prediction" id="markdown-toc-protein-coding-gene-prediction">Protein coding gene prediction</a>    <ol>
+      <li><a href="#mask-repetitive-sequences" id="markdown-toc-mask-repetitive-sequences">Mask repetitive sequences</a></li>
+      <li><a href="#annotate-with-funannotate" id="markdown-toc-annotate-with-funannotate">Annotate with Funannotate</a></li>
+      <li><a href="#extract-orfs-into-fasta-files" id="markdown-toc-extract-orfs-into-fasta-files">Extract ORFs into FASTA files</a></li>
+    </ol>
+  </li>
+  <li><a href="#find-orthologs" id="markdown-toc-find-orthologs">Find orthologs</a>    <ol>
+      <li><a href="#quality-control-with-busco" id="markdown-toc-quality-control-with-busco">Quality control with <strong>Busco</strong></a></li>
+      <li><a href="#extract-proteins-with-proteinortho" id="markdown-toc-extract-proteins-with-proteinortho">Extract proteins with Proteinortho</a></li>
+    </ol>
+  </li>
+  <li><a href="#align-ortholog-sequences" id="markdown-toc-align-ortholog-sequences">Align ortholog sequences</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get data</h1>
+<p>For this training we will use a subset of the genome (chromosome 5) from four strains of <em>S. cerevisiae</em>. The GenBank annotated sequenced were produced using ‘funannotate predict annotation’ (<span class="notranslate">Galaxy</span> Version 1.8.9+<span class="notranslate">galaxy</span>2) on the nucleotide sequences sequences.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">
+ -&gt;</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6610704/files/BK006939.2.genbank
+https://zenodo.org/record/6610704/files/BK006939.2.genome.fasta
+https://zenodo.org/record/6610704/files/CM000925.1.genbank
+https://zenodo.org/record/6610704/files/CM000925.1.genome.fasta
+https://zenodo.org/record/6610704/files/CM005043.2.genbank
+https://zenodo.org/record/6610704/files/CM005043.2.genome.fasta
+https://zenodo.org/record/6610704/files/CM005299.1.genbank
+https://zenodo.org/record/6610704/files/CM005299.1.genome.fasta
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li>Optional: Rename each dataset to its accession number followed by ‘.genome.fasta’ or ‘.genbank’.</li>
+    <li>
+      <p>Group the datasets into <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">collections</a>. These will ease data handling and help minimize the clutter in your history. Make a collection of nucleotide sequences and another of protein sequences.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-creating-a-dataset-collection" class="box-title"><button type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>  <li>Check all the datasets in your history you would like to include</li>  <li>    <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>    <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>  </li>  <li>Enter a name for your collection</li>  <li>Click <strong>Create List</strong> to build your collection</li>  <li>Click on the checkmark icon at the top of your history again</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="protein-coding-gene-prediction">Protein coding gene prediction</h1>
+
+<h2 id="mask-repetitive-sequences">Mask repetitive sequences</h2>
+
+<p>Before we can annotate the genome, we will prepare the data by masking repetitive sequences in the genome.
+Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account (<a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">see RepeatMasker tutorial for more details</a>).
+We use <strong>RepeatMasker</strong>
+<span class="citation"><a href="#RepeatMasker">Smit <i>et al.</i> 2013</a></span>, a program that screens <span class="notranslate">DNA</span> sequences for interspersed repeats and low complexity <span class="notranslate">DNA</span> sequences.
+This program has historically made use of <a href="https://www.girinst.org/repbase/update/index.html">RepBase</a> (<span class="citation"><a href="#Kohany2006-ks">Kohany <i>et al.</i> 2006</a></span>), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use <a href="https://www.dfam.org/home">Dfam</a> (<span class="citation"><a href="#Storer2021">Storer <i>et al.</i> 2021</a></span>) an open collection of Transposable Element <span class="notranslate">DNA</span> sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.</p>
+
+<p>RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (<code class="language-plaintext highlighter-rouge">BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence</code>) to leave only the accession number (<code class="language-plaintext highlighter-rouge">&gt;BK006939.2</code>) by using a regular <span class="notranslate">expression</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-mask-repetitive-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mask repetitive sequences</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset collection)</li>
+        <li>In <em>“Replacement”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Replacement”</em>
+              <ul>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(&gt;[^ ]+).+</code></li>
+                <li>
+                  <p><em>“Replace with:”</em>: <code class="language-plaintext highlighter-rouge">\1</code></p>
+
+                  <blockquote class="comment">
+                    <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+                    <p><code class="language-plaintext highlighter-rouge">\1</code> replaces the text in the header with the first matched text in the header, the accession number in this case.</p>
+                  </blockquote>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic <span class="notranslate">DNA</span>”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Repeat library source”</em>: <code class="language-plaintext highlighter-rouge">DFam (curated only, bundled with RepeatMasker)</code>
+          <ul>
+            <li><em>“Select species name from a list?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+              <ul>
+                <li><em>“Repeat source species”</em>: <code class="language-plaintext highlighter-rouge">"Saccharomyces cerevisiae"</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>If you don’t select the species from the list, you must provide a species name (“Saccharomyces cerevisiae” in this example). In principal, all unique clade names occurring in <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/taxonomyhome.html">NCBI taxonomy database</a> can be used for species. Capitalization is ignored, multiple words need to bound by apostrophes. Not all “common” English names occur in the taxonomy database. Using Latin names is always safest.</p>
+      </blockquote>
+    </li>
+    <li>Inspect the ‘RepeatMasker masked sequence on data’ output file. Scroll down and you will find stretches of ‘N’ on the location of repetitive sequences. The file is now ready for annotation with Funannotate.</li>
+  </ol>
+</blockquote>
+
+<h2 id="annotate-with-funannotate">Annotate with Funannotate</h2>
+
+<p>We will predict protein-coding genes from genomic sequences using <a href="https://funannotate.readthedocs.io/">Funannotate</a> (<span class="citation"><a href="#Young2019">Young and Gillung 2019</a></span>), which collects evidence from different ab-initio gene predictors as well as from <span class="notranslate">RNA</span>-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>If you would like to learn about genome annotation in more depth, the GTN has a <a href="/training-material/topics/genome-annotation">section</a> dedicated to training on genome annotation, including a hands-on tutorial on <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannotate</a>.</p>
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="warning-slow-step-ahead"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Slow Step Ahead!</h3>
+  <p>Even for a small dataset, Funannotate can take a very long time to run. You can skip this step and use the Genbank files downloaded from Zenodo for the following step. These were generated using Funannotate as described in the hands-on below.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-annotate-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotate genome</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+      <ul class="tip">
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">output_masked_genome</code> (output of <strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Organism”</em>:
+          <ul>
+            <li><em>“Name of the species to annotate”</em>: <code class="language-plaintext highlighter-rouge">Saccharomyces cerevisiae</code></li>
+            <li><em>“Is it a fungus species?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Ploidy of assembly”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Evidences”</em>:
+          <ul>
+            <li><em>“Select protein evidences”</em>: <code class="language-plaintext highlighter-rouge">Use UniProtKb/SwissProt (from selected Funannotate database)</code>
+              <blockquote>
+                <h3 id="tip-tip"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+
+                <p>If available, include m<span class="notranslate">RNA</span> and/or ESTs in this evidence section to increase sensitivity of predictions.</p>
+              </blockquote>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul>
+        <li>In <em>“Busco”</em>:
+          <ul>
+            <li><em>“BUSCO models to align”</em>: <code class="language-plaintext highlighter-rouge">saccharomycetes</code></li>
+            <li><em>“Initial Augustus species training set for BUSCO alignment”</em>: <code class="language-plaintext highlighter-rouge">saccharomyces</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Augustus settings (advanced)”</em>:
+          <ul>
+            <li><em>“Minimum number of models to train Augustus”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>When annotating full genomes, increase the number of <em>‘Minimum number of models to train Augustus’</em> to an appropriate value. For the small sample dataset used here, values larger than 15 will result in failure.</p>
+      </blockquote>
+    </li>
+    <li>Inspect the output GenBank file. The FEATURES section contains the genome annotation of protein predictions, their location and their translation. Each predicted protein is given a unique ID, which will become the FASTA header in the next step.</li>
+  </ol>
+</blockquote>
+
+<h2 id="extract-orfs-into-fasta-files">Extract ORFs into FASTA files</h2>
+
+<p>In this step, we extract the protein sequences from the GenBank files into multi-FASTA files. Additionally, we modify the headers to include the accession number of the sample. This creates an unique accession-proteinID header for each predicted protein, and will allow us to retrieve them after we combine all predicted proteins into one multi-FASTA file.</p>
+
+<p>So far, we have kept sequence files in a collection. Now we will combine all predicted proteins from all samples into one big multi-fasta file. Later, we will retrieve ortholog sequences from this file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-orfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract ORFs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02"><strong>Extract ORF</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gene bank file”</em>: <code class="language-plaintext highlighter-rouge">annot_gbk</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> - or the genbank files downloaded from Zenodo)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">aa_output</code> (output of <strong>Extract ORF</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">&gt;([^ ]+).+</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">&gt;#{input_name}_\1</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Is the number of predicted ORFs the same across the samples?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>No, the number of predicted ORFs ranges from 193 to 199.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="find-orthologs">Find orthologs</h1>
+
+<p>Orthologs are genes in different species evolved from a common ancestral gene by a speciation (lineage-splitting) event and contain the information needed for building phylogenies. The input for this step is the collection of multi-FASTA extracted from the GenBank file and modified to have unique headers.
+The result file ‘orthology-groups’ contains one row per orthogroup and one column per sample.</p>
+
+<p>Next, we select orthogroups where all the species are represented by only one protein, 1:1 single copy orthologs (a total of 4 proteins per orthogroup for this dataset).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-find-and-filter-orthologs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: find and filter orthologs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1"><strong>Proteinortho</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+<span class="notranslate">galaxy</span>2.9.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input fasta files (&gt;2)”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Activate synteny feature (POFF)”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">proteinortho</code> (output of <strong>Proteinortho</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1==4 and c2==4</code></li>
+      </ul>
+    </li>
+    <li>Inspect the ‘orthology-groups’ tabular file.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>
+      <p>Inspect the the ‘orthology-groups’ tabular file.</p>
+
+      <ol>
+        <li>Do any samples contain more than one gene for any given orthogroup?</li>
+        <li>What is the name given to these homologous genes within the same genome?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <ol>
+          <li>Yes, <em>CM000925.1</em> contains two genes on the first orthogroup.</li>
+          <li>Paralogs. These are gene copies created by a duplication event within the same genome.</li>
+        </ol>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Look at the filtered orthogroups.</p>
+      <ol>
+        <li>How many orthogroups are represented once only in all four samples?</li>
+      </ol>
+
+      <blockquote class="solution">
+        <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+        <ol>
+          <li>173</li>
+        </ol>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="quality-control-with-busco">Quality control with <strong>Busco</strong></h2>
+
+<p>Busco is a dataset of nearl-universal, single-copy orthologs.
+Here we use it for quality control of the assembly and annotation produced above.
+It outputs a proxy of completeness, duplication and fragmentation of the annotation (Busco can also be used to assess the completeness of a genome assembly).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-qc-with-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> QC with Busco</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Proteome</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Saccharomycetes</code></li>
+        <li>In <em>“Advanced Options”</em>:
+          <ul>
+            <li><em>“Augustus species model”</em>: <code class="language-plaintext highlighter-rouge">Use the default species for selected lineage</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip</h3>
+        <p>Make sure you select the ‘lineage’ closest to the species(s) you are analyzing.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>The <a href="https://busco.ezlab.org/busco_userguide.html#complete">Complete (‘C’) metric</a> stands for complete Busco genes identified. Look at the Busco output file ‘Short summary’ for sample BK006939.2. What is the ‘C’ number?</li>
+    <li>Why is it so low?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>4.0%</li>
+      <li>Our dataset contains only chromosome 5 of the yeast genome.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="extract-proteins-with-proteinortho">Extract proteins with Proteinortho</h2>
+
+<p>Next we extract 1:1 single copy orthologs and generate one multi fasta file per ortholog.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-protein-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: extract protein sequences</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1"><strong>Proteinortho grab proteins</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+<span class="notranslate">galaxy</span>2.9.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input fasta files”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Query type”</em>: <code class="language-plaintext highlighter-rouge">orthology-groups output file</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A orthology-groups file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output is a collection of multi-fasta ortholog files. All species are represented in each file and are ready to be aligned.</p>
+
+<h1 id="align-ortholog-sequences">Align ortholog sequences</h1>
+
+<p>Alignment of sequences allows cross-species (or other taxonomic level, strain, taxa) comparison. An alignment is a hypothesis of positional homology between bases/amino acids of different sequences. A correct alignment is crucial for phylogenetic inference. Here we use ClustaW, a well-established pairwise sequence aligner.</p>
+
+<p>First we modify the headers of the multi-fasta file, such that only the sample name is retained. This is important for future conatenation of alignment into a supermatrix (see Maximum likelihood GTN training)</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-align-orthologs-with-clustalw"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align orthologs with ClustalW</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">listproteinorthograbproteins</code> (output of <strong>Proteinortho grab proteins</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(&gt;[^_]+).+</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">Protein sequences</code></li>
+        <li><em>“Output alignment format”</em>: <code class="language-plaintext highlighter-rouge">FASTA format</code></li>
+        <li><em>“Output complete alignment (or specify part to output)”</em>: <code class="language-plaintext highlighter-rouge">Complete alignment</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Open the ClustalW output ‘queryOrthoGroup121.fasta’ and its corresponding multifasta input. You can compare them side by side activating the ‘Scratchbook’ on the top panel. What is the main difference between the sequences in the unaligned multifasta (input) and the ClustalW output multifasta?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Two of the sequences from this orthogroup are truncated (early stop codon). The alignment program inserts ‘-‘ to represent indels in the alignment.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>In this tutorial, you have prepared genome sequence data for phylogenetic analysis. First, you have extracted information from these in the form of predicted protein sequences. You then grouped the predicted proteins into orthogroups and aligned them. These aligned sequences can now be used for reconstructing a phylogeny and building a phylogenetic tree.</p>
+
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>You now are able to</p>
+</li>
+                        
+                        <li><p>Predict proteins in a nucleotide sequence <em>de-novo</em> using <strong>funannotate_predict</strong></p>
+</li>
+                        
+                        <li><p>Find orthologs across different samples with <strong>orthofinder</strong></p>
+</li>
+                        
+                        <li><p>Align orthologs with <strong>ClustalW</strong> in preparation for phylogeny reconstruction <!-- link to phylogeny reconstruction training. --></p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Kohany2006-ks">Kohany, O., A. J. Gentles, L. Hankus, and J. Jurka, 2006 <b>Annotation, submission and screening of repetitive elements in Repbase: RepbaseSubmitter and Censor</b>. BMC Bioinformatics 7: 474.</li>
+<li id="RepeatMasker">Smit, A. F. A., R. Hubley, and P. Green, 2013 <b>RepeatMasker Open-4.0</b>.</li>
+<li id="Young2019">Young, A. D., and J. P. Gillung, 2019 <b>Phylogenomics — principles,  opportunities and pitfalls of big-data phylogenetics</b>. Systematic Entomology 45: 225–247. <a href="https://doi.org/10.1111/syen.12406">10.1111/syen.12406</a></li>
+<li id="Storer2021">Storer, J., R. Hubley, J. Rosen, T. J. Wheeler, and A. F. Smit, 2021 <b>The Dfam community resource of transposable element families,  sequence models,  and genome annotations</b>. Mobile DNA 12: <a href="https://doi.org/10.1186/s13100-020-00230-y">10.1186/s13100-020-00230-y</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Preparing genomic data for phylogeny reconstruction (Ecology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">Miguel Roncoroni, Brigida Gallone, 2022 <b>Preparing genomic data for phylogeny reconstruction (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+<code id="citation-code">@misc{ecology-phylogeny-data-prep,
+author = "Miguel Roncoroni and Brigida Gallone",
+title = "Preparing genomic data for phylogeny reconstruction (Galaxy Training Materials)",
+year = "2022",
+month = "07",
+day = "04"
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/phylogeny-data-prep/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
