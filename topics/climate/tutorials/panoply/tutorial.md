@@ -14,7 +14,7 @@ objectives:
 - Learn how Panoply plots are exported to Galaxy
 time_estimation: 1H
 key_points:
-- Inspect and view netCDF data with netCDF
+- Inspect and view netCDF data with Panoply
 - Interact with Galaxy to save your plots
 tags:
 - interactive-tools
