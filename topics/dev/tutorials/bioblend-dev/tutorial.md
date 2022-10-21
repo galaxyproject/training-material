@@ -195,7 +195,7 @@ The classic approach for accessing the Galaxy API is using the various clients a
 > >
 > > The output of the classic BioBlend code is provided as JSON, which the user can continue to manipulate themselves. The BioBlend.objects code provides the same information, but in the format of a Python object. This has various properties which the user can access, using for example `name` or `id`.
 > >
-> > You can view numerous examples of both [here](https://github.com/galaxyproject/bioblend/tree/main/docs/examples).
+> > You can view [numerous examples of both here](https://github.com/galaxyproject/bioblend/tree/main/docs/examples).
 > {: .solution }
 {: .question}
 
