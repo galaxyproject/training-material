@@ -137,7 +137,7 @@ This section provides brief descriptions of the core concepts of the Galaxy inte
 
 BioBlend provides separate clients for interacting with each of these entities. For example, the BioBlend client for jobs is the `JobsClient` class. The source code for each `Client` can be found under [bioblend/galaxy/](https://github.com/galaxyproject/bioblend/tree/main/bioblend/galaxy).
 
-<!-- This is the syntax for a defintion list in markdown, it's semantically the most correct option here -->
+<!-- This is the syntax for a definition list in markdown, it's semantically the most correct option here -->
 
 Tool
 : A Galaxy tool packages a particular piece of scientific software, keeping track of its required dependencies. It also contains additional metadata such as the BibTex references to the associated research paper(s). Tools generally take datasets and/or dataset collections as inputs and produce new datasets and/or collections as outputs.
@@ -195,7 +195,7 @@ The classic approach for accessing the Galaxy API is using the various clients a
 > >
 > > The output of the classic BioBlend code is provided as JSON, which the user can continue to manipulate themselves. The BioBlend.objects code provides the same information, but in the format of a Python object. This has various properties which the user can access, using for example `name` or `id`.
 > >
-> > You can view numerous examples of both [here](https://github.com/galaxyproject/bioblend/tree/main/docs/examples).
+> > You can view [numerous examples of both here](https://github.com/galaxyproject/bioblend/tree/main/docs/examples).
 > {: .solution }
 {: .question}
 
