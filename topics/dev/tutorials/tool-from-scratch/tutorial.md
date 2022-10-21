@@ -573,6 +573,7 @@ We will now add a useful macro entry. With the Galaxy ecosystem is becoming more
 >     <token name="@VERSION_SUFFIX@">0</token>
 > </macros>
 >
+> <import>bellerophon_macros.xml</import>
 > <expand macro="bio_tools"/>
 >
 > ```
@@ -1022,7 +1023,7 @@ Multiple citations can be added by using additional citation tags.
 
 ## Final wrapper
 
-With all sections complete, the final wrapper for bellerophon can be found [here](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
+With all sections complete, the final wrapper for bellerophon can be found [in the IUC GitHub repository](https://github.com/galaxyproject/tools-iuc/blob/master/tools/bellerophon/bellerophon.xml).
 
 ## Toolshed file
 
