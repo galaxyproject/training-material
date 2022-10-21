@@ -569,7 +569,7 @@ Output:
 Here if two collection have identical dataset names, a dataset is chosen from the *first* collection.
 
 
-**Keep first instance**
+**Keep last instance**
 
 Input:
 
