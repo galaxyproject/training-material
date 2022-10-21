@@ -285,7 +285,7 @@ The generated tutorial is structured with:
 
 ## Adding images with captions
 
-To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`![proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
+To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`!​[proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -295,11 +295,11 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 {% raw %}
 ```markdown
-![A textual description of the image](../images/image.png "Example of an image with a caption")
+!​[A textual description of the image](../images/image.png "Example of an image with a caption")
 ```
 {% endraw %}
 
-We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
+We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text]​(#figure-nb)` (changing `nb` with the image's number).
 
 ### Guidelines on Alt vs Figcaption Text
 
@@ -317,7 +317,7 @@ As an example for this image:
 
 {% raw %}
 ```markdown
-![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
+!​[Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
 ```
 {% endraw %}
 
