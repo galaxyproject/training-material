@@ -1,5 +1,5 @@
 ---
-title: How to set "Data Privacy Features"?
+title: How to set Data Privacy Features?
 area: histories
 box_type: tip
 layout: faq
@@ -19,7 +19,8 @@ Below are three optional steps to setting private Histories, a user can make use
    - On the second input with a label of **access**
    - Search for the name of the user to grant permission
    - Click on **save permission**
-   - [Watch animation](https://galaxyproject.org/learn/privacy-features/set-perm.gif)
+
+   ![gif of the process described above, in Galaxy](https://galaxyproject.org/learn/privacy-features/set-perm.gif)
 
    *Note*: Adding additional roles to the 'access' permission along with your "private role" does not do what you may expect. Since roles are always logically added together, only you will be able to access the dataset, since only you are a member of your "private role".
 
@@ -28,7 +29,8 @@ Below are three optional steps to setting private Histories, a user can make use
    - Open the History Options galaxy-gear menu {% icon galaxy-gear %} at the top of your history panel
    - Click the **Make Private** option in the dropdown menu available
    - Sets the default settings for all new datasets in this history to private.
-   - [Watch animation](https://galaxyproject.org/learn/privacy-features/this-hist-priv-perm.gif)
+
+   ![gif of the process described above, in Galaxy](https://galaxyproject.org/learn/privacy-features/this-hist-priv-perm.gif)
 
 3. Set the default privacy settings for new histories
 
@@ -36,6 +38,7 @@ Below are three optional steps to setting private Histories, a user can make use
    - Click on the *preferences* under the dropdown {% icon galaxy-dropdown %}
    - Select **Set Dataset Permissions for New Histories** icon {% icon cofest %}
    - Add a permission and click **save permission**
-   - [Watch animation](https://galaxyproject.org/learn/privacy-features/new-hist-perm.gif)
+
+   ![gif of the process described above, in Galaxy](https://galaxyproject.org/learn/privacy-features/new-hist-perm.gif)
 
    *Note*: Changes made here will only affect histories created after these settings have been stored.
