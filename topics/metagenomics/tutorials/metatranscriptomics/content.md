@@ -10,7 +10,7 @@
 
 In this tutorial we will perform a metatranscriptomics analysis based on the ASAIM workflow ({% cite batut2018asaim %}), using data from {% cite kunath2018proteins %}.
 
-> ### {% icon comment %} Note: Two versions of this tutorial
+> <comment-title>Note: Two versions of this tutorial</comment-title>
 >
 > Because this tutorial consists of many steps, we have made two versions of it, one long and one short.
 >
@@ -33,7 +33,7 @@ Microbiomes play a critical role in host health, disease, and the environment. T
 
 ![Multiomics](../../images/metatranscriptomics/Why_MT.png)
 
-New generations of sequencing platforms coupled to numerous bioinformatics tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.
+New generations of sequencing platforms coupled to numerous bioinformatic tools have led to a spectacular technological progress in metagenomics and metatranscriptomics to investigate complex microorganism communities. These techniques are giving insight into taxonomic profiles and genomic components of microbial communities. Metagenomics is packed with information about the present taxonomies in a microbiome, but do not tell much about important functions. That is where metatranscriptomics and metaproteomics play a big part.
 
 ![meta-momics diagram](../../images/metatranscriptomics/meta-omics.png)
 
@@ -41,9 +41,9 @@ In this tutorial, we will focus on **metatranscriptomics**.
 
 Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population. It provides scientists with the confirmation of predicted open‐reading frames (ORFs) and potential identification of novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.
 
-To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}). They generated metatranscriptomics data for 3 replicates over 7 time points. RNAs were enriched by rRNA depletion and treated with DNAse and library was prepared with the TruSeq stranded RNA sample preparation, which included the production of a cDNA library.
+To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor ({% cite kunath2018proteins %}). They generated metatranscriptomics data for 3 replicates over 7 time points. Before amplification the amount of rRNA was reduced by rRNA depletion. The sequencing libray was prepared with the TruSeq stranded RNA sample preparation, which included the production of a cDNA library.
 
-In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.
+In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how to compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.
 
 To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM ({% cite batut2018asaim %}) is an open-source Galaxy-based workflow that enables microbiome analyses. Its workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the **GalaxyP** team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.
 
@@ -52,18 +52,18 @@ The workflow described in this tutorial takes in paired-end datasets of raw shot
 1. Preprocess
 2. Extract and analyze the community structure (taxonomic information)
 2. Extract and analyze the community functions (functional information)
-3. Combine taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy.
+3. Combine taxonomic and functional information to offer insights into the taxonomic contribution to a function or functions expressed by a particular taxonomy.
 
 A graphical representation of the ASaiM workflow which we will be using today is given below:
 
 ![ASaiM diagram](../../images/asaim-wf.png){: width="75%"}
 
 
-> ### {% icon comment %} Workflow also applicable to metagenomics data
+> <comment-title>Workflow also applicable to metagenomics data</comment-title>
 > The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of rRNA sequences.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -74,7 +74,7 @@ A graphical representation of the ASaiM workflow which we will be using today is
 
 # Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
@@ -118,7 +118,7 @@ In this section we will run a workflow that performs the following tasks:
 
 We will run all these steps using a single workflow, then discuss each step and the results in more detail.
 
-> ### {% icon hands_on %} Hands-on: Pretreatments
+> <hands-on-title>Pretreatments</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_preprocessing.ga) or download it to your computer.
@@ -154,7 +154,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 {% unless include.short %} <!-- only in extended tutorial -->
 
-> ### {% icon hands_on %} Hands-on: Quality control
+> <hands-on-title>Quality control</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: both `T1A_forward` and `T1A_reverse` datasets selected with **Multiple datasets**
@@ -163,11 +163,11 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 >
 > 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `T1A_forward` dataset
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > What is the read length?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The read length is 151 bp.
 >    > >
@@ -190,11 +190,11 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 For more information about how to interpret the plots generated by FastQC and MultiQC, please see [this section]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}#assess-quality-with-fastqc---short--long-reads) in our dedicated Quality Control Tutorial.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Inspect the webpage output from MultiQC
 >
-> 1. How many sequences does each file have?
+> 1. How many sequences does each file has?
 > 2. How is the quality score over the reads? And the mean score?
 > 3. Is there any bias in base content?
 > 4. How is the GC content?
@@ -204,7 +204,7 @@ For more information about how to interpret the plots generated by FastQC and Mu
 > 8. Are there still some adapters left?
 > 9. What should we do next?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Both files have 260,554 sequences
 > > 2. The "Per base sequence quality" is globally good: the quality stays around 40 over the reads, with just a slight decrease at the end (but still higher than 35)
@@ -254,14 +254,14 @@ For more information about how to interpret the plots generated by FastQC and Mu
 
 Even though our data is already of pretty high quality, we can improve it even more by:
 1. Trimming reads to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the reads
-2. Removing reads of overall bad quality.
+2. Removing reads of overall bad quality
 3. Removing reads that are too short to be informative in downstream analysis
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What are the possible tools to perform such functions?
 >
->   > ### {% icon solution %} Solution
+>   > <solution-title></solution-title>
 >   >
 >   > There are many tools such as **Cutadapt**, **Trimmomatic**, **Trim Galore**, **Clip**, **trim putative adapter** sequences. etc. We choose here **Cutadapt** because it is error tolerant, it is fast and the version is pretty stable.
 >   {: .solution}
@@ -274,7 +274,7 @@ There are several tools out there that can perform these steps, but in this anal
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Read trimming and filtering
+> <hands-on-title>Read trimming and filtering</hands-on-title>
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end`
@@ -301,14 +301,14 @@ There are several tools out there that can perform these steps, but in this anal
 
 **Cutadapt** {% icon tool %} outputs a report file containing some information about the trimming and filtering it performed.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Inspect the output report from **Cutadapt** {% icon tool %}.
 >
-> 1. How many basepairs has been removed from the forwards reads because of bad quality? And from the reverse reads?
+> 1. How many basepairs have been removed from the forwards reads because of bad quality? And from the reverse reads?
 > 2. How many sequence pairs have been removed because at least one read was shorter than the length cutoff?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.
 > > 2. 27,677 (10.6%) reads were too short after trimming and then filtered.
 > {: .solution }
@@ -319,14 +319,14 @@ There are several tools out there that can perform these steps, but in this anal
 
 Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The highest proportion of the RNA sequences in any organism will be ribosomal RNAs.
 
-These rRNAs are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed) To make the downstream functional annotation faster, we will sort the rRNA sequences using **SortMeRNA** ({% cite kopylova2012sortmerna %}). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:
+These rRNAs are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed). To make the downstream functional annotation faster, we will sort the rRNA sequences using **SortMeRNA** ({% cite kopylova2012sortmerna %}). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:
 
 ![SortMeRNA](../../images/metatranscriptomics/sortmerna.png)
 
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Ribosomal RNA fragments filtering
+> <hands-on-title>Ribosomal RNA fragments filtering</hands-on-title>
 >
 > 1. {% tool [Filter with SortMeRNA](toolshed.g2.bx.psu.edu/repos/rnateam/sortmerna/bg_sortmerna/2.1b.6) %} with the following parameters:
 >    - *"Sequencing type"*: `Reads are paired`
@@ -349,11 +349,11 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 >
 > 2. Expand the aligned and unaligned forward reads datasets in the history
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > How many sequences have been identified as rRNA and non rRNA?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > Aligned forward read file has 1,947 sequences and the unaligned 2,858 sequences. Then 1,947 reads have been identified as rRNA and 2,858 as non rRNA. The numbers are the same for the reverse reads.
 >    > >
@@ -366,7 +366,7 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 
 **SortMeRNA** {% icon tool %} removes any reads identified as rRNA from our dataset, and outputs a log file with more information about this filtering.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Inspect the log output from **SortMeRNA** {% icon tool %}, and scroll down to the `Results` section.
 >
@@ -374,7 +374,7 @@ These rRNAs are useful for the taxonomic assignment (i.e. which organisms are fo
 > 2. How many reads have been identified as rRNA given the log file?
 > 3. Which type of rRNA are identified? Which organisms are we then expected to identify?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 465,754 reads are processed: 232,877 for forward and 232,877 for reverse (given the **Cutadapt** report)
 > >
 > > 2. Out of the 465,754 reads, 119,646 (26%) have passed the e-value threshold and are identified as rRNA.
@@ -398,7 +398,7 @@ We use **FASTQ interlacer** on the unaligned (non-rRNA) reads from **SortMeRNA**
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Interlace FastQ files
+> <hands-on-title>Interlace FastQ files</hands-on-title>
 >
 > 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
 >   - *"Type of paired-end datasets”*: `2 separate datasets`
@@ -420,7 +420,7 @@ The first important information to get from microbiome data is the community str
 
 Different approaches can be used:
 
-- Identification and classification of OTUs, as used in amplicon data
+- Identification and classification of Operational Taxonomic Units OTUs, as used in amplicon data
 
     Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned reads from **SortMeRNA**), then again using the same tools as for amplicon data (as explained in tutorials like [16S Microbial Analysis with mothur]({% link topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.md %}) or [16S Microbial analysis with Nanopore data]({% link topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.md %})).
 
@@ -434,7 +434,7 @@ As rRNAs reads are good marker genes, we will use directly the quality controlle
 
 {% if include.short %}
 
-> ### {% icon hands_on %} Hands-on: Community Profile
+> <hands-on-title>Community Profile</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_community_profile.ga) or download it to your computer.
@@ -456,7 +456,7 @@ As rRNAs reads are good marker genes, we will use directly the quality controlle
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Extract the community structure
+> <hands-on-title>Extract the community structure</hands-on-title>
 >
 > 1. {% tool [MetaPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/metaphlan/metaphlan/3.0.8+galaxy0) %} with the following parameters:
 >    - In *"Input(s)"*
@@ -508,7 +508,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
 
     The file starts with high level taxa (kingdom: `k__`) and go to more precise taxa.
 
-    > ### {% icon question %} Questions
+    > <question-title></question-title>
     >
     > Inspect the `Predicted taxon relative abundances` file output by **MetaPhlAn** {% icon tool %}
     >
@@ -517,7 +517,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
     > 3. What genus and species are found in our sample?
     > 4. Has only bacteria been identified in our sample?
     >
-    > > ### {% icon solution %} Solution
+    > > <solution-title></solution-title>
     > > 1. The file has 20 lines, including an header. Therefore, 17 taxons of different levels have been identified
     > > 2. We have access: kingdom (`k__`), phylum (`p__`), class (`c__`), order (`o__`), family (`f__`), genus (`g__`), species (`s__`), strain (`t__`)
     > > 3. In our sample, we identified:
@@ -537,7 +537,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
 - A **tabular file** called `Bowtie2 output` with similar information as the one in the **SAM file**
 
 
-> ### {% icon comment %} Note: Analyzing an isolated metatranscriptome
+> <comment-title>Note: Analyzing an isolated metatranscriptome</comment-title>
 >
 > We are analyzing our RNA reads as we would do for DNA reads. This approach has one main caveat. In **MetaPhlAn**, the species are quantified based on the recruitment of reads to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for RNA data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species' markers is expressed.
 >
@@ -548,7 +548,7 @@ This step may take a couple of minutes as each sequence is compare to the full d
 
 Some downstream tools need the MetaPhlAn table with predicted taxon abundance with only 2 columns: the lineage and the abundance.
 
-> ### {% icon hands_on %} Hands-on: Format taxon relative abundances table
+> <hands-on-title>Format taxon relative abundances table</hands-on-title>
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c3`
 >    - {% icon param-file %} *"From"*: `Predicted taxon relative abundances` (output of **MetaPhlAn**)
@@ -568,7 +568,7 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Interactive community structure visualization with KRONA
+> <hands-on-title>Interactive community structure visualization with KRONA</hands-on-title>
 >
 > 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0) %} with
 >    - *"What is the type of your input data"*: `Tabular`
@@ -580,7 +580,7 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 
 **Krona** {% cite ondov2011interactive %} renders results of a metagenomic profiling as a zoomable pie chart. It allows hierarchical data, here taxonomic levels, to be explored with zooming, multi-layered pie charts
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Inspect the output from **Krona** {% icon tool %}. (The interactive plot is also shown below)
 >
@@ -590,7 +590,7 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 > <br/><br/>
 > <center><iframe id="krona" src="krona.html" frameBorder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe></center>
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Archaea represents 0.6% so bacteria are 99.4% of the organisms identified in our sample
 > >
@@ -608,7 +608,7 @@ Even if the output of **MetaPhlAn** can be easy to parse, we want to visualize a
 {% unless include.short %}
 It takes a taxonomic tree file as the input. We first need to convert the **MetaPhlAn** output using **Export to GraPhlAn**. This conversion software tool produces both annotation and tree file for GraPhlAn.
 
-> ### {% icon hands_on %} Hands-on: Publication-ready community structure visualization with GraPhlAn
+> <hands-on-title>Publication-ready community structure visualization with GraPhlAn</hands-on-title>
 >
 > 2. {% tool [Export to GraPhlAn](toolshed.g2.bx.psu.edu/repos/iuc/export2graphlan/export2graphlan/0.20+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `Cut predicted taxon relative abundances table`
@@ -640,12 +640,12 @@ We would now like to answer the question "What are the micro-organisms doing?" o
 
 In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using **HUMAnN** ({% cite franzosa2018species %}). **HUMAnN** is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.
 
-To identify the functions made by the community, we do not need the rRNA sequences, specially because they had noise and will slow the run. We will then use the output of **SortMeRNA**, but also the identified community profile from **MetaPhlAn**. This will help **HUMAnN** to focus on the know sequences for the identified organisms.
+To identify the functions made by the community, we do not need the rRNA sequences, specially because they had noise and will slow the run. We will then use the output of **SortMeRNA**, but also the identified community profile from **MetaPhlAn**. This will help **HUMAnN** to focus on the known sequences for the identified organisms.
 
 
 {% if include.short %}
 
-> ### {% icon hands_on %} Hands-on: Functional Information
+> <hands-on-title>Functional Information</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information.ga) or download it to your computer.
@@ -660,7 +660,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
-> > ### {% icon tip %} Tip: Running low on time? Use this faster approach
+> > <tip-title>Running low on time? Use this faster approach</tip-title>
 > >
 > > The first step of this workflow (**HUMAnN** {% icon tool %}) may take quite a bit of time to complete (> 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:
 > >
@@ -688,7 +688,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Extract the functional information
+> <hands-on-title>Extract the functional information</hands-on-title>
 >
 > 1. {% tool [HUMAnN](toolshed.g2.bx.psu.edu/repos/iuc/humann/humann/3.0.0+galaxy1) %} with the following parameters:
 >    - *"Input(s)"*: `Quality-controlled shotgun sequencing reads (metagenome (DNA reads) or metatranscriptome (RNA reads))`
@@ -705,7 +705,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Running low on time? Import the HUMAnN outputs
+> <tip-title>Running low on time? Import the HUMAnN outputs</tip-title>
 >
 > 1. Import the 2 files:
 >
@@ -739,7 +739,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
     The "UNMAPPED" value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, "UNMAPPED" can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.
 
-    > ### {% icon question %} Questions
+    > <question-title></question-title>
     >
     > **Inspect** the `Gene families and their abundances` file from **HUMAnN** {% icon tool %}
     >
@@ -747,7 +747,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > 2. Which species is involved in production of this family?
     > 3. How many gene families have been identified?
     >
-    > > ### {% icon solution %} Solution
+    > > <solution-title></solution-title>
     > > 1. The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1) %} to add extra information about the gene family.
     > > 2. Beta-lactamase TEM seems mostly produced here by *Hungateiclostridium thermocellum*.
     > > 3. There is 6,374 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.
@@ -782,7 +782,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
     The pathway abundance is computed once for all species (community level) and again for each species  using species gene abundances along the components of the pathway. Unlike gene abundance, a pathway's  abundance at community-level is not necessarily the sum of the abundance values of each species. For example, for the same pathway example as above, if the abundances of RXNs 1-4 are [5, 5, 10, 10] in Species A and [10, 10, 5, 5] in Species B, the pathway abundance would be 5 for Species A and Species B, but 15 at the community level as the reaction totals are [15, 15, 15, 15].
 
-    > ### {% icon question %} Questions
+    > <question-title></question-title>
     >
     > **View** the `Pathways and their abundance` output from **HUMAnN** {% icon tool %}
     >
@@ -791,7 +791,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
     > 3. How many gene families have been identified?
     > 4. What is the "UNINTEGRATED" abundance?
     >
-    > > ### {% icon solution %} Solution
+    > > <solution-title></solution-title>
     > > 1. The most abundant pathway is PWY-6609. It produces the adenine and adenosine salvage III.
     > > 2. Like the gene family, this pathway is mostly achieved by *Hungateiclostridium thermocellum*.
     > > 3. There are 118 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with `|` in them using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1) %}.
@@ -807,7 +807,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 
 4. A log file
 
-> ### {% icon comment %} Note: Analyzing an isolated metatranscriptome
+> <comment-title>Note: Analyzing an isolated metatranscriptome</comment-title>
 >
 > As we already mentioned above, we are analyzing our RNA reads as we would do for DNA reads and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species' relative abundance from **MetaPhlAn**, but there is another aspect we should be careful about.
 >
@@ -815,7 +815,7 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >
 > The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running **MetaPhlAn** on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to **HUMAnN**. RNA reads are then mapped to any species' pangenomes detected in the metagenome. Then we run **HUMAnN** on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the RNA-level outputs (e.g. transcript family abundance) by corresponding DNA-level outputs to the quantification of microbial expression independent of gene copy number.
 >
-> Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation
+> Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation.
 >
 {: .comment}
 
@@ -827,7 +827,7 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
+> <hands-on-title>Normalize the gene family abundances</hands-on-title>
 >
 > 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1) %} with
 >    - *"Gene/pathway table"*: `Gene families and their abundance` (output of **HUMAnN**)
@@ -840,15 +840,15 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 
 {% endunless %}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > **Inspect** {% icon galaxy-eye %} the `Normalized gene families` file
 >
 > 1. What percentage of sequences has not been assigned to a gene family?
 > 2. What is the relative abundance of the most abundant gene family?
 >
-> > ### {% icon solution %} Solution
-> > 1. 14% (`0.14438 x 100`) of the sequences have not be assigned to a gene family
+> > <solution-title></solution-title>
+> > 1. 14% (`0.14438 x 100`) of the sequences have not be assigned to a gene family.
 > > 2. The UniRef90_A3DCI4 family represents 6% of the reads.
 > {: .solution }
 {: .question}
@@ -858,7 +858,7 @@ Gene family and pathway abundances are in RPKs (reads per kilobase), accounting 
 
 Let's do the same for the pathway abundances.
 
-> ### {% icon hands_on %} Hands-on: Normalize the pathway abundances
+> <hands-on-title>Normalize the pathway abundances</hands-on-title>
 >
 > 1. {% tool [Renormalize a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_renorm_table/humann_renorm_table/3.0.0+galaxy1) %} with
 >    - *"Gene/pathway table"*: `Pathways and their abundance` (output of **HUMAnN**)
@@ -872,14 +872,14 @@ Let's do the same for the pathway abundances.
 {% endunless %}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > **Inspect** {% icon galaxy-eye %} the `Normalized pathways` file.
 > 1. What is the UNMAPPED percentage?
 > 2. What percentage of reads assigned to a gene family has not be assigned to a pathway?
 > 3. What is the relative abundance of the most abundant gene family?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. UNMAPPED, here 14% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.
 > > 2. 83% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway
 > > 3. The PWY-6609 pathway represents 0.2% of the reads.
@@ -894,7 +894,7 @@ For this, we use the tool **Unpack pathway abundances to show genes included** {
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Normalize the gene family abundances
+> <hands-on-title>Normalize the gene family abundances</hands-on-title>
 >
 > 1. {% tool [Unpack pathway abundances to show genes included](toolshed.g2.bx.psu.edu/repos/iuc/humann_unpack_pathways/humann_unpack_pathways/3.0.0+galaxy1) %} with
 >    - *"Gene family or EC abundance file"*: `Normalized gene families`
@@ -919,13 +919,13 @@ BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermoce
 BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3DIY3	0.000117313
 ```
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > **Inspect** {% icon galaxy-eye %} the output from **Unpack pathway abundances to show genes included** {% icon tool %}
 >
 > Which gene families are involved in the PWY-6609 pathway (the most abundant one)? And which species?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > If we search the generated file for (using <kbd>CTR</kbd><kbd>F</kbd> or <kbd>CMD</kbd><kbd>F</kbd>):
 > >
 > > ````
@@ -942,13 +942,13 @@ BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermoce
 
 ## Group gene families into GO terms
 
-The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help constuct a big picture, we could identify and use categories of genes using the gene families.
+The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help construct a big picture, we could identify and use categories of genes using the gene families.
 
 [Gene Ontology (GO)](http://www.geneontology.org/) analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with **HUMAnN** into GO terms.
 
 {% unless include.short %}
 
-> ### {% icon hands_on %} Hands-on: Group abundances into GO terms
+> <hands-on-title>Group abundances into GO terms</hands-on-title>
 >
 > 1. {% tool [Regroup HUMAnN table features](toolshed.g2.bx.psu.edu/repos/iuc/humann_regroup_table/humann_regroup_table/3.0.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Gene families table"*: `Gene families and their abundance` (output of **HUMAnN**)
@@ -974,11 +974,11 @@ GO:0000015|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	11.313
 GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
 ```
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many GO term have been identified?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Using the tool {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1) %}, we see that the unstratified table has 1,171 lines (including the UNMAPPED, UNGROUPED and the header). So 1,168 GO terms have been identified.
 > {: .solution }
 {: .question}
@@ -988,7 +988,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
 
 The GO term with their id are quite cryptic. We can rename them and then split them in 3 groups  (molecular functions [MF], biological processes [BP] and cellular components [CC])
 
-> ### {% icon hands_on %} Hands-on: Rename GO terms
+> <hands-on-title>Rename GO terms</hands-on-title>
 >
 > 1. {% tool [Rename features of a HUMAnN generated table](toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Gene families table"*: output of **Regroup HUMAnN table features**
@@ -1019,14 +1019,14 @@ The GO term with their id are quite cryptic. We can rename them and then split t
 
 {% endunless %}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > **Inspect** {% icon galaxy-eye %} the 3 outputs of these steps
 >
-> 1. How many GO terms have been identified
+> 1. How many GO terms have been identified?
 > 2. Which of the GO terms related to molecular functions is the most abundant?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. After running {% tool [Split a HUMAnN table](toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1) %} on the 3 outputs, we found:
 > >   - 414 BP GO terms
@@ -1065,7 +1065,7 @@ With **MetaPhlAn** and **HUMAnN**, we investigated "Which micro-organims are pre
 
 Although gene families and pathways, and their abundance may be related to a species, in the **HUMAnN** output, relative abundance of the species is not indicated. Therefore, for each gene family/pathway and the corresponding taxonomic stratification, we will now extract the relative abundance of this gene family/pathway and the relative abundance of the corresponding species and genus.
 
-> ### {% icon hands_on %} Hands-on: Combine taxonomic and functional information
+> <hands-on-title>Combine taxonomic and functional information</hands-on-title>
 >
 > 1. {% tool [Combine MetaPhlAn2 and HUMAnN2 outputs](toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0) %}  with the following parameters:
 >   - {% icon param-file %} *"Input file corresponding to MetaPhlAN output"*: `Cut predicted taxon relative abundances table`
@@ -1094,18 +1094,18 @@ Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_
 Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_G2JC59		2.639170379752865
 ```
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Are there gene families associated with each genus identified with **MetaPhlAn**?
 > 2. How many gene families are associated to each genus?
 > 3. Are there gene families associated to each species identified with **MetaPhlAn**?
 > 4. How many gene families are associated to each species?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. To answer the questions, we need to group the contents of the output of **Combine MetaPhlAn2 and HUMAnN2 outputs** by 1st column and count the number of occurrences of gene families. We do that using **Group data by a column** {% icon tool %}:
 > >
-> >    > ### {% icon hands_on %} Hands-on: Group by genus and count gene families
+> >    > <hands-on-title>Group by genus and count gene families</hands-on-title>
 > >    > 1. {% tool [Group data by a column](Grouping1) %}
 > >    >    - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
 > >    >    - *"Group by column"*: `Column:1`
@@ -1121,7 +1121,7 @@ Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_
 > >
 > > 3. For this question, we should group on the 3rd column:
 > >
-> >    > ### {% icon hands_on %} Hands-on: Group by species and count gene families
+> >    > <hands-on-title>Group by species and count gene families</hands-on-title>
 > >    > 1. {% tool [Group data by a column](Grouping1) %}
 > >    >    - *"Select data"*: output of **Combine MetaPhlAn2 and HUMAnN2 outputs**
 > >    >    - *"Group by column"*: `Column:3`

@@ -55,9 +55,15 @@ layout: base
             {% endif %}
           {% endfor %}
 
-          {% assign other_tutorials = topic_material | where: "subtopic",
-nil %}
-          {% unless other_tutorials.size == 0 %}
+          <!--  show the catch-all "other" subtopic if there are (enabled) tutorials not assigned to any subtoppic -->
+          {% assign other_tutorials = topic_material | where: "subtopic", nil %}
+          {% assign other_tutorials_enabled = topic_material | where: "subtopic", nil | where_exp: "tutorial", "tutorial.enable != false" %}
+          {% assign show_other = true %}
+          {% if other_tutorials.size == 0 %} {% assign show_other = false %}{% endif %}
+          {% if jekyll.environment == "production" and other_tutorials_enabled.size == 0 %} {% assign show_other = false %}{% endif %}
+
+          {% if show_other %}
+          </br>
           <div id="tutorial_list">
           <h3> Other </h3>
           <div class="search_box">
@@ -65,10 +71,10 @@ nil %}
             <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
             <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
           </div></br>
-          Assorted other tutorials </br></br>
+          Assorted tutorials </br></br>
           {% include _includes/tutorial_list.html sub="other" %}
           </div>
-          {% endunless %}
+          {% endif %}
 
         {% else %}
            {% include _includes/tutorial_list.html %}

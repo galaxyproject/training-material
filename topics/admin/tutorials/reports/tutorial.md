@@ -31,18 +31,20 @@ requirements:
 
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}
+
 # Setting up Reports
 
 The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.
 
-> ### {% icon hands_on %} Hands-on: Setup Reports
+> <hands-on-title>Setup Reports</hands-on-title>
 >
 >
 > 1. First we add a basic configuration of the Reports app to the playbook templates. Create `templates/galaxy/config/` folder, if it doesn't exist, and create `templates/galaxy/config/reports.yml` with the following contents:
@@ -92,7 +94,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -51,6 +51,7 @@ galaxy_root: /srv/galaxy
 >     galaxy_user: {name: galaxy, shell: /bin/bash}
->     galaxy_commit_id: release_22.01
+>     galaxy_commit_id: release_22.05
 >     galaxy_force_checkout: true
 >    +galaxy_reports_path: "{{ galaxy_config_dir }}/reports.yml"
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
@@ -121,7 +123,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    @@ -144,6 +144,7 @@ galaxy_dynamic_job_rules:
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    +galaxy_manage_systemd_reports: yes
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >     
@@ -153,7 +155,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >
 > 5. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -169,7 +171,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 > {: data-test="true"}
 {: .hidden}
 
-> ### {% icon comment %} Insecure!
+> <comment-title>Insecure!</comment-title>
 > But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
 

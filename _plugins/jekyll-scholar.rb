@@ -34,8 +34,7 @@ module Jekyll
       begin
         citation_text = site.config['cached_citeproc'].render(:citation, id: @text)
         layout = page.fetch('layout', nil)
-        puts "#{page['path']} #{page['layout']}"
-        if ['tutorial_slides', 'base_slides', 'introduction_slides', 'rdmbites_slides'].include? layout
+        if ['tutorial_slides', 'base_slides', 'introduction_slides'].include? layout
           doi = site.config['cached_citeproc'].items[@text].doi
           url = site.config['cached_citeproc'].items[@text].url
           if ! doi.nil?

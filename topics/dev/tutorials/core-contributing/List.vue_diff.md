@@ -1,33 +1,29 @@
 
-> ### {% icon solution %} ``client/src/components/User/FavoriteExtensions/List.vue``
+> <solution-title>``client/src/components/User/FavoriteExtensions/List.vue``</solution-title>
 > 
 > Possible changes to file ``client/src/components/User/FavoriteExtensions/List.vue``:
 > 
 > ```diff
 > new file mode 100644
-> index 0000000000..e5e7d07ab2
+> index 0000000000..053b354f63
 > --- /dev/null
 > +++ b/client/src/components/User/FavoriteExtensions/List.vue
-> @@ -0,0 +1,82 @@
+> @@ -0,0 +1,78 @@
 > +<template>
 > +    <div class="favorite-extensions-card">
-> +        <b-alert variant="error" show v-if="errorMessage">
-> +            {{ errorMessage }}
-> +        </b-alert>
+> +        <b-alert variant="error" show v-if="errorMessage"> </b-alert>
 > +        <loading-span v-if="loading" message="Loading favorite extensions" />
 > +        <ul id="favorite-extensions" v-else>
 > +            <li v-for="extension in extensions" :key="extension" :data-extension-target="extension">
 > +                <span
 > +                    class="favorite-link unmark-favorite"
 > +                    v-if="favoriteExtensions.indexOf(extension) >= 0"
-> +                    title="Unmark as favorite"
-> +                >
+> +                    title="Unmark as favorite">
 > +                    <a href="#" @click="unmarkAsFavorite(extension)">(X)</a>
 > +                </span>
 > +                <span class="favorite-link mark-favorite" v-else title="Mark as favorite">
 > +                    <a href="#" @click="markAsFavorite(extension)">(+)</a>
 > +                </span>
-> +                {{ extension }}
 > +            </li>
 > +        </ul>
 > +    </div>

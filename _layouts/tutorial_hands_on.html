@@ -64,7 +64,7 @@ footer: no
     {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
-        <h3>{{ locale['overview'] | default: "Overview"}}</h3>
+        <div class="box-title" aria-label="overview box">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         {% endunless %}
@@ -181,7 +181,7 @@ footer: no
                         {% snippet pagesnippet %}
                     {% elsif page.notebook.language ==  "r" %}
                         <blockquote class="comment">
-                            <h3>{% icon comment aria=false %} {{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</h3>
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
                             <p>
                                 This tutorial is available as an RMarkdown file and best viewed in RStudio! You can load this notebook in RStudio on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -215,7 +215,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
                     {% else %}
                         <blockquote class="comment">
-                            <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -256,7 +256,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 {% if page.key_points %}
                 <blockquote class="key_points">
-                    <h3>{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</h3>
+                    <div class="box-title" aria-label="key-points box">{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</div>
                     <ul>
                         {% for key_point in page.key_points %}
                         <li>{{ key_point | markdownify }}</li>
@@ -310,7 +310,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
                 <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
-                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
+                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
@@ -354,14 +354,22 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     </ol>
                 </p>
 
-
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                  <p style="display: none;">
 
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
+{% assign authors = page.contributors | filter_authors:page.contributions -%}
+author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",
@@ -382,8 +390,8 @@ note = "[Online; accessed TODAY]"
     title = {Community-Driven Data Analysis Training for Biology},
     journal = {Cell Systems}
 }</code>
-                </pre></div></div>
-                </p>
+                   </pre></div></div>
+                   </p>
                 </blockquote>
 
                 {% if page.contributions %}
@@ -398,11 +406,11 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3>{% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
+                {% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}
 
                 {% if topic.name == "contributing" %}
                 <blockquote class="agenda">
-                    <h3>Developing GTN training material</h3>
+                    <div class="box-title" aria-label="agenda box">Developing GTN training material</div>
                     This tutorial is part of a series to develop GTN training material, feel free to also look at:
                     {% assign topic = site.data[page.topic_name] %}
                     <ol>

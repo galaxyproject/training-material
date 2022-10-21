@@ -43,7 +43,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 
@@ -66,7 +66,7 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -92,12 +92,12 @@ There are two things to take note of:
 
 Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ([ref](https://doi.org/10.1038/nrg3542)) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why is it important to know which cell a read came from?
 > 2. Why do we need to barcode a read transcript too? Isn't mapping it against the reference genome enough?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. If all our reads encode for a *Red Gene* (as above), we may want to know which cells express *Red Gene* more than others.
 > > * e.g. If our *Grey* cell has 10 times more *Red Gene* reads than our *Green* cell, then we know that the *Grey* cell and *Green* cell differ in their expression of *Red Gene* - which might be biologically significant.
@@ -184,12 +184,12 @@ This then provides us with the true count of the number of true transcripts for 
 {: .matrix}
 
 
-> ### {% icon question %} Questions about UMIs
+> <question-title>about UMIs</question-title>
 >
 > 1. Are UMIs not specific to certain genes? Can the same UMI map to different genes?
 > 2. Can the same UMI map to different mRNA molecules of the same gene?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > 1. Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just 'added randomness' that help reduce amplification bias.
 > > 2. Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
@@ -215,7 +215,7 @@ This then provides us with the true count of the number of true transcripts for 
 
 We now know the role of UMIs and cell barcodes, but how do we handle them in the analysis? Let us look at 4 example sequences in our paired-end FASTQ data.
 
-> ### {% icon hands_on %} Hands-on: Preparing the Data
+> <hands-on-title>Preparing the Data</hands-on-title>
 >
 >    1. Create a new history and rename it (*e.g.* 'Inspecting FastQ Files in scRNA batch data')
 >    1. Import the following files from [`Zenodo`](https://zenodo.org/record/2573177) or from the data library (ask your instructor)
@@ -247,7 +247,7 @@ We now know the role of UMIs and cell barcodes, but how do we handle them in the
 
 At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those reads.
 
-> ### {% icon hands_on %} Hands-on: Extracting the Reads
+> <hands-on-title>Extracting the Reads</hands-on-title>
 >
 > 1. Extracting our 4 reads
 >    * {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
@@ -289,7 +289,7 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 
 Let us examine these four reads of interest which we have just sub-selected using their headers:
 
-> ### {% icon details %} Forward Reads:
+> <details-title>Forward Reads:</details-title>
 >
 >     @J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
 >     GGAAGAACCAGATTTTTTTTTTTTTTTTTT
@@ -314,7 +314,7 @@ Let us examine these four reads of interest which we have just sub-selected usin
 >
 {: .details}
 
-> ### {% icon details %} Reverse Reads:
+> <details-title>Reverse Reads:</details-title>
 >
 >     @J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
 >     GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -367,12 +367,12 @@ As shown in [CEL-Seq2 protocol](#the-cel-seq2-protocol), we have the following e
 
 The encoding of the barcodes on the first read can actually be seen by examining the distribution of bases in a FastQC plot.
 
-> ### {% icon hands_on %} Hands-on: Confirming the Barcoding
+> <hands-on-title>Confirming the Barcoding</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set) You will need to choose 'Dataset collection' to allow this as an input.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > We are only interested in the distribution of bases on the Forward read, but it is more convenient to process the data as a pair instead of un-hiding the original dataset
 >    {: .comment}
@@ -394,11 +394,11 @@ Here we can see the three distinct regions along the x-axis that correspond to o
 
 We can see that the distribution of nucleotides in the 01-06bp range is relatively more stable than the distribution of nucleotides in the 07-12bp range, which seems to exhibit more extreme variation.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Why is this the case? Why is the UMI barcode base distribution smoother than the Cell barcode base distribution?
 > >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > There are far more UMIs than cells. Cell barcodes are designed and selected with a specified edit distance, greatly limiting their availability in the data. UMIs are not so well-curated -- i.e it is possible to encounter the same UMI in the same cell multiple times. The more extreme variation in the 7-12bp region is simply caused by a fewer number of samples.
 > >
@@ -417,14 +417,14 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
  | <small>@J00182:75:HTKJNBBXX:2:2222:13301:35690</small> | GGTAAC | GTCCCA | <small>CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA</small> |
  | <small>@J00182:75:HTKJNBBXX:2:1114:12469:11073</small> | GGTAAC | CGGCGT | <small>ATCCACTTATTGCAAAGCAGAGGACATTGAGTCTCACCTTTTGTCCAGGTCTTCCAATTTCACCCTGCAA</small> |
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Provided that these reads all map to the same gene:
 >
 > 1. Which of these reads come from the same cell?
 > 2. Which of these reads are PCR duplicates?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Reads:
 > >  * `@J00182:75:HTKJNBBXX:2:1203:25022:13763`
@@ -453,7 +453,7 @@ How should we unite these two source of information into a single location witho
 
 For this we need to take the barcode information from the Forward reads, and stick it into the *header* of the Reverse reads. That way we can align our sequence to the reference and still keep the barcode information associated with the reads.
 
-> ### {% icon hands_on %} Hands-on: Barcode Extraction and Annotation of our 4 reads
+> <hands-on-title>Barcode Extraction and Annotation of our 4 reads</hands-on-title>
 >
 > 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1) %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
@@ -463,7 +463,7 @@ For this we need to take the barcode information from the Forward reads, and sti
 >    - *"Barcode pattern for first read"*: `NNNNNNCCCCCC`
 >    - *"Enable quality filter?"*: `No`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > - Here we specify the format of our barcodes as `NNNNNNCCCCCC` where the *N*s represent UMI bases and the *C*s represent the cell barcodes.
 >    > - In some protocols, actual sequence data can be found in between the cell and UMI barcodes, wherein it is neccesary to represent sequence bases using *X*.
@@ -479,7 +479,7 @@ For this we need to take the barcode information from the Forward reads, and sti
 
 We should now be able to see the following reads:
 
-> ### {% icon details %} Forward Reads:
+> <details-title>Forward Reads:</details-title>
 >
 >     @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
 >     TTTTTTTTTTTTTTTTTT
@@ -503,7 +503,7 @@ We should now be able to see the following reads:
 >
 {: .details}
 
-> ### {% icon details %} Reverse Reads:
+> <details-title>Reverse Reads:</details-title>
 >
 >     @J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
 >     GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -529,12 +529,12 @@ We should now be able to see the following reads:
 
 Notice the remaining sequence in each of the reads, and that the reverse reads appear to fully encapsulate all the information that we wanted to capture in our table at the beginning of this section.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Compare the Forward/Read1 and Reverse/Read2 reads to those prior the extraction. What has happened to the header and sequence of each read?
 > 2. Are the Forward reads useful at all?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Comparison:
 > >    * Forward:
@@ -553,7 +553,7 @@ We have also now successfully *de*-multiplexed our data, by decoding each pair o
 
 
 # Conclusion
-{:.no_toc}
+
 
 With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using **UMI-tools** so that we can perform mapping without losing any context of where the reads are derived from.
 

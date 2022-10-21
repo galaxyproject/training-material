@@ -43,7 +43,7 @@ abbreviations:
 
 This module provide something like a recap of everything covered by the modular Python Introductory level curriculum. This serves as something of a graduation into the Intermediate tutorials which cover more advanced topics.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >

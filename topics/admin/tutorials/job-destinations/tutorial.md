@@ -35,20 +35,21 @@ requirements:
       - connect-to-compute-cluster
 ---
 
-# Mapping Jobs
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first.
 
 Now that you have a working scheduler, we will start configuring which jobs are sent to which destinations.
 
-> ### Agenda
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
+
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}
 
 # Galaxy and Slurm - Statically Mapping a Job
 
@@ -56,7 +57,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 ## Writing a testing tool
 
-> ### {% icon hands_on %} Hands-on: Deploying a Tool
+> <hands-on-title>Deploying a Tool</hands-on-title>
 >
 > 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
@@ -96,7 +97,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +- testing.xml
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >    {% endraw %}
 >    ```
@@ -104,7 +105,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >
 > 3. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -113,11 +114,11 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >
 > 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is the tool's output?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```
 >    > > Running with '1' threads
@@ -141,7 +142,7 @@ Of course, this tool doesn't actually *use* the allocated number of cores. In a 
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. This is done in the job configuration file.
 
 
-> ### {% icon hands_on %} Hands-on: Allocating more resources
+> <hands-on-title>Allocating more resources</hands-on-title>
 >
 > 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
 >
@@ -179,7 +180,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 > 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -188,11 +189,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is the tool's output?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```
 >    > > Running with '2' threads
@@ -216,7 +217,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 Dynamic destinations allow you to write custom python code to dispatch jobs based on whatever rules you like. For example, UseGalaxy.eu at one point used a very complex custom dispatching configuration to handle sorting jobs between multiple clusters. Galaxy has [extensive documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping-python-method) on how to write these sort of destinations.
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+> <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
 > 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
@@ -241,7 +242,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
 >
->    > ### {% icon tip %} Debugging dynamic destinations
+>    > <tip-title>Debugging dynamic destinations</tip-title>
 >    > You can use `pdb` for more advanced debugging, but it requires some configuration. `print()` statements are usually sufficient and easier.
 >    {: .tip}
 >
@@ -261,7 +262,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +- my_rules.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy my_rules dynamic rule"}
@@ -306,7 +307,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 > 5. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -328,7 +329,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 
 ## Writing a Dynamic Tool Destination
 
-> ### {% icon hands_on %} Hands-on: Writing a DTD
+> <hands-on-title>Writing a DTD</hands-on-title>
 >
 > 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `templates/galaxy/config/tool_destinations.yml` with the following contents:
 >
@@ -412,7 +413,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >
 > 4. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -425,7 +426,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 
 Our rule specified that any invocation of the `testing` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination.
 
-> ### {% icon hands_on %} Hands-on: Testing the DTD
+> <hands-on-title>Testing the DTD</hands-on-title>
 >
 > 1. Create a dataset using the upload paste tool with a few (<16) characters
 >
@@ -449,7 +450,7 @@ You may find that certain tools can benefit from having form elements added to t
 
 Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
 
-> ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
+> <hands-on-title>Configuring a Resource Selector</hands-on-title>
 >
 > 1. Create and open `templates/galaxy/config/job_resource_params_conf.xml.j2`
 >
@@ -571,7 +572,7 @@ This is a lot but we're still missing the last piece for it to work:
 
 Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job.
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic destination
+> <hands-on-title>Writing a dynamic destination</hands-on-title>
 >
 > 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
@@ -650,14 +651,14 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    +- map_resources.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy map_resources.py"}
 >
 > 3. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -676,14 +677,14 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 The cores parameter can be verified from the output of the tool. The walltime can be verified with `scontrol`:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > Your job number may be different.
 > ```
 > scontrol show job 24
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > Your output may look slightly different. Note that the `TimeLimit` for this job (which I gave a 12 hour time limit) was set to `12:00:00`.
 > ```console
 > JobId=24 JobName=g24_multi_anonymous_10_0_2_2
