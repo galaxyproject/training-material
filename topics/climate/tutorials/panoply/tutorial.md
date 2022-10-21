@@ -14,7 +14,7 @@ objectives:
 - Learn how Panoply plots are exported to Galaxy
 time_estimation: 1H
 key_points:
-- Inspect and view netCDF data with netCDF
+- Inspect and view netCDF data with Panoply
 - Interact with Galaxy to save your plots
 tags:
 - interactive-tools
@@ -115,7 +115,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > > <tip-title>Launch Panoply in Galaxy</tip-title>
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
-> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} [on UseGalaxy.eu](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
 > > 3. Click Execute
 > > 4. The tool will start running and will stay running permanently
