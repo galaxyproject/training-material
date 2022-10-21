@@ -10,7 +10,7 @@ require 'csl/styles'
 
 # Load our citation library
 CITATION_LIBRARY = BibTeX::Bibliography.new
-Find.find('./topics') do |path|
+Find.find('./') do |path|
   if FileTest.directory?(path)
     if File.basename(path).start_with?('.')
       Find.prune       # Don't look any further into this directory.
@@ -466,7 +466,7 @@ module GtnLinter
     self.find_matching_texts(contents, /{%\s*link\s+([^%]*)\s*%}/i)
     .map { |idx, text, selected|
       path = selected[1].to_s.strip
-      if ! File.exist?(path)
+      if ! File.exist?(path.gsub(/^\//, ''))
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
