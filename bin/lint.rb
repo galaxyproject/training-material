@@ -645,9 +645,9 @@ module GtnLinter
     end
   end
 
-  def self.enumerate_type(filter)
+  def self.enumerate_type(filter, root_dir: "topics")
     paths = []
-    Find.find('./topics') do |path|
+    Find.find("./#{root_dir}") do |path|
       if FileTest.directory?(path)
         if File.basename(path).start_with?('.')
           Find.prune       # Don't look any further into this directory.
@@ -682,7 +682,7 @@ module GtnLinter
   end
 
   def self.enumerate_lintable
-    self.enumerate_type(/bib$/) + self.enumerate_type(/md$/)
+    self.enumerate_type(/bib$/) + self.enumerate_type(/md$/) + self.enumerate_type(/md$/, root_dir: "faqs")
   end
 
   def self.run_linter_global
