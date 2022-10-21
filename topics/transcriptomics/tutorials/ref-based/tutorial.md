@@ -414,7 +414,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > 6. **IGV** {% icon tool %}: Zoom to `chr4:540,000-560,000` (Chromosome 4 between 540 kb to 560 kb)
 >
->    > <question-title></question-title>
+>    > <question-title>x</question-title>
 >    >
 >    > ![Screenshot of the IGV view on Chromosome 4](../../images/junction_igv_screenshot.png "Screenshot of IGV on Chromosome 4")
 >    >
