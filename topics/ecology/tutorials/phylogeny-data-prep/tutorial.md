@@ -81,7 +81,7 @@ For this training we will use a subset of the genome (chromosome 5) from four st
 >
 >
 > 3. Optional: Rename each dataset to its accession number followed by '.genome.fasta' or '.genbank'.
-> 4. Group the datasets into [collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html). These will ease data handling and help minimize the clutter in your history. Make a collection of nucleotide sequences and another of protein sequences.
+> 4. Group the datasets into [collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}). These will ease data handling and help minimize the clutter in your history. Make a collection of nucleotide sequences and another of protein sequences.
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -134,7 +134,7 @@ We will predict protein-coding genes from genomic sequences using [Funannotate](
 
 > ### {% icon comment %} Comment
 >
->If you would like to learn about genome annotation in more depth, the GTN has a [section]({{ site.baseurl }}/topics/genome-annotation) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
+>If you would like to learn about genome annotation in more depth, the GTN has a [section]({% link topics/genome-annotation/index.md %}) dedicated to training on genome annotation, including a hands-on tutorial on [Funannotate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 {: .comment}
 
 > ### {% icon warning %} Slow Step Ahead!
