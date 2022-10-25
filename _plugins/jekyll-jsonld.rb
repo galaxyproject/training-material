@@ -355,7 +355,7 @@ module Jekyll
           })
         end
       end
-      data['description'] = description.join('\n')
+      data['description'] = description.join("\n")
 
       if material.key?("lang") then
         data['inLanguage'] = {
