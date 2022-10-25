@@ -171,9 +171,9 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    @@ -37,3 +48,5 @@ execution:
 >     tools:
 >     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->       execution: local_dest
+>       environment: local_dest
 >    +- id: testing
->    +  execution: slurm-2c
+>    +  environment: slurm-2c
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
@@ -297,10 +297,10 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
 >    @@ -52,4 +52,4 @@ tools:
 >     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->       execution: local_dest
+>       environment: local_dest
 >     - id: testing
->    -  execution: slurm-2c
->    +  execution: dynamic_admin_only
+>    -  environment: slurm-2c
+>    +  environment: dynamic_admin_only
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send testing tool to the dynamic admin only destination."}
@@ -403,10 +403,10 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >     
 >     tools:
 >     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->       execution: local_dest
+>       environment: local_dest
 >     - id: testing
->    -  execution: dynamic_admin_only
->    +  execution: dtd
+>    -  environment: dynamic_admin_only
+>    +  environment: dtd
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure dtd in job conf"}
@@ -509,7 +509,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +
 >     tools:
 >     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->       execution: local_dest
+>       environment: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -525,10 +525,10 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
 >    @@ -61,4 +61,5 @@ tools:
 >     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->       execution: local_dest
+>       environment: local_dest
 >     - id: testing
->    -  execution: dtd
->    +  execution: dynamic_cores_time
+>    -  environment: dtd
+>    +  environment: dynamic_cores_time
 >    +  resources: testing
 >    {% endraw %}
 >    ```

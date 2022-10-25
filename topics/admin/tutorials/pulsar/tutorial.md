@@ -719,12 +719,12 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
 >    @@ -86,3 +86,7 @@ tools:
 >     - id: testing
->       execution: dynamic_cores_time
+>       environment: dynamic_cores_time
 >       resources: testing
 >    +- id: bwa
->    +  execution: pulsar
+>    +  environment: pulsar
 >    +- id: bwa_mem
->    +  execution: pulsar
+>    +  environment: pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
