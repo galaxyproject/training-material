@@ -20,7 +20,7 @@ tags:
 - interactive-tools
 contributors:
 - yvanlebras
-- ColineRoyaux
+- colineroyaux
 - Marie59
 - annefou
 
