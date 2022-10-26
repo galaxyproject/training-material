@@ -20,8 +20,8 @@ tags:
 - interactive-tools
 contributors:
 - yvanlebras
-- ColineRoyaux
-- Marie59
+- colineroyaux
+- marie59
 - annefou
 
 
@@ -79,10 +79,10 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the file from [EBV data portal](https://portal.geobon.org/data/upload/9/public/wolf_ecostr_id9_20220216_v1_4d.nc)
+> 2. Import the file from [EBV data portal](https://portal.geobon.org/data/upload/1/public/martins_comcom_id1_20220208_v1.nc)
 >
 >    ```
->    https://portal.geobon.org/data/upload/9/public/wolf_ecostr_id9_20220216_v1_4d.nc
+>    https://portal.geobon.org/data/upload/1/public/martins_comcom_id1_20220208_v1.nc
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -119,13 +119,13 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
 > > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
-> > 2. Check **wolf_ecostr_id9_20220216_v1_4d.nc** dataset selected in the netcdf input field
+> > 2. Check **martins_comcom_id1_20220208_v1.nc** dataset selected in the netcdf input field
 > > 3. Click Execute
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance
 > >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
-> > 7. Click on **wolf_ecostr_id9_20220216_v1_4d.nc** dataset
+> > 7. Click on **martins_comcom_id1_20220208_v1.nc** dataset
 > {: .tip}
 {: .hands_on}
 
@@ -135,7 +135,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 1. Inspect dataset content
 >
->    Here you can look at the dataset (wolf_ecostr_id9_20220216_v1_4d.nc) and related variables (`crs`, `entity`, `lat`, `lon`, `metric_1`, `ebv_cube`, `time`)
+>    Here you can look at the dataset (martins_comcom_id1_20220208_v1.nc) and related variables (`crs`, `entity`, `lat`, `lon`, `metric_1`, `ebv_cube`, `time`)
 >
 >    > <question-title></question-title>
 >    >
