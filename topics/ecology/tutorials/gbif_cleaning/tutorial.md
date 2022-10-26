@@ -15,7 +15,7 @@ objectives:
 - Get occurrence data on a species
 - Visualize the data to understand them
 - Clean GBIF dataset for further analyses
-time_estimation: 0H30
+time_estimation: 0H30M
 key_points:
 - Take the time to look at your data first, manipulate it before analyzing it
 contributors:
