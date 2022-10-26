@@ -2250,7 +2250,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +
 >    +tools:
 >    +- class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->    +  execution: local_dest
+>    +  environment: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
