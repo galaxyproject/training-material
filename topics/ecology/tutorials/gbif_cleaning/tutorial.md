@@ -34,7 +34,7 @@ In this tutorial we will propose a way to clean occurence records retrieved from
 
 This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -50,18 +50,18 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from GBIF
-> ### {% icon hands_on %} Hands-on: Get data from GBIF
+> <hands-on-title>Get data from GBIF</hands-on-title>
 >
 > 1. **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
 >    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
 >    - *"Number of records to return"*: `999999` is a minimum value
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The spocc Galaxy tool allows you to search species occurences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurences. Specifying more than one data source will change the manner the output dataset is formatted.
 >
@@ -82,26 +82,26 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Where come from the records?
 
-> ### {% icon hands_on %} Hands-on: Here we propose to investigate the content of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
+> <hands-on-title>Here we propose to investigate the content of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.</hands-on-title>
 >
 > 1. **Count** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: `output` (output of **Get species occurrences data** {% icon tool %})
 >    - *"Count occurrences of values in column(s)"*: `c[17]`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool is one of the important "classical" Galaxy tool who allows you to better synthtize information content of your data. Here we apply this tool to the 17th column (corresponding to the basisOfRecord attribute) but don't hesitate to investigate others attributes!
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many different types of data collection origin are there?
 > 2. What is your assumption regarding this heterogeneity?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 5
 > > 2. each basisOfRecord type is related to different collection method so different data quality
@@ -112,26 +112,26 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering data thanks to the data origin
 
-> ### {% icon hands_on %} Hands-on: Filter data on basisOfRecord GBIF attribute
+> <hands-on-title>Filter data on basisOfRecord GBIF attribute</hands-on-title>
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `output` (output of **Get species occurrences data** {% icon tool %})
 >    - *"With following condition"*: `c17=='HUMAN_OBSERVATION' or c17=='OBSERVATION' or c17=='PRESERVED_SPECIMEN'`
 >    - *"Number of header lines to skip"*: `1`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many records are kept and what is the percentage of filtered data?
 > 2. Why are we keeping only these 3 types of data collection origin?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 470 and 8.79% of records were drop out
 > > 2. These data collection methods are the most relevant
@@ -151,7 +151,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Have a look at the number of counts per record
 
-> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.
+> <hands-on-title>Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.</hands-on-title>
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -161,11 +161,11 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the min and max of individual counts?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. From 1 to 100
 > >
@@ -175,7 +175,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## **Filtering** data on individual counts
 
-> ### {% icon hands_on %} Hands-on: Filter data on individualCount GBIF attribute
+> <hands-on-title>Filter data on individualCount GBIF attribute</hands-on-title>
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -183,13 +183,13 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    - *"Number of header lines to skip"*: `1`
 >
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many records are kept and what is the percentage of filtered data?
 > 2. How can you explain this result?
 > 3. Which propagated tag you can propose to add here?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 50 and 89.29% o records were drop out
 > > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
@@ -201,7 +201,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Have a look at the age of records
 
-> ### {% icon hands_on %} Hands-on: Here we propose to have a look at the age of records, through the `year` GBIF attribute to know if there is some ancient data to maybe not consider.
+> <hands-on-title>Here we propose to have a look at the age of records, through the `year` GBIF attribute to know if there is some ancient data to maybe not consider.</hands-on-title>
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Summary statistics on"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -211,12 +211,12 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the year of the oldier and younger records?
 > 2. Why do you think of interest to treat differently ancient and recent records?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. From 1903 to 2018
 > > 2. We can assume ancient records are not made in the same way than recent one so keeping ancient records can enhance heterogeneity of our dataset.
@@ -227,26 +227,26 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering data thanks to the age of records
 
-> ### {% icon hands_on %} Hands-on: Filter data on ageOfRecord GBIF attribute
+> <hands-on-title>Filter data on ageOfRecord GBIF attribute</hands-on-title>
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Get species occurrences data** {% icon tool %})
 >    - *"With following condition"*: `c41>1945`
 >    - *"Number of header lines to skip"*: `1`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many records are kept and what is the percentage of filtered data?
 > 2. Why are we keeping only data from 1945?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 44 and 11.76% of records were drop out
 > > 2. This arbitrary date allow to have only quite recent records, but you can specify another year.
@@ -265,14 +265,14 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Taxonomic investigation
 
-> ### {% icon hands_on %} Hands-on: Investigate the taxonomic coverage, at the family level
+> <hands-on-title>Investigate the taxonomic coverage, at the family level</hands-on-title>
 >
 > 1. **Count** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"from dataset"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"Count occurrences of values in column(s)"*: `c[31]`
 >
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This column allows us to look at the different families associated to records. Normally, looking at a uniq species, we will obtain only one family
 >    {: .comment}
@@ -281,26 +281,26 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Filtering
 
-> ### {% icon hands_on %} Hands-on: Filter data on family attribute
+> <hands-on-title>Filter data on family attribute</hands-on-title>
 >
 > 1. **Filter** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Filter** {% icon tool %})
 >    - *"With following condition"*: `c31=='Loliginidae'`
 >    - *"Number of header lines to skip"*: `1`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > We here select only records with the family of interest, Loliginidae
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Is the filtering here of interest ?
 > 2. Why keeping this step can be of interest?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. No, because 100% of records are kept
 > > 2. Because this is an important step we have to take into account in such a GBIF data treatment, and if your goal is to create your own workflow you plan to use on others species, this can be of interest to keep this step
@@ -311,7 +311,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Sub-step with **OGR2ogr**
 
-> ### {% icon hands_on %} Hands-on: Convert occurence dataset to GIS one for visualization
+> <hands-on-title>Convert occurence dataset to GIS one for visualization</hands-on-title>
 >
 > 1. **OGR2ogr** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Gdal supported input file"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -326,12 +326,12 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Did you have access to standard output and error of the original R script?
 > 2. What kind of information you can retrieve here in the standard output and/or error?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Yes, of course ;) A previsualizatoin of stdout is visible when clicking on the history output dataset and full report accessible through the information button, then stdout or stderr (here you can see warnings on the stderr)
 > > 2. The stderr is showing several warning related to automatic variable name mapping from GBIF to OGR plus information about application of a truncate process on a particularly long GeoJSON value
@@ -345,18 +345,18 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 
-> ### {% icon hands_on %} Hands-on: Launch OpenLayers to visualize a map with your filtered records
+> <hands-on-title>Launch OpenLayers to visualize a map with your filtered records</hands-on-title>
 >
 > 1. Click on the *Visualize* tab on the upper menu and select `Create Visualization`
 > 2. Click on the OpenLayers icon
 > 3. Select the GeoJSON file from your history
 > 4. Click on `Create Visualization`
 > 5. Select Openlayers
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. You don't see Opebnlayers? Did you know why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1.If you don't see Openlayers but others visualization types like Cytoscape, this means your datatype is JSON, not geojson. You have to change the datafile manually before visualizing it
 > >
