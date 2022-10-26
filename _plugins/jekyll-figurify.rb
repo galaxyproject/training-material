@@ -26,6 +26,7 @@ module Jekyll
         return
       end
 
+      tuto_dir = File.dirname(page.path)
       page.content = page.content.gsub(/!\[([^\]]*)\]\((.+?)\s*(?:"(.*)")\)({:(.*)})?/) {
         alt = $1
         url = $2
@@ -44,9 +45,11 @@ module Jekyll
             end
           end
 
+          dimensions = Gtn::Images::html_image_dimensions(tuto_dir, url)
+
           prefix = figcaption_prefix(page, site)
           "<figure id=\"figure-#{num}\">" +
-            "<img src=\"#{url}\" alt=\"#{alt}\" #{style} loading=\"lazy\">" +
+            "<img src=\"#{url}\" alt=\"#{alt}\" #{style} #{dimensions} loading=\"lazy\">" +
             "<figcaption><span class=\"figcaption-prefix\">#{prefix}#{num}:</span> #{title}</figcaption>" +
           "</figure>"
         end
