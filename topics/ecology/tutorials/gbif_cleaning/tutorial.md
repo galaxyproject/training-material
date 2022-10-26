@@ -26,9 +26,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
-<!-- This is a comment. -->
 
 GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion reords across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources.
 
@@ -281,7 +279,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 {: .hands_on}
 
-## Filtering 
+## Filtering
 
 > ### {% icon hands_on %} Hands-on: Filter data on family attribute
 >
@@ -299,7 +297,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 > ### {% icon question %} Questions
 >
-> 1. Is the filtering here of interest ? 
+> 1. Is the filtering here of interest ?
 > 2. Why keeping this step can be of interest?
 >
 > > ### {% icon solution %} Solution
@@ -370,6 +368,5 @@ From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 >
 
 # Conclusion
-{:.no_toc}
 
-In this tutorial we learned how to get occurence records from GBIF and several steps to filter these data to be ready to analyze it! So now, let's go for the show! 
+In this tutorial we learned how to get occurence records from GBIF and several steps to filter these data to be ready to analyze it! So now, let's go for the show!
