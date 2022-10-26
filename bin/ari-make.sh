@@ -26,11 +26,7 @@ for slides in $changed_slides; do
 
 	# Process the slides
 	echo $built_slides
-	export NODE_PATH=$(pwd)/node_modules
-	env | grep -i node
-	env | grep -i npm
 	docker run amouat/decktape automatic -s 1920x1080 http://localhost:9876/training-material/$slides _site/training-material/$pdf;
-	#$(npm bin)/decktape automatic -s 1920x1080 http://localhost:9876/training-material/$slides _site/training-material/$pdf; \
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
