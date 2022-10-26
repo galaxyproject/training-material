@@ -21,7 +21,7 @@ tags:
 contributors:
 - yvanlebras
 - colineroyaux
-- marie59
+- Marie59
 - annefou
 
 
