@@ -1,0 +1,512 @@
+---
+layout: introduction_slides
+logo: "GTN"
+video: true
+
+subtopic: intro
+title: "Introduction to proteomics, protein identification, quantification and statistical modelling"
+type: "introduction"
+contributors:
+  - foellmelanie
+
+---
+
+# Proteomics
+
+*"A Proteome is the entire complement of proteins that is or can be expressed by a cell, tissue, or organism at a given time."* - Marc Wilkins 1996
+
+
+![Schematic overview of proteomics, dna is transcribed to rna which is trnalsated to protein. The complexity is shown increasing at every step from minimal with dna, alternative splicing showing in the RNA, and then finall post translational modifications at the protein.]({{site.baseurl}}/topics/proteomics/images/intro-slides/proteomics_schematic.png)
+
+.footnote[Image credit: [Madprime](https://commons.wikimedia.org/wiki/File:Genetic_code.svg)]
+
+???
+
+Proteins are macromolecules that have many important functions in a cell.
+Protein coding genes are transcribed into mRNA, which is translated into amino acids. The amino acid chain forms secondary, tertiary and quartary structures to obtain a functional protein. One gene may generate different proteins due to alternative splicing and post-translational modifications. Therefore, the proteome level shows a higher molecular complexity. The proteome is defined as the entirety of proteins expressed by a genome or by a cell or tissue at a given time. The study of proteins is important as their identity and abundance is only partially predictable from DNA and mRNA information. This is due to alternative splicing, post-translational modifications, protein turnover and subcellular localization.
+
+
+---
+
+# Mass Spectometry (MS)-based Proteomics
+
+
+
+.force-right[
+- Bottom-up approach: measurement of peptides after
+enzymatic digestion of proteins
+- Measures the peptides mass-to-charge (m/z) ratio and stores
+m/z – intensity pairs in mass spectra
+- High sensitivity and throughput
+- Standard method for the analysis of complex samples
+]
+
+<br><br>
+![schematic of mass spec with nano hplc producing tens of thousands of mass spectra, these show up as intensity vs m/z plots with skinny peaks.]({{site.baseurl}}/topics/proteomics/images/intro-slides/ms-proteomics.png)
+
+???
+
+Mass spectrometry is the standard method for proteomic analyses of complex samples. In the classical bottom-up approach, proteins are enzymatically digested into peptides. Peptides can be analyzed with high sensitivity and throughput in a mass spectrometer. The peptide mass is measured as mass-to-charge ratio. Only charged peptides can be measured in the mass spectrometer. Tens of thousands of mass spectra are generated per sample. Each spectrum consists of many mass-to-charge and intensity pairs.
+
+---
+
+# MS-based Proteomic Techniques
+
+
+|   |   |   |
+|:-:|:-:|:-:|
+| .image-90[![Cartoon of various blobs]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics.png)] | .image-90[![Target symbol]({{site.baseurl}}/topics/proteomics/images/intro-slides/targeted-proteomics.png)] | .image-90[![Colourful blob with a scale next to it indicating different regions.]({{site.baseurl}}/topics/proteomics/images/intro-slides/ms-imaging.png)] |
+| **Explorative Proteomics** | **Targeted Proteomics** | **Mass Spectometry** |
+| **(DDA/DIA)** | **(SRM/PRM)** | **Imaging** |
+| All proteins of a cell/organ(ism) | Focus on subset of proteins | Focus on location of proteins |
+
+???
+
+Different mass spectrometry based proteomic techniques exist. The most common one is explorative or shotgun proteomics. It aims to identify as many proteins as possible from a sample. It comes in two flavours: data dependent acquisition (DDA) and data independent acquisition (DIA). A second technique is targeted proteomics. It measures only a predefined set of proteins with very accurate quantification. A third technique is mass spectrometry imaging. It measures the spatial distribution of peptides or proteins in thin tissue sections.
+
+---
+
+# Proteomics tools in Galaxy
+
+![screenshot of a list of tools with a large number of logos include proteowizard, trans proteomic pipeline, cardinal, openms, openswatch, DIA umpire, encyclopeDIA, compomics, uniprot, ms, mq.]({{site.baseurl}}/topics/proteomics/images/intro-slides/tools-overview.png)
+
+???
+
+Plenty of software for DDA, D I A and mass spectrometry imaging are available in Galaxy. Here is an overview of all Proteomics tools installed on the European Galaxy Server. Other public Galaxy servers offer a similar or complementary proteomic tool kit. The Galaxy proteomics tools and training materials are constantly expanding and improving.
+
+---
+
+
+# Explorative Proteomics
+
+
+![Colourful blobs next to what might be a liver]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics.png)
+
+**(DDA/DIA)**
+
+All proteins of a cell / organ / organism
+
+???
+
+This presentation will focus on explorative proteomics via the traditional DDA approach.
+
+---
+
+# Explorative Proteomics Workflow
+
+![Flow chart from sample prep to mass spec to data analysis.]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics-workflow.png)
+
+???
+
+Proteomics experiments consist of three main steps. First, the sample is prepared for the analysis in the mass spectrometer. Then the sample is measured in the mass spectrometer. Last, the obtained data is analyzed.
+---
+
+class: top
+
+![sample prep, MS, data analysis flow chart, but Sample Preparation is highlighted.]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf1-sample-prep.png)
+
+![liver followed by protein extraction, reduction and alkylation, tryptic digestion, and deslating drying to produce a peptide pellet. Below is a schematic of protein crosslinking with S-S binding.]({{site.baseurl}}/topics/proteomics/images/intro-slides/sample-prep.png)
+
+???
+
+Typical sample preparation steps include protein extraction, reduction and alkylation, tryptic digestion and desalting. Before tryptic digestion, disulfide bridges are reduced and cysteins alkylated. This ensures that tryptic peptides are separated from each other and allows their mass based identification. Trypsin cleaves the amino acid sequences C-terminal of arginin and lysine. Desalting is a clean up step to protect the instrument from contamination and clogging.
+
+---
+
+class: top
+
+![sample prep, MS, data analysis flow chart, but Mass spectrometry is highlighted.]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf2-mass-spec.png)
+
+![peptide pellet from previous slide is solved in acidic buffer followed by: liquid chromotography, ion source, mass analyzer, detecter.]({{site.baseurl}}/topics/proteomics/images/intro-slides/mass-spec-schematic.png)
+
+???
+
+Sample measurement in a mass spectrometer consists of different steps. A high performance liquid chromatography (HPLC) system is attached in front of the mass spectrometer. It separates the injected peptide mixture according to their hydrophobicity. The peptides elute from the LC column into the mass spectrometer within several minutes to hours. This reduces sample complexity and gives the mass spectrometer more time for the measurement. The acidic LC buffer charges the peptides positively at their N-terminus and the basic lysin or arginin amino acids on the C-terminus. The LC column is directly connected with the ion source needle. There, high voltage and heat are applied to evaporate the ionized peptides into the gas phase. This process is called electrospray ionization. Inside the mass spectrometer the mass analyzer separates peptides based on their mass-to-charge ratio. The detector detects the peptide ions.
+
+---
+
+class: top
+
+![sample prep, MS, data analysis flow chart, but Mass spectrometry is highlighted.]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf2-mass-spec.png)
+
+Liquid chromatography tandem mass spectrometry (LC-MS/MS)
+
+![an LC+Ion source goes into ms1: mass spectra which are filtered for most abundant m/z, then fragmentation of filtered m/z produces an MS2: Mass spectra. This process is repeated for the 2nd and 3rd most abundant m/z and so on.]({{site.baseurl}}/topics/proteomics/images/intro-slides/mass-spec-schematic2.png)
+
+???
+
+ Typically explorative proteomics is performed via liquid chromatography tandem mass spectrometry (LC-MSMS).  While the sample elutes from the LC column, thousands of mass spectra are acquired. First, a mass spectrum of all peptides at this time point is measured. These mass spectra are called MS1 spectra. From these spectra the N most abundant peptide peaks are determined. These topN peptides get fragmented. N is typically between 3 and 20. This example shows a Top3 method. The filter unit of the mass spectrometer (a quadrupole) allows only these peptides to pass. One after the other is selected in the filter unit and then fragmented by collision with neutral gas molecules. This fragmentation breaks the peptide bonds and generates peptide fragments. The peptide fragments are measured again via the mass analyzer and detector. These spectra are called MS2 spectra. After all topN peptides were fragmented and measured, another full MS1 mass spectra is acquired. MS1 and MS2 spectra are acquired in this way during the elution of the sample from the LC.
+
+---
+
+class: top
+
+![sample prep, MS, data analysis flow chart, but data analysis is highlighted.]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf3-data-analysis.png)
+
+![the MS1 and MS2 mass spectra go into this workflow. The ms1 goes through peptide quantification. the MS2 goes through peptide identification and then protein identification. everything goes to protein quantification and statitstical analysis.]({{site.baseurl}}/topics/proteomics/images/intro-slides/data-analysis-schematic.png)
+
+???
+
+The analysis of the acquired mass spectra comprises several steps. First peptides are identified via their MS2 fragmentation spectra. From these peptide identities the corresponding proteins are assembled. The MS1 spectra are used for peptide quantification. Peptide quantities are summarized into protein quantities. The information about protein identity and quantity allows following statistical analyses.
+
+---
+
+# Typical explorative tandem mass spectrometry workflow
+
+![proteins in tubes, mass spec in the center, and a computer on the right.]({{site.baseurl}}/topics/proteomics/images/intro-slides/all-schematic.png)
+
+![sample prep, ms, data analysis flow chart.]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf4-all.png)
+
+???
+
+This was the overview of a typical explorative tandem mass spectrometry workflow. Now we will dive into more details of the data analysis part.
+
+---
+
+# Peptide identification with MS2 fragment spectra
+
+
+![MS1 spectra with precursor ions are fragmented, an example sequence is given. On the right we see different fragments for each potential cut site in the sequence. Below the MS2 spectra show numerous lines which sum up to the m/z of the entire sequence and have individual peaks for each of the individual subsequences of the protein.]({{site.baseurl}}/topics/proteomics/images/intro-slides/fragment-spectra.png)
+
+
+???
+
+Many tryptic peptides of an organism have same or similar masses. Therefore, MS1 spectra don’t allow reliable peptide sequence identifications. MS2 spectra allow peptide identification via the generated peptide fragments. The N-terminal fragments are called b-ions and the C-terminal fragments y-ions. The differences between the fragment masses correspond to the mass of an amino acid. This allows manual interpretation of the spectra. However, this is a tricky procedure because in reality the MS2 spectra contain more noise and side product peaks than shown here. Also, in explorative proteomics tens of thousands of spectra are acquired and make manual interpretation unfeasible. The manual interpretation process is automatized with so called 'de novo sequencing' software. These algorithms have improved in the last years. No information about potential protein sequences in the sample are needed. The default software for peptide identification are so called ‘search engines’. They require information about all protein sequences of the analyzed organism as FASTA database. From this they generate in silico spectra which are then matched to the measured mass spectra.
+
+---
+
+# Peptide spectrum matching
+
+![Flowchart again, proteins go to peptides go to MS1 to MS2 to a Peak List. Below a sequence database entry goes through in-silico digestion and theoretical fragmentation, producing a theoretical peaklist which is matched against the previous peaklist.]({{site.baseurl}}/topics/proteomics/images/intro-slides/insilico-identification1.png)
+
+???
+
+This process is often called ‘peptide spectrum matching’. It starts with a protein sequence database of all protein sequences of the analyzed organism. Analogous to the procedure in the sample, the protein sequences are in silico digested. This means that the sequences are cut after each lysine and arginin. These in silico tryptic peptide sequences are then in silico fragmented. All amino acid bonds may potentially break and generate peptide fragments. Therefore, all possible fragments are generated in silico. From each in silico peptide fragment, the mass is calculated. In case of amino acid modifications the mass of the modification is added accordingly. Fixed modifications are added to each occurrence of the amino acid on which they occur. Variable modifications may not occur on every amino acid and therefore two masses, with and without the modification, are calculated. These in silico generated mass values are matched to the mass values from each measured MS2 spectra. A matching score allows to find the best identifications for each MS2 spectrum.
+
+
+---
+
+# Peptide spectrum matching
+
+
+![The previous process has added decoy sequences to the sequence database. The rest is the same. A ranked score chart on the right shows a combination of real and decoy colours. 1% FDR cutoff is written next to a point.]({{site.baseurl}}/topics/proteomics/images/intro-slides/insilico-identification2.png)
+
+???
+
+Potentially false matches may occur, therefore the false positive rate is controlled. This is done by adding decoy sequences to the protein sequence database. These sequences are generated by reversing or shuffling the real sequences and will not exist in the sample. In case such sequences are considered a good match to an MS2 spectra, this is a false match. One option to control the number of false positive matches is via a false discovery cutoff, that includes the best matching scores with only 1 % wrong decoy matches included.
+
+---
+
+# FASTA File Format
+
+- Text based file to store DNA, RNA, protein sequences in a single letter code
+- Each entry has
+  - One header line: starting with `>` and containing a unique identifier
+  - A (nucleotide/amino acid) sequence
+
+
+![a fasta file is shown with interleaved headers and sequences.]({{site.baseurl}}/topics/proteomics/images/intro-slides/fasta-proteomics.png)
+
+???
+
+The protein sequence database is stored in a FASTA file. This is a text based file to store DNA, RNA or protein sequences in a single letter code. Each entry contains a header line and the sequence. The header line starts with a > and is follwed by a unique identifier.
+
+---
+
+# FASTA Files for Proteomics
+
+- A proteome is the set of proteins thought to be expressed by an organism.
+
+
+- Only proteins that are present in the FASTA file can be identified
+
+
+- The more proteins are present in the FASTA file the higher the changes for false identifications
+  - Choose the right FASTA file
+
+
+- Source for proteome FASTA files:
+  - Uniprot, neXtProt, NCBI, own/public DNA or RNA sequencing data
+
+
+
+.footnote[
+Tutorial: [Protein FASTA database handling](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html)
+]
+
+???
+
+A proteome is the set of proteins thought to be expressed by an organism. Only proteins that are present in the FASTA file can be identified. But the more proteins are present in the FASTA file the higher the chances for false identifications and the longer the computation time.
+Sources for proteome FASTA files include uniprot, nextprot, NCBI or DNA and RNA sequencing data.
+
+---
+
+# Protein Identification via Protein Inference
+
+![another fasta file is shown with regions of two sequences highlighted. In the first a uniue region is. A shared/razor region is highlighted in both.]({{site.baseurl}}/topics/proteomics/images/intro-slides/protein-interference.png)
+
+???
+
+After having identified peptides, they need to be reconstructed into proteins. This step is called protein inference and is not trivial. Unique or proteotypic peptide sequences belong to one protein. But other peptide sequences may belong to several proteins. These peptides are called shared or razor peptides. Most protein inference algorithms assign them to the protein that has the most other peptides. In the depicted example peptide two would be matched to protein one which is for sure present in the sample because it has one unique peptide.
+
+---
+
+# Quantification methods in proteomics
+
+![Flowchart guiding in the choice of method]({{site.baseurl}}/topics/proteomics/images/intro-slides/proteomic_quant_overview.png)
+
+.footnote[ Tutorial: [Label-free versus Labelled: How to Choose Your Quantitation Method](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html)]
+
+???
+
+Different quantification approaches exist in mass spectrometry based proteomics. In explorative proteomic approaches relative quantification methods are applied. They compare the amount of proteins between different samples. Label-free and label based methods exist. Labels add specific mass tags to the peptides of different samples via metabolic or chemical ways.
+
+---
+
+
+# Quantification Methods in Proteomics
+
+![A chart, on the left is label free methods (peak integration). Each sample goes in its own tube. On the right is label-based with iTRAQ and SILAC mentioned. Each of 4 samples go in a tube before a label is added and they are mixed together. On the right is SILAC where all samples are mixed together. Below in the graphic the peaks are shown. For peak integration two spectra are produced. In iTRAQ and SILAC both produce a single plot with many peaks inside.]({{site.baseurl}}/topics/proteomics/images/intro-slides/quantification-methods.png)
+
+.footnote[Image credit: [Käll and Vitek 2011](https://doi.org/10.1371/journal.pcbi.1002277)]
+
+???
+
+In label-free approaches every sample is measured separately. Afterwards, the protein amounts are compared between measurements. Chemical labeling techniques add a mass label to the digested peptide. Afterwards the samples are mixed and measured in one run. The different masses of the added labels allow distinguishing the origin of the proteins during data analysis. Depending on the labeling technique, up to 16 different labels exist. In metabolic labeling amino acids with heavy isotopes are added to the cell culture medium of one condition. During cell growth these amino acids get incorporated into proteins. Thus, proteins of the heavy condition can be distinguished by their normal counterparts via a fixed mass shift.
+
+---
+
+# Label-free Peptide Quantification
+
+![Here there are two xyz plots with a single m/z (542.5) and a plot with a different peak/retention time behaviour in sample 1 and 2.]({{site.baseurl}}/topics/proteomics/images/intro-slides/label-free-quantification.png)
+
+???
+
+For label-free quantification all peak areas in the MS1 spectra are integrated.
+
+---
+
+# Protein Quantification
+
+- Include only unique or also ambiguous razor peptides?
+- Include peptides with modifications?
+- How to summarize peptide abundances into protein abundances?
+
+
+![table with peptides 1-4. Some are unique, some are 'razor'. Some have modificatinos. Their intensities are listed. This table has an arrow below for 'summarization by mean, sum, ...' and quantificatino value for Protein A.]({{site.baseurl}}/topics/proteomics/images/intro-slides/protein-quantification-table.png)
+
+
+???
+
+Peptide abundances are summarized into protein quantifications. This requires decisions about which peptides to include in the summarization. Only unique peptides? Only proteins with or without modifications? Last, the protein abundance may be computed by taking the median, mean, weighted mean or sum of all its peptides.
+
+---
+
+# MaxQuant Software
+
+
+.left-column50[
+
+.image-100[
+  ![Screenshot of the header of a paper]({{site.baseurl}}/topics/proteomics/images/intro-slides/maxquant-paper.png)
+]
+
+- Freeware, "Black Box"
+- Popular non-commercial proteomics software
+]
+
+.right-column50[
+
+- **Raw data import**
+- **Protein Identification:**
+  - Andromeda Search Engine
+- **Protein Quantification:**
+  - Label-free
+  - Label-based
+      - SILAC, Dimethyl, …
+  - Reporter ion MS2
+      - TMT, iTRAQ
+]
+
+
+
+.footnote[
+Watch: [MaxQuant videos on YouTube](https://www.youtube.com/channel/UCKYzYTm1cnmc0CFAMhxDO8w)
+]
+
+???
+
+MaxQuant is the most popular non-commercial software for quantitative proteomics experiments. It performs protein identification via its Andromeda search engine. Protein quantification of label-free and many label-based methods is supported as well. MaxQuant accepts raw data in vendor specific formats.
+
+
+---
+
+# Follow  up / Statistical Analysis
+
+.pull-left[
+**Typical follow up procedures:**
+
+
+- Visualization
+  - E.g. venn-diagramm, volcano plot, heatmap, boxplots, histogram
+
+
+- Protein-Protein interaction network analysis
+
+- GO annotation and enrichment analysis
+
+- Differentially abundant protein analysis
+
+]
+
+.pull-right[
+.image-100[
+ ![Graphic with several plot types.]({{site.baseurl}}/topics/proteomics/images/intro-slides/statistical-analysis.png)
+]
+]
+
+.footnote[
+Exemplary visualizations taken from Müller, 2018, Neoplasia
+]
+
+???
+
+Typical follow up analyses include visualization, network and GO enrichment analysis. Finding differentially abundant proteins between different groups requires statistical analyses.
+
+---
+
+#  MSstats Software
+
+.left-column50[
+
+.image-100[
+  ![screenshot of msstats paper]({{site.baseurl}}/topics/proteomics/images/intro-slides/msstats-paper.png)
+]
+
+- Two Bioconductor R Packages
+  - MSstats & MSstatsTMT
+- Popular open-source statistical proteomics software
+]
+
+.right-column50[
+
+- **Import and pre-process** results from common proteomics software:
+  - MaxQuant, Skyline, OpenMS
+- **data processing**
+- **Statistical modelling**
+  - linear models to detect differentially abundant proteins in label-free and isobaric labeled experiments
+
+]
+
+
+.footnote[
+Watch: [MSstats videos on YouTube](https://www.youtube.com/c/MayInstituteNEU/search?query=msstats
+)
+]
+
+???
+
+MSstats is an open-source software for statistical modelling of quantitative proteomics data. It is compatible with complex designs of label-free and isobaric labeled quantification experiments. First several processing steps are performed. Then MSstats applies flexible linear models to detect differentially abundant proteins.
+
+---
+
+#  Statistical Analysis with MSstats
+
+![msstats takes output of quant. proteomics software and annotation files and converts them to msstats format. Removes/keeps features, peptides, and proteins and summarizes. This is passed to 'data processing' which has intensity transformation/normalisation, filtering of peptides/features, missing value imputation, and run level summarisation. This is passed to statistical modelling along with a comparison matrix and does group comparison.]({{site.baseurl}}/topics/proteomics/images/intro-slides/msstats_overview.png)
+
+
+???
+
+MSstats takes identified and quantified spectral peaks from common proteomics software such as MaxQuant as input. For DDA data MSstats starts with peptide level data. It applies several feature selection and processing steps in order to account for proteomics specific data properties. Afterwards MSstats calculates new protein abundances and performs statistical modelling on them.
+
+---
+
+# Annotation file with experimental design
+
+
+|   |   |   |   |   |
+|:-:|:-:|:-:|:-:|:-:|
+|   **Raw.file**   |   **Condition**   |   **BioReplicate**   |   **Run**   |   **IsotopeLabelType**   |
+| File1.raw.thermo | Cond1 | 1 | 1 | L |
+| File2.raw.thermo | Cond1 | 2 | 2 | L |
+| File3.raw.thermo | Cond1 | 3 | 3 | L |
+| File4.raw.thermo | Cond2 | 4 | 4 | L |
+| File5.raw.thermo | Cond2 | 5 | 5 | L |
+
+
+???
+
+In addition to the results of the proteomics software an annotation file is needed as input. In this file the experimental design is described. It specifies conditions and biological and technical replicates. In case MaxQuant results are used as MSstats input, an additional column with the label type is needed. In a DDA experiment the value is L for all conditions.
+
+
+---
+
+#  Conversion from MaxQuant to MSstats format
+
+![three files, max quant protein groups.txt, evidence.txt, and annotation file go into a large table with proteinA and several different run intensities.]({{site.baseurl}}/topics/proteomics/images/intro-slides/conversion_msstats.png)
+
+
+???
+
+First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected.
+
+---
+
+# Intensity manipulations
+
+
+- **Log-transformation**: log2 or log10
+- **Intensity normalization**: equalize medians or quantile normalization
+
+
+![box and whisker plot with ms runs along x, and log2 intensities along y. they are segmented into C1-C6.]({{site.baseurl}}/topics/proteomics/images/intro-slides/qc_plot.png)
+
+???
+
+Log transformation brings the peptide intensities into a close to normal distribution. Normalization aims to make the intensities of different runs more comparable to each other. The default normalization method is called 'equalize medians'. It assumes that the majority of proteins do not change across runs. It shifts all intensities of a run by a constant to obtain equal median intensities across runs.
+
+---
+
+
+# Peptide filtering and missing value imputation
+
+- **Feature selection**: which peptides should be kept for protein quantification
+- **Missing value imputation**: Imputation of NA and very low abundant intensities
+- **Protein summarization**: calculates new protein abundances after data processing via TMP model
+
+
+![Heatmap of Protein1 (with 5 sub-peptides) under 2 conditions and three replicates. Squares are different colours.]({{site.baseurl}}/topics/proteomics/images/intro-slides/protein_table.png)
+
+???
+
+Feature selection allows the use of either all or only the most abundant peptides for protein summarization. The table represents the intensity values for the peptides of one protein. The dark grey fields represent missing intensity values of peptides. Missing values and noisy peptides with outliers are typical in label-free DDA datasets but influence protein summarization. For a reliable and robust statistical analysis, missing value imputation is recommended. Missing values in MaxQuant mean that they are missing because they were below the limit of detection. This means the values are not missing for random but for the reason of low abundance. Therefore, the values are only partially known and  called “censored values”. This may also be the case for very low intensity values, which might not be reliable and can be imputed. Censored intensity values are imputed via an accelerated failure time model. Alternatively, they may be replaced with a value obtained from the other measured intensities for the peptide and/or the run. Protein summarization is by default performed via Tukey’s median polish for robust parameter estimation with median across rows and columns.
+
+---
+
+
+# Statistical modelling
+
+- Uses run-level summarized data for hypothesis testing
+- Needs comparison matrix to specify comparisons
+- Adjusts the linear model according to information from annotation file
+
+.pull-left[
+|   |   |   |   |   |
+|:-:|:-:|:-:|:-:|:-:|
+| **name** | **Cond1** | **Cond2** | **Cond3** | **Cond4** |
+| cond1-cond3 | 1 | 0 | -1 | 0 |
+| cond1-cond4 | 1 | 0 | 0 | -1 |
+| cond2-cond3 | 0 | 1 | -1 | 0 |
+| cond2-cond4 | 0 | 1 | 0 | -1 |
+]
+
+.pull-right[
+.image-100[
+ ![Volcano plot with log2 fold change plotted against -log10 adjusted p-value.]({{site.baseurl}}/topics/proteomics/images/intro-slides/volcano_plot.png)
+]
+]
+
+
+???
+
+The calculated run-level protein summaries are used for statistical group comparison. Any two conditions can be compared to find differentially abundant proteins between them. MSstats uses a family of linear mixed models for this. The model is automatically adjusted for the comparison type according to the information in the annotation file. This means MSstats accounts for technical replicates, paired designs or time course experiments automatically.

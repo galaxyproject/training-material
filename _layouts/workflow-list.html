@@ -1,0 +1,38 @@
+---
+layout: base
+---
+
+{% assign topic = site.data[page.topic_name] %}
+<section class="tutorial">
+    <h1 data-toc-skip>Workflows</h1>
+    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Workflow</th>
+            <th>Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% directory path: page.dir exclude:md$ %}
+        {% assign name_size = file.name | size %}
+        {% assign maybe_ga = file.name | slice:-3,name_size %}
+        {% assign maybe_gxwf = file.name | slice:-9,name_size %}
+
+        {% if maybe_ga == ".ga" or maybe_gxwf == ".gxwf.yml" %}
+        <tr>
+            <td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
+            <td>{{ file.date | date: "%b %-d, %Y" }}</td>
+        </tr>
+        {% endif %}
+    {% enddirectory %}
+    </tbody>
+    </table>
+
+   <h1 style="margin-top:2em">Importing into Galaxy</h1>
+   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+   {% snippet faqs/galaxy/workflows_import.md box_type="hands_on" %}
+
+</section>

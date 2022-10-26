@@ -1,0 +1,191 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
+
+title: "Galaxy Interactive Tools"
+objectives:
+  - Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools
+  - Have an understanding of what Galaxy Interactive Tools are and how they work
+contributors:
+  - natefoo
+  - eancelet
+  - abretaud
+
+---
+# History
+
+## 2015
+
+@hexylena, @bgruening, and @jmchilton create Galaxy Interactive Environments (GIEs)
+
+GIEs use Galaxy's *visualization framework* to run certain types of *interactive* visualizations (e.g. Jupyter Notebook)
+
+GIEs run in a docker container on the Galaxy server or a single remote Docker server
+
+???
+
+- Galaxy Interactive Environments were added to Galaxy in 2015.
+- They are a type of visualization in Galaxy.
+- Accessible through the “Visualize” menu or under the visualization button on a dataset with a specific datatype.
+- Back then, the docker container serving an interactive environment could not be run on a cluster.
+- More details within Galaxy Interactive Environment slides.
+
+---
+# History
+
+## 2016
+
+Support for Docker Swarm is added, allowing running a cluster for GIEs
+
+???
+
+- As of 2016, Docker includes swarm mode for natively managing a cluster of Docker Engines called a swarm.
+- This allowed to run Galaxy Interactive Environment on a cluster.
+
+---
+# History
+
+## 2019
+
+@blankenberg creates Galaxy Interactive Tools (GxITs)
+
+Building on the GIE concept, but run as *tools*
+
+Tools run just as any other Galaxy job (e.g. via Slurm, HTCondor)
+
+You will sometimes see Interactive Tools referred to as Interactive Environments version 2
+
+???
+
+- In 2019, were created the Galaxy Interactive Tools.
+- Like interactive environment, Galaxy Interactive Tools are built on docker containers and are accessible through the Galaxy interface.
+- But they are considered as tools.
+- They are launchable from the toolbox menu, on a predefined destination and prioritized as any other job.
+
+---
+# Tool config syntax
+
+```xml
+<tool id="interactive_tool_jupyter_notebook" tool_type="interactive" name="Interactive Jupyter Notebook" version="0.1">
+    <requirements>
+        <container type="docker">quay.io/bgruening/docker-jupyter-notebook:ie2</container>
+    </requirements>
+    <entry_points>
+        <entry_point name="Jupyter Interactive Tool" requires_domain="True">
+            <port>8888</port>
+            <url>ipython/lab</url>
+        </entry_point>
+    </entry_points>
+</tool>
+```
+
+???
+
+- Some settings are needed to configure an interactive tool wrapper.
+- The tool type must be set to interactive.
+- As a requirement, set the path to the repository where the container is to be pulled from.
+- The tool entry point on the container must be defined.
+- For instance, for a Jupyter Notebook, you'll give the port the application is served on and the domain name suffix.
+
+---
+# Mapping clients to containers
+
+- GIEs: Unique path, e.g. `https://galaxy.example.org/gie-proxy/jupyter/...`
+  - Pros: Works with existing SSL certificate
+  - Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session
+- GxITs: Unique hostname, e.g. `https://<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org/`
+  - Pros: Needs no special credentials (can be shared)
+  - Cons: Requires *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
+
+???
+
+- Diverse infrastructures behind Galaxy Interactive Environments and Galaxy Interactive Tools induces various constraints and benefits.
+- Particularly in building the path between the browser and the container.
+
+---
+# Anatomy of a running Interactive Tool
+
+![Galaxy Interactive Tools Proxy Diagram](../../images/interactive-tools/gxit-proxy-diagram.png "Galaxy Interactive Tools Proxy Diagram")
+
+.reduce70[.footnote[The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/]]
+
+???
+
+- This slide illustrates the steps allowing a client to interact with a Galaxy Interactive Tool.
+- We consider a Galaxy server running behind a reverse proxy (NGINX).
+- The client only ever speaks to NGINX on the Galaxy server, running on the standard HTTPS 443 port.
+- Based on the elements provided by the URL, NGINX redirects the requests to Galaxy over a unix domain socket as usual.
+- On the other hand, HTTP requests targetting interactive tools are redirected by NGINX to a proxy, called GIE Proxy, running on port 8000.
+- At this point, remember, when an docker container starts, it will be assigned a host (server or node) and a random port on that host (in our example, port 32768).
+- This information is stored by Galaxy in a sqlite database.
+- So the GIE proxy checks in this sqlite database to know which node and port the IT container is to be found.
+- The GIE proxy forwards the HTTP request to Docker on that node and port.
+- Docker, in turn, forwards it to the application (e.g. Jupyter) on the container's port, defined in the wrapper.
+
+---
+# Galaxy configuration
+
+Enable docker on a destination in `job_conf.xml` and assign your GxITs to that destination
+
+.left[Set in `galaxy.yml`:]
+```yaml
+interactivetools_enable: true
+interactivetools_map: /srv/galaxy/var/gie-proxy-sessions.sqlite
+```
+
+???
+
+- A few settings are needed to get interactive tools running within your Galaxy instance.
+- In your galaxy configuration file, enable the use of interactive tools then set the path to the sqlite database storing the proxying data.
+- In the job configuration file, give to the tool a destination allowing the use of Docker (more details in the tutorial).
+
+---
+# Proxy configuration
+
+Use the proxy configuration that ships with Galaxy
+
+Or the [Node.js-based proxy][usegalaxy_eu-gie_proxy]
+
+[usegalaxy_eu-gie_proxy]: https://galaxy.ansible.com/usegalaxy_eu/gie_proxy
+
+???
+
+- In production, you are likely to use the Node.js based proxy, set up by the Galaxy admin team.
+- During developement, you can use the proxy configuration used by default by Galaxy.
+
+---
+# Security
+
+The default docker-enabled container exposes all datasets to the tool
+
+Normally this isn't bad (normal tools can't be controlled by the user)
+
+Interactive tools are fully user controllable
+
+Solution: [Embedded Pulsar][job-conf-pulsar-embedded]
+
+[job-conf-pulsar-embedded]: https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106
+
+???
+
+- As we have seen, interactive tools are launched in docker containers.
+- By default in galaxy, each container has full access to all user's data.
+- This is a security issue since a user could take control of an interactive tool and read, write or delete those data.
+
+---
+# Embedded Pulsar
+
+Runs a [Pulsar][pulsar] server within the Galaxy application to "stage" (i.e. copy) inputs.
+
+- Pros: Inputs in isolated dir so only that dir is mounted in the container: secure
+- Cons: Has to copy inputs on each Interactive Tool execution: slow
+
+[pulsar]: https://github.com/galaxyproject/pulsar
+
+???
+
+- A solution to this security issue is to use embedded pulsar.
+- This way, pulsar makes available only the job input data to the container.
+- Moreover, these data are read only.
+- You will have more details in the tutorial.

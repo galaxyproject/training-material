@@ -13,28 +13,31 @@ objectives:
   - Secure Jenkins
 time_estimation: "1h"
 tags:
+  - ansible
   - automation
-#subtopic: features
+subtopic: features
 key_points:
   - Automate all the things!
   - Especially regular tasks you might forget to do
   - Automatically run Ansible to ensure machines are in compliance
 contributors:
-  - erasche
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
       - ansible
       - ansible-galaxy
+abbreviations:
+  CI: Continuous Integration
 ---
 
 
 # Overview
-{:.no_toc}
+
 
 Automation is a key component for making your life easier. There are dozens of regular, boring tasks involved in server administration, and many of these can be automated in order to make your life easier.
-<abbr title="Continuous Integration">CI</abbr> systems provide one way to accomplish this.
+{CI} systems provide one way to accomplish this.
 Many of these systems focus on testing and deploying code, and provide some built-in shortcuts to accomplish this.
 Testing and deploying code boils down to "please run this command, when X happens", and they tend to function as "commands as a service".
 You can often configure them to "test code when it is pushed to a branch on GitHub", or "test this code daily" or "deploy this code daily".
@@ -43,7 +46,7 @@ If you need to automatically run a command whenever some event happens, and then
 There are many options for, some of these have different features which may be desirable in one or another scenario.
 This tutorial will specifically cover automation with Jenkins as that is one of the tools `usegalaxy.*` use for a subset of their automation.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -52,7 +55,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 
 # Comparison of CI Systems
 
-There are dozens of CI systems available meeting different needs, which CI system you want to use depends largely on the task you are trying to automate. A couple of key factors you may wish to consider are:
+There are dozens of {CI} systems available meeting different needs, which CI system you want to use depends largely on the task you are trying to automate. A couple of key factors you may wish to consider are:
 
 - How long will jobs run for? Free services often have time and log-output limits.
 - Are you concerned about secret storage? Self-hosted can be a better option here, but it depends on your security posture and threat matrix.
@@ -68,13 +71,13 @@ As per many of the tutorials, we will use Ansible to setup and manage our Jenkin
 
 ## Jenkins
 
-> ### {% icon hands_on %} Hands-on: Setting up Jenkins
+> <hands-on-title>Setting up Jenkins</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yaml
 >    - src: geerlingguy.java
->      version: 1.9.5
+>      version: 1.10.0
 >    - src: geerlingguy.jenkins
 >      version: 3.7.0
 >    ```
@@ -125,8 +128,6 @@ As per many of the tutorials, we will use Ansible to setup and manage our Jenkin
 >    - matrix-auth
 >    ```
 >
->    We need to set the port because it defaults to `8080` and Galaxy currently listens on port 8080.
->
 > 6. Run the build server playbook:
 >
 >    ```
@@ -168,7 +169,7 @@ Start by **visiting your Jenkins instance**, at `https://your-domain/jenkins`
 
 ## A simple job
 
-> ### {% icon hands_on %} Hands-on: Create a simple job
+> <hands-on-title>Create a simple job</hands-on-title>
 >
 > 1. Visit your Jenkins and login with the credentials you set up in the group variables file
 >
@@ -187,7 +188,7 @@ Start by **visiting your Jenkins instance**, at `https://your-domain/jenkins`
 >    - Build Periodically
 >        - *"Schedule"*: `H * * * * `
 >
->    > ### {% icon details %} Cron syntax
+>    > <details-title>Cron syntax</details-title>
 >    > Jenkins uses the [cron syntax](https://en.wikipedia.org/wiki/Cron#Overview), with the addition that `H` can be used to randomly choose a value for that place, rather than running at precisely that minute or hour. This allows you to spread the load of multiple jobs over a period of time, rather than having maybe 10 jobs all attempting to run simultaneously if they do not need to.
 >    > For the above example it will choose one value for the `H`, a random minute in the hour, and then run every hour, every day, at that minute.
 >    > You can enter different expressions to see when Jenkins would run it next.
@@ -207,7 +208,7 @@ Start by **visiting your Jenkins instance**, at `https://your-domain/jenkins`
 >
 >      ![Executing a shell](../../images/jenkins-05-job1.png)
 >
->    > ### {% icon warning %} Danger!
+>    > <warning-title>Danger!</warning-title>
 >    > This field allows you to execute arbitrary bash scripts. This is a reason Jenkins **must** be secured with HTTPS and a good username/password.
 >    {: .warning}
 >
@@ -227,15 +228,15 @@ Start by **visiting your Jenkins instance**, at `https://your-domain/jenkins`
 
 Setting up Jenkins jobs is as simple as setting up a cron job, but the results are stored in a nice visual interface that may provide better visibility than a `cron` job.
 
-> ### {% icon comment %} Author's commentary
+> <comment-title>Author's commentary</comment-title>
 > Cron jobs are great and often useful, but most people ignore the emails that cron sends them. I know I have mailboxes across N servers with dozens and dozens of unread emails from cron jobs. Jenkins is an improvement here because it shows "success" and "failure" messages that are clear, while storing the output in case you later decide that you want to look at it. For the most part, cron jobs write output that is never read, and we really only want to see the output if something has failed, but writing a cron job that behaves like this is unnecessarily complex.
 {: .comment}
 
 ## Ansible in Jenkins
 
-We will now setup Jenkins to run Ansible on cron. In the "Galaxy Installation with Ansible" tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
+We will now setup Jenkins to run Ansible on cron. In the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
 
-> ### {% icon hands_on %} Hands-on: Jenkins running Ansible
+> <hands-on-title>Jenkins running Ansible</hands-on-title>
 >
 > 1. Go back to the Jenkins homepage (click the logo in the top left)
 >
@@ -300,7 +301,7 @@ These are all next steps that are great to look into, and will make your systems
 
 You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible Galaxy deployment job we set the parameter `--diff`, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the `id_secret` or other secret variables, then this diff will be visible in the job's console logs. This is useful to see for admins but needs to be restricted so that the whole world cannot see this.
 
-> ### {% icon hands_on %} Hands-on: Securing Jenkins
+> <hands-on-title>Securing Jenkins</hands-on-title>
 >
 > 1. Return to the Jenkins home page
 >
@@ -328,11 +329,11 @@ You have already secured Jenkins in that it is protected with a good password an
 >
 > 4. Save
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > Try accessing your Jenkins from a private browsing session. How does it look?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should appear as if there are no jobs, until you log in.
 >    > {: .solution}
 >    {: .question}
@@ -358,7 +359,7 @@ Plugins also regularly receive updates due to security issues. You should either
 
 ```bash
 #!/bin/bash
-ARGS="-jar /opt/jenkins-cli.jar -s http://localhost:8080/ -auth user:password"
+ARGS="-jar /opt/jenkins-cli.jar -s http://localhost:4000/ -auth user:password"
 UPDATE_LIST=$(java $ARGS list-plugins | grep ')$' | awk '{print $1}')
 
 if [ ! -z "${UPDATE_LIST}" ]; then
@@ -393,11 +394,11 @@ Jenkins supports most VCSs that are in use today. For the Git plugin, it allows 
 
 You may need to specify credentials for cloning from private repositories, in this case you should beware that when you configure the SSH credentials you should specify the `user` as `git`. You will also need to ensure that the server's SSH public key is known to your Jenkins system which generally requires `su`ing as the Jenkins user and running `ssh git@...` once, and accepting the "Unknown host" key prompt. We recommend that you use repository URLs of the format `git@github.com:org/repo.git`, if you are using one of the GitHub PR builder plugins, then this URL has to match a value in the incoming webhook and it is not always obvious that this needs to be set like this.
 
-The "Branches to build" section allows you to specify which branches. Whenever you click "Build now", Jenkins usually just picks the master branch to build, and doesn't run a build job per-branch. If you are automatically triggering Jenkins builds based on GitHub (or other) webhooks, then you can ensure that branches that should not be built are filtered out here. Real life example: UseGalaxy.eu has one Jenkins job which should only build the master branch of a repository, and another job that only builds the PRs for that repository. We know the first job will only ever build the master branch so we can hardcode that there. With the Git plugin, many "Additional Behaviours" are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time because you write out temporary files to the current working directory, then there is a behaviour to wipe out the repository before each build.
+The "Branches to build" section allows you to specify which branches. Whenever you click "Build now", Jenkins usually just picks the main branch to build, and doesn't run a build job per-branch. If you are automatically triggering Jenkins builds based on GitHub (or other) webhooks, then you can ensure that branches that should not be built are filtered out here. Real life example: UseGalaxy.eu has one Jenkins job which should only build the main branch of a repository, and another job that only builds the PRs for that repository. We know the first job will only ever build the main branch so we can hardcode that there. With the Git plugin, many "Additional Behaviours" are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time because you write out temporary files to the current working directory, then there is a behaviour to wipe out the repository before each build.
 
 ### Build Triggers
 
-The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier. Consider if that is an option. It is not a bad thing to use multiple CI systems, it provides some degree of redundancy where if one system is experiencing an outage it may not affect all CI jobs.
+The GitHub Pull Request Builder plugin is not always easy to configure, here systems like Travis are generally significantly easier. Consider if that is an option. It is not a bad thing to use multiple {CI} systems, it provides some degree of redundancy where if one system is experiencing an outage it may not affect all CI jobs.
 
 ### Credential Binding
 
@@ -450,7 +451,7 @@ scp -i $PRIV_KEY \
 
 Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
 
-Here we store both the [build](https://github.com/erasche/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/erasche/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
+Here we store both the [build](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
 
 ### Job: Website
 

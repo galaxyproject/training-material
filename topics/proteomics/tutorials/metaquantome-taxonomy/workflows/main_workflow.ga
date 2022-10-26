@@ -1,0 +1,592 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "metaquantome-taxonomy",
+    "format-version": "0.1",
+    "name": "metaquantome-taxonomy-workflow",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "metaQuantome: create samples file",
+            "outputs": [
+                {
+                    "name": "samples_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 324.2882385253906,
+                "top": 367.9861297607422
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "40ca115438d2",
+                "name": "metaquantome_sample",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"data\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"samps_args\": {\"samps_src\": \"build\", \"__current_case__\": 0, \"samps\": [{\"__index__\": 0, \"group_name\": \"T2\", \"col_names\": \"T2_A1,T2_B1\"}, {\"__index__\": 1, \"group_name\": \"T4\", \"col_names\": \"T4A_1,T4B_1\"}, {\"__index__\": 2, \"group_name\": \"T7\", \"col_names\": \"T7A_1,T7B_1\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "8f8b3a5c-1ada-4b83-988b-46ff7e2e9468",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "samples_file",
+                    "uuid": "d0b1aed8-8212-4e20-b1b4-b10bf76a394d"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Taxa"
+                }
+            ],
+            "label": "Taxa",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 306.6493225097656,
+                "top": 535.6250152587891
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "dea4289e-33b0-4215-8768-da6c65f8cd83",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "fbf383a9-1774-483c-a1f1-1aa4d0a5659f"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Intensity"
+                }
+            ],
+            "label": "Intensity",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 304.6180725097656,
+                "top": 659.6180877685547
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "be000472-cc47-456f-8791-b62c1a6308ec",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "42e60127-395b-451f-a31c-191f6f82f2e0"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "metaQuantome: database",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tar"
+                }
+            ],
+            "position": {
+                "left": 293.2986145019531,
+                "top": 780.0000152587891
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "860429737408",
+                "name": "metaquantome_db",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"data\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"databases\": [\"ncbi\", \"go\", \"ec\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "25b0969d-52fb-4942-b37f-d9bfb88d048b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "4136ae07-b54f-4dea-bb43-b79259ea1df2"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "db_tar": {
+                    "id": 3,
+                    "output_name": "outfile"
+                },
+                "int_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "mode_args|tax_file": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "metaQuantome: expand",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 595.2430725097656,
+                "top": 528.0034942626953
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "4187b6df1a40",
+                "name": "metaquantome_expand",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tar\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"db_tar\": {\"__class__\": \"ConnectedValue\"}, \"int_file\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"tax_file\": {\"__class__\": \"ConnectedValue\"}, \"pep_colname_tax\": \"peptide\", \"tax_colname\": \"taxon_id\"}, \"pep_colname_int\": \"peptide\", \"samps\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "6d9549b9-849e-4412-8a51-1aa88f34eb8c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "8cc0c4b0-53d3-40b0-aae4-609a33c3de73"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "expand_file": {
+                    "id": 4,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "metaQuantome: filter",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 626.2674255371094,
+                "top": 899.0104522705078
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "a1daafbf5233",
+                "name": "metaquantome_filter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"expand_file\": {\"__class__\": \"ConnectedValue\"}, \"min_child_nsamp\": \"1\", \"min_children_non_leaf\": \"2\", \"min_pep_nsamp\": \"1\", \"min_peptides\": \"1\", \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1}, \"qthreshold\": \"2\", \"samps\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "afab6ea9-b83d-426f-badc-14ca1e4596d9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "6d31b51a-5045-4a68-ba38-507d06331904"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "file": {
+                    "id": 5,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "metaQuantome: stat",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 890.2951354980469,
+                "top": 523.9930877685547
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "b648e45fd3cf",
+                "name": "metaquantome_stat",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"control_group\": \"T2\", \"file\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1}, \"paired\": \"true\", \"parametric\": \"True\", \"samps\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "06bf363c-be87-4342-b803-38e5b0b9b1e0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "b66b5425-b16e-4034-899e-033f15f94bbf"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": "T2-Bar-Plot",
+            "name": "metaQuantome: visualize",
+            "outputs": [
+                {
+                    "name": "wrapped_outfile",
+                    "type": "html"
+                },
+                {
+                    "name": "plotdata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1236.3020935058594,
+                "top": 200.00000762939453
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "eb811f3018ea",
+                "name": "metaquantome_viz",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"height\": null, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"plot\": {\"plottype\": \"bar\", \"__current_case__\": 0, \"target_rank\": \"genus\", \"meancol\": \"T2_mean\", \"nterms\": \"5\", \"barcol\": \"1\"}}, \"samps\": {\"__class__\": \"ConnectedValue\"}, \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "403554ac-e02a-423c-8342-a2813b4f160a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plotdata",
+                    "uuid": "0f00b678-12ee-40a4-919a-736998f1da10"
+                },
+                {
+                    "label": null,
+                    "output_name": "wrapped_outfile",
+                    "uuid": "5ce4440c-d524-47a1-a990-069824a9c20e"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": "T7-T2_volcano-plot",
+            "name": "metaQuantome: visualize",
+            "outputs": [
+                {
+                    "name": "wrapped_outfile",
+                    "type": "html"
+                },
+                {
+                    "name": "plotdata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 931.5625915527344,
+                "top": 947.6042022705078
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "eb811f3018ea",
+                "name": "metaquantome_viz",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"height\": null, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"plot\": {\"plottype\": \"volcano\", \"__current_case__\": 1, \"fc_name\": \"log2fc_T7_over_T2\", \"fc_corr_p\": \"corrected_p_T7_over_T2\", \"textannot\": \"\", \"flip_fc\": \"false\"}}, \"samps\": {\"__class__\": \"ConnectedValue\"}, \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "56b5e0c8-654f-48a1-80f2-5dee80f2ea28",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plotdata",
+                    "uuid": "8a5b5357-fdf6-4a08-80fc-ccc961e197d3"
+                },
+                {
+                    "label": null,
+                    "output_name": "wrapped_outfile",
+                    "uuid": "1885e756-240c-4c52-9a92-3031c86fa28b"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": "T4-Bar-Plot",
+            "name": "metaQuantome: visualize",
+            "outputs": [
+                {
+                    "name": "wrapped_outfile",
+                    "type": "html"
+                },
+                {
+                    "name": "plotdata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1236.3020935058594,
+                "top": 540.0000152587891
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "eb811f3018ea",
+                "name": "metaquantome_viz",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"height\": null, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"plot\": {\"plottype\": \"bar\", \"__current_case__\": 0, \"target_rank\": \"genus\", \"meancol\": \"T4_mean\", \"nterms\": \"5\", \"barcol\": \"1\"}}, \"samps\": {\"__class__\": \"ConnectedValue\"}, \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "a4d4199a-6fac-4027-9403-317561ea3ca0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wrapped_outfile",
+                    "uuid": "5db21144-afd7-486a-ad2e-e2186ccb2759"
+                },
+                {
+                    "label": null,
+                    "output_name": "plotdata",
+                    "uuid": "a6fb4b9a-b0fb-4a0e-af13-6cd78d2a804b"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": "T7-Bar-Plot",
+            "name": "metaQuantome: visualize",
+            "outputs": [
+                {
+                    "name": "wrapped_outfile",
+                    "type": "html"
+                },
+                {
+                    "name": "plotdata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1244.3056335449219,
+                "top": 834.0104522705078
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "eb811f3018ea",
+                "name": "metaquantome_viz",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"height\": null, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"plot\": {\"plottype\": \"bar\", \"__current_case__\": 0, \"target_rank\": \"genus\", \"meancol\": \"T7_mean\", \"nterms\": \"5\", \"barcol\": \"1\"}}, \"samps\": {\"__class__\": \"ConnectedValue\"}, \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "3e71e1e5-5f29-4e02-87d4-431a93d72eb0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wrapped_outfile",
+                    "uuid": "c49669b7-f4c9-4e84-89bf-86484a3e11d0"
+                },
+                {
+                    "label": null,
+                    "output_name": "plotdata",
+                    "uuid": "b17119dd-9b47-40ba-9610-53f1fbffab04"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "infile": {
+                    "id": 6,
+                    "output_name": "outfile"
+                },
+                "samps": {
+                    "id": 0,
+                    "output_name": "samples_file"
+                }
+            },
+            "inputs": [],
+            "label": "T4-T2_volcano-plot",
+            "name": "metaQuantome: visualize",
+            "outputs": [
+                {
+                    "name": "wrapped_outfile",
+                    "type": "html"
+                },
+                {
+                    "name": "plotdata",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1275.2778015136719,
+                "top": 1161.0069732666016
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0",
+            "tool_shed_repository": {
+                "changeset_revision": "eb811f3018ea",
+                "name": "metaquantome_viz",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"height\": null, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"mode_args\": {\"mode\": \"t\", \"__current_case__\": 1, \"plot\": {\"plottype\": \"volcano\", \"__current_case__\": 1, \"fc_name\": \"log2fc_T4_over_T2\", \"fc_corr_p\": \"corrected_p_T4_over_T2\", \"textannot\": \"\", \"flip_fc\": \"false\"}}, \"samps\": {\"__class__\": \"ConnectedValue\"}, \"width\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.2+galaxy0",
+            "type": "tool",
+            "uuid": "6d7fa5d9-4ece-4f7c-9a5c-21366e78b7de",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "wrapped_outfile",
+                    "uuid": "c06ba8b9-d6ae-409a-8418-01a21e80c209"
+                },
+                {
+                    "label": null,
+                    "output_name": "plotdata",
+                    "uuid": "f18da0f4-0758-472d-94fa-737119726861"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "proteomics"
+    ],
+    "uuid": "3f3906be-ad30-452e-b76c-427c73dddf02",
+    "version": 2
+}

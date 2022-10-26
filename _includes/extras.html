@@ -1,0 +1,95 @@
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        {% icon galaxy-star %} Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        {% assign thispage = page.url | replace: '.html', '.md' %}
+        <a class="dropdown-item" href="{{ site.github_repository }}{% unless thispage == '/' %}/edit/{{ site.github_repository_branch }}{{ thispage }}{% endunless %}" title="Edit on GitHub">
+          {% icon github %} Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="{% link stats.md %}" title="Show view statistics about this repository">
+            {% icon galaxy-barchart %} GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}" title="Show view statistics of this page">
+            {% icon galaxy-barchart %} Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        {% if page.layout == 'topic' %}
+            {% assign fdbk_by_topic = site.data['feedback'] | how_many_topic_feedbacks:site.data[page.topic_name].title %}
+            {% if fdbk_by_topic > 0 %}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
+                    {% icon galaxy-barchart %} Topic feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
+        {% elsif page.layout == 'tutorial_hands_on' %}
+            {% assign fdbk_by_tutorial = site.data['feedback'] | how_many_tutorial_feedbacks:page.title %}
+            {% if fdbk_by_tutorial > 0}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
+                    {% icon galaxy-barchart %} Tutorial feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
+        {% else %}
+            <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                {% icon galaxy-barchart %} GTN feedback
+            </a>
+        {% endif %}
+
+        <div class="dropdown-item">
+            <div>
+                {% icon gtn-theme %} Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                {% icon galaxy-rulebuilder-history %} Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            {% for tag in site.git_tags_recent %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
+            {% endfor %}
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>

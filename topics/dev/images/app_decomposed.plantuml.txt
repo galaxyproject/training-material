@@ -1,0 +1,54 @@
+@startuml
+
+!include plantuml_options.txt
+
+class galaxy.structured_app.BasicApp {
+    name: str
+    config: GalaxyAppConfiguration
+    auth_manager: AuthManager
+    model: GalaxyModelMapping
+    toolbox: ToolBox
+    security_agent: GalaxyRBACAgent
+    quota_agent: QuotaAgent
+    datatypes_registry: Registry
+}
+
+class galaxy.structured_app.MinimalApp {
+    is_webapp: bool
+    new_installation: bool
+    tag_handler: GalaxyTagHandler
+    install_model: ModelMapping
+    host_security_agent: HostAgent
+}
+
+class galaxy.structured_app.MinimalManagerApp {
+    file_sources: ConfiguredFileSources
+    genome_builds: GenomeBuilds
+    history_manager: HistoryManager
+    hda_manager: HDAManager
+    workflow_contents_manager: WorkflowContentsManager
+    library_folder_manager: FolderManager
+    library_manager: LibraryManager
+    role_manager: RoleManager
+    installed_repository_manager: InstalledRepositoryManager
+    user_manager: UserManager
+}
+
+class galaxy.structured_app.StructuredApp {
+    object_store: ObjectStore
+    job_metrics: JobMetrics
+    job_config: JobConfig
+    execution_timer_factory: ExecutionTimerFactory
+    workflow_manager: WorkflowsManager
+    job_manager: JobManager
+    queue_worker: GalaxyQueueWorker
+    dependency_resolvers_view: DependencyResolversView
+    api_keys_manager: ApiKeyManager
+}
+
+galaxy.structured_app.BasicApp <|-- galaxy.structured_app.MinimalApp
+galaxy.structured_app.MinimalApp <|-- galaxy.structured_app.MinimalManagerApp
+galaxy.structured_app.MinimalManagerApp <|-- galaxy.structured_app.StructuredApp 
+galaxy.structured_app.StructuredApp <|-- galaxy.app.UniverseApplication
+
+@enduml

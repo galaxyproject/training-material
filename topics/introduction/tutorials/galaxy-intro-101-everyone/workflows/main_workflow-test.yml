@@ -1,0 +1,24 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    iris:
+      class: File
+      location: https://zenodo.org/record/1319069/files/iris.csv
+      filetype: csv
+  outputs:
+    unique_output:
+      asserts:
+        has_text:
+          text: "setosa"
+    datamash_output:
+      asserts:
+        has_text:
+          text: "5.006"
+    group1:
+      asserts:
+        has_text:
+          text: "setosa"
+    group2:
+      asserts:
+        has_text:
+          text: "50"

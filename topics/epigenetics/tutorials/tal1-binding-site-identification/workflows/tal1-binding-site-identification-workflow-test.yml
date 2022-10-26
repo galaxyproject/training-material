@@ -1,0 +1,52 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    G1E_input_R1_downsampled_SRR507859.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
+      filetype: fastqsanger
+    G1E_input_R2_downsampled_SRR507860.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
+      filetype: fastqsanger
+    G1E_Tal1_R1_downsampled_SRR492444.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+      filetype: fastqsanger
+    G1E_Tal1_R2_downsampled_SRR492445.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
+      filetype: fastqsanger
+    Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+      filetype: fastqsanger
+    Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+      filetype: fastqsanger
+    Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
+      filetype: fastqsanger
+    Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger:
+      class: File
+      location: https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+      filetype: fastqsanger
+    RefSeq_gene_annotations_mm10.bed:
+      class: File
+      location: https://zenodo.org/record/197100/files/RefSeq_gene_annotations_mm10.bed
+      filetype: bed
+  outputs:
+    output_overlapping_peaks:
+      asserts:
+        has_text:
+          text: 'chr16'
+    output_g1e_peaks:
+      asserts:
+        has_text:
+          text: 'chr16'
+    output_megakaryocyte_peaks:
+      asserts:
+        has_text:
+          text: 'chr16'

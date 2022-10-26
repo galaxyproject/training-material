@@ -1,0 +1,140 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+
+title: "Galaxy and Celery"
+contributions:
+  authorship:
+  - mira-miracoli
+  editing:
+  - hexylena
+subtopic: jobs
+
+---
+
+## Can you eat it
+
+.pull-left[
+Celery is an asynchronous distributed task queue.
+
+It consists of:
+
+- Application that sends tasks
+- to a broker with queues
+- Worker(s) that execute the tasks
+- A Result backend to store the task results
+
+It's written in Python but supports multiple other languages via webhooks.
+]
+
+.pull-right[
+	![celery logo, a cartoon of a piece of celery](images/celery.png)
+]
+
+---
+
+## So many features
+
+.pull-left[
+- Celeryd – the daemonized version of Celery
+- CeleryBeat a scheduler for repeated tasks
+- Flower, a monitoring interface for
+	- Showing tasks, queues and workers
+	- Prometheus + Grafana Integration
+]
+
+.pull-right[
+	![celery logo, a cartoon of a piece of celery, now with the text celery next to it](images/celery-logo.png)
+]
+
+---
+
+# How Celery Can Improve Galaxy
+
+
+---
+
+.pull-left[
+**The Problem**
+
+The Galaxy Server should respond quickly to every request. Gunicorn Workers should not do everything.
+
+**The Solution**
+
+Queue asynchronous tasks with Celery
+(happens currently internal on the same node)
+
+**The Improvement**
+
+Send the tasks to an external Celery-Cluster
+]
+
+.pull-right[
+	![galaxy logo next to celery logo, with two purple hearts](images/galaxy+celery.png)
+]
+
+---
+
+![A workflow diagram is shown with logos and arrows. Galaxy on the left sends tasks to rabbit MQ. Celery fetches tasks from Rabbit MQ and proceses them. Then celery sends results to the backend database. Finally Galaxy fetches those same results back from the backend.](images/workflow.png)
+
+---
+
+## What is Celery Used For
+
+- Recalculating Disk Usage
+- Purging Datasets
+- Changing Datatypes
+- Preparing compressed downloads (histories, etc.)
+- Creating PDFs for Galaxy workflow reports
+- Cleaning up short term storage
+
+---
+
+.pull-left [
+## What we need
+
+- A Galaxy Server, configured to use an external MQ and external Celery Workers
+- A properly set up broker (for example the [UseGalaxy.eu RabbitMQ Ansible Role](https://github.com/usegalaxy-eu/ansible-rabbitmq))
+- A Celery-Cluster on external node with the full Galaxy repo, branch -> dev, which has run an initialisation (run.sh) and run the Celery Worker above [task definition folder](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/celery)
+]
+
+.pull-right[
+![Collection of three logos, Galaxy, RabbitMQ, and celery](images/logos.png)
+]
+
+---
+
+.pull-left[
+	![screenshot of galaxy documentation page, linked in next section](images/docs.png)
+]
+.pull-right[
+- [Configuration in `galaxy.yml` file](https://docs.galaxyproject.org/en/latest/admin/options.html#amqp-internal-connection)
+- Documentation primarily within codebase and developer, not admin-focused
+- `celery_broker` can be set, but defaults to `amqp_internal_connection`
+- Contributions are very welcome ;)
+- But: Celery, Flower and RabbitMQ are well documented
+]
+
+---
+
+.pull-left[
+![Screenshots of Galaxy, RabbitMQ, and Flower](images/have.png)
+]
+
+.pull-right[
+
+## What's currently easy
+
+- A Galaxy instance
+- A RabbitMQ instance
+- Running Celery via Gravity
+]
+
+---
+
+## To Be Completed
+
+- Securing Celery documentation for Galaxy Admins
+- Running Celery on another node, outside of Gravity (maybe.)
+- The correct Telegraf configuration for monitoring 
+- Dashboards

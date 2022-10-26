@@ -1,17 +1,156 @@
 ---
-layout: base_slides
-logo: "GTN"
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
 
-title: "Controlling Galaxy with Supervisor"
+title: "Controlling Galaxy with systemd or Supervisor"
 contributors:
   - natefoo
+  - hexylena
 ---
-
 class: special
+
+# systemd
+
+The current Linux init system
+
+Used to bootstrap the user space and to manage system processes after booting
+
+???
+
+- systemd is a popular linux init system.
+- It manages processes and ensures they are running after boot.
+- It can restart processes when they crash.
+
+---
+class: left
+
+# systemd
+
+Replaces:
+- `/etc/init.d/*`, `/etc/rc?.d`
+- `service` command
+- Upstart
+- `update-rc.d`
+
+INI config format
+
+???
+
+- systemd replaces many previous alternative init systems
+- it is quite easy to work with
+
+---
+# systemd - Layout
+
+- `/lib/systemd/system` - System service definitions
+- `/etc/systemd/system` - User-defined service definitions
+
+???
+
+- systemd has two separate pools of service definitions.
+- in lib are the system and package provided definitions.
+- in etc are the user provided definitions.
+- Galaxy's will be in /etc.
+
+---
+# systemd - Galaxy service unit
+
+```ini
+[Unit]
+Description=Galaxy
+After=network.target
+After=time-sync.target
+
+[Service]
+UMask=022
+Type=simple
+User=galaxy
+Group=galaxy
+WorkingDirectory=/srv/galaxy/server
+TimeoutStartSec=10
+ExecStart=/srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+Environment=HOME=/srv/galaxy VIRTUAL_ENV=/srv/galaxy/venv PATH=/srv/galaxy/venv/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin DOCUTILSCONFIG= PYTHONPATH=/srv/galaxy/server/lib/galaxy/jobs/rules
+MemoryLimit=32G
+Restart=always
+
+MemoryAccounting=yes
+CPUAccounting=yes
+BlockIOAccounting=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+???
+
+- Here is an example systemd service definition, or a unit.
+- At the top section, it describes the service name, and any dependencies.
+- For galaxy, we only want it to start when the network is available.
+- Next is the service section.
+- here we define that it is a simple service, run by the user and group galaxy.
+- it starts in a particular working directory.
+- and if it does not start within 10 seconds, something is wrong.
+- We provide a command that should be run.
+- And some environment variables like the path or home directory.
+- A memory limit is provided, which systemd enforces through cgroups.
+- next, the process should always restart if it crashes.
+- And various accounting is enabled.
+
+---
+# systemd - systemctl
+
+`systemctl` is the command line interface to systemd
+
+- `systemctl status <name>[.service]`
+- `systemctl <start|stop|restart|...> <name>[.service]`
+- `systemctl <enable|disable> <name>[.service]`
+
+???
+
+- the systemctl command lets you interact with the service.
+- You can start, stop, or restart the service.
+- You can enable or disable the service if you do or do not want it to start at boot.
+
+---
+# systemd - Galaxy service
+
+```console
+$ systemctl status galaxy
+● galaxy.service - Galaxy
+   Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2020-02-26 19:46:03 UTC; 1 day 20h ago
+ Main PID: 7845 (uwsgi)
+    Tasks: 45 (limit: 4915)
+   Memory: 569.2M (limit: 32.0G)
+      CPU: 5h 43min 35.436s
+   CGroup: /system.slice/galaxy.service
+           ├─7845 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8106 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           ├─8111 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+           └─8112 /srv/galaxy/venv/bin/python3 /srv/galaxy/venv/bin/uwsgi --yaml /srv/galaxy/config/galaxy.yml --stats 127.0.0.1:4010
+```
+
+???
+
+- Here is an example output of the status command.
+- The word enabled in the loaded line shows that the service will start at boot
+- The service is running since 1 day and 20 hours.
+- We are told the main PID.
+- And shown the memory usage next to the memory usage limit.
+- systemd starts services in a cgroup, so all children can be kept track of.
+- Child processes which are started by the parent process are likewise listed.
+
+---
 
 # Supervisor
 
-.footnote[\#usegalaxy / @galaxyproject]
+The former recommended method for managing multiple Galaxy processes
+
+???
+
+- Before systemd there was supervisor.
+- We do not use this as much anymore.
 
 ---
 # Supervisor
@@ -23,6 +162,11 @@ A process manager written in Python
 - `supervisorctl` command line interface
 - INI config format
 - `[program:x]` defines a program to control
+
+???
+
+- Supervisor was a process manager written in python.
+- It could run as an unprivileged user, and was similar to systemd.
 
 ---
 class: smaller
@@ -49,6 +193,11 @@ nginx                            RUNNING    pid 1917, uptime 8 days, 6:44:21
 proftpd                          RUNNING    pid 1916, uptime 8 days, 6:44:21
 ```
 
+???
+
+- The supervisor status command would show running parent processes.
+- Very similar to systemd
+
 ---
 # Supervisor - program
 
@@ -65,67 +214,18 @@ user            = galaxy
 stopsignal      = INT
 ```
 
----
-class: special
+???
 
-# Systemd
-
-The current Linux init system
-- Used to bootstrap the user space and to manage system processes after booting
-
-.footnote[\#usegalaxy / @galaxyproject]
+- The service definition for a supervisor process group.
+- Here it is named galaxy.
+- A command and working directory are provided.
+- A user to run the command is listed.
+- comparable to systemd service definitions.
 
 ---
-# Systemd
+# Supervisor + systemd
 
-Replaces:
-- `/etc/init.d/*`, `/etc/rc?.d`
-- `service` command
-- Upstart
-- `update-rc.d`
-
-INI config format
-
----
-# Systemd - Layout
-
-- `/lib/systemd/system` - System service definitions
-- `/etc/systemd/system` - User-defined service definitions
-
----
-class: smaller
-# Systemd - Service file
-
-```ini
-[Unit]
-Description=Supervisor process control system for UNIX
-Documentation=http://supervisord.org
-After=network.target
-
-[Service]
-ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
-ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
-ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
-KillMode=process
-Restart=on-failure
-RestartSec=50s
-
-[Install]
-WantedBy=multi-user.target
-```
-
----
-# Systemd - systemctl
-
-`systemctl` is the command line interface to systemd
-
-- `systemctl <start|stop|restart|...> <name>[.service]`
-- `systemctl <enable|disable> <name>[.service]`
-
----
-# Systemd + supervisor
-
-Ensure that systemd is configured to start supervisor with:
+If you prefer, you can use Supervisor to manage the Galaxy processes. The OS needs to ensure the Supervisor daemon is running, and probably manages it with systemd, as is common on most systems currently.
 
 ```console
 $ systemctl status supervisor
@@ -140,3 +240,8 @@ $ systemctl status supervisor
            ├─10109 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler0
            └─10142 /srv/galaxy/server/.venv/bin/python ./scripts/galaxy-main -c /srv/galaxy/server/galaxy.yml --server-name=handler1
 ```
+
+???
+
+- These two can be combined.
+- systemd can start supervisor, if you have reason to need supervisor.

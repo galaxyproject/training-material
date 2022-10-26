@@ -1,0 +1,36 @@
+---
+---
+[
+{% assign sorted_topics = "" | split: "," %}
+{% assign sorted_topics_pre = site.data | sort | order: "title" %}
+
+{% for topic in sorted_topics_pre %}
+    {% if topic[0] == "introduction" %}
+        {% assign sorted_topics = sorted_topics | unshift: topic %}
+    {% else %}
+        {% assign sorted_topics = sorted_topics | push: topic %}
+    {% endif %}
+{% endfor %}
+               {% for topic in sorted_topics %}
+					{% assign topic_id = topic[0] %}
+                       {% assign t = site.data[topic_id] %}
+                       {% assign topic_material = site | topic_filter:topic[0] %}
+                       {% for material in topic_material %}
+                               {% if material.video %}
+			{
+				"id": "{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}",
+				"topic": "{{ t.title }}",
+				"title": "{{ material.title }}"
+			},
+								{% for lang in material.translations.slides %}
+			{
+				"id": "{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}",
+				"topic": "{{ t.title }}",
+				"title": "{{ material.title }}"
+			},
+								{% endfor %}
+                               {% endif %}
+                       {% endfor %}
+               {% endfor %}
+	null
+]

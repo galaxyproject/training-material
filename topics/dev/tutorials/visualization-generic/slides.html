@@ -2,7 +2,7 @@
 layout: tutorial_slides
 logo: "GTN"
 
-title: "Visualizations: generic plugins"
+title: "Generic plugins"
 questions:
   - "How can visualization plugins benefit science?"
 objectives:
@@ -18,6 +18,7 @@ key_points:
   - "Interactivity is what makes visualizations different from static tools"
   - "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS"
   - "Performance is more important than for static Galaxy tools"
+subtopic: viz
 contributors:
   - shiltemann
   - yhoogstrate
@@ -26,7 +27,7 @@ contributors:
 ## Why visualizations?
 
 
-![](../../images/anscombe-quartet-animated.gif)
+![Animated gif cycling through Anscombe's quartet and various variations that all have the same mean, SD, and correlation but look vastly different to someone's eyes.](../../images/anscombe-quartet-animated.gif)
 
 ```python
 X mean: 54.26, X SD: 16.76
@@ -44,7 +45,7 @@ yet when visualizing them it is revealed they have vastly different structures.
 
 Bam files - textual
 
-![](../../images/vis_alignment_plaintext.png)
+![Screenshot of a terminal showing a wall of text with lines from a BAM file](../../images/vis_alignment_plaintext.png)
 
 ---
 
@@ -52,7 +53,7 @@ Bam files - textual
 
 Bam files - visualized
 
-![](../../images/vis_alignment.png)
+![Screenshot of IGV with presumably the same bam file from before showing a large gap in the alignment, now clear due to a visualisation.](../../images/vis_alignment.png)
 
 ---
 
@@ -77,7 +78,7 @@ Bam files - visualized
 
 ## Which should I use?
 
-![](../../images/which_viz_flowchart.png)
+![Flowchart. Only available on an external website? If yes use a display application. Does it need to be served (e.g. python), if yes use an interactive tool. Is it computationally intensive, then it needs to be a regular tool. Is it written in javascript? Then it shold be a generic plugin. If it passes all these tests it can be a charts plugin.](../../images/which_viz_flowchart.png)
 
 ---
 
@@ -86,7 +87,7 @@ Bam files - visualized
 - Visualizations button on history items
 - Different options depending on file type
 
-![](../../images/vis_plugin_menu.png)
+![Screenshot of the history in galaxy with viz dropdown clicked. On one dataset the options are charts and scatterplots for a tabular dataset. On the other is 'visualise in trackster' for a BAM dataset](../../images/vis_plugin_menu.png)
 
 ---
 
@@ -94,11 +95,11 @@ Bam files - visualized
 ## Plugins: Charts
 ]
 .pull-left[
-![](../../images/vis_charts_02.png)
+![Charts selection interface showing a number of chart types that can be selected](../../images/vis_charts_02.png)
 ]
 
 .pull-right[
-![](../../images/charts_examples.png)
+![Montage of several charts, bar, dot, stacked bar/line, box and whisker, and doughnut charts.](../../images/charts_examples.png)
 ]
 
 ---
@@ -107,10 +108,10 @@ Bam files - visualized
 
 - Allows exporting screenshots
 
-![](../../images/vis_charts_05.png)
+![A screenshot button is clicked providing optinos to save as PNG, SVG, or PDF](../../images/vis_charts_05.png)
 
 - For more information, see the charts plugin development
-[slides](../charts-plugins/slides.html) and [tutorial](../charts-plugins/tutorial.html)
+[slides]({% link topics/dev/tutorials/visualization-charts/slides.html %}) and [tutorial]({% link topics/dev/tutorials/visualization-charts/tutorial.md %})
 ---
 
 ## Plugins: Generic
@@ -144,7 +145,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/config/$PLUGIN_NAME.xml
 
 - Hooks visualizations into Galaxy
 
-![](../../images/vis_plugin_conf_xml.png)
+![Screenshot of code with boxes highlighting Draw RNA.js and the datatypes that it can accept. A template drawrnajs.mako is also highlighted](../../images/vis_plugin_conf_xml.png)
 
 * Data types must match with class names in `$GALAXY_ROOT/lib/galaxy/datatypes/`
 
@@ -159,7 +160,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 - Link to data types and HTML template file
     * Every invocation of visualization: template compiled
 
-![](../../images/vis_mako_hello_world_dual.png)
+![Screenshot of more code showing a mako template being rendered](../../images/vis_mako_hello_world_dual.png)
 
 ---
 
@@ -176,7 +177,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
     * Resolving history uid to hash
     * Correction for extended root URLs:
 
-![](../../images/vis_nested_url.png)
+![Screenshot of a URL bar reading https://bioinf-galaxian.erasmusmc.nl/galaxy/](../../images/vis_nested_url.png)
 
 ---
 
@@ -186,7 +187,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
     - Obtain hash value used in urls *hdadict['id']*
     - Essential Python variables:
 
-![](../../images/vis_important_variables.png)
+![A mako template with a python codeblock section highlighting hdadict, root, app_root, file_url](../../images/vis_important_variables.png)
 
 ---
 
@@ -203,7 +204,7 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 
 ## Plugins: Generic template
 
-![](../../images/vis_generic_template.png)
+![Another code screenshot showing a generic template that can be used for viz.](../../images/vis_generic_template.png)
 
 ---
 
@@ -211,8 +212,8 @@ $ touch $GALAXY_ROOT/config/plugins/$PLUGIN_NAME/templates/$PLUGIN_NAME.mako
 
 - External libraries and static files go in `./static` dir:
 
-![](../../images/vis_generic_template_static.png)
-![](../../images/vis_static_dir.png)
+![Code screenshot showing a cool_vis_plugin.js being loaded](../../images/vis_generic_template_static.png)
+![Screenshot of its location in the static directory.](../../images/vis_static_dir.png)
 
 ---
 

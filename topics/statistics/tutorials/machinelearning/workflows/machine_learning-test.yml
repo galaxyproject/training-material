@@ -1,0 +1,16 @@
+---
+- doc: Test Basics of Machine Learning workflow
+  job:
+    breast-w_train:
+      class: File
+      location: https://zenodo.org/api/files/0d468136-5025-4c0f-bf8b-a8277a513a93/breast-w_train.tsv
+      filetype: tabular
+    breast-w_test:
+      class: File
+      location: https://zenodo.org/api/files/0d468136-5025-4c0f-bf8b-a8277a513a93/breast-w_test.tsv
+      filetype: tabular
+  outputs:
+    outfile_predict:
+      asserts:
+        has_text:
+          text: 'Mitoses'
