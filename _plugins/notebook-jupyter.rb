@@ -1,6 +1,7 @@
 require 'json'
 require 'fileutils'
 require './_plugins/notebook'
+require './_plugins/gtn.rb'
 
 module Jekyll
   class JupyterNotebookGenerator < Generator
@@ -19,7 +20,7 @@ module Jekyll
         page.data['tags'].push('jupyter-notebook')
 
         puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
-        last_modified = begin page.last_modified.to_s rescue Time.new.to_s end
+        last_modified = Gtn::ModificationTimes.obtain_time(page.path)
         notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified, notebook_language, site, dir)
 
         topic_id = dir.split('/')[-3]

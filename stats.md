@@ -102,7 +102,7 @@ layout: base
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Recently Updated Tutorials</h5>
-   {% assign latest_tutorials = tutorials | filter_recent_modified: 10 %}
+   {% assign latest_tutorials = site | recently_modified_tutorials %}
    <table class="table table-striped">
     <thead>
       <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
