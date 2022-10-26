@@ -39,7 +39,7 @@ priority: 1
 
 # Introduction
 
-{:.no_toc}
+
 
 When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 
@@ -225,7 +225,7 @@ Other tools might mask a greater proportion of the genome, at the cost of a more
 
 # Conclusion
 
-{:.no_toc}
+
 
 By following this tutorial you have learn how to mask an eukaryotic genome using Red and RepeatMasker, after assembling ([Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %})) and before annotating it ([Funannotate annotation tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %})).
 

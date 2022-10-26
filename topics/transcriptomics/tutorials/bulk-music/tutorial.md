@@ -37,7 +37,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- using info from here: https://xuranw.github.io/MuSiC/articles/MuSiC.html -->
 
@@ -640,7 +640,7 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we constructed ExpressionSet objects, inspected and annotated them, and then finally processed them with the MuSiC RNA-Deconvolution analysis suite.
 

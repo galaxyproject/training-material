@@ -871,6 +871,6 @@ We can also import data directly into Google Colab:
 -->
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.

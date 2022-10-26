@@ -45,7 +45,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 > <comment-title></comment-title>
 >
@@ -1913,7 +1913,7 @@ With the annotated cell types, we can also visualize the expression of their can
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
 

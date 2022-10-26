@@ -27,7 +27,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
@@ -767,6 +767,6 @@ Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR
 ```
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.

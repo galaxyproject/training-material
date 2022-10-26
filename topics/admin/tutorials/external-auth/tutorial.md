@@ -28,7 +28,7 @@ requirements:
 ---
 
 # Overview
-{:.no_toc}
+
 
 For this exercise we will use a basic password file method for authenticating - this is probably not a very useful method in production, but it demonstrates how the proxy server can be configured to provide the correct header to Galaxy, and how Galaxy integrates with upstream authentication providers. This same method can be used with NGINX and Apache modules for CAS or SAML authentication.
 

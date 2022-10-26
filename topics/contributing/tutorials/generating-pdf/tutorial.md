@@ -14,7 +14,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.
 
@@ -37,12 +37,7 @@ To generate the PDFs, a command `make pdf` is given. This command:
 
 > <hands-on-title>Checking the website generation locally</hands-on-title>
 >
-> 1. Install Chrome
->    - For OSX, install the [Chrome browser]()
->    - For Ubuntu, follow [these instructions](https://askubuntu.com/questions/510056/how-to-install-google-chrome#510186)
+> 1. Install a browser
 > 2. Generate the PDFs: `make pdf`
 > 3. Check the generated PDFs in `_pdf` folder
 {: .hands_on}
-
-# Conclusion
-{:.no_toc}

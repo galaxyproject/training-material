@@ -38,7 +38,7 @@ requirements:
 
 
 # Introduction
-{:.no_toc}
+
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
 
@@ -421,6 +421,6 @@ You can save the edited script by clicking the {% icon galaxy-save %} icon at th
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have seen how a volcano plot can be generated and customised using Galaxy and R. You can see some more possible customisations in the [RNA Seq Counts to Viz in R]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial and at the [ggrepel website](https://ggrepel.slowkow.com/index.html).

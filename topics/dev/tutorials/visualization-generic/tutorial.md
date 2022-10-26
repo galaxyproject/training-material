@@ -24,7 +24,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Visualizations may be very helpful in understanding data better. There is a whole
 range of visualizations, from rather simple scatter and barplots up to projections
@@ -47,12 +47,8 @@ However, for this tutorial we will keep it basic.
 
 Additional documentation about Galaxy visualizations can be found here:
 
-- [VisualizationsRegistry](https://galaxyproject.org/visualizations-registry)
-- [VisualizationsRegistry/Cookbook](https://galaxyproject.org/visualizations-registry/cookbook)
-- [VisualizationsRegistry/Code](https://galaxyproject.org/visualizations-registry/code)
 - [DataProviders](https://galaxyproject.org/data-providers)
 - [DataProviders/Cookbook](https://galaxyproject.org/data-providers/cookbook)
-- [Develop/Visualizations](https://galaxyproject.org/develop/visualizations)
 
 > <agenda-title></agenda-title>
 >
@@ -594,7 +590,7 @@ For more examples of visualization plugins, you can browse this
 [GitHub repo](https://github.com/bgruening/galaxytools/tree/master/visualisations)
 
 # Conclusion
-{:.no_toc}
+
 
 We have just created a visualization plugin in Galaxy to visualize the number of alignments
 per `RNAME` (chromosome) in a BAM file.

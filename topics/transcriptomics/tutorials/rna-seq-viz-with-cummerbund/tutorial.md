@@ -22,7 +22,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 RNA-Seq analysis helps researchers annotate new genes and splice variants, and provides cell- and context-specific quantification of gene expression. RNA-Seq data, however, are complex and require both computer science and mathematical knowledge to be managed and interpreted.
 
@@ -261,7 +261,7 @@ Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2,
 {: .comment}
 
 # Conclusion
-{:.no_toc}
+
 
 Visualization tools help researchers making sense of data, providing a bird's-eye view of the underlying analysis results.
 In this tutorial we overviewed the advantages of visualizing RNA-Seq results with CummeRbund, and gained insights on CuffDiff's big-data output by plotting information relative to the most significant differentially expressed genes in our RNA-Seq analysis.

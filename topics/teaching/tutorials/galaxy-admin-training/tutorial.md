@@ -28,7 +28,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 ![GAT logo is the GTN logo over a space background and text reading galaxy admin traiing.](../../images/gat.png)
 
@@ -255,4 +255,4 @@ There are other `make check-` commands for each of the `gat` status commands. Ru
 Once your training is concluded, go through the questions students have asked in the Google Doc, and consider contributing them back to the training materials with Tips and Question boxes covering these student questions. Here is [an example pull request](https://github.com/galaxyproject/training-material/pull/1922) when we did this after BCC2020.
 
 # Conclusion
-{:.no_toc}
+

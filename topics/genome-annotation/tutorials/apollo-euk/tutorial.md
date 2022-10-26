@@ -49,7 +49,7 @@ abbreviations:
 {: .warning}
 
 # Introduction
-{:.no_toc}
+
 
 After automatically annotating your genome using [Funannotate](../funannotate/tutorial.html) or [Maker](../annotation-with-maker/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
@@ -79,7 +79,7 @@ This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readt
 <div class="Create-your-own-organism" markdown="1">
 
 ## Data upload
-{:.no_toc}
+
 
 To annotate a genome using Apollo, we need the reference genome sequence in FASTA format, and any evidence tracks we want to refine into our annotations. "Evidence tracks" can be any data like:
 
@@ -95,7 +95,7 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 {: .comment}
 
 ### Get data
-{:.no_toc}
+
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -119,7 +119,7 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 {: .hands_on}
 
 ## Using Apollo for Annotation
-{:.no_toc}
+
 
 Refining genome annotations happens in multiple steps:
 
@@ -401,7 +401,7 @@ Click on **Create your own organism** at the beginning to learn more.
 </div>
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations<span class="Create-your-own-organism"> and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution</span><span class="Use-a-precreated-organism">. Although you use a pre-created organism, remember that you can use Galaxy to add your own organism to Apollo, and give access to your project at any other researcher, making it a real collaborative solution</span>.
 

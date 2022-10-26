@@ -24,7 +24,7 @@ tags: [DDA]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most experimental set ups, proteins are digested to peptides before the LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 
@@ -39,7 +39,7 @@ use the [ProteoWizard](http://proteowizard.sourceforge.net/) tool MSconvert and 
 For an alternative identification pipeline using only tools provided by the [OpenMS software suite](https://openms.de), please consult [this tutorial]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-oms/tutorial.html).
 
 # Input data
-{:.no_toc}
+
 
 As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information
@@ -171,12 +171,12 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 {: .hands_on}
 
 # Premade Workflow
-{:.no_toc}
+
 
 A premade workflow for this tutorial can be found [here](workflows/wf_proteinID_SG_PS.ga)
 
 # Further Reading
-{:.no_toc}
+
 
 - [Search GUI and Peptide Shaker tutorials at Compomics](https://compomics.com/bioinformatics-for-proteomics/)
 - [Using Search GUI and Peptide Shaker in Galaxy](https://drive.google.com/file/d/0B6bIeOvjBkbWVnhMLWxXdGVUY3M/view)

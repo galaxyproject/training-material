@@ -18,7 +18,7 @@ subtopic: prokaryote
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Genome annotation is the process of attaching biological information to sequences.
 It consists of three main steps:

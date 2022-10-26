@@ -30,7 +30,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [here](https://covid19.galaxyproject.org/cheminformatics).
 
@@ -342,6 +342,6 @@ The aim of the original study was to select 500 candidate molecules for synthesi
 This step is skipped in the tutorial, as only 100 compounds were tested, using only a single fragment hit structure. If you want, though, check out the [history](https://usegalaxy.eu/u/timdudgeon/h/top-500-enamine--chemspace-bb) and [workflow](https://usegalaxy.eu/u/timdudgeon/w/filter-results) used.
 
 # Conclusion
-{:.no_toc}
+
 
 This tutorial guided you through docking and scoring of a small set of compounds to the MPro protein. Hopefully, you have a better understanding of how docking can be practically used, as well as how the original study was performed.

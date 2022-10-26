@@ -54,7 +54,7 @@ contributions:
 
 Version control is a way of tracking the change history of a project, and `git` is one of the most popular systems for doing that! This tutorial will guide you through the basics of using git for version control.
 
-> <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to create a git repo, and begin working with it.
 >
@@ -109,7 +109,7 @@ metadata make up a [repository](https://git-scm.com/docs/gitglossary#def_reposit
 Repositories can be kept in sync across different computers, facilitating
 collaboration among different people.
 
-> <tip-title>The Long History of Version Control Systems</tip-title>
+> <tip-title>The Long History of Version Control Systems</tip-title>
 >
 > Automated version control systems are nothing new.
 > Tools like [RCS](https://en.wikipedia.org/wiki/Revision_Control_System), [CVS](https://en.wikipedia.org/wiki/Concurrent_Versions_System), or [Subversion](https://en.wikipedia.org/wiki/Apache_Subversion) have been around since the early 1980s and are used by
@@ -159,13 +159,13 @@ Before diving in the tutorial, we need to open {% tool [RStudio](interactive_too
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
-> <hands-on-title>Installing git</hands-on-title>
+> <hands-on-title>Installing git</hands-on-title>
 > The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 We go to "Tools" and pick the "Shell..." option and we are good to go. Our workspace is the left, terminal window that just opened.
 >
 > Fortunately, [miniconda](https://docs.conda.io/en/latest/miniconda.html) is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.
 >
-> > <code-in-title>Environment and Packages</code-in-title>
+> > <code-in-title>Environment and Packages</code-in-title>
 > > ```bash
 > > $ conda create -n name_of_your_env nano git
 > > $ conda activate name_of_your_env
@@ -175,8 +175,8 @@ We go to "Tools" and pick the "Shell..." option and we are good to go. Our works
 >
 >| Software | Version | Manual | Available for | Description |
 >| -------- | ------------ | ------ | ------------- | ----------- |
->| [git](https://git-scm.com/) | 2.35.3 | [Link](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
->| [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Link](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
+>| [git](https://git-scm.com/) | 2.35.3 | [git Manual](https://git-scm.com/book/en/v2) | Linux, MacOS | Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. |
+>| [GNU nano](https://www.nano-editor.org/) | 2.9.8 | [Nano manual](https://www.nano-editor.org/dist/latest/nano.html) | Linux, MacOS | GNU nano is a small and friendly text editor. |
 >
 {: .hands_on}
 
@@ -194,7 +194,7 @@ On a command line, Git commands are written as `git verb options`,
 where `verb` is what we actually want to do and `options` is additional optional information which may be needed for the `verb`. So here is how
 Sherlock sets up his new laptop:
 
-> <code-in-title>Setting up with bash</code-in-title>
+> <code-in-title>Setting up with bash</code-in-title>
 > ```bash
 > $ git config --global user.name "Sherlock Holmes"
 > $ git config --global user.email "sherlock@baker.street"
@@ -211,15 +211,15 @@ after this lesson will include this information.
 
 For this lesson, we will be interacting with [GitHub](https://github.com/) and so the email address used should be the same as the one used when setting up your GitHub account. If you are concerned about privacy, please review [GitHub's instructions for keeping your email address private][git-privacy].
 
-> <tip-title>Keeping your email private</tip-title>
+> <tip-title>Keeping your email private</tip-title>
 >
 > If you choose to use a private email address with GitHub, then use that same email address for the `user.email` value, e.g. `username@users.noreply.github.com` replacing `username` with your GitHub one.
 {: .tip}
 
 
-> <tip-title>Line Endings</tip-title>
+> <tip-title>Line Endings</tip-title>
 >
-> As with other keys, when you hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>, on your keyboard,
+> As with other keys, when you hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>, on your keyboard,
 > your computer encodes this input as a character.
 > Different operating systems use different character(s) to represent the end of a line.
 > (You may also hear these referred to as newlines or line breaks.)
@@ -232,7 +232,7 @@ For this lesson, we will be interacting with [GitHub](https://github.com/) and s
 > using the `core.autocrlf` command to `git config`.
 > The following settings are recommended:
 >
-> > <code-in-title>Settings with bash</code-in-title>
+> > <code-in-title>Settings with bash</code-in-title>
 > > On macOS and Linux:
 > >
 > >```bash
@@ -269,23 +269,23 @@ Sherlock also has to set his favorite text editor, following this table:
 
 It is possible to reconfigure the text editor for Git whenever you want to change it.
 
-> <tip-title>Exiting Vim</tip-title>
+> <tip-title>Exiting Vim</tip-title>
 > Note that Vim is the default editor for many programs. If you haven't used Vim before and wish to exit a session without saving
-your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
-> If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` and hit <kbd>Enter</kbd> or <kbd>↵</kbd> or on Macs, <kbd>Return</kbd>.
+your changes, press <kbd>Esc</kbd> then type `:q!` and hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>.
+> If you want to save your changes and quit, press <kbd>Esc</kbd> then type `:wq` and hit <kbd>Enter</kbd> or <kbd></kbd> or on Macs, <kbd>Return</kbd>.
 {: .tip}
 
 Git (2.28+) allows configuration of the name of the branch created when you
 initialize any new repository.  Sherlock decides to use that feature to set it to `main` so
 it matches the cloud service he will eventually use.
 
-> <code-in-title>Configure the name of the created branch</code-in-title>
+> <code-in-title>Configure the name of the created branch</code-in-title>
 > ```bash
 > $ git config --global init.defaultBranch main
 > ```
 {: .code-in}
 
-> <tip-title>Default Git branch naming</tip-title>
+> <tip-title>Default Git branch naming</tip-title>
 >
 > Source file changes are associated with a "branch."
 > For new learners in this lesson, it's enough to know that branches exist, and this lesson uses one branch.
@@ -311,7 +311,7 @@ to use the settings for every project, in your user account, on this computer.
 
 You can check your settings at any time:
 
-> <code-in-title>Checking your settings</code-in-title>
+> <code-in-title>Checking your settings</code-in-title>
 > ```bash
 > $ git config --list
 > ```
@@ -320,20 +320,20 @@ You can check your settings at any time:
 You can change your configuration as many times as you want: use the
 same commands to choose another editor or update your email address.
 
-> <tip-title>Proxy</tip-title>
+> <tip-title>Proxy</tip-title>
 >
 > In some networks you need to use a
 > [proxy](https://en.wikipedia.org/wiki/Proxy_server). If this is the case, you
 > may also need to tell Git about the proxy:
 >
-> > <code-in-title>Git and proxy</code-in-title>
+> > <code-in-title>Git and proxy</code-in-title>
 > > ```bash
 > > $ git config --global http.proxy proxy-url
 > > $ git config --global https.proxy proxy-url
 > > ```
 > {: .code-in}
 >
-> > <code-in-title>To disable the proxy, use</code-in-title>
+> > <code-in-title>To disable the proxy, use</code-in-title>
 > >
 > > ```bash
 > > $ git config --global --unset http.proxy
@@ -342,12 +342,12 @@ same commands to choose another editor or update your email address.
 > {: .code-in}
 {: .tip}
 
-> <tip-title>Git Help and Manual</tip-title>
+> <tip-title>Git Help and Manual</tip-title>
 >
 > Always remember that if you forget the subcommands or options of a `git` command, you can access the relevant list of options typing `git <command> -h` or access the corresponding Git manual by typing
 > `git <command> --help`, e.g.:
 >
-> > <code-in-title>Access help </code-in-title>
+> > <code-in-title>Access help </code-in-title>
 > >```bash
 > >$ git config -h
 > >$ git config --help
@@ -358,7 +358,7 @@ same commands to choose another editor or update your email address.
 >
 > More generally, you can get the list of available `git` commands and further resources of the Git manual typing:
 >
-> > <code-in-title>Access available commands</code-in-title>
+> > <code-in-title>Access available commands</code-in-title>
 > >```bash
 > >$ git help
 > >```
@@ -381,7 +381,7 @@ We will continue with the story of Sherlock who is investigating a crime and is 
 
 First, let's create a directory for our work and then move into that directory:
 
-> <code-in-title>Create a workspace</code-in-title>
+> <code-in-title>Create a workspace</code-in-title>
 > ```bash
 > $ mkdir suspects
 > $ cd suspects
@@ -391,7 +391,7 @@ First, let's create a directory for our work and then move into that directory:
 Then we tell Git to make `suspects` a [repository](https://git-scm.com/docs/gitglossary#def_repository)
 -- a place where Git can store versions of our files:
 
-> <code-in-title>Turn our workspace into directory</code-in-title>
+> <code-in-title>Turn our workspace into directory</code-in-title>
 > ```bash
 > $ git init
 > ```
@@ -407,7 +407,7 @@ repository are completely separate processes.
 If we use `ls` to show the directory's contents,
 it appears that nothing has changed:
 
-> <code-in-title>Show directory content</code-in-title>
+> <code-in-title>Show directory content</code-in-title>
 > ```bash
 > $ ls
 > ```
@@ -416,7 +416,7 @@ it appears that nothing has changed:
 But if we add the `-a` flag to show everything,
 we can see that Git has created a hidden directory within `suspects` called `.git`:
 
-> <code-in-title>Show everything in our directory</code-in-title>
+> <code-in-title>Show everything in our directory</code-in-title>
 > ```bash
 > $ ls -a
 > ```
@@ -436,7 +436,7 @@ Next, we will change the default branch to be called `main`.
 This might be the default branch depending on your settings and version
 of git.
 
-> <code-in-title>Rename the branch</code-in-title>
+> <code-in-title>Rename the branch</code-in-title>
 > ```bash
 > $ git checkout -b main
 > ```
@@ -452,7 +452,7 @@ of git.
 We can check that everything is set up correctly
 by asking Git to tell us the status of our project:
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -475,7 +475,7 @@ wording of the output might be slightly different.
 
  Along with tracking information about suspects (the project we have already created), Sherlock would also like to track information specific clues. So, Sherlock creates a `clues` project inside his `suspects` project with the following sequence of commands:
 
-> <code-in-title>Create a project within a project</code-in-title>
+> <code-in-title>Create a project within a project</code-in-title>
 > ```bash
 > $ cd ~/Desktop   # return to Desktop directory
 > $ cd suspects     # go into suspects directory, which is already a Git repository
@@ -487,7 +487,7 @@ wording of the output might be slightly different.
 > ```
 {: .code-in}
 
-> <question-title>Tracking in a subdirectory</question-title>
+> <question-title>Tracking in a subdirectory</question-title>
 > Is the `git init` command, run inside the `clues` subdirectory, required for tracking files stored in the `clues` subdirectory?
 >
 > > <solution-title></solution-title>
@@ -502,7 +502,7 @@ wording of the output might be slightly different.
 
 {: .question}
 
-> <tip-title>"Nested" repositories</tip-title>
+> <tip-title>"Nested" repositories</tip-title>
 > Additionally, Git repositories can interfere with each other if they are "nested":
 > the outer repository will try to version-control
 > the inner repository. Therefore, it's best to create each new Git
@@ -511,7 +511,7 @@ wording of the output might be slightly different.
 > like the following, you are good to go to create a new repository as shown
 > above:
 >
-> > <code-in-title>Before creating a new repository</code-in-title>
+> > <code-in-title>Before creating a new repository</code-in-title>
 > > ```bash
 > > $ git status
 > > ```
@@ -530,7 +530,7 @@ Dr. Watson explains to Sherlock how a nested repository is redundant and may cau
 ### USE `rm` WITH CAUTION!
 
 Removing files from a Git repository needs to be done with caution. But we have not learned yet how to tell Git to track a particular file; we will learn this in the next episode. Files that are not tracked by Git can easily be removed like any other "ordinary" files with
-> <code-in-title>Remove files </code-in-title>
+> <code-in-title>Remove files </code-in-title>
 > ```bash
 > $ rm filename
 > ```
@@ -540,7 +540,7 @@ Similarly a directory can be removed using `rm -r dirname` or `rm -rf dirname`. 
 
 Git keeps all of its files in the `.git` directory. To recover from this little mistake, Sherlock can just remove the `.git` folder in the clues subdirectory by running the following command from inside the `suspects` directory:
 
-> <code-in-title>Remove the `.git` folder</code-in-title>
+> <code-in-title>Remove the `.git` folder</code-in-title>
 > ```bash
 > $ rm -rf clues/.git
 > ```
@@ -553,7 +553,7 @@ But be careful! Running this command in the wrong directory will remove the enti
 First let's make sure we're still in the right directory.
 You should be in the `suspects` directory.
 
-> <code-in-title>Check directory</code-in-title>
+> <code-in-title>Check directory</code-in-title>
 > ```bash
 > $ cd ~/suspects
 > ```
@@ -564,7 +564,7 @@ We'll use `nano` to edit the file;
 you can use whatever editor you like.
 In particular, this does not have to be the `core.editor` you set globally earlier. But remember, the bash command to create or edit a new file will depend on the editor you choose (it might not be `nano`). For a refresher on text editors, check out ["Which Editor?"](https://swcarpentry.github.io/shell-novice/03-create/) in [The Unix Shell](https://swcarpentry.github.io/shell-novice/) lesson.
 
-> <code-in-title>Edit file with nano in bash</code-in-title>
+> <code-in-title>Edit file with nano in bash</code-in-title>
 > ```bash
 > $ nano colonel.txt
 > ```
@@ -579,7 +579,7 @@ No alibi for the night of murder.
 
 Let's first verify that the file was properly created by running the list command (`ls`):
 
-> <code-in-title>Check new file</code-in-title>
+> <code-in-title>Check new file</code-in-title>
 > ```bash
 > $ ls
 > ```
@@ -593,7 +593,7 @@ Let's first verify that the file was properly created by running the list comman
 
 `colonel.txt` contains a single line, which we can see by running:
 
-> <code-in-title>Inspect the new file</code-in-title>
+> <code-in-title>Inspect the new file</code-in-title>
 > ```bash
 > $ cat colonel.txt
 > ```
@@ -608,7 +608,7 @@ Let's first verify that the file was properly created by running the list comman
 If we check the status of our project again,
 Git tells us that it's noticed the new file:
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -631,7 +631,7 @@ Git tells us that it's noticed the new file:
 
 The "untracked files" message means that there's a file in the directory that Git isn't keeping track of. We can tell Git to track a file using `git add`:
 
-> <code-in-title>Track file</code-in-title>
+> <code-in-title>Track file</code-in-title>
 > ```bash
 > $ git add colonel.txt
 > ```
@@ -639,7 +639,7 @@ The "untracked files" message means that there's a file in the directory that Gi
 
 and then check that the right thing happened:
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -661,7 +661,7 @@ and then check that the right thing happened:
 
 Git now knows that it's supposed to keep track of `colonel.txt`, but it hasn't recorded these changes as a commit yet. To get it to do that, we need to run one more command:
 
-> <code-in-title>Record changes as a commit with a descriptive title</code-in-title>
+> <code-in-title>Record changes as a commit with a descriptive title</code-in-title>
 > ```bash
 > $ git commit -m "Start notes for colonel Smith as a suspect"
 > ```
@@ -687,11 +687,11 @@ If we just run `git commit` without the `-m` option,
 Git will launch `nano` (or whatever other editor we configured as `core.editor`)
 so that we can write a longer message.
 
-[Good commit messages][commit-messages] start with a brief (<50 characters) statement about the
+[Good commit messages][commit-messages] start with a brief <50 characters) statement about the
 changes made in the commit. Generally, the message should complete the sentence "If applied, this commit will" <commit message here>.
 If you want to go into more detail, add a blank line between the summary line and your additional notes. Use this additional space to explain why you made changes and/or what their impact will be.
 
-> <code-in-title>If we run `git status` now:</code-in-title>
+> <code-in-title>If we run `git status` now:</code-in-title>
 >
 > ```bash
 > $ git status
@@ -709,7 +709,7 @@ it tells us everything is up to date.
 If we want to know what we've done recently,
 we can ask Git to show us the project's history using `git log`:
 
-> <code-in-title>Access project's history</code-in-title>
+> <code-in-title>Access project's history</code-in-title>
 > ```bash
 > $ git log
 > ```
@@ -734,7 +734,7 @@ the commit's author,
 when it was created,
 and the log message Git was given when the commit was created.
 
-> <tip-title>Where Are My Changes?</tip-title>
+> <tip-title>Where Are My Changes?</tip-title>
 >
 > If we run `ls` at this point, we will still see just one file called `colonel.txt`.
 > That's because Git saves information about files' history
@@ -747,7 +747,7 @@ Now suppose Sherlock adds more information to the file.
 (Again, we'll edit with `nano` and then `cat` the file to show its contents;
 you may use a different editor, and don't need to `cat`.)
 
-> <code-in-title>Edit with nano</code-in-title>
+> <code-in-title>Edit with nano</code-in-title>
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
@@ -764,7 +764,7 @@ you may use a different editor, and don't need to `cat`.)
 When we run `git status` now,
 it tells us that a file, it already knows about, has been modified:
 
-> <code-in-title>Find about current status</code-in-title>
+> <code-in-title>Find about current status</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -794,7 +794,7 @@ our changes before saving them. We do this using `git diff`.
 This shows us the differences between the current state
 of the file and the most recently saved version:
 
-> <code-in-title>Review the changes </code-in-title>
+> <code-in-title>Review the changes </code-in-title>
 > ```bash
 > $ git diff
 > ```
@@ -830,7 +830,7 @@ If we break it down into pieces:
 
 After reviewing our change, it's time to commit it:
 
-> <code-in-title>Commit after checking changes</code-in-title>
+> <code-in-title>Commit after checking changes</code-in-title>
 > ```bash
 > $ git commit -m "Add concerns about existence of motive for colonel"
 > ```
@@ -853,7 +853,7 @@ Whoops:
 Git won't commit because we didn't use `git add` first.
 Let's fix that:
 
-> <code-in-title>First `add` then `commit`</code-in-title>
+> <code-in-title>First `add` then `commit`</code-in-title>
 > ```bash
 > $ git add colonel.txt
 > $ git commit -m "Add concerns about existence of motive for colonel"
@@ -884,7 +884,7 @@ where it keeps track of things that have been added to
 the current [changeset](https://git-scm.com/docs/gitglossary#def_changeset)
 but not yet committed.
 
-> <tip-title>Staging Area</tip-title>
+> <tip-title>Staging Area</tip-title>
 >
 > If you think of Git as taking snapshots of changes over the life of a project,
 > `git add` specifies *what* will go in a snapshot
@@ -912,7 +912,7 @@ and into long-term storage.
 First,
 we'll add another line to the file:
 
-> <code-in-title>Add and review new line with `nano` and `cat`</code-in-title>
+> <code-in-title>Add and review new line with `nano` and `cat`</code-in-title>
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
@@ -927,7 +927,7 @@ we'll add another line to the file:
 > ```
 {: .code-out}
 
-> <code-in-title>Review changes</code-in-title>
+> <code-in-title>Review changes</code-in-title>
 > ```bash
 > $ git diff
 > ```
@@ -952,7 +952,7 @@ we've added one line to the end of the file
 Now let's put that change in the staging area
 and see what `git diff` reports:
 
-> <code-in-title>See changes</code-in-title>
+> <code-in-title>See changes</code-in-title>
 > ```bash
 > $ git add colonel.txt
 > $ git diff
@@ -966,7 +966,7 @@ and what's currently in the directory.
 However,
 if we do this:
 
-> <code-in-title>See what is in the staging area</code-in-title>
+> <code-in-title>See what is in the staging area</code-in-title>
 > ```bash
 > $ git diff --staged
 > ```
@@ -990,7 +990,7 @@ the last committed change
 and what's in the staging area.
 Let's save our changes:
 
-> <code-in-title>Save changes</code-in-title>
+> <code-in-title>Save changes</code-in-title>
 > ```bash
 > $ git commit -m "Make notes about colonel's fingerprints"
 > ```
@@ -1003,7 +1003,7 @@ Let's save our changes:
 > ```
 {: .code-out}
 
-> <code-in-title>Check new status</code-in-title>
+> <code-in-title>Check new status</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -1016,7 +1016,7 @@ Let's save our changes:
 > ```
 {: .code-out}
 
-> <code-in-title>and look at the history of what we've done so far: </code-in-title>
+> <code-in-title>and look at the history of what we've done so far: </code-in-title>
 > ```bash
 > $ git log
 > ```
@@ -1044,7 +1044,7 @@ Let's save our changes:
 > ```
 {: .code-out}
 
-> <tip-title>Word-based diffing</tip-title>
+> <tip-title>Word-based diffing</tip-title>
 >
 > Sometimes, e.g. in the case of the text documents a line-wise
 > diff is too coarse. That is where the `--color-words` option of
@@ -1052,7 +1052,7 @@ Let's save our changes:
 > words using colors.
 {: .tip}
 
-> <tip-title>Paging the Log</tip-title>
+> <tip-title>Paging the Log</tip-title>
 >
 > When the output of `git log` is too long to fit in your screen,
 > `git` uses a program to split it into pages of the size of your screen.
@@ -1062,19 +1062,19 @@ Let's save our changes:
 > *   To get out of the pager, press <kbd>Q</kbd>.
 > *   To move to the next page, press <kbd>Spacebar</kbd>.
 > *   To search for `some_word` in all pages,
->     press <kbd>/</kbd>
+>     press <kbd></kbd>
 >     and type `some_word`.
 >     Navigate through matches pressing <kbd>N</kbd>.
 {: .tip}
 
-> <tip-title>Limit Log Size</tip-title>
+> <tip-title>Limit Log Size</tip-title>
 >
 > To avoid having `git log` cover your entire terminal screen, you can limit the
 > number of commits that Git lists by using `-N`, where `N` is the number of
 > commits that you want to view. For example, if you only want information from
 > the last commit you can use:
 >
-> > <code-in-title>See specific number of commits</code-in-title>
+> > <code-in-title>See specific number of commits</code-in-title>
 > > ```bash
 > > $ git log -1
 > > ```
@@ -1093,7 +1093,7 @@ Let's save our changes:
 > You can also reduce the quantity of information using the
 > `--oneline` option:
 >
-> > <code-in-title>See only basic information</code-in-title>
+> > <code-in-title>See only basic information</code-in-title>
 > > ```
 > > $ git log --oneline
 > > ```
@@ -1113,7 +1113,7 @@ Let's save our changes:
 > current `HEAD`, the current branch `main`, or
 > [other Git references][git-references]:
 >
-> > <code-in-title>Extra options</code-in-title>
+> > <code-in-title>Extra options</code-in-title>
 > > ```bash
 > > $ git log --oneline --graph
 > > ```
@@ -1127,14 +1127,14 @@ Let's save our changes:
 > {: .code-out}
 {: .tip}
 
-> <tip-title>Directories </tip-title>
+> <tip-title>Directories </tip-title>
 >
 > Two important facts you should know about directories in Git.
 >
 > 1. Git does not track directories on their own, only files within them.
 >    Try it for yourself:
 >
->    > <code-in-title>Test directory tracking  </code-in-title>
+>    > <code-in-title>Test directory tracking  </code-in-title>
 >    > ```bash
 >    > $ mkdir mysteries
 >    > $ git status
@@ -1158,7 +1158,7 @@ Let's save our changes:
 >     ```
 >
 >    Try it for yourself:
->    > <code-in-title>Add multiple files</code-in-title>
+>    > <code-in-title>Add multiple files</code-in-title>
 >    > ```bash
 >    > $ touch mysteries/belgravia mysteries/reichenbachfall
 >    > $ git status
@@ -1169,7 +1169,7 @@ Let's save our changes:
 >
 >    Before moving on, we will commit these changes.
 >
->    > <code-in-title>Commit the new changes</code-in-title>
+>    > <code-in-title>Commit the new changes</code-in-title>
 >    > ```
 >    > $ git commit -m "Add some initial thoughts on mysteries"
 >    > ```
@@ -1249,7 +1249,7 @@ repository (`git commit`):
 > > this exercise. Your output may vary.
 > >
 > > First we make our changes to the `colonel.txt` and `judge.txt` files:
-> > > <code-in-title>Edit `colonel.txt`</code-in-title>
+> > > <code-in-title>Edit `colonel.txt`</code-in-title>
 > > > ```bash
 > > > $ nano colonel.txt
 > > > $ cat colonel.txt
@@ -1260,7 +1260,7 @@ repository (`git commit`):
 > > > Maybe judge Brown should also be considerable as a suspect.
 > > > ```
 > > {: .code-out}
-> > > <code-in-title>Create and edit `judge.txt`</code-in-title>
+> > > <code-in-title>Create and edit `judge.txt`</code-in-title>
 > > > ```bash
 > > > $ nano judge.txt
 > > > $ cat judge.txt
@@ -1273,13 +1273,13 @@ repository (`git commit`):
 > > {: .code-out}
 > >
 > > Now you can add both files to the staging area. We can do that in one line:
-> > > <code-in-title>Add both files</code-in-title>
+> > > <code-in-title>Add both files</code-in-title>
 > > > ```bash
 > > > $ git add colonel.txt judge.txt
 > > > ```
 > > {: .code-in}
 > >
-> > > <code-in-title>Or with multiple commands: </code-in-title>
+> > > <code-in-title>Or with multiple commands: </code-in-title>
 > > > ```bash
 > > > $ git add colonel.txt
 > > > $ git add judge.txt
@@ -1287,7 +1287,7 @@ repository (`git commit`):
 > > {: .code-in}
 > >
 > > Now the files are ready to commit. You can check that using `git status`. If you are ready to commit use:
-> > > <code-in-title>Commit changes</code-in-title>
+> > > <code-in-title>Commit changes</code-in-title>
 > > > ```bash
 > > > $ git commit -m "Write plans to start a base on judge"
 > > > ```
@@ -1315,7 +1315,7 @@ repository (`git commit`):
 > > <solution-title></solution-title>
 > >
 > > If needed, move out of the `suspects` folder:
-> > > <code-in-title>Change directory</code-in-title>
+> > > <code-in-title>Change directory</code-in-title>
 > > > ```bash
 > > > $ cd ..
 > > > ```
@@ -1329,7 +1329,7 @@ repository (`git commit`):
 > > > ```
 > > {: .code-in}
 > >
-> > > <code-in-title>Initialise git:</code-in-title>
+> > > <code-in-title>Initialise git:</code-in-title>
 > > > ```bash
 > > > $ git init
 > > > ```
@@ -1338,7 +1338,7 @@ repository (`git commit`):
 > > Create your biography file `me.txt` using `nano` or another text editor.
 > > Once in place, add and commit it to the repository:
 > >
-> > > <code-in-title>Create file and edit it</code-in-title>
+> > > <code-in-title>Create file and edit it</code-in-title>
 > > > ```bash
 > > > $ git add me.txt
 > > > $ git commit -m "Add biography file"
@@ -1349,7 +1349,7 @@ repository (`git commit`):
 > > To display the differences
 > > between its updated state and its original state, use `git diff`:
 > >
-> > > <code-in-title>Display the differences</code-in-title>
+> > > <code-in-title>Display the differences</code-in-title>
 > > > ```bash
 > > > $ git diff me.txt
 > > > ```
@@ -1370,7 +1370,7 @@ We've been adding one line at a time to `colonel.txt`, so it's easy to track our
 progress by looking, so let's do that using our `HEAD`s.  Before we start,
 let's make a change to `colonel.txt`, adding yet another line.
 
-> <code-in-title>Edit `colonel.txt`</code-in-title>
+> <code-in-title>Edit `colonel.txt`</code-in-title>
 > ```bash
 > $ nano colonel.txt
 > $ cat colonel.txt
@@ -1388,7 +1388,7 @@ let's make a change to `colonel.txt`, adding yet another line.
 
 Now, let's see what we get.
 
-> <code-in-title>Display the changes</code-in-title>
+> <code-in-title>Display the changes</code-in-title>
 > ```bash
 > $ git diff HEAD colonel.txt
 > ```
@@ -1414,7 +1414,7 @@ that by adding `~1`
 (where "~" is "tilde", pronounced [**til**-d*uh*])
 to refer to the commit one before `HEAD`.
 
-> <code-in-title>Refer to previous commits</code-in-title>
+> <code-in-title>Refer to previous commits</code-in-title>
 > ```bash
 > $ git diff HEAD~1 colonel.txt
 > ```
@@ -1423,7 +1423,7 @@ to refer to the commit one before `HEAD`.
 If we want to see the differences between older commits we can use `git diff`
 again, but with the notation `HEAD~1`, `HEAD~2`, and so on, to refer to them:
 
-> <code-in-title>Refer to previous commits</code-in-title>
+> <code-in-title>Refer to previous commits</code-in-title>
 > ```bash
 > $ git diff HEAD~3 colonel.txt
 > ```
@@ -1447,7 +1447,7 @@ We could also use `git show` which shows us what changes we made at an older com
 well as the commit message, rather than the _differences_ between a commit and our
 working directory that we see by using `git diff`.
 
-> <code-in-title>`git show` and `git diff` differences </code-in-title>
+> <code-in-title>`git show` and `git diff` differences </code-in-title>
 > ```bash
 > $ git show HEAD~3 colonel.txt
 > ```
@@ -1490,7 +1490,7 @@ Our first commit was given the ID
 `f22b25e3233b4645dabd0d81e651fe074bd8e73b`,
 so let's try this:
 
-> <code-in-title>Display specific commit</code-in-title>
+> <code-in-title>Display specific commit</code-in-title>
 > ```bash
 > $ git diff f22b25e3233b4645dabd0d81e651fe074bd8e73b colonel.txt
 > ```
@@ -1514,7 +1514,7 @@ That's the right answer,
 but typing out random 40-character strings is annoying,
 so Git lets us use just the first few characters (typically seven for normal size projects):
 
-> <code-in-title>Shorter alternative</code-in-title>
+> <code-in-title>Shorter alternative</code-in-title>
 > ```bash
 > $ git diff f22b25e colonel.txt
 > ```
@@ -1543,7 +1543,7 @@ Let's suppose we change our mind about the last update to
 `git status` now tells us that the file has been changed,
 but those changes haven't been staged:
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -1565,7 +1565,7 @@ but those changes haven't been staged:
 We can put things back the way they were
 by using `git checkout`:
 
-> <code-in-title>Restore with `git checkout`</code-in-title>
+> <code-in-title>Restore with `git checkout`</code-in-title>
 > ```bash
 > $ git checkout HEAD colonel.txt
 > $ cat colonel.txt
@@ -1588,13 +1588,13 @@ which is the last saved commit.
 If we want to go back even further,
 we can use a commit identifier instead:
 
-> <code-in-title>Restrore specific commit</code-in-title>
+> <code-in-title>Restrore specific commit</code-in-title>
 > ```bash
 > $ git checkout f22b25e colonel.txt
 > ```
 {: .code-in}
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ cat colonel.txt
 > ```
@@ -1606,7 +1606,7 @@ we can use a commit identifier instead:
 > ```
 {: .code-out}
 
-> <code-in-title>Check</code-in-title>
+> <code-in-title>Check</code-in-title>
 > ```bash
 > $ git status
 > ```
@@ -1627,13 +1627,13 @@ Notice that the changes are currently in the staging area.
 Again, we can put things back the way they were
 by using `git checkout`:
 
-> <code-in-title>Restore </code-in-title>
+> <code-in-title>Restore </code-in-title>
 > ```bash
 > $ git checkout HEAD colonel.txt
 > ```
 {: .code-in}
 
-> <warning-title>Don't Lose Your HEAD</warning-title>
+> <warning-title>Don't Lose Your HEAD</warning-title>
 >
 > Above we used
 >
@@ -1646,7 +1646,7 @@ by using `git checkout`:
 > your intentions if you are not accurate with the typing. For example,
 > if you forget `colonel.txt` in the previous command.
 >
-> > <code-in-title>Error recipe</code-in-title>
+> > <code-in-title>Error recipe</code-in-title>
 > > ```bash
 > > $ git checkout f22b25e
 > > ```
@@ -1689,7 +1689,7 @@ here's how Git works in cartoon form:
 
 ![https://figshare.com/articles/How_Git_works_a_cartoon/1328266](../../images/bash-git/git_staging.svg)
 
-> <tip-title>Simplifying the Common Case</tip-title>
+> <tip-title>Simplifying the Common Case</tip-title>
 >
 > If you read the output of `git status` carefully,
 > you'll see that it includes this hint:
@@ -1844,7 +1844,7 @@ moving backward and forward in time becomes much easier.
 > {: .solution}
 {: .question }
 
-> <question-title>Checking Understanding of `git diff`</question-title>
+> <question-title>Checking Understanding of `git diff</question-title>
 >
 > Consider this command: `git diff HEAD~9 colonel.txt`. What do you predict this command
 > will do if you execute it? What happens when you do execute it? Why?

@@ -14,7 +14,7 @@ objectives:
 - Learn how Panoply plots are exported to Galaxy
 time_estimation: 1H
 key_points:
-- Inspect and view netCDF data with netCDF
+- Inspect and view netCDF data with Panoply
 - Interact with Galaxy to save your plots
 tags:
 - interactive-tools
@@ -25,7 +25,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 > <comment-title></comment-title>
 >
@@ -115,7 +115,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > > <tip-title>Launch Panoply in Galaxy</tip-title>
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
-> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} [on UseGalaxy.eu](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **ecv_1979.nc** dataset selected in the netcdf input field
 > > 3. Click Execute
 > > 4. The tool will start running and will stay running permanently
@@ -267,7 +267,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We have now learnt how to analyze climate data using Panoply. We only use one of the two datasets so we strongly encourage you to do the same exercises with the second dataset **ecv_2018.nc**. Please note that when comparing surface temperature or sea-ice area fraction from 1979 and 2018, you would not be able to conclude anything regarding climate change. For any climate studies, long term timeseries (between 20 to 30 years) are necessary to establish climate trends.
 

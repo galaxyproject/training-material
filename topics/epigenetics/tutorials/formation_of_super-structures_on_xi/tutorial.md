@@ -33,7 +33,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
 
@@ -151,7 +151,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    > >
 >    > >     - Homogeneous percentage of the bases
 >    > >
->    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per base_sequence_content.png "Per base sequence content")
+>    > >        ![Per base sequence content for read1](../../images/formation_of_super-structures_on_xi/read1_per_base_sequence_content.png "Per base sequence content")
 >    > >
 >    > >     - No N in the reads
 >    > >
@@ -723,7 +723,7 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Along this tutorial, we learn how to extract peaks and coverage information from raw data of ChIP experiments:
 

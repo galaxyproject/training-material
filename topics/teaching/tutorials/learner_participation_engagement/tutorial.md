@@ -35,7 +35,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Effective training
 
@@ -166,7 +166,7 @@ With the help of Mazur, you hopefully started believing that active, interactive
 
 **There is not "the" ideal teaching technique nor the "most effective" teaching technique.**
 
-You may remember from the [Nichols' steps of curriculum design](), that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
+You may remember from the Nichols' steps of curriculum design, that it is **essential that you align learning experiences to the learning outcomes** of your course. In other words, for each LO, you should identify the learning experience(s) that will best support the achievement of the LO.
 
 More generally, to decide how to teach and choose the **most appropriate learning experience(s)**, you may use **three criteria**:
 - What is your **purpose / goal** (is it to inspire learners? is it to ensure they will remember a concept?)
@@ -435,7 +435,7 @@ Here are some examples of practices to achieve goals above. None of the practice
 Each of the techniques presented here will make your classes better, but **you shouldn't try to adopt them all at once**. The reason is that every new practice increases *your* cognitive load as well as your learners', since you are all now trying to learn a new way to learn as well as the lesson's subject matter. If you are working with a group repeatedly, you can introduce one new technique every few lessons; if you only have them for a one-day workshop, it's best to pick just one method they haven't seen before and get them comfortable with that.
 
 # Conclusion
-{:.no_toc}
+
 
 {% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}
 

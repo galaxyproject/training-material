@@ -40,7 +40,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
 
@@ -1091,7 +1091,7 @@ Depending if you chose “Reads” or “Bases” on the left the colour indicat
 {: .comment}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we checked the quality of FASTQ files to ensure that their data looks good before inferring any further information.
 This step is the usual first step for analyses such as RNA-Seq, ChIP-Seq, or any other OMIC analysis relying on NGS data.

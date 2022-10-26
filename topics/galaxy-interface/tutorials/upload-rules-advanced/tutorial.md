@@ -27,7 +27,7 @@ subtopic: upload
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This builds on the previous Rule Based Uploader tutorial to cover even more advanced topics.
 

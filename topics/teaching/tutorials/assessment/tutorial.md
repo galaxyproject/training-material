@@ -35,7 +35,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 * **Assessment**: evaluation or estimation of the nature, quality, or ability of someone or something
 * **Feedback**: integrate the output of the assessment in the learning process

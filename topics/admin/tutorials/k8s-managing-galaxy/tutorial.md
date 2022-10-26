@@ -38,7 +38,7 @@ priority: 1
 # Managing Galaxy on Kubernetes
 
 ## Overview
-{:.no_toc}
+
 
 A primary advantage of Galaxy on [Kubernetes](https://kubernetes.io/) is the ease with which common
 administrative tasks can be performed reliably and without disruption of

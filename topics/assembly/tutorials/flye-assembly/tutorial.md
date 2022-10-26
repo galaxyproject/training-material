@@ -35,7 +35,7 @@ follow_up_training:
 
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, *Mucor mucedo*, from PacBio sequencing data. These data were obtained from NCBI ([SRR8534473](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534473), [SRR8534474](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534474) and [SRR8534475](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534475)). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).
 
@@ -240,6 +240,6 @@ Another way to calculate metrics assembly is to use ***QUAST = QUality ASsessmen
 
 
 # Conclusion
-{:.no_toc}
+
 
 This pipeline shows how to generate and evaluate a genome assembly from long reads PacBio data. Once you are satisfied with your genome sequence, you might want to annotate it: have a look at the [RepeatMasker]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}) and [Funannoate]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}) tutorials to learn how to do it!

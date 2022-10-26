@@ -66,7 +66,7 @@ There are three elements to a GxIT - an application script, a Docker container a
 
 
 > <comment-title>If you plan to use an existing Galaxy instance</comment-title>
-> The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to [this admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html) for setting up a compatible Galaxy instance for development and testing of your GxIT.
+> The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to [this admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %}) for setting up a compatible Galaxy instance for development and testing of your GxIT.
 > As well as updating the Galaxy server configuration, you will also have to configure the server's DNS provider to allow wildcard DNS records. This allows Galaxy to create unique host names (subdomains) for GxITs to be served over, separating them from the main Galaxy application.
 {: .comment}
 
@@ -595,7 +595,7 @@ Congrats!
 # Installing in Galaxy
 
 We now have all the required components, we can install the tool in our
-[configured Galaxy instance](#introduction).
+configured Galaxy instance.
 This is as simple as dropping the tool XML in the right location inside
 the Galaxy core application directory, and adding the tool to our
 `tool_conf_interactive.xml` file.
@@ -625,7 +625,7 @@ the Galaxy core application directory, and adding the tool to our
 >
 > 3. Enable the new tool
 >
->    This step is the same as activating any other existing Interactive Tool. See [the admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html) for detailed instructions.
+>    This step is the same as activating any other existing Interactive Tool. See [the admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %}) for detailed instructions.
 >
 >    ```sh
 >    # Open the Interactive Tools config file for editing:
@@ -633,7 +633,7 @@ the Galaxy core application directory, and adding the tool to our
 >    ```
 >
 > 4. This configuration file should have been created when
->    [administering the Galaxy instance to serve Interactive Tools](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html)
+>    [administering the Galaxy instance to serve Interactive Tools]({% link topics/admin/tutorials/interactive-tools/tutorial.md %})
 >    We just need to add a single line to this file to enable our tool. Can you figure it out?
 >
 >    > <solution-title></solution-title>
@@ -674,7 +674,7 @@ Have a look in the web interface of your Galaxy instance. You should find the ne
 >
 > The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a Galaxy server. This means that you can manage and deploy a GxIT as part of your Galaxy instance without merging into the `galaxyproject/galaxy` repository (or a fork of it).
 >
-> The [Interactive Tools admin tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html)
+> The [Interactive Tools admin tutorial]({% link topics/admin/tutorials/interactive-tools/tutorial.md %})
 > demonstrates how this can be acheived by adding our tool XML to the "local tools" section of the Ansible Playbook. However, for our GxIT to show up in the correct tool panel we'll need to add an extra config file: `local_tool_conf.xml`.
 >
 >

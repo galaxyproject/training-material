@@ -25,7 +25,7 @@ subtopic: prokaryote
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
 

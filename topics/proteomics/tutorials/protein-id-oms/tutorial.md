@@ -36,7 +36,7 @@ tags: [DDA]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called "bottom-up" procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 
@@ -52,7 +52,7 @@ For an alternative protein ID workflow using the [Compomics](https://compomics.c
 The latter tutorial does not allow to continue with the tutorial on protein quantitation.
 
 # Input data
-{:.no_toc}
+
 
 As an example dataset, we will use an LC-MS/MS analysis of HeLa cell lysate published
 in [Vaudel et al., 2014, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/24678044). Detailed information

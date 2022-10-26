@@ -31,7 +31,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In order to facilitate learning, we had to learn (a bit) how learning works. But motivation is key to learning. If we want to enhance motivation, we have to learn a bit how motivation works.
 Motivation is personal and it is very difficult to work with demotivated learners. Often, teachers cannot do much with deep lack of motivation. Here, we want to see what can trainers do to enhance motivation.

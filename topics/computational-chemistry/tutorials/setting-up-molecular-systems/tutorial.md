@@ -39,7 +39,7 @@ contributors:
 {: .comment}
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, we'll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located [here]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %})) requires access to NAMD Galaxy tools, which can be accessed using the [Docker container](https://github.com/scientificomputing/BRIDGE) but are currently not available on any public Galaxy server.
 
@@ -248,6 +248,6 @@ You are now ready to run the NAMD workflow, which is discussed in another [tutor
 
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! You have started modelling a cellulase protein and uploaded it into Galaxy. The next step is running molecular dynamics simulations ([tutorial]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}))

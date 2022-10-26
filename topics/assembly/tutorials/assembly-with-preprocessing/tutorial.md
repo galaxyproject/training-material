@@ -41,7 +41,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In some research or clinical contexts it is not possible, or very hard, to
 purify DNA/RNA for sequencing from just the specimen of interest.
@@ -909,7 +909,7 @@ for a few others.
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 The power of modern genome assembly tools is remarkable, and so is their
 robustness in the face of data of metagenomic nature. Assembling reads derived

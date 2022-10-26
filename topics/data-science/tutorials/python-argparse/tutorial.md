@@ -24,10 +24,15 @@ key_points:
 - "It's nice for users of your scripts! They don't have to read the code to know how it behaves if you document it well."
 
 subtopic: python-modular
-contributors:
+contributions:
+  authorship:
   - hexylena
-  - dirowa
+  editing:
   - bazante1
+  testing:
+  - dirowa
+  funding:
+  - avans-atgm
 
 priority: 10
 ---
@@ -97,8 +102,11 @@ Let's sum up all of the numbers passed on the command line. We'll do this by han
 > Hints:
 > - Skip the program name
 > - Use `try` and `except` to try converting the string to a number.
+>
 > > <question-title></question-title>
+> >
 > > How does your updated script look?
+> >
 > > > <solution-title></solution-title>
 > > >
 > > > ```python
@@ -206,21 +214,21 @@ Let's go back to our script, and replace `sys` with argparse.
 >
 >    And print out the sum of those numbers.
 >
-> > <question-title></question-title>
-> > How does your final script look?
-> > > <solution-title></solution-title>
-> > > ```python
-> > > import argparse
-> > >
-> > > parser = argparse.ArgumentParser(description='Sum some numbers')
-> > > parser.add_argument('integers', type=float, nargs='+',
-> > >                     help='a number to sum up.')
-> > > args = parser.parse_args()
-> > >
-> > > print(sum(args.integers))
-> > > ```
-> > {: .solution}
-> {: .question}
+>    > <question-title></question-title>
+>    > How does your final script look?
+>    > > <solution-title></solution-title>
+>    > > ```python
+>    > > import argparse
+>    > >
+>    > > parser = argparse.ArgumentParser(description='Sum some numbers')
+>    > > parser.add_argument('integers', type=float, nargs='+',
+>    > >                     help='a number to sum up.')
+>    > > args = parser.parse_args()
+>    > >
+>    > > print(sum(args.integers))
+>    > > ```
+>    > {: .solution}
+>    {: .question}
 >
 > 2. Try running the script with various values
 >
@@ -245,3 +253,79 @@ Wow that's a lot simpler! We have to learn how `argparse` is invoked but it hand
 
 There is a lot of documentation in the [`argparse`](https://docs.python.org/3/library/argparse.html) module for all sorts of use cases!
 
+
+## Why Argparse?
+
+Using argparse can be a big change to your tool but there are some benefits to using it!
+
+1. Standardised interface to your tool that's familiar to everyone who uses command line tools
+2. Automatic Help page
+3. Automatic Galaxy Tools?
+
+### Generating Automatic Galaxy Tools (Optional)
+
+With the `argparse2tool` project, and eventually `pyGalGen` which will be merged into `planemo`, you can generate Galaxy tools automatically from `argparse` based Python scripts.
+
+> <hands-on-title>Generate a Galaxy tool wrapper from your script</hands-on-title>
+> 1. Write out the python script to a file named `main.py`
+>
+>    ```python
+>    import argparse
+>
+>    parser = argparse.ArgumentParser(description='Sum some numbers')
+>    parser.add_argument('integers', type=float, nargs='+',
+>                        help='a number to sum up.')
+>    args = parser.parse_args()
+>
+>    print(sum(args.integers))
+>    ```
+>
+> 2. Create a virtual environment, just in case: ``
+>
+>    ```console
+>    python -m venv .venv
+>    . .venv/bin/activate
+>    ```
+>
+> 3. Install `argparse2tool` via pip:
+>
+>    ```console
+>    pip install argparse2tool
+>    ```
+>
+> 4. Generate the tool interface:
+>
+>    > <code-in-title>Command</code-in-title>
+>    > ```
+>    > PYTHONPATH=$(argparse2tool) python main.py --generate_galaxy_xml
+>    > ```
+>    {: .code-in }
+>
+>    > <code-out-title>Galaxy XML</code-out-title>
+>    > ```xml
+>    > <tool name="main.py" id="main.py" version="1.0">
+>    >   <description>Sum some numbers</description>
+>    >   <stdio>
+>    >     <exit_code range="1:" level="fatal"/>
+>    >   </stdio>
+>    >   <version_command><![CDATA[python main.py --version]]></version_command>
+>    >   <command><![CDATA[python main.py
+>    > #set repeat_var_1 = '" "'.join([ str($var.integers) for $var in $repeat_1 ])
+>    > "$repeat_var_1"
+>    >
+>    > > $default]]></command>
+>    >   <inputs>
+>    >     <repeat title="repeat_title" min="1" name="repeat_1">
+>    >       <param label="a number to sum up." value="0" type="float" name="integers"/>
+>    >     </repeat>
+>    >   </inputs>
+>    >   <outputs>
+>    >     <data name="default" format="txt" hidden="false"/>
+>    >   </outputs>
+>    >   <help><![CDATA[TODO: Write help]]></help>
+>    > </tool>
+>    >
+>    > ```
+>    {: .code-out }
+>
+{: .hands_on}

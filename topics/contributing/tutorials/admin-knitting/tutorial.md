@@ -17,7 +17,7 @@ contributors:
 ---
 
 # Updating Diffs
-{:.no_toc}
+
 
 The admin training was recently converted completely to use diffs. This was
 done so we could build a git repository, and time travel to any point within

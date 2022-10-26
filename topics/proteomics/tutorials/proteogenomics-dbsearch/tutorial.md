@@ -386,7 +386,7 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 
 
 # **Conclusion**
-{:.no_toc}
+
 
 This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
 Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.

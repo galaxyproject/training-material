@@ -33,7 +33,7 @@ The data we use in this tutorial are available at [Zenodo](https://zenodo.org/re
 ---
 
 # Introduction
-{:.no_toc}
+
 
 The field of cancer genomics has demonstrated the power of massively parallel sequencing techniques to inform on genes and specific alterations that drive tumor onset and progression. Although large comprehensive sequence data sets continue to be made increasingly available, data analysis remains an ongoing challenge, particularly for laboratories lacking dedicated resources and bioinformatics expertise. To address this, we have provided training based on Galaxy Infinium Human Methylation BeadChip tool that represents many popular algorithms for detecting somatic genetic alterations from genome and exome data.
 
@@ -223,6 +223,6 @@ GO:1901652 | response to peptide | 3.99E-57 | 8.13E-54 | SULF1/ LAMA5/ MED1 /CFL
 GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ CFLAR/ WDTC1 (...) | 394
 
 # Conclusion
-{:.no_toc}
+
 
 Epigenetic aberrations which involve DNA modifications give researchers an interest in identifying novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as a ready to run pipline in supplementary materials.

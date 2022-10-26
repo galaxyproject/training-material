@@ -28,7 +28,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Synthetic biology is a novel engineering discipline which requires computational tools for the design of metabolic pathways for the production of chemicals such as SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}). 
 
@@ -218,4 +218,4 @@ In this section, you can run the Genetic Design - BASIC Assembly Workflow more e
 >    {: .comment}
 {: .hands_on}
 
-{:.no_toc}
+

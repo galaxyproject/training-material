@@ -43,7 +43,7 @@ tags: [microbiome]
 
 
 # Introduction
-{:.no_toc}
+
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 
@@ -395,7 +395,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 ![T2-T4-volcano](../../images/T2-T4-volcano.png "Volcano Plot of differentially expressed Go-term in T2 and T4."){: width="100%"}
 
 # Conclusion
-{:.no_toc}
+
 
 This completes the walkthrough of the metaQuantome function workflow. This tutorial is a guide to run the metaQuantome modules and can be used for metaproteomics research. Here, we have incorporated only two visualization modules in this workflow but we will make the heatmap and PCA plot also available. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly. Also, refer to the metaQuantome data creation workflow to understand how to make files metaQuantome compatible.
 

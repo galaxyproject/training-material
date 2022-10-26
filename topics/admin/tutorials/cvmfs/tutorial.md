@@ -52,7 +52,7 @@ tags:
 {: .spoken data-visual="gtn" data-target="#top-navbar" }
 
 # Overview
-{:.no_toc}
+
 
 The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
 * **Reference Data**

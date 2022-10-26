@@ -84,14 +84,29 @@ class: center, middle, inverse
 
 # {{ title }}
 
+
 {% include _includes/contributors-line.html page=page authorsonly=true %}
 
-<div class="footnote" style="bottom: {% if page.video%}5.5em;{% else %}4 em;{% endif %}">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
 {% if page.video %}
-<div class="footnote" style="bottom: 4em;"><a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{% icon video-slides %} View video slides for this lecture</a></div>
+  {% icon video-slides %} <a href="{{ site.baseurl }}/videos/watch.html?v={{ page.url | remove: '/topics' | remove: '.html' }}">{{locale['video-slides'] | default: "Video slides"}}</a> |
 {% endif %}
-<div class="footnote" style="bottom: 2.5em;">{% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a></div>
-<div class="footnote" style="bottom: 1em;"><strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}</div>
+
+  {% icon text-document %}<a href="slides-plain{% if page.lang %}_{{page.lang | upcase }}{% endif %}.html"> {{locale['plaintext-slides'] | default: "Plain-text slides"}}</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}
+    | {% icon arrow-keys %} {{locale['first-time-using-slides'] | default: "Use arrow keys to move between slides"}}
+
+</div>
 
 ???
 {{locale['presenter-notes-explanation'] | default: "Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.

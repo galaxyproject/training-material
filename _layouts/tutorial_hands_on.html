@@ -354,12 +354,19 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     </ol>
                 </p>
 
-
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
                 <blockquote class="details">
-                  <div class="box-title" aria-label="details box">BibTeX</div>
-                  <p style="display: none;">
 
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
 {% assign authors = page.contributors | filter_authors:page.contributions -%}
 author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
@@ -383,8 +390,8 @@ note = "[Online; accessed TODAY]"
     title = {Community-Driven Data Analysis Training for Biology},
     journal = {Cell Systems}
 }</code>
-                </pre></div></div>
-                </p>
+                   </pre></div></div>
+                   </p>
                 </blockquote>
 
                 {% if page.contributions %}

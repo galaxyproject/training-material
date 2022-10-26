@@ -39,7 +39,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 
@@ -203,6 +203,6 @@ The Integrative Genomics Viewer (IGV) is a high-performance visualization tool f
 
 
 # Conclusion
-{:.no_toc}
+
 
 After quality control, mapping is an important step of most analyses of sequencing data (RNA-Seq, ChIP-Seq, etc) to determine where in the genome our reads originated from and use this information for downstream analyses.

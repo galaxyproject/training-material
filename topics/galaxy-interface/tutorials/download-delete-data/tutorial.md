@@ -25,7 +25,7 @@ subtopic: cleanup
 
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial outlines the process to get your data out of Galaxy and to delete it from Galaxy afterwards.
 
@@ -197,7 +197,7 @@ You can delete an entire history and purge it from disk.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 This tutorial should have explained to you how to manage your data on Galaxy. Different Galaxy servers will have different policies regarding storage quotas and storage times. You should check with the Galaxy server you are using.
 

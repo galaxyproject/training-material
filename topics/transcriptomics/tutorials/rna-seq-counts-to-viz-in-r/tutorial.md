@@ -41,7 +41,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 
@@ -435,7 +435,7 @@ We would like now to make a barplot showing the number of differentially express
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Data manipulation and visualization are important parts of any RNA-Seq analysis. Galaxy provides several tools for that as explained in several tutorials:
 

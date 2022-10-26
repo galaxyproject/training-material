@@ -30,7 +30,7 @@ tags:
 ---
 
 # Overview
-{:.no_toc}
+
 
 Pervasive use (and misuse) of antibiotics for human disease treatment, as well as for various agricultural purposes, has resulted in the evolution of multi-drug resistant (MDR) pathogenic bacteria. The [Center for Disease Control estimates](https://www.cdc.gov/drugresistance/) that in the U.S. alone, every year at least 2 million people get an antibiotic-resistant infection, and at least 23,000 people die. Antibiotic resistance poses a major public health challenge, and its causes and mitigations are widely studied.
 

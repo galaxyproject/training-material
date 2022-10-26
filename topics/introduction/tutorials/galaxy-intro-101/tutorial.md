@@ -32,7 +32,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
@@ -71,7 +71,7 @@ But even with your data in hand, you still have the question: "how do I actually
 
 Browse to your favorite [Galaxy instance](https://galaxyproject.org/use/) and log in or register.
 
-{% snippet faqs/galaxy/creating_account.md %}
+{% snippet faqs/galaxy/account_create.md %}
 
 The Galaxy interface consists of three main parts:
 
@@ -635,6 +635,6 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.

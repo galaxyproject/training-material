@@ -54,7 +54,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 **Teaching and training**, core elements of academic life, can be enormously
 rewarding but also quite challenging. Instructors are often required to perform
@@ -1269,7 +1269,7 @@ the success of a course.**
 -->
 
 # Conclusion
-{:.no_toc}
+
 
 Course design is prefaced by determining the purpose of the programme, analysing
 the context in which the course will be delivered and who will benefit.

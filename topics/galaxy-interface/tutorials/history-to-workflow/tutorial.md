@@ -26,7 +26,7 @@ subtopic: workflows
 ---
 
 # Create a reusable workflow from a history
-{:.no_toc}
+
 
 This practical shows how to create a reusable analysis pipeline, called a *workflow* in Galaxy, from an analysis that you have already run in Galaxy, called a *history*.
 

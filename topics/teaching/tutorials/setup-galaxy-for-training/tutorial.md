@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
@@ -216,4 +216,4 @@ copy the contents of the "tours" directory for the tutorial to Galaxy's "config/
 When data libraries are created, depending on the server settings, they may be created privately. You will need to fix their permissions either through the UI or the API if you have many datasets. UseGalaxy.eu uses [a script](https://github.com/usegalaxy-eu/shared-data/blob/fb9b4ed069dcd59a39b40e9c7ea08a068d8a9df2/run.sh) to correct the permissions.
 
 # Conclusion
-{:.no_toc}
+

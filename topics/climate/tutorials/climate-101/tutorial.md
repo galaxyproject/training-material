@@ -21,7 +21,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 > <comment-title></comment-title>
 >
@@ -420,7 +420,7 @@ When it comes to future climate, we usually need to make some assumptions (such 
 
 # Conclusion
 
-{:.no_toc}
+
 
 We have learnt to differentiate climate from weather and got an overview of the terminology used by climate scientists to identify the
 various source of climate data.

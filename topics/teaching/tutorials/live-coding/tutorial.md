@@ -22,7 +22,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 ---
 

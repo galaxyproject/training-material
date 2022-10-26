@@ -1298,4 +1298,4 @@ With the rise in high-throughput sequencing technologies, the volume of omics da
 
 This tutorial was only a first introductory step into the main concepts and approaches in machine learning. We looked at some of the common methods being used to analyse a representative dataset, by providing a practical context through the use of basic but widely used R libraries. Hopefully, at this point, you will have acquired a first understanding of the standard ML processes, as well as the practical skills in applying them on familiar problems and publicly available real-world data sets.
 
-{:.no_toc}
+

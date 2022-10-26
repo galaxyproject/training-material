@@ -22,6 +22,19 @@ module Gtn
       "warning" => "fas fa-exclamation-triangle",
     }
 
+    @@ICONS_EMOJI = {
+      'tip' => '💡',
+      'code-in' => '⌨️',
+      'code-out' => '🖥',
+      'question' => '❓',
+      'solution' => '👁',
+      'warning' => '⚠️',
+      'comment' => '💬',
+      'feedback' => '⁉️',
+      'details' => '💬',
+      'hands_on' => '✏️',
+    }
+
     @@BOX_TITLES = {
       "en" => {
         "agenda" => "Agenda",
@@ -67,7 +80,16 @@ module Gtn
       @@BOX_CLASSES
     end
 
-    def self.get_icon(icon)
+    def self.title_classes
+      @@TITLE_CLASSES
+    end
+
+    def self.get_icon(icon_cls, emoji: false)
+      if emoji
+        return @@ICONS_EMOJI.fetch(icon_cls, '')
+      end
+
+      icon = @@ICONS[icon_cls]
       if !icon.nil?
        if icon.start_with?("fa")
         %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
@@ -95,14 +117,19 @@ module Gtn
       box_safe_final
     end
 
+    def self.format_box_title(title, box_type, lang="en")
+      title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
+      "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
+    end
+
     def self.generate_collapsible_title(box_type, title, lang="en", key)
       box_id = self.get_id(box_type, title, key)
-      title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
+      box_title = self.format_box_title(title, box_type, lang=lang)
       return [box_id, %Q(
         <div id="#{box_id}" class="box-title">
         <button type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
-          #{self.get_icon(@@ICONS[box_type])} #{@@BOX_TITLES[lang][box_type]}#{title_fmted}
-          <span role="button" class="fold-unfold fa fa-plus-square"></span>
+          #{self.get_icon(box_type)} #{box_title}
+          <span role="button" class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
@@ -110,7 +137,7 @@ module Gtn
 
     def self.generate_static_title(box_type, title, lang="en", key)
       box_id = self.get_id(box_type, title, key)
-      title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
+      box_title = self.format_box_title(title, box_type, lang=lang)
 
       if title.nil?
         puts "Static | typ=#{box_type} | t=#{title} | l=#{lang} | k=#{key}"
@@ -118,13 +145,22 @@ module Gtn
 
       return [box_id, %Q(
         <div id="#{box_id}" class="box-title" aria-label="#{box_type} box: #{title}">
-          #{self.get_icon(@@ICONS[box_type])} #{@@BOX_TITLES[lang][box_type]}#{title_fmted}
+          #{self.get_icon(box_type)} #{box_title}
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
     end
 
-    def self.generate_title(box_type, title, lang="en", key)
+    def self.safe_title(title)
+      if title.nil?
+        title = ""
+      end
+
       title = title.gsub(/"/, '&quot;')
+      title
+    end
+
+    def self.generate_title(box_type, title, lang="en", key)
+      title = self.safe_title(title)
       if @@COLLAPSIBLE_BOXES.include?(box_type)
         self.generate_collapsible_title(box_type, title, lang, key)
       else
@@ -133,7 +169,7 @@ module Gtn
     end
 
     def self.generate_box(box_type, title, lang="en", key)
-      title = title.gsub(/"/, '&quot;')
+      title = self.safe_title(title)
       box_id, box_title = generate_title(box_type, title, lang, key)
       return %Q(
         <div class="box #{box_type}" markdown=0>

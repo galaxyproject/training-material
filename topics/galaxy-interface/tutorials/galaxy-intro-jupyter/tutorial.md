@@ -22,7 +22,7 @@ subtopic: analyse
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial we are going to explore the basics of using Jupyter in Galaxy. We will use a RNA seq count file as a test set to get a hang of the Jupyter notebooks.
 The file is available in [Zenodo](https://zenodo.org/record/1185122#.WzlCQNhKgWo) or in the *Tutorial* section of *Data Libraries*.
@@ -46,7 +46,7 @@ These notebooks allow you to replace any in-house script you might need to compl
 
 ![Jupyter notebook](../../images/notebook_overview.png)
 
-You can find the complete manual for Jupyter commands [here](http://jupyter-notebook.readthedocs.io/en/stable/).
+You can find the complete manual for Jupyter commands [on Read the Docs](http://jupyter-notebook.readthedocs.io/en/stable/).
 
 # Use Jupyter notebook in Galaxy
 
@@ -76,7 +76,7 @@ The Jupyter notebook can be started from different points. You can either open a
 
 ## Install Libraries in Jupyter
 
-You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas]() and [seaborn]() respectively allowing to manipulate data as Dataframe and to create graphs.
+You can install tools and libraries in Jupyter through conda and pip. In this tutorial we are going to use two libraries, [pandas](https://pandas.pydata.org/) and [seaborn](https://seaborn.pydata.org) respectively allowing to manipulate data as Dataframe and to create graphs.
 
 > <hands-on-title>Install from a Conda recipe</hands-on-title>
 >
@@ -137,6 +137,6 @@ Once you are done with you analysis or anytime during the editing process, you c
 This will create a new notebook `.pynb` file in your history every time you click on this icon. You can later re-open it to continue to use it as described in the [open a notebook section](#open-a-notebook)
 
 # Conclusion
-{:.no_toc}
+
 
 {% icon trophy %} You have just performed your first analysis in Jupyter notebook integrated environment in Galaxy. You generated an distribution plot that you saved in your history along with the notebook to generate it.

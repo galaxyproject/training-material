@@ -35,7 +35,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Patient samples for pathogen detection are usually "contaminated" with human host DNA.
 Such contamination, if not removed from sequencing data, may pose an issue with certain types of
@@ -232,7 +232,7 @@ Then, after processing both with **seqtk_subseq**, we zip the filtered collectio
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 Data cleaning is a standard procedure for clinical sequencing datasets and is a rather straightforward process in Galaxy.
 You just learnt how to remove human reads from any number of paired-end sequenced samples in parallel using collections and just a handful of tools.

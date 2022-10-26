@@ -20,7 +20,7 @@ contributors:
 ---
 
 ## Introduction
-{:.no_toc}
+
 
 In this tutorial we are going to demonstrate how to add a third party
 JavaScript-based visualization to Galaxy, and we'll talk about what the benefits
@@ -418,7 +418,7 @@ More information on parameters can be found in the [wiki](https://docs.galaxypro
 {: .hands_on}
 
 ## Conclusion
-{:.no_toc}
+
 
 First of all, thank you for completing this tutorial. We have learned how to add
 JavaScript visualizations to Galaxy utilizing the Charts framework.

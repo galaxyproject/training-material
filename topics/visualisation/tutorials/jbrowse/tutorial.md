@@ -21,7 +21,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript
 > and HTML5, with optional run-once data formatting tools written in Perl.

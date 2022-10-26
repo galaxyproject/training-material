@@ -34,7 +34,7 @@ tags: [DDA, SILAC]
 ---
 
 # Introduction
-{:.no_toc}
+
 
 To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 There are two types of chemical tags:
@@ -49,7 +49,7 @@ In this tutorial, we will use tools of the [OpenMS suite](http://www.openms.org)
 ![ms1 feature](../../images/protein-quant-sil_ms1feature.png "MS1 mass traces. A) Two peptide features of co-eluting SIL peptides. B) MS1 spectra at a given RT. C) XIC monoisotopic peak light peptide. D) XIC monoisotopic peak heavy peptide.")
 
 ## Prerequisites
-{:.no_toc}
+
 
 If you are in the planning phase of your quantitative proteomics experiment, you may want to consider our tutorial on different [quantitation methods]({{site.baseurl}}/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html) first.
 
@@ -57,7 +57,7 @@ To learn about *protein identification* in Galaxy, please consider our OpenMS-ba
 
 > <hands-on-title>Introduction</hands-on-title>
 > In the hands-on section of this tutorial, we will use a quantitative comparison of HEK cell lysate as a test dataset. In this experiment, HEK cells were once labelled with light, once with heavy SILAC. Both cultures were lysed simultaneously and the cell lysates were mixed in a certain ratio.
-> A detailed description of the full dataset is available in the [PRIDE archive]().
+> A detailed description of the full dataset is available in the [PRIDE archive](https://www.ebi.ac.uk/pride/).
 >
 > Your objective in this hands-on-tutorial is to find out the correct mixing ratio of the test sample.
 >

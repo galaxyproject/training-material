@@ -25,10 +25,31 @@ module Jekyll
 
         topic_id = dir.split('/')[-3]
         tutorial_id = dir.split('/')[-1]
+        with_solutions = notebook.clone
+
+        with_solutions['cells'] = with_solutions['cells'].map{|cell|
+          if cell.fetch('cell_type') == 'markdown'
+            if cell['source'].is_a? String
+              m = cell['source'].match(/<blockquote class="solution"[^>]*>/)
+              if m
+                cell['source'].gsub!(/<blockquote class="solution"[^>]*>/, "<br/><details style=\"border: 2px solid #B8C3EA; margin: 1em 0.2em; padding: 0.5em;\"><summary>👁 View solution</summary>")
+
+                idx = m.begin(0)
+                q = cell['source'][0..idx]
+                w = cell['source'][idx + 1..-1]
+                e = w.index("</blockquote>")
+                r = w[0..e-1] + "</details>" + w[e + 13..-1]
+ 
+                cell['source'] = q + r 
+              end
+            end
+          end
+          cell
+        }
 
         # Write it out!
         page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
-        page2.content = JSON.pretty_generate(notebook)
+        page2.content = JSON.pretty_generate(with_solutions)
         page2.data['layout'] = nil
         page2.data['citation_target'] = 'jupyter'
         site.pages << page2

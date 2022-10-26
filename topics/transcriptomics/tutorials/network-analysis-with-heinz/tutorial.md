@@ -22,7 +22,7 @@ contributors:
 ---
 
 # Overview
-{:.no_toc}
+
 
 The human microbiome plays a key role in health and disease. Thanks to comparative metatranscriptomics,
 the cellular functions that are deregulated by the microbiome in disease can now be computationally
@@ -205,7 +205,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 
 ## What is differential expression analysis?
 
-> <comment-title>A defintion</comment-title>
+> <comment-title>A definition</comment-title>
 >
 > The definition of differential expression analysis given by
 > [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
