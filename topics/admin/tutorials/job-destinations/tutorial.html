@@ -1064,7 +1064,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 25, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1238,9 +1238,9 @@
 <span class="p">@@ -37,3 +48,5 @@</span> execution:
  tools:
  - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
-   execution: local_dest
+   environment: local_dest
 <span class="gi">+- id: testing
-+  execution: slurm-2c
++  environment: slurm-2c
 </span>   
 </code></pre></div>      </div>
     </li>
@@ -1360,10 +1360,10 @@
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
 </span><span class="p">@@ -52,4 +52,4 @@</span> tools:
  - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
-   execution: local_dest
+   environment: local_dest
  - id: testing
-<span class="gd">-  execution: slurm-2c
-</span><span class="gi">+  execution: dynamic_admin_only
+<span class="gd">-  environment: slurm-2c
+</span><span class="gi">+  environment: dynamic_admin_only
 </span>   
 </code></pre></div>      </div>
     </li>
@@ -1469,10 +1469,10 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 </span>    
  tools:
  - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
-   execution: local_dest
+   environment: local_dest
  - id: testing
-<span class="gd">-  execution: dynamic_admin_only
-</span><span class="gi">+  execution: dtd
+<span class="gd">-  environment: dynamic_admin_only
+</span><span class="gi">+  environment: dtd
 </span>   
 </code></pre></div>      </div>
     </li>
@@ -1579,7 +1579,7 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 +
 </span> tools:
  - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
-   execution: local_dest
+   environment: local_dest
    
 </code></pre></div>      </div>
 
@@ -1592,10 +1592,10 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
 </span><span class="p">@@ -61,4 +61,5 @@</span> tools:
  - class: local # these special tools that aren't parameterized for remote execution - <span class="notranslate">expression</span> tools, upload, etc
-   execution: local_dest
+   environment: local_dest
  - id: testing
-<span class="gd">-  execution: dtd
-</span><span class="gi">+  execution: dynamic_cores_time
+<span class="gd">-  environment: dtd
+</span><span class="gi">+  environment: dynamic_cores_time
 +  resources: testing
 </span>   
 </code></pre></div>      </div>
@@ -1895,8 +1895,8 @@ Also, comment out or remove the previous <code class="language-plaintext highlig
 author = "Nate Coraor and Björn Grüning and Helena Rasche",
 title = "Mapping Jobs to Destinations (Galaxy Training Materials)",
 year = "2022",
-month = "09",
-day = "28"
+month = "10",
+day = "25"
 url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html}",
 note = "[Online; accessed TODAY]"
 }
