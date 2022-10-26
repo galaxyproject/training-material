@@ -19,6 +19,14 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
+    # todo migrate somewhere else
+    def how_many_topic_feedbacks(feedback, name)
+      feedback.select{|x| x["topic"] == name}.length
+    end
+    def how_many_tutorial_feedbacks(feedback, name)
+      feedback.select{|x| x["tutorial"] == name}.length
+    end
+
     # todo migrate somewhere more generic
     def filter_authors(contributors, contributions)
       if not contributors.nil?
@@ -53,7 +61,6 @@ module Jekyll
         end
       end
 
-      puts "url=#{url}"
       url
     end
 
