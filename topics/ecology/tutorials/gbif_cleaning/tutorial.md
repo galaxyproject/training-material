@@ -54,9 +54,8 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from GBIF
-> <hands-on-title>Get data from GBIF</hands-on-title>
 >
-> 1. **Get species occurrences data** {% icon tool %} with the following parameters:
+> 3. **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
 >    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
 >    - *"Number of records to return"*: `999999` is a minimum value
@@ -64,10 +63,9 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    > <comment-title></comment-title>
 >    >
 >    > The spocc Galaxy tool allows you to search species occurences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurences. Specifying more than one data source will change the manner the output dataset is formatted.
->
+>    >
 >    {: .comment}
 >
-{: .hands_on}
 >
 > 4. Check the datatype
 >
@@ -124,25 +122,22 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
-{: .hands_on}
-
-> <question-title></question-title>
 >
-> 1. How many records are kept and what is the percentage of filtered data?
-> 2. Why are we keeping only these 3 types of data collection origin?
+>    > <question-title></question-title>
+>    >
+>    > 1. How many records are kept and what is the percentage of filtered data?
+>    > 2. Why are we keeping only these 3 types of data collection origin?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. 470 and 8.79% of records were drop out
+>    > > 2. These data collection methods are the most relevant
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
-> > <solution-title></solution-title>
-> >
-> > 1. 470 and 8.79% of records were drop out
-> > 2. These data collection methods are the most relevant
-> >
-> {: .solution}
->
-{: .question}
-
-{: .hands_on}
->
-> 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
+> 3. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -182,22 +177,24 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    - *"With following condition"*: `c72>0 and c72<99`
 >    - *"Number of header lines to skip"*: `1`
 >
+>
+> > <question-title></question-title>
+> >
+> > 1. How many records are kept and what is the percentage of filtered data?
+> > 2. How can you explain this result?
+> > 3. Which propagated tag you can propose to add here?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > 1. 50 and 89.29% o records were drop out
+> > > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
+> > > 3. As for the previous "count" step you are dealing with the `individualCount` column, you can add a to the output dataset a  `#individualCount` tag for example
+> > >
+> > {: .solution}
+> >
+> {: .question}
+{: .hands_on}
 
-> <question-title></question-title>
->
-> 1. How many records are kept and what is the percentage of filtered data?
-> 2. How can you explain this result?
-> 3. Which propagated tag you can propose to add here?
->
-> > <solution-title></solution-title>
-> >
-> > 1. 50 and 89.29% o records were drop out
-> > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
-> > 3. As for the previous "count" step you are dealing with the `individualCount` column, you can add a to the output dataset a  `#individualCount` tag for example
-> >
-> {: .solution}
->
-{: .question}
 
 ## Have a look at the age of records
 
@@ -239,25 +236,22 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
-{: .hands_on}
-
-> <question-title></question-title>
 >
-> 1. How many records are kept and what is the percentage of filtered data?
-> 2. Why are we keeping only data from 1945?
+>    > <question-title></question-title>
+>    >
+>    > 1. How many records are kept and what is the percentage of filtered data?
+>    > 2. Why are we keeping only data from 1945?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. 44 and 11.76% of records were drop out
+>    > > 2. This arbitrary date allow to have only quite recent records, but you can specify another year.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
-> > <solution-title></solution-title>
-> >
-> > 1. 44 and 11.76% of records were drop out
-> > 2. This arbitrary date allow to have only quite recent records, but you can specify another year.
-> >
-> {: .solution}
->
-{: .question}
-
-{: .hands_on}
->
-> 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
+> 3. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -352,20 +346,21 @@ From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 > 3. Select the GeoJSON file from your history
 > 4. Click on `Create Visualization`
 > 5. Select Openlayers
-> <question-title></question-title>
 >
-> 1. You don't see Opebnlayers? Did you know why?
->
-> > <solution-title></solution-title>
+> > <question-title></question-title>
 > >
-> > 1.If you don't see Openlayers but others visualization types like Cytoscape, this means your datatype is JSON, not geojson. You have to change the datafile manually before visualizing it
+> > 1. You don't see Opebnlayers? Did you know why?
 > >
-> {: .solution}
->
-{: .question}
+> > > <solution-title></solution-title>
+> > >
+> > > 1.If you don't see Openlayers but others visualization types like Cytoscape, this means your datatype is JSON, not geojson. You have to change the datafile manually before visualizing it
+> > >
+> > {: .solution}
+> >
+> {: .question}
 >
 {: .hands_on}
->
+
 
 # Conclusion
 
