@@ -61,11 +61,11 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 > 1. **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
 >    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
->    - *"Number of records to return"*: `999999` is a maimum value
+>    - *"Number of records to return"*: `999999` is a minimum value
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > ***TODO***: *Consider adding a comment regarding the maximum value, the R package spocc ...*
+>    > The spocc Galaxy tool allows you to search species occurences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurences. Specifying more than one data source will change the manner the output dataset is formatted.
 >
 >    {: .comment}
 >
