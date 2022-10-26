@@ -71,11 +71,11 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 4. Check the datatype
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a tag and/or a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and/or the data source (#GBIF for example here). This will help you finding content of particular interest (using the filtering option on the history search form for example) + visualize (notably if you are using propagated tag) which dataset is associated to which content.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -144,7 +144,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#basisOfRecord` string for example
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -259,7 +259,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 1. Add to the output dataset a propagating tag corresponding to the filtering criteria adding `#ageOfRecord` string for example
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
