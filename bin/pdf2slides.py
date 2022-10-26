@@ -32,7 +32,7 @@ PDF = os.path.abspath(sys.argv[1])
 xml = subprocess.check_output(['pdftohtml', '-xml', '-q', '-stdout', PDF]).decode('utf-8')
 tree = ET.fromstring(xml)
 for kid in tree:
-    sys.stdout.write(f"\n\n--- # {kid.attrib['number']}\n\n")
+    sys.stdout.write(f"\n\n--- \n# {kid.attrib['number']}\n\n")
     lasttop = 0
     for e in kid:
         if e.tag == 'fontspec': continue
