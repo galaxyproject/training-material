@@ -91,7 +91,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 >
 > 3. Check that the datatype is **netcdf**
 >
->    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as netcdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -125,7 +125,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance
 > >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
-> > 7. Click on **martins_comcom_id1_20220208_v1.nc** dataset
+> > 7. Click on **martins_comcom_id1_20220208_v1.nc** dataset and **open**.
 > {: .tip}
 {: .hands_on}
 
@@ -210,7 +210,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 >
 > 3. Change colormap
 >    **Always make sure you use color blind friendly palettes.**
->    - To change the default colormap, click on tab "**Scale**" (bottom of your plot wind) and select another "**Color Table**" (you can scroll down to go through all the different available colormap).
+>    - To change the default colormap, click on tab "**Scale**" (bottom of your plot window) and select another "**Color Table**" (you can scroll down to go through all the different available colormap).
 >    - Save your plot using **Save Image As** and make sure to choose another name to avoid overwritting your preceding plot.
 >    ![Panoply colormap](../../images/map2.PNG "Plot colormap")
 {: .hands_on}
