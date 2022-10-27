@@ -72,7 +72,7 @@ It will be a fun learning experience for anyone who loves visualization !
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the **remote files**
+> 2. **Import remote files**
 >    - location: `ECMWF ERA5 Reanalysis` ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`
 >
 >    {% snippet faqs/galaxy/datasets_import_from_remote_files.md location="ECMWF ERA4 Reanalysis -> 2022 -> 05 -> data -> air_temperature_at_2_metres.nc" %}
@@ -86,16 +86,14 @@ It will be a fun learning experience for anyone who loves visualization !
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >
-> 3. Check that the datatype of uploaded data is **netCDF**.
->
->
->    If it is not `netCDF` make sure to convert it using the Galaxy built-in format converters.
+> 3. **Check the datatype** of uploaded data, it should be `netCDF`.
+>    -  If it is not `netCDF`, make sure to convert it using the Galaxy built-in format converters.
 >
 >    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert h5 to netCDF" %}
 >
-> 4. Rename Datasets if you find the name to be too long or you have somthing more meaningful in your mind.
+> 4. **Rename Datasets** {% icon galaxy-pencil %} if you find the name to be too long or you have something more meaningful in your mind.
 >
-> 5. Add to each database a tag corresponding to `ecmwf`
+> 5. **Tag Datasets** {% icon galaxy-tags %} with the tag `#ecmwf`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
