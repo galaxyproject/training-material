@@ -49,7 +49,7 @@ contributors:
 
 ><comment-title>Background</comment-title>
 >
->According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/tutorial.html) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
+>According to [UN](https://www.un.org/en/climatechange/what-is-climate-change) , Climate is the long term shift in temperature and weather patterns which may be due to natural or artificial causes. To learn more about climate, refer this [tutorial]({% link topics/climate/tutorials/climate-101/tutorial.md %}) from the GTN. Due to the frequently changing nature of the weather patterns, the size of the collected data is huge.
 The climate data is mainly represented in these three categories : [NetCDF](https://en.wikipedia.org/wiki/NetCDF) (Network Common Data Form), [HDF](https://en.wikipedia.org/wiki/Hierarchical_Data_Format) (Hierarchical Data Format) , [GRIB](https://en.wikipedia.org/wiki/GRIB) (GRIdded Binary or General Regularly-distributed Information in Binary form).
 >
 >The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
@@ -880,7 +880,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > > 2. The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are :
 > > > 1. It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.
 > > > 2.  You can view as well as download the generated plots to use further.
-> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to [this tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/tutorial.html) for more info.
+> > > 3. Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to [this tutorial]({% link topics/climate/tutorials/pangeo/tutorial.md %}) for more info.
 > >
 > > 3. If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name `Image Montage`.
 > >
