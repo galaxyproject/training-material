@@ -58,7 +58,7 @@ The climate data is mainly represented in these three categories : [NetCDF](http
 >The NetCDF file format is basically used for storing multidimensional data which generally consists of variables such as temperature, precipitation, wind direction, etc. The variation of climate variables over a period of time is suitably plotted using this dataset. The entire earth is divided into both horizontal as well as vertical coordinates which makes plotting of the variables such as the ocean temperatures possible.
 >
 >The coordinate system, types of projections and colormaps are some of the very important considerations in achieving the most suitable visualization option.
-
+{: .comment}
 
 
 # Introduction
@@ -198,14 +198,14 @@ Follow the below steps:
 >    - `time0`: this tabular file contains all the times extracted from the netCDF file. In our case, these are relative to 01/05/2022, 00:00:00 UTC;
 >    - `version`: this is a text file returning the xarray package version. It is useful when publishing your Galaxy workflow.
 >
->{: .hands_on}
+{: .hands_on}
+
+> <comment-title></comment-title>
 >
-> > <comment-title></comment-title>
-> >
-> >The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, (level, if this dimension was present, which is not the case in this particular case) and time may differ from one file to the next.
-> >
-> > {: .comment}
+>The number of tabular files returned by this programme is proportional to the number of coordinate variables in your input file. No further processing is done after decoding the values from the netCDF input file. As a result, depending on how the original input file was coded, units for latitudes, longitudes, (level, if this dimension was present, which is not the case in this particular case) and time may differ from one file to the next.
 >
+{: .comment}
+
 
 
 
@@ -236,8 +236,10 @@ Follow the below steps:
 > {: .solution }
 {: .question }
 
+
 ## Operations on Climate data using **CDO Operations**
->We have hourly data. In order to plot it, we must first extract the hours from the bigger dataset. This is done using the `seltimestep` and the `splithour` options available in the `CDO Operations` tool. `splithour` is used when we wish to plot more than an hour. Our main aim is to plot the last hour data on the last day present in the dataset.
+
+We have hourly data. In order to plot it, we must first extract the hours from the bigger dataset. This is done using the `seltimestep` and the `splithour` options available in the `CDO Operations` tool. `splithour` is used when we wish to plot more than an hour. Our main aim is to plot the last hour data on the last day present in the dataset.
 
 > <hands-on-title>Defining a particular time range using seltimestep </hands-on-title>
 >
@@ -248,11 +250,11 @@ Follow the below steps:
 >            - *"Timesteps for selection"*: `744/744`
 >            - {% icon param-file %} *"Additional input file"*: `air_temperatures_at_2_metres.nc`
 >
->{: .hands_on}
 >
->    > <comment-title></comment-title>
->    >
->    > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention to is how the data entries are numbered: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to achieve the desired result.
+>
+> > <comment-title></comment-title>
+> >
+> > The syntax of using the `seltimestep` is `(initial data number / final data entry)`. An important thing to pay attention to is how the data entries are numbered: are they numbered starting from 0 or 1. Accordingly we can add or skip adding 1 to the data number to achieve the desired result.
 > >
 Although we are not using `splithour` here, you can find below the syntax for future uses.
 > >
@@ -265,9 +267,9 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > > This step generates that `N` number of `outfiles.netcdf` files where `N` is the range of selection.
 > > Suppose your selected range was `744/744` for the `seltimestep` , then it will generate `2` files which can be plotted further.
 > >
-> > {: .comment}
+> {: .comment}
 >
-
+{: .hands_on}
 
 
 
