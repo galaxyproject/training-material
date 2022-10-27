@@ -73,7 +73,7 @@ It will be a fun learning experience for anyone who loves visualization !
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the **remote files**
->    - `Upload Data` -> `Choose remote files` -> `ECMWF ERA5 Reanalysis` ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`
+>    - location: `ECMWF ERA5 Reanalysis` ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`
 >
 >    {% snippet faqs/galaxy/datasets_import_from_remote_files.md location="ECMWF ERA4 Reanalysis -> 2022 -> 05 -> data -> air_temperature_at_2_metres.nc" %}
 >
