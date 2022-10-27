@@ -143,7 +143,11 @@ And a couple that can be used with numbers and strings (or other values!)
 
 ## Iterables
 
-TODO
+In Python, there is a class of things which can be easily looped over, called "iterables". All of the following are examples of iterable items:
+
+- `range(10)`
+- `'abcd'`, a string
+- `['a', 'b' , 'c' , 'd']`, a list
 
 ## Flow Control
 
