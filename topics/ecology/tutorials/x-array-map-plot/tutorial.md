@@ -70,15 +70,21 @@ It will be a fun learning experience for anyone who loves visualization !
 >
 > 1. Create a new history for this tutorial. Name it as per your choice. My suggestions : *ECMWF_Reanalysis*.
 >
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_remote_files.md %}
+> 2. Import the **remote files**
+>    - `Upload Data` -> `Choose remote files` -> `ECMWF ERA5 Reanalysis` ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`
 >
-> 2. Import the files from
->    the remote files
->    ```
->    (`Upload Data` -> `Choose remote files` -> `ECMWF ERA5 Reanalysis` >   ->`2022` -> `05` -> `data` -> `air_temperature_at_2_metres.nc`)
->    ```
->  or  upload it [from Zenodo](https://doi.org/10.5281/zenodo.6621460).
+>    {% snippet faqs/galaxy/datasets_import_from_remote_files.md location="ECMWF ERA4 Reanalysis -> 2022 -> 05 -> data -> air_temperature_at_2_metres.nc" %}
+>
+>    **or**, if this is not available, you can import from [Zenodo]({{page.zenodo_link}}):
+>
+>     ```
+>     https://zenodo.org/record/6621460/files/air_temperature_at_2_metres.netcdf
+>     ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >
 > 3. Check that the datatype of uploaded data is **netCDF**.
 >
