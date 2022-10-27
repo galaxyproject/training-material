@@ -53,6 +53,11 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
+      - name: Check Frontmatter
+        run: |
+          make check-frontmatter ACTIVATE_ENV=pwd
+          make check-contributors ACTIVATE_ENV=pwd
+
       - name: Check Citations
         run: |
           bundle exec ruby bin/lint.rb | reviewdog -filter-mode=file -reporter=github-pr-review -f=rdjsonl -fail-on-error
