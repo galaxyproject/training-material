@@ -92,7 +92,7 @@ These can often be implemented as breakout rooms wherein students are assigned a
 
 ### Tracing Code Execution
 
-> > ### {% icon code-in %} Code
+> > <code-in-title>Code</code-in-title>
 > > ```python
 > > # Initialise our accumulator
 > > x = 1 + 1
@@ -107,7 +107,7 @@ These can often be implemented as breakout rooms wherein students are assigned a
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Trace
+> > <code-out-title>Trace</code-out-title>
 > >
 > > Line | `i` | `x` | `tmp`
 > > ---- | --- | --- | -----
