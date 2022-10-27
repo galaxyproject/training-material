@@ -33,7 +33,7 @@ Workflows are a powerful feature in Galaxy that allow you to link multiple steps
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.
 
 > <tip-title>Create workflows from existing histories</tip-title>
->  Workflows can be extracted from existing histories. You can find a tutorial for this [here]({{ site.baseurl }}/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html)
+>  [Read about extracting workflows from histories in this tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}).
 >
 {: .tip}
 

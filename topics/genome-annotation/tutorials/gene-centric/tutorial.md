@@ -259,7 +259,7 @@ At this point we have three input datasets that would allow us to find and visua
 
 ## Steps 5, 6, and 7: Finding matches and building trees
 
-To find location of genes, we will use the following [workflow](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance as described [here](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/).
+To find location of genes, [we will use the following workflow]({% link topics/genome-annotation/tutorials/gene-centric/workflows/index.md %}) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance.
 
 ![WF](../../images/gene-centric/wf.png)
 
