@@ -33,7 +33,7 @@ contributors:
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on [the Panoply documentation](https://www.giss.nasa.gov/tools/panoply/help/) ["Quick View Data with Panoply"](https://disc.gsfc.nasa.gov/information/howto?title=Quick%20View%20Data%20with%20Panoply) section and the [Galaxy climate dedicated tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/panoply/tutorial.html).
+> This tutorial is significantly based on [the Panoply documentation](https://www.giss.nasa.gov/tools/panoply/help/) and the [Galaxy climate dedicated tutorial](https://training.galaxyproject.org/training-material/topics/climate/tutorials/panoply/tutorial.html).
 >
 {: .comment}
 
