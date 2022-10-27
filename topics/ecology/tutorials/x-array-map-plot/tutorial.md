@@ -29,9 +29,7 @@ contributors:
 ---
 
 
-# Introduction
 
-<!-- This is a comment. -->
 ><comment-title></comment-title>
 >
 > The tutorial aims for establishing a good knowledge about meaningful visualization of climate data.
