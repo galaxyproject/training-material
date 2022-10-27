@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Trajectory Analysis using Monocle3 " />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 08:58:35 +0000" />
+<meta name="DC.date" content="2022-10-27 11:55:48 +0000" />
 <meta name="DC.creator" content="Julia Jakiela" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 08:58:35 +0000",
+  "dateModified": "2022-10-27 11:55:48 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trajectory Analysis using Monocle3 ",
   "interactivityType": "mixed",
@@ -1230,8 +1230,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -1240,7 +1238,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 27, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1824,11 +1822,8 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <p>In the mentioned tutorial, we annotated the cells so that we know what type they are. Above you can see how Monocle used this information to colour cells by their type. It is important to see the ‘form’ of the graph and how the cell types are arranged within its confines. But why is it important? Well, in Monocle, our trajectory analysis will be based on the same arrangement of the cells that you see now. And if you now recall our choice of the number of dimensions during pre-processing, you’ll understand why it was crucial - choosing the right value at the beginning determines the ‘shape’ of the graph that is then retained for the trajectory analysis. Therefore, the fact that on the plot above we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out… Let’s investigate that and wait until the trajectory is inferred!</p>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-  <ul>
-    <li>Genotype
-Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?</li>
-  </ul>
+  <div id="question-genotype" class="box-title" aria-label="question box: Genotype"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genotype</div>
+  <p>Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?</p>
   <figure id="figure-8"><img src="../../images/scrna-casestudy-monocle/genotypes.png" alt="Genotype data plotted on the obtained graph, compared with the cell types graph. Cell types DP-M1, DP-L and T-mat are mainly wildtypes, while for other cell types the distribution is fairly even." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Genotype differences</figcaption></figure>
 
   <blockquote class="solution">
@@ -1840,11 +1835,8 @@ Based on our results, can we confirm findings from the previous tutorial that DP
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-  <ul>
-    <li>Batch effect
-Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?</li>
-  </ul>
+  <div id="question-batch-effect" class="box-title" aria-label="question box: Batch effect"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Batch effect</div>
+  <p>Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?</p>
   <figure id="figure-9"><img src="../../images/scrna-casestudy-monocle/batch_1.png" alt="Batch data plotted on the obtained graph, compared with the cell types graph. DP-L and DP-M1 seem to consist mostly of N705 and N706, while other cell types have quite even batch distribution." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Checking for batch effect</figcaption></figure>
 
   <blockquote class="solution">
@@ -1862,9 +1854,9 @@ Can we confirm the previous findings that DP-L looks to be mainly comprised of N
 <p>Don’t get confused - we haven’t clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it’s time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?</p>
 <blockquote>
 
-  <p>Monocle uses a technique called <a href="https://doi.org/10.1038/s41598-019-41695-z">community detection</a> to group cells. This approach was introduced by <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4508757/">Levine et al</a> as part of the phenoGraph algorithm.</p>
+  <p>Monocle uses a technique called “community detection” (<span class="citation"><a href="#Traag_2019">Traag <i>et al.</i> 2019</a></span>) to group cells. This approach was introduced by <span class="citation"><a href="#Levine_2015">Levine <i>et al.</i> 2015</a></span> as part of the phenoGraph algorithm.</p>
 
-  <p>Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1663-x">Alex Wolf et al</a>, introduced as part of their <a href="https://github.com/theislab/paga">PAGA</a> algorithm.</p>
+  <p>Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from <span class="citation"><a href="#Wolf_2019">Wolf <i>et al.</i> 2019</a></span>, introduced as part of their <a href="https://github.com/theislab/paga">PAGA</a> algorithm.</p>
 </blockquote>
 
 <blockquote class="details">
@@ -1990,11 +1982,8 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 <figure id="figure-15"><img src="../../images/scrna-casestudy-monocle/gene_expression.png" alt="Expression on the genes: Il2ra expressed in DN, Cd8b1, Cd8a expressed in the areas where middle DP, Cd4 mostly expressed in late DP cluster, Itm2a expressed in mature T-cells, Aif1 – no expression, Hba-a1 - very high expression in small branch of DP-M4." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> <span class="notranslate">Expression</span> of the genes across analysed sample</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-8" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-  <ul>
-    <li>Genes and cell types
-Based on the gene <span class="notranslate">expression</span> graph that we just generated, the table above and your knowledge from the previous tutorial, how would you interpret the results?</li>
-  </ul>
+  <div id="question-genes-and-cell-types" class="box-title" aria-label="question box: Genes and cell types"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genes and cell types</div>
+  <p>Based on the gene <span class="notranslate">expression</span> graph that we just generated, the table above and your knowledge from the previous tutorial, how would you interpret the results?</p>
 
   <blockquote class="solution">
     <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2025,7 +2014,7 @@ Based on the gene <span class="notranslate">expression</span> graph that we just
 <p>Here we used a priori knowledge regarding the marker genes. If we wanted to approach this problem in an unsupervised manner, we could use Monocle to tell us the top marker genes in each group of cells. This is very useful if we are trying to identify a cell type, or if we want to find novel marker genes for known cell types.</p>
 
 <blockquote class="question">
-  <div id="question-9" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>If I cluster cells that are not annotated, can I assign clusters to a cell type based on gene <span class="notranslate">expression</span> using Monocle3?</p>
 
@@ -2057,7 +2046,7 @@ Based on the gene <span class="notranslate">expression</span> graph that we just
 <figure id="figure-17"><img src="../../images/scrna-casestudy-monocle/top_markers.jpg" alt="A table showing top markers - which genes (and their percentage) are the most expressed in each cell type." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Identification of the genes most specifically expressed in groups of cells.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-10" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What genes are uniquely expressed in DP-M1?</p>
 
@@ -2121,8 +2110,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 <blockquote class="details">
   <div id="details-pseudotime" class="box-title"><button type="button" aria-controls="details-pseudotime-contents" aria-expanded="true" aria-label="Toggle details box: Pseudotime"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Pseudotime<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
-<a href="https://doi.org/10.1093%2Fbioinformatics%2Fbtw372">Read more</a></p>
+  <p>To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition.  See <span class="citation"><a href="#Reid_2016">Reid and Wernisch 2016</a></span> for more.</p>
 
 </blockquote>
 
@@ -2234,7 +2222,11 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li></ol>
+                <ol class="bibliography"><li id="Levine_2015">Levine, J. H., E. F. Simonds, S. C. Bendall, K. L. Davis, E.-ad D. Amir <i>et al.</i>, 2015 <b>Data-Driven Phenotypic Dissection of AML Reveals Progenitor-like Cells that Correlate with Prognosis</b>. Cell 162: 184–197. <a href="https://doi.org/10.1016/j.cell.2015.05.047">10.1016/j.cell.2015.05.047</a></li>
+<li id="Reid_2016">Reid, J. E., and L. Wernisch, 2016 <b>Pseudotime estimation: deconfounding single cell time series</b>. Bioinformatics 32: 2973–2980. <a href="https://doi.org/10.1093/bioinformatics/btw372">10.1093/bioinformatics/btw372</a></li>
+<li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="Traag_2019">Traag, V. A., L. Waltman, and N. J. van Eck, 2019 <b>From Louvain to Leiden: guaranteeing well-connected communities</b>. Sci Rep 9: <a href="https://doi.org/10.1038/s41598-019-41695-z">10.1038/s41598-019-41695-z</a></li>
+<li id="Wolf_2019">Wolf, F. A., F. K. Hamey, M. Plass, J. Solana, J. S. Dahlin <i>et al.</i>, 2019 <b>PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells</b>. Genome Biol 20: <a href="https://doi.org/10.1186/s13059-019-1663-x">10.1186/s13059-019-1663-x</a></li></ol>
                 
 
                 
