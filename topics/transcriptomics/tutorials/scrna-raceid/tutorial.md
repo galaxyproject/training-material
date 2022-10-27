@@ -56,7 +56,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 # Introduction
 
 
-The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by [Grün et.al](https://doi.org/10.1016/j.stem.2016.05.010) in 2016. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
+The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by {% cite Gr_n_2016 %}. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 
 The input data consists of a single count matrix consisting of ~21,000 genes (rows) and ~400 cells (columns) in tidy data format, generated via [scRNA pre-processing methods]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) using the [CelSeq2 protocol]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}).
 
