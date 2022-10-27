@@ -30,7 +30,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 
 <!-- This is a comment. -->
 ><comment-title></comment-title>
@@ -900,6 +899,5 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 
 
 # Conclusion
-{:.no_toc}
 
 We have learnt about the `xarray map plotting tool` dealing with the `netcdf data set`. The tutorial also discussed about the types of climate datasets. One of the tutorial is info about usage of different [colormaps](https://github.com/Quickbeasts51429/Xarray_ColorMaps/blob/main/index.md#color-maps) and [projections](https://github.com/Quickbeasts51429/xarray_projection) in xarray.
