@@ -118,7 +118,7 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 > > <tip-title>Launch Panoply in Galaxy</tip-title>
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
-> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+> > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [on the Panoply interactive tool shortcut](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **martins_comcom_id1_20220208_v1.nc** dataset selected in the netcdf input field
 > > 3. Click Execute
 > > 4. The tool will start running and will stay running permanently
