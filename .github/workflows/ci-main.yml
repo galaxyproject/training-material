@@ -1,4 +1,4 @@
-name: GTN Tutorials Linting
+name: GTN Tutorial Linting
 
 concurrency:
   group: ci-tutsli-${{ github.head_ref }}
@@ -50,8 +50,16 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
           npm install
+          pip install pyyaml
           bundle pristine ffi
       # END Dependencies
+
+      - name: Check Frontmatter
+        run: |
+          make check-diffs ACTIVATE_ENV=pwd
+          make check-frontmatter ACTIVATE_ENV=pwd
+          make check-contributors ACTIVATE_ENV=pwd
+          python bin/mergeyaml.py --nondocker > /dev/null
 
       - name: Check Citations
         run: |

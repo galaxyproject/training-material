@@ -386,7 +386,7 @@ LOs.
 > 2. Check the content
 > 3. Are its intended LOs stated?
 >
->    > <solution-title></solution-title> for any GTN tutorials, including the dummy one
+>    > <solution-title>for any GTN tutorials, including the dummy one</solution-title>
 >    >
 >    > LOs are always stated on the top for the tutorial, in the Overview box
 >    >
@@ -620,7 +620,7 @@ to learning or how they will help move learners towards the LOs.**
 > - Are any of the LEs listed in Table 1 used in the course or tutorial you
 >   selected?
 >
->   > <solution-title></solution-title> for GTN tutorial, including the dummy one
+>   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
 >   >
 >   > Most of the GTN tutorials are using Practical and Exercises as LEs.
 >   >
@@ -629,7 +629,7 @@ to learning or how they will help move learners towards the LOs.**
 > - What kinds of achievement or learning are they most likely to promote?
 >   Is this consistent with the stated LOs?
 >
->   > <solution-title></solution-title> for GTN tutorial, including the dummy one
+>   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
 >   >
 >   > They are most likely to show how to do things and give an idea of how a tool
 >   > work.
@@ -639,7 +639,7 @@ to learning or how they will help move learners towards the LOs.**
 > - Does the course or tutorial have any LO that can't be achieved through the
 >   LEs that the course currently uses?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   > "Determine the best strategy to get data into Galaxy" may not be achieved
 >   > with only practical
@@ -712,7 +712,7 @@ intended and actual curricula
 > - Review the LOs and identify which parts of the course content support the
 >   LOs
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -721,28 +721,28 @@ intended and actual curricula
 >   delivered & those specific items of content (e.g., item A supports LO 1, &
 >   will be delivered using a lecture)
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there any piece of content that doesn't support any LO(s)?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one piece of content for each LO?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one LE for each piece of content?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1064,7 +1064,7 @@ LOs**.
 >
 > - Do you evaluate its effectiveness?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   > - Embeded feedback form
 >   > - Collecting feedback at the end of courses
@@ -1074,7 +1074,7 @@ LOs**.
 >   If so, how do you do this? How do you determine its effectiveness in leading
 >   learners to your intended LOs?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1082,7 +1082,7 @@ LOs**.
 > - Consider the Kirkpatrick-Katzell framework. What level(s) does your
 >   evaluation incorporate?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1090,7 +1090,7 @@ LOs**.
 > - What adjustments would you need to make, if any, in order to align your
 >   evaluation with the Kirkpatrick-Katzell strategy?
 >
->   > <solution-title></solution-title> for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}

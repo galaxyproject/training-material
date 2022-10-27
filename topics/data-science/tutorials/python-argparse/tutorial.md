@@ -157,18 +157,14 @@ And finally we can define some arguments that are available. Just like we have a
 Here we have an argument named 'integers', which validates that all input values are of the type `int`. `nargs` is the number of arguments, `+` means '1 or more'. And we have some help text as well:
 
 ```python
-parser.add_argument('integers', type=int, nargs='+',
-                    help='an integer for the accumulator')
+parser.add_argument('integer', type=int, help='an integer parameter')
+parser.add_argument('many_integers', type=int, nargs='+', help='an integer parameter')
 ```
 
-We can also define an optional flag, here it's called `--sum`. Here it goes to a destination named 'accumulate', the name we'll use to access the value of this argument. It has an action of 'store_const' which just tracks if the flag was supplied or not.
-
-The `const` attribute is set to `sum`, which is actually the function `sum()`, this is what the value will be if we run the command with `--sum`. Otherwise it will `default` to the function `max()`. We again have some help text to tell us how it behaves
+We can also define an optional flag, here it's called `--sum`. We use `store_true` which will set it as true if the flag is used , otherwise false.
 
 ```python
-parser.add_argument('--sum', dest='accumulate', action='store_const',
-                    const=sum, default=max,
-                    help='sum the integers (default: find the max)')
+parser.add_argument('--sum', action='store_true', help='Should we sum up the integers?')
 ```
 
 Finally we parse the arguments, which reads `sys.argv` and processes it according to the above rules. The output is stored in `args`.
@@ -180,8 +176,9 @@ args = parser.parse_args()
 We have two main variables we can use now:
 
 ```
-args.integers # A list of integers.
-args.accumulate # Actually a function!
+args.integer # A single integer
+args.many_integers # A list of ints
+args.sum # A boolean, True or False.
 ```
 
 ## Using argparse

@@ -441,7 +441,7 @@ As a reminder, here's the comparision between cell type annotation done in the o
 
 In the mentioned tutorial, we annotated the cells so that we know what type they are. Above you can see how Monocle used this information to colour cells by their type. It is important to see the 'form' of the graph and how the cell types are arranged within its confines. But why is it important? Well, in Monocle, our trajectory analysis will be based on the same arrangement of the cells that you see now. And if you now recall our choice of the number of dimensions during pre-processing, you'll understand why it was crucial - choosing the right value at the beginning determines the 'shape' of the graph that is then retained for the trajectory analysis. Therefore, the fact that on the plot above we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out... Let's investigate that and wait until the trajectory is inferred!
 
-> <question-title></question-title> - Genotype
+> <question-title>Genotype</question-title>
 > Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?
 > ![Genotype data plotted on the obtained graph, compared with the cell types graph. Cell types DP-M1, DP-L and T-mat are mainly wildtypes, while for other cell types the distribution is fairly even.](../../images/scrna-casestudy-monocle/genotypes.png "Genotype differences")
 >
@@ -452,7 +452,7 @@ In the mentioned tutorial, we annotated the cells so that we know what type they
 > {: .solution}
 {: .question}
 
-> <question-title></question-title> - Batch effect
+> <question-title>Batch effect</question-title>
 > Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?
 > ![Batch data plotted on the obtained graph, compared with the cell types graph. DP-L and DP-M1 seem to consist mostly of N705 and N706, while other cell types have quite even batch distribution.](../../images/scrna-casestudy-monocle/batch_1.png "Checking for batch effect")
 >
@@ -469,9 +469,9 @@ In the mentioned tutorial, we annotated the cells so that we know what type they
 
 Don't get confused - we haven't clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it's time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?
 >
-Monocle uses a technique called [community detection](https://doi.org/10.1038/s41598-019-41695-z) to group cells. This approach was introduced by [Levine et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4508757/) as part of the phenoGraph algorithm. 
+Monocle uses a technique called "community detection" ({% cite Traag_2019 %}) to group cells. This approach was introduced by {% cite Levine_2015 %} as part of the phenoGraph algorithm.
 >
-Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from [Alex Wolf et al](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1663-x), introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
+Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from {% cite Wolf_2019 %}, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
 > <details-title>Clusters vs partitions</details-title>
 > 
@@ -548,7 +548,7 @@ If we compare the annotated cell types and the clusters that were just formed, w
 
 ![Expression on the genes: Il2ra expressed in DN, Cd8b1, Cd8a expressed in the areas where middle DP, Cd4 mostly expressed in late DP cluster, Itm2a expressed in mature T-cells, Aif1 – no expression, Hba-a1 - very high expression in small branch of DP-M4.](../../images/scrna-casestudy-monocle/gene_expression.png "Expression of the genes across analysed sample")
 
-> <question-title></question-title> - Genes and cell types
+> <question-title>Genes and cell types</question-title>
 > Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorial, how would you interpret the results?
 >
 > > <solution-title></solution-title>
@@ -650,8 +650,7 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 
 > <details-title>Pseudotime</details-title>
 > 
-> To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
-[Read more](https://doi.org/10.1093%2Fbioinformatics%2Fbtw372)
+> To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition.  See {% cite Reid_2016 %} for more.
 >
 {: .details}
 
