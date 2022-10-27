@@ -98,13 +98,13 @@ This [example history](https://usegalaxy.org/u/cartman/h/genecomparisonxbp1) con
 
 You can use this history to understand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
 
-> <code-in-title></code-in-title> dataset in the example history
+> <code-in-title>dataset in the example history</code-in-title>
 > - <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
 > - <kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest
 > - <kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest
 {: .code-in}
 
-> <code-out-title></code-out-title>s in the sample history
+> <code-out-title>in the sample history</code-out-title>
 > - <kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs
 > - <kbd>Trees</kbd> - phylogenetic trees for each exon 
 {: .code-out}

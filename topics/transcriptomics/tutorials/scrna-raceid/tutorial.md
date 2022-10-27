@@ -276,7 +276,7 @@ Four histograms are generated with the top line giving the raw expression data f
 >
 {: .details}
 
-> <comment-title></comment-title>: Choosing Filtering Thresholds
+> <comment-title>Choosing Filtering Thresholds</comment-title>
 >
 > The minimum total filtering threshold of 3000 chosen for this dataset is derived from analysing the *Cross-Contamination Plots* from the [Pre-processing of Single-Cell RNA Data]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}).
 >
