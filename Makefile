@@ -214,22 +214,22 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 _site/%/introduction.pdf: _site/%/introduction.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides amouat/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides amouat/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides amouat/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides amouat/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh
