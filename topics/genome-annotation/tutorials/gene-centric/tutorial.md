@@ -217,8 +217,6 @@ After uploading data from GenomeArk you will end up with a number of FASTA datas
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="Auto-generated english language captioning on video covering collections" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
->
 {: .hands_on}
 
 ## Step 4: Extract amino acid sequences and genome coordinates for all ORFs

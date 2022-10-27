@@ -469,9 +469,9 @@ In the mentioned tutorial, we annotated the cells so that we know what type they
 
 Don't get confused - we haven't clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it's time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?
 >
-Monocle uses a technique called [community detection](https://doi.org/10.1038/s41598-019-41695-z) to group cells. This approach was introduced by [Levine et al](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4508757/) as part of the phenoGraph algorithm. 
+Monocle uses a technique called "community detection" ({% cite Traag_2019 %}) to group cells. This approach was introduced by {% cite Levine_2015 %} as part of the phenoGraph algorithm.
 >
-Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from [Alex Wolf et al](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1663-x), introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
+Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from {% cite Wolf_2019 %}, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
 > <details-title>Clusters vs partitions</details-title>
 > 
@@ -650,8 +650,7 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 
 > <details-title>Pseudotime</details-title>
 > 
-> To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition. 
-[Read more](https://doi.org/10.1093%2Fbioinformatics%2Fbtw372)
+> To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition.  See {% cite Reid_2016 %} for more.
 >
 {: .details}
 
