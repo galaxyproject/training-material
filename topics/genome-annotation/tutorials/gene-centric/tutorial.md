@@ -40,22 +40,23 @@ priority: 2
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
-> > <question-title>What I want:</question-title>
-> > - I work with a gene _X_
-> > - I would like to compare the structure of gene _X_ across _N_ genomes
-> {: .code-in}
->
-> > ### {% icon galaxy-chart-select-data %} What I have:
+> > <code-in-title>What I have</code-in-title>
 > > - I know the gene's name
 > > - I know which species I'm interested in
 > > - I know where to find genomes of these species
+> {: .code-in}
+>
+> > <code-out-title>What I want</code-out-title>
+> > - I work with a gene _X_
+> > - I would like to compare the structure of gene _X_ across _N_ genomes
 > {: .code-out}
+>
 {: .code-2col}
 
-> ### {% icon interactive_tour %} What I will get:
+> <code-out-title>What I will get</code-out-title>
 > - Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.
 > - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
-{: .warning}
+{: .code-out}
 
 > <agenda-title></agenda-title>
 >
