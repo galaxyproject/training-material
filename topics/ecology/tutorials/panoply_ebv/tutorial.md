@@ -33,7 +33,7 @@ contributors:
 
 > <comment-title></comment-title>
 >
-> This tutorial is significantly based on [the Panoply documentation](https://www.giss.nasa.gov/tools/panoply/help/) and the [Galaxy climate dedicated tutorial](topics/climate/tutorials/panoply/tutorial.md).
+> This tutorial is significantly based on [the Panoply documentation](https://www.giss.nasa.gov/tools/panoply/help/) and the [Galaxy climate dedicated tutorial]([topics/climate/tutorials/panoply/tutorial.md](https://training.galaxyproject.org/training-material/topics/climate/tutorials/panoply/tutorial.html).
 >
 {: .comment}
 
