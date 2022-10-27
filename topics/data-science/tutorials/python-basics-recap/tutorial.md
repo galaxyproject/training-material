@@ -255,7 +255,7 @@ Additionally if you need a newline in your file, you *must* write it yourself wi
 
 The above code is equivalent to this, but it is not recommended, it's a bit harder to read, and it is very very common to forget to close files which is not ideal.
 
-```
+```python
 handle = open('out.txt', 'w')
 handle.write("Здравствуйте ")
 handle.write("世界!\n")
