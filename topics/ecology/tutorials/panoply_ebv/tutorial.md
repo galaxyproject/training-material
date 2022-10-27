@@ -69,7 +69,7 @@ In this tutorial, you will learn to:
 
 For climate and forecast data stored in NetCDF format there are (non-mandatory) conventions on metadata ([CF Convention](http://cfconventions.org/)).
 
-In this tutorial, we will be using data from the [Copernicus Climate Data Store](https://zenodo.org/record/3695482/files/era5-land.nc?download=1) and more precisely a [reanalysis ERA5-Land monthly averaged dataset](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land-monthly-means?tab=overview) for 2019. Data from Copernicus Climate Data Store is freely available but may require [free registration](https://cds.climate.copernicus.eu/user/register?destination=%2Fcdsapp%23!%2Fdataset%2Freanalysis-era5-land-monthly-means%3Ftab%3Doverview) and license agreement.
+In this tutorial, we will be using data from the [GEO BON EBV data portal](https://portal.geobon.org/).
 
 ## Get data
 
@@ -97,11 +97,11 @@ In this tutorial, we will be using data from the [Copernicus Climate Data Store]
 >
 > 4. Rename Datasets
 >
->    As "https://zenodo.org/record/3697454/files/ecv_1979.nc" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/3697454/files/` to obtain `ecv_1979.nc` and `ecv_2018.nc`, respectively.
+>    As the original name `martins_comcom_id1_20220208_v1.nc` can be not so good to use, don't hesitate to modify it in `Local bird diversity (cSAR/BES-SIM) martins dataset` for example.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Add a tag to the dataset corresponding to `copernicus`
+> 5. Add a tag to the dataset corresponding to `EBV`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
