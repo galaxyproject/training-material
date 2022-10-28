@@ -65,6 +65,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 > 3. Check the datatype
 >
+>  you normally have a tabular datatype
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 > 4. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and another one mentioning the data source (#GBIF for example here).
