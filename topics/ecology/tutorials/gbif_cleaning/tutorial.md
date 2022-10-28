@@ -25,9 +25,9 @@ contributors:
 # Introduction
 
 
-GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion reords across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources.
+GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion records across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources.
 
-In this tutorial we will propose a way to clean occurence records retrieved from GBIF.
+In this tutorial we will propose a way to clean occurrence records retrieved from GBIF.
 
 This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
@@ -60,15 +60,14 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 >    > <comment-title></comment-title>
 >    >
->    > The spocc Galaxy tool allows you to search species occurences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurences. Specifying more than one data source will change the manner the output dataset is formatted.
+>    > The spocc Galaxy tool allows you to search species occurrences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurrences. Specifying more than one data source will change the manner the output dataset is formatted.
 >    >
 >    {: .comment}
 >
 >
-> 3. Check the datatype
+> 3. **Check the datatype** {% icon galaxy-pencil %}, it should be `tabular`
 >
->  you normally have a tabular datatype
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 4. **Add tags** {% icon galaxy-tags %} to the dataset
 >    - make them propagating tags (tags starting with `#`)
@@ -84,7 +83,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 
 ## Where do the records come from?
 
-Here we propose to investigate the content of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
+Here we propose to investigate the content of the dataset looking notably at the "basisOfRecord" attribute to know more about heterogeneity related to the data collection origin.
 
 > <hands-on-title>"basisOfRecord" filtering</hands-on-title>
 >
@@ -95,7 +94,7 @@ Here we propose to investigate the content of the dataet looking notably at the 
 >
 >    > <comment-title></comment-title>
 >    >
->    > This tool is one of the important "classical" Galaxy tool who allows you to better synthtize information content of your data. Here we apply this tool to the 17th column (corresponding to the basisOfRecord attribute) but don't hesitate to investigate others attributes!
+>    > This tool is one of the important "classical" Galaxy tool who allows you to better synthesize information content of your data. Here we apply this tool to the 17th column (corresponding to the basisOfRecord attribute) but don't hesitate to investigate others attributes!
 >    {: .comment}
 >
 {: .hands_on}
@@ -199,7 +198,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 > > > <solution-title></solution-title>
 > > >
 > > > 1. 50 and 89.29% o records were drop out
-> > > 2. An important percentage of data were drop out because of many records whitout any value for this individual count field
+> > > 2. An important percentage of data were drop out because of many records whithout any value for this individual count field
 > > > 3. As for the previous "count" step you are dealing with the `individualCount` column, you can add a to the output dataset a  `#individualCount` tag for example
 > > >
 > > {: .solution}
@@ -222,7 +221,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 
 > <question-title></question-title>
 >
-> 1. What is the year of the oldier and younger records?
+> 1. What is the year of the older and younger records?
 > 2. Why do you think of interest to treat differently ancient and recent records?
 >
 > > <solution-title></solution-title>
@@ -235,7 +234,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 {: .question}
 
 
-## Filtering data based ont  the age of records
+## Filtering data based on the age of records
 
 > <hands-on-title>Filter data on ageOfRecord GBIF attribute</hands-on-title>
 >
@@ -281,7 +280,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 >
 >    > <comment-title></comment-title>
 >    >
->    > This column allows us to look at the different families associated to records. Normally, looking at a uniq species, we will obtain only one family
+>    > This column allows us to look at the different families associated to records. Normally, looking at a unique species, we will obtain only one family
 >    {: .comment}
 >
 {: .hands_on}
@@ -318,7 +317,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 
 ## Sub-step with **OGR2ogr**
 
-> <hands-on-title>Convert occurence dataset to GIS one for visualization</hands-on-title>
+> <hands-on-title>Convert occurrence dataset to GIS one for visualization</hands-on-title>
 >
 > 1. **OGR2ogr** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Gdal supported input file"*: `out_file1` (output of **Filter** {% icon tool %})
@@ -340,7 +339,7 @@ Here we propose to have a look at the number of counts by record to know if ther
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Yes, of course ;) A previsualizatoin of stdout is visible when clicking on the history output dataset and full report accessible through the information button, then stdout or stderr (here you can see warnings on the stderr)
+> > 1. Yes, of course ;) A previsualization of stdout is visible when clicking on the history output dataset and full report accessible through the information button, then stdout or stderr (here you can see warnings on the stderr)
 > > 2. The stderr is showing several warning related to automatic variable name mapping from GBIF to OGR plus information about application of a truncate process on a particularly long GeoJSON value
 > >
 > {: .solution}
@@ -377,4 +376,4 @@ From your GeoJSON Galaxy history dataset, you can launch GIS visualization.
 
 # Conclusion
 
-In this tutorial we learned how to get occurence records from GBIF and several steps to filter these data to be ready to analyze it! So now, let's go for the show!
+In this tutorial we learned how to get occurrence records from GBIF and several steps to filter these data to be ready to analyze it! So now, let's go for the show!
