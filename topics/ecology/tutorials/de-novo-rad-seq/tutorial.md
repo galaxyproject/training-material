@@ -5,8 +5,6 @@ redirect_from:
 
 title: "RAD-Seq de-novo data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
-tags:
-  - RAD-seq
 questions:
   - "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
 objectives:
@@ -15,6 +13,12 @@ objectives:
   - "Calculate population genomics statistics from RAD sequencing data"
 time_estimation: "8h"
 key_points:
+tags:
+  - RAD-seq
+  - Genetic composition EBV class
+  - Species populations EBV class
+  - EBV dataset
+  - EBV workflow
 contributors:
   - yvanlebras
 ---
