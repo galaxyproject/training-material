@@ -95,13 +95,13 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 4. Rename Datasets
+> 4. **Rename Datasets** {% icon galaxy-pencil %}
 >
 >    As the original name `martins_comcom_id1_20220208_v1.nc` can be not so good to use, don't hesitate to modify it in `Local bird diversity (cSAR/BES-SIM) martins dataset` for example.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Add a tag to the dataset corresponding to `EBV`
+> 5. **Add a tag** {% icon galaxy-tags %} to the dataset corresponding to `#EBV`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
