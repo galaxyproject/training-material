@@ -8,9 +8,7 @@ questions:
 - How do I check and clean the data from GBIF?
 
 - Which ecoinformatics techniques are important to know for this type of data?
-  - Data handling
-  - Data filtering
-  - Data visualization, notably dealing with GIS data
+
 objectives:
 - Get occurrence data on a species
 - Visualize the data to understand them
