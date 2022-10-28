@@ -1258,6 +1258,8 @@ Would you like to add a different language to the GTN? Please contact us first (
 
 # Conclusion
 
+If you have created a new tutorial, please also consider writing a [GTN news post]({% link faqs/gtn/gtn_news_create_post.md %}) about it to let people know about it (and make it easy for us to tweet about)!
+
 
 ## Footnotes (Rendered)
 
