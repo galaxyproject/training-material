@@ -18,6 +18,8 @@ key_points:
 - Interact with Galaxy to save your plots
 tags:
 - interactive-tools
+- EBV cube
+- Data visualization
 contributors:
 - yvanlebras
 - colineroyaux
