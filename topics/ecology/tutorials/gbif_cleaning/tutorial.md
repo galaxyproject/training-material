@@ -143,9 +143,9 @@ Here we propose to investigate the content of the dataet looking notably at the 
 
 
 ## Have a look at the number of counts per record
-> 
-> Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.
-> 
+
+Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.
+
 > <hands-on-title>Summary statistics of count</hands-on-title>
 >
 > 1. **Summary Statistics** {% icon tool %} with the following parameters:
