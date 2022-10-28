@@ -366,6 +366,6 @@ Following this tutorial, we have been able here to load a dataset of occurrences
 > - BIOCLIM: the first species distribution modelling package, its early applications and relevance to most current MAXENT studies. Diversity and Distributions ({% cite booth2018 %}).
 > - ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. ({% cite muscarella2014 %}).
 >
-> [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+> [GCM Guidelines](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
 {: .details}
 
