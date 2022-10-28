@@ -6,7 +6,6 @@ zenodo_link: ''
 questions:
 - How can I get ecological data from GBIF?
 - How do I check and clean the data from GBIF?
-
 - Which ecoinformatics techniques are important to know for this type of data?
 
 objectives:
@@ -51,6 +50,9 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the files from GBIF: **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
 >    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
@@ -68,15 +70,20 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >  you normally have a tabular datatype
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 4. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and another one mentioning the data source (#GBIF for example here).
->  This will help you 1/ finding content of particular interest (using the filtering option on the history search form for example) and 2/ visualizing rapidly (notably thanks to the propagated tags) which dataset is associated to which content.
+> 4. **Add tags** {% icon galaxy-tags %} to the dataset
+>    - make them propagating tags (tags starting with `#`)
+>    - make a tag corresponding to the species (`#LoligoVulgaris` for example here)
+>    - and another tag mentioning the data source (#GBIF for example here).
+>
+>    Tagging dataset like this is good practice in Galaxy, and will help you 1/ finding content of particular interest (using the filtering option on the history search form for example) and 2/ visualizing rapidly (notably thanks to the propagated tags) which dataset is associated to which content.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
 
-## Where come from the records?
+## Where do the records come from?
+
 Here we propose to investigate the content of the dataet looking notably at the "basisOfRecord" attribute to know more about heterogenity related to the data collection origin.
 
 > <hands-on-title>"basisOfRecord" filtering</hands-on-title>
@@ -106,6 +113,8 @@ Here we propose to investigate the content of the dataet looking notably at the 
 > {: .solution}
 >
 {: .question}
+
+
 
 ## Filtering data based on the data origin
 
@@ -169,6 +178,8 @@ Here we propose to have a look at the number of counts by record to know if ther
 >
 {: .question}
 
+
+
 ## **Filtering** data on individual counts
 
 > <hands-on-title>Filter data on individualCount GBIF attribute</hands-on-title>
@@ -223,7 +234,8 @@ Here we propose to have a look at the number of counts by record to know if ther
 >
 {: .question}
 
-## Filtering data thanks to the age of records
+
+## Filtering data based ont  the age of records
 
 > <hands-on-title>Filter data on ageOfRecord GBIF attribute</hands-on-title>
 >
