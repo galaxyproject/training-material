@@ -24,6 +24,10 @@ key_points:
 - Predict proteins in a nucleotide sequence *de-novo* using **funannotate_predict**
 - Find orthologs across different samples with **orthofinder**
 - Align orthologs with **ClustalW** in preparation for phylogeny reconstruction <!-- link to phylogeny reconstruction training. -->
+tags:
+  - phylogeny
+  - data handling
+  - functional annotation
 contributors:
 - roncoronimiguel
 - brigidagallone
