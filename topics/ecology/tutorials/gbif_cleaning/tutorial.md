@@ -51,9 +51,7 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from GBIF
->
-> 3. **Get species occurrences data** {% icon tool %} with the following parameters:
+> 2. Import the files from GBIF: **Get species occurrences data** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Scientific name of the species"*: write the scientific name of something you are interested on, for example `Loligo vulgaris`
 >    - *"Data source to get data from"*: `Global Biodiversity Information Facility : GBIF`
 >    - *"Number of records to return"*: `999999` is a minimum value
@@ -65,11 +63,11 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >    {: .comment}
 >
 >
-> 4. Check the datatype
+> 3. Check the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a tag and/or a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and/or the data source (#GBIF for example here). This will help you finding content of particular interest (using the filtering option on the history search form for example) + visualize (notably if you are using propagated tag) which dataset is associated to which content.
+> 4. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a tag and/or a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and/or the data source (#GBIF for example here). This will help you finding content of particular interest (using the filtering option on the history search form for example) + visualize (notably if you are using propagated tag) which dataset is associated to which content.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
