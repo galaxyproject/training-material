@@ -67,7 +67,8 @@ This tutorial is based on the Ropensci {% cite zizka2018 %} tutorial.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 4. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a tag and/or a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and/or the data source (#GBIF for example here). This will help you finding content of particular interest (using the filtering option on the history search form for example) + visualize (notably if you are using propagated tag) which dataset is associated to which content.
+> 4. Add to the output dataset (and as a good practice, each dataset you generate on Galaxy) a propagated tag (beginning by a `#`, here corresponding to the species (#LoligoVulgaris for example here) and another one mentioning the data source (#GBIF for example here).
+>  This will help you 1/ finding content of particular interest (using the filtering option on the history search form for example) and 2/ visualizing rapidly (notably thanks to the propagated tags) which dataset is associated to which content.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
