@@ -13,6 +13,9 @@ requirements:
 time_estimation: "1h"
 tags:
     - interactive-tools
+    - modeling
+    - gbif
+    - species populations EBV class
 key_points:
     - "Use 'classical' Galaxy tools in combination with Interactive tools"
     - "Identify general steps of a species distribution modeling aproach"
