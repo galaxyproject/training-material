@@ -106,7 +106,7 @@ Here we propose to investigate the content of the dataet looking notably at the 
 >
 {: .question}
 
-## Filtering data thanks to the data origin
+## Filtering data based on the data origin
 
 > <hands-on-title>Filter data on basisOfRecord GBIF attribute</hands-on-title>
 >
