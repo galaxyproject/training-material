@@ -7,6 +7,10 @@ title: "RAD-Seq Reference-based data analysis"
 zenodo_link: "https://doi.org/10.5281/zenodo.1134547"
 tags:
   - RAD-seq
+  - Genetic composition EBV class
+  - Species population EBV class
+  - EBV dataset
+  - EBV workflow
 questions:
   - "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
 objectives:
