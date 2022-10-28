@@ -12,7 +12,7 @@ News items will show up on the [GTN homepage]({% link index.md %}) and in the [G
 
 **Creating the news post**
 
-Have a look at the existing news items in the [`news/_posts/` folder](https://github.com/galaxyproject/training-material/tree/main/news/_posts) for the GTN repository for some examples.
+Have a look at the existing news items in the [`news/_posts/` folder](https://github.com/galaxyproject/training-material/tree/main/news/_posts) of the GTN repository for some examples.
 
 A news post is a markdown file that looks as follows:
 
