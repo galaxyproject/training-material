@@ -15,6 +15,10 @@ objectives:
 time_estimation: 0H30M
 key_points:
 - Take the time to look at your data first, manipulate it before analyzing it
+tags:
+  - gbif
+  - data management
+  - data cleaning
 contributors:
 - yvanlebras
 - sbenateau
