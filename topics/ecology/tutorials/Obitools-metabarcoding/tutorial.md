@@ -11,6 +11,13 @@ objectives:
 time_estimation: 1H
 key_points:
 - From raw reads you can process, clean and filter data to obtain a list of species from environmental DNA (eDNA) samples.
+tags:
+  - Genetic composition EBV class
+  - Community composition EBV class
+  - EBV dataset
+  - EBV workflow
+  - eDNA
+  - Metabarcoding
 contributors:
 - colineroyaux
 - onorvez
