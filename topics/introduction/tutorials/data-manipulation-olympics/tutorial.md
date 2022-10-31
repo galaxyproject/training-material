@@ -1041,11 +1041,17 @@ As an example, let's calculate the age of each athlete at the time of participat
 >    - what parameters do you think we need to use?
 >
 > 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
->    - {% icon param-text %} *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
->    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
->    - {% icon param-toggle %} *"Round result?"*: `Yes`
+>    - {% icon param-file %} *"Input file"*: `olympics.tsv`
 >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
->    - {% icon param-text %} *"The new column name"*: `age`
+>    - Expressions:
+>      - {% icon param-text %} *"Add expression"*: `int(c12)-int(c4)` (year column minus the year_of_birth column)
+>      - {% icon param-select %} *"Mode of the operation?"*: `Append`
+>      - {% icon param-text %} *"The new column name"*: `age`
+>    - {% icon param-toggle %} *"Avoid scientific notation in any newly computed columns"*: `Yes`
+>    - Error handling:
+>      - {% icon param-toggle %} *"Autodetect column types"*: `No`
+>      - {% icon param-select %} *"If an expression cannot be computed for a row"*: `Fill in a replacement value`
+>      - {% icon param-select %} *"Replacement value"*: `NA (not available)`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
