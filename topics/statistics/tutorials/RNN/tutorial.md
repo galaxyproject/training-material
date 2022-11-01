@@ -313,7 +313,7 @@ The model builder can be downloaded as a zip file.
 
 > <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -333,7 +333,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
@@ -351,7 +351,7 @@ the test dataset.
 
 > <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test`
 >    - *"Choose how to select data by column:"*: `All columns`
