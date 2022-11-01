@@ -27,7 +27,6 @@ tags:
   - Community composition EBV class
   - EBV dataset
   - EBV workflow
-  - data analysis
   - modeling
 contributors:
 - colineroyaux
