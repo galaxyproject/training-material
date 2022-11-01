@@ -119,7 +119,7 @@ module GtnLinter
         path: @path,
         idx: idx,
         text: text,
-        message: "Setting  is discouraged, these headings provide useful places for readers to jump to.",
+        message: "Setting {: .no_toc} is discouraged, these headings provide useful places for readers to jump to.",
         code: "GTN:001",
         full_line: text,
       )
