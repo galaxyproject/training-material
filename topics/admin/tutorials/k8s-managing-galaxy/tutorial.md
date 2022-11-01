@@ -23,20 +23,22 @@ contributors:
   - afgane
   - almahmoud
   - pcm32
-  - ic4f
+  - jdavcs
 tags:
   - kubernetes
+subtopic: cloud
 requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
       - k8s-deploying-galaxy
+priority: 1
 ---
 
 # Managing Galaxy on Kubernetes
 
 ## Overview
-{:.no_toc}
+
 
 A primary advantage of Galaxy on [Kubernetes](https://kubernetes.io/) is the ease with which common
 administrative tasks can be performed reliably and without disruption of
@@ -61,7 +63,7 @@ a Galaxy deployment on Kubernetes, including:
 - Scale the number of job and web handlers
 - Delete a deployment
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -87,7 +89,7 @@ your chart start up much faster for the remainder of this tutorial, as the
 default configuration loads the full list of tools used by
 [https://usegalaxy.org/](https://usegalaxy.org/).
 
-> ### {% icon hands_on %} Hands-on: Creating a custom tool set
+> <hands-on-title>Creating a custom tool set</hands-on-title>
 >
 > 1. First, let's create a simpler list of tools by saving the following tool
 >    config as a file called `custom_tool_conf.xml`.
@@ -242,7 +244,7 @@ default configuration loads the full list of tools used by
 Next, we will set the admin user and change the brand in `galaxy.yml`. We will
 rollback our change to understand how Helm manages configuration.
 
-> ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
+> <hands-on-title>Setting admin user and changing the brand</hands-on-title>
 >
 > 1. Modify the following entries in your `galaxy.yml`. Make sure to add these
 >    keys under the `galaxy:` section of the file.
@@ -300,7 +302,7 @@ rollback our change to understand how Helm manages configuration.
 In Galaxy deployment on Kubernetes, there are two containers by default, one
 web handler and one job handler. We will now look at how these can be scaled.
 
-> ### {% icon hands_on %} Hands-on: Setting admin user and changing the brand
+> <hands-on-title>Setting admin user and changing the brand</hands-on-title>
 >
 > 1. View the `values-cvmfs.yaml` file in the Galaxy Helm chart and note down the
 >    number of web and job handlers.
@@ -360,7 +362,7 @@ request to a port, or even a manually executed shell script, which will test
 whether the relevant container is healthy, and if not, Kubernetes will immediately
 provision a new replacement.
 
-> ### {% icon hands_on %} Hands-on: Handling failures
+> <hands-on-title>Handling failures</hands-on-title>
 >
 > 1. First list the available pods.
 >
@@ -402,7 +404,7 @@ provision a new replacement.
 Finally, let’s take a look at how we can uninstall Galaxy and remove all
 related containers.
 
-> ### {% icon hands_on %} Hands-on: Deleting Galaxy
+> <hands-on-title>Deleting Galaxy</hands-on-title>
 >
 > 1. To permanently delete the Galaxy release, run:
 >

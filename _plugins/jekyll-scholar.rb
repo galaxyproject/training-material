@@ -7,28 +7,60 @@ module Jekyll
     end
 
     def render(context)
+      page = context.registers[:page]
+      site = context.registers[:site]
+
+      # Mark this page as having citations
+      page['cited'] = true
+
+      if page['citation_target'] == 'R'
+        return "@#{@text}"
+      end
+
       # Which page is rendering this tag?
-      source_page = context.registers[:page]['path']
+      source_page = page['path']
       # If the overall cache is nil, create it
-      if context.registers[:site].config['citation_cache'].nil?
-        context.registers[:site].config['citation_cache'] = Hash.new
+      if site.config['citation_cache'].nil?
+        site.config['citation_cache'] = Hash.new
       end
       # If the individual page in the chace is nil, create it.
-      if context.registers[:site].config['citation_cache'][source_page].nil?
-        context.registers[:site].config['citation_cache'][source_page] = Array.new
+      if site.config['citation_cache'][source_page].nil?
+        site.config['citation_cache'][source_page] = Array.new
       end
 
-      # Push it to our cache.
-      context.registers[:site].config['citation_cache'][source_page].push(@text)
-      # Mark this page as having citations
-      context.registers[:page]['cited'] = true
+       # Push it to our cache.
+      site.config['citation_cache'][source_page].push(@text)
 
       begin
-        citation_text = context.registers[:site].config['cached_citeproc'].render(:citation, id: @text)
-        res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
-      rescue
-        puts "[GTN/scholar] Could not render #{@text} from #{source_page}"
+        citation_text = site.config['cached_citeproc'].render(:citation, id: @text)
+        layout = page.fetch('layout', nil)
+        if ['tutorial_slides', 'base_slides', 'introduction_slides'].include? layout
+          doi = site.config['cached_citeproc'].items[@text].doi
+          url = site.config['cached_citeproc'].items[@text].url
+          if ! doi.nil?
+            furl = "https://doi.org/#{doi}"
+          elsif ! url.nil?
+            furl = url
+          else
+            furl = nil
+          end
+
+          if furl.nil?
+            res = %Q(<span class="citation">#{citation_text}</span>)
+          else
+            res = %Q(<span class="citation"><a href="#{furl}">#{citation_text}</a></span>)
+          end
+        else
+          res = %Q(<span class="citation"><a href="##{@text}">#{citation_text}</a></span>)
+        end
+
+      rescue => error
+        puts "[GTN/scholar] Could not render #{@text} from #{source_page} (#{error})"
         res = %Q(<span>ERROR INVALID CITATION #{@text}</span>)
+      end
+
+      if page['citation_target'] == 'jupyter'
+        res.gsub!(/"/, '\"')
       end
 
       res

@@ -1,0 +1,134 @@
+<blockquote class="{% if include.value.required %}comment{% else %}tip{% endif %}">
+
+	<div class="box-title">
+		{% if include.value.required %}
+			{% if include.key == "=" %}
+				Any key permitted
+			{% else %}
+				<code>{{ include.key }}</code>
+			{% endif %}
+		{% else %}
+		<button type="button" aria-expanded="true" aria-label="Toggle tip box: {{ include.key }}">
+			<i class="far fa-lightbulb" aria-hidden="true"></i>
+			{% if include.key == "=" %}
+				Any key permitted
+			{% else %}
+				<code>{{ include.key }}</code>
+			{% endif %}
+			<span role="button" class="fold-unfold fa fa-plus-square"></span>
+		</button>
+		{% endif %}
+	</div>
+
+<b>{{ include.value.type | humanize_types }}</b>
+
+<p>
+{{ include.value.description | markdownify }}
+</p>
+
+
+
+{% if include.value.enum %}
+<p>
+<b>Possible Values:</b>
+<ul>
+{% for enum in include.value.enum %}
+	<li><code>{{ enum }}</code></li>
+{% endfor %}
+</ul>
+</p>
+{% endif %}
+
+
+
+{% if include.value.examples or include.value.enum %}
+<p>
+	<b>Example(s)</b>
+
+{%- if include.value.type == "seq" -%}
+<div markdown=1>
+```yaml
+{{include.key}}:
+{%- for ex in include.value.examples %}
+- {{ ex | replace_newline_doublespace }}
+{%- endfor %}
+{%- for ex in include.value.enum %}
+- {{ ex | replace_newline_doublespace }}
+{%- endfor %}
+```
+</div>
+{%- elsif include.value.type == "map" -%}
+<div markdown=1>
+```yaml
+{{ include.value.examples }}
+```
+</div>
+{%- else -%}
+	{% for ex in include.value.examples %}
+<div markdown=1>
+```yaml
+{{ include.key }}: {{ ex }}
+```
+</div>
+	{% endfor %}
+	{% for ex in include.value.enum %}
+<div markdown=1>
+```yaml
+{{ include.key }}: {% if include.value.type == "str" or include.value.sequence[0].type == "str" %}"{% endif %}{{ ex }}{% if include.value.type == "str" %}"{% endif %}
+```
+</div>
+	{% endfor %}
+{%- endif -%}
+</p>
+{% endif %}
+
+
+
+{% if include.value.pattern %}
+<p>
+<b>Required Pattern:</b> Must match the following regular expression
+
+<div markdown=1>
+```yaml
+{{ include.value.pattern }}
+```
+</div>
+
+</p>
+{% endif %}
+
+
+
+{% if include.value.type == "seq" %}
+	{% if include.value.sequence[0].type != "str" %}
+	{% assign kid_key = "Sequence Value (List of items)" %}
+		{% assign kid_val = include.value.sequence[0] %}
+		{% assign kid_depth = include.depth | plus: 1 %}
+		{% include _includes/schema-render.html key=kid_key value=kid_val depth=kid_depth %}
+	{% else %}
+
+	{% endif %}
+{% elsif include.value.type == "map" %}
+	{% assign kv2 = include.value.mapping %}
+	{% for kv in kv2 %}
+		{% if kv[1].required %}
+			{% assign kid_key = kv[0] %}
+			{% assign kid_val = kv[1] %}
+			{% assign kid_depth = include.depth | plus: 1 %}
+
+			{% include _includes/schema-render.html key=kid_key value=kid_val depth=kid_depth %}
+		{% endif %}
+	{% endfor %}
+
+	{% assign kv2 = include.value.mapping | sort %}
+	{% for kv in kv2 %}
+		{% unless kv[1].required %}
+			{% assign kid_key = kv[0] %}
+			{% assign kid_val = kv[1] %}
+			{% assign kid_depth = include.depth | plus: 1 %}
+
+			{% include _includes/schema-render.html key=kid_key value=kid_val depth=kid_depth %}
+		{% endunless %}
+	{% endfor %}
+{% endif %}
+</blockquote>
