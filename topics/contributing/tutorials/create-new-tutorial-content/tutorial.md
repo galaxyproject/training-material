@@ -183,7 +183,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
        - carpentries
      testing:
        - userX
-     ux:/
+     ux:
        - userY
      infrastructure:
        - userZ
