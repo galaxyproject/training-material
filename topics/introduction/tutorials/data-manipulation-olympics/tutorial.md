@@ -43,7 +43,7 @@ Also make sure to include many exercises (with answers) for your section!
 
 <!-- set up some variables to easily update tool versions throughout tutorial, since most tools are used many times %} -->
 {% assign version_cat="cat1" %}
-{% assign version_compute="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6" %}
+{% assign version_compute="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" %}
 {% assign version_count="Count1" %}
 {% assign version_cut_columns="Cut1" %}
 {% assign version_cut_advanced="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" %}
@@ -97,7 +97,7 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 | Filter                 | Remove rows based on values in one or more columns | {% tool [Filter]({{version_filter}}) %}|
 | Counting               | Count occurrences of values in a column   | {% tool [Count]({{version_count}}) %} , {% tool [Datamash]({{version_datamash}}) %} |
 | Group on a column      | And perform simple operations (count, mean, min, max etc) | {% tool [Group](Grouping1) %} , {% tool [Datamash]({{version_datamash}}) %} |
-| Compute an expression  | Over each row, add it as a new column | {% tool [Compute]({{version_compute}}) %} |
+| Compute on rows        | to derive new column values from existing ones | {% tool [Compute]({{version_compute}}) %} |
 | Find and Replace       | in a specific column               | {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}|
 | Find and Replace       | on every line                      | {% tool [Regex Find and Replace]({{version_replace_text_line}}) %}|
 | Join two Datasets      | side by side on a specified field  | {% tool [Join two Datasets]({{version_join}}) %} |
@@ -1029,35 +1029,62 @@ You may have noticed that we could also provide multiple columns to group on. If
 
 # Computing
 
-Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participation (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the {% tool [Compute - an expression on every row]({{version_compute}}) %} tool.
+Sometimes we want to use the data in our column to compute a new value, and add that to the table. For instance, for our dataset we could caluclate athtletes BMI (using height and weight columns), or their age at time of participation (from year of birth and year of the Olymics). By adding these computed values as a new colum to our datset, we can more easily query the dataset for these values. We can do these types of operations using the {% tool [Compute on rows]({{version_compute}}) %} tool.
 
 As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
 
 
 > <hands-on-title>Compute age of athletes</hands-on-title>
 >
-> 1. Open the {% tool [Compute an expression on every row]({{version_compute}}) %} tool.
+> 1. Open the {% tool [Compute on rows]({{version_compute}}) %} tool.
 >    - read the help text at the bottom of the tool
 >    - what parameters do you think we need to use?
 >
-> 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
->    - {% icon param-text %} *"Add expression"*: `c12-c4` (year column minus the year_of_birth column)
->    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
->    - {% icon param-toggle %} *"Round result?"*: `Yes`
+> 2. {% tool [Compute on rows]({{version_compute}}) %} with the following parameters:.
+>    - {% icon param-file %} *"Input file"*: `olympics.tsv`
 >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
->    - {% icon param-text %} *"The new column name"*: `age`
+>    - In *"Expressions"*:
+>      - {% icon param-text %} *"Add expression"*: `int(c12)-int(c4)` (year column minus the year_of_birth column)
+>      - {% icon param-select %} *"Mode of the operation?"*: `Append`
+>      - {% icon param-text %} *"The new column name"*: `age`
+>    - Under *"Error handling"*:
+>      - {% icon param-toggle %} *"Autodetect column types"*: `No`
+>      - {% icon param-select %} *"If an expression cannot be computed for a row"*: `Fill in a replacement value`
+>      - {% icon param-select %} *"Replacement value"*: `NA (not available)`
 >
 > 3. {% icon galaxy-eye %} **View** the results.
 >
 >    > <question-title></question-title>
 >    >
->    > 1. What changed in our file?
->    > 2. How old was Arnaud Boetsch during his Olympic tennis participation?
+>    > 1. Why did we set up the Error handling section of the tool like we did?
+>    >
+>    >    The help at the bottom of the tool interface has a section dedicated
+>    >    to its handling of errors. Read it and try to relate it to the
+>    >    detailed contents of our input data. You can also try rerunning the
+>    >    tool with any of the Error handling settings changed and see what
+>    >    happens.
+>    > 2. What changed in our file?
+>    > 3. How old was Arnaud Boetsch during his Olympic tennis participation?
 >    >
 >    > > <solution-title>Answers</solution-title>
 >    > >
->    > > 1. A new `age` column was added to the end of our file, the value is the age of the athlete in years at time of the olympics.
->    > > 2. Arnaud Boetsch is listed on the first two lines, who turned 27 the year of their Olympics.
+>    > > 1. Rationale behind Error handling settings
+>    > >    - We disabled column type autodetection because some of the numerical
+>    > >      columns in our input have "NA" values. The tool would figure out
+>    > >      that the columns are meant to hold numbers, but would then fail to
+>    > >      convert these "NA" values to a number. Without column type
+>    > >      autodetection the tool will treat all column values as strings
+>    > >      (words) and that is why we have to use `int()` in the expression
+>    > >      to compute, which says: take the value in parentheses and convert
+>    > >      it to an integer number.
+>    > >    - We configured 'NA' as the replacement value to use in rows for
+>    > >      which our expression cannot be computed. If you inspect the input
+>    > >      data carefully, you will find that some rows do not specify a
+>    > >      year of birth of the athlete (look at athlete IDs 13 and 14 for
+>    > >      example). Since the tool would not be able to compute our
+>    > >      expression on such lines we needed to specify what to do instead.
+>    > > 2. A new `age` column was added to the end of our file, the value is the age of the athlete in years at time of the olympics.
+>    > > 3. Arnaud Boetsch is listed on lines 6 and 7. He turned 27 the year of the Olympics in Atlanta.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -1077,7 +1104,7 @@ $$ BMI = weight / (height^2) $$
 (with weight in kilograms and height in meters).
 
 
-Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute this data for all athletes and add it as a new column.
+Let's use the {% tool [Compute on rows]({{version_compute}}) %} tool to compute this data for all athletes and add it as a new column directly after the existing height and weight columns.
 
 
 
@@ -1086,39 +1113,46 @@ Let's use the {% tool [Compute]({{version_column_maker}}) %} tool to compute thi
 >
 > 1. How would you express this calculation in the tool?
 >    - Remember that our height is in cm, and the formula expects height in meters
->    - For each tabular file, Galaxy will try to determine whether a row is numerical or not. While height and weight are numbers, we also have a lot of "NA" values here, which Galaxy sees as a word, and may not automatically interpret the column as numerical, so to be safe, we will manually tell the tool the column are numeric,
->      - do this using e.g. `int(c3)` (`int` stands for integer, if you had a column with decimal numbers, you would say `float(c3)`)
 >
-> 2. What is the BMI for Arnaud Boetsch?
+>    - Try to apply the lessons learnt with regard to error handling from the previous age calculation, i.e. remember the problematic NA values in the weight and height columns.
 >
-> 3. Why does the output have fewer lines than the input?
+> 2. How do you configure the tool to insert the new BMI column directly to the right of the weight column?
+> 3. What is the BMI for Arnaud Boetsch?
+>
 >
 > > <solution-title>Hints</solution-title>
 > >
 > > - division is `/` and multiplication is ` * ` .
-> > - The tool does not recognize the `^` operation as exponentiation. You can use `height * height` or `pow(height,2)`
+> > - The tool does not recognize the `^` operation as exponentiation. You can use `height * height` or `pow(height,2)`, or replace `^` with `**`.
 > > - Parentheses may be required.
-> > - Use `int(column)` to tell the tool the columns contain numbers
-> >   - e.g. for column 3 + column you would use `int(c3) + int(c4)` in the expression
-> >   - this is only needed because some of our rows have "NA" in this columns, so Galaxy is not sure if it is a number column, a string (word) column, or a mixed column.
+> > - Use `int(column)` like before to tell the tool the columns contain numbers
+> >
+> >   This is only needed because the "NA" values will require disabling column type autodetection again.
+> > - `Append` mode will add the newly computed column at the end of the row, but there are other options, too.
 > >
 > {: .solution}
 >
 > > <solution-title>Answers</solution-title>
 > >
 > > 1. `int(c8)/(int(c7)*int(c7))*10000` (other variations are possible)
-> > 2. 22.69
-> > 3. The tool only outputs lines for which it was able to perform the computation, so any lines which had `NA` in the height or weight column are skipped. You could use the [join operation](#joining-files) to re-obtain the missing lines, see also one of the exercises at the end of this tutorial.
+> > 2. You can choose `Insert mode` and specify column `9` as the insert position.
+> > 3. 22.69
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title>Full solution</solution-title>
 > >
-> > 2. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:
-> >    - {% icon param-text %} *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
-> >    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
-> >    - {% icon param-toggle %} *"Round result?"*: `No`
+> > 2. {% tool [Compute on rows]({{version_compute}}) %} with the following parameters:
+> >    - {% icon param-file %} *"Input file"*: `olympics.tsv`
 > >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
-> >    - {% icon param-text %} *"The new column name"*: `BMI`
+> >    - In *"Expressions"*:
+> >      - {% icon param-text %} *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
+> >      - {% icon param-select %} *"Mode of the operation?"*: `Insert`
+> >      - {% icon param-text %} *"Insert new column before existing column number"*: `9`
+> >      - {% icon param-text %} *"The new column name"*: `BMI`
+> >    - Under *"Error handling"*:
+> >      - {% icon param-toggle %} *"Autodetect column types"*: `No`
+> >      - {% icon param-select %} *"If an expression cannot be computed for a row"*: `Fill in a replacement value`
+> >      - {% icon param-select %} *"Replacement value"*: `NA (not available)`
 > >
 > {: .solution}
 >
@@ -1838,131 +1872,6 @@ row a weight range is used), and then answering the question a couple of questio
 > >    ```
 > >
 > {: .solution}
->
-{: .question}
-
-
-Ok, let's try another one. We will calculate BMI again (see [Computing](#computing) section), but this time also include athletes for which we couldn't
-compute a BMI due to missing data. Sounds simple? Not all tools work exactly the way we would like them to for our question, so we will have to get a bit
-creative.
-
-
-> <question-title>Exercise 3: Calculate BMI, handle missing values</question-title>
->
-> If you did the exercises in the [Computing](#computing) section, you will have noticed that the computation cannot be performed for all rows due to missing data.
-> The resulting table will only contain rows for which the computation was successful.
->
-> **Your mission, should you choose to accept it:**
->
-> *Create a file which is the same as olympics.tsv file, but with a new `BMI` column after the `height` and `weight` columns*
->
-> Checklist for your solution; your file:
->  - Has a column containing the BMI of athletes
->  - Uses `NA` for athletes for which we could not compute BMI
->  - Has the same number of rows as `olympics.tsv` (234,523 lines including the header)
->  - Has 18 columns (the original 17 columns, plus a BMI column)
->  - The BMI column should appear 9th (after the height and weight columns)
->  - Has a valid header line
->
-> **TIP:** this is a lot. Do one step at a time, and make sure the file is as you expect after every step, before continuing. Always think about
-> what you expect from your output, how many lines? how many columns? with or without header line, etc. Did you get what you expected?
-> If not, go back and tweak some settings. The sooner you spot a mistake, the easier it is to find where you went wrong!
->
-> > <solution-title>Hints</solution-title>
-> >
-> > 1. We will need to:
-> >    - **Compute** the BMI first,
-> >    - **Join** the resulting file back with the original to recover rows without BMI, making sure the rows without BMI use `NA`.
-> >    - **Cut column** BMI and move it, from the end of the table to the 9th column (just after the `height` and `weight` columns)
-> >
-> > 2. For the **Join** step: if we join the `olympics.tsv` file with our table with BMI column, what columns will be in the resulting table?
-> >    What can we do to avoid duplicate columns here?
-> >
-> > 3. Did you get too many lines after joining? If there are multiple matches, join will make an entry for each combination. So make sure you only
-> >    have each athlete and their BMI in the file you will join with once (tip: {% tool [Unique]({{version_unique}}) %} tool)
-> >
-> > 4. Did your header line get lost somewhere along the line? Use {% tool [Select First]({{version_select_first}}) %} tool to store your header line
-> >    in a separate file. Then use {% tool [Concatenate]({{version_cat}}) %} to restore it later.
-> >
-> > 5. Remember that there are always multiple ways to reach the same goal. Don't worry if your solution is different that the one provided here!
-> >
-> {: .solution}
->
-> > <solution-title>Full solution</solution-title>
-> >
-> > First, we compute BMI, this will be added as a new column at the end of the table.
-> >
-> > **TIP:** If you've done the exercise in the [Computing](#computing) section, you can skip this first step and reuse the file
-> > with the BMI column added (I hope you gave it a descriptive name and can find it back easily! ;) )
-> >
-> > 1. {% tool [Compute an expression on every row]({{version_compute}}) %} with the following parameters:.
-> >    - {% icon param-text %} *"Add expression"*: `int(c8)/(int(c7)*int(c7))*10000`
-> >    - {% icon param-file %} *"As a new column to"*: `olympics.tsv`
-> >    - {% icon param-toggle %} *"Round result?"*: `No`
-> >    - {% icon param-toggle %} *"Input has a header line with column names?"*: `Yes`
-> >    - {% icon param-text %} *"The new column name"*: `BMI`
-> >
-> >    Since we now lost any lines for which we were unable to calculate the BMI, we will join this data back with the original
-> >    `olympics.tsv` file. However, the **Join** tool will add all columns from both files, and we only want the BMI column added.
-> >
-> >    Let's first cut only the columns we need for joining from the BMI table (only `athlete_id` and `BMI`)
-> >
-> > 2. {% tool [Cut columns from a table]({{version_cut}}) %}
-> >    - {% icon param-text %} *"Cut Columns"*: `c1,c18`
-> >    - {% icon param-select %} *"Delimited by"*: `TAB`
-> >    - {% icon param-file %} *"From"*: `output from step 1` (table with BMI column)
-> >
-> >    We have a lot of duplication in this row now, and the join tool will create a line for each match, that's not what we want
-> >    So we get the unique values of this file first. Since the Unique tool is not aware of header lines, we will remove the header line first,
-> >    And restore it later:
-> >
-> > 3. {% tool [Remove beginning of a file]({{version_remove_beginning}}) %} with the following parameters:
-> >    - *"Remove first"*: `1` lines
-> >    - *"From"*: output from previous step (Cut)
-> >
-> >    This gets us the file without a header, but we also want the header in a separate file, so that we can join back later
-> >
-> > 4. {% tool [Select First lines from a dataset]({{version_select_first}}) %}
-> >    - *"Select First"*: `1` lines
-> >    - *"from"*: output from cut step
-> >
-> > 5. **Rename** the last two files so you can find them back later (e.g. `header line` and `athlete BMI without header`)
-> >
-> > 6. {% tool [Unique - occurrences of each record]({{version_unique}}) %} with the following parameters:
-> >     - *"File to scan for unique values"*: `athlete BMI without header`
-> >
-> >    Now we add the header line back to the start of this file
-> >
-> > 7. {% tool [Concatenate datasets]({{version_cat}}) %} with the following parameters:
-> >    - *"Concatenate Datasets"*: `header line`
-> >    - {% icon param-repeat%} *"Insert Dataset"*: `output from Unique`
-> >
-> >    Now we are finally ready to perform our join operation
-> >
-> > 8. {% tool [Join two Datasets side by side on a specified field]({{version_join}}) %} with the following parameters:
-> >    - {% icon param-file %} *"Join"*: `olympics.tsv`
-> >    - {% icon param-select %} *"using column"*: `Column 1` (the `athlete_id` column)
-> >    - {% icon param-file %} *"with"*: `the output from Concatenate`
-> >    - {% icon param-select %} *"and column"*: `Column 1` (the `athlete_id` column)
-> >    - {% icon param-toggle %} *"Keep lines of first input that do not join with second input"*: `Yes`
-> >    - {% icon param-toggle %} *"Fill empty columns?"*: `Yes`
-> >      - {% icon param-text %} *"Fill value"*: `NA`
-> >    - {% icon param-toggle %} *"Keep the header lines?"*: `Yes`
-> >
-> >    Almost there! Our final step is to rearrange the columns so that BMI appears 9th. Notice that our
-> >    file now has 19 columns (c18=`athlete_id` again, c19=`BMI`)
-> >
-> > 9. {% tool [Cut columns from a table]({{version_cut_columns}}) %} using the following parameters:
-> >    - *"Cut Columns"*: `c1,c2,c3,c4,c5,c6,c7,c8,c19,c9,c10,c11,c12,c13,c14,c15,c16,c17`
-> >    - *"Delimited By"*: `TAB`
-> >    - *"From"*: `output from join tool`
-> >
-> {: .solution}
->
-> This was a lot of steps for something seemingly simple (compute BMI over all rows, put `NA` if not possible). If the **Compute** tool worked a bit differently, it
-> could have done everything for us. We could adapt this tool to handle missing data better, but in reality, you will often encounter situations like this in
-> bioinformatics, and are not always in a position where you can change how tools operate. Knowing how to perform these basic steps (join, unique, removing and
-> adding a header line), will help you deal with situations like this more easily.
 >
 {: .question}
 
