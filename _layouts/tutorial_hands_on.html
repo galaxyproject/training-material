@@ -346,7 +346,8 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <p>
                     <ol>
                         <li id="citation-text">
-                            {%- include _includes/contributor-list.html contributors=page.contributors sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            {% assign c = page.contributions.authorship | default: page.contributors %}
+                            {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -366,6 +367,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                    <p style="display: none;">
 
                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
 {% assign authors = page.contributors | filter_authors:page.contributions -%}
