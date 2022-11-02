@@ -24,10 +24,10 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 	// Naturally we also need to toggle the aria-expanded attribute to make sure we're accessible
     $(this).attr("aria-expanded",
-		// if it's collapsed
-		$(">span.fold-unfold", this).hasClass("fa-plus-square") ? 
+		// if it's collapsed (i.e. showing plus icon indicating expanding)
+		$(">span.fold-unfold", this).hasClass("fa-plus-square") ?
 		// mark as collapsed
-		"true" : "false"
+		"false" : "true"
 	);
 });
 
