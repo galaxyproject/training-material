@@ -8,11 +8,11 @@ layout: base
 {% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" %}
 
 <!-- use chart.js for graphs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+<script src="{% link assets/js/Chart.bundle.js %}"></script>
 <!-- plugin for adding data labels to charts -->
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+<script src="{% link assets/js/chartjs-plugin-datalabels@0.7.0.js %}"></script>
 <!-- plugin for palette -->
-<script src="https://github.com/nagix/chartjs-plugin-colorschemes/releases/download/v0.4.0/chartjs-plugin-colorschemes.js"></script>
+<script src="{% link chartjs-plugin-colorschemes.js %}"></script>
 <!-- define the charts -->
 <script type="text/javascript">
     const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
