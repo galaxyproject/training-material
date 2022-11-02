@@ -84,17 +84,24 @@ module Gtn
       @@TITLE_CLASSES
     end
 
-    def self.get_icon(icon_cls, emoji: false)
+    def self.get_icon(icon_cls, emoji: false, a11y: false)
       if emoji
         return @@ICONS_EMOJI.fetch(icon_cls, '')
       end
 
       icon = @@ICONS[icon_cls]
+
+      # We support announcing the proper label of the box, e.g. 'hands on box',
+      # but default to hiding this, as the icons are *mostly* decorative.
+      icon_a11y_title = icon_cls.gsub(/[-_]/, ' ')
+      icon_aria_label = a11y ? "title=\"#{icon_a11y_title} box\"" : ""
+      accessible_addition = a11y ? %Q(<span class="sr-only">#{icon_a11y_title} box</span>) : ""
+
       if !icon.nil?
        if icon.start_with?("fa")
-        %Q(<i class="#{icon}" aria-label="#{icon} box"></i>)
+        %Q(<i class="#{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
        elsif icon.start_with?("ai")
-        %Q(<i class="ai #{icon}" aria-label="#{icon} box"></i>)
+        %Q(<i class="ai #{icon}" aria-hidden=\"true\" #{icon_aria_label}></i>#{accessible_addition})
        end
       else
         %Q(<span class="visually-hidden"></span>)
@@ -132,7 +139,7 @@ module Gtn
         <div class="box-title #{box_type}-title" id="#{box_id}">
         <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
           #{self.get_icon(box_type)} #{box_title}
-          <span role="button" class="fold-unfold fa fa-minus-square"></span>
+          <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
