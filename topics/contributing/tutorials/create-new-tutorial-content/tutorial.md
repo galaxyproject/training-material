@@ -461,7 +461,7 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 
 There is no need to fill out the list; this will be done automatically based off of your tutorial's section titles. First and second level headings (lines starting with `#` and `##` in markdown) will be shown in the agenda.
 
-To avoid adding a particular section in the agenda, you can add `{:.no_toc}` below the section name. However, it is not recommended to use this too often; if a section is not important enough to be shown in the agenda, consider making it a third-level heading (`###`) instead.
+If a section is not important enough to be shown in the agenda, consider making it a third-level heading (`###`) instead.
 
 The agenda will be rendered as follows:
 
@@ -1257,6 +1257,8 @@ If all worked well, it should look something like this, with a dropdown menu on 
 Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
 
 # Conclusion
+
+If you have created a new tutorial, please also consider writing a [GTN news post]({% link faqs/gtn/gtn_news_create_post.md %}) about it to let people know about it (and make it easy for us to tweet about)!
 
 
 ## Footnotes (Rendered)

@@ -40,22 +40,23 @@ priority: 2
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
-> > <question-title>What I want:</question-title>
-> > - I work with a gene _X_
-> > - I would like to compare the structure of gene _X_ across _N_ genomes
-> {: .code-in}
->
-> > ### {% icon galaxy-chart-select-data %} What I have:
+> > <code-in-title>What I have</code-in-title>
 > > - I know the gene's name
 > > - I know which species I'm interested in
 > > - I know where to find genomes of these species
+> {: .code-in}
+>
+> > <code-out-title>What I want</code-out-title>
+> > - I work with a gene _X_
+> > - I would like to compare the structure of gene _X_ across _N_ genomes
 > {: .code-out}
+>
 {: .code-2col}
 
-> ### {% icon interactive_tour %} What I will get:
+> <code-out-title>What I will get</code-out-title>
 > - Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.
 > - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
-{: .warning}
+{: .code-out}
 
 > <agenda-title></agenda-title>
 >
@@ -98,13 +99,13 @@ This [example history](https://usegalaxy.org/u/cartman/h/genecomparisonxbp1) con
 
 You can use this history to understand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
 
-> <code-in-title></code-in-title> dataset in the example history
+> <code-in-title>dataset in the example history</code-in-title>
 > - <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
 > - <kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest
 > - <kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest
 {: .code-in}
 
-> <code-out-title></code-out-title>s in the sample history
+> <code-out-title>in the sample history</code-out-title>
 > - <kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs
 > - <kbd>Trees</kbd> - phylogenetic trees for each exon 
 {: .code-out}
@@ -216,8 +217,6 @@ After uploading data from GenomeArk you will end up with a number of FASTA datas
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="Auto-generated english language captioning on video covering collections" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
->
 {: .hands_on}
 
 ## Step 4: Extract amino acid sequences and genome coordinates for all ORFs
@@ -260,7 +259,7 @@ At this point we have three input datasets that would allow us to find and visua
 
 ## Steps 5, 6, and 7: Finding matches and building trees
 
-To find location of genes, we will use the following [workflow](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance as described [here](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/).
+To find location of genes, [we will use the following workflow]({% link topics/genome-annotation/tutorials/gene-centric/workflows/index.md %}) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance.
 
 ![WF](../../images/gene-centric/wf.png)
 

@@ -33,7 +33,7 @@ Workflows are a powerful feature in Galaxy that allow you to link multiple steps
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.
 
 > <tip-title>Create workflows from existing histories</tip-title>
->  Workflows can be extracted from existing histories. You can find a tutorial for this [here]({{ site.baseurl }}/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html)
+>  [Read about extracting workflows from histories in this tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}).
 >
 {: .tip}
 
@@ -271,7 +271,7 @@ of each workflow together.
 This is a very contrived example, but this technique can be used to separate
 re-useable steps in real world scenarios.
 
-> <comment-title></comment-title>: Workflow versions
+> <comment-title>Workflow versions</comment-title>
 > Every time a workflow is saved a new version is created, so that you can go
 > back and forth between new and old versions of a workflow. Click on the pencil
 > symbol to bring up the workflow attributes. You can freely select different
@@ -279,13 +279,13 @@ re-useable steps in real world scenarios.
 > will become the newest version.
 {: .comment}
 
-> <comment-title></comment-title>: Importing workflows
+> <comment-title>Importing workflows</comment-title>
 >
 > Workflows can be imported via URL, through `Shared Data -> Workflows` or
 > from a local file on your computer.
 {: .comment}
 
-> <comment-title></comment-title>: Managing tool versions
+> <comment-title>Managing tool versions</comment-title>
 >
 > Versions of a tool in a workflow can be changed by clicking on a tool step in
 > the center panel and on the right side clicking on `Select another tool

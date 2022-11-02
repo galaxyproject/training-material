@@ -1,5 +1,6 @@
 require 'json'
 require 'yaml'
+require './_plugins/gtn.rb'
 
 
 module TopicFilter
@@ -255,14 +256,17 @@ module Jekyll
       Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
     end
 
-    def filter_recent_modified(tutorials, count)
-      latest = tutorials.sort{ |x, y|
-        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
-        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+    def last_modified_at(page)
+      Gtn::ModificationTimes.obtain_time(page['path'])
+    end
 
-        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+    def recently_modified_tutorials(site)
+      tutorials = site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' }
+
+      latest = tutorials.sort{ |x, y|
+        Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
       }
-      latest.slice(0, count)
+      latest.slice(0, 10)
     end
 
     def topic_count(resources)

@@ -13,7 +13,6 @@ objectives:
   - Use the log to view the diff
   - Undo a bad change
 time_estimation: "30m"
-subtopic: contribute
 key_points:
   - While git is extremely powerful, just using it for tracking changes is quite easy!
   - This does not take advantage of any advanced features, nor collaboration, but it is easy to expand into doing that.

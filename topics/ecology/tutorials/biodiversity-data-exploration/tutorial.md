@@ -13,6 +13,9 @@ objectives:
 time_estimation: 1H
 key_points:
 - Explore your data before diving into deep analysis
+tags:
+  - taxonomic data
+  - data quality
 contributors:
 - onorvez
 - Marie59

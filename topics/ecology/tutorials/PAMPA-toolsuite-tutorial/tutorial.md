@@ -22,6 +22,12 @@ key_points:
 - Interpret (and correct if needed) GL(M)M results
 - Learn about and interpret common tests to evaluate the quality of your GL(M)M
 - Use an Essential Biodiversity Variables workflow
+tags:
+  - Species population EBV class
+  - Community composition EBV class
+  - EBV dataset
+  - EBV workflow
+  - modeling
 contributors:
 - colineroyaux
 - yvanlebras

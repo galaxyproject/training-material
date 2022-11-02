@@ -143,7 +143,7 @@ module SchemaValidator
     end
 
     if not fn.include?('metadata.yaml') then
-      # Load topic metadata
+      # Load topic metadata for this file
       topic = fn.split('/')[2]
       topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
 
@@ -156,6 +156,8 @@ module SchemaValidator
 
         @TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
         @SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+      $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+      $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
       end
     end
 
@@ -263,6 +265,9 @@ module SchemaValidator
         end
       else
         last_component = path.split('/')[-1]
+        if path =~ /aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy.md/
+          next
+        end
         if last_component =~ /.*.md/ then
           unless last_component =~ /index.md$/ || last_component =~ /README.md/  then
             errs = lint_faq_file(path)
@@ -285,7 +290,7 @@ module SchemaValidator
       else
         last_component = path.split('/')[-1]
         if last_component =~ /ya?ml/  then
-          errors= lint_quiz_file(path)
+          errors += lint_quiz_file(path)
         end
       end
     end
