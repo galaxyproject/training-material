@@ -12,7 +12,7 @@ layout: base
 <!-- plugin for adding data labels to charts -->
 <script src="{% link assets/js/chartjs-plugin-datalabels@0.7.0.js %}"></script>
 <!-- plugin for palette -->
-<script src="{% link chartjs-plugin-colorschemes.js %}"></script>
+<script src="{% link assets/js/chartjs-plugin-colorschemes.js %}"></script>
 <!-- define the charts -->
 <script type="text/javascript">
     const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
