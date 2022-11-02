@@ -15,8 +15,8 @@ The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use t
 {% for tutorial in tutorials %}
     <li class="{% if include.tutorial == tutorial %}active{% elsif seen_tuto == 0 %}disabled{% endif %}">
         <a href="{{ site.baseurl }}/topics/admin/tutorials/{{ tutorial }}/tutorial.html">
-            <span>Step {{ forloop.index }}</span>
-            <span>{{ tutorial }}</span>
+            <div>Step {{ forloop.index }}</div>
+            <div>{{ tutorial }}</div>
         </a>
     </li>
     {% if include.tutorial == tutorial %}{% assign seen_tuto = 1 %}{% endif %}
