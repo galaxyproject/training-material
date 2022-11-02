@@ -92,9 +92,9 @@ module Gtn
       icon = @@ICONS[icon_cls]
       if !icon.nil?
        if icon.start_with?("fa")
-        %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        %Q(<i class="#{icon}" aria-label="#{icon} box"></i>)
        elsif icon.start_with?("ai")
-        %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        %Q(<i class="ai #{icon}" aria-label="#{icon} box"></i>)
        end
       else
         %Q(<span class="visually-hidden"></span>)
