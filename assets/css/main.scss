@@ -781,15 +781,18 @@ blockquote {
 }
 
 
-/* WCAG Contrast. These aim to pass AA level for normal sized text. */
+/* WCAG Contrast. These aim to pass AAA level for normal sized text. */
 a {
     color: var(--hyperlink);
+    text-decoration: underline;
 
     &:hover,
     &:focus,
+    &:focus-visible,
     &:active {
         color: var(--hyperlink-hover);
-        text-decoration: underline;
+        outline: 3px solid #004590;
+        text-decoration: none;
     }
 }
 
@@ -942,10 +945,6 @@ div.highlight:hover .btn,div.highlight .btn:focus{
     }
     #clear_search{
         cursor: pointer;
-    }
-
-    .topic-icon {
-        padding: .5rem .75rem;
     }
 }
 
