@@ -60,8 +60,8 @@ In this tutorial, you will learn to:
 >
 >There are many online services to get climate data, and it is often difficult to know which ones are up-to date and which resources to trust.
 > Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to master them all.
-> Therefore in this tutorial, we will be focusing on the usage of Climate data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the most common data format for storing Climate data.
-> We will be using a freely available dataset containing Essential Climate Variables (sea ice area fraction, surface temperature) from [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home). We will learn to use panoply to visualize the sea ice area fraction over the poles (southern and northern poles) and surface temperatures for two different years (1979 and 2018).
+> Therefore in this tutorial, we will be focusing on the usage of Biodiversity data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the data format used to store data on the EBV data portal.
+> We will be using a freely available dataset representing Essential Biodiversity Variables from [GEO BON data portal](https://portal.geobon.org/home). We will learn to use panoply to visualize the Local bird diversity for last century.
 {:  .comment}
 
 ## NetCDF format
