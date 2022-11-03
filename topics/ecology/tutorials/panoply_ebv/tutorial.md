@@ -58,9 +58,7 @@ In this tutorial, you will learn to:
 
 > <comment-title>Background</comment-title>
 >
->There are many online services to get climate data, and it is often difficult to know which ones are up-to date and which resources to trust.
-> Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to master them all.
-> Therefore in this tutorial, we will be focusing on the usage of Biodiversity data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the data format used to store data on the EBV data portal.
+> In this tutorial, we will be focusing on the usage of Biodiversity data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the data format used to store data on the EBV data portal.
 > We will be using a freely available dataset representing Essential Biodiversity Variables from [GEO BON data portal](https://portal.geobon.org/home). We will learn to use panoply to visualize the Local bird diversity for last century.
 {:  .comment}
 
