@@ -194,10 +194,17 @@ We will use Miniconda, a minimal conda installer that is commonly used, in place
 ```bash
 wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b 
-conda init bash
 ```
 
-Here you will need to restart your kernel, or if you're in a desktop environment, restart your terminal.
+Now you can add it to your `~/.bashrc` which will cause Conda to be automatically loaded whenever you open a terminal:
+
+```
+~/miniconda3/bin/conda init bash
+```
+
+> <tip-title>Reopen Shell / Restart Jupyter Kernel</tip-title>
+> Here you will need to restart your kernel, or if you're in a desktop environment, restart your terminal.
+{: .tip}
 
 ### Installing our First Package
 
@@ -206,6 +213,10 @@ Let's install our first package, the new `libmamba` solver for Conda, as an exam
 ```bash
 conda install -y -q conda-libmamba-solver=22.8
 ```
+
+> <tip-title>Does it get stuck?</tip-title>
+> This step we have sometimes seen get "stuck", it will finish executing the transaction and hang, despite successfully installing the software. You can restart the kernel if this happens.
+{: .tip}
 
 Here we see a few things:
 
@@ -346,8 +357,13 @@ get shipped as part of your software and shared with collaborators and/or users.
 install all the necessary packages from the project root as follows:
 
 ```bash
-conda env create -f environment.yml
+conda env create -y -f environment.yml
 ```
+
+The name is bundled directly into the environment, someone else re-creating
+this environment from the yaml file will also be able to `conda activate hts`
+afterwards. If you want it under a different name, you can use the `-n` flag to
+supply your own name.
 
 As your project grows - you may need to update your environment for a variety of reasons. For example, one of your project's dependencies has
 just released a new version (dependency version number update), you need an additional package for data analysis

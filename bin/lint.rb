@@ -10,7 +10,7 @@ require 'csl/styles'
 
 # Load our citation library
 CITATION_LIBRARY = BibTeX::Bibliography.new
-Find.find('./topics') do |path|
+Find.find('./') do |path|
   if FileTest.directory?(path)
     if File.basename(path).start_with?('.')
       Find.prune       # Don't look any further into this directory.
@@ -432,7 +432,7 @@ module GtnLinter
 
   def self.new_more_accessible_boxes(contents)
     #  \#\#\#
-    self.find_matching_texts(contents, /> (### {% icon ([^%]*)%}[^:]*:(.*))/)
+    self.find_matching_texts(contents, /> (### {%\s*icon ([^%]*)\s*%}[^:]*:?(.*))/)
         .map { |idx, text, selected|
       key = selected[2].strip.gsub(/_/, '-')
       ReviewDogEmitter.error(
@@ -466,7 +466,7 @@ module GtnLinter
     self.find_matching_texts(contents, /{%\s*link\s+([^%]*)\s*%}/i)
     .map { |idx, text, selected|
       path = selected[1].to_s.strip
-      if ! File.exist?(path)
+      if ! File.exist?(path.gsub(/^\//, ''))
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
@@ -597,6 +597,10 @@ module GtnLinter
     end
   end
 
+  def self.should_ignore(contents)
+    contents.select{|x| x.match(/GTN:IGNORE:(\d\d\d)/)}.map{|x| "GTN:" + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
+  end
+
   def self.fix_file(path)
     @path = path
 
@@ -607,7 +611,17 @@ module GtnLinter
     if path.match(/md$/)
       handle = File.open(path)
       contents = handle.read.split("\n")
+      ignores = should_ignore(contents)
       results = fix_md(contents)
+
+      if ! results.nil?
+        # Remove any empty lists
+        results = results.select{|x| !x.nil? && x.length > 0 }.flatten
+        # Before ignoring anything matching GTN:IGNORE:###
+        if results.length > 0
+            results = results.select{|x| ignores.index(x['code']['value']).nil?}
+        end
+      end
       emit_results(results)
     elsif path.match(/.bib$/)
       handle = File.open(path)
@@ -645,9 +659,9 @@ module GtnLinter
     end
   end
 
-  def self.enumerate_type(filter)
+  def self.enumerate_type(filter, root_dir: "topics")
     paths = []
-    Find.find('./topics') do |path|
+    Find.find("./#{root_dir}") do |path|
       if FileTest.directory?(path)
         if File.basename(path).start_with?('.')
           Find.prune       # Don't look any further into this directory.
@@ -682,7 +696,7 @@ module GtnLinter
   end
 
   def self.enumerate_lintable
-    self.enumerate_type(/bib$/) + self.enumerate_type(/md$/)
+    self.enumerate_type(/bib$/) + self.enumerate_type(/md$/) + self.enumerate_type(/md$/, root_dir: "faqs")
   end
 
   def self.run_linter_global

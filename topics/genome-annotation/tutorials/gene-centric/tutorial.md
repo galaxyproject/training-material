@@ -53,10 +53,10 @@ Despite the rapidly increasing number of fully assembled genomes few genomes are
 >
 {: .code-2col}
 
-> <code-out-title>What I will get</code-out-title>
+> <tip-title>What I will get</tip-title>
 > - Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.
 > - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
-{: .code-out}
+{: .tip}
 
 > <agenda-title></agenda-title>
 >
