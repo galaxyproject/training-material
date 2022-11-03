@@ -194,10 +194,17 @@ We will use Miniconda, a minimal conda installer that is commonly used, in place
 ```bash
 wget -c https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b 
-conda init bash
 ```
 
-Here you will need to restart your kernel, or if you're in a desktop environment, restart your terminal.
+Now you can add it to your `~/.bashrc` which will cause Conda to be automatically loaded whenever you open a terminal:
+
+```
+~/miniconda3/bin/conda init bash
+```
+
+> <tip-title>Reopen Shell / Restart Jupyter Kernel</tip-title>
+> Here you will need to restart your kernel, or if you're in a desktop environment, restart your terminal.
+{: .tip}
 
 ### Installing our First Package
 
