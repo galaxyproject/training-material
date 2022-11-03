@@ -333,7 +333,7 @@ However, sometimes it is often more informative to look directly at the source q
 We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file.
 
 
-> ### {% icon details %}: RNA STARsolo log output
+> <comment-title>RNA STARsolo log output</comment-title>
 > ```
 > Barcodes:
 >                   nNoAdapter              0
