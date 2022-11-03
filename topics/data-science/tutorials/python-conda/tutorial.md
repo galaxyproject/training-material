@@ -214,6 +214,10 @@ Let's install our first package, the new `libmamba` solver for Conda, as an exam
 conda install -y -q conda-libmamba-solver=22.8
 ```
 
+> <tip-title>Does it get stuck?</tip-title>
+> This step we have sometimes seen get "stuck", it will finish executing the transaction and hang, despite successfully installing the software. You can restart the kernel if this happens.
+{: .tip}
+
 Here we see a few things:
 
 - `-y` - installs without asking questions like "do you want to do this". Generally people don't use this, but in a Notebook environment it's a bit nicer.
@@ -353,8 +357,13 @@ get shipped as part of your software and shared with collaborators and/or users.
 install all the necessary packages from the project root as follows:
 
 ```bash
-conda env create -f environment.yml
+conda env create -y -f environment.yml
 ```
+
+The name is bundled directly into the environment, someone else re-creating
+this environment from the yaml file will also be able to `conda activate hts`
+afterwards. If you want it under a different name, you can use the `-n` flag to
+supply your own name.
 
 As your project grows - you may need to update your environment for a variety of reasons. For example, one of your project's dependencies has
 just released a new version (dependency version number update), you need an additional package for data analysis
