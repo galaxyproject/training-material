@@ -43,7 +43,7 @@ The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use t
     margin: 0.5em;
 }
 #git-gat-timeline li.active {
-    background: #86d486;
+    background: #a8ffa8;
     color: black;
 }
 #git-gat-timeline li.disabled {
