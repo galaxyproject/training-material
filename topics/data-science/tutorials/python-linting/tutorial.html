@@ -1,0 +1,1266 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Python - Coding Style</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Python - Coding Style" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="2022-11-03 11:02:46 +0000" />
+<meta name="DC.creator" content="The Carpentries" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Python - Coding Style" />
+        <meta property="og:description" content="These lessons will help you get your feet in data science..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/data-science" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Foundations of Data Science
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/data-science/tutorials/python-linting/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/data-science/faqs/" title="Check our FAQs for the Foundations of Data Science topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/data-science/tutorials/python-linting/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/data-science/tutorials/python-linting/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-11-01/topics/data-science/tutorials/python-linting/tutorial.html" title="Version 2022-11-01">2022-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-10-01/topics/data-science/tutorials/python-linting/tutorial.html" title="Version 2022-10-01">2022-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/data-science/tutorials/python-linting/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-03 11:02:46 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Python - Coding Style",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Foundations of Data Science",
+    "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+    "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Python - Coding Style' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "data-science, jupyter-notebook",
+  "description": "The questions this  addresses are:\n - Why should you follow software code style conventions?\n - Who is setting code style conventions?\n - What code style conventions exist for Python?\n\n\nThe objectives are:\n - Understand the benefits of following community coding conventions\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Foundations of Data Science",
+      "description": "These lessons will help you get your feet in data science and give you tools to help you slice and dice your data into results.",
+      "url": "https://training.galaxyproject.org/training-material/topics/data-science/"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+</script>
+
+<section class="tutorial topic-data-science">
+    <h1 data-toc-skip>Python - Coding Style</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=27" alt="Avatar">The Carpentries</a>
+
+
+
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a>
+
+
+</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Overview</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Why should you follow software code style conventions?</p>
+</li>
+        
+        <li><p>Who is setting code style conventions?</p>
+</li>
+        
+        <li><p>What code style conventions exist for Python?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the benefits of following community coding conventions</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-linting/data-science-python-linting.ipynb" title="Jupyter Notebook" alt="Python - Coding Style Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2022 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+                     
+                     
+                     
+                     
+                    
+                        <blockquote class="comment">
+                            <div class="box-title" aria-label="comment box">Best viewed in a Jupyter Notebook</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath=training-material%2Ftopics%2Fdata-science%2Ftutorials%2Fpython-linting%2Ftutorial.md.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/data-science-python-linting.ipynb</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/data-science-python-linting.ipynb">Jupyter Notebook (With Solutions)</a>, <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/data-science-python-linting-course.ipynb">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    
+                 
+
+                <p>But before you dive into writing some more code and
+sharing it with others, ask yourself what kind of code should you be writing and publishing? It may be
+worth spending some time learning a bit about Python
+coding style conventions to make sure that your code is consistently formatted and readable by yourself and others.</p>
+
+<blockquote>
+  <p><em>“Any fool can write code that a computer can understand. Good programmers write code that humans can understand.”</em> - <a href="https://en.wikiquote.org/wiki/Martin_Fowler">Martin Fowler</a>, British software engineer, author and inte<span class="notranslate">rna</span>tional speaker on software development</p>
+</blockquote>
+
+<blockquote class="comment">
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+
+  <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> lesson <a href="https://carpentries-incubator.github.io/python-intermediate-development/">“Intermediate Research Software Development”</a>.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#python-coding-style-guide" id="markdown-toc-python-coding-style-guide">Python Coding Style Guide</a></li>
+  <li><a href="#exercise-improving-indentation" id="markdown-toc-exercise-improving-indentation">Exercise Improving Indentation</a></li>
+  <li><a href="#documentation-strings-aka-docstrings" id="markdown-toc-documentation-strings-aka-docstrings">Documentation Strings aka Docstrings</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="python-coding-style-guide">Python Coding Style Guide</h2>
+
+<p>One of the most important things we can do to make sure our code is readable by others
+(and ourselves a
+few months down the line) is to make sure that it is descriptive, cleanly and consistently formatted and uses sensible,
+descriptive names for variable, function and module names. In order to help us format our code, we generally follow
+guidelines known as a <strong>style guide</strong>. A style guide is a set of conventions that we agree upon with our colleagues or
+community, to ensure that everyone contributing to the same project is producing code which looks similar in style.
+While a group of developers may choose to write and agree upon a new style guide unique to each project,
+in practice many programming languages have a single style guide which is
+adopted almost universally by the communities around the world. In Python, although we do have a choice of style guides
+available, the <a href="https://www.python.org/dev/peps/pep-0008/">PEP8</a> style guide is most commonly used.
+A Python Enhancement Proposal (PEP) is a design document for the Python community, typically
+specifications or conventions for how to do something in Python, a description of a new feature in Python, etc.</p>
+
+<blockquote class="tip">
+  <div id="tip-style-consistency" class="box-title"><button type="button" aria-controls="tip-style-consistency-contents" aria-expanded="true" aria-label="Toggle tip box: Style consistency"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Style consistency<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>One of the
+<a href="https://www.python.org/dev/peps/pep-0008/#a-foolish-consistency-is-the-hobgoblin-of-little-minds">key insights from Guido van Rossum</a>,
+one of the PEP8 authors, is that code is read much more often than it is
+written. Style guidelines are intended to improve the readability of code and make it consistent across the
+wide spectrum of Python code. Consistency with the style guide is important. Consistency within a project is more
+important. Consistency within one module or function is the most important. However, know when to be inconsistent –
+sometimes style guide recommendations are just not applicable. When in doubt, use your best judgment.
+Look at other examples and decide what looks best. And don’t hesitate to ask!</p>
+
+</blockquote>
+
+<p>A full list of style guidelines for this style 
+is available from the <a href="https://www.python.org/dev/peps/pep-0008/">PEP8 website</a>; here we highlight a few.</p>
+
+<h3 id="indentation">Indentation</h3>
+
+<p>Python is a kind of language that uses indentation as a way of grouping statements that belong to a particular
+block of code. Spaces are the recommended indentation method in Python code. The guideline is to use 4 spaces per indentation level -
+so 4 spaces on level one, 8 spaces on level two and so on.</p>
+
+<p>Many people prefer the use of tabs to spaces to indent the code for many reasons (e.g. additional typing, easy to
+introduce an error by missing a single space character, etc.) and do not follow this guideline. Whether you decide to
+follow this guideline or not, be consistent and follow the style already used in the project.</p>
+
+<blockquote class="tip">
+  <div id="tip-accessibility" class="box-title"><button type="button" aria-controls="tip-accessibility-contents" aria-expanded="true" aria-label="Toggle tip box: Accessibility"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Accessibility<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>For many users of Braille Refreshable Displays, encoding the indentation with a tab character is easier to read and more efficient. Rather than 8 space characters, they would only see 2 tab characters which take up less space and are easier to comprehend the indentation level.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div id="tip-indentation-in-python-2-vs-python-3" class="box-title"><button type="button" aria-controls="tip-indentation-in-python-2-vs-python-3-contents" aria-expanded="true" aria-label="Toggle tip box: Indentation in Python 2 vs Python 3"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Indentation in Python 2 vs Python 3<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Python 2 allowed code
+indented with a mixture of tabs and spaces. Python 3 disallows mixing the use of tabs and spaces for indentation.
+Whichever you choose, be consistent throughout the project.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div id="tip-editor-support" class="box-title"><button type="button" aria-controls="tip-editor-support-contents" aria-expanded="true" aria-label="Toggle tip box: Editor support"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Editor support<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Many IDEs and editors have built in support for automatically managing tabs and spaces and auto-converting them back and forth.</p>
+</blockquote>
+
+<p>There are more complex rules on indenting single units of code that continue over several lines, e.g. function,
+list or dictionary definitions can all take more than one line. The preferred way of wrapping such long lines is by
+using Python’s implied line continuation inside delimiters such as parentheses (<code class="language-plaintext highlighter-rouge">()</code>), brackets (<code class="language-plaintext highlighter-rouge">[]</code>) and braces
+(<code class="language-plaintext highlighter-rouge">{}</code>), or a hanging indent.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Add an extra level of indentation (extra 4 spaces) to distinguish arguments from the rest of the code that follows
+</span><span class="k">def</span> <span class="nf">long_function_name</span><span class="p">(</span>
+        <span class="n">var_one</span><span class="p">,</span> <span class="n">var_two</span><span class="p">,</span> <span class="n">var_three</span><span class="p">,</span>
+        <span class="n">var_four</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">var_one</span><span class="p">)</span>
+
+
+<span class="c1"># Aligned with opening delimiter
+</span><span class="n">foo</span> <span class="o">=</span> <span class="n">long_function_name</span><span class="p">(</span><span class="n">var_one</span><span class="p">,</span> <span class="n">var_two</span><span class="p">,</span>
+                         <span class="n">var_three</span><span class="p">,</span> <span class="n">var_four</span><span class="p">)</span>
+
+<span class="c1"># Use hanging indents to add an indentation level like paragraphs of text where all the lines in a paragraph are
+# indented except the first one
+</span><span class="n">foo</span> <span class="o">=</span> <span class="n">long_function_name</span><span class="p">(</span>
+    <span class="n">var_one</span><span class="p">,</span> <span class="n">var_two</span><span class="p">,</span>
+    <span class="n">var_three</span><span class="p">,</span> <span class="n">var_four</span><span class="p">)</span>
+
+<span class="c1"># Using hanging indent again, but closing bracket aligned with the first non-blank character of the previous line
+</span><span class="n">a_long_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="p">[[</span><span class="mf">0.33</span><span class="p">,</span> <span class="mf">0.66</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.66</span><span class="p">,</span> <span class="mf">0.83</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.77</span><span class="p">,</span> <span class="mf">0.88</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+    <span class="p">]</span>
+
+<span class="c1"># Using hanging indent again, but closing bracket aligned with the start of the multiline contruct
+</span><span class="n">a_long_list2</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">,</span>
+    <span class="c1"># ...
+</span>    <span class="mi">79</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>More details on good and bad practices for continuation lines can be found in
+<a href="https://www.python.org/dev/peps/pep-0008/#indentation">PEP8 guideline on indentation</a>.</p>
+
+<h3 id="maximum-line-length">Maximum Line Length</h3>
+
+<p>All lines should be up to 80 characters long; for lines containing comments or docstrings (to be covered later) the
+line length limit should be 73 - see <a href="https://www.google.com/url?q=https://stackoverflow.com/questions/15438326/python-pep-8-docstring-line-length&amp;sa=D&amp;source=editors&amp;ust=1619088968027000&amp;usg=AOvVaw3jn26Qt-kwog_tJnaMR48x">this discussion</a> for reasoning behind these numbers. Some teams strongly prefer a longer line length, and seemed to have settled on the
+length of 100. Long lines of code can be broken over multiple lines by wrapping <span class="notranslate">expression</span>s in delimiters, as
+mentioned above (preferred method), or using a backslash (<code class="language-plaintext highlighter-rouge">\</code>) at the end of the line to indicate
+line continuation (slightly less preferred method).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Using delimiters ( ) to wrap a multi-line <span class="notranslate">expression</span>
+</span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span>
+    <span class="n">b</span> <span class="o">==</span> <span class="bp">False</span><span class="p">):</span>
+
+<span class="c1"># Using a backslash (\) for line continuation
+</span><span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="bp">True</span> <span class="ow">and</span> \
+    <span class="n">b</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+</code></pre></div></div>
+
+<h3 id="should-a-line-break-before-or-after-a-binary-operator">Should a Line Break Before or After a Binary Operator?</h3>
+
+<p>Lines should break before binary operators so that the operators do not get scattered across different columns
+on the screen. In the example below, the eye does not have to do the extra work to tell which items are added
+and which are subtracted:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant - easy to match operators with operands
+</span><span class="n">income</span> <span class="o">=</span> <span class="p">(</span><span class="n">gross_wages</span>
+          <span class="o">+</span> <span class="n">taxable_interest</span>
+          <span class="o">+</span> <span class="p">(</span><span class="n">dividends</span> <span class="o">-</span> <span class="n">qualified_dividends</span><span class="p">)</span>
+          <span class="o">-</span> <span class="n">ira_deduction</span>
+          <span class="o">-</span> <span class="n">student_loan_interest</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="blank-lines">Blank Lines</h3>
+
+<p>Top-level function and class definitions should be surrounded with two blank lines. Method definitions inside a class
+should be surrounded by a single blank line. You can use blank lines in functions, sparingly, to indicate logical sections.</p>
+
+<h3 id="whitespace-in-expressions-and-statements">Whitespace in <span class="notranslate">Expression</span>s and Statements</h3>
+
+<p>Avoid extraneous whitespace in the following situations:</p>
+
+<ul>
+  <li>
+    <p>Immediately inside parentheses, brackets or braces</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant:
+</span><span class="n">my_function</span><span class="p">(</span><span class="n">colour</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">{</span><span class="nb">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+
+<span class="c1"># Not PEP 8 compliant:
+</span><span class="n">my_function</span><span class="p">(</span> <span class="n">colour</span><span class="p">[</span> <span class="mi">1</span> <span class="p">],</span> <span class="p">{</span> <span class="nb">id</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Immediately before a comma, semicolon, or colon (unless doing slicing where the colon acts like a binary operator
+in which case it should should have equal amounts of whitespace on either side)</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant:
+</span><span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="c1"># Not PEP 8 compliant:
+</span><span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">:</span> <span class="k">print</span><span class="p">(</span><span class="n">x</span> <span class="p">,</span> <span class="n">y</span><span class="p">);</span> <span class="n">x</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Immediately before the open parenthesis that starts the argument list of a function call</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant:
+</span><span class="n">my_function</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Not PEP 8 compliant:
+</span><span class="n">my_function</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Immediately before the open parenthesis that starts an indexing or slicing</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant:
+</span><span class="n">my_dct</span><span class="p">[</span><span class="s">'key'</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_lst</span><span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+<span class="n">first_char</span> <span class="o">=</span> <span class="n">my_str</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Not PEP 8 compliant:
+</span><span class="n">my_dct</span> <span class="p">[</span><span class="s">'key'</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_lst</span> <span class="p">[</span><span class="nb">id</span><span class="p">]</span>
+<span class="n">first_char</span> <span class="o">=</span> <span class="n">my_str</span> <span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>More than one space around an assignment (or other) operator to align it with another</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant:
+</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">student_loan_interest</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Not PEP 8 compliant:
+</span><span class="n">x</span>                     <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span>                     <span class="o">=</span> <span class="mi">2</span>
+<span class="n">student_loan_interest</span> <span class="o">=</span> <span class="mi">3</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Avoid trailing whitespace anywhere - it is not necessary and can cause errors. For example, if you use
+backslash (<code class="language-plaintext highlighter-rouge">\</code>) for continuation lines and have a space after it, the continuation line will not be
+interpreted correctly.</li>
+  <li>Surround these binary operators with a single space on either side: assignment (=),
+augmented assignment (+=, -= etc.), comparisons (==, &lt;, &gt;, !=, &lt;&gt;, &lt;=, &gt;=, in, not in, is, is not),
+booleans (and, or, not).</li>
+  <li>
+    <p>Don’t use spaces around the = sign when used to indicate a keyword argument assignment or to indicate a
+default value for an unannotated function parameter</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PEP 8 compliant use of spaces around = for variable assignment
+</span><span class="n">axis</span> <span class="o">=</span> <span class="s">'x'</span>
+<span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">450</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">'my_graph'</span>
+
+<span class="c1"># PEP 8 compliant use of no spaces around = for keyword argument assignment in a function call
+</span><span class="n">my_function</span><span class="p">(</span>
+    <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span>
+    <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span>
+    <span class="n">angle</span><span class="o">=</span><span class="n">angle</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="string-quotes">String Quotes</h3>
+
+<p>In Python, single-quoted strings and double-quoted strings are the same. PEP8 does not make a recommendation for this
+apart from picking one rule and consistently sticking to it. When a string contains single or double quote characters,
+use the other one to avoid backslashes in the string as it improves readability.</p>
+
+<h3 id="naming-conventions">Naming Conventions</h3>
+
+<p>There are a lot of different naming styles in use, including:</p>
+<ul>
+  <li>lowercase</li>
+  <li>lower_case_with_underscores</li>
+  <li>UPPERCASE</li>
+  <li>UPPER_CASE_WITH_UNDERSCORES</li>
+  <li>CapitalisedWords (or PascalCase) (note: when using acronyms in CapitalisedWords, capitalise all the letters of the acronym,
+e.g HTTPServerError)</li>
+  <li>camelCase (differs from CapitalisedWords/PascalCase by the initial lowercase character)</li>
+  <li>Capitalised_Words_With_Underscores</li>
+</ul>
+
+<p>As with other style guide recommendations - consistency is key. Pick one and stick to it, or follow the one already
+established if joining a project mid-way. Some things to be wary of when naming things in the code:</p>
+
+<ul>
+  <li>Avoid using the characters ‘l’ (lowercase letter L), ‘O’ (uppercase letter o), or ‘I’ (uppercase letter i)
+as single character variable names. In some fonts, these characters are indistinguishable from the numerals
+one and zero. When tempted to use ‘l’, use ‘L’ instead.</li>
+  <li>If your audience is inte<span class="notranslate">rna</span>tional and English is the common language, try to use English words for identifiers and 
+comments whenever possible but try to avoid abbreviations/local slang as they may not be understood by everyone. Also consider
+sticking with either ‘American’ or ‘British’ English spellings and try not to mix the two.</li>
+</ul>
+
+<p>Stronlgy consider <strong>not</strong> using single character identifiers wherever possible. Use descriptive variable names when possible, it is no slower to execute, and a lot faster to read and comprehend for a reader.</p>
+
+<blockquote class="tip">
+  <div id="tip-function-variable-class-module-package-naming" class="box-title"><button type="button" aria-controls="tip-function-variable-class-module-package-naming-contents" aria-expanded="true" aria-label="Toggle tip box: Function, Variable, Class, Module, Package Naming"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Function, Variable, Class, Module, Package Naming<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ul>
+    <li>Function and variable names should be lowercase, with words separated by underscores as necessary to improve readability.</li>
+    <li>Class names should normally use the CapitalisedWords convention.</li>
+    <li>Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability.</li>
+    <li>Packages should also have short, all-lowercase names, although the use of underscores is discouraged.</li>
+  </ul>
+
+  <p>A more detailed guide on
+<a href="https://www.python.org/dev/peps/pep-0008/#package-and-module-names">naming functions, modules, classes and variables</a>
+is available from PEP8.</p>
+
+</blockquote>
+
+<h3 id="comments">Comments</h3>
+
+<p>Comments allow us to provide the reader with additional information on what the code does - reading and understanding
+source code is slow, laborious and can lead to misinterpretation, plus it is always a good idea to keep others in mind
+when writing code. A good rule of thumb is to assume that someone will <em>always</em> read your code at a later date,
+and this includes a future version of yourself. It can be easy to forget why you did something a particular way in six
+months’ time. Write comments as complete sentences and in English unless you are 100% sure the code will never be read
+by people who don’t speak your language.</p>
+
+<blockquote class="tip">
+  <div id="tip-the-good-the-bad-and-the-ugly-comments" class="box-title"><button type="button" aria-controls="tip-the-good-the-bad-and-the-ugly-comments-contents" aria-expanded="true" aria-label="Toggle tip box: The Good, the Bad, and the Ugly Comments"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: The Good, the Bad, and the Ugly Comments<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>As a side reading, check out the <a href="https://www.freecodecamp.org/news/code-comments-the-good-the-bad-and-the-ugly-be9cc65fbf83/">‘Putting comments in code: the good, the bad, and the ugly’ blogpost</a>.
+Remember - a comment should answer the ‘why’ question. Occasionally the “what” question.
+The “how” question should be answered by the code itself.</p>
+</blockquote>
+
+<p>Block comments generally apply to some (or all) code that follows them, and are indented to the same level as that
+code. Each line of a block comment starts with a <code class="language-plaintext highlighter-rouge">#</code> and a single space (unless it is indented text inside the comment).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fahr_to_cels</span><span class="p">(</span><span class="n">fahr</span><span class="p">):</span>
+    <span class="c1"># Block comment example: convert temperature in Fahrenheit to Celsius
+</span>    <span class="n">cels</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cels</span>
+</code></pre></div></div>
+
+<p>An inline comment is a comment on the same line as a statement. Inline comments should be separated by at least two
+spaces from the statement. They should start with a <code class="language-plaintext highlighter-rouge">#</code> and a single space and should be used sparingly.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fahr_to_cels</span><span class="p">(</span><span class="n">fahr</span><span class="p">):</span>
+    <span class="n">cels</span> <span class="o">=</span> <span class="p">(</span><span class="n">fahr</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span>  <span class="c1"># Inline comment example: convert temperature in Fahrenheit to Celsius
+</span>    <span class="k">return</span> <span class="n">cels</span>
+</code></pre></div></div>
+
+<p>Python doesn’t have any multi-line comments, like you may have seen in other languages like C++ or Java. However, there
+ are ways to do it using <em>docstrings</em> as we’ll see in a moment.</p>
+
+<p>The reader should be able to understand a single function or method from its code and its comments, and should not have to look elsewhere in the code for clarification. The kind of things that need to be commented are:</p>
+
+<ul>
+  <li>Why certain design or implementation decisions were adopted, especially in cases where the decision may seem counter-intuitive</li>
+  <li>The names of any algorithms or design patterns that have been implemented</li>
+  <li>The expected format of input files or database schemas</li>
+</ul>
+
+<p>However, there are some restrictions. Comments that simply restate what the code does are redundant, and comments must be
+ accurate and updated with the code, because an incorrect comment causes more confusion than no comment at all.</p>
+
+<h2 id="exercise-improving-indentation">Exercise Improving Indentation</h2>
+
+<p>Now given all of the above rules we’ll go ahread and re-format some code to match the style guide. Please review them carefully and prepare yourself for an hour of editing text… no, of course not.</p>
+
+<p>There is no reason to do this manually, we’re learning about computers and reformatting text is something computers are great at! There is a project called <a href="https://pypi.org/project/black/">Black</a> which automates this process, and removes the potential arguing over coding style, which is truly it’s greatest success.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-reformatting-code-with-black" class="box-title" aria-label="hands-on box: Reformatting Code with Black"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Reformatting Code with Black</div>
+  <ol>
+    <li>
+      <p>Install black</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install </span>black
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run Black</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>black <span class="nb">.</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Done. That’s it.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-optional-exercise-improve-code-style-of-your-other-python-projects" class="box-title" aria-label="hands-on box: Optional Exercise: Improve Code Style of Your Other Python Projects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Optional Exercise: Improve Code Style of Your Other Python Projects</div>
+  <p>If you have another Python project, check to which extent it conforms to PEP8 coding style.</p>
+</blockquote>
+
+<h2 id="documentation-strings-aka-docstrings">Documentation Strings aka Docstrings</h2>
+
+<p>If the first thing in a function is a string that is not assigned to a variable, that string is attached to the
+function as its documentation. Consider the following code implementing function for calculating the nth
+Fibonacci number:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="s">"""Calculate the nth Fibonacci number.
+
+    A recursive implementation of Fibonacci array elements.
+
+    :param n: integer
+    :raises ValueError: raised if n is less than zero
+    :returns: Fibonacci number
+    """</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">'Fibonacci is not defined for N &lt; 0'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Note here we are explicitly documenting our input variables, what is returned by the function, and also when the
+<code class="language-plaintext highlighter-rouge">ValueError</code> exception is raised. Along with a helpful description of what the function does, this information can
+act as a <em>contract</em> for readers to understand what to expect in terms of behaviour when using the function,
+as well as how to use it.</p>
+
+<p>A special comment string like this is called a <strong>docstring</strong>. We do not need to use triple quotes when writing one, but
+if we do, we can break the text across multiple lines. Docstrings can also be used at the start of a Python module (a file
+containing a number of Python functions) or at the start of a Python class (containing a number of methods) to list
+their contents as a reference. You should not confuse docstrings with comments though - docstrings are context-dependent and should only
+be used in specific locations (e.g. at the top of a module and immediately after <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">def</code> keywords as mentioned).
+Using triple quoted strings in locations where they will not be interpreted as docstrings or
+using triple quotes as a way to ‘quickly’ comment out an entire block of code is considered bad practice.</p>
+
+<p>In our example case, we used
+the <a href="https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html">Sphynx/ReadTheDocs docstring style</a> formatting
+for the <code class="language-plaintext highlighter-rouge">param</code>, <code class="language-plaintext highlighter-rouge">raises</code> and <code class="language-plaintext highlighter-rouge">returns</code> - other docstring formats exist as well.</p>
+
+<blockquote class="tip">
+  <div id="tip-python-pep-257-recommendations-for-docstrings" class="box-title"><button type="button" aria-controls="tip-python-pep-257-recommendations-for-docstrings-contents" aria-expanded="true" aria-label="Toggle tip box: Python PEP 257 - Recommendations for Docstrings"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Python PEP 257 - Recommendations for Docstrings<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>PEP 257 is another one of Python Enhancement Proposals and this one deals with docstring conventions to
+standardise how they are used. For example, on the subject of module-level docstrings, PEP 257 says:</p>
+
+  <blockquote class="quote">
+    <p>The docstring for a module should generally list the classes, exceptions and functions (and any other objects) that
+are exported by the module, with a one-line summary of each. (These summaries generally give less detail than the
+summary line in the object’s docstring.) The docstring for a package
+(i.e., the docstring of the package’s <code class="language-plaintext highlighter-rouge">__init__.py</code> module) should also list the modules and subpackages exported by
+the package.</p>
+  </blockquote>
+
+  <p>Note that <code class="language-plaintext highlighter-rouge">__init__.py</code> file used to be a required part of a package (pre Python 3.3) where a package was typically
+implemented as a directory containing an <code class="language-plaintext highlighter-rouge">__init__.py</code> file which got implicitly executed when a package was imported.</p>
+</blockquote>
+
+<p>So, at the beginning of a module file we can just add a docstring explaining the nature of a module. For example, if
+<code class="language-plaintext highlighter-rouge">fibonacci()</code> was included in a module with other functions, our module could have at the start of it:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""A module for generating numerical sequences of numbers that occur in nature.
+
+Functions:
+  fibonacci - returns the Fibonacci number for a given integer
+  golden_ratio - returns the golden ratio number to a given Fibonacci iteration
+  ...
+"""</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<p>The docstring for a function or a module is returned when
+calling the <code class="language-plaintext highlighter-rouge">help</code> function and passing its name - for example from the interactive Python console/terminal available
+from the command line or when rendering code documentation online 
+(e.g. see <a href="https://docs.python.org/3.8/library/index.html">Python documentation</a>).
+PyCharm also displays the docstring for a function/module in a little help popup window when using tab-completion.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Just use Black. Don’t argue over it. Just use Black.</p>
+</li>
+                        
+                        <li><p>The author personally has been on projects that argued for years over coding style.</p>
+</li>
+                        
+                        <li><p>Stop. Stop now.</p>
+</li>
+                        
+                        <li><p>Use Black.</p>
+</li>
+                        
+                        <li><p>Always assume that someone else will read your code at a later date, including yourself.</p>
+</li>
+                        
+                        <li><p>Community coding conventions help you create more readable software projects that are easier to contribute to.</p>
+</li>
+                        
+                        <li><p>Python Enhancement Proposals (or PEPs) describe a recommended convention or specification for how to do something in Python.</p>
+</li>
+                        
+                        <li><p>Style checking to ensure code conforms to coding conventions is often part of IDEs.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/data-science/faqs/">FAQ page for the Foundations of Data Science topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>PEP</dt>
+                    <dd>Python Enhancement Proposal</dd>
+                    
+                </dl>
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Python - Coding Style (Foundations of Data Science)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            The Carpentries,  <b>Python - Coding Style (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/tutorial.html">https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{data-science-python-linting,
+author = "The Carpentries",
+title = "Python - Coding Style (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/data-science/tutorials/python-linting/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+    doi = {10.1016/j.cels.2018.05.012},
+    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+    year = 2018,
+    month = {jun},
+    publisher = {Elsevier {BV}},
+    volume = {6},
+    number = {6},
+    pages = {752--758.e1},
+    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+    title = {Community-Driven Data Analysis Training for Biology},
+    journal = {Cell Systems}
+}</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/carpentries" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/carpentries/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/avans-atgm" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/avans-atgm/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href="https://avans.nl/">avans.nl</a></p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+                    </ul>
+                </blockquote>
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
