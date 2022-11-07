@@ -30,10 +30,12 @@ requirements:
       - connect-to-compute-cluster
       - job-destinations
       - pulsar
+abbreviations:
+  TIaaS: Training Infrastructure as a Service
 ---
 
-Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
-Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed {TIaaS}.
+Workshop instructors can apply for {TIaaS}, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.
 
 ![TIaaS concept](../../images/tiaas/tiaas_intro.png "With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available."){: width="70%"}
@@ -55,7 +57,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 
 > <hands-on-title>Setup TIaaS</hands-on-title>
 >
-> 1. In your `requirements.yml` add the TIaaS ansible role:
+> 1. In your `requirements.yml` add the {TIaaS} ansible role:
 >
 >    {% raw %}
 >    ```diff
@@ -178,7 +180,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
 >
-> 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy:
+> 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy. TIaaS provides a set of default nginx routes that can be used.
 >
 >    {% raw %}
 >    ```diff
@@ -212,7 +214,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 {: .hidden}
 
 
-TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)
+{TIaaS} should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
 
 |URL | Use | Who |
@@ -291,7 +293,7 @@ Let's see it in action!
 
 # Job Configuration
 
-While observability for teachers or trainers is already a huge benefit, one of the primary benefits of TIaaS from UseGalaxy.eu is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
+While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} from UseGalaxy.eu is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
 In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
 
@@ -395,7 +397,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 {: .hands_on}
 
-Congratulations! you have now set up TIaaS on your Galaxy server.
+Congratulations! you have now set up {TIaaS} on your Galaxy server.
 
 > ```bash
 > 2.sh
