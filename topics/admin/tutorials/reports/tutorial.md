@@ -138,10 +138,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -105,4 +105,10 @@ server {
->             uwsgi_param UWSGI_SCHEME $scheme;
->             include uwsgi_params;
+>    @@ -91,4 +91,10 @@ server {
 >         }
+>     
+>         {{ tiaas_nginx_routes }}
 >    +
 >    +    location /reports/ {
 >    +        uwsgi_pass           127.0.0.1:9001;

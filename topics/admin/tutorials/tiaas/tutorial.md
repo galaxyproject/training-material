@@ -65,8 +65,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
->    +- src: usegalaxy_eu.tiaas2
->    +  version: 0.0.8
+>    +- src: galaxyproject.tiaas2
+>    +  version: 2.1.3
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tiaas2 requirement"}
@@ -88,18 +88,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -234,6 +234,15 @@ telegraf_plugins_extra:
+>    @@ -234,6 +234,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
 >    +# TIaaS setup
->    +tiaas_dir: /opt/tiaas
->    +tiaas_user: tiaas
->    +tiaas_group: tiaas
->    +tiaas_version: master
+>    +tiaas_dir: /srv/tiaas
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
->    +tiaas_listen_url: "127.0.0.1:6000"
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
@@ -170,11 +166,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,3 +35,4 @@
+>    @@ -30,6 +30,7 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
+>         - usegalaxy_eu.rabbitmq
+>    +    - galaxyproject.tiaas2
+>         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
->         - dj-wasabi.telegraf
->    +    - usegalaxy_eu.tiaas2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
@@ -185,25 +184,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -90,4 +90,19 @@ server {
+>    @@ -90,4 +90,5 @@ server {
 >             proxy_set_header Host $http_host;
 >         }
 >     
->    +    location /tiaas {
->    +        uwsgi_pass {{ tiaas_listen_url }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
->    +    }
->    +
->    +    location /tiaas/static {
->    +        alias /opt/tiaas/static;
->    +    }
->    +
->    +    location /join-training {
->    +        uwsgi_pass {{ tiaas_listen_url }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
->    +    }
+>    +    {{ tiaas_nginx_routes }}
 >     }
 >    {% endraw %}
 >    ```
