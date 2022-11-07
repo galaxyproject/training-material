@@ -157,9 +157,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 >    > users who participated in a training return to using normal (non-training) resources after the training ends.
 >    >
->    > The `usegalaxy_eu.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
+>    > The `galaxyproject.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
 >    > to perform this process every night at midnight. You can control when this runs (or disable it) using
->    > [the tiaas_disassociate_training_roles variable](https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
+>    > [the tiaas_disassociate_training_roles variable](https://github.com/galaxyproject/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
 >    >
 >    {: .tip}
 >
@@ -297,7 +297,7 @@ Let's see it in action!
 
 # Job Configuration
 
-While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} from UseGalaxy.eu is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
+While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
 In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
 
