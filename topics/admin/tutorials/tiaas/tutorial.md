@@ -163,7 +163,11 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    >
 >    {: .tip}
 >
-> 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
+>    > <tip-title>Running the playbook from scratch</tip-title>
+>    > This is one of the few statements we've provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we've provided above depend on the Galaxy tables existing in that database. If those tables aren't there, it will fail. If you do someday run this from scratch, you'll find that you need to comment out those roles.
+>    {: .tip}
+>
+> 3. We need to add the `galaxyproject.tiaas2` role before the `nginx` role, as TIaaS defines variables that Nginx needs.
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
