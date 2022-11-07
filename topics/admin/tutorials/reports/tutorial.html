@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Monitoring with Reports" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-09-28 13:13:58 +0000" />
+<meta name="DC.date" content="2022-11-07 11:37:00 +0000" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Björn Grüning" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 13:13:58 +0000",
+  "dateModified": "2022-11-07 11:37:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Monitoring with Reports",
   "interactivityType": "mixed",
@@ -931,7 +931,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 7, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1055,10 +1055,10 @@
 
       <div data-commit="Configure a location block for Reports in NGINX" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -105,4 +105,10 @@</span> server {
-         uwsgi_param UWSGI_SCHEME $scheme;
-         include uwsgi_params;
+</span><span class="p">@@ -91,4 +91,10 @@</span> server {
      }
+    
+     {{ tiaas_nginx_routes }}
 <span class="gi">+
 +    location /reports/ {
 +        uwsgi_pass           127.0.0.1:9001;

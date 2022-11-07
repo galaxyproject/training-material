@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Training Infrastructure as a Service (TIaaS)" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-11 15:31:39 +0000" />
+<meta name="DC.date" content="2022-11-07 12:22:42 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Saskia Hiltemann" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-11 15:31:39 +0000",
+  "dateModified": "2022-11-07 12:22:42 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Training Infrastructure as a Service (TIaaS)",
   "interactivityType": "mixed",
@@ -1248,7 +1248,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 11, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 7, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1266,8 +1266,8 @@
             <div class="col-sm-10">
                  
 
-                <p><span class="notranslate">Galaxy</span> is widely used for teaching. In order to facilitate instructors, <a href="https://usegalaxy.eu"><span class="notranslate">Galaxy</span> Europe</a> has developed Training Infrastructure as a Service (TIaaS).
-Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+                <p><span class="notranslate">Galaxy</span> is widely used for teaching. In order to facilitate instructors, the <span class="notranslate">Galaxy</span> Project has developed Training Infrastructure as a Service (TIaaS).
+Workshop instructors can apply for <abbr title="Training Infrastructure as a Service">TIaaS</abbr>, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.</p>
 
 <figure id="figure-1"><img src="../../images/tiaas/tiaas_intro.png" alt="TIaaS concept. " width="70%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available.</figcaption></figure>
@@ -1294,7 +1294,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
   <ol>
     <li>
-      <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the <abbr title="Training Infrastructure as a Service">TIaaS</abbr> ansible role:</p>
 
       <div data-commit="Add tiaas2 requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
@@ -1302,8 +1302,8 @@ resources, thus reducing queue times on the day of the training.</p>
    version: 0.14.2
  - src: dj-wasabi.telegraf
    version: 0.12.0
-<span class="gi">+- src: use<span class="notranslate">galaxy</span>_eu.tiaas2
-+  version: 0.0.8
+<span class="gi">+- src: <span class="notranslate">galaxy</span>project.tiaas2
++  version: 2.1.3
 </span>   
 </code></pre></div>      </div>
 
@@ -1323,18 +1323,14 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -234,6 +234,15 @@</span> telegraf_plugins_extra:
+</span><span class="p">@@ -234,6 +234,11 @@</span> telegraf_plugins_extra:
        - data_format = "influx"
        - interval = "15s"
     
 <span class="gi">+# TIaaS setup
-+tiaas_dir: /opt/tiaas
-+tiaas_user: tiaas
-+tiaas_group: tiaas
-+tiaas_version: master
++tiaas_dir: /srv/tiaas
 +tiaas_admin_user: admin
 +tiaas_admin_pass: changeme
-+tiaas_listen_url: "127.0.0.1:6000"
 +
 </span> # TUS
  <span class="notranslate">galaxy</span>_tusd_port: 1080
@@ -1392,49 +1388,43 @@ resources, thus reducing queue times on the day of the training.</p>
 disassociate training groups from roles in the <span class="notranslate">Galaxy</span> database after the training event date has passed, so that
 users who participated in a training return to using normal (non-training) resources after the training ends.</p>
 
-        <p>The <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role will create a <a href="https://manpages.debian.org/stable/cron/cron.8.en.html">cron</a> job
+        <p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.tiaas2</code> role will create a <a href="https://manpages.debian.org/stable/cron/cron.8.en.html">cron</a> job
 to perform this process every night at midnight. You can control when this runs (or disable it) using
-<a href="https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20">the tiaas_disassociate_training_roles variable</a>.</p>
+<a href="https://github.com/galaxyproject/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20">the tiaas_disassociate_training_roles variable</a>.</p>
 
+      </blockquote>
+
+      <blockquote class="tip">
+        <div id="tip-running-the-playbook-from-scratch" class="box-title"><button type="button" aria-controls="tip-running-the-playbook-from-scratch-contents" aria-expanded="true" aria-label="Toggle tip box: Running the playbook from scratch"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running the playbook from scratch<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>This is one of the few statements we’ve provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we’ve provided above depend on the <span class="notranslate">Galaxy</span> tables existing in that database. If those tables aren’t there, it will fail. If you do someday run this from scratch, you’ll find that you need to comment out those roles.</p>
       </blockquote>
     </li>
     <li>
-      <p>We need to add the <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
+      <p>We need to add the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.tiaas2</code> role before the <code class="language-plaintext highlighter-rouge">nginx</code> role, as TIaaS defines variables that Nginx needs.</p>
 
       <div data-commit="Add TIaaS role to the Galaxy playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -35,3 +35,4 @@</span>
+</span><span class="p">@@ -30,6 +30,7 @@</span>
+       become: true
+       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
+     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
+<span class="gi">+    - <span class="notranslate">galaxy</span>project.tiaas2
+</span>     - <span class="notranslate">galaxy</span>project.nginx
+     - <span class="notranslate">galaxy</span>project.tusd
      - <span class="notranslate">galaxy</span>project.cvmfs
-     - <span class="notranslate">galaxy</span>project.gxadmin
-     - dj-wasabi.telegraf
-<span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.tiaas2
-</span>   
+   
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>:</p>
+      <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>. TIaaS provides a set of default nginx routes that can be used.</p>
 
       <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
 </span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="p">@@ -90,4 +90,19 @@</span> server {
+</span><span class="p">@@ -90,4 +90,5 @@</span> server {
          proxy_set_header Host $http_host;
      }
     
-<span class="gi">+    location /tiaas {
-+        uwsgi_pass {{ tiaas_listen_url }};
-+        uwsgi_param UWSGI_SCHEME $scheme;
-+        include uwsgi_params;
-+    }
-+
-+    location /tiaas/static {
-+        alias /opt/tiaas/static;
-+    }
-+
-+    location /join-training {
-+        uwsgi_pass {{ tiaas_listen_url }};
-+        uwsgi_param UWSGI_SCHEME $scheme;
-+        include uwsgi_params;
-+    }
+<span class="gi">+    {{ tiaas_nginx_routes }}
 </span> }
    
 </code></pre></div>      </div>
@@ -1457,7 +1447,7 @@ to perform this process every night at midnight. You can control when this runs 
 </code></pre></div>  </div>
 </blockquote>
 
-<p>TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)</p>
+<p><abbr title="Training Infrastructure as a Service">TIaaS</abbr> should be available now! The following routes on your server are now configured (we will run through these in the next section)</p>
 
 <table>
   <thead>
@@ -1598,7 +1588,7 @@ to perform this process every night at midnight. You can control when this runs 
 
 <h1 id="job-configuration">Job Configuration</h1>
 
-<p>While observability for teachers or trainers is already a huge benefit, one of the primary benefits of TIaaS from Use<span class="notranslate">Galaxy</span>.eu is that your jobs get sent to dedicated compute resources, which won’t be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.</p>
+<p>While observability for teachers or trainers is already a huge benefit, one of the primary benefits of <abbr title="Training Infrastructure as a Service">TIaaS</abbr> is that your jobs get sent to dedicated compute resources, which won’t be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.</p>
 
 <p>In order to achieve this, we first need some way to <em>sort</em> the jobs of the training users into these private queues, while letting the other jobs continue on. So let’s create a <em>sorting hat</em> to figure out where jobs belong.</p>
 
@@ -1701,7 +1691,7 @@ to perform this process every night at midnight. You can control when this runs 
 
 </blockquote>
 
-<p>Congratulations! you have now set up TIaaS on your <span class="notranslate">Galaxy</span> server.</p>
+<p>Congratulations! you have now set up <abbr title="Training Infrastructure as a Service">TIaaS</abbr> on your <span class="notranslate">Galaxy</span> server.</p>
 
 <blockquote class="hidden">
   <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.sh
@@ -1736,6 +1726,15 @@ to perform this process every night at midnight. You can control when this runs 
 
                 
 
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>TIaaS</dt>
+                    <dd>Training Infrastructure as a Service</dd>
+                    
+                </dl>
                 
 
                 <h1>Feedback</h1>

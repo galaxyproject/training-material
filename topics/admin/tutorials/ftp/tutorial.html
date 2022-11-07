@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Enable upload via FTP" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 08:58:35 +0000" />
+<meta name="DC.date" content="2022-11-07 11:37:00 +0000" />
 <meta name="DC.creator" content="Lucille Delisle" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 08:58:35 +0000",
+  "dateModified": "2022-11-07 11:37:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Enable upload via FTP",
   "interactivityType": "mixed",
@@ -792,7 +792,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 7, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -882,8 +882,8 @@
 </span><span class="gi">+++ b/requirements.yml
 </span><span class="p">@@ -38,3 +38,5 @@</span>
    version: 0.12.0
- - src: use<span class="notranslate">galaxy</span>_eu.tiaas2
-   version: 0.0.8
+ - src: <span class="notranslate">galaxy</span>project.tiaas2
+   version: 2.1.3
 <span class="gi">+- src: <span class="notranslate">galaxy</span>project.proftpd
 +  version: 0.3.1
 </span>   
@@ -1051,9 +1051,9 @@ To relax the requirement that the SSL session from the control connection be reu
 
       <div data-commit="Add role to playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -31,6 +31,7 @@</span>
-       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
+</span><span class="p">@@ -32,6 +32,7 @@</span>
      - use<span class="notranslate">galaxy</span>_eu.rabbitmq
+     - <span class="notranslate">galaxy</span>project.tiaas2
      - <span class="notranslate">galaxy</span>project.nginx
 <span class="gi">+    - <span class="notranslate">galaxy</span>project.proftpd
 </span>     - <span class="notranslate">galaxy</span>project.tusd
