@@ -51,19 +51,30 @@ contributors:
   - hexylena
 ---
 
-This tutorial is for developers and researchers routinely developing their own analysis scripts using bash, Python, Perl, Rscript or other scripting languages.
-It shows a convenient way to bridge the gap between a working command line script and installing a real tool that "wraps" that script as a tool in Galaxy.
-The ToolFactory is a Galaxy tool, run in the usual Galaxy tool interface. It is distributed as the ToolFactory Appliance, ready to run on a local linux workstation or high end laptop using Docker.
+The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using
+bash, Python, Perl, Rscript or other common scientific scripting languages. The tutorials show a convenient way to bridge the gap between a
+working command line script and a new tool that "wraps" that script so users can use it like any other tool in Galaxy.
 
-This first tutorial is an introduction. It shows how ToolFactory generates a `Hello World!` Galaxy tool and how the Appliance can be installed locally.
+The ToolFactory is a Galaxy tool. Tools are constructed through the normal Galaxy interface when it is run. It is distributed as the ToolFactory Appliance,
+ready to run on a developer linux workstation using Docker. Generated tools are *immediately installed* and ready to run so you can see
+what the end user will see. Jobs can be re-run to edit and update generated tools, so Galaxy becomes an integrated development environment for Galaxy tools.
+
+A [`Hello Galaxy!` demonstration](https://youtu.be//DK1eKz5TRs4) using the ToolFactory is available if you'd like to see a walk-through of some of
+the hands-on material in this tutorial. You can see whether it looks useful for your work and decide whether to read the material below.
+
+This first tutorial is a slow introduction. For some developers, it may be too slow and the second tutorial may be a better place to start. This one steps
+in some detail through the process of using the ToolFactory
+to generate `Hello World!` style simple demonstration Galaxy tools.
+
 The reader will soon learn if it might be adapted to their work. If so, an [Advanced ToolFactory tutorial]({% link topics/dev/tutorials/tool-generators-advanced/tutorial.md %}) is
 available if the material here is relevant to your needs and you would like to learn more details about the different kinds of tools and features the ToolFactory offers.
 
-Experienced galaxy tool developers already have specialised tools and training to suit their needs so may not gain much from this material.
+Experienced galaxy tool developers already have specialised tools and training so may not gain much from this material.
 Users new to Galaxy from other scientific disciplines not yet familiar with the manual tool development process,
 may find the ToolFactory appliance useful for familiarising themselves with tool development in Galaxy.
 
-> ### Agenda
+
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -72,15 +83,18 @@ may find the ToolFactory appliance useful for familiarising themselves with tool
 
 # Tools, tool wrappers and the ToolFactory in Galaxy.
 
-Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library from many different kinds of science. Galaxy
+Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the [project tool library](https://toolshed.g2.bx.psu.edu) from
+many different kinds of science. Galaxy
 tools can be created from almost any Linux command line software packages or interpreter scripts. What happens
-at tool execution is decoupled from the framework itself, so the framework is agnostic to scientific discipline or coding language.
-This is one reason for rapid uptake in new data intensive scientific areas. All it takes is a set of discipline specific tools to bring a whole new community
-of scientists into Galaxy.
+at tool execution is decoupled from the framework itself, so the framework is indifferent to scientific discipline or coding language.
+This is one reason for rapid uptake in new data intensive scientific areas. In many cases, growing sets of discipline specific tools are attracting
+whole new communities of scientists into the Galaxy community.
 
-Tool execution is tightly constrained and secured. User supplied parameters and data inputs exposed on the tool form are the only things that can be changed
-before execution. Everything else is fixed. This is ideal for non-programmer Galaxy users who rely on prepared tools for their work. Tools are
-utterly predictable to the point of being as reproducible as any complex computing component can be and this is one of the strengths of the Galaxy framework.
+Tool execution is tightly constrained and secured. The only things that can be changed
+before execution are tool form exposed user-controlled settings, and data input selections. Everything else is fixed.
+This is ideal for non-programmer Galaxy users who rely on prepared tools for their work. Tools are
+utterly predictable, to the point of being about as reproducible as any useful complex computing component is likely to be.
+This is one of the strengths of the Galaxy framework for users requiring reproducible and shareable scientific analyses.
 
 ## Galaxy Interactive Tools and Interactive Environments (GxIT/GIE)
 
@@ -100,10 +114,10 @@ without using Galaxy.
 
 The Galaxy developers support extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server.
 These are complex and powerful with substantial
-learning curves but can be used to turn almost any command line software package into a tool.
+learning curves but can be used to turn almost any software package into a tool.
 
-For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" that script in a few minutes, using a
-specialised Galaxy tool for developers that generates tools from scripts.
+For those new to Galaxy, in many simple cases, it may be possible to generate a new tool "wrapping" a script in a few minutes, using a
+specialised Galaxy tool for developers that generates tools.
 
 This tutorial introduces that unusual tool.
 
@@ -111,14 +125,14 @@ This tutorial introduces that unusual tool.
 
 # The ToolFactory Appliance
 
-The ToolFactory is a specialised tool. It implements an automated, form driven code generator that installs newly generated tools so you can try them straight away
-in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes.
+The ToolFactory implements an automated, form driven wrapper code generator, and an installer for newly generated tools so you can try them straight away
+in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes - well, 5 or 10 perhaps.
 
-> ### {% icon tip %} The ToolFactory appliance provides a fully featured Galaxy server.
+> <tip-title>The ToolFactory appliance provides a fully featured Galaxy server.</tip-title>
 > - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
 and for developing new tools for new kinds of scientists using Galaxy.
 > - Any Galaxy tool from the toolshed can be installed and used.
-> - Any reasonably simple script can be generated as a tool.
+> - Any simple script can have a tool wrapper generated and installed as a new tool in the Appliance.
 > - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.
 > - Tool generation jobs can be rerun using the {% icon galaxy-refresh %} button on the history item after editing the form to make changes to the tool the user will see in Galaxy.
 > - The Appliance is a Toolfactory flavour of the [docker-galaxy-stable resource](https://github.com/bgruening/docker-galaxy-stable/tree/master/compose).
@@ -128,15 +142,18 @@ and for developing new tools for new kinds of scientists using Galaxy.
 >    - Usefulness will depend on sufficient hardware. Plenty of cores, RAM and disk storage are needed.
 >    - On a modern workstation or well-endowed laptop, it will perform well out of the box.
 >    - It will struggle on older consumer hardware with limited RAM and CPU capacity.
+>    - It is suitable only for development in a private deployment.
+>    - Production is best done on a professionally maintained service, but please, not a public one.
 {: .tip }
 
-The Appliance was developed for skilled programmers who need new Galaxy tools for their own use or for users they support. Any user comfortable with scientific or general
-scripting languages on a Linux command
-line may find it useful if they ever need a Galaxy tool that wraps a working script. Shell utilities and scripting language interpreters supported by Conda can be used.
+The Appliance was developed for programmers who need scripts they write turned in to new Galaxy tools for their own use and if sufficiently useful,
+for others to share. Any user comfortable with scientific or general scripting languages on a Linux command
+line may find it useful if they ever need a Galaxy tool that wraps a working script. Linux command line utilities and scripting language interpreters supported by Conda can be used.
+Some Conda packages can also be used without a script, but the focus is on scripts.
 
-Generated tools pass Planemo lint if they take an input, and are functionally indistinguishable from equivalent manually written tools. A second tool can be used to finalise
-ToolFactory untested archives. It uses Planemo. The tested toolshed archives contain a test based on the test data provided
-at tool generation.
+Generated tools pass Planemo lint (if they take an input - some of the test tools do not!), and are functionally indistinguishable from equivalent
+manually written tools. A second tool can be used to finalise ToolFactory untested archives. It uses Planemo.
+The tested toolshed archives contain a test based on the test data provided at tool generation.
 
 Working generated examples using bash, Python, Rscript, Lisp, Prolog, Perl and sed are provided and described below. Many demonstrate ToolFactory features.
 All can be updated and changed easily, supporting learning by experimenting. More useful tools can be developed and tested using more complex scripts and as many inputs, outputs
@@ -146,11 +163,13 @@ If you are a scientist/programmer or software developer new to Galaxy and new to
 It introduces an automated way to convert any useful script into a toolshed ready tool, quickly *inside* Galaxy.
 
 
-> ### {% icon tip %} Alternative ways to generate tools:
-> - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server) is a rapidly developing specialised semi-automated tool building environment with VCS bindings.
-> - Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
->    - Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
->    - Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
+> <tip-title>Alternative ways to generate and see tools:</tip-title>
+> - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server)
+>   - Undergoing rapid development.
+>   - Specialised semi-automated tool building environment with VCS bindings.
+> - Planemo can manually [generate and serve tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
+>    - Planemo is recommended for developers who will focus on Galaxy tools on the command line. Outstanding documentation.
+>    - Widely used. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
 >    - No GUI. Command line only. Can create archives with additional steps.
 >    - Need to pass all i/o and parameter details at once on the command line.
 >    - Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
@@ -181,7 +200,7 @@ such as "Hello, Galaxy Training Network".
 
 Save the following sample as `hello.sh`:
 
- > ### {% icon code-in %} Starting bash script: Hello World
+ > <code-in-title>Starting bash script: Hello World</code-in-title>
  > ```bash
  > #!/bin/bash
  > echo "Hello $1!"
@@ -227,15 +246,12 @@ Bash is used here but any scripting language available in Conda could probably b
 
 ### Putting the plan into action using the ToolFactory
 
-Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
-(Apologies for the poor quality - will try to make a shorter one.)
-
 The form collects all the information needed for a new Galaxy tool. It is long and complex as a result, particularly with many repeated form elements for more complex tools.
 Much of what is collected is used to construct a command line for the script when the generated tool runs.
 Other information such as the name and dependencies are needed to construct the relevant
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
-> ### {% icon details %} Detail to explore: Annotated ToolFactory form for the `Hello World` example
+> <details-title>Detail to explore: Annotated ToolFactory form for the `Hello World` example</details-title>
 > ![First part of the form](../../images/ToolFactory_hello1form.png "The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.")
 >
 > ![Second part of the form](../../images/ToolFactory_hello2form.png "The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.")
@@ -248,7 +264,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the `ToolFactory Generated Tools` submenu.
 Text on the form is specified in the XML and it all comes from the ToolFactory form.
 
-> ### {% icon details %} Detail to explore: Generated XML and tool form
+> <details-title>Detail to explore: Generated XML and tool form</details-title>
 >
 > [Galaxy XML documentation is here](https://docs.galaxyproject.org/en/latest/dev/schema.html)
 >
@@ -315,7 +331,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 {: .details}
 
 
-> ### {% icon tip %} If this is confusing
+> <tip-title>If this is confusing</tip-title>
 >
 > If you are not yet familiar with the basics of Galaxy tools covered in the
 > [tool integration training material]({% link topics/dev/tutorials/tool-integration/slides.html %}), the example form and XML
@@ -325,7 +341,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 {: .tip}
 
-> ### {% icon comment %} Limits and scope
+> <comment-title>Limits and scope</comment-title>
 >
 > - It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
 > - Scripts are easier than some Conda packages
@@ -347,7 +363,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 # Installation
 
-> ### {% icon hands_on %} Hands-on: Launching the Appliance
+> <hands-on-title>Launching the Appliance</hands-on-title>
 >
 > 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
 >
@@ -359,39 +375,48 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 > 4. Change to the compose directory, pull the images from quay.io and launch it
 >
-> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> > <warning-title>`Pull` the images first as shown below to save time.</warning-title>
 > >
 > > If they are not found locally (`docker images`), the first time you run `docker-compose up`, docker will build them, taking much, much, much longer.
 > >
 > {: .warning}
 >
->    > ### {% icon code-in %} Input Bash: Prepare a local copy of the configuration for `docker-compose` to read.
+>    > <code-in-title>Bash: Installing the docker files, pulling and launching the Appliance</code-in-title>
 >    > ```bash
->    > wget https://github.com/fubar2/toolfactory-galaxy-server/archive/refs/heads/main.zip
->    > unzip main.zip
->    > cd toolfactory-galaxy-server-main/compose
+>    > git clone https://github.com/fubar2/toolfactory-galaxy-server
+>    > cd toolfactory-galaxy-server/compose
+>    > mkdir export
 >    > docker-compose pull
 >    > docker-compose up
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon tip %} Appliance tips
+>    > <tip-title>Appliance tips</tip-title>
 >    >
->    >  - First time start takes 5-10 minutes.
+>    >  - First time start takes 5-10 minutes after the pull completes.
 >    >      - Watching the first startup process activity log is highly recommended.
->    >      - It exposes the layers that make a Galaxy server work.
->    >      - They show when the Appliance is ready to use, when all Conda activity ceases.
 >    >      - Subsequent starts will be much faster.
 >    >  - The docker containers may not fit or run well on an underpowered machine.
 >    >      - Multiple CPU cores, 8GB of RAM and fast disk are needed for an enjoyable appliance.
 >    >  - This Appliance is recommended for use *only as a private disposable desktop development environment*.
 >    >    - The Appliance keeps no backup of any work.
+>    >    - The `export` directory has most of the changeable parts of the Appliance.
 >    >    - The user can backup the export directory if desired.
->    >    - A professionally managed service is a much safer bet for preserving real research.
->    >    - This is disposable if development goes awry.
+>    >    - A professionally managed Galaxy server is a much safer bet for preserving real research.
+>    >    - The Appliance is disposable if development goes awry.
 >    >  - Even then, secure your Appliance against potential miscreants on the local or public internet.
 >    >     - Change your admin password
 >   {: .tip}
+>
+>    > <tip-title>Appliance disposal to free up desktop resources when no longer needed</tip-title>
+>    > - Save any useful generated material from the `export` directory or from the running Appliance.
+>    > - Delete the `...compose/export` directory - you will need `sudo rm -rf export/*` and perhaps `sudo rm -rf export/.d*`
+>    >   - Then you can delete the parent `toolfactory-galaxy-server` directory
+>    > - Use `docker system prune` and respond `y` to the prompt to clean up any damaged or dangling images and containers.
+>    > - Use `docker volume prune` and respond `y` to the prompt to remove the shared galaxy-central and /etc/galaxy volumes.
+>    > - Remove the 2 pulled `quay.io/fubar2/toolfactory*` docker images in the usual way.
+>   {: .tip}
+>
 >
 > 5. Your appliance should run a local Galaxy on [port 8080 of your workstation](http://localhost:8080) after about 5 minutes of activity on the logs.
 >
@@ -399,7 +424,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    - This is obviously insecure but convenient and easily changed at first login.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
->    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    > <tip-title>Demonstration tools are the best functional documentation.</tip-title>
 >    >
 >    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
 >    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
@@ -410,7 +435,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Patience!
+>    > <tip-title>Patience!</tip-title>
 >    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 >    > Check for Conda or other processes if things seem stuck.
 >    {: .tip}
@@ -432,7 +457,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 # Hello World!
 
-> ### {% icon hands_on %} Hands-on: Building the Hello World example
+> <hands-on-title>Building the Hello World example</hands-on-title>
 >
 > 1. Run {% tool ToolFactory %} with the following parameters:
 >    - "Dependencies, optional script and script interpreter"
@@ -451,7 +476,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >          - *"Enter this parameter's label for the form"*: `Say hello to`
 >          - *"Positional ordinal \| argparse argument name"*: `1`
 >
->    > ### {% icon comment %} First time use involves a long pause in some installations
+>    > <comment-title>First time use involves a long pause in some installations</comment-title>
 >    > The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
 >    {: .comment}
 >
@@ -500,7 +525,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 
 ## Hello World: Continued
 
-> ### {% icon hands_on %} Hands-on: Modifying the Hello World example
+> <hands-on-title>Modifying the Hello World example</hands-on-title>
 >
 > 1. Rerun the output of your previous job, and make the following changes
 >
@@ -517,7 +542,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 
 ## Hello Collections!
 
-> ### {% icon hands_on %} Hands-on: Building a File Splitter
+> <hands-on-title>Building a File Splitter</hands-on-title>
 >
 > 1. Run {% tool ToolFactory %} with the following parameters:
 >    - *"New tool ID and title for outputs"*: `file_splitter`
@@ -563,7 +588,7 @@ You could extend this example to split a `.fastq` file which could speed up your
 They are also a convenient way to keep outputs together that are unlikely to be used downstream in a workflow, such as reports and images
 that a user might want to be able to easily view if they want without cluttering up the history.
 
-> ### {% icon warning %} Collection Testing
+> <warning-title>Collection Testing</warning-title>
 > The default generated test for output collections always passes because it doesn't test anything.
 > Supplying a test over-ride is recommended for collections.
 > For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
@@ -571,7 +596,7 @@ that a user might want to be able to easily view if they want without cluttering
 
 ## Done!
 
-> ### {% icon hands_on %} Hands-on: To safely shut the appliance down
+> <hands-on-title>To safely shut the appliance down</hands-on-title>
 >
 > 1. Type <kbd>Ctrl-C</kbd> in the terminal where you ran `docker-compose`. Most things will still be there next time you start it.
 >
@@ -589,6 +614,8 @@ that a user might want to be able to easily view if they want without cluttering
 and are not widely available, particularly in scientific fields coming to Galaxy.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples.
    - This can solve some of the limitations but if it is needed, it might be better to prepare the wrapper manually if a skilled developer is available.
+   - Any logic in the `<command>` section can probably always be replaced by equivalent code in a script at the cost of time and effort compared to templating.
+   - Other aspects of tool logic such as output filters based on other parameter values can only be implemented in the wrapper document, not in a tool script.
 - The ToolFactory can help new scientists and developers to quickly get some simple tools working for their colleagues while awaiting help with the complex ones.
 
 # Next Steps
@@ -597,12 +624,14 @@ Expand your knowledge further with the [Advanced ToolFactory tutorial]({% link t
 
 # Acknowledgements
 
-This tutorial is based on the work of thousands of contributers to the Galaxy project over the last 15 years or so. Thanks all!
+This tutorial is based on the work of thousands of individual contributers to the Galaxy project over the last 15 years or so.
+Thanks all! It has been a lot of fun.
 
-Special thanks are owed to:
+Special thanks to:
 
-- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
 - {% include _includes/contributor-badge.html id="hexylena" %} for
     - review and contribution to the tutorial and associated code.
-    - the idea of instant installation of generated tools for feedback.
+    - the vision of instant installation of generated tools for developer feedback.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
+- {% include _includes/contributor-badge.html id="bgruening" %} for making it easy to pop-up and flavour [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable)
+- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.

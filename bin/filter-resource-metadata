@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+require 'yaml'
+
+key = ARGV[0]
+files = ARGV.drop(1)
+
+for fn in files do
+	data = YAML.load_file(fn)
+	if data.is_a?(Hash) and data.key?(key) && data[key] == true then
+		puts "#{fn}"
+	end
+end

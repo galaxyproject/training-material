@@ -26,7 +26,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
 in pattern classification, clustering, regression, association, time series prediction, optimiztion, and control {% cite JainEtAl %}.
@@ -36,7 +36,7 @@ image and video processing tasks. This gave way to the development of convolutio
 tailored to image and video processing tasks. In this tutorial, we explain what convolutional neural networks are, discuss
 their architecture, and solve an image classification problem using MNIST digit classification dataset using a CNN in Galaxy.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -72,13 +72,13 @@ for finding spatial relationships in the image data.
 
 ## Inspiration for convolutional neural networks
 
-In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information {% cite HubelWiesel %}.
+In 1959 Hubel and Wiesel conducted an experiment to understand how the visual cortex of the brain processes visual information ({% cite HubelWiesel %}).
 They recorded the activity of the neurons in the visual cortex of a cat while moving a bright line in front of the cat. They noticed that some cells fire
 when the bright line is shown at a particular angle and a particular location (They called these **simple** cells). Other neurons fired when the bright
 line was shown regardless of the angle/location and seemed to detect movement (They called these **complex** cells). It seemed complex cells receive
 inputs from multiple simple cells and have an hierarchical structure. Hubel and Wiesel won the Noble prize for their findings in 1981.
 
-In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed Neocognitron ({% cite Fukishima %}), a hierarchical neural
+In 1980, inspired by hierarchical structure of complex and simple cells, Fukushima proposed *Neocognitron* ({% cite Fukishima %}), a hierarchical neural
 network used for handwritten Japanese character recognition. Neocognitron was the first CNN, and had its own training algorithm. In 1989, LeCun et. al.
 ({% cite LeCunEtAl %}) proposed a CNN that could be trained by backpropagation algorithm. CNN gained immense popularity when they outperformed other
 models at ILSVRC (ImageNet Large Scale Visual Recognition Challenge). ILSVRC is a competition in object classification and detection on hundreds of
@@ -111,7 +111,7 @@ a 28 pixel by 28 pixel grayscale image. Each pixel is represented by a number be
 values in total), and the values are randomly set to 0 or 1. Convolution is the process of placing the 3 by 3 filter on the top left
 corner of the image, multiplying filter values by the pixel values and adding the results, moving the filter to the right one pixel at
 a time and repeating this process. When we get to the top right corner of the image, we simply move the filter down one pixel and
-restart from the right. This process ends when we get to the bottom right corner of the image.
+restart from the left. This process ends when we get to the bottom right corner of the image.
 
 ![A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image](../../images/Conv_no_padding_no_strides.gif "A 3 by 3 filter applied to a 4 by 4 image, resulting in a 2 by 2 image ({% cite DumoulinVisin %})")
 
@@ -161,11 +161,7 @@ $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 
 
 Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
 illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. As Figures 8 and 9 show the output of a multi-channel
-2 dimensional filter is a single channel 2 dimensional image. Applying *multiple* filters to the input image results in a multi-channel 2 dimensional
-image for the output. For example, if the input image is 28 by 28 by 3 (rows x columns x channels), and we apply a 3 by 3 filter with 1 by 1 padding,
-we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28 by 28 by 15. Hence, the number of filters in a
-convolution layer allows us to increase or decrease the channel size.
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
 
 ![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
 
@@ -174,13 +170,18 @@ input image results in a multi-channel 2 dimensional image for the output. For e
 and we apply a 3 by 3 filter with 1 by 1 padding, we would get a 28 by 28 by 1 image. If we apply 15 filters to the input image, our output would be 28
 by 28 by 15. Hence, the number of filters in a convolution layer allows us to increase or decrease the channel size.
 
-![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of 3 input channel 2D convolution operation (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
+![Multiple cubes representing input vector, filter, and output in a 3 channel 2 dimensional convolution operation](../../images/Conv_multiple_channel_3d.gif "Three dimensional illustration of multiple input channel two dimensional convolution (Source: https://thomelane.github.io/convolutions/2DConvRGB.html)")
 
 ### Pooling layer
 
 The pooling layer performs down sampling to reduce the spatial dimensionality of the input. This decreases the number of parameters, which in turn
 reduces the learning time and computation, and the likelihood of overfitting. The most popular type of pooling is *max pooling*. Its usually a 2 by 2
 filter with a stride of 2 that returns the maximum value as it slides over the input data (similar to convolution filters).
+
+### Fully connected layer
+
+The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
+for classification of the image.
 
 ![A convolutional neural network with 3 convolution layers followed by 3 pooling layers](../../images/Conv_CNN.png "A convolutional neural network with 3 convolution layers followed by 3 pooling layers ({% cite OSheaEtAl %})")
 
@@ -189,11 +190,6 @@ for feature extraction at a different level of abstraction. For example, the fil
 edges. The filters in the next layer could detect shapes, and the filters in the last layer could detect collection of shapes. Filter values are randomly
 initialized and are learned by the learning algorithm. This makes CNN very powerful as they not only do classification, but can also automatically do
 feature extraction. This distinguishes CNN from other classification techniques (like Support Vector Machines), which cannot do feature extraction.
-
-### Fully connected layer
-
-The last layer in a CNN is a fully connected layer. We connect all the nodes from the previous layer to this fully connected layer, which is responsible
-for classification of the image.
 
 ## MNIST dataset
 
@@ -204,7 +200,7 @@ to compare various Machine Learning techniques.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history.
 >
@@ -212,7 +208,7 @@ to compare various Machine Learning techniques.
 >
 > 2. **Rename your history** to make it easy to recognize
 >
->    > ### {% icon tip %} Rename a history
+>    > <tip-title>Rename a history</tip-title>
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
@@ -239,7 +235,7 @@ to compare various Machine Learning techniques.
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Check that the datatype of all the three datasets is `tabular`.
+> 5. Check that the datatype of all four datasets is `tabular`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -250,9 +246,32 @@ to compare various Machine Learning techniques.
 In this section, we define a CNN and train it using MNIST dataset training data. The goal is to learn a model such that given an image
 of a digit we can predict whether the digit (0 to 9). We then evaluate the trained CNN on the test dataset and plot the confusion matrix.
 
+In order to train the CNN, we must have the One-Hot Encoding (OHE) representation of the training
+labels. This is needed to calculate the categorical cross entropy loss function. OHE encodes labels
+as a **one-hot** numeric array, where only one element is 1 and the rest are 0's. For example, if
+we had 3 fruits (apple, orange, banana) and their labels were 1, 2, and 3, the OHE
+represntation of apple would be (1,0,0), the OHE representation of orange would be (0,1,0), and the
+OHE representation of banana would be (0,0,1). For apple with label 1, the first element of array
+is 1 (and the rest are 0's); For Orange with label 2, the second element of the array is 1 (and the
+rest are 0's); And for Banana with label 3, the third element of the array is 1 (and the rest are 0's).
+We have 10 digits in our dataset and we would just have an array of size 10, where only one
+element is 1, corresponding to the digit, and the rest are 0's.
+
+### **Create One-Hot Encoding (OHE) representation of training labels**
+
+> <hands-on-title>One-Hot Encoding</hands-on-title>
+>
+> - {% tool [To categorical](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3) %}
+>    - *"Input file"* : Select `y_train`
+>    - *"Does the dataset contain header?"* : Select `No`
+>    - *"Total number of classes"*: Select `10`
+>    - Click *"Execute"*
+>
+{: .hands_on}
+
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
@@ -297,7 +316,7 @@ probability is predicted by CNN. The model config can be downloaded as a JSON fi
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -322,15 +341,15 @@ The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
+>        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Execute"*
 >
@@ -342,9 +361,9 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
@@ -359,9 +378,9 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 
 ### **Machine Learning Visualization Extension**
 
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
+> <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test`
 >    - *"Choose how to select data by column:"*: `All columns`
@@ -409,7 +428,7 @@ $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \
 You can calculate the Precision, Recall, and F score for other digits in a similar manner.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we explained the motivation for convolutional neural networks, explained their architecture, and discussed convolution
 operator and its parameters. We then used Galaxy to solve an image classification problem using CNN on MNIST dataset.

@@ -17,9 +17,11 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-subtopic: features
+subtopic: data
 tags:
+  - ansible
   - storage
+  - git-gat
 requirements:
  - type: "internal"
    topic_name: admin
@@ -37,57 +39,73 @@ of a sequencing run or similar project to a group of users on the servers.
 ![screenshot of data libraries]({{site.baseurl}}/topics/admin/images/data/data-library-screenshot.png)
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="data-library" %}
 
 # Setup
 
 Before we can import local data, we need to configure Galaxy to permit this. Additionally we will setup an example data library which we can use for demonstrative purposes.
 
-> ### {% icon hands_on %} Hands-on: Setting up Data Libraries
+> <hands-on-title>Setting up Data Libraries</hands-on-title>
 >
 > 1. We will add a pre-task to clone [a data repository](https://github.com/usegalaxy-eu/libraries-training-repo) into your machine. We will use this as the source for a library dataset.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -5,6 +5,9 @@
+>    @@ -8,6 +8,9 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
->       handlers:
->         - name: Restart Galaxy
->           systemd:
+>       roles:
+>         - galaxyproject.postgresql
+>         - role: natefoo.postgresql_objects
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the git repository to the pre-tasks"}
+>
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
+> 2. Take a minute to explore the [folders in our sample library.](https://github.com/usegalaxy-eu/libraries-training-repo). These will be important when we start loading data.
 >
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -28,6 +28,9 @@ miniconda_manage_dependencies: false
->
+>    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>     
 >     galaxy_config:
 >       galaxy:
->         # ... existing galaxy configurations ...
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>    {% endraw %}
 >    ```
+>    {: data-commit="Configure the library import directories"}
+>
+>    Note that the `/libraries/admin` will refer to a folder within the libraries-training-repo that we cloned in the pre-task, and likewise for `/libraries/user`
 >
 > 5. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
->    > ```
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
 {: .hands_on}
@@ -96,13 +114,13 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 
 There are multiple options for importing data from your server, we'll go through all of your choices below. But first, let's take a quick look at the example library structure we've provided.
 
-> > ### {% icon code-in %} Input: Bash
+> > <code-in-title>Bash</code-in-title>
 > > ```bash
 > > tree /libraries
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output: Bash
+> > <code-out-title>Bash</code-out-title>
 > > ```
 > > /libraries/
 > > ├── admin
@@ -120,6 +138,16 @@ There are multiple options for importing data from your server, we'll go through
 > {: .code-out}
 {: .code-2col}
 
+> <tip-title>admin@example.org</tip-title>
+> Note that in the user directories, admin@example.com and example.org are used, if you've used a different email address for *your* admin user, you'll need to copy one of these directories.
+{: .tip}
+
+> ```bash
+> 1.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
 We have a directory named `admin`, which will be available to all admin users (we set `library_import_dir: /libraries/admin` earlier.)
 
 Additionally we have a `user` directory, below the user directory are more directories with the user's email as they directory key. Data can be placed in here, and it will become accessible to those users (we set `user_library_import_dir: /libraries/user` for this.)
@@ -130,7 +158,7 @@ Additionally we have a `user` directory, below the user directory are more direc
 
 This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history
 
-![A select box is shown listing files in the user's history](../../images/data/import-admin.png)
+![A select box is shown listing files in the user's history](../../images/data/import-history.png)
 
 You can easily select multiple files and quickly import them.
 
@@ -141,6 +169,13 @@ If user directories are configured, as we did at the beginning of this tutorial,
 ![Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour.](../../images/data/import-user.png)
 
 This will enable the option for everyone, any unprivileged user with a folder in the `user_library_import_dir` directory *and* permissions on a data library can import things from their import directory.
+
+> <tip-title>Do you not see a directory here?</tip-title>
+> We pre-created a directory for someone registered as `admin@example.org`, but if you are logged in with an account registered with a different email, you'll see nothing.
+>
+> You can fix this by going into /libraries/user and `cp -Rv admin@example.org whatever-email-you-used`
+> Then it should appear in Galaxy.
+{: .tip}
 
 ## from import Directory (Admins only)
 
@@ -155,13 +190,13 @@ An important feature of data libraries importing is the ability to "link files i
 If your data is accessible via URL, you can write a yaml file to import and setup the data library automatically.
 We've included this file in the example data libraries repository we cloned at the beginning:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > cat /libraries/example-library.yaml
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output: Bash
+> <code-out-title>Bash</code-out-title>
 > ```yaml
 > ---
 > destination:
@@ -190,19 +225,19 @@ We've included this file in the example data libraries repository we cloned at t
 
 Let's try setting that up in our Galaxy!
 
-{% snippet faqs/galaxy/preferences_admin_api_key.md %}
+{% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 
-> ### {% icon hands_on %} hands-on: importing data library yaml.
+> <hands-on-title>hands-on: importing data library yaml.</hands-on-title>
 >
 > 1. re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 >
->    > ### {% icon code-in %} input: bash
+>    > <code-in-title>input: bash</code-in-title>
 >    > ```
 >    > . ~/ephemeris_venv/bin/activate
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon tip %} missing?
+>    > <tip-title>missing?</tip-title>
 >    >
 >    > then you might need to re-run the steps:
 >    >
@@ -215,13 +250,14 @@ Let's try setting that up in our Galaxy!
 >
 > 2. we'll use the `setup-data-libraries` command to install the data in this yaml file into a library in our galaxy.
 >
->    > ### {% icon code-in %} input: bash
->    > ```
+>    > <code-in-title>input: bash</code-in-title>
+>    > ```bash
 >    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
+>    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} output
+>    > <code-out-title>output</code-out-title>
 >    > ```
 >    > library name: mouse sequencing project
 >    > ```
@@ -239,6 +275,14 @@ Let's try setting that up in our Galaxy!
 ![Screenshot of data libraries, we're in a library folder named "Mouse sequencing project" and a directory and single file are shown. The file has an ugly URL as its name](../../images/data/imported.png)
 
 That's it! You should be able to see your newly created data library in your Galaxy.
+
+> ```bash
+> 2.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
+
+{% snippet topics/admin/faqs/missed-something.md step=6 %}
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 

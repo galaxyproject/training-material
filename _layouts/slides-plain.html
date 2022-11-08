@@ -1,0 +1,91 @@
+---
+layout: base
+---
+
+<section class="tutorial">
+	<a href="{{ site.github_repository }}/blob/main/{{ page.url | replace: 'slides-plain','slides' }}">View markdown source on GitHub</a>
+	<h1>{{ page.title }}</h1>
+		<h2>Contributors</h2>
+{% include _includes/contributors-line.html page=page %}
+
+		{% if page.questions %}
+		<h2>Questions</h2>
+		<ul>
+		{% for question in page.questions %}
+		<li>{{ question | markdownify }}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if page.objectives %}
+		<h2>Objectives</h2>
+		<ul>
+		{% for objective in page.objectives %}
+		<li>{{ objective | markdownify }}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if topic.requirements or page.requirements %}
+		<h2>Requirements</h2>
+		<ul>
+		{% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
+		{% include _includes/display_extra_training.md extra_trainings=page.requirements %}
+		</ul>
+		{% endif %}
+
+		<div><strong> {% icon last_modification %} Last modification:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
+
+	<hr />
+
+
+	{{ content | replace: "???", "<span>Speaker Notes</span>" | markdownify }}
+
+	<hr />
+
+{% if page.key_points %}
+<h2>Key Points</h2>
+
+<ul>
+{% for key_point in page.key_points %}
+<li>{{ key_point }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+
+{% if page.follow_up_training %}
+<h2>{% icon curriculum %} Do you want to extend your knowledge?</h2>
+Follow one of our recommended follow-up trainings:
+
+{% include _includes/display_extra_training_slides.md extra_trainings=page.follow_up_training %}
+
+{% endif %}
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+{% if page.logo == "GTN" %}
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 100px;"/>
+{% else %}
+{% if page.logo contains "://" %}
+<img src="{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+{% else %}
+<img src="{{ site.baseurl }}/{{ page.logo }}" alt="page logo" style="height: 100px;"/>
+{% endif %}
+{% endif %}
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+{% if page.cited %}
+<h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+{% bibliography --cited %}
+{% endif %}
+
+{% if page.contributions %}
+{% include _includes/funding-statement.md contributions=page.contributions %}
+{% endif %}

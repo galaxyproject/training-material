@@ -1,9 +1,10 @@
 ---
 title: Adding a custom database/build (dbkey)
 description: Galaxy may have several reference genomes built-in, but you can also create your own.
-area: datasets
+area: analysis
 box_type: tip
 layout: faq
+contributors: [shiltemann]
 ---
 
 - In the top menu bar, go to the *User*, and select *Custom Builds*

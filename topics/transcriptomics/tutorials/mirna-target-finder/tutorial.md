@@ -27,7 +27,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes ({% cite PlanasRiverola2019 %}, {% cite Ivashuta2011 %}). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
 
@@ -55,7 +55,7 @@ In plants, miRNAs can silence targets through RNA degradation as well as transla
 In this tutorial, inspired by {% cite Park2020 %}, we aim to explore the interplay between brassinosteroids and the miRNA-gene silencing pathway, considered one of the most versatile regulatory mechanisms in response to stressful situations in plants.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -76,26 +76,26 @@ The datasets to be used in this training can be classified into three groups: mi
 
 ### miRNA reads
 
-The miRNA datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575){:target="_blank"}. As in the previous case, for this tutorial, we will use a reduced version of the data.
+The miRNA datasets consist of six FASTQ files, obtained by using the Illumina GAxII sequencing platform. The plant samples were obtained from wild-type Ws-2 seedlings treated with mock or 1 μM EBR for 90 min before harvest. The original datasets are available in the NCBI SRA database, with the accession number [SRP258575](https://www.ncbi.nlm.nih.gov/sra?term=SRP258575). As in the previous case, for this tutorial, we will use a reduced version of the data.
 
 
 ### mRNA reads
 
-The mRNA datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274){:target="_blank"}. For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
+The mRNA datasets consist of four FASTQ files, generated through the Illumina HiSeq 2000 sequencing system. The samples were obtained from wild-type Columbia (Col-0) seedlings treated with mock or 100 nM BL for 4 hours. The original datasets are available in the NCBI SRA database, with the accession number [SRP032274](https://www.ncbi.nlm.nih.gov/sra?term=SRP032274). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
 
 ### Additional datasets
 
 In addition to the RNA-Seq reads obtained from the NCBI database, we will use datasets from two sources:
 
-- [AtRTD2](https://ics.hutton.ac.uk/atRTD/){:target="_blank"} is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as __Salmon__ and __Kallisto__ in analyzing _Arabidopsis_ RNA-Seq data.
-- [PmiREN](http://pmiren.com/){:target="_blank"} is a comprehensive functional plant miRNA database that includes more than 20,000 annotated miRNAs diverse plant species.
+- [AtRTD2](https://ics.hutton.ac.uk/atRTD/) is a high-quality transcript reference dataset developed to exploit the accuracy of transcript quantification tools such as __Salmon__ and __Kallisto__ in analyzing _Arabidopsis_ RNA-Seq data.
+- [PmiREN](http://pmiren.com/) is a comprehensive functional plant miRNA database that includes more than 20,000 annotated miRNAs diverse plant species.
 
 # Get data
 
 The first step of our analysis consists of retrieving the miRNA-Seq datasets from Zenodo and organizing them into collections.
 
-> ### {% icon hands_on %} Hands-on: Retrieve miRNA-Seq and mRNA-Seq datasets
+> <hands-on-title>Retrieve miRNA-Seq and mRNA-Seq datasets</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from Zenodo:
@@ -121,7 +121,7 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
 >
->         > ### {% icon tip %} Can't find *List Identifier*?
+>         > <tip-title>Can't find <i>List Identifier</i>?</tip-title>
 >         > Then you've chosen to upload as a 'dataset' and not a 'collection'. Close the upload menu, and restart the process, making sure you check *Upload data as*: **Collection(s)**
 >         {: .tip}
 >
@@ -136,7 +136,7 @@ The first step of our analysis consists of retrieving the miRNA-Seq datasets fro
 
 Next we will retrieve the remaining datasets.
 
-> ### {% icon hands_on %} Hands-on: Retrieve the additional datasets
+> <hands-on-title>Retrieve the additional datasets</hands-on-title>
 >
 > 1. Import the files from Zenodo:
 >
@@ -160,13 +160,13 @@ Next we will retrieve the remaining datasets.
 >
 {: .hands_on}
 
-> ### {% icon details %} Dataset subsampling
+> <details-title>Dataset subsampling</details-title>
 >
 > As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows:
 >
-> > ### {% icon hands_on %} Hands-on: Dataset subsampling
+> > <hands-on-title>Dataset subsampling</hands-on-title>
 > >
-> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs) %} with the following parameters:
+> > 1. {% tool [Sub-sample sequences files ](toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5) %} with the following parameters:
 > >    - {% icon param-files %} *"Multiple datasets"*: Each of the fastq files
 > >    - *"Subsampling approach"*: `Take every N-th sequence (or pair e.g. every fifth sequence)`
 > >    - *"N"*: `100`
@@ -186,12 +186,12 @@ Due to technical limitations, sequencing is considered an error-prone process. I
 
 Sequence quality control is therefore an essential first step in your analysis. We will use two popular tools for evaluating the quality of our raw reads: __FastQC__ and __MultiQC__.
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > In order to visualize the data from both collections together in the __MultiQC__ tool, it will be necessary to combine the results generated by __FastQC__.
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html){:target="_blank"}.
+> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Initial quality check
+> <hands-on-title>Initial quality check</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Control miRNA`
@@ -211,11 +211,11 @@ Sequence quality control is therefore an essential first step in your analysis. 
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Based on the information provided by __MultiQC__, is it necessary to trimming/filtering the reads?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The report generated by __MultiQC__ indicates that three quality parameters show values outside the recommended limits: per sequence G/C content, overrepresented sequences and adapter content.
 > >
@@ -230,7 +230,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 To remove the adapters contamination, we will employ the __Trim Galore__ tool, a wrapper script around [__Cutadapt__](https://journal.embnet.org/index.php/embnetjournal/article/view/200) and __FastQC__ which automates quality and adapter trimming.
 
-> ### {% icon hands_on %} Hands-on: Trimming of adapter sequences
+> <hands-on-title>Trimming of adapter sequences</hands-on-title>
 >
 > 1. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1) %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Single-end`
@@ -243,7 +243,7 @@ To remove the adapters contamination, we will employ the __Trim Galore__ tool, a
 
 Next, we will reassess the quality of the sequences to check if the adapters have been removed.
 
-> ### {% icon hands_on %} Hands-on: Post-processing quality check
+> <hands-on-title>Post-processing quality check</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Control miRNA trimmed`
@@ -267,11 +267,11 @@ The evaluation of the report generated by __MultiQC__ after having processed the
 ![fig7:Overexpressed sequences](../../images/miRNA_overepresented_processed.png "Report of overexpressed sequences in the miRNA reads")
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What do you think could be the cause of the high number of over-represented sequences?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > >  Two of the factors that may determine the abundance of overrepresented sequences are the existence of highly expressed miRNAs (Seco-Cervera et al. 2018), the existence of highly conserved sequence motifs within the miRNA ({% cite Glazov2008 %}), and contamination with foreign sequences.
 > >
@@ -285,7 +285,7 @@ Quantification of miRNAs requires to use two different tools:
 - The __MiRDeep2 Mapper__ tool for preprocessing the reads.
 - The __MiRDeep2 Quantifier__  tool for mapping the deep sequencing reads to predefined miRNA precursors and determining the expression of the corresponding miRNAs. It is carried out in two steps: firstly, the predefined mature miRNA sequences are mapped to the predefined precursors (optionally, predefined star sequences can be mapped to the precursors too). And second, the deep sequencing reads are mapped to the precursors.
 
-> ### {% icon hands_on %} Hands-on: Quantification of miRNAs
+> <hands-on-title>Quantification of miRNAs</hands-on-title>
 >
 > 1. {% tool [MiRDeep2 Mapper](toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Deep sequencing reads"*: `Control miRNA trimmed`
@@ -307,7 +307,7 @@ Quantification of miRNAs requires to use two different tools:
 
 To use the outputs generated by __MiRDeep2 Quantifier__ in the differential expression analysis, it is necessary to modify the datasets.
 
-> ### {% icon hands_on %} Hands-on: Edition of MiRDeep2 Quantifier outputs
+> <hands-on-title>Edition of MiRDeep2 Quantifier outputs</hands-on-title>
 >
 > 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
@@ -326,12 +326,12 @@ To use the outputs generated by __MiRDeep2 Quantifier__ in the differential expr
 
 __DESeq2__ is a tool for differential gene expression analysis based on a negative binomial generalized linear model. __DESeq2__ internally corrects the differences in library size, due to which no preliminary normalization of input datasets is required.
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > It is desirable to use at least three replicates of each experimental condition to ensure sufficient statistical power.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Differential expression analysis using __DESeq2__
+> <hands-on-title>Differential expression analysis using __DESeq2__</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
@@ -360,13 +360,13 @@ As can be seen, the main axes account for only 47% and 19% of the total variatio
 
 Next, we will extract those genes whose expression is statistically significantly differentially expressed (DE) due to BR treatment by selecting those whose adjusted p-value is less than or 0.05. A cut-off value of 0.05 indicates that the probability of a false positive result is less than 5%.
 
-> ### {% icon details %} p-value vs p-adj
+> <details-title>p-value vs p-adj</details-title>
 >
 > The p-value is a measure of the probability that an observed difference could have occurred just by random chance. A small p-value indicates that there is a small chance of getting this data if no real difference existed. A p-value threshold of 0.05 indicates that there is a 5% chance that the result is a false positive. The p-adj (also known as q-value) is an adjusted p-value which taking in to account the false discovery rate (FDR). Applying a FDR becomes necessary when we're measuring thousands of variables from a small sample set.
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Filter differentially expressed miRNAs
+> <hands-on-title>Filter differentially expressed miRNAs</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `DESeq2 results miRNA`
@@ -374,11 +374,11 @@ Next, we will extract those genes whose expression is statistically significantl
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many miRNAs show statistically significant differential expression?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Unfortunately, we have not detected any differentially expressed miRNAs. In this case, this is caused by the fact that the subsampled datasets don't have sufficient read depth to test for differential expression.
 > {: .solution}
@@ -387,7 +387,7 @@ Next, we will extract those genes whose expression is statistically significantl
 
 To get any sensible results, it is worth analyzing the full dataset. You can analyze the full datasets following the above tutorial. Otherwise, you can import the DESeq2 analysis results that we generated from full dataset into your history.
 
-> ### {% icon hands_on %} Hands-on: Retrieve the DESeq2 analysis results on full miRNA dataset
+> <hands-on-title>Retrieve the DESeq2 analysis results on full miRNA dataset</hands-on-title>
 >
 > 1. Import the files from Zenodo:
 >
@@ -405,7 +405,7 @@ To get any sensible results, it is worth analyzing the full dataset. You can ana
 
 Repeat the filtering step on the imported DESeq2 result.
 
-> ### {% icon hands_on %} Hands-on: Filter and sort differentially expressed miRNAs from the full dataset
+> <hands-on-title>Filter and sort differentially expressed miRNAs from the full dataset</hands-on-title>
 >
 > {: .comment}
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
@@ -422,12 +422,12 @@ Repeat the filtering step on the imported DESeq2 result.
 >    - *"everything in"*: `Descending order`
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many miRNAs are differentially expressed?
 > 2. How many miRNAs show statistically significant upregulation and what is the most upregulated miRNA?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Out of 442 miRNAs, 39 show significant differential expression.
 > > 2. There are 16 upregulated miRNAs and `Ath-miR156g` is the most upregulated one.
@@ -444,7 +444,7 @@ Once the differential expression analysis of miRNAs has been carried out, the ne
 
 As in the previous section, we shall begin by assessing the quality of our sequences.
 
-> ### {% icon hands_on %} Hands-on: Initial quality check
+> <hands-on-title>Initial quality check</hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Control mRNA`
@@ -463,11 +463,11 @@ As in the previous section, we shall begin by assessing the quality of our seque
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Are there any stats that indicate the need to process the samples in order to improve their quality?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > All the stats are within acceptable limits. However, the adapter content shows the presence of Illumina universal adapters in our reads, which can be removed to avoid possible interferences at later stages (Figure 10).
 > >
@@ -476,7 +476,7 @@ As in the previous section, we shall begin by assessing the quality of our seque
 > {: .solution}
 {: .question}
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > Although our samples have adapters, we are not going to trim them in this case. We will explain the reason in the next section.
 {: .comment}
 
@@ -493,14 +493,14 @@ The quasi-mapping approach by __Salmon__ requires a reference index to determine
 After determining the best mapping for each read, __Salmon__  generates the final transcript abundance estimation after modeling sample-specific parameters and biases. Reads that map equally well to more than one transcript will have the count divided between all of the mappings, thus avoiding the loss of information on the different gene isoforms.
 
 
-> ### {% icon details %} Quasi-mapping algorithm
+> <details-title>Quasi-mapping algorithm</details-title>
 > The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) that maps each k-mer in T to its SA interval (by default k = 31). During the quasi-mapping procedure, a read is scanned from left to right until a k-mer (k<sub>i</sub>, starting at position i on the read) is encountered that appears in h. The k<sub>i</sub> is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing the k-mer k<sub>i</sub>. Then, the Maximal Mappable Prefix (MMP<sub>i</sub>) is computed by finding the longest substring of the read that matches the reference suffixes. Owing to sequencing errors, the MMPs may not span the complete read. In this case, the next informative position (NIP) is determined based on the longest common prefix of the SA intervals of MMP<sub>i</sub>. Suffix array search continues from k-bases before NIP until the final NIP is less than k-bases before the read end. Finally, for each read, the algorithm reports the transcripts it mapped to, location and strand information ({% cite Srivastava2016 %}).
 > ![fig12:Quasi-mapping algorithm](../../images/salmon_quasialignment.png "Illustration of the quasi-mapping of a read using k=3. Hash table lookup of k<sub>i</sub> returns the suffix array interval [b, e). The base 'G' at position 6 in the read is a result of sequencing error. Hence, the MMP<sub>i</sub> is 'ATTGA' and the SA interval of MMP<sub>i</sub> is [b', e'). The next k-mer starts at k-bases prior to the NIP which is base after the longest common prefix of the interval [b',e'). In the end, the read in the above example most likely map to the suffix array at [e'-1, e').")
 >
 {: .details}
 
 
-> ### {% icon hands_on %} Hands-on: Quantify gene expression with __Salmon__
+> <hands-on-title>Quantify gene expression with __Salmon__</hands-on-title>
 >
 > 1. {% tool [Salmon quant](toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1) %} with the following parameters:
 >    - *"Select salmon quantification mode:"*: `Reads`
@@ -516,7 +516,7 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 > 2. Rename the outputs as `Salmon control mRNA (Quantification)` and `Salmon control mRNA (Gene Quantification)`
 > 3. Repeat the previous procedure by using the `BR treated mRNA` dataset
 >
->   > ### {% icon comment %} Quasi-mapping sequence requirements
+>   > <comment-title>Quasi-mapping sequence requirements</comment-title>
 >   > Trimming the reads is not required  when using this method, since if there are k-mers in the reads that are not in the hash table, they are not counted. Quantification of the reads is only as good as the quality of the reference transcriptome.
 >   {: .comment}
 >
@@ -541,11 +541,11 @@ NumReads          | The number of reads mapping to each transcript that was quan
 ------------------| ----------
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Could you explain why we did not trim the reads before?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The reason is that, since the k-mers which contain the adaptor sequences are not present in the transcriptome (from which the hash table is generated), they are omitted.
 > >
@@ -555,7 +555,7 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 ## Differential expression analysis of mRNAs: **DESeq2**
 
-> ### {% icon hands_on %} Hands-on: DEA using __DEseq2__
+> <hands-on-title>DEA using __DEseq2__</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
@@ -578,11 +578,11 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 ![fig13:PCA plot of mRNA samples](../../images/mRNA_PCA.png " PCA plot of differential expression data from control and BR treated samples.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > What conclusions about the similarity of the samples can be derived from the PCA plot?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > From the information provided by the plot, it is possible to state that there is a high similarity between the samples belonging to the same experimental conditions, since the first dimension (x-axis) allows to explain 81% of the variability, and the samples are located at opposite ends of the x-axis.
 > >
@@ -594,7 +594,7 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 To conclude the analysis of the differential expression of mRNAs, we will extract those transcripts that show a significant induction of expression in response to brassinosteroids. Before continuing with further analysis, similar to miRNA data analysis, import the DESeq2 results generated from full mRNA datasets.
 
-> ### {% icon hands_on %} Hands-on: Retrieve the DESeq2 analysis results on full mRNA dataset
+> <hands-on-title>Retrieve the DESeq2 analysis results on full mRNA dataset</hands-on-title>
 >
 > 1. Import the files from Zenodo:
 >
@@ -612,7 +612,7 @@ To conclude the analysis of the differential expression of mRNAs, we will extrac
 
 Now we continue with the DE genes analysis.
 
-> ### {% icon hands_on %} Hands-on: Extract significantly DE genes
+> <hands-on-title>Extract significantly DE genes</hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `mRNA_DESeq2_results_complete_dataset`
@@ -631,20 +631,20 @@ Now we continue with the DE genes analysis.
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many genes show statistically significant differential expression?
 > 2. How many of them are upregulated? And downregulated?
 > 3. What is the most significantly DE downregulated gene and what is it biological function?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The total number of genes whose expression differential between the two experimental conditions is 4176.
 > > 2. Of them, 328 are downregulated by the BR treatment and 778 are upregulated.
-> > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus){:target="_blank"}).
+> > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus)).
 > {: .solution}
 >
-> > ### {% icon comment %} Comments
+> > <comment-title></comment-title>
 > > The sum of genes considered as upregulated and downregulated is lower than the total number of genes whose expression is statistically different is due to the fact that we have selected only those whose difference in transcript abundance is greater than a factor of 2.
 > >
 > {: .comment}
@@ -655,8 +655,8 @@ Now we continue with the DE genes analysis.
 
 To predict which miRNAs target which mRNAs, first we need their transcriptomic sequences in FASTA format. Now we will obtain the sequences of miRNAs whose expression is induced by brassinosteroids.
 
-> ### {% icon hands_on %} Hands-on: Obtaining the sequences of upregulated miRNAs
-> > ### {% icon comment %} Comment
+> <hands-on-title>Obtaining the sequences of upregulated miRNAs</hands-on-title>
+> > <comment-title></comment-title>
 > >
 > > The following tools can be found in _Text Manipulation_ and _Filter and Sort_ sections.
 > >
@@ -687,7 +687,7 @@ To predict which miRNAs target which mRNAs, first we need their transcriptomic s
 
 To identify putative targets of upregulated miRNAs, it is necessary to obtain the sequences of all downregulated mRNAs in FASTA format.
 
-> ### {% icon hands_on %} Hands-on: Obtaining the gene sequences of downregulated mRNAs
+> <hands-on-title>Obtaining the gene sequences of downregulated mRNAs</hands-on-title>
 > 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
 >    - *"Delimited by"*: `Tab`
@@ -707,7 +707,7 @@ To identify putative targets of upregulated miRNAs, it is necessary to obtain th
 
 We are now ready to launch the search for miRNA target genes. For this we will use the __TargetFinder__ tool that is implemented and used for miRNA target prediction in plants ({% cite Srivastava2014 %}, {% cite Ma2017 %}).
 
-> ### {% icon hands_on %} Hands-on: identification of potential miRNA targets
+> <hands-on-title>identification of potential miRNA targets</hands-on-title>
 >
 > 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `Upreguled miRNA sequences`
@@ -723,14 +723,14 @@ Congratulations! You have identified the following 5 potential genes involved in
 
 Finally, we can access all the information available on the genes identified in the TAIR database:
 
-- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180){:target="_blank"}: ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
-- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220){:target="_blank"}: LAC7, LACCASE 7
-- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850){:target="_blank"}: Protein kinase superfamily protein
-- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260){:target="_blank"}: EXL2, EXORDIUM LIKE 2
-- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200){:target="_blank"}: PATATIN-LIKE PROTEIN 9, PLA IIIB
+- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180): ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
+- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220): LAC7, LACCASE 7
+- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850): Protein kinase superfamily protein
+- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260): EXL2, EXORDIUM LIKE 2
+- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200): PATATIN-LIKE PROTEIN 9, PLA IIIB
 
-> ### {% icon comment %} Comments
-> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113){:target="_blank"} and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093){:target="_blank"}, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
+> <comment-title></comment-title>
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
@@ -740,7 +740,7 @@ Finally, we can access all the information available on the genes identified in 
 
 As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
-> ### {% icon hands_on %} Hands-on: Import data from the Data Libraries
+> <hands-on-title>Import data from the Data Libraries</hands-on-title>
 > 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
 > 2. In the search box enter the following identifier: `4710649`
 > 3. Select the following files:
@@ -767,6 +767,6 @@ Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR
 ```
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.

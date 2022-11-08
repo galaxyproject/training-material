@@ -18,7 +18,14 @@ module Jekyll
       m = @text.match(format)
 
       if m
-        %Q(<span class="tool" data-tool="#{m[2]}" title="Tested with #{m[2]}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{m[2]}</span></span> )
+        # check if a variable was provided for the tool id
+        if context[m[2].tr('{}','')]
+          tool = context[m[2].tr('{}','')]
+        else
+          tool = m[2]
+        end
+
+        %Q(<span class="tool" data-tool="#{tool}" title="Tested with #{tool}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{tool}</span></span> )
       else
         %Q(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
       end

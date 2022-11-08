@@ -1,4 +1,5 @@
 require 'yaml'
+require './_plugins/gtn.rb'
 
 module Jekyll
   module Tags
@@ -29,7 +30,14 @@ module Jekyll
         file = render_variable(context) || @file
         validate_file_name(file)
 
-        @site.inclusions[file] ||= locate_include_file(file)
+        # This doesn't feel right, we should've been able to figure it out in
+        # render_variable(context) but it's not clear why that doesn't work.
+        begin
+          @site.inclusions[file] ||= locate_include_file(file)
+        rescue
+          @site.inclusions[file] ||= locate_include_file(context[file])
+        end
+
         inclusion = @site.inclusions[file]
 
         add_include_to_dependency(inclusion, context) if @site.config["incremental"]
@@ -38,6 +46,7 @@ module Jekyll
           context["include"] = parse_params(context) if @params
           x = "#{inclusion.render(context)}"
           p = context["include"]
+          count = 0
 
           box_start=""
           box_end=""
@@ -52,29 +61,43 @@ module Jekyll
             end
             icons = get_config(context)
 
-            if box_type == 'tip'
-                icon_text = icons['tip']
-                box_start = '> ### '+get_icon(icon_text)+' Tip: ' + metadata['title']
-                box_end   = "\n{: .tip}"
+            if context.registers[:page]&.key?('lang')
+              lang = context.registers[:page].fetch('lang', "en")
+              if lang.nil?
+                lang = "en"
+              end
             end
-            if box_type == 'hands_on'
-                icon_text = icons['hands_on']
-                box_start = '> ### '+get_icon(icon_text)+' Hands-on: ' + metadata['title']
-                box_end   = "\n{: .hands_on}"
+            if lang != "en" and lang != "es"
+              lang = "en"
             end
-            if box_type == 'comment'
-                icon_text = icons['comment']
-                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
-                box_end   = "\n{: .comment}"
+            if box_type != 'none' and !box_type.nil?
+              box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang, context.registers[:page]['path'])
+              box_start = '> ' + box_title
+              box_end = "\n{: ." + box_type + "}"
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
+          #if y =~ /contribute/
+            #puts "=== step 1   ===\n#{y}\n\n"
+          #end
+          z = markdownify(y)
+          #if z =~ /contribute/
+            #puts "=== step 2   ===\n#{z}\n\n"
+          #end
           if box_start != ""
-             y = y.gsub(/\R+/,"\n> ")
+             z = z.gsub(/\R/,"\n> ")
              #puts box_start+y+box_end
           end
+          #if z =~ /contribute/
+            #puts "=== step 3   ===\n#{z}\n\n"
+            #puts "=== MARKDOWN ===\n#{box_start+z+box_end}\n\n"
+            #puts "=== RENDERED ===\n#{markdownify(box_start+z+box_end)}\n\n"
+          #end
 
-          '<!--SNIPPET-->' + markdownify(box_start+y+box_end).gsub(/\R+/, '').gsub('<h3','<h3 data-toc-skip')
+          '<!--SNIPPET-->' + markdownify(box_start+z+box_end)
+            .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m){|m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
+            .gsub(/\R+/, '') # Strip out spaces or the boxes break
+            .gsub('<h3','<h3 data-toc-skip')
         end
       end
 

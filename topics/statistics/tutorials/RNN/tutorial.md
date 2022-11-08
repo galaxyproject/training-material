@@ -34,7 +34,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
@@ -49,7 +49,7 @@ generation, machine translation, speech recognition, image description, and text
 {% cite karpathyEtAl %}, {% cite li-etal-2017-deep %}). We then explain how RNN differ from feedforward networks,
 describe various RNN architectures and solve a sentiment analysis problem using RNN in Galaxy.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -62,8 +62,8 @@ describe various RNN architectures and solve a sentiment analysis problem using 
 
 In feedforward neural networks (FNN) a single training example is presented to the network,
 after which the the network generates an output. For example, a lung X-ray image is passed
-to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of
-training examples are presented to the network one at a time. For example, a sequence of
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a training example
+is a sequence, which is presented to the network one at a time. For example, a sequence of
 English words is passed to a RNN, one at a time, and the network generates a sequence of
 Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
 
@@ -117,7 +117,7 @@ Unlike FNN, in RNN the output of the network at time t is used as network input 
 ## Possible RNN inputs/outputs
 
 There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many,
-where we have one input and a variable number of output. One example application is image captioning, where a single image is provided
+where we have one input and a variable number of outputs. One example application is image captioning, where a single image is provided
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).
 
 ![Neurons forming a one-to-many recurrent neural network](../../images/RNN_1_to_n.png "One-to-many RNN")
@@ -138,14 +138,15 @@ we pass in n words in English and get m words in Italian (See Figure 9).
 
 Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM ({% cite hochreiter1997long %}), and 3) GRU ({% cite cho-etal-2014-learning %}).
 A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the
-state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
-**vanishing gradient** problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate
-the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer,
-but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers
-of the RNN, halting the learning process.
+state information and output for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the
+**vanishing gradient** problem. Basically, weights/biases are updated according to the gradient of the loss functions relative to 
+the weights/biases. The gradients are calculated recursively from the output layer towards the input layer (Hence, the name *backpropagation*).
+The gradient of the input layer is the product of the gradient of the subsequent layers. If those gradients are small, the gradient of the input
+layer (which is the product of multiple small values) will very small, resulting in very small updates to weights/biases of the initial layers
+of the RNN, effectively halting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
+tutorial (Please refer to {% cite hochreiter1997long %} and {% cite cho-etal-2014-learning %}), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or
 thousands of layers.
 
@@ -170,7 +171,7 @@ the next 10,000 words in our dataset. Reviews are limited to 500 words. They are
 
 ## Bag of words and TF-IDF
 
-If you don't care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
+If you don't care about the order of the words in a document, you can use bag of words (BoW) or term frequency inverse document frequency (TF-IDF).
 In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
 represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use
@@ -184,7 +185,7 @@ representation of these documents is given in Figure 10.
 BoW's advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification.
 
-In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the
+In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Term frequency, the
 frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided
 by the total number of documents (we usually use logarithm of the IDF).
 
@@ -218,7 +219,7 @@ cost function via backpropagation.
 
 # Get Data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -256,7 +257,7 @@ and plot the confusion matrix.
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
 > - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
@@ -285,7 +286,7 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
 > - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
@@ -310,9 +311,9 @@ The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -330,9 +331,9 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
@@ -348,9 +349,9 @@ the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
-> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
+> <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test`
 >    - *"Choose how to select data by column:"*: `All columns`
@@ -380,7 +381,7 @@ Figure 12 is the resultant confusion matrix for our sentiment analysis problem. 
 class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the *true* 1 (or positive sentiment) class labels
 (Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the *predicted* negative sentiment class labels (Our RNN
 predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the *predicted* positive class labels (Our RNN
-predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219
+predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we see that our RNN has correctly predicted 11,219
 reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having
 a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
 (True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given
@@ -393,7 +394,7 @@ $$ Recall = \frac{\text{True positives}}{\text{True positives + False negatives}
 $$ F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.84 * 0.89}{0.84 + 0.89} = 0.86 $$
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various
 RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment

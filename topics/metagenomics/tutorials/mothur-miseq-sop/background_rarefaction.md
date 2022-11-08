@@ -1,4 +1,4 @@
-> ### {% icon comment %} Background: Rarefaction
+> <comment-title>Background: Rarefaction</comment-title>
 >
 > To estimate the fraction of species sequenced, rarefaction curves are typically used. A rarefaction curve
 > plots the number of species as a function of the number of individuals sampled. The curve usually begins

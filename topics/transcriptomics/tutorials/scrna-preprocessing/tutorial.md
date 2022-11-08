@@ -53,11 +53,11 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 
 #### Why do Single Cell sequencing?
-{:.no_toc}
+
 
 Single-cell RNA (scRNA) sequencing is the technological successor to classical "bulk" RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in [previous hands-on material]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.
 
@@ -77,7 +77,7 @@ This tutorial is in part inspired by aspects of the [Hemberg workflow](https://h
 
 
 # Analysis Strategy
-{:.no_toc}
+
 
 Most scRNA sequencing techniques use pooled-sequencing approaches to generate a higher throughput of data by performing amplification and sequencing upon multiple cells in the same "pool". From a bioinformatics standpoint, this means that the output FASTQ data from the sequencer is batch-specific and contains all the sequences from multiple cells, where one sample of cells is equal to one batch.
 
@@ -94,7 +94,7 @@ The tutorial is structured in two parts:
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
 
-> ### {% icon comment %} 10x Datasets
+> <comment-title>10x Datasets</comment-title>
 >
 > 10x Genomics datasets can be processed in a much easier way that is outlined in the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
 >
@@ -105,7 +105,7 @@ The first part of this tutorial will deal with batches, and use example *FASTQ* 
 The second part of this tutorial will deal with merging several output count matrices from multiple single batches generated in the first portion. Here, a set of example count matrices are [merged together](#merging-count-matrices) and quality control performed. This produces a final count matrix valid for downstream analysis.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -126,7 +126,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 ![Workflow Upper]({% link topics/transcriptomics/images/scrna_workflow_upper.png %} "Single batch processing")
 
 
-> ### {% icon hands_on %} Hands-on: Data upload and organization
+> <hands-on-title>Data upload and organization</hands-on-title>
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
@@ -155,7 +155,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 
 ## Barcode Extraction
 
-> ### {% icon comment %} Note
+> <comment-title>Note</comment-title>
 >
 > Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}), as well as the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
 >
@@ -163,7 +163,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 
 We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst also making use of the provided barcodes file to filter for *specific* cell barcodes.
 
-> ### {% icon hands_on %} Hands-on: Barcode Extraction
+> <hands-on-title>Barcode Extraction</hands-on-title>
 >
 > 1. {% tool [UMI-tools extract](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1) %} with the following parameters:
 >    - *"Library type"*: `Paired-end Dataset Collection`
@@ -179,11 +179,11 @@ We will be demultiplexing our FASTQ batch data by performing barcode extraction 
 Verifying that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads is encouraged, using the method outlined in the above hands-on material.
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many reads were filtered out, and why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode `AAATTT` could have single base-pair sequencing errors that could modify it into `ATATTT` or `AAACTT`, etc).
 > >
@@ -208,7 +208,7 @@ The annotation GTF file must match the genome version used, since both use physi
 For alignment, we will use RNA-STAR for performance and splice-awareness.
 
 
-> ### {% icon hands_on %} Hands-on: Performing the Alignment
+> <hands-on-title>Performing the Alignment</hands-on-title>
 >
 > 1. {% tool [RNA-STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.7a) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Single-end`
@@ -231,13 +231,13 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 
 The purpose of MultiQC is to observe how well our reads were mapped against the reference genome. Many reads are discarded due to being of too low quality, or having ambiguous sequence content that can map them to multiple locations.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?
 > 2. What percentage of our reads are mapped to more than one locus?
 > 3. Is our overall mapping 'good' ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `59.5%` or ~80k reads were successfully mapped
 > > 2. `13.6%` are multiply mapped, and `3.7%` were mapped to too many loci
@@ -256,7 +256,7 @@ The purpose of MultiQC is to observe how well our reads were mapped against the 
 
 Before continuing let us first look back on some of the previous stages:
 
-> ### {% icon comment %} Recap of previous stages
+> <comment-title>Recap of previous stages</comment-title>
 >
 > 1. *Barcode Extraction*:
 >
@@ -272,7 +272,7 @@ Before continuing let us first look back on some of the previous stages:
 
 We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:
 
-> ### {% icon hands_on %} Hands-on: Confirming the Alignment Data
+> <hands-on-title>Confirming the Alignment Data</hands-on-title>
 >
 >  1. Click on the {% icon galaxy-eye %} symbol of the BAM output from STAR.
 >  2. There are many header lines that begin with `@` which we are not interested in.
@@ -288,12 +288,12 @@ The fields of the BAM file can be better explained at section 1.4 of [the SAM sp
 * `SRR568..._GCATTC_CTTCGT`: The *readname* appended by `_`, the cell barcode, another `_`, and then the UMI barcode.
 * `16`: The FLAG value
 
-> ### {% icon question %} What does the alignment flag value of 16 tell us about this read?
+> <question-title>What does the alignment flag value of 16 tell us about this read?</question-title>
 >
 >   <!-- TODO This information needs to be integrated into an actual tool -->
 >   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the [Picard web tool](https://broadinstitute.github.io/picard/explain-flags.html)
 >
->   > ### {% icon solution %} Solution
+>   > <solution-title></solution-title>
 >   > The read aligns to the reverse strand
 >   >
 >   {: .solution}
@@ -317,7 +317,7 @@ The main filtering steps performed on our reads so far have been relatively sile
 
 Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. Specifically, we want to keep all reads that align to the forward or reverse strand that also have less that 3 mismatches to the reference, and are also mapped only once to the reference.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Filter BAM datasets on a variety of attributes](toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1) %} with the following parameters:
 >    - {% icon param-file %} *"BAM dataset(s) to filter"*: `output_bam` (output of **RNA STAR** {% icon tool %})
@@ -351,13 +351,13 @@ Another filtering measure we can apply is to keep reads that we are confident ab
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Why are we filtering only for alignment flags `0` and `16`?
 > 2. What do the tag filters `nM:<3` and `NH:<2` do?
 > 3. What is happening at the rules stage?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Alignment flags `0` and `16` specify that we wish to only keep reads that align to the forward and reverse strands.
 > > 2. We are keeping reads that have a number of mismatches (`nM`) to the reference of less than 3, and has a number of hits (`NH`) across the reference of less than 2 (i.e. it is not a multiply-mapped read).
@@ -379,7 +379,7 @@ The **RNA-STAR** tools has the ability to count reads as it maps them. **Feature
 
 Unfortunately, both are currently limited to counting without being able to distinguish between different cells.
 
-> ### {% icon details %} Example
+> <details-title>Example</details-title>
 >
 > If we consider the number of reads that align to *GeneA*, the output given by these two tools is as follows:
 >
@@ -407,7 +407,7 @@ Unfortunately, both are currently limited to counting without being able to dist
 
 In order to obtain this desired format, we must use **UMI-tools count** to perform the counting. However, this tool is dependent on **FeatureCounts** to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.
 
-> ### {% icon comment %} Verifying missing gene name
+> <comment-title>Verifying missing gene name</comment-title>
 > You can check this yourself by examining the {% icon galaxy-eye %} of the BAM file *"STAR Alignment file"*
 {: .comment}
 
@@ -415,7 +415,7 @@ In order to obtain this desired format, we must use **UMI-tools count** to perfo
 
 Let us annotate our BAM file with desired gene tags.
 
-> ### {% icon hands_on %} Hands-on: Quantification assist via FeatureCounts
+> <hands-on-title>Quantification assist via FeatureCounts</hands-on-title>
 >
 > 1. {% tool [FeatureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Alignment file"*: `mapped_reads` (output of **Filter BAM** {% icon tool %})
@@ -436,14 +436,14 @@ Let us annotate our BAM file with desired gene tags.
 The `XS` and `XT` tags in the BAM file will now form the basis for counting reads.
 With all the relevant data now in our BAM file, we can actually perform the counting via `UMI-tools count`.
 
-> ### {% icon comment %} Verifying added gene name
+> <comment-title>Verifying added gene name</comment-title>
 > You can once again check this yourself by examining the {% icon galaxy-eye %} of the BAM file *"STAR Alignment file"*
 {: .comment}
 
 
 ### Counting Genes / Cell
 
-> ### {% icon hands_on %} Hands-on: Final Quantification
+> <hands-on-title>Final Quantification</hands-on-title>
 >
 > 1. {% tool [UMI-tools count](toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.5.1) %} with the following parameters:
 >    - {% icon param-file %} *"Sorted BAM file"*: `out_file1` (output of **FeatureCounts** {% icon tool %})
@@ -462,12 +462,12 @@ The important parameters to take note of are those given in the *Extra Parameter
 
 At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many genes do we have in the matrix?
 > 2. How many cells?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 2,140 lines
 > >    This information can be seen in the file preview window by clicking on the name of the file (**NOT** the {% icon galaxy-eye %} symbol).
@@ -481,7 +481,7 @@ At this stage, we now have a tabular file containing genes/features as rows, and
 The generation of a single count matrix is now complete, with the emphasis on the word *single* due to the fact that we often deal in multiple batches of sequencing data.
 
 
-> ### {% icon comment %} Recap of previous stages
+> <comment-title>Recap of previous stages</comment-title>
 >
 > 1. *Barcode Extraction*:
 >
@@ -503,7 +503,7 @@ The generation of a single count matrix is now complete, with the emphasis on th
 This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the process of merging multiple processed batches from the first stage, and performing qualitative filtering.
 
 
-> ### {% icon details %} Workflows For All Steps
+> <details-title>Workflows For All Steps</details-title>
 >
 > Galaxy provides a workflow that captures the process of all the above stages for a [single pair of FASTQ data](workflows/scrna_pp_celseq.ga):
 >
@@ -536,7 +536,7 @@ The count matrix we have generated in the previous section is too sparse to perf
 
 Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.
 
-> ### {% icon hands_on %} Hands-on: Data upload and organisation
+> <hands-on-title>Data upload and organisation</hands-on-title>
 >
 > 1. Create a new history and rename it (*e.g.* scRNA-seq multiple-batch tutorial)
 >
@@ -578,17 +578,17 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 
 ![Table Join]({% link topics/transcriptomics/images/scrna_fulltable.svg %} "Full Table Join")
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 > For more information on table joins, see [here](http://www.sql-join.com/sql-join-types/)
 {: .comment}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Why is it required to change the column headers in the Full matrix?
 > 2. Why were the cell labels in B1 and B2 the same, if they were labelling completely different cells?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Although the cell headers in each batch matrix is the same, the cells they label are *not* the same and need to be relabelled in the final matrix to tell us which batch they originated from.
 > > 2. The reason the cell headers are the same is because the cells use the same barcodes, due to fact that the *same* barcodes are sometimes used across *different* batches.
@@ -600,7 +600,7 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 
 Let us now merge our matrices from different batches. In order to ensure that our batches are merged in the order that we wish, we should first create a list of datasets so that our matrices are merged in the order given by the list.
 
-> ### {% icon hands_on %} Hands-on: Table Merge
+> <hands-on-title>Table Merge</hands-on-title>
 >
 > 1. **Create a Dataset List**
 >
@@ -619,7 +619,7 @@ The identifier column refers to the column where the gene names are listed. A 1:
 
 Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Each of these matrices/batches come from the same organism.
 >
@@ -627,7 +627,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 > 2. How much overlap in their detected genes did you observe?
 > 3. Why is this?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Given that they come from the same sample, and each matrix has ~15,000 genes, we would have expected a high overlap between matrices, yielding ~18,000 genes in the combined matrix if we assume a difference of +/- 500 genes per batch.
 > >
@@ -652,7 +652,7 @@ There are multiple possible ways to configure a plate for sequencing multiple ba
 
 Since the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.
 
-> ### {% icon details %} Details: Plating protocol
+> <details-title>Plating protocol</details-title>
 >
 > - Barcodes:
 >     These are each 8bp long, with an edit distance of 2, and there 192 of them.
@@ -689,7 +689,7 @@ This plating protocol can be converted into a more textual format, which allows 
 
 Let us now apply this protocol to our count matrix, and look for any cross-contamination.
 
-> ### {% icon hands_on %} Hands-on: Barcode Filtering
+> <hands-on-title>Barcode Filtering</hands-on-title>
 >
 > Select **Cross-contamination Barcode Filter** {%icon tool %} with the following parameters:
 >  - *"Input Matrix"*:`Column Join output` (merged matrices)
@@ -721,7 +721,7 @@ Let us now apply this protocol to our count matrix, and look for any cross-conta
 >
 {: .hands_on}
 
-> ### {% icon comment  %} Regular Expressions
+> <comment-title>Regular Expressions</comment-title>
 > The [regular expression](https://www.regular-expressions.info/quickstart.html) (RegEx) used in the final steps of the above *Hands-On* is required in order to tell us how to capture the important information in the cell headers contained in brackets `(` `)`, where `\\d` denotes an expected digit, and `[ACTG]+` denotes 1 or more characters matching A or C or T or G.
 >
 > The information captured in the brackets `(` `)` can then be placed in the desired arrangement, where `Place \\1 Matches \\2 Here \\3` would place the first `\\d` after "Place ", the second after "Matches ", and so on.
@@ -739,13 +739,13 @@ Two things to take note of:
 1. In the pre-filter plot, we can see how only half of the sequences in each batch map to half the barcodes. This shows very little cross-contamination, and proves that our data is real.
 2. The post-filter plot essentially removes the false barcodes from each batch and retains only the 'Real' barcodes.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?
 > 1. Which batches yield worrying levels of cross-contamination?
 > 1. Which batches should we remove from all further analysis?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Because only half the barcodes in each batch were real. The *UMI-tools extract* took the entire barcodes file to filter against each batch, and the *UMI-tools count* also took the entire barcodes file to count against each batch. Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of $$8 * 192 = 1536$$ cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in $$768$$ cells.
 > > 1. Batch 4 and Batch 6 both appear to have a significant number of mid-to-high range counts in cells under the *False Positives* section in these batches. This means that the cell barcodes that we should *not* be detecting in those batches, did in fact detect cells.
@@ -760,7 +760,7 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 -->
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 

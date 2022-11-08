@@ -3,7 +3,12 @@ module Jekyll
 
     def initialize(tag_name, text, tokens)
       super
-      @text = text.strip
+      parts = text.strip.split
+      @text = parts[0]
+      @aria = true
+      if parts[1] == 'aria=false' then
+        @aria = false
+      end
     end
 
     def render_for_text(icon)
@@ -15,9 +20,17 @@ module Jekyll
       end
 
       if icon.start_with?("fa")
+        if @aria
           %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        else
+          %Q(<i class="#{icon}" aria-hidden="true"></i>)
+        end
       elsif icon.start_with?("ai")
+        if @aria
           %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+        else
+          %Q(<i class="ai #{icon}" aria-hidden="true"></i>)
+        end
       end
     end
 

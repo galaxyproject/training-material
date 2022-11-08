@@ -3,11 +3,12 @@ title:  Getting your API key
 area: user preferences
 box_type: tip
 layout: faq
+contributors: [hexylena,shiltemann,bebatut]
 ---
 
 {% if include.dev %}
 A quick way to get an API key is to create a new user on our local Galaxy server. Navigate to the Galaxy base directory and execute the [run.sh](https://github.com/galaxyproject/galaxy/blob/dev/run.sh) script. This starts the Galaxy server.
-{% else %}
+{% elsif include.admin %}
 Galaxy admin accounts are specified as a comma-separated email list in the `admin_users` directive of `galaxy.yml` . If you have set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, this is set to `admin@example.org`.
 {% endif %}
 

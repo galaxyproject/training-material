@@ -17,10 +17,12 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+subtopic: id-quant
+tags: [DDA]
 ---
 
 # Purpose
-{:.no_toc}
+
 
 A basic question while planning any quantitative proteomic experiment is the choice between label-free versus labelled quantitation. Here, we would like to address and discuss benefits and drawbacks of each method.
 Finally, we will offer a guideline to arrive at a decision on which labeling method to use. We will not discuss various labelling methods here in detail, but focus on our basicquestion on the choice of quantitation method.
@@ -29,7 +31,7 @@ A basic overview of various quantitation techniques is shown below ([original ar
 
 ![Overview quantitation techniques](../../images/Vaudel_label_vs_labelfree.png)
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -66,12 +68,12 @@ A benefit of label free experiments is that any sample can be directly compared 
 - **Study design**: Label-free approaches have the advantage of being very adaptable, even after having started the study. New samples may be included at any time. In contrast, labelled approaches need the same number (n) of each condition. New samples cannot be included into the study, if they cannot be physically mixed with and measured together with a control.
 Labelled techniques like the ["Super-SILAC"](https://www.ncbi.nlm.nih.gov/pubmed/20364148) approach do reduce this problem, but also need to be carefully planned in beforehand.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the difference between metabolic and chemical labelling?
 > 2. What is the "Super-SILAC" approach?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. In metabolic labelling (e.g. "SILAC"), samples like cells or whole animals are labelled *in vivo* by providing amino acids containing stable isotope before starting the experiment. In chemical labelling, samples are labelled *in vitro* after extracting the proteins.
 > > 2. The "Super-SILAC" approach features mixing of easy obtainable control samples that are related to the sample of interest. An example is to use a mixture of several breast cancer cell lines to compare to breast cancer patient samples. The control sample usually is labelled with heavy isotopes, while the sample of interest is unlabelled. The "Super-SILAC" approach thus combines benefits of labelled and label-free experiments.
 > {: .solution }
