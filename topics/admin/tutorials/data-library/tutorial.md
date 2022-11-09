@@ -69,7 +69,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +        dest: /libraries/
 >       roles:
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
