@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Installation with Ansible" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-09 11:03:19 +0000" />
+<meta name="DC.date" content="2022-11-09 11:27:45 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-09 11:03:19 +0000",
+  "dateModified": "2022-11-09 11:27:45 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -1147,11 +1147,13 @@ variables in the requirements.yml file.</p>
 
       <div data-commit="Add ansible.cfg" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
 </span><span class="gi">+++ b/ansible.cfg
-</span><span class="p">@@ -0,0 +1,4 @@</span>
+</span><span class="p">@@ -0,0 +1,6 @@</span>
 <span class="gi">+[defaults]
 +interpreter_python = /usr/bin/python3
 +inventory = hosts
 +retry_files_enabled = false
++stdout_callback = yaml # Use the YAML callback plugin.
++bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 </span>   
 </code></pre></div>      </div>
 
@@ -1870,10 +1872,10 @@ So it is not always easy to tell what variables will be set, or what their final
 
       <div data-commit="Setup the vault file" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/ansible.cfg
 </span><span class="gi">+++ b/ansible.cfg
-</span><span class="p">@@ -2,3 +2,4 @@</span>
- interpreter_python = /usr/bin/python3
- inventory = hosts
+</span><span class="p">@@ -4,3 +4,4 @@</span> inventory = hosts
  retry_files_enabled = false
+ stdout_callback = yaml # Use the YAML callback plugin.
+ bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 <span class="gi">+vault_password_file = .vault-password.txt
 </span>   
 </code></pre></div>      </div>
@@ -3012,6 +3014,16 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
       </blockquote>
 
       <p>If you didn’t, you might have missed the first step in this hands-on.</p>
+
+      <blockquote class="tip">
+        <div id="tip-install-nginx-failed-emerg-socket-80-failed" class="box-title"><button type="button" aria-controls="tip-install-nginx-failed-emerg-socket-80-failed-contents" aria-expanded="true" aria-label="Toggle tip box: Install nginx - Failed [emerg] socket() [::]:80 failed"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install nginx - Failed [emerg] socket() [::]:80 failed<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>If you see this message:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
+</code></pre></div>        </div>
+
+        <p>This may be due to missing IPv6 support on your machine. It is extremely unlikely your operating system doesn’t support it, instead it was probably disabled. Check <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> and <code class="language-plaintext highlighter-rouge">/etc/sysctl.d/*</code> for <code class="language-plaintext highlighter-rouge">net.ipv6.conf.*.disable_ipv6=1</code>, or <code class="language-plaintext highlighter-rouge">/etc/default/grub</code> for <code class="language-plaintext highlighter-rouge">ipv6.disable=1</code></p>
+      </blockquote>
     </li>
     <li>
       <p>Check out the changes made to your server in <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-enabled/</code>, particularly the directory containing the <span class="notranslate">Galaxy</span> virtualhost.</p>
