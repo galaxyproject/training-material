@@ -2131,6 +2131,16 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    If you didn't, you might have missed the first step in this hands-on.
 >
+>    > <tip-title>Install nginx - Failed [emerg] socket() [::]:80 failed</tip-title>
+>    > If you see this message:
+>    >
+>    > ```
+>    > nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
+>    > ```
+>    >
+>    > This may be due to missing IPv6 support on your machine. It is extremely unlikely your operating system doesn't support it, instead it was probably disabled. Check `/etc/sysctl.conf` and `/etc/sysctl.d/*` for `net.ipv6.conf.*.disable_ipv6=1`, or `/etc/default/grub` for `ipv6.disable=1`
+>    {: .tip}
+>
 > 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
 {: .hands_on}
