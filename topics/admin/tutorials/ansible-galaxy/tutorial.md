@@ -354,11 +354,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,4 @@
+>    @@ -0,0 +1,6 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
 >    +retry_files_enabled = false
+>    +stdout_callback = yaml # Use the YAML callback plugin.
+>    +bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
@@ -1001,10 +1003,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/ansible.cfg
 >    +++ b/ansible.cfg
->    @@ -2,3 +2,4 @@
->     interpreter_python = /usr/bin/python3
->     inventory = hosts
+>    @@ -4,3 +4,4 @@ inventory = hosts
 >     retry_files_enabled = false
+>     stdout_callback = yaml # Use the YAML callback plugin.
+>     bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    +vault_password_file = .vault-password.txt
 >    {% endraw %}
 >    ```
@@ -2130,6 +2132,16 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    {: .code-2col}
 >
 >    If you didn't, you might have missed the first step in this hands-on.
+>
+>    > <tip-title>Install nginx - Failed [emerg] socket() [::]:80 failed</tip-title>
+>    > If you see this message:
+>    >
+>    > ```
+>    > nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
+>    > ```
+>    >
+>    > This may be due to missing IPv6 support on your machine. It is extremely unlikely your operating system doesn't support it, instead it was probably disabled. Check `/etc/sysctl.conf` and `/etc/sysctl.d/*` for `net.ipv6.conf.*.disable_ipv6=1`, or `/etc/default/grub` for `ipv6.disable=1`
+>    {: .tip}
 >
 > 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
