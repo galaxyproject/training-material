@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Installation with Ansible" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-25 09:20:24 +0000" />
+<meta name="DC.date" content="2022-11-09 11:03:19 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-25 09:20:24 +0000",
+  "dateModified": "2022-11-09 11:03:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -729,7 +729,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 25, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1040,8 +1040,8 @@ best practices and knowledge from previous admins codified for you.</p>
 +  version: 0.7.0
 +- src: <span class="notranslate">galaxy</span>project.postgresql
 +  version: 1.0.3
-+- src: natefoo.postgresql_objects
-+  version: 1.1
++- src: <span class="notranslate">galaxy</span>project.postgresql_objects
++  version: 1.1.0
 +- src: geerlingguy.pip
 +  version: 2.0.0
 +- src: uchida.miniconda
@@ -1079,7 +1079,7 @@ best practices and knowledge from previous admins codified for you.</p>
               <td>Installs our database, PostgreSQL</td>
             </tr>
             <tr>
-              <td><code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code></td>
+              <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql_objects</code></td>
               <td>Creates users and databases within PostgreSQL</td>
             </tr>
             <tr>
@@ -1203,7 +1203,7 @@ variables in the requirements.yml file.</p>
 
 <p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL use<span class="notranslate">rna</span>mes (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
 
-<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step. Additionally we’re setting a couple of variables to control the automatic backups, they’ll be placed in the <code class="language-plaintext highlighter-rouge">/data/backups</code> folder next to our user uploaded <span class="notranslate">Galaxy</span> data.</p>
+<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql_objects</code> role to handle this step. Additionally we’re setting a couple of variables to control the automatic backups, they’ll be placed in the <code class="language-plaintext highlighter-rouge">/data/backups</code> folder next to our user uploaded <span class="notranslate">Galaxy</span> data.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-installing-postgresql" class="box-title" aria-label="hands-on box: Installing PostgreSQL"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing PostgreSQL</div>
@@ -1257,7 +1257,7 @@ variables in the requirements.yml file.</p>
       <ul>
         <li>Add a pre-task to install the necessary dependencies: <code class="language-plaintext highlighter-rouge">python3-psycopg2</code>, <code class="language-plaintext highlighter-rouge">acl</code></li>
         <li>A role for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code>. This will handle the installation of PostgreSQL.</li>
-        <li>A role for <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="language-plaintext highlighter-rouge">become</code>/<code class="language-plaintext highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
+        <li>A role for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql_objects</code>, run as the postgres user. (You will need <code class="language-plaintext highlighter-rouge">become</code>/<code class="language-plaintext highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
 
       <div data-commit="Add initial galaxy playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
@@ -1273,7 +1273,7 @@ variables in the requirements.yml file.</p>
 +        name: ['acl', 'python3-psycopg2']
 +  roles:
 +    - <span class="notranslate">galaxy</span>project.postgresql
-+    - role: natefoo.postgresql_objects
++    - role: <span class="notranslate">galaxy</span>project.postgresql_objects
 +      become: true
 +      become_user: postgres
 </span>   
@@ -1319,7 +1319,7 @@ variables in the requirements.yml file.</p>
     <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.nginx</span>
     <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.postgresql</span>
     <span class="err">├──</span> <span class="err">geerlingguy.pip</span>
-    <span class="err">├──</span> <span class="err">natefoo.postgresql_objects</span>
+    <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.postgresql_objects</span>
     <span class="err">├──</span> <span class="err">uchida.miniconda</span>
     <span class="err">└──</span> <span class="err">use<span class="notranslate">galaxy</span>_eu.certbot</span>
 
@@ -1414,28 +1414,28 @@ variables in the requirements.yml file.</p>
 <span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Ensure PostgreSQL is running]</span> <span class="err">******************************************</span>
 <span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Revoke extra privileges]</span> <span class="err">*********************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Revoke extra privileges]</span> <span class="err">*********************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop databases]</span> <span class="err">******************************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Drop databases]</span> <span class="err">******************************************************</span>
 <span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create and drop users]</span> <span class="err">***********************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create and drop users]</span> <span class="err">***********************************************</span>
 <span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
 <span class="nn">[WARNING]</span><span class="err">:</span> <span class="err">Module</span> <span class="err">did</span> <span class="err">not</span> <span class="err">set</span> <span class="err">no_log</span> <span class="err">for</span> <span class="err">no_password_changes</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create groups]</span> <span class="err">*******************************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create groups]</span> <span class="err">*******************************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Add or remove users from groups]</span> <span class="err">*************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Add or remove users from groups]</span> <span class="err">*************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop groups]</span> <span class="err">*********************************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Drop groups]</span> <span class="err">*********************************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create databases]</span> <span class="err">****************************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create databases]</span> <span class="err">****************************************************</span>
 <span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant user database privileges]</span> <span class="err">**************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Grant user database privileges]</span> <span class="err">**************************************</span>
 <span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant extra privileges]</span> <span class="err">**********************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Grant extra privileges]</span> <span class="err">**********************************************</span>
 
 <span class="err">RUNNING</span> <span class="err">HANDLER</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Reload PostgreSQL]</span> <span class="err">******************************************</span>
 <span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
@@ -1605,7 +1605,7 @@ variables in the requirements.yml file.</p>
 </span><span class="gi">+        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 </span>   roles:
      - <span class="notranslate">galaxy</span>project.postgresql
-     - role: natefoo.postgresql_objects
+     - role: <span class="notranslate">galaxy</span>project.postgresql_objects
        become: true
        become_user: postgres
 <span class="gi">+    - geerlingguy.pip
@@ -2050,28 +2050,28 @@ index 3fe4444..11831ae 100644
 <span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Ensure PostgreSQL is running]</span> <span class="err">*********************************</span>
 <span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Revoke extra privileges]</span> <span class="err">************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Revoke extra privileges]</span> <span class="err">************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop databases]</span> <span class="err">*********************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Drop databases]</span> <span class="err">*********************************************</span>
 <span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create and drop users]</span> <span class="err">**************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create and drop users]</span> <span class="err">**************************************</span>
 <span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
 <span class="nn">[WARNING]</span><span class="err">:</span> <span class="err">Module</span> <span class="err">did</span> <span class="err">not</span> <span class="err">set</span> <span class="err">no_log</span> <span class="err">for</span> <span class="err">no_password_changes</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create groups]</span> <span class="err">**********************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create groups]</span> <span class="err">**********************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Add or remove users from groups]</span> <span class="err">****************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Add or remove users from groups]</span> <span class="err">****************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop groups]</span> <span class="err">************************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Drop groups]</span> <span class="err">************************************************</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create databases]</span> <span class="err">*******************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Create databases]</span> <span class="err">*******************************************</span>
 <span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant user database privileges]</span> <span class="err">*****************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Grant user database privileges]</span> <span class="err">*****************************</span>
 <span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
 
-<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant extra privileges]</span> <span class="err">*************************************</span>
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql_objects : Grant extra privileges]</span> <span class="err">*************************************</span>
 
 <span class="err">TASK</span> <span class="nn">[geerlingguy.pip : Ensure Pip is installed.]</span> <span class="err">**********************************************</span>
 <span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
@@ -3058,7 +3058,7 @@ In a training setting there is no need to request certificates that will be trus
         <td>None</td>
       </tr>
       <tr>
-        <td><code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code></td>
+        <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql_objects</code></td>
         <td>None</td>
       </tr>
       <tr>
