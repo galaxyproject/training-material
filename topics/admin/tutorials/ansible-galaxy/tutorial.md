@@ -282,8 +282,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
 >    +  version: 1.0.3
->    +- src: natefoo.postgresql_objects
->    +  version: 1.1
+>    +- src: galaxyproject.postgresql_objects
+>    +  version: 1.1.0
 >    +- src: geerlingguy.pip
 >    +  version: 2.0.0
 >    +- src: uchida.miniconda
@@ -304,7 +304,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`galaxyproject.galaxy` | Installs and configures the Galaxy application|
 >    >  |`galaxyproject.nginx` | Sets up a webserver|
 >    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
->    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
+>    >  |`galaxyproject.postgresql_objects` | Creates users and databases within PostgreSQL|
 >    >  |`geerlingguy.pip` | Ensures that pip is available|
 >    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
@@ -409,7 +409,7 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
 
 > <hands-on-title>Installing PostgreSQL</hands-on-title>
 >
@@ -462,7 +462,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 >    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
->    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
+>    - A role for `galaxyproject.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
 >    {% raw %}
 >    ```diff
@@ -479,7 +479,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +        name: ['acl', 'python3-psycopg2']
 >    +  roles:
 >    +    - galaxyproject.postgresql
->    +    - role: natefoo.postgresql_objects
+>    +    - role: galaxyproject.postgresql_objects
 >    +      become: true
 >    +      become_user: postgres
 >    {% endraw %}
@@ -522,7 +522,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── galaxyproject.nginx
 >    > > >     ├── galaxyproject.postgresql
 >    > > >     ├── geerlingguy.pip
->    > > >     ├── natefoo.postgresql_objects
+>    > > >     ├── galaxyproject.postgresql_objects
 >    > > >     ├── uchida.miniconda
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
@@ -615,28 +615,28 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] ******************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [natefoo.postgresql_objects : Revoke extra privileges] *********************************************
+>    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] *********************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop databases] ******************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop databases] ******************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Create and drop users] ***********************************************
+>    > TASK [galaxyproject.postgresql_objects : Create and drop users] ***********************************************
 >    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    > [WARNING]: Module did not set no_log for no_password_changes
 >    >
->    > TASK [natefoo.postgresql_objects : Create groups] *******************************************************
+>    > TASK [galaxyproject.postgresql_objects : Create groups] *******************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Add or remove users from groups] *************************************
+>    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] *************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop groups] *********************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop groups] *********************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Create databases] ****************************************************
+>    > TASK [galaxyproject.postgresql_objects : Create databases] ****************************************************
 >    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant user database privileges] **************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] **************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant extra privileges] **********************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] **********************************************
 >    >
 >    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] ******************************************
 >    > changed: [gat-0.training.galaxyproject.eu]
@@ -792,7 +792,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >           become: true
 >           become_user: postgres
 >    +    - geerlingguy.pip
@@ -1187,28 +1187,28 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *********************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [natefoo.postgresql_objects : Revoke extra privileges] ************************************
+>    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] ************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop databases] *********************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop databases] *********************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Create and drop users] **************************************
+>    > TASK [galaxyproject.postgresql_objects : Create and drop users] **************************************
 >    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    > [WARNING]: Module did not set no_log for no_password_changes
 >    >
->    > TASK [natefoo.postgresql_objects : Create groups] **********************************************
+>    > TASK [galaxyproject.postgresql_objects : Create groups] **********************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Add or remove users from groups] ****************************
+>    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] ****************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop groups] ************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop groups] ************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Create databases] *******************************************
+>    > TASK [galaxyproject.postgresql_objects : Create databases] *******************************************
 >    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant user database privileges] *****************************
+>    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] *****************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant extra privileges] *************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] *************************************
 >    >
 >    > TASK [geerlingguy.pip : Ensure Pip is installed.] **********************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
@@ -2161,7 +2161,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  Role                         | Role-Role Dependencies
 >  ----                         | ------------
 >  `galaxyproject.postgresql`   | None
->  `natefoo.postgresql_objects` | None
+>  `galaxyproject.postgresql_objects` | None
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables

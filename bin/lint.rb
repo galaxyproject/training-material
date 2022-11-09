@@ -489,7 +489,7 @@ module GtnLinter
       *check_dois(contents),
       *check_bad_link_text(contents),
       *incorrect_calls(contents),
-      *check_bad_cite(contents),
+      #*check_bad_cite(contents),
       *non_existent_snippet(contents),
       *bad_tool_links(contents),
       *check_tool_link(contents),
