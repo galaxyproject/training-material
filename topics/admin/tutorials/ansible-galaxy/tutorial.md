@@ -354,11 +354,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,4 @@
+>    @@ -0,0 +1,6 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
 >    +retry_files_enabled = false
+>    +stdout_callback = yaml # Use the YAML callback plugin.
+>    +bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
@@ -1001,10 +1003,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/ansible.cfg
 >    +++ b/ansible.cfg
->    @@ -2,3 +2,4 @@
->     interpreter_python = /usr/bin/python3
->     inventory = hosts
+>    @@ -4,3 +4,4 @@ inventory = hosts
 >     retry_files_enabled = false
+>     stdout_callback = yaml # Use the YAML callback plugin.
+>     bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    +vault_password_file = .vault-password.txt
 >    {% endraw %}
 >    ```
