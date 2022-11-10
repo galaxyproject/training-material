@@ -11,5 +11,5 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
-priority: 10
+priority: 11
 ---
