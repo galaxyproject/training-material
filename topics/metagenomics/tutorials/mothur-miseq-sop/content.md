@@ -1358,8 +1358,8 @@ We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} 
 {: .hands_on}
 
 Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
-more options available under the *calc* parameter. The mothur wiki describes some of these calculators
-[here](https://mothur.org/wiki/Calculators).
+more options available under the *calc* parameter. Descriptions of some of these calculators can be found on
+[the mothur wiki](https://mothur.org/wiki/Calculators).
 
 Examine the rarefaction curve output.
 
