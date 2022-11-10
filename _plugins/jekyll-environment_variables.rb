@@ -20,9 +20,12 @@ module Jekyll
       site.config['git_revision'] = git_head_ref
       site.config['gtn_fork'] = ENV['GTN_FORK']
       begin
-        site.config['git_tags'] = `git tag -l`.strip.split
+        tags = `git tag -l`.strip.split.sort
+        site.config['git_tags'] = tags
+        site.config['git_tags_recent'] = tags.reverse[0..2]
       rescue
         site.config['git_tags'] = []
+        site.config['git_tags_recent'] = []
       end
 
       # Add other environment variables to `site.config` here...

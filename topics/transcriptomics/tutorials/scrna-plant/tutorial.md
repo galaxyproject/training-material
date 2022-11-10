@@ -47,7 +47,7 @@ Single cell RNA-seq analysis is a cornerstone of developmental research and prov
 This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) ({% cite denyer2019spatiotemporal %}), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite ({% cite satija2015spatial %}), but here we will use the ScanPy analysis suite ({% cite wolf2018scanpy %}) integrated within the single-cell resources in Galaxy ({% cite tekman2020single %}).
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -56,7 +56,7 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 >
 {: .agenda}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
 >
@@ -74,7 +74,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 
 ## Data upload
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the two datasets from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
@@ -94,7 +94,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > We can peek at the `#shr` file, and determine the dimensionality and naming scheme of the data. The rows and the columns depict different variables.
 >
@@ -103,7 +103,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 > 1. How many cells in the dataset?
 > 1. How many genes in the dataset?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Rows, notice the long A-C-T-G based names.
 > > 1. Columns, "ATXG" are the gene prefixes commonly used by the Arabidopsis genomes.
@@ -118,14 +118,14 @@ If the above feels like a convoluted way to get the dimensionality, that's becau
 
 ## CSV to AnnData
 
-> ### {% icon hands_on %} Hands-on: Converting the Data
+> <hands-on-title>Converting the Data</hands-on-title>
 >
 > 1. {% tool [Import Anndata and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0) %} with the following parameters:
 >    - *"hd5 format to be created"*: `Anndata file`
 >        - *"Format for the annotated data matrix"*: `Tabular, CSV, TSV`
 >            - {% icon param-file %} *"Annotated data matrix"*: Multi-select both `SHR` and `WT` datasets
 >
->    > ### {% icon comment %} Checking Dimensionality
+>    > <comment-title>Checking Dimensionality</comment-title>
 >    >
 >    > We can now inspect the dimensionality of the dataset by "peeking" at the dataset in the history and observing the general information, simply by clicking on the name of the dataset.
 >    >
@@ -151,19 +151,19 @@ Currently we have two seperate datasets, but we can merge them into one single A
 
 ## Merge Batches and Relabel
 
-> ### {% icon hands_on %} Hands-on: Merging Data
+> <hands-on-title>Merging Data</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `SHR dataset` (output of **Import Anndata and loom** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >        - {% icon param-file %} *"Annotated data matrix to add"*: `WT dataset` (output of **Import Anndata and loom** {% icon tool %})
 >
->    > ### {% icon tip %} Tip: Scheduling
+>    > <tip-title>Scheduling</tip-title>
 >    >
 >    > You can queue on the next task without the previous one being complete yet, just ensure that the input dataset for the next task is at least orange and not grey.
 >    {: .tip}
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > At this point, the AnnData dataset batch information has a value of `0` for the "SHR" cells and `1` for the "WT" cells. This is fine if you wish to remember these two values for the remainder of the analysis since the step below is optional, however for plotting purposes it can just be easier to relabel the batch information with the action text labels `shr` and `wt`.
 >    {: .comment}
@@ -174,7 +174,7 @@ Currently we have two seperate datasets, but we can merge them into one single A
 >        - *"Key for observations or variables annotation"*: `batch`
 >        - *"Comma-separated list of new categories"*: `shr, wt`
 >
->    > ### {% icon warning %} Warning: Order matters!
+>    > <warning-title>Order matters!</warning-title>
 >    >
 >    > The order in which the datasets are concatenated can affect the accuracy of the new labelling. If the `#wt` dataset was first selected and then the `#shr` dataset concatenated onto it, then the comma-seperated list of new categories above should be inverted.
 >    {: .warning}
@@ -200,7 +200,7 @@ A happy coincidence here is that both datasets already had the exact same variab
 
 ## Filtering the Matrix
 
-> ### {% icon hands_on %} Hands-on: Generating some metrics
+> <hands-on-title>Generating some metrics</hands-on-title>
 >
 > 1. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
@@ -234,7 +234,7 @@ The above violin plots suggest quite a few outliers, mostly on the upper-end of 
 
 For this analysis, we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.
 
-> ### {% icon hands_on %} Hands-on: Filtering
+> <hands-on-title>Filtering</hands-on-title>
 >
 > 1. {% tool [Filter](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
@@ -274,7 +274,7 @@ For this analysis, we will set a minimum threshold of detectability that each ce
 
 If we inspect the resulting dataset, we see that the number of cells remaining is `5826` and the number of genes is `18913`, which is still a good number of cells and genes. It is good practice to save the raw data in case we need to use it data, so we "freeze the raw data" into a slot for later safe keeping.
 
-> ### {% icon hands_on %} Hands-on: Saving the original matrix
+> <hands-on-title>Saving the original matrix</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Filter** {% icon tool %})
@@ -291,13 +291,13 @@ We will also apply a log transformation to the cells, as this compresses the var
 
 After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean expression of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.
 
-> ### {% icon tip %} Highly Variable Genes?
+> <tip-title>Highly Variable Genes?</tip-title>
 >
 > Those of you who are familiar with the [ScanPy Tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
 > The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Normalize and Scale
+> <hands-on-title>Normalize and Scale</hands-on-title>
 >
 > 1. {% tool [Normalize](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
@@ -327,7 +327,7 @@ After normalising and regressing out unwanted factors, we will then scale the da
 Dimensionality reduction is the art of reducing a high dimensional dataset into a low dimensional "embedding" that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing > 10 000 genes into just 2 X/Y variables.
 
 
-> ### {% icon tip %} Tip: What is Dimensionality Reduction?
+> <tip-title>What is Dimensionality Reduction?</tip-title>
 >
 > You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
 >
@@ -338,7 +338,7 @@ This is usually a two step process:
 1. A Principal Component Analysis (PCA) is used to perform an optimized "rotation" of the ~ 20 000 "unit" gene axes that we have, in order to better fit the data. These new axes or "principal components" are then *linear* combinations of the original unit axes, with an associated score of how variable each new axis is. By sorting these principal components by most variable to least variable, we can select the top N components and discard the rest, leaving us with most of the variation still in the data. Usually we select the top 40 principal components, which from 20 000 is a *huge* reduction in the dimensionality of the dataset.
 1. We then perform a more complex kind of dimensionality reduction, one that does not assume any linearity in the axes. For scRNA-seq, this is either tSNE or UMAP, with UMAP being the main choice due to how flexible it is in incorporating new data. Though UMAP is capable of working on extremely high dimensional datasets, it is often limited by time and space constraints (read: the computer does not respond in a reasonable timeframe, or it crashes), and so therefore it is quite normal to feed UMAP the output of the PCA as input. This will then be a dimensionality reduction from 50 to 2. With these final 2 dimensions, we can plot the data.
 
-> ### {% icon hands_on %} Hands-on: PCA and UMAP
+> <hands-on-title>PCA and UMAP</hands-on-title>
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Inspect and manipulate** {% icon tool %})
@@ -352,7 +352,7 @@ This is usually a two step process:
 >        - *"The size of local neighborhood (in terms of number of neighboring data points) used for manifold approximation"*: `10`
 >        - *"Number of PCs to use"*: `40`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:40) for more information on how this process works.
 >    {: .comment}
@@ -365,7 +365,7 @@ This is usually a two step process:
 
 With our data now sufficiently "flat" and ready for human consumption, we can now do a naive plot of both the PCA and the UMAP and show cell assignments coloured by batch.
 
-> ### {% icon hands_on %} Hands-on: Plot the PCA and UMAP by Batch
+> <hands-on-title>Plot the PCA and UMAP by Batch</hands-on-title>
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -405,7 +405,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 | ![PCA]({% link topics/transcriptomics/images/scrna-plant/clusters_expected.png %}) | ![UMAP]({% link topics/transcriptomics/images/scrna-plant/dotplot_expected.png %})|
 
 
-> ### {% icon hands_on %} Hands-on: Generate and Plots Clusters
+> <hands-on-title>Generate and Plots Clusters</hands-on-title>
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -422,7 +422,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >            - *"Legend font size"*: `14`
 >            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > We print the legend on the data because it's easier to see where the cluster labels apply.
 >    {: .comment}
@@ -437,7 +437,7 @@ Let us here try to recreate the DotPlot from the paper using the clusters we hav
 
 ## DotPlot and Validating Cell Types
 
-> ### {% icon hands_on %} Hands-on: Dot Plot
+> <hands-on-title>Dot Plot</hands-on-title>
 >
 > 1. {% tool [Plot with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -498,7 +498,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 
 ## Relabel clusters
 
-> ### {% icon hands_on %} Hands-on: Cluster Re-labelling
+> <hands-on-title>Cluster Re-labelling</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})

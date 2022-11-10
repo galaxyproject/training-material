@@ -1,4 +1,5 @@
 require 'json'
+require './_plugins/gtn.rb'
 
 module Jekyll
   module JsonldFilter
@@ -19,6 +20,14 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
+    # todo migrate somewhere else
+    def how_many_topic_feedbacks(feedback, name)
+      feedback.select{|x| x["topic"] == name}.length
+    end
+    def how_many_tutorial_feedbacks(feedback, name)
+      feedback.select{|x| x["tutorial"] == name}.length
+    end
+
     # todo migrate somewhere more generic
     def filter_authors(contributors, contributions)
       if not contributors.nil?
@@ -26,6 +35,34 @@ module Jekyll
       else
         return contributions["authorship"]
       end
+    end
+
+    # todo: migrate somewhere else
+    def get_default_link(material)
+      url = nil
+
+      if material['type'] == "introduction"
+        subfolder = 'slides'
+      else
+        subfolder = 'tutorials'
+      end
+
+      if material['slides']
+        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
+        if material['type'] != "introduction"
+          url += "/slides.html"
+        else
+          url += ".html"
+        end
+      end
+
+      if material['hands_on']
+        if material['hands_on'] != "external" && material['hands_on'] != ""
+          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
+        end
+      end
+
+      url
     end
 
     def generate_dublin_core(material, site)
@@ -37,16 +74,9 @@ module Jekyll
         ["DC.identifier", site['github_repository']],
         ["DC.type", "text"],
         ["DC.title", material['title']],
-        ["DC.publisher", "Galaxy Training Network"]
+        ["DC.publisher", "Galaxy Training Network"],
+        ["DC.date", Gtn::ModificationTimes.obtain_time(material['path'])],
       ]
-
-      material['last_modified_at'].format = '%s'
-      begin
-        attributes += [
-          ["DC.date", Time.at(material['last_modified_at'].to_s.to_i)],
-        ]
-      rescue
-      end
 
       attributes += get_authors(material).map{|user|
         if site['data']['contributors'].has_key?(user) then
@@ -102,7 +132,6 @@ module Jekyll
     def generate_news_jsonld(page, site)
       authors = get_authors(page.to_h).map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
 
-      page['last_modified_at'].format = '%s'
       data = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
@@ -113,7 +142,7 @@ module Jekyll
         "description": page.excerpt[0..100].gsub(/\n/, ' '), # todo remove html tags
         "articleBody": page.content, # todo remove html tags
         "datePublished": page.date,
-        "dateModified": Time.at(page['last_modified_at'].to_s.to_i),
+        "dateModified": Gtn::ModificationTimes.obtain_time(page.path),
         "author": authors,
         "publisher": GTN,
         "mainEntityOfPage": {
@@ -156,7 +185,6 @@ module Jekyll
       }
 
       # aggregate everything
-      material['last_modified_at'].format = '%s'
       data = {
         # Properties from Course
         "@context": "http://schema.org",
@@ -199,7 +227,7 @@ module Jekyll
         #"correction":,
         #"creator":,
         #"dateCreated":,
-        "dateModified": Time.at(material['last_modified_at'].to_s.to_i),
+        "dateModified": Gtn::ModificationTimes.obtain_time(material['path']),
         #"datePublished":,
         "discussionUrl": site["gitter_url"],
         #"editor":,
@@ -327,7 +355,7 @@ module Jekyll
           })
         end
       end
-      data['description'] = description.join('\n')
+      data['description'] = description.join("\n")
 
       if material.key?("lang") then
         data['inLanguage'] = {

@@ -179,8 +179,4 @@ Debrief
 
 ### After the workshop
 
-<<<<<<< HEAD
 {% include {{ page.dir }}instructor-after.md %}
-=======
-{% include {{ page.dir }}instructor-after.md %}
->>>>>>> main

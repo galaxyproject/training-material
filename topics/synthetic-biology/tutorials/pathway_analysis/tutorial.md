@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering ({% cite Hrisson2022 %}).
 
@@ -45,7 +45,7 @@ Finally, the pathway are ranked based on the global score using the _Rank Pathwa
 
 Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -64,7 +64,7 @@ First we need to upload and prepare the following inputs to analyze:
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial named *Pathway Analysis*.
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) :
@@ -104,20 +104,20 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 
 ![This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway.](../../images/fba_calculation.png)
 
-> ### {% icon details %} Comment
+> <details-title>Comment</details-title>
 >
 > Blocking compounds that cannot provide any flux are temporarily removed from heterologous reactions for the FBA evaluation. Such cases can happen due to side substrates or products of predicted reactions that do not match any chassis compound, representing dead-end paths.
 >
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)
+> <hands-on-title>Calculating the flux of a target using Flux Balance Analysis (FBA)</hands-on-title>
 >
 > 1. Run {% tool [Flux balance analysis](toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Pathway (rpSBML)"*: Select `Heterologous pathways` (Input dataset collection) from your current history.
 >    - {% icon param-file %} *"Model (SBML)"*: Select `SBML_Model_iML1515.xml` (Input dataset) from your current history.
 >    - *"SBML compartment ID"*: Leave the default value `c`.
 >
->    > ### {% icon comment %} Choose a compartment corresponding to your model
+>    > <comment-title>Choose a compartment corresponding to your model</comment-title>
 >    >
 >    > You can specify the compartment from which the chemical species were extracted.
 >    > The default is `c`, the BiGG code for the cytoplasm.
@@ -125,7 +125,7 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 >
 >    - *"biomass reaction ID"*: Specify the biomass reaction ID that will be used for the "fraction" simulation, type `R_BIOMASS_Ec_iML1515_core_75p37M`.
 >
->    > ### {% icon comment %} How to select the biomass reaction ID ?
+>    > <comment-title>How to select the biomass reaction ID ?</comment-title>
 >    >
 >    > The biomass reaction ID objective is extracted from the current model *E.Coli iML1515*. You can search the term `biomass` in your XML model and pick the ID where the term `core` appears.
 >    {: .comment}
@@ -134,11 +134,11 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the FBA score for `rp_003_0001` pathway ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. View the SBML rp_003_0001 file and look for `fba_fraction` value in `<groups:listOfGroups>` section: value= `0.23693089430893874`.
 > >
@@ -158,23 +158,23 @@ Finally, the thermodynamic of a pathway is estimated by combining the Gibbs ener
 
 Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions
 
-> ### {% icon hands_on %} Hands-on: Compute thermodynamics values for each pathway using rpThermo tool
+> <hands-on-title>Compute thermodynamics values for each pathway using rpThermo tool</hands-on-title>
 >
 > 1. {% tool [Thermo](toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input File"*: `pathway_with_fba` (output of **Flux balance analysis** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The tool takes as input pathways in SBML format and returns annotated pathways (with thermodynamics information for each reaction) in SBML format too.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the thermodynamic score attributed to the reaction with the following *EC (Enzyme Commission) number* *2.5.1.29* for `rp_001_0001` pathway ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. View the SBML rp_001_0001 file and search the reaction ID `2.5.1.29` contained in `<listOfReactions>`. The corresponding value is indicated in `thermo_dGm_prime` field : `-242.348`.
 > >
@@ -186,23 +186,23 @@ Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based
 
 The _Pathway Score_ tool provides a global score for a given pathway previously annotated by the _Flux Balance Analysis_ and _Thermo_ tools. This score is computed by a machine learning (ML) model (cf. Machine Learning Global Scoring in {% cite Hrisson2022 %}). The model takes as input features describing the pathway (thermodynamic feasibility, target flux with fixed biomass, length) and the reactions within the pathway (reaction SMARTS, Gibbs free energy, enzyme availability score) and prints out the probability for the pathway to be a valid pathway. The ML model has been trained on literature data (cf. section Benchmarking with literature data in {% cite Hrisson2022 %}) and by a validation trial (cf. section Benchmarking by expert validation trial in {% cite Hrisson2022 %}).
 
-> ### {% icon hands_on %} Hands-on: Compute the global score using the _Pathway Score_ tool
+> <hands-on-title>Compute the global score using the _Pathway Score_ tool</hands-on-title>
 >
 > 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1) %} with the following parameters:
 >    - {% icon param-file %} *"Pathway (rpSBML)"*: `pathway_with_thermo` (output of **Thermo** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool will output a new annotated SBML file representing the pathway, containing the `global_score` annotation.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the computed global score for the `rp_001_0001` pathway ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. View the SBML file `rp_001_0001` and search for `global_score` : value=`0.975147980451584`.
 > >
@@ -214,12 +214,12 @@ The _Pathway Score_ tool provides a global score for a given pathway previously 
 
 Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based on their global score, to reveal what are the most likely pathways to produce the target molecule (here it is _lycopene_) in a given organism of interest (_E. coli_ in this tutorial).
 
-> ### {% icon hands_on %} Hands-on: Rank annotated pathways using rpRanker tool
+> <hands-on-title>Rank annotated pathways using rpRanker tool</hands-on-title>
 >
 > 1. {% tool [Rank Pathways](toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1) %} with the following parameters:
 >    - {% icon param-file %} *"Pathways"*: `scored_pathway` (output of **Score Pathway** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This tool will output a CSV file which contains the pathway IDs and their corresponding global score.
 >    {: .comment}
@@ -227,11 +227,11 @@ Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based 
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What are the 3 top-ranked pathways ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `002_0011`, `001_0011` ,`002_0006`.
 > >
@@ -243,7 +243,7 @@ Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based 
 
 In this section, you can run the Pathway Analysis Workflow more easily and fastly following these instructions:
 
-> ### {% icon hands_on %} Hands-on: Execute the entire workflow in one go.
+> <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
 > 1. Import your **Pathway Analysis Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga).
 >
@@ -257,14 +257,14 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 >    - *"Cell compartment ID"*: Enter value `c`.
 >    - *"biomass reaction ID"*: Specify the biomass reaction ID that will be restricted in the "fraction" simulation type `R_BIOMASS_Ec_iML1515_core_75p37M`.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > All the outputs will be automatically generated and identical to the previous ones. 
 >    {: .comment}
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 To select the best pathways for producing the lycopene in *E. coli*, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis workflow.
 

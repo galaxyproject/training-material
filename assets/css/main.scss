@@ -59,13 +59,16 @@ $code-out-color: #fb99d0;
 $hyperlink: #0067d6;
 
 @mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
-    margin-top: 3 * $tutorial-box-spacing;
-    margin-bottom: 2 * $tutorial-box-spacing;
+    margin-top: 4 * $tutorial-box-spacing;
 
-    padding: $tutorial-box-spacing $tutorial-box-spacing - 0.11rem $tutorial-box-spacing;
+    // Legacy
+    padding: ($tutorial-box-spacing - 0.4rem) ($tutorial-box-spacing - 0.11rem) $tutorial-box-spacing;
     border: 1px solid $bg-color;
     box-shadow: 3px 3px $bg-color;
-    & > h3 {
+
+    // The new replacement
+    & > h3 ,
+    > .box-title {
         font-size: $font-size + 3;
         margin-left: -$tutorial-box-spacing;
         margin-right: -$tutorial-box-spacing;
@@ -78,11 +81,18 @@ $hyperlink: #0067d6;
         color: $color;
         vertical-align: 1em;
         float: left;
+        border: none;
         border-top-left-radius: 8px;
         border-top-right-radius: 8px;
 
         .fa {
             padding-right: $tutorial-box-spacing / 5;
+        }
+
+        button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
         }
     }
 }
@@ -685,7 +695,7 @@ blockquote {
         @include tutorial-box($comment-color, $text-color);
     }
 
-    &.hands_on {
+    &.hands_on, &.hands-on {
         @include tutorial-box($handson-color, $text-color);
     }
 
@@ -1490,4 +1500,29 @@ a[target="_blank"]::after {
   display: inline-block;
   margin-left: 0.2em;
   height: 1em;
+}
+
+.tutorials-list {
+/* Big */
+@media (min-width:768px) {
+    .duplicate {
+        display: none;
+    }
+}
+
+/* Skinny */
+@media (max-width:767px) {
+    table.table.table-responsive {
+        display: inline-table;
+    }
+    tr th:not(:first-child) {
+        display: none;
+    }
+    tr td:not(:first-child) {
+        display: none;
+    }r
+    .duplicate {
+        display: unset;
+    }
+}
 }

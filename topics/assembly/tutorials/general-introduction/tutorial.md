@@ -19,11 +19,11 @@ contributors:
 ---
 
 # Genome assembly with Velvet: Background
-{:.no_toc}
+
 
 Velvet is one of a number of *de novo* assemblers that use short read sets as input (*e.g.* Illumina Reads). The assembly method is based on the manipulation of de Bruijn graphs, via the removal of errors and the simplification of repeated regions.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > For information about Velvet, you can check its (nice) [Wikipedia page](https://en.wikipedia.org/wiki/Velvet_assembler).
 {: .comment}
@@ -32,7 +32,7 @@ For this tutorial, we have a set of reads from an imaginary *Staphylococcus aure
 
 We also have a sequence for a reference genome that we will use later in the tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -43,7 +43,7 @@ We also have a sequence for a reference genome that we will use later in the tut
 
 # Get the data
 
-> ### {% icon hands_on %} Hands-on: Getting the data
+> <hands-on-title>Getting the data</hands-on-title>
 >
 > 1. Create and name a new history for this tutorial.
 >
@@ -57,7 +57,7 @@ We also have a sequence for a reference genome that we will use later in the tut
 >    https://zenodo.org/record/582600/files/wildtype.fna
 >    ```
 >
->    > ### {% icon tip %} Tip: Importing data via links
+>    > <tip-title>Importing data via links</tip-title>
 >    >
 >    > * Copy the link location (Right-click on the filename then "Copy Link Address")
 >    > * Open the Galaxy Upload Manager
@@ -75,18 +75,18 @@ We also have a sequence for a reference genome that we will use later in the tut
 >
 > 4. Inspect the content of a file.
 >
->    > ### {% icon tip %} Tip: Inspecting the content of a dataset
+>    > <tip-title>Inspecting the content of a dataset</tip-title>
 >    >
 >    > * Click on the {% icon galaxy-eye %} (eye) icon next to the relevant history entry
 >    > * View the content of the file in the central panel
 >    {: .tip}
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What are four key features of a FASTQ file?
 >    > 2. What is the main difference between a FASTQ and a FASTA file?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. Each sequence in a FASTQ file is represented by 4 lines: 1st line is the id, 2nd line is the sequence, 3rd line is not used, and 4th line is the quality of sequencing per nucleotide
 >    > > 2. In a FASTQ file, not only are the sequences present, but information about the quality of sequencing is also included.
 >    > {: .solution }
@@ -96,11 +96,11 @@ We also have a sequence for a reference genome that we will use later in the tut
 
 The reads have been sequenced from an imaginary *Staphylococcus aureus* bacterium using an Illumina DNA sequencing instrument. We obtained the 2 files we imported (`mutant_R1` and `mutant_R2`)
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Why do we have 2 files here if we only sequenced the bacteria once?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. The bacteria has been sequenced using paired-end sequencing. The first file corresponds to forward reads and the second file to reverse reads.
 > {: .solution }
 {: .question}
@@ -116,7 +116,7 @@ Before doing any assembly, the first questions you should ask about your input r
 
 We will evaluate the input reads using the FastQC tool. This tool runs a standard series of tests on your read set and returns a relatively easy-to-interpret report. We will use it to evaluate the quality of our FASTQ files and combine the results with MultiQC.
 
-> ### {% icon hands_on %} Hands-on: FastQC on a fastq file
+> <hands-on-title>FastQC on a fastq file</hands-on-title>
 >
 > 1. **FastQC** {% icon tool %} with the following parameters
 >    - {% icon param-files %} *"Raw read data from your current history"*:  `mutant_R1.fastq` and `mutant_R2.fastq`
@@ -135,19 +135,19 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
 
     This is important in setting maximum k-mer size for an assembly.
 
-    > ### {% icon comment %} Getting the length of sequences
+    > <comment-title>Getting the length of sequences</comment-title>
     >
     > * Click on **Configure Columns**
     > * Check **Length**
     > * Close the window
     {: .comment}
 
-    > ### {% icon question %} Questions
+    > <question-title></question-title>
     >
     > 1. How long are the sequences?
     > 2. What is the average coverage of the genome, given our imaginary *Staphylococcus aureus* bacterium has a genome of 197,394 bp?
     >
-    > > ### {% icon solution %} Solution
+    > > <solution-title></solution-title>
     > > 1. The sequences are 150 bp long
     > > 2. We have 2 x 12,480 sequences of 150 bp, so the average genome coverage is: 2 * 12480 * 150 / 197394, or approximately 19 X coverage.
     > {: .solution }
@@ -159,12 +159,12 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
 
     ![Sequence Quality Histograms with the mean quality value across each base position in the read](../../images/fastqc_per_base_sequence_quality_plot.png "The mean quality value across each base position in the read")
 
-    > ### {% icon question %} Questions
+    > <question-title></question-title>
     >
     > 1. What does the y-axis represent?
     > 2. Why is the quality score decreasing across the length of the reads?
     >
-    > > ### {% icon solution %} Solution
+    > > <solution-title></solution-title>
     > > 1. The y-axis represents the quality score for each base (an estimate of the error during sequencing).
     > > 2. The quality score is decreasing accross the length of the reads because the sequencing become less and less reliable at the end of the reads.
     > {: .solution }
@@ -183,7 +183,7 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
     The presence of highly recurring k-mers may point to contamination of reads with barcodes or adapter sequences.
 
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > For a fuller discussion of FastQC outputs and warnings, see the [FastQC website link](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), including the section on each of the output [reports](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/3%20Analysis%20Modules/), and examples of ["good"](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/good_sequence_short_fastqc.html) and ["bad"](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/bad_sequence_fastqc.html) Illumina data.
 {: .comment}
@@ -197,7 +197,7 @@ Now, we want to assemble our reads to find the sequence of our imaginary *Staphy
 
 The first step of the assembler is to build a de Bruijn graph. For that, it will break our reads into k-mers, *i.e.* fragments of length *k*. Velvet requires the user to input a value of *k* (k-mer size) for the assembly process. Small k-mers will give greater connectivity, but large k-mers will give better specificity.
 
-> ### {% icon hands_on %} Hands-on: Assemble the reads
+> <hands-on-title>Assemble the reads</hands-on-title>
 >
 > 1. **FASTQ interlacer** {% icon tool %} with the following parameters
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
@@ -242,12 +242,12 @@ Two files are generated:
 
 # Collect some statistics on the contigs
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many contigs have been built?
 > 2. What is the mean, min and max length of the contigs?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 190
 > > 2. To compute this information, we can use the Datamash tool on the 2nd columns (length). Be careful with the first line, the header. As a result, we obtain: 597.82 as mean, 1 as min and 12904 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column corresponds to length of the contig in k-mers. This means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We then obtain a mean contig length of 625.82 bp, a min contig of 29 bp and a max contig of 12,932 bp.
 > {: .solution }
@@ -255,7 +255,7 @@ Two files are generated:
 
 This table is limitted, but we will now collect more basic statistics on our assembly.
 
-> ### {% icon hands_on %} Hands-on: Collect fasta statistics on our contigs
+> <hands-on-title>Collect fasta statistics on our contigs</hands-on-title>
 >
 > 1. **Quast** {% icon tool %} with
 >    - *"Contigs/scaffolds output file"*: outputs of **velvetg**
@@ -269,11 +269,11 @@ This table is limitted, but we will now collect more basic statistics on our ass
 
 This tool generates 5 output files, but we will focus on the HTML report and the Icarus viewer.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What is represented in the Icarus viewer?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Icarus is a novel genome visualizer for accurate assessment and analysis of genomic draft assemblies. It draws contigs ordered from longest to shortest, highlights N50, N75 (NG50, NG75) and long contigs larger than a user-specified threshold
 > {: .solution }
 {: .question}
@@ -292,7 +292,7 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 - Mismatches compared to the reference genomes
 - Statistics about the assembly *per se*, such as the number of contigs and the length of the largest contig
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many contigs have been constructed?
 > 2. Which proportion of the reference genome do they represent?
@@ -301,7 +301,7 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 > 5. What are N50 and L50?
 > 6. Is there a bias in GC percentage induced by the assembly?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 190 contigs have been constructed, but only 47 have a length > 500 bp.
 > > 2. The contigs represents 87.965% of the reference genome.
 > > 3. 1 misassembly has been found: it corresponds to a relocation, *i.e.* a misassembly event (breakpoint) where the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference genome.
@@ -313,7 +313,7 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 
 # Discussion
 
-> ### {% icon hands_on %} (Optional) Hands-on: Rerun for values *k* ranging from 31 to 101
+> <hands-on-title>(Optional) Rerun for values <i>k</i> ranging from 31 to 101</hands-on-title>
 >
 > 1. **velveth** {% icon tool %} with the same parameters as before except
 >    - *"Hash Length"*: a value between 31 and 101
@@ -331,7 +331,7 @@ We have completed an assembly on this data set for a number of k values ranging 
 
 ![n50](../../images/n50.png "N50 metric for each of the assemblies by k-mer size")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Are there any distinct features in the charts?
 > 2. Does it look like one assembly might be better than some of the others?

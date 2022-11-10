@@ -26,11 +26,13 @@ layout: page
 <button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="{{tag}}">{{ tag  }}</button>
 {% endfor %}
 
-
 <hr/>
 
 <div class="row">
   <div class="col-md-8">
+    <p class="text-muted">
+      Posted on: {{ page.date | date: "%-d %B %Y" }}
+    </p>
 
     {{content}}
 
@@ -53,7 +55,7 @@ layout: page
   </div>
 
   <div class="col-md-4">
-    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
+    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300" loading="lazy"/>
   </div>
 </div>
 </div>

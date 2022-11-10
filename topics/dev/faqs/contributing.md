@@ -17,7 +17,7 @@ The general steps are as follows:
 4. Commit your changes, push branch to your fork
 5. Open a pull request for this branch in the upstream Galaxy repository
 
-> ### {% icon details %} Git, Github, and Galaxy Core
+> <details-title>Git, Github, and Galaxy Core</details-title>
 > For a lot more information about Git branching and managing a repository on Github,
 >  see the [Contributing with GitHub via command-line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %}) tutorial.
 >
