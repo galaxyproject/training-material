@@ -696,7 +696,7 @@ Congratulations! You should have a file with all the unique gene names and a cou
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
 To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
-![Publish Your Work](../../images/share_work.PNG)
+
 
 1. **Make accessible via Link**
 
