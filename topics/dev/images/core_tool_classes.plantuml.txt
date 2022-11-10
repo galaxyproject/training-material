@@ -1,0 +1,39 @@
+@startuml
+
+!include plantuml_options.txt
+
+package "galaxy.tools" {
+
+class Tool
+class SetMetadataTool
+class OutputParameterJSONTool
+class DataManagerTool
+class DataSourceTool
+class ExpressionTool
+class InteractiveTool
+'AsyncDataSourceTool
+class DatabaseOperationTool
+'class UnzipCollectionTool
+class ZipCollectionTool
+class MergeCollectionTool
+class RelabelFromFileTool
+'class FilterFromFileTool
+'class BuildListCollectionTool
+'class ExtractDatasetCollectionTool
+'class DataDestinationTool
+}
+
+Tool <|-- SetMetadataTool
+Tool <|-- OutputParameterJSONTool
+OutputParameterJSONTool <|-- DataManagerTool
+OutputParameterJSONTool <|-- DataSourceTool
+Tool <|-- ExpressionTool
+Tool <|-- InteractiveTool
+
+Tool <|-- DatabaseOperationTool
+'DatabaseOperationTool <|-- UnzipCollectionTool
+DatabaseOperationTool <|-- ZipCollectionTool
+DatabaseOperationTool <|-- MergeCollectionTool
+DatabaseOperationTool <|-- RelabelFromFileTool
+'DatabaseOperationTool <|-- FilterFromFileTool
+@enduml

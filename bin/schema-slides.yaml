@@ -1,0 +1,362 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - base_slides
+            - tutorial_slides
+        description: |
+            The layout to use. Generally you should use `tutorial_slides` and no other value.
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the slides (it will appear on the slides and the topic listing)
+        examples:
+            - Introduction to CRISPR screen analysis
+            - High Performance Computing for Pairwise Genome Comparison
+            - Circos
+    questions:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            list of questions that will be addressed in the slides
+        examples:
+            - What is ATAC-Seq?
+            - What are Galaxy Interactive Environments (GIEs)?
+            - How to visualize your genome after automated annotations have been performed?
+    objectives:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            list of learning objectives for the tutorial
+
+            A learning objective is a single sentence describing what a learner will be able to do once they have done the tutorial. Generally it is best to follow a 2C or 3C learning objective such as:
+
+            - Compute (Skill)
+            - multiple whole genome assemblies (Objective)
+            - in such a way to develop big data processing skills (Result)
+        examples:
+            - Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*
+            - Explore Biodiversity data with taxonomic, temporal and geographical informations
+            - Generate a DotPlot emulating the original paper using a different analysis tool
+    key_points:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            List of take-home messages. This information will appear at the end
+            of the slides. These should really be a key point, something that
+            should stick in their mind; what you want them to take home from
+            the slides.
+        examples:
+            - Pangeo is an inclusive community promoting open, reproducible and scalable science.
+            - Balanced batches and replicates allow bioinformatic batch correction
+            - Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
+    edam_ontology:
+        type: str
+        pattern: /^topic_[0-9]+$/
+        description: |
+            An edam ontology id that describes the tutorial.
+        examples:
+            - topic_3173
+    video:
+        type: bool
+        description: |
+            This enables automatic slide-to-video conversion. See the [documentation of that feature](/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html) for more information about this feature.
+            If enabled, you must provide good speaker notes for every single slide.
+    contributors:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+              enum:
+              - CONTRIBUTORS
+        description: |
+            List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
+        examples:
+            - hexylena
+            - shiltemann
+    contributions:
+        required: true
+        description: |
+            List of slide contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        examples: |
+            contributions:
+                authorship:
+                    - shiltemann
+                    - bebatut
+                editing:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                translation:
+                    - shiltemann
+                funding:
+                    - erasmusplus
+        type: map
+        mapping:
+            authorship:
+                description: These entities wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            editing:
+                type: seq
+                description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            testing:
+                type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            ux:
+                type: seq
+                description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            infrastructure:
+                type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            funding:
+                type: seq
+                description: These entities provided funding support for the development of this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+    hands_on:
+        type: str
+        enum:
+            - external
+    hands_on_url:
+        type: str
+    subtopic:
+        type: str
+        description: |
+            if the topic has [multiple subtopics defined](/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
+        examples:
+            - single-cell
+    priority:
+        type: int
+        description: |
+            This field allows ordering resources within the topic list. Learning resources with lower numbered priority come before those with higher numbers.
+        examples: 1
+    zenodo_link:
+        type: str
+        description: |
+            link on Zenodo to the input data for the tutorial
+        examples:
+            - "https://zenodo.org/record/3706539"
+    logo:
+        type: str
+        enum:
+          - GTN
+          - assets/images/gat.png
+          - assets/images/gga.png
+          - assets/images/ncbi.png
+          - /assets/images/elixir-uk.png
+        required: true
+        description: |
+            A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
+    class:
+        type: str
+        description: A default CSS class applied to slides
+    tags:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            A free form list of tags that are relevant for your tutorial.
+        examples:
+            - covid-19
+            - git-gat
+    translations:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If alternative translations of a material are available, then use this key to indicate which languages have been manually translated.
+        examples:
+            - en
+    level:
+        type: str
+        enum:
+            - Introductory
+            - Intermediate
+            - Advanced
+        description: |
+            Here give a feeling of what level the material is at.
+    time_estimation:
+        type: str
+        pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
+        description: |
+            An estimation of the time needed to complete the hands-on. It should look like 10M or 1H30M
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+    lang:
+        type: str
+        enum:
+            - es
+            - en
+        description: |
+            The document language.
+    voice:
+        type: map
+        description: |
+            For materials which are automatically converted into videos via the available mechanisms, this field declares which voice should be used. If this field is not declared, a random voice will be chosen from a list of the best available voices from AWS Polly.
+        mapping:
+            id:
+                type: str
+                required: true
+            lang:
+                type: str
+                required: true
+            neural:
+                type: bool
+                required: true
+            endOfSentencePause:
+                type: float
+            endOfSlidePause:
+                type: float
+        examples: |
+            voice:
+                id: Lupe
+                lang: es-US
+                neural: true
+    follow_up_training:
+        type: seq
+        description: list of resources that the reader of the material could follow at the end of the tutorial
+        examples:
+            - |
+                type: internal
+                topic_name: statistics
+                tutorials:
+                    - age-prediction-with-ml
+            - |
+                type: external
+                title: The Unix Shell
+                link: "http://swcarpentry.github.io/shell-novice/"
+            - |
+                type: none
+                title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                      enum:
+                          - internal
+                          - external
+                          - none
+                      description: |
+                        the type of link
+                  topic_name:
+                      type: str
+                      description: |
+                        [Internal Only] The name of the topic
+                  tutorials:
+                      type: seq
+                      sequence:
+                          - type: str
+                      description: |
+                          [Internal Only] List of required tutorials inside that topic
+                  title:
+                      type: str
+                      description: |
+                        Title of the external resource
+                  link:
+                      type: str
+                      description: |
+                        URL of the external resource
+    requirements:
+        type: seq
+        description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
+        examples:
+            - |
+                type: internal
+                topic_name: statistics
+                tutorials:
+                    - age-prediction-with-ml
+            - |
+                type: external
+                title: The Unix Shell
+                link: "http://swcarpentry.github.io/shell-novice/"
+            - |
+                type: none
+                title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                      enum:
+                          - internal
+                          - external
+                          - none
+                      description: |
+                        the type of link
+                  topic_name:
+                      type: str
+                      description: |
+                        [Internal Only] The name of the topic
+                  tutorials:
+                      type: seq
+                      sequence:
+                          - type: str
+                      description: |
+                          [Internal Only] List of required tutorials inside that topic
+                  title:
+                      type: str
+                      description: |
+                        Title of the external resource
+                  link:
+                      type: str
+                      description: |
+                        URL of the external resource
+    enable:
+        type: bool
+        description: |
+            `false` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.

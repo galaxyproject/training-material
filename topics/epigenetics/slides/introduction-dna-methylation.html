@@ -1,0 +1,114 @@
+---
+layout: introduction_slides
+logo: "GTN"
+
+title: "Introduction to DNA Methylation data analysis"
+type: "introduction"
+contributors:
+  - joachimwolff
+  - yvanlebras
+---
+
+## DNA Methylation data analysis
+## --
+##Bisulfite sequencing QC and processing in Galaxy
+
+
+---
+
+#Biological background
+
+---
+
+![Cartoon of a mitotic chromosome zoomed in to show dna and histones and nucleosomes, further zoomed in to show individual DNA strands with methylated dna.](../images/genome_organization.jpeg)
+
+
+---
+
+.image-75[![A picture from a paper with at top a cartoon of a chromosome and the chromatin, pointing to a single nucleosome, and the histone and dna methylation modifications possible. Below is a comparison of a switched on gene with active or open chromatin and unmethylated cytosines, and acetylated histones. Below is a switched off gene with condensed chromatin, methylated cytosines, and deacetylated histones.](../images/modification_methylation.jpeg)]
+
+---
+
+#Methylation: What is it good for?
+- Suppression of repeats
+- Gene expression
+- Imprinting
+- X-chromosome inactivation
+- Chromosome stability
+- Development
+- Changes in cancer
+- Changes with age
+
+---
+
+#Heritable methylation
+
+.image-50[![Another paper chart, here a number of graphs are shown, but their interpretation is unclear.](../images/heritable_methylation.png)]
+.image-25[![Another set of graphs from the same paper and a picture of a mouse and its baby suggesting heritability.](../images/mouse.jpg)]
+
+<small>Weaver et al. Nature Neurosci 2004; 7: 847-854</small>
+
+---
+
+#More than 5-mC
+.image-75[![A schematic of a chemical pathway affecting cytosine and various transformation that can occur. Some have arrows indicating gene silencing or activation.](../images/more_than_5-mC.png)]
+
+<small>Mariani et al. (2013) Cancers</small>
+
+---
+
+# [Hands-on]({{site.baseurl}}/topics/epigenetics/tutorials/methylation-seq/tutorial.html)
+##Step number 1: load data and run FastQC
+
+---
+
+# Bisulfite sequencing
+.image-75[![Cartoon of a methlated gene sequence and bisulfite conversion  replacing a C with a U. Below that is sequenced and the resut is reconstructed to figure out which Cs were methylated (because they weren't replaced with Us.)](../images/bisulfite_sequencing.png)]
+
+---
+
+# Mapping a bisulfite sequence read
+.image-75[![Illegible graphic from a paper showing reconstruction of methylated sequences.](../images/Mapping_a_bisulfite_seq_read.jpeg)]
+
+<small>Krueger et al.</small>
+
+---
+
+# For the morbidly curious
+####For SE datasets or read number 1 in PE:
+- C→T converted read: OT or OB (original strand)
+- G→A converted read: CTOT or CTOB (complementary strand)
+- C→T converted genome: OT or CTOB (top physical strand)
+- G→A converted genome: OB or CTOB (bottom physical strand)
+
+---
+
+# [Hands-on]({{site.baseurl}}/topics/epigenetics/tutorials/methylation-seq/tutorial.html)
+##Step number 2: Alignment and methylation bias
+
+---
+
+#Methylation bias
+.image-75[![line chart showing position along mapped read and CpG methylation percent. It is a wavy overlapping set of lines.](../images/methylation_bias.png)]
+
+---
+
+#Methylation extraction
+
+```txt
+track type="bedGraph" description="SRR1182519.sorted CpG Methylation levels"
+1	25114	25115	100	2	1
+1	25115	25116	100	3	1
+
+track type="bedGraph" description="SRR1182519.sorted merged CpG Methylation levels"
+1	25114	25116	100	5	1
+```
+
+---
+
+# [Hands-on]({{site.baseurl}}/topics/epigenetics/tutorials/methylation-seq/tutorial.html)
+##Step number 3: Visualization and more
+
+---
+
+#Thanks for your attention!

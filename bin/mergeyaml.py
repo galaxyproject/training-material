@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import glob
+import argparse
 import yaml
 
 
@@ -31,11 +32,19 @@ def extend_list(merged, a):
     merged += missing
 
 
-merged = {}
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Merge the data libraries in the tutorials into a single large one")
+    parser.add_argument('--nondocker', action='store_true', help="For running outside of docker usecase")
+    args = parser.parse_args()
+    merged = {}
 
-for filename in glob.glob('./topics/*/tutorials/*/data-library.yaml'):
-    a = yaml.safe_load(open(filename))
-    extend_dict(merged, a)
+    if args.nondocker:
+        for filename in sorted(glob.glob('./topics/*/tutorials/*/data-library.yaml')):
+            a = yaml.safe_load(open(filename))
+            extend_dict(merged, a)
+    else:
+        for filename in sorted(glob.iglob('./**/data-library.yaml')):
+            a = yaml.safe_load(open(filename))
+            extend_dict(merged, a)
 
-
-print(yaml.dump(merged, default_flow_style=False))
+    print(yaml.dump(merged, default_flow_style=False))

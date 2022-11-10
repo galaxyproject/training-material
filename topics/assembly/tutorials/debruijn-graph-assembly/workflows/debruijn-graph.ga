@@ -1,8 +1,8 @@
 {
   "a_galaxy_workflow": "true",
-  "annotation": "",
+  "annotation": "De Bruijn Graph Assembly",
   "format-version": "0.1",
-  "name": "debruijn-graph",
+  "name": "Debruijn Graph",
   "steps": {
     "0": {
       "annotation": "",
@@ -16,7 +16,7 @@
           "name": "mutant_R1.fastq"
         }
       ],
-      "label": null,
+      "label": "mutant_R1",
       "name": "Input dataset",
       "outputs": [],
       "position": {
@@ -42,7 +42,7 @@
           "name": "mutant_R2.fastq"
         }
       ],
-      "label": null,
+      "label": "mutant_R2",
       "name": "Input dataset",
       "outputs": [],
       "position": {
@@ -208,7 +208,13 @@
       "tool_version": "1.0.1",
       "type": "tool",
       "uuid": "4999cd50-69fd-4e57-af95-8c73ece1fe31",
-      "workflow_outputs": []
+      "workflow_outputs": [
+        {
+          "label": "fasta_stats_velvet",
+          "output_name": "stats",
+          "uuid": "dacb84a5-5482-4ab0-81ad-e92af21636cd"
+        }
+      ]
     },
     "5": {
       "annotation": "",
@@ -246,10 +252,18 @@
       "tool_version": "1.0.1",
       "type": "tool",
       "uuid": "bfc90a5a-640d-4633-b4df-2f8ccdbfe95b",
-      "workflow_outputs": []
+      "workflow_outputs": [
+        {
+          "label": "fasta_stats_spades",
+          "output_name": "stats",
+          "uuid": "ff376be9-7361-48c6-b1c8-d9f951b9c6fa"
+        }
+      ]
     }
   },
-  "tags": [],
+  "tags": [
+    "assembly"
+  ],
   "uuid": "ea644f52-064e-44ab-a669-942f9f2d22a9",
   "version": 0
 }

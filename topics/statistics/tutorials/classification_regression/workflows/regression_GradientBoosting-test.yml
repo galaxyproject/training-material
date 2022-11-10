@@ -1,0 +1,28 @@
+---
+- doc: Test Gradient Boosting regressor workflow
+  job:
+    body_fat_train:
+      class: File
+      location: https://zenodo.org/record/3248907/files/body_fat_train.tsv
+      filetype: tabular
+    body_fat_test:
+      class: File
+      location: https://zenodo.org/record/3248907/files/body_fat_test.tsv
+      filetype: tabular
+    body_fat_test_labels:
+      class: File
+      location: https://zenodo.org/record/3248907/files/body_fat_test_labels.tsv
+      filetype: tabular
+  outputs:
+    output_scatter_plot:
+      asserts:
+        has_text:
+          text: '<html>'
+    output_actual_vs_pred:
+      asserts:
+        has_text:
+          text: '<html>'
+    output_residual_plot:
+      asserts:
+        has_text:
+          text: '<html>'

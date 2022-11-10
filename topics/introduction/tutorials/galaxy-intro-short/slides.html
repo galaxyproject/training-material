@@ -1,0 +1,431 @@
+---
+layout: tutorial_slides
+logo: GTN
+video: true
+title: "A Short Introduction to Galaxy"
+zenodo_link: ""
+questions:
+  - "What is Galaxy?"
+  - "Why should I use Galaxy?"
+  - "How do I use Galaxy?"
+  - "How can I connect with the Galaxy Community?"
+objectives:
+key_points:
+  - "Galaxy lets you perform complex data analysis right from your browser"
+  - "These analyses are *reproducible*; Galaxy keeps track of all the details of your analysis"
+  - "Galaxy has a very large and active user community"
+  - "There are many training materials available to learn Galaxy"
+translations:
+  - es
+contributors:
+  - shiltemann
+  - hexylena
+  - nsoranzo
+---
+
+# What is Galaxy?
+
+???
+
+What is Galaxy?
+
+---
+
+![Galaxy Logo]({{site.baseurl}}/shared/images/galaxy_logo_25percent_transparent.png)
+
+**Data Intensive *analysis* for everyone**
+
+.pull-left[
+- **Data Analysis** platform
+- Web-based
+- **Easy** to use
+- **Free** and Open Source
+
+
+- Many tools (~8000)
+- Popular (&gt;10.000 [publications](https://www.zotero.org/groups/1732893/galaxy))
+- Extensive [tutorials](https://training.galaxyproject.org) available
+
+
+]
+
+.pull-right[
+![data science infographic]({{site.baseurl}}/topics/introduction/images/data_science.jpg) <!-- https://pixy.org/3013900/ CC0 license-->
+]
+
+.footnote[Homepage: [galaxyproject.org](https://galaxyproject.org)]
+
+???
+
+- Galaxy is a web based data analysis platform.
+- It is easy to use, and completely free.
+- Galaxy offers over eight thousand analysis tools.
+- Galaxy is widely used. It currently has over ten thousand publications.
+
+
+---
+
+# Why use Galaxy?
+
+- It's **easy**!
+    - No installation, all you need is a browser.
+    - No complex commands, just point and click!
+
+
+- Makes your research **reproducible**
+    - Galaxy keeps track of all analysis details
+
+
+- **Cross-domain**: bioinformatics, chemistry, ecology, climate science, ..
+
+![Galaxy resource banner]({{site.baseurl}}/topics/introduction/images/titleless-use-resource-banner.png)
+
+???
+
+- Data analysis can be very complex.
+- It often requires specialized programming knowledge or command line skills.
+- Galaxy makes this a lot easier by providing a web-based user interface to popular data analysis tools.
+- This means you don't have to install anything, just open your browser and go to Galaxy.
+- Galaxy also helps you make your research reproducible by keeping track of your analysis steps.
+- Galaxy supports many different scientific domains.
+
+---
+
+# How do I use Galaxy?
+
+???
+
+- How do I use Galaxy?
+
+---
+
+# Find a Galaxy server
+
+- **The Big Three**: Galaxy Main ([usegalaxy.org](https://usegalaxy.org)), Galaxy Europe ([usegalaxy.eu](https://usegalaxy.eu)), Galaxy Australia ([usegalaxy.org.au](https://usegalaxy.org.au))
+
+  .image-50[![usegalaxy.* servers]({{site.baseurl}}/shared/images/usegalaxy_servers.png)]
+
+- Many other smaller, often domain-specific Galaxies available
+ - List of all public Galaxies (125+): [galaxyproject.org/use](https://galaxyproject.org/use/)
+
+???
+
+- There are three main Galaxy servers: Galaxy Main, Galaxy Europe, and Galaxy Australia.
+- These three Galaxies have the biggest teams behind them, and offer the most tools and resources.
+- You can register an account for free on any of these servers.
+- In addition, there are many smaller Galaxy servers to choose from.
+- Many of these are domain specific. For example, Galaxy Proteomics focuses on proteomics tools and workflows.
+- A lot of universities and other institutions have local private servers.
+
+---
+
+# The Galaxy Interface
+
+- Three main panels
+  - **Left:** Available Tools
+  - **Middle:** View your data and run tools
+  - **Right:** Full record of your analysis **history**
+
+![Galaxy user interface]({{site.baseurl}}/topics/introduction/images/galaxy_interface.png)
+
+???
+
+- The Galaxy user interface consists of three main parts.
+- On the left is the list of available tools.
+- In the middle panel you will run your analysis tools and view your data and results.
+- On the right is a full record of your analysis history.
+
+---
+
+# Uploading data
+
+.pull-left[
+- Upload from **your computer**
+
+
+- Import files **from URL**
+
+
+- Import from **public data stores**
+  - UCSC, NCBI, ENA, many more..
+
+
+]
+
+.pull-right[
+![Galaxy upload button]({{site.baseurl}}/topics/introduction/images/upload-data.png)
+]
+
+???
+
+- The first step of an analysis is to get your data into Galaxy.
+- This can be done in several ways.
+- You can upload files from your computer.
+- Or you can enter an Internet URL, and Galaxy will download the data for you.
+- Furthermore, Galaxy can import data directly from many online data stores such as UCSC, NCBI, and many more.
+
+---
+
+# History
+
+.pull-left[
+- The **history** collects all the files of your analysis
+
+
+- Three buttons
+    - {% icon galaxy-eye %} **View** the file
+    - {% icon galaxy-pencil %} **Edit attributes**
+        - e.g. change name
+    - {% icon galaxy-cross %} **Delete file**
+
+
+- Click to **expand**
+    - file information
+       - format, size, ..
+    - file preview
+    - file options
+       - download, visualize, ..
+
+
+
+
+]
+
+.pull-right[
+![expanding a dataset]({{site.baseurl}}/topics/introduction/images/galaxy_history_dataset_expand.gif)
+]
+
+???
+
+- All files you upload will appear in your history.
+- There are 3 button on each dataset in your history.
+- The eye icon lets you view the dataset. This will show up in the middle panel of Galaxy.
+- The pencil icon allows you to edit the attributes of the file. For example you can change the file name here.
+- The cross icon lets you delete the dataset from your history.
+- You can also click on the dataset to expand it. This will show more information and more options.
+
+---
+
+# Finding a tool
+
+.pull-left[
+
+- Explore tool panel sections
+- Enter name in **Tool search** box
+]
+
+.pull-right[
+![tool search box]({{site.baseurl}}/topics/introduction/images/tool_search.png)
+]
+
+<br>
+
+- {% icon galaxy-star %} **Star** you favorite tools to make them easier to find
+
+![add a tool to your favorites by clicking on the star icon]({{site.baseurl}}/topics/introduction/images/tool_favorite.png)
+
+???
+
+- After your data is uploaded, you are ready to run tools.
+- You can find tools by exploring the tool list on the left.
+- If you already know the name of the tool you want to use, you can enter this in the search box at the top of the tool panel.
+- If you have found a tool you like, you can add it to your favorites by clicking the star at the top of the tool.
+
+---
+
+# Running a tool
+
+.pull-left[
+- Choose **input files**
+- Set tool **parameters**
+- **Execute**
+
+
+- Below tool form:
+    - Help information
+    - Tool citation
+
+]
+
+.pull-right[
+![tool interface]({{site.baseurl}}/topics/introduction/images/galaxy_tool.png)
+]
+
+???
+
+- When you click on a tool, it will show up in the middle panel.
+- Here you can select your input files and set the parameters for the tool.
+- Then you can hit the Execute button to start the tool.
+- Older versions of a tool are usually kept available to ensure reproducibility.
+
+---
+
+# Analysis Results
+
+.pull-left[
+- Tool outputs are added to the history
+
+
+- Different dataset states
+    - <span style="background-color: lightgrey"> waiting </span>, <span style="background-color: orange"> running </span>, <span style="background-color: lightgreen">success</span>, <span style="background-color: red">failed</span>
+
+
+- Expand for more options
+    - {% icon galaxy-save %} **Download** dataset
+    - {% icon galaxy-info %} **Information** about tool run
+    - {% icon galaxy-refresh %} **Reload** tool with the same parameters
+    - {% icon galaxy-barchart %} **Visualize** dataset
+
+
+
+- Red dataset?
+    - {% icon galaxy-bug %} Click Bug icon
+      - view error message
+      - submit error report
+]
+
+.pull-right[
+![example tool run]({{site.baseurl}}/topics/introduction/images/tool_run.gif)
+]
+
+???
+
+- The results of the analysis will be added to your history.
+- You will see these output files go through various states.
+- When a dataset is grey, it means it is waiting to run.
+- When it turns orange, it means the tool is running.
+- When the tool is finished, the outputs will turn green if the tool ran successfully.
+- You can then click on the history item to get more information and options.
+- For example, you can download the file to your computer.
+- Or you can reload the tool with the same parameters.
+- There is also an option to visualize your data.
+- If there was a problem with the tool, it will turn red.
+- You can click on the bug icon to view the error message or submit a error report to the Galaxy administrators.
+
+
+---
+
+# Visualisations
+
+- Galaxy has many options to visualize data
+
+![Examples of 6 different visualisations in galaxy features an MSA, a couple graphs, RNA structure, and 3d visualisations of proteins]({{site.baseurl}}/topics/dev/images/charts_examples2.png)
+
+???
+
+- Galaxy offers several ways to visualize your datasets depending on their format.
+- For example, protein PDB data can be seen in a 3D viewer.
+
+---
+
+# Multiple Analyses
+
+- Starting a new analysis? Create a new history {% icon new-history %}
+- You can have as many histories as you want
+- Overview of all your histories {% icon galaxy-history %}
+- Good names for your histories help to keep track of your analyses
+
+![multiple history view]({{site.baseurl}}/topics/introduction/images/galaxy_interface_multiple_histories.png)
+
+???
+
+- When you want to start a new analysis, create a new history using the plus icon at the top of the history panel.
+- You can always go back to an old history, and there is no limit on the number of histories you can create.
+- An overview of your histories is available where you can easily copy files around.
+- Copying datasets instead of re-uploading them let you save on your quota.
+- Giving your histories good names will help you keep track of your analyses'
+
+---
+
+# Workflows
+
+- Run **end-to-end analyses** with one click
+
+![Workflow interface]({{site.baseurl}}/topics/introduction/images/101_28.png)
+
+- **Extract** from a history
+- **Build manually** with workflow editor
+- **Import** a shared workflow
+
+???
+
+- Workflows let you run your analyses very easily by connecting tools' outputs and inputs.
+- There are multiple ways to create a workflow.
+- Workflows can be automatically extracted from a history.
+- This means you perform the analysis manually once, and then can easily repeat it on different input data.
+- You can also build workflows by hand using the workflow editor to connect the tools.
+- Or you can import a workflow somebody else has shared with you.
+
+
+---
+
+# Sharing
+
+- You can share everything you do in Galaxy
+    - Histories, Workflows, Visualizations
+
+
+- Sharing options
+    - Share with specific users
+    - Share via link
+    - *Publish* to make it visible to everybody
+
+
+![shared data menu]({{site.baseurl}}/topics/introduction/images/shared_data.png)
+
+???
+
+- Everything you do in Galaxy can be shared.
+- You can share your history, your workflow, and your visualizations.
+- There are different ways to share your work.
+- You can either share it with specific Galaxy users.
+- Or you can get a share link that you can send to anybody.
+- If you publish your work, it will be visible to everybody.
+
+---
+
+# Learning Galaxy
+
+- Galaxy Training Materials ([training.galaxyproject.org](https://training.galaxyproject.org))
+
+{% snippet faqs/gtn/gtn_stats.md %}
+
+???
+
+- If you would like to learn more about Galaxy, there are a large number of tutorials available.
+- These tutorials cover a wide range of scientific domains.
+
+---
+
+# Getting Help
+
+- **Help Forum** ([help.galaxyproject.org](https://help.galaxyproject.org))
+
+
+  ![Galaxy Help]({{site.baseurl}}/topics/introduction/images/galaxy_help.png)
+
+
+- **Chat on Matrix**
+    - [Main Chat](https://matrix.to/#/#galaxyproject_Lobby:gitter.im)
+    - [Galaxy Training Chat](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im)
+    - Many more channels (scientific domains, developers, admins)
+
+???
+
+- If you get stuck, there are ways to get help.
+- You can ask your questions on the help forum.
+- Or you can chat with the community on Matrix.
+
+---
+
+# Join an event
+
+- Many Galaxy events across the globe
+- Event Horizon: [galaxyproject.org/events](https://galaxyproject.org/events)
+
+![Event schedule]({{site.baseurl}}/topics/introduction/images/event_horizon.png)
+
+???
+
+- There are frequent Galaxy events all around the world.
+- You can find upcoming events on the Galaxy Event Horizon.

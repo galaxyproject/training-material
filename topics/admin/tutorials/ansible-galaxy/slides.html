@@ -1,0 +1,165 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
+
+title: "Galaxy Installation with Ansible"
+questions:
+  - How does it all connect?
+  - What steps will we go through?
+objectives:
+  - Get a high-level overview of a Galaxy server setup
+key_points:
+  - Everything can be accomplished with Ansible roles from Galaxy
+  - You can easily deploy a base Galaxy, or one with more features.
+contributors:
+  - slugger70
+  - natefoo
+---
+
+## Install PostgreSQL & Galaxy extensions
+
+![Graph showing a Postgres DB](../../images/ansible-galaxy-intro-0.png)
+
+???
+
+- The first step of a Galaxy deployment is the database.
+- This is the foundation of everything.
+
+---
+
+## Install Galaxy & Attach Storage
+
+![Galaxy is now attached to the DB. Gunicorn, storage, and compute are attached to Galaxy](../../images/ansible-galaxy-intro-1.png)
+
+???
+
+- Galaxy is deployed, and attached to the database.
+- Next, Gunicorn is setup to run the Galaxy app.
+- Storage is attached to Galaxy for storing data.
+- And lastly compute is attached to Galaxy and the storage.
+
+---
+
+## Configure NGINX
+
+![NGINX is added to proxy Gunicorn](../../images/ansible-galaxy-intro-2.png)
+
+???
+
+- Next, nginx is attached to UWSGI to proxy connections and speed up access.
+
+---
+
+## Configure Job Handlers
+
+![Job Handlers are added, between Galaxy and the Compute](../../images/ansible-galaxy-intro-3.png)
+
+???
+
+- Job handlers are configured and deployed with the app.
+- These connect to the compute and manage jobs.
+
+---
+
+## Install & Configure Slurm
+
+![Slurm is attached to the handlers](../../images/ansible-galaxy-intro-4.png)
+
+???
+
+- Slurm is a much more intelligent resource manager than Galaxy.
+- The job handlers are configured to connect to Slurm.
+- Slurm deployment is explained in a separate tutorial.
+
+---
+
+## Connect CVMFS & Reference Data
+
+![CVMFS is attached to storage + compute + galaxy](../../images/ansible-galaxy-intro-5.png)
+
+???
+
+- CVMFS is deployed.
+- Galaxy is configured to read data from CVMFS.
+- Compute is configured to access it as well for jobs that need reference data.
+
+---
+
+## Setup Remote Compute
+
+![Remote compute site, with Pulsar and compute is attached to the job handlers](../../images/ansible-galaxy-intro-6.png)
+
+???
+
+- Lastly, we can scale Galaxy further with remote compute.
+- Pulsar connected at a remote site will handle this.
+
+---
+
+## Major Initial Decisions
+
+* Where to install Galaxy
+* Where to store Galaxy datasets
+* Database location
+
+???
+
+- These are the major initial decisions you will face.
+- Where to install Galaxy, what servers or VMs do you have available?
+- Where to store the data?
+- Do you have enough space for your users?
+- Where to reliably store the database?
+
+---
+## Where to install Galaxy
+
+* Must be at same path on cluster - more on this in cluster sessions
+
+???
+
+- Galaxy should be installed somewhere that is available across the cluster.
+- We'll cover this in detail in the lesson.
+
+---
+## Where to store Galaxy datasets
+
+* Must be at same path on cluster
+* Consider future scalability
+
+???
+
+- Where should data be stored?
+- Do you have network-attached storage available?
+- It must be available to the entire cluster where compute happens.
+
+---
+## Database location
+
+* Fast local, reliable storage
+* Consider future scalability
+
+???
+
+- The database server should be very reliable.
+- It does not need so much disk space, but consider future scalability.
+
+---
+## Basic best practices
+
+* Run as an **unprivileged user**
+* When possible, separate *code* from *data* and *configs*
+* Write protect code and configs
+
+.left[All of these practices are supported in the [galaxyproject.galaxy][galaxy-role] Ansible role and covered in the [Galaxy Installation with Ansible][ansible-galaxy-tutorial] tutorial!]
+
+[galaxy-role]: https://galaxy.ansible.com/galaxyproject/galaxy
+[ansible-galaxy-tutorial]: {% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}
+
+???
+
+- Here are the basic best practices.
+- Run without privileges so if someone gains access they are limited in what they can do.
+- Ensure the code and configuration are separate.
+- If someone manages to act as the galaxy user, this will prevent them from changing galaxy's behaviour.
+- All of these best practices are built into the ansible role.

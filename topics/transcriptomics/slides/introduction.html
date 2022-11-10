@@ -3,6 +3,9 @@ layout: introduction_slides
 logo: "GTN"
 class: enlarge120
 
+subtopic: introduction
+priority: 1
+
 title: "Introduction to Transcriptomics"
 type: "introduction"
 contributors:
@@ -28,7 +31,7 @@ contributors:
 
 ## RNA sequencing
 
-![Summary of RNA-Seq principle](../images/Summary_of_RNA-Seq.png)
+![Summary of RNA-Seq principle. In vivo transcription, pre-mRNA, intron splicing all rpoduce a mature mRNA. In vitro this is fragmented into RNA fragments, reverse transcribed into double stranded cDNA and then sequenced.](../images/Summary_of_RNA-Seq.png)
 
 - RNA quantification at single base resolution
 - Cost efficient analysis of the whole transcriptome in a high-throughput manner
@@ -39,7 +42,7 @@ contributors:
 
 ### Where does my data come from?
 
-![](../images/RNA_seq_zang2016.png)
+![select a cell population and extract total RNA is shown at the top. Small RNA are size selected by PAGE or kit, an adapter ligated, and converted to cDNA. Or poly(a) selects ribosome minus, and those mRNA are fragmented, and converted to cDNA. In both cases the cDNA becomes a library for sequencing.](../images/RNA_seq_zang2016.png)
 
 .footnote[[*Zang and Mortazavi, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/)]
 
@@ -47,7 +50,7 @@ contributors:
 
 ### Principle of RNA sequencing
 
-![](../images/korf_2013.jpg)
+![Cartoon showing a magazine stand labelled transcriptome, and a person saying "I'll take all of them". These are run through a shredder, before hundreds of people attempt to re-assemble, and the person hands the professor a poorly assembled magazine.](../images/korf_2013.jpg)
 
 .footnote[[*Korf, Nat Met, 2013*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461013/)]
 
@@ -63,7 +66,7 @@ contributors:
 
 ### Benefits of RNA sequencing
 
-![](../images/wordcloud.png)
+![A word cloud highlighting words like benefits, novel, sensitivity. ](../images/wordcloud.png)
 
 ---
 
@@ -89,7 +92,7 @@ contributors:
 
 ### RNA quantification
 
-![](../images/pepke_2009.jpg)
+![Select RNA fraction of interest (polyA, ribo-minus, and others), these are fragmented and reverse transcribed before sequencing and mapping onto the genome and quantification.](../images/pepke_2009.jpg)
 
 .footnote[[*Pepke et al, Nat Met, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/)]
 
@@ -97,7 +100,7 @@ contributors:
 
 ### Overview of the Data Processing
 
-![](../images/rna_seq_workflow.png)
+![Control and treatment files goes through QC, annotation, and rad counting to produce sets of count tables. Then differential expression analysis is computed.](../images/rna_seq_workflow.png)
 
 - No available standardized workflow
 - Multiple possible best practices for every dataset
@@ -109,7 +112,7 @@ contributors:
 1. Adapter clipping to trim the sequencing adapters
 2. Quality trimming to remove wrongly called and low quality bases
 
-.footnote[See [NGS Quality control](../../NGS-QC/slides/index.html)]
+.footnote[See [NGS Quality control]({{site.baseurl}}/topics/sequence-analysis/tutorials/quality-control/slides.html)]
 
 ---
 
@@ -117,7 +120,7 @@ contributors:
 
 Simple mapping on a reference genome? More challenging
 
-![](../images/RNA-Seq-alignment.png)
+![A cartoon of a pre-mRNA, intro and exons. These map to an mRNA and short reads are shown piled up against the mRNA. The short read is splity by intron when aligning to a reference genome.](../images/RNA-Seq-alignment.png)
 
 .footnote[[Credit: Rgocs](https://en.wikipedia.org/wiki/File:RNA-Seq-alignment.png)]
 
@@ -135,9 +138,9 @@ Simple mapping on a reference genome? More challenging
 
 ### Transcriptome mapping
 
-![](../images/transcriptome_alignment.png)
+![Cartoon of multiple exons collapsed, and paired end reads being shown as easy to align.](../images/transcriptome_alignment.png)
 
-*See [NGS Mapping](../../NGS-mapping/slides/index.html)*
+*See [NGS Mapping]({{site.baseurl}}/topics/sequence-analysis/tutorials/mapping/slides.html)*
 
 - Need reliable gene models
 - No detection of novel genes
@@ -150,7 +153,7 @@ Simple mapping on a reference genome? More challenging
 
 Splice-aware read alignment
 
-![](../images/genome_alignment.png)
+![The same cartoon again, but now it is shown split up by introns, and one of the paired end reads is split across three exons, so it is hard to align.](../images/genome_alignment.png)
 
 Detection of novel genes and isoforms
 
@@ -196,7 +199,7 @@ No need for a reference genome ...
 
 ### Differential Expression Analysis
 
-.image-75[![](../images/RNA_seq_DEscheme.png)]
+.image-75[![Three conditions are created and multiple transcriptomics sequenced into reads and mapped and compared.](../images/RNA_seq_DEscheme.png)]
 
 Account for variability of expression across biological replicates<br>with the help of counts
 
@@ -219,7 +222,7 @@ Account for variability of expression across biological replicates<br>with the h
 
 ### Impact of sequencing depth and number of replicates
 
-.image-75[![](../images/RNA_seq_numreplicates.png)]
+.image-75[![Image of a table from a paper. The recommendation is at least three biological replicates to accurately detect changes. 3 replicates will give you an 87% chance of detecting a 2-fold change, but only a 17% chance of detecting a 1.25 fold change.](../images/RNA_seq_numreplicates.png)]
 
 .footnote[[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)]
 

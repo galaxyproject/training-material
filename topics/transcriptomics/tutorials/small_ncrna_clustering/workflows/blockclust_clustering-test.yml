@@ -1,0 +1,22 @@
+- doc: Test blockclust workflow
+  job:
+    blockclust_input:
+      class: File
+      location: https://zenodo.org/record/1491876/files/blockclust.bam
+  outputs:
+    tags_bed:
+      asserts:
+        has_line:
+          line: 'chr2	5145610	5145637	tag_617|2|3	0.666667	+'
+    blockbuster_out:
+      asserts:
+        has_line:
+          line: '>cluster_22	chr2	29136528	29136613	+	73.00	19	3'
+    clusters_bed:
+      asserts:
+        has_line:
+          line: 'chr2	25551512	25551601	7:miRNA:blockgroup_45:cluster_2	727.00	-'
+    model_based_pred_bed:
+      asserts:
+        has_line:
+          line: 'chr2	38458892	38458953	predicted_snoRNA_CD-box	51.00	+'

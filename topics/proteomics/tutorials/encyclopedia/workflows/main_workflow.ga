@@ -1,0 +1,443 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "encyclopedia",
+    "format-version": "0.1",
+    "name": "May19 EncyclopeDIA raw inputs",
+    "steps": {
+        "0": {
+            "annotation": "encyclopedia",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "GPF DIA mzML Files (Dataset collection)"
+                }
+            ],
+            "label": "GPF DIA mzML Files (Dataset collection)",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 434,
+                "height": 105,
+                "left": 450.46875,
+                "right": 650.46875,
+                "top": 329,
+                "width": 200,
+                "x": 450.46875,
+                "y": 329
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "ba253b0a-c081-4dcb-9d3d-2c3b4b36f10d",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "SPECTRAL OR PROSIT LIBRARY"
+                }
+            ],
+            "label": "SPECTRAL OR PROSIT LIBRARY",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 628,
+                "height": 84,
+                "left": 460.703125,
+                "right": 660.703125,
+                "top": 544,
+                "width": 200,
+                "x": 460.703125,
+                "y": 544
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "417bc894-7c88-4633-80ce-ba418dd4179a",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "EXPERIMENTAL DIA mzML FILES (WIDE)"
+                }
+            ],
+            "label": "EXPERIMENTAL DIA mzML FILES (WIDE)",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "bottom": 317,
+                "height": 105,
+                "left": 709.578125,
+                "right": 909.578125,
+                "top": 212,
+                "width": 200,
+                "x": 709.578125,
+                "y": 212
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "9f96077e-d7b3-47d4-bc71-d42c9db72b59",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "BACKGROUND PROTEIN FASTA FILE"
+                }
+            ],
+            "label": "BACKGROUND PROTEIN FASTA FILE",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 839,
+                "height": 105,
+                "left": 440.703125,
+                "right": 640.703125,
+                "top": 734,
+                "width": 200,
+                "x": 440.703125,
+                "y": 734
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b45f41c6-0b3b-48ad-8a1f-73c355c22d61",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool msconvert",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "bottom": 562.5,
+                "height": 116,
+                "left": 739.703125,
+                "right": 939.703125,
+                "top": 446.5,
+                "width": 200,
+                "x": 739.703125,
+                "y": 446.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "tool_shed_repository": {
+                "changeset_revision": "6153e8ada1ee",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": \"false\", \"__current_case__\": 0}, \"precursor_refinement\": {\"use_mzrefinement\": \"false\", \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": \"false\", \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": \"false\", \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": \"false\", \"__current_case__\": 1}, \"ms2deisotope\": \"false\", \"demultiplex\": {\"demultiplex_on\": \"false\", \"__current_case__\": 1}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": \"false\", \"filter_ms_levels\": {\"do_ms_level_filter\": \"false\", \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": \"false\", \"scan_summing\": {\"do_scan_summing\": \"false\", \"__current_case__\": 0}, \"simAsSpectra\": \"false\", \"srmAsSpectra\": \"false\", \"acceptZeroLengthSpectra\": \"false\", \"ignoreUnknownInstrumentError\": \"false\", \"multi_run_output\": {\"do_multi_run_output\": \"false\", \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"license_agreement\": \"true\", \"output_type\": \"mzML\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"32\", \"binary_compression\": \"zlib\", \"gzip_compression\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.20287.2",
+            "type": "tool",
+            "uuid": "e4cfea9c-2d49-4c2d-af72-a1d352303432",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "4ec33042-9998-40ac-8c44-5005ee2e5cef"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool msconvert",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "bottom": 403.5,
+                "height": 116,
+                "left": 1009.703125,
+                "right": 1209.703125,
+                "top": 287.5,
+                "width": 200,
+                "x": 1009.703125,
+                "y": 287.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "tool_shed_repository": {
+                "changeset_revision": "6153e8ada1ee",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": \"false\", \"__current_case__\": 0}, \"precursor_refinement\": {\"use_mzrefinement\": \"false\", \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": \"false\", \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": \"false\", \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": \"false\", \"__current_case__\": 1}, \"ms2deisotope\": \"false\", \"demultiplex\": {\"demultiplex_on\": \"false\", \"__current_case__\": 1}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": \"false\", \"filter_ms_levels\": {\"do_ms_level_filter\": \"false\", \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": \"false\", \"scan_summing\": {\"do_scan_summing\": \"false\", \"__current_case__\": 0}, \"simAsSpectra\": \"false\", \"srmAsSpectra\": \"false\", \"acceptZeroLengthSpectra\": \"false\", \"ignoreUnknownInstrumentError\": \"false\", \"multi_run_output\": {\"do_multi_run_output\": \"false\", \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"license_agreement\": \"true\", \"output_type\": \"mzML\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"32\", \"binary_compression\": \"zlib\", \"gzip_compression\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.20287.2",
+            "type": "tool",
+            "uuid": "8dcbc065-269f-47cf-aea0-dba0b283082b",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9bc6c507-ff1a-4422-812a-662611e45369"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/1.2.2+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "fasta": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "library": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "scan_inputs": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SearchToLib",
+                    "name": "target_fasta"
+                }
+            ],
+            "label": null,
+            "name": "SearchToLib",
+            "outputs": [
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "elib",
+                    "type": "elib"
+                }
+            ],
+            "position": {
+                "bottom": 956.5,
+                "height": 324,
+                "left": 909.703125,
+                "right": 1109.703125,
+                "top": 632.5,
+                "width": 200,
+                "x": 909.703125,
+                "y": 632.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionelib": {
+                    "action_arguments": {
+                        "newname": "CHROMATOGRAM LIBRARY"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "elib"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/1.2.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "36880dfd9fa7",
+                "name": "encyclopedia_searchtolib",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"a\": \"false\", \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"library\": {\"__class__\": \"ConnectedValue\"}, \"options\": {\"acquisition\": {\"set_acquisition\": \"no\", \"__current_case__\": 0}, \"tolerance\": {\"set_tolerance\": \"no\", \"__current_case__\": 0}, \"percolator\": {\"set_percolator\": \"no\", \"__current_case__\": 0}, \"peak\": {\"set_peak\": \"no\", \"__current_case__\": 0}, \"window\": {\"set_window\": \"no\", \"__current_case__\": 0}, \"modifications\": {\"set_modifications\": \"no\", \"__current_case__\": 0}, \"search\": {\"set_search\": \"no\", \"__current_case__\": 0}}, \"scan_inputs\": {\"__class__\": \"ConnectedValue\"}, \"select_outputs\": [\"log\", \"elib\"], \"target_fasta\": {\"__class__\": \"RuntimeValue\"}, \"tp\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.2+galaxy0",
+            "type": "tool",
+            "uuid": "128970ae-d036-4960-b88c-b4f90e2c9c5f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "elib",
+                    "uuid": "4c03ecb4-1a34-45aa-bdec-7248a773d28f"
+                },
+                {
+                    "label": null,
+                    "output_name": "log",
+                    "uuid": "5da7e8b9-5220-47de-b253-74d01d1bc998"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/1.2.2+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "fasta": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "library": {
+                    "id": 6,
+                    "output_name": "elib"
+                },
+                "scan_inputs": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool EncyclopeDIA Quantify",
+                    "name": "target_fasta"
+                }
+            ],
+            "label": null,
+            "name": "EncyclopeDIA Quantify",
+            "outputs": [
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "elib",
+                    "type": "elib"
+                },
+                {
+                    "name": "results",
+                    "type": "tabular"
+                },
+                {
+                    "name": "peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "proteins",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 1093,
+                "height": 585,
+                "left": 1180.15625,
+                "right": 1380.15625,
+                "top": 508,
+                "width": 200,
+                "x": 1180.15625,
+                "y": 508
+            },
+            "post_job_actions": {
+                "HideDatasetActionelib": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "elib"
+                },
+                "HideDatasetActionresults": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "results"
+                },
+                "RenameDatasetActionpeptides": {
+                    "action_arguments": {
+                        "newname": "PEPTIDE QUANTITATION OUTPUT"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "peptides"
+                },
+                "RenameDatasetActionproteins": {
+                    "action_arguments": {
+                        "newname": "PROTEIN QUANTITATION OUTPUT"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "proteins"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/1.2.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "1c5cbf8f79ce",
+                "name": "encyclopedia_quantify",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"a\": \"true\", \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"library\": {\"__class__\": \"ConnectedValue\"}, \"options\": {\"acquisition\": {\"set_acquisition\": \"no\", \"__current_case__\": 0}, \"tolerance\": {\"set_tolerance\": \"no\", \"__current_case__\": 0}, \"percolator\": {\"set_percolator\": \"no\", \"__current_case__\": 0}, \"peak\": {\"set_peak\": \"no\", \"__current_case__\": 0}, \"window\": {\"set_window\": \"no\", \"__current_case__\": 0}, \"modifications\": {\"set_modifications\": \"no\", \"__current_case__\": 0}, \"search\": {\"set_search\": \"no\", \"__current_case__\": 0}}, \"scan_inputs\": {\"__class__\": \"ConnectedValue\"}, \"select_outputs\": [\"log\", \"elib\", \"results\", \"peptides\", \"proteins\"], \"target_fasta\": {\"__class__\": \"RuntimeValue\"}, \"tp\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.2+galaxy0",
+            "type": "tool",
+            "uuid": "f8f64f5a-cf05-4529-a354-c8171e8537c6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "peptides",
+                    "uuid": "1e7fbdde-967c-49f3-9e01-32fdffbf0e06"
+                },
+                {
+                    "label": null,
+                    "output_name": "proteins",
+                    "uuid": "d7d6276c-44bc-452e-8a36-51fcb9817f4c"
+                },
+                {
+                    "label": null,
+                    "output_name": "log",
+                    "uuid": "d4691eee-fb32-4278-8c8a-6e12c7cf7d3f"
+                }
+            ]
+        }
+    },
+    "tags": ["proteomics"],
+    "uuid": "9e843b0f-d8bd-4670-ac66-a1378eae023a",
+    "version": 4
+}

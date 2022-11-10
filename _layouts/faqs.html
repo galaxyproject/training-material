@@ -1,0 +1,53 @@
+---
+layout: base
+---
+
+{% assign topic = site.data[page.topic_name] %}
+{% assign locale = site.data.lang[page.lang] %}
+{% assign contributors = site.data['contributors'] %}
+
+<section class="faqs">
+
+   <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+
+     <li class="breadcrumb-item {% if page.url == '/faqs/' %}active{% endif %}"><a href="{{site.baseurl}}/faqs">All FAQs</a></li>
+     {% if page.url == '/faqs/gtn/' %}
+     <li class="breadcrumb-item active">GTN FAQs</li>
+     {% else %}
+     <li class="breadcrumb-item {% if page.url == '/faqs/galaxy/' %}active">Galaxy FAQs</li>{% else %}"><a href="{{site.baseurl}}/faqs/galaxy/">Galaxy FAQs</a></li>{% endif %}
+     {% endif %}
+     {% if page.url contains 'topics' %}
+     {% assign t = page.url | split: '/tutorials/' %}
+     {% assign top = t[0] | append: "/faqs" %}
+     <li class="breadcrumb-item {% unless page.url contains 'tutorials' %}active">Topic FAQs</li>{% else %}"><a href="{{site.baseurl}}{{top}}">Topic FAQs</a></li>{% endunless %}
+     {%endif %}
+
+     {% if page.url contains 'tutorials' %}
+     <li class="breadcrumb-item active" aria-current="page">Tutorial FAQs</li>
+     {% endif %}
+     </ol>
+    </nav>
+
+    <h1 data-toc-skip>{{ locale['faqs'] | default: "Frequently Asked Questions"}}</h1>
+    {% if page.url contains 'tutorials' %}
+     {% assign t = page.url | split: '/tutorials/' %}
+     {% assign top = t[1] | split: "/faqs"  %}
+    {% endif %}
+<!--<div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true newcontributors=true %}
+    </div>-->
+    <div class="container">
+        <div class="row">
+
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+            </div>
+            <div class="col-sm-10">
+                {{ content
+                    | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
+                    | no_translate:site.words_to_not_translate }}
+            </div>
+        </div>
+    </div>
+</section>

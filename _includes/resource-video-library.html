@@ -1,0 +1,82 @@
+{% assign locale = site.data.lang[page.lang] %}
+
+{% assign tut = include.material.url | default: page.url %}
+{% assign id-tutorial = tut | remove: '/topics/' | remove: "/tutorials" | remove: '.html' %}
+{% assign id-slides = id-tutorial | replace: '/tutorial', '/slides' %}
+{% assign id-demo = id-tutorial | replace: '/tutorial', '/demo' %}
+{% assign id-both = id-tutorial | replace: '/tutorial', '' %}
+
+{% assign hasvideo-tutorial = site.data['video-library'][id-tutorial] %}
+{% assign hasvideo-slides = site.data['video-library'][id-slides] %}
+{% assign hasvideo-demo = site.data['video-library'][id-demo] %}
+{% assign hasvideo-both = site.data['video-library'][id-both]%}
+{% assign hassession = site.data['session-library'][id-tutorial]%}
+
+  {% if hasvideo-tutorial or hasvideo-slides or hasvideo-both or hasvideo-demo or hassession %}
+  <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        {% icon video %}{% if include.label %}&nbsp;Recordings{% endif %}
+    </a>
+    <ul class="dropdown-menu">
+        {% if hasvideo-both %}
+        {% assign allversions = "" | split: ',' %}
+        {% for vid in site.data['video-library'][id-both].versions %}{% assign allversions = allversions | push: vid %}{% endfor %}
+        {% assign sortedversions = allversions | sort: 'date' | reverse %}
+
+        <li>
+
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-both}}" title="View GTN Video Library for this Tutorial">
+                {% icon video %} Lecture & Tutorial ({{sortedversions[0].date | date: "%B %Y" }})
+            </a>
+        </li>
+        {% endif %}
+        {% if hasvideo-tutorial %}
+
+        {% assign allversions = "" | split: ',' %}
+        {% for vid in site.data['video-library'][id-tutorial].versions %}{% assign allversions = allversions | push: vid %}{% endfor %}
+        {% assign sortedversions = allversions | sort: 'date' | reverse %}
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-tutorial}}" title="View GTN Video Library for this Tutorial">
+                {% icon video %} Tutorial ({{sortedversions[0].date | date: "%B %Y" }})
+            </a>
+        </li>
+        {% endif %}
+        {% if hasvideo-slides %}
+          {% assign allversions = "" | split: ',' %}
+          {% for vid in site.data['video-library'][id-slides].versions %}{% assign allversions = allversions | push: vid %}{% endfor %}
+          {% assign sortedversions = allversions | sort: 'date' | reverse %}
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-slides}}" title="View GTN Video Library for these Slides">
+                {% icon video %} Lecture ({{sortedversions[0].date | date: "%B %Y" }})
+            </a>
+        </li>
+        {% endif %}
+        {% if hasvideo-demo %}
+          {% assign allversions = "" | split: ',' %}
+          {% for vid in site.data['video-library'][id-demo].versions %}{% assign allversions = allversions | push: vid %}{% endfor %}
+          {% assign sortedversions = allversions | sort: 'date' | reverse %}
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/{{id-demo}}" title="View GTN Video Library for these Slides">
+                {% icon video %} Demo ({{sortedversions[0].date | date: "%B %Y" }})
+            </a>
+        </li>
+        {% endif %}
+        {% if hassession %}
+          {% assign allversions = "" | split: ',' %}
+          {% assign sessionvid = site.data['session-library'][id-tutorial].videos[0] %}
+          {% for vid in site.data['video-library'][sessionvid].versions %}{% assign allversions = allversions | push: vid %}{% endfor %}
+          {% assign sortedversions = allversions | sort: 'date' | reverse %}
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/sessions/{{id-tutorial}}" title="View GTN Video Library session for this tutorial ">
+                {% icon video %} Multi-video Tutorial ({{sortedversions[0].date | date: "%B %Y" }})
+
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+   </li>
+   {% endif %}

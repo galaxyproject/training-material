@@ -1,0 +1,48 @@
+---
+- doc: Test the M. Tuberculosis Variant Analysis workflow
+  job:
+    'Read 1':
+      location: https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+    'Read 2':
+      location: https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+    'Genbank reference genome':
+      location: https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
+      class: File
+      filetype: genbank
+    'Genome annotation (GFF3)':
+      location: https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
+      class: File
+      filetype: gff3
+    'FASTA reference genome':
+      location: https://zenodo.org/record/3960260/files/MTB_ancestor_reference.fasta
+      class: File
+      filetype: fasta
+  outputs:
+    mtbva_kraken_report:
+      asserts:
+        has_text:
+          text: 'unclassified'
+    mtbva_multiqc_webpage:
+      asserts:
+        has_text:
+          text: 'All samples have sequences of a single length'
+    mtbva_snippy_vcf:
+      asserts:
+        has_text:
+          text: '13460'
+    mtbva_tb_variant_report_html:
+      asserts:
+        has_text:
+          text: 'Leu161Leu'
+    mtbva_tb_variant_dr_report_html:
+      asserts:
+        has_text:
+          text: 'Ser315Thr'
+    mtbva_jbrowse:
+      asserts:
+        has_text:
+          text: '<html>'

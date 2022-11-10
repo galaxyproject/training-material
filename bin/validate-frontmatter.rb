@@ -1,276 +1,314 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'find'
 require 'pathname'
-fn = ARGV[0]
+require 'kwalify'
+require './bin/gtn.rb'
 
-# Required keys
-tutorial_required_keys = ['layout', 'title', 'time_estimation', 'contributors']
-tutorial_optional_keys = ['level', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'subtopic']
-tutorial_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'hands_on', 'slides', 'workflows']
 
-slides_required_keys = ['layout', 'logo', 'title', 'contributors']
-slides_optional_keys = ['level', 'time_estimation', 'questions', 'zenodo_link', 'objectives', 'key_points', 'tags', 'edam_ontology', 'requirements', 'follow_up_training', 'class', 'hands_on', 'hands_on_url']
-slides_deprecated_keys = ['topic_name', 'tutorial_name', 'type', 'name', 'galaxy_tour', 'slides', 'workflows']
+module SchemaValidator
+  # Schemas
+  @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
+  @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+  @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
+  @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
+  @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
+  @requirement_external_schema = YAML.load_file('bin/schema-requirement-external.yaml')
+  @requirement_internal_schema = YAML.load_file('bin/schema-requirement-internal.yaml')
 
-metadata_required_keys = ['name', 'type', 'title', 'summary', 'maintainers']
-metadata_optional_keys = ['references', 'requirements', 'docker_image', 'edam_ontology', 'subtopics']
-metadata_deprecated_keys = ['material']
+  # Update the existing schemas to have enums with values. Then we get validation *for free*!
+  @TUTORIAL_SCHEMA = automagic_loading(@TUTORIAL_SCHEMA_UNSAFE)
+  @SLIDES_SCHEMA = automagic_loading(@SLIDES_SCHEMA_UNSAFE)
+  @TOPIC_SCHEMA = automagic_loading(@TOPIC_SCHEMA_UNSAFE)
+  @FAQ_SCHEMA = automagic_loading(@FAQ_SCHEMA_UNSAFE)
+  @QUIZ_SCHEMA = automagic_loading(@QUIZ_SCHEMA_UNSAFE)
 
-# Contributors
-CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+  @TUTORIAL_SCHEMA['mapping']['contributions']['required'] = false
+  @SLIDES_SCHEMA['mapping']['contributions']['required'] = false
 
-# Any error messages
-errs = []
 
-def skip_disabled(data, fn)
-  # If there's an 'enable' key and it is one flavor of 'false', then, exit
-  # immediately without testing.
-  if data.key?('enable') && (data['enable'] == false || data['enable'].downcase == 'false') then
-    puts "#{fn} skipped (disabled)"
-    exit 0
-  end
-end
+  # Build validators now that we've filled out the subtopic enum
+  $topic_validator = Kwalify::Validator.new(@TOPIC_SCHEMA)
+  $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+  $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
+  $faq_validator = Kwalify::Validator.new(@FAQ_SCHEMA)
+  $quiz_validator = Kwalify::Validator.new(@QUIZ_SCHEMA)
+  $requirement_external_validator = Kwalify::Validator.new(@requirement_external_schema)
+  $requirement_internal_validator = Kwalify::Validator.new(@requirement_internal_schema)
 
-def check_contributors(data)
-  errs = []
-  if data.key?('contributors') then
-    data['contributors'].each{ |x|
-      if not CONTRIBUTORS.key?(x) then
-        errs.push("Unknown contributor #{x}, please add to CONTRIBUTORS.yaml")
-      end
-    }
-  end
-
-  return errs
-end
-
-def validate_non_empty_key_value(map, key)
-    if map.key?(key) then
-      if map[key].length == 0 then
-        return ["Empty #{key} for requirement"]
-      end
-    else
-      return ["Missing #{key} for requirement"]
+  def self.validate_document(document, validator)
+    errors = validator.validate(document)
+    if errors && !errors.empty?
+      return errors
     end
     return []
-end
-
-def validate_level(level)
-  if level != "Introductory" && level != "Intermediate" && level != "Advanced" then
-    return "Wrong level value: only 'Introductory', 'Intermediate' or 'Advanced' are accepted"
-  end
-end
-
-def validate_requirements(requirements)
-  errs = []
-  # Exit early if no requirements
-  if requirements.nil? or requirements.length == 0
-    return []
   end
 
-  # Otherwise check each
-  for requirement in requirements
-    # For external links, they need a link that is non-empty
-    if requirement['type'] == 'external'
-      errs.push(*validate_non_empty_key_value(requirement, 'title'))
-      errs.push(*validate_non_empty_key_value(requirement, 'link'))
-
-      requirement.keys.each{ |x|
-        if not ['title', 'link', 'type'].include?(x) then
-          errs.push("Unknown key #{x}")
+  def self.validate_non_empty_key_value(map, key)
+      if map.key?(key) then
+        if map[key].length == 0 then
+          return ["Empty #{key} for requirement"]
         end
-      }
-    elsif requirement['type'] == 'internal'
-      errs.push(*validate_non_empty_key_value(requirement, 'topic_name'))
-      errs.push(*validate_non_empty_key_value(requirement, 'tutorials'))
+      else
+        return ["Missing #{key} for requirement"]
+      end
+      return []
+  end
 
-      requirement.keys.each{ |x|
-        if not ['topic_name', 'tutorials', 'type'].include?(x) then
-          errs.push("Unknown key #{x}")
+  def self.is_tutorial(fn)
+    fn.include?('tutorial.md') || fn =~ /tutorial_[A-Z]{2,}.md/
+  end
+
+  def self.is_slide(fn)
+    fn.include?('slides.html') || fn =~ /slides_[A-Z]{2,}.html/
+  end
+
+  def self.validate_requirements(requirements)
+    errs = []
+    # Exit early if no requirements
+    if requirements.nil? or requirements.length == 0
+      return []
+    end
+
+    # Otherwise check each
+    for requirement in requirements
+      # For external links, they need a link that is non-empty
+      if requirement['type'] == 'external'
+        errs.push(*validate_document(requirement, $requirement_external_validator))
+      elsif requirement['type'] == 'internal'
+        errs.push(*validate_document(requirement, $requirement_internal_validator))
+
+        # For the internal requirements, test that they point at something real.
+        if requirement.key?('tutorials') then
+          requirement['tutorials'].each{ |tutorial|
+            # For each listed tutorial check that a directory with that name exists
+            pn = Pathname.new("topics/#{requirement['topic_name']}/tutorials/#{tutorial}")
+
+            if not pn.directory?
+              errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} does not exist")
+            end
+          }
         end
-      }
-      # For the internal requirements, test that they point at something real.
-      if requirement.key?('tutorials') then
-        requirement['tutorials'].each{ |tutorial|
-          # For each listed tutorial check that a directory with that name exists
-          pn = Pathname.new("topics/#{requirement['topic_name']}/tutorials/#{tutorial}")
+        #
+      elsif requirement['type'] == 'none'
+        errs.push(*validate_non_empty_key_value(requirement, 'title'))
 
-          if not pn.directory?
-            errs.push("Internal requirement to topics/#{requirement['topic_name']}/tutorials/#{tutorial} does not exist")
+        requirement.keys.each{ |x|
+          if not ['title', 'type'].include?(x) then
+            errs.push("Unknown key #{x}")
           end
         }
+      else
+        errs.push("Unknown requirement type #{requirement['type']}")
       end
-      #
-    elsif requirement['type'] == 'none'
-      errs.push(*validate_non_empty_key_value(requirement, 'title'))
+    end
 
-      requirement.keys.each{ |x|
-        if not ['title', 'type'].include?(x) then
-          errs.push("Unknown key #{x}")
-        end
-      }
+    return errs
+  end
+
+  def self.lint_faq_file(fn)
+    errs = []
+
+    begin
+      data = YAML.load_file(fn)
+    rescue
+      puts "Skipping #{fn}"
+      return nil
+    end
+
+    # Check this is something we actually want to process
+    if ! data.is_a?(Hash) then
+      puts "Skipping #{fn}"
+      return nil
+    end
+    errs.push(*validate_document(data, $faq_validator))
+    return errs
+  end
+
+  def self.lint_file(fn)
+    # Any error messages
+    errs = []
+
+    begin
+      data = YAML.load_file(fn)
+    rescue
+      puts "Skipping #{fn}"
+      return nil
+    end
+
+    # Check this is something we actually want to process
+    if ! data.is_a?(Hash) then
+      puts "Skipping #{fn}"
+      return nil
+    end
+
+    if not fn.include?('metadata.yaml') then
+      # Load topic metadata for this file
+      topic = fn.split('/')[2]
+      topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
+
+      # Load subtopic titles
+      if data.key?('subtopic') then
+        subtopic_ids = []
+        topic_metadata['subtopics'].each{ |x|
+          subtopic_ids.push(x['id'])
+        }
+
+        @TUTORIAL_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+        @SLIDES_SCHEMA['mapping']['subtopic']['enum'] = subtopic_ids
+      $tutorial_validator = Kwalify::Validator.new(@TUTORIAL_SCHEMA)
+      $slides_validator = Kwalify::Validator.new(@SLIDES_SCHEMA)
+      end
+    end
+
+    # Generic error handling:
+    ## Check requirements
+    if data.key?('requirements') then
+      errs.push(*validate_requirements(data['requirements']))
+    end
+
+    ## Check follow ups
+    if data.key?('follow_up_training') then
+      errs.push(*validate_requirements(data['follow_up_training']))
+    end
+
+    # Custom error handling:
+    if is_tutorial(fn) then
+      errs.push(*validate_document(data, $tutorial_validator))
+    elsif fn.include?('metadata.yaml') then
+      errs.push(*validate_document(data, $topic_validator))
+    elsif is_slide(fn) then
+      errs.push(*validate_document(data, $slides_validator))
     else
-      errs.push("Unknown requirement type #{requirement['type']}")
+      #errs.push("No validation available for this type of file")
     end
-  end
 
-  return errs
-end
-
-# Handle tutorials
-if fn.include?('tutorial.md') then
-  data = YAML.load_file(fn)
-  skip_disabled(data, fn)
-
-  # Check for required keys
-  tutorial_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
+    # Check contributors OR contributions
+    if is_slide(fn) || is_tutorial(fn) then
+      if not (data.has_key?('contributors') or data.has_key?('contributions'))
+        errs.push("Document lacks EITHER contributors OR contributions key")
+      end
     end
-  }
 
-  # Check deprecated keys
-  tutorial_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
+    # If we had no errors, validated successfully
+    return errs
+  end
+
+  def self.lint_quiz_file(fn)
+    errs = []
+
+    begin
+      data = YAML.load_file(fn)
+    rescue
+      $stderr.puts "Skipping #{fn}"
+      return nil
     end
-  }
 
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (tutorial_required_keys.include?(x) or tutorial_optional_keys.include?(x) or tutorial_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
+    if ! data.is_a?(Hash) then
+      $stderr.puts "Skipping #{fn}"
+      return nil
     end
-  }
 
-  # Check that the layout is correct
-  if data['layout'] != "tutorial_hands_on" then
-    errs.push("layout should be 'tutorial_hands_on', not '#{data['layout']}'")
-  end
+    data['questions'].select{|q| q.has_key? "correct"}.each{|q|
+      if q["correct"].is_a?(Array) then
+        if q["type"] != "choose-many" then
+          errs.push("There are multiple answers for this question, but it is not a choose-many #{q['title']}")
+        end
 
-  # Check level
-  if data.key?('level') then
-    errs.push(*validate_level(data['level']))
-  end
+        q["correct"].each{|c|
+          if ! q["answers"].include?(c)
+            errs.push("Answer #{c} not included in options for question #{q['title']}")
+          end
+        }
+      else
+        if q["type"] != "choose-1" then
+          errs.push("There is only a single textual answer, it must be a list for a choose-many question #{q['title']}")
+        end
 
-  # Check time formatting
-  if data.key?('time_estimation') then
-    match = /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/.match(data['time_estimation'])
-    if match.nil? then
-      errs.push("Time specification could not be parsed (Should be of form ##h##m##s, is '#{data['time_estimation']}')")
-    end
-  end
-
-  # Check requirements
-  if data.key?('requirements') then
-    errs.push(*validate_requirements(data['requirements']))
-  end
-
-  # Check follow ups
-  if data.key?('follow_up_training') then
-    errs.push(*validate_requirements(data['follow_up_training']))
-  end
-
-  # Check contributors
-  errs = errs.concat(check_contributors(data))
-
-  # Load topic metadata
-  topic = fn.split('/')[1]
-  topic_metadata = YAML.load_file("topics/#{topic}/metadata.yaml")
-
-  # Check subtopics
-  if data.key?('subtopic') then
-    subtopic_ids = []
-    topic_metadata['subtopics'].each{ |x|
-      subtopic_ids.push(x['id'])
+        if ! q["answers"].include?(q["correct"])
+          errs.push("Answer #{q["correct"]} not included in options for question #{q['title']}")
+        end
+      end
     }
 
-    if not subtopic_ids.include?(data['subtopic']) then
-      errs.push("Unknown subtopic: #{data['subtopic']} not in #{subtopic_ids}")
-    end
+    errs.push(*validate_document(data, $quiz_validator))
+    return errs
   end
 
-
-# Validate Metadata
-elsif fn.include?('metadata.yaml') then
-  data = YAML.load_file(fn)
-
-  # Check for required keys
-  metadata_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
+  def self.run
+    errors = []
+    Find.find('./topics') do |path|
+      if FileTest.directory?(path)
+        if File.basename(path).start_with?('.')
+          Find.prune       # Don't look any further into this directory.
+        else
+          next
+        end
+      else
+        last_component = path.split('/')[-1]
+        if last_component =~ /slides.*html$/ || last_component =~ /tutorial.*md/  || last_component =~ /metadata.ya?ml/  then
+          errs = lint_file(path)
+          if ! errs.nil? and errs.length > 0
+            errors += [ [path, errs] ]
+          end
+        end
+      end
     end
-  }
 
-  # Check deprecated keys
-  metadata_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
+
+    Dir.glob("**/faqs/**/*.md") do |path|
+      if FileTest.directory?(path)
+        if File.basename(path).start_with?('.')
+          Find.prune       # Don't look any further into this directory.
+        else
+          next
+        end
+      else
+        last_component = path.split('/')[-1]
+        if path =~ /aaaa_dontquestionthislinkitisthegluethatholdstogetherthegalaxy.md/
+          next
+        end
+        if last_component =~ /.*.md/ then
+          unless last_component =~ /index.md$/ || last_component =~ /README.md/  then
+            errs = lint_faq_file(path)
+            if ! errs.nil? and errs.length > 0
+              puts "#{path}: #{errs}"
+              errors += [ [path, errs] ]
+            end
+          end
+        end
+      end
     end
-  }
 
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (metadata_required_keys.include?(x) or metadata_optional_keys.include?(x) or metadata_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
+    Dir.glob("./topics/**/quiz/*") do |path|
+      if FileTest.directory?(path)
+        if File.basename(path).start_with?('.')
+          Find.prune       # Don't look any further into this directory.
+        else
+          next
+        end
+      else
+        last_component = path.split('/')[-1]
+        if last_component =~ /ya?ml/  then
+          errors += lint_quiz_file(path)
+        end
+      end
     end
-  }
 
-elsif fn.include?('slides.html') then
-  data = YAML.load_file(fn)
-  skip_disabled(data, fn)
-
-  # Check for required keys
-  slides_required_keys.each{ |x|
-    if not data.key?(x) then
-      errs.push("Missing key: #{x}")
-    end
-  }
-
-  # Check deprecated keys
-  slides_deprecated_keys.each{ |x|
-    if data.key?(x) then
-      errs.push("Deprecated key: #{x}")
-    end
-  }
-
-  # Check that all keys are valid
-  data.keys.each{ |x|
-    if not (slides_required_keys.include?(x) or slides_optional_keys.include?(x) or slides_deprecated_keys.include?(x)) then
-      errs.push("Unknown key: #{x}")
-    end
-  }
-
-  # Check level
-  if data.key?('level') then
-    errs.push(*validate_level(data['level']))
+    errors
   end
-
-  # Check requirements
-  if data.key?('requirements') then
-    errs.push(*validate_requirements(data['requirements']))
-  end
-
-  # Check that the layout is correct
-  if not ['base_slides', 'tutorial_slides'].include?(data['layout']) then
-    errs.push("layout should be 'base_slides', not '#{data['layout']}'")
-  end
-
-  # Check contributors
-  errs = errs.concat(check_contributors(data))
-else
-  #puts "No validation available for filetype"
-  exit 0
 end
 
-
-# If we had no errors, validated successfully
-if errs.length == 0 then
-  puts "\e[38;5;40m#{fn} validated succesfully\e[m"
-  exit 0
-else
-  # Otherwise, print errors and exit non-zero
-  puts "\e[48;5;09m#{fn} has errors\e[m"
-  errs.each {|x| puts "  #{x}" }
-  exit 1
+if $0 == __FILE__
+  ec = 0
+  errors = SchemaValidator::run()
+  if errors.length > 0
+    ec = 1
+    errors.each{|path, errs|
+      # Otherwise, print errors and exit non-zero
+      puts "\e[48;5;09m#{path} has errors\e[m"
+      errs.each {|x| puts "  #{x}" }
+    }
+  end
+  exit ec
 end

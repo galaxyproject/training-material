@@ -38,8 +38,8 @@ contributors:
 
 
 To start on Genome assembly you can read the previous assembly tutorials:
-* [Introduction to Genome Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/general-introduction/slides.html#1)
-* [De Bruijn Graph Assembly](https://galaxyproject.github.io/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#46)
+* [Introduction to Genome Assembly]({% link topics/assembly/tutorials/general-introduction/slides.html %})
+* [De Bruijn Graph Assembly]({% link topics/assembly/tutorials/debruijn-graph-assembly/slides.html %}#46)
 
 ---
 
@@ -49,7 +49,7 @@ To start on Genome assembly you can read the previous assembly tutorials:
 
 ]
 
-[![](https://github.com/rrwick/Unicycler/raw/master/misc/illumina_graph_comparison.png)](https://github.com/rrwick/Unicycler)
+[![Graphic shown three different assemblies, all tangled knots of sequences that will be very difficult to resolve.](../../images/illumina_graph_comparison.png)](https://github.com/rrwick/Unicycler)
 
 Genome assembly is a difficult task. In trying to explain it we will be relying on two highly regarded sources:
 
@@ -292,7 +292,7 @@ We can solve assembly challenge using overlaps between sequencing reads. However
 ## Directed graphs
 
 Finding overlaps is identical to building a *directed graph* where directed *edges* connect *nodes* representing overlapping reads:
-![](../../images/dag.png)
+![Cartoons of two sequences aligned with nearly perfect matches. On the right are a list of nodes representing sequences. The two from the alignment are linked with an arrow and the text reads Suffix of source is similar to prefix of sink.](../../images/dag.png)
 
 >**Directed graph** representing overlapping reads. (Image from [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf)).
 
@@ -322,7 +322,7 @@ For example, the string reconstruction we have seen earlier (with the difference
 
 can be represented as a following directed graph (or genome path):
 
-![](../../images/4.6.png)
+![Graph where each of the above 3-mers is a single node in a graph and they are linked together from left to right most 3-mer.](../../images/4.6.png)
 
 **Genome path**. Trimers composing the <code>TAATGCCATGGGATGTT</code> sequence represented as the "genome" path. (Fig. 4.6 from [CP](http://bioinformaticsalgorithms.com/)). In this path a suffix of a 3-mer is equal to prefix of the next 3-mer.
 
@@ -333,7 +333,7 @@ can be represented as a following directed graph (or genome path):
 **However**, we do not know the actual genome! All we have in real life is a collection of reads. Let's first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:
 
 
->![](../../images/4.7.png)
+>![Th above graph is expanded to include a lot more connections between any nodes that share 2 base overlap.](../../images/4.7.png)
 >
 >**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from [CP](http://bioinformaticsalgorithms.com/))
 
@@ -341,10 +341,10 @@ So to determine the sequence of the underlying genome we are looking a path in t
 
 ---
 
-For example for our 3-mer collection there two possible Hamiltonian paths:
+For example for our 3-mer collection there are two possible Hamiltonian paths:
 
-![](../../images/4.9a.png)
-![](../../images/4.9b.png)
+![The above graph is re-used but a single path is highlighted](../../images/4.9a.png)
+![The same graph with a different path highlighted.](../../images/4.9b.png)
 
 **Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from [[CP](http://bioinformaticsalgorithms.com/)](http://bioinformaticsalgorithms.com/)).
 
@@ -368,7 +368,7 @@ What is the overlap between these two reads? For now we will define overlap of <
 
 We will start with some minimal match of length $k$. Once a match is found it will be extended to the left to verify that the entire prefix of Read Y matches:
 
->![](../../images/find_overlap.png)
+>![Two sequences are shown X and Y. The X sequence ends with the string GCC. In Y they start looking from the end until they find a GCC. In this case we confirm a length-6 prefix of Y matches a suffix of X.](../../images/find_overlap.png)
 >
 >**Finding overlaps** between Read X and Read Y (Image from [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf)).
 
@@ -376,7 +376,7 @@ We will start with some minimal match of length $k$. Once a match is found it wi
 
 As a result we represent two reads are connected nodes:
 >
->![](../../images/og1.png)
+>![Node labelled with one sequence points to another. The sequences are the ones from above with the number 6 on the arrow between them.](../../images/og1.png)
 >
 >Number above the edge shows the length of the overlap.
 
@@ -395,11 +395,11 @@ TACGAT
 
 Building an overlap graph with overlap of <code>length >= 4</code> will give us the following:
 
->![](../../images/og2.png)
+>![The overlap graph now has longer sequences and numbers annotating the length of the overlap](../../images/og2.png)
 >
 >You can see that there is a path through this graph that would spell out the original genome sequence <code>GTACGTACGAT</code> :
 >
->![](../../images/og3.png)
+>![The optimal, highest scoring path is represented through this graph](../../images/og3.png)
 >
 >Here we are lucky enough to have all nodes having a single outgoing edge with the highest number (the length of overlap).
 
@@ -434,29 +434,29 @@ SCS(S):: AAABBBABAA (length = 10)
 
 It looks like finding SCS for a set of sequencing reads may just be what we need to produce a genome assembly. But how can this work in practice? One potential idea is to order the strings in some way and "reduce" them into a superstring (following examples are from Ben Langmead):
 
->![](../../images/scs1.png)
+>![A sequence of As and Bs in groups of 3s is labelled order 1. Below the sequence is written AAA, the current superstring.](../../images/scs1.png)
 
 >Let's look at the first two strings. They can be "reduced" to `AAAB`:
 >
->![](../../images/scs2.png)
+>![Now AAAB is written below the sequence because of the overlap in the first two groups.](../../images/scs2.png)
 >
 >The next two add an `A`:
 >
->![](../../images/scs3.png)
+>![Now AAABA is written, due to overlap in the second and third groups](../../images/scs3.png)
 >
 >Third and fourth add `BB`:
 >
->![](../../images/scs4.png)
+>![The extension process continues with another overlapping component extending it further.](../../images/scs4.png)
 
 ---
 
 >Continuing this we will eventually get `AAABABBAABABBABB`:
 >
->![](../../images/scs5.png)
+>![Order 1 produces a longish superstring](../../images/scs5.png)
 >
 >But `AAABABBAABABBABB` is the shortest only for this particular ordering. So let's reorder and try again:
 >
->![](../../images/scs6.png)
+>![Order 2, a new ordering of the same sequences, produces a shorter superstring.](../../images/scs6.png)
 >
 >Now we did better, but maybe we can do even better.
 
@@ -475,7 +475,7 @@ AAA AAB ABB BBA BBB
 
 and first build an overlap graph:
 
->![](../../images/greedy1.png)
+>![Graph showing 5 nodes with various scores between them.](../../images/greedy1.png)
 >
 >**An overlap graph** for set <code>S: AAA AAB ABB BBA BBB</code>.
 
@@ -485,51 +485,51 @@ Next, we start collapsing the nodes to maximize the overlap (and hence to decrea
 
 >In the graph below there are multiple ties: nodes with outgoing edges of identical weights (e.g., edges pointing from `ABB` to both `BBA` and `BBB` have weight of two. Remember, that the weight is the length of overlap between two nodes' labels). In this situation we will break ties by randomly picking an edge to traverse. Let's pick <font color="red">`AAA` &#8594; `AAB`</font>:
 
->![](../../images/greedy2.png)
+>![The above graph however the node AAA -> 2 -> AAB is highlighted in red.](../../images/greedy2.png)
 
 ---
 
 .pull-left[
 >We then merge `AAA` and `AAB` into an SCS containing both, which will be `AAAB`:
 >
->![](../../images/greedy3.png)
+>![The above graph however with 4 nodes, as AAA and AAB are merged](../../images/greedy3.png)
 ]
 --
 .pull-right[
 >Now let's pick edge <font color="red">`ABB` &#8594; `BBB`</font>:
 
->![](../../images/greedy4.png)
+>![Another edge scoring 2 is highlighted, ABB to BBB (2)](../../images/greedy4.png)
 ]
 ---
 
 .pull-left[
 >Collapse the nodes:
 >
->![](../../images/greedy5.png)
+>![They're collapsed, now with 3 nodes in the graph](../../images/greedy5.png)
 ]
 --
 .pull-right[
 >Pick <font color="red">`ABBB` &#8594; `BBA`</font>:
 >
->![](../../images/greedy6.png)
+>![Same as before, another highlighted](../../images/greedy6.png)
 ]
 ---
 .pull-left[
 >Collapse the nodes:
 >
->![](../../images/greedy7.png)
+>![Same as before, down to 2 nodes with arrows going both directions between them. One scores 2, one scores 1.](../../images/greedy7.png)
 ]
 --
 .pull-right[
 >Pick <font color="red">`AAAB` &#8594; `ABBBA`</font>:
 >
->![](../../images/greedy8.png)
+>![The AAAB to ABBBA is highlighted, scoring 2.](../../images/greedy8.png)
 ]
 ---
 
 >Collapse again and now we are left with a superstring of length 7:
 >
->![](../../images/greedy9.png)
+>![A single node is left producing AAABBBA](../../images/greedy9.png)
 
 The above procedure can be computed *very* quickly. But there is a catch: it does not guarantee that it will give us truly the shortest superstring. It really depends on how we choose edges.
 
@@ -541,39 +541,39 @@ Below is another example of using the same dataset in which we traverse graph in
 .pull-left[
 >We start the same way as before by choosing <font color="red">`AAA` &#8594; `AAB`</font>:
 >
->![](../../images/greedy2.png)
+>![THe graph resets to 5 nodes](../../images/greedy2.png)
 ]
 --
 .pull-right[
 >Merge `AAA` and `AAB`:
 >
->![](../../images/greedy3.png)
+>![The same initial step](../../images/greedy3.png)
 ]
 
 ---
 .pull-left[
 >But now we pick a different edge <font color="red">`ABB` &#8594; `BBA`</font>:
 >
->![](../../images/greedy4_alt.png)
+>![Now a different edge scoring 2 is picked, ABB to BBA](../../images/greedy4_alt.png)
 ]
 --
 .pull-right[
 >Collapsing these nodes dramatically changes the graph:
 >
->![](../../images/greedy5_alt.png)
+>![these are collapsed producing a three node graph. AAAB and ABBA have a score of 2, BBB is only connected to AAAB with a score of 1.](../../images/greedy5_alt.png)
 ]
 
 ---
 .pull-left[
 >Now we pick <font color="red">`AAAB` &#8594; `ABBA`</font> as this is the edge with the highest weight:
 >
->![](../../images/greedy6_alt.png)
+>![The highest scoring edge is picked](../../images/greedy6_alt.png)
 ]
 --
 .pull-right[
 >Collapsing it produces two nodes that are not connected to each other:
 >
->![](../../images/greedy7_alt.png)
+>![AAABBA and BBB are left, unconnected.](../../images/greedy7_alt.png)
 ]
 ---
 
@@ -600,7 +600,7 @@ g_long      g_time      ng_tim
 
 An overlap graph will look like this:
 
->![](../../images/long.png)
+>![A large, messy graph with various portions fo the above sentence.](../../images/long.png)
 >
 <small>**An overlap graph** for with overlap length <code> >= 3<code>.</small>
 
@@ -608,13 +608,13 @@ An overlap graph will look like this:
 
 If we proceed with Greedy SCS we will follow the following trajectory through the graph:
 
->![](../../images/long_opt.png)
+>![A greedy path is highlighted, all scoring 5.](../../images/long_opt.png)
 
 ---
 
 To make things even clearer let's isolate the path:
 
-![](../../images/long_opt_focus.png)
+![Irrelevant edges are removed.](../../images/long_opt_focus.png)
 
 ---
 
@@ -640,7 +640,7 @@ a_long_long_time
 
 We are missing one instance of 'long' in this string. The following graph shows the path that would return the *correct* string:
 
- >![](../../images/long_corr.png)
+ >![A less optimal path is shown that recovers the duplicated long](../../images/long_corr.png)
 
 ---
 
@@ -680,7 +680,7 @@ Let's talk about an alternative way to represent the relationship between *k*-me
 
 [Nicolaas de Bruijn](https://en.wikipedia.org/wiki/Nicolaas_Govert_de_Bruijn) had a purely theoretical interest of constructing _k_-universal strings for an arbitrary value of _k_. A _k_-universal string contains every possible _k_-mer only once:
 
->[![](../../images/deBruijn_txt.png)](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
+>[![Screenshot of a box from a textbook with illegible text and a similar graph to the ABBA ones shown above.](../../images/deBruijn_txt.png)](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
 >
 >**de Bruijn graph**. From [Compeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html)
 
@@ -694,35 +694,35 @@ TAA AAT ATG TGC GCC CCA CAT ATG TGG GGG GGA GAT ATG TGT GTT
 
 ---
 
-We will assign 3-mers to _edges_ instead or _nodes_:
+We will assign 3-mers to _edges_ instead of _nodes_:
 
 
-![](../../images/4.12.png)
+![A long string of 2-mer nodes linked together with 3-mers on edges.](../../images/4.12.png)
 
 **_k_-mers as edges**. Edges represented by 3-mers connect nodes representing the overlaps. (Fig. 4.12 from [CP](http://bioinformaticsalgorithms.com/))
 
 This graph can be simplified by gluing identical nodes together:
 
-![](../../images/4.13a.png)
+![The same graph](../../images/4.13a.png)
 
-![](../../images/4.13b.png)
+![Re-organised to collapse identical nodes, first the AT node is collapsed from three into one.](../../images/4.13b.png)
 
 ---
 
 
 Here the complexity of the graph is reduced by first gluing redundant <font color="red">`AT`</font> nodes
 
-![](../../images/4.13c.png)
+![Now the 3 TG nodes are highlighted](../../images/4.13c.png)
 
-![](../../images/4.13d.png)
+![and collapsed into a single one, sharing the original's connections.](../../images/4.13d.png)
 
 ---
 
 Next, <font color="blue">`TG`</font> nodes are merged
 
-![](../../images/4.13e.png)
+![2 GG nodes are highlighted](../../images/4.13e.png)
 
-![](../../images/4.13f.png)
+![and merged, including a self-link.](../../images/4.13f.png)
 
 ---
 
@@ -730,7 +730,7 @@ And, finally the two <font color="green">`GG`</font> nodes are resolved. (Fig. 4
 
 Because we now represent _k_-mers as edges (rather than nodes), our problem has morphed into finding a path that visits every _edge_ once, or an [Eulerian Path](https://en.wikipedia.org/wiki/Eulerian_path):
 
-![](../../images/4.15.png)
+![The final graph, same as previous image but now edges are numbered as well.](../../images/4.15.png)
 
 **Eulerian paths for the 15 3-mers**. Numbering of edges provides a way to reconstruct the original "genome". (Fig. 4.15 from [CP](http://bioinformaticsalgorithms.com/))
 
@@ -754,7 +754,7 @@ Some definitions:
 Let's apply Euler's Theorem to a classical problem: The bridges of Königsberg problem. Here the question is: *Can you walk through all of Königsberg traversing every bridge exactly one time?* In other words: *Is there a Eulerian path through the city of Königsberg?*
 
 
->![](../../images/koninsberg.png)
+>![Old map of Königsberg with dots on land portions and links between them. This is reduced into the same coloured nodes and bridges representing edges.](../../images/koninsberg.png)
 >
 >**Königsberg and Euler's Theorem**. (a) A map of old Königsberg, in which each area of the city is labeled with a different color point. (b) The Königsberg Bridge graph, formed by representing each of four land areas as a node and each of the city's seven bridges as an edge. (From [Campeau:2011](http://www.nature.com/nbt/journal/v29/n11/abs/nbt.2023.html#close))
 
@@ -766,7 +766,7 @@ By looking at this graph we can see that it is *unbalanced*. If one arrives to, 
 
 Let's look at the de Bruijn graph from above again. But this time let's drop edge numbering and pretend that the genome is now really known to us (as is usually the case in real life):
 
->![](../../images/dg1.png)
+>![Similar graph as above but now edges are only labelled by sequences, no more numbers.](../../images/dg1.png)
 >
 >**Eulerian paths for the 15 3-mers**.
 
@@ -774,7 +774,7 @@ Let's look at the de Bruijn graph from above again. But this time let's drop edg
 
 In the original sequence `TAATGCCATGGGATGTT` *k*-mer <font color="red">`AT`</font> is present 3 times and *k*-mer <font color="blue">`TG`</font> is found twice. Thus *multiple* Eulerian walks are now possible like this:
 
->![](../../images/dg2.png)
+>![Following a direct path from the one node without incoming connections, to TG node, choosing one of the three outgoing connections we go 'up'](../../images/dg2.png)
 >
 >**Possible path #1**. Here after we reach <font color="blue">`TG`</font> node we turn **up**.
 
@@ -806,7 +806,7 @@ TAATGCCATGGGATGTT
 
 Yet there is an alternative:
 
->![](../../images/dg3.png)
+>![The same as above but this time going down to follow a different path](../../images/dg3.png)
 >
 >**Possible path #2**. Here after we reach <font color="blue">`TG`</font> node we turn **dow**.
 
@@ -852,7 +852,7 @@ In the above example we have used *k*-mer size of 3. But what if we try 4 or 5? 
 
 #### *k* = 3
 
->![](../../images/k2.png)
+>![The same graph as above, now in a different orientation. There are many connections](../../images/k2.png)
 
 ---
 
@@ -860,7 +860,7 @@ In the above example we have used *k*-mer size of 3. But what if we try 4 or 5? 
 
 #### *k* = 4
 
->![](../../images/k3.png)
+>![There are now significantly fewer connections.](../../images/k3.png)
 >
 >Here complexity is decreasing, but we still have the problem with having `ATG` twice.
 
@@ -876,7 +876,7 @@ In this case there is only one path. This because our *k* is larger that the rep
 This is why technologies producing long sequencing reads stimulate so much enthusiasm - they will allow to resolve and produce accurate assembly of large genomes.
 ]
 .pull-right[
-![](../../images/k4.png)
+![Graph with only a single route through the sequence.](../../images/k4.png)
 ]
 
 ---
@@ -888,13 +888,13 @@ In this topic we've learned about two ways of representing the relationship betw
 1. **Overlap graphs** - nodes are reads, edges are overlaps between reads.
 2. **De Bruijn graphs** - nodes are overlaps, edges are reads.
 
->![](../../images/4.7.png)
+>![Overlap: graph from before, nodes are 3-mers, unlabelled connections.](../../images/4.7.png)
 
 ---
 
 **A**.
 
-![](../../images/4.13f.png)
+![De Bruijn: The 2-mer graph with 3-mer connections again.](../../images/4.13f.png)
 
 ---
 
@@ -903,7 +903,7 @@ An overlap (A) and De Bruijn (B) graphs for the same string.
 
 Whatever the representation will be it will be messy:
 
-![](../../images/t12_mess.png)
+![A hypothetical real life graph with a huge number of nodes snaking all over the screen, and many many isolaed single and pairs of nodes unconnected to anything.](../../images/t12_mess.png)
 
 A fragment of a very large De Bruijn graph (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -916,7 +916,7 @@ There are multiple reasons for such messiness:
 
 Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.
 
->![](../../images/t12_errors.png)
+>![An inset from the above. A red box highlights pairs of 2 and 3 node groups.](../../images/t12_errors.png)
 >
 >Graph components resulting from sequencing errors (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -926,7 +926,7 @@ Sequencing machines do not give perfect data. This results in spurious deviation
 
 As we discussed earlier humans are diploid and there are multiple differences between maternal and paternal genomes. This creates "bubbles" on assembly graphs:
 
->![](../../images/t12_bubble.png)
+>![A bubble in the graph. there are a series of nodes which have 5-8 connections pointing from one to the next. Halfway through there is a single base deviation and the 5-mer nodes highlight this single base change. The change results in a split into two strands which shortly reconnect. One strand is labelled Maternal, the other Paternal.](../../images/t12_bubble.png)
 >
 >Bubbles due to a heterozygous site  (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -936,7 +936,7 @@ As we discussed earlier humans are diploid and there are multiple differences be
 
 As we've seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called *contigs*:
 
->![](../../images/t12_contigs.png)
+>![A sentence is represented "to everything turn", "turn" (a repeat) and "turn there is a season". The repeat makes the graph hard to solve into a single path.](../../images/t12_contigs.png)
 >
 >The following "genomic" segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 

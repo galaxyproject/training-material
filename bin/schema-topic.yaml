@@ -1,0 +1,181 @@
+---
+type: map
+mapping:
+    name:
+        type: str
+        required: true
+        pattern: /^[a-z0-9_-]+$/
+        description: |
+            The internal identifier for a topic, it should be the same as the folder name.
+        examples:
+            - epigenetics
+            - sequence-analysis
+            - admin
+    type:
+        type: str
+        required: true
+        enum:
+            - admin-dev
+            - basics
+            - data-science
+            - use
+            - instructors
+        description: |
+            The type of topic, some have subtly different behaviours.
+
+            `admin-dev`
+            :  should be used for admin and developer topics that are not scientifically focused.
+
+            `basics`
+            :  Only used for galaxy-interface type topics
+
+            `data-science`
+            :  Topics which are not necessarily Galaxy focused but expand into broader communities
+
+            `use`
+            :  These topics use galaxy for some analysis
+
+            `instructors`
+            :  Specific to topics related to instruction of Galaxy
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the topic, this is displayed for users to see.
+        examples:
+            - Proteomics
+            - Variant Analysis
+    summary:
+        type: str
+        required: true
+        description: |
+            A longer description of the contents of this topic
+        examples:
+            - Statistical Analyses for omics data and machine learning using Galaxy tools
+    docker_image:
+        type: str
+        description: |
+            The image ID for an image which contains all of the tools and data for this topic.
+        examples:
+            - quay.io/galaxy/sequence-analysis-training
+    subtopics:
+        type: seq
+        required: false
+        description: |
+            For large topics, we can define subtopics and create multiple tutorial lists, which separates the tutorials to help users find content that interests them more quickly.
+        sequence:
+            - type: map
+              mapping:
+                  id:
+                      type: str
+                      required: true
+                      pattern: /^[A-Za-z0-9_-]+$/
+                      description: |
+                          Subtopic ID, this should match what is used in tutorials.
+                      examples:
+                          - single-cell
+                  title:
+                      type: str
+                      required: true
+                      description: |
+                          Subtopic title, which is displayed for users to see.
+                      examples:
+                          - Maintaining a Production Galaxy
+                          - Single-cell RNA-seq
+                  description:
+                      type: str
+                      required: true
+                      description: |
+                          A human readable textual description of a subtopic.
+                      examples: |
+                        - "Start here if you are new to RNA-Seq analysis in Galaxy"
+                        - "These tutorials take you from raw sequencing reads to pathway analysis"
+                        - "Tutorials about analysis of single-cell RNA-seq data"
+                        - "Tutorials using a single published single-cell RNA-seq dataset for a variety of analyses"
+                  enable:
+                      type: bool
+                      description: |
+                        `false` to hide your topic from the production GTN. This is useful if you need a topic for a workshop, but have not finished making it up to GTN standards.
+
+    maintainers:
+        type: seq
+        required: true
+        sequence:
+            - type: str
+              required: true
+              description: A contributor's ID in the CONTRIBUTORS.yaml file.
+              enum:
+              - CONTRIBUTORS
+    edam_ontology:
+        type: str
+        pattern: /^topic_[0-9]+$/
+        description: |
+            An edam ontology id that describes the topic.
+        examples:
+            - topic_3173
+    requirements:
+        type: seq
+        description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
+        examples:
+            - |
+                type: internal
+                topic_name: statistics
+                tutorials:
+                    - age-prediction-with-ml
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  type:
+                      type: str
+                      required: true
+                      enum:
+                          - internal
+                      description: |
+                        the type of link
+                  topic_name:
+                      type: str
+                      description: |
+                        The name of the topic
+                  tutorials:
+                      type: seq
+                      sequence:
+                          - type: str
+                      description: |
+                        List of required tutorials inside that topic
+
+    references:
+        type: seq
+        examples: |
+          - |
+            authors: "Vaudel M, et al."
+            title: "Shedding light on black boxes in protein identification."
+            link: "https://www.ncbi.nlm.nih.gov/pubmed/24678044"
+            summary: "An extensive tutorial for peptide and protein identification, available at http://compomics.com/bioinformatics-for-proteomics. The material is completely based on freely available and open-source tools."
+        sequence:
+            - type: map
+              required: true
+              mapping:
+                  authors:
+                      type: str
+                      required: true
+                  title:
+                      type: str
+                      required: true
+                  link:
+                      type: str
+                      required: true
+                  summary:
+                      type: str
+    gitter:
+        type: str
+        description: |
+            Link to a gitter channel that is more relevant for this topic than the default. E.g. a single cell topic, you could use `Galaxy-Training-Network/galaxy-single-cell` to link to their specific chat room in all of the child tutorials by default.
+        examples:
+            - Galaxy-Training-Network/galaxy-single-cell
+            - galaxy-genome-annotation/Lobby
+    enable:
+        type: bool
+        required: false
+        description: |
+            `false` to hide your topic from the production GTN. This is useful if you need a topic for a workshop, but have not finished making it up to GTN standards.

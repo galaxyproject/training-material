@@ -1,0 +1,340 @@
+---
+id: formation_of_super-structures_on_xi
+name: Formation of the Super-Structures on the Inactive X
+description: >-
+  In this tutorial we will follow <a
+  href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et al.
+  (2018)</a> experiments to identify if there are differences in the H3K27me3,
+  H3K4me3 and CTCF between the X (active or inactive) chromosomes and the
+  potentially influenced genes (only use the wild type data).
+title_default: formation_of_super-structures_on_xi
+steps:
+  - title: Introduction
+    content: >-
+      Within a cell nucleus, the DNA is tightly-packed and the chromatin is
+      spatially distributed with different levels and scales of
+      organizations.<br><br> At the smallest scale, DNA is packaged into units
+      called nucleosomes, made of eight histone proteins.<br><br> On a larger
+      scale than nucleosomes, DNA is forming loops. DNA elements that would be
+      otherwise separated by large distances can interact. The corresponding
+      self-interacting (or self-associating) domains are found in many
+      organisms: they are called Topologically Associating Domains (TADs) in
+      mammalian cells. Mammalian chromosomes are also partitioned into two
+      spatial compartments, labeled “A” and “B”, where regions in compartment A
+      tend to interact preferentially with A compartment-associated regions than
+      B compartment-associated ones. Similarly, regions in compartment B tend to
+      associate with other B compartment-associated regions.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      In mammals, the X chromosome inactivation (XCI) balances the dosage of
+      X-linked genes between females and males. The genes on the inactive X (Xi)
+      chromosome are not expressed.<br><br> Binding certain proteins to each of
+      the eight histone proteins may modify the chromatin structure and may
+      result in changes in transcription level. For example, the H3K4m3 is
+      adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This
+      modification is known to activate the transcription on nearby genes by
+      opening the chromatin. The H3K27me3 on the other hand is inactivating the
+      transcription of the nearby genes. <br><br>More H3K27me3 and less H3K4m3
+      on the Xi could explain a lower expression of the genes there.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      It has been also observed that the Xi adopts a distinct conformation
+      without evident compartments or TAD. cohesins, condensins and
+      CCCTC-binding factor (CTCF) play key roles in chromosomal architectures
+      and TAD formation which are other potential cause of the repression of the
+      expression of the genes on Xi. The structural-maintenance-of-chromosomes
+      hinge domain containing 1 (SMCHD1) has been found enriched on the Xi. It
+      may be the potential actor in the shape of Xi and the change in gene
+      expression there. <br><br><a
+      href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et
+      al. (2018)</a> investigates the mechanism by which the SMCHD1 gene shapes
+      the Xi and represses the expression of the genes on Xi in mouse.
+      <br><br>Their idea was to identify the differences which could be observed
+      between the Xi and activated X chromosome, on both wild-type and SMCHD1
+      gene knockdown samples to study the SMCHD1 effect. In different
+      experiments, they targeted histones with H3K27me3 or H3K4me3 and CTCF
+      using ChIP-seq experiments.
+    backdrop: true
+  - title: Introduction
+    content: >-
+      They obtained sequences corresponding to a portion of DNA linked to
+      histones with H3K27me3, H3K4me3 or CTCF. Using this information, they
+      could identify if there are differences in the H3K27me3, H3K4me3 and CTCF
+      between the X (active or inactive) chromosomes and the potentially
+      influenced genes.<br><br> In the upcoming tutorial, we will only use the
+      wild type data from <a
+      href="https://www.cell.com/cell/fulltext/S0092-8674(18)30584-1">Wang et
+      al. (2018)</a> and analyze the ChIP-seq data step by step:<ul>
+        <li>CTCF with 2 replicates: <b>wt_CTCF_rep1</b> and <b>wt_CTCF_rep2</b></li>
+        <li>H3K4me3 with 2 replicates: <b>wt_H3K4me3_rep1</b> and <b>wt_H3K4me3_rep2</b></li>
+        <li>H3K27me3 with 2 replicates: <b>wt_H3K27me3_rep1</b> and <b>wt_H3K27me3_rep2</b></li>
+        <li>‘input’ with 2 replicates: <b>wt_input_rep1</b> and <b>wt_input_rep2</b></li>
+      </ul> In ‘input’ samples, the same treatment as the ChIP-seq samples was
+      done except for the immunoprecipitation step. They are also used along
+      with the ‘ChIP-seq’ samples to identify the potential sequencing bias and
+      help for differential analysis.
+    backdrop: true
+  - title: Quality control and treatment of the sequences
+    content: >-
+      The first step of any ChIP-Seq data analysis is quality control of the raw
+      sequencing data.<br><br> To save time, we will do it only on the data of
+      one sample <b>wt_H3K4me3_rep1</b> that has been down-sampled. keep in mind
+      that with real data this should be done on all samples.
+    backdrop: true
+  - title: History options
+    element: '#history-options-button'
+    content: >-
+      Create a new history for this exercise. Click on this button and then
+      "Create New"
+    placement: left
+  - title: Importing data via links
+    content: >-
+      Import <b>wt_H3K4me3_read1.fastq.gz</b> and
+      <b>wt_H3K4me3_read2.fastq.gz</b> from <a
+      href="https://zenodo.org/record/1324070">Zenodo</a>.
+    backdrop: true
+  - title: Uploading the new data
+    element: '#tool-panel-upload-button .fa.fa-upload'
+    content: We need to upload data. Open the Galaxy Upload Manager
+    placement: right
+    postclick:
+      - '#tool-panel-upload-button .fa.fa-upload'
+      - '#btn-reset'
+  - title: Uploading the input data
+    element: '#btn-new'
+    content: Click on Paste/Fetch Data
+    placement: right
+    postclick:
+      - '#btn-new'
+  - title: Uploading the input data
+    element: .upload-text-column .upload-text .upload-text-content.form-control
+    content: The corresponding links should be provided in this field
+    placement: right
+    textinsert: |-
+      https://zenodo.org/record/1324070/files/wt_H3K4me3_read1.fastq.gz
+      https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
+    backdrop: false
+  - title: Uploading the input data
+    element: '#btn-start'
+    content: Click on "Start" to start loading the data to history
+    placement: right
+    postclick:
+      - '#btn-start'
+  - title: Uploading the input data
+    element: '#btn-close'
+    content: >-
+      The upload may take a while.<br> Hit the close button to close this
+      window.
+    placement: right
+    postclick:
+      - '#btn-close'
+  - title: Rename the input data
+    element: '.history-right-panel .list-items > *:first'
+    content: >-
+      The uploaded data is in the history, but its name corresponds to the link.
+      We want to rename them it to something more meaningful<ul>
+        <li>Click on the pencil icon beside the file to "Edit Attributes".</li>
+        <li>Change the "<b>Name:</b>" accordingly.</li>
+      </ul>
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How are the DNA sequences stored?</li>
+        <li>What are the other entries of the file?</li>
+      </ul>
+    backdrop: false
+  - title: Quality control
+    content: >-
+      During sequencing, errors are introduced, such as incorrect nucleotides
+      being called. These are due to the technical limitations of each
+      sequencing platform. Sequencing errors might bias the analysis and can
+      lead to a misinterpretation of the data.<br><br> Sequence quality control
+      is therefore an essential first step in your analysis. We use here similar
+      tools as described in <a
+      href="http://training.galaxyproject.org/training-material/topics/sequence-analysis">“Quality
+      control” tutorial</a>: <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>
+      and <a
+      href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">Trim
+      Galore</a>.
+    backdrop: true
+  - title: Quality control
+    element: '#tool-search-query'
+    content: Search for 'FastQC' tool.
+    placement: right
+    textinsert: FastQC
+  - title: Quality control
+    element: '#tool-search'
+    content: Click on the 'FastQC' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.72"]
+        .tool-old-link
+  - title: Quality control
+    element: '#tool-search'
+    content: Run the tool with the default parameters on both input files.
+    position: right
+  - title: Quality control
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the generated HTML files.
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How is the quality of the reads in <b>wt_H3K4me3_read1</b>?</li>
+        <li>And in <b>wt_H3K4me3_read2</b>?</li>
+        <li>What should we do if the quality of the reads is not good?</li>
+      </ul>
+    backdrop: false
+  - title: Trimming low quality bases
+    content: >-
+      It is often necessary to trim sequenced read, for example, to get rid of
+      bases that were sequenced with high uncertainty (= low quality bases) at
+      the read ends.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is the relation between wt_H3K4me3_read1 and wt_H3K4me3_read2?</li>
+      </ul>
+    backdrop: false
+  - title: Trimming low quality bases
+    element: '#tool-search-query'
+    content: Search for 'Trim Galore' tool.
+    placement: right
+    textinsert: Trim Galore
+  - title: Trimming low quality bases
+    element: '#tool-search'
+    content: Click on the 'Trim Galore' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftrim_galore%2Ftrim_galore%2F0.4.3.1"]
+        .tool-old-link
+  - title: Trimming low quality bases
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul> <li>“Is this library
+      paired- or single-end?” to 'Paired-end'<ul> <li>“Reads in FASTQ format” to
+      'wt_H3K4me3_read1 (Input dataset)'</li> <li>“Reads in FASTQ format” to
+      'wt_H3K4me3_read2 (Input dataset)'</li></ul> <li>“Trim Galore! advanced
+      settings” to 'Full parameter list'<ul> <li>“Trim low-quality ends from
+      reads in addition to adapter removal” to '15'</li> <li>“Overlap with
+      adapter sequence required to trim a sequence” to '3'</li> <li>“Generate a
+      report file” to 'Yes'</li></ul></li> </ul>
+    position: right
+  - title: Trimming low quality bases
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the generated <i>txt</i> file (report file)
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many basepairs has been removed from the forwards reads because of bad quality?</li>
+        <li>And from the reverse reads?</li>
+        <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
+      </ul>
+    backdrop: false
+  - title: Mapping of the reads
+    content: >-
+      With ChiP sequencing, we obtain sequences corresponding to portion of DNA
+      linked to histones with H3K4me3. As H3K4me3 opens the chromatime, nearby
+      genes are more transcribed. It would be interesting to know if there is a
+      difference in the quantity of DNA impacted by H3K4me3 and the impacted
+      genes between active and inactive X chromosome.<br><br> We first need to
+      figure out where the sequenced DNA fragments originated from in the
+      genome. The reads must be aligned to a reference genome to identify the
+      binding sites.<br><br> This is equivalent to solving a jigsaw puzzles, but
+      unfortunately, not all pieces are unique.
+    backdrop: true
+  - title: Mapping of the reads
+    content: >-
+      In principle, we could do a BLAST analysis to figure out where the
+      sequenced pieces fit best in the known genome. Aligning millions of short
+      sequences this way may, however, take a couple of weeks. And we do not
+      really care about the exact base to base correspondence
+      (<b>alignment</b>). What we are really interested in is “where these reads
+      came from”. This approach is called <b>mapping</b>. <br><br>Nowadays,
+      there are many mapping programs for shotgun sequenced DNA. We will use <a
+      href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">Bowtie2</a>.
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What is a reference genome?</li>
+        <li>For each model organism, several possible reference genomes may be available (e.g. hg19 and hg38 for human). What do they correspond to?</li>
+        <li>Which reference genome should we use?</li>
+      </ul>
+    backdrop: false
+  - title: Running Bowtie2
+    element: '#tool-search-query'
+    content: Search for 'Bowtie2' tool.
+    placement: right
+    textinsert: Bowtie2
+  - title: Running Bowtie2
+    element: '#tool-search'
+    content: Click on the 'Bowtie2' tool to open it.
+    placement: right
+    postclick:
+      - >-
+        a[href$="/tool_runner?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbowtie2%2Fbowtie2%2F2.3.4.2"]
+        .tool-old-link
+  - title: Running Bowtie2
+    element: '#tool-search'
+    content: >-
+      Run the tool with the following parameters:<ul> <li>“Is this library
+      paired- or single-end?” to 'Paired-end'<ul> <li>“FASTA/Q file 1” to
+      trimmed reads pair 1 (output of Trim Galore!)</li> <li>“FASTA/Q file 2” to
+      trimmed reads pair 2 (output of Trim Galore!)</li></ul> <li>“Will you
+      select a reference genome from your history or use a built-in index?” to
+      'Use a built-in genome index'<ul> <li>“Select reference genome” to 'Mouse
+      (Mus musculus) mm10'</li></ul></li> <li>"Save the bowtie2 mapping
+      statistics to the history" to `Yes`</li> </ul>
+    position: left
+  - title: Trimming low quality bases
+    element: '.history-right-panel .list-items > *:first'
+    content: Inspect the mapping stats
+    position: left
+  - title: Questions
+    content: |-
+      <ul>
+        <li>How many reads where mapped? Uniquely or several times?</li>
+      </ul>
+    backdrop: false
+  - title: Inspection of a BAM file
+    content: >-
+      The output of Bowtie2 is a BAM file. A BAM (<a
+      href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment
+      Map</a>) file is a compressed, binary file storing the sequences mapped to
+      a reference sequence. <br><br>A BAM file (or a SAM file, the non
+      compressed version) consists of:<ul>
+        <li>A header section with the chromosome names and lengths (the lines starting with the @ symbol)</li>
+        <li>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</li></ul>
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>Which information do you find in a SAM/BAM file?</li>
+        <li>What is the additional information compared to a FASTQ file?</li>
+      </ul>
+    backdrop: false
+  - title: Visualization of the reads in IGV
+    element: '#history-options-button'
+    content: >-
+      <ul><li>Expand the output of Bowtie2</li> <li>Click on the <b>local</b> in
+      <b>display with IGV</b> to load the reads into the IGV browser</li> </ul>
+    placement: left
+  - title: Visualization of the reads in IGV
+    content: 'Zoom on the <b>chr2:91,053,413-91,055,345</b>'
+    backdrop: true
+  - title: Questions
+    content: |-
+      <ul>
+        <li>What could it mean if a bar in the coverage view is colored?</li>
+        <li>What could be the reason why a read is white instead of grey?</li>
+      </ul>
+    backdrop: false

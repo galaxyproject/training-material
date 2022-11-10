@@ -1,0 +1,500 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Analyse HeLa fluorescence siRNA screen",
+  "format-version": "0.1",
+  "name": "Analyze Screen",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": "input images",
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 257,
+        "top": 230.5
+      },
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "4954c66d-4bc5-43de-9811-7a17f9cf484a",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "dad4c62e-9626-400e-b2be-21c460e65ce9"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [],
+      "label": "rules",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 306,
+        "top": 342.5
+      },
+      "tool_id": null,
+      "tool_state": "{}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "c4cdc22b-48d0-4db2-ae15-9f35d747e2eb",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "a0b90ab5-440c-4343-ba6b-d0be198386b4"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "id": 2,
+      "input_connections": {
+        "filter rules": {
+          "id": 1,
+          "input_subworkflow_step_id": 1,
+          "output_name": "output"
+        },
+        "input image": {
+          "id": 0,
+          "input_subworkflow_step_id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "feature_extraction",
+      "outputs": [],
+      "position": {
+        "left": 624.5,
+        "top": 311
+      },
+      "subworkflow": {
+        "a_galaxy_workflow": "true",
+        "annotation": "",
+        "format-version": "0.1",
+        "name": "feature_extraction",
+        "steps": {
+          "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": "input image",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+              "left": 154,
+              "top": 459.1875
+            },
+            "tool_id": null,
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8465a62f-a0c8-478a-82d9-70282b5d784b",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "e15c31d2-969c-4c14-a646-d7317f23e614"
+              }
+            ]
+          },
+          "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "filter rules",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+              "left": 160,
+              "top": 558.5
+            },
+            "tool_id": null,
+            "tool_state": "{}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1762926f-a1d3-47d8-91c1-9c6f2f051de0",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "d9dc432a-a990-4111-9941-269290457b00"
+              }
+            ]
+          },
+          "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+              "input": {
+                "id": 0,
+                "output_name": "output"
+              }
+            },
+            "inputs": [
+              {
+                "description": "runtime parameter for tool Filter Image",
+                "name": "input"
+              }
+            ],
+            "label": null,
+            "name": "Filter Image",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tiff"
+              }
+            ],
+            "position": {
+              "left": 325.5,
+              "top": 195
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutput": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "output"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "tool_shed_repository": {
+              "changeset_revision": "dba87c4b32d3",
+              "name": "2d_simple_filter",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"radius\": \"\\\"3\\\"\", \"filter_type\": \"\\\"gaussian\\\"\", \"__page__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "a1c73eda-c075-4b5f-8000-9d47b4e46e10",
+            "workflow_outputs": []
+          },
+          "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.3",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+              "input": {
+                "id": 2,
+                "output_name": "output"
+              }
+            },
+            "inputs": [
+              {
+                "description": "runtime parameter for tool Auto Threshold",
+                "name": "input"
+              }
+            ],
+            "label": null,
+            "name": "Auto Threshold",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tiff"
+              }
+            ],
+            "position": {
+              "left": 565.5,
+              "top": 195
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutput": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "output"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.3",
+            "tool_shed_repository": {
+              "changeset_revision": "d4da97f51700",
+              "name": "2d_auto_threshold",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"thresh_type\": \"\\\"otsu\\\"\", \"dark_background\": \"\\\"true\\\"\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+            "tool_version": "0.0.3",
+            "type": "tool",
+            "uuid": "9a3428a3-749a-4e43-8e26-b1d393675f63",
+            "workflow_outputs": []
+          },
+          "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+              "input": {
+                "id": 3,
+                "output_name": "output"
+              }
+            },
+            "inputs": [
+              {
+                "description": "runtime parameter for tool Split objects",
+                "name": "input"
+              }
+            ],
+            "label": null,
+            "name": "Split objects",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tiff"
+              }
+            ],
+            "position": {
+              "left": 611.5,
+              "top": 423
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutput": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "output"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
+            "tool_shed_repository": {
+              "changeset_revision": "5e21d7342593",
+              "name": "2d_split_binaryimage_by_watershed",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"min_distance\": \"\\\"20\\\"\", \"__page__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "8f69c8c6-106b-48ca-a31b-d0508dd10811",
+            "workflow_outputs": []
+          },
+          "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+              "input_label": {
+                "id": 4,
+                "output_name": "output"
+              }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "2D Feature Extraction",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tabular"
+              }
+            ],
+            "position": {
+              "left": 857.5,
+              "top": 367.1875
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutput": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "output"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+            "tool_shed_repository": {
+              "changeset_revision": "6fdb3542a406",
+              "name": "2d_feature_extraction",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_label\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"use_raw_option\": \"{\\\"__current_case__\\\": 0, \\\"use_raw\\\": \\\"no_original\\\"}\", \"feature_options\": \"{\\\"__current_case__\\\": 1, \\\"features\\\": \\\"select\\\", \\\"selected_features\\\": [\\\"--label\\\", \\\"--area\\\", \\\"--eccentricity\\\", \\\"--major_axis_length\\\"]}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "4cfeb46f-0302-4ee7-8df3-e19789c39ca8",
+            "workflow_outputs": []
+          },
+          "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+              "feature_file": {
+                "id": 5,
+                "output_name": "output"
+              },
+              "input": {
+                "id": 4,
+                "output_name": "output"
+              },
+              "rule_file": {
+                "id": 1,
+                "output_name": "output"
+              }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter segmentation",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tiff"
+              }
+            ],
+            "position": {
+              "left": 1115.59375,
+              "top": 512.1875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
+            "tool_shed_repository": {
+              "changeset_revision": "e576b73a2e2f",
+              "name": "2d_filter_segmentation_by_features",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__rerun_remap_job_id__\": null, \"feature_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"rule_file\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"__page__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "050edc66-f14f-4e24-9487-3a93c644c55c",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "65d3ad3d-90d3-4343-bb57-43a492bf4e7f"
+              }
+            ]
+          },
+          "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+              "input_label": {
+                "id": 6,
+                "output_name": "output"
+              },
+              "use_raw_option|input_raw": {
+                "id": 0,
+                "output_name": "output"
+              }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "2D Feature Extraction",
+            "outputs": [
+              {
+                "name": "output",
+                "type": "tabular"
+              }
+            ],
+            "position": {
+              "left": 1368,
+              "top": 664.796875
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+            "tool_shed_repository": {
+              "changeset_revision": "6fdb3542a406",
+              "name": "2d_feature_extraction",
+              "owner": "imgteam",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_label\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"use_raw_option\": \"{\\\"__current_case__\\\": 1, \\\"input_raw\\\": {\\\"__class__\\\": \\\"ConnectedValue\\\"}, \\\"use_raw\\\": \\\"raw_image\\\"}\", \"feature_options\": \"{\\\"__current_case__\\\": 1, \\\"features\\\": \\\"select\\\", \\\"selected_features\\\": [\\\"--mean_intensity\\\", \\\"--area\\\", \\\"--major_axis_length\\\"]}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "7e1459ec-4dec-44d9-abae-2141194ad14c",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "db1d6547-ff56-4dc5-8437-1a9f866ff3a1"
+              }
+            ]
+          }
+        },
+        "tags": "",
+        "uuid": "4a5c1b78-c7da-46b6-8836-9d645a7df9af"
+      },
+      "tool_id": "7ddb0fe3ba37c4cf",
+      "type": "subworkflow",
+      "uuid": "1519aa9a-7d3f-454c-b72f-c5a7ecb2e646",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "7:output",
+          "uuid": "b94ef03f-194e-4dc9-a088-436fe2b155c7"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input_list": {
+          "id": 2,
+          "output_name": "7:output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Collapse Collection",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1011,
+        "top": 416.5
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+      "tool_shed_repository": {
+        "changeset_revision": "25136a2b0cfe",
+        "name": "collapse_collections",
+        "owner": "nml",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input_list\": \"{\\\"__class__\\\": \\\"ConnectedValue\\\"}\", \"one_header\": \"\\\"true\\\"\", \"filename\": \"{\\\"__current_case__\\\": 1, \\\"add_name\\\": \\\"false\\\"}\"}",
+      "tool_version": "4.0",
+      "type": "tool",
+      "uuid": "a0d0dd96-ffce-4d84-87ee-1ee1c8b34f25",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "7f6e208f-1fc0-4e9e-a169-ddedaf1678d0"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "imaging"
+  ],
+  "uuid": "e335dfca-36ae-4151-9a4b-be5a34565c9d",
+  "version": 9
+}

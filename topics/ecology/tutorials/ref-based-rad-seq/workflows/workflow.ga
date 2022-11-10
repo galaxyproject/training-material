@@ -1,0 +1,670 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "RAD-Seq Reference-based data analysis",
+  "format-version": "0.1",
+  "name": "Ref Based Rad Seq",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "ref_genome_chromFa.tar"
+        }
+      ],
+      "label": "ref_genome_chromFa.tar",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200.00001525878906,
+        "top": 200.00001525878906
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"ref_genome_chromFa.tar\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "d41b8a08-8893-4fe4-86c1-21caa8e95cb9",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Population_map.txt"
+        }
+      ],
+      "label": "Population_map.txt",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200.00001525878906,
+        "top": 320.00001525878906
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Population_map.txt\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "59b48fd7-4a76-4683-8e5b-b8db033e4f5d",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Barcodes_SRR034310.tabular"
+        }
+      ],
+      "label": "Barcodes_SRR034310.tabular",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200.00001525878906,
+        "top": 440.00001525878906
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"Barcodes_SRR034310.tabular\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "c7ea916e-f493-4e53-bbf5-1d9b0ab34c18",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "SRR034310.fastq"
+        }
+      ],
+      "label": "SRR034310.fastq",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200.00001525878906,
+        "top": 560.0000457763672
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"SRR034310.fastq\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "8dcf8e48-fc08-4c2c-9aad-477de98b41d1",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "barcode": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "input_type|input_single": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "input_type"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "barcode"
+        }
+      ],
+      "label": null,
+      "name": "Stacks: process radtags",
+      "outputs": [
+        {
+          "name": "demultiplexed",
+          "type": "input"
+        },
+        {
+          "name": "remaining",
+          "type": "input"
+        },
+        {
+          "name": "discarded",
+          "type": "input"
+        },
+        {
+          "name": "output_log",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 420.0000457763672,
+        "top": 200.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "tool_shed_repository": {
+        "changeset_revision": "57910d476be9",
+        "name": "stacks_procrad",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"capture\": \"\\\"true\\\"\", \"outype\": \"\\\"fastq\\\"\", \"options_enzyme\": \"{\\\"enzyme\\\": \\\"sbfI\\\", \\\"options_enzyme_selector\\\": \\\"1\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"input_type\": \"{\\\"input_single\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"barcode_encoding\\\": \\\"--inline_null\\\", \\\"__current_case__\\\": 0, \\\"options_type_selector\\\": \\\"single\\\"}\", \"__rerun_remap_job_id__\": null, \"barcode\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"options_advanced\": \"{\\\"rescue\\\": \\\"false\\\", \\\"truncate\\\": \\\"\\\", \\\"remove\\\": \\\"false\\\", \\\"retain_header\\\": \\\"false\\\", \\\"score\\\": \\\"10\\\", \\\"discard\\\": \\\"false\\\", \\\"sliding\\\": \\\"0.15\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\"}",
+      "tool_version": "1.46.0",
+      "type": "tool",
+      "uuid": "5383a9fb-0c93-42ea-b6dd-87d565917c17",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "barcode": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "input_type|input_single": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "input_type"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "barcode"
+        }
+      ],
+      "label": null,
+      "name": "Stacks: process radtags",
+      "outputs": [
+        {
+          "name": "demultiplexed",
+          "type": "input"
+        },
+        {
+          "name": "remaining",
+          "type": "input"
+        },
+        {
+          "name": "discarded",
+          "type": "input"
+        },
+        {
+          "name": "output_log",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 420.0000457763672,
+        "top": 320.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "tool_shed_repository": {
+        "changeset_revision": "57910d476be9",
+        "name": "stacks_procrad",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"capture\": \"\\\"true\\\"\", \"outype\": \"\\\"fastq\\\"\", \"options_enzyme\": \"{\\\"enzyme\\\": \\\"sbfI\\\", \\\"options_enzyme_selector\\\": \\\"1\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"input_type\": \"{\\\"input_single\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"barcode_encoding\\\": \\\"--inline_null\\\", \\\"__current_case__\\\": 0, \\\"options_type_selector\\\": \\\"single\\\"}\", \"__rerun_remap_job_id__\": null, \"barcode\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"options_advanced\": \"{\\\"rescue\\\": \\\"false\\\", \\\"truncate\\\": \\\"\\\", \\\"remove\\\": \\\"false\\\", \\\"retain_header\\\": \\\"false\\\", \\\"score\\\": \\\"10\\\", \\\"discard\\\": \\\"true\\\", \\\"sliding\\\": \\\"0.15\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\"}",
+      "tool_version": "1.46.0",
+      "type": "tool",
+      "uuid": "b736c8fc-4f62-4535-ab6d-4a3f4cb1dc4c",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "barcode": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "input_type|input_single": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "input_type"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: process radtags",
+          "name": "barcode"
+        }
+      ],
+      "label": null,
+      "name": "Stacks: process radtags",
+      "outputs": [
+        {
+          "name": "demultiplexed",
+          "type": "input"
+        },
+        {
+          "name": "remaining",
+          "type": "input"
+        },
+        {
+          "name": "discarded",
+          "type": "input"
+        },
+        {
+          "name": "output_log",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 420.0000457763672,
+        "top": 440.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+      "tool_shed_repository": {
+        "changeset_revision": "57910d476be9",
+        "name": "stacks_procrad",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"capture\": \"\\\"true\\\"\", \"outype\": \"\\\"fastq\\\"\", \"options_enzyme\": \"{\\\"enzyme\\\": \\\"sbfI\\\", \\\"options_enzyme_selector\\\": \\\"1\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"input_type\": \"{\\\"input_single\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"barcode_encoding\\\": \\\"--inline_null\\\", \\\"__current_case__\\\": 0, \\\"options_type_selector\\\": \\\"single\\\"}\", \"__rerun_remap_job_id__\": null, \"barcode\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"options_advanced\": \"{\\\"rescue\\\": \\\"false\\\", \\\"truncate\\\": \\\"\\\", \\\"remove\\\": \\\"false\\\", \\\"retain_header\\\": \\\"false\\\", \\\"score\\\": \\\"20\\\", \\\"discard\\\": \\\"true\\\", \\\"sliding\\\": \\\"0.15\\\"}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\"}",
+      "tool_version": "1.46.0",
+      "type": "tool",
+      "uuid": "3774972a-3761-4572-9732-6f522dded358",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "genomeSource|ownFile": {
+          "id": 0,
+          "output_name": "output"
+        },
+        "paired|input1": {
+          "id": 4,
+          "output_name": "demultiplexed"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Map with BWA for Illumina",
+          "name": "genomeSource"
+        },
+        {
+          "description": "runtime parameter for tool Map with BWA for Illumina",
+          "name": "paired"
+        }
+      ],
+      "label": null,
+      "name": "Map with BWA for Illumina",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 640.0000457763672,
+        "top": 200.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+      "tool_shed_repository": {
+        "changeset_revision": "b4427dbb6ced",
+        "name": "bwa_wrappers",
+        "owner": "devteam",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"genomeSource\": \"{\\\"refGenomeSource\\\": \\\"history\\\", \\\"ownFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"paired\": \"{\\\"sPaired\\\": \\\"single\\\", \\\"input1\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"input1|__identifier__\": \"\\\"SRR034310_GGTT\\\"\", \"params\": \"{\\\"__current_case__\\\": 0, \\\"source_select\\\": \\\"pre_set\\\"}\", \"suppressHeader\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\"}",
+      "tool_version": "1.2.3",
+      "type": "tool",
+      "uuid": "41cab8e8-a8fd-46dc-b175-d4bf8b55f163",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_refmap/stacks_refmap/1.46.0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "options_usage|individual_sample": {
+          "id": 7,
+          "output_name": "output"
+        },
+        "options_usage|popmap": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Stacks: reference map",
+          "name": "options_usage"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: reference map",
+          "name": "options_usage"
+        }
+      ],
+      "label": null,
+      "name": "Stacks: reference map",
+      "outputs": [
+        {
+          "name": "tags",
+          "type": "input"
+        },
+        {
+          "name": "snps",
+          "type": "input"
+        },
+        {
+          "name": "alleles",
+          "type": "input"
+        },
+        {
+          "name": "matches",
+          "type": "input"
+        },
+        {
+          "name": "all_output",
+          "type": "input"
+        },
+        {
+          "name": "output_log",
+          "type": "txt"
+        },
+        {
+          "name": "output_summary",
+          "type": "html"
+        },
+        {
+          "name": "catalogtags",
+          "type": "tabular"
+        },
+        {
+          "name": "catalogsnps",
+          "type": "tabular"
+        },
+        {
+          "name": "catalogalleles",
+          "type": "tabular"
+        },
+        {
+          "name": "out_joinmap",
+          "type": "txt"
+        },
+        {
+          "name": "out_generic_haplo",
+          "type": "tabular"
+        },
+        {
+          "name": "out_generic_geno",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sql_markers",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sql_genotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_haplotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_hapstats",
+          "type": "tabular"
+        },
+        {
+          "name": "out_populations_log",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sumstats_sum",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sumstats",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sql",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 859.9826507568359,
+        "top": 200.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_refmap/stacks_refmap/1.46.0",
+      "tool_shed_repository": {
+        "changeset_revision": "4ee074ca88fb",
+        "name": "stacks_refmap",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"P\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"options_usage\": \"{\\\"rad_analysis_type\\\": \\\"population\\\", \\\"individual_sample\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 1, \\\"popmap\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"m\": \"\\\"3\\\"\", \"snp_options\": \"{\\\"select_model\\\": {\\\"model_type\\\": \\\"snp\\\", \\\"alpha\\\": \\\"0.05\\\", \\\"__current_case__\\\": 0}}\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\"}",
+      "tool_version": "1.46.0",
+      "type": "tool",
+      "uuid": "89c6f146-6f35-4b04-a427-ab9b271caf9d",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "options_usage|input_col": {
+          "id": 8,
+          "output_name": "all_output"
+        },
+        "options_usage|popmap": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Stacks: populations",
+          "name": "options_usage"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: populations",
+          "name": "options_usage"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: populations",
+          "name": "bootstrap_resampling"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: populations",
+          "name": "advanced_options"
+        },
+        {
+          "description": "runtime parameter for tool Stacks: populations",
+          "name": "advanced_options"
+        }
+      ],
+      "label": null,
+      "name": "Stacks: populations",
+      "outputs": [
+        {
+          "name": "out_haplotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_hapstats",
+          "type": "tabular"
+        },
+        {
+          "name": "out_populations_log",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sumstats_sum",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sumstats",
+          "type": "tabular"
+        },
+        {
+          "name": "out_sql",
+          "type": "tabular"
+        },
+        {
+          "name": "out_fstats",
+          "type": "tabular"
+        },
+        {
+          "name": "out_fasta",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phylip_all_partitions",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phylip_all_pop",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phylip_all_loci",
+          "type": "tabular"
+        },
+        {
+          "name": "out_genepop",
+          "type": "tabular"
+        },
+        {
+          "name": "out_vcf_haplotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_hzar",
+          "type": "tabular"
+        },
+        {
+          "name": "out_beagle_phased_haplotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_beagle_phased_markers",
+          "type": "tabular"
+        },
+        {
+          "name": "out_beagle_haplotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_beagle_markers",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phylip_pop",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phylip_loci",
+          "type": "tabular"
+        },
+        {
+          "name": "out_plink_markers",
+          "type": "tabular"
+        },
+        {
+          "name": "out_plink_genotypes",
+          "type": "tabular"
+        },
+        {
+          "name": "out_fasta_strict",
+          "type": "tabular"
+        },
+        {
+          "name": "out_structure",
+          "type": "tabular"
+        },
+        {
+          "name": "out_treemix_pop",
+          "type": "tabular"
+        },
+        {
+          "name": "out_treemix_loci",
+          "type": "tabular"
+        },
+        {
+          "name": "out_fastpĥase",
+          "type": "tabular"
+        },
+        {
+          "name": "out_phase",
+          "type": "tabular"
+        },
+        {
+          "name": "out_vcf",
+          "type": "tabular"
+        },
+        {
+          "name": "out_genomic",
+          "type": "tabular"
+        },
+        {
+          "name": "output_summary",
+          "type": "html"
+        }
+      ],
+      "position": {
+        "left": 1080.0001068115234,
+        "top": 200.00001525878906
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
+      "tool_shed_repository": {
+        "changeset_revision": "45db1ba16163",
+        "name": "stacks_populations",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"options_kernel\": \"{\\\"kernel\\\": \\\"false\\\", \\\"__current_case__\\\": 1}\", \"__page__\": null, \"populations_output\": \"{\\\"phylip_var_all\\\": \\\"false\\\", \\\"fasta_strict\\\": \\\"false\\\", \\\"hzar\\\": \\\"false\\\", \\\"phylip_var\\\": \\\"false\\\", \\\"plink\\\": \\\"false\\\", \\\"vcf\\\": \\\"false\\\", \\\"phylip\\\": \\\"false\\\", \\\"beagle_phased\\\": \\\"false\\\", \\\"vcf_haplotypes\\\": \\\"false\\\", \\\"options_genomic\\\": {\\\"genomic\\\": \\\"false\\\", \\\"__current_case__\\\": 1}, \\\"genepop\\\": \\\"false\\\", \\\"beagle\\\": \\\"false\\\", \\\"fastphase\\\": \\\"false\\\", \\\"ordered_export\\\": \\\"false\\\", \\\"phase\\\": \\\"false\\\", \\\"fasta\\\": \\\"false\\\", \\\"treemix\\\": \\\"false\\\", \\\"structure\\\": \\\"false\\\"}\", \"options_usage\": \"{\\\"input_type\\\": \\\"stacks\\\", \\\"popmap\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"input_col\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"__current_case__\\\": 0}\", \"bootstrap_resampling\": \"{\\\"bootstrap_wl\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"bootstrap_reps\\\": \\\"100\\\", \\\"bootstrap_resampling_mode\\\": {\\\"bootstrap_phist\\\": \\\"false\\\", \\\"bootstrap_fst\\\": \\\"false\\\", \\\"bootstrap_all\\\": \\\"false\\\", \\\"bootstrap_pifis\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"bootstrap_div\\\": \\\"false\\\"}}\", \"options_filtering\": \"{\\\"write_single_snp\\\": \\\"false\\\", \\\"mindepth\\\": \\\"1\\\", \\\"minpop\\\": \\\"2\\\", \\\"minminor\\\": \\\"0.25\\\", \\\"max_obs_het\\\": \\\"\\\", \\\"lnl\\\": \\\"\\\", \\\"correction_select\\\": {\\\"correction\\\": \\\"no_corr\\\", \\\"__current_case__\\\": 0}, \\\"minperc\\\": \\\"0.5\\\", \\\"write_random_snp\\\": \\\"false\\\"}\", \"advanced_options\": \"{\\\"blacklist\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"batchid\\\": \\\"1\\\", \\\"whitelist\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/gasAcu1.len\\\"\", \"fstats\": \"\\\"false\\\"\"}",
+      "tool_version": "1.46.0",
+      "type": "tool",
+      "uuid": "1ae9361c-d5a0-4068-b94a-f958e11e76e6",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "ecology"
+  ],
+  "uuid": "733d4e4d-5650-400a-8707-6778773a9afd"
+}

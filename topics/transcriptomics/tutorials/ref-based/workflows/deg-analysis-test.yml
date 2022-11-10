@@ -1,0 +1,68 @@
+---
+- doc: "Test sample data for Transcriptomics:Refence-based"
+  job:
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: GSM461176_untreat_single
+        location: https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461177_untreat_paired
+        location: https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461178_untreat_paired
+        location: https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461179_treat_single
+        location: https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461180_treat_paired
+        location: https://zenodo.org/record/1185122/files/GSM461180_treat_paired.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461181_treat_paired
+        location: https://zenodo.org/record/1185122/files/GSM461181_treat_paired.counts
+        filetype: tabular
+      - class: File
+        identifier: GSM461182_untreat_single
+        location: https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
+        filetype: tabular
+    Drosophila_melanogaster.BDGP6.87.gtf:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gtf
+      filetype: gtf
+    Drosophila_melanogaster.BDGP6.87.gene_lengths:
+      class: File
+      location: https://zenodo.org/record/1185122/files/Drosophila_melanogaster.BDGP6.87.gene_lengths
+      filetype: tabular
+    header:
+      class: File
+      path: test-data/header.txt
+      filetype: tabular
+    KEGG pathways to plot:
+      class: File
+      path: test-data/KEGG_toplot.txt
+      filetype: tabular
+  outputs:
+    deseq_out:
+      asserts:
+        has_text:
+          text: '1086.97429520489'
+    z_score:
+      asserts:
+        has_text:
+          text: '1.222027'
+    go_terms:
+      asserts:
+        has_text:
+          text: 'GO:0005576'
+    kegg_pathways:
+      asserts:
+        has_text:
+          text: '01100'
