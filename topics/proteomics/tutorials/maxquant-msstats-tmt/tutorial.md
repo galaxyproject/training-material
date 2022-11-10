@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+enable: true
 
 title: MaxQuant and MSstats for the analysis of TMT data
 zenodo_link: 'https://zenodo.org/record/5195800'
@@ -11,7 +11,7 @@ objectives:
 - Learn how to use MaxQuant and MSstats for the analysis of TMT labelled shotgun (DDA) data
 - Learn how to create an experimental design template for fractionated data in MaxQuant
 - Learn how to create an annotation file for MSstatsTMT
-time_estimation: 1H
+time_estimation: 3H
 key_points:
 - MaxQuant in combination with MSstatsTMT enables quantitative analysis of TMT data.
 contributors:
@@ -25,13 +25,13 @@ tags: [DDA, TMT]
 
 
 # Introduction
-{:.no_toc}
+
 
 In this training we will cover the full analysis workflow from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT. 
 
 The training dataset consists of a dataset from a [study](https://doi.org/10.1186/s12935-020-1141-2) which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α expression in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -44,7 +44,7 @@ The training dataset consists of a dataset from a [study](https://doi.org/10.118
 
 The raw data is available via the PRIDE repository under the ID: [PXD014145](https://www.ebi.ac.uk/pride/archive/projects/PXD014145). The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html).
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
@@ -63,34 +63,23 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145).
->
+> 4. To run MaxQuant, import the raw data from [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD014145) as a 'Collection'.
 >    ```
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA380.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA381.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA382.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA383.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA384.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA385.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA386.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA387.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA388.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA389.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA390.raw
->	ftp://ftp.pride.ebi.ac.uk/pride/data/archive/2020/05/PXD014145/MFA391.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA380.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA381.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA382.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA383.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA384.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA385.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA386.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA387.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA388.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA389.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA390.raw
+>    ftp://ftp.pride.ebi.ac.uk/pride-archive/2020/05/PXD014145/MFA391.raw
 >    ```
-> 5. Rename the raw datasets into 'MFA380.raw', 'MFA381.raw', etc.. The naming for the raw files have to be exactly this way to later match the file names provided in the MSstats annotation file. 
->
->    {% snippet faqs/galaxy/datasets_rename.md %}
->
-> 6. Control that the data type of the raw files is 'thermo.raw' otherwise change the datatype into 'thermo.raw'
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
->
-> 7. Generate a collection for all raw files and name it 'raw_files', hide the individual raw files
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
->
+>    
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true collection_type="List" collection_name="raw_files" format="thermo.raw" %}
 {: .hands_on}
 
 
@@ -99,7 +88,7 @@ The raw data is available via the PRIDE repository under the ID: [PXD014145](htt
 We start the MaxQuant run with TMT parameters for MS2 based reporter quantitation. A quality control report will be generated with the [PTXQC functionality](https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780) that is directly implemented in the MaxQuant Galaxy tool. For more information about MaxQuant and its parameter please have a look at the [Label-free data analysis using MaxQuant tutorial]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-label-free/tutorial.html). To continue with statistical analysis in MSstatsTMT, the Protein Groups and the Evidence files are needed from MaxQuant. The run time of MaxQuant depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a while, but the training can be directly continued with the MaxQuant result files from Zenodo. 
 
 
-> ### {% icon hands_on %} Hands-on: MaxQuant analysis
+> <hands-on-title>MaxQuant analysis</hands-on-title>
 >
 > 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.17.0+galaxy2) %} with the following parameters:
 >    - In *"Input Options"*:
@@ -107,6 +96,7 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 >    - In *"Search Options"*:
 >        - {% icon param-file %} *"Specify an experimental design template"*: `experimental design template` 
 >    - In *"Parameter Group"*:
+>        - {% icon param-collection %} *"Infiles"*: `MFA380.raw` `MFA381.raw` `MFA382.raw` `MFA383.raw` `MFA384.raw` `MFA385.raw` `MFA386.raw` `MFA387.raw` `MFA388.raw` `MFA389.raw` `MFA390.raw` `MFA391.raw`
 >        - *"Quantitation Methods"*: `reporter ion MS2`
 >            - *"isobaric labeling"*: `TMT11plex`
 >            - *"Filter by PIF"*: `Yes`
@@ -114,7 +104,7 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 >    - In *"Output Options"*:
 >        - *"Select the desired outputs."*: `Protein Groups` `mqpar.xml` `Evidence` `MaxQuant and PTXQC log`
 >
->    > ### {% icon tip %} Tip: Continue with results from Zenodo
+>    > <tip-title>Continue with results from Zenodo</tip-title>
 >    >
 >    > Because the MaxQuant run takes quite a while, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial
 >    > 1. Import the files from [Zenodo](https://zenodo.org/record/5195800)
@@ -126,11 +116,11 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 >    {: .tip}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many protein groups were found with MaxQuant?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. 6911 (numbers might slightly vary with different MaxQuant versions); number of lines minus header line in the MaxQuant protein groups output
 > >
@@ -140,11 +130,11 @@ We start the MaxQuant run with TMT parameters for MS2 based reporter quantitatio
 
 
 
-> ### {% icon tip %} Tip: PIF parameter for TMT data
+> <tip-title>PIF parameter for TMT data</tip-title>
 > Co-isolation of multiple peptides can lead to inaccurate TMT signals, as not only one peptide is fragmented but multiple different peptides are fragmented and the TMT signals cannot be distinguished anymore. MaxQuant can “check” the MS1 scans to predict, whether multiple different peptides were cofragmented. Precursor Intensity Filtering (PIF) allows you to implement a cutoff how high the purity of fragmentation was (1 = no coisolation, 0.75 = default).
 {: .tip}
 
-> ### {% icon tip %} Tip: Preparing an MaxQuant experimental design template for your own analysis
+> <tip-title>Preparing an MaxQuant experimental design template for your own analysis</tip-title>
 > For this tutorial all files needed for the analysis are provided. Nevertheless here are some guidelines for the generation of the experimental design template for MaxQuant for your own data analyses.
 > For thermo.raw files, “.raw” is considered a part of the filename. Therefore, file names should be 'Filename1.raw', 'Filename2.raw' etc.. Please pay special attention to your experimental design, since MaxQuant will summarize peptide and protein intensities differently depending on this input. In brief, MaxQuant will summarize the protein intensities within each specified experiment. Often, TMT experiments are not measured in one MS run, but in multiple runs (either as so called fractions, or as replicates). Over the last years, high pH prefractionation has become the standard for fractionating TMT samples. Alternatively, SCX or HILIC fractionations can be employed. Although you fractionated your samples prior to measurement you still want MaxQuant to group all samples which belong to “one” TMT experiment. Since the fractions originate from one sample the experimental design template allows to map multiple measurements to one experiment (= Sample). Additionally, it is possible to have a more complex experimental setup including multiple TMT experiments, possibly containing multiple fractions per experiment. All MS files which are labeled with the same “Experiment” name are summarized in the proteinGroups and peptides output of MaxQuant.
 {: .tip}
@@ -155,7 +145,7 @@ The protein groups and evidence files of MaxQuant can directly be used as an inp
 For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as this is a straightforward two group comparison. If you have more than two groups, you may consider using the comparison matrix option of MSstatsTMT (for more information see [label-free MSstats training]({{site.baseurl}}/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html)).
 
 
-> ### {% icon hands_on %} Hands-on: MSstatsTMT analysis
+> <hands-on-title>MSstatsTMT analysis</hands-on-title>
 >
 > 1. {% tool [MSstatsTMT](toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy0) %} with the following parameters:
 >    - *"Input Source"*: `MaxQuant`
@@ -163,29 +153,30 @@ For this dataset, the standard parameters of MSstatsTMT fit quite nicely, as thi
 >        - {% icon param-file %} *"proteinGroups.txt"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
 >        - {% icon param-file %} *"annotation.txt"*: `annotation file`
 >    - In *"Plot Output Options"*:
->        - *"Select protein IDs to draw plots"*: `generate all plots for each protein`
+>        - *"Select protein IDs to draw plots"*: `Option for QC plot: "allonly" will generate one QC plot with all proteins`
 >    - *"Compare Groups"*: `Yes`
 >        - In *"Comparison Plot Options"*:
 >            - *"Display protein names in Volcano Plot."*: `No`
->    - *"Select Outputs"*: `QC Plot`
+>    - *"Select Outputs"*: `MSstatsTMT summarization log` `Protein Abundance` `QC Plot`
 {: .hands_on}
 
+> <tip-title>Waiting for MSstatsTMT result</tip-title>
+> This training consists of a real proteomics experiments. Therefore, calculation times take longer than in usual Galaxy tutorials. You may want to come back later to the training or use the time to prepare your own data for the analysis with MaxQuant and MSstatsTMT with the tips provided in this training (yellow boxes).
+{: .tip}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many differentially regulated proteins were detected in the MSstatsTMT group comparison? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 7139 (numbers might slightly vary with different MSstatsTMT versions); number of lines minus header line in the MSstatsTMT group comparison output
 > >
 > {: .solution}
 >
 {: .question}
 
-> ### {% icon tip %} Tip: Preparing an MSstatsTMT annotation file for your own analysis
+> <tip-title>Preparing an MSstatsTMT annotation file for your own analysis</tip-title>
 > 
 > For this tutorial all files needed for the analysis are provided. Nevertheless here are some guidelines for the generation of annotation file for MSstatsTMT for your own data analyses.
 > As MSstatsTMT has to perform statistical analyses, you have to provide the following basic information: Which quantitation channel in every sample corresponds to which original biological sample and which biological condition (e.g WT or knock-down) does this sample belong to? To fully automate the process of choosing an appropriate statistical model for analysis, MSstatsTMT needs an annotation matrix that is extremely powerful because it can deal with any experimental setup. 
@@ -262,7 +253,7 @@ For more information on MSstats parameters and ideas on how to follow up with yo
 # Follow up on MSstatsTMT results
 
 We obtain several output files from MSstatsTMT. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
-The QC report allows to visualize protein abundance of conditions for all proteins (first page) or for each individual protein (following pages). 
+The QC report allows to visualize protein abundance of conditions for all proteins (first page) or if enabled for each individual protein (following pages). 
 
 ![QC report](../../images/maxquant-msstats-tmt/QC_plot.png "QC report for all samples, each boxplot summarizes the protein abundances of one sample")
 

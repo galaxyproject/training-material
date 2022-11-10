@@ -3,6 +3,7 @@ title: Importing via links
 area: data upload
 box_type: tip
 layout: faq
+contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,nekrut,mblue9]
 ---
 
 * Copy the link location
@@ -47,7 +48,4 @@ layout: faq
 * Click on **Create list** (and wait a bit)
 {% else %}
 * **Close** the window
-{% endif %}
-{% if include.renaming == undefined or include.renaming == true %}
-* By default, Galaxy uses the URL as the name, so rename the files with a more useful name.
 {% endif %}

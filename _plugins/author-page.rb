@@ -2,6 +2,28 @@ module Jekyll
   class AuthorPageGenerator < Generator
     safe true
 
+    def pusher(t, datastructure, flat)
+      if t.data.has_key?('contributors')
+        if flat
+          t.data['contributors'].each{|c| datastructure[c].push(t) }
+        else
+          t.data['contributors'].each{|c| datastructure[c].push([t, nil]) }
+        end
+      elsif t.data.has_key?('contributions')
+        t.data['contributions'].each{|contribution_type, contributor|
+          contributor.each{|c|
+
+            if flat
+              datastructure[c].push(t)
+            else
+              datastructure[c].push([t, contribution_type])
+            end
+          }
+        }
+      end
+      datastructure
+    end
+
     def generate(site)
       if site.layouts.key? 'contributor_index'
         dir = 'hall-of-fame'
@@ -10,23 +32,33 @@ module Jekyll
         # build time of 5 seconds.
         tutorials_by_author = Hash.new { |hash, key| hash[key] = [] }
         slides_by_author = Hash.new { |hash, key| hash[key] = [] }
+        news_by_author = Hash.new { |hash, key| hash[key] = [] }
         has_philosophy = Hash.new { false }
 
         site.pages.each {|t|
           # Tutorials
-          if t['layout'] == 'tutorial_hands_on' && ! t.data['contributors'].nil?
-            t.data['contributors'].each{|c| tutorials_by_author[c].push(t) }
+          if t['layout'] == 'tutorial_hands_on'
+            pusher(t, tutorials_by_author, false)
           end
 
           # Slides
-          if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil? && ! t.data['contributors'].nil?
-            t.data['contributors'].each{|c| slides_by_author[c].push(t) }
+          if ! ['base_slides', 'introduction_slides', 'tutorial_slides'].index(t['layout']).nil?
+            pusher(t, slides_by_author, false)
           end
+
 
           # Philosophies
           if t['layout'] == 'training_philosophy' && ! t.data['username'].nil?
             has_philosophy[t.data['username']] = true
           end
+        }
+
+        site.posts.docs.each {|t|
+          # News
+          if t['layout'] == 'news'
+            pusher(t, news_by_author, true)
+          end
+
         }
 
         site.data['contributors'].select{|c| c['halloffame'] != "no"}.each_key do |contributor|
@@ -42,9 +74,17 @@ module Jekyll
           page2.data['personname'] = name
           page2.data['title'] = "GTN Contributor: #{name}"
           page2.data["layout"] = "contributor_index"
+
           page2.data["tutorials"] = tutorials_by_author[contributor]
           page2.data["slides"] = slides_by_author[contributor]
+          page2.data["news"] = news_by_author[contributor]
+
+          page2.data["tutorials_count"] = tutorials_by_author[contributor].length
+          page2.data["slides_count"] = slides_by_author[contributor].length
+          page2.data["news_count"] = news_by_author[contributor].length
+
           page2.data["has_philosophy"] = has_philosophy[contributor]
+
           site.pages << page2
         end
       end

@@ -2,6 +2,8 @@
 title: How can I test an Interactive Tour?
 area: contributors
 layout: faq
+box_type: tip
+contributors: [shiltemann]
 ---
 
 Perhaps you've been asked to review an interactive tour, or maybe you just want to try one out. The easiest way to run an interactive tour is to use the [Tour builder](https://tailordev.fr/blog/2017/07/19/the-galaxy-tour-builder-extension/) browser extension.

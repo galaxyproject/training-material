@@ -19,11 +19,8 @@ layout: page
  {% assign coverimage = "/assets/images/GTN.png" %}
  {% assign coverimagealt = "GTN logo with a multi-coloured star and the words Galaxy Training Network" %}
 {% endif %}
-
 <div class="newsitem">
-{% if page.contributors %}
-<div class="contributors-line">By: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
-{% endif %}
+{% include _includes/contributors-line.html page=page %}
 
 {% for tag in page.tags %}
 <button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="{{tag}}">{{ tag  }}</button>
@@ -31,14 +28,38 @@ layout: page
 
 <hr/>
 
-<img class="float-right" alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
-{{content}}
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted">
+      Posted on: {{ page.date | date: "%-d %B %Y" }}
+    </p>
 
-{% if page.link %}
-<a href="{{page.link}}" class="btn btn-primary">Full Story</a>
-{% endif %}
+    {{content}}
 
-{% if page.tutorial %}
-<a href="{{site.baseurl}}/{{page.tutorial}}" class="btn btn-primary">View Tutorial</a>
-{% endif %}
+    {% if page.link %}
+    <a href="{{page.link}}" class="btn btn-primary">Full Story</a>
+    {% endif %}
+
+    {% if page.tutorial %}
+    <a href="{{site.baseurl}}/{{page.tutorial}}" class="btn btn-primary">View Tutorial</a>
+    {% endif %}
+
+    {% if page.cited %}
+    <h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+    {% bibliography --cited %}
+    {% endif %}
+
+    {% if page.contributions %}
+    {% include _includes/funding-statement.md contributions=page.contributions %}
+    {% endif %}
+  </div>
+
+  <div class="col-md-4">
+    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300" loading="lazy"/>
+  </div>
 </div>
+</div>
+
+<script type="application/ld+json">
+{{ page | generate_news_jsonld: site }}
+</script>

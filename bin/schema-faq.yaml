@@ -1,0 +1,72 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - faq
+        description: |
+            This must be set to `faq`
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the FAQ
+        examples:
+            - How does the GTN implement the 'Ten simple rules for collaborative lesson development'
+            - How can I give feedback?
+            - Ways to use Galaxy
+    description:
+        type: str
+        required: false
+        description: |
+            A short, one line description to provide additional context of the FAQ
+        examples:
+        - Galaxy may have several reference genomes built-in, but you can also create your own.
+        - Quickly learn what the identifiers are in any **BAM** dataset that is the result from mapping
+        - Finding and Correcting Metadata
+    area:
+        type: str
+        required: false
+        description: |
+            A text key used for sorting related FAQs together in the visual interface for users.
+        examples:
+            - contributors
+            - learners
+            - features
+    box_type:
+        type: str
+        required: true
+        enum:
+            - tip
+            - hands_on
+            - question
+            - comment
+            - warning
+            - details
+            - none
+        description: |
+            The type of box that should be used when rendering this FAQ. Use `none` if it should not be in a box, but just plain text.
+    contributors:
+        type: seq
+        required: true
+        description: |
+            Who contributed to this FAQ
+        examples:
+            - shiltemann
+            - hexylena
+        sequence:
+            - type: str
+              required: true
+              enum:
+              - CONTRIBUTORS
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+---

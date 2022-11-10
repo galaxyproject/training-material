@@ -1,18 +1,177 @@
 require 'json'
+require './_plugins/gtn.rb'
 
 module Jekyll
   module JsonldFilter
+    GTN = {
+      "@type": "Organization",
+      "email": "galaxytrainingnetwork@gmail.com",
+      "name": "Galaxy Training Network",
+      "url": "https://galaxyproject.org/teach/gtn/"
+    }
+
+    A11Y = {
+      "accessMode": ["textual", "visual"],
+      "accessModeSufficient": ["textual", "visual"],
+      #"accessibilityAPI": ,
+      "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
+      "accessibilityFeature": ["alternativeText", "tableOfContents"],
+      #"accessibilityHazard": [],
+      "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+    }
+
+    # todo migrate somewhere else
+    def how_many_topic_feedbacks(feedback, name)
+      feedback.select{|x| x["topic"] == name}.length
+    end
+    def how_many_tutorial_feedbacks(feedback, name)
+      feedback.select{|x| x["tutorial"] == name}.length
+    end
+
+    # todo migrate somewhere more generic
+    def filter_authors(contributors, contributions)
+      if not contributors.nil?
+        return contributors
+      else
+        return contributions["authorship"]
+      end
+    end
+
+    # todo: migrate somewhere else
+    def get_default_link(material)
+      url = nil
+
+      if material['type'] == "introduction"
+        subfolder = 'slides'
+      else
+        subfolder = 'tutorials'
+      end
+
+      if material['slides']
+        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
+        if material['type'] != "introduction"
+          url += "/slides.html"
+        else
+          url += ".html"
+        end
+      end
+
+      if material['hands_on']
+        if material['hands_on'] != "external" && material['hands_on'] != ""
+          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
+        end
+      end
+
+      url
+    end
+
+    def generate_dublin_core(material, site)
+      if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
+        return
+      end
+
+      attributes = [
+        ["DC.identifier", site['github_repository']],
+        ["DC.type", "text"],
+        ["DC.title", material['title']],
+        ["DC.publisher", "Galaxy Training Network"],
+        ["DC.date", Gtn::ModificationTimes.obtain_time(material['path'])],
+      ]
+
+      attributes += get_authors(material).map{|user|
+        if site['data']['contributors'].has_key?(user) then
+          ['DC.creator', site['data']['contributors'][user].fetch('name', user)]
+        else
+          puts "[GTN/Meta] #{user} not found in CONTRIBUTORS.yaml"
+          ['DC.creator', user]
+        end
+      }
+
+      return attributes.map{|a, b| "<meta name=\"#{a}\" content=\"#{b}\" />" }.join("\n")
+    end
+
+    def get_authors(material)
+      if material.key?('contributors') then
+        material['contributors']
+      elsif material.key?('contributions') then
+        material['contributions']['authorship']
+      else
+        []
+      end
+    end
+
+    def generate_person_jsonld(id, contributor, site)
+      person = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+            "@type": "Person"
+        },
+        # I guess these are identical?
+        "url": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
+        "mainEntityOfPage": "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
+        "name": contributor.nil? ? id : contributor.fetch('name', id),
+        "image": "https://avatars.githubusercontent.com/#{id}",
+        # No clue what to put here it's a person.
+        "description": contributor.nil? ? "A contributor to the GTN project." : contributor.fetch("bio", "A contributor to the GTN project."),
+        "memberOf": [GTN],
+      }
+      if ! contributor.nil? && contributor.has_key?('orcid')
+        person['identifier'] = "https://orcid.org/" + contributor['orcid']
+        person['orcid'] = "https://orcid.org/" + contributor['orcid']
+      end
+
+      person
+    end
+
+    def to_person_jsonld(id, contributor, site)
+      JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
+    end
+
+    def generate_news_jsonld(page, site)
+      authors = get_authors(page.to_h).map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
+
+      data = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "url": "#{site['url']}#{site['baseurl']}#{page['url']}",
+        "name": page['title'],
+        "headline": page.excerpt[0..100].gsub(/\n/, ' '), # todo remove html tags.
+        "keywords": page.fetch('tags', []),
+        "description": page.excerpt[0..100].gsub(/\n/, ' '), # todo remove html tags
+        "articleBody": page.content, # todo remove html tags
+        "datePublished": page.date,
+        "dateModified": Gtn::ModificationTimes.obtain_time(page.path),
+        "author": authors,
+        "publisher": GTN,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "#{site['url']}#{page['url']}"
+        },
+        "image": {
+          "@type": "ImageObject",
+          "width": 60,
+          "height": 60,
+          "url": "#{site['baseurl']}/assets/images/GTN-60px.png"
+        }
+      }
+      data.update(A11Y)
+
+      JSON.pretty_generate(data)
+    end
+
     def to_jsonld(material, topic, site)
       langCodeMap = {
         'en': "English",
         'es': "Español",
       }
 
-      gtn = {
-        "@type": "Organization",
-        "email": "#{site['email']}",
-        "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+
+      eduLevel = {
+        "Introductory" => "Beginner",
+        "Intermediate" => "Intermediate",
+        "Advanced"     => "Advanced"
       }
       if not topic then
         return '{}'
@@ -22,36 +181,31 @@ module Jekyll
         "@type": "CreativeWork",
         "name": "#{topic['title']}",
         "description": "#{topic['summary']}",
-        "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{topic['name']}/"
+        "url": "#{site['url']}#{site['baseurl']}/topics/#{topic['name']}/"
       }
 
       # aggregate everything
       data = {
         # Properties from Course
         "@context": "http://schema.org",
-        "@type": "Course",
-        #"courseCode" described below
-        #"coursePrerequisites" described below
-        #"educationalCredentialAwarded": ,
-        #"hasCourseInstance": ,
-        #"skillLevel" described below
+        "@type": "LearningResource",
+
+        # Required for BioSchemas
+        "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+            "@type": "CreativeWork"
+        },
 
         # Properties from CreativeWork
         #"about" described below
-        "accessMode": ["textual", "visual"],
-        "accessModeSufficient": ["textual", "visual"],
-        #"accessibilityAPI": ,
-        "accessibilityControl": ["fullKeyboardControl", "fullMouseControl"],
-        "accessibilityFeature": ["alternativeText", "tableOfContents"],
-        #"accessibilityHazard": [],
-        "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+        #
         #"accountablePerson":,
         #"aggregateRating":,
         #"alternativeHeadline":,
         #"associatedMedia":,
         "audience": {
           "@type": "EducationalAudience",
-          "educationalRole": "students"
+          "educationalRole": "Students"
         },
         #"audio":,
         #"award":,
@@ -68,12 +222,12 @@ module Jekyll
         #"contentRating":,
         #"contentReferenceTime":,
         #"contributor" described below
-        "copyrightHolder": gtn,
+        "copyrightHolder": GTN,
         #"copyrightYear":,
         #"correction":,
         #"creator":,
         #"dateCreated":,
-        "dateModified": Time.at(material['last_modified_at'].to_s.to_i),
+        "dateModified": Gtn::ModificationTimes.obtain_time(material['path']),
         #"datePublished":,
         "discussionUrl": site["gitter_url"],
         #"editor":,
@@ -102,8 +256,8 @@ module Jekyll
         #"mentions" described below
         #"offers":,
         #"position":,
-        "producer": gtn,
-        "provider": gtn,
+        "producer": GTN,
+        "provider": GTN,
         #"publication":,
         #"publisher":,
         #"publisherImprint":,
@@ -115,7 +269,7 @@ module Jekyll
         #"sdDatePublished":,
         #"sdLicense":,
         #"sdPublisher":,
-        "sourceOrganization": gtn,
+        "sourceOrganization": GTN,
         #"spatialCoverage":,
         #"sponsor":,
         #"temporalCoverage":,
@@ -135,7 +289,7 @@ module Jekyll
         #"alternateName":,
         #"description" described below
         #"disambiguatingDescription":,
-        #"identifier":,
+        "identifier": site['github_repository'],
         #"image":,
         #"mainEntityOfPage":,
         #"name" described below
@@ -144,31 +298,31 @@ module Jekyll
         #"subjectOf":,
         # "url" described below
       }
+      data.update(A11Y)
 
       #info depending if tutorial, hands-on or slide level
       parts = []
+      #data['hasPart'] = parts
+
       mentions = []
       description = []
 
       data['isPartOf'] = topic_desc
 
       if material['type'] == 'introduction' then
-        data['courseCode'] = "#{material['topic_name']} / introduction / #{material['name']}"
         data['learningResourceType'] = "slides"
         data['name'] = "Introduction to '#{topic['title']}'"
-        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
         description.push("Slides for #{topic['title']}")
       elsif material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
         if material['name'] == 'tutorial.md' then
-          data['courseCode'] = "#{material['topic_name']} / #{material['tutorial_name']} / hands-on"
           data['learningResourceType'] = "hands-on tutorial"
           data['name'] = "Hands-on for '#{material['title']}' tutorial"
         else
-          data['courseCode'] = "#{material['topic_name']} / #{material['tutorial_name']} / slides"
           data['learningResourceType'] = "slides"
           data['name'] = "Slides for '#{material['title']}' tutorial"
         end
-        data['url'] = "https://training.galaxyproject.org/#{site['baseurl']}#{material['url']}"
+        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
         # Time required
         if material.key?('time_estimation') and not material['time_estimation'].nil? then
@@ -190,9 +344,8 @@ module Jekyll
         end
 
         # Keywords
-        if material.key?('tags') then
-          data['keywords'] = material['tags'].join(', ')
-        end
+        data['keywords'] = [topic['name']] + material.fetch('tags', [])
+        data['keywords'] = data['keywords'].join(', ')
         #Zenodo links
         if material.key?('zenodo_link') then
           mentions = mentions.push({
@@ -202,7 +355,7 @@ module Jekyll
           })
         end
       end
-      data['description'] = description.join('\n')
+      data['description'] = description.join("\n")
 
       if material.key?("lang") then
         data['inLanguage'] = {
@@ -238,17 +391,19 @@ module Jekyll
                       #slides
                       if page['name'] == 'slides.html' then
                         coursePrerequisites.push({
-                          "@type": "Course",
-                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
+                          "@context": "http://schema.org",
+                          "@type": "LearningResource",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/slides.html",
                           "name": "#{page['title']}",
                           "description": "Slides for '#{page['title']}' tutorial",
                           "learningResourceType": "slides",
                           "interactivityType": "expositive",
-                          "provider": gtn
+                          "provider": GTN
                         })
                         if page['hands_on_url'] then
                           coursePrerequisites.push({
-                            "@type": "Course",
+                            "@context": "http://schema.org",
+                            "@type": "LearningResource",
                             "url": "#{page['hands_on_url']}",
                             "learningResourceType": "hands-on tutorial",
                             "interactivityType": "expositive",
@@ -258,13 +413,14 @@ module Jekyll
                       #hands-on
                       if page['name'] == 'tutorial.md' then
                         coursePrerequisites.push({
-                          "@type": "Course",
-                          "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
+                          "@context": "http://schema.org",
+                          "@type": "LearningResource",
+                          "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/tutorials/#{tuto}/tutorial.html",
                           "name": "#{page['title']}",
                           "description": "Hands-on for '#{page['title']}' tutorial",
                           "learningResourceType": "hands-on tutorial",
                           "interactivityType": "expositive",
-                          "provider": gtn
+                          "provider": GTN
                         })
                       end
                     end
@@ -273,11 +429,12 @@ module Jekyll
               end
             else
               coursePrerequisites.push({
-                "@type": "CreativeWork",
-                "url": "https://training.galaxyproject.org/#{site['baseurl']}/topics/#{req['topic_name']}/",
+                "@context": "http://schema.org",
+                "@type": "LearningResource",
+                "url": "#{site['url']}#{site['baseurl']}/topics/#{req['topic_name']}/",
                 "name": "#{site['data'][req['topic_name']]['title']}",
                 "description": "#{site['data'][req['topic_name']]['title']}",
-                "provider": gtn
+                "provider": GTN
               })
             end
           elsif req['type'] == "external" then
@@ -290,19 +447,12 @@ module Jekyll
             coursePrerequisites.push("#{req['title']}")
           end
         end
-        data['coursePrerequisites'] = coursePrerequisites
+        data['competencyRequired'] = coursePrerequisites.uniq
       end
-
-      data['hasPart'] = parts
 
       # Add contributors/authors
       if material.key?('contributors') then
-        contributors = material['contributors'].map{ |x|
-          {
-            "@type": "Person",
-            "name": "#{site['data']['contributors'].fetch(x, {"name": x})['name']}" #expand to use real names
-          }
-        }
+        contributors = material['contributors'].map{ |x| generate_person_jsonld(x, site['data']['contributors'][x], site) }
         data['author'] = contributors
         data['contributor'] = contributors
       end
@@ -322,7 +472,7 @@ module Jekyll
       data['about'] = about
 
       if material.key?('level') then
-        data['skillLevel'] = material['level']
+        data['educationalLevel'] = eduLevel[material['level']]
       end
 
       return JSON.pretty_generate(data)

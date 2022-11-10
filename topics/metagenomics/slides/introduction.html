@@ -96,8 +96,8 @@ puzzle analogy: think of each organism as a jigsaw puzzle
 ## Amplicon
 
 
-- Targetted approach (e.g. 16S/18S rRNA gene)
-- Amplifies bacteria, not host or environmental fungi, plants
+- Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)
+- Amplify gene of specific taxonomic group, i.e. not host or environment
 
 ![left is picture of e. coli ribosome with "so much rna" written, right is the RNA structure in a diagram](../images/16S_gene.png)
 
@@ -172,6 +172,11 @@ Shotgun:             ~ ? reads
 
 ![comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment.](../images/metagenomics_pipeline.png)
 
+Amplicon analysis variants:
+
+- OTU: operational taxonomic units
+- ASV: amplicon sequence variants
+
 ---
 
 ## Pre-processing
@@ -183,22 +188,40 @@ Shotgun:             ~ ? reads
 
 ---
 
+## OTU Clustering / Denoising
+
+.pull-left[
+OTU clustering:
+
+- Cluster on 97% sequence similarity for genus-level differentiation
+- OTUs depend on the data set: no comparability of data sets
+
+.image-75[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold](../images/otu.png) ]
+
+]
+
+.pull-right[
+ASV Denoising:
+
+- Discriminate sequence variations from sequencing errors
+- Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly
+
+.image-90[ ![DNA sequences with hierarchical clustering shown](../images/clustering.png) ]
+
+]
+
+???
+ASV stands for "Amplicon Sequence Variants"
+
+TODO: expand on OTU vs ASV a bit more
+---
+
 ## Chimera Removal
 
 - During PCR multiple sequences can combine to form a hybrid
 - Must be removed from your data for better results
 
 ![aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera](../images/chimeras.png)
-
----
-
-## OTU Clustering
-
-Cluster on 97% sequence similarity for genus-level differentiation
-
-.pull-left[ .image-100[ ![dna sequences with hierarchical clustering shown](../images/clustering.png) ]]
-
-.pull-right[.image-100[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold.](../images/otu.png) ]]
 
 ---
 

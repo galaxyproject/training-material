@@ -17,53 +17,34 @@
             {% icon galaxy-barchart %} Page Metrics
         </a>
 
-        {% if page.layout == 'topic' and site.data['feedback'].topic contains page.topic_name %}
-            <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
-                {% icon galaxy-barchart %} Topic feedback
-            </a>
-        {% elsif page.layout == 'tutorial_hands_on' and site.data['feedback'].tutorial contains page.tutorial_name %}
-            <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
-                {% icon galaxy-barchart %} Tutorial feedback
-            </a>
+        <!-- link to feedback -->
+        {% if page.layout == 'topic' %}
+            {% assign fdbk_by_topic = site.data['feedback'] | how_many_topic_feedbacks:site.data[page.topic_name].title %}
+            {% if fdbk_by_topic > 0 %}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#topic-{{ page.topic_name }}" title="Show feedback statistics about this topic">
+                    {% icon galaxy-barchart %} Topic feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
+        {% elsif page.layout == 'tutorial_hands_on' %}
+            {% assign fdbk_by_tutorial = site.data['feedback'] | how_many_tutorial_feedbacks:page.title %}
+            {% if fdbk_by_tutorial > 0}
+                <a class="dropdown-item" href="{{ site.baseurl }}/feedback.html#tutorial-{{ page.tutorial_name }}" title="Show feedback statistics about this tutorial">
+                    {% icon galaxy-barchart %} Tutorial feedback
+                </a>
+            {% else %}
+                <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
+                    {% icon galaxy-barchart %} GTN feedback
+                </a>
+            {% endif %}
         {% else %}
             <a class="dropdown-item" href="{% link feedback.md %}" title="Show feedback statistics about this repository">
                 {% icon galaxy-barchart %} GTN feedback
             </a>
         {% endif %}
-
-        <div class="dropdown-item">
-            <div>
-                {% icon language %} Translate this page
-            </div>
-
-            <div id="lang-selector">
-                {% if page.translations %}
-                  <strong>Curated Translations</strong>
-                  {% for lang in page.translations %}
-                      {% if lang == "en" %}
-                          {% capture fixed_final %}_{{ page.lang | upcase }}.html{% endcapture %}
-                          <a class="btn btn-info" href="{{ site.baseurl }}{{ page.url | replace: fixed_final,".html"}}">
-                            {{site.other_languages[lang]}}
-                          </a>
-                      {% else %}
-                          {% capture fixed_final %}_{{ lang | upcase }}.html{% endcapture %}
-                          <a class="btn btn-info" href="{{ site.baseurl }}{{ page.url | replace: '_ES', '' | replace: ".html",fixed_final}}">
-                            {{site.other_languages[lang]}}
-                          </a>
-                      {% endif %}
-                  {% endfor %}
-                {% endif %}
-                <strong>Automatic Translations</strong>
-{% for lang in site.other_languages %}{% unless lang[0]=='en' %}
-<a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
-                {{lang[1]}}
-                </a>
-                {% endunless %}{% endfor %}
-                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org{{ page.url }}&edit-text=&act=url" title="{{ inst[0] }}">
-                And more!
-                </a>
-            </div>
-        </div>
 
         <div class="dropdown-item">
             <div>
@@ -101,9 +82,8 @@
                 {% icon galaxy-rulebuilder-history %} Previous Versions
             </div>
 
-            {% assign taglist = site.git_tags | sort | reverse | slice: 0, 3 %}
             <div id="archive-selector">
-            {% for tag in taglist %}
+            {% for tag in site.git_tags_recent %}
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
             {% endfor %}
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
