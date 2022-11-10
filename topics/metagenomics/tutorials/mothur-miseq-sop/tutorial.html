@@ -824,12 +824,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
-            UseGalaxy.fr
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
             UseGalaxy.no
         </a>
@@ -845,8 +839,6 @@
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
             UseGalaxy.org.au
         </a>
-        
-    
         
     
         
@@ -882,7 +874,7 @@
                  
 
                 
-<h1 class="no_toc" id="overview">Overview</h1>
+<h1 id="overview">Overview</h1>
 
 <p>In this tutorial we will perform an analysis based on the
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <span class="citation"><a href="#Schloss2009">Schloss <i>et al.</i> 2009</a></span>.</p>
@@ -905,6 +897,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
+  <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
   <li><a href="#obtaining-and-preparing-data" id="markdown-toc-obtaining-and-preparing-data">Obtaining and preparing data</a>    <ol>
       <li><a href="#understanding-our-input-data" id="markdown-toc-understanding-our-input-data">Understanding our input data</a></li>
       <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></a></li>
@@ -937,6 +930,7 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
       <li><a href="#phinch" id="markdown-toc-phinch">Phinch</a></li>
     </ol>
   </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -1128,11 +1122,8 @@ convention, so that our tools will know which files belong together. We do this 
 of files that differ only by a <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> part in their names. In our case however, these
 should be <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>.</p>
     </li>
-    <li>Change these values accordingly
-      <ul>
-        <li>Change <code class="language-plaintext highlighter-rouge">_1</code> to <code class="language-plaintext highlighter-rouge">_R1</code> in the text field on the top left</li>
-        <li>Change <code class="language-plaintext highlighter-rouge">_2</code> to <code class="language-plaintext highlighter-rouge">_R2</code> om the text field on the top right</li>
-      </ul>
+    <li>
+      <p>Click on “Choose Filters” and select <code class="language-plaintext highlighter-rouge">Forward: _R1, Reverse: _R2</code> (note that you can also enter Filters manually in the text fields on the top)</p>
 
       <p>You should now see a list of pairs suggested by <span class="notranslate">Galaxy</span>:
 <img src="../../images/create_collection.png" alt="List of suggested paired datasets" /></p>
@@ -1173,8 +1164,7 @@ should be <code class="language-plaintext highlighter-rouge">_R1</code> and <cod
 <h1 id="quality-control">Quality Control</h1>
 <p><a href="../mothur-miseq-sop-short/tutorial.html#quality-control"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
-<p>For more information on the topic of quality control, please see our training materials
-<a href="/training-material/topics/sequence-analysis/">here</a>.</p>
+<p>For more information on the topic of quality control, please see our <a href="/training-material/topics/sequence-analysis/">dedicated QC training materials</a>.</p>
 
 <p>Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
 where possible by trimming and filtering <span class="notranslate">reads</span>. The mothur toolsuite contains several tools to assist with this task.
@@ -1395,17 +1385,16 @@ the number of duplicates of this sequence observed in each sample.</p>
   <p>From now on, we will only work with the set of <em>unique sequences</em>, but it’s important to remember that these represent a larger
 number of <em>total sequences</em>, which we keep track of in the <em>count table</em>.</p>
 
-  <p>The <strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will
+  <p>In the following we will use the <em>unique sequences</em> together with the <em>count table</em> as input to tools instead of the complete set of sequences. If this is done for the <strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool it will
 report both the number of unique <em>representative sequences</em> as well as the <em>total sequences</em> they represent.</p>
 </blockquote>
 
 <h1 id="sequence-alignment">Sequence Alignment</h1>
 <p><a href="../mothur-miseq-sop-short/tutorial.html#sequence-alignment"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to short tutorial</a></p>
 
-<p>For more information on the topic of alignment, please see our training materials
-<a href="/training-material/topics/sequence-analysis/">here</a></p>
+<p>For more information on the topic of alignment, please see our <a href="/training-material/topics/sequence-analysis/">dedicated alignment training materials</a></p>
 
-<p>We are now ready to align our sequences to the reference. This is an important
+<p>We are now ready to align our sequences to the reference alignment. This is an important
 step to improve the clustering of your OTUs <span class="citation"><a href="#Schloss2012">Schloss 2012</a></span>.</p>
 
 <p>In mothur this is done by determining for each unique sequence the entry of the reference database that
@@ -1496,6 +1485,7 @@ homopolymer stretches.</p>
   <li>Remove any <span class="notranslate">reads</span> not overlapping the region V4 region (position 1968 to 11550) using <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
   <li>Remove any overhang on either end of the V4 region to ensure our sequences overlap <em>only</em> the V4 region, using <strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
   <li>Clean our alignment file by removing any columns that have a gap character (<code class="language-plaintext highlighter-rouge">-</code>, or <code class="language-plaintext highlighter-rouge">.</code> for terminal gaps) at that position in every sequence (also using <strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
+  <li>Remove redundancy in the aligned sequences that might have been introduced by filtering columns by running <strong>Unique.seqs</strong> once more.</li>
   <li>Group near-identical sequences together with <strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.</li>
 </ol>
 
@@ -1790,7 +1780,7 @@ our sequencing and bioinformatics pipeline is.</p>
   <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-clustering">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 <br /><br />
-Click <a href="#otu-clustering">here</a> to skip this section and continue with the analysis.</p>
+If you wish to skip the mock community analysis, you can go <a href="#otu-clustering">directly to the next section</a> and continue with the analysis.</p>
 
 </blockquote>
 
@@ -2305,8 +2295,8 @@ species rich habitat, only a small fraction has been sampled.</p>
 </blockquote>
 
 <p>Note that we used the default diversity measure here (<em>sobs</em>; observed species richness), but there are many
-more options available under the <em>calc</em> parameter. The mothur wiki describes some of these calculators
-<a href="https://mothur.org/wiki/Calculators">here</a>.</p>
+more options available under the <em>calc</em> parameter. Descriptions of some of these calculators can be found on
+<a href="https://mothur.org/wiki/Calculators">the mothur wiki</a>.</p>
 
 <p>Examine the rarefaction curve output.</p>
 
@@ -2375,8 +2365,8 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 <p>View the <code class="language-plaintext highlighter-rouge">summary</code> output from <strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This shows several alpha diversity metrics:</p>
 <ul>
   <li><a href="https://www.mothur.org/wiki/Sobs">sobs</a>: observed richness (number of OTUs)</li>
-  <li><a href="https://mothur.org/wiki/Coverage">coverage</a>: Good’s coverage index</li>
-  <li><a href="https://en.wikipedia.org/wiki/Diversity_index#Simpson_index">invsimpson</a>: Inverse Simpson Index</li>
+  <li><a href="https://mothur.org/wiki/Coverage">coverage</a>: Good’s coverage index (1 - (number of OTUs containing a single sequence / total number of sequences ))</li>
+  <li><a href="https://en.wikipedia.org/wiki/Diversity_index#Simpson_index">invsimpson</a>: Inverse Simpson Index (1 / probability that two random individuals represent the OTU)</li>
   <li><a href="https://www.mothur.org/wiki/Nseqs">nseqs</a>: number of sequences</li>
 </ul>
 
@@ -2676,7 +2666,7 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
   </blockquote>
 </blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>Well done! <i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> You have completed the basics of the Schloss lab’s <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure for Illumina MiSeq data</a>. You have worked your way through the following pipeline:</p>
 
