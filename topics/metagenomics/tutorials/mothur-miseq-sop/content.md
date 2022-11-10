@@ -1,3 +1,6 @@
+---
+layout: none
+---
 {% if include.short %}
   {% assign other_tutorial = "../mothur-miseq-sop/tutorial.html" %}
   {% assign other_tutorial_name = "extended" %}
