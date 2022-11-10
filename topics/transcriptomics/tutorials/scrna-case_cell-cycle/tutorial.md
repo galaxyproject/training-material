@@ -2,24 +2,20 @@
 layout: tutorial_hands_on
 
 title: Removing the effects of cell cycle genes
-zenodo_link: https://zenodo.org/record/7311628/files/Processed_AnnData.h5ad?download=1
+zenodo_link: https://zenodo.org/record/7311628/
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How can I reduce the effects of the cell cycle on my scRNA-seq data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Identify and regress out the effects of cell cycle genes
+- Create PCA plots to understand the impact of the regression
+requirements:
+- 
 time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Cell cycle genes can conceal what is happening in your data 
+- Identifying the cell cycle genes and regressing out their effects can reveal underlying patterns in the data
 contributors:
-- Marisa Loach
-- contributor2
+- MarisaJL
 
 ---
 
@@ -29,11 +25,23 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+Single-cell RNA sequencing can be sensitive to both biological and technical
+variation, which is why preparing your data carefully is an important part of
+the analysis. You want the results to reflect real differences in expression
+between cells that relates to their type or state. Other sources of variation
+can conceal or confound this variation, making it harder for you to see what
+is really going on. 
+
+One common biological confounder is the cell cycle. Cells express different
+genes during different parts of the cell cycle, depending on whether they are
+in their growing phase or duplicating their DNA in preparation for cell
+division. If these cell cycle genes are having a big impact on your data,
+then you could end up with separate clusters that actually represent cells of
+the same type that are just at different stages of the cycle. 
+
+In this tutorial, we will identify the genes whose expression varies during
+the cell cycle so that we can regress out (or remove) their effects on the
+data. 
 
 You may want to cite some publications; this can be done by adding citations to the
 bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
@@ -83,6 +91,14 @@ have fun!
 
 ## Get data
 
+The data used in this tutorial is from a mouse dataset of fetal growth restriction {% raw %} `{% cite Bacon2018 %}`{% endraw %}. 
+
+If you've been working through the Filter, Plot and Explore Single-cell 
+RNA-seq Data tutorial then you can use your dataset here. Cell cycle
+regression should be performed after the data has been filtered, normalised,
+and scaled. At the end of this tutorial, you can return to the main tutorial
+to plot and explore your data with reduced effects from the cell cycle genes.
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
@@ -101,18 +117,46 @@ have fun!
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the dataset Processed_AnnData
+> 4. Check that the datatype is h5ad
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+{: .hands_on}
+
+In addition to the scRNA-seq dataset, we will also need lists of the genes
+that are expressed at different points in the cell cycle. The lists used in
+this tutorial were prepared by.......... and can be downloaded from Zenodo
+below. 
+
+The first list includes genes that are expressed during S Phase. The second
+list contains genes that are expressed during the G2/M Phases. We don't need
+a list of genes that are expressed in the G1 Phase because ........
+
+> ### {% icon hands_on %} Hands-on: Data upload
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+> 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    ```
+>    
+>    ```
+>    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 2. Check that the datatype for both is tabular
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+
+
+# Cell Cycle Scoring
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
@@ -128,83 +172,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 > But to describe more details, it is possible to use the detail boxes which are expandable
 >
 {: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Inspect AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `output` (Input dataset)
->    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Concatenate datasets**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
->    - {% icon param-file %} *"Concatenate Dataset"*: `output` (Input dataset)
->    - In *"Dataset"*:
->        - {% icon param-repeat %} *"Insert Dataset"*
->            - {% icon param-file %} *"Select"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Inspect and manipulate**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -243,81 +210,23 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Table Compute**
+# Cell Cycle Regression
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
->    - *"Input Single or Multiple Tables"*: `Single Table`
->        - {% icon param-file %} *"Table"*: `var` (output of **Inspect AnnData** {% icon tool %})
->        - *"Type of table operation"*: `Drop, keep or duplicate rows and columns`
->            - *"List of columns to select"*: `1`
->            - *"List of rows to select"*: `2:15396`
->    - *"Output formatting options"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+It comes first a description of the step: some background and some theory.
+Some image can be added there to support the theory explanation:
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![Alternative text](../../images/image_name "Legend of the image")
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The idea is to keep the theory description before quite simple to focus more on the practical part.
 
-## Sub-step with **Add column**
+***TODO***: *Consider adding a detail box to expand the theory*
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon details %} More details about the theory
 >
-> 1. {% tool [Add column](toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0) %} with the following parameters:
->    - *"Add this value"*: `TRUE`
->    - {% icon param-file %} *"to Dataset"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+> But to describe more details, it is possible to use the detail boxes which are expandable
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+{: .details}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy RegressOut**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -336,27 +245,69 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+# Plotting the Effects of Cell Cycle Regression
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Your data is now ready for further analysis, so you can return to the Filter,
+Plot and Explore Single-cell RNA-seq Data tutorial and move on to the
+Preparing coordinates step there. However, if you want to understand how cell
+cycle regression has affected your data then you might want to work through
+the following steps first. 
 
-## Sub-step with **Add column**
+In order to do this, we need to identify the cell cycle genes in our AnnData
+dataset so that we can select them for plotting. We need to create a new
+column to annotate the AnnData - you might find it easier to do this using a
+spreadsheet and then upload the column as a tabular dataset, but it is
+possible to complete all the steps on Galaxy. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Prepare a table of cell cycle genes
+>If we're going to mark all the cell cycle genes, we'll need a list of all 97
+>genes instead of the two separate lists for S Phase and G2/M Phase. We'll 
+>join the two lists together and then add another column that just reads TRUE,
+>which we'll use later to mark these as cell cycle genes in the main dataset.
 >
-> 1. {% tool [Add column](toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0) %} with the following parameters:
+> ### {% icon hands_on %} Hands-on: Create a list of all cell cycle genes
+>
+> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: `output` (Input dataset)
+>    - In *"Dataset"*:
+>        - {% icon param-repeat %} *"Insert Dataset"*
+>            - {% icon param-file %} *"Select"*: `output` (Input dataset)
+>
+> 2. {% tool [Add column](toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0) %} with the following parameters:
+>    - *"Add this value"*: `TRUE`
+>    - {% icon param-file %} *"to Dataset"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>
+> 3. Rename the dataset CC_Genes
+{: .hands_on}
+
+## Create an ordered list of gene names
+> Next, we'll need a list of all the genes in our dataset, so that we can mark
+> the ones that are in our cell cycle list. We'll also add a column of 
+> numbers as this will help us keep the gene names in order.
+> 
+> ### {% icon hands_on %} Hands-on: Get the gene names from your dataset
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `output` (Input dataset)
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
+>
+> 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
+>    - *"Input Single or Multiple Tables"*: `Single Table`
+>        - {% icon param-file %} *"Table"*: `var` (output of **Inspect AnnData** {% icon tool %})
+>        - *"Type of table operation"*: `Drop, keep or duplicate rows and columns`
+>            - *"List of columns to select"*: `1`
+>            - *"List of rows to select"*: `2:15396`
+>    - *"Output formatting options"*: ``
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Since we don't want to keep the header, we select the rows from 2 to the end
+>    >  of the dataset. If you were using a dataset of a different size, you would
+>    >  need to change this parameter to include all the genes. 
+>    {: .comment}
+>
+> 3. {% tool [Add column](toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"to Dataset"*: `table` (output of **Table Compute** {% icon tool %})
 >    - *"Iterate?"*: `YES`
 >
@@ -366,29 +317,18 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Adding these numbers will enable us to keep the genes in their original
+>    > order. This is essential for adding the cell cycle gene annotation back
+>    > into the AnnData. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Join**
-
+## Mark the cell cycle genes
+> We can now combine our table of cell cycle genes with the table of gene
+> names. 
+>  
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
@@ -405,32 +345,15 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > When we do this, we'll ask for any empty fields to be filled in with
+>    > FALSE. The cell cycle gene table has an extra column where they are
+>    >  all marked as TRUE - they will retain this marking when we join the
+>    >   tables but since there are no entries for the rest of the genes,
+>    >    their rows will be filled in as FALSE. This will enable us to pick
+>    >     out the cell cycle genes later. 
 >    {: .comment}
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Sort**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Sort](sort1) %} with the following parameters:
+> 2. {% tool [Sort](sort1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `output` (output of **Join** {% icon tool %})
 >    - *"on column"*: `c2`
 >    - *"everything in"*: `Ascending order`
@@ -441,30 +364,37 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Sorting the genes using the numbers we added earlier will put them back in their original order - make sure to sort them in ascending order, otherwise they'll end up the opposite way around. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What would happen if any of the cell cycle genes were not present in the dataset?
+> 2. How would we remove these genes from the table?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Any cell cycle genes that weren't in the dataset would have an empty
+> >  field in numbered column, which would be filled in with FALSE when we
+> >   created the table. These rows would appear at the top of the table
+> >    after it was sorted. 
+> > 2. We should check the first rows of the table for any unnumbered genes
+> >  and then cut these rows out in the next step. 
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Table Compute**
+## Add an annotation to the AnnData
+We now have a table with all the gene names in the same order as the main
+dataset and a column indicating which ones are cell cycle genes. If we cut
+this column out of the table then we can add it as a new annotation to the
+main dataset. We'll also need to add a column header, which will be used as
+the key for this annotation in the AnnData. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Add the cell cycle annotation 
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -474,71 +404,29 @@ A big step can have several subsections or sub steps:
 >            - *"List of rows to select"*: `1:15395`
 >    - *"Output formatting options"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > If there were any cell cycle genes that weren't present in the main
+>    > dataset, we could remove them at this stage by excluding them from the
+>    >  List of rows to select. 
 >    {: .comment}
+> 
+> 2. Create a header for the new column 
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Concatenate datasets**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 3. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `output` (Input dataset)
 >    - In *"Dataset"*:
 >        - {% icon param-repeat %} *"Insert Dataset"*
 >            - {% icon param-file %} *"Select"*: `table` (output of **Table Compute** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Manipulate AnnData**
+We will need to add the annotation to both the original dataset and to the one that we created by regressing out the cell cycle genes. This will allow us to plot the cell cycle genes before and after regression. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -547,74 +435,25 @@ A big step can have several subsections or sub steps:
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >        - {% icon param-file %} *"Table with new annotations"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Manipulate AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+> 2. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5ad` (output of **Scanpy RegressOut** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >        - {% icon param-file %} *"Table with new annotations"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Manipulate AnnData**
-
+## Filter the cell cycle genes
+For both the nely annotated datasets
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - *"Function to manipulate the object"*: `Filter observations or variables`
+>        - *"Type of filtering?"*: `By key (column) values`
+>            - *"Key to filter"*: `CC_genes`
+>            - *"Type of value to filter"*: `Boolean`
+>
+> 2. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Function to manipulate the object"*: `Filter observations or variables`
 >        - *"Type of filtering?"*: `By key (column) values`
@@ -648,49 +487,16 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Manipulate AnnData**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
->    - *"Function to manipulate the object"*: `Filter observations or variables`
->        - *"Type of filtering?"*: `By key (column) values`
->            - *"Key to filter"*: `CC_genes`
->            - *"Type of value to filter"*: `Boolean`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cluster, infer trajectories and embed**
+## Plot the cell cycle genes before regression
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
+>    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
+>        - *"Type of PCA?"*: `Full PCA`
+>
+> 2. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
 >        - *"Type of PCA?"*: `Full PCA`
@@ -722,47 +528,27 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Cluster, infer trajectories and embed**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata` (output of **Manipulate AnnData** {% icon tool %})
->    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
->        - *"Type of PCA?"*: `Full PCA`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Plot**
+## Plot the cell cycle genes after regression
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
+>    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
+>        - *"Keys for annotations of observations/cells or variables/genes"*: `phase`
+>        - In *"Plot attributes"*:
+>            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 2. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
 >    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
 >        - *"Keys for annotations of observations/cells or variables/genes"*: `phase`
@@ -795,52 +581,6 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
-
-## Sub-step with **Plot**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
->    - *"Method used for plotting"*: `PCA: Plot PCA results, using 'pl.pca_overview'`
->        - *"Keys for annotations of observations/cells or variables/genes"*: `phase`
->        - In *"Plot attributes"*:
->            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
