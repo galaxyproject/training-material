@@ -231,8 +231,7 @@ convention, so that our tools will know which files belong together. We do this 
 # Quality Control
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="quality-control" %}
 
-For more information on the topic of quality control, please see our training materials
-[here]({% link topics/sequence-analysis/index.md %}).
+For more information on the topic of quality control, please see our [dedicated QC training materials]({% link topics/sequence-analysis/index.md %}).
 
 Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
 where possible by trimming and filtering reads. The mothur toolsuite contains several tools to assist with this task.
@@ -487,8 +486,7 @@ the number of duplicates of this sequence observed in each sample.
 # Sequence Alignment
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="sequence-alignment" %}
 
-For more information on the topic of alignment, please see our training materials
-[here]({% link topics/sequence-analysis/index.md %})
+For more information on the topic of alignment, please see our [dedicated alignment training materials]({% link topics/sequence-analysis/index.md %})
 
 We are now ready to align our sequences to the reference alignment. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
