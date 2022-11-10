@@ -8,7 +8,6 @@
 
 
 # Overview
-{:.no_toc}
 
 In this tutorial we will perform an analysis based on the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the [Schloss lab](http://www.schlosslab.org/), the creators of the mothur software package {% cite Schloss2009 %}.
@@ -1705,7 +1704,6 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 
 
 # Conclusion
-{:.no_toc}
 
 Well done! {% icon trophy %} You have completed the basics of the Schloss lab's [Standard Operating Procedure for Illumina MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP). You have worked your way through the following pipeline:
 
