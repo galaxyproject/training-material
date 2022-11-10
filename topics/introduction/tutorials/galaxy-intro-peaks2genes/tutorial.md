@@ -159,7 +159,9 @@ Let's start with a fresh history.
 >    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
->    ![Search in Database/Build](../../images/Search-for-mm9.PNG)
+>
+>    ![The database/build version can be selected from a dropdown menu. Users can start typing the database name to filter the list](../../images/Search-for-mm9.PNG)
+>
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
