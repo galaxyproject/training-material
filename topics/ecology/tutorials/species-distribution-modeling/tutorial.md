@@ -99,7 +99,7 @@ We will extract the 4 columns mentioned above and keep only the occurrence recor
 >
 > 4. **Tabular to CSV** {% icon tool %}
 >    - Click on the **Edit Attributes** {% icon galaxy-pencil %} option for the output of **Filter**.
->    - On the central panel click on the {% galaxy-gear %} **Convert** tab.
+>    - On the central panel click on the {% icon galaxy-gear %} **Convert** tab.
 >    - Check the  **Target data** is csv.
 >    - Click on **Create Dataset**
 >
