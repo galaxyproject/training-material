@@ -710,7 +710,7 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 
     This will share the history only with specific users on the Galaxy instance.
 
-![Publish Your Work](../../images/publish.PNG)
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >
