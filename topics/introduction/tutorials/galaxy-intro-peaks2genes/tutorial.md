@@ -64,6 +64,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 # Pretreatments
 
 > <hands-on-title>Open Galaxy</hands-on-title>
+>
 > 1. Browse to a Galaxy instance: the one recommended by your instructor or one in the list **Galaxy instance** on the head of this page
 > 2. Log in or register (top panel)
 >
@@ -76,7 +77,6 @@ The Galaxy interface consist of three main parts. The available tools are listed
 
 Let's start with a fresh history.
 
-![Switch Between Histories](../../images/Switch-Between-Histories.PNG)
 
 > <hands-on-title>Create history</hands-on-title>
 >
