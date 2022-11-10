@@ -10,9 +10,9 @@ questions:
   - Why and when should I use BioBlend?
 requirements:
   -
-    title: "IPython"
+    title: "JupyterLab"
     type: "external"
-    link: "https://ipython.org"
+    link: "https://jupyterlab.readthedocs.io/"
 time_estimation: "2h"
 key_points:
   - The API allows you to use Galaxy's capabilities programmatically.
@@ -47,11 +47,11 @@ contributors:
   - exploring and visualizing data
   - experimenting
   - graphically designing workflows
-  - people not comfortable with command line
+  - people not comfortable with the command line
 
 - The Galaxy API is good for:
   - interact programmatically with the server
-    - complex control: **branching** and **looping** (not possible in workflows)
+    - complex control: **branching** and **looping** (not yet possible in workflows)
   - automate repetitive tasks
   - integration with external resources
 
@@ -278,7 +278,7 @@ contributors:
 - Main advantages:
   - [Async requests](https://fastapi.tiangolo.com/async/)
   - Subscriptions via [websockets](https://fastapi.tiangolo.com/advanced/websockets/)
-  - [OpenAPI](https://spec.openapis.org/oas/v3.1.0) interactive documentation
+  - Integrated [OpenAPI](https://spec.openapis.org/oas/v3.1.0) interactive documentation, e.g. https://usegalaxy.org/api/docs
   - Reduce maintenance burden
 - Challenges:
   - Need to refactor over 200 endpoints
@@ -328,11 +328,11 @@ contributors:
 ## BioBlend features
 
 - Stable procedural API
-- Supported under Python >=3.6
+- Supported under Python >=3.7
 - Wraps all main Galaxy API controllers
 - Extensive Continuous Integration testing:
   - on Galaxy release_17.09 and later
-  - \>230 unit tests
+  - \>240 unit tests
 - Well-documented on https://bioblend.readthedocs.io
 
 ???
@@ -341,28 +341,6 @@ contributors:
 - It provides methods wrapping all the important Galaxy API endpoints.
 - The library uses Continuous Integration to perform a large number of tests on a wide range of Galaxy releases.
 - The documentation of BioBlend is very well curated and is often more accurate than the corresponding Galaxy API one.
-
----
-
-## Tutorials - part 1
-
-We have prepared
-[some tutorials](https://github.com/nsoranzo/bioblend-tutorial/) as Jupyter
-notebooks, which can be executed online with Binder at
-https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main
-
-Walk-throughs:
-- `galaxy_api_histories.ipynb`: interact with histories using the **Galaxy API**
-- `bioblend_histories.ipynb`: interact with histories using **BioBlend**
-
-Exercises:
-- `ex1_galaxy_api.ipynb`: launch a workflow using the **Galaxy API**
-- `ex1_bioblend.ipynb`: launch a workflow using **BioBlend**
-
-???
-
-- Now it's a good time to try the Galaxy API and BioBlend!
-- Follow the instructions on the slide to access the tutorials and exercises.
 
 ---
 
@@ -401,25 +379,6 @@ Exercises:
 - When using this interface, methods will return objects encapsulating the dictionaries returned by the Galaxy API.
 - The user can then invoke further methods on these objects, for example the download method for a Dataset object.
 - Only a subset of BioBlend is available through the object interface, but most of the common user functionalities are included.
-
----
-
-## Tutorials - part 2
-
-More [Jupyter notebooks](https://github.com/nsoranzo/bioblend-tutorial/) which
-can be executed online with Binder at
-https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/main
-
-Walk-throughs:
-- `bioblend.objects_histories.ipynb`: interact with histories using **BioBlend.objects**
-
-Exercises:
-- `ex1_bioblend.objects.ipynb`: launch a workflow using **BioBlend.objects**
-
-???
-
-- Now you can try BioBlend objects and see how it compares with BioBlend.
-- Follow the instructions on the slide to access the tutorials and exercises.
 
 ---
 

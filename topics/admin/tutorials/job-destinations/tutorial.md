@@ -22,8 +22,10 @@ contributors:
   - bgruening
   - hexylena
 tags:
+  - ansible
   - jobs
-subtopic: features
+  - git-gat
+subtopic: jobs
 requirements:
   - type: "internal"
     topic_name: admin
@@ -33,20 +35,21 @@ requirements:
       - connect-to-compute-cluster
 ---
 
-# Mapping Jobs
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first.
 
 Now that you have a working scheduler, we will start configuring which jobs are sent to which destinations.
 
-> ### Agenda
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
+
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}
 
 # Galaxy and Slurm - Statically Mapping a Job
 
@@ -54,14 +57,14 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 ## Writing a testing tool
 
-> ### {% icon hands_on %} Hands-on: Deploying a Tool
+> <hands-on-title>Deploying a Tool</hands-on-title>
 >
-> 1. Create the directory `templates/galaxy/tools/` if it doesn't exist and edit a new file in `templates/galaxy/tools/testing.xml` with the following contents:
+> 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/tools/testing.xml
+>    +++ b/files/galaxy/tools/testing.xml
 >    @@ -0,0 +1,11 @@
 >    +<tool id="testing" name="Testing Tool">
 >    +    <command>
@@ -78,13 +81,15 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```
 >    {: data-commit="Add testing tool"}
 >
+>    {% snippet topics/admin/faqs/diffs.md %}
+>
 > 2. Add the tool to the Galaxy group variables under the new item `galaxy_local_tools` :
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -99,6 +99,9 @@ galaxy_config_templates:
+>    @@ -96,6 +96,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -92,7 +97,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +- testing.xml
 >    +
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >     galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 >    {% endraw %}
 >    ```
@@ -100,7 +105,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >
 > 3. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -109,11 +114,11 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >
 > 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is the tool's output?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```
 >    > > Running with '1' threads
@@ -137,42 +142,45 @@ Of course, this tool doesn't actually *use* the allocated number of cores. In a 
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. This is done in the job configuration file.
 
 
-> ### {% icon hands_on %} Hands-on: Allocating more resources
+> <hands-on-title>Allocating more resources</hands-on-title>
 >
-> 1. Edit your `templates/galaxy/config/job_conf.xml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
+> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -11,6 +11,13 @@
->                 <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->                 <env id="SINGULARITY_TMPDIR">/tmp</env>
->             </destination>
->    +        <destination id="slurm-2c" runner="slurm">
->    +            <param id="nativeSpecification">--nodes=1 --ntasks=1 --cpus-per-task=2</param>
->    +            <param id="singularity_enabled">true</param>
->    +            <env id="LC_ALL">C</env>
->    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
->    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
->    +        </destination>
->             <destination id="singularity" runner="local_plugin">
->                 <param id="singularity_enabled">true</param>
->                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
->    @@ -22,5 +29,6 @@
->             </destination>
->         </destinations>
->         <tools>
->    +        <tool id="testing" destination="slurm-2c"/>
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -20,6 +20,17 @@ execution:
+>             value: /tmp/singularity
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +    slurm-2c:
+>    +      runner: slurm
+>    +      singularity_enabled: true
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task=2
+>    +      env:
+>    +      - name: LC_ALL
+>    +        value: C
+>    +      - name: SINGULARITY_CACHEDIR
+>    +        value: /tmp/singularity
+>    +      - name: SINGULARITY_TMPDIR
+>    +        value: /tmp
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
+>    @@ -37,3 +48,5 @@ execution:
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       environment: local_dest
+>    +- id: testing
+>    +  environment: slurm-2c
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
 >
-> 3. Run the Galaxy playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
+> 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -181,11 +189,11 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What is the tool's output?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > ```
 >    > > Running with '2' threads
@@ -209,14 +217,14 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 Dynamic destinations allow you to write custom python code to dispatch jobs based on whatever rules you like. For example, UseGalaxy.eu at one point used a very complex custom dispatching configuration to handle sorting jobs between multiple clusters. Galaxy has [extensive documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping-python-method) on how to write these sort of destinations.
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+> <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
-> 1. Create and open `templates/galaxy/dynamic_job_rules/my_rules.py`
+> 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/my_rules.py
+>    +++ b/files/galaxy/dynamic_job_rules/my_rules.py
 >    @@ -0,0 +1,10 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -234,7 +242,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
 >
->    > ### {% icon tip %} Debugging dynamic destinations
+>    > <tip-title>Debugging dynamic destinations</tip-title>
 >    > You can use `pdb` for more advanced debugging, but it requires some configuration. `print()` statements are usually sufficient and easier.
 >    {: .tip}
 >
@@ -246,7 +254,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,8 @@ galaxy_config_templates:
+>    @@ -98,6 +98,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -254,7 +262,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +- my_rules.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy my_rules dynamic rule"}
@@ -263,46 +271,43 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -27,6 +27,10 @@
->                 <!-- Singularity uses a temporary directory to build the squashfs filesystem. -->
->                 <env id="SINGULARITY_TMPDIR">/tmp</env>
->             </destination>
->    +        <destination id="dynamic_admin_only" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">admin_only</param>
->    +        </destination>
->         </destinations>
->         <tools>
->             <tool id="testing" destination="slurm-2c"/>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -44,6 +44,9 @@ execution:
+>           # Singularity uses a temporary directory to build the squashfs filesystem
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +    dynamic_admin_only:
+>    +      runner: dynamic
+>    +      function: admin_only
+>     
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic admin only destination"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.yml`
 >
-> 4. Finally, in `job_conf.xml`, update the `<tool>` definition and point it to this destination:
+> 4. Finally, in `job_conf.yml`, update the `<tool>` definition and point it to this destination:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -33,6 +33,6 @@
->             </destination>
->         </destinations>
->         <tools>
->    -        <tool id="testing" destination="slurm-2c"/>
->    +        <tool id="testing" destination="dynamic_admin_only" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -52,4 +52,4 @@ tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       environment: local_dest
+>     - id: testing
+>    -  environment: slurm-2c
+>    +  environment: dynamic_admin_only
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send testing tool to the dynamic admin only destination."}
 >
 > 5. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -324,7 +329,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 
 ## Writing a Dynamic Tool Destination
 
-> ### {% icon hands_on %} Hands-on: Writing a DTD
+> <hands-on-title>Writing a DTD</hands-on-title>
 >
 > 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `templates/galaxy/config/tool_destinations.yml` with the following contents:
 >
@@ -367,8 +372,8 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->    @@ -98,6 +99,8 @@ galaxy_config_templates:
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>    @@ -95,6 +96,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -381,33 +386,34 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```
 >    {: data-commit="Deploy tool destinations config file"}
 >
-> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.xml.j2` and add a DTD destination.
+> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.yml.j2` and add a DTD destination.
 >    Also, comment out or remove the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -31,8 +31,11 @@
->                 <param id="type">python</param>
->                 <param id="function">admin_only</param>
->             </destination>
->    +        <destination id="dtd" runner="dynamic">
->    +            <param id="type">dtd</param>
->    +        </destination>
->         </destinations>
->         <tools>
->    -        <tool id="testing" destination="dynamic_admin_only" />
->    +        <tool id="testing" destination="dtd" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -47,9 +47,12 @@ execution:
+>         dynamic_admin_only:
+>           runner: dynamic
+>           function: admin_only
+>    +    dtd:
+>    +      runner: dynamic
+>    +      type: dtd
+>     
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       environment: local_dest
+>     - id: testing
+>    -  environment: dynamic_admin_only
+>    +  environment: dtd
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure dtd in job conf"}
 >
 > 4. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -420,7 +426,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 
 Our rule specified that any invocation of the `testing` tool with an input dataset with size <16 bytes would run on the 1 core destination, whereas any with >= 16 bytes would run on the 2 core destination.
 
-> ### {% icon hands_on %} Hands-on: Testing the DTD
+> <hands-on-title>Testing the DTD</hands-on-title>
 >
 > 1. Create a dataset using the upload paste tool with a few (<16) characters
 >
@@ -444,7 +450,7 @@ You may find that certain tools can benefit from having form elements added to t
 
 Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
 
-> ### {% icon hands_on %} Hands-on: Configuring a Resource Selector
+> <hands-on-title>Configuring a Resource Selector</hands-on-title>
 >
 > 1. Create and open `templates/galaxy/config/job_resource_params_conf.xml.j2`
 >
@@ -472,35 +478,38 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -93,6 +93,8 @@ galaxy_config:
->         farm: job-handlers:1,2
+>    @@ -90,6 +90,8 @@ galaxy_config:
+>               - workflow-scheduler
 >     
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/job_conf.xml.j2
+>       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >       - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job resource params configuration"}
 >
-> 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.xml.j2`:
+> 3. Next, we define a new section in `job_conf.yml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.yml.j2`:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -35,6 +35,9 @@
->                 <param id="type">dtd</param>
->             </destination>
->         </destinations>
->    +    <resources>
->    +        <group id="testing">cores,time</group>
->    +    </resources>
->         <tools>
->             <tool id="testing" destination="dtd" />
->         </tools>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -51,6 +51,12 @@ execution:
+>           runner: dynamic
+>           type: dtd
+>     
+>    +resources:
+>    +  default: default
+>    +  groups:
+>    +    default: []
+>    +    testing: [cores, time]
+>    +
+>     tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       environment: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -508,20 +517,19 @@ Such form elements can be added to tools without modifying each tool's configura
 >    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
 >
 >
-> 4. Finally, in `job_conf.xml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
+> 4. Finally, in `job_conf.yml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -39,6 +39,6 @@
->             <group id="testing">cores,time</group>
->         </resources>
->         <tools>
->    -        <tool id="testing" destination="dtd" />
->    +        <tool id="testing" destination="dynamic_cores_time" resources="testing" />
->         </tools>
->     </job_conf>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -61,4 +61,5 @@ tools:
+>     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>       environment: local_dest
+>     - id: testing
+>    -  environment: dtd
+>    +  environment: dynamic_cores_time
+>    +  resources: testing
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -530,24 +538,23 @@ Such form elements can be added to tools without modifying each tool's configura
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.xml.j2
->    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -34,6 +34,10 @@
->             <destination id="dtd" runner="dynamic">
->                 <param id="type">dtd</param>
->             </destination>
->    +        <destination id="dynamic_cores_time" runner="dynamic">
->    +            <param id="type">python</param>
->    +            <param id="function">dynamic_cores_time</param>
->    +        </destination>
->         </destinations>
->         <resources>
->             <group id="testing">cores,time</group>
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -50,6 +50,9 @@ execution:
+>         dtd:
+>           runner: dynamic
+>           type: dtd
+>    +    dynamic_cores_time:
+>    +      runner: dynamic
+>    +      function: dynamic_cores_time
+>     
+>     resources:
+>       default: default
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic_cores_time destination"}
 >
->    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
+>    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.yml`
 >
 {: .hands_on}
 
@@ -565,14 +572,14 @@ This is a lot but we're still missing the last piece for it to work:
 
 Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job.
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic destination
+> <hands-on-title>Writing a dynamic destination</hands-on-title>
 >
-> 1. Create and edit `templates/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
+> 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/map_resources.py
+>    +++ b/files/galaxy/dynamic_job_rules/map_resources.py
 >    @@ -0,0 +1,42 @@
 >    +import logging
 >    +from galaxy.jobs.mapper import JobMappingException
@@ -609,7 +616,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    +            destination.params['nativeSpecification'] = ''
 >    +        destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
 >    +    except:
->    +        # resource param selector not sent with tool form, job_conf.xml misconfigured
+>    +        # resource param selector not sent with tool form, job_conf.yml misconfigured
 >    +        log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
 >    +        raise JobMappingException(FAILURE_MESSAGE)
 >    +
@@ -637,21 +644,21 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->    @@ -108,6 +109,7 @@ galaxy_local_tools:
+>    @@ -105,6 +106,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >    +- map_resources.py
 >     
 >     # systemd
->     galaxy_manage_systemd: yes
+>     galaxy_manage_systemd: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy map_resources.py"}
 >
 > 3. Run the Galaxy playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -670,14 +677,14 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 The cores parameter can be verified from the output of the tool. The walltime can be verified with `scontrol`:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > Your job number may be different.
 > ```
 > scontrol show job 24
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > Your output may look slightly different. Note that the `TimeLimit` for this job (which I gave a 12 hour time limit) was set to `12:00:00`.
 > ```console
 > JobId=24 JobName=g24_multi_anonymous_10_0_2_2
@@ -708,12 +715,12 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
-{% snippet topics/admin/faqs/missed-something.md step=7 %}
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 ## Further Reading
 
 - The [sample dynamic tool destination config file](https://github.com/galaxyproject/galaxy/blob/dev/config/tool_destinations.yml.sample) fully describes the configuration language
 - [Dynamic destination documentation](https://docs.galaxyproject.org/en/latest/admin/jobs.html)
 - Job resource parameters are not as well documented as they could be, but the [sample configuration file](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/test/files/galaxy/config/job_resource_params_conf.xml) shows some of the possibilities.
-- [usegalaxy.org's job_conf.xml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/templates/galaxy/config/job_conf.xml.j2) is publicly available for reference.
+- [usegalaxy.org's job_conf.yml](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/common/templates/galaxy/config/job_conf.yml.j2) is publicly available for reference.
 - [usegalaxy.eu's job_conf.xml](https://github.com/usegalaxy-eu/infrastructure-playbook/search?l=YAML&q=galaxy_jobconf) is likewise (see the `group_vars/galaxy.yml` result)

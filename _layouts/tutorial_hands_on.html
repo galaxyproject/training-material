@@ -14,7 +14,7 @@ footer: no
 {% assign associated_slides = false %}
 {% assign own_material = null %}
 {% for material in topic_material %}
-    {% if material.enable != "false" %}
+    {% if material.enable != "false" or jekyll.environment != "production"  %}
         {% if material.tutorial_name == page.tutorial_name %}
             {% assign own_material = material %}
             {% if material.slides  %}
@@ -61,10 +61,10 @@ footer: no
     </div>
     {% endif %}
 
-    <div class="contributors-line">{{ locale['authors'] | default: "Authors" }}: {% include _includes/contributor-list.html contributors=page.contributors badge=true %}</div>
+    {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
-        <h3>{{ locale['overview'] | default: "Overview"}}</h3>
+        <div class="box-title" aria-label="overview box">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         {% endunless %}
@@ -143,13 +143,17 @@ footer: no
                {% include _includes/resource-faqs.html material=own_material topic=topic.name %}
             {% endif %}
 
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            {% include _includes/resource-video-library.html label=true %}
+
+
             {% if tuto_has_docker and topic.name != 'admin' %}
                 <li class="btn btn-default supporting_material">{% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=own_material.tutorial_name docker=topic.docker_image label=true %}</li>
             {% endif %}
         </ul>
         {% endif %}
 
-        <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+        <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
             {% if page.license %}
             Tutorial Content is licensed under {{ page.license }}
@@ -167,34 +171,84 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                {% if page.notebook %}
-                <blockquote class="comment">
-                    <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
-                    <p>
-                        This tutorial is best viewed in a Jupyter notebook! You can load this notebook in Jupyter on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
-                    </p>
-                    <!--
-                    <p><b>Launching on MyBinder</b>
-                        Click here and the notebook will launch on MyBinder.org
-                        <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
-                    </p>
-                    -->
-                    <p><b>Launching the notebook in Jupyter in Galaxy</b>
-                        <ol>
-                            <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
-                            <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
-                            <li>Run <code>wget {{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb</code></li>
-                            <li>Select the notebook that appears in the list of files on the left.</li>
-                        </ol>
-                    </p>
-                    <p><b>Downloading the notebook</b>
-                        <ol>
-                            <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.path }}.ipynb">tutorial.ipynb</a></li>
-                            <li>Save Link As..</li>
-                        </ol>
-                    </p>
-                </blockquote>
-                {% endif %}
+                 {% if page.notebook %}
+                     {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
+                     {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
+                     {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
+                     {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
+                    {% if page.notebook.snippet %}
+                        {% assign pagesnippet = page.notebook.snippet %}
+                        {% snippet pagesnippet %}
+                    {% elsif page.notebook.language ==  "r" %}
+                        <blockquote class="comment">
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
+                            <p>
+                                This tutorial is available as an RMarkdown file and best viewed in RStudio! You can load this notebook in RStudio on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <p><b>Launching the notebook in RStudio in Galaxy</b></p>
+                            <ol>
+                                <li><a href="{% link faqs/galaxy/interactive_tools_rstudio_launch.md %}">Instructions to Launch RStudio</a></li>
+                                <li>Access the R console in RStudio (bottom left quarter of the screen)</li>
+                                <li>Run the following code:
+{% capture howtodownload %}
+```R
+download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", ""}}{{ page.topic_name }}-{{ own_material.tutorial_name }}.Rmd", "{{ page.topic_name }}-{{ own_material.tutorial_name }}.Rmd")
+download.file("{{ site.url }}{{ site.baseurl }}/assets/css/r-notebook.css", "gtn.css"){% if page.cited %}
+download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", ".bib"}}", "{{ page.topic_name }}-{{ own_material.tutorial_name }}.bib"){% endif %}
+```
+{% endcapture %}
+                                {{ howtodownload | markdownify }}
+                                </li>
+                                <li>Double click the RMarkdown document that appears in the list of files on the right.</li>
+                            </ol>
+                            <p><b>Downloading the notebook</b></p>
+                            <ol>
+                                <li>Right click this link: <a href="{{ site.url }}{{ site.baseurl }}/{{ page.url | replace: ".html", ".Rmd"}}">tutorial.Rmd</a></li>
+                                <li>Save Link As...</li>
+                            </ol>
+                            <p><b>Alternative Formats</b></p>
+                            <ol>
+                                <li>This tutorial is also available as a <a href="{{ ipynbpath }}">Jupyter Notebook (With Solutions)</a>, <a href="{{ ipynbpathnosoln }}">Jupyter Notebook (Without Solutions)</a></li>
+                            </ol>
+                        </blockquote>
+
+                        {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
+                    {% else %}
+                        <blockquote class="comment">
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</div>
+                            <p>
+                                This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
+                            </p>
+                            <!--
+                            <p><b>Launching on MyBinder</b>
+                                Click here and the notebook will launch on MyBinder.org
+                                <a href="https://mybinder.org/v2/gh/galaxyproject/training-material/main?filepath={{ site.baseurl | replace: '/','' }}%2F{{ page.path | replace: '/','%2F' }}.ipynb" title="Launch notebook on MyBinder"><img src="https://mybinder.org/badge_logo.svg" alt="My Binder Logo"/></a>
+                            </p>
+                            -->
+                            {% if page.notebook.pyolite %}
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="{{ site.baseurl }}/jupyter/lab/index.html?path={{ ipynbpathsimple }}">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            {% endif %}
+                            <p><b>Launching the notebook in Jupyter in Galaxy</b>
+                                <ol>
+                                    <li><a href="{% link faqs/galaxy/interactive_tools_jupyter_launch.md %}">Instructions to Launch JupyterLab</a></li>
+                                    <li>Open a Terminal in JupyterLab with <b>File -> New -> Terminal</b></li>
+                                    <li>Run <code>wget {{ ipynbpath }}</code></li>
+                                    <li>Select the notebook that appears in the list of files on the left.</li>
+                                </ol>
+                            </p>
+                            <p><b>Downloading the notebook</b>
+                                <ol>
+                                    <li>Right click one of these links: <a href="{{ ipynbpath }}">Jupyter Notebook (With Solutions)</a>, <a href="{{ ipynbpathnosoln }}">Jupyter Notebook (Without Solutions)</a></li>
+                                    <li>Save Link As..</li>
+                                </ol>
+                            </p>
+                        </blockquote>
+                    {% endif %}
+                 {% endif %}
 
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
@@ -202,7 +256,7 @@ footer: no
 
                 {% if page.key_points %}
                 <blockquote class="key_points">
-                    <h3>{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</h3>
+                    <div class="box-title" aria-label="key-points box">{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</div>
                     <ul>
                         {% for key_point in page.key_points %}
                         <li>{{ key_point | markdownify }}</li>
@@ -216,10 +270,28 @@ footer: no
                 If not, please ask your question on the <a href="{{site.gitter_url}}">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
+                {% if own_material.quiz %}
+                <h1 data-toc-skip>Quizzes</h1>
+                <p>Check your understanding with these quizzes</p>
+                    {% for q in own_material.quiz %}
+                    <h2>{{ q.title }}</h2>
+                    <div class="contributors-line">{% include _includes/contributor-list.html contributors=q.contributors badge=true %}</div>
+                    <ul>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=self&quiz={{ site.baseurl }}/{{ q.path }}">Self Study Mode</a> - do the quiz at your own pace, to check your understanding.
+                        </li>
+                        <li>
+                            <a href="{% link quiz/quiz.html %}?mode=teacher&quiz={{ site.baseurl }}/{{ q.path }}">Classroom Mode</a> - do the quiz synchronously with a classroom of students.
+                        </li>
+                    </ul>
+                    {% endfor %}
+                {% endif %}
+
                 {% if topic.references %}
                 <h1 data-toc-skip>Useful literature</h1>
                 <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="{{ site.baseurl }}/topics/{{ topic.name }}#references">here</a>.</p>
                 {% endif %}
+
 
                 {% if material.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
@@ -238,7 +310,9 @@ footer: no
                 {% endif %}
 
                 <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
-                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.</p>
+                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
+                <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
+                </p>
 
                 <div id="feedback-button">
                     <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
@@ -268,13 +342,12 @@ footer: no
                     })(window, document);
                 </script>
 
-
-
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
                     <ol>
                         <li id="citation-text">
-                            {%- include _includes/contributor-list.html contributors=page.contributors sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            {% assign c = page.contributions.authorship | default: page.contributors %}
+                            {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -282,14 +355,23 @@ footer: no
                     </ol>
                 </p>
 
-
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                  <p style="display: none;">
 
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
+{% assign authors = page.contributors | filter_authors:page.contributions -%}
+author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",
@@ -310,9 +392,13 @@ note = "[Online; accessed TODAY]"
     title = {Community-Driven Data Analysis Training for Biology},
     journal = {Cell Systems}
 }</code>
-                </pre></div></div>
-                </p>
+                   </pre></div></div>
+                   </p>
                 </blockquote>
+
+                {% if page.contributions %}
+                {% include _includes/funding-statement.md contributions=page.contributions %}
+                {% endif %}
 
 
 <script type="text/javascript">
@@ -322,16 +408,16 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3>{% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
+                {% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}
 
                 {% if topic.name == "contributing" %}
                 <blockquote class="agenda">
-                    <h3>Developing GTN training material</h3>
+                    <div class="box-title" aria-label="agenda box">Developing GTN training material</div>
                     This tutorial is part of a series to develop GTN training material, feel free to also look at:
                     {% assign topic = site.data[page.topic_name] %}
                     <ol>
                     {% for material in topic_material %}
-                        {% if material.enable != "false" %}
+                        {% if material.enable != "false" or jekyll.environment != "production" %}
                             {% if material.type == "introduction" %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
                             {% elsif material.type == "tutorial" %}

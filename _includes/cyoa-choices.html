@@ -1,0 +1,40 @@
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	{% if include.text %}
+	<p>
+		{{ include.text }}
+	</p>
+	{% endif %}
+	{% if include.option1 %}
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="{{ include.option1 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option1 | slugify_unsafe }}')">
+		<label for="cyoa-opt1" class="select btn btn-secondary">{{ include.option1 }}</label>
+	{% endif %}
+	{% if include.option2 %}
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="{{ include.option2 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option2 | slugify_unsafe }}')">
+		<label for="cyoa-opt2" class="select btn btn-secondary">{{ include.option2 }}</label>
+	{% endif %}
+	{% if include.option3 %}
+		<input id="cyoa-opt3" type="radio" name="cyoa" value="{{ include.option3 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option3 | slugify_unsafe }}')">
+		<label for="cyoa-opt3" class="select btn btn-secondary">{{ include.option3  }}</label>
+	{% endif %}
+	{% if include.option4 %}
+		<input id="cyoa-opt4" type="radio" name="cyoa" value="{{ include.option4 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option4 | slugify_unsafe }}')">
+		<label for="cyoa-opt4" class="select btn btn-secondary">{{ include.option4 }}</label>
+	{% endif %}
+
+	{% if include.default %}
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("{{ include.default | slugify_unsafe }}");
+		})
+	</script>
+	{% endif %}
+</blockquote>

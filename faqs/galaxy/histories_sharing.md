@@ -4,6 +4,7 @@ area: histories
 description: You can share your work in Galaxy. There are various ways you can give access one of your histories to other users.
 box_type: tip
 layout: faq
+contributors: [shiltemann]
 ---
 
 Sharing your history allows others to import and access the datasets, parameters, and steps of your history.
