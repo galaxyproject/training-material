@@ -24,7 +24,7 @@ More information about Maker can be found [here](http://www.yandell-lab.org/soft
 This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
 
-> ### {% icon comment %} Note: Two versions of this tutorial
+> <comment-title>Note: Two versions of this tutorial</comment-title>
 >
 > Because this tutorial consists of many steps, we have made two versions of it, one long and one short.
 >
@@ -39,7 +39,7 @@ This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotatio
 > {% endif %}
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -58,7 +58,7 @@ To annotate a genome using Maker, you need the following files:
 
  Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create and name a new history for this tutorial.
 >
@@ -102,7 +102,7 @@ You have the following main datasets:
 - `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome of *S. pombe*
 {% unless include.short %}- `S_pombe_genome.fasta` contains the full genome sequence of *S. pombe*
 
-> ### {% icon hands_on %} Hands-on: Choose your Genome
+> <hands-on-title>Choose your Genome</hands-on-title>
 >
 > 1. You need to choose between `S_pombe_chrIII.fasta` and `S_pombe_genome.fasta`:
 >
@@ -124,7 +124,7 @@ The quality of a genome annotation is highly dependent on the quality of the gen
 
 Before running the full annotation process, you need first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.
 
-> ### {% icon hands_on %} Hands-on: Get genome sequence statistics
+> <hands-on-title>Get genome sequence statistics</hands-on-title>
 >
 > 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"fasta or multifasta file"*: select `{{ genome_name }}` from your history
@@ -139,7 +139,7 @@ Have a look at the statistics:
 
 These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > {% if include.short %}
 > Keep in mind that we are running this tutorial only on the chromosome III instead of the whole genome.
@@ -153,14 +153,14 @@ These statistics are useful to detect obvious problems in the genome assembly, b
 We will first run this tool on the genome sequence to evaluate its quality.
 
 
-> ### {% icon hands_on %} Hands-on: Run Busco on the genome
+> <hands-on-title>Run Busco on the genome</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: select `{{ genome_name }}` from your history
 >    - *"Mode"*: `Genome`
 >    - *"Lineage"*: `Fungi`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > We select `Fungi` as we will annotate the genome of *Schizosaccharomyces pombe* which belongs to the Fungi kingdom. It is usually better to select the most specific lineage for the species you study. Large lineages (like Metazoa) will consist of fewer genes, but with a strong support. More specific lineages (like Hymenoptera) will have more genes, but with a weaker support (has they are found in fewer genomes).
 >    {: .comment}
@@ -175,11 +175,11 @@ BUSCO produces three output datasets
 
 ![BUSCO genome summary](../../images/busco_genome_summary.png "Example of BUSCO short summary (not from this tutorial). Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.")
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Do you think the genome quality is good enough for performing the annotation?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The genome consists of the expected number of chromosome sequences ({% if include.short %}1{% else %}4, or 1 if you chose to annotate chromosome III only{% endif %}), with very few N, which is the ideal case.
 > > {% if include.short %}As we only analysed chromosome III, many BUSCO genes are missing, but still ~100 are found as complete single copy, and very few are found fragmented, which means that our genome have a good quality, at least on this single chromosome. That's a very good material to perform an annotation.{% else %}
@@ -189,7 +189,7 @@ BUSCO produces three output datasets
 >
 {: .question}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > {% if include.short %}
 > Keep in mind that we are running this tutorial only on the chromosome III instead of the whole genome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool.
@@ -203,7 +203,7 @@ BUSCO produces three output datasets
 
 Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome, and it will run ab initio predictors (SNAP and Augustus) using pre-trained models for this organism (have a look at the [longer version of tutorial]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) to understand how they were trained).
 
-> ### {% icon hands_on %} Hands-on: Annotation with Maker
+> <hands-on-title>Annotation with Maker</hands-on-title>
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -220,7 +220,7 @@ Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.w
 >    - In *"Repeat masking"*:
 >        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either use [Dfam](https://www.dfam.org) or provide your own repeats library.
 >    {: .comment}
@@ -234,7 +234,7 @@ Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.w
 
 For this first round, we configure Maker to construct gene models only by aligning [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome. This will produce a first draft annotation that we will improve in the next steps.
 
-> ### {% icon hands_on %} Hands-on: First draft annotation with Maker
+> <hands-on-title>First draft annotation with Maker</hands-on-title>
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -251,7 +251,7 @@ For this first round, we configure Maker to construct gene models only by aligni
 >    - In *"Repeat masking"*:
 >        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either use [Dfam](https://www.dfam.org) or provide your own repeats library.
 >    {: .comment}
@@ -276,7 +276,7 @@ We need now to evaluate this {% unless include.short %}first draft {% endunless 
 
 First, use the `Genome annotation statistics` that will compute some general statistics on the annotation.
 
-> ### {% icon hands_on %} Hands-on: Get annotation statistics
+> <hands-on-title>Get annotation statistics</hands-on-title>
 >
 > 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
@@ -286,12 +286,12 @@ First, use the `Genome annotation statistics` that will compute some general sta
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many genes where predicted by Maker?
 > 2. What is the mean gene locus size of these genes?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > {% if include.short %}
 > > 1. 864 genes
@@ -316,7 +316,7 @@ Just as we did for the genome at the beginning, we can use BUSCO to check the qu
 
 First we need to compute all the transcript sequences from the Maker annotation, using {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %}. This tool will compute the sequence of each transcript that was predicted by {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} and write them all in a FASTA file.
 
-> ### {% icon hands_on %} Hands-on: Extract transcript sequences
+> <hands-on-title>Extract transcript sequences</hands-on-title>
 >
 > 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
@@ -331,7 +331,7 @@ First we need to compute all the transcript sequences from the Maker annotation,
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Run BUSCO
+> <hands-on-title>Run BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
@@ -340,11 +340,11 @@ Now run BUSCO with the predicted transcript sequences:
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How do the BUSCO statistics compare to the ones at the genome level?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > {% if include.short %}
 > > 128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time). (Results can be very slightly different in your own history, it's normal).
@@ -368,7 +368,7 @@ Maker is able to use the EST and protein evidences, and to combine them with the
 
 We will use two of the most widely used ab-initio predictors: SNAP and Augustus. Before using it within Maker, we need to train them with the first annotation draft we produced in the previous steps. We know the quality of this draft is not perfect, but only the best scoring genes (ie the ones having the strongest evidences) will be retained to train the predictors.
 
-> ### {% icon hands_on %} Hands-on: Train SNAP
+> <hands-on-title>Train SNAP</hands-on-title>
 >
 > 1. {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -379,7 +379,7 @@ We will use two of the most widely used ab-initio predictors: SNAP and Augustus.
 
 Augustus is trained in a very similar way.
 
-> ### {% icon hands_on %} Hands-on: Train Augustus
+> <hands-on-title>Train Augustus</hands-on-title>
 >
 > 1. {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -399,7 +399,7 @@ We need now to run a new round of Maker. As the evidences were already aligned o
 But this time, enable ab-initio gene prediction, and input the output of {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} and {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %} tools.
 We also disable inferring gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
-> ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
+> <hands-on-title>Second draft annotation with Maker</hands-on-title>
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -428,7 +428,7 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
 
 Do we get a better result from Maker after this second run? Let's run the same tools as after the first run, and compare the results.
 
-> ### {% icon hands_on %} Hands-on: Get annotation statistics
+> <hands-on-title>Get annotation statistics</hands-on-title>
 >
 > 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} second run)
@@ -440,7 +440,7 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 ## Busco
 
-> ### {% icon hands_on %} Hands-on: Extract transcript sequences
+> <hands-on-title>Extract transcript sequences</hands-on-title>
 >
 > 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} second run)
@@ -455,7 +455,7 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Run BUSCO
+> <hands-on-title>Run BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
@@ -464,12 +464,12 @@ Now run BUSCO with the predicted transcript sequences:
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How does the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?
 > 2. How do you explain these changes?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The annotation looks much better: more BUSCO complete single-copy, and more genes
 > > 2. Using ab-initio predictors allowed to find much more genes in regions where EST or protein alignments were not sufficient to predict genes.
@@ -483,7 +483,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 To get better results, we are going to perform a second training of SNAP and Augustus, and then run Maker for a third (final) time.
 
-> ### {% icon hands_on %} Hands-on: Train SNAP and Augustus
+> <hands-on-title>Train SNAP and Augustus</hands-on-title>
 >
 > 1. {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -504,7 +504,7 @@ The Augustus training usually take around 2 hours to complete, to continue this 
 
 Let's run the final round of Maker, in the same way as we did for the second run.
 
-> ### {% icon hands_on %} Hands-on: Final annotation with Maker
+> <hands-on-title>Final annotation with Maker</hands-on-title>
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
@@ -533,7 +533,7 @@ Let's run the final round of Maker, in the same way as we did for the second run
 
 Do we get a better result from Maker after this third run? Let's run the same tools as after the first and second run, and compare the results.
 
-> ### {% icon hands_on %} Hands-on: Get annotation statistics
+> <hands-on-title>Get annotation statistics</hands-on-title>
 >
 > 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
 >    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} third run)
@@ -545,7 +545,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 ## Busco
 
-> ### {% icon hands_on %} Hands-on: Extract transcript sequences
+> <hands-on-title>Extract transcript sequences</hands-on-title>
 >
 > 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} third run)
@@ -562,7 +562,7 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 Now run BUSCO with the predicted transcript sequences:
 
-> ### {% icon hands_on %} Hands-on: Run BUSCO
+> <hands-on-title>Run BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
@@ -571,11 +571,11 @@ Now run BUSCO with the predicted transcript sequences:
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How do the third annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Depending on wether you annotated the full genome or only chromosome III, you should see nearly the same, or even less genes than in the previous Maker round. But you'll notice that the number of multi-exon genes have increased. It means that in this third round, Maker was able to predict more complex genes, for example merging some genes that were considered separate beforehand.
 > >
@@ -591,14 +591,14 @@ Usually no more than two rounds of training is needed to get the best results fr
 
 If you look at the content of the `final annotation` dataset, you will notice that the gene names are long, complicated, and not very readable. That's because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.
 
-> ### {% icon hands_on %} Hands-on: Change gene names
+> <hands-on-title>Change gene names</hands-on-title>
 >
 > 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >    - *"Prefix for ids"*: `TEST_`
 >    - *"Justify numeric ids to this length"*: `6`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Genes will be renamed to look like: `TEST_001234`. You can replace `TEST_` by anything you like, usually an uppercase short prefix.
 >    {: .comment}
@@ -612,7 +612,7 @@ Look at the generated dataset, it should be much more readable, and ready for an
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.
 
-> ### {% icon hands_on %} Hands-on: Visualize annotations in JBrowse
+> <hands-on-title>Visualize annotations in JBrowse</hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -639,13 +639,13 @@ Enable the track on the left side of JBrowse, then navigate along the genome and
 {% else %}
 Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Navigate to the position `NC_003421.2:143850..148763` (meaning: on the sequence named `NC_003421.2` (NCBI identifier for Chromosome III), between positions `143850` and `148763`).
 > ![JBrowse navigation](../../images/jbrowse_navigate.png "Navigating to the given sequence and positions.")
 > 1. How did the annotation improved in this region after each Maker round?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. At the end of the first round, a first short gene model was predicted by Maker in this region.
 > > After the second round, Maker was able to predict a second gene model in this region. Notice the name of the model beginning with `snap_masked`: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
@@ -661,7 +661,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 
 You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
 
-> ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
+> <hands-on-title>Visualize evidences in JBrowse</hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -693,4 +693,4 @@ Congratulations, you finished this tutorial! You learned how to annotate an euka
 
 After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.
 
-An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.
+An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) helps a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo-euk/tutorial.md %}) for more details.

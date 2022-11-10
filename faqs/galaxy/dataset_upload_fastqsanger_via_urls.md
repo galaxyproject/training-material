@@ -1,6 +1,6 @@
 ---
 title: Upload fastqsanger datasets via links
-area: datasets
+area: data upload
 box_type: tip
 layout: faq
 contributors: [nekrut]

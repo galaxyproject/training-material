@@ -22,7 +22,7 @@ contributors:
   - nekrut
   - martenson
   - hexylena
-subtopic: interface
+subtopic: histories
 ---
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps

@@ -10,6 +10,9 @@ contributors: [bebatut,shiltemann,wm75,hexylena,simonbray]
 * Open the Galaxy Upload Manager
 * Select **Paste/Fetch Data**
 * Paste the file contents into the text field
+{% if include.name %}
+* Change the dataset name from "New File" to `{{ include.name }}`
+{% endif %}
 {% if include.format %}
 * Change **Type** from "Auto-detect" to `{{ include.format }}`
 {% endif %}

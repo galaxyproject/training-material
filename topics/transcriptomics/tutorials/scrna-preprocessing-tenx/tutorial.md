@@ -49,7 +49,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
 # Introduction
-{:.no_toc}
+
 
 Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
 The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.
@@ -70,7 +70,7 @@ The 10X barcoded gel beads consist of a pool barcodes which are used to separate
 
 Though there are approximately 3 million 10x gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (>90%) being empty in order to ensure that the remainder contains only one cell.
 
-> ### {% icon details %} Whitelist Barcodes
+> <details-title>Whitelist Barcodes</details-title>
 >
 > There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.
 >
@@ -90,11 +90,11 @@ More information can be found in the [reagent kit documentation](https://support
 
 
 # Analysis Strategy
-{:.no_toc}
+
 
 The tutorial is structured into two parts:
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -114,7 +114,7 @@ However, those who are more interested in learning the intricacies of how FASTQ 
 Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their **RNA STARsolo** jobs and spend the time familiarising themselves with the pre-processing training materials mentioned above.
 
 
-> ### {% icon details %}: Benchmark of Cell Ranger to others
+> <details-title>Benchmark of Cell Ranger to others</details-title>
 >
 > ![tenx_runtimes]({% link topics/transcriptomics/images/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
 >
@@ -145,7 +145,7 @@ For the mapping, we require the sub-sampled source files, as well as a "whitelis
 The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
 
 
-> ### {% icon hands_on %} Hands-on: Data upload and organization
+> <hands-on-title>Data upload and organization</hands-on-title>
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq 10X dataset tutorial)
 >
@@ -190,7 +190,7 @@ The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular
 
 The table above gives a summary of the primers used in the image and the number of basepairs occupied by each.
 
-> ### {% icon details %} Details: Strandedness
+> <details-title>Strandedness</details-title>
 >
 > Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
@@ -202,7 +202,7 @@ The table above gives a summary of the primers used in the image and the number 
 
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What has stayed constant between the chemistry versions?
 > 1. What advantage does this constant factor give?
@@ -210,7 +210,7 @@ The table above gives a summary of the primers used in the image and the number 
 > 1. What advantage does the 2 extra bp in the v3 UMIs have over v2 UMIs?
 > 1. What will be the strandedness of the generated library
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The Cell Barcode (CB) has remained at 16bp for both chemistries.
 > > 1. This has the advantage that the same set of barcodes can be used in both chemistries, which is important because barcodes are *very* hard to design.
@@ -229,13 +229,13 @@ The differences in the chemistries is a slight change in the library size, where
 
 To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 > Peek at one of the R1 FASTQ files using the {% icon galaxy-eye %} symbol below the dataset name.
 >
 > 1. How many basepairs are there in any given read?
 > 2. Which library preparation chemistry version was this read generated from?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. There are 28 basepairs.
 > > 2. The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the reads we have here use the Chromium v3 chemistry.
 > {: .solution}
@@ -247,12 +247,12 @@ To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in
 
 We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
@@ -275,7 +275,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - *"Cell filter type and parameters"*: `Do not filter`
 >        - *"Field 3 in the Genes output"*: `Gene Expression`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > The in-built Cell filtering is a relatively new feature that emulates the CellRanger pipeline. Here, we set the filtering options to not filter because we will use our own methods to better understand how this works. For your own future datasets, you may wish to enable the filtering parameter.
 >    {: .comment}
@@ -300,7 +300,7 @@ The log and the summaries files give program logistics and metrics about the qua
 Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) tutorial.
 
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title>Hands-on</hands-on-title>
 >
 > {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
@@ -313,11 +313,11 @@ Let us investigate the output log. This type of quality control is essential in 
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What percentage of reads are uniquely mapped?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 87.5%
 > > - This is good, and is expected of 10x datasets.
 > >
@@ -333,7 +333,7 @@ However, sometimes it is often more informative to look directly at the source q
 We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file.
 
 
-> ### {% icon details %}: RNA STARsolo log output
+> <comment-title>RNA STARsolo log output</comment-title>
 > ```
 > Barcodes:
 >                   nNoAdapter              0
@@ -365,7 +365,7 @@ We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of 
 
 The explanation of these parameters can be seen in the [RNA STAR Manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) under the *STARsolo* section, with most of the information given in the details box below.
 
-> ### {% icon details %} Explanation of parameters
+> <details-title>Explanation of parameters</details-title>
 >
 >  | Parameter | Explanation |
 >  |-----------|-------------|
@@ -412,7 +412,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 ## Cell Ranger Method
 
-> ### {% icon hands_on %} Hands-on: Default Method
+> <hands-on-title>Default Method</hands-on-title>
 >
 > {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
@@ -426,7 +426,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >            - *"Lower Proportion"*: `0.1`
 >        - *"Format for output matrices"*: `Tabular`
 >
-> > ### {% icon comment %} Default Parameter
+> > <comment-title>Default Parameter</comment-title>
 > >
 > > The *"Expected Number of Cells"* parameter is the number of cells you expect to see in your sample, but does not correspond to how many cells you expect to see in a sub-sampled dataset like this one. The default is 3000 for *Cell Ranger*, which will yield ~300 cells here, but users are encouraged to experiment with this value when dealing with their own data, to recover the desired number of cells.
 > >
@@ -434,12 +434,12 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many cells were detected?
 > 1. Does this agree with the STARsolo Feature Statistics output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
 > > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `6101` cells. What this means is that *6101* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
@@ -448,7 +448,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}) tutorial.
 
-> ### {% icon details %} File Formats in scRNA-seq
+> <details-title>File Formats in scRNA-seq</details-title>
 >
 > The tabular outputs here are selected mostly for transparency, since they are easy to inspect. However, the datasets produced with 10x data are very large and very sparse, meaning there is much data redundancy due to the repetition of zeroes everywhere in the data.
 >
@@ -471,7 +471,7 @@ However, the **DropletUtils** tool does provide other options for determining wh
 
 A useful diagnostic for droplet-based data is the barcode rank plot, which shows the (log-)total UMI count for each barcode on the y-axis and the (log-)rank on the x-axis. This is effectively a transposed empirical cumulative density plot with log-transformed axes. It is useful as it allows users to examine the distribution of total counts across barcodes, focusing on those with the largest counts.
 
-> ### {% icon hands_on %} Hands-on: Rank Barcodes
+> <hands-on-title>Rank Barcodes</hands-on-title>
 >
 > {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
@@ -493,7 +493,7 @@ The knee and inflection points on the curve mark the transition between two comp
 > 1. How many high quality cells do we expect to see in our sample bed on the above plot?
 > 1. What is the minimum number of UMIs that we can expect to see for high quality cells?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 5300"`. This is in good accordance with the `6101` cells shown in the STARsolo log output previously.
 > > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`, so 260 cells.
 > > 1. The vertical drop in the chart occurs at a log X-axis position just above `1e+02`, so we can estimate ~ 200 UMIs minimum per cell.
@@ -502,7 +502,7 @@ The knee and inflection points on the curve mark the transition between two comp
 
 On large 10x datasets we can use these thresholds as metrics to utilise in our own custom filtering, which is once again provided by the **DropletUtils** tool.
 
-> ### {% icon hands_on %} Hands-on: Custom Filtering
+> <hands-on-title>Custom Filtering</hands-on-title>
 >
 > {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
@@ -524,7 +524,7 @@ Here we recover 278 high quality cells instead of the 272 detected via the defau
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 
