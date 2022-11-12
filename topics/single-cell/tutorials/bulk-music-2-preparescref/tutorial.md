@@ -1,0 +1,350 @@
+---
+layout: tutorial_hands_on
+
+title: Creating the single-cell RNA-seq reference dataset
+questions:
+- Where can I find good quality scRNA-seq reference datasets?
+- How can I reformat and manipulate these downloads to create the right format for MuSiC?
+objectives:
+- You will retrieve raw data from the EMBL-EBI Single cell expression atlas.
+- You will manipulate the metadata and matrix files.
+- You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.
+- You will create multiple ESet objects - both combined and separated out by disease phenotype for your single cell reference.
+time_estimation: 2H
+key_points:
+- The EMBL-EBI Single-cell expression atlas contains high quality datasets.
+- Metadata manipulation is key for generating the correctly formatted resource.
+contributors:
+- nomadscientist
+- mtekman
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-3-preparebulk
+
+requirements:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+      - bulk-music
+
+---
+
+
+# Introduction
+{:.no_toc}
+
+<!-- This is a comment. -->
+
+After completing the MuSiC {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}.  [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}. Let's get started!
+
+
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# Metadata Manipulation
+
+First, we will tackle the metadata. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it. 
+
+## Finding data 
+We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
+
+## Get data
+
+Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
+
+> ### {% icon hands_on %} Hands-on: Data retrieval
+>
+> 1. {% tool [EBI SCXA Data Retrieval](retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
+>    - *"SC-Atlas experiment accession"*: `E-MTAB-5061`
+{: .hands_on}
+
+This tool will retrieve four files: a barcodes list, a genes list, an experimental design file, and a matrix market format (where columns refer to genes, cells, and quantities). We (mostly) only need the experimental design file, but keep in mind this will have data on all the cells reported by the authors. 
+
+> <question-title></question-title>
+>
+> 1. Why are some tests filtered?
+> 2. Does it improve the *p*-value distribution?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
+{: .question}
+
+If you select the **exp_design.tsv** file, you will find it has 3514 lines, corresponding to the 3514 cells reported by the authors. Not all of these cells pass the internal EBI quality metrics, however. If you select the **barcodes.tsv** file, you'll find it only contains only 2914 cells, corresponding to only those cells passing filter.
+
+> ### {% icon hands_on %} Hands-on: Data retrieval
+>
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    ```
+>    
+>    ```
+>    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>
+>    ***TODO***: *Remove the useless files (if added)*
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+> 5. Add to each database a tag corresponding to ...
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+
+
+
+## Sub-step with **Cut**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Cut](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c1,c4,c6,c8,c10,c14,c20,c24,c26,c30,c32,c34`
+>    - {% icon param-file %} *"From"*: `design_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Add line to file**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
+>    - *"text to add"*: `Cell`
+>    - {% icon param-file %} *"input file"*: `barcode_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Regex Find And Replace**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Cut** {% icon tool %})
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[individual\]`
+>            - *"Replacement"*: `Individual`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[sex\]`
+>            - *"Replacement"*: `Sex`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[age\]`
+>            - *"Replacement"*: `Age`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[body mass index\]`
+>            - *"Replacement"*: `BMI`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: ` kilogram per square meter`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `HbA1c `
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[clinical information\]`
+>            - *"Replacement"*: `HbA1c`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `%`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[disease\]`
+>            - *"Replacement"*: `Disease`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[single cell quality\]`
+>            - *"Replacement"*: `Single cell quality`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[submitted single cell quality\]`
+>            - *"Replacement"*: `Submitted single cell quality`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Factor Value\[inferred cell type - ontology labels\]`
+>            - *"Replacement"*: `Inferred cell type - ontology label`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Factor Value\[inferred cell type - authors labels\]`
+>            - *"Replacement"*: `Inferred cell type - author labels`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Join two Datasets**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Join two Datasets](join1) %} with the following parameters:
+>    - {% icon param-file %} *"Join"*: `outfile` (output of **Add line to file** {% icon tool %})
+>    - *"using column"*: `c1`
+>    - {% icon param-file %} *"with"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
+>    - *"and column"*: `c1`
+>    - *"Fill empty columns"*: `No`
+>    - *"Keep the header lines"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Advanced Cut**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Join two Datasets** {% icon tool %})
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `c1`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Re-arrange
+
+To create the template, each step of the workflow had its own subsection.
+
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+# Conclusion
+{:.no_toc}
+
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.

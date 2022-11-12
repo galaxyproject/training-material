@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 subtopic: deconvo
 priority: 2
-title: Bulk deconvolution with MuSiC across multiple variables
-zenodo_link: https://zenodo.org/record/5719228
+title: Comparing inferred cell composition using MuSiC deconvolution
+#fixmezenodo_link: https://zenodo.org/record/5719228
 tags:
   - single-cell
   - mouse
