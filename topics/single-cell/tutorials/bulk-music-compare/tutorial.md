@@ -10,6 +10,7 @@ tags:
   - human
   - deconvolution
   - bulk
+  - transcriptomics
 questions:
 - How do the cell type distributions vary in bulk RNA samples across my variable of interest?
 - For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?
