@@ -62,7 +62,7 @@ CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite end
 
 In this case; *Read1* contains the barcoding information followed by the polyT tail of the messenger RNA, and *Read2* contains the actual sequence. Here, Read1 is regarded as the 'forward' strand and Read2 as the 'reverse' strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.
 
- ![CEL-Seq2 Scheme](../../images/celseq2_schema.svg "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
+ ![CEL-Seq2 Scheme](../../images/scrna-umis/celseq2_schema.svg "Read1 encapsulates the barcodes, and Read2 the mRNA sequence")
 
 
 
@@ -79,11 +79,11 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
- ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
+ ![Cell Barcodes](../../images/scrna-intro/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
 
 Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.
 
- ![Transcript Barcodes](../../images/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
+ ![Transcript Barcodes](../../images/scrna-uis/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
 
 There are two things to take note of:
 
@@ -383,7 +383,7 @@ The encoding of the barcodes on the first read can actually be seen by examining
 {: .hands_on}
 
 
- ![FastQC Plot](../../images/scrna_barcodes_fastq.png "FastQC plot of Forward read")
+ ![FastQC Plot](../../images/scrna-umis/scrna_barcodes_fastq.png "FastQC plot of Forward read")
 
 
 Here we can see the three distinct regions along the x-axis that correspond to our expected [CEL-Seq2 Schema](#the-cel-seq2-protocol):

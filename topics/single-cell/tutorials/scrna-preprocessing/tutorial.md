@@ -65,13 +65,13 @@ The rise of scRNA sequencing provides the means to explore this heterogeneity by
 
 Consider the heterogeneity of cells sampled from bone marrow, where hematopoietic stem cells can give rise to many different cell types within the same tissue:
 
-![Cell Differentiation of Hematopoietic Stem cells]({% link topics/transcriptomics/images/scrna_hematopoiesis.png %} "Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg")
+![Cell Differentiation of Hematopoietic Stem cells]({% link topics/transcriptomics/images/scrna-pre-processing/scrna_hematopoiesis.png %} "Cell Differentiation of Hematopoietic Stem cells. Image Source: https://commons.wikimedia.org/wiki/File:Hematopoiesis_simple.svg")
 
 The genes expressed by these cells at different developmental time points can be subtle, but generally can be classified into discrete cell sub-populations or under statistical clustering methods such as PCA or tSNE. Cells in the same cluster exhibit similar profiles of differential expression in the same set of related genes, compared to cells in other clusters. By identifying significant genes in each cluster, cell types and cell developmental hierarchies can be inferred based on the proximity of these clusters to one another.
 
 Other than cell development, there are many more factors that can shape the level of gene expression exhibited by a given cell. Intercellular cell-signalling can block or enhance specific transcripts, the total amount of transcripts of a cell increases with the cell-cycle, or the proximity of a cell within a tissue to nutrients or oxygen.
 
-![Facets of Cellular Identity]({% link topics/transcriptomics/images/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
+![Facets of Cellular Identity]({% link topics/transcriptomics/images/scrna-pre-processing/scrna_nbt3711.png %} "Revealing the vectors of cellular identity with single-cell genomics, Nature Biotechnology, 2016")
 
 This tutorial is in part inspired by aspects of the [Hemberg workflow](https://hemberg-lab.github.io/scRNA.seq.course/) at the Sanger institute, as well as the [CGATOxford workflow](https://github.com/CGATOxford/UMI-tools) which provides the **UMI-tools** suite that we make use of. The barcoding follows the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) mentioned in the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on, and uses the same lane configuration as utilised by the [Freiburg MPI Grün lab](https://www.ie-freiburg.mpg.de/gruen).
 
@@ -90,7 +90,7 @@ The tutorial is structured in two parts:
 1. **Single-Batch Processing**
 1. **Multi-Batch Processing**
 
-![Overview of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "An overview of the entire workflow")
+![Overview of workflow]({% link topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg %} "An overview of the entire workflow")
 
 The first part of this tutorial will deal with batches, and use example *FASTQ* data from a single batch, which we will perform [barcode extraction](#barcode-extraction) and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.
 
@@ -123,7 +123,7 @@ In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken 
 The size of scRNA files (.fastq) are typically in the gigabyte range and are somewhat impractical for training purposes, so we will expedite the analysis by using a smaller subset of actual batch data. We will also be using *Mus Musculus* annotation data (.gtf) from the  [NCBI RefSeq](ftp://ftp.ncbi.nlm.nih.gov/genomes/refseq/vertebrate_mammalian/Mus_musculus/) track, as well as a barcodes file (.tsv).
 
 
-![Workflow Upper]({% link topics/transcriptomics/images/scrna_workflow_upper.png %} "Single batch processing")
+![Workflow Upper]({% link topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png %} "Single batch processing")
 
 
 > <hands-on-title>Data upload and organization</hands-on-title>
@@ -507,11 +507,11 @@ This concludes the first part of the tutorial which focused on the transformatio
 >
 > Galaxy provides a workflow that captures the process of all the above stages for a [single pair of FASTQ data](workflows/scrna_pp_celseq.ga):
 >
-> ![Single Batch Workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow_single.png "Single Batch Workflow")
+> ![Single Batch Workflow]({{site.baseurl}}/topics/single-cell/images/scrna-pre-processing/scrna_workflow_single.png "Single Batch Workflow")
 >
 > For multiple batch processing, Galaxy can make use of *Nested Workflows* that in this case can take in a [list of input paired FASTQ data](workflows/scrna_mp_celseq.ga) and process them in parallel.
 >
-> ![Multiple Batch Workflow]({{site.baseurl}}/topics/transcriptomics/images/scrna_workflow_nested.png "Nested Multiple Batch Workflow")
+> ![Multiple Batch Workflow]({{site.baseurl}}/topics/single-cell/images/scrna-pre-processing/scrna_workflow_nested.png "Nested Multiple Batch Workflow")
 >
 {: .details}
 
@@ -520,7 +520,7 @@ For the processing of 10x Genomics datasets, please refer to the [*Pre-processin
 # Multi-Batch Processing
 
 
-![Workflow Lower]({% link topics/transcriptomics/images/scrna_workflow_lower.png %} "Multiple batch processing")
+![Workflow Lower]({% link topics/single-cell/images/scrna-pre-processing/scrna_workflow_lower.png %} "Multiple batch processing")
 
 Handling more than one batch of sequencing data is rather trivial when we take into account our main goals and requirements:
 
@@ -576,7 +576,7 @@ We have the problem that only *GeneC* and *GeneD* appear in both batches, whilst
 
 To resolve this we can perform a "Full Table Join" where the missing data for *GeneE* and *GeneA* in Batch1 and Batch2 respectively are replaced with zeroes:
 
-![Table Join]({% link topics/transcriptomics/images/scrna_fulltable.svg %} "Full Table Join")
+![Table Join]({% link topics/single-cell/images/scrna-pre-processing/scrna_downstream.svg %} "Full Table Join")
 
 > <comment-title></comment-title>
 > For more information on table joins, see [here](http://www.sql-join.com/sql-join-types/)
@@ -732,7 +732,7 @@ The plot that follows tells us everything we need to know about each of our batc
 
 #### Cross-contamination Plot
 
-![Contamination Plots]({% link topics/transcriptomics/images/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
+![Contamination Plots]({% link topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png %} "The Pre-filter and Post-filter plots")
 
 Two things to take note of:
 
@@ -764,6 +764,6 @@ Factoid: We can convert the number of UMIs to the number of molecules using a tr
 
 In this tutorial we have learned the importance of barcoding; namely how to define, extract, and annotate them from our reads and into the read headers, in order to preserve them during mapping. We have discovered how these barcoded reads are transformed into counts, where the cell barcode and UMI barcode are used to denote individual cells and to correct against reads that are PCR duplicates. Finally, we have learned how to combine separate batch data as well as being able to check and correct against cross-contamination.
 
-![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow")
+![Recap of workflow]({% link topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg %} "A recap of the entire workflow")
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
