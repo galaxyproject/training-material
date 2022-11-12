@@ -29,7 +29,7 @@ It started life as a small shell script that Helena wrote because she couldn't r
 
 Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -42,7 +42,7 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 
 It's simple to install gxadmin. Here's how you do it, if you haven't done it already.
 
-> ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
+> <hands-on-title>Installing gxadmin with Ansible</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -64,7 +64,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -88,7 +88,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >
 > 4. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -99,18 +99,18 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 
 With that, `gxadmin` should be installed! Now, test it out:
 
-> ### {% icon hands_on %} Hands-on: Test out gxadmin
+> <hands-on-title>Test out gxadmin</hands-on-title>
 >
 > 1. Run `gxadmin` as the galaxy user and list recently registered users:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sudo -u galaxy gxadmin query latest-users
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```bash
 >    >  id |          create_time          | disk_usage | username |       email        | groups | active
 >    > ----+-------------------------------+------------+----------+--------------------+--------+--------
@@ -299,7 +299,7 @@ gxadmin iquery workflow-invocation-status
 ```
 
 
-> ### {% icon tip %} Which queries support iquery?
+> <tip-title>Which queries support iquery?</tip-title>
 > This data is not currently exposed, so, just try the queries. But it's easy to add influx support when missing! [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54), we set the variables in a function:
 >
 > ```
@@ -320,7 +320,7 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 
 ## A basic function
 
-> ### {% icon hands_on %} Hands-on: Implementing a basic function
+> <hands-on-title>Implementing a basic function</hands-on-title>
 >
 > 1. If `~/.config/` does not exist, create that directory with `mkdir -p ~/.config/`
 >
@@ -336,11 +336,11 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 >
 > 4. Run `gxadmin local`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should look like:
 >    > >
 >    > > ```console
@@ -359,11 +359,11 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 >
 > 5. Run `gxadmin local hello`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should output 'hi!'
 >    > {: .solution}
 >    >
@@ -376,7 +376,7 @@ This is the simplest possible function you can add, and is pretty limited in its
 
 Every function is improved by documentation! Let's add that now:
 
-> ### {% icon hands_on %} Hands-on: Adding help
+> <hands-on-title>Adding help</hands-on-title>
 >
 > 1. Open `~/.config/gxadmin-local.sh` in a text editor.
 >
@@ -393,11 +393,11 @@ Every function is improved by documentation! Let's add that now:
 >
 > 4. Run `gxadmin local hello --help`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should look like:
 >    > >
 >    > > ```console
@@ -426,7 +426,7 @@ Every function is improved by documentation! Let's add that now:
 
 The bulk of gxadmin is not functions calling shell commands though, it's mostly SQL queries. So let's find the N most recent jobs
 
-> ### {% icon hands_on %} Hands-on: Adding a query
+> <hands-on-title>Adding a query</hands-on-title>
 >
 > 1. Open `~/.config/gxadmin-local.sh` in a text editor.
 >
@@ -454,11 +454,11 @@ The bulk of gxadmin is not functions calling shell commands though, it's mostly 
 >
 > 4. Run `gxadmin local query-latest 5` to select
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What do you see?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > It should similar to the following, assuming you've run tools in your Galaxy
 >    > >
 >    > > ```console

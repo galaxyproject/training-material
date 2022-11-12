@@ -23,7 +23,7 @@ contributors:
   - thobalose
 ---
 # Introduction
-{:.no_toc}
+
 
 Tuberculosis (TB) is an infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
 as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for *M. tuberculosis* (Mtb). In a larger context *M. tuberculosis* is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
@@ -38,7 +38,7 @@ This tutorial will focus on identifying genomic variation in Mtb and using that 
 
 The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
 
-> ### {% icon hands_on %} Hands-on: Get the data
+> <hands-on-title>Get the data</hands-on-title>
 >
 > 1. {% tool [Import](upload1) %} the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
 >```
@@ -68,7 +68,7 @@ out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
 tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
-> ### {% icon hands_on %} Hands-on: Quality control of the input datasets
+> <hands-on-title>Quality control of the input datasets</hands-on-title>
 >
 > 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} {% icon tool %} on both of your fastq datasets
 >
@@ -90,7 +90,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 
 While one could examine the quality control report for each set of reads (forward and reverse) independently it can be quite useful to inspect them side by side using the **MultiQC** tool.
 
-> ### {% icon hands_on %} Hands-on: Combining QC results
+> <hands-on-title>Combining QC results</hands-on-title>
 >
 > 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
@@ -102,12 +102,12 @@ While one could examine the quality control report for each set of reads (forwar
 >
 > 2. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Based on the report, do you think preprocessing of the reads
 >    >    (trimming and/or filtering) will be necessary before mapping?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Sequence quality is quite good overall. If anything you might
 >    > >    consider trimming the 3' ends of reads (base qualities decline
@@ -123,7 +123,7 @@ While one could examine the quality control report for each set of reads (forwar
 
 As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
 
-> ### {% icon hands_on %} Hands-on: Quality trimming
+> <hands-on-title>Quality trimming</hands-on-title>
 > 1. Use {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1) %} {% icon tool %} to clean up the reads and remove the poor quality sections.
 >       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
 >       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
@@ -137,11 +137,11 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 >
 > 2. Inspect the output produced by Trimmomatic
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Why are there 4 output read files instead of 2?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because both their sequence and the gap between them (the "insert size") can be used for further analysis. In a typical analysis, only the paired reads are used.
 >    > >
@@ -155,7 +155,7 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 
 We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. **Kraken2** is an effective way of looking at which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately the tool uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **Kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Run Kraken2
+> <hands-on-title>Run Kraken2</hands-on-title>
 >
 > 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} {% icon tool %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
@@ -170,11 +170,11 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >
 > 2. Inspect the report produced by Kraken
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Was there any significant contamination of the sample?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Over 85% of the reads here have been positively identified as *Mycobacterium* (the precise % will differ depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
 >    > >
@@ -193,7 +193,7 @@ If we give Snippy an annotated reference in Genbank format, it will run a tool c
 We have an annotated reference built from the inferred *M. tuberculosis* [ancestral reference genome](https://zenodo.org/record/3497110) and the
 gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3) so will use it in this case.
 
-> ### {% icon hands_on %} Hands-on: Run Snippy
+> <hands-on-title>Run Snippy</hands-on-title>
 >
 > 1. {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %} {% icon tool %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -212,7 +212,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >
 > 2. Inspect the Snippy VCF output
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What type of variant is the first one in the list?
 >    >
@@ -220,7 +220,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    >
 >    > 3. How many variants were found?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Substitution of a `C` to a `T`. This variant is supported by 134 reads.
 >    > >
@@ -243,18 +243,18 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
-> ### {% icon hands_on %} Hands-on: Run Snippy
+> <hands-on-title>Run Snippy</hands-on-title>
 > 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2) %}: {% icon tool %} with the following parameters
 >   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
 >   - *"Filters to apply"*: Select `Filter variants by region`, `Filter variants close to indels` and `Filter sites by read alignment depth`.
 >
 > 2. Open the new VCF file.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. How many of the original variants have now been filtered out?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. `218` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
 >    > >
@@ -266,7 +266,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
-> ### {% icon hands_on %} Hands-on: Run TB Profiler and TB Variant Report
+> <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
 > 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.1.1+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
@@ -287,13 +287,13 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >
 > 3. Open the drug resistance and variant report html files.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What was the final lineage of the sample we tested?
 >    >
 >    > 2. Were there any drug resistances found?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. `4`
 >    > >
@@ -307,7 +307,7 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 
 We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
-> ### {% icon hands_on %} Hands-on: Run JBrowse
+> <hands-on-title>Run JBrowse</hands-on-title>
 >
 > 1. Use {% tool [seqret](toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
 >    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
@@ -362,7 +362,7 @@ In [Zenodo](https://doi.org/10.5281/zenodo.3960260) we have included sample *18-
 *M. tuberculosis* sample, but in some ways quite different from the sample we have analysed in the tutorial thus
 far.
 
-> ### {% icon hands_on %} Hands-on: Take a closer look at sample 18-1
+> <hands-on-title>Take a closer look at sample 18-1</hands-on-title>
 >
 > 1. Fetch the data from Zenodo
 >```
@@ -374,13 +374,13 @@ far.
 >
 > 3. Examine the sample composition with {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} {% icon tool %}.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What problems were discovered with sequence quality?
 >    >
 >    > 2. What did the **Kraken2** report show? How does this impact your assessment of variants discovered from this sample?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The quality of the sequence drops sharply towards the end of the sequences. Even more concerning, the sequence content changes across the length of the sample, which is not what we would expect at all. Finally, the sample seems to contain sequencing adapters, an artefact of the sequencing process that should be trimmed out before any sequence analysis.
 >    > >
@@ -394,7 +394,7 @@ As you can see, quality of sequence data strongly determines how useful it is fo
 
 The next example is *SRR12416842* from an Indonesia [study](https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221) of multi-drug resistant (MDR) tuberculosis.
 
-> ### {% icon hands_on %} Hands-on: Take a closer look at sample SRR12416842
+> <hands-on-title>Take a closer look at sample SRR12416842</hands-on-title>
 >
 > 1. Fetch the data from EBI European Nucleotide Archive
 >```
@@ -408,13 +408,13 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >
 > 4. Map the samples to the *M. tuberculosis* reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0) %} {% icon tool %}
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. Was the sequence quality good?
 >    >
 >    > 2. How many variants were discovered by snippy?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. The **FastQC** result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.
 >    > >
@@ -426,13 +426,13 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >
 > 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy**.
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What percentage of reads mapped to the reference genome?
 >    >
 >    > 2. If you could run the **BAM Coverage Plotter** tool, was the coverage even across the genome?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Less than 110000 out of 7297618, that is 1.5%, of the reads mapped to the reference genome.
 >    > >

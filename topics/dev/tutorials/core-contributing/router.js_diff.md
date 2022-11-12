@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``client/src/entry/analysis/router.js``
+> <solution-title>``client/src/entry/analysis/router.js``</solution-title>
 > 
 > Possible changes to file ``client/src/entry/analysis/router.js``:
 > 

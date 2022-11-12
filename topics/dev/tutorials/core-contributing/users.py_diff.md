@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``lib/galaxy/managers/users.py``
+> <solution-title>``lib/galaxy/managers/users.py``</solution-title>
 > 
 > Possible changes to file ``lib/galaxy/managers/users.py``:
 > 

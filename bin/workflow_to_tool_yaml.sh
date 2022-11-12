@@ -10,9 +10,10 @@ do
         echo " - Tutorial: $tutorial"
         if [ -d "${tutorial}/workflows" ]
         then
-            wf_files=$(find "${tutorial}/workflows/" -name '*.ga' | wc -l)
-            if (( wf_files > 0 )); then
-                workflow-to-tools -w "${tutorial}/workflows/*.ga" -o "${tutorial}/tools.yaml" -l "$(basename "${tutorial}")"
+            wf_files=$(find "${tutorial}/workflows/" -name '*.ga' | paste -sd " ")
+            num_wf_files=$(find "${tutorial}/workflows/" -name '*.ga' | wc -l)
+            if (( num_wf_files > 0 )); then
+                workflow-to-tools -w ${wf_files} -o "${tutorial}/tools.yaml" -l "$(basename "${tutorial}")"
                 echo "    ..done. Tool list in ${tutorial}/tools.yaml"
             else
                 echo "    No workflows to install (no files found)"

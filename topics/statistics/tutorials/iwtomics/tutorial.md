@@ -28,7 +28,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 IWTomics ({% cite Cremona2018 %}) implements the Interval-Wise Testing (IWT; {% cite Pini2017 %}) for omics data. This
 inferential procedure tests for differences in "Omics" data between two groups
@@ -43,7 +43,7 @@ Recombination hotspots measurements are associated to each "ETn fixed" and "Cont
 
 The data we use in this tutorial is available at [Zenodo](https://doi.org/10.5281/zenodo.5589610).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > IWTomics is composed of three steps (corresponding to three tools):
 >
@@ -56,7 +56,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).
 
-> ### {% icon hands_on %} Hands-on: Get the data
+> <hands-on-title>Get the data</hands-on-title>
 > 1. Create a new history for this tutorial
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
@@ -83,7 +83,7 @@ The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic r
 >    Please note that the file names in the first column of the header files must exactly match the dataset names in the Galaxy history.
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Pre-process data and create pointwise boxplot
+> <hands-on-title>Pre-process data and create pointwise boxplot</hands-on-title>
 > **Load, Smooth and Plot** {% icon tool %}: Run **Load, Smooth and Plot** with:
 >    * Select the two region datasets `ETn_fixed.bed` and `Control.bed`.
 >    * Select the region header file `regions_header.tabular`.
@@ -102,7 +102,7 @@ The second tool (IWTomics Test and Plot) statistically evaluates differences in 
 
 It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.
 
-> ### {% icon hands_on %} Hands-on: Test for difference between ETn and Control regions
+> <hands-on-title>Test for difference between ETn and Control regions</hands-on-title>
 > **Test and Plot** {% icon tool %}: Run **Test and Plot** with:
 >    * Select the `IWTomicsData Object`, `Region Dataset IDs`, and `Feature IDs` created during **Step 1**.
 >    * Select pairs of genomic region datasets to be compared using two-sample Interval-Wise Testing. In this example we consider one two-sample test contrasting `ETn_fixed` (select it as **Region 1**) to `Control` (select it as **Region 2**).
@@ -117,7 +117,7 @@ It allows to perform multiple two sample permutation tests between pairs of regi
 
 The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the scale for the Interval-Wise Testing results. In particular it returns the p-value curves for the different tests performed at the selected scale, and it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) at the selected scale.
 
-> ### {% icon hands_on %} Hands-on: Change scale for test results
+> <hands-on-title>Change scale for test results</hands-on-title>
 > **Plot with Threshold on Test Scale** {% icon tool %}: Run **Plot with Threshold on Test Scale** with:
 >    * Select the `IWTomicsData Object with Test Results`, `Test IDs`, and `Feature IDs` created during **Step 2**.
 >    * Select the scale to be used in Interval-Wise Testing results and plot. Select the test identifier `ETn_fixed vs Control`, the feature identifier `Recomb_hot`, and the scale `8` (8-kb scale).
@@ -126,7 +126,7 @@ The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the
 > ![Recombination hotspot IWT results scale 8](../../images/plot_with_threshold_on_test_scale_output.png)
 {: .hands_on}
 
-> ### {% icon details %} Additional resources
+> <details-title>Additional resources</details-title>
 >
 > Read more about **IWTomics** [here](https://bioconductor.org/packages/release/bioc/vignettes/IWTomics/inst/doc/IWTomics.pdf).
 {:.details}

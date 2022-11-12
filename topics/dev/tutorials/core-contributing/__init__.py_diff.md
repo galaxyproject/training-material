@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``lib/galaxy/model/__init__.py``
+> <solution-title>``lib/galaxy/model/__init__.py``</solution-title>
 > 
 > Possible changes to file ``lib/galaxy/model/__init__.py``:
 > 

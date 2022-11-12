@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``client/src/layout/menu.js``
+> <solution-title>``client/src/layout/menu.js``</solution-title>
 > 
 > Possible changes to file ``client/src/layout/menu.js``:
 > 
