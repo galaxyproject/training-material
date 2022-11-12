@@ -113,41 +113,52 @@ Now, there might be a better way to do this in Galaxy (or you might consider dow
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[individual\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[individual\]"`
 >            - *"Replacement"*: `Individual`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[sex\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[sex\]"`
 >            - *"Replacement"*: `Sex`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[age\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[age\]"`
 >            - *"Replacement"*: `Age`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[body mass index\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[body mass index\]"`
 >            - *"Replacement"*: `BMI`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: ` kilogram per square meter`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `HbA1c `
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[clinical information\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[clinical information\"]`
 >            - *"Replacement"*: `HbA1c`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `%`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[disease\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[disease\]"`
 >            - *"Replacement"*: `Disease`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[single cell quality\]`
+>            - *"Find Regex"*: `"Sample Characteristic\[single cell quality\]"`
 >            - *"Replacement"*: `Single cell quality`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[submitted single cell quality\]`
->            - *"Replacement"*: `Submitted single cell quality`
+>            - *"Find Regex"*: `"Sample Characteristic\[submitted single cell quality\]"`
+>            - *"Replacement"*: `"Submitted single cell quality"`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `Factor Value\[inferred cell type - ontology labels\]`
->            - *"Replacement"*: `Inferred cell type - ontology label`
+>            - *"Replacement"*: `"Inferred cell type - ontology label"`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Factor Value\[inferred cell type - authors labels\]`
+>            - *"Find Regex"*: `"Factor Value\[inferred cell type - authors labels\]"`
 >            - *"Replacement"*: `Inferred cell type - author labels`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `""`
+>            - *"Replacement"*: ``
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `"`
+>            - *"Replacement"*: ``
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > What's with the `\` everywhere? That's because the `[]` symbols usually call the code to do something, rather than just read it as a normal character. the `\` prevents this.
+>    {: .comment}\
 >
 > 2. Change the datatype to tabular.
 >
@@ -209,21 +220,10 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Fantastic! You've completed part 1 - making the single cell metadata file. It should now look like this:
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![Columns in the history window of a dataset contain words without any extra symbols or ""]](../../images/bulk-music/corrected_ebimetadata.png "Pretty scRNA metadata")
+
 
 
 ## Re-arrange
