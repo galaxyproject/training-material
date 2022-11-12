@@ -31,6 +31,7 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+  - transcriptomics
 
 lang: es
 
@@ -53,6 +54,12 @@ requirements:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_alevin-combine-datasets
 ---
 
 # Introduction

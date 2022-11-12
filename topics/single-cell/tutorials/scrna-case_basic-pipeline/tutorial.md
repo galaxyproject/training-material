@@ -36,7 +36,6 @@ tags:
 - 10x
 - paper-replication
 - español
-- interactive-tools
 - transcriptomics
 
 contributions:
@@ -48,6 +47,14 @@ contributions:
     - wee-snufkin
 translations:
   - es
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_JUPYTER-Trajectories
+        - scrna-case_monocle3-trajectories
 ---
 
 

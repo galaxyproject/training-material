@@ -30,6 +30,7 @@ tags:
   - 10x
   - paper-replication
   - español
+  - transcriptomics
 
 contributions:
   authorship:
@@ -54,6 +55,12 @@ translations:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_alevin-combine-datasets
 ---
 
 # Introduction

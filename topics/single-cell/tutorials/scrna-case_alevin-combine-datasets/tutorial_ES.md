@@ -30,6 +30,7 @@ tags:
   - single-cell
   - 10x
   - paper-replication
+  - transcriptomics
 
 lang: es
 
@@ -51,6 +52,13 @@ requirements:
         - scrna-umis
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_basic-pipeline
 
 ---
 

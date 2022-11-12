@@ -12,6 +12,7 @@ tags:
   - human
   - deconvolution
   - bulk
+  - transcriptomics
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
 - How are these cell types grouped together?
@@ -34,6 +35,13 @@ contributors:
 - nomadscientist
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-compare
 
 ---
 
