@@ -1,8 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: "Bulk RNA Deconvolution with MuSiC"
-subtopic: single-cell
-priority: 10
+subtopic: deconvo
+redirect_from:
+- /topics/transcriptomics/tutorials/bulk-music/tutorial
+priority: 1
 zenodo_link: https://zenodo.org/record/5719228
 tags:
   - single-cell
@@ -24,7 +26,7 @@ key_points:
 requirements:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - scrna-intro
 contributors:

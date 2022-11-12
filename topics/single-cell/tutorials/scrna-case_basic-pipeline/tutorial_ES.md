@@ -6,6 +6,9 @@ subtopic: single-cell-CS
 priority: 3
 level: Advanced
 zenodo_link: 'https://zenodo.org/record/4624461'
+redirect_from:
+- /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial_ES
+- /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial_ES
 questions:
 - ¿Es mi conjunto de datos de células únicas un conjunto de calidad?
 - ¿Cómo genero y anoto agrupamientos de células?
@@ -23,7 +26,7 @@ key_points:
 requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-case_alevin
 tags:
@@ -31,6 +34,7 @@ tags:
 - 10x
 - paper-replication
 - interactive-tools
+- transcriptomics
 contributors:
 - nomadscientist
 - pclo

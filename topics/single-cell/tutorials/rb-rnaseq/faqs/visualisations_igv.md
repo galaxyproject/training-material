@@ -1,1 +1,0 @@
-../../../../../faqs/galaxy/visualisations_igv.md

@@ -2,9 +2,10 @@
 layout: tutorial_hands_on
 
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
-subtopic: single-cell
-priority: 7
-
+subtopic: end-to-end
+priority: 3
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/3457880"
 tags:
   - single-cell
@@ -32,7 +33,7 @@ requirements:
 follow_up_training:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - scrna-scanpy-pbmc3k
 

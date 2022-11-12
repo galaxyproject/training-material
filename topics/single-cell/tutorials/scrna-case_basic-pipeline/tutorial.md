@@ -8,6 +8,7 @@ zenodo_link: 'https://zenodo.org/record/7053673'
 
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
+- /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -22,11 +23,11 @@ time_estimation: 3H
 key_points:
 - Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
 - Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
-  - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study 
+  - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study
 requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
@@ -36,6 +37,7 @@ tags:
 - paper-replication
 - español
 - interactive-tools
+- transcriptomics
 
 contributions:
   authorship:
@@ -512,7 +514,7 @@ Now we need to look at reducing our gene dimensions. We have loads of genes, but
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy NormaliseData** {% icon tool %})
 >    - *"Flavor of computing normalised dispersion"*: `Seurat`
 >    - *"Number of top variable genes to keep, mandatory if flavor='seurat_v3'"*: `` (remove the automated 2000 here and leave the space blank)
-> 
+>
 > 2. **Rename** {% icon galaxy-pencil %} plot output `Use_me_FVG`
 {: .hands_on}
 

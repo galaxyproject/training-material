@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: "Downstream Single-cell RNA analysis with RaceID"
-subtopic: single-cell
-priority: 6
-
+subtopic: end-to-end
+priority: 2
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-raceid/tutorial
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell
@@ -23,14 +24,14 @@ objectives:
 requirements:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-scater-qc
 
 follow_up_training:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - scrna-preprocessing-tenx
 

@@ -3,8 +3,11 @@ layout: tutorial_slides
 logo: "GTN"
 title: "Plates, Batches, and Barcodes"
 
-subtopic: single-cell
-priority: 4
+subtopic: scintroduction
+priority: 3
+
+redirect_from:
+- /topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides
 
 video: yes
 zenodo_link: ""
@@ -23,19 +26,7 @@ key_points:
   - "Balanced batches and replicates allow bioinformatic batch correction"
   - "A sequencing lane often contains multiple batches, and is itself a batch effect!"
 
-requirements:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-umis
 
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-scater-qc
 
 contributors:
   - nomadscientist
@@ -91,7 +82,7 @@ contributors:
 .center[Batch effect (plate vs plate) cannot be separated from treatment effect in either scenario.]
 
 ???
-- Trick question! 
+- Trick question!
 - In both examples, the treatment effect cannot be separated from any technical effect from the plate itself.
 - For example, the biological effect of the yellow cells might just be the technical confounding effect from Batch 1.
 - What can we do instead to reduce the effect of these technical confounding effects across treatments?
@@ -117,7 +108,7 @@ contributors:
 .center[Can't mix samples on plates? Separate replicates evenly and process together.]
 
 ???
-- If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction. 
+- If putting multiple treatments on the same plate is not an option, then having enough separated replicates will also allow for batch correction.
 - Here, you can assess the variation between replicates, and thus batches, as well as between treatments.
 
 ---
@@ -156,7 +147,7 @@ contributors:
 .center[No! You've turned each treatment (A & B) into a batch!]
 
 ???
-- No, because you've turned Treatment A and Treatment B into separate batches. 
+- No, because you've turned Treatment A and Treatment B into separate batches.
 - This gives us the same unbalanced design we saw with the sorting plates.
 
 ---
@@ -181,7 +172,7 @@ contributors:
 * Cells are selected from a plate by their *barcodes*
 * Barcodes must be unique
   + e.g. 96 wells in a plate, need 96 barcodes to sequence them together
-  
+
 ???
 - How do we distinguish each cell in each well?
 - Do we remember the physical location of that cell on that well, or do we tag it somehow?
@@ -520,4 +511,3 @@ Is it better to use Longer or Shorter Barcodes?
 ???
 - Cell barcodes indicate what cell a transcript came from
 - They reduce sequencing errors when spaced appropriately
-

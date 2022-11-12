@@ -6,6 +6,10 @@ subtopic: single-cell-CS
 priority: 2
 level: Advanced
 
+redirect_from:
+- /topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial_ES
+- /topics/transcriptomics/tutorials/scrna-case_alevin/tutorial_ES
+
 zenodo_link: 'https://zenodo.org/record/4574153'
 
 questions:
@@ -42,7 +46,7 @@ contributors:
 requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-intro
         - scrna-umis

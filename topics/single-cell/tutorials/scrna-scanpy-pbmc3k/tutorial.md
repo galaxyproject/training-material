@@ -2,9 +2,10 @@
 layout: tutorial_hands_on
 
 title: "Clustering 3K PBMCs with Scanpy"
-subtopic: single-cell
-priority: 8
-
+subtopic: end-to-end
+priority: 4
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial
 zenodo_link: 'https://zenodo.org/record/3581213'
 questions:
 - What are the steps to prepare single-cell RNA-Seq data for clustering?
@@ -27,7 +28,7 @@ key_points:
 requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-preprocessing
         - scrna-preprocessing-tenx
@@ -141,9 +142,9 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 >            - {% icon param-file %} *"Barcodes"*: `barcodes.tsv`
 >            - *"Variables index"*: `gene_symbols`
 >            - *"Make the variable index unique by appending '-1', '-2'?"*: `Yes`
-> 
+>
 > 2. Rename the generated file to `Input 3k PBMC`
-> 
+>
 > 3. Check that the format is `h5ad`
 {: .hands_on}
 
@@ -1929,5 +1930,3 @@ In this tutorial, we investigated clustering and annotation of single-cell data 
 5. Annotation of the clusters with cell types
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
-
-

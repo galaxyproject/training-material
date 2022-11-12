@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
-subtopic: single-cell
-priority: 11
+subtopic: deconvo
+priority: 2
 title: Bulk deconvolution with MuSiC across multiple variables
 zenodo_link: https://zenodo.org/record/5719228
 tags:
@@ -27,7 +27,7 @@ contributors:
 requirements:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - bulk-music
 

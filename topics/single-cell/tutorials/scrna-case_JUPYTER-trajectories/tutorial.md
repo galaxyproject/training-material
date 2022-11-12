@@ -7,6 +7,7 @@ priority: 4
 zenodo_link: 'https://zenodo.org/record/7075718'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial
+- /topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
 objectives:
@@ -19,7 +20,7 @@ key_points:
 requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
@@ -34,6 +35,7 @@ tags:
 - 10x
 - paper-replication
 - interactive-tools
+- transcriptomics
 
 contributions:
   authorship:
@@ -134,7 +136,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
 
 > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
-> 
+>
 > 1. You will need to download the tutorial notebook locally to your own computer. Do this by going here: [Download the notebook](https://zenodo.org/record/7054806/files/Trajectories_Instructions.ipynb?download=1)
 {: .hands_on}
 

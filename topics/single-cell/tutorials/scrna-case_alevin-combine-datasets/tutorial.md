@@ -19,7 +19,7 @@ time_estimation: 1H
 key_points:
   - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
   - Retreive partially analysed data from a public repository
-  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) in this case study 
+  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) in this case study
 
 tags:
   - single-cell
@@ -40,7 +40,7 @@ contributions:
 
 requirements:
   - type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-intro
         - scrna-umis
@@ -57,7 +57,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 <!-- This is a comment. -->
 
-This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on. 
+This tutorial will take you from the multiple AnnData outputs of the [previous tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 
 > <agenda-title></agenda-title>
 >

@@ -2,9 +2,10 @@
 layout: tutorial_hands_on
 
 title: "Single-cell quality control with scater"
-subtopic: single-cell
-priority: 5
-
+subtopic: tricks
+priority: 1
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-scater-qc/tutorial
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
@@ -18,13 +19,13 @@ objectives:
 requirements:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - scrna-plates-batches-barcodes
 follow_up_training:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
       - scrna-raceid
 

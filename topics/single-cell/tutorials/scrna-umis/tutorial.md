@@ -1,8 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: "Understanding Barcodes"
-subtopic: single-cell
-priority: 3
+subtopic: scintroduction
+priority: 2
+redirect_from:
+- /topics/transcriptomics/tutorials/scrna-umis/tutorial
 
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
@@ -19,20 +21,6 @@ key_points:
   - "Verifying the distribution of barcodes via a FASTQC plot"
   - "Relocating barcodes into headers"
   - "Removing unwanted barcodes"
-requirements:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-preprocessing
-
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - scrna-plates-batches-barcodes
-
 
 contributors:
   - mtekman

@@ -1,4 +1,4 @@
 ---
 layout: topic
-topic_name: transcriptomics
+topic_name: single-cell
 ---

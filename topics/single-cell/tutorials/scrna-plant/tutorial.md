@@ -1,9 +1,10 @@
 ---
 layout: tutorial_hands_on
 title: "Analysis of plant scRNA-Seq Data with Scanpy"
-subtopic: single-cell
-priority: 9
-
+subtopic: end-to-end
+priority: 5
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-plant/tutorial
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
   - single-cell
@@ -19,7 +20,7 @@ objectives:
 requirements:
   -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-scanpy-pbmc3k
 

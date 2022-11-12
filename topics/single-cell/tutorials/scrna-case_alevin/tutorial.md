@@ -9,6 +9,7 @@ zenodo_link: 'https://zenodo.org/record/4574153'
 
 redirect_from:
 - /topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial
+- /topics/transcriptomics/tutorials/scrna-case_alevin/tutorial
 
 questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
@@ -22,7 +23,7 @@ time_estimation: 2H
 
 key_points:
   - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
-  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) in this case study 
+  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) in this case study
 
 tags:
   - single-cell
@@ -43,7 +44,7 @@ contributions:
 
 requirements:
   - type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-intro
         - scrna-umis

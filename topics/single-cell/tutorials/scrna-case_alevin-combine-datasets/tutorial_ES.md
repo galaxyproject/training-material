@@ -8,6 +8,9 @@ level: Advanced
 
 zenodo_link: 'https://zenodo.org/record/4574153'
 
+redirect_from:
+- /topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial_ES
+
 questions:
   - Tengo algunos archivos FASTQ de secuenciación de ARN de células únicas los cuales quiero analizar. ¿Por dónde empiezo?
 
