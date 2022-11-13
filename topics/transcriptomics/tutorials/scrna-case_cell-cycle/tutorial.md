@@ -31,18 +31,6 @@ One common biological confounder is the cell cycle. Cells express different gene
 In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can regress out (or remove) their effects on the
 data. 
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -54,7 +42,7 @@ tutorial.
 
 ## Get data
 
-The data used in this tutorial is from a mouse dataset of fetal growth restriction {% raw %} `{% cite Bacon2018 %}`{% endraw %}. You can download the dataset below.
+The data used in this tutorial is from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. You can download the dataset below.
 
 If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle genes. 
 
@@ -373,7 +361,7 @@ You will learn more about plotting your data in the Filter, Plot and Explore tut
 > > ### {% icon solution %} Solution
 > >
 > > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
-> > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](/PCA1.png)"PCA Plot of Cell Cycle Genes before regression"
+> > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](https://github.com/MarisaJL/training-material/blob/main/topics/transcriptomics/images/CellCycle_PCA1.png?raw=true)"PCA Plot of Cell Cycle Genes before regression"
 > > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens. 
 > >
 > {: .solution}
@@ -408,7 +396,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > > ### {% icon solution %} Solution
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, which are no longer having the same impact because their effects have been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the genes, leaving behind any individual variation in their expression between cells.
-> > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](/PCA2.png)"PCA Plot of Cell Cycle Genes after regression"
+> > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](https://github.com/MarisaJL/training-material/blob/main/topics/transcriptomics/images/CellCycle_PCA2.png?raw=true)"PCA Plot of Cell Cycle Genes after regression"
 > > 2. The cell cycle genes aren't having a coordinated effect on the data now that they have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effect of the cell cycle genes are in this particular dataset. 
 > >
 > {: .solution}
