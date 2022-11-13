@@ -376,7 +376,7 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 # Conclusion
 {:.no_toc}
 
-You have successfully performed, essentially, three workflows.
+You have successfully performed, essentially, three workflows. You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--matrix--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--matrix--eset).
 
 ![6 boxes in the workflow editor](../../images/bulk-music/scref-metadata.png "Workflow: Manipulating metadata")
 
