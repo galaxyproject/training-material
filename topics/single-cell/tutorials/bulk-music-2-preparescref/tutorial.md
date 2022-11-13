@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Creating the single-cell RNA-seq reference dataset
+title: Creating the single-cell RNA-seq reference dataset for deconvolution
 questions:
 - Where can I find good quality scRNA-seq reference datasets?
 - How can I reformat and manipulate these downloads to create the right format for MuSiC?
@@ -56,10 +56,8 @@ After completing the MuSiC {% cite wang2019bulk %} deconvolution tutorial, you a
 
 First, we will tackle the metadata. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it. 
 
-## Finding data 
+## Find the data 
 We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
-
-## Get data
 
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
 
@@ -224,17 +222,166 @@ Fantastic! You've completed part 1 - making the single cell metadata file. It sh
 
 ![Columns in the history window of a dataset contain words without any extra symbols or ""]](../../images/bulk-music/corrected_ebimetadata.png "Pretty scRNA metadata")
 
+The workflow for this portion of the tutorial is [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--metadata), while an example history is [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--metadata).
 
 
-## Re-arrange
+# Manipulate the expression matrix
 
-To create the template, each step of the workflow had its own subsection.
+Currently, the matrix data is in a 3-column format common in 10x outputs, where you need the barcodes and the genes files to interpret the matrix. What you actually need is an expression matrix with cells on one axis and genes on another. While we aren't runny a Scanpy analysis, we can still use our Scanpy tools to get this format.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+## Reformat the matrix
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `matrix_mtx` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+>    - {% icon param-file %} *"Gene table"*: `genes_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+>    - {% icon param-file %} *"Barcode/cell table"*: `barcode_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+>    - *"Format of output object"*: `AnnData format (h5 for older versions)`
+>
+> 2. Change the datatype to `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+{: .hands_on}
+
+Now your precious matrix is stored in the 10x AnnData object. Let's retrieve it!
+
+> ### {% icon hands_on %} Hands-on: Inspect the matrix
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `output_h5` (output of **Scanpy Read10x** {% icon tool %})
+>    - *"What to inspect?"*: `The full data matrix`
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Which are currently the rows in your matrix, cells or genes?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. You may remember from earlier that the sample should have `2914 cells` in it. If you inspect the dataset in your history, you will find that it contains `2915` lines (1 for the header), which means that rows correspond to cells. Unfortunately... that's not what you need.
+> >
+> {: .solution}
+{: .question}
+
+> ### {% icon hands_on %} Hands-on: Transpose the matrix
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `X` (output of **Inspect AnnData** {% icon tool %})
+>
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. How many genes are in your sample?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. You should have `30,416` lines in it, meaning your sample has `30,415` genes.
+> >
+> {: .solution}
+{: .question}
+
+## Collapse EnsemblIDs
+
+Ok, real talk here. Technically, the best way of analysing anything is by using the EnsemblIDs for any given RNA transcript, because they are more specific than gene names and also cover more of the transcriptome than our gene names...
+But...
+As biologists, it's very difficult to interpret ENSIDs. And it's an awful shame to get to the end of the MuSiC deconvolution and have all our plots show sad ENS IDs. So, courtesy of the excellent @mtekman, we steal his workflow to collapse the ENS IDs into gene names.
+
+![First table shows 4 rows with different ENS IDs and a second column with geney symbols and some overlap. Arrow pointing to second table shows 3 rows having collapsed the overlap.](../../images/bulk-music/ensid_collapse.png "Collapsing ENS IDs")
+
+> ### {% icon hands_on %} Hands-on: Convert from Ensembl to GeneSymbol using workflow
+>
+> 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes).
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+> 
+> 2. Run the workflow on your sample with the following parameters:
+>    - *"Organism"*: `Human`
+>    - {% icon param-file %} *"Expression Matrix (Gene Rows)"*: `output_h5` (output of **Transpose** {% icon tool %})
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
+The output will likely be called **Text transformation** and will look like this:
+
+![Alphabetised gene symbols appear in column one with decimal pointed integers in the following columns corresponding to cells](../../images/bulk-music/ensid_output.png "Output of the ENS ID collapsing workflow")
+
+# Construct Expression Set Objects
+
+We're nearly there! We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.
+
+> ### {% icon hands_on %} Hands-on: Creating the combined object
+>
+> 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
+>    - {% icon param-file %} *"Phenotype Data"*: `output` (output of **Text transformation** {% icon tool %})
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. How many genes are in your sample now?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. If you select the {% icon galaxy-eye %} of the output **General Info** dataset in the history, you will find it contains 21671 features and 2914 samples, or rather, `21671` genes and 2914 cells. That's a huge reduction in genes thanks to the ENS ID collapsing! 
+> >
+> {: .solution}
+{: .question}
+
+> ### {% icon hands_on %} Hands-on: Creating the disease-only object
+>
+> 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
+>    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
+>    - *"Concatenate other Expression Set objects?"*: `No`
+>    - *"Subset the dataset?"*: `Yes`
+>        - *"By"*: `Filter Samples and Genes by Phenotype Values`
+>            - In *"Filter Samples by Condition"*:
+>                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
+>                    - *"Name of phenotype column"*: `Disease`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
+>
+{: .hands_on}
+
+You can either re-run this tool or set it up again to create the healthy-only object.
+> ### {% icon hands_on %} Hands-on: Creating the healthy-only object
+>
+> 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
+>    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
+>    - *"Concatenate other Expression Set objects?"*: `No`
+>    - *"Subset the dataset?"*: `Yes`
+>        - *"By"*: `Filter Samples and Genes by Phenotype Values`
+>            - In *"Filter Samples by Condition"*:
+>                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
+>                    - *"Name of phenotype column"*: `Disease`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
+>
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. Why are you making a healthy-only and diseased-only reference objects?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. We could imagine that the cells will express different transcript levels, but that the deconvolution tools will have to take some sort of average. Perhaps it might be more accurate to infer like from like, i.e. healthy from healthy? Or perhaps that is skewing the data through a more 'supervised' approach. We're not   quite sure, and it likely depends on the biology, so we're covering all our bases by making sure you can do this every way. (We've tested it on our dataset in all the ways and got the same results, so it doesn't make much of a difference as far as we can tell!) 
+> >
+> {: .solution}
+{: .question}
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+You have successfully performed, essentially, three workflows.
+
+![6 boxes in the workflow editor](../../images/bulk-music/scref-metadata.png "Workflow: Manipulating metadata")
+
+![9 boxes including a subworkflow in the workflow editor](../../images/bulk-music/scref-eset.png "Workflow: Creating the ESet single-cell object")
+
+![8 boxes in the workflow editor](../../images/bulk-music/ens-id-collapse.png "Subworkflow: Collapsing the Ensembl IDs into gene names")
+
+With these workflows, you've created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!
