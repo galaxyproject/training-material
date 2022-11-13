@@ -24,7 +24,7 @@ contributors:
 {:.no_toc}
 
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of
-the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is really going on. 
+the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on. 
 
 One common biological confounder is the cell cycle. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
 
@@ -56,7 +56,7 @@ tutorial.
 
 The data used in this tutorial is from a mouse dataset of fetal growth restriction {% raw %} `{% cite Bacon2018 %}`{% endraw %}. You can download the dataset below.
 
-If you've been working through the Single-cell RNA-seq: Cast Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle genes. 
+If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle genes. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -69,7 +69,6 @@ If you've been working through the Single-cell RNA-seq: Cast Study then you can 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the dataset `Processed_Anndata`
 > 4. Check that the datatype is `h5ad`
@@ -88,11 +87,9 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 >    {{ page.zenodo_link }}/files/sPhase.tabular
 >    {{ page.zenodo_link }}/files/g2mPhase.tabular
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Rename the datasets `sPhase` and `g2mPhase` respectively - be careful not to mix them up!
 > 3. Check that the datatype for both is `tabular`
@@ -104,7 +101,7 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 
 # Cell Cycle Scoring
 
-The first step towards removing the effects of the cell cycle on our dataset is cell cycle scoring. Cell cycle scoring will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
+The first step towards removing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
 
 > ### {% icon hands_on %} Hands-on: Score the cell cycle genes
 >
@@ -133,7 +130,7 @@ The first step towards removing the effects of the cell cycle on our dataset is 
 
 # Cell Cycle Regression
 
-The second step after scoring the cell cycle genes is to regress out their effects. 
+The second step after scoring the cell cycle genes is to regress out their effects. Now that we know which genes are linked to the cell cycle and how they are affecting our cells, we can cancel out their effects so that they won't influence our later analyses of the data. 
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
@@ -158,13 +155,13 @@ The second step after scoring the cell cycle genes is to regress out their effec
 
 Your data is now ready for further analysis, so you can return to the [Filter, Plot and Explore Single-cell RNA-seq Data](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial and move on to the Preparing coordinates step there. Make sure that you use the `CellCycle_Regressed` dataset (you may want to rename it as `Use_me_Scaled` as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first. 
 
-In order to do this, we need to identify the cell cycle genes in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that reads `TRUE` for the 97 cell cycle genes and `FALSE` for all the other genes.
+In order to see what is happening to the cell cycle genes, we need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that reads `TRUE` for the 97 cell cycle genes and `FALSE` for all the other genes.
 You might find it easier to create this new column using a spreadsheet and then upload it as a tabular dataset, but it is possible to complete all the steps on Galaxy. 
 
 ## Prepare a table of cell cycle genes
->If we're going to mark all the cell cycle genes, we'll need a list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. We'll 
->combine the two lists and then add another column that simply reads `TRUE`, which we'll use later to mark these as cell cycle genes in the main dataset. 
->
+If we're going to mark all the cell cycle genes, we'll need a single list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. We'll 
+combine the two lists and then add another column that simply reads `TRUE`, which we'll use later to mark these as cell cycle genes in the main dataset. 
+
 > ### {% icon hands_on %} Hands-on: Create a list of all cell cycle genes
 >
 > 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
@@ -181,8 +178,8 @@ You might find it easier to create this new column using a spreadsheet and then 
 {: .hands_on}
 
 ## Create an ordered list of gene names
-> Next, we'll need a list of all the genes in our dataset, so that we can mark the ones that are in our cell cycle list. We'll also add a column of numbers as this will help us keep the gene names in order.
-> 
+Next, we'll need a list of all the genes in our dataset, so that we can mark the ones that are in our cell cycle list. We'll also add a column of numbers as this will help us keep the gene names in order.
+
 > ### {% icon hands_on %} Hands-on: Get the gene names from your dataset
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
@@ -219,8 +216,8 @@ You might find it easier to create this new column using a spreadsheet and then 
 
 
 ## Mark the cell cycle genes
-> We can now combine our table of cell cycle genes `CC_genes` with the table of gene names `Dataset_Genes`. 
->  
+We can now combine our table of cell cycle genes `CC_genes` with the table of gene names `Dataset_Genes`. 
+
 > ### {% icon hands_on %} Hands-on: Combine the two tables
 >
 > 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
@@ -321,7 +318,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 >        - {% icon param-file %} *"Table with new annotations"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
 >
 ## Filter the cell cycle genes
-For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have `TRUE` in their new `CC_genes` annotation). The filtered datasets will only include expression dats for these 97 genes, so we'll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.  
+For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have `TRUE` in their new `CC_genes` annotation). The filtered datasets will only include expression data for these 97 genes, so we'll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.  
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -339,19 +336,10 @@ For both the newly annotated datasets, we can now filter out the cell cycle gene
 >            - *"Key to filter"*: `CC_genes`
 >            - *"Type of value to filter"*: `Boolean`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ## Plot the cell cycle genes before regression
-Now that we have a dataset that only includes the cell cycle genes, we can visualise their effects in a PCA plot. We first calculate the PCA coordinates, which are a measure of how similar each pair of cells is in terms of the expression of the 97 cell cycle genes we've included in the dataset. We will then visualise the cells on a PCA plot where the axes represent the principal components, which reflect the genes (or groups of genes) that had the biggest impact in these calculations. 
+Now that we have a dataset that only includes the cell cycle genes, we can visualise their effects in a PCA plot. We first calculate the PCA coordinates, which are a measure of how similar each pair of cells is in terms of the expression of the 97 cell cycle genes we've included in the filtered dataset. We will then visualise the cells on a PCA plot where the axes represent the principal components, which reflect the genes (or groups of genes) that had the biggest impact in these calculations. 
 You will learn more about plotting your data in the Filter, Plot and Explore tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
 
 > ### {% icon hands_on %} Hands-on: Create a PCA Plot of Cell Cycle Genes 
@@ -369,9 +357,6 @@ You will learn more about plotting your data in the Filter, Plot and Explore tut
 >            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -387,7 +372,7 @@ You will learn more about plotting your data in the Filter, Plot and Explore tut
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The PCA plot shows that the three groups of cells are separated out according to what stage of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
+> > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
 > > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](/PCA1.png)"PCA Plot of Cell Cycle Genes before regression"
 > > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens. 
 > >
@@ -415,8 +400,6 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
 > 1. Does the plot look as you expected?
@@ -426,7 +409,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, which are no longer having the same impact because their effects have been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the genes, leaving behind any individual variation in their expression between cells.
 > > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](/PCA2.png)"PCA Plot of Cell Cycle Genes after regression"
-> > 2. The cell cycle genes aren't having a coordinated effect on the data now that they have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial to find out how much of an effect this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effect of the cell cycle genes are in this particular dataset. 
+> > 2. The cell cycle genes aren't having a coordinated effect on the data now that they have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effect of the cell cycle genes are in this particular dataset. 
 > >
 > {: .solution}
 >
