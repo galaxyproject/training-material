@@ -324,7 +324,8 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 > ### {% icon hands_on %} Hands-on: Creating the combined object
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Phenotype Data"*: `output` (output of **Text transformation** {% icon tool %})
+>    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
+>    - {% icon param-file %} *"Phenotype Data"*: `output` (output of **Advanced Cut** {% icon tool %})
 >
 {: .hands_on}
 

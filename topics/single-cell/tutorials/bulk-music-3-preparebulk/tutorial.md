@@ -189,20 +189,20 @@ Now examine {% icon galaxy-eye %} your raw counts file in the Galaxy history.
 
 > <question-title></question-title>
 >
-> 1. Are cells in the rows or columns?
+> 1. Are samples in the rows or columns?
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > > 
 > > ![Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####](../../images/bulk-music/raw-matrix.png "Raw counts file appearance")
 > > 
-> > 1. By examining the matrix, you can find that genes are the rows while cells are the `columns`.
+> > 1. By examining the matrix, you can find that genes are the rows while samples are the `columns`.
 > >
 > {: .solution}
 {: .question}
 
 While it's awesome that there's a gene name column, unfortunately the gene names will be duplicated - different ENS IDs can refer to the same Gene Name. This going to be a problem later. So we need to get this in a format to collapse the ENS IDs, just as we did previously in the scRNA-seq data reference preparation. Sadly, we'll start by removing the column of gene names to prepare for the ENS ID collapse.
 
-> ### {% icon hands_on %} Hands-on: Remove gene names
+> ### {% icon hands_on %} Hands-on: Remove gene names column
 >
 > 1. {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: `raw-counts` (Input dataset)
@@ -212,113 +212,37 @@ While it's awesome that there's a gene name column, unfortunately the gene names
 >
 {: .hands_on}
 
+Now that your data is in a format of having a rows of ENS IDs and samples as columns, you can apply the handy ENS ID collapsing workflow as we did in the scRNA-seq reference.
 
-
-> ### {% icon question %} Questions
+> ### {% icon hands_on %} Hands-on: Convert from Ensembl to GeneSymbol using workflow
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes).
 >
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
+>    {% snippet faqs/galaxy/workflows_import.md %}
 >
-{: .question}
-
-## Sub-step with **Advanced Cut**
-
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> 2. Run the workflow on your sample with the following parameters:
+>    - *"Organism"*: `Human`
+>    - {% icon param-file %} *"Expression Matrix (Gene Rows)"*: `output` (output of **Remove columns** {% icon tool %})
 >
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **annotateMyIDs**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [annotateMyIDs](toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"File with IDs"*: `output_tabular` (output of **Remove columns** {% icon tool %})
->    - *"File has header?"*: `Yes`
->    - *"Output columns"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+The output will likely be called **Text transformation** and will look like this:
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![Alphabetised gene symbols appear in column one with integers in the following columns corresponding to samples](../../images/bulk-music/ensidcollapse_bulk.png "Output of the ENS ID collapsing workflow for bulk dataset")
 
-## Sub-step with **Regex Find And Replace**
+Success! You've now prepared your metadata and your matrix. It's time to put it together to create the Expression Set objects needed for MuSiC deconvolution.
 
+# Construct Expression Set Objects
 
+We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Construct Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Creating the combined object
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Phenotype Data"*: `out_file1` (output of **Regex Find And Replace** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
+>    - {% icon param-file %} *"Phenotype Data"*: `out_file1` #metadata (output of **Regex Find And Replace** {% icon tool %})
 >
 {: .hands_on}
 
