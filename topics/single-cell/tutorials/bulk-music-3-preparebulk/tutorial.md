@@ -45,29 +45,7 @@ requirements:
 
 <!-- This is a comment. -->
 
-After completing the MuSiC {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}.  [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}. Let's get started!
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas {% cite Moreno2021 %}.  Let's get started!
 
 > ### Agenda
 >
@@ -78,28 +56,12 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Metadata Manipulation
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+Just as in our scRNA-dataset preparation tutorial, we will tackle the metadata first. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+## Find the data
+We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), browsing experiments in order to find a bulk RNA-seq pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results) using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our scRNA-seq reference from, so we should get quite accurate results given the same lab made both datasets!
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -109,50 +71,138 @@ have fun!
 >     -> `{{ page.title }}`):
 >
 >    ```
->    
+>    {{ page.zenodo_link }}/files/E-MTAB-5060-experiment-design.tsv
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
+> 3. Rename the datasets as needed
 > 4. Check that the datatype
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. Add to each database a tag corresponding to ...
+5 6. Add to `experiment-design` the tags `#metadata`, `#bulk`, `#ebi`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+As before, the metadata object annoyingly has a bunch of unnecessary columns. You can examine this with the {% icon galaxy-eye %} in the Galaxy history. Let's remove them!
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+![Columns in a table where some contain run info or Sample Characteristic[age] while others are empty.](../../images/bulk-music/bulk-metadata-annoying.png "Ridiculous metadata columns and labels")
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Remove unnecessary columns
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `output` (Input dataset)
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `3
+5
+7
+8
+9
+10
+11
+12
+13
+15
+16
+17
+18`
 >
-{: .details}
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!
+>    {: .comment}
+>
+{: .hands_on}
 
-A big step can have several subsections or sub steps:
+Now let's take care of the excessively wordy header titles - and note that oftentimes various programmes struggle with titles or cells that have any spaces ` ` in them, so removing those now often saves hassle later. 
 
+> <comment-title></comment-title>
+> You might also remember in the MuSiC tutorial that we can analyse numeric parameters in the metadata (in that case, hbac1c content). Reformatting to ensure numerical values in these columns (i.e. taking the ` years` out of an age cell) is helpful then too.
+{: .comment}
 
-## Sub-step with **Remove columns**
+> ### {% icon hands_on %} Hands-on: Fixing titles
+>
+> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `output` (output of **Advanced Cut** {% icon tool %})
+>    - In *"Check"*:
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[age\]`
+>            - *"Replacement"*: `Age`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: ` year`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[body mass index\]`
+>            - *"Replacement"*: `BMI`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[disease\]`
+>            - *"Replacement"*: `Disease`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[individual\]`
+>            - *"Replacement"*: `Individual`
+>        - {% icon param-repeat %} *"Insert Check"*
+>            - *"Find Regex"*: `Sample Characteristic\[sex\]`
+>            - *"Replacement"*: `Sex`
+>
+{: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Task description
+Now examine {% icon galaxy-eye %} your resultant metadata file in the Galaxy history. Better, right?
+
+![5 columns with numerical or string information on Run, Age, BMI, Disease and Sex](../../images/bulk-music/bulk-metadata-pretty.png "Look at the pretty metadata")
+
+This is ready to go, so now we'll reformat the matrix!
+
+# Manipulate the expression matrix
+
+Let's upload the dataset.
+
+> ### {% icon hands_on %} Hands-on: Data upload
+>
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    ```
+>    {{ page.zenodo_link }}/files/E-MTAB-5060-raw-counts.tsv
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename the dataset as needed
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
+> 5. Add to `raw-counts` the tags `#matrix`, `#bulk`, `#ebi`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+Now examine {% icon galaxy-eye %} your raw counts file in the Galaxy history.
+
+> <question-title></question-title>
+>
+> 1. Are cells in the rows or columns?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > 
+> > ![Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####](../../images/bulk-music/raw-matrix.png "Raw counts file appearance")
+> > 
+> > 1. By examining the matrix, you can find that genes are the rows while cells are the `columns`.
+> >
+> {: .solution}
+{: .question}
+
+While it's awesome that there's a gene name column, unfortunately the gene names will be duplicated - different ENS IDs can refer to the same Gene Name. This going to be a problem later. So we need to get this in a format to collapse the ENS IDs, just as we did previously in the scRNA-seq data reference preparation. Sadly, we'll start by removing the gene names.
+
+> ### {% icon hands_on %} Hands-on: Remove gene names
 >
 > 1. {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: `output` (Input dataset)
@@ -189,36 +239,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Advanced Cut**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `output` (Input dataset)
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c3
-5
-7
-8
-9
-10
-11
-12
-13
-15
-16
-17
-18`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
@@ -274,39 +295,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Regex Find And Replace**
 
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `output` (output of **Advanced Cut** {% icon tool %})
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[age\]`
->            - *"Replacement"*: `Age`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: ` year`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[body mass index\]`
->            - *"Replacement"*: `BMI`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[disease\]`
->            - *"Replacement"*: `Disease`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[individual\]`
->            - *"Replacement"*: `Individual`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Sample Characteristic\[sex\]`
->            - *"Replacement"*: `Sex`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
