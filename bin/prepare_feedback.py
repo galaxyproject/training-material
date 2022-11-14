@@ -43,7 +43,10 @@ new_topic_for_tuto = {
     'RAD-Seq de-novo data analysis': 'Ecology',
     'RAD-Seq to construct genetic maps': 'Ecology',
     'Advanced R in Galaxy': 'Foundations of Data Science',
-    'R basics in Galaxy': 'Foundations of Data Science'
+    'R basics in Galaxy': 'Foundations of Data Science',
+    'Pre-processing of 10X Single-Cell RNA Datasets': 'Single Cell',
+    'Generating a single cell matrix using Alevin': 'Single Cell',
+    'Downstream Single-cell RNA analysis with RaceID': 'Single Cell'
 }
 new_topics = {
     'User Interface and Features': 'Using Galaxy and Managing your Data',
@@ -69,6 +72,7 @@ acceptable_topics = [
     "Metagenomics",
     "Proteomics",
     "Sequence analysis",
+    "Single Cell",
     "Statistics and machine learning",
     "Teaching and Hosting Galaxy training",
     "Transcriptomics",
