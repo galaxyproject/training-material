@@ -40,7 +40,7 @@ data.
 >
 {: .agenda}
 
-## Get data
+## Get Data
 
 The data used in this tutorial is from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. You can download the dataset below.
 
@@ -65,7 +65,7 @@ If you've been working through the Single-cell RNA-seq: Case Study then you can 
 >
 {: .hands_on}
 
-In addition to the scRNA-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the [Harvard Chan Bioinformatics Core's tinyatlas](https://github.com/hbc/tinyatlas/blob/master/cell_cycle/Mus_musculus.csv) and can be downloaded from Zenodo below. Between them, they include 97 genes that are expressed during the S and G2/M phases. 
+In addition to the scRNA-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the {% cite tinyatlas %} and can be downloaded from Zenodo below. Between them, they include 97 genes that are expressed during the S and G2/M phases. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -89,7 +89,7 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 
 # Cell Cycle Scoring
 
-The first step towards removing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
+The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
 
 > ### {% icon hands_on %} Hands-on: Score the cell cycle genes
 >
@@ -228,8 +228,6 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 >    - *"everything in"*: `Ascending order`
 >
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > Sorting the genes using the numbers we added earlier will put them back in their original order - make sure to sort them in ascending order, otherwise they'll end up the opposite way around. 
@@ -267,7 +265,7 @@ We now have a table with all the gene names in the same order as the main datase
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > If there were any cell cycle genes that weren't present in the main dataset, we could remove them at this stage by excluding them from the List of rows to select. As before, if we were using a dataset of a differnet size, we would need to change this parameter to include all the rest of the rows. 
+>    > If there were any cell cycle genes that weren't present in the main dataset, we could remove them at this stage by excluding them from the List of rows to select. As before, if we were using a dataset of a different size, we would need to change this parameter to include all the rest of the rows. 
 >    {: .comment}
 > 
 > 2. Create a new **tabular** file from the following
@@ -288,7 +286,7 @@ We now have a table with all the gene names in the same order as the main datase
 {: .hands_on}
 
 
-## Sub-step with **Manipulate AnnData**
+## Add an annotation to the AnnData
 We will need to add the annotation to both the annotated dataset `CellCycle_Annotated` and to the one that we created by regressing out the cell cycle genes `CellCycle_Regressed`. This will allow us to plot the cell cycle genes before and after regression. 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -328,7 +326,7 @@ For both the newly annotated datasets, we can now filter out the cell cycle gene
 
 ## Plot the cell cycle genes before regression
 Now that we have a dataset that only includes the cell cycle genes, we can visualise their effects in a PCA plot. We first calculate the PCA coordinates, which are a measure of how similar each pair of cells is in terms of the expression of the 97 cell cycle genes we've included in the filtered dataset. We will then visualise the cells on a PCA plot where the axes represent the principal components, which reflect the genes (or groups of genes) that had the biggest impact in these calculations. 
-You will learn more about plotting your data in the Filter, Plot and Explore tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
+You will learn more about plotting your data in the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
 
 > ### {% icon hands_on %} Hands-on: Create a PCA Plot of Cell Cycle Genes 
 >
