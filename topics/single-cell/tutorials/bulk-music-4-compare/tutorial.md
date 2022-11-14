@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 subtopic: deconvo
-priority: 2
-title: Comparing inferred cell composition using MuSiC deconvolution
+priority: 4
+title: Comparing inferred cell compositions using MuSiC deconvolution
 #fixmezenodo_link: https://zenodo.org/record/5719228
 tags:
   - single-cell
