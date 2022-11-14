@@ -36,6 +36,12 @@ requirements:
       - bulk-music
       - bulk-music-2-preparescref
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-4-compare
 
 ---
 
@@ -63,7 +69,7 @@ Just as in our scRNA-dataset preparation tutorial, we will tackle the metadata f
 ## Find the data
 We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), browsing experiments in order to find a bulk RNA-seq pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results) using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our scRNA-seq reference from, so we should get quite accurate results given the same lab made both datasets!
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -90,7 +96,7 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 
 ![Columns in a table where some contain run info or Sample Characteristic[age] while others are empty.](../../images/bulk-music/bulk-metadata-annoying.png "Ridiculous metadata columns and labels")
 
-> ### {% icon hands_on %} Hands-on: Remove unnecessary columns
+> <hands-on-title> Remove unnecessary columns </hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `output` (Input dataset)
@@ -110,10 +116,6 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 17
 18`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!
@@ -127,7 +129,7 @@ Now let's take care of the excessively wordy header titles - and note that often
 > You might also remember in the MuSiC tutorial that we can analyse numeric parameters in the metadata (in that case, hbac1c content). Reformatting to ensure numerical values in these columns (i.e. taking the ` years` out of an age cell) is helpful then too.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Fixing titles
+> <hands-on-title> Fixing titles </hands-on-title>
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Advanced Cut** {% icon tool %})
@@ -162,7 +164,7 @@ This is ready to go, so now we'll reformat the matrix!
 
 Let's upload the dataset.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -202,7 +204,7 @@ Now examine {% icon galaxy-eye %} your raw counts file in the Galaxy history.
 
 While it's awesome that there's a gene name column, unfortunately the gene names will be duplicated - different ENS IDs can refer to the same Gene Name. This going to be a problem later. So we need to get this in a format to collapse the ENS IDs, just as we did previously in the scRNA-seq data reference preparation. Sadly, we'll start by removing the column of gene names to prepare for the ENS ID collapse.
 
-> ### {% icon hands_on %} Hands-on: Remove gene names column
+> <hands-on-title> Remove gene names column </hands-on-title>
 >
 > 1. {% tool [Remove columns](toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: `raw-counts` (Input dataset)
@@ -214,7 +216,7 @@ While it's awesome that there's a gene name column, unfortunately the gene names
 
 Now that your data is in a format of having a rows of ENS IDs and samples as columns, you can apply the handy ENS ID collapsing workflow as we did in the scRNA-seq reference.
 
-> ### {% icon hands_on %} Hands-on: Convert from Ensembl to GeneSymbol using workflow
+> <hands-on-title> Convert from Ensembl to GeneSymbol using workflow </hands-on-title>
 >
 > 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes).
 >
@@ -238,7 +240,7 @@ Success! You've now prepared your metadata and your matrix. It's time to put it 
 
 We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.
 
-> ### {% icon hands_on %} Hands-on: Creating the combined object
+> <hands-on-title> Creating the combined object </hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
@@ -268,7 +270,7 @@ We have three more tasks to do: first, we need to create the expression set obje
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Creating the disease-only object
+> <hands-on-title> Creating the disease-only object </hands-on-title>
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
@@ -288,7 +290,7 @@ We have three more tasks to do: first, we need to create the expression set obje
 
 You can either re-run this tool or set it up again to create the healthy-only object.
 
-> ### {% icon hands_on %} Hands-on: Creating the healthy-only object
+> <hands-on-title> Creating the healthy-only object </hands-on-title>
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
