@@ -73,7 +73,7 @@ Galaxy has a specific tool for ingesting data from the Single cell expression at
 >    - *"SC-Atlas experiment accession"*: `E-MTAB-5061`
 >
 > Data management is going to be key in this analysis, so trust me now to start adding tags.
-> 5. Add to the **EBI SCXA Data Retrieval on E-MTAB-5061 exp_design.tsv** file the following tags: #ebi #metadata #singlecell
+> 5. Add to the **EBI SCXA Data Retrieval on E-MTAB-5061 exp_design.tsv** file the following tags: `#ebi #metadata #singlecell`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 {: .hands_on}
@@ -327,6 +327,11 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
 >    - {% icon param-file %} *"Phenotype Data"*: `output` (output of **Advanced Cut** {% icon tool %})
 >
+> 2. Remove the `#metadata #matrix` tags from the output **RData ESet Object**
+>
+> 3. Add the tag `#combined` to the output **RData ESet Object**
+>
+>
 {: .hands_on}
 
 > <question-title></question-title>
@@ -352,9 +357,16 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
 >
+> 2. Remove the `#combined` tag from the output **RData ESet Object**
+>
+> 3. Add the tag `#T2D` to the output **RData ESet Object**
+>
+>
+>
 {: .hands_on}
 
 You can either re-run this tool or set it up again to create the healthy-only object.
+
 > ### {% icon hands_on %} Hands-on: Creating the healthy-only object
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
@@ -366,6 +378,10 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 >                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
+>
+> 2. Remove the `#combined` tag from the output **RData ESet Object**
+>
+> 3. Add the tag `#healthy` to the output **RData ESet Object**
 >
 {: .hands_on}
 

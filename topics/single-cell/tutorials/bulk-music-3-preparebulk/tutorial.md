@@ -80,7 +80,7 @@ We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), brows
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-5 6. Add to `experiment-design` the tags `#metadata`, `#bulk`, `#ebi`
+5 6. Add to `experiment-design` the following tags `#metadata #bulk #ebi`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -179,7 +179,7 @@ Let's upload the dataset.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. Add to `raw-counts` the tags `#matrix`, `#bulk`, `#ebi`
+> 5. Add to `raw-counts` the following tags `#matrix #bulk #ebi`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -193,7 +193,7 @@ Now examine {% icon galaxy-eye %} your raw counts file in the Galaxy history.
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > > 
-> > ![Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####](../../images/bulk-music/raw-matrix.png "Raw counts file appearance")
+> > ![Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####](../../images/bulk-music/raw-matrix.png "Gene info")
 > > 
 > > 1. By examining the matrix, you can find that genes are the rows while samples are the `columns`.
 > >
@@ -243,28 +243,32 @@ We have three more tasks to do: first, we need to create the expression set obje
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
 >    - {% icon param-file %} *"Phenotype Data"*: `out_file1` #metadata (output of **Regex Find And Replace** {% icon tool %})
+> 
+> 2. Remove the `#metadata #matrix` tags from the output **RData ESet Object**
+>
+> 3. Add the tag `#combined` to the output **RData ESet Object**
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many genes are in your object?
+> 2. How many samples?
+> 3. What metadata categories are there?
 >
-> > ### {% icon solution %} Solution
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > The trick with all of these questions is to examine {% icon galaxy-eye %} the `General info` output {% icon param-file %} of the **Construct Expression Set Object** tool.
+> > ![Lines showing ExpressionSet'; assayData: 34997 features, 7 samples; protocolData: none; phenoData; sampleNames: ERR### (7 total); varLabels: Age BMI Disease Sex; varMetadata: labelDescription; and 3 more useless lines ](../../images/bulk-music/generalinfo.png "General info output")
+> >
+> > 1. There are `34997` features, which are the genes. 
+> > 2. There are `7` samples.
+> > 3. The metadata categories are the same you prepared earlier, shown here in a category of phenoData: `Age BMI Disease Sex`
 > >
 > {: .solution}
->
 {: .question}
 
-## Sub-step with **Manipulate Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Creating the disease-only object
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
@@ -276,36 +280,15 @@ We have three more tasks to do: first, we need to create the expression set obje
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Remove the `#combined` tag from the output **RData ESet Object**
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. Add the tag `#T2D` to the output **RData ESet Object**
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+You can either re-run this tool or set it up again to create the healthy-only object.
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Manipulate Expression Set Object**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Creating the healthy-only object
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
@@ -317,43 +300,17 @@ We have three more tasks to do: first, we need to create the expression set obje
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Remove the `#combined` tag from the output **RData ESet Object**
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 3. Add the tag `#healthy` to the output **RData ESet Object**
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+{% icon congratulations %} Congrats! You have successfully reformatted the RNA-seq samples into three ESet objects consisting of combined, disease-only, or healthy-only samples. You're ready to take all this hard work and start comparing cell compositions in the next tutorial.
+
+You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--bulk--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--bulk--eset).
+
+![7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol](../../images/bulk-music/workflow-bulk.png "Workflow: Generating the bulk ESet Objects")
