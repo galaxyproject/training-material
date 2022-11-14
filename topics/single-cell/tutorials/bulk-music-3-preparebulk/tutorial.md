@@ -238,7 +238,7 @@ Success! You've now prepared your metadata and your matrix. It's time to put it 
 
 # Construct Expression Set Objects
 
-We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.
+We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we will create the two objects we actually need - one for healthy and one for diseased.
 
 > <hands-on-title> Creating the combined object </hands-on-title>
 >
@@ -247,8 +247,6 @@ We have three more tasks to do: first, we need to create the expression set obje
 >    - {% icon param-file %} *"Phenotype Data"*: `out_file1` #metadata (output of **Regex Find And Replace** {% icon tool %})
 > 
 > 2. Remove the `#metadata #matrix` tags from the output **RData ESet Object**
->
-> 3. Add the tag `#combined` to the output **RData ESet Object**
 >
 {: .hands_on}
 
@@ -282,9 +280,7 @@ We have three more tasks to do: first, we need to create the expression set obje
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
 >
-> 2. Remove the `#combined` tag from the output **RData ESet Object**
->
-> 3. Add the tag `#T2D` to the output **RData ESet Object**
+> 2. Add the tag `#T2D` to the output **RData ESet Object**
 >
 {: .hands_on}
 
@@ -302,16 +298,14 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 >                    - *"Name of phenotype column"*: `Disease`
 >                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
 >
-> 2. Remove the `#combined` tag from the output **RData ESet Object**
->
-> 3. Add the tag `#healthy` to the output **RData ESet Object**
+> 2. Add the tag `#healthy` to the output **RData ESet Object**
 >
 {: .hands_on}
 
 # Conclusion
 {:.no_toc}
 
-{% icon congratulations %} Congrats! You have successfully reformatted the RNA-seq samples into three ESet objects consisting of combined, disease-only, or healthy-only samples. You're ready to take all this hard work and start comparing cell compositions in the next tutorial.
+{% icon congratulations %} Congrats! You have successfully reformatted the RNA-seq samples into two ESet objects consisting of disease-only or healthy-only samples. You're ready to take all this hard work and start comparing cell compositions in the next tutorial.
 
 You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--bulk--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--bulk--eset).
 
