@@ -45,9 +45,16 @@ new_topic_for_tuto = {
     'Advanced R in Galaxy': 'Foundations of Data Science',
     'R basics in Galaxy': 'Foundations of Data Science',
     'Pre-processing of 10X Single-Cell RNA Datasets': 'Single Cell',
+    'Pre-processing of Single-Cell RNA Data': 'Single Cell',
     'Generating a single cell matrix using Alevin': 'Single Cell',
-    'Downstream Single-cell RNA analysis with RaceID': 'Single Cell'
+    'Downstream Single-cell RNA analysis with RaceID': 'Single Cell',
+    'Clustering 3K PBMCs with Scanpy':'Single Cell',
+    'Understanding Barcodes':'Single Cell',
+    'Filter, Plot and Explore Single-cell RNA-seq Data': 'Single Cell',
+    'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy': 'Single Cell',
+    'Bulk RNA Deconvolution with MuSiC': 'Single Cell'
 }
+
 new_topics = {
     'User Interface and Features': 'Using Galaxy and Managing your Data',
     'Data Manipulation': 'Using Galaxy and Managing your Data',
