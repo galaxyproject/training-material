@@ -96,7 +96,7 @@ The first part of this tutorial will deal with batches, and use example *FASTQ* 
 
 > <comment-title>10x Datasets</comment-title>
 >
-> 10x Genomics datasets can be processed in a much easier way that is outlined in the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
+> 10x Genomics datasets can be processed in a much easier way that is outlined in the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
 >
 > However, much of the essential concepts for scRNA-seq pre-processing are not explained, so it is a good idea to familiarise yourself with them in this tutorial.
 >
@@ -515,7 +515,7 @@ This concludes the first part of the tutorial which focused on the transformatio
 >
 {: .details}
 
-For the processing of 10x Genomics datasets, please refer to the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
+For the processing of 10x Genomics datasets, please refer to the [*Pre-processing of 10X Single-Cell RNA Datasets*]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %}) tutorial.
 
 # Multi-Batch Processing
 

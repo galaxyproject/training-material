@@ -65,7 +65,7 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 
 # Data
 
-The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
+The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
 
 * GSE123818\_Root\_single\_cell\_**shr**\_datamatrix.fixednames.transposed.csv.gz
 * GSE123818\_Root\_single\_cell\_**wt**\_datamatrix.fixednames.transposed.csv.gz
