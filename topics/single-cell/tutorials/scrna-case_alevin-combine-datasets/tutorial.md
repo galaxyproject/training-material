@@ -10,7 +10,7 @@ zenodo_link: 'https://zenodo.org/record/7075635'
 questions:
   - I have some AnnData files from different samples that I want to combine into a single file. How can I combine these and label them within the object?
 
-  redirect_from:
+redirect_from:
   - /topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial
 
 objectives:
