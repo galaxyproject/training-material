@@ -17,7 +17,7 @@ questions:
 objectives:
 - Apply the MuSiC deconvolution to samples and compare the cell type distributions
 - Compare the results from analysing different types of input, for example, whether combining disease and healthy references or not yields better results
-time_estimation: 2H
+time_estimation: 1H
 key_points:
 - Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets
 contributors:
@@ -110,9 +110,15 @@ It's finally time!
 >                - *"Comma list of cell types to use from scRNA dataset"*: `alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell`
 >            - In *"Bulk Datasets in scRNA Group"*:
 >                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_combined.rdata` (Input dataset)
+>                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
 >                    - *"Factor Name"*: `Disease`
+>                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
+>                    - *"Name of Bulk Dataset"*: `Bulk_set:T2D`
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
+>                    - *"Factor Name"*: `Disease`
+>
+> 2. To each of the outputs, add the `#altogether` tag.
 >
 {: .hands_on}
 
@@ -124,21 +130,21 @@ There are four sets of output files.
 
 ### Summarised Plots
 
-Examine {% icon galaxy-eye %} the output file *Summarised Plots (MuSiC)*. Now the first few pages are pretty standard stuff, similar to the standard deconvolution tool. Page 4 starts to get interesting, with some comparisons between the normal and T2D samples. Page 5, however, contains what we're looking for - a comparison of inferred cell proportions across disease.
+Examine {% icon galaxy-eye %} the output file *Summarised Plots (MuSiC)*. Now the first few pages are similar to the standard deconvolution tool, but now comparing across the factor of interest (disease). Among the myriad of visualisations available, our favourite is on page 5 - a comparison of inferred cell proportions across disease.
 
-![Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample.](../../images/bulk-music/altogether_comparison.png "Altogether: Resulting Graph")
+![Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample.](../../images/bulk-music/plot_altogether.png "Altogether: Resulting Graph")
 
 Here we can see that the bulk-RNA seq samples from the T2D patients contain markedly fewer beta cells as compared with their healthy counterparts. This makes sense, so that's good!
 
 ### Individual Heatmaps
 
-Examine {% icon galaxy-eye %} the output file *Individual heatmaps (MuSiC)*. This shows the cell distribution across each of the individual samples, but isn't terribly informative about our disease variable.
+Examine {% icon galaxy-eye %} the output file *Individual heatmaps (MuSiC)*. This shows the cell distribution across each of the individual samples, separated out by disease factor into two separate plots, but ultimately isn't particularly informative.
 
-![Heatmap showing vertically each Sample (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample.](../../images/bulk-music/individual_heatmaps.png "Altogether: Individual heatmaps")
+![Heatmap showing vertically four samples (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample.](../../images/bulk-music/individual_heatmaps.png "Altogether: Individual heatmaps")
 
 ### Stats
 
-If you select the *Stats* dataset, you'll find it contains two sets of data, `Bulk_set: Read Props` and `Bulk_set: Sample Props`. Examine {% icon galaxy-eye %} the file `Bulk_set: Sample Props`. This contains summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, overall. Again, this does not distinguish between healthy and disease so is not particularly helpful.
+If you select the *Stats* dataset, you'll find it contains four sets of data, `Bulk_disease: Read Props`, `Bulk_disease: Sample Props`, `Bulk_healthy: Read Props` and `Bulk_healthy: Sample Props`. Examine {% icon galaxy-eye %} the file `Bulk_disease: Sample Props`. This contains summary statistics (Min, quartiles, median, mean, etc.) for each phenotype. This could be quite helpful if you're trying to statistically identify differences across samples.
 
 ![Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean.](../../images/bulk-music/summary_statistics.png "Altogether: Stats")
 
@@ -146,20 +152,25 @@ If you select the *Stats* dataset, you'll find it contains two sets of data, `Bu
 
 Finally, if you select the *Tables* dataset, you'll find it contains three sets of data, `Data Table`, `Matrix of Cell Type Read Counts`, and `Matrix of Cell Type Sample Proportions`. 
 
-Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred proportions and reads associated with each sample and cell type, alongwith its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works.
+Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred proportions and reads associated with each sample and cell type, alongwith its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.
 
-Finally
+![Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads.](../../images/bulk-music/data_table.png "Altogether: Data table")
 
+> <question-title></question-title>
+>
+> 1. Why does the data table contain 42 rows?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The data table contains a row for each cell type within each sample. Since there are 6 cell types and 7 samples, `6*7 = 42` rows.
+> >
+> {: .solution}
+>
+{: .question}
 
-KEEP GOING HERE
+Hopefully, this has been illumating! Now let's try two other ways of inferring from a reference and see if it makes a difference.
 
-, examine {% icon galaxy-eye %} the file `Data Table`. 
-
-summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, overall. Again, this does not distinguish between healthy and disease so is not particularly helpful.
-
-![Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean.](../../images/bulk-music/summary_statistics.png "Altogether: Stats")
-
-## Altogether: Deconvolution of healthy samples with a healthy reference and diseased samples with a diseased reference
+## Like4like: Deconvolution of healthy samples with a healthy reference and diseased samples with a diseased reference
 
 > <hands-on-title> Like4like Inferrence </hands-on-title>
 >
@@ -167,6 +178,7 @@ summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, ove
 >    - In *"New scRNA Group"*:
 >        - {% icon param-repeat %} *"Insert New scRNA Group"*
 >            - *"Name of scRNA Dataset"*: `scRNA_set:Normal`
+>            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_healthy.rdata` (Input dataset)
 >            - In *"Advanced scRNA Parameters"*:
 >                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
 >                - *"Samples Identifier from scRNA dataset"*: `Individual`
@@ -174,10 +186,11 @@ summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, ove
 >            - In *"Bulk Datasets in scRNA Group"*:
 >                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
 >                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `output` (Input dataset)
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
 >                    - *"Factor Name"*: `Disease`
 >        - {% icon param-repeat %} *"Insert New scRNA Group"*
 >            - *"Name of scRNA Dataset"*: `scRNA_set:T2D`
+>            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_T2D.rdata` (Input dataset)
 >            - In *"Advanced scRNA Parameters"*:
 >                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
 >                - *"Samples Identifier from scRNA dataset"*: `Individual`
@@ -185,35 +198,27 @@ summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, ove
 >            - In *"Bulk Datasets in scRNA Group"*:
 >                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
 >                    - *"Name of Bulk Dataset"*: `bulk_set:T2D`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `output` (Input dataset)
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
 >                    - *"Factor Name"*: `Disease`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. Add the `#like4like` tag to each of the outputs.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How have the cell inferrences changed, now that we have changed the scRNA references used?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > IMAGE HERE TODO
+> > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inferrence of a beta cell and leading to a higher proportion of interred B-cells.
 > >
 > {: .solution}
 >
 {: .question}
+
+Let's try one more inferrence - this time, we'll use only healthy cells as a reference, to (theoretically) make a more consistent analysis across the two phenotypes.
 
 ## healthyscref: Deconvolution using only healthy cells as a reference
 
@@ -223,6 +228,7 @@ summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, ove
 >    - In *"New scRNA Group"*:
 >        - {% icon param-repeat %} *"Insert New scRNA Group"*
 >            - *"Name of scRNA Dataset"*: `scRNA_set:Normal`
+>            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_healthy.rdata` (Input dataset)
 >            - In *"Advanced scRNA Parameters"*:
 >                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
 >                - *"Samples Identifier from scRNA dataset"*: `Individual`
@@ -230,47 +236,34 @@ summary statistics (Min, quartiles, median, mean, etc.) for the bulk sample, ove
 >            - In *"Bulk Datasets in scRNA Group"*:
 >                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
 >                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `output` (Input dataset)
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
 >                    - *"Factor Name"*: `Disease`
 >                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
 >                    - *"Name of Bulk Dataset"*: `Bulk_set:T2D`
+>                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
 >                    - *"Factor Name"*: `Disease`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 2. Add the `#healthyscref` tag to each of the outputs.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How have the cell inferrences changed this time?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > IMAGE HERE TODO
+> > 1. If using a like4like inferrence reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+Overall, it's important to remember how the inferrence changes depending on the reference used - for example, a combined reference might have majority healthy samples or diseased samples, so that would impact the inferred cellular compositions.
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferrences using multiple kinds of reference datasets. We hope this helps you in your research!
+
+![Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool](../../images/bulk-music/compare_workflow.png "MuSiC Compare Tutorial Workflow")

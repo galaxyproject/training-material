@@ -10,7 +10,7 @@ objectives:
 - You will manipulate the metadata and matrix files.
 - You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.
 - You will create multiple ESet objects - both combined and separated out by disease phenotype for your single cell reference.
-time_estimation: 2H
+time_estimation: 1H
 key_points:
 - The EMBL-EBI Single-cell expression atlas contains high quality datasets.
 - Metadata manipulation is key for generating the correctly formatted resource.

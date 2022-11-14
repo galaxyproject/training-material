@@ -26,7 +26,7 @@ tags:
   - bulk
   - transcriptomics
 
-time_estimation: 2H
+time_estimation: 1H
 
 requirements:
   -
