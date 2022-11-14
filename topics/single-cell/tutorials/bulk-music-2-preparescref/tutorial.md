@@ -18,13 +18,6 @@ contributors:
 - nomadscientist
 - mtekman
 
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - bulk-music-3-preparebulk
-
 requirements:
   -
     type: "internal"
@@ -54,9 +47,9 @@ After completing the MuSiC {% cite wang2019bulk %} deconvolution tutorial, you a
 
 # Metadata Manipulation
 
-First, we will tackle the metadata. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it. 
+First, we will tackle the metadata. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it.
 
-## Find the data 
+## Find the data
 We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
 
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
@@ -72,7 +65,7 @@ Galaxy has a specific tool for ingesting data from the Single cell expression at
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 {: .hands_on}
 
-This tool will retrieve four files: a barcodes list, a genes list, an experimental design file, and a matrix market format (where columns refer to genes, cells, and quantities). We (mostly) only need the experimental design file, but keep in mind this will have data on all the cells reported by the authors. 
+This tool will retrieve four files: a barcodes list, a genes list, an experimental design file, and a matrix market format (where columns refer to genes, cells, and quantities). We (mostly) only need the experimental design file, but keep in mind this will have data on all the cells reported by the authors.
 
 > <question-title></question-title>
 >
@@ -298,7 +291,7 @@ As biologists, it's very difficult to interpret ENSIDs. And it's an awful shame 
 > 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes).
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
-> 
+>
 > 2. Run the workflow on your sample with the following parameters:
 >    - *"Organism"*: `Human`
 >    - {% icon param-file %} *"Expression Matrix (Gene Rows)"*: `output_h5` (output of **Transpose** {% icon tool %})
@@ -328,7 +321,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > >
-> > 1. If you select the {% icon galaxy-eye %} of the output **General Info** dataset in the history, you will find it contains 21671 features and 2914 samples, or rather, `21671` genes and 2914 cells. That's a huge reduction in genes thanks to the ENS ID collapsing! 
+> > 1. If you select the {% icon galaxy-eye %} of the output **General Info** dataset in the history, you will find it contains 21671 features and 2914 samples, or rather, `21671` genes and 2914 cells. That's a huge reduction in genes thanks to the ENS ID collapsing!
 > >
 > {: .solution}
 {: .question}
@@ -368,7 +361,7 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > >
-> > 1. We could imagine that the cells will express different transcript levels, but that the deconvolution tools will have to take some sort of average. Perhaps it might be more accurate to infer like from like, i.e. healthy from healthy? Or perhaps that is skewing the data through a more 'supervised' approach. We're not   quite sure, and it likely depends on the biology, so we're covering all our bases by making sure you can do this every way. (We've tested it on our dataset in all the ways and got the same results, so it doesn't make much of a difference as far as we can tell!) 
+> > 1. We could imagine that the cells will express different transcript levels, but that the deconvolution tools will have to take some sort of average. Perhaps it might be more accurate to infer like from like, i.e. healthy from healthy? Or perhaps that is skewing the data through a more 'supervised' approach. We're not   quite sure, and it likely depends on the biology, so we're covering all our bases by making sure you can do this every way. (We've tested it on our dataset in all the ways and got the same results, so it doesn't make much of a difference as far as we can tell!)
 > >
 > {: .solution}
 {: .question}
