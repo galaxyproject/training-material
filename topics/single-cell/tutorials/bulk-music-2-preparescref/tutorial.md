@@ -25,6 +25,19 @@ requirements:
     tutorials:
       - bulk-music
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-3-preparebulk
+
+tags:
+  - single-cell
+  - human
+  - deconvolution
+  - bulk
+  - transcriptomics
 ---
 
 
@@ -33,7 +46,7 @@ requirements:
 
 <!-- This is a comment. -->
 
-After completing the MuSiC {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}.  [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}. Let's get started!
+After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!
 
 
 > ### Agenda
