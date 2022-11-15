@@ -1,4 +1,7 @@
 ---
+redirect_from:
+- /topics/transcriptomics/faqs/umi
+
 title: Are UMIs not actually unique?
 area: Single-Cell RNA
 box_type: tip

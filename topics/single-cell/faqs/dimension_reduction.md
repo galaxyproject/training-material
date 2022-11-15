@@ -1,4 +1,7 @@
 ---
+redirect_from:
+- /topics/transcriptomics/faqs/dimension_reduction
+
 title: Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?
 area: gene
 box_type: tip

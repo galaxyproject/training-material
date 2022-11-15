@@ -1,4 +1,7 @@
 ---
+redirect_from:
+- /topics/transcriptomics/faqs/amplification
+
 title: Why is amplification more of an issue in scRNA-seq than RNA-seq?
 area: Single-Cell RNA
 box_type: tip

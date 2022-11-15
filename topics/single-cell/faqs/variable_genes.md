@@ -1,4 +1,7 @@
 ---
+redirect_from:
+- /topics/transcriptomics/faqs/variable_genes
+
 title: Why do we only consider highly variable genes?
 area: gene
 box_type: tip
