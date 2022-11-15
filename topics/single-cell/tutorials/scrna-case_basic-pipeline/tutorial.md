@@ -53,7 +53,7 @@ follow_up_training:
     type: "internal"
     topic_name: single-cell
     tutorials:
-        - scrna-case_JUPYTER-Trajectories
+        - scrna-case_JUPYTER-trajectories
         - scrna-case_monocle3-trajectories
 ---
 
