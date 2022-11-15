@@ -23,7 +23,7 @@ time_estimation: 3H
 key_points:
 - Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
 - Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
-  - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study
+  - Ready for the [final] tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) in this case study
 requirements:
 -
     type: "internal"
@@ -64,7 +64,7 @@ follow_up_training:
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 
 > <comment-title>Tutorials everywhere?</comment-title>
-> This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
+> This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
 {: .comment}
 
 > <agenda-title></agenda-title>
@@ -78,7 +78,7 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -799,7 +799,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >    - *"+ Insert Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`
 >    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
->    
+>
 >    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
 >
 > 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} {% icon tool %} with the following parameters:
