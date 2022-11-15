@@ -52,6 +52,8 @@ new_topic_for_tuto = {
     'Understanding Barcodes':'Single Cell',
     'Filter, Plot and Explore Single-cell RNA-seq Data': 'Single Cell',
     'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy': 'Single Cell',
+    'Trajectory Analysis using Python (Jupyter Notebook) in Galaxy': 'Single Cell',
+    'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy': 'Single Cell',
     'Bulk RNA Deconvolution with MuSiC': 'Single Cell'
 }
 
