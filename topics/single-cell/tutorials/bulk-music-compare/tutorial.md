@@ -44,7 +44,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need is well-annotated, high quality reference scRNA-seq dataset (or multiple!) and your bulk RNA-samples of choice. For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -62,7 +62,7 @@ To perform this analysis, we will use mouse kidney single-cell RNA-seq data from
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Dendrogram of Mouse Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -97,7 +97,7 @@ To perform this analysis, we will use mouse kidney single-cell RNA-seq data from
 >
 {: .hands_on}
 
-> ### {% icon details %} Exploring the Datasets
+> <details-title>Exploring the Datasets</details-title>
 >
 > As before, you may choose to explore the bulk and scrna datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.
 >
@@ -107,13 +107,13 @@ You will need to again create ExpressionSet objects, as before.
 
 ### **Construct Expression Set Object**
 
-> ### {% icon hands_on %} Hands-on: Build the Expression Set inputs
+> <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `Mousebulkeset.expression.tabular` (Input dataset)
 >    - {% icon param-file %} *"Phenotype Data"*: `Mousebulkeset.phenotype.tabular` (Input dataset)
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > An ExpressionSet object has many data slots, the principle of which are the experiment data (*exprs*), the phenotype data (*pData*), as well metadata pertaining to experiment information and additional annotations (*fData*).
 >    {: .comment}
@@ -126,7 +126,7 @@ You will need to again create ExpressionSet objects, as before.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Cell Type inference of Human Pancreas Data"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -189,7 +189,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
-> ### {% icon details %} More details about the theory
+> <details-title>More details about the theory</details-title>
 >
 > But to describe more details, it is possible to use the detail boxes which are expandable
 >
@@ -200,7 +200,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Cut**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4,c5,c6,c7`
@@ -210,7 +210,7 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -219,12 +219,12 @@ A big step can have several subsections or sub steps:
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Question1?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
@@ -235,7 +235,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Split file**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Split file](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to select"*: `output` (Input dataset)
@@ -246,7 +246,7 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -255,12 +255,12 @@ A big step can have several subsections or sub steps:
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Question1?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
@@ -271,7 +271,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **Construct Expression Set Object**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -280,7 +280,7 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -289,12 +289,12 @@ A big step can have several subsections or sub steps:
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Question1?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
@@ -305,7 +305,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **MuSiC Compare**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
 >    - In *"New scRNA Group"*:
@@ -326,7 +326,7 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -335,12 +335,12 @@ A big step can have several subsections or sub steps:
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Question1?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
@@ -351,7 +351,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **MuSiC Compare**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
 >    - In *"New scRNA Group"*:
@@ -376,7 +376,7 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Consider adding a comment or tip box*
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -385,12 +385,12 @@ A big step can have several subsections or sub steps:
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Question1?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. Answer for question2
