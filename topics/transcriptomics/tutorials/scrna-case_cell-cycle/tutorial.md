@@ -8,8 +8,14 @@ questions:
 objectives:
 - Identify and regress out the effects of cell cycle genes
 - Create PCA plots to understand the impact of the regression
-requirements:
-- 
+- requirements:
+-
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
+        - scrna-case_basic-pipeline
 time_estimation: 1H
 key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are being grouped according to their stage in the cycle
@@ -30,6 +36,11 @@ One common biological confounder is the cell cycle. Cells express different gene
 
 In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can regress out (or remove) their effects on the
 data. 
+
+>    > ### {% icon comment %} Comment
+>    >
+>    > This tutorial is based on the Scanpy tutorial {% cite ScanpyCC %}, which was itself based on the Seurat vignette {% cite SeuratCC %}. However, we will be using a different dataset for this tutorial. 
+>    {: .comment}
 
 > ### Agenda
 >
@@ -91,6 +102,11 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 
 The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
 
+>    > ### {% icon comment %} Comment
+>    > When should we regress out the effects of the cell cycle? 
+>    >  Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle. However, it isn't always appropriate to remove the effects of the cell cycle genes - sometimes it can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the cell cycle genes are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters. 
+>    {: .comment}
+
 > ### {% icon hands_on %} Hands-on: Score the cell cycle genes
 >
 > 1. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
@@ -118,13 +134,15 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 
 # Cell Cycle Regression
 
-The second step after scoring the cell cycle genes is to regress out their effects. Now that we know which genes are linked to the cell cycle and how they are affecting our cells, we can cancel out their effects so that they won't influence our later analyses of the data. 
+The second step after scoring the cell cycle genes is to regress out their effects. Now that we know which genes are linked to the cell cycle and how they are affecting our cells, we can subtract their effects from the data so that they won't influence our later analyses. 
 
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon details %} How does cell cycle regression work?
+> 
+>The {% tool Scanpy RegressOut %} tool will create a linear model of the relationship between gene expression and the `S_score` and `G2M_score` we calculated in the previous step. Basically, this model is a line that shows how gene expression changes as the S or G2M score changes. For any S score or G2M score, we could look at the corresponding point on the line to see the expected expression level of the gene. 
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+>{% tool Scanpy RegressOut %} will then regress out or remove this expected effect for the genes expressed by each cell, according to its S and G2M scores. The expected effect is subtracted from the expression data, leaving behind the difference between the expected position on the line and the actual position of each data point.
+>
+> We don't want to completely delete the cell cycle genes from the dataset because they could still provide useful information about differences between cells - after we have regressed out the expected effect of the cell cycle, there will still be some variation in their expression. 
 >
 {: .details}
 
@@ -250,7 +268,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 {: .question}
 
 ## Create the annotation column 
-We now have a table with all the gene names in the same order as the main dataset and a column indicating which ones are cell cycle genes. If we cut this column out of the table then we can add it as a new annotation to the main dataset. We'll also need to add a column header, which will be used as the key for this annotation in the AnnData dataset. 
+We now have a table with all the gene names in the same order as the main dataset and a column indicating which ones are cell cycle genes. If we cut this column out of the table, then we can add it as a new annotation to the main dataset. We'll also need to add a column header, which will be used as the key for this annotation in the AnnData dataset. 
 
 > ### {% icon hands_on %} Hands-on: Create the cell cycle annotation column 
 >
@@ -395,7 +413,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, which are no longer having the same impact because their effects have been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the genes, leaving behind any individual variation in their expression between cells.
 > > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](https://github.com/MarisaJL/training-material/blob/main/topics/transcriptomics/images/CellCycle_PCA2.png?raw=true)"PCA Plot of Cell Cycle Genes after regression"
-> > 2. The cell cycle genes aren't having a coordinated effect on the data now that they have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effect of the cell cycle genes are in this particular dataset. 
+> > 2. The cell cycle genes aren't having a coordinated effect on the data now that they have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle genes are in this particular dataset. 
 > >
 > {: .solution}
 >
@@ -406,6 +424,6 @@ Comparing the before and after plots, we can clearly see that the effects of the
 # Conclusion
 {:.no_toc}
 
-In this tutorial, you have annotated, scored and regressed out the effects of the cell cycle genes. You have also created PCA plots of the data before and after regression to visualise the effects. 
+In this tutorial, you have annotated, scored, and regressed out the effects of the cell cycle genes. You have also created PCA plots of the data before and after regression to visualise the effects. 
 
 You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial.html) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the cell cycle genes have been regressed out. 
