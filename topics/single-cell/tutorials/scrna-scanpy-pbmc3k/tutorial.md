@@ -77,7 +77,7 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 - `barcodes.tsv`: a tabular file with the barcode for each of the 2,700 cells
 - `matrix.mtx`: a condensed version of the count matrix
 
-    The count matrix is therefore represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [here](https://math.nist.gov/MatrixMarket/formats.html)
+    The count matrix is therefore represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [in this documentation](https://math.nist.gov/MatrixMarket/formats.html)
 
 ## Data upload
 
