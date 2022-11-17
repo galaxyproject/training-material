@@ -59,7 +59,7 @@ contributors:
 - This module outlines the major components, and how they fit together
 - Drafted by a human, it represents only one of many possible explanations
 
-> <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
+> <details-title>Classifying components in a global open science project is a hard problem</details-title>
 > - Categories and divisions are necessarily arbitrary. 
 > - The project has grown of its own accord, not neatly from a blueprint.
 > - Driven by shared vision and values, adapting to rapid external developments
@@ -68,68 +68,82 @@ contributors:
 > - No obvious “best” way to describe an open science collaborative ecosystem.
 > - No known terminology for the components or interactions.
 > - Need to invent a descriptive approach.
-{:  .tip}
+{:  .details}
  
 
-## People + grant resource inputs + open source => project outputs
+## People + resource inputs = project outputs
+- A kind of functional equation for Galaxy
+- Explanation in the optional detail sections
 
-### People working together make the project possible
-- Self governed collaboration
-    - Many independent institutions and investigators 
-    - No single institution has control
--  Individuals engage with the project on their own terms
-    - Leading and participating in community activities
-    - Communities of practice
-    - Collaborating investigators with grant resources
-    - Contributing training material, documentation, source code 
-    - Participation and leadership in governance
-
-### Grant resource inputs help sustain the communities, team, collaborations and services
-- Supports core "corporate" project services
-- Source code maintenance, support and enhancenments,...,GTN
-- Computational resource allocations for free services
-    - adding substantial value to the source
-    - Free analysis and training services
-- Professional staff
-    - outreach, communication, project management.
-    - user support, system administration and software engineers.
-
-### Project code and services depend on the open source community
-- Galaxy depends on thousands of other open source projects
-
-### Project outputs - things the project delivers for open science and scientists
-- Source code
-- Online analysis services
-- GTN open access to training material any time and to periodic training intensives.
-    - Provides capacity building resources:
-        - Introductory Galaxy useage training
-        - Specialised training 
-            - for users doing common analyses in a range of specialties 
-            - for tool wrapper and software developers
-            - for trainers
-            - for server system administrators  
-    - Best practice standards and automation for writing tool wrappers and workflows - IUC
-    - Communities of practice specialty toolkits such as in proteomics or ecology.
+> <details-title>People working together make the project possible</details-title>
+> - That might seem trite, but it's how open source succeeds.
+> - Shared values help people get things done
+> - Self governed collaboration because no single "owner"
+>     - Many independent institutions and investigators 
+>     - No single institution has control
+> -  Individuals engage with the project on their own terms
+>     - Leading and participating in community activities
+>     - Communities of practice
+>     - Collaborating investigators with grant resources
+>     - Contributing training material, documentation, source code 
+>     - Participation and leadership in governance.
+{:  .details}
 
 
-# People and organisation
+> <details-title>Grant resource inputs help sustain the communities, team, collaborations and services</details-title>
+> - Core "corporate" project services like outreach, communication and administration.
+> - Source code management, user support, usegalaxy.*, GTN and other services.
+> - Computational resource allocations for free services
+>     - adding substantial value to the source
+>     - Free analysis and training services
+> - Professional staff
+>     - outreach, communication, project management.
+>     - user support, system administration and software engineers.
+{:  .details}
+
+> <details-title>Project code and services depend on resources from open source community</details-title>
+> - Galaxy source code depends on interacting resources provided by thousands of other open source projects
+> - Flavours for Galaxy servers depend on command line software packages wrapped as tools
+{:  .details}
+
+> <details-title>Project outputs - things the project delivers for open science and scientists</details-title>
+> - Source code
+> - Online analysis services
+> - ToolShed automated tools for servers
+> - Best practice standards and automation for writing tool wrappers and workflows - IUC
+> - Communities of practice specialty toolkits such as in proteomics or ecology.
+> - GTN open access to training material any time and to periodic training intensives.
+>     - Provides capacity building resources:
+>         - Introductory Galaxy useage training
+>         - Specialised training 
+>             - for users doing common analyses in a range of specialties 
+>             - for tool wrapper and software developers
+>             - for trainers
+>             - for server system administrators  
+{:  .details}
+
+
+# People: Individuals, collaborations, communities and governance
 
 - How people engage and work together is central to understanding how Galaxy works
-- The inputs and outputs are left to the end.
+- People bring the resource inputs and project outputs are what people produce.
+- For this module, how they get things done is of more interest than exactly what they do.
 
 ## Communities
 
-- Participants form relationships and communities
-- Usually self identified as a shared interest that drives some collaboration or organisation
-- Open source shared values regulate interactions, so they are inclusive, participatory, professional.
-    - Project strives to engage contributors and users
-    - Supporting and listening helps focus on real scientific need
-    - Engaged and skilled community members provide valuable contributions to improve the project
-- Formal and informal communities, sharing a distinguishing common interest or feature
-    - Developers and contributors collaborate in an ecology of open source communities
-    - Communities contribute important tool kits and training material.
-- Important part of project growth and sustainability.
-- Core resource that adds enormous value to the project
+- Participants more likely to interact when they share a particular interest
+- Informal and formal communities are formed by these interactions.
+- They are an important part of any open project 
+- Open source shared values drive participation
+    - inclusive, participatory, professional behaviours are encouraged
+    - Project strives to welcome and engage contributors and users
+    - Community members are encouraged to help improve the project
+- A community might define itself as participants sharing a particular interest.
+    - Recognisable communities organise activities for interested participants
+    - Code contributors collaborate as one of many interacting open source communities
+    - Communities of practice contribute consensus best practice, tool kits and training material.
+- Project growth and sustainability are dependent on providing value through community engagement
+- Communities are a core resource, adding substantial value to project grant resources.
 
 ### Communities of Practice
 
@@ -150,7 +164,7 @@ contributors:
 - "Free" Galaxy analysis services are sustained by large research grants
 
 
-> <tip-title>Collaborative resources in more details</tip-title>
+> <details-title>Collaborative resources in more details</details-title>
 > - Free analysis consumes substantial research infrastructure and computational resources 
 > - Project activities are supported by highly skilled professionals
 > - Independent grants operate efficiently for their own goals and can pool resources
@@ -159,29 +173,27 @@ contributors:
 > - Some are code focussed, others provide resources such as the GTN and usegalaxy.* services
 > - Community engagement and contribution adds import additional value
 > - These must work together efficiently for the project to succeed.
-{:  .tip}
+{:  .details}
  
 
 
 ## Contributors
-
+ 
 - Galaxy is an open project, where contributors are welcomed and supported
 - Project success and sustainability depends on contributions from community members.
 - Project complexity offers many opportunities for contribution
 - Effort is needed to make it easier to navigate.
-- Some examples for different kinds of skills
-    - Issues can be raised and pull request submitted for review at the github repository. 
-    - The GTN provides integrated tutorials on using Galaxy, and technical capacity building training material, such as on server administration, and on making GTN tutorials. Infrastructure for slides narrated in multiple languages, and hands-on tutorials applying real Galaxy tools to real data are supported.
-    - The IUC provides best practice guidance and GTN training modules to help developers build new tool wrappers for Galaxy, and automated infrastructure to help maintain them efficiently.
-    - GGSC offers opportunities for motivated community members to initiate and lead community development collaborations that can help the project to expand into activities that help support and expand subcommunities of users.
-    - Working groups provide opportunities for the contribution of technical and other skills in focussed project areas ranging from GUI development through to training and outreach.
-
 - In the past, many community members have become highly valued contributors by finding their own particular way to join in.
-
 - More recently, effort is being devoted to documenting and clarifying the process, to make it far easier to navigate, for all kinds of contributors. 
-
 - This training module is part of that effort and there is a separate module on contributor pathways and stories to help show how many useful contributions have been made.
 
+> <details-title>Examples for different kinds of skills and interests</details-title>
+> - Issues can be raised and pull request submitted for review at the github repository. 
+> - The GTN provides integrated tutorials on using Galaxy, and technical capacity building training material, such as on server administration, and on making GTN tutorials. Infrastructure for slides narrated in multiple languages, and hands-on tutorials applying real Galaxy tools to real data are supported.
+> - The IUC provides best practice guidance and GTN training modules to help developers build new tool wrappers for Galaxy, and automated infrastructure to help maintain them efficiently.
+> - GGSC offers opportunities for motivated community members to initiate and lead community development collaborations that can help the project to expand into activities that help support and expand subcommunities of users.
+> - Working groups provide opportunities for the contribution of technical and other skills in focussed project areas ranging from GUI development through to training and outreach.
+{:  .details}
 
 ## Users
 
