@@ -79,7 +79,7 @@ This tutorial will take you from the multiple AnnData outputs of the [previous t
 
 
 ## Get Data
-The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html).
+The sample data is a subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Each of the 7 samples (N701 --> N707) has been run through the workflow from the [Alevin tutorial](https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html).
 
 You can access the data for this tutorial in multiple ways:
 
