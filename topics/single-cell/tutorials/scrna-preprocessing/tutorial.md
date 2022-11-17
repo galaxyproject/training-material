@@ -579,7 +579,7 @@ To resolve this we can perform a "Full Table Join" where the missing data for *G
 ![Table Join]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg %} "Full Table Join")
 
 > <comment-title></comment-title>
-> For more information on table joins, see [here](http://www.sql-join.com/sql-join-types/)
+> For more information on table joins, see [this guide](http://www.sql-join.com/sql-join-types/)
 {: .comment}
 
 
