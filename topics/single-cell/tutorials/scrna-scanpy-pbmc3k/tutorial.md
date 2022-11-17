@@ -127,7 +127,7 @@ The representation of the matrix with 3 files is convenient to share the data bu
 
 The most common format, called [`AnnData`](https://anndata.readthedocs.io/en/stable/), stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:
 
-![Anndata format](../../scrna-pre-processing/tenx_anndata.svg "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
+![Anndata format]({% link topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}), the tool suite for analyzing single-cell gene expression data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an `AnnData` object.
 
@@ -567,7 +567,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC violin plot](../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png)
+>    > ![QC violin plot]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_violin_plot.png %})
 >    > <!-- To update... -->
 >    >
 >    > How do the distributions of the 3 QC metrics look?
@@ -596,7 +596,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC total_counts n_genes_by_counts](../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png)
+>    > ![QC total_counts n_genes_by_counts]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png %})
 >    >
 >    > Is there any relationship between the cell size and the number of expressed genes?
 >    >
@@ -620,7 +620,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC total_counts pct_counts_mito](../../images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png)
+>    > ![QC total_counts pct_counts_mito]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png %})
 >    >
 >    > 1. Is there any relationship between the number of expressed genes and the proportion of reads mapped to mitochondrial genes?
 >    > 2. What could be a good threshold to filter for cells with high concentrations of mitochondrial genes?
@@ -805,7 +805,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 >
 {: .hands_on}
 
-![Highly variable genes](../../images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png)
+![Highly variable genes]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png %})
 
 Both highly variable genes and other genes are still in the `AnnData` object. We can now actually keep only the highly variable genes.
 
@@ -1091,7 +1091,7 @@ Scanpy provides several useful ways of visualizing both cells and genes that def
 >        - *"Number of panels per row"*: `2`
 {: .hands_on}
 
-![PCA overview](../../images/scrna-scanpy-pbmc3k/pca_overview.png)
+![PCA overview]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/pca_overview.png %})
 
 On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.
 

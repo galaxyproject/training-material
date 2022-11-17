@@ -67,11 +67,11 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
- ![Cell Barcodes](../../images/scrna-intro/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
+ ![Cell Barcodes]({% link topics/single-cell/images/scrna-intro/scrna_pbb_barcodes_add.svg %} "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
 
 Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.
 
- ![Transcript Barcodes](../../images/scrna-uis/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
+ ![Transcript Barcodes]({% link topics/single-cell/images/scrna-umis/scrna_umi_add.svg %} "Random oligonucleotides barcodes added to (cell barcoded) reads")
 
 There are two things to take note of:
 
@@ -116,7 +116,7 @@ Amplification is an imprecise process however, since some reads are amplified mo
 
 ## Naive Amplification
 
- ![Amplification Bias](../../images/scrna_amplif_errors.svg "A cell with two reads from different transcripts being amplified unevenly")
+ ![Amplification Bias]({% link topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg %} "A cell with two reads from different transcripts being amplified unevenly")
 
 
 
@@ -135,7 +135,7 @@ How do we correct for this bias?
 
 **Unique Molecular Identifiers** (or *UMIs*) constitute the second portion of a barcode, where their role is to *uniquely* count reads such that amplicons of the same read are only counted once, e.g:
 
- ![Amplification Bias with UMIs](../../images/scrna_amplif_errors_umis.svg "A cell with four unique transcripts, two from Gene Red and two from Gene Blue")
+ ![Amplification Bias with UMIs]({% link topics/single-cell/images/scrna-intro/scrna_amplif_errors_umis.svg %} "A cell with four unique transcripts, two from Gene Red and two from Gene Blue")
 
  Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:
 
