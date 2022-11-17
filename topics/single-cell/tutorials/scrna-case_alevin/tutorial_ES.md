@@ -63,9 +63,6 @@ follow_up_training:
 ---
 
 # Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos FASTQ a una matriz de datos en formato AnnData donde cada célula es una fila y cada gen es una columna. Pero, ¿Qué es una matriz de datos y cuál es el formato AnnData? Lo averiguaremos a su debido tiempo. Enfatizamos que este es el primer paso para procesar datos de secuenciación de células únicas para poder realizar su análisis.
 
@@ -806,7 +803,6 @@ Si te interesa analizar datos de acceso público, particularmente del [Single Ce
 Es importante tener en cuenta que esta matriz es procesada de cierto modo por medio del pipeline SCXA, que es muy similar a este tutorial, y que contiene todos y cada uno de los metadatos proporcionados por su pipeline, así como sus autores (por ejemplo, más anotaciones celulares o de genes).
 
 # Conclusion
-{:.no_toc}
 
 ![Workflow Part 1](../../images/scrna-casestudy/wab-alevin-part1workflow.png "Flujo de trabajo - Pasos 1-3")
 
