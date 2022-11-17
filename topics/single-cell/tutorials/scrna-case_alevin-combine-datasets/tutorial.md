@@ -125,7 +125,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1){% icon tool %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N707 to N702`
