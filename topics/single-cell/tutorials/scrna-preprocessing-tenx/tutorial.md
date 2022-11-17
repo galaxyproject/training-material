@@ -119,7 +119,7 @@ Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first pa
 >
 > ![tenx_runtimes]({% link topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
 >
-> The image is from [*"Melsted et al (June, 2019)*](https://doi.org/10.1101/673285). Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.
+> The image is from {% cite Melsted2019 %}. Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.
 {: .details}
 
 The second part of this tutorial also has a one-click solution to producing a matrix identical to that given by the *Cell Ranger* pipeline, but the more interesting aspects of the pipeline are explored in the *Introspective Method* part of the tutorial.

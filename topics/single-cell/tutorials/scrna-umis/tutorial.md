@@ -40,7 +40,7 @@ Barcodes are small oligonucleotides that are inserted into the captured sequence
 
 When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.
 
-Barcodes come in a variety of formats, and in this tutorial we will be looking at the [CEL-Seq2 protocol](https://doi.org/10.1186/s13059-016-0938-8) used in droplet-based single-cell RNA-seq.
+Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol {% cite Hashimshony2016 %} used in droplet-based single-cell RNA-seq.
 
 ### The CEL-Seq2 Protocol
 
@@ -78,7 +78,7 @@ There are two things to take note of:
  1. The number of duplicates in the transcript barcodes (left)
  2. The number of duplicate read transcripts (right)
 
-Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ([ref](https://doi.org/10.1038/nrg3542)) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
+Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ({% cite Shapire2013 %}) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
 
 > <question-title></question-title>
 >
