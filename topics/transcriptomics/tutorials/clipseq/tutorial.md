@@ -74,7 +74,7 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 >
 >    ![upload](../../images/transcriptomics_images/upload_data_page.png "Data can be imported directly with links.")
 >
->   ![data](../../images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
+>   ![data](../../images/transcriptomics_images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
 >
 {: .hands_on}
 

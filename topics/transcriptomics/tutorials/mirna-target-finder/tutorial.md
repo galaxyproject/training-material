@@ -33,7 +33,7 @@ As sessile organisms, the survival of plants under adverse environmental conditi
 
 Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones (Figure 1). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.
 
-![fig1:Esteroid hormones](../../images/transcriptomics_images/brassinosteroids.png "Structure of various plant and animal steroid hormones.")
+![fig1:Esteroid hormones]({% link topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png %} "Structure of various plant and animal steroid hormones.")
 
 Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect diverse abiotic stress conditios, such as drought, but also by enhancing plant growth and yield. For instance, in tomato (_Solanum lycopersicum_), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense ({% cite Wang2018 %}). In pepper (_Capsicum annuum_), BL treatment increased the efficiency of light utilization under drought ({% cite Hu2013 %}). Gram (_Cicer arietinum_) plants exposed to drought stress and treated with BL showed significant increases in weight ({% cite Anwar2018 %}). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.
 
