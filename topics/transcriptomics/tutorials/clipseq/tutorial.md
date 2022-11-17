@@ -29,14 +29,14 @@ contributors:
 # Introduction
 
 
-The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ({% cite VanNostrand2016%}). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ({% cite VanNostrarnd2016 %}). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
-**Table 1**: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.
+**Table 1**: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by *Nostrand et al.* ([2016]({% cite VanNostrand2016 %}). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.
 
 | Cellular state | Datatype | Description | Replicate | ENCODE Accession | Library type | Read length | Stranded? |
 | ---            | ---      | :-:     | :-:       | ---           | :-:          | :-:         | :-:       |
-| Hep G2            | [eCLIP](https://doi.org/10.1038/nmeth.3810) | RBFOX2   | 1         | ENCSR987FTF     | PE           | 175-300          | Yes        |
-| Hep G2            | [eCLIP](https://doi.org/10.1038/nmeth.3810) | input   | 1         | ENCSR799EKA     | PE           | 175-300          | Yes        |
+| Hep G2            | eCLIP | RBFOX2   | 1         | ENCSR987FTF     | PE           | 175-300          | Yes        |
+| Hep G2            | eCLIP | input   | 1         | ENCSR799EKA     | PE           | 175-300          | Yes        |
 
 
 > <agenda-title></agenda-title>
@@ -121,7 +121,7 @@ It is often necessary to remove adapter and barcodes sequences as well as UMIs. 
 
 ## Removal of adapter sequences with **Cutadapt**
 
-In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](https://doi.org/10.1038/nmeth.3810)).
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look in the original publication {% cite VanNostrand2016 %}).
 
 > <hands-on-title>Adapter Removal</hands-on-title>
 >
