@@ -445,7 +445,7 @@ emptyDrops {% cite article-emptyDrops %} works with a specific form of R object 
 
 > <hands-on-title>Converting to SingleCellExperiment format</hands-on-title>
 >
-> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0){% icon tool %} with the following parameters:
+> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `Matrix table`
 >    - {% icon param-file %} *"Gene Table"*: `Annotated Gene Table`
 >    - {% icon param-file %} *"Barcode/cell table"*: `Barcode table`
@@ -458,7 +458,7 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 
 > <hands-on-title>Emptydrops</hands-on-title>
 >
-> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0){% icon tool %} with the following parameters:
+> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
 >
@@ -489,7 +489,7 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 
 > <hands-on-title>Converting to AnnData format</hands-on-title>
 >
-> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} with the following parameters:
+> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) %} with the following parameters:
 >    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
 >    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `Emptied-Object`
 >    - *"Name of the assay to be transferred as main layer"*: `counts`
