@@ -488,7 +488,7 @@ La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo espe
 
 > <hands-on-title>Convertir al formato SingleCellExperiment</hands-on-title>
 >
-> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2){% icon tool %} con los siguientes parámetros:
+> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `Matrix table`
 >    - {% icon param-file %} *"Gene Table"*: `Annotated Gene Table`
 >    - {% icon param-file %} *"Barcode/cell table"*: `Barcode table`
@@ -501,7 +501,7 @@ La herramienta emptyDrops {% cite article-emptyDrops %} trabaja con un tipo espe
 
 > <hands-on-title>emptyDrops</hands-on-title>
 >
-> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} con los siguientes parámetros:
+> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
 >
@@ -539,7 +539,7 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 
 > <hands-on-title>emptyDrops - ¡Intentemoslo de nuevo!</hands-on-title>
 >
-> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} con los siguiente parámetros:
+> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1) %} con los siguiente parámetros:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
 >    - *"UMI count lower bound"*: `5` - aquí puedes usar diversos valores y ver que sucede
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
@@ -553,7 +553,7 @@ Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta 
 
 > <hands-on-title>Conversión al formato AnnData</hands-on-title>
 >
-> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} con los siguientes parámetros:
+> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1) %} con los siguientes parámetros:
 >    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
 >    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `<pon tu número aquí>UMI-Object`
 >    - *"Name of the assay to be transferred as main layer"*: `counts`
@@ -603,7 +603,7 @@ Inspecciona {% icon galaxy-eye %} el archivo de texto `Experimental Design`. Est
 ## Concatenación de objetos
 > <hands-on-title>Concatenación de objetos AnnData</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} con los siguientes parámetros:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} con los siguientes parámetros:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k-AnnData`
 >    - *"Function to manipulate the object"*: 'Concatenate along the observations axis'
 >    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files from bottom to top'
