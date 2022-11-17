@@ -22,7 +22,6 @@ time_estimation: 1H
 key_points:
   - Create a single scanpy-accessible AnnData object from multiple AnnData files, including relevant cell metadata according to the study design
   - Retreive partially analysed data from a public repository
-  - Ready for the [next tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html) in this case study
 
 tags:
   - single-cell
