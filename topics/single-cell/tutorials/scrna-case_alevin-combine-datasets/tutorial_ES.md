@@ -63,7 +63,6 @@ follow_up_training:
 ---
 
 # Introduction
-{:.no_toc}
 
 <!-- This is a comment. -->
 
@@ -691,7 +690,7 @@ Los dos metadatos más críticos en este experimento son `sex` y `genotype`. Pos
 > 2. {% tool [Cut columns from a table](Cut1) %} con los siguientes parámetros:
 >    - *"Cut columns"*: `c9`
 >    - *"Delimited by"*: `Tab`
->    - % icon param-file %} *"From"*: la salida de la herramienta **Replace text** {% icon tool %}
+>    - {% icon param-file %} *"From"*: la salida de la herramienta **Replace text** {% icon tool %}
 >
 > 3. Cambiar el nombre {% icon galaxy-pencil %} de la salida a `Sex metadata`
 {: .hands_on}
@@ -806,7 +805,6 @@ Si te interesa analizar datos de acceso público, particularmente del [Single Ce
 Es importante tener en cuenta que esta matriz es procesada de cierto modo por medio del pipeline SCXA, que es muy similar a este tutorial, y que contiene todos y cada uno de los metadatos proporcionados por su pipeline, así como sus autores (por ejemplo, más anotaciones celulares o de genes).
 
 # Conclusion
-{:.no_toc}
 
 ![Workflow Part 1](../../images/scrna-casestudy/wab-alevin-part1workflow.png "Flujo de trabajo - Pasos 1-3")
 
