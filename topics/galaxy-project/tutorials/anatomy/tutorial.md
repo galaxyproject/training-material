@@ -71,9 +71,9 @@ contributors:
 {:  .tip}
  
 
-## Simple functional model: People + Grant resource inputs = Project outputs
+# Simple model: Open source + people + grant resource inputs = Project outputs
 
-
+- Project code and services depend on the open source community 
 - People working together make the project possible
     - Self governed collaboration
         - Many independent institutions and investigators 
@@ -106,7 +106,7 @@ contributors:
                 - for server system administrators  
     - Best practice standards and automation for writing tool wrappers and workflows - IUC
     - Communities of practice specialty toolkits such as in proteomics or ecology.
-- Galaxy exists as part of the global open science ecosystem.
+
 
 # People and organisation
 
