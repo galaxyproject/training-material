@@ -220,7 +220,7 @@ In this task we are going to remove the UMI at the 5' end of the second read. We
 
 # Step 4: Aligning Reads to a Reference Genome
 
-To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. [STAR](https://doi.org/10.1093/bioinformatics/bts635) is one of them that works well with CLIP-Seq data. [STAR](https://doi.org/10.1093/bioinformatics/bts635) is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
+To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. STAR {% cite Dobin2012%} is one of them that works well with CLIP-Seq data. STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
 
 ## Aligning with **RNA STAR**
 
@@ -272,7 +272,7 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 
 # Step 5: De-Duplication
 
-Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The [UMI-tools](https://doi.org/10.1101/gr.209601.116) will help us again in this matter.
+Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The UMI-tools {% cite Smith2017 %} will help us again in this matter.
 
 ## De-duplication with **UMI-tools deduplicate**
 
@@ -288,7 +288,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >
 >   > <comment-title>What is the purpose of the method we have chosen for the de-duplication?</comment-title>
 >   >
->   > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of   [UMI-tools](https://doi.org/10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
+>   > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of UMI-tools {% cite Smith2017 %}. For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
 >   {: .comment}
 >
 >   > <comment-title>Do the same thing for the input control data set.</comment-title>
@@ -411,7 +411,7 @@ We are therefore going to further check the correlation between our control and 
 
 # Step 7: Peak Calling
 
-Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to mapping. There exist a variety of peak callers like [PEAKachu](https://github.com/tbischler/PEAKachu), [PureCLIP](https://doi.org/10.1186/s13059-017-1364-2) or [Piranha](https://doi.org/10.1093/bioinformatics/bts569) each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peak callers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
+Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to mapping. There exist a variety of peak callers like [PEAKachu](https://github.com/tbischler/PEAKachu), PureCLIP ({% cite Krakau2017 %}) or Piranha ({% cite Uren2012 %}) each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peak callers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
 
 ## Peak calling with **PEAKachu**
 
