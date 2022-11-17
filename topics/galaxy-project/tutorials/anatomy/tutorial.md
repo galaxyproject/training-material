@@ -71,39 +71,43 @@ contributors:
 {:  .tip}
  
 
-# Simple model: Open source + people + grant resource inputs = Project outputs
+## People + grant resource inputs + open source => project outputs
 
-- Project code and services depend on the open source community 
-- People working together make the project possible
-    - Self governed collaboration
-        - Many independent institutions and investigators 
-        - No single institution has control
-    -  Individuals engage with the project on their own terms
-       - Leading and participating in community activities
-       - Communities of practice
-       - Collaborating investigators with grant resources
-       - Contributing training material, documentation, source code 
-       - Participation and leadership in governance
-- Grant resource inputs help sustain the communities, team, collaborations and services
-    - Supports core "corporate" project services
-    - Source code maintenance, support and enhancenments,...,GTN
-    - Computational resource allocations for free services
-        - adding substantial value to the source
-        - Free analysis and training services
-    - Professional staff
-        - outreach, communication, project management.
-        - user support, system administration and software engineers.
-- Project outputs - things the project delivers for open science and scientists
-    - Source code
-    - Online analysis services
-    - GTN open access to training material any time and to periodic training intensives.
-        - Provides capacity building resources:
-            - Introductory Galaxy useage training
-            - Specialised training 
-                - for users doing common analyses in a range of specialties 
-                - for tool wrapper and software developers
-                - for trainers
-                - for server system administrators  
+### People working together make the project possible
+- Self governed collaboration
+    - Many independent institutions and investigators 
+    - No single institution has control
+-  Individuals engage with the project on their own terms
+    - Leading and participating in community activities
+    - Communities of practice
+    - Collaborating investigators with grant resources
+    - Contributing training material, documentation, source code 
+    - Participation and leadership in governance
+
+### Grant resource inputs help sustain the communities, team, collaborations and services
+- Supports core "corporate" project services
+- Source code maintenance, support and enhancenments,...,GTN
+- Computational resource allocations for free services
+    - adding substantial value to the source
+    - Free analysis and training services
+- Professional staff
+    - outreach, communication, project management.
+    - user support, system administration and software engineers.
+
+### Project code and services depend on the open source community
+- Galaxy depends on thousands of other open source projects
+
+### Project outputs - things the project delivers for open science and scientists
+- Source code
+- Online analysis services
+- GTN open access to training material any time and to periodic training intensives.
+    - Provides capacity building resources:
+        - Introductory Galaxy useage training
+        - Specialised training 
+            - for users doing common analyses in a range of specialties 
+            - for tool wrapper and software developers
+            - for trainers
+            - for server system administrators  
     - Best practice standards and automation for writing tool wrappers and workflows - IUC
     - Communities of practice specialty toolkits such as in proteomics or ecology.
 
