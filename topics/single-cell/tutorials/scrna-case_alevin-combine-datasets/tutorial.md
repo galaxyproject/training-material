@@ -315,7 +315,7 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 
 # Pulling single cell data from public resources
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all these steps into one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all these steps into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
 > <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
