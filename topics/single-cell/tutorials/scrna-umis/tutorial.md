@@ -78,7 +78,7 @@ There are two things to take note of:
  1. The number of duplicates in the transcript barcodes (left)
  2. The number of duplicate read transcripts (right)
 
-Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ({% cite Shapire2013 %}) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
+Transcript barcodes are often *not* unique. This becomes evident when you consider that there are approximately 200,000 mRNA's in a given mammalian cell ({% cite Shapiro2013 %}) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.
 
 > <question-title></question-title>
 >
