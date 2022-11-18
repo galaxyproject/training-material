@@ -14,7 +14,7 @@ objectives:
   - "Be able to choose the method appropriate for your specific data"
   - "Gain insight into methods currently available in Galaxy"
 
-  redirect_from:
+redirect_from:
   - /topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/slides
 
 subtopic: single-cell-CS
@@ -144,7 +144,7 @@ We will consider some aspects shown here to better understand similarities and d
 ]
 
 ???
-- distance matrix details: [intro, slide 45]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})
+- distance matrix details: [intro, slide 45]({% link topics/single-cell/tutorials/scrna-intro/slides.html %})
 
 ---
 
@@ -188,7 +188,7 @@ We will consider some aspects shown here to better understand similarities and d
 .pull-right[
 
 - Tries to find stable **cell states** in the data, then connect these states to form a trajectory
-- [soft K-means (fuzzy clustering)]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [Louvain]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), [hierarchical clustering]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}), non-negative matrix factorization
+- [soft K-means (fuzzy clustering)]({% link topics/single-cell/tutorials/scrna-intro/slides.html %}), [Louvain]({% link topics/single-cell/tutorials/scrna-intro/slides.html %}), [hierarchical clustering]({% link topics/single-cell/tutorials/scrna-intro/slides.html %}), non-negative matrix factorization
 
 ![Grey set of cells getting clustered into several distinct groups, each group marked in different colour](../../images/scrna-casestudy-monocle/clusters.png)
 
@@ -197,7 +197,7 @@ We will consider some aspects shown here to better understand similarities and d
 ???
 - cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
 - [cell state with a particular function can be called a cell type](https://mbernste.github.io/posts/cell_types_cell_states/)
-- methods explained in [intro, slides 54 - 57]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})
+- methods explained in [intro, slides 54 - 57]({% link topics/single-cell/tutorials/scrna-intro/slides.html %})
   - soft K-means: number of clusters are defined before hand, and initialised in random positions
   - Louvain: extracts communities from large networks
   - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
@@ -218,7 +218,7 @@ We will consider some aspects shown here to better understand similarities and d
 .pull-right[
 
 - think of 'graph structure' as the nodes (clusters with cell states) and edges (similarity, based on eg. Euclidean distance)
-- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %}) graph using the Euclidean distance
+- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **]({% link topics/single-cell/tutorials/scrna-intro/slides.html %}) graph using the Euclidean distance
 - **Minimum weight spanning tree (MST)** is often used to connect the clusters to each other
 
 ![Grey set of cells getting clustered into several distinct groups, each group marked in a different colour. Coloured clusters are connected by straight lines with weights, but the chosen path is the one that minimises the total total edge weight.](../../images/scrna-casestudy-monocle/clusters_mst.png)
@@ -227,7 +227,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 ???
 - General idea is to construct a graph representation of the cells and perform graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
-- kNN explained in [intro, slide 46]({% link topics/transcriptomics/tutorials/scrna-intro/slides.html %})
+- kNN explained in [intro, slide 46]({% link topics/single-cell/tutorials/scrna-intro/slides.html %})
 - MST connects clusters without any cycles and minimises the total total edge weight (cost) to ensure that the most similar clusters are connected
 ---
 
@@ -489,7 +489,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ### Trajectory analysis methods used in Galaxy
 --
 
-- Scanpy PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}))
+- Scanpy PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}))
 
 --
 
@@ -497,11 +497,11 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 --
 
-- RaceID ([Downstream Single-cell RNA analysis with RaceID]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}))
+- RaceID ([Downstream Single-cell RNA analysis with RaceID]({% link topics/single-cell/tutorials/scrna-raceid/tutorial.md %}))
 
 --
 
-- Monocle3 ([Trajectory Analysis using Monocle3]({% link topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}))
+- Monocle3 ([Trajectory Analysis using Monocle3]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}))
 
 --
 
@@ -527,7 +527,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ???
 - The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric
 
-- Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) where PAGA was used from the Scanpy toolkit
+- Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) where PAGA was used from the Scanpy toolkit
 
 --
 
@@ -586,7 +586,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 ???
 - Specific Trajectory Lineage Analysis (StemID) and Specific Trajectory Fate Analysis (FateID) in Galaxy
-- Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %})
+- Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial]({% link topics/single-cell/tutorials/scrna-raceid/tutorial.md %})
 
 ---
 
@@ -647,7 +647,7 @@ From the mentioned tutorial:
 ???
 - Orders cells by learning an explicit principal graph from the single cell transcriptomics data with advanced machine learning techniques (Reversed Graph Embedding), which robustly and accurately resolves complicated biological processes
 - Performs clustering (i.e. using t-SNE and density peaks clustering), differential gene expression testing, identifies key marker genes to discover and characterise cell types, infers trajectories
-- The use of those tools was shown in ([Trajectory Analysis using Monocle3 tutorial]({% link topics/transcriptomics/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}))
+- The use of those tools was shown in ([Trajectory Analysis using Monocle3 tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}))
 
 ---
 

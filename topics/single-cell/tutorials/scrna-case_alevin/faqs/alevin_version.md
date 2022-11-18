@@ -3,6 +3,9 @@ title: Why is Alevin is not working?
 box_type: question
 layout: faq
 contributors: [nomadscientist, mtekman]
+redirect_from:
+  - /topics/transcriptomics/tutorials/scrna-case_alevin/faqs/alevin_version
+
 ---
 
 Check your tool version, you need to use `1.3.0+galaxy2`

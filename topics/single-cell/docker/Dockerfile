@@ -14,7 +14,7 @@ MAINTAINER Galaxy Training Material
 ENV GALAXY_CONFIG_BRAND "GTN: Single cell"
 
 # copy the tutorials directory for your topic
-ADD topics/transcriptomics/tutorials/ /tutorials/
+ADD topics/single-cell/tutorials/ /tutorials/
 
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh

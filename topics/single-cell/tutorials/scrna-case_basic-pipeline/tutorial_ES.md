@@ -54,18 +54,17 @@ follow_up_training:
     type: "internal"
     topic_name: single-cell
     tutorials:
-        - scrna-case_JUPYTER-Trajectories
+        - scrna-case_JUPYTER-trajectories
         - scrna-case_monocle3-trajectories
 ---
 
 
 # Introducción
-{:.no_toc}
 
-Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta [este tutorial]({% link topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.md %}) para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en Galaxy.
+Has hecho el trabajo para crear una matriz de células únicas, con recuentos de genes y mitocondrias y con grupos de metadatos celulares de todas tus variables de interés (si no, por favor consulta [este tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) para hacerlo). Ahora analizaremos completamente nuestros datos para eliminar las células con poca calidad, para reducir las dimensiones de los datos que dificultan el trabajo, y finalmente, para intentar definir nuestros agrupamientos ¡y darles significado biológico! Hay muchos paquetes para analizar datos de células únicas - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, etc. Aquí trabajaremos con Scanpy porque es la opción con más herramientas disponibles en Galaxy.
 
 > <comment-title>¿Tutoriales por todos lados?</comment-title>
-> Este tutorial es similar a otro tutorial fantástico: [Clustering 3k PBMC]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). Este tutorial profundiza mucho más en el análisis, en particular en la visualización y la ciencia tras la identificación de marcadores. Todos los pasos se ilustran a la perfección ya que los datos experimentales están limpios y bien anotados. Aquí, trabajaremos con datos más desorganizados para ayudarte a tomar decisiones durante el análisis. Te recomendamos que sigas los tutoriales de célula única disponibles para aumentar tu confianza y experiencia. Para instructores: ten en cuenta que este tutorial dispone de opciones para grupos pequeños.
+> Este tutorial es similar a otro tutorial fantástico: [Clustering 3k PBMC]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). Este tutorial profundiza mucho más en el análisis, en particular en la visualización y la ciencia tras la identificación de marcadores. Todos los pasos se ilustran a la perfección ya que los datos experimentales están limpios y bien anotados. Aquí, trabajaremos con datos más desorganizados para ayudarte a tomar decisiones durante el análisis. Te recomendamos que sigas los tutoriales de célula única disponibles para aumentar tu confianza y experiencia. Para instructores: ten en cuenta que este tutorial dispone de opciones para grupos pequeños.
 {: .comment}
 
 > <agenda-title></agenda-title>
@@ -79,7 +78,7 @@ Has hecho el trabajo para crear una matriz de células únicas, con recuentos de
 
 ## Obtener datos
 
-Te proporcionamos un conjunto de datos experimentales de ratón de restricción en el crecimiento fetal {% cite Bacon2018 %}. Este es el conjunto de datos generado a partir de [este tutorial](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html) si usaste los ficheros FASTQ completos en vez de los reducidos (ver el estudio del Single Cell Expression Atlas [aquí](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) y todos los datos del proyecto [aquí](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Puedes encontrar estos datos en este [historial de entrada](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) o descargarlo del link a Zenodo que aparece más abajo.
+Te proporcionamos un conjunto de datos experimentales de ratón de restricción en el crecimiento fetal {% cite Bacon2018 %}. Este es el conjunto de datos generado a partir de [este tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) si usaste los ficheros FASTQ completos en vez de los reducidos (ver el estudio del Single Cell Expression Atlas [aquí](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) y todos los datos del proyecto [aquí](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). Puedes encontrar estos datos en este [historial de entrada](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/filter-plot-and-explore-single-cell-rna-seq-data---input) o descargarlo del link a Zenodo que aparece más abajo.
 
 > <hands-on-title>Subir o cargar los datos</hands-on-title>
 >
@@ -917,7 +916,6 @@ Antes de que te dejemos explorar lo desconocido, habrás notado que las interpre
 Estás advertido: esta herramienta de visualización es una poderosa opción para explorar tus datos, pero lleva algún tiempo acostumbrarse a ella. ¡Considera la posibilidad de explorarlo como tu propio tutorial para otro día!
 
 # Conclusión
-{:.no_toc}
 
 > <details-title>¿Trabajando en grupo? ¡El final!</details-title>
 > Es de esperar que, independientemente de la vía de análisis que hayas tomado, hayas encontrado las mismas interpretaciones generales. Si no es así, este es un buen momento para hablar y considerar con tu grupo por qué puede ser así: ¿qué decisión fue "errónea" o "desacertada", y cómo te asegurarias de interpretar correctamente tus datos en el futuro? El mejor consejo: probar y equivocarse es una buena idea, lo creas o no, y cuantas más formas encuentres de la misma manera, más seguro estarás. Pero no hay nada mejor que la validación experimental...

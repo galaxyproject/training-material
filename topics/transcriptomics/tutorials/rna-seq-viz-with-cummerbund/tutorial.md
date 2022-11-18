@@ -257,7 +257,7 @@ Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2,
 
 > <comment-title></comment-title>
 >
-> For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look [here](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
+> For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look at the [ggplot2 documentation](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
 {: .comment}
 
 # Conclusion

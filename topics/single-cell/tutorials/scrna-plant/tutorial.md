@@ -40,12 +40,14 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
+# Introduction
+
 Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 
-![The various cell subpopulations that are expected within this tutorial]({% link topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg %})
+![The various cell subpopulations that are expected within this tutorial]({% link topics/single-cell/images/scrna-plant/scrna-plant1.jpg %})
 
 
-This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) ({% cite denyer2019spatiotemporal %}), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite ({% cite satija2015spatial %}), but here we will use the ScanPy analysis suite ({% cite wolf2018scanpy %}) integrated within the single-cell resources in Galaxy ({% cite tekman2020single %}).
+This tutorial replicates the paper *"Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"* ({% cite denyer2019spatiotemporal %}), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite ({% cite satija2015spatial %}), but here we will use the ScanPy analysis suite ({% cite wolf2018scanpy %}) integrated within the single-cell resources in Galaxy ({% cite tekman2020single %}).
 
 
 > <agenda-title></agenda-title>
@@ -59,13 +61,13 @@ This tutorial replicates the paper ["Spatiotemporal Developmental Trajectories i
 
 > <comment-title></comment-title>
 >
-> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
+> Please familiarise yourself with the ["Clustering 3K PBMCs with ScanPy"]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.
 >
 {: .comment}
 
 # Data
 
-The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
+The *Arabidopsis* root cells come from two biological replicates which were isolated and profiles using droplet-based scRNA-seq (please see: ["Pre-processing of 10X Single-Cell RNA Datasets"]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %})); a "short root" mutant (labelled: `shr`) and a wild-type (labelled: `wt`):
 
 * GSE123818\_Root\_single\_cell\_**shr**\_datamatrix.fixednames.transposed.csv.gz
 * GSE123818\_Root\_single\_cell\_**wt**\_datamatrix.fixednames.transposed.csv.gz
@@ -115,7 +117,7 @@ As explained in the Zenodo link, the datasets have been modified to use more com
 >
 {: .question}
 
-If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData section in the previous tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}#anndata)).
+If the above feels like a convoluted way to get the dimensionality, that's because we haven't imported the data into the right format. For this we need to import both datasets into a single AnnData object (see the [AnnData section in the previous tutorial]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}#anndata)).
 
 ## CSV to AnnData
 
@@ -223,7 +225,7 @@ A happy coincidence here is that both datasets already had the exact same variab
 
 This should result in the following violin plot, where we see the distribution of the number of genes per cell (`n_genes_by_counts`) and the library size per cell, where the library size is the total number of mRNA in a cell, regardless of which gene it came from (`total_counts`).
 
-!["Violin Plots per Batch"]({% link topics/transcriptomics/images/scrna-plant/violin1.png %})
+!["Violin Plots per Batch"]({% link topics/single-cell/images/scrna-plant/violin1.png %})
 
 Each dot is a cell, and the x-axis has two groups showing the absolute values of for each batch (`shr` and `wt`). The y-values correspond to the actual value of each cell, but the x-vales within each group are just random jitter to help see the cells more clearly. The outline of the violin plot shows us the density of each batch, where we can see that most of the cells in the `shr` group have an average number of features just below 2000 genes, compared to `wt` which has an average number of features just below 4000 genes. If we compare the library size, however, we notice that the outlines are very similar and that the average library sizes across batches are comparable.
 
@@ -286,7 +288,7 @@ If we inspect the resulting dataset, we see that the number of cells remaining i
 
 ## Confounder Removal
 
-Now we have a set of cells we are reasonably confident contain desirable biological variation (please view the  following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=11:28) as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.
+Now we have a set of cells we are reasonably confident contain desirable biological variation (please view the  following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=single-cell/tutorials/scrna-intro/slides&t=11:28) as a reference for the types of wanted and unwanted variation). We wish to now regress out the library size variation, as it is not indicative of cell type. To do this, we will first ensure that all cells are of the same comparable library size by applying individual size factors to each cell.
 
 We will also apply a log transformation to the cells, as this compresses the variation into a less extreme space, making it easier to see the relative differences between cells.
 
@@ -294,7 +296,7 @@ After normalising and regressing out unwanted factors, we will then scale the da
 
 > <tip-title>Highly Variable Genes?</tip-title>
 >
-> Those of you who are familiar with the [ScanPy Tutorial]({% link topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
+> Those of you who are familiar with the [ScanPy Tutorial]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
 > The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!
 {: .tip}
 
@@ -330,7 +332,7 @@ Dimensionality reduction is the art of reducing a high dimensional dataset into 
 
 > <tip-title>What is Dimensionality Reduction?</tip-title>
 >
-> You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:46).
+> You can learn more about dimensionality reduction by consulting the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=single-cell/tutorials/scrna-intro/slides&t=13:46).
 >
 {: .tip}
 
@@ -355,7 +357,7 @@ This is usually a two step process:
 >
 >    > <comment-title></comment-title>
 >    >
->    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=transcriptomics/tutorials/scrna-intro/slides&t=13:40) for more information on how this process works.
+>    > UMAP relies on a connected graph of cells to operate. Please view the following segment from [*"An introduction to scRNA-seq data analysis"*]({% link videos/watch.md %}?v=single-cell/tutorials/scrna-intro/slides&t=13:40) for more information on how this process works.
 >    {: .comment}
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
@@ -388,7 +390,7 @@ With our data now sufficiently "flat" and ready for human consumption, we can no
 
 | PCA                                | UMAP                                 |
 |:----------------------------------:|:------------------------------------:|
-| ![PCA]({% link topics/transcriptomics/images/scrna-plant/pca_batch.png %}) | ![UMAP]({% link topics/transcriptomics/images/scrna-plant/umap_batch.png %})|
+| ![PCA]({% link topics/single-cell/images/scrna-plant/pca_batch.png %}) | ![UMAP]({% link topics/single-cell/images/scrna-plant/umap_batch.png %})|
 
 
 From this, we can see that there is a reasonable overlap in our batches shown both in the PCA and UMAP embeddings. This is good because it shows that though there is *some* batch effect (i.e. cells from one batch appear to cluster on a different side of the plot than the other) it is not significant enough for there not to be some commonality between the batches.
@@ -403,7 +405,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 
 | UMAP                                   | DotPlot                                    |
 |:--------------------------------------:|:------------------------------------------:|
-| ![PCA]({% link topics/transcriptomics/images/scrna-plant/clusters_expected.png %}) | ![UMAP]({% link topics/transcriptomics/images/scrna-plant/dotplot_expected.png %})|
+| ![PCA]({% link topics/single-cell/images/scrna-plant/clusters_expected.png %}) | ![UMAP]({% link topics/single-cell/images/scrna-plant/dotplot_expected.png %})|
 
 
 > <hands-on-title>Generate and Plots Clusters</hands-on-title>
@@ -430,7 +432,7 @@ Let us cluster the cells and see what cell types we can discover in the plots. T
 >
 {: .hands_on}
 
-![UMAP Leiden Clusters]({% link topics/transcriptomics/images/scrna-plant/clusters_found.png %})
+![UMAP Leiden Clusters]({% link topics/single-cell/images/scrna-plant/clusters_found.png %})
 
 Here we have recovered 13 clusters but we don't yet know what types they describe. If we have a list of genes that we know are indicative of a certain cell type (i.e. are marker genes) then we can use this to assign labels to our clusters.
 
@@ -491,7 +493,7 @@ Let us here try to recreate the DotPlot from the paper using the clusters we hav
 
 By running the above we end up with the following DotPlot:
 
-![Dotplot In Analyssis]({% link topics/transcriptomics/images/scrna-plant/dotplot_found.png %})
+![Dotplot In Analyssis]({% link topics/single-cell/images/scrna-plant/dotplot_found.png %})
 
 Notice how we have the Columella, QC and NC sharing the same cluster 11, that the Endodermis is localised in cluster 8, the Cortex in cluster 9, the Trichoblast cells in cluster 3, the Xylem showing strong expression in cluster 12, VC in clusters 4 and 6, and the Atrichoblasts have a mixed expression in a range of clusters. These characteristics are the same as the Dotplot in the original paper.
 
@@ -519,7 +521,7 @@ We can use this Dotplot as a guide to relabel our clusters and give more meaning
 >
 {: .hands_on}
 
-![Relabelled clusters]({% link topics/transcriptomics/images/scrna-plant/clusters_found_relabelled.png %})
+![Relabelled clusters]({% link topics/single-cell/images/scrna-plant/clusters_found_relabelled.png %})
 
 
 If we look at the clusters now, and compare them to the original image in the paper, we can infer that the meristematic cells are likely to be derived from cluster 1, which shares soft clustering with the trichoblasts suggesting a trajectory pathway which could be explored.
@@ -527,14 +529,14 @@ If we look at the clusters now, and compare them to the original image in the pa
 
 # Conclusions
 
-In this tutorial, we have recapitulated the same clustering analysis in the ["Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing"](https://doi.org/10.1016/j.devcel.2019.02.022) {% cite denyer2019spatiotemporal %} paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
+In this tutorial, we have recapitulated the same clustering analysis in the "Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing" {% cite denyer2019spatiotemporal %} paper, and validated them by comparing DotPlots for specific genes that were used as markers in that paper.
 
 From this point, we can perform a lineage analysis to infer a differentiation pathway between the clusters. For ScanPy there is the PAGA option, however, this does not work so well with the current dataset, so it is encouraged that users use the original Seurat trajectory suite that was given in the paper, or to experiment with Monocle.
 
-Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading. An excellent follow-up tutorial to perform a trajectory analysis in Galaxy using Jupyter notebooks would be the [*"Trajectory Analysis using Python (Jupyter Notebook) in Galaxy"*]({% link topics/transcriptomics/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}).
+Both libraries are available within the RStudio and Jupyter Notebook libraries in the interactive Galaxy envronments which can be found in the *"Miscellaneous Tools"* section under the *"Interactive Tools"* subheading. An excellent follow-up tutorial to perform a trajectory analysis in Galaxy using Jupyter notebooks would be the [*"Trajectory Analysis using Python (Jupyter Notebook) in Galaxy"*]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}).
 
 This entire tutorial can be invoked from the scRNA Plant Workflow shown below:
 
-![scRNA Plant]({% link topics/transcriptomics/images/scrna-plant/scrna-plant-workflow.png %})
+![scRNA Plant]({% link topics/single-cell/images/scrna-plant/scrna-plant-workflow.png %})
 
 The input parameters take two datasets as input, and 5 parameters using the defaults shown in this tutorial: min cells, min genes, max features, max library size, and Leiden clustering resolution. Play with these options to see how robust the analysis really is!

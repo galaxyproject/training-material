@@ -29,14 +29,14 @@ contributors:
 # Introduction
 
 
-The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
+The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by *Nostrand et al.* ({% cite VanNostrand2016 %}). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from *Nostrand et al.* ({% cite VanNostrand2016 %}). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from [Ensembl](http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/).
 
-**Table 1**: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by *Nostrand et al.* ([2016](https://doi.org/10.1038/nmeth.3810)). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.
+**Table 1**: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by *Nostrand et al.* ([2016]({% cite VanNostrand2016 %}). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.
 
 | Cellular state | Datatype | Description | Replicate | ENCODE Accession | Library type | Read length | Stranded? |
 | ---            | ---      | :-:     | :-:       | ---           | :-:          | :-:         | :-:       |
-| Hep G2            | [eCLIP](https://doi.org/10.1038/nmeth.3810) | RBFOX2   | 1         | ENCSR987FTF     | PE           | 175-300          | Yes        |
-| Hep G2            | [eCLIP](https://doi.org/10.1038/nmeth.3810) | input   | 1         | ENCSR799EKA     | PE           | 175-300          | Yes        |
+| Hep G2            | eCLIP | RBFOX2   | 1         | ENCSR987FTF     | PE           | 175-300          | Yes        |
+| Hep G2            | eCLIP | input   | 1         | ENCSR799EKA     | PE           | 175-300          | Yes        |
 
 
 > <agenda-title></agenda-title>
@@ -74,13 +74,13 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 >
 >    ![upload](../../images/transcriptomics_images/upload_data_page.png "Data can be imported directly with links.")
 >
->   ![data](../../images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
+>   ![data](../../images/transcriptomics_images/clipseq_data_uploaded.png "Imported datasets will appear in the history panel.")
 >
 {: .hands_on}
 
 # Step 2: Quality Control
 
-As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial for NGS [here]({{site.baseurl}}/topics/sequence-analysis). One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found [here](http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/).
+As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the [tutorial for NGS]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}). One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found [in this guide](http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/).
 
 ## Report with **FastQC**
 
@@ -121,7 +121,7 @@ It is often necessary to remove adapter and barcodes sequences as well as UMIs. 
 
 ## Removal of adapter sequences with **Cutadapt**
 
-In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look [here](https://doi.org/10.1038/nmeth.3810)).
+In this task we are going to remove two 3' and two 5' adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look in the original publication {% cite VanNostrand2016 %}).
 
 > <hands-on-title>Adapter Removal</hands-on-title>
 >
@@ -220,7 +220,7 @@ In this task we are going to remove the UMI at the 5' end of the second read. We
 
 # Step 4: Aligning Reads to a Reference Genome
 
-To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. [STAR](https://doi.org/10.1093/bioinformatics/bts635) is one of them that works well with CLIP-Seq data. [STAR](https://doi.org/10.1093/bioinformatics/bts635) is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
+To determine where DNA fragments originated in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. STAR {% cite Dobin2012%} is one of them that works well with CLIP-Seq data. STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take RNA processing steps like splicing events into account.
 
 ## Aligning with **RNA STAR**
 
@@ -272,7 +272,7 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 
 # Step 5: De-Duplication
 
-Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The [UMI-tools](https://doi.org/10.1101/gr.209601.116) will help us again in this matter.
+Lets return to the UMIs which we extracted in step three. Since we have mapped the reads to our reference genome, we can now identify which reads might be duplicated or not. The UMI-tools {% cite Smith2017 %} will help us again in this matter.
 
 ## De-duplication with **UMI-tools deduplicate**
 
@@ -288,7 +288,7 @@ Lets return to the UMIs which we extracted in step three. Since we have mapped t
 >
 >   > <comment-title>What is the purpose of the method we have chosen for the de-duplication?</comment-title>
 >   >
->   > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of   [UMI-tools](https://doi.org/10.1101/gr.209601.116). For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
+>   > `UMI-tools deduplication` has several methods. The method we have picked is called the  **adjacency** method. For detailed information have a look at method descriptions of UMI-tools {% cite Smith2017 %}. For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the **adjacency** method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the [hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and read counts.
 >   {: .comment}
 >
 >   > <comment-title>Do the same thing for the input control data set.</comment-title>
@@ -369,7 +369,7 @@ In this section we check the quality of our mapped reads and see if our samples 
 >
 {: .hands_on}
 
-For additional information on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
+For additional information on how to interpret **plotFingerprint** plots, read the information [the DeepTools documentation](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
 
 ## Correlation between Samples
 
@@ -411,7 +411,7 @@ We are therefore going to further check the correlation between our control and 
 
 # Step 7: Peak Calling
 
-Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to mapping. There exist a variety of peak callers like [PEAKachu](https://github.com/tbischler/PEAKachu), [PureCLIP](https://doi.org/10.1186/s13059-017-1364-2) or [Piranha](https://doi.org/10.1093/bioinformatics/bts569) each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peak callers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
+Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to mapping. There exist a variety of peak callers like [PEAKachu](https://github.com/tbischler/PEAKachu), PureCLIP ({% cite Krakau2017 %}) or Piranha ({% cite Uren2012 %}) each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use `PEAKachu` to find possible binding motifs for our data. `PEAKachu` is able to incorporate control data in contrast to other peak callers like `Piranha`, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.
 
 ## Peak calling with **PEAKachu**
 
@@ -434,7 +434,7 @@ calling
 >
 >   > <comment-title>Adjusted p-value Threshold</comment-title>
 >   >
->   > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [here](http://www.biostathandbook.com/multiplecomparisons.html).
+>   > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [this handbook](http://www.biostathandbook.com/multiplecomparisons.html).
 >   {: .comment}
 >
 >   > <comment-title>Fold-Change Threshold</comment-title>
@@ -506,11 +506,11 @@ Lets first find out which sequence motifs RBFOX2 might preferentially bind to.
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 > 6. View the **MEME-ChIP** html.
 >
-> ![motif](../../images/transcriptomics_images/clipseq_motif.png "Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).")
+> ![motif](../../images/transcriptomics_images/clipseq_motif.png "Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [this Wikipedia article](https://en.wikipedia.org/wiki/Sequence_logo).")
 >
 >   > <comment-title>MEME and DREME</comment-title>
 >   >
->   > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found [here](http://meme-suite.org/).
+>   > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found on [meme-suite.org](http://meme-suite.org/).
 >   {: .comment}
 >
 >   > <comment-title>What is the purpose of SlopBED?</comment-title>

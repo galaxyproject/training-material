@@ -36,13 +36,6 @@ contributors:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - bulk-music-compare
-
 ---
 
 
@@ -174,7 +167,7 @@ Let's start exploring the datasets.
 > <hands-on-title>Exploring the Datasets</hands-on-title>
 >
 > 1. Inspect the `#scrna` expression file
->  
+>
 >    > <question-title></question-title>
 >    >
 >    > 1. What do the rows and columns correspond to?
@@ -195,7 +188,7 @@ Let's start exploring the datasets.
 >    {: .question}
 >
 > 2. Inspect the `#bulk` expression file
->  
+>
 >    > <question-title></question-title>
 >    >
 >    > 1. What do the rows and columns correspond to?
@@ -212,7 +205,7 @@ Let's start exploring the datasets.
 >    {: .question}
 >
 > 3. Inspect the `#scrna` phenotype file
->  
+>
 >    > <question-title></question-title>
 >    >
 >    > 1. Does the phenotypes file describe genes or cells?
@@ -231,7 +224,7 @@ Let's start exploring the datasets.
 >    {: .question}
 >
 > 4. Inspect the `#bulk` phenotype file
->  
+>
 >    > <question-title></question-title>
 >    >
 >    > 1. Does the phenotypes file describe genes or samples?
@@ -314,7 +307,7 @@ We will now inspect these objects we just created to see what information we can
 >    - {% tool [Inspect Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3) %} with the following parameters:
 >         > <warning-title>Danger: This tool has needs!</warning-title>
 >         > You may need to click the dataset from your history and drag it into the input of this tool. Some browsers don't allow this.
->         {: .warning}  
+>         {: .warning}
 >       - {% icon param-file %} *"ESet Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >       - *"Inspect"*: `Feature Data Table`
 >         > <comment-title>Features or Genes?</comment-title>
@@ -418,13 +411,13 @@ As stated previously, it is well known that the beta cell proportions are relate
 >
 >  ```
 >  Coefficients:
->               Estimate Std. Error t value Pr(>|t|)    
+>               Estimate Std. Error t value Pr(>|t|)
 >  (Intercept)  0.797148   0.194757   4.093  0.00011 ***
->  age          0.002639   0.001772   1.489  0.14087    
->  bmi         -0.013620   0.007276  -1.872  0.06529 .  
->  hba1c       -0.061396   0.025403  -2.417  0.01819 *  
->  genderMale   0.079874   0.039274   2.034  0.04566 *  
->  
+>  age          0.002639   0.001772   1.489  0.14087
+>  bmi         -0.013620   0.007276  -1.872  0.06529 .
+>  hba1c       -0.061396   0.025403  -2.417  0.01819 *
+>  genderMale   0.079874   0.039274   2.034  0.04566 *
+>
 >  ```
 >
 >  In addition to HbA1c levels, gender has also correlated with beta cell proportions. This is unsurprising, as more men have diabetes than women and sex is known to impact HbA1c levels.
@@ -541,7 +534,7 @@ You will need to again create ExpressionSet objects, as before.
 >        - *"Cell Types Label from scRNA Dataset"*: `cellType`
 >        - *"Cluster Types Label from scRNA dataset"*: `clusterType`
 >        - *"Samples Identifier from scRNA dataset"*: `sampleID`
->        - *"Comma list of cell types to use from scRNA dataset"*:  
+>        - *"Comma list of cell types to use from scRNA dataset"*:
 >           `Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK`
 >
 {: .hands_on}
@@ -593,14 +586,14 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >      >
 >      > Here we need to re-use all the inputs from the previous **MuSiC** {% icon tool %} step, plus add a few extra. To speed this up, you can simply click on the re-run icon {% icon galaxy-refresh %} under any of its outputs.
 >      {: .warning}
->    
+>
 >    - {% icon param-file %} *"scRNA Dataset"*: `#scrna` (output of **Construct Expression Set Object** {% icon tool %})
 >    - {% icon param-file %} *"Bulk RNA Dataset"*: `#bulk` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Purpose"*: `Compute Dendrogram`
 >        - *"Cell Types Label from scRNA Dataset"*: `cellType`
 >        - *"Cluster Types Label from scRNA dataset"*: `clusterType`
 >        - *"Samples Identifier from scRNA dataset"*: `sampleID`
->        - *"Comma list of cell types to use from scRNA dataset"*:  
+>        - *"Comma list of cell types to use from scRNA dataset"*:
 >           `Endo,Podo,PT,LOH,DCT,CD-PC,CD-IC,Fib,Macro,Neutro,B lymph,T lymph,NK`
 >        - In *"Cluster Groups"*:
 >            - {% icon param-repeat %} *"Insert Cluster Groups"*
@@ -611,13 +604,13 @@ We shall use the 4 cell type groups determined by the cut off threshold in the a
 >                - *"Comma list of cell types to use from scRNA dataset"*: `Podo`
 >            - {% icon param-repeat %} *"Insert Cluster Groups"*
 >                - *"Cluster ID"*: `C3`
->                - *"Comma list of cell types to use from scRNA dataset"*:  
+>                - *"Comma list of cell types to use from scRNA dataset"*:
 >                   `Endo,CD-PC,LOH,CD-IC,DCT,PT`
 >                - *"Marker Gene Group Name"*:`Epithelial`
 >                - {% icon param-file %} *"List of Gene Markers"*: `epith.markers` (Input dataset)
 >            - {% icon param-repeat %} *"Insert Cluster Groups"*
 >                - *"Cluster ID"*: `C4`
->                - *"Comma list of cell types to use from scRNA dataset"*:   
+>                - *"Comma list of cell types to use from scRNA dataset"*:
 >                   `Macro,Fib,B lymph,NK,T lymph`
 >                - *"Marker Gene Group Name"*:`Immune`
 >                - {% icon param-file %} *"List of Gene Markers"*: `immune.markers` (Input dataset)

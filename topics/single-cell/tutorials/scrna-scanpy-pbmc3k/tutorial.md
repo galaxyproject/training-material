@@ -69,7 +69,7 @@ In this tutorial, we will investigate clustering of single-cell data from 10x Ge
 
 # Data
 
-For this tutorial, we analyze a dataset of Peripheral Blood Mononuclear Cells (PBMC) extracted from a healthy donor, freely available from 10X Genomics. The dataset contains 2,700 single cells sequenced using Illumina NextSeq 500. The raw sequences have been processed by the [**cellranger**](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X to extract a unique molecular identifier (UMI) count matrix, in a similar way to that as explained in ["Pre-processing of 10X Single-Cell RNA Datasets" tutorial]({% link topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.md %}).
+For this tutorial, we analyze a dataset of Peripheral Blood Mononuclear Cells (PBMC) extracted from a healthy donor, freely available from 10X Genomics. The dataset contains 2,700 single cells sequenced using Illumina NextSeq 500. The raw sequences have been processed by the [**cellranger**](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) pipeline from 10X to extract a unique molecular identifier (UMI) count matrix, in a similar way to that as explained in ["Pre-processing of 10X Single-Cell RNA Datasets" tutorial]({% link topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.md %}).
 
 In this matrix, the values represent the number for each feature (i.e. gene; row) that are detected in each cell (column). Such matrices can be quite large, where here there are 2,700 columns with 32,738 lines, with mostly zero values, i.e. an extremely sparse matrix. To optimize the storage of such a table and the information about the genes and cells, **cellranger** creates 3 files:
 
@@ -77,7 +77,7 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 - `barcodes.tsv`: a tabular file with the barcode for each of the 2,700 cells
 - `matrix.mtx`: a condensed version of the count matrix
 
-    The count matrix is therefore represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [here](https://math.nist.gov/MatrixMarket/formats.html)
+    The count matrix is therefore represented by its non-zero values. Each non-zero value is indicated by its line number (1st column), its column number (2nd column) and its value (3rd column). The first row gives indication about the number of lines, column and non-zero values. More information on the Matrix Market Exchange (mtx) format can be found [in this documentation](https://math.nist.gov/MatrixMarket/formats.html)
 
 ## Data upload
 
@@ -127,7 +127,7 @@ The representation of the matrix with 3 files is convenient to share the data bu
 
 The most common format, called [`AnnData`](https://anndata.readthedocs.io/en/stable/), stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:
 
-![Anndata format](../../scrna-pre-processing/tenx_anndata.svg "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
+![Anndata format]({% link topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 
 This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}), the tool suite for analyzing single-cell gene expression data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an `AnnData` object.
 
@@ -567,7 +567,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC violin plot](../../images/scrna-scanpy-pbmc3k/qc_violin_plot.png)
+>    > ![QC violin plot]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_violin_plot.png %})
 >    > <!-- To update... -->
 >    >
 >    > How do the distributions of the 3 QC metrics look?
@@ -596,7 +596,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC total_counts n_genes_by_counts](../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png)
+>    > ![QC total_counts n_genes_by_counts]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png %})
 >    >
 >    > Is there any relationship between the cell size and the number of expressed genes?
 >    >
@@ -620,7 +620,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >
 >    > <question-title></question-title>
 >    >
->    > ![QC total_counts pct_counts_mito](../../images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png)
+>    > ![QC total_counts pct_counts_mito]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png %})
 >    >
 >    > 1. Is there any relationship between the number of expressed genes and the proportion of reads mapped to mitochondrial genes?
 >    > 2. What could be a good threshold to filter for cells with high concentrations of mitochondrial genes?
@@ -805,7 +805,7 @@ Once the per-gene variation has been quantified, we need to select the subset of
 >
 {: .hands_on}
 
-![Highly variable genes](../../images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png)
+![Highly variable genes]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png %})
 
 Both highly variable genes and other genes are still in the `AnnData` object. We can now actually keep only the highly variable genes.
 
@@ -1091,7 +1091,7 @@ Scanpy provides several useful ways of visualizing both cells and genes that def
 >        - *"Number of panels per row"*: `2`
 {: .hands_on}
 
-![PCA overview](../../images/scrna-scanpy-pbmc3k/pca_overview.png)
+![PCA overview]({% link topics/single-cell/images/scrna-scanpy-pbmc3k/pca_overview.png %})
 
 On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.
 

@@ -273,7 +273,7 @@ In their [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/) Dündar et al.
 **RNAseq normalization metrics: Within sample comparisons**<br>
 Table from Dündar et al. [2015](http://chagall.med.cornell.edu/RNASEQcourse/)
 
-In addition, an excellent overview of these metrics can be found [here](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
+In addition, an ee this [xcellent overview of these metrics](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
 
 #### <font color="red">&#9888; You should NEVER EVER use RPKM, FPKM, or TPM to compare expression levels <em>across</em> samples. These are RELATIVE measures! Consider yourself warned!</font>
 
@@ -347,7 +347,7 @@ In this case the input to TopHat is **not** individual datasets, but a collectio
 
 The same procedure is then repeated for collection **c2**. In the end it generates a lot of datasets in the history resulting in something resembling an image below. TopHat produces five types of output and because we started with dataset collections every one of the green boxes shown below is actually a collection of outputs for **c1** and **c2**, respectively.
 
-![TopHat outputs for both collections](../../images/tophat_output.png)
+![TopHat outputs for both collections](../../images/transcriptomics_images/tophat_output.png)
 
 Let's now take a look at some of the alignments. We will use IGV for this purpose.
 
@@ -357,7 +357,7 @@ First, let's drill down to actual alignments produced by TopHat. For example, in
 
 Now, click on **c2-r1x** and the following will appear:
 
-![Accepted hits c2-r1x and D. melanogaster button](../../images/accepted_hits_2.png)
+![Accepted hits c2-r1x and D. melanogaster button](../../images/transcriptomics_images/accepted_hits_2.png)
 
 Finally, use **D. melanogaster** link (highlighted above) and follow the on-screen instructions. By focusing IGV on genomic position `chrX:11,897,111-11,920,446` you will be able to see spliced alignments produced by TopHat:
 

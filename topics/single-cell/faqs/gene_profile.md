@@ -1,4 +1,7 @@
 ---
+redirect_from:
+- /topics/transcriptomics/faqs/gene_profile
+
 title: What exactly is a ‘Gene profile’?
 area: gene
 box_type: tip
