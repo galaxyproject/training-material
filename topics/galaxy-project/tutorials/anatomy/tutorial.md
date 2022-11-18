@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Galaxy: People, resources and source code for open science analyses"
+title: "The people, values, resources and source code of Galaxy"
 questions:
-  - "What are the main project components?"
+  - "What are the main identifiable project components?"
   - "How do they all fit together?"
   - "Who pays for the 'free' analysis computational resources?"
   - "How are decisions really made?"
@@ -57,10 +57,13 @@ contributors:
     - Convenient and reliable way to get complex analyses done for users
     - Interdependent open source code repositories for developers.
     - Global collaboration for investigators
+- All models of Galaxy are wrong, but some may be useful.
 - This module outlines the major components, and how they fit together
 - Drafted by a human, it represents only one of many possible explanations
+- Most participants will be associated with more than one of the parts described here
+- They all need to be considered together but it's easier to list them individually
 
-> <details-title>Classifying components in a global open science project is a hard problem</details-title>
+> <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
 > - The project has grown of its own accord, not neatly from a blueprint.
 > - Driven by shared vision and values, adapting to rapid external developments
@@ -69,12 +72,13 @@ contributors:
 > - No obvious “best” way to describe an open science collaborative ecosystem.
 > - No known terminology for the components or interactions.
 > - Need to invent a descriptive approach.
-{:  .details}
+{:  .tip}
  
 
 ## People + resource inputs = project outputs
-- A kind of functional equation for Galaxy
-- Explanation in the optional detail sections
+- An equation that summarises the Galaxy project
+- Explanation in the optional detail sections below
+- People are the key to everything.
 
 > <details-title>People working together make the project possible</details-title>
 > - That might seem trite, but it's how open source succeeds.
@@ -123,9 +127,10 @@ contributors:
 >             - for server system administrators  
 {:  .details}
 
-
-# People: Individuals, collaborations, communities and governance
-
+# Field guide to the project ecosystem 
+## People: Individuals, collaborations, communities and governance
+- Starts with the major ways people have organised themselves in the project
+- Many individuals are part of many of the organisations and communities below
 - How people engage and work together is central to understanding how Galaxy works
 - People bring the resource inputs and project outputs are what people produce.
 - For this module, how they get things done is of more interest than exactly what they do.
@@ -148,8 +153,12 @@ contributors:
 
 ### Communities of Practice
 
-- Communities developing and supporting specialised fields - proteomics, climate science
-- small scale admins - people responsible for keeping Galaxy services running
+- Communities developing and supporting specialised fieldd
+    - proteomics
+    - climate science
+    - public halth 
+    - small scale admins
+        - for people responsible for keeping Galaxy services running
 
 ### Regions
 
