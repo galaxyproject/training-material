@@ -42,9 +42,7 @@ tags:
 
 
 # Introduction
-{:.no_toc}
 
-<!-- This is a comment. -->
 
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!
 
@@ -397,7 +395,6 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 {: .question}
 
 # Conclusion
-{:.no_toc}
 
 You have successfully performed, essentially, three workflows. You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--matrix--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--matrix--eset).
 

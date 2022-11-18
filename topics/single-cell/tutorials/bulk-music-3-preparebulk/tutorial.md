@@ -47,9 +47,6 @@ follow_up_training:
 
 
 # Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas {% cite Moreno2021 %}.  Let's get started!
 
@@ -123,7 +120,7 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 >
 {: .hands_on}
 
-Now let's take care of the excessively wordy header titles - and note that oftentimes various programmes struggle with titles or cells that have any spaces ` ` in them, so removing those now often saves hassle later. 
+Now let's take care of the excessively wordy header titles - and note that oftentimes various programmes struggle with titles or cells that have any spaces ` ` in them, so removing those now often saves hassle later.
 
 > <comment-title></comment-title>
 > You might also remember in the MuSiC tutorial that we can analyse numeric parameters in the metadata (in that case, hbac1c content). Reformatting to ensure numerical values in these columns (i.e. taking the ` years` out of an age cell) is helpful then too.
@@ -194,9 +191,9 @@ Now examine {% icon galaxy-eye %} your raw counts file in the Galaxy history.
 > 1. Are samples in the rows or columns?
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-> > 
+> >
 > > ![Column 1 contains Gene ID followed by many lines of ENSG####. Column 2 contains the gene names. The following columns contain numerous iterations of ERR#####](../../images/bulk-music/raw-matrix.png "Gene info")
-> > 
+> >
 > > 1. By examining the matrix, you can find that genes are the rows while samples are the `columns`.
 > >
 > {: .solution}
@@ -245,7 +242,7 @@ We have three more tasks to do: first, we need to create the expression set obje
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
 >    - {% icon param-file %} *"Phenotype Data"*: `out_file1` #metadata (output of **Regex Find And Replace** {% icon tool %})
-> 
+>
 > 2. Remove the `#metadata #matrix` tags from the output **RData ESet Object**
 >
 {: .hands_on}
@@ -261,7 +258,7 @@ We have three more tasks to do: first, we need to create the expression set obje
 > > The trick with all of these questions is to examine {% icon galaxy-eye %} the `General info` output {% icon param-file %} of the **Construct Expression Set Object** tool.
 > > ![Lines showing ExpressionSet'; assayData: 34997 features, 7 samples; protocolData: none; phenoData; sampleNames: ERR### (7 total); varLabels: Age BMI Disease Sex; varMetadata: labelDescription; and 3 more useless lines ](../../images/bulk-music/generalinfo.png "General info output")
 > >
-> > 1. There are `34997` features, which are the genes. 
+> > 1. There are `34997` features, which are the genes.
 > > 2. There are `7` samples.
 > > 3. The metadata categories are the same you prepared earlier, shown here in a category of phenoData: `Age BMI Disease Sex`
 > >
@@ -303,7 +300,6 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 
 {% icon congratulations %} Congrats! You have successfully reformatted the RNA-seq samples into two ESet objects consisting of disease-only or healthy-only samples. You're ready to take all this hard work and start comparing cell compositions in the next tutorial.
 
