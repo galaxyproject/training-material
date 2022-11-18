@@ -3,13 +3,13 @@ layout: tutorial_hands_on
 logo: "Galrollup"
 title: "Galaxy: People, resources and source code for open science analyses"
 questions:
-  - "What are the main distinct project structures?"
-  - "How do they work together?"
+  - "What are the main project components?"
+  - "How do they all fit together?"
   - "Who pays for the 'free' analysis computational resources?"
   - "How are decisions really made?"
   - "Who's in charge?"
   - "Why is contribution from the community so important?"
-  - "How can you join in?"
+  - "How can I join in?"
 objectives:
   - "Understand the value of Galaxy community development stories as examples of how things are done"
   - "Understand how different communities work together to make things happen"
