@@ -11,9 +11,9 @@ questions:
   - "Why is contribution from the community so important?"
   - "How can I join in?"
 objectives:
-  - "Understand the value of Galaxy community development stories as examples of how things are done"
+  - "Understand Galaxy community development stories as examples of how things get done"
   - "Understand how different communities work together to make things happen"
-  - "Understand the importance of community development and contributor engagement to project sustainability"
+  - "Understand opportunities for engagement and contributing your skills"
  
 time_estimation:
 subtopic: anatomy
@@ -53,10 +53,10 @@ contributors:
 # Alternative ways of seeing Galaxy
 
 - Galaxy is a big, complicated project with many moving parts making it hard to comprehend completely
-- What you see depends on how you look at it, so people see different things such as:
-    - Convenient and reliable way to get complex analyses done for users
-    - Interdependent open source code repositories for developers.
-    - Global collaboration for investigators
+- What you see depends on how you look at it, so it is:
+    - A convenient and reliable way to get complex analyses done for users
+    - Inter-dependent open source code repositories for developers.
+    - A global collaboration for investigators
 - All models of Galaxy are wrong, but some may be useful.
 - This module outlines the major components, and how they fit together
 - Drafted by a human, it represents only one of many possible explanations
