@@ -105,7 +105,7 @@ Let's get rid of a bunch of repetitive columns in the metadata we don't need. Yo
 
 You can inspect the dataset {% icon galaxy-eye %} to see that it's full of annoying "" everywhere, and overly long descriptions of each columns.
 
-![Columns in Galaxy history window contain "Assay" and "" around every word or ID](../../images/bulk-music/annoying_ebimetadata.png History window "Annoying metadata")
+![Columns in Galaxy history window contain "Assay" and "" around every word or ID](../../images/bulk-music/annoying_ebimetadata.png "Annoying metadata")
 
 Now, there might be a better way to do this in Galaxy (or you might consider downloading the file locally and changing it in a spreadsheet application or something), but this is what will work to reformat all that annoying text.
 
