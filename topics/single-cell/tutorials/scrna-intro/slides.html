@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>An introduction to scRNA-seq data analysis</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:title" content="Galaxy Training: An introduction to scRNA-seq data analysis" />
+    <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-12 21:35:12 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "An introduction to scRNA-seq data analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html",
+  "timeRequired": "PT30M",
+  "keywords": "single-cell, single-cell, español",
+  "description": "The questions this  addresses are:\n - How are samples compared?\n - How are cells captured?\n - How does bulk RNA-seq differ from scRNA-seq?\n - Why is clustering important?\n\n\nThe objectives are:\n - To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.\n - Know the types of variation in an analysis and how to control for them.\n - Grasp what dimension reduction is, and how it might be performed.\n - Be familiarised with the main types of clustering techniques and when to use them.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Intermediate"
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/single-cell" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-intro/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# An introduction to scRNA-seq data analysis
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: </div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+  <i class="far fa-play-circle" aria-hidden="true"></i><span class="visually-hidden">video-slides</span> <a href="/training-material/videos/watch.html?v=/single-cell/tutorials/scrna-intro/slides">Video slides</a> |
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How are samples compared?
+
+- How are cells captured?
+
+- How does bulk RNA-seq differ from scRNA-seq?
+
+- Why is clustering important?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- To understand the pitfalls in scRNA-seq sequencing and amplification, and how they are overcome.
+
+- Know the types of variation in an analysis and how to control for them.
+
+- Grasp what dimension reduction is, and how it might be performed.
+
+- Be familiarised with the main types of clustering techniques and when to use them.
+
+
+---
+
+
+# Single-cell RNA-seq
+
+An introduction to scRNA-seq data analysis
+
+???
+- Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis workshop.
+- Here we will walk you through some of the basics and concepts when dealing with single cell data.
+
+---
+
+
+## Bulk RNA-Seq
+
+.pull-left[![Two blobs labelled tissue A and tissue B are shown, on the right they are summarised into tables of Gene A, B, and X and their different average expression per tissue.](../../images/scrna-intro/rna_cells_bulkrez.svg)]
+
+.pull-right[
+.reduce90[
+
+|Attribute| Summary |
+|-:|:-|
+|Resolution| Entire tissues |
+|Signal | Average gene expression per tissue |
+|Differential Expression | Difference between average gene expression between tissues |
+
+]
+]
+
+
+???
+- Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data.
+- With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues.
+- Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high.
+- The differential expression is then measured as the relative expression of a given gene between one tissue and another.
+
+---
+
+## Single Cell RNA-Seq
+
+.pull-left[![Red and blue clusters of cells are shown resembling the tissue blob from the previous slide. Now the graphs on the right for expression in Genes A, B, X are shown per cell instead of per tissue.](../../images/scrna-intro/rna_cells_singlerez.svg)]
+
+.pull-right[
+.reduce90[
+
+|Attribute| Summary |
+|-:|:-|
+| Resolution| Individual cells within tissues |
+| Signal | Individual gene expression per cell |
+| Differential Expression | Some cells express the same set of genes in the same way; comparing one set of cells against another |
+
+]
+]
+
+
+???
+- With single cell RNA-seq analysis, the stage shifts away from measuring the average expression of a tissue.
+- And towards measuring the specific gene expression of individual cells within those tissues.
+- Here we are no longer comparing tissue against tissue, but cell against cell.
+- Each cell is assigned a gene profile which describes the relative abundance of genes detected within it.
+- Many cells share the same gene profile, where a gene profile ideally describes a cell type.
+- Sometimes we need to compare single-cell datasets across tissues, and we see that many cells across tissues share the same cell type.
+- For example, look at the purple and green gene profiles which are shared across both tissues.
+
+
+---
+
+# From Bulk RNA to Single Cell RNA
+
+.image-50[![Tissue A and B from the first slide are shown as the collections of cells from the second slide.](../../images/scrna-intro/rna_cells_bulk2single.svg)]
+
+.reduce90[
+* In order to quantify RNA at the level of individual cells:
+  * New methods of library preparation
+  * New methods of sequencing
+  * New methods of quality control
+  * New methods of analysis
+]
+
+???
+- New technologies means new methods and techniques to harness the new features that come with them.
+- Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.
+
+---
+
+# Cell Capture and Replicates
+
+.center[*How do we prepare samples for sequencing?*]
+
+???
+For example, how are cells captured and sequenced?
+
+--
+
+.pull-left[
+.reduce90[
+
+__Bulk RNA-seq__
+
+  1. Cut a thin slice of a tissue
+  1. Add enzyme to break down cell walls
+  1. Rinse out the unwanted DNA / RNA material
+  1. Perform sequencing on leftover goop
+
+]
+]
+
+???
+In bulk RNA-seq analysis, the process involves taking a sample, removing unwanted molecules and sequencing everything else.
+
+--
+
+.pull-left[
+.reduce90[
+
+__Single-cell RNA-seq__
+
+  1. Cut a thin slice of a tissue
+  1. Breakdown a tissue into cells
+  1. Isolate each cell
+     * Add enzyme to break down cell walls
+     * Perform barcoding
+  1. Perform sequencing in a common pool
+
+]
+]
+
+???
+- For single cell analysis, the process is much the same, except that each sample is a cell.
+- And must therefore be sequenced separately from other cells.
+- Once isolated, unique barcodes are added to each cell, and then sequenced.
+
+
+--
+
+__Biological Replicates__
+
+.center[
+.reduce90[
+
+|Type|Notes|
+|--------:|:-----------|
+| **Bulk RNA-seq** | Each tissue slice is a sample, can take another slice |
+| **Single-cell RNA-seq** | Each cell is sample, cannot directly replicate because unique |
+
+]
+]
+
+???
+- The level of resolution in single-cell is at the cell level, and each cell is unique.
+- Therefore, the concept biological replicates is not quite the same as that in bulk RNA-seq.
+
+
+---
+
+# Capture / Sorting:
+
+*How are cells isolated?*
+
+
+???
+Cell isolation can be performed in different ways.
+
+--
+
+.pull-right[.image-90[![A black and white image of a woman in the lab using her mouth to pipette cells from one test tube to another.](../../images/scrna-intro/mouthpipette.jpg)]]
+
+.pull-left[
+.reduce90[
+* Manual pipette:
+   * Use a thin glass tube to suction up a cell
+   * Maintain pressure in tube
+   * Transport to new environment
+   * Release pressure in tube
+]
+]
+
+???
+One method is manual pipetting, where wet lab scientists suction up individual cells using a long thin tube.
+
+
+--
+
+.pull-left[
+.reduce90[
+* Repeat 1000 times to isolate 1000 cells
+  * Error-prone
+]
+]
+
+???
+They can do this hundreds of times to isolate hundreds of cells, but it is error-prone, and often multiple cells are isolated together.
+
+
+--
+
+.pull-left[
+.reduce90[
+* Automatic pipette:
+  * Flow cytometry
+]
+]
+
+???
+Another method is flow cytometry, which reduces the human-error component of this stage.
+
+---
+
+# Capture / Sorting: Flow Cytometry
+
+.pull-right[![Cartoon of a fluidics system with two lasers pointing through the fluidics system and filters and detectors detecting the amount of light reflected out of the system with an optics system. This goes through a detector to an electronics system.](../../images/scrna-intro/opticssystem.png)]
+
+.pull-left[
+.reduce90[
+* Stream cells along a liquid through a narrow tube
+  * Narrow to permit one cell at a time
+  * Fluid enough to allow high-throughput.
+]
+]
+
+.pull-left[
+.reduce90[
+* Screen each cell with a laser to probe properties:
+   * Cell Size and Type
+      * Front scatter vs Side scatter
+   * Cell Type by Fluorescent Labelling
+     *  Cell Surface Markers (CDs)
+     *  Fluorescent Labelling
+]
+]
+
+.pull-left[
+.reduce90[
+* Isolate a cell into its own sequencing environment
+]
+]
+
+???
+- Flow cytometry floats cells in a shallow liquid bath and streams them along a narrow channel, just narrow for one cell to pass through.
+- Cells can be screened by a variety of properties this way, such as by their light scatter properties, and from fluorescent cell labelling.
+- Cells can be tagged and isolated in this manner.
+
+---
+
+# Capture / Sorting: Size and Type
+
+.pull-right[
+  ![The same cartoon as previously](../../images/scrna-intro/opticssystem.png)
+]
+
+
+.pull-left[
+*Optical Scatter*
+  * Ratio of Cell Size:Wavelength
+  * If Cell Size &lt; Laser Wavelength (~400nm)
+    * Low intensity and high inconsistency scatter
+
+  * Measured in terms of:
+     * Forward Scatter (FSC)
+     * Side Scatter (SSC)
+
+]
+
+???
+- Optical scatter properties can be used to probe size and consistency of the cell, where cells with a smaller size than the laser wavelength yield lower intensities and more inconsistent scatter patterns.
+- There are two main types of optical scatter: Forward scatter, and Side scatter.
+
+---
+
+# Capture / Sorting: Size and Type
+
+.pull-left[
+.reduce90[
+*Forward Scatter (FSC)*
+  * Measures along the path of the laser
+  * FSC intensity proportional to diameter of cell
+  * Good for distinguishing between immune cells
+]
+]
+
+.image-75[.pull-right[![A coloured scatter plot showing two clumps of points labelled monocytes and lymphocytes.](../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg)]]
+
+
+???
+- Forward scatter is aligned with the main laser and measures the diameter of cell, which is ideal for distinguishing different cells by their size profiles.
+- For example monocytes, which are typically larger than lymphocytes, as seen on the X-axis of the example image.
+
+--
+
+.pull-left[
+.reduce90[
+&lt;br /&gt;
+
+*Side Scatter (SSC)*
+  * Measures 90° to laser, along path of cells
+  * Much weaker intensities than FSC
+  * Refraction/reflection proportional to granularity of cell
+]
+]
+
+.image-75[.pull-right[![The same scatter plot but now monocytes and graunlocytes are shown as blobs.](../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg)]]
+
+
+???
+Side scatter is perpendicular to the main laser, and measures the granularity of the cell, ideal for distinguishing cells with less defined internal structures, such as the granulocytes on the Y-axis of the example image.
+
+---
+
+# Capture / Sorting: FACS
+
+.pull-left[
+![A scatter plot cut into four regions of CD4+/- and CD8+/-](../../images/scrna-intro/CD8vsCD3.png)
+.footnote[.reduce70[Image from BD Biosciences]]
+]
+
+.pull-right[
+.reduce90[
+*Fluorescence-Activated Cell Sorting (FACS)*
+  * Cell surface markers
+    * Fluorescent Markers for each cell
+  * Positive and Negative
+    * Whether cell activated for that CD or not.
+  * Plot different CD markers against each other
+    * Isolate cell populations
+  * Can set gating thresholds to isolate analysis to enriched subset of cells
+
+]
+]
+
+???
+- Cells can also be gated and characterised by their cell surface markers via FACS.
+- By plotting different surface marker intensities against one another, cells can be separated, gated, and labelled based on these fluorescent properties.
+
+---
+
+# Barcoding Cells
+
+.center[![Groups of GGG and TCT are added to two different cells to label them.](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)]
+
+.footnote[Add unique barcodes to every transcript in a cell]
+
+???
+- Once isolated, cells can be barcoded.
+- Barcodes are unique sequences that are added to each RNA molecule.
+- They are not unique to the molecule, but unique to the cell such that any two RNA molecules will be tagged by the same cell barcode, should they exist in the same cell.
+- RNA molecules from different cells will have different cell barcodes.
+
+---
+
+# Barcoding Cells
+
+.footnote[Place cells into sequencing plate]
+
+.pull-left[![Cells with barcodes are plated into individual wells based on their barcode.](../../images/scrna-intro/scrna_pbb_barcodes_overview.svg)]
+
+.pull-right[
+.reduce90[
+* From a pool of many *many* different tissue samples / cells:
+
+   * Cell Barcodes tell us which cell the transcript from
+   * UMIs can tell us how much the transcript was amplified, by comparing it with other transcripts from the same gene with the same UMI tag.
+]
+]
+
+???
+Once the RNA molecules have been tagged by cell barcodes, they can be amplified, either separately or pooled together, where the amplified products share the same cell barcodes as their original counterparts.
+
+---
+
+### Sequencing Issues: Amplification
+
+.center[.image-75[![A cartoon of a cell with a red and blue strand. The red strand amplifies well, the blue does not.](../../images/scrna-intro/amplification_errors.svg)]]
+
+.reduce90[
+* Polymerase Chain Reaction (PCR)
+   * Takes a single-stranded read and duplicates it
+   * Works well when enough reads are present in pool
+* Low coverage
+   * When reads in sequencing pool are low, many will be missed
+   * Can lead to one-sided amplification
+]
+
+???
+- PCR amplifies the gene products to make them more easily detectable during sequencing.
+- When there is a lot of gene product to amplify, as is the case for bulk RNA-seq, PCR works quite well in amplifying all products in a reasonably well-represented manner.
+- However, in the case of single-cell products, the amount to amplify is very small, and many unique reads might be missed during this phase whereas others may be over amplified, as shown in the blue and red transcripts in the example.
+
+---
+
+### Sequencing Issues: Amp. + UMIs
+
+.pull-left[![The same cartoon but now red and blue strands are labelled with pink and grey adapters. The red and blue both amplify but at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+
+.pull-right[
+.reduce90[
+* How many red transcripts in the cell?
+
+* After PCR amplification?
+
+* What do the little coloured tags at the start of each transcript do?
+
+
+* Unique Molecular Identifiers (UMIs)
+
+* Added to help mitigate bias from amplification.
+]
+]
+
+???
+
+- To guard against this type of amplification bias, we can add a random element to the barcoding.
+- These random barcodes known as UMIs, uniquely tag transcripts such that any two transcripts of the same gene are likely to have different random barcodes.
+
+---
+
+### Sequencing Issues: Amp. + UMIs
+
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+
+.pull-right[
+
+.center[Counting Reads
+
+|          | Reads |
+|---------:|:-----:|
+|  **Red** | 6     |
+| **Blue** | 3     |
+
+]
+]
+
+???
+- Let us consider the example to the left: we have 2 red transcripts and 2 blue transcripts inside the cell, which after amplification equate to 6 red transcripts and 3 blue transcripts.
+- If we were to compare the differential gene expression between the red and blue transcripts, just by looking at the amplified reads, we would come to the false conclusion that the red transcripts are expressed twice more than the blue.
+
+
+--
+
+.pull-left[
+
+.center[Grouping Reads by Gene and UMI
+
+|          | **UMIs** | **Reads** |
+|---------:|:--------:|:-----------:|
+|  **Red** | Pink     | 2           |
+|          | Cyan     | 4           |
+| **Blue** | Pink     | 1           |
+|          | Green    | 2           |
+
+]
+]
+
+.pull-right[
+
+.center[Counting de-duplicated Reads
+
+|          | **UMIs (Grouped)** | **# UMIs** |
+|---------:|:------------------:|:-----------:|
+|  **Red** | {Pink, Cyan}       | 2           |
+| **Blue** | {Pink, Green}      | 2           |
+
+]
+]
+
+???
+However if we group the reads by their UMIs, and then count only the number of unique UMIs per transcript, de-duplicating the reads which share the same transcript and UMI, we arrive at 2 red reads and 2 blue reads which better represents the true number of transcripts.
+
+
+---
+
+### Sequencing Issues: Unique UMIs?
+
+
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-right[
+
+|          | **UMIs** | **#Reads** |
+|---------:|:------------------:|:-----------:|
+|  **Red** | {Pink, Cyan}       | 2           |
+| **Blue** | {Pink, Green}      | 2           |
+
+.reduce90[
+* Pink appears twice in different genes.
+* In what context are UMIs unique?
+]
+
+]
+
+???
+- UMIs are relatively random, but not truly random.
+- Notice that the pink UMI appears twice: once in the blue transcript and once in the red transcript.
+
+
+--
+
+&lt;br /&gt;
+
+.reduce90[
+* Can every transcript in a cell have its own UMI?
+
+* Number of mRNA transcripts in a cell?
+  * ~ 10⁵ to 10⁶ in a mammalian cell.
+
+* Require at minimum barcodes of length *N*, where 4ᴺ = 10⁵
+]
+
+???
+This is due to there being often more transcripts than available UMIs, both which are dependent on the number of transcripts in a cell, and the length of the barcode.
+
+---
+
+# Sequencing Issues: Unique UMIs?
+
+.center[Barcodes of length *N* with Edit Distance of *B*:]
+
+.pull-left[
+
+.center[*N = 5* and *B = 1*]
+
+```
+AAAAA AAAAC AAAAG AAAAT AAACA ····
+CCCCC CCCCA CCCCG CCCCT CCCAC ····
+              ·
+              ·
+              ·
+```
+
+.center[*4⁵ = 1024* barcodes]
+
+]
+
+.pull-right[
+
+.center[*N = 5* and *B = 2*]
+
+```
+AAAAA AAACC AAAGG AAATT AACCA ····
+CCCCC CCCAA CCCGG CCCTT CCCAA ····
+              ·
+              ·
+              ·
+```
+
+.center[*4⁵⁻¹ = 512* barcodes]
+
+]
+
+.footnote[
+
+Edit distances guard against **sequencing errors.**
+
+]
+
+???
+
+- Consider a set of barcodes of length 5 with an edit distance of 1 between adjacent barcodes, and another set with an edit distance of 2.
+- The former is not robust against common sequencing errors of 1 base pair, but the latter only allows for half the number of barcodes.
+- This trade-off between the number of available barcodes and guarding against sequencing errors is instrumental in the design of cell barcodes and UMIs.
+
+---
+
+# Sequencing Issues: Unique UMIs?
+
+.pull-left[![The same cartoon, red and blue amplify at different rates.](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-right[
+
+|          | **UMIs**      | **# Reads** |
+|---------:|:-------------:|:----------:|
+|  **Red** | {Pink, Cyan}  | 2          |
+| **Blue** | {Pink, Green} | 2          |
+
+.reduce90[
+* Pink appears twice in different genes.
+* In what context are UMIs unique?
+
+&lt;br /&gt;
+&lt;br /&gt;
+
+]
+
+]
+
+.reduce90[
+*In what context are UMIs unique?*
+  * UMIs are &quot;random salt&quot;
+    * 'Unique enough' at the transcript level
+
+  * We wish to count transcripts only
+    * De-duplication of UMIs at transcript level
+    * Good estimation of true transcript abundance
+]
+
+???
+In the context of amplification, UMIs do not need to be unique, they just need to be random enough to deduplicate transcripts in order to give a more accurate estimate of the number of transcripts within a cell.
+
+---
+
+# Cell Barcodes and UMIs (Recap)
+
+For Each Cell:
+
+1. Add Cell Barcodes to Cells
+![Groups of GGG and TCT are added to two different cells to label them.](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)
+
+???
+So let's just recap what we've learned: First each cell has cell barcodes added to each RNA molecule in each cell.
+
+---
+
+# Cell Barcodes and UMIs (Recap)
+
+For Each Cell:
+
+1. Add Cell Barcodes to Cells
+1. Add UMIs to Cell Barcoded Cells
+![Random mixtures of three letter barcodes are shown, in addition to the two cells from the last cartoon which had GGG in one and TCT labelled reads in the other cell. Now they all have random prefixes before the GGG in one cell and TCT in the other.](../../images/scrna-intro/scrna_umi_add.svg)
+
+
+???
+- Then we add random UMIs to all transcripts, which further tag the molecules.
+- These can then be used deduplicate the transcripts after amplification.
+- After amplification we need to perform some quality control.
+
+---
+
+# QC: Overcoming Background Noise
+
+
+
+.center[![A matrix of Genes 1, 2, 3 and cells per column is changed into two matrices, one with counts of genes detected per cell, and counts of cells detected per gene](../../images/scrna-intro/raceid_libsize.svg)]
+
+* Num. features per cell, and library size should follow a normal curve.
+* Min-Max filtering helps clip off the fat-tails of a distribution.
+
+???
+- One way to do this is to set thresholds on the limits of detectability for genes and for cells.
+- Consider an analysis governed only by 3 genes (G1, G2 and G3), and 5 cells (A, B, C, D and E).
+- The first row of the top table defines the library size, which is total number of messenger RNAs across all genes in each cell.
+- The subsequent rows are the thresholds of gene detectability, displaying how many genes are detected in each cell for genes greater than the threshold amounts of 0 to 4.
+- We see that even a threshold of greater than 3 transcripts detected in a given cell  still keeps 3 cells in the analysis: B, C, and E. In the lower table, the opposite is represented, with the total number of transcripts across all cells for each gene.
+- By setting thresholds of detectability, we can see how many cells are described by the gene for that threshold.
+- In both cases, we can see that if we set the thresholds too low, then we risk keeping low quality genes or cells, but if we set the thresholds of detectability too high, then we risk losing too many.
+
+---
+
+# Normalisation: Bulk vs Single-Cell
+
+.pull-left[
+
+*Bulk RNA-seq*: High Coverage
+
+|            |  T1 | T2 | T3 |
+|:-----------|----:|---:|----|
+| **GeneA** | 100 | 80 | 40 |
+| **GeneB** |  45 | 30 | 40 |
+
+.reduce70[* Median Gene Expression is high]
+
+
+&lt;br /&gt;
+
+*scRNA-seq*: Very Low Sequencing Depth
+
+|            | C1 | C2 | C3 | C4 | C5 |
+|:-----------|---:|---:|---:|---:|---:|
+| **GeneA** |  0 |  0 |  2 |  0 |  1 |
+| **GeneB** |  2 |  0 | 15 |  0 |  0 |
+
+.reduce70[* Median Gene Expression is zero]
+
+]
+
+
+.pull-right[
+
+__Why is this a problem?__
+
+.center[
+$$R(s,g) = \frac{X\_{sg}}{(\prod\_{s} X\_{s})^{\frac{1}{n}}}$$
+
+$$DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}$$
+
+]
+]
+
+???
+- Filtering can be a luxury however, as many single-cell RNA-seq datasets have typically low sequencing depth compared to bulk RNA-seq.
+- During the process of normalisation, samples are scaled against one another to make them more comparable.
+- This is normally performed by using median values. For example, for DE-Seq normalisation, the geometric mean count for a cell is taken, and each gene value in that cell is divided by it and by the median value of all geometric means of all cells.
+- If median gene expression is high, then this normalisation method works quite well.
+
+--
+
+.pull-right[
+Can't divide by zero!
+]
+
+???
+- But if the median gene expression is zero, as is often the case with single-cell data, then we have the problem of dividing by zero.
+- There are methods to get around these zero counts.
+
+---
+
+# Normalisation: SCRAN method
+
+.footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
+
+.pull-left[![Blue and red bubbles are mixed, then separated into two groups, and then arranged around a circle, red going from small to large around the right half, blue from small to large around the left. The bottom of the circle is labelled 6, the top is labelled 12.](../../images/scrna-intro/scran_pooling_left.svg)]
+
+
+.pull-right[
+.reduce90[
+1. Calculate the library sizes of all cells
+
+1. Calculate the library size of a pseudo reference cell (average)
+
+1. Separate odd sizes (red) and even sizes (blue) into two groups
+
+1. Sort each group by library size and place on opposite sides of a &quot;ring&quot;
+]
+]
+
+???
+- One such method is the SCRAN method which works by creating overlapping pools of cells such that any individual cell is characterized by cells of similar library sizes.
+- The method involves splitting all cells into an odd and even group by their library size, and arranging them onto a ring structure where neighbouring cells on the ring have similar sizes.
+
+---
+
+# Normalisation: SCRAN method
+
+.footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
+
+.pull-right[![The same final graph with blue and red circles of increasing size with an arrow pointing to a large number of formulas that overlap.](../../images/scrna-intro/scran_pooling_right.svg)]
+
+.pull-left[
+.reduce90[
+1. Define overlapping pools of adjacent cells of size *k*
+
+1. For each pool
+    1. Sum the library sizes of all cells within
+    1. Derive a size factor by dividing by the reference cell
+
+1. For each cell
+    1. Find which pools it belongs to
+    1. Build a linear model using these size factors
+    1. Estimate the size factor of the cell on this linear model
+]
+]
+
+???
+- Overlapping pools of fixed sizes are defined, resulting in each cell being defined by multiple pools.
+- A linear model for that cell can then be built by the pools it occurs within, and normalisation factors for all cells can be determined this way.
+
+---
+
+# Normalisation: SCRAN method
+
+.footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
+
+.center[![The two previous graphs now in one graph.](../../images/scrna-intro/scran_pooling.svg)]
+
+???
+- By this method, the issue of low sequence coverage is worked around by turning cells with low library sizes into useful components of a size factor that can be applied to similar cells.
+- Such novel normalization methods were commonplace a few years ago, but as sequencing technologies have improved, the issue of many zero counts in a matrix becomes less important, and normalisation size factors can be derived using bulk RNA-seq methods once again.
+
+
+---
+
+# Wanted vs Unwanted Variation
+
+.pull-right[![Three overlapping line graphs mapping contributing variance to density. Top N genes is shown increasing in density as contributing variance increases, which genes per cell, transcripts, and batch source decrease.](../../images/scrna-intro/variance.svg)]
+
+.pull-left[
+.reduce90[
+*Wanted Variation*
+  * Expression from the top most differentially expressed genes
+
+*Unwanted Variation*
+  * &quot;Confounders&quot;
+  * Technical Variation
+     * Batch source
+     * Library Size
+  * Biological Variation
+     * Intrinsic cell noise
+]
+]
+
+???
+- Other factors that we need to take into account during a single cell RNA analysis are the unwanted factors that can confound the analysis.
+- Ideally we wish to see the gene profiles that separate different types of cells are driven by biological variance.
+- There is however confounding variation from both technical and biological sources that are not useful to the analysis but do contribute to the variance.
+
+---
+
+# Confounding Variation: Biological
+
+.center[![A cartoon on the left shows a question mark with arrows to nothing and to transcripts shown. On the right are the cell cycle phases and different amounts of transcripts in each phase.](../../images/scrna-intro/raceid_cellcycle.svg)]
+
+.pull-left[
+.reduce90[
+.center[*Transcription Bursting*]
+ * Transcription not continuous, occurs in &quot;bursts&quot;
+ * Phenomenon hidden in bulk RNA-seq
+]
+]
+
+.pull-right[
+.reduce90[
+.center[*Cell Cycle*]
+ * Cells of the same type have twice the amount of mRNA at M-phase than G1-phase
+]
+]
+
+???
+- Confounding biological variance appears in two forms: Transcriptional bursting, and Cell cycle variation.
+- Transcriptional bursting is a phenomenon that occurs in cells in which transcription occurs in discrete states of active and inactive, where the interval between these states is hard to model.
+- In bulk RNA-seq, this phenomenon is unnoticeable as the effects are averaged out over many cells. But in single cell, two cells of the same type may exhibit different gene profiles simply because one cell was actively transcribing and the other was not.
+- This is not something we can control for in the analysis, but it is something we should be aware of when understanding why cell clusters can be noisy.
+- Cell cycle variation on the other hand is a much more well understood process, where the amount of RNA in a cell is approximately double that from a cell of the same type due to one being in the early G1 phase and the other being in the M-phase during the cell cycle.
+- There are genes which are known to covary with the cell cycle, and so by regressing the effect of these genes, we can control against the cell cycle.
+
+
+---
+
+# Confounding Variation: Technical
+
+.center[![Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped.](../../images/scrna-intro/raceid_technical_variation.svg)]
+
+.pull-left[
+.reduce90[
+*Amplification Bias*
+* Different transcripts are amplified more than others
+* Mitigated via UMIs
+]
+]
+
+.pull-left[
+.reduce90[
+*Dropout Events*
+* Some genes are falsely not detected in cells
+* Mitigated via better capture methods and normalisation
+]
+]
+
+???
+- Confounding technical variance appears in a three forms: Amplification bias, Dropout events, and Library size variation.
+- Amplification bias can be mitigated by UMIs as demonstrated before.
+- Dropout events give rise to the prevalent zeroes in the count matrices, and their effect can be reduced by using clever normalisation techniques such as the pooling method shown previously, as well as by using better sequencing methods.
+
+---
+
+# Confounding Variation: Technical
+
+.center[![Library size variation points to two cells with red and blue transcripts in identical numbers. However during amplification in one cell it produces results, while in the other blue is dropped.](../../images/scrna-intro/raceid_technical_variation.svg)]
+
+*Library Size Variation*
+* Cells have different transcription rates and capture rates
+* Mitigated via normalisation
+
+???
+- Library size variation arises for a variety of different reasons, but is the main source of variation within an analysis.
+- Like bulk RNA-seq, this is reduced with good normalisation methods.
+
+---
+
+# Relationships Between Cells
+
+Consider:
+ * 1,000s of Cells
+ * 10,000s of Genes
+ * 10k dimensional dataset, with 1k observations
+
+Aim:
+ * Find groupings of Cells in a subset of these Genes
+
+Note:
+* Some cells can have very similar expression in one gene, and very far different expression in all others.
+* How to represent this?
+
+???
+- Once we have removed unwanted confounders from the analysis we have the issue of quantifying the relationships between cells.
+- From a data analysis standpoint, we treat each cell as an observation, and each gene as a variable.
+- For large genomes this means extremely high dimensional datasets. Cells exist as points in this extremely sparsely populated high dimensional space, making it difficult to see the natural groupings.
+- The high dimensional space can be reduced a lot by simply filtering out genes that do not appear to be differentially expressed across all cells.
+- To find the relationships between these cells however, we need to define the distances between cells.
+
+---
+
+# Distance Matrix
+
+![A count matrix of genes vs cells is plotted in N-dimensional space with each gene representing the different axes. A distance formula for 3 dimensions is shown, and then a final table is shown from the count matrix with the distances between each of the cells, based on their genes.](../../images/scrna-intro/raceid_distance.svg)
+
+???
+- A distance matrix does just this, defining the distance between any two cells by a single score.
+- Here we use the Euclidean distance on a 3 dimensional dataset of 3 genes (G1, G2 and G3), and 3 cells (R, P and V).
+- The distance between any two cells can be calculated as the sum of squares of the difference in gene values.
+- Note how the distance matrix is symmetrical along the diagonal, confirming that for example the distance from cells R to V is the distance from V to R as expected.
+
+---
+
+# Relatedness of Cells: KNN
+
+![A plot of cells across three genes is shown with the label high dimensional dataset of cells. This produces a distance matrix (symmetric), and then via KNN with k=2, a non-symmetric matrix. This is then plotted again in the gene-dimensional space to show connections between cells.](../../images/scrna-intro/scrna_knn.svg)
+
+* Perform *K-nearest neighbours* to connect edges to cell vertices.
+
+???
+- Once a distance matrix is generated, we can perform K-nearest neighbours upon the distance matrix where directed edges are generated between cells.
+- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells.
+- If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.
+
+
+---
+
+# Dimensional Reduction
+
+![Matrix of genes vs cells is plotted in gene-dimensions, and then reduced into 2 dimensions.](../../images/scrna-intro/raceid_dimred.svg)
+
+.pull-left[
+.reduce90[
+*Aim:*
+* Take a high-dimensional dataset and reduce it into a lower dimension that we can understand.
+  * e.g. 10000-D → 2D
+]
+]
+
+.pull-right[
+.reduce90[
+*Constraint*
+* Preserve the high dimensional topology in a low dimensional space.
+   * e.g. if Cell A is far from Cell D yet close to Cell B in 3D, it should replicate those relationships in 2D.
+]
+]
+
+???
+- We can represent this 3 dimensional space easily as 3 independent axes with points that denote the cells.
+- Extrapolating this relatively low dimensional example set to a real dataset which thousands of dimensions is beyond the scope of human possibility.
+- Dimensional reduction is a type of technique that takes a high dimensional dataset and produces a low dimensional representation, usually 2 dimensional, that tries to preserve the distances between the data points.
+- Here the relative differences between cells is maintained in both the high and low dimensional representations.
+- There are  many different kinds of dimension reduction techniques, each with their own strengths and weaknesses dependent on the type and the dimensionality of the data.
+
+
+---
+
+### Clustering
+
+.pull-left[.image-100[![A scatter plot with many groups of cells labelled by different colours. The cells are largely clustered well, with few outlying cells.](../../images/scrna-intro/singlecellplot3.png)]]
+
+.pull-right[
+.reduce90[
+1. 2D Projection
+   * Each dot is a cell
+   * Clustering colours the dots, where different coloured cells belong to different clusters
+   * Different clusters represent different cell types
+]
+]
+
+???
+- Once the number of variables of the dataset have been sufficiently reduced via filtering and dimensional reduction, clustering can be performed more easily.
+- Here in this 2D projection, each circle is a cell, and the unique colours depict the clusters they have been assigned to.
+- The physical distances between the groups of coloured cells tell us how good the clustering is for this projection.
+
+
+---
+
+### Clustering
+
+.pull-left[.image-100[![Same scatter plot with clustering as before, but now the clusters are labelled things like Neurons, NSC, Glial Prog., Astrocytes, etc.](../../images/scrna-intro/singlecellplot4.png)]]
+
+.pull-right[
+.reduce90[
+1. 2D Projection
+1. Discrete Cell Types
+  * Each cluster should represent a different type
+  * Look for the most DE genes in each cluster
+    * Find the marker genes → Cell Type
+]
+]
+
+???
+- By inspecting the top differentially expressed genes in each cluster against all other clusters, clues to the type of cell that the cluster describes can be found.
+- Cell types are often characterized by the expression of specific marker genes, and the presence of these genes are strong indicators of type.
+- Marker gene discovery can then be used to annotate the clusters.
+
+
+---
+
+### Clustering
+
+.pull-left[.image-100[![The same labelled graph, but now arrows connect the next nearest groups of cell types.](../../images/scrna-intro/singlecellplot6.png)]]
+
+.pull-right[
+.reduce90[
+1. 2D Projection
+1. Discrete Cell Types
+1. Relationships infer Lineage
+  * Neural Stem Cells differentiate into mature cell types
+  * Lineage trees are constructed by taking into account
+     * Entropy of cluster
+     * Proximity of cluster
+]
+]
+
+???
+We can also further derive the relationships between these clusters by computing lineage trees based on the amount of noise in each cluster, with the expectation that stem cells have noisy expression profiles yielding broader clusters, and mature cells have very clear expression profiles yielding tighter clusters.
+
+
+---
+
+## Clustering: Hard vs Soft
+
+
+|  |  |
+|--|--|
+| .image-100[![Same set of distinct clusters with very clear separation](../../images/scrna-intro/singlecellplot3.png)] | .image-100[![Clusters now bleed into one another, and the separate is not clear.](../../images/scrna-intro/10xdata.png)] |
+| .center[**Hard**] | .center[**Soft**] |
+| Big spaces between clusters | Clusters bleed into one another |
+| Cell types are well defined and the clustering reflects that | Cell types seem to intermingle with one another. |
+
+
+???
+- The types of clustering you are likely to encounter in an analysis is dependent on the input datasets, where cells taken from late stage samples are less likely to be bunched together and are more likely to yield large visible gaps known as hard clusters that clearly defined different types.
+- Earlier stage datasets are more likely to yield softer clusters, where neighbouring clusters share soft boundaries as clusters intermingle slightly with one another.
+
+---
+
+# Continuous Phenotypes:
+
+.center[![The graph charts development time of reticulocytes as they pass through an intermediate or rare cell phase, into their final form: red blood cells.](../../images/scrna-intro/raceid_contpheno.svg)]
+.reduce90[
+* Cells aren't discrete, they transition
+* Continuously changing over time from a less mature type to more mature type
+]
+
+???
+Soft clustering is to be expected, since although clustering is a statistical method for discretely partitioning data, the underlying cell biology of the data is a continuous process, where cells transition from one well-defined state to another through intermediate stages which are represented in-between two cluster centres.
+
+---
+
+## Performing Clustering
+
+.pull-left[
+![Discrete expression profiles: Three mountains are shown with clouds, we just see three peaks. Cells in red, green, and blue are shown at the peaks. Continuous expression landscape: the clouds are removed and we see the mountains are actually connected and there are cells in between in various intermediate colours.](../../images/scrna-intro/raceid_mountains.svg)
+]
+
+.pull-right[
+.reduce90[
+*Dynamic datasets with continuously dynamic clusters*
+  * single-cell datasets
+  * PCA is too discrete in partitioning data
+  * Manifold learning algorithms, learn the landscape
+
+
+*Variety of different clustering methods*
+
+  * K-means
+  * K-medians
+  * Hierarchical Clustering
+  * Community Clustering
+]
+]
+
+
+???
+- Because of the continuous nature of these single-cell datasets and the extremely high dimensionality of the data, discrete partitioning is often a poor model for partitioning the data.
+- If we instead assume that cell clusters are related to one another via transitional cells which would naturally lie in-between clusters, then manifold learning techniques are better suited.
+- These techniques derive an expression landscape that can not only be used to relate clusters to one another, but also can be used to infer lineage and hierarchy.
+- To actually perform the clustering there are three commonly-used methods: K-means, hierarchical and community clustering.
+
+---
+
+### Performing Clustering: K-means
+
+.pull-right[![An animated figure showing several iteration of an algorithm that is optimising a 3-way split between a scatter plot of cells. There is no clear boundary making the final result appear only marginally better.](../../images/scrna-intro/kmeans.gif)]
+
+.pull-left[
+.reduce90[
+*K-means*
+   1. Initialise *k* random positions
+   1. Iteration Step:
+      1. Calculate distance from each cell to each *k* position
+      1. Assign each cell to it's nearest *k*
+      1. Set new *k* positions to the mean position of all cells in that group
+
+*K-medians*
+   * Same as above, but use median position instead
+   * Less influenced by outliers
+
+]
+]
+
+???
+- K-means and K-medians follow the same method: the number of clusters are defined before hand, and initialised in random positions.
+- The positions are then updated by the contribution of the cells more closer to it than to other positions.
+- This process occurs multiples times until the positions no longer significantly change or until a set number of iterations have been achieved.
+- The final assignment of each cell then becomes the cluster assignment.
+
+---
+
+## Performing Clustering: Hierarchical
+
+.pull-left[![A many-step figure starting with a number of individual dots. The text reads &quot;identify the two clusters that are closest&quot; and &quot;merge the two most similar clusters.&quot; The process repeats a number of times until all clusters are absorbed into the one large blob.](../../images/scrna-intro/hierarchal1.png)]
+
+.pull-right[
+.reduce90[
+* Use the distance matrix to find the two closest points
+* Merge and repeat
+
+* Yields a dendrogram
+  * Hierarchy of clusters:
+
+.image-90[![Several points in a square are labelled A through F, on the right a dendogram is shown with lengths indicating how close each letter is to each other.](../../images/scrna-intro/hierarchal2.png)]
+
+???
+- Hierarchical clustering is more flexible and does not need an initial parameter to define the number of resulting clusters.
+- Here the two closest points in a distance matrix are joined into a single group, distances are recalculated, and the two closest points are once again joined.
+- This process repeats until all data has been consumed into one.
+- By tracing the process backwards, a hierarchy can be established that is represented by a dendrogram.
+
+---
+
+
+## Community Clustering: Louvain
+
+.center[![A graph is shown with dots connected by lines. Below, those dots have expanded and pink touches orange and nearly touches purple. It asks pink by iteself? And notes 4 external links and 0 internal links. Two hypothetical options are shown, if pink absorbs purple, we see 5 external connections and 1 internal, so, it's added new connections. An X suggests this is wrong. Below is the pink absorbs orange option, where we see 3 external and 1 internal connection, so one connection has become internal, and no new nodes are connected. A check mark indicates this was right.](../../images/scrna-intro/commgraph1.svg)]
+
+.reduce90[
+Aim: Maximise internal links and minimise external links
+]
+
+???
+- Louvain clustering is a widely used type of community clustering for single cell data.
+- Here each cell is assigned a neighbourhood of its own and the number of internal and external links between neighbourhoods are counted.
+- For each iteration, a random cell is selected and brought within the neighbourhood of another cell, and the internal and external links are once again counted.
+- If the new configuration has reduced the number of external links in favour of more internal links, then the configuration is kept.
+
+---
+
+## Community Clustering: Louvain
+
+.center[![Same Graph as previously, but now there are more, larger clusters. Blue and purple were absorbed, yellow and red were absorbed, and we see a simplified 4 node graph.](../../images/scrna-intro/commgraph2.svg)]
+
+.reduce90[
+* Randomly pick a cell and try to place it in a neighbour's cluster
+  * Accept if Internal:External increases
+  * Reject and pick another
+]
+
+???
+If the new configuration has instead increased the number of external links, then the configuration is rejected and another cell is picked and tested. By performing this multiple times, a community structure of cells is built to whichever degree of specificity the user desires.
+
+---
+
+# Summary
+
+.pull-left[![Red and blue clusters of cells are shown resembling the tissue blobs. Graphs on the right for expression in Genes A, B, X are shown per cell](../../images/scrna-intro/rna_cells_singlerez.svg)]
+
+.pull-right[
+.reduce90[
+* Single-cell datasets are vast and sparsely populated
+
+* Quality filtering and normalisation are required
+
+* Feature selection and dimension reduction reduce the complexity
+
+* Clustering denotes cell types and cell relationships
+
+* scRNA-seq is a statistically driven field
+
+* Many ways to analyse the data
+ * Play with it!
+]
+]
+
+???
+- Single cell analysis is non-trivial, and each stage, from the filtering to the normalisation to the dimension reduction and the clustering can drastically affect the outcome of the analysis.
+- Due to the variability in the analysis, one should not panic when faced with uncertainty.
+- The goal is to play around with the data until it begins to reflect the biology.
+- This can take many many tries to achieve, and it may never be perfect, but the idea is to try as many different ways as possible to see what robust conclusions you can come to.
+
+---
+
+### Further scRNA-seq Data Analysis
+
+![Screenshot of the galaxy training materials that cover single cell](../../images/scrna-intro/training_single_cell.png)
+
+???
+- In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard.
+- Please explore them to better develop your understanding.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- scRNA-seq requires much pre-processing before analysis can be performed.
+
+- Groups of similarly profiled-cells are compared against other groups.
+
+- Detectability issues requires careful consideration at all stages.
+
+- Clustering is an integral part of an analysis.
+
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-graduation-cap&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;curriculum&lt;/span&gt; Do you want to extend your knowledge?
+
+
+Follow one of our recommended follow-up trainings:
+
+
+
+    
+        
+        
+            
+        
+- [Single Cell](/training-material/topics/single-cell)
+    - Pre-processing of Single-Cell RNA Data: [&lt;i class=&quot;fab fa-slideshare&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;slides&lt;/span&gt; slides](/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html) - [&lt;i class=&quot;fas fa-laptop&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;tutorial&lt;/span&gt; hands-on](/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html)
+    
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

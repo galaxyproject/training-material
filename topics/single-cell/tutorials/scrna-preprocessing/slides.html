@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Dealing with Cross-Contamination in Fixed Barcode Protocols</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:title" content="Galaxy Training: Dealing with Cross-Contamination in Fixed Barcode Protocols" />
+    <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-15 12:55:43 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Dealing with Cross-Contamination in Fixed Barcode Protocols",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Dealing with Cross-Contamination in Fixed Barcode Protocols' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html",
+  "timeRequired": "PT1H",
+  "keywords": "single-cell, single-cell",
+  "description": "The questions this  addresses are:\n - What is cross-contamination?\n - What are fixed barcodes?\n - Why are plating setups important to know?\n - Is it necessary to check barcodes that don't exist in a batch?\n\n\nThe objectives are:\n - How to describe a plating setup\n - Proper naming conventions when dealing with multiple batches\n - Checking for false positives across batches\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html",
+      "name": "Plates, Batches, and Barcodes",
+      "description": "Slides for 'Plates, Batches, and Barcodes' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "name": "Alex Ostrovsky",
+      "image": "https://avatars.githubusercontent.com/astrovsky01",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/",
+      "name": "Mehmet Tekman",
+      "image": "https://avatars.githubusercontent.com/mtekman",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/",
+      "name": "Alex Ostrovsky",
+      "image": "https://avatars.githubusercontent.com/astrovsky01",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/single-cell" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-preprocessing/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Dealing with Cross-Contamination in Fixed Barcode Protocols
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+
+
+
+<a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge contributor-astrovsky01"><img src="https://avatars.githubusercontent.com/astrovsky01?s=27" alt="Avatar">Alex Ostrovsky</a>
+
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: </div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+        
+        
+            
+        
+- [Single Cell](/training-material/topics/single-cell)
+    - Plates, Batches, and Barcodes: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html)
+    
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is cross-contamination?
+
+- What are fixed barcodes?
+
+- Why are plating setups important to know?
+
+- Is it necessary to check barcodes that don't exist in a batch?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- How to describe a plating setup
+
+- Proper naming conventions when dealing with multiple batches
+
+- Checking for false positives across batches
+
+
+---
+
+
+### Fixed Barcode Protocols and Multiplexing
+
+
+The main contending questions are:
+
+ 1. How large is each batch?
+
+???
+How many slots in a batch that we need to barcode for
+
+--
+
+ 2. How many batches on a plate?
+
+--
+
+ 3. Should each batch use the same barcodes?
+
+--
+
+ 4. What **constraints** are there on the plate?
+
+
+
+???
+A technician always has to balance quality against cost, and this is illustrated in the following examples:
+
+---
+
+### Example Setup
+
+.pull-left[
+* Barcodes:
+  * 24 unique barcodes, with an edit distance of E=2:
+
+             AAA ACC AGG TTT TAA TCC
+             ATT CCC CAA TGG NAA NCC
+             CGG CTT GGG NGG NTT ANN
+             GAA GCC GTT CNN GNN TNN
+
+]
+--
+.pull-right[
+* Plates and Batches:
+  * 12 slots per lane (3x4)
+  * 4 batches per plate
+
+* Constraints
+  * Only 2 batches sequenced at the same time
+    * i.e. half the plate is sequenced at the same time
+]
+
+???
+Here we use N as an extra base just for example purposes, but you do sometimes see this in other barcodes.
+2 batches at a time, only half
+
+---
+
+### Example 1: Single Plate with a Single Lane
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+--
+
+.image-75[![slide36](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide36.svg)]
+
+.pull-left[
+* 12 total slots in Plate 1
+
+* 12 slots in Lane 1
+
+* All slots filled
+]
+
+--
+.pull-right[
+* We only need to use half of our barcodes
+
+* Why is this wasteful?
+]
+
+
+???
+* Half of the barcodes used for that lane, and the other half we can ignore.
+* Wasteful because we are not getting full use of our 24 barcodes in a single sequencing run
+
+---
+
+### Example 2: Single Plate with 2 Batches
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+* 24 total slots in Plate 1
+* 12 slots in Lane 1, and 12 slots in Lane 2
+* All slots filled
+
+.image-75[![slide38](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide38.svg)]
+
+--
+* We can use all of our barcodes
+* Maximum number of cells can be sequenced in a single run
+* Why might this be too optimal?
+
+
+???
+Here we use all barcodes since these batches will be sequenced at the same time
+Let's look at one final example to see why using all our barcodes on a plate might not be optimal.
+
+---
+
+### Example 3: Single Plate with 2 Batches, only 1 active
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+* 24 total slots in Plate 1
+* 12 slots in Lane 1, and 12 slots in Lane 2
+* Only slots in Lane 1 filled
+
+.image-75[![slide40](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide40.svg)]
+
+
+--
+* Why are we still using all barcodes?
+* Why have we not filled in Lane 2?
+
+
+???
+All barcodes used, why leave one lane empty?
+
+---
+
+### Example 3: Single Plate with 2 Batches, only 1 active
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+* What would it mean if we sequenced reads with {TTT,TAA,...,TNN} as their Cell Barcodes?
+
+.image-75[![slide40](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide40.svg)]
+
+
+--
+* **Cross-Contamination**
+  * There should be *no cells in that lane*!
+  * These are contaminants from Lane 1
+  * We can ignore these reads and select for the {AAA,ACC,...,GTT}
+
+
+???
+If we see any reads in the Plate which contain barcodes {TTT,TAA,TCC, etc} then we know that some contamination has occurred *because there should be no cells there*. One reason is that the second lane was not completely cleaned before being used.
+
+---
+
+### Example 4: 2 Plates with 2 Batches, only 1 active (alternate)
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+
+* Same as before but extra plate. A single lane used to check for contaminants.
+* Alternate barcodes used for each plate
+
+.image-50[![slide44](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide44.svg)]
+
+
+&lt;small&gt;
+* Why alternate active batches across plates?
+&lt;/small&gt;
+
+--
+&lt;small&gt;
+  * Plate 1 and Plate 2 are sometimes the *same plate*
+  * Contaminants might carry over *undetected* if same lane is used!
+&lt;/small&gt;
+
+???
+* Here we have repeated previous example, but with an extra plate. In the first plate, the first half of the barcodes are used, and in the second plate, the second half of the barcodes are used.
+
+* Why alternate the barcodes between plates? The full set of barcodes does not change, so why not keep the same format?
+
+* Loaded at different times, washed clean, re-used.
+
+* Again, the answer is to reduce cross-contamination. Plate2 will be loaded after Plate1 (and perhaps Plate2 and Plate1 will use the same plate!) If we see any reads in Plate2 that should not be there, we can now surmise where they came from. We also have the added benefit of protecting the cells in Plate2 from those that may have been used in Plate1, since they are in completely different positions across plates.
+
+---
+
+### Example 5: 1 Plate with 2 Batches, both active
+
+.bottom-info-box[
+Available Barcodes
+
+    AAA ACC AGG TTT TAA TCC
+    ATT CCC CAA TGG NAA NCC
+    CGG CTT GGG NGG NTT ANN
+    GAA GCC GTT CNN GNN TNN
+
+]
+
+* Both batches filled. *All barcodes* are applied individually to *each* lane
+
+.image-100[![slide46](../../images/scrna-pre-processing/scrna-plates-batches-barcodes_slide46.svg)]
+
+.pull-left[
+
+* Why check all barcodes against each lane?
+
+* Why not separate batches across different plates?
+
+]
+--
+.pull-right[
+* If &lt;small&gt;{TTT,TAA,...,TNN}&lt;/small&gt; is detected in Lane 1, or vice versa → **Contamination!**
+
+* *Benefit of* **detecting cross-contamination** *whilst still* **maximising plate usage**
+]
+???
+1. Why apply the full set of barcodes to each lane, when only half will actually label?
+2. What benefit does this serve, instead of separating them over different plates as in the previous example?
+
+A1. This setup is actually the same as example 4, but with the two plates merged. Here we can check for cross-contamination in each lane by measuring the real cell labels against the false barcodes. If in lane 1, we detect a significant number of reads with cell barcodes of `TAA` or `ANN`, we can assume that some cross-contamination has occurred since we should not be able to detect these barcodes in that lane. The converse is also true of lane 2.
+
+A2. We have the benefit of detecting cross-contamination with the same advantages as example 4, but with the cost advantage of sequencing two batches at the same time.
+
+---
+
+# Summary
+
+* Barcodes are often reused across batches if there is a fixed and limited number of them
+
+* Intelligent plating strategies reduce sequencing errors
+
+* Cross contamination can be detected by examining false positives across plates
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Eliminating false positives
+
+- Intelligent plating strategies can guard against cross-contamination
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+
+
+
+<a href="/training-material/hall-of-fame/astrovsky01/" class="contributor-badge contributor-astrovsky01"><img src="https://avatars.githubusercontent.com/astrovsky01?s=27" alt="Avatar">Alex Ostrovsky</a>
+
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

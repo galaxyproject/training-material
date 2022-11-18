@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Trajectory analysis</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:title" content="Galaxy Training: Trajectory analysis" />
+    <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2022-11-14 17:24:21 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Trajectory analysis",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Trajectory analysis' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html",
+  "keywords": "single-cell",
+  "description": "The questions this  addresses are:\n - What is trajectory analysis?\n - What are the main methods of trajectory inference?\n - How are the decisions about the trajectory analysis made?\n - What to take into account when choosing the method for your data?\n\n\nThe objectives are:\n - Become familiar with the methods of trajectory inference\n - Learn how the algorithms produce outputs\n - Be able to choose the method appropriate for your specific data\n - Gain insight into methods currently available in Galaxy\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/single-cell" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Trajectory analysis
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a>
+
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: </div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+        
+        
+            
+        
+- [Single Cell](/training-material/topics/single-cell)
+    - An introduction to scRNA-seq data analysis: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html)
+    
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is trajectory analysis?
+
+- What are the main methods of trajectory inference?
+
+- How are the decisions about the trajectory analysis made?
+
+- What to take into account when choosing the method for your data?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Become familiar with the methods of trajectory inference
+
+- Learn how the algorithms produce outputs
+
+- Be able to choose the method appropriate for your specific data
+
+- Gain insight into methods currently available in Galaxy
+
+
+---
+
+
+### What is trajectory analysis?
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+
+--
+
+Trajectory inference (TI) methods have emerged as a novel subfield within computational biology to better study the underlying dynamics of a biological process of interest, such as:
+
+cellular development    | differentiation      | immune responses
+:---:| :---:| :---:
+.image-40[ ![Petri dish with a magnified scheme of embryonic development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![Scheme of one cell differentiating into three different types](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![Different types of immune cells taking part in inflammation](../../images/scrna-casestudy-monocle/3_immune.png) ]
+
+--
+TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
+
+.image-40[ ![A cell changing its shape in three steps (showing the evolution from one state to another)](../../images/scrna-casestudy-monocle/4_process.png) ]
+
+???
+
+- TI helps to understand - 'visualise' - the biological process that the green cell went into
+---
+
+### Clustering, trajectory and pseudotime
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+--
+
+.pull-left[
+**Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster.
+
+.image-75[ ![A graph with axis labels ‘t-SNE’, showing the cells being clustered into several groups – each group marked in a  different colour.](../../images/scrna-casestudy-monocle/5_clusters.png) ]
+
+]
+
+???
+
+- axes labels - here t-SNE - the method of dimentionality reduction that was used
+- each coloured group of cells =&gt; different clusters
+- combine clusters and you get partition(s)
+--
+.pull-right[
+**Trajectory inference** helps to understand how those cell types are related - whether cells differentiate, change in response to stimuli or over time. To infer trajectories, we need data from cells at different points along a path of differentiation. This inferred temporal dimension is known as pseudotime.
+**Pseudotime** measures the cells’ progress through the transition.
+
+.image-60[ ![A graph with axis labels ‘UMAP’, showing the cells ordered in pseudotime along learned trajectory path. Pseudotime goes through range of colours to depict progress through the transition: dark blue meaning root cells, yellow meaning end cells.](../../images/scrna-casestudy-monocle/6_trajectories.png) ]
+
+]
+
+???
+_______________________________________
+- axes labels - here UMAP was used as the method of dimentionality reduction
+- plot: usually pseudotime goes through range of colours to depict progress through the transition: here dark blue = root cells, yellow = end cells
+- plot: also here's the example of disjoint trajectories - you might choose if you want to learn single tree structure for all the partitions or learn the disjoint trajectory within each partition
+
+---
+
+### Assumptions
+
+???
+- snapshot data with cells in different stages of differentiaiton
+- multiple methods and how they work in biological context
+--
+
+- It would be quite difficult to analyse a sample every few seconds to see how the cells are changing. Therefore, we assume that snapshot data encompass all naïve, intermediate, and mature cell states with sufficient sampling coverage to allow the reconstruction of differentiation trajectories.
+[Sagar and Grün, 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7115822/)
+
+--
+
+- As different TI methods make different assumptions about the data, a first choice to make is based on which biological process is to be expected: **not all TI methods are designed to infer all kinds of biological processes.**
+[Deconinck et al., 2021](https://doi.org/10.1016/j.coisb.2021.05.005)
+
+---
+### Why different TI methods are designed to infer different kinds of biological processes?
+
+???
+There are multiple algorithms used to analyse scRNA-seq data to make it more readable.
+Note that this is a graph from 2016 - many new approaches has been developed since then, but this scheme shows how those methods are built.
+--
+
+Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlinelibrary.wiley.com/doi/10.1002/eji.201646347)
+
+--
+
+.image-100[ ![A scheme showing a pipeline how single cell expression data is being processed: 1) similarity: cosine and Euclidean, 2) manifold learning:  t-SNE, diffusion maps, LLE, PCA, ICA, 3) clustering: Mclust, k-Means, Hierarchical, 4) graph: Bootstrap, KNN, MST, 5) pathfinding: principal curve, shortest path from origin, longest path, binary tree, 6) cell ordering: principal curve, average orderings, mutual disagreement, detect branches, OU process, project cells to path, optimize tree, 7) method: SCUBA pseudotime, Wanderlust, Wishbone, SLICER, SCOUP, Waterfall, Mpath, TSCAN, Monocle, SCUBA](../../images/scrna-casestudy-monocle/7_methods.jpg) ]
+--
+
+There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
+
+???
+We will consider some aspects shown here to better understand similarities and differences of TI methods. Those are also the things that highly affect the output or are quite important to be aware of.
+
+---
+
+### Similarity
+
+.pull-left[
+
+![Fragment cut from the pipeline - similarity: cosine and Euclidean (additionally Pearson, Spearman)](../../images/scrna-casestudy-monocle/similarity.jpg)
+
+]
+
+--
+
+.pull-right[
+
+- Think of similarity as a distance between cells (nearer cells - more similar)
+- Euclidean distance is usually used, it's just mathematically defined distance between two points
+
+![A count matrix of genes vs cells is plotted in N-dimensional space with each gene representing the different axes. A distance formula for 3 dimensions is shown, and then a final table is shown from the count matrix with the distances between each of the cells, based on their genes.](../../images/scrna-intro/raceid_distance.svg)
+
+]
+
+???
+- distance matrix details: [intro, slide 45](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html)
+
+---
+
+### Manifold learning / dimentionality reduction
+
+.pull-left[
+
+![Fragment cut from the pipeline - manifold learning:  t-SNE, diffusion maps, LLE, PCA, ICA (additionally CAP, GPLVM, Isomap, MDS)](../../images/scrna-casestudy-monocle/manifold.jpg)
+
+]
+
+--
+
+.pull-right[
+
+- Making a manifold is like making a flat map of a sphere (the Earth)
+- We try to 'flatten' our data, changing it from high-dimensional to low-dimentional
+- UMAP (Uniform Manifold Approximation and Projection) is another often used dimentionality reduction method
+
+.image-100[ ![Four graphs showing the alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together.](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+
+]
+
+???
+- Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
+- Uses principal curves and graphs to obtain smooth trajectories
+- figure shows how using different dimentionality reduction methods in Monocle3 affects the outcome
+
+---
+
+### Clustering
+
+.pull-left[
+
+![Fragment cut from the pipeline - clustering: Mclust, k-Means, Hierarchical (additionally SOM, PAM, Mean shift)](../../images/scrna-casestudy-monocle/clustering.jpg)
+
+]
+
+--
+
+.pull-right[
+
+- Tries to find stable **cell states** in the data, then connect these states to form a trajectory
+- [soft K-means (fuzzy clustering)](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html), [Louvain](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html), [hierarchical clustering](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html), non-negative matrix factorization
+
+![Grey set of cells getting clustered into several distinct groups, each group marked in different colour](../../images/scrna-casestudy-monocle/clusters.png)
+
+]
+
+???
+- cell state - which genes are expressed, which proteins are produced, what is its function, how it responds to external stimuli. Cell state changes and that's what we want to inspect
+- [cell state with a particular function can be called a cell type](https://mbernste.github.io/posts/cell_types_cell_states/)
+- methods explained in [intro, slides 54 - 57](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html)
+  - soft K-means: number of clusters are defined before hand, and initialised in random positions
+  - Louvain: extracts communities from large networks
+  - non-negative matrix factorization: splits your data up into a set of individual signals and weights to apply to those signals to recreate your original data
+  - hierarchical clustering: builds a hierarchy of clusters
+
+---
+
+### Graph-based approach
+
+.pull-left[
+
+![Fragment cut from the pipeline - graph: Bootstrap, KNN, MST](../../images/scrna-casestudy-monocle/graph.jpg)
+
+]
+
+--
+
+.pull-right[
+
+- think of 'graph structure' as the nodes (clusters with cell states) and edges (similarity, based on eg. Euclidean distance)
+- Many graph-based methods start by building a [**k-nearest neighbors (kNN) **](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html) graph using the Euclidean distance
+- **Minimum weight spanning tree (MST)** is often used to connect the clusters to each other
+
+![Grey set of cells getting clustered into several distinct groups, each group marked in a different colour. Coloured clusters are connected by straight lines with weights, but the chosen path is the one that minimises the total total edge weight.](../../images/scrna-casestudy-monocle/clusters_mst.png)
+
+]
+
+???
+- General idea is to construct a graph representation of the cells and perform graph decomposition to reveal connected and disconnected components, or graph diffusion or traversal methods to construct the trajectory topology
+- kNN explained in [intro, slide 46](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html)
+- MST connects clusters without any cycles and minimises the total total edge weight (cost) to ensure that the most similar clusters are connected
+---
+
+### Graph-based approach
+.footnote[[Haghverdi et al. Diffusion pseudotime robustly reconstructs lineage branching, 2016](https://doi.org/10.1101/041384)]
+
+.pull-left[
+
+![Fragment cut from the pipeline - graph: Bootstrap, KNN, MST](../../images/scrna-casestudy-monocle/graph.jpg)
+
+]
+
+
+.pull-right[
+
+- Diffusion pseudotime (DPT) uses random walks from a user-provided root cell
+  - random walks between data points — path created between cells in distinct stages of the differentiation process
+  - short walk =&gt; higher probability that the cells are connected
+  - finding path (pseudotime) based on those probabilities
+
+![Multi-dimensional plane with cells projected onto it. From there the construction of transition matrix is performed: the smallest distance between points means higher probability than for longer distance between points. From there the diffusion pseudotime is performed which means scale-free average over random walks](../../images/scrna-casestudy-monocle/dpt.png)
+]
+
+---
+
+
+
+### Extensions of trajectory inference: **RNA velocity methods**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+--
+
+- RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation.
+  - assuming that the cells with the highest unspliced : spliced reads are in the steady state
+  - high amount of unspliced reads and low amount of spliced reads =&gt; gene is likely being turned on =&gt; higher positive velocity
+
+.image-40[ ![A graph showing unspliced vs spliced reads for any given gene with two plots: one goes like e^x (state likelihood off) and the other one: ln(x) (state likelihood: on)](../../images/scrna-casestudy-monocle/velo.jpg) ]
+
+---
+
+### Extensions of trajectory inference: **RNA velocity methods**
+.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+
+- scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method.
+
+--
+
+- This has the advantage that root cell specification is not necessary, and adds directional information to the trajectory.
+
+--
+
+.image-25[ ![Pseudotime plot with arrows going from root cells towards branches](../../images/scrna-casestudy-monocle/velocity.png) ]
+
+---
+
+### When analysing your data, consider the following:
+--
+
+.pull-left[
+
+
+- Tissue from which the cells come from
+
+- Branching points
+
+- Supervised and unsupervised learning
+
+- Format of the data
+
+- Number of cells and features
+
+- Computing power &amp; running time
+
+]
+
+--
+
+.pull-right[
+
+
+To help you evaluate which method would work best for your data, check out this [**awesome comparision site - dynguidelines**](https://zouter.shinyapps.io/server/), a part of a larger set of open packages for doing and interpreting trajectories called [the dynverse](https://github.com/dynverse/dynverse).
+
+![Screenshot of the user interface of dynguidelines, comparing multiple trajectory analysis methods](../../images/scrna-casestudy-monocle/zouter.jpg)
+
+]
+
+---
+
+### When analysing your data, consider the following: **Tissue from which the cells come from**
+--
+
+.pull-left[
+
+
+
+- Gives an idea of the type of cell relationships you would expect and the prior biological knowledge you can feed the method with, as well as expected cell types and potential contaminants
+
+- You need to know about 75% of your data and verify that your analysis shows that, before you can then identify the 25% new information
+
+- Trajectory analysis is quite a sensitive method, so always check if the obtained computational results make biological sense!
+
+]
+
+--
+
+.pull-right[
+
+
+![Experimental workflow summarising the identification of diverse lymph node stromal cells by single-cell RNA sequencing. 1) taking sample from a mouse, 2) CD45 depletion, 3) FACS sorting, 4) scRNA seq analysis (a graph showing clustered cells), 5) magnified scheme showing the multiplicity of cells that can be identified, in this case within llymphatic endothelial cells, vascular endothelial cells, fibrobastic reticular cells](../../images/scrna-casestudy-monocle/8_scheme.png)
+
+&lt;sub&gt;&lt;sub&gt;&lt;sub&gt; Reprinted from “Heterogeneity of Murine Lymph Node Stromal Cell Subsets”, by BioRender.com (2022) &lt;/sub&gt;&lt;/sub&gt;&lt;/sub&gt;
+]
+
+---
+### When analysing your data, consider the following: **Branching points**
+
+--
+
+Cells can differentiate or develop in various way, so they may exhibit different topologies.
+
+--
+
+![A table showing trajectory topologies: cycle, linear, bifurcation, multifurcation, tree, connected graph, disconnected graph] (../../images/scrna-casestudy-monocle/table.jpg)
+
+---
+
+### When analysing your data, consider the following: **Branching points**
+
+
+
+.pull-left[
+&lt;br /&gt;
+&lt;br /&gt;
+- diffusion pseudotime (DPT) and branch points
+ - DPT does not rely on dimension reduction and can thus detect subtle changes in high-dimensional gene expression patterns
+ - DPT-based analysis proceeds by identifying branching points that occur after cells progress from a root cell through a common ‘trunk trajectory’
+ &lt;sub&gt;[L. Haghverdi et al. (2016)](http://dx.doi.org/10.1038/nmeth.3971)&lt;/sub&gt;
+
+- binning and DNB (Dynamical Network Biomarker) theory
+ - order cells, according to the pseudotime, evenly segmented into nonoverlap bins with each bin containing X cells
+ - categorize DNB and non-DNB markers for each bin
+ - one bin contains some unassigned cells - annotated as branch bin; of the remaining bins, there are bins on the trunk, and bins for each of the branch1 and branch2
+ &lt;sub&gt;[Z. Chen et al. (2018)](https://ieeexplore.ieee.org/document/8386685) &lt;/sub&gt;
+
+]
+
+--
+
+.pull-right[
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+&lt;br /&gt;
+![Branching points are identified as points where anticorrelated distances from branch ends become correlated](../../images/scrna-casestudy-monocle/branch.jpg)
+
+]
+
+???
+- Branching points are determined by comparing two independent DPT orderings over cells, one starting at the root cell x and the other at its maximally distant cell y. The two sequences of pseudotimes are anticorrelated until the two orderings merge in a new branch, where they become correlated. This criterion robustly identifies branching points
+- Branching points are identified as points where anticorrelated distances from branch ends become correlated
+
+---
+
+### When analysing your data, consider the following: **Supervised and unsupervised learning**
+--
+
+.pull-left[
+&lt;br /&gt;
+![Biologist with a speech bubble, saying ‘What are my root cells? Where should the trajectory start?](../../images/scrna-casestudy-monocle/root_cells.jpg)
+
+]
+
+--
+
+.pull-right[
+&lt;br /&gt;
+&lt;br /&gt;
+- Some algorithms work fully unsupervised, ie. the user is not required to input any priors.
+
+- However, many of them take the ‘starting cell’, or ‘end cell’ as information that helps to infer the trajectory which best represents the actual biological processes.
+
+- On the other hand, priors can bias the outcome of the method, but if chosen appropriately, they are really helpful.
+
+]
+
+---
+### When analysing your data, consider the following: **Supervised and unsupervised learning**
+
+If you know which cells are root cells, you should enter this information to the method to make the computations more precise. However, some methods use unsupervised algorithms, so you will get a trajectory based on the tools they use and topology they can infer.
+
+--
+
+Unsupervised | Priors needed: start cells | Priors needed: end cells | Priors needed: both start and end cells
+ :---:| :---:| :---: | :---:
+Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID/StemID, Monocle DDRTree | PAGA Tree, PAGA, Wanderlust, Wishbone, topslam, URD, CellRouter, SLICER | MFA, GrandPrix, GPfates, MERLoT | Monocle ICA
+
+---
+### When analysing your data, consider the following: **Format of the data**
+--
+
+- You have to check that your chosen method is compatible with the format of your data. If not, consider converting it or even contacting the developers to implement this into the pipeline.
+
+--
+
+- Other possible inputs:
+ - Raw (FASTQ);
+ - Cellxgene matrix;
+ - Matrix, genes &amp; barcodes tables;
+ - AnnData
+ - RDS
+
+--
+
+- Powerful [SCEasy tool](https://toolshed.g2.bx.psu.edu/repository/display_tool?repository_id=a4381cd7162476d9&amp;render_repository_actions_for=tool_shed&amp;tool_config=%2Fsrv%2Ftoolshed%2Fmain%2Fvar%2Fdata%2Frepos%2F004%2Frepo_4830%2Fsceasy_convert.xml&amp;changeset_revision=f62bc418173f) in Galaxy to convert between formats
+
+--
+
+- Implementations
+
+.image-100[ ![A table showing implementations for different methods. R: Monocle, SLICE, TSCAN, Waterfall, SLICER, StemID, Slingshot, RNA velocity, FateID, DPT. Python: Wanderlust, Wishbone, PAGA, P-creode, RNA velocity, GPfates, DPT, Waddington-OT. Matlab: SCUBA, Wishbone, Pseudo-dynamics. Java: GRAND-SLAM.](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
+
+---
+### When analysing your data, consider the following: **Number of cells and features**
+--
+
+- The more cells and features you have, the more dimensions there are in your dataset. Therefore, it may be more computationally difficult for the particular method to reduce the dimensionality and infer the correct trajectory.
+
+--
+
+- For example, PAGA generally performs better than RaceID or Monocle when the dataset contains huge number of cells. (PAGA is graph-based, Monocle is tree based).
+
+--
+
+- Also, the more cells you have, the more insightful data you can get, but it is often associated with more noise as well. Therefore, the number of cells also impacts how you pre-process your data and how ‘pure’ it will be for trajectory analysis.
+
+---
+### When analysing your data, consider the following: **Computing power &amp; running time**
+
+It doesn't directly affect your analysis, however do bear in mind that calculations performed during dimensionality reduction, especially on large datasets, can be really time-consuming. Therefore, you might consider if you won't be limited by any of those factors.
+
+---
+### Trajectory analysis methods used in Galaxy
+--
+
+- Scanpy PAGA ([Inferring Trajectories using Python (Jupyter Notebook) in Galaxy](/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html))
+
+--
+
+- Scanpy DPT
+
+--
+
+- RaceID ([Downstream Single-cell RNA analysis with RaceID](/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html))
+
+--
+
+- Monocle3 ([Trajectory Analysis using Monocle3](/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html))
+
+--
+
+- scVelo (coming soon)
+
+---
+
+### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
+.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+
+--
+
+.pull-left[
+
+- [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups (clusters)
+-  Provides an interpretable graph-like map. The graph nodes correspond to cell groups and whose edge weights quantify the connectivity between groups
+- Available within [Scanpy](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.paga.html)
+
+![Plots generated using PAGA based on cell types,  CD4 and Cd8a genes expression. Graph nodes connected to each other.](../../images/scrna-casestudy-monocle/paga_plot.png)
+
+]
+
+???
+- The clustering step of RaceID identifies larger clusters of different cells by k-means clustering which is applied to the similarity matrix using the Euclidean metric
+
+- Plot comes from [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy tutorial](/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html) where PAGA was used from the Scanpy toolkit
+
+--
+
+.pull-right[
+
+![Screenshot of the interface of ‘Scanpy PAGA’ Galaxy tool](../../images/scrna-casestudy-monocle/paga_galaxy.jpg)
+
+]
+
+???
+- But PAGA is also available as a tool in Galaxy
+
+---
+
+### Trajectory analysis methods used in Galaxy: **Diffusion Pseudotime in Scanpy**
+
+--
+
+.pull-left[
+
+- There is another Scanpy tool in Galaxy, which allows you to calculate diffusion pseudotime
+- Based on single cell KNN graphs
+- Requires to run Scanpy DiffusionMap and Scanpy FindCluster first
+
+]
+
+--
+
+.pull-right[
+
+![Screenshot of the interface of ‘Scanpy DPT’ Galaxy tool](../../images/scrna-casestudy-monocle/dpt_galaxy.jpg)
+
+]
+
+---
+
+### Trajectory analysis methods used in Galaxy: **RaceID**
+.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+
+--
+.pull-left[
+
+- **StemID** is a tool (part of the **RaceID** package) that aims to derive a hierarchy of the cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+- **FateID** tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
+- Where StemID utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, FateID uses top-down approach that starts from the progenitor and works its way down.
+
+]
+
+--
+
+.pull-right[
+
+![Screenshot of the interface of ‘Lineage Branch Analysis using StemID’ Galaxy tool](../../images/scrna-casestudy-monocle/raceid_galaxy.jpg)
+
+]
+
+???
+- Specific Trajectory Lineage Analysis (StemID) and Specific Trajectory Fate Analysis (FateID) in Galaxy
+- Nicely described in [Downstream Single-cell RNA analysis with RaceID tutorial](/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html)
+
+---
+
+### Trajectory analysis methods used in Galaxy: **RaceID**
+.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+
+.pull-left[
+
+- **StemID** is a tool (part of the **RaceID** package) that aims to derive a hierarchy of the cell types by constructing a cell lineage tree, rooted at the cluster(s) believed to best describe multipotent progenitor stem cells, and terminating at the clusters which describe more mature cell types.
+- **FateID** tries to quantify the cell fate bias a progenitor type might exhibit to indicate which lineage path it will pursue.
+- Where StemID utilises a bottom-up approach by starting from mature cell types and working up to the multi-potent progenitor, FateID uses top-down approach that starts from the progenitor and works its way down.
+
+]
+
+
+.pull-right[
+
+![Lineage Computation Plots](../../images/scrna-raceid/stemid_lineage.png)
+
+]
+
+???
+From the mentioned tutorial:
+- StemID Lineage Tree and Branches of significance.
+  - (Top-Left) Minimum spanning tree showing most likely connections between clusters
+  - (Top-Right) Minimum spanning tree with projected time series
+  - (Bottom-Left) Significance between clusters
+  - (Bottom-Right) Link scores between cluster-cluster pairs
+
+---
+
+### Trajectory analysis methods used in Galaxy: **Monocle3**
+.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+
+--
+.pull-left[
+
+- Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress
+- Monocle uses an algorithm to learn the sequence of gene expression changes each cell must go through as part of a dynamic biological process
+- General workflow:
+  - Pre-process the data
+  - Reduce dimensionality
+  - Cluster cells
+  - Learn the trajectory graph
+  - Order the cells in pseudotime
+- All those steps (and more) can be done using Galaxy tools!
+
+]
+
+--
+
+.pull-right[
+
+![Screenshot of the Monocle3 tools available in Galaxy](../../images/scrna-casestudy-monocle/monocle_galaxy.jpg)
+
+]
+
+???
+- Orders cells by learning an explicit principal graph from the single cell transcriptomics data with advanced machine learning techniques (Reversed Graph Embedding), which robustly and accurately resolves complicated biological processes
+- Performs clustering (i.e. using t-SNE and density peaks clustering), differential gene expression testing, identifies key marker genes to discover and characterise cell types, infers trajectories
+- The use of those tools was shown in ([Trajectory Analysis using Monocle3 tutorial](/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html))
+
+---
+
+### Trajectory analysis methods used in Galaxy: **Monocle3**
+.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+
+.pull-left[
+
+- Monocle introduced the concept of pseudotime, which is a measure of how far a cell has moved through biological progress
+- Monocle uses an algorithm to learn the sequence of gene expression changes each cell must go through as part of a dynamic biological process
+- General workflow:
+  - Pre-process the data
+  - Reduce dimensionality
+  - Cluster cells
+  - Learn the trajectory graph
+  - Order the cells in pseudotime
+- All those steps (and more) can be done using Galaxy tools!
+
+]
+
+
+.pull-right[
+
+![Pseudotime plot, showing the development of T-cells – starting in dark blue on double negative cells and ending up on mature T-cells, marked in yellow on pseudotime scale.](../../images/scrna-casestudy-monocle/pseudotime.png)
+
+]
+
+???
+- Example of T-cells development in pseudotime, from the mentioned Monocle3 tutorial
+
+---
+
+### Trajectory analysis methods used in Galaxy: **scVelo**
+.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
+
+--
+
+- scVelo infers gene-specific rates of transcription, splicing and degradation, and recovers the latent time of the underlying cellular processes
+- think of velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
+- Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models
+The originally proposed framework obtains velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
+
+.image-25[ ![scVelo plot showing arrows going in ordered directions both within the cell types and between them](../../images/scrna-casestudy-monocle/scvelo.png) ]
+
+
+
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Trajectory analysis in pseudotime is a powerful way to get insight into the differentiation and development of cells.
+
+- There are multiple methods and algorithms used in trajectory analysis and depending on the dataset, some might work better than others.
+
+- Trajectory analysis is quite sensitive and thus you should always check if the output makes biological sense.
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: 
+<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a>
+
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Reference-based RNA-Seq data analysis" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-21 12:11:36 +0000" />
+<meta name="DC.date" content="2022-11-12 19:22:39 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 <meta name="DC.creator" content="Mallory Freeberg" />
 <meta name="DC.creator" content="Mo Heydarian" />
@@ -286,7 +286,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-21 12:11:36 +0000",
+  "dateModified": "2022-11-12 19:22:39 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Reference-based RNA-Seq data analysis",
   "interactivityType": "mixed",
@@ -1313,8 +1313,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1368,7 +1366,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 21, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 12, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1820,7 +1818,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
 <p>Therefore they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">DNA</span> data. Spliced-awared mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against a reference genome:</p>
 
-<figure id="figure-10"><img src="../../images/splice_aware_alignment.png" alt="Splice-aware alignment. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Principle of spliced mappers: (1) identification of the <span class="notranslate">reads</span> spanning a single exon, (2) identification of the splicing junctions on the unmapped <span class="notranslate">reads</span></figcaption></figure>
+<figure id="figure-10"><img src="../../images/transcriptomics_images/splice_aware_alignment.png" alt="Splice-aware alignment. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Principle of spliced mappers: (1) identification of the <span class="notranslate">reads</span> spanning a single exon, (2) identification of the splicing junctions on the unmapped <span class="notranslate">reads</span></figcaption></figure>
 
 <blockquote class="details">
   <div id="details-more-details-on-the-different-spliced-mappers" class="box-title"><button type="button" aria-controls="details-more-details-on-the-different-spliced-mappers-contents" aria-expanded="true" aria-label="Toggle details box: More details on the different spliced mappers"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More details on the different spliced mappers<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1829,21 +1827,21 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
   <p><a href="https://ccb.jhu.edu/software/tophat/index.shtml"><strong>TopHat</strong></a> (<span class="citation"><a href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a></span>) was one of the first tools designed specifically to address this problem. In <strong>TopHat</strong> <span class="notranslate">reads</span> are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). “Piles” of <span class="notranslate">reads</span> representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.</p>
 
-  <figure id="figure-11"><img src="../../images/tophat.png" alt="TopHat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> TopHat (Figure 1 from <span class="citation"><a href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a></span>)</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/transcriptomics_images/tophat.png" alt="TopHat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> TopHat (Figure 1 from <span class="citation"><a href="#trapnell2009tophat">Trapnell <i>et al.</i> 2009</a></span>)</figcaption></figure>
 
   <p><strong>TopHat</strong> has been subsequently improved with the development of <strong>TopHat2</strong> (<span class="citation"><a href="#kim2013tophat2">Kim <i>et al.</i> 2013</a></span>):</p>
 
-  <figure id="figure-12"><img src="../../images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> TopHat2 (Figure 6 from <span class="citation"><a href="#kim2013tophat2">Kim <i>et al.</i> 2013</a></span>)</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/transcriptomics_images/13059_2012_Article_3053_Fig6_HTML.jpg" alt="TopHat2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> TopHat2 (Figure 6 from <span class="citation"><a href="#kim2013tophat2">Kim <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
   <p>To further optimize and speed up spliced read alignment, <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> (<span class="citation"><a href="#kim2019graph">Kim <i>et al.</i> 2019</a></span>) was developed. It uses a hierarchical graph <a href="https://en.wikipedia.org/wiki/FM-index">FM</a> (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:</p>
 
-  <figure id="figure-13"><img src="../../images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>)</figcaption></figure>
+  <figure id="figure-13"><img src="../../images/transcriptomics_images/hisat.png" alt="Hierarchical Graph FM index in HISAT/HISAT2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from <span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>)</figcaption></figure>
 
   <p>A part of the read (blue arrow) is first mapped to the genome using the global FM index. <strong>HISAT2</strong> then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (<strong>a</strong>) it succeeds and this read is aligned as it completely resides within an exon. In (<strong>b</strong>) the extension hits a mismatch. Now <strong>HISAT2</strong> takes advantage of the local FM index overlapping this location to find the appropriate <span class="notranslate">mapping</span> for the remainder of this read (green arrow). The (<strong>c</strong>) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).</p>
 
   <p><a href="https://github.com/alexdobin/STAR"><strong>STAR</strong> aligner</a> (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) is a fast alte<span class="notranslate">rna</span>tive for <span class="notranslate">mapping</span> <span class="notranslate">RNA</span>-Seq <span class="notranslate">reads</span> against a reference genome utilizing an uncompressed <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a>. It operates in two stages. In the first stage it performs a seed search:</p>
 
-  <figure id="figure-14"><img src="../../images/star.png" alt="STAR's seed search. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> STAR's seed search (Figure 1 from <span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>)</figcaption></figure>
+  <figure id="figure-14"><img src="../../images/transcriptomics_images/star.png" alt="STAR's seed search. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 14:</span> STAR's seed search (Figure 1 from <span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
   <p>Here a read is split between two consecutive exons. <strong>STAR</strong> starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it starts to look for a MMP for the unmatched portion of the read (<strong>a</strong>). In the case of mismatches (<strong>b</strong>) and unalignable regions (<strong>c</strong>) MMPs serve as anchors from which to extend alignments.</p>
 
@@ -2111,7 +2109,7 @@ installed on your machine. However, the questions in this section can also be an
       <blockquote class="question">
         <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-        <figure id="figure-16"><img src="../../images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
+        <figure id="figure-16"><img src="../../images/transcriptomics_images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
         <ol>
           <li>What information appears at the top as grey peaks?</li>
@@ -2145,7 +2143,7 @@ installed on your machine. However, the questions in this section can also be an
 
         <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-        <figure id="figure-17"><img src="../../images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
+        <figure id="figure-17"><img src="../../images/transcriptomics_images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
         <ol>
           <li>What does the vertical red bar graph represent? What about the arcs with numbers?</li>
@@ -2488,7 +2486,7 @@ installed on your machine. However, the questions in this section can also be an
 
 <p>To compare the <span class="notranslate">expression</span> of single genes between different conditions (<em>e.g.</em> with or without PS depletion), an essential first step is to quantify the number of <span class="notranslate">reads</span> per gene, or more specifically the number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the exons of each gene.</p>
 
-<figure id="figure-19"><img src="../../images/gene_counting.png" alt="Counting the number of reads per annotated gene. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
+<figure id="figure-19"><img src="../../images/transcriptomics_images/gene_counting.png" alt="Counting the number of reads per annotated gene. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Counting the number of <span class="notranslate">reads</span> per annotated gene</figcaption></figure>
 
 <blockquote class="question">
   <div id="question-10" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -2598,7 +2596,7 @@ installed on your machine. However, the questions in this section can also be an
 <blockquote class="details">
   <div id="details-more-details-about-strandness" class="box-title"><button type="button" aria-controls="details-more-details-about-strandness-contents" aria-expanded="true" aria-label="Toggle details box: More details about strandness"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More details about strandness<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <figure id="figure-21"><img src="../../images/dna_rna.png" alt="Relationship between DNA and RNA orientation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Relationship between <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> orientation</figcaption></figure>
+  <figure id="figure-21"><img src="../../images/transcriptomics_images/dna_rna.png" alt="Relationship between DNA and RNA orientation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Relationship between <span class="notranslate">DNA</span> and <span class="notranslate">RNA</span> orientation</figcaption></figure>
 
   <p>The implication of stranded <span class="notranslate">RNA</span>-Seq is that you can distinguish whether the <span class="notranslate">reads</span> are derived from forward or reverse-encoded transcripts. In the following example, the counts for the gene Mrpl43 can only be efficiently estimated in a stranded library as most of it overlap the gene Peo1 in the reverse orientation:</p>
 
@@ -2606,7 +2604,7 @@ installed on your machine. However, the questions in this section can also be an
 
   <p>Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the <span class="notranslate">mapping</span> of these <span class="notranslate">reads</span> to the genome:</p>
 
-  <figure id="figure-23"><img src="../../images/rnaseq_library_type.png" alt="Effects of RNA-Seq library types. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Effects of <span class="notranslate">RNA</span>-Seq library types (Figure adapted from Sailfish documentation)</figcaption></figure>
+  <figure id="figure-23"><img src="../../images/transcriptomics_images/rnaseq_library_type.png" alt="Effects of RNA-Seq library types. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 23:</span> Effects of <span class="notranslate">RNA</span>-Seq library types (Figure adapted from Sailfish documentation)</figcaption></figure>
 </blockquote>
 
 <p>This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.</p>
@@ -5359,36 +5357,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                         
                     
                         
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
                             
                             <li> Visualization of RNA-Seq results with heatmap2:
                             
@@ -5407,36 +5375,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                         
                     
                 
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
                     
                         
                     
@@ -5508,36 +5446,6 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         

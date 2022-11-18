@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="CLIP-Seq data analysis from pre-processing to motif detection" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:55:39 +0000" />
+<meta name="DC.date" content="2022-11-18 14:53:13 +0000" />
 <meta name="DC.creator" content="Florian Heyl" />
 <meta name="DC.creator" content="Daniel Maticzka" />
 <meta name="DC.creator" content="Bérénice Batut" />
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:55:39 +0000",
+  "dateModified": "2022-11-18 14:53:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "CLIP-Seq data analysis from pre-processing to motif detection",
   "interactivityType": "mixed",
@@ -916,8 +916,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -963,7 +961,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 18, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -983,9 +981,9 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
+<p>The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by <em>Nostrand et al.</em> (<span class="citation"><a href="#VanNostrand2016">Nostrand <i>et al.</i> 2016</a></span>). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from <em>Nostrand et al.</em> (<span class="citation"><a href="#VanNostrand2016">Nostrand <i>et al.</i> 2016</a></span>). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from <a href="http://ftp.ensemblorg.ebi.ac.uk/pub/release-74/gtf/homo_sapiens/">Ensembl</a>.</p>
 
-<p><strong>Table 1</strong>: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by <em>Nostrand et al.</em> (<a href="https://doi.org/10.1038/nmeth.3810">2016</a>). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.</p>
+<p><strong>Table 1</strong>: Data from RBFOX2 CLIP-Seq and control experiment which we are going to use in this tutorial from a study published by <em>Nostrand et al.</em> ([2016](<span class="citation"><a href="#VanNostrand2016">Nostrand <i>et al.</i> 2016</a></span>). PE stands for a paired-end read library. Hep G2 is a human liver cancer cell line. Replicate is the number of the biological replicate. Stranded means, if the read-library is strand specific, i.e., in a specific forward-reverse direction.</p>
 
 <table>
   <thead>
@@ -1003,7 +1001,7 @@
   <tbody>
     <tr>
       <td>Hep G2</td>
-      <td><a href="https://doi.org/10.1038/nmeth.3810">eCLIP</a></td>
+      <td>eCLIP</td>
       <td style="text-align: center">RBFOX2</td>
       <td style="text-align: center">1</td>
       <td>ENCSR987FTF</td>
@@ -1013,7 +1011,7 @@
     </tr>
     <tr>
       <td>Hep G2</td>
-      <td><a href="https://doi.org/10.1038/nmeth.3810">eCLIP</a></td>
+      <td>eCLIP</td>
       <td style="text-align: center">input</td>
       <td style="text-align: center">1</td>
       <td>ENCSR799EKA</td>
@@ -1106,17 +1104,17 @@ https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R2.fastq
       <!--SNIPPET-->
       <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
 
-      <figure id="figure-1"><img src="../../images/upload_data_page.png" alt="upload. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/transcriptomics_images/upload_data_page.png" alt="upload. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Data can be imported directly with links.</figcaption></figure>
     </li>
   </ol>
 
-  <figure id="figure-2"><img src="../../images/clipseq_data_uploaded.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
+  <figure id="figure-2"><img src="../../images/transcriptomics_images/clipseq_data_uploaded.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Imported datasets will appear in the history panel.</figcaption></figure>
 
 </blockquote>
 
 <h1 id="step-2-quality-control">Step 2: Quality Control</h1>
 
-<p>As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial for NGS <a href="/training-material/topics/sequence-analysis">here</a>. One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found <a href="http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/">here</a>.</p>
+<p>As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">tutorial for NGS</a>. One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found <a href="http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/">in this guide</a>.</p>
 
 <h2 id="report-with-fastqc">Report with <strong>FastQC</strong></h2>
 
@@ -1139,7 +1137,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
   </ol>
 
-  <figure id="figure-3"><img src="../../images/clipseq_duplication_level_1.png" alt="fastqbefore. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of <span class="notranslate">reads</span> with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/transcriptomics_images/clipseq_duplication_level_1.png" alt="fastqbefore. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of <span class="notranslate">reads</span> with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).</figcaption></figure>
 
   <blockquote class="question">
     <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1170,7 +1168,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 <h2 id="removal-of-adapter-sequences-with-cutadapt">Removal of adapter sequences with <strong>Cutadapt</strong></h2>
 
-<p>In this task we are going to remove two 3’ and two 5’ adapters from the <span class="notranslate">reads</span> (Note: The eCLIP protocol uses more adapter sequences, for more information take a look <a href="https://doi.org/10.1038/nmeth.3810">here</a>).</p>
+<p>In this task we are going to remove two 3’ and two 5’ adapters from the <span class="notranslate">reads</span> (Note: The eCLIP protocol uses more adapter sequences, for more information take a look in the original publication <span class="citation"><a href="#VanNostrand2016">Nostrand <i>et al.</i> 2016</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-adapter-removal" class="box-title" aria-label="hands-on box: Adapter Removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adapter Removal</div>
@@ -1359,7 +1357,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 <h1 id="step-4-aligning-reads-to-a-reference-genome">Step 4: Aligning <span class="notranslate">Reads</span> to a Reference Genome</h1>
 
-<p>To determine where <span class="notranslate">DNA</span> fragments originated in the genome, the sequenced <span class="notranslate">reads</span> must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. <a href="https://doi.org/10.1093/bioinformatics/bts635">STAR</a> is one of them that works well with CLIP-Seq data. <a href="https://doi.org/10.1093/bioinformatics/bts635">STAR</a> is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take <span class="notranslate">RNA</span> processing steps like splicing events into account.</p>
+<p>To determine where <span class="notranslate">DNA</span> fragments originated in the genome, the sequenced <span class="notranslate">reads</span> must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. However, this can take a couple of weeks. Nowadays, there are many read alignment programs. STAR <span class="citation"><a href="#Dobin2012">Dobin <i>et al.</i> 2012</a></span> is one of them that works well with CLIP-Seq data. STAR is able to use genome as well as transcriptome data. This ability is handy, since CLIP-Seq generates transcriptome data, consequently we have to take <span class="notranslate">RNA</span> processing steps like splicing events into account.</p>
 
 <h2 id="aligning-with-rna-star">Aligning with <strong><span class="notranslate">RNA</span> STAR</strong></h2>
 
@@ -1441,7 +1439,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 <h1 id="step-5-de-duplication">Step 5: De-Duplication</h1>
 
-<p>Lets return to the UMIs which we extracted in step three. Since we have mapped the <span class="notranslate">reads</span> to our reference genome, we can now identify which <span class="notranslate">reads</span> might be duplicated or not. The <a href="https://doi.org/10.1101/gr.209601.116">UMI-tools</a> will help us again in this matter.</p>
+<p>Lets return to the UMIs which we extracted in step three. Since we have mapped the <span class="notranslate">reads</span> to our reference genome, we can now identify which <span class="notranslate">reads</span> might be duplicated or not. The UMI-tools <span class="citation"><a href="#Smith2017">Smith <i>et al.</i> 2017</a></span> will help us again in this matter.</p>
 
 <h2 id="de-duplication-with-umi-tools-deduplicate">De-duplication with <strong>UMI-tools deduplicate</strong></h2>
 
@@ -1464,7 +1462,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   <blockquote class="comment">
     <div id="comment-what-is-the-purpose-of-the-method-we-have-chosen-for-the-de-duplication" class="box-title" aria-label="comment box: What is the purpose of the method we have chosen for the de-duplication?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What is the purpose of the method we have chosen for the de-duplication?</div>
 
-    <p><code class="language-plaintext highlighter-rouge">UMI-tools deduplication</code> has several methods. The method we have picked is called the  <strong>adjacency</strong> method. For detailed information have a look at method descriptions of   <a href="https://doi.org/10.1101/gr.209601.116">UMI-tools</a>. For a brief explanation: the method fuses <span class="notranslate">reads</span> together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the <strong>adjacency</strong> method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the <a href="https://en.wikipedia.org/wiki/Hamming_distance">hamming distance</a> and read counts.</p>
+    <p><code class="language-plaintext highlighter-rouge">UMI-tools deduplication</code> has several methods. The method we have picked is called the  <strong>adjacency</strong> method. For detailed information have a look at method descriptions of UMI-tools <span class="citation"><a href="#Smith2017">Smith <i>et al.</i> 2017</a></span>. For a brief explanation: the method fuses <span class="notranslate">reads</span> together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the <strong>adjacency</strong> method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the <a href="https://en.wikipedia.org/wiki/Hamming_distance">hamming distance</a> and read counts.</p>
   </blockquote>
 
   <blockquote class="comment">
@@ -1506,7 +1504,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
     <li>View the <strong>Sequence Duplication Levels</strong> plot.</li>
   </ol>
-  <figure id="figure-4"><img src="../../images/clipseq_duplication_level_2.png" alt="fastqafter. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence duplication levels <b>after</b> de-duplication.</figcaption></figure>
+  <figure id="figure-4"><img src="../../images/transcriptomics_images/clipseq_duplication_level_2.png" alt="fastqafter. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Sequence duplication levels <b>after</b> de-duplication.</figcaption></figure>
 
   <blockquote class="question">
     <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1549,7 +1547,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </li>
     <li>View the output image.</li>
   </ol>
-  <figure id="figure-5"><img src="../../images/clipseq_fingerprint.png" alt="fingerprint. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Graph of IP strength from <b>plotFingerprint</b>. The y-axis represents the fraction of the total number of <span class="notranslate">reads</span>. `plotFingerprint` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The x-axis therefore orders the bins from lowest coverage to highest coverage. The plot here is too idealistic which is because of our small data set.</figcaption></figure>
+  <figure id="figure-5"><img src="../../images/transcriptomics_images/clipseq_fingerprint.png" alt="fingerprint. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Graph of IP strength from <b>plotFingerprint</b>. The y-axis represents the fraction of the total number of <span class="notranslate">reads</span>. `plotFingerprint` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The x-axis therefore orders the bins from lowest coverage to highest coverage. The plot here is too idealistic which is because of our small data set.</figcaption></figure>
 
   <blockquote class="comment">
     <div id="comment-what-does-this-graph-represent-especially-for-clip-seq-data" class="box-title" aria-label="comment box: What does this graph represent, especially for CLIP-Seq data?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What does this graph represent, especially for CLIP-Seq data?</div>
@@ -1577,7 +1575,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 
 </blockquote>
 
-<p>For additional information on how to interpret <strong>plotFingerprint</strong> plots, read the information <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background">here</a>.</p>
+<p>For additional information on how to interpret <strong>plotFingerprint</strong> plots, read the information <a href="https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background">the DeepTools documentation</a>.</p>
 
 <h2 id="correlation-between-samples">Correlation between Samples</h2>
 
@@ -1608,7 +1606,7 @@ We are therefore going to further check the correlation between our control and 
     </li>
     <li>View the output image.</li>
   </ol>
-  <figure id="figure-6"><img src="../../images/clipseq_correlation.png" alt="correlation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/transcriptomics_images/clipseq_correlation.png" alt="correlation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.</figcaption></figure>
 
   <blockquote class="question">
     <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1634,7 +1632,7 @@ We are therefore going to further check the correlation between our control and 
 
 <h1 id="step-7-peak-calling">Step 7: Peak Calling</h1>
 
-<p>Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to <span class="notranslate">mapping</span>. There exist a variety of peak callers like <a href="https://github.com/tbischler/PEAKachu">PEAKachu</a>, <a href="https://doi.org/10.1186/s13059-017-1364-2">PureCLIP</a> or <a href="https://doi.org/10.1093/bioinformatics/bts569">Piranha</a> each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use <code class="language-plaintext highlighter-rouge">PEAKachu</code> to find possible binding motifs for our data. <code class="language-plaintext highlighter-rouge">PEAKachu</code> is able to incorporate control data in contrast to other peak callers like <code class="language-plaintext highlighter-rouge">Piranha</code>, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.</p>
+<p>Peak calling is one of the most important steps in the data analysis of CLIP-Seq, next to <span class="notranslate">mapping</span>. There exist a variety of peak callers like <a href="https://github.com/tbischler/PEAKachu">PEAKachu</a>, PureCLIP (<span class="citation"><a href="#Krakau2017">Krakau <i>et al.</i> 2017</a></span>) or Piranha (<span class="citation"><a href="#Uren2012">Uren <i>et al.</i> 2012</a></span>) each with different underlying assumptions and parameters. It is difficult (nearly impossible) to find a generic solution for every data set. We are going to use <code class="language-plaintext highlighter-rouge">PEAKachu</code> to find possible binding motifs for our data. <code class="language-plaintext highlighter-rouge">PEAKachu</code> is able to incorporate control data in contrast to other peak callers like <code class="language-plaintext highlighter-rouge">Piranha</code>, thus allowing to find binding regions that are significantly enriched in comparison to our control (input) data.</p>
 
 <h2 id="peak-calling-with-peakachu">Peak calling with <strong>PEAKachu</strong></h2>
 
@@ -1662,12 +1660,12 @@ We are therefore going to further check the correlation between our control and 
     </li>
     <li>Take a look at the MA plot of <strong>PEAKachu</strong>.</li>
   </ol>
-  <figure id="figure-7"><img src="../../images/clipseq_ma_plot.png" alt="ma. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the <span class="notranslate">expression</span> rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.</figcaption></figure>
+  <figure id="figure-7"><img src="../../images/transcriptomics_images/clipseq_ma_plot.png" alt="ma. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the <span class="notranslate">expression</span> rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.</figcaption></figure>
 
   <blockquote class="comment">
     <div id="comment-adjusted-p-value-threshold" class="box-title" aria-label="comment box: Adjusted p-value Threshold"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Adjusted p-value Threshold</div>
 
-    <p>P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read <a href="http://www.biostathandbook.com/multiplecomparisons.html">here</a>.</p>
+    <p>P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read <a href="http://www.biostathandbook.com/multiplecomparisons.html">this handbook</a>.</p>
   </blockquote>
 
   <blockquote class="comment">
@@ -1775,12 +1773,12 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     <li>View the <strong>MEME-ChIP</strong> html.</li>
   </ol>
 
-  <figure id="figure-8"><img src="../../images/clipseq_motif.png" alt="motif. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for <span class="notranslate">DNA</span>: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).</figcaption></figure>
+  <figure id="figure-8"><img src="../../images/transcriptomics_images/clipseq_motif.png" alt="motif. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for <span class="notranslate">DNA</span>: T,C,G,A). Bigger letters stand for a higher probability. For more information read [this Wikipedia article](https://en.wikipedia.org/wiki/Sequence_logo).</figcaption></figure>
 
   <blockquote class="comment">
     <div id="comment-meme-and-dreme" class="box-title" aria-label="comment box: MEME and DREME"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: MEME and DREME</div>
 
-    <p><strong>MEME</strong> and <strong>DREME</strong> are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found <a href="http://meme-suite.org/">here</a>.</p>
+    <p><strong>MEME</strong> and <strong>DREME</strong> are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found on <a href="http://meme-suite.org/">meme-suite.org</a>.</p>
   </blockquote>
 
   <blockquote class="comment">
@@ -1928,7 +1926,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     </li>
     <li>Inspect the peaks (e.g., <b>chr11:peak_2</b> chr11:2152602-2152742)</li>
   </ol>
-  <figure id="figure-9"><img src="../../images/clipseq_peak_igv.png" alt="igv_peak. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Inspection of a peak in IGV.</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/transcriptomics_images/clipseq_peak_igv.png" alt="igv_peak. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Inspection of a peak in IGV.</figcaption></figure>
 
   <blockquote class="question">
     <div id="question-10" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1966,16 +1964,16 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   <ul>
     <li>Click on the check box icon in the history.</li>
   </ul>
-  <figure id="figure-10"><img src="../../images/clipseq_build_list_data_set_pairs_1.png" alt="builddatasetpairs1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Select data sets for your list of data set pairs.</figcaption></figure>
+  <figure id="figure-10"><img src="../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_1.png" alt="builddatasetpairs1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Select data sets for your list of data set pairs.</figcaption></figure>
   <ul>
     <li>Select the data files for your experiment (or control).</li>
     <li>Select <strong>For all selected…</strong> below the check box icon.</li>
     <li>Select <strong>Build List of Dataset Paris</strong></li>
     <li>In the new window, if you see no files and a warning, then select <strong>Clear filters</strong>. After that, organise the files into forward-reverse pairs.</li>
   </ul>
-  <figure id="figure-11"><img src="../../images/clipseq_build_list_data_set_pairs_2.png" alt="builddatasetpairs2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Organise the data sets into pairs.</figcaption></figure>
+  <figure id="figure-11"><img src="../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_2.png" alt="builddatasetpairs2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Organise the data sets into pairs.</figcaption></figure>
 
-  <figure id="figure-12"><img src="../../images/clipseq_build_list_data_set_pairs_3.png" alt="builddatasetpairs3. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Result after organising the data sets into pairs.</figcaption></figure>
+  <figure id="figure-12"><img src="../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_3.png" alt="builddatasetpairs3. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Result after organising the data sets into pairs.</figcaption></figure>
   <ul>
     <li>Give the list a name and click on the button <strong>Create list</strong>.</li>
   </ul>
@@ -2016,6 +2014,13 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Dobin2012">Dobin, A., C. A. Davis, F. Schlesinger, J. Drenkow, C. Zaleski <i>et al.</i>, 2012 <b>STAR: ultrafast universal RNA-seq aligner</b>. Bioinformatics 29: 15–21. <a href="https://doi.org/10.1093/bioinformatics/bts635">10.1093/bioinformatics/bts635</a></li>
+<li id="Uren2012">Uren, P. J., E. Bahrami-Samani, S. C. Burns, M. Qiao, F. V. Karginov <i>et al.</i>, 2012 <b>Site identification in high-throughput RNA–protein interaction data</b>. Bioinformatics 28: 3013–3020. <a href="https://doi.org/10.1093/bioinformatics/bts569">10.1093/bioinformatics/bts569</a></li>
+<li id="VanNostrand2016">Nostrand, E. L. V., G. A. Pratt, A. A. Shishkin, C. Gelboin-Burkhart, M. Y. Fang <i>et al.</i>, 2016 <b>Robust transcriptome-wide discovery of RNA-binding protein binding sites with enhanced CLIP (eCLIP)</b>. Nature Methods 13: 508–514. <a href="https://doi.org/10.1038/nmeth.3810">10.1038/nmeth.3810</a></li>
+<li id="Krakau2017">Krakau, S., H. Richard, and A. Marsico, 2017 <b>PureCLIP: capturing target-specific protein–RNA interaction footprints from single-nucleotide CLIP-seq data</b>. Genome Biology 18: <a href="https://doi.org/10.1186/s13059-017-1364-2">10.1186/s13059-017-1364-2</a></li>
+<li id="Smith2017">Smith, T., A. Heger, and I. Sudbery, 2017 <b>UMI-tools: modeling sequencing errors in Unique Molecular Identifiers to improve quantification accuracy</b>. Genome Research 27: 491–499. <a href="https://doi.org/10.1101/gr.209601.116">10.1101/gr.209601.116</a></li></ol>
                 
 
                 
