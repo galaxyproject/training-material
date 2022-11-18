@@ -49,7 +49,7 @@ tags:
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas {% cite Moreno2021 %}. Let's get started!
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -67,7 +67,7 @@ We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/expe
 
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Data retrieval
+> <hands-on-title>Data retrieval</hands-on-title>
 >
 > 1. {% tool [EBI SCXA Data Retrieval](retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
 >    - *"SC-Atlas experiment accession"*: `E-MTAB-5061`
@@ -97,7 +97,7 @@ This tool will retrieve four files: a barcodes list, a genes list, an experiment
 
 Let's get rid of a bunch of repetitive columns in the metadata we don't need. You can find out what each columns is by inspecting the dataset {% icon galaxy-eye %} in the history window.
 
-> ### {% icon hands_on %} Hands-on: Cutting necessary metadata columns
+> <hands-on-title>Cutting necessary metadata columns</hands-on-title>
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c4,c6,c8,c10,c14,c20,c24,c26,c30,c32,c34`
@@ -111,7 +111,7 @@ You can inspect the dataset {% icon galaxy-eye %} to see that it's full of annoy
 
 Now, there might be a better way to do this in Galaxy (or you might consider downloading the file locally and changing it in a spreadsheet application or something), but this is what will work to reformat all that annoying text.
 
-> ### {% icon hands_on %} Hands-on: Reformatting the metadata
+> <hands-on-title>Reformatting the metadata</hands-on-title>
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `out_file1` (output of **Cut** {% icon tool %})
@@ -159,7 +159,7 @@ Now, there might be a better way to do this in Galaxy (or you might consider dow
 >            - *"Find Regex"*: `"`
 >            - *"Replacement"*: ``
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > What's with the `\` everywhere? That's because the `[]` symbols usually call the code to do something, rather than just read it as a normal character. the `\` prevents this.
 >    {: .comment}\
@@ -174,13 +174,13 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 
 ## Prepare the barcodes file
 
-> ### {% icon hands_on %} Hands-on: Adding a header
+> <hands-on-title>Adding a header</hands-on-title>
 >
 > 1. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
 >    - *"text to add"*: `Cell`
 >    - {% icon param-file %} *"input file"*: `barcode_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > This is an annoying step we have to do to get the right format, otherwise future steps won't work.
 >    {: .comment}
@@ -189,7 +189,7 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 
 ## Use the barcodes list to filter out cells in the experimental design file
 
-> ### {% icon hands_on %} Hands-on: Joining datasets
+> <hands-on-title>Joining datasets</hands-on-title>
 >
 > 1. {% tool [Join two Datasets](join1) %} with the following parameters:
 >    - {% icon param-file %} *"Join"*: `outfile` (output of **Add line to file** {% icon tool %})
@@ -214,7 +214,7 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Remove duplicate columns
+> <hands-on-title>Remove duplicate columns</hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `out_file1` (output of **Join two Datasets** {% icon tool %})
@@ -237,7 +237,7 @@ Currently, the matrix data is in a 3-column format common in 10x outputs, where 
 
 ## Reformat the matrix
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `matrix_mtx` (output of **EBI SCXA Data Retrieval** {% icon tool %})
@@ -253,7 +253,7 @@ Currently, the matrix data is in a 3-column format common in 10x outputs, where 
 
 Now your precious matrix is stored in the 10x AnnData object. Let's retrieve it!
 
-> ### {% icon hands_on %} Hands-on: Inspect the matrix
+> <hands-on-title>Inspect the matrix</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `output_h5` (output of **Scanpy Read10x** {% icon tool %})
@@ -272,7 +272,7 @@ Now your precious matrix is stored in the 10x AnnData object. Let's retrieve it!
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Transpose the matrix
+> <hands-on-title>Transpose the matrix</hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `X` (output of **Inspect AnnData** {% icon tool %})
@@ -299,7 +299,7 @@ As biologists, it's very difficult to interpret ENSIDs. And it's an awful shame 
 
 ![First table shows 4 rows with different ENS IDs and a second column with geney symbols and some overlap. Arrow pointing to second table shows 3 rows having collapsed the overlap.](../../images/bulk-music/ensid_collapse.png "Collapsing ENS IDs")
 
-> ### {% icon hands_on %} Hands-on: Convert from Ensembl to GeneSymbol using workflow
+> <hands-on-title>Convert from Ensembl to GeneSymbol using workflow</hands-on-title>
 >
 > 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes).
 >
@@ -321,7 +321,7 @@ The output will likely be called **Text transformation** and will look like this
 
 We're nearly there! We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.
 
-> ### {% icon hands_on %} Hands-on: Creating the combined object
+> <hands-on-title>Creating the combined object</hands-on-title>
 >
 > 1. {% tool [Construct Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Assay Data"*: `out_file` #matrix (output of **Text transformation** {% icon tool %})
@@ -345,7 +345,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Creating the disease-only object
+> <hands-on-title>Creating the disease-only object</hands-on-title>
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})
@@ -367,7 +367,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 
 You can either re-run this tool or set it up again to create the healthy-only object.
 
-> ### {% icon hands_on %} Hands-on: Creating the healthy-only object
+> <hands-on-title>Creating the healthy-only object</hands-on-title>
 >
 > 1. {% tool [Manipulate Expression Set Object](toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4) %} with the following parameters:
 >    - {% icon param-file %} *"Expression Set Dataset"*: `out_rds` (output of **Construct Expression Set Object** {% icon tool %})

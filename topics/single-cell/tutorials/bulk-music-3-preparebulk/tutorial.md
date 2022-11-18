@@ -53,7 +53,7 @@ follow_up_training:
 
 After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas {% cite Moreno2021 %}.  Let's get started!
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -116,7 +116,7 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 17
 18`
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!
 >    {: .comment}
