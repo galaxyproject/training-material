@@ -80,7 +80,7 @@ RBFOX2 is a relevant development and tissue-specific splicing factor with the co
 
 # Step 2: Quality Control
 
-As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial for NGS [here]({{site.baseurl}}/topics/sequence-analysis). One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found [here](http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/).
+As for any NGS data analysis, CLIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the [tutorial for NGS]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}). One crucial thing to check for CLIP-Seq data is the sequence duplication levels. PCR duplications occur naturally in any NGS experiment during the PCR amplification of the genetic material. CLIP-Seq is prone to many PCR duplicates because of the sparse material that is obtained during a CLIP-Seq experiment resulting in high PCR cycles in many occasions. More information about the problem of PCR duplicates can be found [in this guide](http://www.cureffi.org/2012/12/11/how-pcr-duplicates-arise-in-next-generation-sequencing/).
 
 ## Report with **FastQC**
 
@@ -369,7 +369,7 @@ In this section we check the quality of our mapped reads and see if our samples 
 >
 {: .hands_on}
 
-For additional information on how to interpret **plotFingerprint** plots, read the information [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
+For additional information on how to interpret **plotFingerprint** plots, read the information [the DeepTools documentation](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
 
 ## Correlation between Samples
 
@@ -434,7 +434,7 @@ calling
 >
 >   > <comment-title>Adjusted p-value Threshold</comment-title>
 >   >
->   > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [here](http://www.biostathandbook.com/multiplecomparisons.html).
+>   > P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read [this handbook](http://www.biostathandbook.com/multiplecomparisons.html).
 >   {: .comment}
 >
 >   > <comment-title>Fold-Change Threshold</comment-title>
@@ -506,11 +506,11 @@ Lets first find out which sequence motifs RBFOX2 might preferentially bind to.
 >    - *"I certify that I am not using this tool for commercial purposes."*: `Yes`
 > 6. View the **MEME-ChIP** html.
 >
-> ![motif](../../images/transcriptomics_images/clipseq_motif.png "Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [here](https://en.wikipedia.org/wiki/Sequence_logo).")
+> ![motif](../../images/transcriptomics_images/clipseq_motif.png "Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [this Wikipedia article](https://en.wikipedia.org/wiki/Sequence_logo).")
 >
 >   > <comment-title>MEME and DREME</comment-title>
 >   >
->   > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found [here](http://meme-suite.org/).
+>   > **MEME** and **DREME** are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found on [meme-suite.org](http://meme-suite.org/).
 >   {: .comment}
 >
 >   > <comment-title>What is the purpose of SlopBED?</comment-title>
