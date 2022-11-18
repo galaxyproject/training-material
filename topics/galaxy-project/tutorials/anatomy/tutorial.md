@@ -229,18 +229,18 @@ People + resource inputs = project outputs
 
 ### Governance
 
-# Resource inputs from grants
+## Resource inputs from grants
 
 
 
-# Project deliverables
+## Project deliverables
 
-## Code for the generic analysis framework
+### Code for the generic analysis framework
 
-## Tools to "flavour" framework instances
+### Tools to "flavour" framework instances
 
-## Free analysis services
+### Free analysis services
 
-## Capacity building training resources and services
+### Capacity building training resources and services
 
-## Downstream: repeatable open science analyses
+### Downstream: repeatable open science analyses
