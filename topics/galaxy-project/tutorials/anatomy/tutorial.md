@@ -1,10 +1,11 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Galaxy: People, resources and source code for open science analysis"
+title: "Galaxy: People, resources and source code for open science analyses"
 questions:
   - "What are the main distinct project structures?"
   - "How do they work together?"
+  - "Who pays for the 'free' analysis computational resources?"
   - "How are decisions really made?"
   - "Who's in charge?"
   - "Why is contribution from the community so important?"
