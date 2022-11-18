@@ -273,7 +273,7 @@ In their [tutorial](http://chagall.med.cornell.edu/RNASEQcourse/) Dündar et al.
 **RNAseq normalization metrics: Within sample comparisons**<br>
 Table from Dündar et al. [2015](http://chagall.med.cornell.edu/RNASEQcourse/)
 
-In addition, an excellent overview of these metrics can be found [here](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
+In addition, an ee this [xcellent overview of these metrics](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/).
 
 #### <font color="red">&#9888; You should NEVER EVER use RPKM, FPKM, or TPM to compare expression levels <em>across</em> samples. These are RELATIVE measures! Consider yourself warned!</font>
 
