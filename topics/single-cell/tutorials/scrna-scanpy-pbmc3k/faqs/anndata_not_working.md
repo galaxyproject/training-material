@@ -4,7 +4,7 @@ box_type: tip
 layout: faq
 contributors: [nomadscientist, mtekman]
 redirect_from:
-  - topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.md
+  - topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working
 ---
 
 This is a known issue, please do not use version `0.7.4` of the tool, and use version `0.6.2` instead. The  Inspect AnnData tool should work fine however.

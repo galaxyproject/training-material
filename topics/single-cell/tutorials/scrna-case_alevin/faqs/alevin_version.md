@@ -4,7 +4,7 @@ box_type: question
 layout: faq
 contributors: [nomadscientist, mtekman]
 redirect_from:
-  - topics/transcriptomics/tutorials/scrna-case_alevin/faqs/alevin_version.md
+  - topics/transcriptomics/tutorials/scrna-case_alevin/faqs/alevin_version
 
 ---
 
