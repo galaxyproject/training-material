@@ -74,11 +74,14 @@ contributors:
 > - Need to invent a descriptive approach.
 {:  .tip}
  
+## A simple model relating the three major parts to this guide
 
-## People + resource inputs = project outputs
+.center[## People + resource inputs = project outputs]
+
 - An equation that summarises the Galaxy project
 - Explanation in the optional detail sections below
-- People are the key to everything.
+- People are the key to everything 
+- They are considered in detail in the first section of the field guide
 
 > <details-title>People working together make the project possible</details-title>
 > - That might seem trite, but it's how open source succeeds.
@@ -163,7 +166,6 @@ contributors:
 ### Regions
 
 ### Developers
-
 
 
 ## Collaborating investigators
