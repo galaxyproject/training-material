@@ -76,7 +76,7 @@ contributors:
  
 # Three related top level categories for this guide
 
-People + resource inputs = project outputs
+### People + resource inputs = project outputs
 
 - An equation that summarises the Galaxy project
 - More explanation in the optional material below
