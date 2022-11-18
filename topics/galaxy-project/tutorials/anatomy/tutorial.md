@@ -74,13 +74,13 @@ contributors:
 > - Need to invent a descriptive approach.
 {:  .tip}
  
-## A simple model relating the three major parts to this guide
+# Three related top level categories for this guide
 
-.center[## People + resource inputs = project outputs]
+People + resource inputs = project outputs
 
 - An equation that summarises the Galaxy project
-- Explanation in the optional detail sections below
-- People are the key to everything 
+- More explanation in the optional material below
+- People are the key.
 - They are considered in detail in the first section of the field guide
 
 > <details-title>People working together make the project possible</details-title>
@@ -131,6 +131,7 @@ contributors:
 {:  .details}
 
 # Field guide to the project ecosystem 
+
 ## People: Individuals, collaborations, communities and governance
 - Starts with the major ways people have organised themselves in the project
 - Many individuals are part of many of the organisations and communities below
@@ -138,10 +139,10 @@ contributors:
 - People bring the resource inputs and project outputs are what people produce.
 - For this module, how they get things done is of more interest than exactly what they do.
 
-## Communities
+### Communities 
 
 - Participants more likely to interact when they share a particular interest
-- Informal and formal communities are formed by these interactions.
+- Informal and formal communities arise from these interactions.
 - They are an important part of any open project 
 - Open source shared values drive participation
     - inclusive, participatory, professional behaviours are encouraged
@@ -153,6 +154,7 @@ contributors:
     - Communities of practice contribute consensus best practice, tool kits and training material.
 - Project growth and sustainability are dependent on providing value through community engagement
 - Communities are a core resource, adding substantial value to project grant resources.
+- Some important communities are described individually below
 
 ### Communities of Practice
 
@@ -168,7 +170,7 @@ contributors:
 ### Developers
 
 
-## Collaborating investigators
+### Collaborating investigators
 
 - Independent principal investigators
 - Multiple independent grants that support interacting project deliverables
@@ -189,7 +191,7 @@ contributors:
  
 
 
-## Contributors
+### Contributors
  
 - Galaxy is an open project, where contributors are welcomed and supported
 - Project success and sustainability depends on contributions from community members.
@@ -207,25 +209,38 @@ contributors:
 > - Working groups provide opportunities for the contribution of technical and other skills in focussed project areas ranging from GUI development through to training and outreach.
 {:  .details}
 
-## Users
+### Users
 
 - GUI tool users who do not want to write code
 - Bioinformaticians and other users who want to write code
 
 
-## Institutional adopters
+### Institutional adopters
 
 - Institutions: organisations deploying and using private Galaxy services
 
 
-## Developers
+### Developers
 - Source code. Team and many independent contributors
 - Tool wrappers. IUC. Communities of Practice
 - Analysis packages - external authors.
 
-## Educators
+### Educators
 
-## Governance
+### Governance
+
+# Resource inputs from grants
 
 
 
+# Project deliverables
+
+## Code for the generic analysis framework
+
+## Tools to "flavour" framework instances
+
+## Free analysis services
+
+## Capacity building training resources and services
+
+## Downstream: repeatable open science analyses
