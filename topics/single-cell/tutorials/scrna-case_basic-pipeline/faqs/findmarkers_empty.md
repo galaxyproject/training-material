@@ -4,7 +4,7 @@ box_type: question
 layout: faq
 contributors: [nomadscientist, mtekman]
 redirect_from:
-  - topics/transcriptomics/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty
+  - /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty
 
 ---
 
