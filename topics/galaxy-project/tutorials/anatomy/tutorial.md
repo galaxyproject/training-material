@@ -132,7 +132,7 @@ contributors:
 
 # Field guide to the project ecosystem 
 
-## People: Individuals, collaborations, communities and governance
+## 1. People: Individuals, collaborations, communities and governance
 - Starts with the major ways people have organised themselves in the project
 - Many individuals are part of more than one of the organisations and communities below
 - How people engage and work together is central to understanding how Galaxy works
@@ -247,26 +247,47 @@ contributors:
 
 - GTN!
 
-### Governance
+### Governance and organisation
 
-- See hub
+- See hub!
+- Self governing, open source style
+- Unusual challenge: Respect independent grant holder responsibilities
+- Executive Board
+- GGSC
+- Working groups
+- Road maps
 
 ### Your ideas for people things to describe here please
 
 
-## Resource inputs from grants
+## 2. Resource inputs
+ 
 
-- not sure about this 
+### Source code
+- Open source community provides
+    - Galaxy source code dependencies
+    - Command line analysis package code for tools
 
-### Would PI's want to advertise their deliverables here?
+### Computational infrastructure, support and analysis services
 
+- Australia
+- Europe
+- USA
+
+### Collaborating grants
+- Would PI's want to advertise their deliverables here?
 - One way of letting potential collaborators know what you're doing?
 - Does not need budgets :)
 - AnVIL
 - Cancer....
 - Your ideas here please?
 
-## Project outputs
+### Community contributors
+- Very important resource
+- Bug fixes, ideas...
+- 
+
+## 3. Project outputs
 
 - Most visible and widely used parts of the project
 - Only possible because of the people and the resources
