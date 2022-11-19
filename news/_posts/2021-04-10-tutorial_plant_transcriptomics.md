@@ -2,7 +2,7 @@
 title: "New Tutorials: Whole transcriptome analysis of Arabidopsis thaliana"
 tags: [new tutorial, transcriptomics, plants, mirna]
 contributors: [gallardoalba, pavanvidem, beatrizserrano]
-cover: "topics/transcriptomics/images/plant_mirna_synthesis.png"
+cover: "topics/transcriptomics/images/transcriptomics_images/plant_mirna_synthesis.png"
 coveralt: "Biosynthesis of miRNA in plants"
 
 layout: news
