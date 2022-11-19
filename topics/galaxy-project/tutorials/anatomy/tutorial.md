@@ -52,16 +52,16 @@ contributors:
 
 # Alternative ways of seeing Galaxy
 
-- Galaxy is a big, complicated project with many moving parts making it hard to comprehend completely
-- What you see depends on how you look at it, so it is:
+- Galaxy is a complicated project with many moving parts, making it hard to comprehend completely
+- What you see depends on how you look at it, so at the same time, it is:
     - A convenient and reliable way to get complex analyses done for users
     - Inter-dependent open source code repositories for developers.
     - A global collaboration for investigators
-- All models of Galaxy are wrong, but some may be useful.
 - This module outlines the major components, and how they fit together
 - Drafted by a human, it represents only one of many possible explanations
 - Most participants will be associated with more than one of the parts described here
-- They all need to be considered together but it's easier to list them individually
+- They need to be described separately to clarify their relationships.
+- However, they are all needed for the project to succeed.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -78,11 +78,11 @@ contributors:
 
 ### People + resource inputs = project outputs
 
-- An equation that summarises the Galaxy project
-- More explanation in the optional material below
-- People are the key.
-- They are considered in detail in the first section of the field guide
-
+- An equation that summarises the Galaxy project in three broad categories
+- More explanation of those top level categories are in the optional material below
+- The field guide separates those three componenents into distinct sections.
+- The project depends on them all, working efficiently together.
+ 
 > <details-title>People working together make the project possible</details-title>
 > - That might seem trite, but it's how open source succeeds.
 > - Shared values help people get things done
