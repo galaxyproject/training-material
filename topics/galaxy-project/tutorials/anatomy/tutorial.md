@@ -147,9 +147,11 @@ contributors:
 > - Participants might interact more often if they share an important distinguishing interest.
 > - New communities are formed when these interactions become frequent and distinct in the project
 >     - Recognisable communities organise activities for interested participants
->     - For example:
->         - Code contributors organise themselves in the various repositories
->         - Communities of practice organise best practice tools, workflows and training.
+>     - Leadership comes from the community 
+>     - Collaborations such as the GTN are supported by communities of contributors. 
+>     - Some are functional such as code contributors collaborating on a repository
+>     - *Communities of practice* organise best practice tools, workflows and training.
+>     - IUC was formed to provide best practice guidance and infrastructure for tool wrapper maintainers
 > - Open source shared values help make communities safe, productive and enjoyable for everyone
 >     - inclusive, participatory, professional behaviours are encouraged
 >     - Project strives to welcome and engage contributors and users
@@ -230,37 +232,78 @@ contributors:
 ### Institutional adopters
 
 - Institutions: organisations deploying and using private Galaxy services
+    - NHGRI AnVIL
 
 
 ### Developers
+
 - Source code. Team and many independent contributors
 - Tool wrappers. IUC. Communities of Practice
 - Analysis packages - external authors.
 
 ### Educators
+
 - GTN!
 
 ### Governance
+
 - See hub
 
-### Your ideas here
+### Your ideas for people things to describe here please
+
 
 ## Resource inputs from grants
+
 - not sure about this 
-- 
-### PI's want to advertise their deliverables here?
-- anvil
+
+### Would PI's want to advertise their deliverables here?
+
+- One way of letting potential collaborators know what you're doing?
+- Does not need budgets :)
+- AnVIL
 - Cancer....
+- Your ideas here please?
 
+## Project outputs
 
-## Project deliverables
+- Most visible and widely used parts of the project
+- Only possible because of the people and the resources
+- Ultimate product is increased productivity in open science analysis.
+    - hard to measure. 
 
-### Code for the generic analysis framework
+### Source code
 
-### Tools to "flavour" framework instances
+- Generic analysis framework
+- Utilities - planemo etc
+- Your ideas here please?
+
+### Tool wrappers to "flavour" framework instances
+
+- +8k tools in public toolshed
+- Your ideas here please?
 
 ### Free analysis services
 
-### Capacity building training resources and services
+- usegalaxy.*
+- Large Australian, European and US research infrastructure allocations
+- Tens of thousands of users
+- Professional user support
+- Stress testing framework code and tools
+- Your ideas here please?
+
+### Capacity building: training resources and services
+
+- GTN offers training to enhance open science research capacity
+    - Using Galaxy itself
+    - Specific kinds of analyses
+    - System administrators
+    - Software developers 
+    - Trainers
+- Your ideas here please?
 
 ### Downstream: repeatable open science analyses
+
+- Most important and probably largest deliverable
+- 10k+ publications
+- Tens of thousands of scientists trained
+- Your ideas here please?
