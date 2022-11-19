@@ -19,10 +19,10 @@ time_estimation:
 subtopic: anatomy
 key_points:
   - "Galaxy is a global collaboration"
-  - "Write once, use often for framework features like analysis reproducibility"
+  - "Write once, use often code for framework features like analysis reproducibility"
   - "Running code as a free service provides effective stress testing for defects"
   - "Embeded in the much bigger open source and open science ecosystem"
-  - "Started in genomics but adapted for use by many data rich disciplines"
+  - "Started in genomics but now adapted to suit many data rich disciplines"
   - "New contributors and investigators are highly valued"
  
 contributors:
@@ -139,36 +139,47 @@ contributors:
 - People bring the resource inputs and project outputs are what people produce.
 - For this module, how they get things done is of more interest than exactly what they do.
 
-### Communities 
+> <tip-title>Communities are core features of open science projects</tip-title>
+> - Communities feature a lot in this guide although they may seem very abstract. 
+>   - Show how participants organise themselves to get things done.
+>   - Represent subgroups of individuals interacting regularly for some special purpose
+>   - They are an important part of any open project
+> - Participants might interact more often if they share an important distinguishing interest.
+> - New communities are formed when these interactions become frequent and distinct in the project
+>     - Recognisable communities organise activities for interested participants
+>     - For example:
+>         - Code contributors organise themselves in the various repositories
+>         - Communities of practice organise best practice tools, workflows and training.
+> - Open source shared values help make communities safe, productive and enjoyable for everyone
+>     - inclusive, participatory, professional behaviours are encouraged
+>     - Project strives to welcome and engage contributors and users
+>     - Community members are encouraged to help improve the project
+> - Communities are a core resource, adding substantial value to project grant resources.
+> - The whole project can be seen as a self governing community
+{:  .tip}
 
-- Participants more likely to interact when they share a particular interest
-- Informal and formal communities arise from these interactions.
-- They are an important part of any open project 
-- Open source shared values drive participation
-    - inclusive, participatory, professional behaviours are encouraged
-    - Project strives to welcome and engage contributors and users
-    - Community members are encouraged to help improve the project
-- A community might define itself as participants sharing a particular interest.
-    - Recognisable communities organise activities for interested participants
-    - Code contributors collaborate as one of many interacting open source communities
-    - Communities of practice contribute consensus best practice, tool kits and training material.
-- Project growth and sustainability are dependent on providing value through community engagement
-- Communities are a core resource, adding substantial value to project grant resources.
-- Some important communities are described individually below
 
 ### Communities of Practice
 
-- Communities developing and supporting specialised fieldd
+- Communities developing and supporting specialised scientific fields:
     - proteomics
     - climate science
-    - public halth 
-    - small scale admins
-        - for people responsible for keeping Galaxy services running
+    - public health 
+    - small server administrators
+    - add your own here...
 
 ### Regions
 
+- North America
+- Europe
+- Australia
+- India
+- add your own here...
+
 ### Developers
 
+- Communities of developers are recognisable in the various source code repositories
+- Interact through github issues, pull requests, and matrix chat channels
 
 ### Collaborating investigators
 
@@ -199,7 +210,8 @@ contributors:
 - Effort is needed to make it easier to navigate.
 - In the past, many community members have become highly valued contributors by finding their own particular way to join in.
 - More recently, effort is being devoted to documenting and clarifying the process, to make it far easier to navigate, for all kinds of contributors. 
-- This training module is part of that effort and there is a separate module on contributor pathways and stories to help show how many useful contributions have been made.
+- This training module is part of that effort
+- See the contributor stories material to learn how useful contributions have been made.
 
 > <details-title>Examples for different kinds of skills and interests</details-title>
 > - Issues can be raised and pull request submitted for review at the github repository. 
@@ -226,11 +238,19 @@ contributors:
 - Analysis packages - external authors.
 
 ### Educators
+- GTN!
 
 ### Governance
+- See hub
+
+### Your ideas here
 
 ## Resource inputs from grants
-
+- not sure about this 
+- 
+### PI's want to advertise their deliverables here?
+- anvil
+- Cancer....
 
 
 ## Project deliverables
