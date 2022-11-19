@@ -134,10 +134,12 @@ contributors:
 
 ## People: Individuals, collaborations, communities and governance
 - Starts with the major ways people have organised themselves in the project
-- Many individuals are part of many of the organisations and communities below
+- Many individuals are part of more than one of the organisations and communities below
 - How people engage and work together is central to understanding how Galaxy works
 - People bring the resource inputs and project outputs are what people produce.
-- For this module, how they get things done is of more interest than exactly what they do.
+- Contributors volunteer their skills and time to make things even better
+- Focus here is on showing how they get things done, rather than exactly what they do.
+- If any activity of the project looks interesting to you, please get in touch!
 
 > <tip-title>Communities are core features of open science projects</tip-title>
 > - Communities feature a lot in this guide although they may seem very abstract. 
@@ -163,9 +165,9 @@ contributors:
 
 ### Communities of Practice
 
-- Communities developing and supporting specialised scientific fields:
-    - proteomics
-    - climate science
+- Communities developing and supporting specialised fields:
+    - [Proteomics](../../../proteomics)
+    - [Climate science](../../../climate)
     - public health 
     - small server administrators
     - add your own here...
