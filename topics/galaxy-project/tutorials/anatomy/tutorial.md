@@ -31,6 +31,7 @@ contributors:
 
 > <comment-title></comment-title>
 >
+> Work in Progress! This is far from complete - please add what's missing and fix what's broken
 > Ross has strong opinions. 
 > Many of them are probably wrong but he doesn't know which ones yet. 
 > Please feel free to contribute your own, to make this more useful to future readers.
