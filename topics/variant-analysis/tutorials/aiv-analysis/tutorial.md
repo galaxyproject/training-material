@@ -115,7 +115,7 @@ If you want to learn how you can create a Galaxy collection from your own refere
 >
 {: .hands_on}
 
-## Quality control
+# Quality control
 
 As a very first step, we would like to make sure that we base our analysis only on the high-quality parts of the sequenced reads.
 
@@ -157,13 +157,15 @@ The tool **fastp** lets us perform these tasks and obtain a nice quality report 
 >
 {: .hands_on}
 
-## Per-segment subtyping
+# Per-segment subtyping and hybrid reference construction
 
 Our goal at this step is to find best matches between our sequencing data and the reference sequences of each genome segment. This will:
 - give us preliminary subtyping results with regard to the HA and NA segments for the sequenced sample
 - suggest the best reference to map the sequencing data to for each segment.
 
-We are going to run the tool **VAPOR** for this purpose asking it to report the stats for any hits it identifies.
+We are then going to combine the best reference of each segment into a hybrid reference genome to use for mapping our sequenced reads against.
+
+To identify the best matching reference segments, we are going to run the tool **VAPOR** asking it to report the stats for any hits it identifies.
 
 > <hands-on-title>Exploring best-matching reference segment scores</hands-on-title>
 >
@@ -221,7 +223,9 @@ Now that we have established that things *may* make sense, we can use the output
 >
 {: .hands_on}
 
-## Mapping to a hybrid reference
+At this point, you may want to {% icon galaxy-eye %} inspect the output of the last step to see if it is an eight-segments reference genome as expected, and if the segments correspond to the top hits found by VAPOR.
+
+# Mapping to a hybrid reference
 
 If things went well, the hybrid reference we just obtained should be close enough across all segments to our sample to allow successful mapping of reads. Before we start the mapping we may want to truncate the segment names in our hybrid reference genome though because currently these names still reflect the full origin of the segment sequences, but from now on we are fine with just the segment ID. We can use the **Replace** tool from before again to truncate the names.
 
@@ -259,9 +263,26 @@ Having polished the titles of the segments in our hybrid reference genome we are
 >    - In *"Settings affecting specific plots"*:
 >      - *"Number of bins to use in across-reference plots"*: `40`
 >
+> 4. {% icon galaxy-eye %} Study the report generated with QualiMap
+>
+>    > <question-title>Questions</question-title>
+>    >
+>    > 1. What is the coverage of each segment by the sequenced reads, and is it uniform?
+>    > 2. Look for a plot showing read mapping quality across the reference. What can you conclude?
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. Coverage is rather different for the different segments. Looking at "Mean coverage" and its "Standard deviation" in the "Chromosome stats" table and at the "Coverage across reference" plot, coverage of the HA segment seems to be most critical since it approaches zero in some regions.
+>    > > 2. Mapping quality is almost constant at or very near 60 (which happens to be the maximum mapping quality value emitted by BWA-MEM) across all segments with the exception of HA.
+>    > >
+>    > > These two observations combined with the VAPOR statistics for HA show again that even the best matching reference for this segment is not exactly close to the sequence of our sample. The read mapper had difficulties placing the sequenced reads on that sub-optimal reference and it looks as if we might have very little sequence information for some HA regions.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
 {: .hands_on}
 
-## Consensus sequence construction
+# Consensus sequence construction
 
 From the polished mapping of reads to our custom reference we can now construct the consensus sequence of our sample.
 
@@ -323,7 +344,7 @@ And with that we are ready for consensus sequence generation!
 >
 {: .hands_on}
 
-## Placing segments on a phylogenetic tree
+# Placing segments on a phylogenetic tree
 
 The next logical step after obtaining the consensus sequences of segments of our sample is to explore how those sequences are related to the sequences in our reference collection.
 To do so, we are going to build multiple sequence alignments (MSAs) per segment of all reference sequences, add our sample segments to those alignments, and build phylogenetic trees, one per segment. We are going to use two rather standard tools, **MAFFT** and **IQTree**, for generating MSAs and trees, respectively.
