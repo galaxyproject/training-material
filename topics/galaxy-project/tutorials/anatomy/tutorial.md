@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Galaxy: People, resource inputs and project outputs"
+title: "People, resource inputs and project outputs: A descriptive guide to the Galaxy project"
 questions:
   - "What are the main identifiable project components?"
   - "How do they all fit together?"
@@ -18,12 +18,14 @@ objectives:
 time_estimation:
 subtopic: anatomy
 key_points:
-  - "Galaxy is a global collaboration"
-  - "Write once, use often code for framework features like analysis reproducibility"
-  - "Running code as a free service provides effective stress testing for defects"
-  - "Embeded in the much bigger open source and open science ecosystem"
+  - "Galaxy is a complicated, participatory self-governing collaborative community project"
+  - "Participants engage with the project on their own individual terms"
+  - "Multiple perspectives and opinions are needed to see the whole interacting structure"
+  - "Vision: Build hard features like reproducibility into an analysis framework with pluggable tools"
+  - "Running code as a free service provides effective stress testing for software defects and useability"
+  - "Project depends on and collaborates as part of the open source and open science ecosystem"
   - "Started in genomics but now adapted to suit many data rich disciplines"
-  - "New contributors and investigators are highly valued"
+  - "New contributors and investigators are highly valued and warmly welcomed"
  
 contributors:
   - fubar2
@@ -53,16 +55,15 @@ contributors:
 
 # Alternative ways of seeing Galaxy
 
-- Galaxy is a complicated project with many moving parts, making it hard to comprehend completely
-- What you see depends on how you look at it, so at the same time, it is:
-    - A convenient and reliable way to get complex analyses done for users
-    - Inter-dependent open source code repositories for developers.
-    - A global collaboration for investigators
+- Galaxy is a big, complicated project
 - This module outlines the major components, and how they fit together
-- Drafted by a human, it represents only one of many possible explanations
-- Most participants will be associated with more than one of the parts described here
-- They need to be described separately to clarify their relationships.
-- However, they are all needed for the project to succeed.
+- What you see depends on how you look at it, so at the same time, it is:
+    - A convenient and reliable way to share complex open science analyses for users
+    - Inter-dependent open source code repositories for developers.
+    - A global open science collaboration for investigators
+- Participants engage in their own chosen way, according to their skills and interests
+- Each sees a different part of the whole
+- Galaxy flourishes, because all the parts govern themselves in an efficient collaboration.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -79,9 +80,9 @@ contributors:
 
 ### People + resource inputs = project outputs
 
-- An equation that summarises the Galaxy project in three broad categories
-- More explanation of those top level categories are in the optional material below
-- The field guide separates those three componenents into distinct sections.
+- An equation that summarises the Galaxy project as three interacting components
+- More explanation of those components are in the detail below
+- The field guide separates those three components artificially.
 - The project depends on them all, working efficiently together.
  
 > <details-title>People working together make the project possible</details-title>
@@ -110,9 +111,11 @@ contributors:
 >     - user support, system administration and software engineers.
 {:  .details}
 
-> <details-title>Project code and services depend on resources from open source community</details-title>
+> <details-title>Project code and services depend on resources from the open source community</details-title>
 > - Galaxy source code depends on interacting resources provided by thousands of other open source projects
 > - Flavours for Galaxy servers depend on command line software packages wrapped as tools
+> - Galaxy builds on and adds value to all these resources
+> - Shared open source community values help build and sustain efficient collaborative networks
 {:  .details}
 
 > <details-title>Project outputs - things the project delivers for open science and scientists</details-title>
@@ -134,12 +137,13 @@ contributors:
 # Field guide to the project ecosystem 
 
 ## 1. People: Individuals, collaborations, communities and governance
-- Starts with the major ways people have organised themselves in the project
+- Guide starts with people, and how they have organised themselves
 - Many individuals are part of more than one of the organisations and communities below
-- How people engage and work together is central to understanding how Galaxy works
-- People bring the resource inputs and project outputs are what people produce.
+- How people become engaged and work together is central to understanding how Galaxy works
+- People provide the project inputs; People collaborating produce the project outputs.
 - Contributors volunteer their skills and time to make things even better
 - Focus here is on showing how they get things done, rather than exactly what they do.
+- For those details, see the [Hub](https://galaxyproject.org/)
 - If any activity of the project looks interesting to you, please get in touch!
 
 > <tip-title>Communities are core features of open science projects</tip-title>
@@ -262,7 +266,11 @@ contributors:
 
 
 ## 2. Resource inputs
- 
+- Many different kinds of resources are needed to support all the "free" services
+- Large scale computational infrastructure and professionals 
+- Individual skilled contributors
+- Engaged communities
+- Other interacting open communities
 
 ### Source code
 - Open source community provides
@@ -290,10 +298,12 @@ contributors:
 
 ## 3. Project outputs
 
-- Most visible and widely used parts of the project
-- Only possible because of the people and the resources
-- Ultimate product is increased productivity in open science analysis.
-    - hard to measure. 
+- Most visible parts of the project to researchers using Galaxy for analyses
+- Made possible by all the people and the resources
+- Downstream products of Galaxy are important but hard to quantify
+    - Increased productivity in open science analysis
+    - Improved trustworthiness of sharable, replicable computation for analyses.
+    - Scientific discovery
 
 ### Source code
 
