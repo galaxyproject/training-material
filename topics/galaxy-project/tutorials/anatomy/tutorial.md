@@ -47,6 +47,9 @@ contributors:
 > - These are necessarily somewhat arbitrary and overlapping.
 > - They have grown and continue to grow organically over time rather than by design.
 > - The project continues to expand rapidly, so this module will need updating regularly
+> - The Hub provides detail about many of the same structures
+> - This material is designed to provide multiple, simplified views of the project
+> - A kind of field guide to the ecosystem generating those Hub activities.
 >
 > 1. TOC
 > {:toc}

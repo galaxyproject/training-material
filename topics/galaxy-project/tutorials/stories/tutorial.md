@@ -63,6 +63,7 @@ contributors:
 - Seeing how existing activities started may offer insight
 - Useful for new project activity planning
 - The stories below have been contributed by the people who did the work
+- Individual leadership in response to genuine need, and collaboration underly them all
 
 
 ## Proteomics communities: a case-study
