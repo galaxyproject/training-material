@@ -89,17 +89,19 @@ contributors:
 - The project depends on them all, working efficiently together.
  
 > <details-title>People working together make the project possible</details-title>
-> - That might seem trite, but it's how open source succeeds.
-> - Shared values help people get things done
+> - This is the reason open source succeeds so well
+> - Shared values and participatory self governance help people get things done
 > - Self governed collaboration because no single "owner"
 >     - Many independent institutions and investigators 
 >     - No single institution has control
-> -  Individuals engage with the project on their own terms
->     - Leading and participating in community activities
->     - Communities of practice
->     - Collaborating investigators with grant resources
->     - Contributing training material, documentation, source code 
->     - Participation and leadership in governance.
+> -  Individuals engage with the project in their own way, such as:
+>     - Analysing and sharing experimental data
+>     - Working as professional member of the core team
+>     - Contributing skills, code and ideas
+>     - Maintaining best practice tool wrappers
+>     - Bringing grant resources to the collaboration
+>     - Providing community and project governance leadership
+> - 
 {:  .details}
 
 
@@ -197,8 +199,8 @@ contributors:
 
 - Independent principal investigators
 - Multiple independent grants that support interacting project deliverables
-- Support source code, hub, usegalaxy.* analysis services, Galaxy Training Network.
-- "Free" Galaxy analysis services are sustained by large research grants
+- Support source code, hub, usegalaxy.* analysis services, Galaxy Training Network, communities...
+- Provide resources at scale for "free" Galaxy analysis services
 
 
 > <details-title>Collaborative resources in more details</details-title>
@@ -216,11 +218,13 @@ contributors:
 
 ### Contributors
  
-- Galaxy is an open project, where contributors are welcomed and supported
-- Project success and sustainability depends on contributions from community members.
+- Galaxy is an open project
+    - contributors are welcomed and supported
+    - Project success and sustainability depends on contributions from community members.
 - Project complexity offers many opportunities for contribution
-- Effort is needed to make it easier to navigate.
-- In the past, many community members have become highly valued contributors by finding their own particular way to join in.
+- Suggestions are always welcomed to make it easier to navigate.
+- In the past, community members turn into highly valued contributors
+- Finding their own particular way to join in according to their situation.
 - More recently, effort is being devoted to documenting and clarifying the process, to make it far easier to navigate, for all kinds of contributors. 
 - This training module is part of that effort
 - See the contributor stories material to learn how useful contributions have been made.
