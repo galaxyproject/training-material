@@ -286,7 +286,7 @@ Having polished the titles of the segments in our hybrid reference genome we are
 
 From the polished mapping of reads to our custom reference we can now construct the consensus sequence of our sample.
 
-Unfortunately, the tool we are going to use for this, **ivar consensus**, is not capable of working with more than one reference name at a time, but because this is influenza data we have mappings to 8 different segments described in our data. So we need to take a little detour and split the mapped reads data into a collection of datasets each containing the mappings for just one segment first, then perform the consensus construction for all of them in parallel.
+Unfortunately, the tool we are going to use for this, **ivar consensus**, is not capable of working with more than one reference name at a time, but because this is influenza data we have mappings to 8 different segments described in our data. So we need to take a little detour and split the mapped reads data into a collection of datasets each containing the mappings for just one segment first again, then perform the consensus construction for all of them in parallel.
 
 > <hands-on-title>Splitting mapped reads by genome segment</hands-on-title>
 >
@@ -322,6 +322,17 @@ The output from this step has the desired collection structure, but the names of
 
 And with that we are ready for consensus sequence generation!
 
+To accept any base suggested by the mapped sequenced reads as the consensus base for the corresponding genome position, we ask for the following requirements to be fulfilled:
+
+- at least ten sequenced reads have to provide information about the base in question
+- at a minimum, 70% of these reads have to agree on the base at this position.
+
+To avoid getting misled too much by sequencing errors, we are also going to ignore bases with a base calling quality less than 20 in the above counts (i.e., we are going to base our decisions only on bases in sequenced reads that the basecaller of the sequencer was reasonably sure about.
+
+Now what if we cannot obtain a consensus base for a position with the above criteria? In such cases of uncertainty we want to insert an N (i.e. an unknown base) to express that we either did not have enough information about the position or that this information was ambiguous.
+
+{% icon galaxy-info %} All of the above limits for consensus base calling are arbitrary to some degree, and depend somewhat on the quality of the sequencing data. With very high overall coverage, for example, it is possible to increase the coverage threshold, but if you increase that threshold too much, you may end up with a consensus sequence consisting mostly of Ns.
+
 > <hands-on-title>Per-segment consensus construction</hands-on-title>
 >
 > 1. {% tool [ivar consensus](toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0) %}
@@ -341,6 +352,19 @@ And with that we are ready for consensus sequence generation!
 >      - *"Find pattern"*: `^>Consensus_(.*)_threshold_.*`
 >      - *"Replace with"*: `>$1`
 >      - *"Find-Pattern is a regular expression"*: `Yes`
+>
+> 3. {% icon galaxy-eye %} Inspect each consensus sequence generated for the different segments
+>
+>    > <question-title>Question</question-title>
+>    >
+>    > 1. Does everything look ok?
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. As expected from the findings so far, the consensus sequence for the HA segment has stretches of N in it, which likely reflect the mapping issues and associated loss of coverage caused by our insufficiently sized collection of references.
+>    > >
+>    > {: .solution}
+>    {: .question}
 >
 {: .hands_on}
 
