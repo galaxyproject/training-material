@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "The people, values, resources and source code of Galaxy"
+title: "Galaxy: People, resource inputs and project outputs"
 questions:
   - "What are the main identifiable project components?"
   - "How do they all fit together?"
