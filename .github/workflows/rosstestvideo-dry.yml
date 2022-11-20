@@ -1,4 +1,4 @@
-name: Ross test Dry-run of Video Generation
+name: A Ross test Dry-run of Video Generation
 
 on:
   workflow_dispatch
@@ -10,7 +10,8 @@ on:
 
 jobs:
   runner-job:
-    if: github.repository_owner == 'galaxyproject'
+    #if: github.repository_owner == 'fubar2'
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     services:
       # Label used to access the service container
