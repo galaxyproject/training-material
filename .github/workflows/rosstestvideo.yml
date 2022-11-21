@@ -81,12 +81,12 @@ jobs:
           echo "::set-output name=commit::$(curl https://galaxy-training.s3.amazonaws.com/videos/topics/last-commit -f 2>/dev/null || echo none)"
 
       # The actual compilation process deposits everything in the ./videos/ folder.
-      - name: fix bug https://github.com/actions/runner/issues/1317
-        run: mkdir -p _site/training_material/topics
+
       - name: Build Videos
         run: |
           # Override permissions on _site to allow docker access.
-          chmod ugo+rwx _site 
+          mkdir -p _site/training-material/topics
+          chmod -R ugo+rwx _site/training-material/topics
           # Then we can build the slides
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bundle exec bash bin/ross-ari-make.sh
         env:
