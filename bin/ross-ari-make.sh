@@ -16,7 +16,7 @@ else
 fi
 
 $(npm bin)/http-server -p 9876 _site &
-
+ 
 for slides in $changed_slides; do
 	echo "====== $slides ======"
 	dir="$(dirname "$slides")"
@@ -26,8 +26,10 @@ for slides in $changed_slides; do
 
 	# Process the slides
 	echo $built_slides
-	echo "======> docker run --rm --network host -v $(pwd):/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf"
-	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
+	echo "======> docker run --rm --network host -v _site/training_material:/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/$pdf"
+#	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
+    mkdir -p _site/training_material/$dir # https://github.com/actions/runner/issues/1317
+	docker run --rm --network host -v _site/training_material:/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/$pdf
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
