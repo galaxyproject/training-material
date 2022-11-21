@@ -11,7 +11,7 @@ objectives:
 - requirements:
 -
     type: "internal"
-    topic_name: transcriptomics
+    topic_name: single-cell
     tutorials:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
