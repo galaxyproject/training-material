@@ -400,5 +400,5 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 
 Analysis workflows for influenza whole-genome sequencing data need to take into account the specific characteristics of the viral genome. Due to their higher natural variability this is especially true for avian influenza samples and for the HA- and NA-encoding segments of the genome.
 
-Nevertheless, it is possible, with a carefully chosen collections of reference segment sequences and bioinformatic tools, to avoid a computaionally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.
+Nevertheless, it is possible, with a carefully chosen collections of reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.
 
