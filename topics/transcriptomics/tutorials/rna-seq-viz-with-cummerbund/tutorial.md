@@ -52,7 +52,7 @@ CummeRbund is an open-source tool that simplifies the analysis of a CuffDiff RNA
 
 A typical workflow for the visualization of RNA-Seq data involving CummeRbund:
 
-![workflow](../../images/cummerbund-rna-seq-viz-with-cummerbund.png)
+![workflow](../../images/transcriptomics_images/cummerbund-rna-seq-viz-with-cummerbund.png)
 
 CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) database. This database has to be created using CuffDiff's SQLite output option.
 
@@ -60,7 +60,7 @@ CummeRbund reads your RNA-Seq results from a [SQLite](https://www.sqlite.org/) d
 >
 > Instruct CuffDiff to organize its output in a SQLite database to be read CummeRbund.
 >
-> ![SQLite output](../../images/cummerbund-cuffdiff-set-sqlite.png)
+> ![SQLite output](../../images/transcriptomics_images/cummerbund-cuffdiff-set-sqlite.png)
 {: .details}
 
 # Importing RNA-Seq result data
@@ -206,7 +206,7 @@ The input data used to create the visualization comprise 3 conditions: *hits7* (
 
 Our first CummeRbund plot is the "Expression Plot" of the isoforms of gene NDUFV1, which shows the expression differences of isoforms NM_001166102 and NM_007103 among the three conditions. Error bars capture the variability of the distribution of FPKM values: the broader the distribution of FPKM values, the larger the corresponding error bar.
 
-![Expression plot](../../images/cummerbund-expression-plot.png)
+![Expression plot](../../images/transcriptomics_images/cummerbund-expression-plot.png)
 
 Our plot has a modest number of isoforms, and is therefore easy to read. However, with a high number of isoforms and expression variability among different conditions, the plot can look very busy. We can therefore change the visualization type by selecting another type of plot. Let's change visualization.
 
@@ -221,7 +221,7 @@ Our plot has a modest number of isoforms, and is therefore easy to read. However
 >        - *"Gene ID"*: `NDUFV1`
 {: .hands_on}
 
-![Expression bar plot](../../images/cummerbund-expression-bar-plot.png)
+![Expression bar plot](../../images/transcriptomics_images/cummerbund-expression-bar-plot.png)
 
 The Expression Bar Plot of gene NDUFV1's replicates NM_001166102 and NM_007103, shows the expression changes across the three aforementioned conditions.
 
@@ -251,13 +251,13 @@ As a showcase example, let's consider only the top 5 differentially expressed ge
 >
 {: .hands_on}
 
-![Expression bar plot](../../images/cummerbund-heatmap.png)
+![Expression bar plot](../../images/transcriptomics_images/cummerbund-heatmap.png)
 
 Heatmap of significant differentially expressed isoforms of genes LIMCH1, IFNL2, CXCL11, NUB1. Differences in up- and down-regulation of certain gene isoforms across Patient 1 (hits7), Patient 2 (hits8), and Control (hits9), are visible in the lower and upper part of the heatmap.
 
 > <comment-title></comment-title>
 >
-> For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look [here](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
+> For more sophisticated visualizations of your RNA-Seq analysis results, try selecting different CummeRbund plot options and parametrizations. Have a look also at CummeRbund's [manual](http://compbio.mit.edu/cummeRbund/manual_2_0.html). Alternatively, you can modify a plot's style by changing CummeRbund's R output! CummeRbund's R outputs are *ggplot* objects. Look at the [ggplot2 documentation](https://github.com/tidyverse/ggplot2) to learn how to change fonts, colors, error bars, and more.
 {: .comment}
 
 # Conclusion
