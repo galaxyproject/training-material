@@ -81,6 +81,8 @@ jobs:
           echo "::set-output name=commit::$(curl https://galaxy-training.s3.amazonaws.com/videos/topics/last-commit -f 2>/dev/null || echo none)"
 
       # The actual compilation process deposits everything in the ./videos/ folder.
+      - name: fix bug https://github.com/actions/runner/issues/1317
+        run: mkdir -p _site/training_material/topics
       - name: Build Videos
         run: |
           # Override permissions on _site to allow docker access.
