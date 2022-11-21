@@ -87,6 +87,7 @@ jobs:
           # Override permissions on _site to allow docker access.
           mkdir -p _site/training-material/topics # ? needed now? https://github.com/actions/runner/issues/1317
           chmod -R ugo+rwx _site/training-material/topics
+          # recurse and add w - was chmod ugo+rx _site
           # Then we can build the slides
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bundle exec bash bin/ross-ari-make.sh
         env:
@@ -94,4 +95,24 @@ jobs:
 #          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_POLLY_SECRET_ACCESS_KEY }}
 #          AWS_DEFAULT_REGION: us-east-1
            PREVIOUS_COMMIT_ID: ${{ steps.build_id.outputs.commit }}
+
+      - name: make tar
+        run: | 
+          mkdir ../buildhere
+          cp -TR . ../buildhere
+          tar -cvf deploy.tar ../buildhere/
+          
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            key: ${{ secrets.SSH2 }}
+            # port: ${{ secrets.PORT }}
+            source: "deploy.tar"
+            target: "/var/www/html/videos/topics/"
+
+
+
+
 

@@ -14,7 +14,8 @@ if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
 else
 	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
-
+# hack to just do ours for the moment
+changed_slides="topics/galaxy-project/slides/introduction.html"
 $(npm bin)/http-server -p 9876 _site &
  
 for slides in $changed_slides; do
