@@ -32,7 +32,7 @@ contributors:
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of
 the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on. 
 
-One common biological confounder is the cell cycle. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
+One common biological confounder is the cell cycle {% cite Luecken2019 %}. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
 
 In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can regress out (or remove) their effects on the
 data. 
@@ -104,7 +104,7 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 
 >    > ### {% icon comment %} Comment
 >    > When should we regress out the effects of the cell cycle? 
->    >  Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle. However, it isn't always appropriate to remove the effects of the cell cycle genes - sometimes it can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the cell cycle genes are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters. 
+>    >  Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle {% cite Luecken2019 %}. However, it isn't always appropriate to remove the effects of the cell cycle genes - sometimes it can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the cell cycle genes are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters. 
 >    {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Score the cell cycle genes
