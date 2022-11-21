@@ -73,7 +73,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 ## Get reference and sequenced samples data
 
-In this tutorial you are going to work on a single avian influenza sample seqquenced in paired-end mode on the Illumina platform, *i.e.* we are going to download two datasets of sequenced reads for that sample.
+In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, *i.e.* we are going to download two datasets of sequenced reads for that sample.
 
 In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public INSAFlu data.
 
