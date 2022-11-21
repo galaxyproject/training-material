@@ -84,8 +84,8 @@ jobs:
       - name: Build Videos
         run: |
           # Override permissions on _site to allow docker access.
-          chmod ugo+rx _site 
-          mkdir -p /slides 
+          chmod ugo+rwx _site 
+          ln -s _site /slides 
           # try making a temp volume for slides in docker image
           # patched to add w permission for failing pdf outputs - try privileged
           # Then we can build the slides
