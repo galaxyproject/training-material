@@ -44,7 +44,11 @@ Together these characteristics enable *Influenza A* to evolve relatively rapidly
 
 In order to estimate the likelihood of an epidemic or pandemic influenza event in the near future it is, therefor, important to monitor closely the genome composition of circulating Avian Influenza strains in wild and domestic birds and the huge technological advances over the last decade make it possible to use next-generation sequencing for this purpose.
 
-At the same time, the segmented nature of their genomes combined with high genetic variability, especially in the HA and NA genes, requires rather specialized bioinformatics workflows for the analysis of data from influenza viruses compared to other viruses with similar genome size (like, *e.g.* SARS-CoV-2).
+At the same time, the segmented nature of their genomes combined with high genetic variability, especially in the HA and NA genes, requires rather specialized bioinformatics workflows for the analysis of data from influenza viruses compared to other viruses with similar genome size (like, *e.g.* SARS-CoV-2):
+
+The viral surface proteins HA and (to a lesser extent) NA are the main targets of the host antibody response and are, thus, under constant selection pressure to mutate into forms capable of evading an existing host immune response. As a consequence, these segments have evolved into a much richer panel of sequence variants than the other segments, to the point that sequences of the HA segment can, at present, be classified into 18 distinct subfamilies, H1-H18, while there are 11 recognized subfamilies of NA, and *Influenza A* strains are subtyped (as, for example, H5N1, H3N2, etc.) according to the combination of HA- and NA-encoding segments they are carrying.
+
+Importantly, the sequence diversity of HA and (again to a lesser extent) of NA segments is big enough to prevent a naive approach of mapping sequenced reads to one specific agreed-upon *Influenza A* reference sequence. While this would work for the other six segments, mapping software would regularly fail to find enough plausible mappings for sequenced reads of HA and NA origin to continue analysis with. This is why, in this tutorial we are going to explore an alternative approach, which is also mapping-based but chooses a suitable reference for each segment dynamically based on the input sequencing data.
 
 > <agenda-title></agenda-title>
 >
@@ -114,6 +118,37 @@ If you want to learn how you can create a Galaxy collection from your own refere
 >    6. Switch to the tutorial history
 >
 {: .hands_on}
+
+## Inspect the reference data
+
+> <hands-on-title>What is in the reference collection?</hands-on-title>
+>
+> 1. Step inside the uploaded reference collection by clicking on it.
+> 2. Expand individual elements of the collection by clicking on them to reveal more details about them.
+> 3. View the content of any element by clicking its {% icon galaxy-eye %}.
+>
+>    You can then scroll through the data and use your browser's search function to look for particular sequences.
+>
+>    > <question-title>Questions</question-title>
+>    >
+>    > 1. How many elements are in the collection? What do they represent?
+>    > 2. How many sequences are stored in each element?
+>    > 3. Are all subtypes of HA and NA represented in the sequences?
+>    > 4. Are there sequences of non-A Influenza species?
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. The collection consists of eight elements and each element provides reference sequences for one genome segment.
+>    > > 2. Each element has data for 56 sequences (Galaxy knows how to interpret the fasta format of the sequencing data and counts sequences for you; you can see the count for any of the elements by expanding it).
+>    > > 3. The collection has reference sequence data for H1-H18 (with the exception of H11) and for N1-N11. For many of those subtypes, however, there is only one reference, i.e., within-subtype variation is not captured well by the collection.
+>    > > 4. There are 6 *Influenza B* references in the collection. Since *Influenza B* is not normally seen in birds and we are going to analyze an avian influenza sample here, these can be considered controls: if we get an *Influenza B* assignment for the sample at any step in our analysis, we know something is very suspicious. This also means that we only have 50 *informative* references in the collection.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+{% icon galaxy-info %} There are lots of text processing and filtering tools for Galaxy, of which this tutorial is going to introduce just a small subset. You could use them to extract statistics about which subtypes are found how many times in the collection of references instead of relying on scrolling and searching. If you are interested and have the time, you may want to try the [Data Manipulation Olympics]({% link topics/introduction/tutorials/data-manipulation-olympics/tutorial.md %}) to learn more about available such tools and how to combine them.
 
 # Quality control
 
@@ -357,11 +392,11 @@ Now what if we cannot obtain a consensus base for a position with the above crit
 >
 >    > <question-title>Question</question-title>
 >    >
->    > 1. Does everything look ok?
+>    > Does everything look ok?
 >    >
->    > > <solution-title>Answers</solution-title>
+>    > > <solution-title>Answer</solution-title>
 >    > >
->    > > 1. As expected from the findings so far, the consensus sequence for the HA segment has stretches of N in it, which likely reflect the mapping issues and associated loss of coverage caused by our insufficiently sized collection of references.
+>    > > As expected from the findings so far, the consensus sequence for the HA segment has stretches of Ns in it, which likely reflect the mapping issues and associated loss of coverage caused by our insufficiently sized collection of references.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -394,11 +429,29 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 >    - {% icon param-collection %} *"Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format."*: output of **MAFFT add**
 >    - *"Specify sequence type ..."*: `DNA`
 >
+> 4. {% icon galaxy-eye %} Explore each of the final trees produced by IQTree for the different segments
+>
+>    > <question-title>Question</question-title>
+>    >
+>    > What are your conclusions about the sample in general and its HA and NA segments in particular?
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > - For most of its segments the sample resembles relatively recent (from the last decade) Eurasian reference sequences.
+>    > > - For HA and NA the sample clusters with the few available samples of the corresponding subtype.
+>    > > - None of the references closest to the sample with respect to HA and NA are close to the recent Eurasian reference cluster for their remaining segments.
+>    > > - A plausible explanation is that the H4 and N6 segments of the sample have been brought into the recent Eurasian background through a reassortment event. Caveat: interpretations like this can be heavily influenced by the size of the reference collection!
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
 {: .hands_on}
 
 # Conclusion
 
 Analysis workflows for influenza whole-genome sequencing data need to take into account the specific characteristics of the viral genome. Due to their higher natural variability this is especially true for avian influenza samples and for the HA- and NA-encoding segments of the genome.
 
-Nevertheless, it is possible, with a carefully chosen collections of reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.
+Nevertheless, it looks possible, with carefully chosen reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.
+
+The rather small reference segment collection suggested for this tutorial consists of 56 different samples, of which only a single one has the H4N6 subtype of the sample analyzed here. Still it allowed us to perform subtyping of the sample, to construct complete consensus sequences for 7 segments including NA, and to draw valuable conclusions about the origin of the sample. It is conceivable that a larger collection of references chosen to capture several strains from each HA subtype could solve the remaining issue of the incomplete HA consensus sequence.
 
