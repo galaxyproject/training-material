@@ -7,18 +7,11 @@ function cleanup(){
 
 trap cleanup EXIT
 
-# We have an old commit ID, so we need to figure out which slides to build.
-videos="$(find topics -name 'slides.html' -or -name introduction.html -or -name 'slides_*ES.html')"
-if [[ "${PREVIOUS_COMMIT_ID}" != "none" ]]; then
-	changed_slides="$(join <(echo "$videos" | xargs ./bin/filter-resource-metadata video | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
-else
-	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
-fi
 # hack to just do ours for the moment
-changed_slides="topics/galaxy-project/slides/introduction.html"
+# eg set BUILD_ME_SLIDES using env to "topics/galaxy-project/slides/introduction.html"
 $(npm bin)/http-server -p 9876 _site &
  
-for slides in $changed_slides; do
+for slides in $BUILD_ME_SLIDES; do
 	echo "====== $slides ======"
 	dir="$(dirname "$slides")"
 	pdf="$dir/$(basename "$slides" .html).pdf"
