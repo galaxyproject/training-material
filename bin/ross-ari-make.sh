@@ -27,7 +27,7 @@ for slides in $changed_slides; do
 	# Process the slides
 	echo $built_slides
 	# -v $(pwd):/slides may be causing problems
-	docker run --rm --network host astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /_site/training-material/$pdf
+	docker run --rm --network host astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides _site/training-material/$pdf
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
