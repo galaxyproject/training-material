@@ -85,7 +85,7 @@ jobs:
       - name: Build Videos
         run: |
           # Override permissions on _site to allow docker access.
-          chmod -R ugo+rwx _site/training-material/topics
+          chmod -R ugo+rwx _site   # /training-material/topics
           # Then we can build the slides
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bundle exec bash bin/ross-ari-make.sh
         env:
