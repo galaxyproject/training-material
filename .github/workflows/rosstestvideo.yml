@@ -9,8 +9,6 @@ on:
 
 jobs:
   runner-job:
-    #if: github.repository_owner == 'fubar2'
-    if: ${{ always() }}
     runs-on: ubuntu-latest
     services:
       # Label used to access the service container
@@ -22,7 +20,7 @@ jobs:
       # Shallow should be fine for video
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 5000
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
