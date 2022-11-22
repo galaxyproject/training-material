@@ -20,7 +20,7 @@ for slides in $BUILD_ME_SLIDES; do
 
 	# Process the slides
 	echo $built_slides
-    # mkdir -p _site/training_material/$dir # https://github.com/actions/runner/issues/1317
+    mkdir -p _site/training_material/$dir # https://github.com/actions/runner/issues/1317
     docker run --rm --network host -v $(pwd):/slides astefanutti/decktape automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
 
 	# Build the slides
