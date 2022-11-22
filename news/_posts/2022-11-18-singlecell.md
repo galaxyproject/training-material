@@ -9,6 +9,6 @@ Single-cell analysis now has [it's own topic]({% link topics/single-cell/index.m
 
 Exciting new single-cell tutorials are also planned to be added in the near future, so keep your eyes on this hot topic!
 
-![Pretty dots of different colours combined into two cell cluster plots on the sides. In the middle, a split violin plot showing the expression of unknown genes in blue on one side and the expression of the genes in an opposing sample in orange alongside. Snuck in between these three important plots is a PhD comic of data showing no trend, with the chat box “Hmm… I think there’s a clear trend happening here.”](../../images/single_cell.png "Single cell visualisations are fun")
+![Pretty dots of different colours combined into two cell cluster plots on the sides. In the middle, a split violin plot showing the expression of unknown genes in blue on one side and the expression of the genes in an opposing sample in orange alongside. Snuck in between these three important plots is a PhD comic of data showing no trend, with the chat box “Hmm… I think there’s a clear trend happening here.”](../news/images/single_cell.png "Single cell visualisations are fun")
 
 <a href="{% link topics/single-cell/index.md %}" class="btn btn-primary">View Topic</a>
