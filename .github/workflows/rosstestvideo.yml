@@ -84,6 +84,7 @@ jobs:
         run: |
           # Override permissions on _site to allow docker access.
           chmod -R ugo+rwx _site   # /training-material/topics
+          # https://github.com/actions/runner/issues/1317 was the wrong problem
           # Then we can build the slides
           xvfb-run --auto-servernum --server-args="-screen 0 1920x1080x24" bundle exec bash bin/ross-ari-make.sh
         env:
