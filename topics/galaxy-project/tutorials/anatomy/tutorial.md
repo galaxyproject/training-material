@@ -56,11 +56,12 @@ contributors:
 >
 {: .agenda}
 
-# Alternative ways of seeing Galaxy
+# Many ways of seeing the Galaxy project
 
-- Galaxy is a big, complicated project
-- This module outlines the major components, and how they fit together
-- What you see depends on how you look at it, so at the same time, it is:
+- Galaxy is a complicated global enterprise
+- This tutorial outlines the major components, and how they fit together
+- Companion material includes stories of how individuals have developed new project activities
+- What you see depends on how you look at the project, so at the same time, it is:
     - A convenient and reliable way to share complex open science analyses for users
     - Inter-dependent open source code repositories for developers.
     - A global open science collaboration for investigators
@@ -79,7 +80,7 @@ contributors:
 > - Need to invent a descriptive approach.
 {:  .tip}
  
-# Three related top level categories for this guide
+# Top level categories used in this guide
 
 ### People + resource inputs = project outputs
 
