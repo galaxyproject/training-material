@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "People, resource inputs and project outputs: A descriptive guide to the Galaxy project"
+title: "Field guide to the Galaxy project"
+summary: "People, resource inputs and project outputs. Work in progress. Please help make it better?"
 questions:
   - "What are the main identifiable project components?"
   - "How do they all fit together?"
@@ -29,10 +30,10 @@ key_points:
  
 contributors:
   - fubar2
+ 
 ---
 
 > <comment-title></comment-title>
->
 > - Work in Progress! This is far from complete - please add what's missing and fix what's broken
 > - Ross has strong opinions. 
 > - Many of them are probably wrong but he doesn't know which ones yet. 
@@ -56,18 +57,19 @@ contributors:
 >
 {: .agenda}
 
-# Many ways of seeing the Galaxy project
+# Many ways of seeing Galaxy
 
-- Galaxy is a complicated global enterprise
-- This tutorial outlines the major components, and how they fit together
-- Companion material includes stories of how individuals have developed new project activities
-- What you see depends on how you look at the project, so at the same time, it is:
+- Galaxy is a complicated global enterprise.
+- Participants engage in their own chosen way, according to their skills and interests
+- For example, it is seen as:
     - A convenient and reliable way to share complex open science analyses for users
     - Inter-dependent open source code repositories for developers.
     - A global open science collaboration for investigators
-- Participants engage in their own chosen way, according to their skills and interests
 - Each sees a different part of the whole
 - Galaxy flourishes, because all the parts govern themselves in an efficient collaboration.
+- A separate tutorial on how activities were started, helps illustrate how the project grows.
+- This tutorial outlines the major components.
+- The [Hub](https://galaxyproject.org/) provides more detail, and current activities.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -82,31 +84,36 @@ contributors:
  
 # Top level categories used in this guide
 
+- The project exists in the context of a global open science ecosystem
+- That context is an essential part of any description. 
+- Many possible top level divisions for describing those complexities
+- Three top level mapping categories form a simple model:
+
 ### People + resource inputs = project outputs
 
-- An equation that summarises the Galaxy project as three interacting components
-- More explanation of those components are in the detail below
+- An equation involving three interacting components
+- Those components are detailed below - click on the "Details" tabs
 - The field guide separates those three components artificially.
-- The project depends on them all, working efficiently together.
+- The project depends on them all, efficiently working together.
  
 > <details-title>People working together make the project possible</details-title>
-> - This is the reason open source succeeds so well
+> - Open source is a very productive way of delivering software
 > - Shared values and participatory self governance help people get things done
-> - Self governed collaboration because no single "owner"
+> - Galaxy has to be a self-governed collaboration
 >     - Many independent institutions and investigators 
 >     - No single institution has control
-> -  Individuals engage with the project in their own way, such as:
+> - Individuals engage with the project in their own way, such as:
 >     - Analysing and sharing experimental data
 >     - Working as professional member of the core team
->     - Contributing skills, code and ideas
->     - Maintaining best practice tool wrappers
->     - Bringing grant resources to the collaboration
->     - Providing community and project governance leadership
-> - 
+>     - Contributing skills, support, code and ideas
+>     - Maintaining best practice tool kits and workflows for specific fields
+>     - Bringing new activities to the collaboration
+>     - Providing community and project leadership
+>     - Contributing to project governance
 {:  .details}
 
 
-> <details-title>Grant resource inputs help sustain the communities, team, collaborations and services</details-title>
+> <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
 > - Core "corporate" project services like outreach, communication and administration.
 > - Source code management, user support, usegalaxy.*, GTN and other services.
 > - Computational resource allocations for free services
@@ -115,16 +122,19 @@ contributors:
 > - Professional staff
 >     - outreach, communication, project management.
 >     - user support, system administration and software engineers.
+> - Without these, the source code repository would still be a valuable resource
+> - They add value, in the form of highly valued resources for scientists.
 {:  .details}
 
-> <details-title>Project code and services depend on resources from the open source community</details-title>
-> - Galaxy source code depends on interacting resources provided by thousands of other open source projects
-> - Flavours for Galaxy servers depend on command line software packages wrapped as tools
-> - Galaxy builds on and adds value to all these resources
-> - Shared open source community values help build and sustain efficient collaborative networks
+> <details-title>Open source community resources are essential parts of project code</details-title>
+> - Galaxy source code depends on thousands of other open source projects
+> - Flavours for Galaxy servers depend on thousands of open source command line packages
+> - Galaxy builds on and adds value to all those resources.
+> - It makes command line packages interoperable and reproducible, through a uniform interface.
+> - Provides a GUI and sharing for users, without requiring effort from the package developer.
 {:  .details}
 
-> <details-title>Project outputs - things the project delivers for open science and scientists</details-title>
+> <details-title>Project outputs: things the project delivers for open science and scientists</details-title>
 > - Source code
 > - Online analysis services
 > - ToolShed automated tools for servers
@@ -137,25 +147,27 @@ contributors:
 >             - for users doing common analyses in a range of specialties 
 >             - for tool wrapper and software developers
 >             - for trainers
->             - for server system administrators  
+>             - for server system administrators   
 {:  .details}
 
 # Field guide to the project ecosystem 
 
 ## 1. People: Individuals, collaborations, communities and governance
-- Guide starts with people, and how they have organised themselves
+- Guide starts with people and their communities
+- Seeing how they have organised themselves provides a foundation for the field guide  
 - Many individuals are part of more than one of the organisations and communities below
-- How people become engaged and work together is central to understanding how Galaxy works
-- People provide the project inputs; People collaborating produce the project outputs.
+- People provide the project inputs
 - Contributors volunteer their skills and time to make things even better
+- The sum of their effort produces the project outputs.
 - Focus here is on showing how they get things done, rather than exactly what they do.
 - For those details, see the [Hub](https://galaxyproject.org/)
 - If any activity of the project looks interesting to you, please get in touch!
 
-> <tip-title>Communities are core features of open science projects</tip-title>
-> - Communities feature a lot in this guide although they may seem very abstract. 
->   - Show how participants organise themselves to get things done.
->   - Represent subgroups of individuals interacting regularly for some special purpose
+> <tip-title>Communities in more detail</tip-title>
+> - Communities feature a lot in this guide although they may seem very abstract.
+> - Core features of open science projects 
+>   - Represent how participants have organised themselves to get things done.
+>   - Subgroups of individuals interacting regularly as part of a shared project activity
 >   - They are an important part of any open project
 > - Participants might interact more often if they share an important distinguishing interest.
 > - New communities are formed when these interactions become frequent and distinct in the project
@@ -176,9 +188,10 @@ contributors:
 
 ### Communities of Practice
 
-- Communities developing and supporting specialised fields:
+- Communities developing and supporting best practice analyses in specialised disciplines:
     - [Proteomics](../../../proteomics)
     - [Climate science](../../../climate)
+    - [Microbiome] (../../../metagenomics)
     - public health 
     - small server administrators
     - add your own here...
@@ -262,13 +275,14 @@ contributors:
 
 ### Governance and organisation
 
-- See hub!
+- See hub.
 - Self governing, open source style
 - Unusual challenge: Respect independent grant holder responsibilities
 - Executive Board
 - GGSC
 - Working groups
 - Road maps
+- Your ideas here please?
 
 ### Your ideas for people things to describe here please
 
