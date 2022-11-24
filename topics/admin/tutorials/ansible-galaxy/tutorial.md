@@ -2045,8 +2045,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    server_name   "{{ inventory_hostname }}";
 >    +
 >    +    # Our log files will go here.
->    +    access_log  /var/log/nginx/access.log;
->    +    error_log   /var/log/nginx/error.log;
+>    +    access_log  syslog:server=unix:/dev/log;
+>    +    error_log   syslog:server=unix:/dev/log;
 >    +
 >    +    # The most important location block, by default all requests are sent to gunicorn
 >    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
