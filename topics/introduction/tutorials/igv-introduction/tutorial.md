@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "IGV Introduction"
+enable: false
 zenodo_link: ""
 questions:
 objectives:
