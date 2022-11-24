@@ -170,7 +170,7 @@ Sites like UseGalaxy.eu use the distributed object store in order to balance dat
 > know](https://github.com/galaxyproject/training-material/issues/new) with
 > some example code, and we can include this as a training module for everyone.
 >
-{: .details}
+{: .tip}
 
 > <warning-title>switching object store types will cause issues</warning-title>
 > We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy's database. Any datasets that were created as hierarchical will lack the `object_store_id`, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on [Gitter](http://gitter.im/galaxyproject/Lobby) for more help
@@ -342,7 +342,8 @@ This tutorial will help you setup the connection between Galaxy and Dropbox, all
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > {: .code-in}
->    > > <code-in-title>Output</code-in-title>
+>    >
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************

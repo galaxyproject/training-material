@@ -165,8 +165,8 @@ The alignment process consists of two steps:
 > <hands-on-title>Align reads to reference genome</hands-on-title>
 >
 > The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
-aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
-is faster and more accurate.
+> aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
+> is faster and more accurate.
 >
 > An example of what a `bwa` command looks like is below. This command will not run, as we do not have the files `ref_genome.fa`, `input_file_R1.fastq`, or `input_file_R2.fastq`.
 >
@@ -189,7 +189,7 @@ is faster and more accurate.
 > > $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 > > ```
 > {: .code-in}
-> >
+>
 > > <code-out-title></code-out-title>
 > > ```
 > > [M::bwa_idx_load_from_disk] read 0 ALT contigs
