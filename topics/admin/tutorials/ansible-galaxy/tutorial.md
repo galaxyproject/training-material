@@ -2145,6 +2145,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
+> 8. Check out the nginx logs with `journalctl`
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > journalctl -fu nginx
+>    > ```
+>    {: .code-in}
 {: .hands_on}
 
 > <details-title>"Potential Security Risk" / LetsEncrypt Staging Environment</details-title>
