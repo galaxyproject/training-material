@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Field guide to the Galaxy project"
+title: "A field guide to the Galaxy project"
 summary: "People, resource inputs and project outputs. Work in progress. Please help make it better?"
 questions:
   - "What are the main identifiable project components?"
@@ -24,7 +24,7 @@ key_points:
   - "Multiple perspectives and opinions are needed to see the whole interacting structure"
   - "Vision: Build hard features like reproducibility into an analysis framework with pluggable tools"
   - "Running code as a free service provides effective stress testing for software defects and useability"
-  - "Project depends on and collaborates as part of the open source and open science ecosystem"
+  - "Project depends on and collaborates as part of the open science ecosystem"
   - "Started in genomics but now adapted to suit many data rich disciplines"
   - "New contributors and investigators are highly valued and warmly welcomed"
  
@@ -34,7 +34,13 @@ contributors:
 ---
 
 > <comment-title></comment-title>
-> - Work in Progress! This is far from complete - please add what's missing and fix what's broken
+> - Work in Progress! 
+> - This is a first draft to try to get the structure to make sense.
+> - It needs many contributors to make it useful
+> - So, please add what's missing and fix what's broken
+> - Most of the headings are stubs waiting to be edited and extended 
+> - Hoping this way of splitting the material makes for useful reading?
+> - Add your story or stories to the stories tutorial too please!
 > - Ross has strong opinions. 
 > - Many of them are probably wrong but he doesn't know which ones yet. 
 > - Please feel free to contribute your own, to make this more useful to future readers.
@@ -42,15 +48,16 @@ contributors:
 {: .comment}
 
 
-> <agenda-title></agenda-title>
+> <agenda-title>Contents</agenda-title>
 >
-> - This module introduces some of the most important components of the Galaxy project
-> - These are necessarily somewhat arbitrary and overlapping.
-> - They have grown and continue to grow organically over time rather than by design.
+> - This module introduces the most important parts of the Galaxy project
+> - They are grouped arbitrarily and there are many overlaps.
+> - Galaxy grows organically through collaborations, rather than by design.
 > - The project continues to expand rapidly, so this module will need updating regularly
-> - The Hub provides detail about many of the same structures
-> - This material is designed to provide multiple, simplified views of the project
+> - The Hub provides details about many of the same structures
+> - This material is designed to provide simplified views of the project
 > - A kind of field guide to the ecosystem generating those Hub activities.
+> - For the use of participants trying to navigate it.
 >
 > 1. TOC
 > {:toc}
@@ -62,14 +69,15 @@ contributors:
 - Galaxy is a complicated global enterprise.
 - Participants engage in their own chosen way, according to their skills and interests
 - For example, it is seen as:
-    - A convenient and reliable way to share complex open science analyses for users
-    - Inter-dependent open source code repositories for developers.
-    - A global open science collaboration for investigators
-- Each sees a different part of the whole
-- Galaxy flourishes, because all the parts govern themselves in an efficient collaboration.
+    - A convenient and reliable way to share complex open science analyses by users
+    - Inter-dependent open source code repositories by developers.
+    - A global open science collaboration by investigators
+- The project is all of these at the same time and more
+- Seeing the big picture requires multiple perspectives.
+- Galaxy flourishes, because all these parts govern themselves in an efficient collaboration.
 - A separate tutorial on how activities were started, helps illustrate how the project grows.
-- This tutorial outlines the major components.
-- The [Hub](https://galaxyproject.org/) provides more detail, and current activities.
+- This tutorial outlines the major components as a field guide.
+- The [Hub](https://galaxyproject.org/) can provide much more detail, particularly once you know what you are looking for.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -91,8 +99,8 @@ contributors:
 
 ### People + resource inputs = project outputs
 
-- An equation involving three interacting components
-- Those components are detailed below - click on the "Details" tabs
+- An equation involving interacting high level project components
+- Click on the "Details" tabs for more information about these.
 - The field guide separates those three components artificially.
 - The project depends on them all, efficiently working together.
  
@@ -153,13 +161,14 @@ contributors:
 # Field guide to the project ecosystem 
 
 ## 1. People: Individuals, collaborations, communities and governance
-- Guide starts with people and their communities
-- Seeing how they have organised themselves provides a foundation for the field guide  
+- This field guide starts with people and their communities
+- Seeing how they have organised themselves provides a basis for the understanding the project.  
 - Many individuals are part of more than one of the organisations and communities below
 - People provide the project inputs
+- Investigators bring resources.
 - Contributors volunteer their skills and time to make things even better
 - The sum of their effort produces the project outputs.
-- Focus here is on showing how they get things done, rather than exactly what they do.
+- Focus here is on showing *how* they get things done, rather than exactly *what* they do.
 - For those details, see the [Hub](https://galaxyproject.org/)
 - If any activity of the project looks interesting to you, please get in touch!
 
@@ -188,7 +197,10 @@ contributors:
 
 ### Communities of Practice
 
-- Communities developing and supporting best practice analyses in specialised disciplines:
+- Galaxy began with a focus on tools for analysing commodity sequencing data.
+- Many new fields have adopted Galaxy for their own data and analyses
+- Some of these are described in the companion stories tutorial.
+- Best practice tool kits are maintained by contributors working in each field
     - [Proteomics](../../../proteomics)
     - [Climate science](../../../climate)
     - [Microbiome] (../../../metagenomics)
