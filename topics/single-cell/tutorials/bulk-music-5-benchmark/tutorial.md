@@ -43,7 +43,67 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 
 ![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../single-cell/images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
 
-topics/
+> <comment-title></comment-title>
+> - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a tutorial on that [here](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html) if you like!)
+> - Therefore, instead, we've gone through the hard work of generating reusable workflows that you can simply run. We'll focus on data inputs, outputs, and interpretation, rather than running tool by tool.
+{: .comment}
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# Data
+
+We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
+
+In that tutorial, you retrieved expression matrix data from the SCXA and converted it. You generated a single cell x gene expression matrix as well as a comprehensive metadata file that contained the author names for each cell type.
+
+# 1: Generating pseudobulks
+
+ - remember the random nature means your results may be different. This will not be true if you use our inputs in Part 2
+
+## Get the data - Part 1
+
+
+Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input
+
+## Get the workflow - Part 1
+
+Workflow:
+https://usegalaxy.eu/u/wendi.bacon.training/w/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulks
+
+## Run the workflow - Part 1
+
+FAQ here
+Inputs set-up
+
+## Inspect outputs - Part 1
+
+Answer key:
+https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key
+
+
+
+# 2: Inferring cellular proportions
+
+## Get data - Part 2
+
+# 3: Statistical analysis
+
+## Get data - Part 3
+
+# 4: Doing this... at scale!
+
+## Get data - Part 4
+
+# Conclusion
+
+## Final histories for each part
 
 Workflow 1
  -
@@ -57,14 +117,7 @@ BELOW IS ALL OLD
 The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}
 
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
+
 
 
 # Data
