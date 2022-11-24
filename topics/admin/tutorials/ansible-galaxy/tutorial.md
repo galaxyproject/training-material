@@ -2126,7 +2126,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -2322,7 +2322,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
