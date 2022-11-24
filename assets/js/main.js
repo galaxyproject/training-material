@@ -44,7 +44,17 @@ $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title>button", this).click();
 });
 
-$("section.tutorial .hands_on,section.tutorial .hands-on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
+$("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
+	var box_id = $(".box-title", el).attr("id");
+	$(el).append(`
+		<p class="text-muted" style="text-align:right;font-size:0.9rem;">
+			<a href="#${box_id}">Link to here</a> |
+			<i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> |
+			<a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> |
+			<a href="https://help.galaxyproject.org">Help Forum</a>
+		</p>`
+	);
+})
 
 // CYOA Support
 function cyoaChoice(text){
