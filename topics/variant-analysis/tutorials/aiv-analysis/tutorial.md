@@ -162,8 +162,7 @@ The tool **fastp** lets us perform these tasks and obtain a nice quality report 
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %}
 >    - *"Single-end or paired reads"*: `Paired Collection`
->    - *"Select paired collection(s)"*: 
->    - {% icon param-collection %} *"Reference sequences"*: `References per segment (INSAFlu)`
+>    - *"Select paired collection(s)"*: the uploaded paired collection of sequenced reads
 >    - In *"Filter Options"* under *"Length filtering options"*:
 >      - *"Length required"*: `30`
 >    - In *"Read Modification Options"* under *"Per read cutting by quality options"*:
@@ -267,7 +266,7 @@ If things went well, the hybrid reference we just obtained should be close enoug
 > <hands-on-title>Shortening sequence titles</hands-on-title>
 >
 > 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %}
->    - {% icon param-collection %} *"File to process"*: the hybrid reference genome; output of **Collapse Collection**
+>    - {% icon param-file %} *"File to process"*: the hybrid reference genome; output of **Collapse Collection**
 >    - In {% icon param-repeat %} *"1. Find and Replace"*:
 >      - *"Find pattern"*: `^>([^|]+).+$`
 >      - *"Replace with"*: `>$1`
