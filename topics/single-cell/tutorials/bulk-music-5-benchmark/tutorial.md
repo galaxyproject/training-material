@@ -59,23 +59,102 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 
 # Data
 
-We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
-
-In that tutorial, you retrieved expression matrix data from the SCXA and converted it. You generated a single cell x gene expression matrix as well as a comprehensive metadata file that contained the author names for each cell type.
+We previously retrieved this pancreas single cell dataset {% cite Segerstolpe2016 %} from the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments) and manipulated it into an Expression Set object. As a reminder, these cells come from 6 healthy individuals and 4 individuals with Type II diabetes, and we combined all 10 samples into a single Expression Set object. To do this, we made a metadata file with details about each cell (including cell type), and a cell x gene matrix with cells as rows and genes as columns. We'll need all these files to generate our pseudobulks and test them against their reference.
 
 # 1: Generating pseudobulks
 
- - remember the random nature means your results may be different. This will not be true if you use our inputs in Part 2
+Our first goal is to make pseudobulk matrices, with a list of gene expressions for a single 'pseudobulk' sample that we generate from the expression of known single cells. We also need to generate a list of those known single cells, which we'll use later to see how good our deconvolution was. To do this, we need two files:
 
-## Get the data - Part 1
+ - Metadata file (which label each cell barcode with an author-declared cell type)
+ - Matrix file (which has cells as rows and genes as columns)
 
+## Get data FIXME
 
 Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input
 
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Create a new history for this tutorial *"Deconvolution: Benchmarking"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+>
+>    * Human single cell RNA ESet objects (tag: `#singlecell`)
+>
+>      ```
+>    {{ page.zenodo_link }}/files/sc_metadata.FIXME
+>    {{ page.zenodo_link }}/files/sc_matrix.FIXME
+>    {{ page.zenodo_link }}/files/
+>      ```
+>
+>    * Human bulk RNA ESet objects (tag: `#bulk`)
+>      ```
+>    {{ page.zenodo_link }}/files/ESet_object_bulk_healthy.rdata
+>    {{ page.zenodo_link }}/files/ESet_object_bulk_T2D.rdata
+>      ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename the datasets
+>
+> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+Let's look at the datasets.
+
+Inspect {% icon galaxy-eye %} the `Metadata` file in your Galaxy history.
+
+> <question-title></question-title>
+>
+> 1. How many cells are in your sample?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. If you look at the dataset in the Galaxy window, you'll find that it has 2915 lines. One of those is a header, so you have 2914 cells. Each row has a cell barcode identifying it as a cell.
+> >
+> {: .solution}
+{: .question}
+
+Now check the `Matrix` file in your Galaxy history - do not inspect {% icon galaxy-eye %} it as it is a massive file!
+
+> <question-title></question-title>
+>
+> 1. How are the genes labelled in your matrix, by gene symbol or Ensembl ID?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > 1. If you look at the dataset in the Galaxy window, you'll find that the rows correspond to the metadata file as cell barcodes, while the columns contain long ENSG##### names. These are Ensembl IDs and will have to be changed in the workflow to gene symbols.
+> >
+> {: .solution}
+{: .question}
+
+Ultimately, we'll use both these files to generate our pseudbulks.
+
+![2 Panels: Panel 1 shows a metadata table with each cell as a row and information such as individual, sex, and cell type as columns. Panel 2 shows a matrix of cell barcodes as rows and genes as columns. Arrows connect cell barcodes between both panels with either cell types or the expression matrix."](../../single-cell/images/bulk-music-benchmark/retrieving_actuals.png "Part 1: Using cell metadata to generate known cell proportions within a pseudobulk sample)
+
 ## Get the workflow - Part 1
 
+> <hands-on-title>Generate pseudbulk populations using workflow</hands-on-title>
+>
+> 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulks).
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run the workflow on your sample with the following parameters:
+>    - {% icon param-file %}*"Formatted metadata"*:  `sc_metadata`
+>    - {% icon param-file %}*"Formatted metadata"*:  `sc_matrix`
+>    - *"Cell Sample Expr"*: `table.sample(100)` (This makes pseudobulks of 100 cells, although you could change this to suit your needs)
+>    - *"Label the second sample"*: `BEGIN { print "column\tB_infer" { print $0 }` (This labels the second sample B}
+>    - *"Organism"*: `Hs` (This stipulates your organism for the Ensembl ID collapsing.)
+>    - *"Label the first sample"*: `BEGIN { print "column\tA_infer" { print $0 }` (This labels the first sample A}
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
 Workflow:
-https://usegalaxy.eu/u/wendi.bacon.training/w/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulks
+
 
 ## Run the workflow - Part 1
 
@@ -83,6 +162,10 @@ FAQ here
 Inputs set-up
 
 ## Inspect outputs - Part 1
+
+> <warning-title>Danger: Your samples will look different!</warning-title>
+> Because you're randomly generating pseudobulk samples, your data will look different from what is in this tutorial. We'll catch this up in Part 2 by giving you our inputs, but you're also welcome to have a go with your own datasets with slightly altered numbers.
+{: .warning}
 
 Answer key:
 https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key
