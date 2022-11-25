@@ -327,7 +327,7 @@ Unfortunately, the tool we are going to use for this, **ivar consensus**, is not
 >
 > 1. {% tool [Split BAM by Reference](toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0) %}
 >    - {% icon param-file %} *"BAM dataset to split by reference"*: filtered mapped reads; output of **Samtools view**
->    - *"Select references (chromosomes and contigs) you would like to restrict bam to"*: `Select all`
+>    - *"Select references (chromosomes and contigs) you would like to restrict bam to"*: `Unselect all`
 >
 {: .hands_on}
 
