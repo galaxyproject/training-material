@@ -74,7 +74,7 @@ Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking-
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Create a new history for this tutorial *"Deconvolution: Benchmarking"*
+> 1. Create a new history for this tutorial *"Deconvolution: Benchmarking Part 1"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    * Human single cell RNA ESet objects (tag: `#singlecell`)
@@ -167,17 +167,76 @@ Now we've largely tried to hide the datasets created at each step within the cod
  - `A_pseudobulk matrix` - which contains two columns, one of for each gene and another for the gene counts in that pseudbulk
  - `B_pseudobulk matrix` - which is identical but for the second sample
 
-You can see our example [Answer Key] for this matrix and cell proportion generation [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
+ > <comment-title>Answer Key</comment-title>
+ > You can see our example [Answer Key] for this matrix and cell proportion generation [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
+ {: .comment}
+
 
 Now, onto part 2!
 
 # 2: Inferring cellular proportions
 
+Now that we have our two 'pseudobulk' samples, we will combine them into a single matrix and apply deconvolution using the single cell reference to infer pseudobulk cell proportions. Deconvolution will **not work** if you do not have at least two samples in the matrix.
+
 ## Get data
+
+You can either start with the outputs from the first part - and just import the ESet single cell reference you created in the previous tutorial - or you can import our inputs and even set up a new history. Your choice!
+
+Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---input
+
+#FIXME
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. (Optional) Create a new history for this tutorial *"Deconvolution: Benchmarking Part 2"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+>
+>    * Actual tables and pseudobulk proportions
+>      ```
+>    {{ page.zenodo_link }}/files/A_actual.FIXME
+>    {{ page.zenodo_link }}/files/B_actual.FIXME
+>    {{ page.zenodo_link }}/files/A_pseudobulk_matrix
+>    {{ page.zenodo_link }}/files/B_pseudobulk_matrix
+>      ```
+>    * Single cell reference Expression Object
+>      ```
+>    {{ page.zenodo_link }}/files/ESet_sc_reference
+>      ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename the datasets
+>
+> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
 
 ## Get the workflow & run it
 
+> <hands-on-title>Infer cell proportions using workflow</hands-on-title>
+>
+> 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/imported-deconvolution-benchmarking--2---pseudobulks-to-inferred-tables).
+>
+> 2. Run the workflow on your sample with the following parameters:
+>    - {% icon param-file %}*"Subsample_B - matrix"*:  `B_pseudobulk_matrix`
+>    - {% icon param-file %}*"Subsample_A - matrix"*:  `A_pseudobulk_matrix`
+>    - {% icon param-file %}*"ESet Reference scRNA-seq"*:  `ESet_sc_reference`
+>    - {% icon param-file %}*"B_actuals"*:  `B_actual`
+>    - {% icon param-file %}*"A_actuals"*:  `A_actual`
+>
+{: .hands_on}
+
+Now go have a coffee while this runs...
+
 ## Inspect outputs
+
+You have two important outputs here - the `A_proportions_actual-infer` and the `B_proportions_actual-infer`. Inspect {% icon galaxy-eye %} both outputs. You'll find `Actual` proportions in a column alongside the `Infer` proportions. Do they look pretty close? Or are they wildly off? In the next section, you'll get to assess this in a variety of ways. Bring on the statistics!
+
+> <comment-title>Answer Key</comment-title>
+> You can see our example [Answer Key] for this part [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---answer-key)
+{: .comment}
 
 # 3: Statistical analysis
 
