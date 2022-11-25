@@ -133,7 +133,7 @@ Ultimately, we'll use both these files to generate our pseudbulks.
 
 ![2 Panels: Panel 1 shows a metadata table with each cell as a row and information such as individual, sex, and cell type as columns. Panel 2 shows a matrix of cell barcodes as rows and genes as columns. Arrows connect cell barcodes between both panels with either cell types or the expression matrix."](../../single-cell/images/bulk-music-benchmark/retrieving_actuals.png "Part 1: Using cell metadata to generate known cell proportions within a pseudobulk sample)
 
-## Get the workflow - Part 1
+## Get the workflow & run it
 
 > <hands-on-title>Generate pseudbulk populations using workflow</hands-on-title>
 >
@@ -153,36 +153,47 @@ Ultimately, we'll use both these files to generate our pseudbulks.
 >
 {: .hands_on}
 
-Workflow:
+Now go have a coffee while this runs...
 
-
-## Run the workflow - Part 1
-
-FAQ here
-Inputs set-up
-
-## Inspect outputs - Part 1
+## Inspect outputs
 
 > <warning-title>Danger: Your samples will look different!</warning-title>
 > Because you're randomly generating pseudobulk samples, your data will look different from what is in this tutorial. We'll catch this up in Part 2 by giving you our inputs, but you're also welcome to have a go with your own datasets with slightly altered numbers.
 {: .warning}
 
-Answer key:
-https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key
+Now we've largely tried to hide the datasets created at each step within the code to make histories not too painful. The important outputs to inspect {% icon galaxy-eye %} from this workflow are:
+ - `A_actual` - which contains two columns, one of each cell type and the second the proportion of those cells used in the `A` pseudobulk
+ - `B_actual` - which is identical but for the second sample
+ - `A_pseudobulk matrix` - which contains two columns, one of for each gene and another for the gene counts in that pseudbulk
+ - `B_pseudobulk matrix` - which is identical but for the second sample
 
+You can see our example [Answer Key] for this matrix and cell proportion generation [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
 
+Now, onto part 2!
 
 # 2: Inferring cellular proportions
 
-## Get data - Part 2
+## Get data
+
+## Get the workflow & run it
+
+## Inspect outputs
 
 # 3: Statistical analysis
 
-## Get data - Part 3
+## Get data
+
+## Get the workflow & run it
+
+## Inspect outputs
 
 # 4: Doing this... at scale!
 
-## Get data - Part 4
+## Get data
+
+## Get the workflow & run it
+
+## Inspect outputs
 
 # Conclusion
 
