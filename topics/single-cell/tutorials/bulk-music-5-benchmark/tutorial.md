@@ -157,7 +157,7 @@ Now go stare at something other than a screen while this runs...
 ## Inspect outputs
 
 > <warning-title>Danger: Your samples will look different!</warning-title>
-> Because you're randomly generating pseudobulk samples, your data will look different from what is in this tutorial. We'll catch this up in Part 2 by giving you our inputs, but you're also welcome to have a go with your own datasets with slightly altered numbers.
+> Because you're randomly generating pseudobulk samples, your data will look different from what is in this tutorial. We'll catch this up in the next section by giving you our inputs, but you're also welcome to have a go with your own datasets with slightly altered numbers.
 {: .warning}
 
 Now we've largely tried to hide the datasets created at each step within the code to make histories not too painful. The important outputs to inspect {% icon galaxy-eye %} from this workflow are:
@@ -170,7 +170,7 @@ Now we've largely tried to hide the datasets created at each step within the cod
  > You can see our example [Answer Key for this matrix and cell proportion generation](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
  {: .comment}
 
-Now, onto part 2!
+Now, onto the next part!
 
 # Inferring cellular proportions
 
