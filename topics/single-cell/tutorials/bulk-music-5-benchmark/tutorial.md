@@ -45,7 +45,7 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 ![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
 
 > <comment-title></comment-title>
-> - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a tutorial on that [here](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html) if you like!)
+> - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a [tutorial on data manipulation](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html) if you like!)
 > - Therefore, instead, we've gone through the hard work of generating reusable workflows that you can simply run. We'll focus on data inputs, outputs, and interpretation, rather than running tool by tool.
 {: .comment}
 
@@ -72,7 +72,7 @@ Our first goal is to make pseudobulk matrices, with a list of gene expressions f
 ## Get data
 
 > <comment-title></comment-title>
-> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input)
+> - You can either import files using Zenodo (see below) or you can import the [**Input History**](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input)
 > - Rename the datasets according to the samples
 {: .comment}
 
@@ -167,9 +167,8 @@ Now we've largely tried to hide the datasets created at each step within the cod
  - `B_pseudobulk matrix` - which is identical but for the second sample
 
  > <comment-title>Answer Key</comment-title>
- > You can see our example [Answer Key] for this matrix and cell proportion generation [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
+ > You can see our example [Answer Key for this matrix and cell proportion generation](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-answer-key)
  {: .comment}
-
 
 Now, onto part 2!
 
@@ -182,7 +181,7 @@ Now that we have our two 'pseudobulk' samples, we will combine them into a singl
 You can either start with the outputs from the first part - and just import the ESet single cell reference you created in the previous tutorial - or you can import our inputs and even set up a new history. Your choice!
 
 > <comment-title></comment-title>
-> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---input)
+> - You can either import files using Zenodo (see below) or you can import the [**Input History**](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---input)
 > - Rename the datasets according to the samples
 {: .comment}
 
@@ -238,7 +237,7 @@ You have two important outputs here - the `A_proportions_actual-infer` and the `
 You'll find `Actual` proportions in a column alongside the `Infer` proportions. Do they look pretty close? Or are they wildly off? In the next section, you'll get to assess this in a variety of ways. Bring on the statistics!
 
 > <comment-title>Answer Key</comment-title>
-> You can see our example [Answer Key] for this part [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---answer-key)
+> You can see our example [Answer Key for part 2](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---answer-key)
 {: .comment}
 
 # 3: Statistical analysis
@@ -268,7 +267,7 @@ Now here's the fun bit! You have your tables, so you can already kind of assess 
 ## Get data
 
 > <comment-title></comment-title>
-> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---input)
+> - You can either import files using Zenodo (see below) or you can import the [**Input History**](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---input)
 > - Rename the datasets according to the samples
 {: .comment}
 
@@ -395,7 +394,7 @@ Let's examine the MAPE and RSME across the samples.
 Here you can find a very low RSME - which is great! - but a reasonably high MAPE - which is a bit bigger. However, RSME is the standard often used in the field {% cite Cobos2020 %}, and the fact that it is so low is particularly good.
 
 > <comment-title>Answer Key</comment-title>
-> You can see our example [Answer Key] for this statistical workflow [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key)
+> You can see our example [Answer Key for this statistical workflow](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key)
 {: .comment}
 
 So, this is great! How exciting!
@@ -411,7 +410,7 @@ But just for kicks, what if we wanted to do this a bit more at scale? Or even, w
 ## Inspect outputs
 
 > <comment-title>Answer Key</comment-title>
-> You can see our example [Answer Key] for this megaworkflow [here](FIXME)
+> You can see our example [Answer Key for this megaworkflow](FIXME)
 {: .comment}
 
 Can also do one where we share a history of running this using the 3 ESet objects and then compare them with the violin plots :)

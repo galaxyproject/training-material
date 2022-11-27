@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
-
+subtopic: deconvo
+priority: 2
 title: Creating the single-cell RNA-seq reference dataset for deconvolution
 questions:
 - Where can I find good quality scRNA-seq reference datasets?
@@ -61,7 +62,7 @@ After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html)
 First, we will tackle the metadata. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it.
 
 ## Find the data
-We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
+We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
 
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
 
@@ -226,7 +227,7 @@ Fantastic! You've completed part 1 - making the single cell metadata file. It sh
 
 ![Columns in the history window of a dataset contain words without any extra symbols or ""]](../../images/bulk-music/corrected_ebimetadata.png "Pretty scRNA metadata")
 
-The workflow for this portion of the tutorial is [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--metadata), while an example history is [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--metadata).
+You can use the [workflow for this portion of the tutorial](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--metadata), and access an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--metadata).
 
 
 # Manipulate the expression matrix
@@ -396,7 +397,7 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 
 # Conclusion
 
-You have successfully performed, essentially, three workflows. You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--matrix--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--matrix--eset).
+You have successfully performed, essentially, three workflows. You can find the [workflows for generating the ESet object](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--matrix--eset) and the [answer key history for this entire tutorial](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--matrix--eset).
 
 ![6 boxes in the workflow editor](../../images/bulk-music/scref-metadata.png "Workflow: Manipulating metadata")
 

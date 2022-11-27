@@ -262,7 +262,7 @@ Overall, it's important to remember how the inferrence changes depending on the 
 
 # Conclusion
 
-Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferrences using multiple kinds of reference datasets. You can find the workflow for this tutorial [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1) and an example history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final).
+Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferrences using multiple kinds of reference datasets. You can find the [workflow for this tutorial](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1) and an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final).
 
  We hope this helps you in your research!
 

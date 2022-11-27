@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+subtopic: deconvo
+priority: 3
 
 title: Creating the bulk RNA-seq dataset for deconvolution
 zenodo_link: ''
@@ -303,6 +305,6 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 
 {% icon congratulations %} Congrats! You have successfully reformatted the RNA-seq samples into two ESet objects consisting of disease-only or healthy-only samples. You're ready to take all this hard work and start comparing cell compositions in the next tutorial.
 
-You can find the workflow for generating the ESet object [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--bulk--eset) and the answer key history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--bulk--eset).
+You can find the [workflow for generating the ESet object](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--bulk--eset) and the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--bulk--eset).
 
 ![7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol](../../images/bulk-music/workflow-bulk.png "Workflow: Generating the bulk ESet Objects")
