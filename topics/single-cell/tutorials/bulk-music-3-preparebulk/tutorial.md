@@ -50,7 +50,7 @@ follow_up_training:
 
 # Introduction
 
-After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html {% cite wang2019bulk %} deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas {% cite Moreno2021 %}.  Let's get started!
+After completing the [MuSiC deconvolution tutorial](https://xuranw.github.io/MuSiC/articles/MuSiC.html) {% cite wang2019bulk %}, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas {% cite Moreno2021 %}.  Let's get started!
 
 > <agenda-title></agenda-title>
 >
@@ -66,7 +66,7 @@ After completing the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html 
 Just as in our scRNA-dataset preparation tutorial, we will tackle the metadata first. We are roughly following the same concept as in the previous bulk deconvolution tutorial, by comparing human pancreas data across a disease variable (type II diabetes vs healthy), but using public datasets to do it.
 
 ## Find the data
-We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), browsing experiments in order to find a bulk RNA-seq pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results) using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our scRNA-seq reference from, so we should get quite accurate results given the same lab made both datasets!
+We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), browsing experiments in order to find a bulk RNA-seq pancreas dataset: {% cite segerstolpe2016single %}. You can [explore this dataset here](https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results) using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our scRNA-seq reference from, so we should get quite accurate results given the same lab made both datasets!
 
 > <hands-on-title> Data upload </hands-on-title>
 >
