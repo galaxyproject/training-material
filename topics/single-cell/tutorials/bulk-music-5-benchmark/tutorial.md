@@ -21,8 +21,8 @@ time_estimation: 1H
 key_points:
 - Deconvolution might be better on some tissues than others, so it's a good idea to test your reference accuracy
 contributors:
-- nomadscientist
 - mtekman
+- nomadscientist
 requirements:
   -
     type: "internal"
