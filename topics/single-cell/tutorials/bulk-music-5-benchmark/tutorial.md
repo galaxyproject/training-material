@@ -45,7 +45,7 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 ![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
 
 > <comment-title></comment-title>
-> - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a [tutorial on data manipulation](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html) if you like!)
+> - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a [tutorial on data manipulation]({% link topics/introduction/tutorials/data-manipulation-olympics/tutorial.md %}) if you like!)
 > - Therefore, instead, we've gone through the hard work of generating reusable workflows that you can simply run. We'll focus on data inputs, outputs, and interpretation, rather than running tool by tool.
 {: .comment}
 
@@ -399,7 +399,7 @@ Here you can find a very low RSME - which is great! - but a reasonably high MAPE
 
 So, this is great! How exciting!
 
-But just for kicks, what if we wanted to do this a bit more at scale? Or even, what if we wanted to compare - statistically - the different reference datasets we examined in the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-5-benchmark/tutorial.html) comparing healthy and T2D patients?
+But just for kicks, what if we wanted to do this a bit more at scale? Or even, what if we wanted to compare - statistically - the different reference datasets we examined in the [previous tutorial on comparing variables with deconvolution]({% link topics/single-cell/tutorials/bulk-music-5-benchmark/tutorial.md %}) comparing healthy and T2D patients?
 
 # 4: Doing this... at scale!
 
