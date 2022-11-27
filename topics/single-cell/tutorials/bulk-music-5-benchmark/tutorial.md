@@ -213,6 +213,7 @@ Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking-
 >
 {: .hands_on}
 
+
 ## Get the workflow & run it
 
 > <hands-on-title>Infer cell proportions using workflow</hands-on-title>
@@ -240,11 +241,100 @@ You have two important outputs here - the `A_proportions_actual-infer` and the `
 
 # 3: Statistical analysis
 
+Now here's the fun bit! You have your tables, so you can already kind of assess how good the deconvolution was. In our hands, for pseudobulk A, we found:
+
+| |A_actual |	A_infer |
+|acinar cell |	0.058	| 0.096|
+|alpha cell	| 0.406	| 0.347|
+|beta cell	| 0.130	| 0.184|
+|delta cell	| 0.043	| 0.030|
+|ductal cell	| 0.217	| 0.133|
+|gamma cell	| 0.145 |	0.210|
+
+> <question-title></question-title>
+>
+> How good was the deconvolution for pseudobulk A?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > Just visually inspecting this shows that it's pretty accurate for the rarer cell types (acinar cells & delta cells). Moving on up, alpha cells are also pretty darn close, and they were the most common cell type. The cell types in the middle - beta cells, ductal cells, and gamma cells - are a little more off.
+> >
+> {: .solution}
+{: .question}
+
+
 ## Get data
+
+https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---input
+
+#FIXME
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. (Optional) Create a new history for this tutorial *"Deconvolution: Benchmarking Part 2"*
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+>
+>    * Actual tables and pseudobulk proportions
+>      ```
+>    {{ page.zenodo_link }}/files/A_actual.FIXME
+>    {{ page.zenodo_link }}/files/B_actual.FIXME
+>    {{ page.zenodo_link }}/files/A_pseudobulk_matrix
+>    {{ page.zenodo_link }}/files/B_pseudobulk_matrix
+>      ```
+>    * Single cell reference Expression Object
+>      ```
+>    {{ page.zenodo_link }}/files/ESet_sc_reference
+>      ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Rename the datasets
+>
+> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
 
 ## Get the workflow & run it
 
+> <hands-on-title>Evaluate deconvolution accuracy</hands-on-title>
+>
+> 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/deconvolution-benchmarking--3---statistics).
+>
+> 2. Run the workflow on your sample with the following parameters:
+>    - {% icon param-file %}*"Cell proportions B"*:  `B_proportions_actual-infer`
+>    - {% icon param-file %}*"Cell proportions A"*:  `A_proportions_actual-infer`
+>
+{: .hands_on}
+
+Now go have a snack while this runs...
+
 ## Inspect outputs
+
+You have two sets of data for this - individual data that visualises each pseudobulk independently, and then statistical outputs that analyse the deconvolution by combining the pseudobulks. Let's start with the individual outputs.
+
+### Individual evaluation
+
+We'll again evaluate pseudobulk A, but this time with some visualisation tools.
+
+Inspect {% icon galaxy-eye %} the {% icon param-file %} **Actual vs predicted curves** for `#A`.
+
+![Scatterplot with 6 data points on X-axis and data spanning 0.05 to 0.4 on Y axis. Two lines - orange for predicted values and blue for true values. Lines largely follow each other except for points 5 and 6](../../single-cell/images/bulk-music-benchmark/actual_residual.png "Actual vs Predicted Plot")
+
+Plotting the values actually looks pretty good with the exception of datapoints 5 and 6, which are the ductal and gamma cells. Even if the other points don't overlap fully, they do show the same trends (i.e. higher / lower) than the other cell types.
+
+Inspect {% icon galaxy-eye %} the {% icon param-file %} **Residual plot** for `#A`.
+
+![Scatterplot with predicted values on X-axis and residuals (predicted - true) on Y axis. The bigger the predicted, the further from 0 the points become.](../../single-cell/images/bulk-music-benchmark/residual.png "Residuals plot")
+
+This is a way of visualising the residuals - the closer to the middle `0` line, the better, as this means the difference between the predicted and actual values are close to 0.
+
+Finally, inspect {% icon galaxy-eye %} the {% icon param-file %} **Scatter plot of actual and predicted values** for `#A`.
+
+
+
+https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key
 
 # 4: Doing this... at scale!
 
