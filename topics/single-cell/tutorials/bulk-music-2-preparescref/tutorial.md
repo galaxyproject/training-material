@@ -67,7 +67,7 @@ We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/expe
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
-toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2
+
 > <hands-on-title>Data retrieval</hands-on-title>
 >
 > 1. {% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
@@ -227,7 +227,7 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 
 Fantastic! You've completed part 1 - making the single cell metadata file. It should now look like this:
 
-![Columns in the history window of a dataset contain words without any extra symbols or ""]](../../images/bulk-music/corrected_ebimetadata.png "Pretty scRNA metadata")
+![Columns in the history window of a dataset contain words without any extra symbols or ""](../../images/bulk-music/corrected_ebimetadata.png "Pretty scRNA metadata")
 
 You can use the [workflow for this portion of the tutorial](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--metadata), and access an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--metadata).
 
