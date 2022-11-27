@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 subtopic: deconvo
 priority: 5
 title: Benchmarking MuSiC Deconvolution
-zenodo_link: https://zenodo.org/record/NUMBERHERE
+zenodo_link: https://zenodo.org/record/7368839
 tags:
   - single-cell
   - human
@@ -31,6 +31,7 @@ requirements:
       - bulk-music
       - bulk-music-2-preparescref
       - bulk-music-3-preparebulk
+      - bulk-music-4-compare
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
@@ -68,34 +69,26 @@ Our first goal is to make pseudobulk matrices, with a list of gene expressions f
  - Metadata file (which label each cell barcode with an author-declared cell type)
  - Matrix file (which has cells as rows and genes as columns)
 
-## Get data FIXME
+## Get data
 
-Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input
+> <comment-title></comment-title>
+> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulk-input)
+> - Rename the datasets according to the samples
+{: .comment}
 
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Benchmarking Part 1"*
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
->    * Human single cell RNA ESet objects (tag: `#singlecell`)
->
 >      ```
->    {{ page.zenodo_link }}/files/sc_metadata.FIXME
->    {{ page.zenodo_link }}/files/sc_matrix.FIXME
->    {{ page.zenodo_link }}/files/
->      ```
->
->    * Human bulk RNA ESet objects (tag: `#bulk`)
->      ```
->    {{ page.zenodo_link }}/files/ESet_object_bulk_healthy.rdata
->    {{ page.zenodo_link }}/files/ESet_object_bulk_T2D.rdata
+>    {{ page.zenodo_link }}/files/sc_metadata.tabular
+>    {{ page.zenodo_link }}/files/sc_matrix.tabular
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets
->
-> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -103,7 +96,10 @@ Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking-
 
 Let's look at the datasets.
 
-Inspect {% icon galaxy-eye %} the `Metadata` file in your Galaxy history.
+> <hands-on-title>Inspect metadata</hands-on-title>
+> Inspect {% icon galaxy-eye %} the `Metadata` file in your Galaxy history.
+>
+{: .hands_on}
 
 > <question-title></question-title>
 >
@@ -116,7 +112,10 @@ Inspect {% icon galaxy-eye %} the `Metadata` file in your Galaxy history.
 > {: .solution}
 {: .question}
 
-Now check the `Matrix` file in your Galaxy history - do not inspect {% icon galaxy-eye %} it as it is a massive file!
+> <hands-on-title>Inspect matrix</hands-on-title>
+> Now check the `Matrix` file in your Galaxy history - do not inspect {% icon galaxy-eye %} it as it is a massive file!
+>
+{: .hands_on}
 
 > <question-title></question-title>
 >
@@ -135,7 +134,7 @@ Ultimately, we'll use both these files to generate our pseudbulks.
 
 ## Get the workflow & run it
 
-> <hands-on-title>Generate pseudbulk populations using workflow</hands-on-title>
+> <hands-on-title>Generate pseudobulk populations using workflow</hands-on-title>
 >
 > 1. Import this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/deconvolution-benchmarking--1---scrna-matrix-to-pseudobulks).
 >
@@ -153,7 +152,7 @@ Ultimately, we'll use both these files to generate our pseudbulks.
 >
 {: .hands_on}
 
-Now go have a coffee while this runs...
+Now go stare at something other than a screen while this runs...
 
 ## Inspect outputs
 
@@ -182,9 +181,10 @@ Now that we have our two 'pseudobulk' samples, we will combine them into a singl
 
 You can either start with the outputs from the first part - and just import the ESet single cell reference you created in the previous tutorial - or you can import our inputs and even set up a new history. Your choice!
 
-Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---input
-
-#FIXME
+> <comment-title></comment-title>
+> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---input)
+> - Rename the datasets according to the samples
+{: .comment}
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -193,26 +193,21 @@ Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking-
 >
 >    * Actual tables and pseudobulk proportions
 >      ```
->    {{ page.zenodo_link }}/files/A_actual.FIXME
->    {{ page.zenodo_link }}/files/B_actual.FIXME
->    {{ page.zenodo_link }}/files/A_pseudobulk_matrix
->    {{ page.zenodo_link }}/files/B_pseudobulk_matrix
+>    {{ page.zenodo_link }}/files/A_actual.tabular
+>    {{ page.zenodo_link }}/files/B_actual.tabular
+>    {{ page.zenodo_link }}/files/A_pseudobulk_matrix.tabular
+>    {{ page.zenodo_link }}/files/B_pseudobulk_matrix.tabular
 >      ```
->    * Single cell reference Expression Object
+>    * Single cell reference Expression Object.rdata
 >      ```
->    {{ page.zenodo_link }}/files/ESet_sc_reference
+>    {{ page.zenodo_link }}/files/ESet_sc_combined.rdata
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets
 >
-> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
 {: .hands_on}
-
 
 ## Get the workflow & run it
 
@@ -223,17 +218,24 @@ Input: https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking-
 > 2. Run the workflow on your sample with the following parameters:
 >    - {% icon param-file %}*"Subsample_B - matrix"*:  `B_pseudobulk_matrix`
 >    - {% icon param-file %}*"Subsample_A - matrix"*:  `A_pseudobulk_matrix`
->    - {% icon param-file %}*"ESet Reference scRNA-seq"*:  `ESet_sc_reference`
+>    - {% icon param-file %}*"ESet Reference scRNA-seq"*:  `ESet_sc_combined`
 >    - {% icon param-file %}*"B_actuals"*:  `B_actual`
 >    - {% icon param-file %}*"A_actuals"*:  `A_actual`
 >
 {: .hands_on}
 
-Now go have a coffee while this runs...
+Now go have a snack while this runs...
 
 ## Inspect outputs
 
-You have two important outputs here - the `A_proportions_actual-infer` and the `B_proportions_actual-infer`. Inspect {% icon galaxy-eye %} both outputs. You'll find `Actual` proportions in a column alongside the `Infer` proportions. Do they look pretty close? Or are they wildly off? In the next section, you'll get to assess this in a variety of ways. Bring on the statistics!
+You have two important outputs here - the `A_proportions_actual-infer` and the `B_proportions_actual-infer`.
+
+> <hands-on-title>Inspect cell proportion tables</hands-on-title>
+> Inspect {% icon galaxy-eye %} both outputs.
+>
+{: .hands_on}
+
+You'll find `Actual` proportions in a column alongside the `Infer` proportions. Do they look pretty close? Or are they wildly off? In the next section, you'll get to assess this in a variety of ways. Bring on the statistics!
 
 > <comment-title>Answer Key</comment-title>
 > You can see our example [Answer Key] for this part [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---answer-key)
@@ -265,9 +267,10 @@ Now here's the fun bit! You have your tables, so you can already kind of assess 
 
 ## Get data
 
-https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---input
-
-#FIXME
+> <comment-title></comment-title>
+> - You can either import files using Zenodo (see below) or you can import the **Input History** [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---input)
+> - Rename the datasets according to the samples
+{: .comment}
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -276,23 +279,13 @@ https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---st
 >
 >    * Actual tables and pseudobulk proportions
 >      ```
->    {{ page.zenodo_link }}/files/A_actual.FIXME
->    {{ page.zenodo_link }}/files/B_actual.FIXME
->    {{ page.zenodo_link }}/files/A_pseudobulk_matrix
->    {{ page.zenodo_link }}/files/B_pseudobulk_matrix
->      ```
->    * Single cell reference Expression Object
->      ```
->    {{ page.zenodo_link }}/files/ESet_sc_reference
+>    {{ page.zenodo_link }}/files/A_proportions_actual-infer.tabular
+>    {{ page.zenodo_link }}/files/B_proportions_actual-infer.tabular
 >      ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 3. Rename the datasets
->
-> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -318,23 +311,96 @@ You have two sets of data for this - individual data that visualises each pseudo
 
 We'll again evaluate pseudobulk A, but this time with some visualisation tools.
 
-Inspect {% icon galaxy-eye %} the {% icon param-file %} **Actual vs predicted curves** for `#A`.
+> <hands-on-title>Inspect actual v predicted curves</hands-on-title>
+> Inspect {% icon galaxy-eye %} the {% icon param-file %} **Actual vs predicted curves** for `#A`.
+>
+{: .hands_on}
 
-![Scatterplot with 6 data points on X-axis and data spanning 0.05 to 0.4 on Y axis. Two lines - orange for predicted values and blue for true values. Lines largely follow each other except for points 5 and 6](../../single-cell/images/bulk-music-benchmark/actual_residual.png "Actual vs Predicted Plot")
+![Scatterplot with 6 data points on the X-axis and data spanning 0.05 to 0.4 on the Y axis. Two lines - orange for predicted values and blue for true values. Lines largely follow each other except for points 5 and 6](../../single-cell/images/bulk-music-benchmark/actual_residual.png "Actual vs Predicted Plot")
 
 Plotting the values actually looks pretty good with the exception of datapoints 5 and 6, which are the ductal and gamma cells. Even if the other points don't overlap fully, they do show the same trends (i.e. higher / lower) than the other cell types.
 
-Inspect {% icon galaxy-eye %} the {% icon param-file %} **Residual plot** for `#A`.
+> <hands-on-title>Inspect residual plots</hands-on-title>
+> Inspect {% icon galaxy-eye %} the {% icon param-file %} **Residual plot** for `#A`.
+>
+{: .hands_on}
 
-![Scatterplot with predicted values on X-axis and residuals (predicted - true) on Y axis. The bigger the predicted, the further from 0 the points become.](../../single-cell/images/bulk-music-benchmark/residual.png "Residuals plot")
+![Scatterplot with predicted values on the X-axis and residuals (predicted - true) on the Y axis. The bigger the predicted, the further from 0 the points become.](../../single-cell/images/bulk-music-benchmark/residual.png "Residuals plot")
 
 This is a way of visualising the residuals - the closer to the middle `0` line, the better, as this means the difference between the predicted and actual values are close to 0.
 
-Finally, inspect {% icon galaxy-eye %} the {% icon param-file %} **Scatter plot of actual and predicted values** for `#A`.
+> <hands-on-title>Inspect scatter plot</hands-on-title>
+> Finally, inspect {% icon galaxy-eye %} the {% icon param-file %} **Scatter plot of actual and predicted values** for `#A`.
+>
+{: .hands_on}
 
+![Scatterplot with actual values on the X-axis and inferred values on the Y axis. There is a trend of inferred and actual values forming a line from 0 towards the top right of the chart. At the top, RMSE: 0.06 and R2: 0.78.](../../single-cell/images/bulk-music-benchmark/scatter.png "Correlation plot")
 
+In this final plot, we can see a calculated sample RMSE value of 0.06 (the smaller this particular value is, the better - more on that later!) and the R-squared value of 0.78. The closer to 1 the R-squared value is, the better the correlation.
 
-https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key
+> <question-title></question-title>
+>
+> Which deconvolution was better, A or B?
+>
+> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> >
+> > By looking at the **Scatter plot of actual and predicted values** alone, both numerically the R-squared value is closer to 1 for the A sample, and also visually the trend of actual vs predicted is stronger in the A sample.
+> >
+> > ![Scatterplots of actual (X-axis) by inferred (Y-axis) values with pseudobulk A on the left and sample pseudobulk B on the right. The A plot has an RSME of 0.06 and R-squared of 0.78, while the B plot has an RSME of 0.07 and R-squared of 0.72. The trend of actual vs inferred is less clear in the B plot.](../../single-cell/images/bulk-music-benchmark/scatters_combined.png "Comparing samples)
+> {: .solution}
+{: .question}
+
+### Combined evaluation
+
+Finally, there are three different evaluations of the combined deconvolution, looking more generally at the deconvolution success.
+
+Let's first examine the visualisation.
+
+> <hands-on-title>Inspect heatmap</hands-on-title>
+> Inspect {% icon galaxy-eye %} the {% icon param-file %} **Heatmap** plot.
+>
+{: .hands_on}
+
+![Heatmap with columns of cell types vs rows of inferred and actual cell type proportions for A and B samples. Cell colours are similar between actual and inferred.](../../single-cell/images/bulk-music-benchmark/heatmap.png "Heatmap")
+
+The heatmap looks pretty good - largely the same trends in both deconvolution, with issues in the ductal and gamma cells. This is important, as you might consider that any new trends identified that involve ductal and gamma cells may not be correct.
+
+Can we quantify how well the deconvolution is working in general? Let's start with the RSME value (**Root-mean squared error). In general, low RSME values are good, as they indicate little difference between actual and inferred value.
+
+> <details-title>More details on the RSME</details-title>
+>
+> The RSME value is calculated by first squaring the difference between the predicted and actual cell proportions in each sample. This is then averaged across the cell types.
+>![Square root of 1/n times the sum of (predicted - observed) ^2](../../single-cell/images/bulk-music-benchmark/rsme.png "RSME")
+>
+{: .details}
+
+Another statistical value is the MAPE (**Mean Absolute Percentage Error**), where again, low numbers are best.
+
+> <details-title>More details on the MAPE</details-title>
+>
+> The MAPE value is calculated by dividing the difference between the predicted and actual cell proportions by their actual cell proportions. The average is then taken across the cell types.
+>![Average of the (observed - predicted / actual) predicted - observed)](../../single-cell/images/bulk-music-benchmark/MAPE.png "MAPE")
+>
+{: .details}
+
+Let's examine the MAPE and RSME across the samples.
+
+> <hands-on-title>Inspect Violin</hands-on-title>
+> Inspect {% icon galaxy-eye %} the {% icon param-file %} **Violin plot with ggplot2** plot.
+>
+{: .hands_on}
+
+![Violin plots of the MAPE (left) and RSME (right) of the samples. Violins are short, showing little variation between the pseudobulks. MAPEs are around 0.4 and RSME is much less than 0.1](../../single-cell/images/bulk-music-benchmark/violin.png "Violin")
+
+Here you can find a very low RSME - which is great! - but a reasonably high MAPE - which is a bit bigger. However, RSME is the standard often used in the field {% cite Cobos2020 %}, and the fact that it is so low is particularly good.
+
+> <comment-title>Answer Key</comment-title>
+> You can see our example [Answer Key] for this statistical workflow [here](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key)
+{: .comment}
+
+So, this is great! How exciting!
+
+But just for kicks, what if we wanted to do this a bit more at scale? Or even, what if we wanted to compare - statistically - the different reference datasets we examined in the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-5-benchmark/tutorial.html) comparing healthy and T2D patients?
 
 # 4: Doing this... at scale!
 
@@ -344,238 +410,12 @@ https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---st
 
 ## Inspect outputs
 
-# Conclusion
+> <comment-title>Answer Key</comment-title>
+> You can see our example [Answer Key] for this megaworkflow [here](FIXME)
+{: .comment}
 
-## Final histories for each part
-
-Workflow 1
- -
-
-
-
-BELOW IS ALL OLD
-
-# Introduction
-
-The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) or published article {% cite wang2019bulk %}
-
-
-
-
-
-# Data
-
-In the standard MuSiC tutorial, we used human pancreas data. We will now use the same single cell reference dataset {%cite segerstolpe2016single %} withits 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk RNA-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into Expression Set objects in the previous two tutorials. For both the single cell reference and the bulk samples of interest, you have generated Expression Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the scRNA reference. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy single cell reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.
-
-![Three colours of arrows connect bulk healthy & diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy & bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref).](../../images/bulk-music/comparison.png "Plan of analysis")
-
-## Get data
-
-> <hands-on-title>Data upload</hands-on-title>
->
-> 1. Create a new history for this tutorial *"Deconvolution: Compare"*
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
->
->    * Human single cell RNA ESet objects (tag: `#singlecell`)
->
->      ```
->    {{ page.zenodo_link }}/files/ESet_object_sc_combined.rdata
->    {{ page.zenodo_link }}/files/ESet_object_sc_T2D.rdata
->    {{ page.zenodo_link }}/files/ESet_object_sc_healthy.rdata
->      ```
->
->    * Human bulk RNA ESet objects (tag: `#bulk`)
->      ```
->    {{ page.zenodo_link }}/files/ESet_object_bulk_healthy.rdata
->    {{ page.zenodo_link }}/files/ESet_object_bulk_T2D.rdata
->      ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
-> 3. Rename the datasets
->
-> 5. Add to each file a tag corresponding to `#bulk` and `#scrna`
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
-{: .hands_on}
-
-# Infer cellular composition & compare
-
-It's finally time!
-
-## Altogether: Deconvolution with a combined sc reference
-
-> <hands-on-title> Comparing: altogether </hands-on-title>
->
-> 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
->    - In *"New scRNA Group"*:
->        - {% icon param-repeat %} *"Insert New scRNA Group"*
->            - *"Name of scRNA Dataset"*: `scRNA_set`
->            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_combined.rdata` (Input dataset)
->            - In *"Advanced scRNA Parameters"*:
->                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
->                - *"Samples Identifier from scRNA dataset"*: `Individual`
->                - *"Comma list of cell types to use from scRNA dataset"*: `alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell`
->            - In *"Bulk Datasets in scRNA Group"*:
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set:T2D`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->
-> 2. To each of the outputs, add the `#altogether` tag.
->
-{: .hands_on}
-
-There are four sets of output files.
-1. *Summarised Plots* <- This is the most interesting output, because it has the pretty pictures!
-2. *Individual Heatmaps* <- This kind of does what standard (non-Comparing) MuSiC does for each sample, rather than combining them.
-3. *Stats* <- This will be very handy if you want to make any statistical calculations, as it contains medians and quartiles
-4. *Tables* <- This contains the cell proportions found within each sample as well as the number of reads.
-
-### Summarised Plots
-
-Examine {% icon galaxy-eye %} the output file *Summarised Plots (MuSiC)*. Now the first few pages are similar to the standard deconvolution tool, but now comparing across the factor of interest (disease). Among the myriad of visualisations available, our favourite is on page 5 - a comparison of inferred cell proportions across disease.
-
-![Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample.](../../images/bulk-music/plot_altogether.png "Altogether: Resulting Graph")
-
-Here we can see that the bulk-RNA seq samples from the T2D patients contain markedly fewer beta cells as compared with their healthy counterparts. This makes sense, so that's good!
-
-### Individual Heatmaps
-
-Examine {% icon galaxy-eye %} the output file *Individual heatmaps (MuSiC)*. This shows the cell distribution across each of the individual samples, separated out by disease factor into two separate plots, but ultimately isn't particularly informative.
-
-![Heatmap showing vertically four samples (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample.](../../images/bulk-music/individual_heatmaps.png "Altogether: Individual heatmaps")
-
-### Stats
-
-If you select the *Stats* dataset, you'll find it contains four sets of data, `Bulk_disease: Read Props`, `Bulk_disease: Sample Props`, `Bulk_healthy: Read Props` and `Bulk_healthy: Sample Props`. Examine {% icon galaxy-eye %} the file `Bulk_disease: Sample Props`. This contains summary statistics (Min, quartiles, median, mean, etc.) for each phenotype. This could be quite helpful if you're trying to statistically identify differences across samples.
-
-![Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean.](../../images/bulk-music/summary_statistics.png "Altogether: Stats")
-
-### Tables
-
-Finally, if you select the *Tables* dataset, you'll find it contains three sets of data, `Data Table`, `Matrix of Cell Type Read Counts`, and `Matrix of Cell Type Sample Proportions`.
-
-Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred proportions and reads associated with each sample and cell type, alongwith its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.
-
-![Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads.](../../images/bulk-music/data_table.png "Altogether: Data table")
-
-> <question-title></question-title>
->
-> 1. Why does the data table contain 42 rows?
->
-> > <solution-title></solution-title>
-> >
-> > 1. The data table contains a row for each cell type within each sample. Since there are 6 cell types and 7 samples, `6*7 = 42` rows.
-> >
-> {: .solution}
->
-{: .question}
-
-Hopefully, this has been illumating! Now let's try two other ways of inferring from a reference and see if it makes a difference.
-
-## Like4like: Deconvolution of healthy samples with a healthy reference and diseased samples with a diseased reference
-
-> <hands-on-title> Like4like Inferrence </hands-on-title>
->
-> 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
->    - In *"New scRNA Group"*:
->        - {% icon param-repeat %} *"Insert New scRNA Group"*
->            - *"Name of scRNA Dataset"*: `scRNA_set:Normal`
->            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_healthy.rdata` (Input dataset)
->            - In *"Advanced scRNA Parameters"*:
->                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
->                - *"Samples Identifier from scRNA dataset"*: `Individual`
->                - *"Comma list of cell types to use from scRNA dataset"*: `alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell`
->            - In *"Bulk Datasets in scRNA Group"*:
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->        - {% icon param-repeat %} *"Insert New scRNA Group"*
->            - *"Name of scRNA Dataset"*: `scRNA_set:T2D`
->            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_T2D.rdata` (Input dataset)
->            - In *"Advanced scRNA Parameters"*:
->                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
->                - *"Samples Identifier from scRNA dataset"*: `Individual`
->                - *"Comma list of cell types to use from scRNA dataset"*: `alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell`
->            - In *"Bulk Datasets in scRNA Group"*:
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `bulk_set:T2D`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->
-> 2. Add the `#like4like` tag to each of the outputs.
->
-{: .hands_on}
-
-> <question-title></question-title>
->
-> 1. How have the cell inferrences changed, now that we have changed the scRNA references used?
->
-> > <solution-title></solution-title>
-> >
-> > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/plot_altogether.png "Altogether vs like4like")
-> > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inferrence of a beta cell and leading to a higher proportion of interred B-cells.
-> >
-> {: .solution}
->
-{: .question}
-
-Let's try one more inferrence - this time, we'll use only healthy cells as a reference, to (theoretically) make a more consistent analysis across the two phenotypes.
-
-## healthyscref: Deconvolution using only healthy cells as a reference
-
-> <hands-on-title> Healthy sc reference only inferrence </hands-on-title>
->
-> 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
->    - In *"New scRNA Group"*:
->        - {% icon param-repeat %} *"Insert New scRNA Group"*
->            - *"Name of scRNA Dataset"*: `scRNA_set:Normal`
->            - {% icon param-file %} *"scRNA Dataset"*: `ESet_object_sc_healthy.rdata` (Input dataset)
->            - In *"Advanced scRNA Parameters"*:
->                - *"Cell Types Label from scRNA dataset"*: `Inferred cell type - author labels`
->                - *"Samples Identifier from scRNA dataset"*: `Individual`
->                - *"Comma list of cell types to use from scRNA dataset"*: `alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell`
->            - In *"Bulk Datasets in scRNA Group"*:
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set:Normal`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_healthy.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->                - {% icon param-repeat %} *"Insert Bulk Datasets in scRNA Group"*
->                    - *"Name of Bulk Dataset"*: `Bulk_set:T2D`
->                    - {% icon param-file %} *"Bulk RNA Dataset"*: `ESet_object_bulk_T2D.rdata` (Input dataset)
->                    - *"Factor Name"*: `Disease`
->
-> 2. Add the `#healthyscref` tag to each of the outputs.
->
-{: .hands_on}
-
-> <question-title></question-title>
->
-> 1. How have the cell inferrences changed this time?
->
-> > <solution-title></solution-title>
-> >
-> > > > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
-> >
-> > 1. If using a like4like inferrence reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
-> >
-> {: .solution}
->
-{: .question}
-
-Overall, it's important to remember how the inferrence changes depending on the reference used - for example, a combined reference might have majority healthy samples or diseased samples, so that would impact the inferred cellular compositions.
+Can also do one where we share a history of running this using the 3 ESet objects and then compare them with the violin plots :)
 
 # Conclusion
 
-Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferrences using multiple kinds of reference datasets. You can find the workflow for this tutorial [here](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1) and an example history [here](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final).
-
- We hope this helps you in your research!
-
-![Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool](../../images/bulk-music/compare_workflow.png "MuSiC Compare Tutorial Workflow")
+#FIXME
