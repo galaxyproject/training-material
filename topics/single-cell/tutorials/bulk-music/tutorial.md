@@ -92,7 +92,7 @@ The heterogeneity that exists in the cellular composition of bulk RNA-seq can ad
 >
 {: .details}
 
-Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite {% cite wang2019bulk %} to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
+Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite ({% cite wang2019bulk %}) to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
 
 ### MusiC
 

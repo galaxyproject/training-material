@@ -38,9 +38,9 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 # Introduction
 
-So you want to do some deconvolution, but how accurate is it likely to be? Is your reference good enough? Is the MuSiC {% cite wang2019bulk %} algorithm itself good enough? Well, we can't answer these questions specifically, but we can give you a good indication of how well the deconvolution is working in a given situation.
+So you want to do some deconvolution, but how accurate is it likely to be? Is your reference good enough? Is the MuSiC ({% cite wang2019bulk %}) algorithm itself good enough? Well, we can't answer these questions specifically, but we can give you a good indication of how well the deconvolution is working in a given situation.
 
-To do this, we will generate pseudobulk matrices from our single cell reference, wherein we sum all the transcripts in a random sample of genes to create a 'bulk' sample. This strategy, and some of our downstream statistics (specifically the use of RSME, the root square mean error), parallel current benchmarking strategies in deconvolution {% cite Cobos2020 %}
+To do this, we will generate pseudobulk matrices from our single cell reference, wherein we sum all the transcripts in a random sample of genes to create a 'bulk' sample. This strategy, and some of our downstream statistics (specifically the use of RSME, the root square mean error), parallel current benchmarking strategies in deconvolution ({% cite Cobos2020 %}).
 
 ![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
 
@@ -60,7 +60,7 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 
 # Data
 
-We previously retrieved this pancreas single cell dataset {% cite segerstolpe2016single %} from the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments) and manipulated it into an Expression Set object. As a reminder, these cells come from 6 healthy individuals and 4 individuals with Type II diabetes, and we combined all 10 samples into a single Expression Set object. To do this, we made a metadata file with details about each cell (including cell type), and a cell x gene matrix with cells as rows and genes as columns. We'll need all these files to generate our pseudobulks and test them against their reference.
+We previously retrieved a pancreas single cell dataset ({% cite segerstolpe2016single %}) from the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments) and manipulated it into an Expression Set object. As a reminder, these cells come from 6 healthy individuals and 4 individuals with Type II diabetes, and we combined all 10 samples into a single Expression Set object. To do this, we made a metadata file with details about each cell (including cell type), and a cell x gene matrix with cells as rows and genes as columns. We'll need all these files to generate our pseudobulks and test them against their reference.
 
 # Generating pseudobulks
 
@@ -391,7 +391,7 @@ Let's examine the MAPE and RSME across the samples.
 
 ![Violin plots of the MAPE (left) and RSME (right) of the samples. Violins are short, showing little variation between the pseudobulks. MAPEs are around 0.4 and RSME is much less than 0.1](../../images/bulk-music-benchmark/violin.png "Violin")
 
-Here you can find a very low RSME - which is great! - but a reasonably high MAPE - which is a bit bigger. However, RSME is the standard often used in the field {% cite Cobos2020 %}, and the fact that it is so low is particularly good.
+Here you can find a very low RSME - which is great! - but a reasonably high MAPE - which is a bit bigger. However, RSME is the standard often used in the field ({% cite Cobos2020 %}), and the fact that it is so low is particularly good.
 
 > <comment-title>Answer Key</comment-title>
 > You can see our example [Answer Key for this statistical workflow](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--3---statistics---answer-key)
