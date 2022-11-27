@@ -406,3 +406,5 @@ You have successfully performed, essentially, three workflows. You can find the 
 ![8 boxes in the workflow editor](../../images/bulk-music/ens-id-collapse.png "Subworkflow: Collapsing the Ensembl IDs into gene names")
 
 With these workflows, you've created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!
+
+This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).

@@ -418,3 +418,5 @@ Can also do one where we share a history of running this using the 3 ESet object
 # Conclusion
 
 #FIXME
+
+This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
