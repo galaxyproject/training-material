@@ -257,6 +257,8 @@ Let's start exploring the datasets.
 
 ## Building the Expression Set objects
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 For now we need to construct our Expression set objects that will be consumed by MuSiC.
 
 > <details-title>Expression Set</details-title>

@@ -105,6 +105,8 @@ It's finally time!
 
 ## Altogether: Deconvolution with a combined sc reference
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > <hands-on-title> Comparing: altogether </hands-on-title>
 >
 > 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:

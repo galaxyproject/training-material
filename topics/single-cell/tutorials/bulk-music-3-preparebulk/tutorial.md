@@ -95,6 +95,8 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 
 ![Columns in a table where some contain run info or Sample Characteristic[age] while others are empty.](../../images/bulk-music/bulk-metadata-annoying.png "Ridiculous metadata columns and labels")
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > <hands-on-title> Remove unnecessary columns </hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:

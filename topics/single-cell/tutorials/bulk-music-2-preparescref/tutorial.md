@@ -64,6 +64,8 @@ First, we will tackle the metadata. We are roughly following the same concept as
 ## Find the data
 We explored the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments), browsing experiments in order to find a pancreas dataset: {% cite Segerstolpe2016 %}. You can [explore this dataset](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-5061/results/tsne) using their browser. These cells come from 6 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!).
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.
 toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2
 > <hands-on-title>Data retrieval</hands-on-title>
