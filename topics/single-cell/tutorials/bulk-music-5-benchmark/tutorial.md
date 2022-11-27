@@ -42,7 +42,7 @@ So you want to do some deconvolution, but how accurate is it likely to be? Is yo
 
 To do this, we will generate pseudobulk matrices from our single cell reference, wherein we sum all the transcripts in a random sample of genes to create a 'bulk' sample. This strategy, and some of our downstream statistics (specifically the use of RSME, the root square mean error), parallel current benchmarking strategies in deconvolution {% cite Cobos2020 %}
 
-![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../single-cell/images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
+![3 Panels: Panel 1 shows Input and images of people and tissues and the label "Human pancreas; Panel 2 shows construction of two matrices, one for single cells and one combining cell expression into a column; Panel 3 shows a chart of MAPE and RMSE statistical outputs as well as a heatmap comparing actual and inferred samples"](../../images/bulk-music-benchmark/Overall_benchmark.png "Overall strategy for tutorial benchmarking (Adapted from Cobos et al) ")
 
 > <comment-title></comment-title>
 > - We will not be running tool by tool in this tutorial. The reason is, none of the tools are new for this tutorial, and mostly involve a lot of data manipulation (you can do a tutorial on that [here](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html) if you like!)
@@ -130,7 +130,7 @@ Let's look at the datasets.
 
 Ultimately, we'll use both these files to generate our pseudbulks.
 
-![2 Panels: Panel 1 shows a metadata table with each cell as a row and information such as individual, sex, and cell type as columns. Panel 2 shows a matrix of cell barcodes as rows and genes as columns. Arrows connect cell barcodes between both panels with either cell types or the expression matrix."](../../single-cell/images/bulk-music-benchmark/retrieving_actuals.png "Part 1: Using cell metadata to generate known cell proportions within a pseudobulk sample)
+![2 Panels: Panel 1 shows a metadata table with each cell as a row and information such as individual, sex, and cell type as columns. Panel 2 shows a matrix of cell barcodes as rows and genes as columns. Arrows connect cell barcodes between both panels with either cell types or the expression matrix."](../../images/bulk-music-benchmark/retrieving_actuals.png "Part 1: Using cell metadata to generate known cell proportions within a pseudobulk sample)
 
 ## Get the workflow & run it
 
@@ -316,7 +316,7 @@ We'll again evaluate pseudobulk A, but this time with some visualisation tools.
 >
 {: .hands_on}
 
-![Scatterplot with 6 data points on the X-axis and data spanning 0.05 to 0.4 on the Y axis. Two lines - orange for predicted values and blue for true values. Lines largely follow each other except for points 5 and 6](../../single-cell/images/bulk-music-benchmark/actual_residual.png "Actual vs Predicted Plot")
+![Scatterplot with 6 data points on the X-axis and data spanning 0.05 to 0.4 on the Y axis. Two lines - orange for predicted values and blue for true values. Lines largely follow each other except for points 5 and 6](../../images/bulk-music-benchmark/actual_residual.png "Actual vs Predicted Plot")
 
 Plotting the values actually looks pretty good with the exception of datapoints 5 and 6, which are the ductal and gamma cells. Even if the other points don't overlap fully, they do show the same trends (i.e. higher / lower) than the other cell types.
 
@@ -325,7 +325,7 @@ Plotting the values actually looks pretty good with the exception of datapoints 
 >
 {: .hands_on}
 
-![Scatterplot with predicted values on the X-axis and residuals (predicted - true) on the Y axis. The bigger the predicted, the further from 0 the points become.](../../single-cell/images/bulk-music-benchmark/residual.png "Residuals plot")
+![Scatterplot with predicted values on the X-axis and residuals (predicted - true) on the Y axis. The bigger the predicted, the further from 0 the points become.](../../images/bulk-music-benchmark/residual.png "Residuals plot")
 
 This is a way of visualising the residuals - the closer to the middle `0` line, the better, as this means the difference between the predicted and actual values are close to 0.
 
@@ -334,7 +334,7 @@ This is a way of visualising the residuals - the closer to the middle `0` line, 
 >
 {: .hands_on}
 
-![Scatterplot with actual values on the X-axis and inferred values on the Y axis. There is a trend of inferred and actual values forming a line from 0 towards the top right of the chart. At the top, RMSE: 0.06 and R2: 0.78.](../../single-cell/images/bulk-music-benchmark/scatter.png "Correlation plot")
+![Scatterplot with actual values on the X-axis and inferred values on the Y axis. There is a trend of inferred and actual values forming a line from 0 towards the top right of the chart. At the top, RMSE: 0.06 and R2: 0.78.](../../images/bulk-music-benchmark/scatter.png "Correlation plot")
 
 In this final plot, we can see a calculated sample RMSE value of 0.06 (the smaller this particular value is, the better - more on that later!) and the R-squared value of 0.78. The closer to 1 the R-squared value is, the better the correlation.
 
@@ -346,7 +346,7 @@ In this final plot, we can see a calculated sample RMSE value of 0.06 (the small
 > >
 > > By looking at the **Scatter plot of actual and predicted values** alone, both numerically the R-squared value is closer to 1 for the A sample, and also visually the trend of actual vs predicted is stronger in the A sample.
 > >
-> > ![Scatterplots of actual (X-axis) by inferred (Y-axis) values with pseudobulk A on the left and sample pseudobulk B on the right. The A plot has an RSME of 0.06 and R-squared of 0.78, while the B plot has an RSME of 0.07 and R-squared of 0.72. The trend of actual vs inferred is less clear in the B plot.](../../single-cell/images/bulk-music-benchmark/scatters_combined.png "Comparing samples)
+> > ![Scatterplots of actual (X-axis) by inferred (Y-axis) values with pseudobulk A on the left and sample pseudobulk B on the right. The A plot has an RSME of 0.06 and R-squared of 0.78, while the B plot has an RSME of 0.07 and R-squared of 0.72. The trend of actual vs inferred is less clear in the B plot.](../../images/bulk-music-benchmark/scatters_combined.png "Comparing samples)
 > {: .solution}
 {: .question}
 
@@ -361,7 +361,7 @@ Let's first examine the visualisation.
 >
 {: .hands_on}
 
-![Heatmap with columns of cell types vs rows of inferred and actual cell type proportions for A and B samples. Cell colours are similar between actual and inferred.](../../single-cell/images/bulk-music-benchmark/heatmap.png "Heatmap")
+![Heatmap with columns of cell types vs rows of inferred and actual cell type proportions for A and B samples. Cell colours are similar between actual and inferred.](../../images/bulk-music-benchmark/heatmap.png "Heatmap")
 
 The heatmap looks pretty good - largely the same trends in both deconvolution, with issues in the ductal and gamma cells. This is important, as you might consider that any new trends identified that involve ductal and gamma cells may not be correct.
 
@@ -370,7 +370,7 @@ Can we quantify how well the deconvolution is working in general? Let's start wi
 > <details-title>More details on the RSME</details-title>
 >
 > The RSME value is calculated by first squaring the difference between the predicted and actual cell proportions in each sample. This is then averaged across the cell types.
->![Square root of 1/n times the sum of (predicted - observed) ^2](../../single-cell/images/bulk-music-benchmark/rsme.png "RSME")
+>![Square root of 1/n times the sum of (predicted - observed) ^2](../../images/bulk-music-benchmark/rsme.png "RSME")
 >
 {: .details}
 
@@ -379,7 +379,7 @@ Another statistical value is the MAPE (**Mean Absolute Percentage Error**), wher
 > <details-title>More details on the MAPE</details-title>
 >
 > The MAPE value is calculated by dividing the difference between the predicted and actual cell proportions by their actual cell proportions. The average is then taken across the cell types.
->![Average of the (observed - predicted / actual) predicted - observed)](../../single-cell/images/bulk-music-benchmark/MAPE.png "MAPE")
+>![Average of the (observed - predicted / actual) predicted - observed)](../../images/bulk-music-benchmark/MAPE.png "MAPE")
 >
 {: .details}
 
@@ -390,7 +390,7 @@ Let's examine the MAPE and RSME across the samples.
 >
 {: .hands_on}
 
-![Violin plots of the MAPE (left) and RSME (right) of the samples. Violins are short, showing little variation between the pseudobulks. MAPEs are around 0.4 and RSME is much less than 0.1](../../single-cell/images/bulk-music-benchmark/violin.png "Violin")
+![Violin plots of the MAPE (left) and RSME (right) of the samples. Violins are short, showing little variation between the pseudobulks. MAPEs are around 0.4 and RSME is much less than 0.1](../../images/bulk-music-benchmark/violin.png "Violin")
 
 Here you can find a very low RSME - which is great! - but a reasonably high MAPE - which is a bit bigger. However, RSME is the standard often used in the field {% cite Cobos2020 %}, and the fact that it is so low is particularly good.
 
