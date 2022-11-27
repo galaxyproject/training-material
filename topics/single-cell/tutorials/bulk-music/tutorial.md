@@ -34,6 +34,13 @@ contributors:
 - mtekman
 - nomadscientist
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-2-preparescref
+
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
