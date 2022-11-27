@@ -62,7 +62,7 @@ To do this, we will generate pseudobulk matrices from our single cell reference,
 
 We previously retrieved this pancreas single cell dataset {% cite Segerstolpe2016single %} from the [single cell expression atlas](https://www.ebi.ac.uk/gxa/sc/experiments) and manipulated it into an Expression Set object. As a reminder, these cells come from 6 healthy individuals and 4 individuals with Type II diabetes, and we combined all 10 samples into a single Expression Set object. To do this, we made a metadata file with details about each cell (including cell type), and a cell x gene matrix with cells as rows and genes as columns. We'll need all these files to generate our pseudobulks and test them against their reference.
 
-# 1: Generating pseudobulks
+# Generating pseudobulks
 
 Our first goal is to make pseudobulk matrices, with a list of gene expressions for a single 'pseudobulk' sample that we generate from the expression of known single cells. We also need to generate a list of those known single cells, which we'll use later to see how good our deconvolution was. To do this, we need two files:
 
@@ -172,7 +172,7 @@ Now we've largely tried to hide the datasets created at each step within the cod
 
 Now, onto part 2!
 
-# 2: Inferring cellular proportions
+# Inferring cellular proportions
 
 Now that we have our two 'pseudobulk' samples, we will combine them into a single matrix and apply deconvolution using the single cell reference to infer pseudobulk cell proportions. Deconvolution will **not work** if you do not have at least two samples in the matrix.
 
@@ -240,7 +240,7 @@ You'll find `Actual` proportions in a column alongside the `Infer` proportions. 
 > You can see our example [Answer Key for part 2](https://usegalaxy.eu/u/wendi.bacon.training/h/deconvolution-benchmarking--2---pseudobulk-to-inferrence---answer-key)
 {: .comment}
 
-# 3: Statistical analysis
+# Statistical analysis
 
 Now here's the fun bit! You have your tables, so you can already kind of assess how good the deconvolution was. In our hands, for pseudobulk A, we found:
 
@@ -401,7 +401,9 @@ So, this is great! How exciting!
 
 But just for kicks, what if we wanted to do this a bit more at scale? Or even, what if we wanted to compare - statistically - the different reference datasets we examined in the [previous tutorial on comparing variables with deconvolution]({% link topics/single-cell/tutorials/bulk-music-5-benchmark/tutorial.md %}) comparing healthy and T2D patients?
 
-# 4: Doing this... at scale!
+# Doing this... at scale!
+
+FIXME
 
 ## Get data
 
