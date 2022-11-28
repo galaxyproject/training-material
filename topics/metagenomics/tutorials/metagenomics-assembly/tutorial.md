@@ -97,7 +97,13 @@ In case of a not very large dataset it’s more convenient to upload data direct
 Co-assembly of short reads will be the focus of this tutorial. Later in this tutorial, we will also cover individual assembly. 
 To accomplish our objectives, we will use the MetaSPAdes assembly tool. MetaSPADES is an NGS assembler designed specifically for large and complex metagenomics datasets. MetaSPAdes is part of the SPAdes toolkit, which has several assembly pipelines.
 
-There are three challenges to metagenomics assembly: 1) differences in genome coverage between samples, resulting from differences in abundance, 2) the fact that different species often share conserved regions ({%cite kececioglu2001%}), and 3) the presence of multiple strains of a single species ({%cite miller2010%}). Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities' metagenomes.
+There are three challenges to metagenomics assembly: 
+
+1. differences in genome coverage between samples, resulting from differences in abundance, 
+2. the fact that different species often share conserved regions ({%cite kececioglu2001%}), and 
+3. the presence of multiple strains of a single species ({%cite miller2010%}). 
+
+Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities' metagenomes.
 
 #### Co-assembly
 
