@@ -93,7 +93,7 @@ In case of a not very large dataset it’s more convenient to upload data direct
 > 5. When they are ready, rename the datasets
 {: .hands_on}
 
-### Assembly
+## Assembly
 Co-assembly of short reads will be the focus of this tutorial. Later in this tutorial, we will also cover individual assembly. 
 To accomplish our objectives, we will use the MetaSPAdes assembly tool. MetaSPADES is an NGS assembler designed specifically for large and complex metagenomics datasets. MetaSPAdes is part of the SPAdes toolkit, which has several assembly pipelines.
 
