@@ -58,7 +58,7 @@ For an in-depth analysis of the structure and functions of the coffee microbiome
 
 Real datasets are available for download in [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJEB24129?show=reads), as well as metadata about samples. There are six samples of a coffee fermentation system sequenced with Illumina MiSeq utilizing whole genome sequencing. This dataset contains paired-end reads.
 
-#### Upload dataset to Galaxy
+## Prepare Galaxy and data
 First we need to get some data into our history. There are different ways to upload data into the Galaxy. You can upload files from your computer, or Galaxy can also fetch data directly from external sources.
 
 In case of a not very large dataset it’s more convenient to upload data directly from your computer to Galaxy. In case of a large dataset, we can use FTP server or the [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
