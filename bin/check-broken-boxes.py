@@ -4,7 +4,8 @@ import re
 import sys
 
 # read in a tutorial, and check the structure of it.
-tuto = open(sys.argv[1], 'r')
+file = sys.argv[1]
+tuto = open(file, 'r')
 
 boxes = r'^([\s>]*>[\s>]*)'
 box_open = r'<([a-z-]*)-title>(.*)<\/[a-z-]*-title>'
@@ -99,13 +100,15 @@ for line, text in enumerate(tuto.read().split('\n')):
                 # print(f"{mw}{' ' * (depth)}</{closing_tag}>")
 
                 if len(tag_stack) == 0:
-                    raise Exception(f"Potential broken was closed with {closing_tag} on line {line}")
+                    message = f"Potential broken was closed with {closing_tag} on line {line}"
+                    print(f"{file}:{line}: {message}")
                 if tag_stack[-1]['tag'] == closing_tag:
                     p = tag_stack.pop()
                 else:
                     # print(f'prev={prev_depth} -> curr={depth} line={line} m={m1} c={closing_tags}')
                     if not (tag_stack[-1]['tag'] is None and closing_tag not in BASE_EXPECTED_TAGS):
-                        raise Exception(f"A {tag_stack[-1]['tag']} was opened, but closed with {closing_tag} on line {line}")
+                        message = f"A {tag_stack[-1]['tag']} was opened, but closed with {closing_tag} on line {line}"
+                        print(f"{file}:{line}: {message}")
                     else:
                         p = tag_stack.pop()
 
