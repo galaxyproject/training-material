@@ -188,18 +188,20 @@ In order to calculate the percentage of reads used for assembly, we use **Bowtie
 
 There are different ways to analyze the quality of metagenomic assembly that was considered in detail in the CAMI1 ({%cite sczyrba2017%}) and the CAMI2 ({%cite meyer2022%}) challenge. Our recommendation for anyone interested in assembly quality assessment is to read the CAMI papers in depth. As part of our discussion of metagenomic assembly quality, we will review a few general metrics. 
 
-**Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping. In other words, genome fraction is the total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
+- **Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping. In other words, genome fraction is the total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
 
-**Mismatches per 100 kbp**: number of mismatched bases in the contig-reference alignment (average per 100 kb). 
+- **Mismatches per 100 kbp**: number of mismatched bases in the contig-reference alignment (average per 100 kb). 
 
-**Duplication ratio**: total number of aligned bases / genome fraction * reference length.
+- **Duplication ratio**: total number of aligned bases / genome fraction * reference length.
 
-**Number of misassemblies**: number of contigs which:
-1) contain a gap of more than 1kb (number of positions in the assembled contigs where the left flanking sequence aligns over 1 kb away from the right flanking sequence on the reference); 
-2) contain inserts of more than 1kb (they overlap by >1 kb); or 
-3) align to different genomes (the flanking sequences align on opposite strands or different chromosomes). 
+- **Number of misassemblies**: number of contigs which:
+    1. contain a gap of more than 1kb (number of positions in the assembled contigs where the left flanking sequence aligns over 1 kb away from the right flanking sequence on the reference); 
+    2. contain inserts of more than 1kb (they overlap by >1 kb); or 
+    3. align to different genomes (the flanking sequences align on opposite strands or different chromosomes). 
 
-**N50**:  minimum contig length that contains 50% of the assembled bases. If all contigs in an assembly are ordered by length, the N50 is the minimum length of contigs that contains 50% of the assembled bases. For example, an N50 of 10 000 bp means that 50% of the assembled bases are contained in contigs of at least 10000 bp
+- **N50**:  minimum contig length that contains 50% of the assembled bases. 
+
+    If all contigs in an assembly are ordered by length, the N50 is the minimum length of contigs that contains 50% of the assembled bases. For example, an N50 of 10 000 bp means that 50% of the assembled bases are contained in contigs of at least 10000 bp
 
 Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), metagenomics mode of **QUAST** ({%cite gurevich2013%}).
 
