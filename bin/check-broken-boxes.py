@@ -52,7 +52,7 @@ for line, text in enumerate(tuto.read().split('\n')):
         m1 = re.match(box_open, unprefixed)
         if m1:
             tag = m1.group(1).replace('-', '_')
-            print(f'{mw}{" " * (depth - 1)}<{tag}>')
+            # print(f'{mw}{" " * (depth - 1)}<{tag}>')
 
             tag_stack.append({
                 'tag': tag,
@@ -61,7 +61,7 @@ for line, text in enumerate(tuto.read().split('\n')):
                 'mw': mw,
             })
         else:
-            print(f'{mw}{" " * (depth - 1)}<NONE>')
+            # print(f'{mw}{" " * (depth - 1)}<NONE>')
             tag_stack.append({
                 'tag': None,
                 'line': line,
@@ -74,15 +74,15 @@ for line, text in enumerate(tuto.read().split('\n')):
     elif depth < prev_depth:
         unprefixed = stripN(text, depth)
         m1 = re.match(box_close, unprefixed)
-        print(f'prev={prev_depth} -> curr={depth} line={line} m={m1} ts={len(tag_stack)} tss={[x["tag"] for x in tag_stack]}')
+        # print(f'prev={prev_depth} -> curr={depth} line={line} m={m1} ts={len(tag_stack)} tss={[x["tag"] for x in tag_stack]}')
         if m1 is None:
             # print(f'NONE {line} |{text}|')
             # print(tag_stack[-1])
-            print(f"{mw}{' ' * (depth)}</NONE>")
+            # print(f"{mw}{' ' * (depth)}</NONE>")
             tag_stack.pop()
         else:
             if any([skippable_tag(BASE_SKIPPABLE_TAGS, t) for t in m1.groups()]):
-                print(f"{mw}{' ' * (depth)}</NONE-skip tag={m1.groups()[0]}>")
+                # print(f"{mw}{' ' * (depth)}</NONE-skip tag={m1.groups()[0]}>")
                 # print(f'NONE {line} |{text}|')
                 # print(tag_stack[-1])
                 if 'code-2col' in m1.groups()[0] and (len(tag_stack) == 0 or tag_stack[-1]['tag'] is not None):
@@ -96,8 +96,10 @@ for line, text in enumerate(tuto.read().split('\n')):
                 closing_tags = m1.groups(1)[0].replace('-', '_').lstrip('.').split('.')
                 closing_tag = closing_tags[0].strip()
                 # print(tag_stack[-1])
-                print(f"{mw}{' ' * (depth)}</{closing_tag}>")
+                # print(f"{mw}{' ' * (depth)}</{closing_tag}>")
 
+                if len(tag_stack) == 0:
+                    raise Exception(f"Potential broken was closed with {closing_tag} on line {line}")
                 if tag_stack[-1]['tag'] == closing_tag:
                     p = tag_stack.pop()
                 else:
