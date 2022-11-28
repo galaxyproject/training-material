@@ -907,7 +907,7 @@ Prior to any downstream analysis like dimensional reduction, we need to apply a 
 >      - *"Keys for observation annotation on which to regress on"*: `total_counts, pct_counts_mito`
 >
 > 2. {% tool [Inspect and Manipulate with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %}
- with the following parameters:
+>     with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Remove confounders** {% icon tool %}
 >    - *"Method used for inspecting"*: `Scale data to unit variance and zero mean, using 'pp.scale'`
 >      - *"Zero center?"*: `Yes`
@@ -943,7 +943,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > <hands-on-title>Perform the PCA</hands-on-title>
 >
 > 1. {% tool [Cluster, infer trajectories and embed with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %}
- with the following parameters:
+>    with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling`
 >    - *"Method used for plotting"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
 >      - *"Number of principal components to compute"*: `50`

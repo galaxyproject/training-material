@@ -67,7 +67,8 @@ and different ways that we can categorise them:
 
 ![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png)
 
-<!-- >> <hands-on-title>Diagnostic Assessment - Break-out room discussion  - *⏰ 15 min*</hands-on-title>
+<!-- 
+> <hands-on-title>Diagnostic Assessment - Break-out room discussion  - *⏰ 15 min*</hands-on-title>
 >
 > - Split into groups of 4, depending on the number of participants.
 > - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
@@ -113,7 +114,8 @@ Formative assessment collect feedback (information) from learners' on their lear
 - **Frequent mistakes**: which types of mistakes need special attention
 - **Ability to perform a task**
 
-<!-- >> <hands-on-title>Collecting formative assessment - Break-out room discussion  - *⏰ 10 min*</hands-on-title>
+<!-- 
+> <hands-on-title>Collecting formative assessment - Break-out room discussion  - *⏰ 10 min*</hands-on-title>
 >
 > - Split into groups of 4, depending on the number of participants.
 >
@@ -213,13 +215,14 @@ Many group activities are possible
 
 {% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}
 
-<!-- >> <hands-on-title>Self-reflect  (5 min)</hands-on-title>
+<!-- 
+> <hands-on-title>Self-reflect  (5 min)</hands-on-title>
 >
 > - Think about this session: how many feedback opportunities have you had so far?
 >
-> > {% icon tip %} Get feedback often
+> > <tip-title>Get feedback often</tip-title>
 > > In this tutorial so far, there were at least 3 feedback opportunities
-> > {: .tip}
+> {: .tip}
 {: .hands_on} -->
 
 ![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/AttentionCurve.jpg "Attention Curve")

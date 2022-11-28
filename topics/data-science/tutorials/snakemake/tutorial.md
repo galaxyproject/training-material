@@ -1392,7 +1392,7 @@ Ok! That's hopefully went successfully. Run your pipeline to check.
 >    > 	fastqc_trim: fastqc/SRR2584863_1_fastqc.html
 >    > 	fastqc: fastqc/SRR2584863_1_fastqc.html
 >    > ```
->    {: .code-in}
+>    {: .code-out}
 >
 > 2. Uhoh! There was an error. If we read the error message we see **Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastq**, because both rules produce the same file. We should rename the folder, `fastqc-trimmed`.
 >
@@ -1505,7 +1505,7 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >    > ```
 >    {: .code-in}
 >
->    > <code-in-title>CLI</code-in-title>
+>    > <code-out-title>CLI</code-out-title>
 >    > ```
 >    > Building DAG of jobs...
 >    > MissingInputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
@@ -1538,7 +1538,7 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >    > ```
 >    {: .code-in}
 >
->    > <code-in-title>CLI</code-in-title>
+>    > <code-out-title>Output</code-out-title>
 >    > ```
 >    >    raise IOError(
 >    >OSError: Missing files after 5 seconds:
@@ -1577,7 +1577,7 @@ Now that we've got a pipeline successfully completing the dry-run, let's try it 
 >    > ```
 >    {: .code-in}
 >
->    > <code-in-title>CLI</code-in-title>
+>    > <code-out-title>Output</code-out-title>
 >    > ```
 >    > SRR2584863_1.trim_fastqc.html    SRR2584863_2.trim_fastqc.html
 >    > SRR2589044_1.trim_fastqc.html    SRR2589044_2.trim_fastqc.html

@@ -137,11 +137,12 @@ You can also watch an animated illustration of the difference between climate an
 In order to answer this question, we are going to inspect and visualize the dataset `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` using simple galaxy tools.
 
 > <hands-on-title>Daily temperature time series</hands-on-title>
+>
 >    > <comment-title>Tip: search for the tool</comment-title>
 >    >
 >    > Many different tools can be used to answer to the questions. Here we give you some guidelines to help you to choose.
 >    > Use the **tools search box** at the top of the tool panel to find **Select lines that match an expression** {% icon tool %} and **Datamash** {% icon tool %}.
->    {: .tip}
+>    {: .comment}
 >
 >    > <question-title></question-title>
 >    >
