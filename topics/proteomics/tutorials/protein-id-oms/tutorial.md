@@ -363,9 +363,8 @@ Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.un
 
 # Premade Workflow
 
-A premade workflow for this tutorial can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
-
-A premade workflow using the search engines XTandem and MSGF+ can be found [here]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
+- [A premade workflow for this tutorial]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga %}).
+- [A premade workflow using the search engines XTandem and MSGF+]({% link topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga %}).
 
 # Further Reading
 
