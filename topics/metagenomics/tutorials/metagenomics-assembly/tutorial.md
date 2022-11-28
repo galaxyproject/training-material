@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Metagenomic data assembly"
-zenodo_link: ""
+zenodo_link: "https://zenodo.org/record/6958893"
 questions:
   - "Why metagenomic data should be assembled?"
   - "What is the difference between co-assembly and individual assembly?"
