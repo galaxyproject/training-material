@@ -121,7 +121,7 @@ Since SPAdes handles non-uniform coverage, it is useful for assembling simple co
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collection of short reads
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 3. Rename output to “Output - assembly with MetaSPAdes”
+> 3. Rename output to "Output - assembly with MetaSPAdes"
 {: .hands_on}
 
 > ### {% icon details %} Output of MetaSPAdes
