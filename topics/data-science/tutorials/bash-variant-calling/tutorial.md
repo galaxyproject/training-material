@@ -308,9 +308,9 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > <hands-on-title>Step 1: Calculate the read coverage of positions in the genome</hands-on-title>
 >
 > Do the first pass on variant calling by counting read coverage with
-[bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
-use the command `mpileup`. The flag `-O b` tells bcftools to generate a
-bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+> [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
+> use the command `mpileup`. The flag `-O b` tells bcftools to generate a
+> bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 > > <code-in-title>`mpileup` command</code-in-title>
 > > ```bash
 > > $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
