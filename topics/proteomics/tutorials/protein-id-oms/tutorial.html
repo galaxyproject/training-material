@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Peptide and Protein ID using OpenMS tools" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2022-11-28 10:24:24 +0000" />
 <meta name="DC.creator" content="Florian Christoph Sigloch" />
 <meta name="DC.creator" content="Björn Grüning" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2022-11-28 10:24:24 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Peptide and Protein ID using OpenMS tools",
   "interactivityType": "mixed",
@@ -842,8 +842,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -889,7 +887,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -936,8 +934,7 @@ you can use the constructed database including decoys.
 You can find a prepared database, as well as the input LC-MS/MS data in different file formats on <a href="https://zenodo.org/record/796184">Zenodo</a>.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: 
-">Agenda:</div>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -967,8 +964,7 @@ However, the OpenMS tool <strong><em>PeakPickerHiRes</em></strong> <i class="fas
 If your data were generated on a low resolution mass spectrometer, use <strong>PeakPickerWavelet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> instead.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-file-conversion-and-peak-picking" class="box-title" aria-label="hands-on box: Hands-On: File Conversion and Peak Picking
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: File Conversion and Peak Picking</div>
+  <div id="hands-on-file-conversion-and-peak-picking" class="box-title" aria-label="hands-on box: File Conversion and Peak Picking"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: File Conversion and Peak Picking</div>
 
   <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="language-plaintext highlighter-rouge">raw</code> format and also already converted to <code class="language-plaintext highlighter-rouge">mzML</code>. If <strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your <span class="notranslate">Galaxy</span> instance, please download the preconverted <code class="language-plaintext highlighter-rouge">mzML</code> as an input and continue with step 5 of the following hands-on training.</p>
 
@@ -1040,16 +1036,14 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 <p>Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine <a href="https://www.ncbi.nlm.nih.gov/pubmed/14976030">X!Tandem</a>. OpenMS provides “adapters” (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-peptide-identification" class="box-title" aria-label="hands-on box: Hands-On: Peptide Identification
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide Identification</div>
+  <div id="hands-on-hands-on-peptide-identification" class="box-title" aria-label="hands-on box: Hands-On: Peptide Identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide Identification</div>
 
   <ol>
     <li>Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view</li>
   </ol>
 
   <blockquote class="comment">
-    <div id="comment-you-did-not-run-the-database-handling-first" class="box-title" aria-label="comment box: You did not run the Database Handling first?
-"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: You did not run the Database Handling first?</div>
+    <div id="comment-you-did-not-run-the-database-handling-first" class="box-title" aria-label="comment box: You did not run the Database Handling first?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: You did not run the Database Handling first?</div>
     <p>You can upload the ready-made database from Zenodo</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
@@ -1075,8 +1069,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-settings-for-labelled-data" class="box-title" aria-label="comment box: Settings for labelled data
-"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Settings for labelled data</div>
+  <div id="comment-settings-for-labelled-data" class="box-title" aria-label="comment box: Settings for labelled data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Settings for labelled data</div>
   <p>Several common quantitation methods are based on labels e.g. SILAC, TMT, iTRAQ, Dimethyl. Those labels must be specified in the search engine as a (variable) modification. See also <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">Peptide and Protein Quantification via Stable Isotope Labelling</a>.</p>
 </blockquote>
 
@@ -1098,8 +1091,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 <p>To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with <strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. and set the score back to PEP with <strong>IDScoreSwitcher</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-peptide-fdr-filtering" class="box-title" aria-label="hands-on box: Hands-On: Peptide FDR filtering
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide FDR filtering</div>
+  <div id="hands-on-hands-on-peptide-fdr-filtering" class="box-title" aria-label="hands-on box: Hands-On: Peptide FDR filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide FDR filtering</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0"><strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_peptideindexer/PeptideIndexer/2.6+<span class="notranslate">galaxy</span>0</span></span>  with
@@ -1163,8 +1155,7 @@ Numbers may slightly vary depending on the versions of the tools and the used FA
 The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Fido</a> algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-protein-inference" class="box-title" aria-label="hands-on box: Hands-On: Protein inference
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Protein inference</div>
+  <div id="hands-on-hands-on-protein-inference" class="box-title" aria-label="hands-on box: Hands-On: Protein inference"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Protein inference</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0"><strong>FidoAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fidoadapter/FidoAdapter/2.6+<span class="notranslate">galaxy</span>0</span></span>
@@ -1212,8 +1203,7 @@ It also enables you to check for contaminations in your samples.</p>
 <p><strong>CAVE:</strong> When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-analysis-of-contaminants" class="box-title" aria-label="hands-on box: Hands-On: Analysis of Contaminants
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Analysis of Contaminants</div>
+  <div id="hands-on-hands-on-analysis-of-contaminants" class="box-title" aria-label="hands-on box: Hands-On: Analysis of Contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Analysis of Contaminants</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0"><strong>TextExporter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_textexporter/TextExporter/2.6+<span class="notranslate">galaxy</span>0</span></span>  to convert the idXML output to a human-readable tabular file.
@@ -1265,8 +1255,7 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
 <p>Here, we will use the OpenMS tool <a href="https://abibuilder.informatik.uni-tuebingen.de/archive/openms/Documentation/release/latest/html/TOPP_ConsensusID.html">ConsensusID</a> to combine the search engine results.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-multiple-search-engines" class="box-title" aria-label="hands-on box: Hands-On: Multiple search engines
-"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Multiple search engines</div>
+  <div id="hands-on-hands-on-multiple-search-engines" class="box-title" aria-label="hands-on box: Hands-On: Multiple search engines"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Multiple search engines</div>
 
   <ol>
     <li>Run <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1386,9 +1375,10 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
 
 <h1 id="premade-workflow">Premade <span class="notranslate">Workflow</span></h1>
 
-<p>A premade <span class="notranslate">workflow</span> for this tutorial can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">here</a>.</p>
-
-<p>A premade <span class="notranslate">workflow</span> using the search engines XTandem and MSGF+ can be found <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga">here</a>.</p>
+<ul>
+  <li><a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga">A premade <span class="notranslate">workflow</span> for this tutorial</a>.</li>
+  <li><a href="/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga">A premade <span class="notranslate">workflow</span> using the search engines XTandem and MSGF+</a>.</li>
+</ul>
 
 <h1 id="further-reading">Further Reading</h1>
 

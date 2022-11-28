@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="NGS data logistics" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
 <meta name="DC.creator" content="Anton Nekrutenko" />
 <meta name="DC.creator" content="Marius van den Beek" />
 <meta name="DC.creator" content="Dave Clements" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2022-11-28 09:55:50 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "NGS data logistics",
   "interactivityType": "mixed",
@@ -791,8 +791,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -850,7 +848,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1914,7 +1912,9 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Click `Execute`
 > 1. It will create a dataset in the history that will be permanently yellow (running)
 > 1. You will see the following banner:
-> <img src="../../images/jupyter_start.png" alt="Jupyter startup banner. "  loading="lazy">
+>
+>    <img src="../../images/jupyter_start.png" alt="Jupyter startup banner. "  loading="lazy">
+>
 > 1. Click on `User menu`. You may need to wait a bit (go get coffee quickly). In the end you will a `Jupyter Interactive Tool` link. Click on it.
 > 1. This will open a new tab with a fully functional Jupyter environment:
 > <img src="../../images/jupyter_running.png" alt="Jupyter running. "  loading="lazy">
@@ -1922,25 +1922,31 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history.
 > 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
 > 1. Read data into a dataframe:
->```
-> import pandas as pd
-> df = pd.read_csv('data/Collapsed_collection',sep='\t')
-> # Drop duplicates is required to get rid of SnpEff artifacts
-> df = df.drop_duplicates(ignore_index=True)
-```
-> <i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
+>    ```
+>    import pandas as pd
+>    df = pd.read_csv('data/Collapsed_collection',sep='\t')
+>    # Drop duplicates is required to get rid of SnpEff artifacts
+>    df = df.drop_duplicates(ignore_index=True)
+>    ```
+>    <i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
 > 1. Filter variants with intermediate frequencies between 20% and 80%:
->```
->df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
->```
+>
+>    ```
+>    df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>    ```
+>
 > 1. Plot relationship between variant position and alternative allele frequency:
->```
->import seaborn as sns
->%matplotlib inline
->sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
->```
-> This plot shows how variants are distributed across the SARS-CoV-2 genome:
-> <img src="../../images/sns_plot.png" alt="Seaborn plot. "  loading="lazy">
+>
+>    ```
+>    import seaborn as sns
+>    %matplotlib inline
+>    sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
+>    ```
+>
+>    This plot shows how variants are distributed across the SARS-CoV-2 genome:
+>    <img src="../../images/sns_plot.png" alt="Seaborn plot. "  loading="lazy">
 > 1. Play with it!
 {: .hands_on}
 

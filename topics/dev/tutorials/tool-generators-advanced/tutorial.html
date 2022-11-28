@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="ToolFactory: Generating Tools From More Complex Scripts" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-09-28 13:13:58 +0000" />
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
 <meta name="DC.creator" content="Ross Lazarus" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 13:13:58 +0000",
+  "dateModified": "2022-11-28 09:55:50 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "ToolFactory: Generating Tools From More Complex Scripts",
   "interactivityType": "mixed",
@@ -929,7 +929,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1284,15 +1284,13 @@ Congratulations on acquiring a local instance of the ToolFactory Appliance</p>
 
 <blockquote class="tip">
   <div id="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses" class="box-title"><button type="button" aria-controls="tip-using-an-appliance-involves-dependency-installation-that-may-cause-long-pauses-contents" aria-expanded="true" aria-label="Toggle tip box: Using an Appliance involves dependency installation that may cause long pauses..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using an Appliance involves dependency installation that may cause long pauses...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
-    <ul>
-      <li>There will be delays as any new dependencies are installed for the first time
-     - the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.
-     - the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.
-     - the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.
-     - Check for Conda and other running processes before assuming it has frozen.</li>
-    </ul>
-  </blockquote>
+  <p>There will be delays as any new dependencies are installed for the first time</p>
+  <ul>
+    <li>the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.</li>
+    <li>the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.</li>
+    <li>the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.</li>
+    <li>Check for Conda and other running processes before assuming it has frozen.</li>
+  </ul>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1364,18 +1362,17 @@ line will echo all the repeated parameters is shown in the example shown in the 
 
 <blockquote class="details">
   <div id="details-repeats-demonstration-generated-tool-xml" class="box-title"><button type="button" aria-controls="details-repeats-demonstration-generated-tool-xml-contents" aria-expanded="true" aria-label="Toggle details box: Repeats demonstration generated tool XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Repeats demonstration generated tool XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"repeats_demo"</span> <span class="na">id=</span><span class="s">"repeats_demo"</span> <span class="na">version=</span><span class="s">"2.00"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 29/05/2021 07:46:08 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>Repeated parameter demonstration<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;requirements/&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "2.00"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[python
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"repeats_demo"</span> <span class="na">id=</span><span class="s">"repeats_demo"</span> <span class="na">version=</span><span class="s">"2.00"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 29/05/2021 07:46:08 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Repeated parameter demonstration<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;requirements/&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "2.00"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[python
 $runme
 #for $rep in $R_mi:
 --mi "$rep.mi"
@@ -1385,8 +1382,8 @@ $runme
 #end for
 &gt;</span>
 $repeats_out]]&gt;<span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;configfiles&gt;</span>
-   <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#raw
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#raw
 
 import argparse
 parser = argparse.ArgumentParser()
@@ -1395,37 +1392,37 @@ a("--mi", action="append")
 a("--mp", action="append")
 args = parser.parse_args()
 if args.mi:
-  print(" file and ".join(args.mi))
+   print(" file and ".join(args.mi))
 if args.mp:
-  print(" string and ".join(args.mp))
+   print(" string and ".join(args.mp))
 if not (args.mi or args.mp):
-  print('Nothing was selected')
+   print('Nothing was selected')
 
 #end raw]]&gt;</span><span class="nt">&lt;/configfile&gt;</span>
- <span class="nt">&lt;/configfiles&gt;</span>
- <span class="nt">&lt;inputs&gt;</span>
-   <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mi"</span> <span class="na">title=</span><span class="s">"Add as many Multiple input files from your history - as many as you like as needed"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mi"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"Multiple input files from your history - as many as you like"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"html,txt,xml"</span> <span class="na">multiple=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/repeat&gt;</span>
-   <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mp"</span> <span class="na">title=</span><span class="s">"Add as many Multiple user supplied text strings - as many different ones as you like as needed"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mp"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span> <span class="na">label=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span> <span class="na">help=</span><span class="s">""</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/repeat&gt;</span>
- <span class="nt">&lt;/inputs&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"repeats_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"repeats_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"repeats_out"</span> <span class="na">value=</span><span class="s">"repeats_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"6"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mi"</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mi"</span> <span class="na">value=</span><span class="s">"mi_sample"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/repeat&gt;</span>
-     <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mp"</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mp"</span> <span class="na">value=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;/repeat&gt;</span>
-   <span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mi"</span> <span class="na">title=</span><span class="s">"Add as many Multiple input files from your history - as many as you like as needed"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mi"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"Multiple input files from your history - as many as you like"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"html,txt,xml"</span> <span class="na">multiple=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/repeat&gt;</span>
+    <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mp"</span> <span class="na">title=</span><span class="s">"Add as many Multiple user supplied text strings - as many different ones as you like as needed"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mp"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">value=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span> <span class="na">label=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span> <span class="na">help=</span><span class="s">""</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/repeat&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"repeats_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"repeats_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"repeats_out"</span> <span class="na">value=</span><span class="s">"repeats_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"6"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mi"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mi"</span> <span class="na">value=</span><span class="s">"mi_sample"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/repeat&gt;</span>
+      <span class="nt">&lt;repeat</span> <span class="na">name=</span><span class="s">"R_mp"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"mp"</span> <span class="na">value=</span><span class="s">"Multiple user supplied text strings - as many different ones as you like"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;/repeat&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
@@ -1440,34 +1437,33 @@ Unpredictable or messy "repeated" outputs can use a collection if they are not u
 
 Script::
 
-   import argparse
-   parser = argparse.ArgumentParser()
-   a = parser.add_argument
-   a("--mi", action="append")
-   a("--mp", action="append")
-   args = parser.parse_args()
-   if args.mi:
-      print(" file and ".join(args.mi))
-   if args.mp:
-      print(" string and ".join(args.mp))
-   if not (args.mi or args.mp):
-      print('Nothing was selected')
+    import argparse
+    parser = argparse.ArgumentParser()
+    a = parser.add_argument
+    a("--mi", action="append")
+    a("--mp", action="append")
+    args = parser.parse_args()
+    if args.mi:
+       print(" file and ".join(args.mi))
+    if args.mp:
+       print(" string and ".join(args.mp))
+    if not (args.mi or args.mp):
+       print('Nothing was selected')
 
 ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
 
 
-</code></pre></div>    </div>
+</code></pre></div>  </div>
 
-    <ul>
-      <li>The user sees the following form after adding 3 repeats for each of the two available items</li>
-    </ul>
+  <ul>
+    <li>The user sees the following form after adding 3 repeats for each of the two available items</li>
+  </ul>
 
-    <p><img src="../../images/toolfactory_repeats_sample_form.png" alt="User can add as many repeats as they want for repeated input file and parameter values. " loading="lazy" /></p>
-  </blockquote>
+  <p><img src="../../images/toolfactory_repeats_sample_form.png" alt="User can add as many repeats as they want for repeated input file and parameter values. " loading="lazy" /></p>
 </blockquote>
 
 <h4 id="toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item">ToolFactory <code class="language-plaintext highlighter-rouge">collection</code> outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item</h4>
@@ -1501,78 +1497,77 @@ Script::
 
 <blockquote class="details">
   <div id="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs" class="box-title"><button type="button" aria-controls="details-plotter-collection-output-demonstration-tool-form-generated-xml-and-outputs-contents" aria-expanded="true" aria-label="Toggle details box: `plotter` collection output demonstration tool form, generated XML and outputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `plotter` collection output demonstration tool form, generated XML and outputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
 
-    <ul>
-      <li>The ToolFactory form for the plotter example tool
-is configured as shown below, from “rerunning” the plotter job from the sample history.</li>
-    </ul>
+  <ul>
+    <li>The ToolFactory form for the plotter example tool
+ is configured as shown below, from “rerunning” the plotter job from the sample history.</li>
+  </ul>
 
-    <p><img src="../../images/toolfactory_plotter_demo_form.png" alt="ToolFactory form configuration of the output collection in the plotter example. " loading="lazy" /></p>
+  <p><img src="../../images/toolfactory_plotter_demo_form.png" alt="ToolFactory form configuration of the output collection in the plotter example. " loading="lazy" /></p>
 
-    <p>The Rscript is contained in a configfile so<code class="language-plaintext highlighter-rouge">#</code> is escaped - this is automatic.</p>
+  <p>The Rscript is contained in a configfile so<code class="language-plaintext highlighter-rouge">#</code> is escaped - this is automatic.</p>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"plotter"</span> <span class="na">id=</span><span class="s">"plotter"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 24/01/2021 05:02:33 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>ToolFactory collection demonstration - random plots<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;requirements&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>r-base<span class="nt">&lt;/requirement&gt;</span>
- <span class="nt">&lt;/requirements&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[Rscript
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"plotter"</span> <span class="na">id=</span><span class="s">"plotter"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 24/01/2021 05:02:33 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>ToolFactory collection demonstration - random plots<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>r-base<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[Rscript
 $runme
 "$nplot"]]&gt;</span><span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;configfiles&gt;</span>
-   <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
 \# demo
 args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
-  n_plots = 3
+   n_plots = 3
 } else {
-  n_plots = as.integer(args[1]) }
+   n_plots = as.integer(args[1]) }
 dir.create('plots')
 for (i in 1:n_plots) {
-   foo = runif(100)
-   bar = rnorm(100)
-   bar = foo + 0.05*bar
-   pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-   plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
-   dev.off()
-   foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-   bar = as.matrix(foo)
-   pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-   heatmap(bar,main='Random Heatmap')
-   dev.off()
+    foo = runif(100)
+    bar = rnorm(100)
+    bar = foo + 0.05*bar
+    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
+    dev.off()
+    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+    bar = as.matrix(foo)
+    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+    heatmap(bar,main='Random Heatmap')
+    dev.off()
 }
 
 ]]&gt;</span><span class="nt">&lt;/configfile&gt;</span>
- <span class="nt">&lt;/configfiles&gt;</span>
- <span class="nt">&lt;inputs&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Number of random plots pairs to draw"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">value=</span><span class="s">"3"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"nplot"</span> <span class="na">argument=</span><span class="s">"nplot"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/inputs&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">"plots"</span> <span class="na">type=</span><span class="s">"list"</span> <span class="na">label=</span><span class="s">"Plots"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;discover_datasets</span> <span class="na">pattern=</span><span class="s">"__name_and_ext__"</span> <span class="na">directory=</span><span class="s">"plots"</span> <span class="na">visible=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/collection&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Number of random plots pairs to draw"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">value=</span><span class="s">"3"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"nplot"</span> <span class="na">argument=</span><span class="s">"nplot"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;collection</span> <span class="na">name=</span><span class="s">"plots"</span> <span class="na">type=</span><span class="s">"list"</span> <span class="na">label=</span><span class="s">"Plots"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;discover_datasets</span> <span class="na">pattern=</span><span class="s">"__name_and_ext__"</span> <span class="na">directory=</span><span class="s">"plots"</span> <span class="na">visible=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/collection&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
 
 
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"nplot"</span> <span class="na">value=</span><span class="s">"3"</span> <span class="nt">/&gt;</span>
-     <span class="nt">&lt;output_collection</span> <span class="na">name=</span><span class="s">"plots"</span> <span class="na">type=</span><span class="s">"list"</span><span class="nt">&gt;</span>
-    <span class="nt">&lt;element</span> <span class="na">file=</span><span class="s">"yet_1_anotherplot_sample"</span> <span class="na">name=</span><span class="s">"yet_1_anotherplot"</span> <span class="na">ftype=</span><span class="s">"pdf"</span> <span class="na">compare=</span><span class="s">"sim_size"</span> <span class="na">delta_frac=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/output_collection&gt;</span>
-<span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"nplot"</span> <span class="na">value=</span><span class="s">"3"</span> <span class="nt">/&gt;</span>
+      <span class="nt">&lt;output_collection</span> <span class="na">name=</span><span class="s">"plots"</span> <span class="na">type=</span><span class="s">"list"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;element</span> <span class="na">file=</span><span class="s">"yet_1_anotherplot_sample"</span> <span class="na">name=</span><span class="s">"yet_1_anotherplot"</span> <span class="na">ftype=</span><span class="s">"pdf"</span> <span class="na">compare=</span><span class="s">"sim_size"</span> <span class="na">delta_frac=</span><span class="s">"0.05"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/output_collection&gt;</span>
+ <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
 
 
 
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
@@ -1585,43 +1580,42 @@ Draws as many random plot pairs as you need
 
 Script::
 
-   # demo
-   args = commandArgs(trailingOnly=TRUE)
-   if (length(args)==0) {
-      n_plots = 3
-   } else {
-      n_plots = as.integer(args[1]) }
-   dir.create('plots')
-   for (i in 1:n_plots) {
-       foo = runif(100)
-       bar = rnorm(100)
-       bar = foo + 0.05*bar
-       pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-       plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
-       dev.off()
-       foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-       bar = as.matrix(foo)
-       pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-       heatmap(bar,main='Random Heatmap')
-       dev.off()
-   }
+    # demo
+    args = commandArgs(trailingOnly=TRUE)
+    if (length(args)==0) {
+       n_plots = 3
+    } else {
+       n_plots = as.integer(args[1]) }
+    dir.create('plots')
+    for (i in 1:n_plots) {
+        foo = runif(100)
+        bar = rnorm(100)
+        bar = foo + 0.05*bar
+        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
+        dev.off()
+        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+        bar = as.matrix(foo)
+        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+        heatmap(bar,main='Random Heatmap')
+        dev.off()
+    }
 
 ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
-</code></pre></div>    </div>
-    <p>After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
-One of them is displayed by clicking the “eye” icon.
-Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a <span class="notranslate">downstream</span> tool.
-It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
-As shown above, the script only has to write the files to a directory.
-Note that the test is over-ridden in the ToolFactory form to generate this tool.
-Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.</p>
+</code></pre></div>  </div>
+  <p>After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
+ One of them is displayed by clicking the “eye” icon.
+ Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a <span class="notranslate">downstream</span> tool.
+ It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
+ As shown above, the script only has to write the files to a directory.
+ Note that the test is over-ridden in the ToolFactory form to generate this tool.
+ Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.</p>
 
-    <p><img src="../../images/toolfactory_plotter_sample_output.png" alt="Plotter collection opens to show all the plots as separate items to be viewed or downloaded. " loading="lazy" /></p>
-  </blockquote>
+  <p><img src="../../images/toolfactory_plotter_sample_output.png" alt="Plotter collection opens to show all the plots as separate items to be viewed or downloaded. " loading="lazy" /></p>
 </blockquote>
 
 <h4 id="selects-as-user-supplied-parameters">Selects as user supplied parameters</h4>
@@ -1636,50 +1630,49 @@ Without an over-ride to suit your script, an empty test will be generated that w
 
 <blockquote class="details">
   <div id="details-select-test-select-field-demonstration-tool-generated-xml" class="box-title"><button type="button" aria-controls="details-select-test-select-field-demonstration-tool-generated-xml-contents" aria-expanded="true" aria-label="Toggle details box: `select_test` select field demonstration tool generated XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `select_test` select field demonstration tool generated XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
 
-    <p>The ToolFactory form section for user configurable command line settings is
-configured as shown here for the select demonstration</p>
+  <p>The ToolFactory form section for user configurable command line settings is
+ configured as shown here for the select demonstration</p>
 
-    <p><img src="../../images/toolfactory_select_demo_form.png" alt="Form to configure an additional parameter as a select. " loading="lazy" /></p>
+  <p><img src="../../images/toolfactory_select_demo_form.png" alt="Form to configure an additional parameter as a select. " loading="lazy" /></p>
 
-    <p>The generated XML is shown below.</p>
+  <p>The generated XML is shown below.</p>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"select_test"</span> <span class="na">id=</span><span class="s">"select_test"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 24/01/2021 05:03:21 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>ToolFactory select demonstration<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[bash
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"select_test"</span> <span class="na">id=</span><span class="s">"select_test"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 24/01/2021 05:03:21 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>ToolFactory select demonstration<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[bash
 $runme
 "$choose"
 &gt;</span>
 $select_out]]&gt;<span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;configfiles&gt;</span>
-   <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
 echo "You chose \$1"
 ]]&gt;</span><span class="nt">&lt;/configfile&gt;</span>
- <span class="nt">&lt;/configfiles&gt;</span>
- <span class="nt">&lt;inputs&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Choose"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">name=</span><span class="s">"choose"</span> <span class="na">argument=</span><span class="s">"choose"</span><span class="nt">&gt;</span>
-     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"won"</span><span class="nt">&gt;</span>one<span class="nt">&lt;/option&gt;</span>
-     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"too"</span><span class="nt">&gt;</span>two<span class="nt">&lt;/option&gt;</span>
-     <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"free"</span><span class="nt">&gt;</span>three<span class="nt">&lt;/option&gt;</span>
-   <span class="nt">&lt;/param&gt;</span>
- <span class="nt">&lt;/inputs&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"select_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"select_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"select_out"</span> <span class="na">value=</span><span class="s">"select_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"choose"</span> <span class="na">value=</span><span class="s">"won"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">label=</span><span class="s">"Choose"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"select"</span> <span class="na">name=</span><span class="s">"choose"</span> <span class="na">argument=</span><span class="s">"choose"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"won"</span><span class="nt">&gt;</span>one<span class="nt">&lt;/option&gt;</span>
+      <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"too"</span><span class="nt">&gt;</span>two<span class="nt">&lt;/option&gt;</span>
+      <span class="nt">&lt;option</span> <span class="na">value=</span><span class="s">"free"</span><span class="nt">&gt;</span>three<span class="nt">&lt;/option&gt;</span>
+    <span class="nt">&lt;/param&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"select_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"select_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"select_out"</span> <span class="na">value=</span><span class="s">"select_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"choose"</span> <span class="na">value=</span><span class="s">"won"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
@@ -1692,18 +1685,17 @@ Echoes your selection
 
 Script::
 
-   echo "You chose $1"
+    echo "You chose $1"
 
 ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
-</code></pre></div>    </div>
-    <p>The generated tool form from the select demonstration shows the three options and returns the one selected.</p>
+</code></pre></div>  </div>
+  <p>The generated tool form from the select demonstration shows the three options and returns the one selected.</p>
 
-    <p><img src="../../images/toolfactory_select_test_tool.png" alt="Generated form seen by users of the select demonstration tool. " loading="lazy" /></p>
-  </blockquote>
+  <p><img src="../../images/toolfactory_select_test_tool.png" alt="Generated form seen by users of the select demonstration tool. " loading="lazy" /></p>
 </blockquote>
 
 <h4 id="the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations">The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.</h4>
@@ -1737,28 +1729,28 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 
 <blockquote class="details">
   <div id="details-planemo-lint-demonstration-tool-generated-xml" class="box-title"><button type="button" aria-controls="details-planemo-lint-demonstration-tool-generated-xml-contents" aria-expanded="true" aria-label="Toggle details box: `planemo lint` demonstration tool generated XML"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `planemo lint` demonstration tool generated XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
-    <p>The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.</p>
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"planemo_lint"</span> <span class="na">id=</span><span class="s">"planemo_lint"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 18/05/2021 01:16:17 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>Runs Planemo lint on any ToolFactory xml history file<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;requirements&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">"0.74.3"</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>planemo<span class="nt">&lt;/requirement&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">"3.7"</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/requirement&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"4.6.3"</span><span class="nt">&gt;</span>lxml<span class="nt">&lt;/requirement&gt;</span>
- <span class="nt">&lt;/requirements&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[python
+  <p>The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.</p>
+
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"planemo_lint"</span> <span class="na">id=</span><span class="s">"planemo_lint"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 18/05/2021 01:16:17 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Runs Planemo lint on any ToolFactory xml history file<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">"0.74.3"</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>planemo<span class="nt">&lt;/requirement&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">"3.7"</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/requirement&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"4.6.3"</span><span class="nt">&gt;</span>lxml<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[python
 $runme
 $ToolFactory_XML_to_be_linted
 &gt;</span>
 $lint_output]]&gt;<span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;configfiles&gt;</span>
-   <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#raw
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[#raw
 
 import lxml.etree as ET
 import os
@@ -1766,37 +1758,37 @@ import subprocess
 import sys
 
 def main():
-   assert len(sys.argv) &gt;</span>= 2, 'Must have input xml on command line'
-   xmlin = sys.argv[1]
-   tree = ET.parse(xmlin)
-   root = tree.getroot()
-   toolname = root.get('id')
-   toolxml = os.path.join('/export/<span class="notranslate">galaxy</span>/tools/TFtools', toolname, '%s.xml' % toolname)
-   cl = ['planemo', 'lint', toolxml]
-   print('Running', cl)
-   p = subprocess.run(cl, shell=False)
-   if p.returncode &gt; 0:
-        print('Planemo lint call returned error %d')
-   else:
-        print('Lint report ends')
+    assert len(sys.argv) &gt;</span>= 2, 'Must have input xml on command line'
+    xmlin = sys.argv[1]
+    tree = ET.parse(xmlin)
+    root = tree.getroot()
+    toolname = root.get('id')
+    toolxml = os.path.join('/export/<span class="notranslate">galaxy</span>/tools/TFtools', toolname, '%s.xml' % toolname)
+    cl = ['planemo', 'lint', toolxml]
+    print('Running', cl)
+    p = subprocess.run(cl, shell=False)
+    if p.returncode &gt; 0:
+         print('Planemo lint call returned error %d')
+    else:
+         print('Lint report ends')
 main()
 
 
 #end raw]]&gt;<span class="nt">&lt;/configfile&gt;</span>
- <span class="nt">&lt;/configfiles&gt;</span>
- <span class="nt">&lt;inputs&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ToolFactory_XML_to_be_linted"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"ToolFactory XML to be linted"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"xml"</span> <span class="na">multiple=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/inputs&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"lint_output"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"${ToolFactory_XML_to_be_linted.name}_lint_output"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"lint_output"</span> <span class="na">value=</span><span class="s">"lint_output_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"5"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ToolFactory_XML_to_be_linted"</span> <span class="na">value=</span><span class="s">"ToolFactory_XML_to_be_linted_sample"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ToolFactory_XML_to_be_linted"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"ToolFactory XML to be linted"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"xml"</span> <span class="na">multiple=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"lint_output"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"${ToolFactory_XML_to_be_linted.name}_lint_output"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"lint_output"</span> <span class="na">value=</span><span class="s">"lint_output_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"5"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"ToolFactory_XML_to_be_linted"</span> <span class="na">value=</span><span class="s">"ToolFactory_XML_to_be_linted_sample"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
@@ -1809,36 +1801,35 @@ ToolFactory demonstration script using bash to run planemo lint from a history X
 
 Script::
 
-   import lxml.etree as ET
-   import os
-   import subprocess
-   import sys
-   def main():
-       assert len(sys.argv) &gt;</span>= 2, 'Must have input xml on command line'
-       xmlin = sys.argv[1]
-       tree = ET.parse(xmlin)
-       root = tree.getroot()
-       toolname = root.get('id')
-       toolxml = os.path.join('/export/<span class="notranslate">galaxy</span>/tools/TFtools', toolname, '%s.xml' % toolname)
-       cl = ['planemo', 'lint', toolxml]
-       print('Running', cl)
-       p = subprocess.run(cl, shell=False)
-       if p.returncode &gt; 0:
-            print('Planemo lint call returned error %d')
-       else:
-            print('Lint report ends')
-   main()
+    import lxml.etree as ET
+    import os
+    import subprocess
+    import sys
+    def main():
+        assert len(sys.argv) &gt;</span>= 2, 'Must have input xml on command line'
+        xmlin = sys.argv[1]
+        tree = ET.parse(xmlin)
+        root = tree.getroot()
+        toolname = root.get('id')
+        toolxml = os.path.join('/export/<span class="notranslate">galaxy</span>/tools/TFtools', toolname, '%s.xml' % toolname)
+        cl = ['planemo', 'lint', toolxml]
+        print('Running', cl)
+        p = subprocess.run(cl, shell=False)
+        if p.returncode &gt; 0:
+             print('Planemo lint call returned error %d')
+        else:
+             print('Lint report ends')
+    main()
 #end raw
 ]]&gt;<span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
 
 
 
-</code></pre></div>    </div>
-  </blockquote>
+</code></pre></div>  </div>
 </blockquote>
 
 <h4 id="other-languages-such-as-lisp-and-prolog-scripts-in-galaxy">Other languages such as Lisp and Prolog scripts in <span class="notranslate">Galaxy</span>.</h4>
@@ -1853,19 +1844,18 @@ Script::
 
 <blockquote class="details">
   <div id="details-prolog-and-lisp-demonstration-tools" class="box-title"><button type="button" aria-controls="details-prolog-and-lisp-demonstration-tools-contents" aria-expanded="true" aria-label="Toggle details box: `Prolog` and `Lisp` demonstration tools"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `Prolog` and `Lisp` demonstration tools<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"prolog_demo"</span> <span class="na">id=</span><span class="s">"prolog_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 04/04/2021 17:21:32 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>Runs a prolog script<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;requirements&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>swi-prolog<span class="nt">&lt;/requirement&gt;</span>
- <span class="nt">&lt;/requirements&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[swipl
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"prolog_demo"</span> <span class="na">id=</span><span class="s">"prolog_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 04/04/2021 17:21:32 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Runs a prolog script<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>swi-prolog<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[swipl
 -q
 -g
 main
@@ -1874,8 +1864,8 @@ main
 $runme
 &gt;</span>
 $prolog_out]]&gt;<span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;configfiles&gt;</span>
-   <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;configfiles&gt;</span>
+    <span class="nt">&lt;configfile</span> <span class="na">name=</span><span class="s">"runme"</span><span class="nt">&gt;</span><span class="cp">&lt;![CDATA[
 parent(pam,bob).
 parent(tom,bob).
 parent(tom,liz).
@@ -1884,21 +1874,21 @@ parent(bob,pat).
 parent(pat,jim).
 
 main :-
-   parent(X,jim),
-   format('~a is the parent of jim~n', [X]),
-   halt.
+    parent(X,jim),
+    format('~a is the parent of jim~n', [X]),
+    halt.
 ]]&gt;</span><span class="nt">&lt;/configfile&gt;</span>
- <span class="nt">&lt;/configfiles&gt;</span>
- <span class="nt">&lt;inputs/&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"prolog_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"prolog_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"prolog_out"</span> <span class="na">value=</span><span class="s">"prolog_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;/configfiles&gt;</span>
+  <span class="nt">&lt;inputs/&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"prolog_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"prolog_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"prolog_out"</span> <span class="na">value=</span><span class="s">"prolog_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
@@ -1913,71 +1903,70 @@ Prolog demonstration in the ToolFactory
 
 Script::
 
-   parent(pam,bob).
-   parent(tom,bob).
-   parent(tom,liz).
-   parent(bob,ann).
-   parent(bob,pat).
-   parent(pat,jim).
-   main :-
-       parent(X,jim),
-       format('~a is the parent of jim~n', [X]),
-       halt.
+    parent(pam,bob).
+    parent(tom,bob).
+    parent(tom,liz).
+    parent(bob,ann).
+    parent(bob,pat).
+    parent(pat,jim).
+    main :-
+        parent(X,jim),
+        format('~a is the parent of jim~n', [X]),
+        halt.
 
 ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
-</code></pre></div>    </div>
+</code></pre></div>  </div>
 
-    <p>Lisp too!
-In this case, the tool takes a lisp script as input</p>
+  <p>Lisp too!
+ In this case, the tool takes a lisp script as input</p>
 
-    <p>A lisp <span class="notranslate">expression</span> was typed into the upload tool text box and saved as hello_lisp.txt <code class="language-plaintext highlighter-rouge">(write-line "Hello, ToolFactory does Lisp!")</code>.
-It or any other lisp script can be used as input to the SBCL Conda dependency.</p>
+  <p>A lisp <span class="notranslate">expression</span> was typed into the upload tool text box and saved as hello_lisp.txt <code class="language-plaintext highlighter-rouge">(write-line "Hello, ToolFactory does Lisp!")</code>.
+ It or any other lisp script can be used as input to the SBCL Conda dependency.</p>
 
-    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"lisp_demo"</span> <span class="na">id=</span><span class="s">"lisp_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
- <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
- <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 04/04/2021 16:38:47 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
- <span class="nt">&lt;description&gt;</span>Runs SBCL hello world demonstration<span class="nt">&lt;/description&gt;</span>
- <span class="nt">&lt;requirements&gt;</span>
-   <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>sbcl<span class="nt">&lt;/requirement&gt;</span>
- <span class="nt">&lt;/requirements&gt;</span>
- <span class="nt">&lt;stdio&gt;</span>
-   <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/stdio&gt;</span>
- <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
- <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[sbcl
+  <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"lisp_demo"</span> <span class="na">id=</span><span class="s">"lisp_demo"</span> <span class="na">version=</span><span class="s">"0.01"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!--Source in git at: https://github.com/fubar2/toolfactory--&gt;</span>
+  <span class="c">&lt;!--Created by admin@<span class="notranslate">galaxy</span>.org at 04/04/2021 16:38:47 using the <span class="notranslate">Galaxy</span> Tool Factory.--&gt;</span>
+  <span class="nt">&lt;description&gt;</span>Runs SBCL hello world demonstration<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;requirements&gt;</span>
+    <span class="nt">&lt;requirement</span> <span class="na">version=</span><span class="s">""</span> <span class="na">type=</span><span class="s">"package"</span><span class="nt">&gt;</span>sbcl<span class="nt">&lt;/requirement&gt;</span>
+  <span class="nt">&lt;/requirements&gt;</span>
+  <span class="nt">&lt;stdio&gt;</span>
+    <span class="nt">&lt;exit_code</span> <span class="na">range=</span><span class="s">"1:"</span> <span class="na">level=</span><span class="s">"fatal"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/stdio&gt;</span>
+  <span class="nt">&lt;version_command&gt;</span><span class="cp">&lt;![CDATA[echo "0.01"]]&gt;</span><span class="nt">&lt;/version_command&gt;</span>
+  <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[sbcl
 --script
 $script
 &gt;</span>
 $lisp_out]]&gt;<span class="nt">&lt;/command&gt;</span>
- <span class="nt">&lt;inputs&gt;</span>
-   <span class="nt">&lt;param</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"SBCL lisp script to execute"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">multiple=</span><span class="s">"false"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">name=</span><span class="s">"script"</span> <span class="na">argument=</span><span class="s">"--script"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/inputs&gt;</span>
- <span class="nt">&lt;outputs&gt;</span>
-   <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"lisp_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"lisp_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
- <span class="nt">&lt;/outputs&gt;</span>
- <span class="nt">&lt;tests&gt;</span>
-   <span class="nt">&lt;test&gt;</span>
-     <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"lisp_out"</span> <span class="na">value=</span><span class="s">"lisp_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
-     <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"script"</span> <span class="na">value=</span><span class="s">"script_sample"</span><span class="nt">/&gt;</span>
-   <span class="nt">&lt;/test&gt;</span>
- <span class="nt">&lt;/tests&gt;</span>
- <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
+  <span class="nt">&lt;inputs&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">optional=</span><span class="s">"false"</span> <span class="na">label=</span><span class="s">"SBCL lisp script to execute"</span> <span class="na">help=</span><span class="s">""</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">multiple=</span><span class="s">"false"</span> <span class="na">type=</span><span class="s">"data"</span> <span class="na">name=</span><span class="s">"script"</span> <span class="na">argument=</span><span class="s">"--script"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/inputs&gt;</span>
+  <span class="nt">&lt;outputs&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"lisp_out"</span> <span class="na">format=</span><span class="s">"txt"</span> <span class="na">label=</span><span class="s">"lisp_out"</span> <span class="na">hidden=</span><span class="s">"false"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/outputs&gt;</span>
+  <span class="nt">&lt;tests&gt;</span>
+    <span class="nt">&lt;test&gt;</span>
+      <span class="nt">&lt;output</span> <span class="na">name=</span><span class="s">"lisp_out"</span> <span class="na">value=</span><span class="s">"lisp_out_sample"</span> <span class="na">compare=</span><span class="s">"diff"</span> <span class="na">lines_diff=</span><span class="s">"0"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"script"</span> <span class="na">value=</span><span class="s">"script_sample"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/test&gt;</span>
+  <span class="nt">&lt;/tests&gt;</span>
+  <span class="nt">&lt;help&gt;</span><span class="cp">&lt;![CDATA[
 
 **What it Does**
 
 Lisp in the ToolFactory
 
-]]&gt;</span><span class="nt">&lt;/help&gt;</span>
- <span class="nt">&lt;citations&gt;</span>
-   <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
- <span class="nt">&lt;/citations&gt;</span>
+ ]]&gt;</span><span class="nt">&lt;/help&gt;</span>
+  <span class="nt">&lt;citations&gt;</span>
+    <span class="nt">&lt;citation</span> <span class="na">type=</span><span class="s">"doi"</span><span class="nt">&gt;</span>10.1093/bioinformatics/bts573<span class="nt">&lt;/citation&gt;</span>
+  <span class="nt">&lt;/citations&gt;</span>
 <span class="nt">&lt;/tool&gt;</span>
-</code></pre></div>    </div>
-  </blockquote>
+</code></pre></div>  </div>
 </blockquote>
 
 <h4 id="command-over-ride-and-test-over-ride">Command over-ride and test over-ride</h4>
@@ -1999,17 +1988,15 @@ Lisp in the ToolFactory
 
 <blockquote class="details">
   <div id="details-bwa-test-command-override-sample-the-command-override" class="box-title"><button type="button" aria-controls="details-bwa-test-command-override-sample-the-command-override-contents" aria-expanded="true" aria-label="Toggle details box: `bwa_test_command_override` sample - the command override"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `bwa_test_command_override` sample - the command override<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
-    <p>ToolFactory command over-ride section adapted from the Planemo BWA example.</p>
+  <p>ToolFactory command over-ride section adapted from the Planemo BWA example.</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Build reference
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ## Build reference
 #set $reference_fasta_filename = "localref.fa"
 ln -s "${ref_file}" "${reference_fasta_filename}" ;
 bwa index -a is "${reference_fasta_filename}" ;
 bwa mem -t "2" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - &gt; temporary_bam_file.bam ;
 samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
-</code></pre></div>    </div>
-  </blockquote>
+</code></pre></div>  </div>
 </blockquote>
 
 <ul>
@@ -2028,18 +2015,16 @@ samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
 
 <blockquote class="details">
   <div id="details-bwa-test-toolfactory-positional-bash-sample-alternative" class="box-title"><button type="button" aria-controls="details-bwa-test-toolfactory-positional-bash-sample-alternative-contents" aria-expanded="true" aria-label="Toggle details box: `bwa_test_toolfactory_positional_bash` sample alternative."><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `bwa_test_toolfactory_positional_bash` sample alte<span class="notranslate">rna</span>tive.<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <blockquote>
-    <p>ToolFactory form bash script to replace above command over-ride section:</p>
+  <p>ToolFactory form bash script to replace above command over-ride section:</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFFILE=$1
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFFILE=$1
 FASTQ=$2
 BAMOUT=$3
 ln -s "$REFFILE" "refalias"
 bwa index -a is "refalias"
 bwa mem -t "2" -v 1 "refalias" "$FASTQ"  | samtools view -Sb - &gt; temporary_bam_file.bam
 samtools sort -o "$BAMOUT" temporary_bam_file.bam
-</code></pre></div>    </div>
-  </blockquote>
+</code></pre></div>  </div>
 </blockquote>
 
 <ul>
@@ -2331,8 +2316,8 @@ Thanks all! It has been a lot of fun.</p>
       <li>elegantly generated lint-free XML provided by <a href="https://github.com/hexylena/galaxyxml"><span class="notranslate">galaxy</span>ml code</a></li>
     </ul>
   </li>
-  <li><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar" />Björn Grüning</a> for making it easy to pop-up and flavour <a href="https://github.com/bgruening/docker-galaxy-stable">docker-<span class="notranslate">galaxy</span>-stable</a></li>
-  <li><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
+  <li><a href="/training-material/hall-of-fame/bgruening/" class="contributor-badge contributor-bgruening"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" /><img src="https://avatars.githubusercontent.com/bgruening?s=27" alt="Avatar" />Björn Grüning</a> for making it easy to pop-up and flavour <a href="https://github.com/bgruening/docker-galaxy-stable">docker-<span class="notranslate">galaxy</span>-stable</a>
+ <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=27" alt="Avatar" />Marius van den Beek</a> for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.</li>
 </ul>
 
 

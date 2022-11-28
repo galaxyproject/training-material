@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Library Generation for DIA Analysis" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
 <meta name="DC.creator" content="Matthias Fahrner" />
 <meta name="DC.creator" content="Melanie Föll" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2022-11-28 09:55:50 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Library Generation for DIA Analysis",
   "interactivityType": "mixed",
@@ -745,8 +745,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -792,7 +790,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1099,7 +1097,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
 
 <h1 id="spectral-library-refinement-with-openswathassaygenerator">Spectral library refinement with <strong>OpenSwathAssayGenerator</strong></h1>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div id="hands-on-spectral-library-optimization-and-refinement-using-b-openswathassaygenerator-b" class="box-title" aria-label="hands-on box: Spectral library optimization and refinement using &lt;b&gt;OpenSwathAssayGenerator&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spectral library optimization and refinement using <b>OpenSwathAssayGenerator</b></div>
 
   <ol>
@@ -1110,16 +1108,13 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
         <li><em>“upper MZ limit for precursor ions”</em>: <code class="language-plaintext highlighter-rouge">1000.0</code></li>
         <li><em>“MZ threshold in Thomson for fragment ion annotation”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
       </ul>
+
+      <blockquote class="comment">
+        <div id="comment-adjustment-of-the-spectral-library" class="box-title" aria-label="comment box: Adjustment of the Spectral library"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Adjustment of the Spectral library</div>
+        <p>The spectral library coming from <strong>diapysef library generation</strong> contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.</p>
+      </blockquote>
     </li>
   </ol>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-
-  <blockquote class="comment">
-    <div id="comment-adjustment-of-the-spectral-library" class="box-title" aria-label="comment box: Adjustment of the Spectral library"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Adjustment of the Spectral library</div>
-    <p>The spectral library coming from <strong>diapysef library generation</strong> contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.</p>
-  </blockquote>
 
 </blockquote>
 

@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Trajectory Analysis using Monocle3 " />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-14 16:36:55 +0000" />
+<meta name="DC.date" content="2022-11-28 10:10:13 +0000" />
 <meta name="DC.creator" content="Julia Jakiela" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-14 16:36:55 +0000",
+  "dateModified": "2022-11-28 10:10:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trajectory Analysis using Monocle3 ",
   "interactivityType": "mixed",
@@ -922,8 +922,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -932,7 +930,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 14, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1694,7 +1692,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
   </blockquote>
 </blockquote>
 
-<blockquote class="question">
+<blockquote class="tip">
   <div id="tip-purity-of-the-sample-hba-a1-gene" class="box-title"><button type="button" aria-controls="tip-purity-of-the-sample-hba-a1-gene-contents" aria-expanded="true" aria-label="Toggle tip box: Purity of the sample - Hba-a1 gene"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Purity of the sample - Hba-a1 gene<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The Hba-a1 gene creates hemoglobin which is found in red blood cells. This is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms a a clearly visible, distinct, little branch. Hemoglobin should NOT be found in T-cells. However, if you remember, the gene was found to be expressed in the previous Scanpy tutorial (see the image below). That marker appeared throughout the entire sample in low numbers, suggesting some background contamination of red blood cell debris in the cell samples during library generation. Unlike Scanpy, Monocle algorithms allowed us to gather the cells expressing that gene into a distinct group! That’s great!</p>
@@ -1790,7 +1788,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 
 <figure id="figure-18"><img src="../../images/scrna-casestudy-monocle/learned_trajectory.png" alt="A trajectory path, branching out to connect all the clusters and thus show their relationships." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Learned trajectory path</figcaption></figure>
 
-<blockquote class="question">
+<blockquote class="tip">
   <div id="tip-comparing-the-trajectories" class="box-title"><button type="button" aria-controls="tip-comparing-the-trajectories-contents" aria-expanded="true" aria-label="Toggle tip box: Comparing the trajectories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comparing the trajectories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>As a reminder, here’s the comparision between our trajectory and the one from the previous tutorial, where we used Scanpy for clustering, and then appplied Force-Directed + PAGA algorithms to infer trajectory. As you remember from those tutorials, the arrangement of the cell groups changed a bit during these steps. Indeed - by using the mentioned methods, we get different graphs for clusters and trajectory, while in Monocle the general ‘shape’ of the graph stays the same from the beginning. ‘Leranig the trajectory’ step in Monocle is about finding a path, along which the cells can be then ordered in pseudotime.</p>
