@@ -218,11 +218,13 @@ Using **MultiQC** ({%cite ewels2016%}), one can generate a nice report with all 
 > ### {% icon hands_on %} Hands-on: Aggregation of all metrics
 >
 > 1. Run **MultiQC**{% icon tool %} with parameters:
->     - {% icon param-file %} *"Which tool used to generate report"*: Quast
->     - {% icon param-file %} *"Data"*: all outputs of Quast
-> 2. Add report for **Bowtie 2**
->     - {% icon param-file %} *"Which tool used to generate report"*: Bowtie2
->     - {% icon param-file %} *"Data"*: all outputs of Bowtie2
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Quast`
+>                -  {% icon param-file %} *"Data"*: all outputs of Quast
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - "Which tool used to generate report"*: Bowtie2
+>                - {% icon param-file %} *"Data"*: all outputs of Bowtie2
 > 
 {: .hands_on}
 
