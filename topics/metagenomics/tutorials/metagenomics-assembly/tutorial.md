@@ -103,6 +103,8 @@ In case of a not very large dataset it’s more convenient to upload data direct
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
+> 4. Create a paired dataset collection
+>
 {: .hands_on}
 
 ## Assembly
@@ -148,9 +150,9 @@ It is useful to use both approaches: individual assembly and co-assembly and ben
 > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
 >
 > 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2) %} with parameters:
->     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
->     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collection of short reads
->     - {% icon param-file %} *"Select k-mer detection option"*: manual
+>     - {% icon param-file %} *"Pair-end reads input format"*: Paired-end: list of dataset pairs
+>     - {% icon param-file %} *"FASTQ file(s): interlaced"*: Collection of short reads
+>     - {% icon param-file %} *"Select k-mer detection option"*: User specific
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
 > 2. Rename output to "Output - assembly with MetaSPAdes"
 {: .hands_on}
@@ -308,5 +310,8 @@ We will use a MEGAHIT assembler ({%cite li2015%}) for individual assembly. This 
 > We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8 will be considered in the following tutorial - Binning tutorial.
 {: .details}
 
+## Conclusion
+
+Metagenomic data should be assembled to, ideally, obtain a set of genomes of all the species that are represented within the input data. There are different approaches for metagenome assembly, such as co-assembly, when we assembly all samples together, and individual assembly, when we assembly samples one by one and then perform de-replication. As input data for assembly we use reads that after assembling are gethered into contigs, while contigs and gaps make up scaffolds. Assembly algorithms differ depending on goals. The most commobly used algorithm is de Bruijn graphs method. MetaSPAdes and MEGAHIT are assemblers that use de Bruijn graphs. After metagenome assembly, quality control of assembly should be performed when we use various metrics to evaluate quality. Tools like Bowtie2 and Quast can be used to evaluate assembly quality.
 
 Well done! {% icon trophy %}
