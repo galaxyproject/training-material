@@ -26,7 +26,7 @@ key_points:
   - "MetaSPAdes and MEGAHIT are assemblers"
   - "Quast is the tool to assess the assembly quality"
 contributors:
-  - PlushZ
+  - plushz
   - bebatut
 tags:
   - assembly
@@ -45,6 +45,8 @@ In order to construct a whole chromosome's sequence (ideally), reads are assembl
 ![Image shows greedy extention, overlap layout consensus, and de Brujin graphs assembly algorithms](../../images/assembly-algorithms.png "Assembly algorithms. Image from {%cite carpentries%}"){:width="70%"}
 
 Different assemblers have different computational characteristics. Their performance varies according to the microbiome. The preference of one assembler over another depends on the purpose at hand. It was proven by the first round of the Critical Assessment of Metagenome Interpretation initiative ({%cite sczyrba2017%}) and confirmed by the second round of the CAMI initiative ({%cite meyer2022%}, {%cite meyer2021%}). Among the most popular are MetaSPAdes ({%cite nurk2017%}) and MEGAHIT ({%cite li2015%}). 
+
+In this tutorial, we will use [Galaxy](https://galaxyproject.org/), an open-source platform for data analysis that enables anyone to use bioinformatics tools through its graphical web interface via any Web browser, to assemble and assess the quality of performed assembly of metagenomic data.
 
 ### Data
 
@@ -149,12 +151,7 @@ It is useful to use both approaches: individual assembly and co-assembly and ben
 > In the previous steps we used **metaSPAdes** assembler. **MetaSPAdes** is a versatile metagenomic assembler ({%cite nurk2017%}). As input for metaSPAdes it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 {: .comment} 
 
-> ### {% icon details %} Output of MetaSPAdes
->
-> **MetaSPAdes** outputs contigs and scaffolds.
-> Scaffolds are segments of genome sequence reconstructed from end-sequenced whole-genome shotgun clones. Contigs and gaps make up scaffolds. Contigs are contiguous lengths of genomic sequences in which bases are known to a high degree of certainty. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
->
-{: .details}
+**MetaSPAdes** outputs contigs and scaffolds. Scaffolds are segments of genome sequence reconstructed from end-sequenced whole-genome shotgun clones. Contigs and gaps make up scaffolds. Contigs are contiguous lengths of genomic sequences in which bases are known to a high degree of certainty. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
 
 ##### Quality control of assembly
 
@@ -178,7 +175,7 @@ In order to calculate the percentage of reads used for assembly, we use **Bowtie
 >     - {% icon param-file %} *"Interleaved FASTQ file"*: raw dataset collection
 >     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index?"*: history
 >     - {% icon param-file %} *"Select reference genome"*: MetaSPAdes output
->     - {% icon param-file %} *"Save the bowtie2 mapping statistics to the history"*: True
+>     - {% icon param-file %} *"Save the Bowtie2 mapping statistics to the history"*: True
 > 3. Inspect the generated output.
 {: .hands_on}
 
