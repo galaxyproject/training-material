@@ -67,14 +67,13 @@ contributors:
 # Many ways of seeing Galaxy
 
 - Galaxy is a complicated global enterprise.
-- Participants engage in their own chosen way, according to their skills and interests
+- Individuals engage in many different ways, according to their interests.
 - For example, it is seen as:
     - A convenient and reliable way to share complex open science analyses by users
     - Inter-dependent open source code repositories by developers.
     - A global open science collaboration by investigators
 - The project is all of these at the same time and more
 - Seeing the big picture requires multiple perspectives.
-- Galaxy flourishes, because all these parts govern themselves in an efficient collaboration.
 - A separate tutorial on how activities were started, helps illustrate how the project grows.
 - This tutorial outlines the major components as a field guide.
 - The [Hub](https://galaxyproject.org/) can provide much more detail, particularly once you know what you are looking for.
@@ -95,14 +94,16 @@ contributors:
 - The project exists in the context of a global open science ecosystem
 - That context is an essential part of any description. 
 - Many possible top level divisions for describing those complexities
-- Three top level mapping categories form a simple model:
+- Three top level categories are related in a simple model:
 
 ### People + resource inputs = project outputs
 
-- An equation involving interacting high level project components
+- Interacting high level project components
 - Click on the "Details" tabs for more information about these.
 - The field guide separates those three components artificially.
 - The project depends on them all, efficiently working together.
+- Galaxy flourishes, because all these parts govern themselves in an efficient collaboration.
+
  
 > <details-title>People working together make the project possible</details-title>
 > - Open source is a very productive way of delivering software
@@ -161,8 +162,8 @@ contributors:
 # Field guide to the project ecosystem 
 
 ## 1. People: Individuals, collaborations, communities and governance
-- This field guide starts with people and their communities
-- Seeing how they have organised themselves provides a basis for the understanding the project.  
+- This field guide begins with people and their interactions in communities and structures
+- Seeing how they have organised themselves provides one useful perspective on the project.  
 - Many individuals are part of more than one of the organisations and communities below
 - People provide the project inputs
 - Investigators bring resources.
@@ -179,10 +180,10 @@ contributors:
 >   - Subgroups of individuals interacting regularly as part of a shared project activity
 >   - They are an important part of any open project
 > - Participants might interact more often if they share an important distinguishing interest.
-> - New communities are formed when these interactions become frequent and distinct in the project
->     - Recognisable communities organise activities for interested participants
->     - Leadership comes from the community 
->     - Collaborations such as the GTN are supported by communities of contributors. 
+> - New communities are formed when these interactions become frequent and are distinct from existing communities
+>     - Functional communities organise activities for interested participants
+>     - Leadership comes from the community. 
+>     - Participants 
 >     - Some are functional such as code contributors collaborating on a repository
 >     - *Communities of practice* organise best practice tools, workflows and training.
 >     - IUC was formed to provide best practice guidance and infrastructure for tool wrapper maintainers
@@ -197,19 +198,21 @@ contributors:
 
 ### Communities of Practice
 
+- Participants sharing an interest in a specific field form field-focussed communities
 - Galaxy began with a focus on tools for analysing commodity sequencing data.
-- Many new fields have adopted Galaxy for their own data and analyses
+- Many new fields have adopted it for their own data and analyses
 - Some of these are described in the companion stories tutorial.
-- Best practice tool kits are maintained by contributors working in each field
+- Best practice tool kits are maintained by contributors working in many fields:
     - [Proteomics](../../../proteomics)
     - [Climate science](../../../climate)
-    - [Microbiome] (../../../metagenomics)
+    - [Microbiome](../../../metagenomics)
     - public health 
     - small server administrators
     - add your own here...
 
 ### Regions
 
+- Participants also tend to create geographically local communities and activities
 - North America
 - Europe
 - Australia
