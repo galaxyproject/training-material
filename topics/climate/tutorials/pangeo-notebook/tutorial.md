@@ -690,7 +690,7 @@ print(dset.resample(time='30min').interpolate('linear'))
 > > > ```
 > > {: .code-in}
 > >
-> > >  ![Daily mean for PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png)
+> > ![Daily mean for PM2.5 over Italy](../../images/CAMS-PM2_5-fc-multi-Italy-mean-per-day.png)
 > {: .solution }
 {: .question }
 

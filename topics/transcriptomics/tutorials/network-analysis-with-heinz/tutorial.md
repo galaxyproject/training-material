@@ -196,7 +196,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
 > >
 > > 5. Redo the Step 2, 3, 4 for CN, set the name of the data list as 'CN'.
-> {: .details}
+> {: .hands_on}
 {: .tip}
 
 

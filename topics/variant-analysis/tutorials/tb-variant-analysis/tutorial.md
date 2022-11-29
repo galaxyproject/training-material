@@ -130,7 +130,7 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 >       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
 >       - *"Select Trimmomatic operation to perform"*
 >           - Keep the default value of `Sliding window trimming` but set
-            - *"Average quality required"*: `30`
+>           - *"Average quality required"*: `30`
 >       - *"+Insert Trimmomatic Operation"*
 >           - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >           - *"Minimum length of reads to be kept"*: `20`
