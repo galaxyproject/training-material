@@ -273,7 +273,7 @@ mutation.
 >
 > In the **MiModD NacreousMap** {% icon tool %} interface, set
 > - **type of mapping analysis to perform** to `Variant Allele Frequency
-    Mapping` and
+>   Mapping` and
 > - **data source to use** to `VCF file of variants`.
 > - As the **input file with variants to analyze** select your extracted
 >   variants VCF dataset obtained in the previous step.

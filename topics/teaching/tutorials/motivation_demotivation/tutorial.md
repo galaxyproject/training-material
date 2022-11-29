@@ -49,7 +49,7 @@ Adult learners usually come motivated to courses and the point is to not demotiv
 > - Read the chapter "What factors motivate Students to learn?" in [How Learning works, {% cite ambrose2010learning %}](https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer)
 > - Check ["Motivation and Demotivation" section](https://carpentries.github.io/instructor-training/08-motivation/index.html), Instructor Training, The Carpentries
 >
-{: .tip }
+{: .comment}
 
 
 > <agenda-title></agenda-title>
@@ -73,7 +73,8 @@ What is motivation?
 
 Motivation influences **direction**, **intensity**, **persistence** and **quality** of the learning behaviors.
 
-<!-- >> <hands-on-title>Recall a motivating learning experience (5 min - Silent reflection)</hands-on-title>
+<!-- 
+> <hands-on-title>Recall a motivating learning experience (5 min - Silent reflection)</hands-on-title>
 >
 > Write in the shared notes about a **motivating** experience in your life (as a learner) and how it impacted you
 >
@@ -250,7 +251,8 @@ Motivation can go both ways: motivation and de-motivation are strictly connected
 Adult learners usually come motivated to courses and the point is to not demotivate them.
 In many cases, to not de-motivate learners is an excellent way to support motivation.
 
-<!-- >> <hands-on-title>Recall a demotivating experience (5 min - Silent reflection)</hands-on-title>
+<!-- 
+> <hands-on-title>Recall a demotivating experience (5 min - Silent reflection)</hands-on-title>
 >
 > Write in the shared notes about a **demotivating** experience in your life (as a learner) and how it impacted you
 >

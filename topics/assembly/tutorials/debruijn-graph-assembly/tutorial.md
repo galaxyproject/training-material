@@ -149,7 +149,7 @@ Currently VelvetOptimiser does not include the LastGraph output, so we will manu
 > > <solution-title></solution-title>
 > > 55
 > {: .solution}
-{: .hands_on}
+{: .question}
 
 With this information in hand, let's run velvet:
 

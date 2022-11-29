@@ -208,7 +208,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 >    > <comment-title>Tip: search for the tool</comment-title>
 >    >
 >    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
->    {: .tip}
+>    {: .comment}
 >
 >    ![Settings for the `Remove beginning` tool](../../images/101_foreveryone_remove_beginning.png)
 >
@@ -306,7 +306,7 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 > > 2. This approach should give the same answer. There are often multiple ways to do a task in Galaxy, which way you choose is up to you!
 > {: .solution}
 >
-{: .question}
+{: .hands_on}
 
 
 ## How many samples by species are in the dataset?

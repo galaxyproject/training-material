@@ -63,7 +63,8 @@ Effective training
 
 # Effective training & good trainer
 
-<!-- >> <hands-on-title>What makes training effective and a good trainer? (10 min - Discussion in groups of 2)</hands-on-title>
+<!-- 
+> <hands-on-title>What makes training effective and a good trainer? (10 min - Discussion in groups of 2)</hands-on-title>
 >
 > - Recall concrete examples of your past training experience
 > - Share with your colleague
@@ -98,7 +99,8 @@ This matrix is then a **tool for self evaluation**:
 - In which area(s) do you feel you would need improvement?
 - In which area(s) do you feel you are ok?
 
-<!-- >> <hands-on-title>Reflect on your skills as a trainer? (5 min - Silent reflection)</hands-on-title>
+<!-- 
+> <hands-on-title>Reflect on your skills as a trainer? (5 min - Silent reflection)</hands-on-title>
 >
 > - Look at the GOBLET Skill Matrix
 > - Reflect on which areas do you need to develop in
@@ -125,7 +127,8 @@ We are now going to watch a short video (13 min) from Eric Mazur, professor at t
 
 In this video, Eric Mazur discusses some of these teaching practices and a **paradigm change: from the traditional lecture to active learning-based approaches**. Can you recognise the main features of this change of paradigm?
 
-<!-- >> <hands-on-title>Reflect on Mazur's interview (5 min - Silent reflection)</hands-on-title>
+<!-- 
+> <hands-on-title>Reflect on Mazur's interview (5 min - Silent reflection)</hands-on-title>
 >
 > - Write something that really impressed you in Mazur’s interview
 >

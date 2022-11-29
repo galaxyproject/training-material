@@ -315,7 +315,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 >  - {% icon param-text %} *Chromosome*: `chr9`
 >    - *ABL1* is on chr9. Restricting it to this region saves some processing time.
 >  - {% icon param-text %} *Minimum base quality*: `0`
-     - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
+>    - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
 >  - {% icon param-text %} *Minimum mapping quality*: `20`
 >  - {% icon param-text %} *Ploidy*: `1`
 >    - Ploidy is irrelevant here as it is a mixture of multiple genomes.
