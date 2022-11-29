@@ -58,6 +58,15 @@ For an in-depth analysis of the structure and functions of the coffee microbiome
 
 Real datasets are available for download in [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJEB24129?show=reads), as well as metadata about samples. There are six samples of a coffee fermentation system sequenced with Illumina MiSeq utilizing whole genome sequencing. This dataset contains paired-end reads.
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 ## Prepare Galaxy and data
 First we need to get some data into our history. There are different ways to upload data into the Galaxy. You can upload files from your computer, or Galaxy can also fetch data directly from external sources.
 
@@ -108,7 +117,7 @@ There are three challenges to metagenomics assembly:
 
 Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities' metagenomes.
 
-#### Co-assembly
+### Co-assembly
 
 We will execute a so-called co-assembly. Let's learn a bit more about co-assembly. Basically, we will performe the assembly on the bunch of samples taking reads from all samples simultaneously while assembling.
 
@@ -146,18 +155,18 @@ It is useful to use both approaches: individual assembly and co-assembly and ben
 > 2. Rename output to "Output - assembly with MetaSPAdes"
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > In the previous steps we used **metaSPAdes** assembler. **MetaSPAdes** is a versatile metagenomic assembler ({%cite nurk2017%}). As input for metaSPAdes it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 {: .comment} 
 
 **MetaSPAdes** outputs contigs and scaffolds. Scaffolds are segments of genome sequence reconstructed from end-sequenced whole-genome shotgun clones. Contigs and gaps make up scaffolds. Contigs are contiguous lengths of genomic sequences in which bases are known to a high degree of certainty. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
 
-##### Quality control of assembly
+#### Quality control of assembly
 
 There are different ways to analyze the quality of metagenomic assembly that was considered in detail in the CAMI1 ({%cite sczyrba2017%}) and the CAMI2 ({%cite meyer2022%}) challenge. Our recommendation for anyone interested in assembly quality assessment is to read the CAMI papers in depth. As part of our discussion of metagenomic assembly quality, we will review a few general metrics. 
 
-###### Extraction of % reads used in assemblies
+##### Extraction of % reads used in assemblies
 To determine the number of reads used to build an assembly, we want to know the percentage of reads that were used.
 
 We map input reads onto assemblies in order to extract this information.
@@ -165,7 +174,7 @@ In order to calculate the percentage of reads used for assembly, we use **Bowtie
 
 > <hands-on-title>% reads used in assemblies</hands-on-title>
 >
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > When using MetaSPAdes output, choose “Contigs” output preferably because contigs do not contain gaps represented with multiple-X letters.
 > {: .comment} 
@@ -179,7 +188,21 @@ In order to calculate the percentage of reads used for assembly, we use **Bowtie
 > 3. Inspect the generated output.
 {: .hands_on}
 
-###### Extraction of general metrics
+> <question-title></question-title>
+>
+> 1. Question?
+> 2. Question?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer
+> > 2. Answer
+> >
+> {: .solution}
+>
+{: .question}
+
+##### Extraction of general metrics
 
 - **Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping. In other words, genome fraction is the total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
 
@@ -229,11 +252,33 @@ Using **MultiQC** ({%cite ewels2016%}), one can generate a nice report with all 
 > 
 {: .hands_on}
 
-#### Individual assembly
+### Individual assembly
 So far we performed co-assembly. For the assembly techniques with the de-replication involved, it is important to know how to do individual assembly. A corresponding hands-on section with steps of individual assembly of short reads samples is below.
 We will use a MEGAHIT assembler ({%cite li2015%}) for individual assembly. This is fortunate that MEGAHIT can perform both options: individual and co-assembly.
 
-> ### {% icon details %} De-replication
+> <hands-on-title>Individual assembly of short-reads samples with MEGAHIT</hands-on-title>
+> 1. Create new history
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Name a new history "Individual assembly of short-reads samples with MEGAHIT"
+> 3.  Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
+>     - {% icon param-file %} *"Select your input option"*: paired-end collection
+>     - {% icon param-file %} *"Run in batch mode?"*: Run individually
+>     - {% icon param-file %} *"Select a paired collection"*: dataset collection
+>     - {% icon param-file %} *"K-mer specificatidetailon method"*: klim_method
+>     - {% icon param-file %} *"Minimum kmer size"*: 21
+>     - {% icon param-file %} *"Maximum kmer size"*: 91
+>     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
+>
+> > <comment-title></comment-title>
+> >
+> > **MEGAHIT** produced a collection of output assemblies - one per sample - that can be proceeded further in binning step and then de-replication.
+> {: .comment} 
+>
+{: .hands_on}
+
+> <details-title>De-replication</details-title>
 >
 > De-replication is the process of identifying sets of genomes that are the “same” in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
 >
@@ -262,28 +307,6 @@ We will use a MEGAHIT assembler ({%cite li2015%}) for individual assembly. This 
 >
 > We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8 will be considered in the following tutorial - Binning tutorial.
 {: .details}
-
-> <hands-on-title>Individual assembly of short-reads samples with MEGAHIT</hands-on-title>
-> 1. Create new history
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Name a new history "Individual assembly of short-reads samples with MEGAHIT"
-> 3.  Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: paired-end collection
->     - {% icon param-file %} *"Run in batch mode?"*: Run individually
->     - {% icon param-file %} *"Select a paired collection"*: dataset collection
->     - {% icon param-file %} *"K-mer specification method"*: klim_method
->     - {% icon param-file %} *"Minimum kmer size"*: 21
->     - {% icon param-file %} *"Maximum kmer size"*: 91
->     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
->
-> > ### {% icon comment %} Comment
-> >
-> > **MEGAHIT** produced a collection of output assemblies - one per sample - that can be proceeded further in binning step and then de-replication.
-> {: .comment} 
->
-{: .hands_on}
 
 
 Well done! {% icon trophy %}
