@@ -40,7 +40,7 @@ contributors:
 
 ---
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -103,7 +103,7 @@ on their own workstations, preparing them for sharing and deployment to producti
 system is damaged, the Appliance can be rebuilt from scratch in a few minutes.
 
 
-> ### {% icon tip %} Under the hood:
+> <tip-title>Under the hood:</tip-title>
 >
 >  - It uses [galaxyml](https://github.com/hexylena/galaxyxml) to generate the tool XML from ToolFactory form settings.
 >  - It uses [Planemo](https://github.com/galaxyproject/planemo) to generate the test outputs and then again to test newly generated code
@@ -149,7 +149,7 @@ automated code generator in a tailored, readily deployed appliance.
 
 ## Installation
 
-> ### {% icon warning %} Security advisory!
+> <warning-title>Security advisory!</warning-title>
 >- *Please do not install the ToolFactory on any public server*
 >- Although it will only run for administrative users, it allows unlimited scripting and that exposes unwise security weakness for any public facing machine.
 >- In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that's no reason to chance your arm. They keep inventing better mice.
@@ -158,9 +158,9 @@ automated code generator in a tailored, readily deployed appliance.
 {: .warning}
 
 
-> ### {% icon hands_on %} Hands-on: Launching the Appliance
+> <hands-on-title>Launching the Appliance</hands-on-title>
 >
-> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> > <warning-title>`Pull` the images first as shown below to save time.</warning-title>
 > >
 > > If they are not found locally the first time you run `docker-compose up`, docker will build them, taking half an hour or more instead of a couple of minutes.
 > >
@@ -172,7 +172,7 @@ automated code generator in a tailored, readily deployed appliance.
 >
 > 3. Clone/Download, Change to the compose directory, and launch it:
 >
->    > ### {% icon tip %} Tip: Installing the docker files, pulling and launching the Appliance
+>    > <tip-title>Installing the docker files, pulling and launching the Appliance</tip-title>
 >    > ```bash
 >    > git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    > cd toolfactory-galaxy-server/compose
@@ -182,7 +182,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon tip %} Appliance tips
+>    > <tip-title>Appliance tips</tip-title>
 >    >
 >    >  - `docker-compose pull` and making the local export directory *are only needed the first time*.
 >    >  - Add `-d` at the end of the `docker-compose up` command to detach the terminal so you can keep working - but only after watching the process the first time.
@@ -209,7 +209,7 @@ automated code generator in a tailored, readily deployed appliance.
 >      - Or more permanently in the docker-compose.yml if you prefer.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
->    > ### {% icon tip %} Tip: Demonstration tools are the functional documentation
+>    > <tip-title>Demonstration tools are the functional documentation</tip-title>
 >    >
 >    > - At first login you will find the demonstration history ready to explore if you waited for all the first run installation activity to die down
 >    > - First run startup takes about 5 minutes. Subsequent starts take less than a minute.
@@ -220,7 +220,7 @@ automated code generator in a tailored, readily deployed appliance.
 >    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Patience!
+>    > <tip-title>Patience!</tip-title>
 >    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 >    > Check for Conda or other processes if things seem stuck.
 >    {: .tip}
@@ -235,7 +235,7 @@ automated code generator in a tailored, readily deployed appliance.
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Brief Guide to ToolFactory Appliance Operation
+> <hands-on-title>Brief Guide to ToolFactory Appliance Operation</hands-on-title>
 >
 > ## Generating new tools - what happens when you press `execute` on a completed ToolFactory form?
 >
@@ -271,16 +271,16 @@ automated code generator in a tailored, readily deployed appliance.
 
 # Hands-on: Learning to use the ToolFactory
 
-> ### {% icon tip %} Using an Appliance involves dependency installation that may cause long pauses...
->>- There will be delays as any new dependencies are installed for the first time
->>        - the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.
->>        - the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.
->>        - the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.
->>        - Check for Conda and other running processes before assuming it has frozen.
+> <tip-title>Using an Appliance involves dependency installation that may cause long pauses...</tip-title>
+> There will be delays as any new dependencies are installed for the first time
+> - the first ToolFactory run after first starting a new Appliance will involve Conda installing the ToolFactory dependencies before running the job.
+> - the first time any new tool with a new dependency is run, Conda must install it locally taking a variable amount of time depending on complexity.
+> - the first time the planemo_test tool is run, there will be a 10+ minute delay as Conda grinds away.
+> - Check for Conda and other running processes before assuming it has frozen.
 {: .tip}
 
 
-> ### {% icon hands_on %} Exploring the sample tools by regenerating their original ToolFactory forms
+> <hands-on-title>Exploring the sample tools by regenerating their original ToolFactory forms</hands-on-title>
 >
 > * With the ToolFactory working and the sample history active as described above
 > * Select any of the generated toolshed archive history items.
@@ -338,109 +338,109 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - The demonstration returns whatever the user chose to repeat.
 
 
-> ### {% icon details %} Repeats demonstration generated tool XML
+> <details-title>Repeats demonstration generated tool XML</details-title>
+>
+>
+> ```xml
+> <tool name="repeats_demo" id="repeats_demo" version="2.00">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 29/05/2021 07:46:08 using the Galaxy Tool Factory.-->
+>   <description>Repeated parameter demonstration</description>
+>   <requirements/>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "2.00"]]></version_command>
+>   <command><![CDATA[python
+> $runme
+> #for $rep in $R_mi:
+> --mi "$rep.mi"
+> #end for
+> #for $rep in $R_mp:
+> --mp "$rep.mp"
+> #end for
 > >
-> >
-> >```xml
-> ><tool name="repeats_demo" id="repeats_demo" version="2.00">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 29/05/2021 07:46:08 using the Galaxy Tool Factory.-->
-> >  <description>Repeated parameter demonstration</description>
-> >  <requirements/>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "2.00"]]></version_command>
-> >  <command><![CDATA[python
-> >$runme
-> >#for $rep in $R_mi:
-> >--mi "$rep.mi"
-> >#end for
-> >#for $rep in $R_mp:
-> >--mp "$rep.mp"
-> >#end for
-> >>
-> >$repeats_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[#raw
-> >
-> >import argparse
-> >parser = argparse.ArgumentParser()
-> >a = parser.add_argument
-> >a("--mi", action="append")
-> >a("--mp", action="append")
-> >args = parser.parse_args()
-> >if args.mi:
-> >   print(" file and ".join(args.mi))
-> >if args.mp:
-> >   print(" string and ".join(args.mp))
-> >if not (args.mi or args.mp):
-> >   print('Nothing was selected')
-> >
-> >#end raw]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <repeat name="R_mi" title="Add as many Multiple input files from your history - as many as you like as needed">
-> >      <param name="mi" type="data" optional="false" label="Multiple input files from your history - as many as you like" help="" format="html,txt,xml" multiple="false"/>
-> >    </repeat>
-> >    <repeat name="R_mp" title="Add as many Multiple user supplied text strings - as many different ones as you like as needed">
-> >      <param name="mp" type="text" value="Multiple user supplied text strings - as many different ones as you like" label="Multiple user supplied text strings - as many different ones as you like" help=""/>
-> >    </repeat>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="repeats_out" format="txt" label="repeats_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="repeats_out" value="repeats_out_sample" compare="diff" lines_diff="6"/>
-> >      <repeat name="R_mi">
-> >        <param name="mi" value="mi_sample"/>
-> >      </repeat>
-> >      <repeat name="R_mp">
-> >        <param name="mp" value="Multiple user supplied text strings - as many different ones as you like"/>
-> >      </repeat>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Simple python Argparse sample to echo repeated user selections - how to use repeated inputs and user parameters.
-> >
-> >Unpredictable or messy "repeated" outputs can use a collection if they are not useful downstream but otherwise require manual wrapping - see the GTN advanced tutorial.
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    import argparse
-> >    parser = argparse.ArgumentParser()
-> >    a = parser.add_argument
-> >    a("--mi", action="append")
-> >    a("--mp", action="append")
-> >    args = parser.parse_args()
-> >    if args.mi:
-> >       print(" file and ".join(args.mi))
-> >    if args.mp:
-> >       print(" string and ".join(args.mp))
-> >    if not (args.mi or args.mp):
-> >       print('Nothing was selected')
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >
-> >
-> >```
-> >
-> > - The user sees the following form after adding 3 repeats for each of the two available items
-> >
-> > ![User can add as many repeats as they want for repeated input file and parameter values](../../images/toolfactory_repeats_sample_form.png)
+> $repeats_out]]></command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[#raw
+>
+> import argparse
+> parser = argparse.ArgumentParser()
+> a = parser.add_argument
+> a("--mi", action="append")
+> a("--mp", action="append")
+> args = parser.parse_args()
+> if args.mi:
+>    print(" file and ".join(args.mi))
+> if args.mp:
+>    print(" string and ".join(args.mp))
+> if not (args.mi or args.mp):
+>    print('Nothing was selected')
+>
+> #end raw]]></configfile>
+>   </configfiles>
+>   <inputs>
+>     <repeat name="R_mi" title="Add as many Multiple input files from your history - as many as you like as needed">
+>       <param name="mi" type="data" optional="false" label="Multiple input files from your history - as many as you like" help="" format="html,txt,xml" multiple="false"/>
+>     </repeat>
+>     <repeat name="R_mp" title="Add as many Multiple user supplied text strings - as many different ones as you like as needed">
+>       <param name="mp" type="text" value="Multiple user supplied text strings - as many different ones as you like" label="Multiple user supplied text strings - as many different ones as you like" help=""/>
+>     </repeat>
+>   </inputs>
+>   <outputs>
+>     <data name="repeats_out" format="txt" label="repeats_out" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="repeats_out" value="repeats_out_sample" compare="diff" lines_diff="6"/>
+>       <repeat name="R_mi">
+>         <param name="mi" value="mi_sample"/>
+>       </repeat>
+>       <repeat name="R_mp">
+>         <param name="mp" value="Multiple user supplied text strings - as many different ones as you like"/>
+>       </repeat>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
+>
+> **What it Does**
+>
+> Simple python Argparse sample to echo repeated user selections - how to use repeated inputs and user parameters.
+>
+> Unpredictable or messy "repeated" outputs can use a collection if they are not useful downstream but otherwise require manual wrapping - see the GTN advanced tutorial.
+>
+>
+>
+> ------
+>
+>
+> Script::
+>
+>     import argparse
+>     parser = argparse.ArgumentParser()
+>     a = parser.add_argument
+>     a("--mi", action="append")
+>     a("--mp", action="append")
+>     args = parser.parse_args()
+>     if args.mi:
+>        print(" file and ".join(args.mi))
+>     if args.mp:
+>        print(" string and ".join(args.mp))
+>     if not (args.mi or args.mp):
+>        print('Nothing was selected')
+>
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+>
+>
+> ```
+>
+>  - The user sees the following form after adding 3 repeats for each of the two available items
+>
+>  ![User can add as many repeats as they want for repeated input file and parameter values](../../images/toolfactory_repeats_sample_form.png)
 {: .details}
 
 #### ToolFactory `collection` outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
@@ -455,7 +455,7 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - The script sends them into the the collection that appears in the history after the job runs.
 - The user's history shows only one new item after it runs - it must be viewed to see all the individual contents.
 
-> ### {% icon warning %} The default generated test for output collections always passes because it doesn't test anything.
+> <warning-title>The default generated test for output collections always passes because it doesn't test anything.</warning-title>
 >
 >    - Supplying a test over-ride is recommended for collections.
 >    - Example code is shown on the sample tool's form and in the original example code below - removed from the current sample.
@@ -467,126 +467,126 @@ line will echo all the repeated parameters is shown in the example shown in the 
 >
 {: .warning}
 
-> ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
-> >
-> > - The ToolFactory form for the plotter example tool
-> > is configured as shown below, from "rerunning" the plotter job from the sample history.
-> >
-> >![ToolFactory form configuration of the output collection in the plotter example](../../images/toolfactory_plotter_demo_form.png)
-> >
-> > The Rscript is contained in a configfile so`#` is escaped - this is automatic.
-> >
-> >```xml
-> ><tool name="plotter" id="plotter" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory collection demonstration - random plots</description>
-> >  <requirements>
-> >    <requirement version="" type="package">r-base</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[Rscript
-> >$runme
-> >"$nplot"]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >\# demo
-> >args = commandArgs(trailingOnly=TRUE)
-> >if (length(args)==0) {
-> >   n_plots = 3
-> >} else {
-> >   n_plots = as.integer(args[1]) }
-> >dir.create('plots')
-> >for (i in 1:n_plots) {
-> >    foo = runif(100)
-> >    bar = rnorm(100)
-> >    bar = foo + 0.05*bar
-> >    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
-> >    dev.off()
-> >    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >    bar = as.matrix(foo)
-> >    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >    heatmap(bar,main='Random Heatmap')
-> >    dev.off()
-> >}
-> >
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
-> >  </inputs>
-> >  <outputs>
-> >    <collection name="plots" type="list" label="Plots">
-> >      <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
-> >    </collection>
-> >  </outputs>
-> >
-> >
-> >  <tests>
-> >    <test>
-> >      <param name="nplot" value="3" />
-> >      <output_collection name="plots" type="list">
-> >     <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
-> >    </output_collection>
-> > </test>
-> >  </tests>
->>
->>
-> >
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Draws as many random plot pairs as you need
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    # demo
-> >    args = commandArgs(trailingOnly=TRUE)
-> >    if (length(args)==0) {
-> >       n_plots = 3
-> >    } else {
-> >       n_plots = as.integer(args[1]) }
-> >    dir.create('plots')
-> >    for (i in 1:n_plots) {
-> >        foo = runif(100)
-> >        bar = rnorm(100)
-> >        bar = foo + 0.05*bar
-> >        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
-> >        dev.off()
-> >        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >        bar = as.matrix(foo)
-> >        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >        heatmap(bar,main='Random Heatmap')
-> >        dev.off()
-> >    }
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
->>```
->> After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
->> One of them is displayed by clicking the "eye" icon.
->> Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
->> It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
->> As shown above, the script only has to write the files to a directory.
->> Note that the test is over-ridden in the ToolFactory form to generate this tool.
->> Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.
->>
->>
->>![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
+> <details-title>`plotter` collection output demonstration tool form, generated XML and outputs</details-title>
+>
+>  - The ToolFactory form for the plotter example tool
+>  is configured as shown below, from "rerunning" the plotter job from the sample history.
+>
+> ![ToolFactory form configuration of the output collection in the plotter example](../../images/toolfactory_plotter_demo_form.png)
+>
+>  The Rscript is contained in a configfile so`#` is escaped - this is automatic.
+>
+> ```xml
+> <tool name="plotter" id="plotter" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
+>   <description>ToolFactory collection demonstration - random plots</description>
+>   <requirements>
+>     <requirement version="" type="package">r-base</requirement>
+>   </requirements>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "0.01"]]></version_command>
+>   <command><![CDATA[Rscript
+> $runme
+> "$nplot"]]></command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[
+> \# demo
+> args = commandArgs(trailingOnly=TRUE)
+> if (length(args)==0) {
+>    n_plots = 3
+> } else {
+>    n_plots = as.integer(args[1]) }
+> dir.create('plots')
+> for (i in 1:n_plots) {
+>     foo = runif(100)
+>     bar = rnorm(100)
+>     bar = foo + 0.05*bar
+>     pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+>     plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
+>     dev.off()
+>     foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+>     bar = as.matrix(foo)
+>     pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+>     heatmap(bar,main='Random Heatmap')
+>     dev.off()
+> }
+>
+> ]]></configfile>
+>   </configfiles>
+>   <inputs>
+>     <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
+>   </inputs>
+>   <outputs>
+>     <collection name="plots" type="list" label="Plots">
+>       <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
+>     </collection>
+>   </outputs>
+>
+>
+>   <tests>
+>     <test>
+>       <param name="nplot" value="3" />
+>       <output_collection name="plots" type="list">
+>      <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
+>     </output_collection>
+>  </test>
+>   </tests>
+>
+>
+>
+>   <help><![CDATA[
+>
+> **What it Does**
+>
+> Draws as many random plot pairs as you need
+>
+>
+>
+> ------
+>
+>
+> Script::
+>
+>     # demo
+>     args = commandArgs(trailingOnly=TRUE)
+>     if (length(args)==0) {
+>        n_plots = 3
+>     } else {
+>        n_plots = as.integer(args[1]) }
+>     dir.create('plots')
+>     for (i in 1:n_plots) {
+>         foo = runif(100)
+>         bar = rnorm(100)
+>         bar = foo + 0.05*bar
+>         pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+>         plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
+>         dev.off()
+>         foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+>         bar = as.matrix(foo)
+>         pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+>         heatmap(bar,main='Random Heatmap')
+>         dev.off()
+>     }
+>
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> ```
+>  After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
+>  One of them is displayed by clicking the "eye" icon.
+>  Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
+>  It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
+>  As shown above, the script only has to write the files to a directory.
+>  Note that the test is over-ridden in the ToolFactory form to generate this tool.
+>  Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.
+>
+>
+> ![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
 {: .details}
 
 #### Selects as user supplied parameters
@@ -597,74 +597,74 @@ line will echo all the repeated parameters is shown in the example shown in the 
 - It is clumsy and suitable only for a limited number of options.
 - Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
 
-> ### {% icon details %} `select_test` select field demonstration tool generated XML
->>
->>The ToolFactory form section for user configurable command line settings is
->> configured as shown here for the select demonstration
->>
->>![Form to configure an additional parameter as a select](../../images/toolfactory_select_demo_form.png)
+> <details-title>`select_test` select field demonstration tool generated XML</details-title>
+>
+> The ToolFactory form section for user configurable command line settings is
+>  configured as shown here for the select demonstration
+>
+> ![Form to configure an additional parameter as a select](../../images/toolfactory_select_demo_form.png)
+>
+> The generated XML is shown below.
+>
+> ```xml
+> <tool name="select_test" id="select_test" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
+>   <description>ToolFactory select demonstration</description>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "0.01"]]></version_command>
+>   <command><![CDATA[bash
+> $runme
+> "$choose"
 > >
-> >The generated XML is shown below.
-> >
-> >```xml
-> ><tool name="select_test" id="select_test" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory select demonstration</description>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[bash
-> >$runme
-> >"$choose"
-> >>
-> >$select_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >echo "You chose \$1"
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Choose" help="" type="select" name="choose" argument="choose">
-> >      <option value="won">one</option>
-> >      <option value="too">two</option>
-> >      <option value="free">three</option>
-> >    </param>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="select_out" format="txt" label="select_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
-> >      <param name="choose" value="won"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Echoes your selection
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    echo "You chose $1"
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-> > The generated tool form from the select demonstration shows the three options and returns the one selected.
-> >
-> >![Generated form seen by users of the select demonstration tool](../../images/toolfactory_select_test_tool.png)
+> $select_out]]></command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[
+> echo "You chose \$1"
+> ]]></configfile>
+>   </configfiles>
+>   <inputs>
+>     <param label="Choose" help="" type="select" name="choose" argument="choose">
+>       <option value="won">one</option>
+>       <option value="too">two</option>
+>       <option value="free">three</option>
+>     </param>
+>   </inputs>
+>   <outputs>
+>     <data name="select_out" format="txt" label="select_out" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
+>       <param name="choose" value="won"/>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
+>
+> **What it Does**
+>
+> Echoes your selection
+>
+>
+>
+> ------
+>
+>
+> Script::
+>
+>     echo "You chose $1"
+>
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> ```
+>  The generated tool form from the select demonstration shows the three options and returns the one selected.
+>
+> ![Generated form seen by users of the select demonstration tool](../../images/toolfactory_select_test_tool.png)
 {: .details}
 
 
@@ -686,108 +686,109 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
      - A lot depends on the ingenuity and preferences of the developer.
      - For specialist use and complex tools, the project developer supported tool building infrastructure is recommended.
 
-> ### {% icon details %} `planemo lint` demonstration tool generated XML
-> > The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.
-> >```xml
-> ><tool name="planemo_lint" id="planemo_lint" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 18/05/2021 01:16:17 using the Galaxy Tool Factory.-->
-> >  <description>Runs Planemo lint on any ToolFactory xml history file</description>
-> >  <requirements>
-> >    <requirement version="0.74.3" type="package">planemo</requirement>
-> >    <requirement version="3.7" type="package">python</requirement>
-> >    <requirement type="package" version="4.6.3">lxml</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[python
-> >$runme
-> >$ToolFactory_XML_to_be_linted
-> >>
-> >$lint_output]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[#raw
+> <details-title>`planemo lint` demonstration tool generated XML</details-title>
+> The labels for outputs have been edited to include the tool name in this sample - this is not possible at present in the ToolFactory.
+>
+> ```xml
+> <tool name="planemo_lint" id="planemo_lint" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 18/05/2021 01:16:17 using the Galaxy Tool Factory.-->
+>   <description>Runs Planemo lint on any ToolFactory xml history file</description>
+>   <requirements>
+>     <requirement version="0.74.3" type="package">planemo</requirement>
+>     <requirement version="3.7" type="package">python</requirement>
+>     <requirement type="package" version="4.6.3">lxml</requirement>
+>   </requirements>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "0.01"]]></version_command>
+>   <command><![CDATA[python
+> $runme
+> $ToolFactory_XML_to_be_linted
 > >
-> >import lxml.etree as ET
-> >import os
-> >import subprocess
-> >import sys
-> >
-> >def main():
-> >    assert len(sys.argv) >= 2, 'Must have input xml on command line'
-> >    xmlin = sys.argv[1]
-> >    tree = ET.parse(xmlin)
-> >    root = tree.getroot()
-> >    toolname = root.get('id')
-> >    toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
-> >    cl = ['planemo', 'lint', toolxml]
-> >    print('Running', cl)
-> >    p = subprocess.run(cl, shell=False)
-> >    if p.returncode > 0:
-> >         print('Planemo lint call returned error %d')
-> >    else:
-> >         print('Lint report ends')
-> >main()
-> >
-> >
-> >#end raw]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param name="ToolFactory_XML_to_be_linted" type="data" optional="false" label="ToolFactory XML to be linted" help="" format="xml" multiple="false"/>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="lint_output" format="txt" label="${ToolFactory_XML_to_be_linted.name}_lint_output" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="lint_output" value="lint_output_sample" compare="diff" lines_diff="5"/>
-> >      <param name="ToolFactory_XML_to_be_linted" value="ToolFactory_XML_to_be_linted_sample"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >ToolFactory demonstration script using bash to run planemo lint from a history XML representing a tool.
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    import lxml.etree as ET
-> >    import os
-> >    import subprocess
-> >    import sys
-> >    def main():
-> >        assert len(sys.argv) >= 2, 'Must have input xml on command line'
-> >        xmlin = sys.argv[1]
-> >        tree = ET.parse(xmlin)
-> >        root = tree.getroot()
-> >        toolname = root.get('id')
-> >        toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
-> >        cl = ['planemo', 'lint', toolxml]
-> >        print('Running', cl)
-> >        p = subprocess.run(cl, shell=False)
-> >        if p.returncode > 0:
-> >             print('Planemo lint call returned error %d')
-> >        else:
-> >             print('Lint report ends')
-> >    main()
-> >#end raw
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >
-> >
->>
->>```
+> $lint_output]]></command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[#raw
+> 
+> import lxml.etree as ET
+> import os
+> import subprocess
+> import sys
+> 
+> def main():
+>     assert len(sys.argv) >= 2, 'Must have input xml on command line'
+>     xmlin = sys.argv[1]
+>     tree = ET.parse(xmlin)
+>     root = tree.getroot()
+>     toolname = root.get('id')
+>     toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
+>     cl = ['planemo', 'lint', toolxml]
+>     print('Running', cl)
+>     p = subprocess.run(cl, shell=False)
+>     if p.returncode > 0:
+>          print('Planemo lint call returned error %d')
+>     else:
+>          print('Lint report ends')
+> main()
+> 
+> 
+> #end raw]]></configfile>
+>   </configfiles>
+>   <inputs>
+>     <param name="ToolFactory_XML_to_be_linted" type="data" optional="false" label="ToolFactory XML to be linted" help="" format="xml" multiple="false"/>
+>   </inputs>
+>   <outputs>
+>     <data name="lint_output" format="txt" label="${ToolFactory_XML_to_be_linted.name}_lint_output" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="lint_output" value="lint_output_sample" compare="diff" lines_diff="5"/>
+>       <param name="ToolFactory_XML_to_be_linted" value="ToolFactory_XML_to_be_linted_sample"/>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
+> 
+> **What it Does**
+> 
+> ToolFactory demonstration script using bash to run planemo lint from a history XML representing a tool.
+> 
+> 
+> 
+> ------
+> 
+> 
+> Script::
+> 
+>     import lxml.etree as ET
+>     import os
+>     import subprocess
+>     import sys
+>     def main():
+>         assert len(sys.argv) >= 2, 'Must have input xml on command line'
+>         xmlin = sys.argv[1]
+>         tree = ET.parse(xmlin)
+>         root = tree.getroot()
+>         toolname = root.get('id')
+>         toolxml = os.path.join('/export/galaxy/tools/TFtools', toolname, '%s.xml' % toolname)
+>         cl = ['planemo', 'lint', toolxml]
+>         print('Running', cl)
+>         p = subprocess.run(cl, shell=False)
+>         if p.returncode > 0:
+>              print('Planemo lint call returned error %d')
+>         else:
+>              print('Lint report ends')
+>     main()
+> #end raw
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> 
+> 
+> 
+> ```
 {: .details}
 
 
@@ -799,132 +800,132 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 - The Prolog tool has an inbuilt script. Substitute the sample script for real code and add inputs, user-configurable parameters and outputs to produce a tool wrapping a Prolog script if you ever need one in Galaxy.
 - The Lisp tool will try to execute the selected input text file, hoping it contains a Lisp program like the `hello world` example supplied. This is a terrible idea for a public server and is shown only as a skeletal example of what is possible, not what is sensible.
 
-> ### {% icon details %} `Prolog` and `Lisp` demonstration tools
-> >```xml
-> ><tool name="prolog_demo" id="prolog_demo" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.-->
-> >  <description>Runs a prolog script</description>
-> >  <requirements>
-> >    <requirement version="" type="package">swi-prolog</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[swipl
-> >-q
-> >-g
-> >main
-> >-s
+> <details-title>`Prolog` and `Lisp` demonstration tools</details-title>
+> ```xml
+> <tool name="prolog_demo" id="prolog_demo" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 04/04/2021 17:21:32 using the Galaxy Tool Factory.-->
+>   <description>Runs a prolog script</description>
+>   <requirements>
+>     <requirement version="" type="package">swi-prolog</requirement>
+>   </requirements>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "0.01"]]></version_command>
+>   <command><![CDATA[swipl
+> -q
+> -g
+> main
+> -s
+> 
+> $runme
 > >
-> >$runme
-> >>
-> >$prolog_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >parent(pam,bob).
-> >parent(tom,bob).
-> >parent(tom,liz).
-> >parent(bob,ann).
-> >parent(bob,pat).
-> >parent(pat,jim).
+> $prolog_out]]></command>
+>   <configfiles>
+>     <configfile name="runme"><![CDATA[
+> parent(pam,bob).
+> parent(tom,bob).
+> parent(tom,liz).
+> parent(bob,ann).
+> parent(bob,pat).
+> parent(pat,jim).
+> 
+> main :-
+>     parent(X,jim),
+>     format('~a is the parent of jim~n', [X]),
+>     halt.
+> ]]></configfile>
+>   </configfiles>
+>   <inputs/>
+>   <outputs>
+>     <data name="prolog_out" format="txt" label="prolog_out" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="prolog_out" value="prolog_out_sample" compare="diff" lines_diff="0"/>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
+> 
+> **What it Does**
+> 
+> 
+> 
+> Prolog demonstration in the ToolFactory
+> 
+> 
+> 
+> ------
+> 
+> 
+> Script::
+> 
+>     parent(pam,bob).
+>     parent(tom,bob).
+>     parent(tom,liz).
+>     parent(bob,ann).
+>     parent(bob,pat).
+>     parent(pat,jim).
+>     main :-
+>         parent(X,jim),
+>         format('~a is the parent of jim~n', [X]),
+>         halt.
+> 
+> ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> ```
+> 
+>  Lisp too!
+>  In this case, the tool takes a lisp script as input
+> 
+>  A lisp expression was typed into the upload tool text box and saved as hello_lisp.txt ```(write-line "Hello, ToolFactory does Lisp!")```.
+>  It or any other lisp script can be used as input to the SBCL Conda dependency.
+> 
+> ```xml
+> <tool name="lisp_demo" id="lisp_demo" version="0.01">
+>   <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>   <!--Created by admin@galaxy.org at 04/04/2021 16:38:47 using the Galaxy Tool Factory.-->
+>   <description>Runs SBCL hello world demonstration</description>
+>   <requirements>
+>     <requirement version="" type="package">sbcl</requirement>
+>   </requirements>
+>   <stdio>
+>     <exit_code range="1:" level="fatal"/>
+>   </stdio>
+>   <version_command><![CDATA[echo "0.01"]]></version_command>
+>   <command><![CDATA[sbcl
+> --script
+> $script
 > >
-> >main :-
-> >    parent(X,jim),
-> >    format('~a is the parent of jim~n', [X]),
-> >    halt.
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs/>
-> >  <outputs>
-> >    <data name="prolog_out" format="txt" label="prolog_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="prolog_out" value="prolog_out_sample" compare="diff" lines_diff="0"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >
-> >
-> >Prolog demonstration in the ToolFactory
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    parent(pam,bob).
-> >    parent(tom,bob).
-> >    parent(tom,liz).
-> >    parent(bob,ann).
-> >    parent(bob,pat).
-> >    parent(pat,jim).
-> >    main :-
-> >        parent(X,jim),
-> >        format('~a is the parent of jim~n', [X]),
-> >        halt.
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
-> >
-> > Lisp too!
-> > In this case, the tool takes a lisp script as input
-> >
-> > A lisp expression was typed into the upload tool text box and saved as hello_lisp.txt ```(write-line "Hello, ToolFactory does Lisp!")```.
-> > It or any other lisp script can be used as input to the SBCL Conda dependency.
-> >
-> >```xml
-> ><tool name="lisp_demo" id="lisp_demo" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 04/04/2021 16:38:47 using the Galaxy Tool Factory.-->
-> >  <description>Runs SBCL hello world demonstration</description>
-> >  <requirements>
-> >    <requirement version="" type="package">sbcl</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[sbcl
-> >--script
-> >$script
-> >>
-> >$lisp_out]]></command>
-> >  <inputs>
-> >    <param optional="false" label="SBCL lisp script to execute" help="" format="txt" multiple="false" type="data" name="script" argument="--script"/>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="lisp_out" format="txt" label="lisp_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="lisp_out" value="lisp_out_sample" compare="diff" lines_diff="0"/>
-> >      <param name="script" value="script_sample"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Lisp in the ToolFactory
-> >
-> > ]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-> >```
+> $lisp_out]]></command>
+>   <inputs>
+>     <param optional="false" label="SBCL lisp script to execute" help="" format="txt" multiple="false" type="data" name="script" argument="--script"/>
+>   </inputs>
+>   <outputs>
+>     <data name="lisp_out" format="txt" label="lisp_out" hidden="false"/>
+>   </outputs>
+>   <tests>
+>     <test>
+>       <output name="lisp_out" value="lisp_out_sample" compare="diff" lines_diff="0"/>
+>       <param name="script" value="script_sample"/>
+>     </test>
+>   </tests>
+>   <help><![CDATA[
+> 
+> **What it Does**
+> 
+> Lisp in the ToolFactory
+> 
+>  ]]></help>
+>   <citations>
+>     <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>   </citations>
+> </tool>
+> ```
 {: .details}
 
 
@@ -940,17 +941,17 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
 - It allows templating - `${reference_fasta_filename}` is replaced by the current value of the `reference_fasta_filename` parameter on the tool form.
 - The pasted over-ride completely replaces the galaxyxml generated ones.
 
-> ### {% icon details %} `bwa_test_command_override` sample - the command override
->> ToolFactory command over-ride section adapted from the Planemo BWA example.
->>
->>```
->> ## Build reference
->>#set $reference_fasta_filename = "localref.fa"
->>ln -s "${ref_file}" "${reference_fasta_filename}" ;
->>bwa index -a is "${reference_fasta_filename}" ;
->>bwa mem -t "2" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
->>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
->>```
+> <details-title>`bwa_test_command_override` sample - the command override</details-title>
+>  ToolFactory command over-ride section adapted from the Planemo BWA example.
+> 
+> ```
+>  ## Build reference
+> #set $reference_fasta_filename = "localref.fa"
+> ln -s "${ref_file}" "${reference_fasta_filename}" ;
+> bwa index -a is "${reference_fasta_filename}" ;
+> bwa mem -t "2" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
+> samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
+> ```
 {: .details}
 
 - There is another sample bwa_test tool that achieves the same results using a bash script.
@@ -962,18 +963,18 @@ runs planemo lint on the inferred tool path. STDOUT is captured with the linter 
   - These and other extensions are welcomed as pull requests if there is a need for them.
   - But if a tool needs them, it probably needs an experienced tool developer.
 
-> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
->> ToolFactory form bash script to replace above command over-ride section:
->>
->>```
->>REFFILE=$1
->>FASTQ=$2
->>BAMOUT=$3
->>ln -s "$REFFILE" "refalias"
->>bwa index -a is "refalias"
->>bwa mem -t "2" -v 1 "refalias" "$FASTQ"  | samtools view -Sb - > temporary_bam_file.bam
->>samtools sort -o "$BAMOUT" temporary_bam_file.bam
->>```
+> <details-title>`bwa_test_toolfactory_positional_bash` sample alternative.</details-title>
+> ToolFactory form bash script to replace above command over-ride section:
+> 
+> ```
+> REFFILE=$1
+> FASTQ=$2
+> BAMOUT=$3
+> ln -s "$REFFILE" "refalias"
+> bwa index -a is "refalias"
+> bwa mem -t "2" -v 1 "refalias" "$FASTQ"  | samtools view -Sb - > temporary_bam_file.bam
+> samtools sort -o "$BAMOUT" temporary_bam_file.bam
+> ```
 {: .details}
 
 
@@ -1075,7 +1076,7 @@ It should be there if the XML for the new tool appeared without complaint. Pleas
 
 ## Why is the form so complex?
 
-> ### {% icon details %} Summary: details needed and how they are used to generate a new tool
+> <details-title>Summary: details needed and how they are used to generate a new tool</details-title>
 >
 > #### What information is needed to generate a tool ?
 >
@@ -1187,4 +1188,4 @@ Special thanks to:
     - the vision of instant installation of generated tools for developer feedback.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
 - {% include _includes/contributor-badge.html id="bgruening" %} for making it easy to pop-up and flavour [docker-galaxy-stable](https://github.com/bgruening/docker-galaxy-stable)
-- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+ {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.

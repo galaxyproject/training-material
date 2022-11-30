@@ -74,7 +74,7 @@ Users new to Galaxy from other scientific disciplines not yet familiar with the 
 may find the ToolFactory appliance useful for familiarising themselves with tool development in Galaxy.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -128,9 +128,8 @@ This tutorial introduces that unusual tool.
 The ToolFactory implements an automated, form driven wrapper code generator, and an installer for newly generated tools so you can try them straight away
 in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes - well, 5 or 10 perhaps.
 
-> ### {% icon tip %} The ToolFactory appliance provides a fully featured Galaxy server.
-> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
-and for developing new tools for new kinds of scientists using Galaxy.
+> <tip-title>The ToolFactory appliance provides a fully featured Galaxy server.</tip-title>
+> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works and for developing new tools for new kinds of scientists using Galaxy.
 > - Any Galaxy tool from the toolshed can be installed and used.
 > - Any simple script can have a tool wrapper generated and installed as a new tool in the Appliance.
 > - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.
@@ -163,7 +162,7 @@ If you are a scientist/programmer or software developer new to Galaxy and new to
 It introduces an automated way to convert any useful script into a toolshed ready tool, quickly *inside* Galaxy.
 
 
-> ### {% icon tip %} Alternative ways to generate and see tools:
+> <tip-title>Alternative ways to generate and see tools:</tip-title>
 > - The [Galaxy Language Server](https://github.com/galaxyproject/galaxy-language-server)
 >   - Undergoing rapid development.
 >   - Specialised semi-automated tool building environment with VCS bindings.
@@ -200,7 +199,7 @@ such as "Hello, Galaxy Training Network".
 
 Save the following sample as `hello.sh`:
 
- > ### {% icon code-in %} Starting bash script: Hello World
+ > <code-in-title>Starting bash script: Hello World</code-in-title>
  > ```bash
  > #!/bin/bash
  > echo "Hello $1!"
@@ -251,7 +250,7 @@ Much of what is collected is used to construct a command line for the script whe
 Other information such as the name and dependencies are needed to construct the relevant
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
-> ### {% icon details %} Detail to explore: Annotated ToolFactory form for the `Hello World` example
+> <details-title>Detail to explore: Annotated ToolFactory form for the `Hello World` example</details-title>
 > ![First part of the form](../../images/ToolFactory_hello1form.png "The first part of the form collects the new tool name and dependencies to be installed. In this case, no Conda dependency is used. bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them. If run in a shell, the bash script <code>echo "Hello $1"</code> in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network" This will be collected from STDOUT (configured below) into a new history output file (named and configured below). Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.")
 >
 > ![Second part of the form](../../images/ToolFactory_hello2form.png "The second section shows the new generated history output. It uses the special name <code>STDOUT</code> so the tool will take whatever the bash script writes and create a new text file called <code>Hello_output</code>. When the test is generated, the pass criterion is that the default value <code>Galaxy Training Network</code> should appear as the message in <code>hello_output</code>. no difference. Other criteria including <code>sim_size</code> are available for the test applied to each output file. There is no limit (other than your patience) to the number of new generated history outputs. Note that this example has no history input files. Again, any number of these can be specified on the form using the repeat.")
@@ -264,7 +263,7 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 The generated tool XML appears in the history after the ToolFactory is executed and the tool itself is installed in the `ToolFactory Generated Tools` submenu.
 Text on the form is specified in the XML and it all comes from the ToolFactory form.
 
-> ### {% icon details %} Detail to explore: Generated XML and tool form
+> <details-title>Detail to explore: Generated XML and tool form</details-title>
 >
 > [Galaxy XML documentation is here](https://docs.galaxyproject.org/en/latest/dev/schema.html)
 >
@@ -331,7 +330,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 {: .details}
 
 
-> ### {% icon tip %} If this is confusing
+> <tip-title>If this is confusing</tip-title>
 >
 > If you are not yet familiar with the basics of Galaxy tools covered in the
 > [tool integration training material]({% link topics/dev/tutorials/tool-integration/slides.html %}), the example form and XML
@@ -341,7 +340,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 {: .tip}
 
-> ### {% icon comment %} Limits and scope
+> <comment-title>Limits and scope</comment-title>
 >
 > - It works best wrapping simple R/Bash/Python and other interpreted scripts, with few user supplied parameters and a few input and output files.
 > - Scripts are easier than some Conda packages
@@ -363,7 +362,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 # Installation
 
-> ### {% icon hands_on %} Hands-on: Launching the Appliance
+> <hands-on-title>Launching the Appliance</hands-on-title>
 >
 > 1. [Install Docker](https://docs.docker.com/engine/install/) following the appropriate instructions for your platform.
 >
@@ -375,13 +374,13 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >
 > 4. Change to the compose directory, pull the images from quay.io and launch it
 >
-> > ### {% icon warning %} `Pull` the images first as shown below to save time.
+> > <warning-title>`Pull` the images first as shown below to save time.</warning-title>
 > >
 > > If they are not found locally (`docker images`), the first time you run `docker-compose up`, docker will build them, taking much, much, much longer.
 > >
 > {: .warning}
 >
->    > ### {% icon code-in %} Input Bash: Installing the docker files, pulling and launching the Appliance
+>    > <code-in-title>Bash: Installing the docker files, pulling and launching the Appliance</code-in-title>
 >    > ```bash
 >    > git clone https://github.com/fubar2/toolfactory-galaxy-server
 >    > cd toolfactory-galaxy-server/compose
@@ -391,7 +390,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon tip %} Appliance tips
+>    > <tip-title>Appliance tips</tip-title>
 >    >
 >    >  - First time start takes 5-10 minutes after the pull completes.
 >    >      - Watching the first startup process activity log is highly recommended.
@@ -408,7 +407,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    >     - Change your admin password
 >   {: .tip}
 >
->    > ### {% icon tip %} Appliance disposal to free up desktop resources when no longer needed
+>    > <tip-title>Appliance disposal to free up desktop resources when no longer needed</tip-title>
 >    > - Save any useful generated material from the `export` directory or from the running Appliance.
 >    > - Delete the `...compose/export` directory - you will need `sudo rm -rf export/*` and perhaps `sudo rm -rf export/.d*`
 >    >   - Then you can delete the parent `toolfactory-galaxy-server` directory
@@ -424,7 +423,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    - This is obviously insecure but convenient and easily changed at first login.
 >    - The container `/export` directory is mounted locally at `compose/export` so you can find your generated and tested tools for sharing.
 >
->    > ### {% icon tip %} Demonstration tools are the best functional documentation.
+>    > <tip-title>Demonstration tools are the best functional documentation.</tip-title>
 >    >
 >    > - At first login you will find the demonstration history ready to explore if you waited for all the Conda activity to die down
 >    > - It takes a minute or two to import because the dependencies for the ToolFactory must first be installed.
@@ -435,7 +434,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >    >    - Change the tool ID to change the tool name and generate a different tool. *Generating a same-name tool will overwrite the old version*.
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Patience!
+>    > <tip-title>Patience!</tip-title>
 >    > When you run the ToolFactory for the first time inside the container and whenever you run a new tool with new dependencies, it will require some time to build the conda environment.
 >    > Check for Conda or other processes if things seem stuck.
 >    {: .tip}
@@ -457,7 +456,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 
 # Hello World!
 
-> ### {% icon hands_on %} Hands-on: Building the Hello World example
+> <hands-on-title>Building the Hello World example</hands-on-title>
 >
 > 1. Run {% tool ToolFactory %} with the following parameters:
 >    - "Dependencies, optional script and script interpreter"
@@ -476,7 +475,7 @@ Text on the form is specified in the XML and it all comes from the ToolFactory f
 >          - *"Enter this parameter's label for the form"*: `Say hello to`
 >          - *"Positional ordinal \| argparse argument name"*: `1`
 >
->    > ### {% icon comment %} First time use involves a long pause in some installations
+>    > <comment-title>First time use involves a long pause in some installations</comment-title>
 >    > The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
 >    {: .comment}
 >
@@ -525,7 +524,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 
 ## Hello World: Continued
 
-> ### {% icon hands_on %} Hands-on: Modifying the Hello World example
+> <hands-on-title>Modifying the Hello World example</hands-on-title>
 >
 > 1. Rerun the output of your previous job, and make the following changes
 >
@@ -542,7 +541,7 @@ Galaxy can be used as an Integrated Development Environment for tools - clunky b
 
 ## Hello Collections!
 
-> ### {% icon hands_on %} Hands-on: Building a File Splitter
+> <hands-on-title>Building a File Splitter</hands-on-title>
 >
 > 1. Run {% tool ToolFactory %} with the following parameters:
 >    - *"New tool ID and title for outputs"*: `file_splitter`
@@ -588,7 +587,7 @@ You could extend this example to split a `.fastq` file which could speed up your
 They are also a convenient way to keep outputs together that are unlikely to be used downstream in a workflow, such as reports and images
 that a user might want to be able to easily view if they want without cluttering up the history.
 
-> ### {% icon warning %} Collection Testing
+> <warning-title>Collection Testing</warning-title>
 > The default generated test for output collections always passes because it doesn't test anything.
 > Supplying a test over-ride is recommended for collections.
 > For a real test, one or more expected <element.../> tags must be provided so the test really does test something.
@@ -596,7 +595,7 @@ that a user might want to be able to easily view if they want without cluttering
 
 ## Done!
 
-> ### {% icon hands_on %} Hands-on: To safely shut the appliance down
+> <hands-on-title>To safely shut the appliance down</hands-on-title>
 >
 > 1. Type <kbd>Ctrl-C</kbd> in the terminal where you ran `docker-compose`. Most things will still be there next time you start it.
 >

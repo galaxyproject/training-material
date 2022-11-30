@@ -23,7 +23,6 @@ module GTNNotebooks
   }
   COLORS_EXTRA = {
     'agenda' => 'display: none',
-    'solution' => 'color: transparent !important',
   }
 
   ICONS = {
@@ -34,7 +33,23 @@ module GTNNotebooks
     'solution' => '👁',
     'warning' => '⚠️',
     'comment' => '💬',
+    'feedback' => '⁉️',
+    'details' => '💬',
     'hands_on' => '✏️',
+  }
+
+  ICONS_FA = {
+    "far fa-keyboard" => "code-in",
+    "fas fa-laptop-code" => "code-out",
+    "far fa-comment-dots" => "comment",
+    "fas fa-info-circle" => "details",
+    "far fa-comments" => "feedback",
+    "fas fa-pencil-alt" => "hands_on",
+    "fas fa-pencil-alt" => "hands_on",
+    "far fa-question-circle" => "question",
+    "far fa-eye" => "solution",
+    "far fa-lightbulb" => "tip",
+    "fas fa-exclamation-triangle" => "warning",
   }
 
   def self.generate_css
@@ -164,7 +179,13 @@ module GTNNotebooks
     out.flatten(1).join("\n")
   end
 
-  def self.construct_byline(folks)
+  def self.construct_byline(metadata)
+    if metadata.has_key?('contributors')
+      folks = metadata['contributors']
+    else
+      folks = metadata['contributions'].map{|k, v| v }.flatten
+    end
+
     contributors = nil
     File.open('CONTRIBUTORS.yaml', 'r') do |f2|
       contributors = YAML.load(f2.read)
@@ -176,7 +197,7 @@ module GTNNotebooks
   end
 
   def self.add_metadata_cell(notebook, metadata)
-    by_line = self.construct_byline(metadata['contributors'])
+    by_line = self.construct_byline(metadata)
 
     meta_header = [
       "<div style=\"border: 2px solid #8A9AD0; margin: 1em 0.2em; padding: 0.5em;\">\n\n",
@@ -294,7 +315,7 @@ module GTNNotebooks
   end
 
   def self.render_rmarkdown(page_data, page_content, page_url, page_last_modified, fn)
-    by_line = self.construct_byline(page_data['contributors'])
+    by_line = self.construct_byline(page_data)
 
     # Replace top level `>` blocks with fenced `:::`
     content = group_doc_by_first_char(page_content)
@@ -304,6 +325,9 @@ module GTNNotebooks
 
     ICONS.each{ |key, val|
       content.gsub!(/{% icon #{key} %}/, val)
+    }
+    ICONS_FA.each{ |key, val|
+      content.gsub!(/<i class="#{key}" aria-hidden="true"><\/i>/, ICONS[val])
     }
 
     content = content + %Q(\n\n# References\n\n<div id="refs"></div>\n)
@@ -395,7 +419,7 @@ module GTNNotebooks
           "Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material#{url}#feedback) and check there for further resources!\n"
       ]
     }]
-    JSON.pretty_generate(notebook)
+    notebook
   end
 
   def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
@@ -411,6 +435,9 @@ module GTNNotebooks
         # rendering otherwise by going through rouge
         source = source.gsub(/ `([^`]*)`([^`])/, ' <code>\1</code>\2')
           .gsub(/([^`])`([^`]*)` /, '\1<code>\2</code> ')
+
+        # Strip out includes
+        source = source.gsub(/{% include .* %}/, '')
 
         # Replace all the broken icons that can't render, because we don't
         # have access to the full render pipeline.
@@ -488,9 +515,6 @@ module GTNNotebooks
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')
         cell['source'].gsub!(/<div class="highlight">/, '<div>')
         cell['source'].gsub!(/<code>/, '<code style="color: inherit">')
-
-        # add a 'hint' to the solution boxes which have blanked out text.
-        cell['source'].gsub!(/(<h3 id="-icon-solution--solution">)/, '<div style="color: #555; font-size: 95%;">Hint: Select the text with your mouse to see the answer</div>\1')
 
         # There is some weirdness in the processing of $s in Jupyter. After a
         # certain number of them, it will give up, and just render everything

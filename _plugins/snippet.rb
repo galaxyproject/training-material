@@ -1,4 +1,5 @@
 require 'yaml'
+require './_plugins/gtn.rb'
 
 module Jekyll
   module Tags
@@ -45,6 +46,7 @@ module Jekyll
           context["include"] = parse_params(context) if @params
           x = "#{inclusion.render(context)}"
           p = context["include"]
+          count = 0
 
           box_start=""
           box_end=""
@@ -59,33 +61,19 @@ module Jekyll
             end
             icons = get_config(context)
 
-            tiptitle = "Tip"
-            handsontitle = "Hands-on"
             if context.registers[:page]&.key?('lang')
-              lang = context.registers[:page]['lang']
-              tiptitle = context.registers[:site].data["lang"][lang]["tip"]
-              handsontitle = context.registers[:site].data["lang"][lang]["handson"]
+              lang = context.registers[:page].fetch('lang', "en")
+              if lang.nil?
+                lang = "en"
+              end
             end
-
-            if box_type == 'tip'
-                icon_text = icons['tip']
-                box_start = '> ### '+get_icon(icon_text)+' '+tiptitle+': ' + metadata['title']
-                box_end   = "\n{: .tip}"
+            if lang != "en" and lang != "es"
+              lang = "en"
             end
-            if box_type == 'hands_on'
-                icon_text = icons['hands_on']
-                box_start = '> ### '+get_icon(icon_text)+' '+handsontitle+': ' + metadata['title']
-                box_end   = "\n{: .hands_on}"
-            end
-            if box_type == 'comment'
-                icon_text = icons['comment']
-                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
-                box_end   = "\n{: .comment}"
-            end
-            if box_type == 'question'
-                icon_text = icons['question']
-                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
-                box_end   = "\n{: .question}"
+            if box_type != 'none' and !box_type.nil?
+              box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang, context.registers[:page]['path'])
+              box_start = '> ' + box_title
+              box_end = "\n{: ." + box_type + "}"
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')

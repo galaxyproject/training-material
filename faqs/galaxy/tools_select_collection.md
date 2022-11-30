@@ -1,5 +1,5 @@
 ---
-title: Selecting a datast collection as input
+title: Selecting a dataset collection as input
 area: tools
 box_type: tip
 layout: faq

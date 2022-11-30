@@ -1,9 +1,11 @@
 require 'json'
+require 'yaml'
+require './_plugins/gtn.rb'
 
 
 module TopicFilter
   def self.list_topics(site)
-    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('type')}.map{|k, v| k}
+    site.data.select{|k, v| v.is_a?(Hash) && v.has_key?('maintainers')}.map{|k, v| k}
   end
 
   def self.topic_filter(site, topic_name)
@@ -17,6 +19,25 @@ module TopicFilter
     end
 
     site.data['cache_topic_filter'][topic_name]
+  end
+
+  def self.fetch_tutorial_material(site, topic_name, tutorial_name)
+    if not site.data.has_key?('cache_topic_filter')
+      site.data['cache_topic_filter'] = Hash.new
+
+      # For each topic
+      self.list_topics(site).each{|topic|
+        site.data['cache_topic_filter'][topic] = self.run_topic_filter(site.pages, topic)
+      }
+    end
+
+    site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
+  end
+
+  def self.extract_workflow_tool_list(data)
+    out = data['steps'].select{|k, v| v['type'] == "tool"}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+    out += data['steps'].select{|k, v| v['type'] == "subworkflow"}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
+    out
   end
 
   def self.run_topic_filter(pages, topic_name)
@@ -146,6 +167,20 @@ module TopicFilter
         page_obj['slides'] = resources.include?('slides.html')
       end
 
+      if resources.include?("quiz") then
+        ymls = Dir.glob("#{folder}/quiz/*.yml") + Dir.glob("#{folder}/quiz/*.yaml")
+        quizzes = ymls.map{ |a| a.split('/')[-1] }
+        page_obj['quiz'] = quizzes.map{|q|
+          quiz_data = YAML.load_file("#{folder}/quiz/#{q}")
+          {
+            "id" => q,
+            "path" => "#{folder}/quiz/#{q}",
+            "title" => quiz_data['title'],
+            "contributors" => quiz_data['contributors'],
+          }
+        }
+      end
+
       # Similar as above.
       if resources.include?('workflows')
         workflow_files = Dir.glob("#{folder}/workflows/*.ga").map{ |a| a.split('/')[-1] }
@@ -159,6 +194,9 @@ module TopicFilter
       end
 
       # Tool List
+      #
+      # This is exposed in the GTN API to help admins/devs easily get the tool
+      # list for installation.
       page_obj['tools'] = []
       if page_obj['hands_on']
         page_obj['tools'] += page.content.scan(/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/)
@@ -169,7 +207,7 @@ module TopicFilter
           wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
           wf_data = JSON.parse(File.open(wf_path).read)
-          page_obj['tools'] += wf_data['steps'].map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+          page_obj['tools'] += self.extract_workflow_tool_list(wf_data)
         }
       end
       page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
@@ -200,7 +238,7 @@ module TopicFilter
 
     # The complete resources we'll return is the introduction slides first
     # (regardless of alphabetisation), and then the rest of the pages.
-    resource_pages = resource_intro + resource_pages.sort_by{ |k| k["title"].downcase}
+    resource_pages = resource_intro + resource_pages.sort_by{ |k| k.fetch('title', '').downcase}
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name}"
@@ -214,6 +252,7 @@ end
 
 module Jekyll
   module ImplTopicFilter
+
     def most_recent_contributors(contributors, count)
       # Remove non-hof
       hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
@@ -226,14 +265,17 @@ module Jekyll
       Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
     end
 
-    def filter_recent_modified(tutorials, count)
-      latest = tutorials.sort{ |x, y|
-        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
-        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+    def last_modified_at(page)
+      Gtn::ModificationTimes.obtain_time(page['path'])
+    end
 
-        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+    def recently_modified_tutorials(site)
+      tutorials = site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' }
+
+      latest = tutorials.sort{ |x, y|
+        Gtn::ModificationTimes.obtain_time(y.path) <=> Gtn::ModificationTimes.obtain_time(x.path)
       }
-      latest.slice(0, count)
+      latest.slice(0, 10)
     end
 
     def topic_count(resources)
@@ -241,10 +283,82 @@ module Jekyll
       resources.select{ |a| a['type'] != 'introduction' }.length
     end
 
+    def fetch_tutorial_material(site, topic_name, page_name)
+      TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
+    end
+
+    def list_topics(site, category)
+      q = TopicFilter.list_topics(site).map{|k|
+        [k, site.data[k]]
+      }
+
+      # Alllow filtering by a category, or return "all" otherwise.
+      if category != "all"
+        q = q.select{|k, v| v['type'] == category }
+      end
+
+      # Sort alphabetically by titles
+      q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
+
+      # But move introduction to the start
+      q = q.select{|k, v| k == "introduction"} + q.select{|k, v| k != "introduction"}
+
+      q
+    end
+
     def topic_filter(site, topic_name)
       TopicFilter.topic_filter(site, topic_name)
     end
 
+    ELIXIR_NODES = {
+      "au" => "Australia",
+      "be" => "Belgium",
+      "ch" => "Switzerland",
+      "cz" => "Czechia",
+      "de" => "Germany",
+      "dk" => "Denmark",
+      "ee" => "Estonia",
+      "es" => "Spain",
+      "fi" => "Finland",
+      "fr" => "France",
+      "gr" => "Greece",
+      "hu" => "Hungary",
+      "ie" => "Ireland",
+      "il" => "Israel",
+      "it" => "Italy",
+      "lu" => "Luxembourg",
+      "nl" => "the Netherlands",
+      "no" => "Norway",
+      "pt" => "Portugal",
+      "se" => "Sweden",
+      "si" => "Slovenia",
+      "uk" => "United Kingdom",
+    }
+
+    def elixirnode2name(name)
+      ELIXIR_NODES[name]
+    end
+
+    def slugify_unsafe(text)
+      # Gets rid of *most* things without making it completely unusable?
+      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+    end
+
+    def humanize_types(type)
+      data = {
+        "seq" => "List of Items",
+        "str" => "Free Text",
+        "map" => "A dictionary/map",
+        "float" => "Decimal Number",
+        "int" => "Integer Number",
+        "bool" => "Boolean"
+      }
+      data[type]
+    end
+
+    def replace_newline_doublespace(text)
+      text.gsub(/\n/, "\n  ")
+    end
   end
 end
 

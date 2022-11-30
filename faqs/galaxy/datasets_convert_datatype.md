@@ -10,4 +10,4 @@ contributors: [shiltemann,hexylena]
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
 * In the central panel, click on the {% icon galaxy-gear %} **Convert** tab on the top
 * Select {% if include.conversion %}`{{ include.conversion }}`{% else %}the appropriate datatype from the list {% endif %}
-* Click the **Convert datatype** button
+* Click the **Create dataset** button to start the conversion.
