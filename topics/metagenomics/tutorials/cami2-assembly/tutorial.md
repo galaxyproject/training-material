@@ -131,7 +131,7 @@ Two types of assemblies were assessed: single-sample assembly, i.e. assembly of 
 
 Participants provided 155 submissions and 20 assembler versions of 10 assembling tools to be evaluated during this challenge. The different tools performed differently while measuring various metrics. By CAMI2 developers there are provided [plots](https://www.biorxiv.org/content/biorxiv/early/2021/07/12/2021.07.12.451567/F1.large.jpg?width=800&height=600&carousel=1) of benchmarking analyses of different tools depending on different statistics.
 
-![Assembly tools plot from CAMI2](../../images/cami2/assembly-tools-plots.jpg){:width="70%"}
+![Assembly tools plot from CAMI2](../../images/assembly-tools-plots.jpg){:width="70%"}
 
 
 
@@ -973,7 +973,7 @@ To generate a nice report with all metrics combined we use MultiQC. This tool is
 
 In CAMI2 there were compared computational characteristics of different tools such as runtime and memory usage. There were created the following plots:
 
-![Job statistics from CAMI2](../../images/cami2/tools-job-statistics.jpg){:width="70%"}
+![Job statistics from CAMI2](../../images/tools-job-statistics.jpg){:width="70%"}
 
 To export job metrics (memory usage and runtime) from Galaxy in csv format use [Biobland ](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)
 
