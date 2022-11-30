@@ -374,7 +374,7 @@ It is possible to download datasets using DOI links from Table 2 in {%cite tutor
 > ### {% icon hands_on %} Hands-on: Get dataset with DOI
 > 
 > 1. Use the table above to find unique identifier (DOI) of dataset you need
-> 2. Use [https://search.datacite.org/](https://search.datacite.org/) to search for data via DOI, and click the link that was found for the DOI. 
+> 2. Use [DataCite](https://search.datacite.org/) to search for data via DOI, and click the link that was found for the DOI. 
 > 3. On the page of dataset there is the link provided to download dataset -  for marine dataset all samples available via [https://frl.publisso.de/data/frl:6425521/marine/](https://frl.publisso.de/data/frl:6425521/marine/)
 > 4. Download datasets on your computer
 {: .hands_on}
