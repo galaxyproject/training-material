@@ -241,14 +241,14 @@ To determine where DNA fragments originated in the genome, the sequenced reads m
 >        - *"Reference genome with or without an annotation"*: `use genome reference with builtin gene-model`
 >            - *"Select reference genome"*: `Homo sapiens (hg38+GRCh38.87)`
 >    - *"Count number of reads per gene"*: `No`
->    - *"Would you like to set output parameters (formatting and filtering)?"*: `Yes`
->        - *"Extra SAM attributes to include"*: `All`
->        - *"Include strand field flag XS"*: `Yes -- and reads with inconsistent and/or non-canonical introns are filtered out`
->        - *"Would you like to set additional output parameters (formatting and filtering)?"*: `Yes`
->    - *"Other parameters (seed, alignment, limits and chimeric alignment)"*: `Extended parameter list`
->        - In *"Alignment parameters"*:
->            - *"Use end-to-end read alignments, with no soft-clipping?"*: `Yes`
->        - *"Would you like to set chimeric alignment parameters?"*: `No`
+>    - In *"BAM output format specification"*:
+>        - *"Read alignment tags to include in the BAM output"*: include `XS (strand flag, see parameter help below)` and `NM (edit distance of the aligned read to the reference)`
+>    - In *"Output filter criteria"*:
+>        - *"Would you like to set additional output filters?"*: `Yes`
+>    - In *"Algorithmic settings"*:
+>        - *"Configure seed, alignment and limits options"*: `Extended parameter list`
+>            - In *"Configure seed, alignment and limits options"*:
+>                - *"Use end-to-end read alignments, with no soft-clipping?*": `True`
 >
 >   > ### {% icon comment %} Note: We have switched R1 and R2 as forward and reverse reads!
 >   >
