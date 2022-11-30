@@ -116,7 +116,7 @@ UCSC prefaces chromosome names with chr while Ensembl does not. To perform this 
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
-
+>
 >  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
 >
 >

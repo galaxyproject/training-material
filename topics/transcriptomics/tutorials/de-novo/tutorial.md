@@ -18,9 +18,12 @@ key_points:
   - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
   - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
   - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
-contributors:
+contributions:
+  authorship:
   - malloryfreeberg
   - moheydarian
+  editing:
+  - jxtx
 ---
 
 # Introduction
@@ -121,7 +124,7 @@ For quality control, we use similar tools as described in [NGS-QC tutorial]({{si
 >    > > 2. The average quality of base calls does not drop off as sharply at the 3' ends of reads.
 >    > {: .solution }
 >    {: .question}
-> ![Before and after trimming comparison](../../images/BeforeAndAfterTrimming.png)
+> ![Before and after trimming comparison](../../images/transcriptomics_images/BeforeAndAfterTrimming.png)
 >
 > 4. **Trimmomatic** {% icon tool %}: Run `Trimmomatic` on the remaining forward/reverse read pairs with the same parameters.
 >
@@ -333,25 +336,25 @@ In addition to the list of genes, `DESeq2` outputs a graphical summary of the re
 
 1. Histogram of *p*-values for all tests
 
-    ![DESeq2 histogram](../../images/Deseq2_histogram3.png)
+    ![DESeq2 histogram]({% link topics/transcriptomics/images/transcriptomics_images/Deseq2_histogram3.png %})
 
 2. [MA plot](https://en.wikipedia.org/wiki/MA_plot): global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value < 0.1) are colored in red.
 
-    ![MA plot](../../images/Deseq2_MAplot3.png)
+    ![MA plot]({% link topics/transcriptomics/images/transcriptomics_images/Deseq2_MAplot3.png %})
 
 3. Principal Component Analysis ([PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)) and the first two axes
 
-    ![Principal component analysis output](../../images/Deseq2_PCA3.png)
+    ![Principal component analysis output]({% link topics/transcriptomics/images/transcriptomics_images/Deseq2_PCA3.png %})
 
     Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.
 
 4. Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples
 
-    ![Heatmap of sample-to-sample distance matrix](../../images/Deseq2_heatmap3.png)
+    ![Heatmap of sample-to-sample distance matrix]({% link topics/transcriptomics/images/transcriptomics_images/Deseq2_heatmap3.png %})
 
 5. Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)
 
-    ![Dispersion estimates](../../images/Deseq2_dispersion3.png)
+    ![Dispersion estimates]({% link topics/transcriptomics/images/transcriptomics_images/Deseq2_dispersion3.png %})
 
     This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.
 
@@ -385,7 +388,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 >    - Name your visualization someting descriptive under "Browser name:"
 >    - Choose "Mouse Dec. 2011 (GRCm38/mm10) (mm10)" as the "Reference genome build (dbkey)
 >    - Click "Create" to initiate your Trackster session
-> ![Trackster opening window](../../images/Trackster_opening_window.png)
+> ![Trackster opening window](../../images/transcriptomics_images/Trackster_opening_window.png)
 >
 > 2. **Viz** {% icon tool %}: Click "Add datasets to visualization"
 >    - Select the "RefSeq GTF mm10" file
@@ -411,7 +414,7 @@ In this last section, we will convert our aligned read data from BAM format to b
 > 9. {% icon tool %}: Repeat the previous step on the other three bigWig files representing the minus strand.
 >
 > 10. {% icon tool %}: Adjust the track height of the bigWig files to be consistent for each set of plus strand and minus strand tracks.
-> ![Adjusting the track height](../../images/Hoxb13_locus_screenshot.png)
+> ![Adjusting the track height](../../images/transcriptomics_images/Hoxb13_locus_screenshot.png)
 > 11. {% icon tool %}: Direct Trackster to the coordinates: chr11:96191452-96206029, what do you see?
 >
 >    > <question-title></question-title>
@@ -431,4 +434,4 @@ In this last section, we will convert our aligned read data from BAM format to b
 
 In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:
 
-![RNAseq de novo tutorial workflow](../../images/schematic_for_RNAseq_de_novo_tutorial.png)
+![RNAseq de novo tutorial workflow](../../images/transcriptomics_images/schematic_for_RNAseq_de_novo_tutorial.png)

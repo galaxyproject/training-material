@@ -2122,7 +2122,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .code-in}
->    > > <code-in-title>Output</code-in-title>
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
@@ -2318,7 +2318,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .code-in}
->    > > <code-in-title>Output</code-in-title>
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************

@@ -799,7 +799,9 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Click `Execute`
 > 1. It will create a dataset in the history that will be permanently yellow (running)
 > 1. You will see the following banner:
-> ![Jupyter startup banner](../../images/jupyter_start.png)
+>
+>    ![Jupyter startup banner](../../images/jupyter_start.png)
+>
 > 1. Click on `User menu`. You may need to wait a bit (go get coffee quickly). In the end you will a `Jupyter Interactive Tool` link. Click on it.
 > 1. This will open a new tab with a fully functional Jupyter environment:
 > ![Jupyter running](../../images/jupyter_running.png)
@@ -807,25 +809,31 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history.
 > 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
 > 1. Read data into a dataframe:
->```
-> import pandas as pd
-> df = pd.read_csv('data/Collapsed_collection',sep='\t')
-> # Drop duplicates is required to get rid of SnpEff artifacts
-> df = df.drop_duplicates(ignore_index=True)
-```
-> {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
+>    ```
+>    import pandas as pd
+>    df = pd.read_csv('data/Collapsed_collection',sep='\t')
+>    # Drop duplicates is required to get rid of SnpEff artifacts
+>    df = df.drop_duplicates(ignore_index=True)
+>    ```
+>    {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
 > 1. Filter variants with intermediate frequencies between 20% and 80%:
->```
->df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
->```
+>
+>    ```
+>    df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>    ```
+>
 > 1. Plot relationship between variant position and alternative allele frequency:
->```
->import seaborn as sns
->%matplotlib inline
->sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
->```
-> This plot shows how variants are distributed across the SARS-CoV-2 genome:
-> ![Seaborn plot](../../images/sns_plot.png)
+>
+>    ```
+>    import seaborn as sns
+>    %matplotlib inline
+>    sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
+>    ```
+>
+>    This plot shows how variants are distributed across the SARS-CoV-2 genome:
+>    ![Seaborn plot](../../images/sns_plot.png)
 > 1. Play with it!
 {: .hands_on}
 

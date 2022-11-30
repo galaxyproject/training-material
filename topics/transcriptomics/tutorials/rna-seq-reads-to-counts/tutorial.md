@@ -621,8 +621,7 @@ The coverage of reads along gene bodies can be assessed to check if there is any
 >       - In *"1: Results"*:
 >           - {% icon param-select %} *"Which tool was used generate logs?"*: `RSeQC`
 >               - {% icon param-select %} *"Type of RSeQC output?"*: `gene_body_coverage`
->                   - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (
-BAM)** {% icon tool %})
+>                   - {% icon param-collection %} *"RSeQC gene_body_coverage output"*: `Gene Body Coverage (BAM) (text)` (output of **Gene Body Coverage (BAM)** {% icon tool %})
 > 3. Inspect the `Webpage` output from MultiQC
 >
 {: .hands_on}

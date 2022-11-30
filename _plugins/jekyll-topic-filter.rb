@@ -34,6 +34,12 @@ module TopicFilter
     site.data['cache_topic_filter'][topic_name].select{|p| p['tutorial_name'] == tutorial_name}[0]
   end
 
+  def self.extract_workflow_tool_list(data)
+    out = data['steps'].select{|k, v| v['type'] == "tool"}.map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+    out += data['steps'].select{|k, v| v['type'] == "subworkflow"}.map{|k, v| self.extract_workflow_tool_list(v['subworkflow'])}
+    out
+  end
+
   def self.run_topic_filter(pages, topic_name)
     # Arrays that will store all introduction slides and tutorials we discover.
     resource_intro = []
@@ -188,6 +194,9 @@ module TopicFilter
       end
 
       # Tool List
+      #
+      # This is exposed in the GTN API to help admins/devs easily get the tool
+      # list for installation.
       page_obj['tools'] = []
       if page_obj['hands_on']
         page_obj['tools'] += page.content.scan(/{% tool \[[^\]]*\]\(([^)]*)\)\s*%}/)
@@ -198,7 +207,7 @@ module TopicFilter
           wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
           wf_data = JSON.parse(File.open(wf_path).read)
-          page_obj['tools'] += wf_data['steps'].map{|k, v| v['tool_id']}.select{|x| ! x.nil?}
+          page_obj['tools'] += self.extract_workflow_tool_list(wf_data)
         }
       end
       page_obj['tools'] = page_obj['tools'].flatten.sort.uniq

@@ -234,7 +234,7 @@ _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 video: ## Build all videos
 	bash bin/ari-make.sh
 
-annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
+annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	bash bin/workflow_to_tool_yaml.sh && \
 	python bin/add_galaxy_instance_annotations.py
