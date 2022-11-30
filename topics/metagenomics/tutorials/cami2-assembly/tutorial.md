@@ -27,7 +27,7 @@ key_points:
   - "Short reads and long reads can be assembled with different tools"
   - "Co-assembly and individual assembly should be performed for dataset"
 contributors:
-  - PlushZ
+  - plushz
   - bebatut
 tags:
   - assembly
@@ -218,28 +218,11 @@ We compared tools submitted for every challenge to understand the start point of
 * Notes on their performance	
 * Ranking according to CAMI2 results	
 
-> ### {% icon details %} CAMI2 Assembly tools comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-> ### {% icon details %} CAMI2 Genome binning tools comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=836882193&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-> ### {% icon details %} CAMI2 Taconomic binning tools comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=794114188&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-> ### {% icon details %} CAMI2 Taxonomic profiling tools comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=2127016351&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
+> <details-title>CAMI2 Details</details-title>>
+> - [CAMI2 Assembly tools comparison](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml)
+> - [CAMI2 Genome binning tools comparison](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=836882193)
+> - [CAMI2 Taxonomic binning tools comparison](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=794114188)
+> - [CAMI2 Taxonomic profiling tools comparison](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=2127016351)
 {: .details}
 
 After this comparison it turned out that the Assembly challenge is more interesting for us to reproduce on Galaxy platform. One reason for this choice is that highly ranked tools in CAMI2 (like Megahit, Flye, MetaSPAdes, etc.) are already available in Galaxy, so that we can focus more on benchmarking analysis of assembly results than on adding missing tools into Galaxy. 
@@ -281,23 +264,11 @@ For the assembly challenge itself, 4 “challenge” datasets were offered:
 
 ###### Clinical Pathogen detection
 
-The clinical pathogen detection dataset, a short-read metagenomic sequencing dataset of a blood sample from a patient with hemorrhagic fever of unknown cause, was excluded because it is provided only for the last challenge: identify a causal pathogen together with further pathogens.
-
-> ### {% icon details %} Clinical Pathogen detection dataset links
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1317732159&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
+[The clinical pathogen detection dataset, a short-read metagenomic sequencing dataset of a blood sample from a patient with hemorrhagic fever of unknown cause](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1317732159), was excluded because it is provided only for the last challenge: identify a causal pathogen together with further pathogens.
 
 ###### Marine
 
-The dataset represents a marine environment.
-
-> ### {% icon details %} Marine dataset details
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1420005524&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
+[The dataset represents a marine environment](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1420005524).
 
 The dataset represents a marine environment. It was created with CAMISIM from BIOM profiles of a deep-sea environment, using 155 newly sequenced marine isolate genomes from this environment and 622 public genomes with matching taxonomic provenance from MarRef, a manually curated database with completely sequenced marine genomes. Additionally, 200 newly sequenced circular elements including plasmids and viruses were added.
 
@@ -306,25 +277,12 @@ The dataset (100Gb) consists of 2x10 samples (5 Gb each) paired-end short (Illum
 
 ###### Strain madness
 
-> ### {% icon details %} Strain madness dataset links
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=548769407&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-The strain madness dataset represents a very high strain diversity environment (“strain madness”) generated with CAMISIM, using 408 newly sequenced genomes. Dataset (400 Gb) includes 2x100 samples (2 Gb each) paired-rend short (Illumina, the length of 150bp) and long(Nanopore with the length of 7408 bp) read sequences. 
+[The strain madness dataset](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=548769407) represents a very high strain diversity environment (“strain madness”) generated with CAMISIM, using 408 newly sequenced genomes. Dataset (400 Gb) includes 2x100 samples (2 Gb each) paired-rend short (Illumina, the length of 150bp) and long(Nanopore with the length of 7408 bp) read sequences. 
 
 
 ###### Plant-associated
 
-> ### {% icon details %} Plant-associated dataset links
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=934346728&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-
-The dataset represents a plant-associated environment (that included fungal genomes and host plant material). It includes 894 genomes:
+[The dataset represents a plant-associated environment (that included fungal genomes and host plant material)](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=934346728). It includes 894 genomes:
 
 * 224 are from the proGenomes terrestrial representative genomes, 
 * 216 are newly sequenced genomes from an _Arabidopsis thaliana_ root rhizosphere,
@@ -337,26 +295,16 @@ To evaluate the assembly quality of single-sample versus cross-assembly strategi
 
 Dataset (315Gb) includes 3x21 (5 Gb each paired-end read) paired-end short (with the length of 150bp) and long (with the length of 7408 bp or 3000 bp (sd 1000 bp)) read sequences
 
-
 #### Dataset choice
 
-We analysed all datasets and compared them with each other in terms of number of samples, dataset size, average read length.
-
-> ### {% icon details %} Datasets comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=650574223&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
+We analysed all datasets and [compared them with each other in terms of number of samples, dataset size, average read length](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=650574223).
 
 1. After close consideration of all datasets we decide to choose a marine dataset:It contains paired-end reads from 10 samples, both short (sequenced with Illumina method) and long (sequenced with nanopore method). ITmeans that we can try different tools on either one sample or pooled sample collection and also rub tools working with long reads and short reads, and tools working with both short and long at the same time. 
 2. Overall size of all marine data is 180 Gb. This size is big enough and allows us to test tools and measure such metrics as runtime and memory usage. Other datasets (strain madness and plant-associated) are too large, and since we have a limit in time of this tutorial we decided to give preference to smaller but highly representable marine dataset.
 
-
 ### Get datasets
 
 So the assembly challenge is our choice of challenge that we are interested in. And marine dataset is our choice of dataset that we want to launch an assembly challenge on. Let’s start with the first step - uploading data to Galaxy.
-
 
 #### Download data from CAMI2 resources.
 
@@ -364,14 +312,14 @@ Since data is of large size we cannot just download them to our computer by clic
 
 It is possible to download datasets using DOI links from Table 2 in {%cite tutorialMeyer2021%}
 
-| CAMI benchmark dataset                                               | DOI                                              |
-|--------------------------------------------------------------------- |------------------------------------------------- |
-| CAMI I: low, medium, high complexity, and ‘toy’ datasets             | 10.5524/100344                                   |
-| CAMI II: human microbiome project and mouse gut toy datasets         | 10.4126/FRL01-006425518; 10.4126/FRL01-006421672 |
-| CAMI II: marine, strain madness, rhizosphere, and pathogen detection | 10.4126/FRL01-006425521                          |
+| CAMI benchmark dataset                                               | DOI                                                             |
+|--------------------------------------------------------------------- |---------------------------------------------------------------- |
+| CAMI I: low, medium, high complexity, and ‘toy’ datasets             | {%cite toy-data-doi%}                                           |
+| CAMI II: human microbiome project and mouse gut toy datasets         | {%cite human-microbiome-data-doi%}; {%cite mouse-gut-data-doi%} |
+| CAMI II: marine, strain madness, rhizosphere, and pathogen detection | {%cite cami2-data-doi%}                                         |
 
 
-> ### {% icon hands_on %} Hands-on: Get dataset with DOI
+> <hands-on-title>Get dataset with DOI</hands-on-title>
 > 
 > 1. Use the table above to find unique identifier (DOI) of dataset you need
 > 2. Use [DataCite](https://search.datacite.org/) to search for data via DOI, and click the link that was found for the DOI. 
@@ -380,14 +328,14 @@ It is possible to download datasets using DOI links from Table 2 in {%cite tutor
 {: .hands_on}
 
 
-> ### {% icon details %} Download datasets with CAMI Client
+> <details-title>Download datasets with CAMI</details-title>
 >
 > Another way to download datasets is to use CAMI Client. [Here](https://www.microbiome-cosi.org/cami/resources/cami-client) you can find instructions on how to use it.
 >
-> > ### {% icon hands_on %} Hands-on: Get dataset with DOI
+> > <hands-on-title>Get dataset with DOI</hands-on-title>
 > > 
 > > 1. Install Java 8 on your computer.
-> > 2. Create an account on[ CAMI portal](https://data.cami-challenge.org/)
+> > 2. Create an account on [CAMI portal](https://data.cami-challenge.org/)
 > > 3. Download the [camiClient.jar](https://data.cami-challenge.org/camiClient.jar)
 > > 4. Get text-file with links for dataset from [CAMI portal](https://data.cami-challenge.org/). You can download this file in the section “2nd CAMI Challenge Marine Dataset”
 > > 5. You can download data with CAMI client using the following command line in the terminal:
@@ -419,7 +367,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 * Define the file **Identifier** column (`SampleID`).
 * Define the **URL** column (`URL`) (this is the location Galaxy can download the data from).
 
-> ### {% icon hands_on %} Hands-on: Upload data into Galaxy with Rule Builder
+> <hands-on-title>Upload data into Galaxy with Rule Builder</hands-on-title>
 >
 > 1. Create new history
 >
@@ -448,7 +396,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >            - Click `Apply`, and you should see your new column definitions listed
 >        - Click `Upload`
 >
-> > ### {% icon details %} FTP is the other way to upload dataset 
+> > <details-title>FTP is the other way to upload dataset</details-title>
 > > 
 > > {% snippet faqs/galaxy/datasets_upload_ftp.md %}
 > > 
@@ -467,7 +415,7 @@ We got the marine data in our history, with one file per sample (10 samples for 
 1. We should organise our data into collections. For deeper learning about dataset collections [follow our tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 2. These files consist of interleaved paired-end reads, i.e. forward and reverse reads are all together in one single file and not 2 as often. This can be a problem for some assemblers as not every assembling tool can take interleaved paired-end reads as input.For co-assembly of all samples, some assemblers expect one file with all samples combined together.
 
-> ### {% icon hands_on %} Hands-on: Preprocessing data
+> <hands-on-title>Preprocessing data</hands-on-title>
 >
 > 1. Take files for short reads for all samples
 > 2. Create a collection with all samples- We now have a collection with all files. Let's now combine all sample files into one file
@@ -491,33 +439,15 @@ We got the marine data in our history, with one file per sample (10 samples for 
 
 Based on {%cite 2022%}, {%cite Meyer2021%} and {%cite tutorialMeyer2021%}, we can compare tools on a set of metrics to select the one to use for an analysis but also here to run the challenge. Tools performance ranking.
 
-**_Performance of assembly tools on the marine dataset_**:
-<iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1873156403&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-
-> ### {% icon details %} Performance of the assembly tools on the strain madness dataset
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=153898462&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
+> <details-title>Tools performance details</details-title>>
+> - [Performance of assembly tools on the marine dataset](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=1873156403)
+> - [Performance of the assembly tools on the strain madness dataset](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=153898462)
+> - [Performance of the assembly tools on the plant-associated dataset](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=694755016)
 {: .details}
-
-> ### {% icon details %} Performance of the assembly tools on the plant-associated dataset
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=694755016&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
-
-
 
 Using the described metrics, the different tools were evaluated in the CAMI paper and aggregated in tables (Supplementary Tables 3-7) from {%cite tutorialMeyer2021%}. 
 
-In these tables there are also ranking scores of the tools shown for every statistic as well as overall ranking scores. Overall, ranking scores for every dataset are computed as a sum of all ranking scores across metrics. The average ranking score of both datasets are calculated as weighted average sum of ranking for both datasets. We created a table showing all ranking results from previous tables:
-
-
-> ### {% icon details %} Assembly tools ranking
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=455354696&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
+In these tables there are also ranking scores of the tools shown for every statistic as well as overall ranking scores. Overall, ranking scores for every dataset are computed as a sum of all ranking scores across metrics. The average ranking score of both datasets are calculated as weighted average sum of ranking for both datasets. We created [a table showing all ranking results from previous tables](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=455354696)
 
 We summed up ranking scores for all methods, common genomes, and unique genomes to extract the following  priority list for tools
 
@@ -561,14 +491,7 @@ There are no certain ranking tables among Supplementary tables for plant-associa
 2. **(meta)Flye**
 3. **(meta)SPAdes**
 
-Since in this tutorial we have decided to focus on marine dataset it would be reasonable to reproduce CAMI2 assembly challenge using HipMer, metaSPAdes, ABySS, Ray-Meta, Megahit assemblers which performed better. As we know from our comparison Galaxy and CAMI2 analysis, metaSPAdes, ABySS, Megahit tools are available in Galaxy while Ray-Meta and HipMer are not.
-
-
-> ### {% icon details %} Assembly tools comparison
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
+Since in this tutorial we have decided to focus on marine dataset it would be reasonable to reproduce CAMI2 assembly challenge using HipMer, metaSPAdes, ABySS, Ray-Meta, Megahit assemblers which performed better. As we know from our [comparison Galaxy and CAMI2 analysis](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml), metaSPAdes, ABySS, Megahit tools are available in Galaxy while Ray-Meta and HipMer are not.
 
 Moreover, we also selected Flye assembler, even though Flye is not in the Top-5 assemblers in CAMI2. Flye is a long-read assembler that works well for this task.. We do that to show the assembler launched on long-reads and not only on short-reads and hybrid.
 
@@ -597,7 +520,7 @@ To update or fix a tool, we need to change its XML. Tools in a Galaxy server are
 But usually, XML of tools are developed collaboratively inside GitHub repositories and then pushed to the ToolShed. So we need to find the development repository of the Galaxy tool to update it. 
 
 
-> ### {% icon hands_on %} Hands-on: Finding the development repository of a tool to update
+> <hands-on-title>Finding the development repository of a tool to update</hands-on-title>
 > 
 > 1. Open the fastqc splitter in Galaxy
 > 2. Click on “See in the ToolShed” on the top right of the tool form. You will be redirected to the tool on the ToolShed
@@ -606,7 +529,7 @@ But usually, XML of tools are developed collaboratively inside GitHub repositori
 > 5. Once we have the development repository setup, we can update the tool. We recommend using Planemo, the Galaxy software development kit, to help the process. More information is [here](https://planemo.readthedocs.io/en/latest/writing_standalone.html).
 {: .hands_on}
 
-> ### {% icon details %} Update the tools
+> <details-title>Update the tools</details-title>
 > 
 > 1. Update lines corresponding to output files: add “Forward” or “Reverse” to the filenames respectively.
 > 2. Update tests for this tool
@@ -641,7 +564,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
  **MetaFlye** (metagenome mode of Flye) is a scalable long-read metagenome assembly using repeat graphs ({%cite Kolmogorov2020%}). It is supposed to use long reads as input.
 
 
-> ### {% icon hands_on %} Hands-on: Co-assembly of long-read samples with Flye
+> <hands-on-title>Co-assembly of long-read samples with Flye</hands-on-title>
 > 
 > 1. Create a new history with the name “CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection”
 >
@@ -652,7 +575,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >     - {% icon param-file %} *"Mode"*:	--nano-raw
 >     - {% icon param-file %} *"Perform metagenomic assembly"*: True
 > 
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > Flye was reported in CAMI2 using parameter Mode –-raw-bio while datasets were sequenced with nanopore, thus we corrected parameters and used –-nano-raw instead.
 > {: .comment} 
@@ -660,7 +583,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Individual assembly of long-read sample with Flye
+> <hands-on-title>Individual assembly of long-read sample with Flye</hands-on-title>
 > 
 > 1. Create a new history with the name “CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection”
 >
@@ -678,13 +601,13 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 
 #### Short reads
 
-> ### {% icon hands_on %} Hands-on: Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes
+> <hands-on-title>Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
 > 
 > 1. Create a new history with the name “Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes”
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
 > {: .comment} 
@@ -711,7 +634,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 10
 > 7. Rename output to “Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 pooled interleaved short collection”
 > 
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
 > {: .comment} 
@@ -727,7 +650,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
 > 11. Rename output to “Output - CAMI2 Abyss v234 k96 pooled interleaved short collapsed”
 >  
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 > {: .comment} 
@@ -748,13 +671,13 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Individual assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes
+> <hands-on-title>Individual assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
 > 
 > 1. Create a new history with the name “Individual of short-reads samples with Megahit, Abyss, and MetaSPAdes”
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 > 
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
 > {: .comment} 
@@ -781,7 +704,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 10
 > 7. Rename output to “Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 interleaved short sample1”
 > 
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
 > {: .comment} 
@@ -797,7 +720,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
 > 11. Rename output to “Output - CAMI2 Abyss v234 k96 interleaved short sample1”
 >  
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 > {: .comment} 
@@ -817,7 +740,7 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 > 15. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1 additional nanopore long sample1”
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > We got an error “Out of memory” for the first launches of metaspades. The memory limit in Galaxy was set to 200 Gb. After that,[ the memory for this tool was increased up to 250 GB](https://github.com/usegalaxy-eu/infrastructure-playbook/pull/358), which is the recommended default value according to [SPAdes documentation](http://cab.spbu.ru/files/release3.12.0/manual.html#sec3.2) (see “Advanced options” section). Only Galaxy administrators can solve this kind of problem with memory. If you need the memory increase for the specific tool you need to report an issue via Galaxy by clicking “View and report this error” (small “bug” icon).
 > 
@@ -853,13 +776,7 @@ Several metrics are used to assess the quality of the assemblies.
 
 ## Assess the assembly outputs
 
-In CAMI2, different tools are used to evaluate the quality of the tools for the different challenges.
-
-> ### {% icon details %} The list of assessment tools with metadata
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=15494775&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
+In CAMI2, [different tools are used to evaluate the quality of the tools for the different challenges](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=15494775).
 
 In this tutorial we focus on the assembly challenge and on the metrics presented before.
 
@@ -875,7 +792,7 @@ To extract this information, we map the input reads on the assemblies.
 
 We use Bowtie2 for mapping short-reads raw data to the assembly we got after usage of different short-reads assemblers (Megahit, MetaSPAdes, Abyss) in order to get the percentage of reads used for assembly.
 
-> ### {% icon hands_on %} Hands-on: Get percentage of reads used for co-assembly with Bowtie2
+> <hands-on-title>Get percentage of reads used for co-assembly with Bowtie2</hands-on-title>
 > 
 > 1. Create a new history named "Short reads co-assemblies"
 >
@@ -892,7 +809,7 @@ We use Bowtie2 for mapping short-reads raw data to the assembly we got after usa
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Get percentage of reads used for individual assembly with Bowtie2
+> <hands-on-title>Get percentage of reads used for individual assembly with Bowtie2</hands-on-title>
 > 
 > 1. Create a new history named "Short reads co-assemblies"
 >
@@ -915,7 +832,7 @@ Bowtie2 should not be used to align long reads to resulting assemblies because, 
 
 For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-sequenced data.
 
-> ### {% icon hands_on %} Hands-on: Get percentage of reads used for co-assembly with Map with minimap2
+> <hands-on-title>Get percentage of reads used for co-assembly with Map with minimap2</hands-on-title>
 > 
 > 1. Create a new history named "Long reads co-assemblies"
 >
@@ -934,7 +851,7 @@ For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-
 > 5. Inspect the generated output 
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Get percentage of reads used for individual assembly with Map with minimap2
+> <hands-on-title>Get percentage of reads used for individual assembly with Map with minimap2</hands-on-title>
 > 
 > 1. Create a new history named "Long reads individual assemblies"
 >
@@ -962,7 +879,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 
 
 
-> ### {% icon hands_on %} Hands-on: Metaquast without provided reference genome
+> <hands-on-title>Metaquast without provided reference genome</hands-on-title>
 > 
 > 1. Move to "Short reads co-assemblies" history
 > 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
@@ -988,7 +905,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Metaquast with provided reference genome
+> <hands-on-title>Metaquast with provided reference genome</hands-on-title>
 > 
 > 1. Move to "Short reads co-assemblies" history
 > 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
@@ -997,7 +914,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 >     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
 >     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
 >  
-> > ### {% icon comment %} Comment
+> > <comment-title></comment-title>
 > >
 > > Working on this tutorial we encountered some issues. For example, in CAMI2 Quast was launched with Gold Standard Assembly as a reference genome. In Galaxy it took a long time and the tool is still running. Withsout GSA as a reference genome we got QUAST results faster.
 > {: .comment} 
@@ -1023,7 +940,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 > 9. Inspect the generated output 
 {: .hands_on}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > While running Quast, some of the generated outputs (statistics and log files) were empty while the html report was not. After investigation, it seems that the outputs were not correctly retrieved in the Galaxy wrapper. We then fixed the tool.
 {: .comment} 
@@ -1034,7 +951,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 To generate a nice report with all metrics combined we use MultiQC. This tool is a good choice when you want to combine results and make them visually represented with different graphs. MultiQC generates a webpage combining reports.
 
 
-> ### {% icon hands_on %} Hands-on: Aggregate all metrics with MultiQC
+> <hands-on-title>Aggregate all metrics with MultiQC</hands-on-title>
 > 
 > 1. Create a new history named "Benchmarking analysis of reproduced CAMI2"
 >
@@ -1092,17 +1009,11 @@ MultiQC and Jupiter notebook were used to create final reports and visualise res
 
 The datasets were uploaded to Galaxy using an FTP server.
 
-During the project, we created galaxy histories that are available to the public. They are slightly different from those we suggest in this tutorial. We created them according to the principle of one history per:
+During the project, we created [galaxy histories that are available to the public](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=915388998). They are slightly different from those we suggest in this tutorial. We created them according to the principle of one history per:
 * Long reads or short reads as input
 * Co-assembly or individual assembly
 * one unique tool version
 * one unique set of parameters
-
-> ### {% icon details %} Details of Galaxy histories
->
-> <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=915388998&amp;single=true&amp;widget=true&amp;headers=false" width="900" height="600" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
->
-{: .details}
 
 Furthermore, we have created this tutorial for those who are interested in such a topic and would like to reproduce CAMI2 assembly challenge on marine datasets. This tutorial could be undoubtedly useful for further improvement.
 
