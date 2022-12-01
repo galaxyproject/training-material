@@ -635,13 +635,13 @@ Now we continue with the DE genes analysis.
 > <question-title></question-title>
 >
 > 1. How many genes show statistically significant differential expression?
-> 2. How many of them are significally upregulated (at least two-fold change)? And downregulated?
+> 2. How many of them are significantly upregulated (at least two-fold change)? And downregulated?
 > 3. What is the most significantly DE downregulated gene and what is it biological function?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The total number of genes whose expression differential between the two experimental conditions is 4176.
-> > 2. Of them, 328 are significally upregulated by the BR treatment and 778 are downregulated.
+> > 2. Of them, 328 are significantly upregulated by the BR treatment and 778 are downregulated.
 > > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus)).
 > {: .solution}
 >
