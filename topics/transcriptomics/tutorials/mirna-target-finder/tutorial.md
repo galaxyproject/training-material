@@ -645,11 +645,6 @@ Now we continue with the DE genes analysis.
 > > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus)).
 > {: .solution}
 >
-> > <comment-title></comment-title>
-> > The sum of genes considered as upregulated and downregulated is lower than the total number of genes whose expression is statistically different is due to the fact that we have selected only those whose difference in transcript abundance is greater than a factor of 2.
-> >
-> {: .comment}
->
 {: .question}
 
 # Identification of miRNA targets
@@ -731,7 +726,7 @@ Finally, we can access all the information available on the genes identified in 
 Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according {% cite Gao2017 %}, SPL13 is likely a negative regulator of plant vegetative growth.
 
 
-> <comment-title></comment-title>
+> <comment-title>Hypothesis testing</comment-title>
 > One of the hypotheses that we could propose from our results is: the inhibition of the AT5G50570 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G50570 mutant seeds](https://abrc.osu.edu/stocks/482611) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/transcriptomics_images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
