@@ -156,7 +156,7 @@ Co-assembly is then not always beneficial:
 - Changes in strain can cause the assembly graph to collapse
 - Binned contigs are likely to be misclassified: MAGs must be treated as a population genome.
 
-![Image shows the process of assembled reads from 2 samples followed by binning and there is detailed information about broken contigs, dominant coverage, chimeric contigs found during assembly process](../../images/co-assembly-process.png "Co-assembly process"){:width="80%"}
+![Image shows the process of assembled reads from 2 samples followed by binning and there is detailed information about broken contigs, dominant coverage, chimeric contigs found during assembly process](./images/co-assembly-process.png "Co-assembly process"){:width="80%"}
 
 In these cases, co-assembly is reasonable if:
 - Same samples
@@ -650,7 +650,7 @@ De-replication is the process of identifying sets of genomes that are the "same"
 
 A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
 
-![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](../../images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly"){:width="80%"}
+![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly"){:width="80%"}
 
 If we have different samples, then we do an individual assembly for each sample. In the figure above we see that after individual assembly we have results for every individual assembly represented with pie charts. Different colours on these charts show different strains (organisms). Every chart has a different percentage of every strain which means that the assemblies contain different strains in different proportions in each sample.
 
