@@ -6,6 +6,7 @@ zenodo_link: 'https://zenodo.org/record/4710649'
 tags:
     - miRNA
     - plants
+    - stress tolerance
 questions:
 - Which miRNAs are upregulated in response to brassinosteroids?
 - Which genes are potential target of brassinosteroid-induced miRNAs?
