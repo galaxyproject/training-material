@@ -331,7 +331,7 @@ __DESeq2__ is a tool for differential gene expression analysis based on a negati
 >
 {: .comment}
 
-> <hands-on-title>Differential expression analysis using __DESeq2__</hands-on-title>
+> <hands-on-title>Differential expression analysis using DESeq2</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
@@ -501,7 +501,7 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 {: .details}
 
 
-> <hands-on-title>Quantify gene expression with __Salmon__</hands-on-title>
+> <hands-on-title>Quantify gene expression with Salmon</hands-on-title>
 >
 > 1. {% tool [Salmon quant](toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1) %} with the following parameters:
 >    - *"Select salmon quantification mode:"*: `Reads`
@@ -556,7 +556,9 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 ## Differential expression analysis of mRNAs: **DESeq2**
 
-> <hands-on-title>DEA using __DEseq2__</hands-on-title>
+Now, let's analyze which genes show statistically significant differential expression in response to brassinosteoids.
+
+> <hands-on-title>Differential expression analysis using DEseq2</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
