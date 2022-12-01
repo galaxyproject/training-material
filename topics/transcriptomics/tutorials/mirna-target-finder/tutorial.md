@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Identification of genes involved in plant stress tolerance'
+title: 'Whole transcriptome analysis of Arabidopsis thaliana'
 zenodo_link: 'https://zenodo.org/record/4710649'
 tags:
     - miRNA
