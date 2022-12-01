@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Installation with Ansible" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
+<meta name="DC.date" content="2022-12-01 08:15:38 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nate Coraor" />
 <meta name="DC.creator" content="Simon Gladman" />
@@ -195,11 +195,11 @@
 
             <div id="archive-selector">
             
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-12-01/topics/admin/tutorials/ansible-galaxy/tutorial.html" title="Version 2022-12-01">2022-12-01</a>
+            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-11-01/topics/admin/tutorials/ansible-galaxy/tutorial.html" title="Version 2022-11-01">2022-11-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-10-01/topics/admin/tutorials/ansible-galaxy/tutorial.html" title="Version 2022-10-01">2022-10-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-09-01/topics/admin/tutorials/ansible-galaxy/tutorial.html" title="Version 2022-09-01">2022-09-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
             </div>
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2022-12-01 08:15:38 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -673,7 +673,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 1, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -2872,8 +2872,8 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
 +    server_name   "{{ inventory_hostname }}";
 +
 +    # Our log files will go here.
-+    access_log  /var/log/nginx/access.log;
-+    error_log   /var/log/nginx/error.log;
++    access_log  syslog:server=unix:/dev/log;
++    error_log   syslog:server=unix:/dev/log;
 +
 +    # The most important location block, by default all requests are sent to gunicorn
 +    # If you serve <span class="notranslate">galaxy</span> at a path like /<span class="notranslate">galaxy</span>, change that below (and all other locations!)
@@ -2952,7 +2952,7 @@ Jun 28 17:07:58 gat-14.be.training.<span class="notranslate">galaxy</span>projec
           <div id="code-out-output" class="box-title" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
-changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+changed: [gat-0.training.<span class="notranslate">galaxy</span>project.eu]
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -2972,8 +2972,16 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
     <li>
       <p>Check out the changes made to your server in <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-enabled/</code>, particularly the directory containing the <span class="notranslate">Galaxy</span> virtualhost.</p>
     </li>
-  </ol>
+    <li>
+      <p>Check out the nginx logs with <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code></p>
 
+      <blockquote class="code-in">
+        <div id="code-in-bash-15" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-fu</span> nginx
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
 </blockquote>
 
 <blockquote class="details">
@@ -3098,7 +3106,7 @@ In a training setting there is no need to request certificates that will be trus
       <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-15" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div id="code-in-bash-16" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> templates/<span class="notranslate">galaxy</span>/config/
 </code></pre></div>        </div>
       </blockquote>
@@ -3170,7 +3178,7 @@ In a training setting there is no need to request certificates that will be trus
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash-16" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div id="code-in-bash-17" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>          </div>
         </blockquote>
@@ -3178,7 +3186,7 @@ In a training setting there is no need to request certificates that will be trus
           <div id="code-out-output-1" class="box-title" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
-changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+changed: [gat-0.training.<span class="notranslate">galaxy</span>project.eu]
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -3187,7 +3195,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
       <p>Checkout the new job_conf.yml file.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-17" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div id="code-in-bash-18" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_conf.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -3300,7 +3308,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-18" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div id="code-in-bash-19" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -3351,7 +3359,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-19" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div id="code-in-bash-20" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>        </div>
       </blockquote>
