@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Assembly Metagenomic sequencing data assembly"
+title: "Assembly of metagenomic sequencing data"
 zenodo_link: "https://zenodo.org/record/6958893"
 level: Introductory
 questions:
