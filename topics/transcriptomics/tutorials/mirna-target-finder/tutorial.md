@@ -713,7 +713,7 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
-Congratulations! You have identified the following three potential genes involved in the brassinosteroid-miRNA regulatory network.
+Congratulations! You have identified the following three potential genes involved in the brassinosteroid-miRNA regulatory network: AT4G14365/Ath-miR408, AT5G50570/Ath-miR156i and AT1G26890/Ath-miR156i.
 
 ![fig15:TargetFinder results](../../images/transcriptomics_images/targetFinder_results.png "TargetFinder results.")
 
