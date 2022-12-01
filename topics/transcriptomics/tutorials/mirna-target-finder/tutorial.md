@@ -728,7 +728,7 @@ Finally, we can access all the information available on the genes identified in 
 - [AT5G50570](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G50570): SPL13, SPL13A, SQUAMOSA PROMOTER-BINDING PROTEIN LIKE 13
 - [AT1G26890](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT1G26890): FBD, F-box and Leucine Rich Repeat domains containing protein
 
-Both AT4G14365 and AT1G26890. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according {% cite Gao2017 %}, SPL13 is likely a negative regulator of plant vegetative growth.
+Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according {% cite Gao2017 %}, SPL13 is likely a negative regulator of plant vegetative growth.
 
 
 > <comment-title></comment-title>
