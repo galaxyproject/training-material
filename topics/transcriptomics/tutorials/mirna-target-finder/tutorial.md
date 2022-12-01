@@ -724,7 +724,7 @@ Congratulations! You have identified the following three potential genes involve
 
 Finally, we can access all the information available on the genes identified in the TAIR database:
 
-- [AT4G14365](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT4G14365): XB3 ORTHOLOG 4 IN ARABIDOPSIS THALIANA, XBAT34 (hipothetical protein)
+- [AT4G14365](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT4G14365): XB3 ORTHOLOG 4 IN ARABIDOPSIS THALIANA, XBAT34 (hypothetical protein)
 - [AT5G50570](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G50570): SPL13, SPL13A, SQUAMOSA PROMOTER-BINDING PROTEIN LIKE 13
 - [AT1G26890](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT1G26890): FBD, F-box and Leucine Rich Repeat domains containing protein
 
