@@ -765,4 +765,4 @@ Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR
 # Conclusion
 
 
-In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.
+In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of three potential miRNA targets.
