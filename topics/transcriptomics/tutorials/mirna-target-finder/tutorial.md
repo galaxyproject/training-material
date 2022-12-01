@@ -483,7 +483,7 @@ As in the previous section, we shall begin by assessing the quality of our seque
 
 ## Quantification of gene expression: **Salmon**
 
-After performing the quality assessment of the reads, we can move on to quantifying the gene expression. The aim of this step is to identify which transcript each read comes from and the total number of reads associated with each transcript. In this tutorial, we will use the Salmon tool ({% cite Patro2017 %})  for the quantification of mRNA transcripts.
+After performing the quality assessment of the reads, we can move on to quantifying the gene expression. The aim of this step is to identify which transcript each read comes from and the total number of reads associated with each transcript. In this tutorial, we will use the Salmon tool ({% cite Patro2017 %}) for the quantification of mRNA transcripts.
 
 ![fig11:Salmon logo](../../images/transcriptomics_images/salmon_logo.png)
 
@@ -723,7 +723,7 @@ Finally, we can access all the information available on the genes identified in 
 - [AT5G50570](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G50570): SPL13, SPL13A, SQUAMOSA PROMOTER-BINDING PROTEIN LIKE 13
 - [AT1G26890](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT1G26890): FBD, F-box and Leucine Rich Repeat domains containing protein
 
-Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according {% cite Gao2017 %}, SPL13 is likely a negative regulator of plant vegetative growth.
+Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according {% cite Gao2017 %}, AT5G50570 is likely a negative regulator of plant vegetative growth.
 
 
 > <comment-title>Hypothesis testing</comment-title>
