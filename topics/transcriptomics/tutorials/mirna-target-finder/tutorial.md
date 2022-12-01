@@ -430,7 +430,7 @@ Repeat the filtering step on the imported DESeq2 result.
 > > <solution-title></solution-title>
 > >
 > > 1. Out of 442 miRNAs, 39 show significant differential expression.
-> > 2. There are 23 upregulated miRNAs and the `Ath-miR169` family members are the most upregulated one.
+> > 2. There are 23 upregulated miRNAs and the `Ath-miR169` family members are the most upregulated ones.
 > {: .solution}
 >
 {: .question}
