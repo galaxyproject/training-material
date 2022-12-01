@@ -622,12 +622,12 @@ Now we continue with the DE genes analysis.
 >
 > 3. {% tool [Filter](Filter1) %}data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
->    - *"With following condition"*: `c3>1`
+>    - *"With following condition"*: `c3<-1`
 > 4. Rename it as `Upregulated mRNAs`
 >
 > 5. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
->    - *"With following condition"*: `c3<-1`
+>    - *"With following condition"*: `c3>1`
 > 6. Rename it as `Downregulated mRNAs`
 >
 {: .hands_on}
