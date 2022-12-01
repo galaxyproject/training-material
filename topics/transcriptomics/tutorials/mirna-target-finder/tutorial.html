@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Whole transcriptome analysis of Arabidopsis thaliana" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-18 10:46:12 +0000" />
+<meta name="DC.date" content="2022-12-01 10:01:59 +0000" />
 <meta name="DC.creator" content="Cristóbal Gallardo" />
 <meta name="DC.creator" content="Pavankumar Videm" />
 <meta name="DC.creator" content="Beatriz Serrano-Solano" />
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-18 10:46:12 +0000",
+  "dateModified": "2022-12-01 10:01:59 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Whole transcriptome analysis of Arabidopsis thaliana",
   "interactivityType": "mixed",
@@ -970,7 +970,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 1, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1540,7 +1540,7 @@ For more information on the topic of quality control, please see our <a href="/t
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s (<span class="notranslate">Galaxy</span> Version 1.1.1) with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Differentially expressed mi<span class="notranslate">RNA</span>s</code></li>
-        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&gt;0</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3&lt;0</code></li>
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span>s</code></li>
@@ -1548,7 +1548,7 @@ For more information on the topic of quality control, please see our <a href="/t
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">Upregulated mi<span class="notranslate">RNA</span>s</code></li>
         <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
-        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
       </ul>
     </li>
   </ol>
@@ -1559,7 +1559,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
   <ol>
     <li>How many mi<span class="notranslate">RNA</span>s are differentially expressed?</li>
-    <li>How many mi<span class="notranslate">RNA</span>s show statistically significant upregulation and what is the most upregulated mi<span class="notranslate">RNA</span>?</li>
+    <li>How many mi<span class="notranslate">RNA</span>s show statistically significant upregulation and what are the most upregulated mi<span class="notranslate">RNA</span>?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1567,11 +1567,13 @@ For more information on the topic of quality control, please see our <a href="/t
 
     <ol>
       <li>Out of 442 mi<span class="notranslate">RNA</span>s, 39 show significant differential <span class="notranslate">expression</span>.</li>
-      <li>There are 16 upregulated mi<span class="notranslate">RNA</span>s and <code class="language-plaintext highlighter-rouge">Ath-miR156g</code> is the most upregulated one.</li>
+      <li>There are 23 upregulated mi<span class="notranslate">RNA</span>s and the <code class="language-plaintext highlighter-rouge">Ath-miR169</code> family members are the most upregulated ones.</li>
     </ol>
   </blockquote>
 
 </blockquote>
+
+<p>Experimental results indicate that at least one member of the ath-miR-169 family is induced significantly by saline stress (<span class="citation"><a href="#Zhao2009">Zhao <i>et al.</i> 2009</a></span>).</p>
 
 <h1 id="mrna-data-analysis">m<span class="notranslate">RNA</span> data analysis</h1>
 
@@ -1640,7 +1642,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
 <h2 id="quantification-of-gene-expression-salmon">Quantification of gene <span class="notranslate">expression</span>: <strong>Salmon</strong></h2>
 
-<p>After performing the quality assessment of the <span class="notranslate">reads</span>, we can move on to quantifying the gene <span class="notranslate">expression</span>. The aim of this step is to identify which transcript each read comes from and the total number of <span class="notranslate">reads</span> associated with each transcript. In this tutorial, we will use the Salmon tool (<span class="citation"><a href="#Patro2017">Patro <i>et al.</i> 2017</a></span>)  for the quantification of m<span class="notranslate">RNA</span> transcripts.</p>
+<p>After performing the quality assessment of the <span class="notranslate">reads</span>, we can move on to quantifying the gene <span class="notranslate">expression</span>. The aim of this step is to identify which transcript each read comes from and the total number of <span class="notranslate">reads</span> associated with each transcript. In this tutorial, we will use the Salmon tool (<span class="citation"><a href="#Patro2017">Patro <i>et al.</i> 2017</a></span>) for the quantification of m<span class="notranslate">RNA</span> transcripts.</p>
 
 <p><img src="../../images/transcriptomics_images/salmon_logo.png" alt="fig11:Salmon logo. " loading="lazy" /></p>
 
@@ -1890,7 +1892,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
   <ol>
     <li>How many genes show statistically significant differential <span class="notranslate">expression</span>?</li>
-    <li>How many of them are upregulated? And downregulated?</li>
+    <li>How many of them are significantly upregulated (at least two-fold change)? And downregulated?</li>
     <li>What is the most significantly DE downregulated gene and what is it biological function?</li>
   </ol>
 
@@ -1899,15 +1901,9 @@ For more information on the topic of quality control, please see our <a href="/t
 
     <ol>
       <li>The total number of genes whose <span class="notranslate">expression</span> differential between the two experimental conditions is 4176.</li>
-      <li>Of them, 328 are downregulated by the BR treatment and 778 are upregulated.</li>
+      <li>Of them, 328 are significantly upregulated by the BR treatment and 778 are downregulated.</li>
       <li>The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: <a href="https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&amp;type=locus">TAIR database</a>).</li>
     </ol>
-  </blockquote>
-
-  <blockquote class="comment">
-    <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-    <p>The sum of genes considered as upregulated and downregulated is lower than the total number of genes whose <span class="notranslate">expression</span> is statistically different is due to the fact that we have selected only those whose difference in transcript abundance is greater than a factor of 2.</p>
-
   </blockquote>
 
 </blockquote>
@@ -1919,7 +1915,7 @@ For more information on the topic of quality control, please see our <a href="/t
 <blockquote class="notranslate hands_on">
   <div id="hands-on-obtaining-the-sequences-of-upregulated-mirnas" class="box-title" aria-label="hands-on box: Obtaining the sequences of upregulated miRNAs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining the sequences of upregulated mi<span class="notranslate">RNA</span>s</div>
   <blockquote class="comment">
-    <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>The following tools can be found in <em>Text Manipulation</em> and <em>Filter and Sort</em> sections.</p>
 
@@ -2020,7 +2016,7 @@ For more information on the topic of quality control, please see our <a href="/t
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input small <span class="notranslate">RNA</span> sequences file”</em>: <code class="language-plaintext highlighter-rouge">Upreguled mi<span class="notranslate">RNA</span> sequences</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Target sequence database file</em>”: <code class="language-plaintext highlighter-rouge">Downregulated m<span class="notranslate">RNA</span> sequences</code></li>
-        <li><em>“Prediction score cutoff value”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+        <li><em>“Prediction score cutoff value”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tab-delimited format</code></li>
       </ul>
     </li>
@@ -2028,23 +2024,23 @@ For more information on the topic of quality control, please see our <a href="/t
   </ol>
 </blockquote>
 
-<p>Congratulations! You have identified the following 5 potential genes involved in the brassinosteroid-mi<span class="notranslate">RNA</span> regulatory network.</p>
+<p>Congratulations! We have identified three gene-pairs potentially involved in the brassinosteroid-mediated regulatory network: AT4G14365/Ath-miR408, AT5G50570/Ath-miR156i and AT1G26890/Ath-miR156i.</p>
 
 <figure id="figure-12"><img src="../../images/transcriptomics_images/targetFinder_results.png" alt="fig15:TargetFinder results. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> TargetFinder results.</figcaption></figure>
 
 <p>Finally, we can access all the information available on the genes identified in the TAIR database:</p>
 
 <ul>
-  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT5G10180">AT5G10180</a>: ARABIDOPSIS SULFATE TRANSPORTER 68, AST6</li>
-  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT3G09220">AT3G09220</a>: LAC7, LACCASE 7</li>
-  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT2G46850">AT2G46850</a>: Protein kinase superfamily protein</li>
-  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT5G64260">AT5G64260</a>: EXL2, EXORDIUM LIKE 2</li>
-  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT3G63200">AT3G63200</a>: PATATIN-LIKE PROTEIN 9, PLA IIIB</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT4G14365">AT4G14365</a>: XB3 ORTHOLOG 4 IN ARABIDOPSIS THALIANA, XBAT34 (hypothetical protein)</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT5G50570">AT5G50570</a>: SPL13, SPL13A, SQUAMOSA PROMOTER-BINDING PROTEIN LIKE 13</li>
+  <li><a href="https://www.arabidopsis.org/servlets/TairObject?type=locus&amp;name=AT1G26890">AT1G26890</a>: FBD, F-box and Leucine Rich Repeat domains containing protein</li>
 </ul>
 
+<p>Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in <em>Medicago sativa</em>, through a signaling path mediated by miR156 (<span class="citation"><a href="#Feyissa2021">Feyissa <i>et al.</i> 2021</a></span>). On the other hand, according to <span class="citation"><a href="#Gao2017">Gao <i>et al.</i> 2017</a></span>, SPL13 is likely a negative regulator of plant vegetative growth. The interaction between miR156 and SPL transcription factors has been suggested for diverse Poaceae family members (<span class="citation"><a href="#Yue2021">Yue <i>et al.</i> 2021</a></span>).</p>
+
 <blockquote class="comment">
-  <div id="comment-5" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <p>One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire <a href="https://abrc.osu.edu/stocks/392113">AT2G46850 mutant seeds</a> and <a href="http://arabidopsis.info/StockInfo?NASC_id=N1093">wild type seeds</a>, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).</p>
+  <div id="comment-hypothesis-testing" class="box-title" aria-label="comment box: Hypothesis testing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Hypothesis testing</div>
+  <p>One of the hypotheses that we could propose from our results is: the inhibition of the AT5G50570 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire <a href="https://abrc.osu.edu/stocks/482611">AT5G50570 mutant seeds</a> and <a href="http://arabidopsis.info/StockInfo?NASC_id=N1093">wild type seeds</a>, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).</p>
 
   <figure id="figure-13"><img src="../../images/transcriptomics_images/arabidopis_growth_protocol.png" alt="fig16:Plant growth. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Arabidopsis growth conditions protocol (<span class="citation"><a href="#deOllas2019">de Ollas <i>et al.</i> 2019</a></span>).</figcaption></figure>
 
@@ -2121,10 +2117,12 @@ https://zenodo.org/record/4710649/files/SRR7779229_BRL3_m<span class="notranslat
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Glazov2008">Glazov, E. A., S. McWilliam, W. C. Barris, and B. P. Dalrymple, 2008 <b>Origin,  Evolution,  and Biological Role of miRNA Cluster in DLK-DIO3 Genomic Region in Placental Mammals</b>. Molecular Biology and Evolution 25: 939–948. <a href="https://doi.org/10.1093/molbev/msn045">10.1093/molbev/msn045</a></li>
+<li id="Zhao2009">Zhao, B., L. Ge, R. Liang, W. Li, K. Ruan <i>et al.</i>, 2009 <b>Members of miR-169 family are induced by high salinity and transiently inhibit the NF-YA transcription factor</b>. BMC Molecular Biology 10: <a href="https://doi.org/10.1186/1471-2199-10-29">10.1186/1471-2199-10-29</a></li>
 <li id="Ivashuta2011">Ivashuta, S., I. R. Banks, B. E. Wiggins, Y. Zhang, T. E. Ziegler <i>et al.</i>, 2011 <b>Regulation of Gene Expression in Plants through miRNA Inactivation</b> (G. Dalmasso, Ed.). PLoS ONE 6: e21330. <a href="https://doi.org/10.1371/journal.pone.0021330">10.1371/journal.pone.0021330</a></li>
 <li id="Hu2013">Hu, W.-hai, X.-hong Yan, Y.-an Xiao, J.-jun Zeng, H.-juan Qi <i>et al.</i>, 2013 <b>24-Epibrassinosteroid alleviate drought-induced inhibition of photosynthesis in Capsicum annuum</b>. Scientia Horticulturae 150: 232–237. <a href="https://doi.org/10.1016/j.scienta.2012.11.012">10.1016/j.scienta.2012.11.012</a></li>
 <li id="Srivastava2014">Srivastava, P. K., T. Moturu, P. Pandey, I. T. Baldwin, and S. P. Pandey, 2014 <b>A comparison of performance of plant miRNA target prediction tools and the characterization of features for genome-wide target prediction</b>. BMC Genomics 15: 348. <a href="https://doi.org/10.1186/1471-2164-15-348">10.1186/1471-2164-15-348</a></li>
 <li id="Srivastava2016">Srivastava, A., H. Sarkar, N. Gupta, and R. Patro, 2016 <b>RapMap: a rapid,  sensitive and accurate tool for mapping RNA-seq reads to transcriptomes</b>. Bioinformatics 32: i192–i200. <a href="https://doi.org/10.1093/bioinformatics/btw277">10.1093/bioinformatics/btw277</a></li>
+<li id="Gao2017">Gao, R., M. Y. Gruber, L. Amyot, and A. Hannoufa, 2017 <b>SPL13 regulates shoot branching and flowering time in Medicago sativa</b>. Plant Molecular Biology 96: 119–133. <a href="https://doi.org/10.1007/s11103-017-0683-8">10.1007/s11103-017-0683-8</a></li>
 <li id="Ma2017">Ma, X., C. Liu, L. Gu, B. Mo, X. Cao <i>et al.</i>, 2017 <b>TarHunter,  a tool for predicting conserved microRNA targets and target mimics in plants</b> (I. Hofacker, Ed.). Bioinformatics 34: 1574–1576. <a href="https://doi.org/10.1093/bioinformatics/btx797">10.1093/bioinformatics/btx797</a></li>
 <li id="Patro2017">Patro, R., G. Duggal, M. I. Love, R. A. Irizarry, and C. Kingsford, 2017 <b>Salmon provides fast and bias-aware quantification of transcript expression</b>. Nature Methods 14: 417–419. <a href="https://doi.org/10.1038/nmeth.4197">10.1038/nmeth.4197</a></li>
 <li id="Anwar2018">Anwar, A., Y. Liu, R. Dong, L. Bai, X. Yu <i>et al.</i>, 2018 <b>The physiological and molecular mechanism of brassinosteroid in response to stress: a review</b>. Biological Research 51: <a href="https://doi.org/10.1186/s40659-018-0195-2">10.1186/s40659-018-0195-2</a></li>
@@ -2132,7 +2130,9 @@ https://zenodo.org/record/4710649/files/SRR7779229_BRL3_m<span class="notranslat
 <li id="Wang2019">Wang, Y., J.-J. Cao, K.-X. Wang, X.-J. Xia, K. Shi <i>et al.</i>, 2018 <b>BZR1 Mediates Brassinosteroid-Induced Autophagy and Nitrogen Starvation in Tomato</b>. Plant Physiology 179: 671–685. <a href="https://doi.org/10.1104/pp.18.01028">10.1104/pp.18.01028</a></li>
 <li id="PlanasRiverola2019">Planas-Riverola, A., A. Gupta, I. Betegón-Putze, N. Bosch, M. Ibañes <i>et al.</i>, 2019 <b>Brassinosteroid signaling in plant development and adaptation to stress</b>. Development 146: dev151894. <a href="https://doi.org/10.1242/dev.151894">10.1242/dev.151894</a></li>
 <li id="deOllas2019">Ollas, C. de, C. Segarra-Medina, M. González-Guzmán, J. Puertolas, and A. Gómez-Cadenas, 2019 <b>A customizable method to characterize Arabidopsis thaliana transpiration under drought conditions</b>. Plant Methods 15: <a href="https://doi.org/10.1186/s13007-019-0474-0">10.1186/s13007-019-0474-0</a></li>
-<li id="Park2020">Park, S. Y., J.-H. Choi, D.-H. Oh, J. C. Johnson, M. Dassanayake <i>et al.</i>, 2020 <b>Genome-wide analysis of brassinosteroid responsive small RNAs in Arabidopsis thaliana</b>. Genes &amp; Genomics 42: 957–969. <a href="https://doi.org/10.1007/s13258-020-00964-2">10.1007/s13258-020-00964-2</a></li></ol>
+<li id="Park2020">Park, S. Y., J.-H. Choi, D.-H. Oh, J. C. Johnson, M. Dassanayake <i>et al.</i>, 2020 <b>Genome-wide analysis of brassinosteroid responsive small RNAs in Arabidopsis thaliana</b>. Genes &amp; Genomics 42: 957–969. <a href="https://doi.org/10.1007/s13258-020-00964-2">10.1007/s13258-020-00964-2</a></li>
+<li id="Feyissa2021">Feyissa, B. A., L. Amyot, V. Nasrollahi, Y. Papadopoulos, S. E. Kohalmi <i>et al.</i>, 2021 <b>Involvement of the miR156/SPL module in flooding response in Medicago sativa</b>. Scientific Reports 11: <a href="https://doi.org/10.1038/s41598-021-82450-7">10.1038/s41598-021-82450-7</a></li>
+<li id="Yue2021">Yue, E., H. Tao, and J. Xu, 2021 <b>Genome-wide analysis of microRNA156 and its targets,  the genes encoding SQUAMOSA promoter-binding protein-like (SPL) transcription factors,  in the grass family Poaceae</b>. Journal of Zhejiang University-SCIENCE B 22: 366–382. <a href="https://doi.org/10.1631/jzus.b2000519">10.1631/jzus.b2000519</a></li></ol>
                 
 
                 
