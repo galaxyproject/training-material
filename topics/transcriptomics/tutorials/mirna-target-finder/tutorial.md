@@ -435,7 +435,7 @@ Repeat the filtering step on the imported DESeq2 result.
 >
 {: .question}
 
-Experimental results indicate that least one member of the ath-miR-169 family is induced significantly by saline stress ({% cite Zhao2009 %}).
+Experimental results indicate that at least one member of the ath-miR-169 family is induced significantly by saline stress ({% cite Zhao2009 %}).
 
 # mRNA data analysis
 
