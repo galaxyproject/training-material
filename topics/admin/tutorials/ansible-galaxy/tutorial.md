@@ -2045,8 +2045,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    server_name   "{{ inventory_hostname }}";
 >    +
 >    +    # Our log files will go here.
->    +    access_log  /var/log/nginx/access.log;
->    +    error_log   /var/log/nginx/error.log;
+>    +    access_log  syslog:server=unix:/dev/log;
+>    +    error_log   syslog:server=unix:/dev/log;
 >    +
 >    +    # The most important location block, by default all requests are sent to gunicorn
 >    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
@@ -2126,7 +2126,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -2145,6 +2145,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
+> 8. Check out the nginx logs with `journalctl`
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > journalctl -fu nginx
+>    > ```
+>    {: .code-in}
 {: .hands_on}
 
 > <details-title>"Potential Security Risk" / LetsEncrypt Staging Environment</details-title>
@@ -2322,7 +2329,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
