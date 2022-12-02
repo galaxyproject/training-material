@@ -6,6 +6,7 @@ zenodo_link: 'https://zenodo.org/record/4710649'
 tags:
     - miRNA
     - plants
+    - stress tolerance
 questions:
 - Which miRNAs are upregulated in response to brassinosteroids?
 - Which genes are potential target of brassinosteroid-induced miRNAs?
@@ -331,7 +332,7 @@ __DESeq2__ is a tool for differential gene expression analysis based on a negati
 >
 {: .comment}
 
-> <hands-on-title>Differential expression analysis using __DESeq2__</hands-on-title>
+> <hands-on-title>Differential expression analysis using DESeq2</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
@@ -501,7 +502,7 @@ After determining the best mapping for each read, __Salmon__  generates the fina
 {: .details}
 
 
-> <hands-on-title>Quantify gene expression with __Salmon__</hands-on-title>
+> <hands-on-title>Quantify gene expression with Salmon</hands-on-title>
 >
 > 1. {% tool [Salmon quant](toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1) %} with the following parameters:
 >    - *"Select salmon quantification mode:"*: `Reads`
@@ -556,7 +557,9 @@ NumReads          | The number of reads mapping to each transcript that was quan
 
 ## Differential expression analysis of mRNAs: **DESeq2**
 
-> <hands-on-title>DEA using __DEseq2__</hands-on-title>
+Now, let's analyze which genes show statistically significant differential expression in response to brassinosteoids.
+
+> <hands-on-title>Differential expression analysis using DEseq2</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1) %} with the following parameters:
 >    - *"How"*: `Select datasets per level`
@@ -621,13 +624,13 @@ Now we continue with the DE genes analysis.
 > 2. Rename the output as `Differentially expressed mRNAs`
 >
 > 3. {% tool [Filter](Filter1) %}data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
->    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
->    - *"With following condition"*: `c3>1`
+>    - {% icon param-file %} *"Filter"*: `Differentially expressed mRNAs`
+>    - *"With following condition"*: `c3<-1`
 > 4. Rename it as `Upregulated mRNAs`
 >
 > 5. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
->    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
->    - *"With following condition"*: `c3<-1`
+>    - {% icon param-file %} *"Filter"*: `Differentially expressed mRNAs`
+>    - *"With following condition"*: `c3>1`
 > 6. Rename it as `Downregulated mRNAs`
 >
 {: .hands_on}
@@ -765,4 +768,4 @@ Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR
 # Conclusion
 
 
-In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.
+In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of three potential miRNA targets.
