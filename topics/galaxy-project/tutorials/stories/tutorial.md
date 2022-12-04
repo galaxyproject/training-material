@@ -93,23 +93,28 @@ Hans Rudolf?
 
 ## IUC
 
-*Ross just wanted to try this out. Not a good example because it was a team initiative rather than from the community?*
+*Ross test. Delete me. Not a good example here because it was a team initiative rather than from the community?*
 
-- The IUC was created initially in 2012 by Greg Von Kuster, and involved the most active toolshed contributors at the time.
-- Unlike many of the other stories here, it was started by the team
-- Initially as a way to mark reliable Toolshed tools
-- The Toolshed was always meant to be an open resource resource
-- In practice, this results in contributions of variable reliability.
-- User demand for identifiably curated and reliable tools was increasing. 
-- Like everything else, it has adapted to changing needs with growth over time.
-- Now provides 
-    - "Best practice" tool wrapper implementation guidelines.
-    - Tool code repository automation
-    - Tool development utilities and support.
-    - Maintains wrappers for many popular and important new packages
-    - Training topic content contributions.
-- Open to community participants who are interested in helping out.
-- Gitter channel supports contributors developing new tool wrappers.
+- The IUC was created in 2012.
+- An initiative by Greg Von Kuster.
+- Invited most of the active toolshed contributors at the time.
+- Unlike most other stories here, it was started by the Galaxy team.
+- A group responsible for identifying reliable and trustworthy Toolshed tools
+- The Toolshed has always been an open resource to which any author could contribute.
+- Some automated checks at upload, but no human review of contributions.
+- Contributions are of variable reliability.
+- Users had to do their own due diligence for security and reliability.
+- Demand for curated and reliable Galaxy tools was growing.
+- Response was creating the IUC to help identify and mark reliable tools. 
+- Like everything else, it has adapted to changing needs over time.
+- Now provides: 
+    - "Best practice" tool wrapper implementation standards.
+    - Tool wrapper Github source code repository automation scripts.
+    - Tool wrapper development utilities and support.
+    - Wrappers for many popular and important new packages.
+    - Training topic content contributions and support.
+- Open to participation from community participants interested in helping out.
+- IUC Gitter channel provides support and advice for contributors developing new tool wrappers.
 
 > <details-title>Formation of the IUC</details-title>
 > Greg Von Kuster <greg@bx.psu.edu>
@@ -117,6 +122,7 @@ Hans Rudolf?
 > Tue, 11 Sept 2012, 06:40
 > 
 > to Edward, Peter, jj@umn.edu, Brad, Ross, Ira, Björn, Dave, Anton, Daniel, Dave, Nate, Greg
+> 
 > Hello everyone,
 > 
 > Thanks to each of you for agreeing to be a charter member of the new Intergalactic Utilities Commission (IUC).  In agreeing to membership, you are now deemed to be an Intergalactic Utilities Commissioner!
