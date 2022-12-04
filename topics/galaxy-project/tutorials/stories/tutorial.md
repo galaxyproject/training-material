@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 logo: "Galrollup"
 title: "Stories of success: How important project activities got themselves started"
 questions:
-  - "Who controls the development of new activities in Galaxy?"
+  - "Who controls new activities being added to the project?"
   - "Are there examples of new project initiatives being developed by participants?"
   - "What structures support community development initiatives"
   - "How are technical decisions made about the source code?"
@@ -20,11 +20,12 @@ time_estimation:
 subtopic: anatomy
 key_points:
   - "Galaxy is a global collaboration"
-  - "Write once, use often for framework features like analysis reproducibility"
-  - "Running code as a free service provides effective stress testing for defects"
-  - "Embeded in the much bigger open source and open science ecosystem"
-  - "Started in genomics but adapted for use by many data rich disciplines"
-  - "New contributors and investigators are highly valued"
+  - "It provides great value to scientists as a platform for transparent analysis"
+  - "That value is created by coordinating the work of hundreds of individuals"
+  - "The collaboration welcomes new ideas to expand and improve the project"
+  - "Stories about how people found their way in starting new ideas help explain how the project functions"
+  - "They may offer guidance and ideas for initiatives"
+  - "New data rich fields, contributors and investigators are all invited to work with us"
  
 contributors:
   - fubar2
@@ -73,8 +74,19 @@ The unique features of tool flexibility and availability, provenance tracking, w
 These explorations resulted in revelations about new possibilities for using Galaxy beyond domain-centric analyses (proteomics), and further developing multi-omic applications such as proteogenomics which integrates genomic, transcriptomic and proteomic data for novel molecular characterization of systems.  The innovation offered by multi-omics, coupled with the numerous unique advantages of Galaxy (access and training in use of complex workflows by novice users in particular), proved a competitive advantage in seeking funding to support development work.  These qualities have carried on since early days of development to gained continued support of Galaxy-P, as plausible arguments can be made to reviewers that this is not just another software tool but rather an ecosystem with unique, beneficial features.  A number of other groups across the world (Europe, Australia) have also recognized these benefits, and via coordination through the Galaxy-P team, a community of developers and users has been built and sustained.
 
 
+## Climate science communities
+
+Anne?
 
 
+## Small scale system administrators
 
+Hans Rudolf?
+
+## Micro
+
+## Ecology
+
+## Insert your story here or email text to Ross please?
 
 
