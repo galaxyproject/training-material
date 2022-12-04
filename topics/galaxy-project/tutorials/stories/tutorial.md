@@ -93,22 +93,30 @@ Hans Rudolf?
 
 ## IUC
 
+*Ross just wanted to try this out. Not a good example because it was a team initiative rather than from the community?*
+
 - The IUC was created initially in 2012 by Greg Von Kuster, and involved the most active toolshed contributors at the time.
+- Unlike many of the other stories here, it was started by the team
+- Initially as a way to mark reliable Toolshed tools
+- The Toolshed was always meant to be an open resource resource
+- In practice, this results in contributions of variable reliability.
+- User demand for identifiably curated and reliable tools was increasing. 
 - Like everything else, it has adapted to changing needs with growth over time.
-- Provides 
+- Now provides 
     - "Best practice" tool wrapper implementation guidelines.
-    - Tool code repository update automation support.
+    - Tool code repository automation
+    - Tool development utilities and support.
     - Maintains wrappers for many popular and important new packages
     - Training topic content contributions.
 - Open to community participants who are interested in helping out.
-- Gitter channel can be helpful for contributors developing new tools.
+- Gitter channel supports contributors developing new tool wrappers.
 
 > <details-title>Formation of the IUC</details-title>
 > Greg Von Kuster <greg@bx.psu.edu>
 > 
 > Tue, 11 Sept 2012, 06:40
 > 
-> to Edward, Peter, jj@umn.edu, Brad, me, Ira, Björn, Dave, Anton, Daniel, Dave, Nate, Greg
+> to Edward, Peter, jj@umn.edu, Brad, Ross, Ira, Björn, Dave, Anton, Daniel, Dave, Nate, Greg
 > Hello everyone,
 > 
 > Thanks to each of you for agreeing to be a charter member of the new Intergalactic Utilities Commission (IUC).  In agreeing to membership, you are now deemed to be an Intergalactic Utilities Commissioner!
@@ -130,30 +138,6 @@ Hans Rudolf?
 > Greg Von Kuster <greg@bx.psu.edu>
 {:  .details}
 
-
-	
-Tue, 11 Sept 2012, 06:40
-	
-to Edward, Peter, jj@umn.edu, Brad, me, Ira, Björn, Dave, Anton, Daniel, Dave, Nate, Greg
-Hello everyone,
-
-Thanks to each of you for agreeing to be a charter member of the new Intergalactic Utilities Commission (IUC).  In agreeing to membership, you are now deemed to be an Intergalactic Utilities Commissioner!
-
-The goals of the IUC include enabling the pervasive use of the main Galaxy tool shed by:
-
-a. Ensuring the repositories available in the tool shed include contents that are functionally correct and optimized for installation into local Galaxies.  New features will soon be introduced to the tool shed enabling repositories to be flagged as "IUC Approved".  When appropriate, guidance should be provided to repository owners so that they can understand what changes are necessary for their repository to be approved.
-
-b. Providing prioritization guidance to the Galaxy Tool Shed developers for the implementation of upcoming new features. 
-
-A detailed understanding of the tool shed and it's current and upcoming features and behaviors is necessary in order for the IUC to be successful with these goals.  We would like to schedule a teleconference towards the end of September using Google Hangout to start guiding you through this process.  We'll work with you to schedule the conference so it is as convenient as possible for the various time zones, and we'll send out an agenda a few days prior to the scheduled discussion.
-
-In preparation for this first teleconference, if you have not already done so, please make sure to read the tool shed wiki at http://wiki.g2.bx.psu.edu/Tool%20Shed.  I know that the wiki is a bit monolithic, and I am planning to break it up as soon as I get a chance, but it contains valuable details that are essential to understand as we start this process.
-
-In addition, I am willing to answer some questions from you via email to help prepare for this if needed.  Let us know if you feel that yet another email list is appropriate for this (e.g., iuc@galaxyproject.org or something similar).
-
-Thanks very much,
-
-Greg Von Kuster
 
 
 
