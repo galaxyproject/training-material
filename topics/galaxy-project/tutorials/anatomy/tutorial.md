@@ -174,25 +174,31 @@ contributors:
 - If any activity of the project looks interesting to you, please get in touch!
 
 > <tip-title>Communities in more detail</tip-title>
-> - Communities feature a lot in this guide although they may seem very abstract.
-> - Core features of open science projects 
->   - Represent how participants have organised themselves to get things done.
->   - Subgroups of individuals interacting regularly as part of a shared project activity
->   - They are an important part of any open project
-> - Participants might interact more often if they share an important distinguishing interest.
-> - New communities are formed when these interactions become frequent and are distinct from existing communities
->     - Functional communities organise activities for interested participants
->     - Leadership comes from the community. 
->     - Participants 
->     - Some are functional such as code contributors collaborating on a repository
->     - *Communities of practice* organise best practice tools, workflows and training.
->     - IUC was formed to provide best practice guidance and infrastructure for tool wrapper maintainers
+> - Communities sustain Galaxy, although the idea is abstract and fluid.
+> - They support all successful open projects 
+> - Theories about what they represent:
+>   - Arise when participants organise themselves, to get things done.
+>   - Subgroups of individuals interacting regularly in shared project activity
+>   - An important part of the success of any open project.
+> - Benefits for community contributors:
+>   - Opportunities for personal and professional development.  
+>   - Extending skills through supported problem solving.
+>   - Satisfaction in helping make open science better.
+> - Participants interact more often, if they share an important distinguishing interest.
+> - New communities appear when interactions are frequent and distinct from existing communities
+>     - Functional communities organise publicised activities for interested participants
+>     - Leadership and participation are responsive to the real needs of the community.
+>     - The project can help with publicity, but the community must sustain itself.
+>     - Anyone can participate in, or initiate new community activities.
+>     - Developers contributing to the code repository are an example of an important community.
+>     - *Communities of practice* maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
+>     - Regional communities support local training and other distributed activities.
 > - Open source shared values help make communities safe, productive and enjoyable for everyone
 >     - inclusive, participatory, professional behaviours are encouraged
 >     - Project strives to welcome and engage contributors and users
 >     - Community members are encouraged to help improve the project
 > - Communities are a core resource, adding substantial value to project grant resources.
-> - The whole project can be seen as a self governing community
+> - The project succeeds because it is a global, self governing, collaborating community.
 {:  .tip}
 
 
@@ -297,6 +303,8 @@ contributors:
 - GGSC
 - Working groups
 - Road maps
+- IUC/IWC/IDC and other project initiatives - open but initiated by the Team?
+- ....
 - Your ideas here please?
 
 ### Your ideas for people things to describe here please
