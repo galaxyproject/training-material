@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "A field guide to the Galaxy project"
+title: "A field guide to the Galaxy project for participants"
 summary: "People, resource inputs and project outputs. Work in progress. Please help make it better?"
 questions:
   - "What are the main identifiable project components?"

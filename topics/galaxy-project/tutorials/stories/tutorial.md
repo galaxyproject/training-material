@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Stories of success: How important project activities got themselves started"
+title: "Stories of success: How Galaxy project activities can be initiated"
 questions:
   - "Who controls new activities being added to the project?"
   - "Are there examples of new project initiatives being developed by participants?"
@@ -85,7 +85,7 @@ Anne?
 
 ## Small scale system administrators
 
-Hans Rudolf?
+Hans-Rudolf?
 
 ## Micro
 
