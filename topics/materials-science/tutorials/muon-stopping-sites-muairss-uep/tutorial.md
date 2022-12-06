@@ -31,7 +31,6 @@ abbreviations:
 
 
 # Introduction
-{:.no_toc}
 
 The problem of identifying the stopping site of a muon is often key in the
 interpretation of experimental results, and also one of those that computational
@@ -91,7 +90,7 @@ need to create these yourself outside of Galaxy.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -118,10 +117,9 @@ need to create these yourself outside of Galaxy.
 
 ## Import workflow
 
-> ### {% icon hands_on %} Hands-on: Import workflow
+> <hands-on-title>Import workflow</hands-on-title>
 >
-> 1. Import the workflow for this tutorial using the instructions located
->    [here](workflows/).
+> 1. Import the workflow for this tutorial using [these instructions](workflows/).
 > 2. Open the editor for the workflow, and verify that all the required tools
 >    are installed on your Galaxy instance, and have the same version(s) as the
 >    tools in workflow. If this is not the case a dialogue box will warn you.
@@ -139,16 +137,16 @@ what parameters they take and what exactly they do.
 First, we must randomly generate a batch possible locations for the muon using
 the {AIRSS} method using the following parameters.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [Generate muonated structures](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_write) %} with the following parameters:
+> 1. {% tool [PyMuonSuite AIRSS Generate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_write/pm_muairss_write/0.2.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Structure file"*: `Si-out.cell` (Input dataset)
 >    - {% icon param-file %} *"YAML parameter file"*: `Si-muairss-uep.yaml` (Input dataset)
 >    - *"Does your configuration use the CASTEP calculator?"*: `No`
 > 2. Should generate the following output(s):
 >    - {% icon param-file %} `Muonated Si-out.cell using Si-muairss-uep.yaml` (Output dataset)
 >
->    > ### {% icon comment %} CASTEP calculator
+>    > <comment-title>CASTEP calculator</comment-title>
 >    >
 >    > In our example we have not used the CASTEP calculator. If we had, we
 >    > would have the option of providing a CASTEP parameter file as well.
@@ -170,9 +168,9 @@ muon in each. This tool minimises the classical electrostatic forces with
 respect to the muon position, using the {UEP} generated for the original
 structure.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Run UEP optimisation (pm-uep-opt)](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt) %} with the following parameters:
+> 1. {% tool [PyMuonSuite AIRSS UEP Optimise](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.2.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Muonated structures (.zip)"*: `Muonated Si-out.cell using Si-muairss-uep.yaml` (output of **Generate muonated structures (pm-muairss)** {% icon tool %})
 >    - {% icon param-file %} *"Charge density file (.den_fmt)"*: `Si.den_fmt` (Input dataset)
 >    - {% icon param-file %} *"CASTEP log (.castep)"*: `Si.castep` (Input dataset)
@@ -189,9 +187,9 @@ We can then use this with the next tool in our workflow.
 Finally, we can cluster the optimised positions in order to generate a short
 list of potential stopping sites.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Run clustering for optimised structures (pm-muairss read)](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read) %} with the following parameters:
+> 1. {% tool [PyMuonSuite AIRSS Cluster](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.2.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"optimised muonated structures (.zip)"*: `UEP results for Muonated Si-out.cell using Si-muairss-uep.yaml` (output of **Run UEP optimisation (pm-uep-opt)** {% icon tool %})
 > 2. Should generate the following output(s):
 >    - {% icon param-file %} `Cluster Report` (Output dataset)
@@ -209,7 +207,6 @@ we also report the energy corresponding to that site. This can help inform which
 site(s) are most favourable for the muon.
 
 # Conclusion
-{:.no_toc}
 
 ![Graphical illustration of the generation, optimisation and clustering of potential stopping sites](../../images/muon_stopping_sites_diagram.png)
 
@@ -217,7 +214,7 @@ We have used tools from PyMuonSuite to determine possible locations of implanted
 muons in a simple structure. In reality, the structure of interest will likely
 be more complex, but the workflow will remain the same. It is also possible to
 modify the settings used by PyMuonSuite with
-{% tool [PyMuonSuite AIRSS Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_yaml_config) %}
+{% tool [PyMuonSuite AIRSS Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_yaml_config/pm_yaml_config/0.2.1+galaxy0) %}
 and then use that file in our input, or alternatively modify the workflow to
 include this tool directly. The Galaxy implementation has explanations of the
 various settings, and sensible values set by default.

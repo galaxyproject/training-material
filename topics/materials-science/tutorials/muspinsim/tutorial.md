@@ -19,11 +19,12 @@ contributors:
 - patrick-austin
 subtopic: muon-spectroscopy
 priority: 3
+abbreviations:
+  ALC: Avoided Level Crossing
 ---
 
 
 # Introduction
-{:.no_toc}
 
 As in other materials science domains, in muon spectroscopy comparing the
 results of simulation with experimentally observed properties is a staple tool
@@ -31,7 +32,7 @@ for gaining insight into the structure of interest. There are various types of
 coupling, and a variety of possible experimental setups that may be desirable to
 simulate. A more in depth discussion of the theory of spin dynamics in the
 context of muon spectroscopy can be found
-[here](https://muon-spectroscopy-computational-project.github.io/muspinsim/).
+[in the main MuSpinSim documentation](https://muon-spectroscopy-computational-project.github.io/muspinsim/).
 
 This tutorial covers a number of workflows, which reflect the different
 capabilities of MuSpinSim:
@@ -68,7 +69,12 @@ However, the main structure of the workflow remains similar throughout.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for each workflow in this tutorial
+> 1. Create a new history for each workflow in this tutorial. Note that while it
+>    is possible to import all data into and run workflows in a single history,
+>    you will need to be careful to manually select the right input files for
+>    the 6th and 7th workflows. By default Galaxy will automatically select the
+>    most recent file with the correct type, which could be the output of
+>    another workflow leading to an error.
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`) into history for the 6th and 7th workflows respectively:
@@ -93,8 +99,7 @@ However, the main structure of the workflow remains similar throughout.
 
 > ### {% icon hands_on %} Hands-on: Import workflow
 >
-> 1. Import each workflow for this tutorial using the instructions located
->    [here](workflows/).
+> 1. Import each workflow for this tutorial using these [instructions](workflows/).
 > 2. Open the editor for each workflow, and verify that all the required tools
 >    are installed on your Galaxy instance, and have the same version(s) as the
 >    tools in workflow. If this is not the case a dialogue box will warn you.
@@ -126,16 +131,16 @@ understanding we will describe each step in detail below.
 
 The first step is to generate a configuration file for the rest of the process.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `zeeman`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `Zeeman`
 >          - *"Index of coupled spin"*: `1`
@@ -156,9 +161,9 @@ The first step is to generate a configuration file for the rest of the process.
 >
 {: .hands_on}
 
-The output of this tool is `txt` file, formatted for MuSpinSim to use for the
+The output of this tool is a `txt` file, formatted for MuSpinSim to use for the
 the simulation itself. While there are a lot of parameters being defined, we can
-focus on the *"Interactions to simulates"* section. Here we define only one
+focus on the *"Interactions to simulate"* section. Here we define only one
 coupling, Zeeman, and we define its direction (aligned with the $$z$$ axis),
 strength ($$20.0$$) and units. The coupling value is implicitly assumed to be in
 terms of frequency ($$MHz$$); this is more intuitive when viewing the final plot
@@ -167,18 +172,18 @@ enough to cause oscillations at $$20MHz$$" using the inverse of the muon's
 gyromagnetic ratio $$135.5388 MHz/T$$ (i.e. a field strength of $$0.1475T$$).
 MuSpinSim supports a number of keyword arguments (we can also note the use of
 the Python `range` function) and these are described
-[here](https://muon-spectroscopy-computational-project.github.io/muspinsim/input/).
+[in the main MuSpinSim documentation](https://muon-spectroscopy-computational-project.github.io/muspinsim/input/).
 Although not explicitly stated, the unit for time is $$\mu s$$.
 
 ## MuSpinSim Simulate
 
-Now that we have defined the conditions, can simulate them during the next step
-of the workflow. For this we only need to provide our configuration file as an
-input.
+Now that we have defined the conditions, we can simulate them during the next
+step of the workflow. For this we only need to provide our configuration file as
+an input.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file zeeman` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
@@ -198,9 +203,9 @@ Finally, we can visualise our data by plotting it. This tool will parse the
 `.dat` format of the previous step and provide some simple options to control
 the appearance of the plot, which are given below.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Zeeman Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
@@ -249,18 +254,18 @@ largely the same.
 
 As in the previous example, we start with configuration.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
 >    - *"Name"*: `hfine`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >        - *"Spins to simulate 2"*:
 >          - *"Species"*: `e`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `hyperfine`
 >          - *"Index of nuclear coupled spin"*: `1`
@@ -292,9 +297,9 @@ the units are implicitly $$MHz$$.
 As all our changes are captured in the config file, this step operates exactly
 as before.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file hfine` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
@@ -307,9 +312,9 @@ as before.
 Similarly aside from labelling there are no differences with the plotting
 parameters.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Hfine Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
@@ -340,7 +345,7 @@ the *"Orientations"* section of the configuration to simulate an experiment on a
 powdered sample.
 
 In a powdered sample, each fragment is treated as being randomly orientated such
-that it is equivalent an average over all possible rotations of a crystalline
+that it is equivalent to an average over all possible rotations of a crystalline
 sample. In simulation, there are multiple ways of achieving this average
 supported by MuSpinSim. Regardless, each orientation will have its own
 contribution to the "powder" average, and we should expect to see this reflected
@@ -350,18 +355,18 @@ in the final plot we obtain.
 
 As in the previous example, we start with configuration.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
 >    - *"Name"*: `hfine_powder`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >        - *"Spins to simulate 2"*:
 >          - *"Species"*: `e`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `hyperfine`
 >          - *"Index of nuclear coupled spin"*: `1`
@@ -386,7 +391,7 @@ As in the previous example, we start with configuration.
 >    - *"Fitting Parameters"*:
 >      - *"Fit experimental data with simulations"*: `No`
 > 2. Should generate the following output(s):
->    - {% icon param-file %} `muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim input file hfine_powder` (Output dataset)
 >
 {: .hands_on}
 
@@ -396,7 +401,7 @@ achieved by providing a vector rather than scalar here).
 
 We have also defined the orientations needed to do our powder average. It is
 possible to define a specific range of angles for the average (see
-[here](https://muon-spectroscopy-computational-project.github.io/muspinsim/input/#orientation))
+[the main MuSpinSim documentation](https://muon-spectroscopy-computational-project.github.io/muspinsim/input/#orientation))
 but there are also helper functions that cover a full sphere. We are using
 `eulrange`, which will generate a grid of $$n \times n \times n$$ (1000)
 weighted Euler angles.
@@ -406,13 +411,13 @@ weighted Euler angles.
 As all our changes are captured in the config file, this step operates exactly
 as before.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
->    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file hfine` (Input dataset)
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file hfine_powder` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
->    - {% icon param-file %} `muspinsim log for muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim log for muspinsim input file hfine_powder` (Output dataset)
 >
 {: .hands_on}
 
@@ -421,16 +426,16 @@ as before.
 Similarly aside from labelling there are no differences with the plotting
 parameters.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Hyperfine (with powder averaging) Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
 >    - *"Output File Type"*: `PNG`
 >    - *"Muspinsim File Series"*:
 >      - *"Muspinsim File Series 1"*:
->        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `hfine.dat`
+>        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `hfine_powder.dat`
 >        - *"Line/Point Color"*: `Black`
 >        - *"Series Type"*: `Line`
 >        - *"Line type"*: `Solid`
@@ -442,27 +447,28 @@ parameters.
 
 ![Resultant plot of asymmetry against time for the powdered example](../../images/powder_example.png "The asymmetry oscillates, but also decays over time")
 
-As discussed earlier, our final plot is the sum of 1000 individual oscillations.
-Each has its own frequency, and so as time progresses they end up increasingly
-out of phase. The result is that the oscillations decay as the contributions
-begin to cancel each other out.
+As discussed earlier, our final plot is the average of 1000 individual
+oscillations. Each has its own frequency, and so as time progresses they end up
+increasingly out of phase. The result is that the oscillations decay as the
+contributions begin to cancel each other out.
 
 # Workflow 4 - Avoided Level Crossing
 
-An Avoided Level Crossing (ALC) experiment which involves three spins - a muon,
-electron and hydrogen atom. As a result we need two hyperfine tensors, one for
-both the muon and hydrogen to interact with the electron.
+This workflow simulates a simple {ALC} experiment which involves three spins: a
+muon, an electron, and a hydrogen atom. Both muon and hydrogen are coupled via
+hyperfine coupling to the electron, and so we will need to define a spin
+interaction for each in our configuration file.
 
 ## MuSpinSim Configure
 
 As in the previous example, we start with configuration.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
->    - *"Name"*: `hfine_powder`
+>    - *"Name"*: `alc`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `e`
 >        - *"Spins to simulate 2"*:
@@ -471,7 +477,7 @@ As in the previous example, we start with configuration.
 >          - *"Species"*: `custom`
 >          - *"Species name"*: `H`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `hyperfine`
 >          - *"Index of nuclear coupled spin"*: `2`
@@ -494,7 +500,7 @@ As in the previous example, we start with configuration.
 >    - *"Fitting Parameters"*:
 >      - *"Fit experimental data with simulations"*: `No`
 > 2. Should generate the following output(s):
->    - {% icon param-file %} `muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim input file alc` (Output dataset)
 >
 {: .hands_on}
 
@@ -502,8 +508,8 @@ The method of defining the hyperfine tensors is unchanged, however we now have
 two of them, with the respective index noted. Our experiment parameters have
 also changed. We use a predefined *"Experiment type"* instead of manually
 defining our $$x$$ and $$y$$ axes, and now have a `range` of values for our
-magnetic field. Note that we have also changed to the other helper function
-for orientation angles, `zcw`. This is cheaper as it only generates $$n$$ polar
+magnetic field. Note that we have also changed the helper function for
+orientation angles to `zcw`. This is cheaper as it only generates $$n$$ polar
 angles, but should only be used for cases where polar angles are sufficient.
 This is the case here thanks to the experiment's longitudinal polarisation.
 
@@ -512,37 +518,37 @@ This is the case here thanks to the experiment's longitudinal polarisation.
 As all our changes are captured in the config file, this step operates exactly
 as before.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
->    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file hfine` (Input dataset)
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file alc` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
->    - {% icon param-file %} `muspinsim log for muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim log for muspinsim input file alc` (Output dataset)
 >
 {: .hands_on}
 
 ## MuSpinSim Plot
 
 Here we define two file series to plot, but use the same dataset for each.
-Effectively this will give use both points and a connecting line between them.
+Effectively this will give us both points and a connecting line between them.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Hyperfine (with powder averaging) Example`
 >    - *"Label for x axis"*: `B`
 >    - *"Label for y axis"*: `Asymmetry`
 >    - *"Output File Type"*: `PNG`
 >    - *"Muspinsim File Series"*:
 >      - *"Muspinsim File Series 1"*:
->        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `hfine.dat`
+>        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `alc.dat`
 >        - *"Line/Point Color"*: `Black`
 >        - *"Series Type"*: `Line`
 >        - *"Line type"*: `Solid`
 >        - *"Line width"*: `1.0`
 >      - *"Muspinsim File Series 2"*:
->        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `hfine.dat`
+>        - {% icon param-file %} *"Muspinsim Experiment Data (.dat)"*: `alc.dat`
 >        - *"Line/Point Color"*: `Blue`
 >        - *"Series Type"*: `Points`
 >        - *"Point Type"*: `Square`
@@ -576,7 +582,7 @@ $$
 T \gg \frac{1.159\cdot 10^{-4} \,\mathrm{eV}}{ k_B} \approx 1.35 \,\mathrm{K}.
 $$
 
-For this reason, we make a comparison between two versions of the same system, one with $T=\infty$ and one with $T = 1 \,\mathrm{K}$, low enough to be out of the high temperature regime. The expected behaviour is as follows:
+For this reason, we make a comparison between two versions of the same system, one with $$T=\infty$$ and one with $$T = 1 \,\mathrm{K}$$, low enough to be out of the high temperature regime. The expected behaviour is as follows:
 
 * the external field sets a base Larmor frequency of 135.54 MHz for the muon. The hyperfine interaction adds or subtracts 5 MHz based on whether the electron is up or down;
 * for very low T, the electron will start entirely in one state, aligned with the external magnetic field. In this case we expect the signal to be a single cosinusoid at 140.54 MHz;
@@ -587,18 +593,18 @@ For this reason, we make a comparison between two versions of the same system, o
 As we are simulating two different temperatures, we need a configuration file
 for each.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
 >    - *"Name"*: `Low T` / `High T`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >        - *"Spins to simulate 2"*:
 >          - *"Species"*: `e`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `hyperfine`
 >          - *"Index of nuclear coupled spin"*: `1`
@@ -621,7 +627,7 @@ for each.
 >    - *"Fitting Parameters"*:
 >      - *"Fit experimental data with simulations"*: `No`
 > 2. Should generate the following output(s):
->    - {% icon param-file %} `muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim input file Low T` / `muspinsim input file High T` (Output dataset)
 >
 {: .hands_on}
 
@@ -632,13 +638,13 @@ are the same.
 
 Here we will need to run the simulation on both of the configuration files.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
->    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file hfine` (Input dataset)
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `muspinsim input file Low T` / `muspinsim input file High T` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
->    - {% icon param-file %} `muspinsim log for muspinsim input file hfine` (Output dataset)
+>    - {% icon param-file %} `muspinsim log for muspinsim input file Low T` / `muspinsim log for muspinsim input file High T` (Output dataset)
 >
 {: .hands_on}
 
@@ -647,9 +653,9 @@ Here we will need to run the simulation on both of the configuration files.
 We will use two files as inputs to the plot, however these are now displaying
 different data (low and high temperature).
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Temperature Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
@@ -686,20 +692,27 @@ muon is polarised in the $$x$$ direction, but the field applied is aligned with
 $$z$$. Under this perpendicular field, we expect the oscillations to decay
 according to the dissipation strength we provide.
 
+> <warning-title>Selecting the right dataset</warning-title>
+> If using a separate history for each workflow, switch to the history
+> containing only `dissipation_theory.dat` now. If sharing one history between
+> workflows, make sure that *"Theoretical Datapoints for Dissipation"* is
+> manually set to `dissipation_theory.dat`.
+{: .warning}
+
 ## MuSpinSim Configure
 
 As in the previous example, we start with configuration.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
 >    - *"Name"*: `dissipation`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `dissipation`
 >          - *"Index of spin with dissipation"*: `1`
@@ -738,9 +751,9 @@ Where $$A$$ is the asymmetry, and $$t$$ is in $$\mu s$$.
 As all our changes are captured in the config file, this step operates exactly
 as before.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `Output dataset 'out_file' from step 1` (Input dataset)
 > 2. Should generate the following output(s):
 >    - {% icon param-collection %} `Muspinsim output collection` (Output dataset)
@@ -750,9 +763,9 @@ as before.
 
 ## MuSpinSim Plot
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Dissipation Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
@@ -780,7 +793,7 @@ as before.
 Here we would like to compare the output of MuSpinSim with the theoretical
 expression given earlier. For this we need to provide a second dataset as input
 to the plot in the expected format. You should have imported such a dataset at
-the start of this, tutorial.
+the start of this tutorial.
 
 ![Resultant plot of asymmetry dissipating over time](../../images/dissipation_example.png "The output of MuSpinSim agrees with the theoretical behaviour")
 
@@ -794,20 +807,27 @@ strength of the dissipation will be the variable controlling our fit.
 While experimental data would usually be the target for fitting, here we will
 use the analytical solution with added noise.
 
+> <warning-title>Selecting the right dataset</warning-title>
+> If using a separate history for each workflow, switch to the history
+> containing only `experiment.dat` now. If sharing one history between
+> workflows, make sure that *"Fitting Data"* is manually set to
+> `experiment.dat`.
+{: .warning}
+
 ## MuSpinSim Configure
 
 As in the previous example, we start with configuration.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
 >    - *"Name"*: `fitting`
 >    - *"Spins"*:
->      - *"Spins to simulates"*:
+>      - *"Spins to simulate"*:
 >        - *"Spins to simulate 1"*:
 >          - *"Species"*: `mu`
 >    - *"Spin Interactions"*:
->      - *"Interactions to simulates"*:
+>      - *"Interactions to simulate"*:
 >        - *"Interactions to simulate 1"*:
 >          - *"Choose interaction type"*: `dissipation`
 >          - *"Index of spin with dissipation"*: `1`
@@ -842,18 +862,18 @@ As in the previous example, we start with configuration.
 In order to perform the fitting, we have replaced the numerical *"Dissipation"*
 with a variable, `g`. We then need to provide details of this variable in the
 *"Fitting Parameters"* section: it's starting value, minimum and maximum bound.
-Finally we need to provide the method to use. Here we use `Nelder-Mead`, but
-`lbfgs` is also supported {% cite nelder_mead_1965 %}
-{% cite nocedal_wright_2006 %}. 
+Finally we need to provide the method to use. Here we use
+`Nelder-Mead`{% cite nelder_mead_1965 %}, but
+`lbfgs`{% cite nocedal_wright_2006 %} is also supported. 
 
 ## MuSpinSim Simulate
 
 At this stage of the process we need to include our "experimental" data that we
 wish to fit to, which should have been imported into our history.
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim) %} with the following parameters:
+> 1. {% tool [MuSpinSim Simulate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim/muspinsim/1.1.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Configuration file containing simulation parameters"*: `Output dataset 'out_file' from step 1` (Input dataset)
 >    - {% icon param-file %} *"Experiment data to fit (.dat) (Optional)"*: `experiment.dat` (Input dataset)
 > 2. Should generate the following output(s):
@@ -868,9 +888,9 @@ iterations and error on the final, fitted simulation.
 
 ## MuSpinSim Plot
 
-> ### {% icon hands_on %} Hands-on: Tool details
+> <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot) %} with the following parameters:
+> 1. {% tool [MuSpinSim Plot](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_plot/muspinsim_plot/3.5.1+galaxy0) %} with the following parameters:
 >    - *"Plot Title"*: `Fitting Example`
 >    - *"Label for x axis"*: `t`
 >    - *"Label for y axis"*: `Asymmetry`
@@ -902,10 +922,9 @@ which should closely match the output of our simulation(s) with MuSpinSim.
 ![Resultant plot of fitted solution against "experiment"](../../images/dissipation_example.png "The fitted output of MuSpinSim agrees with the provided data")
 
 # Conclusion
-{:.no_toc}
 
 We have used the MuSpinSim tool to perform a variety of simulations that may be
 of interest. In all cases, the workflow involved three Galaxy tool wrappers for
 configuration, simulation and plotting respectively. In these examples, each
 workflow defined the configuration parameters that were relevant for the
-experimental set up. For the full range of options, the standalone {% tool [PyMuonSuite AIRSS Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} can be used as a reference.
+experimental set up. For the full range of options, the standalone {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} can be used as a reference.
