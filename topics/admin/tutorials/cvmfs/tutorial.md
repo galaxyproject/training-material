@@ -92,7 +92,9 @@ From the Cern website:
 > well. So we're just going to get on with things.
 {: .spoken data-visual="gtn" data-target="#cvmfs-quote"}
 
-A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data).
+
+This exercise uses Ansible to install and configure CVMFS and Galaxy's access to CVMFS. For a tutorial that does not use Ansible and gives a closer look at how reference data is configured in Galaxy, see [the Reference Data with CVMFS without Ansible tutorial]({% link topics/admin/tutorials/cvmfs-manual/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
