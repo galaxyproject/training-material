@@ -67,7 +67,7 @@ However, the main structure of the workflow remains similar throughout.
 
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for each workflow in this tutorial. Note that while it
 >    is possible to import all data into and run workflows in a single history,
@@ -97,7 +97,7 @@ However, the main structure of the workflow remains similar throughout.
 
 ## Import workflows
 
-> ### {% icon hands_on %} Hands-on: Import workflow
+> <hands-on-title>Import Workflow</hands-on-title>
 >
 > 1. Import each workflow for this tutorial using these [instructions](workflows/).
 > 2. Open the editor for each workflow, and verify that all the required tools
@@ -256,7 +256,7 @@ As in the previous example, we start with configuration.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `hfine`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -357,7 +357,7 @@ As in the previous example, we start with configuration.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `hfine_powder`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -465,7 +465,7 @@ As in the previous example, we start with configuration.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `alc`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -595,7 +595,7 @@ for each.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `Low T` / `High T`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -705,7 +705,7 @@ As in the previous example, we start with configuration.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `dissipation`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -820,7 +820,7 @@ As in the previous example, we start with configuration.
 
 > <hands-on-title>Tool details</hands-on-title>
 >
-> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} with the following parameters:
+> 1. {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} with the following parameters:
 >    - *"Name"*: `fitting`
 >    - *"Spins"*:
 >      - *"Spins to simulate"*:
@@ -927,4 +927,4 @@ We have used the MuSpinSim tool to perform a variety of simulations that may be
 of interest. In all cases, the workflow involved three Galaxy tool wrappers for
 configuration, simulation and plotting respectively. In these examples, each
 workflow defined the configuration parameters that were relevant for the
-experimental set up. For the full range of options, the standalone {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config) %} can be used as a reference.
+experimental set up. For the full range of options, the standalone {% tool [MuSpinSim Configure](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/muspinsim_config/muspinsim_config/1.1.0+galaxy0) %} can be used as a reference.
