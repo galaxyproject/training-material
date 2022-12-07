@@ -328,15 +328,21 @@ Total run time: 0:00:00.770248
 
 Run the fetch DM:
 
-```console
-$ run-data-managers --config fetch-sacCer3.yml -g https://gat-0.student.galaxy.training -a abbacadabba
-Storing log file in: /tmp/ephemeris_kfsmjk2a
-Running data managers that populate the following source data tables: ['all_fasta']
-Dispatched job 1. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" with parameters: {'dbkey_source|dbkey': 'sacCer3', 'reference_source|reference_source_selector': 'ucsc', 'reference_source|requested_dbkey': 'sacCer3'}
-Job 1 finished with state ok.
-Running data managers that index sequences.
-Finished running data managers. Results:
-Successful jobs: 1
-Skipped jobs: 0
-Failed jobs: 0
-```
+> <code-in-title></code-in-title>
+> ```
+> run-data-managers --config fetch-sacCer3.yml -g https://gat-0.student.galaxy.training -a abbacadabba
+> ```
+{: .code-in}
+
+> <code-out-title></code-out-title>
+> ```
+> Storing log file in: /tmp/ephemeris_kfsmjk2a
+> Running data managers that populate the following source data tables: ['all_fasta']
+> Dispatched job 1. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" with parameters: {'dbkey_source|dbkey': 'sacCer3', 'reference_source|reference_source_selector': 'ucsc', 'reference_source|requested_dbkey': 'sacCer3'}
+> Job 1 finished with state ok.
+> Running data managers that index sequences.
+> Finished running data managers. Results:
+> Successful jobs: 1
+> Skipped jobs: 0
+> Failed jobs: 0
+> ```
