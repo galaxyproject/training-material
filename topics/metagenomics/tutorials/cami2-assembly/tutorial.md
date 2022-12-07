@@ -118,7 +118,7 @@ A the entire challenge is not a one-day task and takes months to complete, we sh
 
     ![Assembly tools plot from CAMI2](./images/assembly-tools-plots.jpg){:width="70%"}
 
-    Overall, GATB ({%cite Drezen2014%}) ranked best on the strain madness data across most metrics (mismatches, misassemblies, strain recall, and strain precision), while HipMer ({%cite Georganas2018%}, {%cite Georganas2015%}, {%cite Hofmeyr2020%}) on the plant-associated data. Compared to the first CAMI challenge A-STAR ({%cite astar%}) considerably improved in genome fraction for the strain madness data. The other leader SPAdes ({%cite Bankevich2012%}, {%cite Nurk2017%}) was not introduced in CAMI1 ({%cite Sczyrba2017%}) and performed well in CAMI2 ({%cite Meyer2021%}, {%cite 2022%}). For the type of assembly, the different tools performed differently. Single-sample assembly was done well by all assemblers. HipMer performed better on single samples as well as for pooled samples.
+    Overall, GATB ({% cite Drezen2014 %}) ranked best on the strain madness data across most metrics (mismatches, misassemblies, strain recall, and strain precision), while HipMer ({% cite Georganas2018 %}, {% cite Georganas2015 %}, {% cite Hofmeyr2020 %}) on the plant-associated data. Compared to the first CAMI challenge A-STAR considerably improved in genome fraction for the strain madness data. The other leader SPAdes ({% cite Bankevich2012 %}, {% cite Nurk2017 %}) was not introduced in CAMI1 ({% cite Sczyrba2017 %}) and performed well in CAMI2 ({% cite Meyer2021 %}, {% cite 2022 %}). For the type of assembly, the different tools performed differently. Single-sample assembly was done well by all assemblers. HipMer performed better on single samples as well as for pooled samples.
 
 - **Genome binning**: clusters or classifies sequences or contigs into bins representing genomes.
 
@@ -188,7 +188,7 @@ To select which challenge to run, we compared **tools submitted for every challe
 	[(Meta)HipMer](https://sourceforge.net/projects/hipmer) | {% cite georganas2015hipmer %}, {% cite Georganas2018 %},  {% cite Hofmeyr2020 %} | short read, v.1.0, v.1.2.2, v.2.0, Metagenome, cgraph, cgraph-ono | No
     [(meta)Flye](https://github.com/fenderglass/Flye) | {% cite Kolmogorov2020 %} | long read, v.2.4.1, v.2.8, v.2.8.1 | Yes | 2.9
     [(meta)SPAdes](http://cab.spbu.ru/software/spades) | {% cite Bankevich2012 %} | short read/hybrid, v.3.13.0, v.3.13.1, v.3.14-dev | Yes | 3.15.3 |
-	[OPERA-MS](https://github.com/CSB5/OPERA-MS) | {% cite Bertrand2019 %} | No | | Second fastest and most memory efficient
+	[OPERA-MS](https://github.com/CSB5/OPERA-MS) | {% cite Bertrand2019 %} | | No | | Second fastest and most memory efficient
     [Ray Meta](http://github.com/sebhtml/ray) | {% cite Boisvert2012 %} | short read, v.2.3.1 | No
     [ABySS](https://github.com/bcgsc/abyss) | {% cite Simpson2009 %}, {% cite jackman2017abyss %}| short read, v.2.1.5 | Yes | 2.3.4
     [GATB](http://gatb.inria.fr) | {% cite Drezen2014 %}, {% cite chikhi2013space %}| hybrid, v.1.0 | No | second fastest and most memory efficient
@@ -585,26 +585,30 @@ We now have collections for both short and long reads.
 
 # Select and prepare the tools to run
 
-Based on {% cite meyer2022critical %}, {% cite Meyer2021 %} and {% cite Meyer2021_tutorial %}, we can compare tools on a set of metrics to select the one to use for an analysis but also here to run the challenge.
-In the following table in the column "Tool" there is the name of the assembly tool. Note, that Gold Standard Assembly refers to the correct result that was expected from the assemblers.
-"Genome fraction" column refers to percentage of aligned bases in the reference genome reached by the corresponding tool.
-"Mismatches per 100 kbp" column refers to mismatched bases in the contig-reference alignment.
-"Misassemblies" -  joining sequences that should not be adjacent.
-"NGA50" - the contig length such that using longer contigs produces half (50%) of the bases of the reference genome.
-"Strain recall" is defined as the fraction of high-quality (more than 90% genome fraction and less than a specific number of mismatches per 100 kb) genome assemblies recovered for all ground truth genomes.
-"Strain precision" specifies the fraction of low mismatch and high genome fraction (more than 90%) assemblies among all high genome fraction assemblies.
+## Select tools
+
+To select the tools to use for an analysis but also here to run the challenge, we can compare tools nased on {% cite meyer2022critical %}, {% cite Meyer2021 %} and {% cite Meyer2021_tutorial %} on a set of metrics:
+
+- **Genome fraction**: percentage of aligned bases in the reference genome reached by the corresponding tool
+- **Mismatches per 100 kbp**: mismatched bases in the contig-reference alignment
+- **Misassemblies**: joining sequences that should not be adjacent.
+- **NGA50**: the contig length such that using longer contigs produces half (50%) of the bases of the reference genome
+- **Strain recall**: the fraction of high-quality (more than 90% genome fraction and less than a specific number of mismatches per 100 kb) genome assemblies recovered for all ground truth genomes
+- **Strain precision**: the fraction of low mismatch and high genome fraction (more than 90%) assemblies among all high genome fraction assemblies
+
+The first line, the Gold Standard Assembly, refers to the correct result that was expected from the assemblers.
 
 Tool | Genome fraction (%) | Mismatches per 100 kbp | Misassemblies | NGA50 | Strain recall | Strain precision
 Gold Standard Assembly (GSA) | 76.9 | 0 | 0 | 682,777 | 54.9% (upper bound) | 100
 ABySS ({% cite jackman2017abyss %}) | Very accurate mean fraction (<1% divergence) |  | The fewest misassemblies | 100% precision. The highest strain precision (100%) for the unique genome
 Ray ({% cite Boisvert2012 %}) |  |  |  |  |  | 100% precision. The highest strain precision (100%) for the unique genome
-A-STAR ({% cite astar %}) | A-STAR excelled in terms of genome fraction on marine and strain madness data sets. A-STAR improved the genome fraction to 44.1% on the marine dataset. On marine common genomes, A-STAR (26.7%) achieved the highest genome fractions. For unique genome, A-STAR provided the most complete assemblies (55.3% genome fraction). A-STAR partially recovered 102 (78%) of 131 16S gold standard sequences. | More mismatches than others: 773/100 kb | More misassemblies than others | | 2nd highest: 7.5% recall  | 2nd highest: 69.4% precision
-OPERA-MS ({%cite operams%}) | There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The hybrid assembler OPERA-MS recovered one of the most complete 16S sequences (mean recovered gene fraction 47.1%). For the unique genome, OPERA-MS has an exceptional average NGA50 (187,083, 75% of the gold standard NGA50). | | The most contiguous assemblies were provided by the hybrid assembler OPERA-MS for the marine data, with an average NGA50 of 28,244 across genomes. |
-MEGAHIT ({%cite li2015megahit%}) | 41.1. On marine common genomes, MEGAHIT (24.6%) achieved the second highest (after A-STAR) genome fractions. There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The mean fraction of genes recovered by short-read assembler MEGAHIT is 36.9% | | For short-read assembly, MEGAHIT had the highest contiguity on the marine (NGA50 of 26,599) |
-HipMer ({%cite georganas2015hipmer%}) | high genome fraction. There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The mean fraction of genes recovered by short-read assembler HipMer is 29.6% | | high NGA50 | HipMer had the highest strain recall (14.4% on marine). For the unique genome, the HipMer assembly had the highest strain recall (20.4%). | achieved 100% precision. For the unique genome, the highest strain precision (100%) | HipMer had the fewest mm per 100 kb on the marine data set with 96
-GATB ({%cite Drezen2014%}) | There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The hybrid assembler GATB recovered the most complete 16S sequences (mean recovered gene fraction 60.1%) | The fewest mismatches (173) for hybrid assemblers were introduced by GATB | | 10.8% on marine
-SPAdes ({%cite Nurk2017%}) | | | | The SPAdes hybrid submission had NGA50 of 43,014 | On marine common genomes, SPAdes had the highest strain recall (8.7%) | On marine common genomes, SPAdes had 96.7% strain precision
-Flye ({%cite Kolmogorov2020%}) | Flye performed less well than other assemblers across most metrics on the marine data
+A-STAR | A-STAR excelled in terms of genome fraction on marine and strain madness data sets. A-STAR improved the genome fraction to 44.1% on the marine dataset. On marine common genomes, A-STAR (26.7%) achieved the highest genome fractions. For unique genome, A-STAR provided the most complete assemblies (55.3% genome fraction). A-STAR partially recovered 102 (78%) of 131 16S gold standard sequences. | More mismatches than others: 773/100 kb | More misassemblies than others | | 2nd highest: 7.5% recall  | 2nd highest: 69.4% precision
+OPERA-MS ({% cite Bertrand2019 %}) | There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The hybrid assembler OPERA-MS recovered one of the most complete 16S sequences (mean recovered gene fraction 47.1%). For the unique genome, OPERA-MS has an exceptional average NGA50 (187,083, 75% of the gold standard NGA50). | | The most contiguous assemblies were provided by the hybrid assembler OPERA-MS for the marine data, with an average NGA50 of 28,244 across genomes. |
+MEGAHIT ({% cite li2015megahit %}) | 41.1. On marine common genomes, MEGAHIT (24.6%) achieved the second highest (after A-STAR) genome fractions. There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The mean fraction of genes recovered by short-read assembler MEGAHIT is 36.9% | | For short-read assembly, MEGAHIT had the highest contiguity on the marine (NGA50 of 26,599) |
+HipMer ({% cite georganas2015hipmer %}) | high genome fraction. There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The mean fraction of genes recovered by short-read assembler HipMer is 29.6% | | high NGA50 | HipMer had the highest strain recall (14.4% on marine). For the unique genome, the HipMer assembly had the highest strain recall (20.4%). | achieved 100% precision. For the unique genome, the highest strain precision (100%) | HipMer had the fewest mm per 100 kb on the marine data set with 96
+GATB ({% cite Drezen2014 %}) | There were selected 50 unique, public genomes present as a single contig in the gold standard and with annotated 16S sequences. The hybrid assembler GATB recovered the most complete 16S sequences (mean recovered gene fraction 60.1%) | The fewest mismatches (173) for hybrid assemblers were introduced by GATB | | 10.8% on marine
+SPAdes ({% cite Nurk2017 %}) | | | | The SPAdes hybrid submission had NGA50 of 43,014 | On marine common genomes, SPAdes had the highest strain recall (8.7%) | On marine common genomes, SPAdes had 96.7% strain precision
+Flye ({% cite Kolmogorov2020 %}) | Flye performed less well than other assemblers across most metrics on the marine data
 
 > <details-title>Performance of the assembly tools on the strain madness and plant-associated datasets</details-title>>
 > **Strain madness**
@@ -637,248 +641,306 @@ Flye ({%cite Kolmogorov2020%}) | Flye performed less well than other assemblers 
 > Flye (the second place) | HipMer, HipMer2, and Flye have the best coverage. |  | Flye_hybrid has higher number of misassemblies than others |  |  | Flye, HipMer, amd HipMer2 have the highest precision
 {: .details}
 
-Using the described metrics, the different tools were evaluated in the CAMI paper and aggregated in tables (Supplementary Tables 3-7) from {%cite tutorialMeyer2021%}.
+Using the described metrics, the different tools were evaluated in the CAMI paper and aggregated in tables (Supplementary Tables 3-7) from {%cite Meyer2021_tutorial %}.
 
-In these tables there are also ranking scores of the tools shown for every statistic as well as overall ranking scores. Overall, ranking scores for every dataset are computed as a sum of all ranking scores across metrics. The average ranking score of both datasets are calculated as weighted average sum of ranking for both datasets. We created [a table showing all ranking results from previous tables](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=455354696)
+In these tables there are also ranking scores of the tools shown for every statistic as well as overall ranking scores. Overall, ranking scores for every dataset are computed as a sum of all ranking scores across metrics. The average ranking score of both datasets are calculated as weighted average sum of ranking for both datasets. We created a table showing all ranking (sum of ranking scores through all metrics) results from previous tables:
 
-We summed up ranking scores for all methods, common genomes, and unique genomes to extract the following  priority list for tools
+Tool | Version | Type of reads | Running time | Ranking of all methods on MARINE dataset | Ranking of all methods on STRAIN MADNESS dataset | Ranking of all methods on BOTH datasets | Ranking for common marine genomes | Ranking for unique marine genomes | Ranking for unique strain genomes | Ranking for common strain genomes | Sum of all ranking scores for MARINE dataset | Sum of all ranking scores for STRAIN MADNESS dataset | Sum of all ranking scores for BOTH
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+Gold Standard | | Short |  | 15 | 8 | 10,8 | 17 | 0 | 0 | 8 | 32 | 16 | 48
+HipMer | cgraph | Short | 2m 1s 2b | 37 | 25 | 29,8 | 34 | 33 | 24 | 21 | 104 | 70 | 174
+HipMer | Metagenome | short | 1m 2s 1b | 29 | 31 | 30,2 | 30 | 33 | 14 | 27 | 92 | 72 | 164
+HipMer | cgraph-ono | short | 3m 3s 3b | 39 | 27 | 31,8 | 36 | 34 | 33 | 25 | 109 | 85 | 194
+Megahit | v1.1.2 | short | 8m 4s 4b	| 57 | 45 | 49,8 | 61 | 52 | 33 | 39 | 170 | 117 | 287
+SPAdes | v3.14-dev | hybrid | 9m 5s 5b | 58 | 45 | 50,2 | 55 | 65 | 55 | 25 | 178 | 125 | 303
+OPERA-MS |  | hybrid | 6s 7b | 80 | 44 | 58,4 | 76 | 79 | 47 | 36 | 235 | 127 | 362
+Megahit | V1.2.7 | short | 7s 6b | 67 | 51 | 57,4 | 74 | 68 | 47 | 41 | 209 | 139 | 348
+Megahit | v1.1.4-2 | short | 8s 8b | 83 | 52 | 64,4 | 87 | 87 | 47 | 43 | 257 | 142 | 399
+A-STAR | scaffold | hybrid |  | 91 | 48 | 65,2 | 88 | 82 | 61 | 33 | 261 | 142 | 403
+A-STAR | contig | hybrid |  | 91 | 49 | 65,8 | 86 | 83 | 62 | 34 | 260 | 145 | 405
+wtdbg2 | GATB-Pipeline | hybrid |  |  | 1000 | 1000 | 1000 | 1000 | 21 | 20 | 2000 | 1041 | 3041
+Miniasm | GATB | hybrid | | 60 | 20 | 36 | 70 | 58 | 1000 | 1000 | 188 | 2020 | 2208
+metaSPAdes | v3.13.1 | short | 4m | 50 | 1000 | 1000 | 41 | 55 | 1000 | 1000 | 146 | 3000 | 3146
+metaSPAdes | v3.13.0 | short | 5m | 53 | 1000 | 1000 | 42 | 57 | 1000 | 1000 | 152 | 3000 | 3152
+ABySS |  | short | 6m | 52 | 1000 | 1000 | 48 | 54 | 1000 | 1000 | 154 | 3000 | 3154
+Ray-Meta |  | short | 7m | 53 | 1000 | 1000 | 61 | 55 | 1000 | 1000 | 169 | 3000 | 3169
+metaSPAdes | v3.13.1| short |  | 61 | 1000 | 1000 | 52 | 72 | 1000 | 1000 | 185 | 3000 | 3185
+Flye |  | long |  | 83 | 1000 | 1000 | 80 | 77 | 1000 | 1000 | 240 | 3000 | 3240
 
-**Marine** dataset
+We summed up ranking scores for all methods, common genomes, and unique genomes to extract the following  priority list for tools:
 
-_With tool versions_
-1. HipMer
-2. metaSPAdes_v3.13.1
-3. metaSPAdes_v3.13.0
-4. ABySS
-5. Ray-Meta
-6. Megahit_v1.1.2
-7. SPAdes_v3.14-dev
+- With tool versions
 
-_Without tool versions_
-1. HipMer
-2. **metaSPAdes**
-3. **ABySS**
-4. **Ray-Meta**
-5. **Megahit**
+    Order | **Marine** dataset | **Strain madness** dataset
+    --- | --- | ---
+    1 | HipMer | HipMer
+    2 | metaSPAdes v3.13.1 | Megahit_v1.1.2
+    3 | metaSPAdes v3.13.0 | SPAdes_v3.14-dev
+    4 | ABySS | OPERA-MS
+    5 | Ray-Meta | Megahit_V1.2.7
+    6 | Megahit v1.1.2 |
+    7 | SPAdes v3.14-dev |
 
-**Strain madness** dataset
-_With tool versions_
-1. HipMer
-2. Megahit_v1.1.2
-3. SPAdes_v3.14-dev
-4. OPERA-MS
-5. Megahit_V1.2.7
+- Without tool versions
 
-_Without tool versions_
-1. HipMer
-2. **Megahit**
-3. **SPAdes**
-4. **OPERA**
+    Order | **Marine** dataset | **Strain madness** dataset | **Plant-associated** dataset
+    --- | --- | --- | ---
+    1 | HipMer | HipMer | (Meta)HipMer
+    2 | **metaSPAdes** | **Megahit** | **(meta)Flye**
+    3 | **ABySS** | **SPAdes** | **(meta)SPAdes**
+    4 | **Ray-Meta** | **OPERA** |
+    5 | **Megahit** | |
 
-**Plant-associated** dataset
+    > <comment-title></comment-title>
+    > There are no certain ranking tables among Supplementary tables for plant-associated dataset. However,  in {%cite Meyer2021%} there is information related to tools performance on plant-associated dataset. We created the priority list of tools for the plant-associated dataset.
+    {: .comment}
 
-There are no certain ranking tables among Supplementary tables for plant-associated dataset. However,  in {%cite Meyer2021%} there is information related to tools performance on plant-associated dataset. We created the priority list of tools for the plant-associated dataset.
+Since in this tutorial we have decided to focus on marine dataset it would be reasonable to reproduce CAMI2 assembly challenge using **HipMer**, **metaSPAdes**, **ABySS**, **Ray-Meta**, **MEGAHIT** assemblers which performed better.
 
-1. (Meta)HipMer
-2. **(meta)Flye**
-3. **(meta)SPAdes**
-
-Since in this tutorial we have decided to focus on marine dataset it would be reasonable to reproduce CAMI2 assembly challenge using HipMer, metaSPAdes, ABySS, Ray-Meta, Megahit assemblers which performed better. As we know from our [comparison Galaxy and CAMI2 analysis](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml), metaSPAdes, ABySS, Megahit tools are available in Galaxy while Ray-Meta and HipMer are not.
-
-Moreover, we also selected Flye assembler, even though Flye is not in the Top-5 assemblers in CAMI2. Flye is a long-read assembler that works well for this task.. We do that to show the assembler launched on long-reads and not only on short-reads and hybrid.
+As we know from a table above, **metaSPAdes**, **ABySS**, **MEGAHIT** tools are available in Galaxy while **Ray-Meta** and **HipMer** are not. Moreover, we also selected **Flye** assembler, even though Flye is not in the Top-5 assemblers in CAMI2. Flye is a long-read assembler that works well for this task. We do that to show the assembler launched on long-reads and not only on short-reads and hybrid.
 
 
-### Tool Update
+## Prepare tools
 
 Due to the limited time for this project, we have decided to skip adding new tools into Galaxy. So, in this tutorial we do not run Hipmer and Ray-Meta.
 
-But, in order to show the possibility of adding, updating and fixing tools and the process of how to do that.
-
 All tools in Galaxy are kept up-to-date with their corresponding command-line tool. This is why in this tutorial we checked if the tool we want to use is up-to-date before using it. We then updated Megahit from 1.1.3.5 version to 1.2.9 (the latest version for that moment).
 
-The other case it might be necessary to update the tool when we get an error on tool run or we find out that there is a bug. It can be an issue/bug in the tool itself, then we have to contact the tool developers. In other cases, it can be an issue/bug with the tool wrapper. If this is the case, you may be able to fix it by yourself.
+The other case it might be necessary to update the tool when we get an error on tool run or we find out that there is a bug:
+- In the **tool itself**, then we have to contact the tool developers
+- With the **Galaxy tool**, you may be able to fix it by yourself.
 
 This was the case with the metaSPAdes tool. When we launched the metaSPAdes tool it failed with the error:
 
+```
 ln: failed to create symbolic link 'paired_reads1/FASTQ_splitter_on_data_X.fastq': File exists
+```
 
-The reason for this error was the same filenames with forward and reverse reads. We figure out that this error came from the FASTQ splitter tool, so we updated the FASTQ splitter. But we also updated spades tool to avoid similar cases in the future.
+The reason for this error was the same filename were used forward and reverse reads. We figure out that this error came from the FASTQ splitter tool, so we updated the FASTQ splitter. But we also updated metaSPAdes tool to avoid similar cases in the future.
 
-Updating or fixing  tools has the same concept as adding tools but is less time consuming. Therefore, in this tutorial we will limit ourselves to fixing a tool, but the concept will be the same for adding or updating a new tool.
+Updating or fixing tools has the same concept as adding tools but is less time consuming.
 
-Now we are going to update the tool in Galaxy by updating its wrapper. A wrapper is a XML which serves as a layer between the command-line tool itself and the Galaxy interface. This wrapper helps Galaxy users to have a visual interface and selection of the parameters of the command-line.  Please read our dedicated tutorial to learn more about Galaxy tools and the detailed instruction of how to build or update the tool is [here](https://planemo.readthedocs.io/en/latest/writing_standalone.html).
+To update the tool in Galaxy, we need to update its **wrapper**. A wrapper is a XML which serves as a **layer between the command-line tool itself and the Galaxy interface**. This wrapper helps Galaxy users to have a visual interface and selection of the parameters of the command-line.
 
-To update or fix a tool, we need to change its XML. Tools in a Galaxy server are installed by the administrators of this Galaxy server using the Galaxy ToolShed. The Galaxy ToolShed is like an AppStore with the XML for all possible Galaxy tools. So to update a tool, we need to change its XML in the ToolShed.
-But usually, XML of tools are developed collaboratively inside GitHub repositories and then pushed to the ToolShed. So we need to find the development repository of the Galaxy tool to update it.
+> <comment-title></comment-title>
+> Please read our dedicated tutorial to learn more about Galaxy tools and the detailed instruction of how to build or update the tool is [here](https://planemo.readthedocs.io/en/latest/writing_standalone.html).
+{: .comment}
 
+To update or fix a tool, we need to change its XML. But first we need to find where is the source of this XML. Tools in a Galaxy server are installed by the administrators of this Galaxy server using the [**Galaxy ToolShed**](https://toolshed.g2.bx.psu.edu/). The Galaxy ToolShed is like an AppStore with the XML for all possible Galaxy tools. So to update a tool, we need to change its XML in the ToolShed. But usually, XML of tools are developed collaboratively inside GitHub repositories and then pushed to the ToolShed. So we need to find the development repository of the Galaxy tool to update it.
 
-> <hands-on-title>Finding the development repository of a tool to update</hands-on-title>
+> <hands-on-title>Find the development repository of a tool to update</hands-on-title>
 >
-> 1. Open the fastqc splitter in Galaxy
-> 2. Click on “See in the ToolShed” on the top right of the tool form. You will be redirected to the tool on the ToolShed
-> 3. Follow the link in “**Development repository”**
-> 4. **You have now the tool wrapper, i.e. its XML**
-> 5. Once we have the development repository setup, we can update the tool. We recommend using Planemo, the Galaxy software development kit, to help the process. More information is [here](https://planemo.readthedocs.io/en/latest/writing_standalone.html).
+> 1. Open the {% tool [FASTQ splitter](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_splitter/1.1.5+galaxy1) %} in Galaxy
+> 2. Click on the {% icon galaxy-dropdown %} (*Option*) menu on the top right of the tool form and select {% icon galaxy_instance %} **See in the ToolShed**
+>
+>    You will be redirected to the [tool on the ToolShed](https://toolshed.g2.bx.psu.edu/repository?repository_id=3b1fd65d5ff152bf)
+>
+> 3. Click on the link in [**"Development repository"**](https://github.com/galaxyproject/tools-iuc/tree/master/tool_collections/galaxy_sequence_utils/fastq_paired_end_splitter)
+>
 {: .hands_on}
 
-> <details-title>Update the tools</details-title>
+We are in the GitHub repository where the source of the tool wrapper, i.e. its XML, is stored and versioned.
+
+Once we have the development repository setup, we can update the tool. We recommend using [Planemo](https://planemo.readthedocs.io/en/latest/), the Galaxy software development kit, to help the process.
+
+> <hands-on-title>Update the tools</hands-on-title>
 >
-> 1. Update lines corresponding to output files: add “Forward” or “Reverse” to the filenames respectively.
-> 2. Update tests for this tool
-> 3. Lint and test the tool using `planemo lint` and `planemo test`
-> 4. Push the changes to a branch of your fork of the GitHub repository
-> 5. Create a Pull Request
-> 6. Modify the tool given the suggested changes
-> 7. In case you add new tool - add the tool to yaml file (for usegalaxy.eu server - [tools_iuc.yaml](https://github.com/usegalaxy-eu/usegalaxy-eu-tools/blob/master/tools_iuc.yaml))
-> 8. Once the Pull request is merged to the main branch at GitHub, the tool will be added (or updated with increased version) in Tool Shed (for usegalaxy.eu - [Galaxy - Tool Shed](https://toolshed.g2.bx.psu.edu/)) on weekend
-> 9. Go to the Tool Shed after weekend and check the tool changes
-> 10. Go to usegalaxy.eu (or to other Galaxy server if you used one) and check that tool was added/updated
-{: .details}
+> 1. Install Planemo
+> 2. Fork the GitHub repository
+> 3. Clone the GitHub repository
+> 4. Create a branch
+> 5. Go in the folder of the tool
+> 6. Make the changes to fix the tool
+> 7. Update the tests for this tool
+> 8. Lint the tool using `planemo lint`
+> 9. See and try the new wrapper by serving a local Galaxy instance using `planemo lint`
+> 10. Test the tool with `planemo test`
+> 11. Push the changes to the branch of your fork
+> 12. Create a Pull Request
+> 12. Modify the tool given the suggested changes
+{: .hands-on}
 
+Once the Pull Request will be merged, the tool will be automatically updated on the ToolShed and within few likely also in the main Galaxy servers (like usegalaxy.eu, usegalaxy.org or usegalaxy.org.au). If not, you might need to ask the Galaxy administrators to do it.
 
-### Run the tools
+# Run the assembly tools on the marine dataset
 
-We run tools both on individual sample and on all pooled samples as it was done in CAMI2 challenge as well.
+In the CAMI 2 challenge, the assemblies were run with 2 approaches:
 
-It is important to use both approaches: individual assembly and co-assembly and benchmark them in order to get the intuition of more applicable technique for the certain dataset. In case of individual assembly we have the possibility to de-replicate genome after binning. It will not be done in this tutorial as the purpose here is only assembly CAMI2 challenge. However, you can get to know both these practices in [the tutorial]({% link topics/assembly/tutorials/general-introduction/tutorial.md %}) (in the section about de-replication).
+- **Individual assembly**, i.e. assembly on each individual sample
 
-Co-assembly is more commonly used than individual assembly and then de-replication after binning. Nevertheless, de-replication approach should be taken into account while choosing the assembly method.
+- **Co-assembly**, i.e. assembly on the pooled samples
 
-The runtime and memory usage are obviously different for not only these two scenarios, but also for the tools. Some assemblers are fast (like Megahit), some are slow (like Flye).
+> <comment-title></comment-title>
+> You can learn about metagenomic assembly, individual and co-assembly in [our dedicated tutorial]({% link topics/assembly/tutorials/general-introduction/tutorial.md %})
+{: .comment}
 
-While choosing parameters to run every tool with we oriented on parameters which have been used in CAMI2 challenge by its participants. However, we didn’t consider it as absolute truth as in metagenomic analysis it can be not very clear which tools and which parameters would be better for the best assembly performance. Then we had to be critical to what had been done in CAMI2. It was the basis of this tutorial/project, even though we made some corrections. Additionally, we take into account recommendations from tool documentation.
+Co-assembly is more commonly used than individual assembly. But to reproduce the CAMI challenge, we run tools in both modes. The runtime and memory usage are obviously different for not only these two scenarios, but also for the tools. Some assemblers are fast (like Megahit), some are slow (like Flye).
 
-A Galaxy history was created for each tool and type of assembly (single or co-assembly). We named them such that it is easy to identify the tool and type from the mame, but we also Created a spreadsheet to list all histories along with their metadata (tool, etc).
+While choosing parameters to run every tool with we oriented on parameters which have been used in CAMI2 challenge by its participants. However, we didn’t consider it as absolute truth as in metagenomic analysis it can be not very clear which tools and which parameters would be better for the best assembly performance. Then we had to be critical to what had been done in CAMI 2. It was the basis of this tutorial/project, even though we made some corrections. Additionally, we take into account recommendations from tool documentation.
 
+A Galaxy history was created for each tool and type of assembly (single or co-assembly). We named them such that it is easy to identify the tool and type from the mame, but to keep an overview we created a spreadsheet to list all histories along with their metadata (tool, etc).
 
-#### Long reads
+## Long reads
 
- **MetaFlye** (metagenome mode of Flye) is a scalable long-read metagenome assembly using repeat graphs ({%cite Kolmogorov2020%}). It is supposed to use long reads as input.
+**MetaFlye** (metagenome mode of Flye) is a scalable long-read metagenome assembly using repeat graphs ({%cite Kolmogorov2020%}). It is supposed to use long reads as input.
 
+### Individual assembly
 
-> <hands-on-title>Co-assembly of long-read samples with Flye</hands-on-title>
+> <hands-on-title>Individual assembly of long-read samples with Flye</hands-on-title>
 >
-> 1. Create a new history with the name “CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection”
+> 1. Create a new history with the name `CAMI 2 - Long reads - Individual assembly`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Copy the collection with long read data into this new history
+>
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
 > 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Input reads"*: the collection of long reads from all samples
->     - {% icon param-file %} *"Mode"*:	--nano-raw
->     - {% icon param-file %} *"Perform metagenomic assembly"*: True
+>     - {% icon param-collection %} *"Input reads"*: the collection of long reads from all samples
+>     - *"Mode"*: `Nanopore raw (--nano-raw)`
 >
-> > <comment-title></comment-title>
-> >
-> > Flye was reported in CAMI2 using parameter Mode –-raw-bio while datasets were sequenced with nanopore, thus we corrected parameters and used –-nano-raw instead.
-> {: .comment}
+>       > <comment-title></comment-title>
+>       >
+>       > Flye was reported in CAMI2 using parameter Mode `–-raw-bio` while datasets were sequenced with nanopore, thus we corrected parameters and used `–-nano-raw` instead.
+>       {: .comment}
+>
+>     - *"Perform metagenomic assembly"*: `True`
 >
 {: .hands_on}
 
+### Co-assembly
 
-> <hands-on-title>Individual assembly of long-read sample with Flye</hands-on-title>
+> <hands-on-title>Co-assembly of long-read sample with Flye</hands-on-title>
 >
-> 1. Create a new history with the name “CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection”
+> 1. Create a new history with the name `CAMI 2 - Long reads - Co-assembly`
 >
->    {% snippet faqs/galaxy/histories_create_new.md %}
+> 2. Copy the pooled long read data into this new history
 >
 > 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Input reads"*: long reads from sample1
->     - {% icon param-file %} *"Mode"*:	--nano-raw
->     - {% icon param-file %} *"Perform metagenomic assembly"*: True
+>     - {% icon param-file %} *"Input reads"*: pooled long read data
+>     - *"Mode"*: `Nanopore raw (--nano-raw)`
+>     - *"Perform metagenomic assembly"*: `True`
 {: .hands_on}
 
+We just launched **Flye** for:
+- Individual assembly on the collection of long reads from all 10 samples
+- Co-assembly on the pooled long reads data
 
-We just launched Flye, first, for collection of long reads from all 10 samples to produce co-assembly. In the second Hands-on we launched Flye on individual sample. In the following hands-on for other tools for short-reads and hybrid we will need to run assemblers for both options as well.
+## Short reads
 
+For short reads, we will use the same approach (co-assembly and individual assembly) using 3 tools:
 
-#### Short reads
+- **MEGAHIT**
 
-> <hands-on-title>Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
+    MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
+
+- **ABySS**
+
+    ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
+
+- **MetaSPAdes**  
+
+    MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
+
+### Individual assembly
+
+> <hands-on-title>Prepare history for individual assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
 >
-> 1. Create a new history with the name “Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes”
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
-> {: .comment}
->
-> 2. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: interleaved
->     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: the collection of short reads from all samples
-> 3. Rename output to “Output - CAMI2 MEGAHIT v129 pooled interleaved short collection”
-> 4. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: paired
->     - {% icon param-file %} *"Mate 1 input reads"*: Output of FASTQ splitter: Forward
->     - {% icon param-file %} *"Mate 2 input reads"*: Output of FASTQ splitter: Reverse
->     - {% icon param-file %} *"K-mer specification method"*: klim_method
->     - {% icon param-file %} *"Minimum kmer size"*: 21
->     - {% icon param-file %} *"Maximum kmer size"*: 91
->     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
-> 5. Rename output to “Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 pooled deinterleaved short collapsed”
-> 6. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: interleaved
->     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Output of FASTQ splitter: the collection of short reads from all samples
->     - {% icon param-file %} *"K-mer specification method"*: klim_method
->     - {% icon param-file %} *"Minimum kmer size"*: 21
->     - {% icon param-file %} *"Maximum kmer size"*: 91
->     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 10
-> 7. Rename output to “Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 pooled interleaved short collection”
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
-> {: .comment}
->
-> 8. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
->     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
+> 1. Create a new history with the name `CAMI 2 - Short reads - Individual assembly`
+> 2. Copy the collection with short read data into this new history
+{: .hands_on}
+
+#### MEGAHIT
+
+MEGAHIT makes use of succinct *de Bruijn* graphs, representing all $$k$$-mers ( *i.e.* all substrings of length $$k$$) from the reads. MEGAHIT uses a multiple $$k$$-mer strategie. By default, the list of $$k$$-mer sizes is $$[21, 29, 39, 59, 79, 99, 119, 141]$$. But, it is also possible to have iteration with a minimum $$k$$ ($$k_{min}$$), maximum $$k$$ ($$k_{max}$$) and the step ($$k_{step}$$) for the iteration.
+
+In CAMI 2, were used:
+- The default setting
+- The iteration with $$k_{min} = 21$$, $$k_{max} = 91$$, $$k_{step} = 12$$
+- The iteration with $$k_{min} = 21$$, $$k_{max} = 91$$, $$k_{step} = 10$$
+
+Let's reproduce that.
+
+> <hands-on-title>Individual assembly with MEGAHIT</hands-on-title>
+> 1. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Paired-end collection`
+>       - *"Run in batch mode?"*: `Run individually`
+>       - {% icon param-collection %} *"Select a paired collection"*: Short read collection
+> 2. Rename output to `MEGAHIT - Default`
+> 3. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Paired-end collection`
+>       - *"Run in batch mode?"*: `Run individually`
+>       - {% icon param-collection %} *"Select a paired collection"*: Short read collection
+>     - *"K-mer specification method"*: `Specify min, max, and step values`
+>       - *"Minimum kmer size"*: `21`
+>       - *"Maximum kmer size"*: `91`
+>       - *"Increment of kmer size of each iteration"*: `12`
+> 4. Rename output to `MEGAHIT - k-min21 k-max91 k-step12`
+> 5. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Paired-end collection`
+>       - *"Run in batch mode?"*: `Run individually`
+>       - {% icon param-collection %} *"Select a paired collection"*: Short read collection
+>     - *"K-mer specification method"*: `Specify min, max, and step values`
+>       - *"Minimum kmer size"*: `21`
+>       - *"Maximum kmer size"*: `91`
+>       - *"Increment of kmer size of each iteration"*: `10`
+> 4. Rename output to `MEGAHIT - k-min21 k-max91 k-step10`
+{: .hands_on}
+
+#### ABySS
+
+ABySS on the contrary uses only one $$k$$-mer size. And in CAMI 2, 2 values were tested: $$k = 41$$ and $$k = 96$$.
+
+> <hands-on-title>Individual assembly with ABySS</hands-on-title>
+> 1. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+>     - In *"Paired-end library"*
+>       - Click on 
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 41
-> 9. Rename output to “Output - CAMI2 Abyss v234 k41 pooled interleaved short collapsed”
-> 10. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 2. Rename output to `Abyss - k41`
+> 3. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
-> 11. Rename output to “Output - CAMI2 Abyss v234 k96 pooled interleaved short collapsed”
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
-> {: .comment}
->
-> 12. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 4. Rename output to `Abyss - k96`
+{: .hands_on}
+
+#### MetaSPAdes
+
+> <hands-on-title>Individual assembly with MetaSPAdes</hands-on-title>
+> 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 13. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed”
-> 14. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 2. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed`
+> 3. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
 >     - {% icon param-file %} *"Arf - Nanopore reads"*: collapsed collection of long reads from all samples
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 15. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed”
+> 4. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed`
 {: .hands_on}
 
 
-> <hands-on-title>Individual assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
+### Co-assembly
+
+> <hands-on-title>Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
 >
-> 1. Create a new history with the name “Individual of short-reads samples with Megahit, Abyss, and MetaSPAdes”
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use the **Megahit** assembler. MEGAHIT is an ultra-fast single-node solution for large and complex metagenomics assembly via succinct de Bruijn graph ({%cite Li2015%}). As input it uses metagenomics samples as paired-end fastq files. As metagenomics input data short reads should be used.
-> {: .comment}
->
-> 2. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 1. Create a new history with the name `CAMI 2 - Short reads - Co-assembly`
+> 2. Copy the collection with short read data into this new history
+{: .hands_on}
+
+#### MEGAHIT
+
+> <hands-on-title>Co-assembly with MEGAHIT</hands-on-title>
+> 1. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: dataset of short reads from sample1
-> 3. Rename output to “Output - CAMI2 MEGAHIT v129 interleaved short sample1”
-> 4. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 2. Rename output to `Output - CAMI2 MEGAHIT v129 interleaved short sample1`
+> 3. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: paired
 >     - {% icon param-file %} *"Mate 1 input reads"*: Output of FASTQ splitter: Forward
 >     - {% icon param-file %} *"Mate 2 input reads"*: Output of FASTQ splitter: Reverse
@@ -886,50 +948,48 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 >     - {% icon param-file %} *"Minimum kmer size"*: 21
 >     - {% icon param-file %} *"Maximum kmer size"*: 91
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
-> 5. Rename output to “Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 deinterleaved short sample1”
-> 6. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+> 4. Rename output to `Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 deinterleaved short sample1`
+> 5. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Select your input option"*: interleaved
 >     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Output of FASTQ splitter: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer specification method"*: klim_method
 >     - {% icon param-file %} *"Minimum kmer size"*: 21
 >     - {% icon param-file %} *"Maximum kmer size"*: 91
 >     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 10
-> 7. Rename output to “Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 interleaved short sample1”
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use **Abyss** assembler. ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
-> {: .comment}
->
-> 8. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 6. Rename output to `Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 interleaved short sample1`
+{: .hands_on}
+
+#### Abyss
+
+> <hands-on-title>Individual assembly with Abyss</hands-on-title>
+> 1. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 41
-> 9. Rename output to “Output - CAMI2 Abyss v234 k41 interleaved short sample1”
-> 10. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+> 2. Rename output to `Output - CAMI2 Abyss v234 k41 interleaved short sample1`
+> 3. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
 >     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"K-mer length (in bp)"*: 96
-> 11. Rename output to “Output - CAMI2 Abyss v234 k96 interleaved short sample1”
->
-> > <comment-title></comment-title>
-> >
-> > In the next steps we use **metaSPAdes** assembler. MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
-> {: .comment}
->
-> 12. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 4. Rename output to `Output - CAMI2 Abyss v234 k96 interleaved short sample1`
+{: .hands_on}
+
+#### MetaSPAdes
+
+> <hands-on-title>Individual assembly with MetaSPAdes</hands-on-title>
+> 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 13. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1”
-> 14. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 2. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1`
+> 3. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
 >     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
 >     - {% icon param-file %} *"Arf - Nanopore reads"*: dataset of long reads from sample1
 >     - {% icon param-file %} *"Select k-mer detection option"*: manual
 >     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 15. Rename output to “Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1 additional nanopore long sample1”
+> 4. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1 additional nanopore long sample1`
 {: .hands_on}
 
 > <comment-title></comment-title>
@@ -942,12 +1002,9 @@ We just launched Flye, first, for collection of long reads from all 10 samples t
 {: .comment}
 
 
-### Description of metrics
+# Assess the assembly outputs
 
-Several metrics are used to assess the quality of the assemblies.
-
-
-
+Several metrics are used to assess the quality of the assemblies:
 * **Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping.
     * The total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
 * **Mismatches per 100 kbp**: number of mismatched bases in the contig-reference alignment (average per 100 kb).
@@ -966,8 +1023,6 @@ Several metrics are used to assess the quality of the assemblies.
     * Strain precision assesses how accurately reference genomes are recovered, based on the fraction of correctly assembled high-quality, near-complete genomes (>90% genome fraction, &lt;0.1% mm) divided by the overall number of assembled, near-complete genomes (>90% genome fraction).
 
 
-## Assess the assembly outputs
-
 In CAMI2, [different tools are used to evaluate the quality of the tools for the different challenges](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=15494775).
 
 In this tutorial we focus on the assembly challenge and on the metrics presented before.
@@ -975,12 +1030,12 @@ In this tutorial we focus on the assembly challenge and on the metrics presented
 Before running Quast as in CAMI to extract general statistics, we want to know the percentage of reads that were used to build the assemblie
 
 
-### Extraction of % reads used in assemblies
+## Extraction of % reads used in assemblies
 
 To extract this information, we map the input reads on the assemblies.
 
 
-#### Short-reads
+### Short-reads
 
 We use Bowtie2 for mapping short-reads raw data to the assembly we got after usage of different short-reads assemblers (Megahit, MetaSPAdes, Abyss) in order to get the percentage of reads used for assembly.
 
@@ -1018,7 +1073,7 @@ We use Bowtie2 for mapping short-reads raw data to the assembly we got after usa
 {: .hands_on}
 
 
-#### Long reads
+### Long reads
 
 Bowtie2 should not be used to align long reads to resulting assemblies because, as it is stated in Bowtie2 documentation, “Bowtie2 is geared toward aligning relatively short sequencing reads to long genomes. That said, it handles arbitrarily small reference sequences (e.g. amplicons) and very long reads (i.e. upwards of 10s or 100s of kilobases), though it is slower in those settings. It is optimised for the read lengths and error modes yielded by typical Illumina sequencers”.
 
@@ -1062,14 +1117,12 @@ For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-
 {: .hands_on}
 
 
-### Extraction of general metrics
+## Extraction of general metrics
 
 Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.0.2.
 
 
-#### Quast
-
-
+## Quast
 
 > <hands-on-title>Metaquast without provided reference genome</hands-on-title>
 >
@@ -1138,7 +1191,7 @@ Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.
 {: .comment}
 
 
-#### Aggregate all metrics
+## Aggregate all metrics
 
 To generate a nice report with all metrics combined we use MultiQC. This tool is a good choice when you want to combine results and make them visually represented with different graphs. MultiQC generates a webpage combining reports.
 
@@ -1161,7 +1214,7 @@ To generate a nice report with all metrics combined we use MultiQC. This tool is
 > 9. Inspect the generated output
 {: .hands_on}
 
-### Extract computational metrics from Galaxy - memory used, runtime
+## Extract computational metrics from Galaxy - memory used, runtime
 
 In CAMI2 there were compared computational characteristics of different tools such as runtime and memory usage. There were created the following plots:
 
@@ -1170,12 +1223,9 @@ In CAMI2 there were compared computational characteristics of different tools su
 To export job metrics (memory usage and runtime) from Galaxy in csv format use [Bioblend](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)
 
 
-### Galaxy results
-
 We launched a Jupyter notebook to analyse results we got and reproduce graphs from CAMI2 paper for 4 tools (Flye, Megahit, Abyss, MetaSPAdes) and additional GSA in order to compare our results with Gold Standard Assembly. Further steps for benchmarking analysis could be to plot both individual assembly quast results and co-assembly quast results.
 
 # Conclusion
-{:.no_toc}
 
 In this tutorial we analysed all CAMI2 challenges and reproduced the assembly challenge on a marine dataset to demonstrate that Galaxy is a viable solution for such challenges.
 
