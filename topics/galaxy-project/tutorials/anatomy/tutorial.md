@@ -29,6 +29,7 @@ key_points:
   - "New contributors and investigators are highly valued and warmly welcomed"
  
 contributors:
+  - ggsc-user
   - fubar2
  
 ---
