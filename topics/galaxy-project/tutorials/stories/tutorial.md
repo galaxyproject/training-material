@@ -28,7 +28,7 @@ key_points:
   - "New data rich fields, contributors and investigators are all invited to work with us"
  
 contributors:
-  - ggsc-user
+  - ggsc
   - fubar2
 ---
 
