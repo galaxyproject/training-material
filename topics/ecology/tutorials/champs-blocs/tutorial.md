@@ -8,7 +8,8 @@ questions:
 objectives:
 - Calculate IVR (Visual Rollover Indicator)
 - Compute dissimilarity indice
-- Vizualize some 1H
+- Vizualize some diversity indices
+time_estimation: 1H
 key_points:
 - Diversity indicators
 - Champs Blocs
