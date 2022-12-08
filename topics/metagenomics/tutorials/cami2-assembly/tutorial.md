@@ -1023,9 +1023,14 @@ Several metrics are used to assess the quality of the assemblies:
     * Strain precision assesses how accurately reference genomes are recovered, based on the fraction of correctly assembled high-quality, near-complete genomes (>90% genome fraction, &lt;0.1% mm) divided by the overall number of assembled, near-complete genomes (>90% genome fraction).
 
 
-In CAMI2, [different tools are used to evaluate the quality of the tools for the different challenges](https://docs.google.com/spreadsheets/d/e/2PACX-1vQgJr3J-IyVy9IkXS9W-RZcV83Tr6f7RusG_97QwgpW2dFdCXUMroROIhy8gKjPcUgISFXW9NQwOzzK/pubhtml?gid=15494775).
+In CAMI2, different tools are used to evaluate the quality of the tools for the different challenges:
 
-In this tutorial we focus on the assembly challenge and on the metrics presented before.
+**Tool name**	| **Assessment of**
+MetaQUAST ({% cite Mikheenko2015 %}) |	Assembly challenge
+AMBER ({% cite Meyer2018 %})	| Genome binning challenge
+OPAL ({% cite Meyer2019 %})	| Taxonomic profiling challenge
+
+In this tutorial, we focus on the assembly challenge and on the metrics presented before.
 
 Before running Quast as in CAMI to extract general statistics, we want to know the percentage of reads that were used to build the assemblie
 
