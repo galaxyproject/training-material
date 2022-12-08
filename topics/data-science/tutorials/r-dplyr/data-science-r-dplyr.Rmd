@@ -35,7 +35,7 @@ code_download: true
 dplyr (@r-dplyr) is a powerful R-package to transform and summarize tabular data with rows and columns. It is part of a group of packages (including `ggplot2`) called the `tidyverse` (@r-tidyverse), a collection of packages for data processing and visualisation. For further exploration please see the dplyr package vignette: [Introduction to dplyr](https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html)
 
 :::{.comment}
-<div id="comment" class="box-title" aria-label="comment box: ">💬<span class="visually-hidden"></span> Comment</div>
+<div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
 This tutorial is **significantly** based on [GenomicsClass/labs](https://github.com/genomicsclass/labs/blob/master/intro/dplyr_tutorial.Rmd).
 
@@ -63,7 +63,7 @@ library(tidyverse)
 ```
 
 :::{.tip}
-<div id="tip-package-not-found" class="box-title"><button type="button" aria-controls="tip-package-not-found-contents" aria-expanded="true" aria-label="Toggle tip box: Package not found?">💡<span class="visually-hidden"></span> Tip: Package not found?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+<div id="tip-package-not-found" class="box-title"><button type="button" aria-controls="tip-package-not-found-contents" aria-expanded="true" aria-label="Toggle tip box: Package not found?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Package not found?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 Remember that you can install new packages by running
 ```
 install.packages("tidyverse")
@@ -151,13 +151,13 @@ msleep %>% select(name, sleep_total) %>% head(2)
 ```
 
 :::{.question}
-<div id="question" class="box-title" aria-label="question box: ">❓<span class="visually-hidden"></span> Question</div>
+<div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 How would you rewrite the following code to use the pipe operator?
 ```
 prcomp(tail(read.csv("file.csv"), 10))
 ```
 :::{.solution}
-<div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: ">👁<span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+<div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 Just read from inside to outside, starting with the innermost `()` and use `%>%` between each step.
 ```
 read.csv("file.csv") %>% tail(10) %>% prcomp()
