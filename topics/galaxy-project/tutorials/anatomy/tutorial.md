@@ -38,10 +38,10 @@ contributors:
 > - Work in progress!!
 > - First draft to try to get the structure to make sense.
 > - Needs many contributors to make it useful
-> - What would you wish you'd been told when you first discovered Galaxy?
-> - Please add what's missing and fix what's broken
-> - Most of the headings are stubs waiting to be edited and extended 
-> - Hoping this way of splitting the material makes for useful reading?
+> - What would you like to have known, when you first tried getting things done in Galaxy?
+> - Please add what's missing and fix what's broken. 
+> - Headings are mostly stubs waiting to be edited and extended 
+> - Trying to describe the big picture will necessarily be big - probably eventually need to break this already very wordy module into separate parts.
 > - Add your story or stories to the stories tutorial too please!
 > - Ross has strong opinions. 
 > - Many of them are probably wrong but he doesn't know which ones yet. 
