@@ -455,9 +455,11 @@ contributions begin to cancel each other out.
 # Workflow 4 - Avoided Level Crossing
 
 This workflow simulates a simple {ALC} experiment which involves three spins: a
-muon, an electron, and a hydrogen atom. Both muon and hydrogen are coupled via
-hyperfine coupling to the electron, and so we will need to define a spin
-interaction for each in our configuration file.
+muon, an electron, and a hydrogen atom. Both the muon and the hydrogen are
+coupled to the electron by the hyperfine interaction. As a result, in our
+configuration file we will need to define two spin interactions with type
+`hyperfine`, but which act on different nuclear spins and have different
+coupling tensors.
 
 ## MuSpinSim Configure
 
@@ -919,7 +921,7 @@ We can finally compare the result of our fitting against the "experimental"
 dataset we provided. Prior to adding noise, the generated data had a value of 3,
 which should closely match the output of our simulation(s) with MuSpinSim.
 
-![Resultant plot of fitted solution against "experiment"](../../images/dissipation_example.png "The fitted output of MuSpinSim agrees with the provided data")
+![Resultant plot of fitted solution against "experiment"](../../images/fitting_example.png "The fitted output of MuSpinSim agrees with the provided data")
 
 # Conclusion
 
