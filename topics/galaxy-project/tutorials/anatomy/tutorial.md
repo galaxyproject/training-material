@@ -34,11 +34,10 @@ contributors:
  
 ---
 
-> <comment-title></comment-title>
-> - Work in Progress! 
-> - This is a first draft to try to get the structure to make sense.
-> - It needs many contributors to make it useful
-> - So, please add what's missing and fix what's broken
+> <comment-title>Work in progress</comment-title>
+> - First draft to try to get the structure to make sense.
+> - Needs many contributors to make it useful
+> - Please add what's missing and fix what's broken
 > - Most of the headings are stubs waiting to be edited and extended 
 > - Hoping this way of splitting the material makes for useful reading?
 > - Add your story or stories to the stories tutorial too please!
@@ -49,8 +48,7 @@ contributors:
 {: .comment}
 
 
-> <agenda-title>Contents</agenda-title>
->
+> <comment-title>Note to readers</comment-title>
 > - This module introduces the most important parts of the Galaxy project
 > - They are grouped arbitrarily and there are many overlaps.
 > - Galaxy grows organically through collaborations, rather than by design.
@@ -59,6 +57,10 @@ contributors:
 > - This material is designed to provide simplified views of the project
 > - A kind of field guide to the ecosystem generating those Hub activities.
 > - For the use of participants trying to navigate it.
+> 
+{: .comment}
+
+> <agenda-title>Contents</agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -120,7 +122,7 @@ contributors:
 >     - Bringing new activities to the collaboration
 >     - Providing community and project leadership
 >     - Contributing to project governance
-{:  .details}
+{: .details}
 
 
 > <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
@@ -134,7 +136,7 @@ contributors:
 >     - user support, system administration and software engineers.
 > - Without these, the source code repository would still be a valuable resource
 > - They add value, in the form of highly valued resources for scientists.
-{:  .details}
+{: .details}
 
 > <details-title>Open source community resources are essential parts of project code</details-title>
 > - Galaxy source code depends on thousands of other open source projects
