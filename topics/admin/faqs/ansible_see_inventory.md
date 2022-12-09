@@ -60,6 +60,7 @@ Here is a relatively simple, flat example, but this can be more complicated if y
 
 **List** shows you all defined variables:
 
+{% raw %}
 ```
 $ ansible-inventory --host galaxy.example.com | head
 [WARNING]: While constructing a mapping from
@@ -74,6 +75,7 @@ only.
     "certbot_auto_renew": true,
     "certbot_auto_renew_hour": "{{ 23 |random(seed=inventory_hostname)  }}",
     "certbot_auto_renew_minute": "{{ 59 |random(seed=inventory_hostname)  }}",
+{% endraw %}
 ```
 
 And, helpfully, if variables are overridden in precedence you can see that as well with the above warnings.
