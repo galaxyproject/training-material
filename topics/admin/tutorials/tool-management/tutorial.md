@@ -49,10 +49,10 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 > <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
 >
-> 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
+> 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
 >    ```console
->    virtualenv -p python3 ~/ephemeris_venv
+>    python3 -m venv ~/ephemeris_venv
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```

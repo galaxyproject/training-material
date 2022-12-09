@@ -242,7 +242,7 @@ Let's try setting that up in our Galaxy!
 >    > then you might need to re-run the steps:
 >    >
 >    > ```bash
->    > virtualenv -p python3 ~/ephemeris_venv
+>    > python3 -m venv ~/ephemeris_venv
 >    > . ~/ephemeris_venv/bin/activate
 >    > pip install ephemeris
 >    > ```

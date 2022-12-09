@@ -68,7 +68,9 @@ As discussed in the overview, Galaxy Data Managers handle the population of nume
 - Population of the corresponding location (`.loc`) file when new reference data are installed. The `.loc` file used corresponds to the Data Manager and its specific version that was executed to install the data. The path to the location file can be found in the Data Manager's entry in the tool data table configuration file (above).
 - Generation of the reference data on disk, underneath the directory specified by `tool_data_path` in `galaxy.yml`.
 
-# Install a Data Manager from the Tool Shed
+# Installing and Using Data Managers with the Galaxy UI
+
+## Install a the Fetch Genome Data Manager from the Tool Shed
 
 > <comment-title>Galaxy Configuration</comment-title>
 >
@@ -78,13 +80,13 @@ As discussed in the overview, Galaxy Data Managers handle the population of nume
 >
 {: .comment}
 
+> <tip-title>Intall with Ephemeris</tip-title>
+> This hands-on exercise installs data managers and reference data through the Galaxy UI, but you are encouraged to install tools in a deterministic, recordable way through the use of Ephemeris, which is described in [the Installing and Using Data Managers from the command line with Ephemeris section](#installing-and-using-data-managers-from-the-command-line-with-ephemeris) below.
+{: .tip}
+
 We will install a data manager that can fetch the various genome sequences from multiple sources.
 
-> <hands-on-title>Install the "Fetch Genome" Data Manager </hands-on-title>
->
-> > <tip-title>Intall with Ephemeris</tip-title>
-> > This hands-on exercise installs a tool through the Galaxy UI, but you are encouraged to install tools in a deterministic, recordable way through the use of Ephemeris, which is descirbed in [the Galaxy Tool Management with Ephemeristutorial]({ link topics/admin/tutorials/tool-management/tutorial.md %}).
-> {: .tip}
+> <hands-on-title>Install the Fetch Genome Data Manager </hands-on-title>
 >
 > 1. Access the **Admin** menu from the top bar (you need to be logged-in with an email specified in the `admin_users` setting)
 > 2. Click **Install and Uninstall**, which can be found on the left, under **Tool Management**
@@ -186,7 +188,7 @@ View in the file system where the various elements land. Have a look in the conf
 >
 {: .question}
 
-# Download and install a reference genome sequence
+## Download and install a reference genome sequence
 
 Next, we will install some reference data. Specifically, we will grab sacCer2 (version 2 of the Saccharomyces cerevisiae genome).
 
@@ -322,13 +324,13 @@ View in the file system where the changes to the location file and the reference
 >
 {: .question}
 
-# Download and install the BWA data manager
+## Download and install the BWA data manager
 
 Having the genome is a prerequisite for our ultimate goal, which is to use the sacCer2 genome as a *reference genome* for the BWA tool. BWA, like many tools, needs an *index* of the reference genome, and has its own format for that index. Thankfully, the BWA/BWA-MEM data manager will build that index for us.
 
 In this part we will repeat the same process as when we installed the Fetch Genome data manager, except that we will install the BWA/BWA-MEM data manager this time.
 
-> <hands-on-title>Install the "Fetch Genome" Data Manager </hands-on-title>
+> <hands-on-title>Install the BWA/BWA-MEM Data Manager </hands-on-title>
 >
 > 1. Access the **Admin** menu from the top bar
 > 2. Click **Install and Uninstall**, which can be found on the left, under **Tool Management**
@@ -337,11 +339,11 @@ In this part we will repeat the same process as when we installed the Fetch Geno
 > 5. Click the **Install** button for the latest revision
 {: .hands_on}
 
-# Build the BWA index for sacCer2
+## Build the BWA index for a reference genome
 
 In this part we will actually build the BWA index for sacCer2. It will automatically be added to our list of available reference genomes in the BWA tool.
 
-> <hands-on-title>Download and install sacCer2</hands-on-title>
+> <hands-on-title>Build the sacCer2 BWA index</hands-on-title>
 >
 > 1. Access the Admin menu from the top bar
 > 2. Click **Local Data**, which can be found on the left, under **Server**
@@ -386,7 +388,7 @@ In this part we will actually build the BWA index for sacCer2. It will automatic
 >
 {: .question}
 
-# Verify that BWA can access the new reference data
+## Verify that BWA can access the new reference data
 
 Finally, we will verify that the BWA tool can see the new sacCer2 indexes.
 
@@ -403,61 +405,150 @@ Finally, we will verify that the BWA tool can see the new sacCer2 indexes.
 
 How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
 
-# Addendum: Installing and Running a DM with ephemeris
+# Installing and Using Data Managers from the command line with Ephemeris
 
-Create a config file for `run-data-managers` named `fetch-sacCer3.yml`:
+The same process described in the previous section can also be performed from the command line, e.g. in a CI/CD
+pipeline, using Ephemeris. For a more in-depth look at Ephemeris, especially in the tool installation context, please see [the Galaxy Tool Management with Ephemeris tutorial]({ link topics/admin/tutorials/tool-management/tutorial.md %}).
 
-```yaml
-data_managers:
-    # Data manager ID
-    - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4
-      # tool parameters, nested parameters should be specified using a pipe (|)
-      params:
-        - 'dbkey_source|dbkey': '{{ item }}'
-        - 'reference_source|reference_source_selector': 'ucsc'
-        - 'reference_source|requested_dbkey': '{{ item }}'
-      # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
-      # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
-      items:
-        - sacCer3
-        #- dm3
-        #- mm9
-      # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
-      data_table_reload:
-        - all_fasta
-        - __dbkeys__
-```
+In order to accomplish this, you will need:
 
-Install the fetch DM:
+- The URL of your Galaxy server
+- The API key for your account, which must be an admin
 
-```console
-$ shed-tools install -g https://gat-0.student.galaxy.training --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam -a abbacadabba
-Storing log file in: /tmp/ephemeris_2qpg_hrq
-(1/1) repository data_manager_fetch_genome_dbkeys_all_fasta already installed at revision 4d3eff1bc421. Skipping.
-Installed repositories (0): []
-Skipped repositories (1): [('data_manager_fetch_genome_dbkeys_all_fasta', '4d3eff1bc421')]
-Errored repositories (0): []
-All repositories have been installed.
-Total run time: 0:00:00.770248
-```
+{% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 
-Run the fetch DM:
+## Install a the Fetch Genome Data Manager from the Tool Shed
 
-> <code-in-title></code-in-title>
-> ```
-> run-data-managers --config fetch-sacCer3.yml -g https://gat-0.student.galaxy.training -a abbacadabba
-> ```
-{: .code-in}
+> <hands-on-title>Install the Fetch Genome Data Manager with Ephemeris</hands-on-title>
+>
+> 1. Re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
+>
+>    > <code-in-title>input: bash</code-in-title>
+>    > ```
+>    > . ~/ephemeris_venv/bin/activate
+>    > ```
+>    {: .code-in}
+>
+>    > <tip-title>missing?</tip-title>
+>    >
+>    > then you might need to re-run the steps:
+>    >
+>    > ```bash
+>    > python3 -m venv ~/ephemeris_venv
+>    > . ~/ephemeris_venv/bin/activate
+>    > pip install ephemeris
+>    > ```
+>    {: .tip}
+>
+> 2. Install the `data_manager_fetch_genome_dbkeys_all_fasta` data manager tool owned by `devteam`.
+>
+>    > <code-in-title>input: bash</code-in-title>
+>    > Be sure to adjust the value of `-g` appropriately for your Galaxy server, and replace the value of `-a` with your API key.
+>    > ```console
+>    > shed-tools install -g https://your-galaxy -a <api-key> --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam
+>    {: .code-in}
+>
+>    > <code-out-title></code-out-title>
+>    > ```console
+>    > Storing log file in: /tmp/ephemeris_x9xeu8ro
+>    > (1/1) Installing repository data_manager_fetch_genome_dbkeys_all_fasta from devteam to section "None" at revision 4d3eff1bc421 (TRT: 0:00:00.401143)
+>    > 	repository data_manager_fetch_genome_dbkeys_all_fasta installed successfully (in 0:00:25.530604) at revision 4d3eff1bc421
+>    > Installed repositories (1): [('data_manager_fetch_genome_dbkeys_all_fasta', '4d3eff1bc421')]
+>    > Skipped repositories (0): []
+>    > Errored repositories (0): []
+>    > All repositories have been installed.
+>    > Total run time: 0:00:25.932659
+>    > ```
+>    {: .code-out}
+>
+{: .hands-on}
 
-> <code-out-title></code-out-title>
-> ```
-> Storing log file in: /tmp/ephemeris_kfsmjk2a
-> Running data managers that populate the following source data tables: ['all_fasta']
-> Dispatched job 1. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" with parameters: {'dbkey_source|dbkey': 'sacCer3', 'reference_source|reference_source_selector': 'ucsc', 'reference_source|requested_dbkey': 'sacCer3'}
-> Job 1 finished with state ok.
-> Running data managers that index sequences.
-> Finished running data managers. Results:
-> Successful jobs: 1
-> Skipped jobs: 0
-> Failed jobs: 0
-> ```
+## Download and install a reference genome sequence
+
+> <hands-on-title>Download and install sacCer3 with Ephemeris</hands-on-title>
+>
+> 1. Create a config file for `run-data-managers` named `fetch-sacCer3.yml`:
+>
+>    {% raw %}
+>    ```yaml
+>    data_managers:
+>      # Data manager ID
+>      - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4
+>        # tool parameters, nested parameters should be specified using a pipe (|)
+>        params:
+>          - 'dbkey_source|dbkey': '{{ item.dbkey }}'
+>          - 'dbkey_source|dbkey_name': '{{ item.name }}'
+>          - 'reference_source|reference_source_selector': 'ucsc'
+>          - 'reference_source|requested_dbkey': '{{ item.dbkey }}'
+>        # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
+>        # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
+>        items:
+>          - dbkey: sacCer3
+>            name: 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)'
+>          #- dm3
+>          #- mm9
+>        # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
+>        data_table_reload:
+>          - all_fasta
+>          - __dbkeys__
+>    ```
+>    {% endraw %}
+>
+> 2. Run the Genome Fetch DM with `run-data-managers`:
+>
+>    > <code-in-title>input: bash</code-in-title>
+>    > ```console
+>    > run-data-managers -g https://your-galaxy -a <api-key> --config fetch-sacCer3.yml
+>    > ```
+>    {: .code-in}
+>
+>    > <code-out-title></code-out-title>
+>    > ```console
+>    > Storing log file in: /tmp/ephemeris_f6klyy7v
+>    > Running data managers that populate the following source data tables: ['all_fasta']
+>    > Dispatched job 1. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" with parameters: {'dbkey_source|dbkey': 'sacCer3', 'dbkey_source|dbkey_name': 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)', 'reference_source|reference_source_selector': 'ucsc', 'reference_source|requested_dbkey': 'sacCer3'}
+>    > Job 1 finished with state ok.
+>    > Running data managers that index sequences.
+>    > Finished running data managers. Results:
+>    > Successful jobs: 1
+>    > Skipped jobs: 0
+>    > Failed jobs: 0
+>    > ```
+>    {: .code-out}
+>
+> 3. In the Galaxy UI, access the Admin menu from the top bar
+> 4. Click **Local Data**, which can be found on the left, under **Server**
+> 5. Click **all_fasta** under *View Tool Data Table Entries*
+>
+>    You should see that *sacCer3* has been added to all_fasta.
+>
+>    ![populated all_fasta data table with sacCer3](../../images/dm-all-fasta-populated-2.png)
+>
+{: .hands-on}
+
+> <warning-title>run-data-managers is not idempotent!</warning-title>
+> Unlike `shed-tools install`, the Ephemeris `run-data-managers` utility is not idempotent. If run a second time on the same set of inputs, you will end up with two entries in your `all_fasta` data table, with the data from the second run overwriting the data from the first run.
+>
+> **TODO: make an issue for the above**
+>
+{: .warning}
+
+## Download and install the BWA data manager
+
+> <hands-on-title>Install the BWA/BWA-MEM Data Manager </hands-on-title>
+>
+> TODO
+>
+{: .hands-on}
+
+## Build the BWA index for a reference genome
+
+> <hands-on-title>Build the sacCer3 BWA index</hands-on-title>
+>
+> TODO
+>
+{: .hands-on}
+
+## Verify that BWA can access the new reference data
+
+TODO
