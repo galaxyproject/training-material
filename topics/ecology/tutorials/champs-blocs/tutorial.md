@@ -21,7 +21,6 @@ contributors:
 
 # Introduction
 {:.no_toc}
-
 This tutorial will allow you to better apprehend the workflow for indicators on boulder fields. This will hepl you understand the effects of global and local changes on marine habitats, and the effectiveness of the management measures adopted, requires standardized monitoring and robust and sensitive indicators reflecting the state of the habitats.
 
 The "mediolittoral boulder fields" habitat harbors a high diversity of micro-habitats and species due to its high structural heterogeneity and its intermediate position on the foreshore, which makes it one of the most diversified mediolittoral habitats and of high ecological interest along the French Channel-Atlantic coast. It is also a very attractive habitat for recreational fishing, which, through the reworking of the blocks, can impact the communities.
@@ -49,15 +48,15 @@ Here we will go over the different steps in order to get those 2 indicators and 
 > You can leave the tutorial and go bask on the main screen by clicking outside of the tutorial screen.
 > You can come back to where you left off the tutorial anytime by clicking {% icon level %}.
 >
-> > ### {% icon hands_on %} Hands-on: Log in to Galaxy
+> > <hands-on-title>Log in to Galaxy</hands-on-title>
 > > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
 > > 2. Browse to your Galaxy instance
 > > 3. Log in or register
 > >
-> > ![Screenshot of Galaxy interface with the register or login button highlighted](../../images/galaxy_homepage.png "Galaxy homepage")
+> > ![Screenshot of Galaxy interface with the register or login button highlighted](../../images/champbloc/galaxy_homepage.png "Galaxy homepage")
 > >
 > > This is an image of Galaxy Ecology, located at [usegalaxy.eu](https://ecology.usegalaxy.eu/)
-> > 
+> >
 > {: .hands_on}
 >
 > The Galaxy homepage is divided into three panels:
@@ -65,15 +64,14 @@ Here we will go over the different steps in order to get those 2 indicators and 
 > * Viewing panel in the middle
 > * History of analysis and files on the right
 >
-> ![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.](../../images/galaxy_interface.png "Galaxy interface explanation")
+> ![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.](../../images/champbloc/galaxy_interface.png "Galaxy interface explanation")
 >
 > The first time you use Galaxy, there will be no files in your history panel.
->
 {: .details}
 
 Now let's focus on our workflow on boulder field ecological state
 
-![Workflow for boulder field ecological state analysis](../../images/workflow.png "Workflow")
+![Workflow for boulder field ecological state analysis](../../images/champbloc/workflow.png "Workflow")
 
 # Get data
 
@@ -91,24 +89,23 @@ Now let's focus on our workflow on boulder field ecological state
 <div class="Yes" markdown="1">
 </div>
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 > 1. Import the data into Galaxy
 > > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
 > > * Select **Choose local files**
-> > ![Choose local files](../../images/upload.png "upload your data")
+> > ![Choose local files](../../images/champbloc/upload.png "upload your data")
 > > * Browse in your computer and get your ESTAMP files (select all three of them : champbloc_ivr.csv, champbloc_qecb.csv and ficheterrain.csv)
 > >
 > > * Press **Start**
-> > ![Start charging your data](../../images/start.png "Start")
+> > ![Start charging your data](../../images/champbloc/start.png "Start")
 > > * Press **Close**
-> > ![Close upload your data](../../images/close.png "Close")
+> > ![Close upload your data](../../images/champbloc/close.png "Close")
 > > You need to wait for the data to become green on the right panel
-> > ![Data ready](../../images/after_before.png "Data ready")
+> > ![Data ready](../../images/champbloc/after_before.png "Data ready")
 > >
-> > ### {% icon tip %} Tip: Create a new history
+> > <tip-title>Tip: Create a new history</tip-title>
 > > Create a new history for this tutorial and give it a name (example: “Champs blocs indicators”) for you to find it again later if needed.
-> >
-> >  {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+> > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 > {: .tip}
 {: .hands_on}
 
@@ -120,8 +117,7 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 > <tip-title>How to get your tool ?</tip-title>
 >
 > > ### {% icon hands_on %} Hands-on: Use a tool
-> > 1.  click on for example the {% tool [IVR](toolshed.g2.bx.psu.edu/repos/devteam/IVR) %} tool or type **ivr** in the tools panel search box (top left)
-> >
+> > 1.  click on for example the {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr) %} tool or type **ivr** in the tools panel search box (top left)
 > > The tool will be displayed in the central Galaxy panel.
 > {: .hands_on}
 {: .tip}
@@ -131,9 +127,9 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 
 Go on the tool **IVR**
 
-> ### {% icon hands_on %} Hands-on: Calculating IVR
+> <hands-on-title>Calculating IVR</hands-on-title>
 >
-> 1. {% tool [IVR](cb_ivr) %} with the following parameters:
+> 1. {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr) %} with the following parameters:
 >    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
@@ -147,7 +143,7 @@ Go on the tool **IVR**
 > 
 >  The information is displayed in the central panel
 > 
->   ![IVR](../../images/ivr.png "IVR for Bilfot"){:width="620px"}
+>   ![IVR](../../images/champbloc/ivr.png "IVR for Bilfot"){:width="620px"}
 >
 > > <tip-title>Search for your site results</tip-title>
 > >
@@ -162,19 +158,17 @@ Go on the tool **IVR**
 > 
 >  * Click on the output you are interested in for instance **Reports**
 >  * Click on {% icon galaxy-save %} (download)
->
 {: .hands_on}
-
 
 # Computing dissimilarity coefficient for each site
 
 ## **Dissimilarity**
 Cleaning out your data in order and then compute de dissimilarity coefficient.
-Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/devteam/Dissimilarity) %} tool
+Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim) %} tool
 
-> ### {% icon hands_on %} Hands-on: Calculate dissimilarity index
+> <hands-on-title>Calculate dissimilarity index</hands-on-title>
 >
-> 1. {% tool [Dissimilarity](cb_dissim) %} with the following parameters:
+> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim) %} with the following parameters:
 >    - {% icon param-file %} *"Input champbloc_qecb.csv"*: `input` (champbloc_qecb.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
@@ -190,9 +184,9 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/devteam/Dissimilari
 > 
 >  The information is displayed in the central panel
 >
-> ![Dissim fs fi](../../images/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
+> ![Dissim fs fi](../../images/champbloc/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
 >
-> ![Dissim bf bm](../../images/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
+> ![Dissim bf bm](../../images/champbloc/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
 >
 > 3. Download your results
 > 
@@ -203,5 +197,4 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/devteam/Dissimilari
 
 # Conclusion
 {:.no_toc}
-
 Here you have finished your study on your champs blocs biodiversity state.
