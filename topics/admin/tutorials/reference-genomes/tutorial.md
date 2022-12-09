@@ -14,9 +14,12 @@ key_points:
   - Understand how to manually add a reference genome and tool indices if required
   - Understand and how to use data managers to make all of this much much easier
 contributors:
-  - slugger70
-  - afgane
-  - natefoo
+  authorship:
+    - slugger70
+    - afgane
+  editing:
+    - hexylena
+    - natefoo
 requirements:
   - type: "internal"
     topic_name: admin
