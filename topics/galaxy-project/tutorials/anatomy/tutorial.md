@@ -34,9 +34,11 @@ contributors:
  
 ---
 
-> <comment-title>Work in progress</comment-title>
+> <comment-title>Note to contributors</comment-title>
+> - Work in progress!!
 > - First draft to try to get the structure to make sense.
 > - Needs many contributors to make it useful
+> - What would you wish you'd been told when you first discovered Galaxy?
 > - Please add what's missing and fix what's broken
 > - Most of the headings are stubs waiting to be edited and extended 
 > - Hoping this way of splitting the material makes for useful reading?
@@ -67,18 +69,23 @@ contributors:
 >
 {: .agenda}
 
-# Many ways of seeing Galaxy
+# Introduction to a project field guide
+
+## Motivation for maintaining a field guide
 
 - Galaxy is a complicated global enterprise.
+- There are many different ways to describe all the project activities.
+- It is much more than an open source project.
+- Project activities build on the code to support many kinds of analysis and training.
 - Individuals engage in many different ways, according to their interests.
 - For example, it is seen as:
     - A convenient and reliable way to share complex open science analyses by users
     - Inter-dependent open source code repositories by developers.
     - A global open science collaboration by investigators
-- The project is all of these at the same time and more
-- Seeing the big picture requires multiple perspectives.
+- It is all of these at the same time and more
+- Seeing the big picture requires perspectives from many individuals.
 - A separate tutorial on how activities were started, helps illustrate how the project grows.
-- This tutorial outlines the major components as a field guide.
+- This lesson outlines the major components, in the form of a field guide.
 - The [Hub](https://galaxyproject.org/) can provide much more detail, particularly once you know what you are looking for.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
@@ -92,18 +99,22 @@ contributors:
 > - Need to invent a descriptive approach.
 {:  .tip}
  
-# Top level categories used in this guide
+## Top level categories used in this guide
 
 - The project exists in the context of a global open science ecosystem
-- That context is an essential part of any description. 
-- Many possible top level divisions for describing those complexities
+- That context is an essential part of a complete description.
+- It is assumed that the reader has some experience.
+- Successful projects are complex, and each has particular complexities.
+- Many possible approaches describing those complexities.
+- Adopt an arbitrary model as a starting point.
 - Three top level categories are related in a simple model:
 
 ### People + resource inputs = project outputs
 
-- Interacting high level project components
-- Click on the "Details" tabs for more information about these.
-- The field guide separates those three components artificially.
+Three interacting components summarise the project in a simple way, allowing a logical division for the field guide, to make it easier to break down some of the complexity.
+
+- "Details" tabs below show more information about these.
+- The field guide separates those three components.
 - The project depends on them all, efficiently working together.
 - Galaxy flourishes, because all these parts govern themselves in an efficient collaboration.
 
@@ -165,7 +176,10 @@ contributors:
 # Field guide to the project ecosystem 
 
 ## 1. People: Individuals, collaborations, communities and governance
-- This field guide begins with people and their interactions in communities and structures
+
+
+This field guide begins with people and their interactions in communities and structures
+
 - Seeing how they have organised themselves provides one useful perspective on the project.  
 - Many individuals are part of more than one of the organisations and communities below
 - People provide the project inputs
@@ -314,6 +328,7 @@ contributors:
 
 
 ## 2. Resource inputs
+
 - Many different kinds of resources are needed to support all the "free" services
 - Large scale computational infrastructure and professionals 
 - Individual skilled contributors
@@ -321,9 +336,10 @@ contributors:
 - Other interacting open communities
 
 ### Source code
-- Open source community provides
+- Open source communities provide
     - Galaxy source code dependencies
     - Command line analysis package code for tools
+- Without these, Galaxy could not exist.
 
 ### Computational infrastructure, support and analysis services
 
