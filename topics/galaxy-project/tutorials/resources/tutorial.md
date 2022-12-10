@@ -90,12 +90,9 @@ contributors:
 - Very important resource
 - Bug fixes, ideas...
 
-## Related content
+#### Related content
 
-### 1. [Introduction and definitions](../introduction/tutorial.html)
-
-### 2. [People and their interactions](../people/tutorial.html)
-
-### 4. [Project outputs and deliverables](../outputs/tutorial.html)
-
-### 5. [Community development success stories](../stories/tutorial.html)
+1. [Introduction and definitions](../introduction/tutorial.html)
+2. [People and their interactions](../people/tutorial.html)
+4. [Project outputs and deliverables](../outputs/tutorial.html)
+5. [Community development success stories](../stories/tutorial.html)

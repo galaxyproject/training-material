@@ -74,7 +74,7 @@ contributors:
     - A global open science collaboration by investigators
 - All these views are true, but incomplete. Seeing the big picture requires many perspectives and opinions.
 - A separate Lesson gives examples of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities. 
-- This Lesson outlines the major components of the project, in the form of a field guide for participants. The [Hub](https://galaxyproject.org/) can provide much more detail and current activities, particularly once you know what you are looking for. Where possible, links to the relevant Hub pages are provided in this Lesson.
+- This section introduces the field guide for participants. The [Hub](https://galaxyproject.org/) can provide much more detail and current activities, particularly once you know what you are looking for. Where possible, links to the relevant Hub pages are provided in the detailed sections of the guide. The introduction shows how the guide is structured and gives a definition for the term "community" because it is used widely. Sections are linked at the end of this module, or from the main Topic page.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 

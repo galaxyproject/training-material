@@ -149,15 +149,12 @@ Hans-Rudolf?
 
 ## Insert your story here or email text to Ross please?
 
-# Related content
+#### Related content
 
-## 1. [Introduction and definitions](../introduction/tutorial.html)
-
-## 2. [People and their interactions](../people/tutorial.html)
-
-## 3. [Resources used in project activities](../resources/tutorial.html)
-
-## 4. [Project outputs and deliverables](../outputs/tutorial.html)
+1. [Introduction and definitions](../introduction/tutorial.html)
+2. [People and their interactions](../people/tutorial.html)
+3. [Resources used in project activities](../resources/tutorial.html)
+4. [Project outputs and deliverables](../outputs/tutorial.html)
 
 
 

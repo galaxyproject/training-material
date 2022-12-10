@@ -114,12 +114,9 @@ Providing training to build community capacity is an essential activity for the 
 - Tens of thousands of scientists trained
 - Your ideas here please?
 
-# Related content
+#### Related content
 
-## 1. [Introduction and definitions](../introduction/tutorial.html)
-
-## 2. [People and their interactions](../people/tutorial.html)
-
-## 3. [Resources used in project activities](../resources/tutorial.html)
-
-## 5. [Community development success stories](../stories/tutorial.html)
+1. [Introduction and definitions](../introduction/tutorial.html)
+2. [People and their interactions](../people/tutorial.html)
+3. [Resources used in project activities](../resources/tutorial.html)
+5. [Community development success stories](../stories/tutorial.html)
