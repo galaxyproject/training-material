@@ -190,32 +190,31 @@ This field guide begins with people and their interactions in communities and st
 - For those details, see the [Hub](https://galaxyproject.org/)
 - If any activity of the project looks interesting to you, please get in touch!
 
-> <tip-title>Communities in more detail</tip-title>
-> - Communities sustain Galaxy, although the idea is abstract and fluid.
-> - They support all successful open projects 
-> - Theories about what they represent:
->   - Arise when participants organise themselves, to get things done.
->   - Subgroups of individuals interacting regularly in shared project activity
->   - An important part of the success of any open project.
-> - Benefits for community contributors:
+> <tip-title>Communities: Theory and practical aspects</tip-title>
+> - Communities sustain Galaxy, although they are not always easy to define.
+> - They arise organically, when participants organise themselves to get things done in the project.
+>   - Often arise from groups of individuals interacting regularly in shared project activities.
+>   - A core element of the success of any large open project.
+> - Benefits and motivations vary for community contributors:
 >   - Opportunities for personal and professional development.  
 >   - Extending skills through supported problem solving.
 >   - Satisfaction in helping make open science better.
-> - Participants interact more often, if they share an important distinguishing interest.
-> - New communities appear when interactions are frequent and distinct from existing communities
->     - Functional communities organise publicised activities for interested participants
->     - Leadership and participation are responsive to the real needs of the community.
->     - The project can help with publicity, but the community must sustain itself.
->     - Anyone can participate in, or initiate new community activities.
+> - Theories on how communities form themselves:
+>   - Participants are more likely to interact, when they share a distinguishing interest.
+>   - New communities appear when those interactions become sufficiently frequent and distinct from existing communities.
+>   - Functional communities organise and publicise activities for interested participants.
+>   - Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants.
+>   - The project provides support and publicity, but the community must sustain itself with minimal external resources.
+> - Any individual can participate in, or initiate new community activities, such as:
 >     - Developers contributing to the code repository are an example of an important community.
 >     - *Communities of practice* maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
 >     - Regional communities support local training and other distributed activities.
-> - Open source shared values help make communities safe, productive and enjoyable for everyone
+> - Open source shared values ensure that community activities are safe, productive and enjoyable:
 >     - inclusive, participatory, professional behaviours are encouraged
->     - Project strives to welcome and engage contributors and users
->     - Community members are encouraged to help improve the project
+>     - The project explicitly strives to welcome and engage contributors and users
+>     - Community members are encouraged to help make the project better.
 > - Communities are a core resource, adding substantial value to project grant resources.
-> - The project succeeds because it is a global, self governing, collaborating community.
+> - The project succeeds because it is a self governing collaboration between many specialised communities of contributors and investigators.
 {:  .tip}
 
 
