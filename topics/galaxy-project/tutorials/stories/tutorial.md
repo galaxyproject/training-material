@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "Stories of success: How Galaxy project activities can be initiated"
+title: "5. Stories: Galaxy project community development in practice"
 questions:
   - "Who controls new activities being added to the project?"
   - "Are there examples of new project initiatives being developed by participants?"
@@ -16,7 +16,7 @@ objectives:
   - "Understand how different project communities work together to make things happen"
   - "Understand the importance of community development and contributor engagement to project sustainability"
  
-time_estimation:
+time_estimation: 10m
 subtopic: anatomy
 key_points:
   - "Galaxy is a global collaboration"
@@ -143,11 +143,23 @@ Hans-Rudolf?
 > Thanks very much,
 > 
 > Greg Von Kuster <greg@bx.psu.edu>
-{:  .details}
-
-
+>
+{: .details}
 
 
 ## Insert your story here or email text to Ross please?
+
+# Related content
+
+## 1. [Introduction and definitions](../introduction/tutorial.html)
+
+## 2. [People and their interactions](../people/tutorial.html)
+
+## 3. [Resources used in project activities](../resources/tutorial.html)
+
+## 4. [Project outputs and deliverables](../outputs/tutorial.html)
+
+
+
 
 
