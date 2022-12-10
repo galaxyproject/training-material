@@ -103,18 +103,18 @@ contributors:
 
 - The project exists in the context of a global open science ecosystem
 - That context is an essential part of a complete description.
-- It is assumed that the reader has some experience.
+- It is assumed that the reader has some experience of these external issues.
 - Successful projects are complex, and each has particular complexities.
-- Many possible approaches describing those complexities.
-- Adopt an arbitrary model as a starting point.
-- Three top level categories are related in a simple model:
+- There are many alternative ways to describe those complexities.
+- Here we adopt one arbitrary but useful starting point.
+- Three top level categories are described in the form of a simple model:
 
 ### People + resource inputs = project outputs
 
-Three interacting components summarise the project in a simple way, allowing a logical division for the field guide, to make it easier to break down some of the complexity.
+This summarise the complicated project in a relatively simple way, allowing a logical division of material for the field guide, to make it easier to break down some of the complexity.
 
 - "Details" tabs below show more information about these.
-- The field guide separates those three components.
+- The field guide is divided into three corresponding sections.
 - The project depends on them all, efficiently working together.
 - Galaxy flourishes, because all these parts govern themselves in an efficient collaboration.
 
@@ -137,7 +137,7 @@ Three interacting components summarise the project in a simple way, allowing a l
 
 
 > <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
-> - Core "corporate" project services like outreach, communication and administration.
+> - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track
 > - Source code management, user support, usegalaxy.*, GTN and other services.
 > - Computational resource allocations for free services
 >     - adding substantial value to the source
@@ -146,10 +146,10 @@ Three interacting components summarise the project in a simple way, allowing a l
 >     - outreach, communication, project management.
 >     - user support, system administration and software engineers.
 > - Without these, the source code repository would still be a valuable resource
-> - They add value, in the form of highly valued resources for scientists.
+> - These additional activites add value, in the form of highly valued resources for scientists.
 {: .details}
 
-> <details-title>Open source community resources are essential parts of project code</details-title>
+> <details-title>Open source resources are essential parts of project code</details-title>
 > - Galaxy source code depends on thousands of other open source projects
 > - Flavours for Galaxy servers depend on thousands of open source command line packages
 > - Galaxy builds on and adds value to all those resources.
@@ -157,15 +157,15 @@ Three interacting components summarise the project in a simple way, allowing a l
 > - Provides a GUI and sharing for users, without requiring effort from the package developer.
 {:  .details}
 
-> <details-title>Project outputs: things the project delivers for open science and scientists</details-title>
+> <details-title>Project outputs: Project outputs for open science and scientists</details-title>
 > - Source code
 > - Online analysis services
 > - ToolShed automated tools for servers
 > - Best practice standards and automation for writing tool wrappers and workflows - IUC
 > - Communities of practice specialty toolkits such as in proteomics or ecology.
-> - GTN open access to training material any time and to periodic training intensives.
->     - Provides capacity building resources:
->         - Introductory Galaxy useage training
+> - GTN provides training material access 24x7, and regular training intensives.
+>     - Crucial capacity building resources help Galaxy grow:
+>         - Introductory Galaxy training for users
 >         - Specialised training 
 >             - for users doing common analyses in a range of specialties 
 >             - for tool wrapper and software developers
@@ -391,12 +391,18 @@ This field guide begins with people and their interactions in communities and st
 
 ### Capacity building: training resources and services
 
-- GTN offers training to enhance open science research capacity
-    - Using Galaxy itself
-    - Specific kinds of analyses
-    - System administrators
-    - Software developers 
-    - Trainers
+Providing training to build community capacity is an essential activity for the project, to ensure long term sustainability. 
+
+ - User training integrated directly into the Galaxy user interface makes it easier for new users to become productive quickly. 
+ - Training system administrators helps support the public usegalaxy.* and the many private servers that operate in academic and commercial laboratories. 
+ - Training for external developers makes it easier for them to contribute efficiently, improving Galaxy code and creating new tools.
+- The Galaxy Trainng Network (GTN) is central to building community capability.
+- Offers free training to enhance global open science research capacity.
+    - Generic aspects of using Galaxy for new users
+    - Specific kinds of analyses with common types of open data.
+    - System administrators are key to running reliable framework services
+    - Software developers can contribute more efficiently with appropriate training
+    - Trainers can learn how to prepare material for new GTN topics
 - Your ideas here please?
 
 ### Downstream: repeatable open science analyses
