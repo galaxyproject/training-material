@@ -50,7 +50,7 @@ contributors:
 > 
 {: .comment}
 
-> <agenda-title>Field Guide part 2: Resources in Galaxy.</agenda-title>
+> <agenda-title>Field Guide part 2. Resources in Galaxy.</agenda-title>
 >
 > 1. TOC
 > {:toc}

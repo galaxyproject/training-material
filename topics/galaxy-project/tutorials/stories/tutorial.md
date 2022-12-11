@@ -47,7 +47,7 @@ contributors:
 {: .comment}
 
 
-> <agenda-title></agenda-title>
+> <agenda-title>Field Guide Part 4. Stories of successful community development</agenda-title>
 >
 > - This module includes some stories to illustrate how participants can introduce new project initiatives
 > - These are encouraged in an open project, and this training material is designed to make it easier. 

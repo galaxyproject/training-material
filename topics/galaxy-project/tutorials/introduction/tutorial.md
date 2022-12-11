@@ -72,9 +72,13 @@ contributors:
     - A convenient and reliable way to share complex open science analyses, for researchers.
     - Inter-dependent open source code repositories, for software developers.
     - A global open science collaboration, for investigators.
-- These are all accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because it has grown so large and complex, that few individuals can keep engaged and fully informed on all project activities.
-- A separate Lesson gives examples of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities. 
-- This section introduces the field guide for participants. The [Hub](https://galaxyproject.org/) can provide much more detail and current activities, particularly once you know what you are looking for. Where possible, links to the relevant Hub pages are provided in the detailed sections of the guide. The introduction shows how the guide is structured and gives a definition for the term "community" because it is used widely. Sections are linked at the end of this module, or from the main Topic page.
+- Each of these is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because it has grown so large, that few individuals have time to be engaged and fully informed across all project activities.
+
+## How to use the field guide.
+
+- The [Hub](https://galaxyproject.org/) provides much more detail and current activities. This training material refers to the Hub where possible, but aims to present an orderly overview of the main structures. 
+- This introduction is recommended reading, because it describes how the guide is structured to help make it easier to use. It also provides a restricted definition for the term "community" to simplify the guide. Related topic sections are linked at the end of this module, or from the main Topic page.
+- One part of the field guide gives examples of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -89,41 +93,39 @@ contributors:
  
 ## Structure for the field guide
 
-- A useful field guide must break all the complexities into more manageable chunks so the reader is not overwhelmed.
-- Describing the project is further complicated because it functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete description but is itself complex. The reader is assumed to be familiar with the external issues, since they are not addressed further in this material.
+- A useful field guide must break all the complexities down into more manageable chunks, since the material is potentially overwhelming.
+- Describing the project is further complicated because it functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete description, but is itself complicated. The reader is assumed to have some experience, since it is not addressed further in this material.
 - Successful projects are complex, and each has particular complexities, so there are many alternative ways to describe them. 
-- Here we adopt one arbitrary but useful starting point, with three high level categories that are related in the following model:
+- The arbitrary division used for this guide gives three high level categories related in the following model:
 
-### People + resource inputs = project outputs
+### *People + Resource inputs = Project outputs*
 
-- This simple equation summarise the complicated project and provides a logical division of material, to make it easier to break down some of the complexity. "Details" tabs below show more overview information about them.
-- The main part of the field guide is divided into corresponding sections. In practice, the project depends on them all, efficiently working together. Galaxy flourishes, because all these parts govern themselves in an efficient and productive collaboration.
+- This provides a logical division for the guide to simplify the task of seeing it all. "Details" tabs below show more overview information about each component.
+- The main part of the field guide is divided into those corresponding sections. In practice, the project depends on them all, efficiently working together. Galaxy flourishes, because all these parts govern themselves in an efficient and productive collaboration.
 
  
 > <details-title>People working together make the project possible</details-title>
 > - Open source is a very productive way of delivering software. Shared values and participatory self-governance help people get things done
-> - Galaxy participants must governed the collaboration themselves, because there are many independent institutions and investigators, so no single institution has control
-> - Individuals engage with the project in their own ways, such as:
+> - Galaxy participants must govern the collaboration for themselves, because there are many independent institutions and investigators, so no single institution has control
+> - Individuals engage with the project according to their interestests, such as:
 >     - Analysing and sharing experimental data
 >     - Working as a member of the core professional team
 >     - Contributing skills, support, code and ideas while working in a related field.
 >     - Helping build best practice tool kits and workflows for specific fields
 >     - Leading new activities in the collaboration by providing community and project leadership.
-> - Contributing to project governance
+>     - Contributing to project governance
+> - A detailed module on [people and their interactions is available](../people/tutorial.html)
 {: .details}
 
 
 > <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
-> - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track
-> - Source code management, user support, usegalaxy.*, GTN and other services.
-> - Computational resource allocations for free services
->     - adding substantial value to the source
->     - Free analysis and training services
-> - Professional staff
+> - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track. Professional, dedicated staff are needed for source code curation, user support, usegalaxy.* services, ToolShed maintenance, GTN material and training services, and many other related resources.
+> - Computational resource allocations needed for free service provision are provided by collaborating institutions, adding substantial value to the source code in the form of free analysis and training services.
+> - Professional staff are needed to support project related core functions:
 >     - outreach, communication, project management.
 >     - user support, system administration and software engineers.
-> - Without these, the source code repository would still be a valuable resource
-> - These additional activites add value, in the form of highly valued resources for scientists.
+> - Without these, the source code repository would still be a valuable resource. Value added by these services probably outweighs investment, because substantial skilled community effort adds greatly to total project impact and value, multiplying the benefit from that investment.
+> - A detailed guide to [Resources used in project activities is available.](../resources/tutorial.html)
 {: .details}
 
 > <details-title>Open source resources are essential parts of project code</details-title>
@@ -135,42 +137,50 @@ contributors:
 {:  .details}
 
 > <details-title>Project outputs: Project outputs for open science and scientists</details-title>
-> - Source code
-> - Online analysis services
-> - ToolShed automated tools for servers
-> - Best practice standards and automation for writing tool wrappers and workflows - IUC
-> - Communities of practice specialty toolkits such as in proteomics or ecology.
-> - GTN provides training material access 24x7, and regular training intensives.
->     - Crucial capacity building resources help Galaxy grow:
->         - Introductory Galaxy training for users
->         - Specialised training 
->             - for users doing common analyses in a range of specialties 
->             - for tool wrapper and software developers
->             - for trainers
->             - for server system administrators   
+> - Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings.
+> - The code is a core project deliverable, but it is used to support many other important project outputs.
+> - Other project activities build on the source code, to provide a range of open science benefits such as:
+>   - The usegalaxy.* public deployments are large, free analysis services that support tens of thousands of researchers each day.
+>   - The Galaxy Training Network supports training to improve researcher productivity, integrated into Galaxy's user interface.
+>   - Specialised training, toolkits and workflows for specific fields are supported and distributed by communities of practice
+> - These and other outputs are [described in more detail here](../outputs/tutorial.html) 
 {:  .details}
 
      
 
 ### Communities: Definition and importance in this guide.
 
-- Communities sustain Galaxy. It is a self-governing project, so they arise when participants organise themselves to get things done as part of the project. 
-- Community engagement is a core element of the success of any large open project. They feature heavily in the main "People" part of the field guide, but the term is used here in a restrictive way for clarity, referring to communities that organise activities for interested participants. However defined, it is hard for participants to become engaged in any "community" that does not offer organised activities.
-- Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities so does not fit the restrictive definition. It is very important, demonstrating productivity for grants, and serving as the major recruitment source of individuals choosing to engage and contribute to more active communities. That group, and the research outputs they generate using Galaxy analyses, are the most important downstream open science outputs of the entire project. They are detailed in the "Products" lesson of this guide.
-- Communities form themselves through regular interactions within the project.             Participants are more likely to interact with others who share a distinguishing interest. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activities and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities to maintain their own pages on the Hub*.
+Active, self-governing communities are an important part of the project ecology, because their activities extend the project and produce added value for open science. When participants with a shared interest are sufficiently motivated to organise themselves to work on project activities related to that shared interest, a new community is created. For example, participants with research interests in some particular fields, such as climate science, have created their own open, active, collaborative communities of practice, to share ideas, tool wrappers and workflows.
+
+#### Definition
+
+- For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to become engaged in any "community" that does not organise any activities, although they may have other importance.
+
+#### Origins and sustainability
+
+- Communities form by regular interactions within the project. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities to maintain their own pages on the Hub*.
 - Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. 
 - Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal external resources.
-- Communities are open, for participation or to initiate new community activities, such as:
-            Developers contributing to the code repository are an example of an important community.
-            Communities of practice maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
-            Regional communities support local training and other distributed activities.
+
+#### Importance
+
+- Communities are a core element of the success of any large open project. They represent groups of people self-selecting to work on project activities in which they have an interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
+- Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. It is very important, demonstrating productivity for grants, and serving as the major recruitment source of individuals choosing to engage and contribute to more active communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they are in the "Products" part of this guide.
+
+#### Shared values help communities flourish
+
+- Communities are open for participation such as:
+   - Developers contributing to the code repository are an example of an important community.
+   - Communities of practice maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
+    - Regional communities support local training and other distributed activities.
+- Newly organised communities related to the project are welcomed.
 - Open source shared values ensure that community activities are safe, productive and enjoyable:
-            inclusive, participatory, professional behaviours are encouraged
-            The project explicitly strives to welcome and engage contributors and users
-            Community members are encouraged to help make the project better.
+    - inclusive, participatory, professional behaviours are encouraged
+    - The project explicitly strives to welcome and engage contributors and users
+    - Community members are encouraged to help make the project better.
 - Communities are a core resource, adding substantial value to project grant resources. The project succeeds because it is a self governing collaboration between many specialised communities of contributors and investigators. 
 
-# Field guide to the Galaxy collaboration for participants 
+# A field guide to the Galaxy collaboration in 4 parts. 
 
 ## 2. [People and their interactions](../people/tutorial.html)
 

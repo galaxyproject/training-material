@@ -47,7 +47,7 @@ contributors:
 > 
 {: .comment}
 
-> <agenda-title>Field Guide Part 3: Project deliverables</agenda-title>
+> <agenda-title>Field Guide Part 3. Project deliverables</agenda-title>
 >
 > 1. TOC
 > {:toc}
