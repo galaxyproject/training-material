@@ -71,9 +71,15 @@ contributors:
     - Galaxy source code dependencies
     - Command line analysis package code for tools
 - Without these, Galaxy could not exist.
+- Github committers and community
+- The core framework code, markup for the Hub and GTN, and other resources are also maintained on GitHub, allowing pull requests with independent review before changes are accepted.
 
 ### Computational infrastructure, support and analysis services
 
+"Free" user allocations for storage and computing depend on the available resources and the intensity of user demand. They are sufficient for many common data intensive projects, but are not suitable for very large data or extremely demanding computing because availability is limited to the resources provided by collaborators and it is far from infinite. 
+
+Each of the main usegalaxy.* services shares the main source code, and system administrators share their skills, but they each involve a different set of hardware and storage, so there are important differences in the fine detail of deployment. 
+ 
 - Australia
 - Europe
 - USA
@@ -92,7 +98,7 @@ contributors:
 
 ### Related field guide content for further reading
 
-1. [Introduction and definitions](../introduction/tutorial.html)
-2. [People and their interactions](../people/tutorial.html)
-4. [Project outputs and deliverables](../outputs/tutorial.html)
-5. [Community development success stories](../stories/tutorial.html)
+- [Introduction and definitions](../introduction/tutorial.html)
+- [People and their interactions](../people/tutorial.html)
+- [Project outputs and deliverables](../outputs/tutorial.html)
+- [Community development success stories](../stories/tutorial.html)

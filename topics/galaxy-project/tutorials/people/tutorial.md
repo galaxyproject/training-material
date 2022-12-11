@@ -184,9 +184,9 @@ This field guide begins with people and their interactions in communities and st
 
 ### Related field guide content for further reading
 
-1. [Introduction and definitions](../introduction/tutorial.html)
-3. [Resources used in project activities](../resources/tutorial.html)
-4. [Project outputs and deliverables](../outputs/tutorial.html)
-5. [Community development success stories](../stories/tutorial.html)
+- [Introduction and definitions](../introduction/tutorial.html)
+- [Resources used in project activities](../resources/tutorial.html)
+- [Project outputs and deliverables](../outputs/tutorial.html)
+- [Community development success stories](../stories/tutorial.html)
 
 

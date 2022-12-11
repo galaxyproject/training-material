@@ -151,10 +151,10 @@ Hans-Rudolf?
 
 ### Related field guide content for further reading
 
-1. [Introduction and definitions](../introduction/tutorial.html)
-2. [People and their interactions](../people/tutorial.html)
-3. [Resources used in project activities](../resources/tutorial.html)
-4. [Project outputs and deliverables](../outputs/tutorial.html)
+- [Introduction and definitions](../introduction/tutorial.html)
+- [People and their interactions](../people/tutorial.html)
+- [Resources used in project activities](../resources/tutorial.html)
+- [Project outputs and deliverables](../outputs/tutorial.html)
 
 
 

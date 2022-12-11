@@ -54,14 +54,14 @@ contributors:
 >
 {: .agenda}
 
-# 3. Project Deliverables
+# 3. Project outputs
 
-- Most visible parts of the project to researchers using Galaxy for analyses
-- Made possible by all the people and the resources
-- Downstream products of Galaxy are important but hard to quantify
-    - Increased productivity in open science analysis
+Source code is the primary deliverable for the project, because most other project activities build on it. The most visible parts of the project for researchers are the free Galaxy services for training and analyses, made possible by all the people and the resources.
+
+The downstream products of Galaxy are important but hard to quantify:
+    - increased research outputs from analyses in open science result from increased productivity for researchers. Access to efficient and reliable analysis methods for large, complex data resources will increase their use in research, in many scientific fields.
     - Improved trustworthiness of sharable, replicable computation for analyses.
-    - Scientific discovery
+    
 
 ## Source code
 
@@ -108,7 +108,7 @@ Providing training to build community capacity is an essential activity for the 
 
 ### Related field guide content for further reading
 
-1. [Introduction and definitions](../introduction/tutorial.html)
-2. [People and their interactions](../people/tutorial.html)
-3. [Resources used in project activities](../resources/tutorial.html)
-5. [Community development success stories](../stories/tutorial.html)
+- [Introduction and definitions](../introduction/tutorial.html)
+- [People and their interactions](../people/tutorial.html)
+- [Resources used in project activities](../resources/tutorial.html)
+- [Community development success stories](../stories/tutorial.html)
