@@ -178,7 +178,7 @@ Active, self-governing communities are an important part of the project ecology,
     - inclusive, participatory, professional behaviours are encouraged
     - The project explicitly strives to welcome and engage contributors and users
     - Community members are encouraged to help make the project better.
-- Communities are a core resource, adding substantial value to project grant resources. The project succeeds because it is a self governing collaboration between many specialised communities of contributors and investigators. 
+- Communities are a core resource, adding substantial value to project grant resources. The project succeeds because it is a self-governing collaboration between many specialised  active communities. 
 
 # A field guide to the Galaxy collaboration in 4 parts. 
 
