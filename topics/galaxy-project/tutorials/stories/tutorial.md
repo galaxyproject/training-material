@@ -65,17 +65,14 @@ contributors:
 
 # Many paths to making new things happen in Galaxy
 
-- Galaxy is a big, complicated project with many moving parts.
-- Starting something new is hard enough but even harder when it's not clear how to begin
-- Seeing how existing activities started may offer insight
-- Useful for new project activity planning
-- The stories below have been contributed by the people who did the work
-- Individual leadership in response to genuine need, and collaboration underly them all
+- Galaxy is a big, complicated project with many moving parts. Starting something new is hard enough but even harder when it's not clear how to begin. For that reason, this material is available to help understand how existing activities started. These stories may offer insight useful for planning new project activities.
+- The stories below have been contributed by the people who helped organise the work. Individual leadership in response to genuine need, supported by community engagement underly them all, reflecting a core shared value in open projects that participants are encouraged to engage in activities that interest them, to help improve the project's value to scientists.
 
+# Communities of Practice
 
 ## Proteomics communities: a case-study
 
-The unique features of tool flexibility and availability, provenance tracking, workflow development, scalability and a user-interface offered unique aspects to mainly Windows-centric, standalone software options in the field.  As an example, the Galaxy for proteomics project started at the University of Minnesota around 2010 was borne of need for a scalable, enterprise workflow solution to support analyses of datasets being produced on campus.  The Minnesota Supercomputing Institute (MSI) supported these computational needs and sought out solutions.  Because of connections to the genomics community, MSI personnel were aware of Galaxy.  The forward-looking design of Galaxy offered potential for applications beyond genomics, and exploratory work was initiated to investigate suitability for proteomics needs.
+Galay's unique features of open source tool flexibility and availability, provenance tracking, workflow development, scalability and convenient user interface, offered a very competitive low cost alternative to the predominantly Windows-based, standalone software options in the field.  As an example, the Galaxy for proteomics project at the University of Minnesota around 2010 was borne of the need for a scalable, enterprise workflow solution to support analyses of the large and increasingly numerous datasets being produced on campus.  The Minnesota Supercomputing Institute (MSI) supported these computational needs and sought out solutions.  Because of connections to the genomics community, MSI personnel were aware of Galaxy.  The forward-looking design of Galaxy offered potential for applications beyond genomics, and exploratory work was initiated to investigate suitability for proteomics needs.
 
 These explorations resulted in revelations about new possibilities for using Galaxy beyond domain-centric analyses (proteomics), and further developing multi-omic applications such as proteogenomics which integrates genomic, transcriptomic and proteomic data for novel molecular characterization of systems.  The innovation offered by multi-omics, coupled with the numerous unique advantages of Galaxy (access and training in use of complex workflows by novice users in particular), proved a competitive advantage in seeking funding to support development work.  These qualities have carried on since early days of development to gained continued support of Galaxy-P, as plausible arguments can be made to reviewers that this is not just another software tool but rather an ecosystem with unique, beneficial features.  A number of other groups across the world (Europe, Australia) have also recognized these benefits, and via coordination through the Galaxy-P team, a community of developers and users has been built and sustained.
 
@@ -92,6 +89,13 @@ Hans-Rudolf?
 ## Micro
 
 ## Ecology
+
+
+# Open team initiated support community bodies
+
+These are not typical active communties, but are open to community participation. Their activities are very technical in nature, and they are an important part of the maintenance of technical and related standards for communities maintaining tools and workflows.
+
+## IWC
 
 ## IUC
 
@@ -146,6 +150,10 @@ Hans-Rudolf?
 > Greg Von Kuster <greg@bx.psu.edu>
 >
 {: .details}
+
+# Individual contributor stories
+
+
 
 ## [Interesting user story](https://static.sched.com/hosted_files/gcc2022/13/NEWCOMER%20TO%20CONTRIBUTOR%20Awan%20Collins%20Savage.pdf)
 

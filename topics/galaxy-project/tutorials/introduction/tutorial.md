@@ -67,12 +67,13 @@ contributors:
 ## Motivation: Why does Galaxy need a field guide?
 
 - Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities.
-- It has a much wider range of deliverables than most open source projects. Project activities build on the code to support many kinds of analysis and training, across many diverse areas of open science.
-- This provides many different opportunities for participants, according to their interests. For example, it is seen as:
+- It has a much wider range of deliverables than most open source projects. Project activities build on the code to support analysis and training in diverse areas of open science.
+- This allows each participant to engage according to their own interests. For example, it is seen as:
     - A convenient and reliable way to share complex open science analyses, for researchers.
     - Inter-dependent open source code repositories, for software developers.
     - A global open science collaboration, for investigators.
-- Each of these is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because it has grown so large, that few individuals have time to be engaged and fully informed across all project activities.
+- Each of these perspectives is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large that few individuals can devote enough time to remain engaged and fully informed across every project activity.
+- This guide is intended to allow many perspectives to be combined, to provide a more comprehensive view of the project. For those engaged in the project, it may provide useful insights into how new active communities and new collaborations can be started, and how individuals have become engaged on their own terms.
 
 ## How to use the field guide.
 
@@ -169,7 +170,7 @@ Active, self-governing communities are an important part of the project ecology,
 
 #### Shared values help communities flourish
 
-- Communities are open for participation such as:
+- Communities are open for participation, such as:
    - Developers contributing to the code repository are an example of an important community.
    - Communities of practice maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
     - Regional communities support local training and other distributed activities.
