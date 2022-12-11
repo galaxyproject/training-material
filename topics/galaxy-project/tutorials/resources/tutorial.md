@@ -58,7 +58,7 @@ contributors:
 {: .agenda}
 
 
-## 2. Resources used in Galaxy
+# 2. Resources used in Galaxy
 
 - Many different kinds of resources are needed to support all the "free" services
 - Large scale computational infrastructure and professionals 
@@ -66,7 +66,7 @@ contributors:
 - Engaged communities
 - Other interacting open communities
 
-### Source code
+## Source code
 - Open source communities provide
     - Galaxy source code dependencies
     - Command line analysis package code for tools
@@ -74,7 +74,7 @@ contributors:
 - Github committers and community
 - The core framework code, markup for the Hub and GTN, and other resources are also maintained on GitHub, allowing pull requests with independent review before changes are accepted.
 
-### Computational infrastructure, support and analysis services
+## Computational infrastructure, support and analysis services
 
 "Free" user allocations for storage and computing depend on the available resources and the intensity of user demand. They are sufficient for many common data intensive projects, but are not suitable for very large data or extremely demanding computing because availability is limited to the resources provided by collaborators and it is far from infinite. 
 
@@ -84,7 +84,7 @@ Each of the main usegalaxy.* services shares the main source code, and system ad
 - Europe
 - USA
 
-### Collaborating grants
+## Collaborating grants
 - Would PI's want to advertise their deliverables here?
 - One way of letting potential collaborators know what you're doing?
 - Does not need budgets :)
@@ -92,7 +92,7 @@ Each of the main usegalaxy.* services shares the main source code, and system ad
 - Cancer....
 - Your ideas here please?
 
-### Community contributors
+## Community contributors
 - Very important resource
 - Bug fixes, ideas...
 

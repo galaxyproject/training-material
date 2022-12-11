@@ -79,7 +79,7 @@ contributors:
 
 - The [Hub](https://galaxyproject.org/) provides much more detail and current activities. This training material refers to the Hub where possible, but aims to present an orderly overview of the main structures. 
 - This introduction is recommended reading, because it describes how the guide is structured to help make it easier to use. It also provides a restricted definition for the term "community" to simplify the guide. Related topic sections are linked at the end of this module, or from the main Topic page.
-- One part of the field guide gives examples of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
+- The field guide includes descriptions by those involved, of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -94,8 +94,8 @@ contributors:
  
 ## Structure for the field guide
 
-- A useful field guide must break all the complexities down into more manageable chunks, since the material is potentially overwhelming.
-- Describing the project is further complicated because it functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete description, but is itself complicated. The reader is assumed to have some experience, since it is not addressed further in this material.
+- A useful guide breaks all the complexities into smaller, more manageable chunks, since the material is potentially overwhelming.
+- The project functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete project description, but is itself too complicated to add here. The reader is assumed to have some experience, since they are reading this guide, so it is not addressed further in this material.
 - Successful projects are complex, and each has particular complexities, so there are many alternative ways to describe them. 
 - The arbitrary division used for this guide gives three high level categories related in the following model:
 
