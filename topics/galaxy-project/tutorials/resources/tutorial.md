@@ -90,7 +90,7 @@ contributors:
 - Very important resource
 - Bug fixes, ideas...
 
-#### Related content
+### Related field guide content for further reading
 
 1. [Introduction and definitions](../introduction/tutorial.html)
 2. [People and their interactions](../people/tutorial.html)

@@ -4,29 +4,21 @@ logo: "Galrollup"
 title: "4: Galaxy project outputs"
 summary: "Deliverables part of the field guide. Work in progress. Please help make it better?"
 questions:
-  - "What are the main identifiable project components?"
-  - "How do they all fit together?"
-  - "Who pays for the 'free' analysis computational resources?"
-  - "How are decisions really made?"
-  - "Who's in charge?"
-  - "Why is contribution from the community so important?"
-  - "How can I join in?"
+  - "What are the main identifiable project outputs?"
+  - "How can Galaxy offer 'free' analysis computational resources?"
+  - "How does the open source community support Galaxy"
+  - "How are new project outputs or resources created?"
 objectives:
-  - "Understand Galaxy community development stories as examples of how things get done"
+  - "Understand Galaxy outputs and open science services"
   - "Understand how different communities work together to make things happen"
   - "Understand opportunities for engagement and contributing your skills"
  
 time_estimation:
 subtopic: anatomy
 key_points:
-  - "Galaxy is a complicated, participatory self-governing collaborative community project"
-  - "Participants engage with the project on their own individual terms"
-  - "Multiple perspectives and opinions are needed to see the whole interacting structure"
-  - "Vision: Build hard features like reproducibility into an analysis framework with pluggable tools"
-  - "Running code as a free service provides effective stress testing for software defects and useability"
-  - "Project depends on and collaborates as part of the open science ecosystem"
-  - "Started in genomics but now adapted to suit many data rich disciplines"
-  - "New contributors and investigators are highly valued and warmly welcomed"
+  - "The Galaxy project creates many highly valued open science resources"
+  - "Unlike most open source projects, Galaxy offers important services and community activities in addition to source code"
+  - "Participants engage with, and add value to the project outputs on their own individual terms"
  
 contributors:
   - ggsc
@@ -48,7 +40,7 @@ contributors:
 
 
 > <comment-title>Note to readers</comment-title>
-> - This module introduces the most important parts of the Galaxy project. They are grouped arbitrarily and there are many overlaps, because Galaxy grows organically through collaborations, rather than by design.
+> - This module introduces the most important outputs of the Galaxy project. They are grouped arbitrarily and there are many overlaps, because Galaxy grows organically through collaborations, rather than by design.
 > - The project continues to expand rapidly, so this module will need updating regularly
 > - The Hub provides much more detail about many of the same structures and their activities, but this material is designed to provide simplified views of the project, so the Hub becomes easier to navigate.
 > - This is an attempt at a kind of field guide to the ecosystem generating those Hub activities, for the use of participants trying to navigate it.
@@ -114,7 +106,7 @@ Providing training to build community capacity is an essential activity for the 
 - Tens of thousands of scientists trained
 - Your ideas here please?
 
-#### Related content
+### Related field guide content for further reading
 
 1. [Introduction and definitions](../introduction/tutorial.html)
 2. [People and their interactions](../people/tutorial.html)

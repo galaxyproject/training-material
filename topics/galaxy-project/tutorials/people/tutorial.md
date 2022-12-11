@@ -182,7 +182,7 @@ This field guide begins with people and their interactions in communities and st
 ## Your ideas 
 - for people things to describe here please
 
-#### Related content
+### Related field guide content for further reading
 
 1. [Introduction and definitions](../introduction/tutorial.html)
 3. [Resources used in project activities](../resources/tutorial.html)

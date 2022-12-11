@@ -149,7 +149,7 @@ Hans-Rudolf?
 
 ## Insert your story here or email text to Ross please?
 
-#### Related content
+### Related field guide content for further reading
 
 1. [Introduction and definitions](../introduction/tutorial.html)
 2. [People and their interactions](../people/tutorial.html)
