@@ -30,6 +30,7 @@ key_points:
 contributors:
   - ggsc
   - fubar2
+  - timothygriffin
 ---
 
 > <comment-title>Note to contributors</comment-title>
@@ -146,6 +147,7 @@ Hans-Rudolf?
 >
 {: .details}
 
+## [Interesting user story](https://static.sched.com/hosted_files/gcc2022/13/NEWCOMER%20TO%20CONTRIBUTOR%20Awan%20Collins%20Savage.pdf)
 
 ## Insert your story here or email text to Ross please?
 
