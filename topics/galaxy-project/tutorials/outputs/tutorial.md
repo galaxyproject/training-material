@@ -66,21 +66,25 @@ The downstream products of Galaxy are important but hard to quantify:
 ## Source code
 
 - Generic analysis framework
-- Utilities - planemo etc
+- Utilities - planemo, ephemeris...
+- Tool wrappers to "flavour" framework instances
+    - +8k variable quality tools in public toolshed
+    - Click to install in any framework server
+    - Many well maintained tools from IUC and communities of practice.
+- Utility code for Galaxy services at scale
+    - Ansible, system scripts and related automation 
 - Your ideas here please?
 
-## Tool wrappers to "flavour" framework instances
+## Open science analysis services
 
-- +8k tools in public toolshed
-- Your ideas here please?
-
-## Free analysis services
-
-- usegalaxy.*
-- Large Australian, European and US research infrastructure allocations
-- Tens of thousands of users
-- Professional user support
-- Stress testing framework code and tools
+- "Free" project supported services
+    - usegalaxy.*
+    - Large Australian, European and US research infrastructure allocations
+    - Tens of thousands of users
+    - Professional user support
+    - Stress testing framework code and tools
+- 100+ specialised public instances
+- Unknown number of private installations
 - Your ideas here please?
 
 ## Capacity building: training resources and services

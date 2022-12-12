@@ -48,14 +48,12 @@ contributors:
 {: .comment}
 
 
-> <agenda-title>Field Guide Part 4. Stories of successful community development</agenda-title>
+> <agenda-title>Field Guide Part 4. Stories of engagement and community development</agenda-title>
 >
-> - This module includes some stories to illustrate how participants can introduce new project initiatives
-> - These are encouraged in an open project, and this training material is designed to make it easier. 
-> - Community initiatives and new collaborations help the project grow organically over time rather than by design.
-> Each of the collaborations described below have gained lives of their own in the Galaxy ecosystem
-> The kinds of leadership needed and the processes that were followed are useful examples
-> The provide a view from inside a successful initiative
+> The stories here recount how participants created some existing project initiatives. All open projects encourage this, and this training material is designed to make it easier to navigate the process in Galaxy.
+> 
+> Community initiatives and new collaborations make the project grow organically, rather than by design, and the project now has active communities in a wide range of scientific fields. Project source code supports a highly adaptable, scalable open science analysis framework, readily "flavoured" with open source command line analysis packages as tools, to suit the complex analysis needs of researchers in any data rich field.
+> Each of the initiatives and experiences described below have lives of their own in the Galaxy ecosystem. The kinds of leadership needed and the processes that were followed are useful examples, providing a view from inside some successful initiatives. Individual experiences show the varied ways it is possible for interested participants to make a difference.
 > 
 >
 > 1. TOC
@@ -65,8 +63,9 @@ contributors:
 
 # Many paths to making new things happen in Galaxy
 
-- Galaxy is a big, complicated project with many moving parts. Starting something new is hard enough but even harder when it's not clear how to begin. For that reason, this material is available to help understand how existing activities started. These stories may offer insight useful for planning new project activities.
-- The stories below have been contributed by the people who helped organise the work. Individual leadership in response to genuine need, supported by community engagement underly them all, reflecting a core shared value in open projects that participants are encouraged to engage in activities that interest them, to help improve the project's value to scientists.
+- Galaxy is already big and complicated, with many moving parts. Starting a new activity is hard enough, made even harder when it's not clear where to begin. Stories offer insight for planning new project activities.
+- Stories were contributed by the people who helped organise the work. Individual leadership, responding to genuine need, supported by participant engagement, are the common themes. They illustrate a core shared value in open projects, that encourages everyone to engage in activities that interest them, where they can help improve the project's value to scientists.
+- This part of the field guide has community initiatives, team initiatives and individual stories in separate sections, so readers can focus on their own interests. 
 
 # Communities of Practice
 
@@ -91,15 +90,15 @@ Hans-Rudolf?
 ## Ecology
 
 
-# Open team initiated support community bodies
+# Team initiated specialised communities
 
-These are not typical active communties, but are open to community participation. Their activities are very technical in nature, and they are an important part of the maintenance of technical and related standards for communities maintaining tools and workflows.
+These are open to community participation, but their activities are very technical in nature, so technical decisions are made by a small group of members. They are open to anyone with an interest in the maintenance of technical and related standards for reliable and heavily used tools and workflows. 
 
 ## IWC
 
 ## IUC
 
-*Ross test. Delete me. Not a good example here because it was a team initiative rather than from the community?*
+*Ross placeholder. Delete me. Not a good example here because it was a team initiative rather than from the community?*
 
 - The IUC was created in 2012.
 - An initiative by Greg Von Kuster.

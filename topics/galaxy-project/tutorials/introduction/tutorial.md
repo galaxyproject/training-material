@@ -106,8 +106,11 @@ contributors:
 
  
 > <details-title>People working together make the project possible</details-title>
-> - Open source is a very productive way of delivering software. Shared values and participatory self-governance help people get things done
+> 
+> - Open source is a very productive way of delivering software. Shared values and participatory self-governance help people get things done.
+> 
 > - Galaxy participants must govern the collaboration for themselves, because there are many independent institutions and investigators, so no single institution has control
+> 
 > - Individuals engage with the project according to their interestests, such as:
 >     - Analysing and sharing experimental data
 >     - Working as a member of the core professional team
@@ -115,35 +118,45 @@ contributors:
 >     - Helping build best practice tool kits and workflows for specific fields
 >     - Leading new activities in the collaboration by providing community and project leadership.
 >     - Contributing to project governance
+> 
 > - A detailed module on [people and their interactions is available](../people/tutorial.html)
 {: .details}
 
 
 > <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
+> 
 > - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track. Professional, dedicated staff are needed for source code curation, user support, usegalaxy.* services, ToolShed maintenance, GTN material and training services, and many other related resources.
+> 
 > - Computational resource allocations needed for free service provision are provided by collaborating institutions, adding substantial value to the source code in the form of free analysis and training services.
 > - Professional staff are needed to support project related core functions:
 >     - outreach, communication, project management.
 >     - user support, system administration and software engineers.
+> 
 > - Without these, the source code repository would still be a valuable resource. Value added by these services probably outweighs investment, because substantial skilled community effort adds greatly to total project impact and value, multiplying the benefit from that investment.
+> 
 > - A detailed guide to [Resources used in project activities is available.](../resources/tutorial.html)
 {: .details}
 
 > <details-title>Open source resources are essential parts of project code</details-title>
+> 
 > - Galaxy source code depends on thousands of other open source projects
 > - Flavours for Galaxy servers depend on thousands of open source command line packages
 > - Galaxy builds on and adds value to all those resources.
+> 
 > - It makes command line packages interoperable and reproducible, through a uniform interface.
 > - Provides a GUI and sharing for users, without requiring effort from the package developer.
 {:  .details}
 
 > <details-title>Project outputs: Project outputs for open science and scientists</details-title>
+> 
 > - Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings.
 > - The code is a core project deliverable, but it is used to support many other important project outputs.
+> 
 > - Other project activities build on the source code, to provide a range of open science benefits such as:
 >   - The usegalaxy.* public deployments are large, free analysis services that support tens of thousands of researchers each day.
 >   - The Galaxy Training Network supports training to improve researcher productivity, integrated into Galaxy's user interface.
 >   - Specialised training, toolkits and workflows for specific fields are supported and distributed by communities of practice
+> 
 > - These and other outputs are [described in more detail here](../outputs/tutorial.html) 
 {:  .details}
 
@@ -155,18 +168,19 @@ Active, self-governing communities are an important part of the project ecology,
 
 #### Definition
 
-- For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to become engaged in any "community" that does not organise any activities, although they may have other importance.
+- For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to engage with a community that does not organise any activities, although it may be important in other ways.
 
 #### Origins and sustainability
 
-- Communities form by regular interactions within the project. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities to maintain their own pages on the Hub*.
-- Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. 
+- Communities form when participants come together to work on a project related initiative. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities, to require their own pages on the Hub*.
 - Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal external resources.
+- Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. The are all open and welcome participants. 
+- In some highly specialised active groups, such as the IUC, formal decision making on technical issues is deliberately restricted to designated "members". The groups are "open", since regular IUC communication channels, code and documentation are public, but the work depends on specific skills. They are "open" to support and ideas from anyone with an interest, and in practice, developers who contribute regularly, are typically recruited by consensus of the members.
 
 #### Importance
 
-- Communities are a core element of the success of any large open project. They represent groups of people self-selecting to work on project activities in which they have an interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
-- Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. It is very important, demonstrating productivity for grants, and serving as the major recruitment source of individuals choosing to engage and contribute to more active communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they are in the "Products" part of this guide.
+- Communities are a core element of the success of any large open project. They represent self-selected individuals, who choose to work on a project activity in which they have a particular interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
+- Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. That does not diminish their importance in demonstrating productivity for grant renewals, and serving as the major recruitment source of individuals choosing to engage in active project communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they appear in the "Products" part of this guide.
 
 #### Shared values help communities flourish
 
@@ -179,7 +193,7 @@ Active, self-governing communities are an important part of the project ecology,
     - inclusive, participatory, professional behaviours are encouraged
     - The project explicitly strives to welcome and engage contributors and users
     - Community members are encouraged to help make the project better.
-- Communities are a core resource, adding substantial value to project grant resources. The project succeeds because it is a self-governing collaboration between many specialised  active communities. 
+- Communities are a core resource, adding substantial value to project grant resources. Project success is the result of efficient and coherent self-governing collaboration, involving many specialised active communities of contributors.  
 
 # A field guide to the Galaxy collaboration in 4 parts. 
 
