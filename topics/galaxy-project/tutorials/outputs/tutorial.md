@@ -40,14 +40,14 @@ contributors:
 
 
 > <comment-title>Note to readers</comment-title>
-> - This module introduces the most important outputs of the Galaxy project. They are grouped arbitrarily and there are many overlaps, because Galaxy grows organically through collaborations, rather than by design.
+> - The most important outputs of the Galaxy project are grouped arbitrarily here, and there are many overlaps, because Galaxy grows organically through collaborations, rather than by design.
 > - The project continues to expand rapidly, so this module will need updating regularly
 > - The Hub provides much more detail about many of the same structures and their activities, but this material is designed to provide simplified views of the project, so the Hub becomes easier to navigate.
 > - This is an attempt at a kind of field guide to the ecosystem generating those Hub activities, for the use of participants trying to navigate it.
 > 
 {: .comment}
 
-> <agenda-title>Field Guide Part 3. Project deliverables</agenda-title>
+> <agenda-title>Field Guide Part 3. Project outputs and impact</agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -56,23 +56,27 @@ contributors:
 
 # 3. Project outputs
 
-Source code is the primary deliverable for the project, because most other project activities build on it. The most visible parts of the project for researchers are the free Galaxy services for training and analyses, made possible by all the people and the resources.
+Source code is the primary deliverable for the project, because most other project activities build on it. It is also probably the most important resource for the project in a sense, but for simplicity, it is an output in this guide. The most widely used outputs of the project for researchers, are free services for training and analyses, made possible by the source code, and all the people and the resources described in this guide.
 
-The downstream products of Galaxy are important but hard to quantify:
-    - increased research outputs from analyses in open science result from increased productivity for researchers. Access to efficient and reliable analysis methods for large, complex data resources will increase their use in research, in many scientific fields.
+The downstream impact of Galaxy is important but hard to quantify, such as:
+    - increased research outputs from analyses in open science represent increased productivity for researchers. Access to efficient and reliable analysis methods for large, complex data resources, is likely to greatly increase their actual use in research, across many scientific fields.
     - Improved trustworthiness of sharable, replicable computation for analyses.
     
 
 ## Source code
 
-- Generic analysis framework
-- Utilities - planemo, ephemeris...
+The core framework source code is supported by many other project repositories. For example, providing tools for system administrators and developers, and ToolShed code for tool distribution services. These are not very useful outside the project, since they are specific to Galaxy. Their impact on open science is through their support for Galaxy. 
+
+### Do these need to be listed here? Will most readers care about detail?
+
+- Generic analysis framework source code
+- ToolShed source code
+- Developer and system administrator utilities
+    -  planemo, ephemeris, ansible...
 - Tool wrappers to "flavour" framework instances
     - +8k variable quality tools in public toolshed
-    - Click to install in any framework server
-    - Many well maintained tools from IUC and communities of practice.
-- Utility code for Galaxy services at scale
-    - Ansible, system scripts and related automation 
+    - Click to install from ToolShed, in any framework server
+    - Many well maintained tools from IUC and communities of practice. 
 - Your ideas here please?
 
 ## Open science analysis services
@@ -89,11 +93,11 @@ The downstream products of Galaxy are important but hard to quantify:
 
 ## Capacity building: training resources and services
 
-Providing training to build community capacity is an essential activity for the project, to ensure long term sustainability. 
+Providing training to build community capacity is an essential activity for the project, to ensure wide, well managed deployment and long term sustainability. 
 
- - User training integrated directly into the Galaxy user interface makes it easier for new users to become productive quickly. 
+ - GTN user training integrated directly into the Galaxy user interface, helps new users to gain the skills they need to be productive and efficient. 
  - Training system administrators helps support the public usegalaxy.* and the many private servers that operate in academic and commercial laboratories. 
- - Training for external developers makes it easier for them to contribute efficiently, improving Galaxy code and creating new tools.
+ - Training for external developers makes it easier for them to contribute efficiently, improving Galaxy code and wrapping new tools.
 - The Galaxy Trainng Network (GTN) is central to building community capability.
 - Offers free training to enhance global open science research capacity.
     - Generic aspects of using Galaxy for new users
@@ -108,6 +112,8 @@ Providing training to build community capacity is an essential activity for the 
 - Most important and probably largest deliverable
 - 10k+ publications
 - Tens of thousands of scientists trained
+- Millions of jobs run.
+- 
 - Your ideas here please?
 
 ### Related field guide content for further reading

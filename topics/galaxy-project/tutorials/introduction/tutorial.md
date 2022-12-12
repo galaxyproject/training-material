@@ -64,22 +64,26 @@ contributors:
 
 # Introduction to a Galaxy field guide
 
-## Motivation: Why does Galaxy need a field guide?
+## Motivation: Why a field guide?
 
-- Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities.
-- It has a much wider range of deliverables than most open source projects. Project activities build on the code to support analysis and training in diverse areas of open science.
-- This allows each participant to engage according to their own interests. For example, it is seen as:
+Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities. It has a far wider range of deliverables than most other projects. Project activities build on the code, to support analysis and training in diverse areas of open science.
+
+There is a lot going on, so there is a wide range of ways to engage, depending on individual interests. For example, it is seen as:
     - A convenient and reliable way to share complex open science analyses, for researchers.
     - Inter-dependent open source code repositories, for software developers.
     - A global open science collaboration, for investigators.
-- Each of these perspectives is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large that few individuals can devote enough time to remain engaged and fully informed across every project activity.
-- This guide is intended to allow many perspectives to be combined, to provide a more comprehensive view of the project. For those engaged in the project, it may provide useful insights into how new active communities and new collaborations can be started, and how individuals have become engaged on their own terms.
+
+Each of these perspectives is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large that few individuals can devote enough time to remain engaged and fully informed across every project activity.
+
+This guide is intended to allow many perspectives to be combined, to provide a more comprehensive view of the project. For those engaged in the project, it may provide useful insights into how new active communities and new collaborations can be started, and how individuals have become engaged on their own terms.
 
 ## How to use the field guide.
 
-- The [Hub](https://galaxyproject.org/) provides much more detail and current activities. This training material refers to the Hub where possible, but aims to present an orderly overview of the main structures. 
-- This introduction is recommended reading, because it describes how the guide is structured to help make it easier to use. It also provides a restricted definition for the term "community" to simplify the guide. Related topic sections are linked at the end of this module, or from the main Topic page.
-- The field guide includes descriptions by those involved, of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
+The [Hub](https://galaxyproject.org/) provides much more detail and current activities. This training material refers to the Hub where possible, but aims to present an orderly overview of the main structures. 
+
+This introduction is recommended reading, because it describes how the guide is structured to help make it easier to use. It also provides a restricted definition for the term "community" to simplify the guide. Related topic sections are linked at the end of this module, or from the main Topic page.
+
+The field guide includes descriptions by those involved, of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
 > - Categories and divisions are necessarily arbitrary. 
@@ -94,15 +98,13 @@ contributors:
  
 ## Structure for the field guide
 
-- A useful guide breaks all the complexities into smaller, more manageable chunks, since the material is potentially overwhelming.
-- The project functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete project description, but is itself too complicated to add here. The reader is assumed to have some experience, since they are reading this guide, so it is not addressed further in this material.
-- Successful projects are complex, and each has particular complexities, so there are many alternative ways to describe them. 
-- The arbitrary division used for this guide gives three high level categories related in the following model:
+A useful guide breaks all the complexities into smaller, more manageable chunks, since the material is potentially overwhelming. The project functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete project description, but is itself too complicated to add here. The reader is assumed to have some experience, since they are reading this guide, so it is not addressed further in this material.
+
+Successful projects are complex, and each has particular complexities, so there are many alternative ways to describe them. The arbitrary division used for this guide produces three high level categories, related in the following model:
 
 ### *People + Resource inputs = Project outputs*
 
-- This provides a logical division for the guide to simplify the task of seeing it all. "Details" tabs below show more overview information about each component.
-- The main part of the field guide is divided into those corresponding sections. In practice, the project depends on them all, efficiently working together. Galaxy flourishes, because all these parts govern themselves in an efficient and productive collaboration.
+This provides a logical division for the guide to simplify the task of seeing it all. "Details" tabs below show more overview information about each component. The main part of the guide is divided into those corresponding sections. In practice, the project depends on them all, efficiently working together. Galaxy flourishes, because all these parts govern themselves in an efficient and productive collaboration.
 
  
 > <details-title>People working together make the project possible</details-title>
@@ -139,25 +141,27 @@ contributors:
 
 > <details-title>Open source resources are essential parts of project code</details-title>
 > 
-> - Galaxy source code depends on thousands of other open source projects
-> - Flavours for Galaxy servers depend on thousands of open source command line packages
-> - Galaxy builds on and adds value to all those resources.
+> Galaxy source code depends on thousands of other open source projects
+> Flavours for Galaxy servers depend on thousands of open source command line packages
 > 
-> - It makes command line packages interoperable and reproducible, through a uniform interface.
-> - Provides a GUI and sharing for users, without requiring effort from the package developer.
+> Galaxy builds on and adds value to all those resources.
+> 
+> It makes command line packages interoperable and reproducible, through a uniform interface.
+> Provides a GUI and sharing for users, without requiring effort from the package developer.
 {:  .details}
 
 > <details-title>Project outputs: Project outputs for open science and scientists</details-title>
 > 
-> - Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings.
-> - The code is a core project deliverable, but it is used to support many other important project outputs.
+> Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings.
+> The code is a core project deliverable, but it is used to support many other important project outputs.
 > 
-> - Other project activities build on the source code, to provide a range of open science benefits such as:
->   - The usegalaxy.* public deployments are large, free analysis services that support tens of thousands of researchers each day.
->   - The Galaxy Training Network supports training to improve researcher productivity, integrated into Galaxy's user interface.
->   - Specialised training, toolkits and workflows for specific fields are supported and distributed by communities of practice
+> Other project activities build on the source code, to provide a range of open science benefits such as:
 > 
-> - These and other outputs are [described in more detail here](../outputs/tutorial.html) 
+> - The usegalaxy.* public deployments are large, free analysis services that support tens of thousands of researchers each day.
+> - The Galaxy Training Network supports training to improve researcher productivity, integrated into Galaxy's user interface.
+> - Specialised training, toolkits and workflows for specific fields are supported and distributed by communities of practice
+> 
+> These and other outputs are [described in more detail here](../outputs/tutorial.html) 
 {:  .details}
 
      
@@ -168,32 +172,37 @@ Active, self-governing communities are an important part of the project ecology,
 
 #### Definition
 
-- For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to engage with a community that does not organise any activities, although it may be important in other ways.
+For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to engage with a community that does not organise any activities, although it may be important in other ways.
 
 #### Origins and sustainability
 
-- Communities form when participants come together to work on a project related initiative. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities, to require their own pages on the Hub*.
-- Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal external resources.
-- Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. The are all open and welcome participants. 
-- In some highly specialised active groups, such as the IUC, formal decision making on technical issues is deliberately restricted to designated "members". The groups are "open", since regular IUC communication channels, code and documentation are public, but the work depends on specific skills. They are "open" to support and ideas from anyone with an interest, and in practice, developers who contribute regularly, are typically recruited by consensus of the members.
+Communities form when participants come together to work on a project related initiative. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities, to require their own pages on the Hub*.
+
+Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal external resources.
+
+Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. The are all open and welcome participants. In some highly specialised active groups, such as the IUC, formal decision making on technical issues is deliberately restricted to designated "members". The groups are "open", since regular IUC communication channels, code and documentation are public, but the work depends on specific skills. They are "open" to support and ideas from anyone with an interest, and in practice, developers who contribute regularly, are typically recruited by consensus of the members.
 
 #### Importance
 
-- Communities are a core element of the success of any large open project. They represent self-selected individuals, who choose to work on a project activity in which they have a particular interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
-- Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. That does not diminish their importance in demonstrating productivity for grant renewals, and serving as the major recruitment source of individuals choosing to engage in active project communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they appear in the "Products" part of this guide.
+Communities are a core element of the success of any large open project. They represent self-selected individuals, who choose to work on a project activity in which they have a particular interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
+
+Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. That does not diminish their importance in demonstrating productivity for grant renewals, and serving as the major recruitment source of individuals choosing to engage in active project communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they appear in the "Products" part of this guide.
 
 #### Shared values help communities flourish
 
-- Communities are open for participation, such as:
+Communities are open for participation, such as:
+
    - Developers contributing to the code repository are an example of an important community.
    - Communities of practice maintain "best practice" tools, workflows and training for specific kinds of open science analysis.
-    - Regional communities support local training and other distributed activities.
-- Newly organised communities related to the project are welcomed.
-- Open source shared values ensure that community activities are safe, productive and enjoyable:
-    - inclusive, participatory, professional behaviours are encouraged
-    - The project explicitly strives to welcome and engage contributors and users
-    - Community members are encouraged to help make the project better.
-- Communities are a core resource, adding substantial value to project grant resources. Project success is the result of efficient and coherent self-governing collaboration, involving many specialised active communities of contributors.  
+   - Regional communities support local training and other distributed activities.
+
+Newly organised communities related to the project are welcomed. Open source shared values ensure that community activities are safe, productive and enjoyable:
+
+- inclusive, participatory, professional behaviours are encouraged
+- The project explicitly strives to welcome and engage contributors and users
+- Community members are encouraged to help make the project better.
+
+Communities are a core resource, adding substantial value to project grant resources. Project success is the result of efficient and coherent self-governing collaboration, involving many specialised active communities of contributors.  
 
 # A field guide to the Galaxy collaboration in 4 parts. 
 
