@@ -290,7 +290,7 @@ abundance estimation at higher ranks was more problematic for the binners
 | DUDes     | v.cami1              | no                  | strain-madness                                        | \-                             |                                                                                                                                                            |
 | FOCUS 1.5 |  1.5                 | no                  | \-                                                    | fastest; most memory efficient |                                                                                                                                                            |
 | Bracken   |  2.2                 | yes (version 2.7)   | \-                                                    | fastest                        | provide good performance metrics<br>very fast on large numbers of samples<br>allow custom databases<br>when high amounts of memory (>100 Gb) are available |
-| Bracken   |  2.6                 | yes (version 2.7)   | plant-associated                                      | \-                             |
+| Bracken   |  2.6                 | yes (version 2.7)   | plant-associated                                                               
 | Kraken    |  2.0.8 beta (GSA,Sr) | yes                 | marine                                                | fastest; most memory efficient |
 
 *metagenome benchmark datasets created by {% cite Meyer.2022 %} representing a marine, a high strain diversity environment (‘strain-madness’) and a plant-associated environment including fungal genomes and host plant material
