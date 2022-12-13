@@ -13,7 +13,7 @@ key_points:
   - Understand how Galaxy stores and uses its reference data
   - Understand how to manually add a reference genome and tool indices if required
   - Understand and how to use data managers to make all of this much much easier
-contributors:
+contributions:
   authorship:
     - slugger70
     - afgane
@@ -286,7 +286,7 @@ View in the file system where the changes to the location file and the reference
 > > > #fasta file. So there will be multiple fasta files for each build,
 > > > #such as with hg19 above.
 > > > #
-> > > sacCer2 sacCer2 S. cerevisiae June 2008 (SGD/sacCer2)   /srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
+> > > sacCer2	sacCer2	S. cerevisiae June 2008 (SGD/sacCer2)	/srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
 > > > ```
 > > {: .code-out}
 > >
@@ -388,23 +388,6 @@ In this part we will actually build the BWA index for sacCer2. It will automatic
 >
 {: .question}
 
-## Verify that BWA can access the new reference data
-
-Finally, we will verify that the BWA tool can see the new sacCer2 indexes.
-
-> <hands-on-title>Configure Galaxy</hands-on-title>
->
-> 1. Install the BWA and BWA-MEM tools, if needed.
->
->    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA" section="Mapping" %}
->
-> 2. Click the "Home" icon at the top to return to the Galaxy analysis interface
->
-> 3. Load the {% tool [Map with BWA](bwa) %} tool and verify that the sacCer2 genome appears in the {% icon param-select %} *"Using reference genome"* option.
-{: .hands_on}
-
-How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
-
 # Installing and Using Data Managers from the command line with Ephemeris
 
 The same process described in the previous section can also be performed from the command line, e.g. in a CI/CD
@@ -446,6 +429,7 @@ In order to accomplish this, you will need:
 >    > Be sure to adjust the value of `-g` appropriately for your Galaxy server, and replace the value of `-a` with your API key.
 >    > ```console
 >    > shed-tools install -g https://your-galaxy -a <api-key> --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam
+>    > ```
 >    {: .code-in}
 >
 >    > <code-out-title></code-out-title>
@@ -472,27 +456,38 @@ In order to accomplish this, you will need:
 >    {% raw %}
 >    ```yaml
 >    data_managers:
->      # Data manager ID
 >      - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4
->        # tool parameters, nested parameters should be specified using a pipe (|)
 >        params:
 >          - 'dbkey_source|dbkey': '{{ item.dbkey }}'
->          - 'dbkey_source|dbkey_name': '{{ item.name }}'
+>          - 'sequence_name': '{{ item.name }}'
 >          - 'reference_source|reference_source_selector': 'ucsc'
 >          - 'reference_source|requested_dbkey': '{{ item.dbkey }}'
->        # Items refere to a list of variables you want to run this data manager. You can use them inside the param field with {{ item }}
->        # In case of genome for example you can run this DM with multiple genomes, or you could give multiple URLs.
 >        items:
 >          - dbkey: sacCer3
 >            name: 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)'
->          #- dm3
->          #- mm9
->        # Name of the data-tables you want to reload after your DM are finished. This can be important for subsequent data managers
 >        data_table_reload:
 >          - all_fasta
 >          - __dbkeys__
 >    ```
 >    {% endraw %}
+>
+>    > <details-title>What do these config file compontents mean?</details-title>
+>    >
+>    > The `run-data-managers` config file options correspond to the options in the data manager tool XML file. To locate the tool XML file for the Fetch Genomes data manager, you can search for it in [the Tool Shed](https://toolshed.g2.bx.psu.edu) the same way you did when installing it via the UI. You can also open the data manager's tool form in the UI as if to run it, and, using the drop-down menu at the top right of the tool form, click "See in Tool Shed". From the Tool Shed, you can click the **Development repository** link and browse to the [tool XML file, `data_manager/data_manager_fetch_genome_all_fasta_dbkeys.xml`](https://github.com/galaxyproject/tools-iuc/blob/8487d2c73793be0afa5b34388b122e686ac8a094/data_managers/data_manager_fetch_genome_dbkeys_all_fasta/data_manager/data_manager_fetch_genome_all_fasta_dbkeys.xml).
+>    >
+>    > `run-data-managers` config file component          | Purpose
+>    > ---                                                | ---
+>    > `id`                                               | Data manager full (shed) tool ID, this can be found in `shed_data_manager_conf.xml`
+>    > `params`                                           | Data manager tool params, these correspond to `<param>` tags in the tool XML file. Nested paramaters are specified using a pipe character (`|`).
+>    > param `dbkey_source|dbkey`                         | Value of `<param name="dbkey" ...>` in `<conditional name="dbkey_source">`.
+>    > param `sequence_name`                              | Value of `<param name="sequence_name" ...>`.
+>    > param `reference_source|reference_source_selector` | Value of `<param name="reference_source_selector" ...>` in `<conditional name="reference_source">`.
+>    > param `reference_source|requested_dbkey`           | Value of `<param name="requested_dbkey" ...>` in `<conditional name="reference_source">`.
+>    > `items`                                            | A list of variables to template in to `params`, referenced in param fields with {% raw %}`{{ item }}`{% endraw %}. In the case of genomes, for example, you can run this DM with multiple genomes, or you could give multiple URLs.
+>    > `data_table_reload`                                | Names of the data tables you want to reload after your DMs are finished running. This can be important for subsequent data managers.
+>    >
+>    {: .details}
+>
 >
 > 2. Run the Genome Fetch DM with `run-data-managers`:
 >
@@ -524,12 +519,55 @@ In order to accomplish this, you will need:
 >
 >    ![populated all_fasta data table with sacCer3](../../images/dm-all-fasta-populated-2.png)
 >
+>    > <question-title></question-title>
+>    >
+>    > Can we view the changes from the command line? Where are they located?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > The `all_fasta.loc` file contains the entry for our new genome. If you need a reminder on how to locate it, see the *What did this data manager execution change?* question in the UI section above.
+>    > >
+>    > > > <code-in-title>Bash</code-in-title>
+>    > > > ```bash
+>    > > > cat /srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/all_fasta.loc
+>    > > > ```
+>    > > {: .code-in}
+>    > >
+>    > > > <code-out-title>Bash</code-out-title>
+>    > > > ```bash
+>    > > > #This file lists the locations and dbkeys of all the fasta files
+>    > > > #under the "genome" directory (a directory that contains a directory
+>    > > > #for each build). The script extract_fasta.py will generate the file
+>    > > > #all_fasta.loc. This file has the format (white space characters are
+>    > > > #TAB characters):
+>    > > > #
+>    > > > #<unique_build_id>  <dbkey>     <display_name>  <file_path>
+>    > > > #
+>    > > > #So, all_fasta.loc could look something like this:
+>    > > > #
+>    > > > #apiMel3    apiMel3 Honeybee (Apis mellifera): apiMel3      /path/to/genome/apiMel3/apiMel3.fa
+>    > > > #hg19canon  hg19        Human (Homo sapiens): hg19 Canonical        /path/to/genome/hg19/hg19canon.fa
+>    > > > #hg19full   hg19        Human (Homo sapiens): hg19 Full         /path/to/genome/hg19/hg19full.fa
+>    > > > #
+>    > > > #Your all_fasta.loc file should contain an entry for each individual
+>    > > > #fasta file. So there will be multiple fasta files for each build,
+>    > > > #such as with hg19 above.
+>    > > > #
+>    > > > sacCer2	sacCer2	S. cerevisiae June 2008 (SGD/sacCer2)	/srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
+>    > > > sacCer3	sacCer3	S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)	/srv/galaxy/var/tool-data/sacCer3/seq/sacCer3.fa
+>    > > > ```
+>    > > {: .code-out}
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
+>
 {: .hands-on}
 
 > <warning-title>run-data-managers is not idempotent!</warning-title>
 > Unlike `shed-tools install`, the Ephemeris `run-data-managers` utility is not idempotent. If run a second time on the same set of inputs, you will end up with two entries in your `all_fasta` data table, with the data from the second run overwriting the data from the first run.
 >
-> **TODO: make an issue for the above**
+> Please see [Galaxy issue #15188](https://github.com/galaxyproject/galaxy/issues/15188) for details.
 >
 {: .warning}
 
@@ -537,7 +575,26 @@ In order to accomplish this, you will need:
 
 > <hands-on-title>Install the BWA/BWA-MEM Data Manager </hands-on-title>
 >
-> TODO
+> 1. Install the `bwa_mem_index_builder_data_manager` data manager tool owned by `devteam`.
+>
+>    > <code-in-title>input: bash</code-in-title>
+>    > ```console
+>    > shed-tools install -g https://your-galaxy -a <api-key> --name data_manager_bwa_mem_index_builder --owner devteam
+>    > ```
+>    {: .code-in}
+>
+>    > <code-out-title></code-out-title>
+>    > ```console
+>    > Storing log file in: /tmp/ephemeris_2dyujjvi
+>    > (1/1) Installing repository data_manager_bwa_mem_index_builder from devteam to section "None" at revision 63d5652be07a (TRT: 0:00:00.204350)
+>    > 	repository data_manager_bwa_mem_index_builder installed successfully (in 0:00:05.599382) at revision 63d5652be07a
+>    > Installed repositories (1): [('data_manager_bwa_mem_index_builder', '63d5652be07a')]
+>    > Skipped repositories (0): []
+>    > Errored repositories (0): []
+>    > All repositories have been installed.
+>    > Total run time: 0:00:05.804217
+>    > ```
+>    {: .code-out}
 >
 {: .hands-on}
 
@@ -545,10 +602,66 @@ In order to accomplish this, you will need:
 
 > <hands-on-title>Build the sacCer3 BWA index</hands-on-title>
 >
-> TODO
+> 1. Create a config file for `run-data-managers` named `build-sacCer3-bwa.yml`:
+>
+>    {% raw %}
+>    ```yaml
+>    data_managers:
+>      - id: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5
+>        params:
+>          - 'all_fasta_source': '{{ item.dbkey }}'
+>          - 'sequence_name': '{{ item.name }}'
+>        items:
+>          - dbkey: sacCer3
+>            name: 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)'
+>        data_table_reload:
+>          - bwa_mem_indexes
+>    ```
+>    {% endraw %}
+>
+> 2. Run the BWA-MEM index builder DM with `run-data-managers`:
+>
+>    > <code-in-title>input: bash</code-in-title>
+>    > ```console
+>    > run-data-managers -g https://your-galaxy -a <api-key> --config build-sacCer3-bwa.yml
+>    > ```
+>    {: .code-in}
+>
+>    > <code-out-title></code-out-title>
+>    > ```console
+>    > Storing log file in: /tmp/ephemeris_esecdef4
+>    > Running data managers that populate the following source data tables: ['all_fasta']
+>    > Running data managers that index sequences.
+>    > Dispatched job 2. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5" with parameters: {'all_fasta_source': 'sacCer3', 'sequence_name': 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)'}
+>    > Job 2 finished with state ok.
+>    > Finished running data managers. Results:
+>    > Successful jobs: 1
+>    > Skipped jobs: 0
+>    > Failed jobs: 0
+>    > ```
+>    {: .code-out}
+>
+> 3. In the Galaxy UI, access the Admin menu from the top bar
+> 4. Click **Local Data**, which can be found on the left, under **Server**
+> 5. Click **bwa_mem_indexes** under *View Tool Data Table Entries*
+>
+>    You should see that *sacCer3* has been added to bwa_mem_indexes. You can also verify this via the command line using the methods you've learned above.
 >
 {: .hands-on}
 
-## Verify that BWA can access the new reference data
+# Verify that BWA can access the new reference data
 
-TODO
+Finally, we will verify that the BWA tool can see the new genome indexes.
+
+> <hands-on-title>Configure Galaxy</hands-on-title>
+>
+> 1. Install the BWA and BWA-MEM tools, if needed. If installing with Ephemeris, the repo name for the `--name` parameter is `bwa` and the owner is `devteam`.
+>
+>    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA" section="Mapping" %}
+>
+> 2. Click the "Home" icon at the top to return to the Galaxy analysis interface
+>
+> 3. Load the {% tool [Map with BWA](bwa) %} tool and verify that the sacCer2 genome (if you completed the "Galaxy UI" section) and/or sacCer3 genome (if you completed the "command line with Ephemeris" section)  appears in the {% icon param-select %} *"Using reference genome"* option.
+{: .hands_on}
+
+How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
