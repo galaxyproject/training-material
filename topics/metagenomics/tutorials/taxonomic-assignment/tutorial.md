@@ -251,7 +251,7 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
 # Discussion: Choosing the right tool
 
 When it comes to taxonomic assignment while analyzing metagenomic data, in this tutorial presented Kraken2 is not the only tool available. Several papers do benchmarking of different tools ({% cite Meyer.2022 %},{% cite Sczyrba.2017 %},{% cite Ye.2019 %}) and their results are presented in the following section, with focus on tools that are available in Galaxy.
-When it comes to taxonomic profiling, thus investigating the abundance of specific taxa, the biggest problem is the abundance bias. It is introduced during isolation of DNA (which might work for some organisms better then for others) and by PCR duplicates during PCR amplification.
+The benchmarking papers present different methods for comparing the available tools: The CAMI challenge is based on results of different labs that each used the CAMI dataset to perform their analysis on and send it back to the authors. In contrast, {% cite Ye.2019 %} performed all the analysis themselves. Additionally, the datasets used for both benchmarking approaches differ: in the CAMI dataset only ~30%-40% of reads are simulated from known taxa while the rest of the reads are from novel taxa, plasmids or simulated evolved strains. In contrast, {% cite Ye.2019 %} used International Metagenomics and Microbiome Standards Alliance (IMMSA) datasets, wherein the taxa are described better.
  
 When benchmarking different classification tools, several metrics are used to compare their performance:
 1. **Precision**: proportion of true positive species identified in the sample divided by number of total species identified by the method
@@ -259,7 +259,8 @@ When benchmarking different classification tools, several metrics are used to co
 3. Precision-recall curve: each point represents the precision and recall scores at a specific abundance threshold → **area under the precision-recall curve (AUPR)**
  
 4. **L2 distance**: representation of abundance profiles → how accurately the abundance of each species or genera in the resulting classification reflects the abundance of each species in the original biological sample (“ground truth”)
- 
+
+When it comes to taxonomic profiling, thus investigating the abundance of specific taxa, the biggest problem is the abundance bias. It is introduced during isolation of DNA (which might work for some organisms better then for others) and by PCR duplicates during PCR amplification.
 
 ## Profiling tools
  
@@ -271,7 +272,7 @@ Profilers, which are tools that investigate relative abundances of taxa within a
 However, some characteristics are common to all profilers:
 - Most profilers only perform well until the family level
 - Drastic decrease in performance between family and genus level, while little change between order and family level
-- poorer performance of all profilers on CAMI datasets (only ~30%-40% of reads are simulated from known taxa, rest of the reads are from novel taxa, plasmids or simulated evolved strains) compared to International Metagenomics and Microbiome Standards Alliance (IMMSA) 
+- poorer performance of all profilers on CAMI datasets compared to International Metagenomics and Microbiome Standards Alliance (IMMSA) 
 - Fidelity of abundance estimates decreases notably when viruses and plasmids were present
 - high numbers of false positive calls at low abundance 
 - Taxonomic profilers vs profiles from taxonomic binning:
