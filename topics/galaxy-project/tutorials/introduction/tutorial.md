@@ -68,11 +68,11 @@ contributors:
 
 Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities. It has a far wider range of deliverables than most other projects. Project activities build on the code, to support analysis and training in diverse areas of open science.
 
-There is a lot going on, so there is a wide range of ways to engage, depending on individual interests. For example, it is seen as:
+There is a lot going on, so there is a wide range of ways to engage, depending on individual interests. For example, it serves as
 
-    - A convenient and reliable way to share complex open science analyses, for researchers.
-    - Inter-dependent open source code repositories, for software developers.
-    - A global open science collaboration, for investigators.
+- A convenient and reliable way to share complex open science analyses, for researchers.
+- Inter-dependent open source code repositories, for software developers.
+- A global open science collaboration, for investigators.
 
 Each of these perspectives is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large that few individuals can devote enough time to remain engaged and fully informed across every project activity.
 
