@@ -69,6 +69,7 @@ contributors:
 Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities. It has a far wider range of deliverables than most other projects. Project activities build on the code, to support analysis and training in diverse areas of open science.
 
 There is a lot going on, so there is a wide range of ways to engage, depending on individual interests. For example, it is seen as:
+
     - A convenient and reliable way to share complex open science analyses, for researchers.
     - Inter-dependent open source code repositories, for software developers.
     - A global open science collaboration, for investigators.
@@ -172,15 +173,19 @@ Active, self-governing communities are an important part of the project ecology,
 
 #### Definition
 
-For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to engage with a community that does not organise any activities, although it may be important in other ways.
+For clarity, the term is used here in a restrictive way, referring to communities that organise publicised activities for interested participants. It is hard for participants to engage with a community that does not organise any activities, although it may be important in other ways. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities, to require their own pages on the Hub*.
 
 #### Origins and sustainability
 
-Communities form when participants come together to work on a project related initiative. Participants who share a distinguishing interest are probably more likely to interact. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. The *functional definition* used in this guide, is that *a project community arises when those interactions become sufficiently frequent and distinct from existing communities, to require their own pages on the Hub*.
+Communities form when participants come together to work on a project related initiative. Participants who share a common interest are more likely to interact when there are project activities related to that interest. That special interest might be ecology, proteomics, muon science, India or almost anything else that generates enough activity and participation. 
 
-Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal external resources.
+Communities organise and publicise activities for interested participants through the Hub. Leadership and participation are responsive to the real needs of the community because they are motivated and organised by participants. The project provides support and publicity, but the community must be able to sustain itself, with minimal project resources.
 
-Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. The are all open and welcome participants. In some highly specialised active groups, such as the IUC, formal decision making on technical issues is deliberately restricted to designated "members". The groups are "open", since regular IUC communication channels, code and documentation are public, but the work depends on specific skills. They are "open" to support and ideas from anyone with an interest, and in practice, developers who contribute regularly, are typically recruited by consensus of the members.
+Some communities have been initiated by the project team, but many have come from participants organising themselves around an interest. The are all open and welcome participants. 
+
+#### Some clarification about what "open" means
+
+In some highly specialised groups, such as the IUC, formal decision making on technical issues is restricted to designated "members". They are open, like other groups, because regular communication channels, code and documentation are public and visible. Their work depends on specific skills. They welcome contribution and ideas from anyone with an interest. In practice, developers who contribute regularly, are typically recruited by consensus of the existing members.
 
 #### Importance
 
