@@ -271,26 +271,27 @@ Profilers, which are tools that investigate relative abundances of taxa within a
 However, some characteristics are common to all profilers:
 - Most profilers only perform well until the family level
 - Drastic decrease in performance between family and genus level, while little change between order and family level
+- poorer performance of all profilers on CAMI datasets (only ~30%-40% of reads are simulated from known taxa, rest of the reads are from novel taxa, plasmids or simulated evolved strains) compared to International Metagenomics and Microbiome Standards Alliance (IMMSA) 
 - Fidelity of abundance estimates decreases notably when viruses and plasmids were present
+- high numbers of false positive calls at low abundance 
 - Taxonomic profilers vs profiles from taxonomic binning:
 Precision and recall of the taxonomic binners were comparable to that of the profilers;
 abundance estimation at higher ranks was more problematic for the binners
  
-MetaPhlAn 2.0 belongs to the group of precise profilers. On the basis of the average of precision and recall, over all samples and taxonomic ranks, MetaPhlAn 2.0 performed second best of all 10 profilers tested.
 
 
-> | Tool                | Best method across metrics for* :   | additional features           | available in Galaxy   |
-> | -----------------   |-------------------------------------|
-> | mOTUs 1.1.1         | -                                   |most memory efficient          | no                    |
-> | mOTUs 2.5.1         |marine; plant-associated             | -                             | no                    |
-> | mOTUs v.cami1       |strain-madness                       | -                             | no                    |
-> | MetaPhlAn 2.9.21    |plant-associated                     | -                             | yes
-> | MetaPhlAn 2.9.22    |marine; strain-madness               | -                             | yes
-> | DUDes v.cami1       |strain-madness                       | -                             | no
-> | FOCUS 1.5           | -                                   |fastest; most memory efficient | no                    |
-> | Bracken 2.2         | -                                   |fastest                        | yes (version 2.7)     |
-> | Bracken 2.6         |plant-associated                     | -                             | yes (version 2.7)     |
-{: .matrix}
+| Tool      | version              | available in Galaxy | In CAMI challenge, best method across metrics for\* : | additional features            | Ye et al. benchmarking                                                                                                                                     |
+| --------- | -------------------- | ------------------- | ----------------------------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mOTUs     |  1.1.1               | no                  | \-                                                    | most memory efficient          |                                                                                                                                                            |
+| mOTUs     |  2.5.1               | no                  | marine; plant-associated                              | \-                             |                                                                                                                                                            |
+| mOTUs     | v.cami1              | no                  | strain-madness                                        | \-                             |                                                                                                                                                            |
+| MetaPhlAn |  2.9.21              | yes                 | plant-associated                                      | \-                             | recommended for low computational requirements (< 2 Gb of memory)                                                                                          |
+| MetaPhlAn |  2.9.22              | yes                 | marine; strain-madness                                | \-                             |
+| DUDes     | v.cami1              | no                  | strain-madness                                        | \-                             |                                                                                                                                                            |
+| FOCUS 1.5 |  1.5                 | no                  | \-                                                    | fastest; most memory efficient |                                                                                                                                                            |
+| Bracken   |  2.2                 | yes (version 2.7)   | \-                                                    | fastest                        | provide good performance metrics<br>very fast on large numbers of samples<br>allow custom databases<br>when high amounts of memory (>100 Gb) are available |
+| Bracken   |  2.6                 | yes (version 2.7)   | plant-associated                                      | \-                             |
+| Kraken    |  2.0.8 beta (GSA,Sr) | yes                 | marine                                                | fastest; most memory efficient |
 
 *metagenome benchmark datasets created by {% cite Meyer.2022 %} representing a marine, a high strain diversity environment (‘strain-madness’) and a plant-associated environment including fungal genomes and host plant material
 
