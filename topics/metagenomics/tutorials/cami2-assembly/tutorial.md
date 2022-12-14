@@ -645,27 +645,27 @@ Using the described metrics, the different tools were evaluated in the CAMI pape
 
 In these tables there are also ranking scores of the tools shown for every statistic as well as overall ranking scores. Overall, ranking scores for every dataset are computed as a sum of all ranking scores across metrics. The average ranking score of both datasets are calculated as weighted average sum of ranking for both datasets. We created a table showing all ranking (sum of ranking scores through all metrics) results from previous tables:
 
-Tool | Version | Type of reads | Running time | Ranking of all methods on MARINE dataset | Ranking of all methods on STRAIN MADNESS dataset | Ranking of all methods on BOTH datasets | Ranking for common marine genomes | Ranking for unique marine genomes | Ranking for unique strain genomes | Ranking for common strain genomes | Sum of all ranking scores for MARINE dataset | Sum of all ranking scores for STRAIN MADNESS dataset | Sum of all ranking scores for BOTH
+Tool | Version | Inputs | Running time | Ranking of all methods on MARINE dataset | Ranking of all methods on STRAIN MADNESS dataset | Ranking of all methods on BOTH datasets | Ranking for common marine genomes | Ranking for unique marine genomes | Ranking for unique strain genomes | Ranking for common strain genomes | Sum of all ranking scores for MARINE dataset | Sum of all ranking scores for STRAIN MADNESS dataset | Sum of all ranking scores for BOTH
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
-Gold Standard | | Short |  | 15 | 8 | 10,8 | 17 | 0 | 0 | 8 | 32 | 16 | 48
-HipMer | cgraph | Short | 2m 1s 2b | 37 | 25 | 29,8 | 34 | 33 | 24 | 21 | 104 | 70 | 174
-HipMer | Metagenome | short | 1m 2s 1b | 29 | 31 | 30,2 | 30 | 33 | 14 | 27 | 92 | 72 | 164
-HipMer | cgraph-ono | short | 3m 3s 3b | 39 | 27 | 31,8 | 36 | 34 | 33 | 25 | 109 | 85 | 194
-Megahit | v1.1.2 | short | 8m 4s 4b	| 57 | 45 | 49,8 | 61 | 52 | 33 | 39 | 170 | 117 | 287
-SPAdes | v3.14-dev | hybrid | 9m 5s 5b | 58 | 45 | 50,2 | 55 | 65 | 55 | 25 | 178 | 125 | 303
-OPERA-MS |  | hybrid | 6s 7b | 80 | 44 | 58,4 | 76 | 79 | 47 | 36 | 235 | 127 | 362
-Megahit | V1.2.7 | short | 7s 6b | 67 | 51 | 57,4 | 74 | 68 | 47 | 41 | 209 | 139 | 348
-Megahit | v1.1.4-2 | short | 8s 8b | 83 | 52 | 64,4 | 87 | 87 | 47 | 43 | 257 | 142 | 399
-A-STAR | scaffold | hybrid |  | 91 | 48 | 65,2 | 88 | 82 | 61 | 33 | 261 | 142 | 403
-A-STAR | contig | hybrid |  | 91 | 49 | 65,8 | 86 | 83 | 62 | 34 | 260 | 145 | 405
-wtdbg2 | GATB-Pipeline | hybrid |  |  | 1000 | 1000 | 1000 | 1000 | 21 | 20 | 2000 | 1041 | 3041
-Miniasm | GATB | hybrid | | 60 | 20 | 36 | 70 | 58 | 1000 | 1000 | 188 | 2020 | 2208
-metaSPAdes | v3.13.1 | short | 4m | 50 | 1000 | 1000 | 41 | 55 | 1000 | 1000 | 146 | 3000 | 3146
-metaSPAdes | v3.13.0 | short | 5m | 53 | 1000 | 1000 | 42 | 57 | 1000 | 1000 | 152 | 3000 | 3152
-ABySS |  | short | 6m | 52 | 1000 | 1000 | 48 | 54 | 1000 | 1000 | 154 | 3000 | 3154
-Ray-Meta |  | short | 7m | 53 | 1000 | 1000 | 61 | 55 | 1000 | 1000 | 169 | 3000 | 3169
-metaSPAdes | v3.13.1| short |  | 61 | 1000 | 1000 | 52 | 72 | 1000 | 1000 | 185 | 3000 | 3185
-Flye |  | long |  | 83 | 1000 | 1000 | 80 | 77 | 1000 | 1000 | 240 | 3000 | 3240
+Gold Standard | | Short reads |  | 15 | 8 | 10,8 | 17 | 0 | 0 | 8 | 32 | 16 | 48
+HipMer | cgraph | Short reads | 2m 1s 2b | 37 | 25 | 29,8 | 34 | 33 | 24 | 21 | 104 | 70 | 174
+HipMer | Metagenome | Short reads | 1m 2s 1b | 29 | 31 | 30,2 | 30 | 33 | 14 | 27 | 92 | 72 | 164
+HipMer | cgraph-ono | Short reads | 3m 3s 3b | 39 | 27 | 31,8 | 36 | 34 | 33 | 25 | 109 | 85 | 194
+Megahit | v1.1.2 | Short reads | 8m 4s 4b	| 57 | 45 | 49,8 | 61 | 52 | 33 | 39 | 170 | 117 | 287
+SPAdes | v3.14-dev | Short and long reads | 9m 5s 5b | 58 | 45 | 50,2 | 55 | 65 | 55 | 25 | 178 | 125 | 303
+OPERA-MS |  | Short and long reads | 6s 7b | 80 | 44 | 58,4 | 76 | 79 | 47 | 36 | 235 | 127 | 362
+Megahit | V1.2.7 | Short reads | 7s 6b | 67 | 51 | 57,4 | 74 | 68 | 47 | 41 | 209 | 139 | 348
+Megahit | v1.1.4-2 | Short reads | 8s 8b | 83 | 52 | 64,4 | 87 | 87 | 47 | 43 | 257 | 142 | 399
+A-STAR | scaffold | Short and long reads |  | 91 | 48 | 65,2 | 88 | 82 | 61 | 33 | 261 | 142 | 403
+A-STAR | contig | Short and long reads |  | 91 | 49 | 65,8 | 86 | 83 | 62 | 34 | 260 | 145 | 405
+wtdbg2 | GATB-Pipeline | Short and long reads |  |  | 1000 | 1000 | 1000 | 1000 | 21 | 20 | 2000 | 1041 | 3041
+Miniasm | GATB | Short and long reads | | 60 | 20 | 36 | 70 | 58 | 1000 | 1000 | 188 | 2020 | 2208
+metaSPAdes | v3.13.1 | Short reads | 4m | 50 | 1000 | 1000 | 41 | 55 | 1000 | 1000 | 146 | 3000 | 3146
+metaSPAdes | v3.13.0 | Short reads | 5m | 53 | 1000 | 1000 | 42 | 57 | 1000 | 1000 | 152 | 3000 | 3152
+ABySS |  | Short reads | 6m | 52 | 1000 | 1000 | 48 | 54 | 1000 | 1000 | 154 | 3000 | 3154
+Ray-Meta |  | Short reads | 7m | 53 | 1000 | 1000 | 61 | 55 | 1000 | 1000 | 169 | 3000 | 3169
+metaSPAdes | v3.13.1| Short reads |  | 61 | 1000 | 1000 | 52 | 72 | 1000 | 1000 | 185 | 3000 | 3185
+Flye |  | Long reads |  | 83 | 1000 | 1000 | 80 | 77 | 1000 | 1000 | 240 | 3000 | 3240
 
 We summed up ranking scores for all methods, common genomes, and unique genomes to extract the following  priority list for tools:
 
@@ -764,6 +764,8 @@ Once the Pull Request will be merged, the tool will be automatically updated on 
 
 # Run the assembly tools on the marine dataset
 
+In the CAMI 2 challenge, short and long reads are available for each sample. Different tools are needed to assembly short or long reads. We will reproduce that. In addition, some tools allows **hybrid** assembly, *i.e.* short and long reads together.
+
 In the CAMI 2 challenge, the assemblies were run with 2 approaches:
 
 - **Individual assembly**, i.e. assembly on each individual sample
@@ -774,9 +776,9 @@ In the CAMI 2 challenge, the assemblies were run with 2 approaches:
 > You can learn about metagenomic assembly, individual and co-assembly in [our dedicated tutorial]({% link topics/assembly/tutorials/general-introduction/tutorial.md %})
 {: .comment}
 
-Co-assembly is more commonly used than individual assembly. But to reproduce the CAMI challenge, we run tools in both modes. The runtime and memory usage are obviously different for not only these two scenarios, but also for the tools. Some assemblers are fast (like Megahit), some are slow (like Flye).
+Co-assembly is **more commonly** used than individual assembly. But to reproduce the CAMI challenge, we run tools in both modes.
 
-While choosing parameters to run every tool with we oriented on parameters which have been used in CAMI2 challenge by its participants. However, we didn’t consider it as absolute truth as in metagenomic analysis it can be not very clear which tools and which parameters would be better for the best assembly performance. Then we had to be critical to what had been done in CAMI 2. It was the basis of this tutorial/project, even though we made some corrections. Additionally, we take into account recommendations from tool documentation.
+The runtime and memory usage are obviously different for not only these two scenarios, but also for the tools. Some assemblers are fast (like Megahit), some are slow (like Flye). While choosing parameters to run every tool with we oriented on parameters which have been used in CAMI2 challenge by its participants. However, we did't consider it as absolute truth as in metagenomic analysis it can be not very clear which tools and which parameters would be better for the best assembly performance. Then we had to be critical to what had been done in CAMI 2. It was the basis of this tutorial/project, even though we made some corrections. Additionally, we take into account recommendations from tool documentation.
 
 A Galaxy history was created for each tool and type of assembly (single or co-assembly). We named them such that it is easy to identify the tool and type from the mame, but to keep an overview we created a spreadsheet to list all histories along with their metadata (tool, etc).
 
@@ -839,21 +841,45 @@ For short reads, we will use the same approach (co-assembly and individual assem
 
     ABySS is a parallel assembler for short read sequence data ({%cite Simpson2009%}). It uses de novo short read assembly algorithms. Short reads should be used as input data for Abyss.
 
-- **MetaSPAdes**  
+- **MetaSPAdes**
 
     MetaSPAdes is a versatile metagenomic assembler ({%cite Nurk2017%}). As input for metaspades it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
 
 ### Individual assembly
 
-> <hands-on-title>Prepare history for individual assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
+> <hands-on-title>Prepare history for individual assembly of short-reads samples with MEGAHIT, Abyss, and MetaSPAdes</hands-on-title>
 >
 > 1. Create a new history with the name `CAMI 2 - Short reads - Individual assembly`
 > 2. Copy the collection with short read data into this new history
 {: .hands_on}
 
+MEGAHIT, Abyss, and MetaSPAdes uses *de Bruijn* graphs, representing all $$k$$-mers ( *i.e.* all substrings of length $$k$$) from the reads.
+
+#### ABySS
+
+In ABySS, we need to define the $$k$$-mer size. And in CAMI 2, 2 values were tested: $$k = 41$$ and $$k = 96$$.
+
+> <hands-on-title>Individual assembly with ABySS</hands-on-title>
+> 1. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+>     - In *"Paired-end library"*
+>       - {% icon param-repeat %} *"Insert Paired-end library"*
+>         - *"Type of paired-end datasets"*: `1 paired dataset collection`
+>           - {% icon param-collection %} *"Paired-end reads collection"*: Short read collection
+>     - *"K-mer length (in bp)"*: `41`
+> 2. Rename output to `ABySS - k41`
+> 3. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+>     - In *"Paired-end library"*
+>       - {% icon param-repeat %} *"Insert Paired-end library"*
+>         - *"Type of paired-end datasets"*: `1 paired dataset collection`
+>           - {% icon param-collection %} *"Paired-end reads collection"*: Short read collection
+>     - *"K-mer length (in bp)"*: `96`
+> 4. Rename output to `ABySS - k96`
+{: .hands_on}
+
+
 #### MEGAHIT
 
-MEGAHIT makes use of succinct *de Bruijn* graphs, representing all $$k$$-mers ( *i.e.* all substrings of length $$k$$) from the reads. MEGAHIT uses a multiple $$k$$-mer strategie. By default, the list of $$k$$-mer sizes is $$[21, 29, 39, 59, 79, 99, 119, 141]$$. But, it is also possible to have iteration with a minimum $$k$$ ($$k_{min}$$), maximum $$k$$ ($$k_{max}$$) and the step ($$k_{step}$$) for the iteration.
+MEGAHIT uses a multiple $$k$$-mer strategie. By default, the list of $$k$$-mer sizes is $$[21, 29, 39, 59, 79, 99, 119, 141]$$. But, it is also possible to have iteration with a minimum $$k$$ ($$k_{min}$$), maximum $$k$$ ($$k_{max}$$) and the step ($$k_{step}$$) for the iteration.
 
 In CAMI 2, were used:
 - The default setting
@@ -888,41 +914,30 @@ Let's reproduce that.
 > 4. Rename output to `MEGAHIT - k-min21 k-max91 k-step10`
 {: .hands_on}
 
-#### ABySS
-
-ABySS on the contrary uses only one $$k$$-mer size. And in CAMI 2, 2 values were tested: $$k = 41$$ and $$k = 96$$.
-
-> <hands-on-title>Individual assembly with ABySS</hands-on-title>
-> 1. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
->     - In *"Paired-end library"*
->       - Click on 
->     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
->     - {% icon param-file %} *"K-mer length (in bp)"*: 41
-> 2. Rename output to `Abyss - k41`
-> 3. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
->     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
->     - {% icon param-file %} *"Interleaved paired-end reads"*: collapsed collection of short reads from all samples
->     - {% icon param-file %} *"K-mer length (in bp)"*: 96
-> 4. Rename output to `Abyss - k96`
-{: .hands_on}
-
 #### MetaSPAdes
+
+MetaSPAdes uses also a multiple $$k$$-mer strategie. In CAMI 2, they used $$[21, 33, 55, 77]$$
 
 > <hands-on-title>Individual assembly with MetaSPAdes</hands-on-title>
 > 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
->     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
->     - {% icon param-file %} *"Select k-mer detection option"*: manual
->     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 2. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed`
-> 3. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
->     - {% icon param-file %} *"FASTQ file(s): interlaced"*: collapsed collection of short reads from all samples
->     - {% icon param-file %} *"Arf - Nanopore reads"*: collapsed collection of long reads from all samples
->     - {% icon param-file %} *"Select k-mer detection option"*: manual
->     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 4. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed`
+>     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
+>       - {% icon param-collection %} *"FASTQ file(s): collection"*: Short read collection
+>     - *"Select k-mer detection option"*: `User specific`
+>       - *"K-mer size values"*: `21,33,55,77`
+> 2. Rename output to `MetaSPAdes - k21-33-55-77`
 {: .hands_on}
+
+
+> <comment-title></comment-title>
+>
+> We got an error `Out of memory` for the first launches of metaspades. The memory limit in Galaxy was set to 200 Gb on usegalaxy.eu.
+>
+> If such issue happens, you can contact Galaxy administrators to ask if it is possible to increase the available memory for the tool.
+>
+> However, it was not enough. According to [Supplementary Table 2](https://www.biorxiv.org/content/10.1101/2021.07.12.451567v1.supplementary-material) CAMI2 participants used the memory limit of 500 Gb. Since the memory limit in Galaxy for every tool is set once and it is used for every launch of this tool no matter how much memory it is needed. It seems to be unreasonable to set 500 Gb instead of the recommended 250, because then any SPAdes job would request that amount of memory.
+>
+> Other issues we encountered during this project are more general. Protracted technical works occured on the Galaxy platform, all tools were stopped and launched from scratch. That means we ran out of time. Before these technical works tools have been running for around one month and they were re-launched. However, we increased the CPU which helped us to get results sooner.
+{: .comment}
 
 
 ### Co-assembly
@@ -930,81 +945,80 @@ ABySS on the contrary uses only one $$k$$-mer size. And in CAMI 2, 2 values were
 > <hands-on-title>Co-assembly of short-reads samples with Megahit, Abyss, and MetaSPAdes</hands-on-title>
 >
 > 1. Create a new history with the name `CAMI 2 - Short reads - Co-assembly`
+> 2. Copy the pooled short read data into this new history
+> 3. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+>     - In *"Paired-end library"*
+>       - {% icon param-repeat %} *"Insert Paired-end library"*
+>         - *"Type of paired-end datasets"*: `1 dataset of interleaved reads`
+>           - {% icon param-file %} *"Interleaved paired-end reads"*: Short read data
+>     - *"K-mer length (in bp)"*: `41`
+> 4. Rename output to `ABySS - k41`
+> 5. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
+>     - In *"Paired-end library"*
+>       - {% icon param-repeat %} *"Insert Paired-end library"*
+>         - *"Type of paired-end datasets"*: `1 dataset of interleaved reads`
+>           - {% icon param-file %} *"Interleaved paired-end reads"*: Short read data
+>     - *"K-mer length (in bp)"*: `96`
+> 6. Rename output to `ABySS - k96`
+> 7. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Interleaved-paired-end`
+>       - *"Interleaved-paired-end file(s)"*: Short read data
+> 8. Rename output to `MEGAHIT - Default`
+> 9. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Interleaved-paired-end`
+>       - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Short read data
+>     - *"K-mer specification method"*: `Specify min, max, and step values`
+>       - *"Minimum kmer size"*: `21`
+>       - *"Maximum kmer size"*: `91`
+>       - *"Increment of kmer size of each iteration"*: `12`
+> 10. Rename output to `MEGAHIT - k-min21 k-max91 k-step12`
+> 11. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Select your input option"*: `Interleaved-paired-end`
+>       - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Short read data
+>     - *"K-mer specification method"*: `Specify min, max, and step values`
+>       - *"Minimum kmer size"*: `21`
+>       - *"Maximum kmer size"*: `91`
+>       - *"Increment of kmer size of each iteration"*: `10`
+> 12. Rename output to `MEGAHIT - k-min21 k-max91 k-step10`
+> 13. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+>     - *"Pair-end reads input format"*: `Paired-end: interlace reads`
+>       - {% icon param-file %} *"FASTQ file(s): interlaced"*: Short read data
+>     - *"Select k-mer detection option"*: `User specific`
+>       - *"K-mer size values"*: `21,33,55,77`
+> 14. Rename output to `MetaSPAdes - k21-33-55-77`
+{: .hands_on}
+
+
+## Hybrid
+
+Hybrid assembly uses both short- and long-read sequencing data. Most assemblers are not designed to handly hybrid mode. metaSPAdes can use auxiliary libraries (typically long noisy-reads) during the repeat resolution and gap closure steps to improve the contiguity of the results.
+
+> <hands-on-title>Hybrid assembly with MetaSPAdes</hands-on-title>
+> 1. Create a new history with the name `CAMI 2 - Hybrid`
+> 2. Copy the collection with long read data into this new history
 > 2. Copy the collection with short read data into this new history
-{: .hands_on}
-
-#### MEGAHIT
-
-> <hands-on-title>Co-assembly with MEGAHIT</hands-on-title>
-> 1. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: interleaved
->     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: dataset of short reads from sample1
-> 2. Rename output to `Output - CAMI2 MEGAHIT v129 interleaved short sample1`
-> 3. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: paired
->     - {% icon param-file %} *"Mate 1 input reads"*: Output of FASTQ splitter: Forward
->     - {% icon param-file %} *"Mate 2 input reads"*: Output of FASTQ splitter: Reverse
->     - {% icon param-file %} *"K-mer specification method"*: klim_method
->     - {% icon param-file %} *"Minimum kmer size"*: 21
->     - {% icon param-file %} *"Maximum kmer size"*: 91
->     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 12
-> 4. Rename output to `Output - CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 deinterleaved short sample1`
-> 5. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Select your input option"*: interleaved
->     - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Output of FASTQ splitter: dataset of short reads from sample1
->     - {% icon param-file %} *"K-mer specification method"*: klim_method
->     - {% icon param-file %} *"Minimum kmer size"*: 21
->     - {% icon param-file %} *"Maximum kmer size"*: 91
->     - {% icon param-file %} *"Increment of kmer size of each iteration"*: 10
-> 6. Rename output to `Output - CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 interleaved short sample1`
-{: .hands_on}
-
-#### Abyss
-
-> <hands-on-title>Individual assembly with Abyss</hands-on-title>
-> 1. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
->     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
->     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
->     - {% icon param-file %} *"K-mer length (in bp)"*: 41
-> 2. Rename output to `Output - CAMI2 Abyss v234 k41 interleaved short sample1`
-> 3. Run {% tool [ABYSS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
->     - {% icon param-file %} *"Type of paired-end datasets"*: paired_il
->     - {% icon param-file %} *"Interleaved paired-end reads"*: dataset of short reads from sample1
->     - {% icon param-file %} *"K-mer length (in bp)"*: 96
-> 4. Rename output to `Output - CAMI2 Abyss v234 k96 interleaved short sample1`
-{: .hands_on}
-
-#### MetaSPAdes
-
-> <hands-on-title>Individual assembly with MetaSPAdes</hands-on-title>
 > 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
->     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
->     - {% icon param-file %} *"Select k-mer detection option"*: manual
->     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 2. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1`
-> 3. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Pair-end reads input format"*: paired_interlaced
->     - {% icon param-file %} *"FASTQ file(s): interlaced"*: dataset of short reads from sample1
->     - {% icon param-file %} *"Arf - Nanopore reads"*: dataset of long reads from sample1
->     - {% icon param-file %} *"Select k-mer detection option"*: manual
->     - {% icon param-file %} *"K-mer size values"*: 21,33,55,77
-> 4. Rename output to `Output - CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 interleaved short sample1 additional nanopore long sample1`
+>     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
+>       - {% icon param-collection %} *"FASTQ file(s): collection"*: Short read collection
+>     - In *"Additional read files"*
+>       - {% icon param-collection %} *"Nanopore reads"*: Long read collection
+>     - *"Select k-mer detection option"*: `User specific`
+>       - *"K-mer size values"*: `21,33,55,77`
+> 4. Rename output to `MetaSPAdes - hybrid`
 {: .hands_on}
-
-> <comment-title></comment-title>
->
-> We got an error “Out of memory” for the first launches of metaspades. The memory limit in Galaxy was set to 200 Gb. After that,[ the memory for this tool was increased up to 250 GB](https://github.com/usegalaxy-eu/infrastructure-playbook/pull/358), which is the recommended default value according to [SPAdes documentation](http://cab.spbu.ru/files/release3.12.0/manual.html#sec3.2) (see “Advanced options” section). Only Galaxy administrators can solve this kind of problem with memory. If you need the memory increase for the specific tool you need to report an issue via Galaxy by clicking “View and report this error” (small “bug” icon).
->
-> However, it was not enough. According to [Supplementary Table 2](https://www.biorxiv.org/content/10.1101/2021.07.12.451567v1.supplementary-material) CAMI2 participants used the memory limit of 500 Gb. Since the memory limit in Galaxy for every tool is set once and it is used for every launch of this tool no matter how much memory it is needed. It seems to be unreasonable to set 500 Gb instead of the recommended 250, because then any spades job would request that amount of memory.
->
-> Other issues we encountered during this project are more general. Protracted technical works occured on the Galaxy platform, all tools were stopped and launched from scratch. That means we ran out of time. Before these technical works tools have been running for around one month and they were re-launched. However, we increased the CPU which helped us to get results sooner.
-{: .comment}
 
 
 # Assess the assembly outputs
 
-Several metrics are used to assess the quality of the assemblies:
+Now we run the different assemblies, we need to assess their outputs. In CAMI2, different tools are used to evaluate the quality of the tools for the different challenges:
+
+**Tool name** | **Assessment of**
+[MetaQUAST](https://github.com/ablab/quast/) ({% cite Mikheenko2015 %}) |	Assembly challenge
+[AMBER](https://github.com/CAMI-challenge/AMBER) ({% cite Meyer2018 %})	| Genome binning challenge
+[OPAL](https://github.com/CAMI-challenge/OPAL) ({% cite Meyer2019 %})	| Taxonomic profiling challenge
+
+In this tutorial, we focus on the assembly challenge and on some metrics used to assess the quality of the assemblies:
+
 * **Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping.
     * The total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
 * **Mismatches per 100 kbp**: number of mismatched bases in the contig-reference alignment (average per 100 kb).
@@ -1022,15 +1036,6 @@ Several metrics are used to assess the quality of the assemblies:
 * **Strain precision**: fraction of high-quality assemblies among all high genome fraction (more than 90%) assemblies.
     * Strain precision assesses how accurately reference genomes are recovered, based on the fraction of correctly assembled high-quality, near-complete genomes (>90% genome fraction, &lt;0.1% mm) divided by the overall number of assembled, near-complete genomes (>90% genome fraction).
 
-
-In CAMI2, different tools are used to evaluate the quality of the tools for the different challenges:
-
-**Tool name**	| **Assessment of**
-[MetaQUAST](https://github.com/ablab/quast/) ({% cite Mikheenko2015 %}) |	Assembly challenge
-[AMBER](https://github.com/CAMI-challenge/AMBER) ({% cite Meyer2018 %})	| Genome binning challenge
-[OPAL](https://github.com/CAMI-challenge/OPAL) ({% cite Meyer2019 %})	| Taxonomic profiling challenge
-
-In this tutorial, we focus on the assembly challenge and on the metrics presented before.
 
 Before running Quast as in CAMI to extract general statistics, we want to know the percentage of reads that were used to build the assemblie
 
@@ -1263,17 +1268,17 @@ During the project, we created galaxy histories that are available to the public
 * one unique set of parameters
 
 **№** | **Galaxy history name** | **Link** | **Tool name** | **Version** | **Parameters (the rest is default)** | **Reads in marine dataset** | **interleaved / deinterleaved** | **collection / collapsed to one file** | **command line** | **CPU time** | **Max memory usage, Gb** | **Runtime (wallclock)** | **CAMI2 Runtime** | **CAMI2 max memory** | **tool version used in CAMI2**
-1 | CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection | https://usegalaxy.eu/u/polina/h/cami2-flye-v29-meta-nano-raw-pooled-interleaved-long-collection | Flye | 2.9 | Perform metagenomic assembly = True (-meta)  Mode = --nano-raw (-nano-raw) | long | interleaved | collection | ln -s '/data/dnb05/galaxy_db/files/1/5/7/dataset_1577bfa8-dc08-4fb1-a759-f4e993078522.dat' ./input_0.fastq && ln -s '/data/dnb05/galaxy_db/files/8/6/b/dataset_86b52299-c4c9-435a-a1b8-8aaa10887c51.dat' ./input_1.fastq && ln -s '/data/dnb05/galaxy_db/files/6/9/7/dataset_697ce059-8d27-4c2f-887f-72d1e9f31e5b.dat' ./input_2.fastq && ln -s '/data/dnb05/galaxy_db/files/d/e/0/dataset_de04fe80-a70d-4146-ab95-43092abfe2c1.dat' ./input_3.fastq && ln -s '/data/dnb05/galaxy_db/files/4/d/6/dataset_4d650a82-ea83-48e9-820b-60a07e196203.dat' ./input_4.fastq && ln -s '/data/dnb05/galaxy_db/files/6/5/b/dataset_65b6a461-db9a-4fa8-83ed-834081523ff8.dat' ./input_5.fastq && ln -s '/data/dnb05/galaxy_db/files/0/2/1/dataset_021336e2-8ec0-4867-b239-0b8d50b5cf8d.dat' ./input_6.fastq && ln -s '/data/dnb05/galaxy_db/files/f/2/2/dataset_f2234201-a81d-4671-ba6b-2681574b8d89.dat' ./input_7.fastq && ln -s '/data/dnb05/galaxy_db/files/e/b/f/dataset_ebf6def1-fb2d-4d28-9c6e-31d2b6e0b0ca.dat' ./input_8.fastq && ln -s '/data/dnb05/galaxy_db/files/b/0/c/dataset_b0c8b11b-d1b4-474e-93cf-1db2648868df.dat' ./input_9.fastq && flye --nano-raw ./input_0.fastq ./input_1.fastq ./input_2.fastq ./input_3.fastq ./input_4.fastq ./input_5.fastq ./input_6.fastq ./input_7.fastq ./input_8.fastq ./input_9.fastq -o out_dir -t ${GALAXY_SLOTS:-4} -i 1 --meta | 2377 hours and 33 minutes | 273.6 | 171 hours and 40 minutes |  |  | 
-2 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed  | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') | short | interleaved | collapsed to one file | mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&      metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr     -k '21,33,55,77' |  |  |  |  |  | 
-3 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed-additional-nanopore-long-collapsed  | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') Additional read files = Nanopore reads (--nanopore nanopore_reads/file1.fastq --nanopore nanopore_reads/file2.fastq) | hybrid | interleaved | collapsed to one file |          mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&    mkdir -p nanopore_reads && ln -s '/data/dnb05/galaxy_db/files/2/7/a/dataset_27a1c510-2d09-40fe-9540-a9b5d7b6322c.dat' 'nanopore_reads/file1.fastq' &&    metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr   --nanopore nanopore_reads/file1.fastq   -k '21,33,55,77' |  |  |  |  |  | 
-4 | CAMI2 Abyss v234 k41 pooled interleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k41-pooled-interleaved-short-collapsed | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 41 (k=41) | short | interleaved | collapsed to one file | ln -s /data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat lib_reads_il_0.fastqsanger &&     abyss-pe name=abyss j=${GALAXY_SLOTS:-1} B=${GALAXY_MEMORY_MB:-2048}M k=41  q=3 Q=0 p=0.9 a=2 s=200 n=10 d=6 lib='lib0' lib0='lib_reads_il_0.fastqsanger' | 127 hours and 58 minutes | 174.8 | 9 hours and 57 minutes |  |  | 
+1 | CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection | https://usegalaxy.eu/u/polina/h/cami2-flye-v29-meta-nano-raw-pooled-interleaved-long-collection | Flye | 2.9 | Perform metagenomic assembly = True (-meta)  Mode = --nano-raw (-nano-raw) | long | interleaved | collection | ln -s '/data/dnb05/galaxy_db/files/1/5/7/dataset_1577bfa8-dc08-4fb1-a759-f4e993078522.dat' ./input_0.fastq && ln -s '/data/dnb05/galaxy_db/files/8/6/b/dataset_86b52299-c4c9-435a-a1b8-8aaa10887c51.dat' ./input_1.fastq && ln -s '/data/dnb05/galaxy_db/files/6/9/7/dataset_697ce059-8d27-4c2f-887f-72d1e9f31e5b.dat' ./input_2.fastq && ln -s '/data/dnb05/galaxy_db/files/d/e/0/dataset_de04fe80-a70d-4146-ab95-43092abfe2c1.dat' ./input_3.fastq && ln -s '/data/dnb05/galaxy_db/files/4/d/6/dataset_4d650a82-ea83-48e9-820b-60a07e196203.dat' ./input_4.fastq && ln -s '/data/dnb05/galaxy_db/files/6/5/b/dataset_65b6a461-db9a-4fa8-83ed-834081523ff8.dat' ./input_5.fastq && ln -s '/data/dnb05/galaxy_db/files/0/2/1/dataset_021336e2-8ec0-4867-b239-0b8d50b5cf8d.dat' ./input_6.fastq && ln -s '/data/dnb05/galaxy_db/files/f/2/2/dataset_f2234201-a81d-4671-ba6b-2681574b8d89.dat' ./input_7.fastq && ln -s '/data/dnb05/galaxy_db/files/e/b/f/dataset_ebf6def1-fb2d-4d28-9c6e-31d2b6e0b0ca.dat' ./input_8.fastq && ln -s '/data/dnb05/galaxy_db/files/b/0/c/dataset_b0c8b11b-d1b4-474e-93cf-1db2648868df.dat' ./input_9.fastq && flye --nano-raw ./input_0.fastq ./input_1.fastq ./input_2.fastq ./input_3.fastq ./input_4.fastq ./input_5.fastq ./input_6.fastq ./input_7.fastq ./input_8.fastq ./input_9.fastq -o out_dir -t ${GALAXY_SLOTS:-4} -i 1 --meta | 2377 hours and 33 minutes | 273.6 | 171 hours and 40 minutes |  |  |
+2 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed  | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') | short | interleaved | collapsed to one file | mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&      metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr     -k '21,33,55,77' |  |  |  |  |  |
+3 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed-additional-nanopore-long-collapsed  | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') Additional read files = Nanopore reads (--nanopore nanopore_reads/file1.fastq --nanopore nanopore_reads/file2.fastq) | hybrid | interleaved | collapsed to one file |          mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&    mkdir -p nanopore_reads && ln -s '/data/dnb05/galaxy_db/files/2/7/a/dataset_27a1c510-2d09-40fe-9540-a9b5d7b6322c.dat' 'nanopore_reads/file1.fastq' &&    metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr   --nanopore nanopore_reads/file1.fastq   -k '21,33,55,77' |  |  |  |  |  |
+4 | CAMI2 Abyss v234 k41 pooled interleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k41-pooled-interleaved-short-collapsed | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 41 (k=41) | short | interleaved | collapsed to one file | ln -s /data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat lib_reads_il_0.fastqsanger &&     abyss-pe name=abyss j=${GALAXY_SLOTS:-1} B=${GALAXY_MEMORY_MB:-2048}M k=41  q=3 Q=0 p=0.9 a=2 s=200 n=10 d=6 lib='lib0' lib0='lib_reads_il_0.fastqsanger' | 127 hours and 58 minutes | 174.8 | 9 hours and 57 minutes |  |  |
 5 | CAMI2 Abyss v234 k96 pooled interleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k96-pooled-interleaved-short-collapsed | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 96 (k=96) | short | interleaved | collapsed to one file | ln -s /data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat lib_reads_il_0.fastqsanger &&     abyss-pe name=abyss j=${GALAXY_SLOTS:-1} B=${GALAXY_MEMORY_MB:-2048}M k=96  q=3 Q=0 p=0.9 a=2 s=200 n=10 d=6 lib='lib0' lib0='lib_reads_il_0.fastqsanger' | 80 hours and 47 minutes | 169.9 | 7 hours and 34 minutes | 63,98 hours | 979,27 | 2_1_5
-6 | CAMI2 MEGAHIT v129 pooled interleaved short collection | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-pooled-interleaved-short-collection | MEGAHIT | 1_2_9 | Select your input option = interleaved | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-list '21,29,39,59,79,99,119,141'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 190 hours and 26 minutes | 80.0 | 40 hours and 40 minutes |  |  | 
+6 | CAMI2 MEGAHIT v129 pooled interleaved short collection | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-pooled-interleaved-short-collection | MEGAHIT | 1_2_9 | Select your input option = interleaved | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-list '21,29,39,59,79,99,119,141'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 190 hours and 26 minutes | 80.0 | 40 hours and 40 minutes |  |  |
 7 | CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 pooled deinterleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep12-pooled-deinterleaved-short-collapsed | MEGAHIT | 1_2_9 | Select your input option = paired K-mer specification method = klim_method Minimum kmer size = 21 Maximum kmer size = 91 Increment of kmer size of each iteration = 12 | short | deinterleaved | collapsed to one file | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} -1 '/data/dnb05/galaxy_db/files/d/d/2/dataset_dd22109e-f787-40f6-a527-b88142529691.dat' -2 '/data/dnb05/galaxy_db/files/0/6/8/dataset_06830009-b9fe-4329-9962-9ed563766101.dat' --min-count '2' --k-step '12' --k-min '21' --k-max '91'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 108 hours and 11 minutes | 80.0 | 26 hours and 7 minutes | 7,07 hours | 42,02 | 1_2_7
 8 | CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 pooled interleaved short collection | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep10-pooled-interleaved-short-collection | MEGAHIT | 1_2_9 | Select your input option = interleaved K-mer specification method = klim_method
  Minimum kmer size = 21
  Maximum kmer size = 91
- Increment of kmer size of each iteration = 10 | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-step '10' --k-min '21' --k-max '91'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 193 hours and 34 minutes | 80.0 | 40 hours and 57 minutes |  |  | 
+ Increment of kmer size of each iteration = 10 | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-step '10' --k-min '21' --k-max '91'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 193 hours and 34 minutes | 80.0 | 40 hours and 57 minutes |  |  |
 
 Furthermore, we have created this tutorial for those who are interested in such a topic and would like to reproduce CAMI2 assembly challenge on marine datasets. This tutorial could be undoubtedly useful for further improvement.
 
