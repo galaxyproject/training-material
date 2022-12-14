@@ -212,7 +212,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 > 4. Click **Local Data** to return to the previous page
 >
-> 5. Click {% tool [Create DBKey and Reference Genome - fetching](data_manager_fetch_genome_all_fasta_dbkey) %} under **Installed Data Managers**.
+> 5. Click {% tool [Create DBKey and Reference Genome - fetching](toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4) %} under **Installed Data Managers**.
 >    - {% icon param-select %} *"Use existing dbkey or create a new one"*: `Existing`
 >    - {% icon param-select %} *"DBKEY to assign to data"*: `sacCer2`
 >    - {% icon param-text %} *"Name of sequence"*: `S. cerevisiae June 2008 (SGD/sacCer2)`
@@ -350,7 +350,7 @@ In this part we will actually build the BWA index for sacCer2. It will automatic
 >
 > 1. Access the Admin menu from the top bar
 > 2. Click **Local Data**, which can be found on the left, under **Server**
-> 3. Click **{% tool [BWA-MEM index - builder](data_manager_bwa_mem_index_builder) %}** under **Installed Data Managers**.
+> 3. Click **{% tool [BWA-MEM index - builder](toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5) %}** under **Installed Data Managers**.
 >    - {% icon param-select %} *"Source Fasta Sequence"*: `S. cerevisiae June 2008 (SGD/sacCer2)`
 > 4. Click **Execute**.
 > 5. Verify that the new BWA index for sacCer2 has been built and the .loc file has been filled in. From the **Local Data** page in the Admin section, click on **bwa_mem_indexes** under *View Tool Data Table Entries*
