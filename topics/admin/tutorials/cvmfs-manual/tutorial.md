@@ -35,7 +35,7 @@ From the Cern website:
 > -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
 {: .quote}
 
-A slideshow presentation on this subject can be found [here]({% link topics/admin/tutorials/cvmfs/slides.html %}). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+[A slideshow presentation on this subject]({% link topics/admin/tutorials/cvmfs/slides.html %}) is available. More [details are available on usegalaxy.org (Galaxy Main's) reference data setup](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data) and CVMFS system.
 
 This exercise describes a manual process to install and configure CVMFS and Galaxy's access to CVMFS. For a tutorial that uses Ansible to perform these tasks, see [the Reference Data with CVMFS tutorial]({% link topics/admin/tutorials/cvmfs/tutorial.md %}).
 

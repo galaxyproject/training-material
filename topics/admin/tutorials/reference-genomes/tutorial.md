@@ -43,7 +43,10 @@ Data Managers can be defined locally in the data manager and tool data table con
 
 They are a flexible framework for adding reference data to Galaxy (not just genomic data). They are workflow compatible and can run via the Galaxy API. Data managers automatically update the appropriate location files when new data are installed.
 
-More detailed background information on data managers can be found [here](https://galaxyproject.org/admin/tools/data-managers/), and details on how to define a data manager for a tool can be found [here](https://galaxyproject.org/admin/tools/data-managers/how-to/define/). There is also discussion of this topic in [the Reference Genomes in Galaxy slides]({% link topics/admin/tutorials/reference-genomes/slides.html %}).
+For more background details on data managers, check out:
+- [The data managers documentation on the hub](https://galaxyproject.org/admin/tools/data-managers/)
+- [How to define a data manager for a tool](https://galaxyproject.org/admin/tools/data-managers/how-to/define/)
+- There is also discussion of this topic in [the Reference Genomes in Galaxy slides]({% link topics/admin/tutorials/reference-genomes/slides.html %})
 
 > <comment-title>Pre-built data are available</comment-title>
 >
@@ -86,7 +89,7 @@ As discussed in the overview, Galaxy Data Managers handle the population of nume
 
 We will install a data manager that can fetch the various genome sequences from multiple sources.
 
-> <hands-on-title>Install the Fetch Genome Data Manager </hands-on-title>
+> <hands-on-title>Install the Fetch Genome Data Manager</hands-on-title>
 >
 > 1. Access the **Admin** menu from the top bar (you need to be logged-in with an email specified in the `admin_users` setting)
 > 2. Click **Install and Uninstall**, which can be found on the left, under **Tool Management**
@@ -190,7 +193,7 @@ View in the file system where the various elements land. Have a look in the conf
 
 ## Download and install a reference genome sequence
 
-Next, we will install some reference data. Specifically, we will grab sacCer2 (version 2 of the Saccharomyces cerevisiae genome).
+Next, we will install some reference data. Specifically, we will grab sacCer2 (version 2 of the *Saccharomyces cerevisiae* genome).
 
 > <hands-on-title>Download and install sacCer2</hands-on-title>
 >
@@ -231,7 +234,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 >    You should see that *sacCer2* has been added to all_fasta.
 >
->    ![populated all_fasta data table](../../images/dm-all-fasta-populated.png)
+>    ![populated all_fasta data table which now includes sacCer2 in the genome list](../../images/dm-all-fasta-populated.png)
 >
 {: .hands_on}
 
@@ -347,12 +350,12 @@ In this part we will actually build the BWA index for sacCer2. It will automatic
 >
 > 1. Access the Admin menu from the top bar
 > 2. Click **Local Data**, which can be found on the left, under **Server**
-> 3. Click **{% tool [BWA-MEM index - builder]({{data_manager_bwa_mem_index_builder}}) %}** under **Installed Data Managers**.
+> 3. Click **{% tool [BWA-MEM index - builder](data_manager_bwa_mem_index_builder) %}** under **Installed Data Managers**.
 >    - {% icon param-select %} *"Source Fasta Sequence"*: `S. cerevisiae June 2008 (SGD/sacCer2)`
 > 4. Click **Execute**.
 > 5. Verify that the new BWA index for sacCer2 has been built and the .loc file has been filled in. From the **Local Data** page in the Admin section, click on **bwa_mem_indexes** under *View Tool Data Table Entries*
 >
->    S. cerevisiae sacCer2 should now appear in the list!
+>    *S. cerevisiae* sacCer2 should now appear in the list!
 {: .hands_on}
 
 > <question-title></question-title>
@@ -391,7 +394,7 @@ In this part we will actually build the BWA index for sacCer2. It will automatic
 # Installing and Using Data Managers from the command line with Ephemeris
 
 The same process described in the previous section can also be performed from the command line, e.g. in a CI/CD
-pipeline, using Ephemeris. For a more in-depth look at Ephemeris, especially in the tool installation context, please see [the Galaxy Tool Management with Ephemeris tutorial]({ link topics/admin/tutorials/tool-management/tutorial.md %}).
+pipeline, using Ephemeris. For a more in-depth look at Ephemeris, especially in the tool installation context, please see [the Galaxy Tool Management with Ephemeris tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 
 In order to accomplish this, you will need:
 
