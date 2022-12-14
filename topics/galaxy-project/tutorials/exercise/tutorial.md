@@ -32,7 +32,7 @@ contributors:
 {: .agenda}
 
 
-> <warning-title>Warning: Experimental educational activity</comment-title>
+> <warning-title>Experimental educational activity</warning-title>
 We are not (yet) aware of evidence of benefit (or harm) arising from completing this exercise, but we hope you enjoy and gain something from it anyway. Feedback really is helpful for training modules.
 >
 {: .warning}
