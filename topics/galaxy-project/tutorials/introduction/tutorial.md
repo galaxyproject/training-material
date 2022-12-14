@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "1. Motivation, goals and definitions for the field guide"
+title: "1. Introduction to the field guide"
 summary: "Introduction to the people, resource inputs and project outputs of Galaxy. Work in progress. Please help make it better?"
 questions:
   - "What are the main identifiable project components?"
@@ -62,19 +62,21 @@ contributors:
 >
 {: .agenda}
 
-# Introduction to a Galaxy field guide
+# Motivation, goals and definitions
 
-## Motivation: Why a field guide?
+## Why does Galaxy need a field guide?
 
-Galaxy is a complicated global enterprise, so there are many different ways to describe all the project activities. It has a far wider range of deliverables than most other projects. Project activities build on the code, to support analysis and training in diverse areas of open science.
+Galaxy is a complicated global enterprise, with many separate components that have a substantial impact on open science analysis practice, by making every analysis transparent and reproducible, without requiring any special effort from the user. Project deliverables address a much wider range of open science research than most other open source projects, because Galaxy has proven to be easily adopted for use in many distinct scientific fields. New kinds of analyses are easily accomodated, by packaging relevant existing open source command line applications, into interoperable and sharable Galaxy workflow tools. 
 
-There is a lot going on, so there is a wide range of ways to engage, depending on individual interests. For example, it serves as
+Many project activities build on this generic, adaptable, analysis infrastructure source code core, adding value in the form of free analysis and training resources and services for open science researchers. Topic based communities, such as for Proteomics and Climate science, maintain "best practice" tools and workflows for researchers in those fields, improving productivity, analysis reliability and trustworthiness for results, for each community of researchers. Those communities also contribute specialised training resources through the Galaxy Training Network. Material includes short videos and slides, together with hands-on exercises that are integrated into the Galaxy user interface, giving step by step guidance, for new users learning to use the Galaxy platform in general, and for useful, complicated specialised analysis workflows using real data.
 
-- A convenient and reliable way to share complex open science analyses, for researchers.
-- Inter-dependent open source code repositories, for software developers.
+In short, there is a lot going on. This makes it seem more confusing, but provides a wide range of different ways to engage with the project, depending on individual interests. For example, it serves as
+
+- A convenient and reliable way to share complex open science analyses, for researchers,
+- Inter-dependent open source code repositories, for software developers,
 - A global open science collaboration, for investigators.
 
-Each of these perspectives is accurate, but incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large that few individuals can devote enough time to remain engaged and fully informed across every project activity.
+Each of these perspectives is valid, but woefully incomplete. Seeing the big picture requires many perspectives and opinions, because the project has grown so large, that few individuals can devote enough time to remain engaged in, and fully informed, about every project activity.
 
 This guide is intended to allow many perspectives to be combined, to provide a more comprehensive view of the project. For those engaged in the project, it may provide useful insights into how new active communities and new collaborations can be started, and how individuals have become engaged on their own terms.
 
@@ -208,6 +210,7 @@ Newly organised communities related to the project are welcomed. Open source sha
 - Community members are encouraged to help make the project better.
 
 Communities are a core resource, adding substantial value to project grant resources. Project success is the result of efficient and coherent self-governing collaboration, involving many specialised active communities of contributors.  
+
 
 # A field guide to the Galaxy collaboration in 4 parts. 
 

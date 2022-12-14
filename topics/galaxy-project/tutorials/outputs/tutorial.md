@@ -109,11 +109,14 @@ Providing training to build community capacity is an essential activity for the 
 
 ## Downstream: repeatable open science analyses
 
-- Most important and probably largest deliverable
+The "black box" of a closed source software package hides the source code, assumptions and methods used in an analyses, so they cannot be readily scrutinised. The software is not readily accessible for independent replication without fees, so the scientific trustworthiness of the results cannot be tested readily. It is said that *many eyes make bugs shallow*.
+
+Closed source code may be perfect, but unfortunately, experience suggests that all complex software contains errors, many of which can only be found after widespread and thorough independent scrutiny. This is equally true of expensive commercial software, and of open source software. Open source package assumptions, methods and code are readily accessible for review, testing and improvement. Open projects encourage and facilitate scrutiny and replication, in order to decrease the risks to scientific integrity and trustworthiness from hidden coding or methodological errors. 
+
+- Analysis of provable scientific integrity are arguably the most important project deliverable
 - 10k+ publications
 - Tens of thousands of scientists trained
 - Millions of jobs run.
-- 
 - Your ideas here please?
 
 ### Related field guide content for further reading
