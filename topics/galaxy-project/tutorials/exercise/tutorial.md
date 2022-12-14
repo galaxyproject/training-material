@@ -39,9 +39,7 @@ We are not (yet) aware of evidence of benefit (or harm) arising from completing 
 
 
 
-# Preparation
-
-## An exercise to consolidate the material and reinforce your learning.
+# An exercise to consolidate the material and reinforce your learning.
 
 If possible, please take a few minutes to complete the first step of the following exercise *before* continuing with the lessons in this training topic. This exercise may be more helpful for those relatively new to the project, because much detail about Galaxy's scope, opportunities and impact on open science, are not yet widely understood, even among researchers who routinely use Galaxy. 
 
@@ -53,35 +51,34 @@ The exercise continues, only *after* you have completed reading all the parts of
 
 The last and most optional part of the exercise is more personal and internal, involving reflecting on the process of learning, and how well the material supported your needs. If you have suggestions that would help make the material more useful for future readers, please contribute them as feedback, to help us improve the training material and so make the project better.
 
-### Step 1
+## Step 1
 
 Take a few minutes (at most), to write a short response to each of the following propositions, based on what you already know about the Galaxy project. 
 
 1. Galaxy is an open source project, so most project activities involve the source code repository.
-2. Software engineering skills are needed, so even deep domain specific scientific knowledge is not very useful for making worthwhile contributions to the project.
+2. Domain-specific scientific or other kinds of knowledge and skills are not useful for contributing to the project, unless you also have software engineering skills.
 3. Galaxy is only suitable for analysing commodity sequencing data in biology.
-4. Galaxy is free open source, so it must be unstable, buggy, poorly supported and not usable at scale.
-5. Galaxy "usegalaxy.*" analysis services are free, so they must be unstable, buggy, poorly supported and of no use for any real research.
-6. The project is too big to have room left for any new collaborators or contributors.
-7. Galaxy is hard to learn to use, because it is open source, so it must be poorly documented.
-8. Galaxy is supported by a grant, so all project activities are controlled by the institution managing the grant.
-9. Closed source analysis methods provide trustworthy results, even if their methods and code cannot be scrutinised, because commercial providers charge enough to pay for error free code.
+4. Galaxy is free, open source, so it must be unstable, buggy, poorly supported and not usable at scale.
+5. Galaxy "usegalaxy.*" analysis services are free, so they must be unreliable, buggy, poorly supported and of no use for any real research.
+6. The project is too big for any new collaborators or contributors.
+7. It is hard to learn to use Galaxy, because it is open source, so it must be poorly documented.
+8. Galaxy is supported by a research grant, so all project activities are controlled by the institution managing the grant.
 
 When you have finished, store your responses, so you can use them to complete the exercise when you have read as much of the training material as you need.
 
-### Step 2
+## Step 2
 
 Read the [intoductory material](../introduction/tutorial.html), and then work through the remaining material in this training topic at your own pace.
 
-### Step 3
+## Step 3
 
 When you have finished reading, take a few moments to review your responses from Step 1. Take note of where your views on each assertion were changed as a result of reading this material. This should help clarify and consolidate the new material you have encountered.
 
-### Step 4
+## Step 4
 
 After completing a quick learning review, take a minute to reflect on how the material served *your* particular learning needs. There are likely to be changes that would have helped you to understand and use the material more easily, because this training material is surprisingly hard to create and we need all the help we can get from the community. Gaining insight into your own preferred learning style, can help focus your approach to lifelong learning, so this is a win-win proposition, Give us your suggestions as feedback, through the built in mechanisms at the end of each lesson. In that way you can make your contribution to the project - perhaps the first of many.
 
-When you have completed step 1, please continue by reading the introduction and then the remaining modules, then review your responses and if possible, provide feedback on your learning experience.
+So, to summarise: When you have completed step 1, please continue by reading the introduction and then the remaining modules, then review your responses and if possible, provide feedback on your learning experience.
 
 ### 1. [Intoductory material](../introduction/tutorial.html)
 
