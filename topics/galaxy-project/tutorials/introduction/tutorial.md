@@ -89,40 +89,32 @@ This introduction is recommended reading, because it describes how the guide is 
 The field guide includes descriptions by those involved, of how activities were started. These stories can provide information and strategies for participants thinking about initiating new activities, based on existing successful initiatives.
 
 > <tip-title>Classifying components in a global open science project is a hard problem</tip-title>
-> - Categories and divisions are necessarily arbitrary. 
-> - The project has grown of its own accord, not neatly from a blueprint.
-> - Driven by shared vision and values, adapting to rapid external developments
-> - Many participants, structures and processes that fit into more than one category. 
->    - Most users identify with multiple different communities for example.
-> - No obvious “best” way to describe an open science collaborative ecosystem.
-> - No known terminology for the components or interactions.
-> - Need to invent a descriptive approach.
+> Every open science project functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete project description, but is too complicated to address here. It is assumed that the reader is familiar with it, because they have found this guide, so it is not addressed further in this material.
+> Given the complexities, descriptive categories and divisions are necessarily arbitrary. The project has grown organically, and of its own accord, not neatly from a blueprint. It is driven by shared vision and values, and constantly adapting to rapidly changing externalities and project growth.
+> A useful guide breaks all the complexities into smaller, more manageable chunks, since the material is potentially overwhelming. Large open projects are complex, and each has particular complexities, so there are many alternative ways to describe them. 
+> - Many participants, structures and processes could fit into more than one category, with many users engaging with more than one community for example. It seems that there is no obvious, “best” way to describe an open science collaboration. It is a kind of virtual ecosystem with many interdependent and dynamic components with complex interactions and synergies. Descriptive terminology for the components and interactions needs to be invented, since it is not yet in wide use.
+> 
 {:  .tip}
  
 ## Structure for the field guide
 
-A useful guide breaks all the complexities into smaller, more manageable chunks, since the material is potentially overwhelming. The project functions in, and depends on the context of the global open science ecosystem. That context is an essential part of a complete project description, but is itself too complicated to add here. The reader is assumed to have some experience, since they are reading this guide, so it is not addressed further in this material.
-
-Successful projects are complex, and each has particular complexities, so there are many alternative ways to describe them. The arbitrary division used for this guide produces three high level categories, related in the following model:
+The arbitrary division used for this guide gives 3 high level categories, related in the following trivial model:
 
 ### *People + Resource inputs = Project outputs*
 
-This provides a logical division for the guide to simplify the task of seeing it all. "Details" tabs below show more overview information about each component. The main part of the guide is divided into those corresponding sections. In practice, the project depends on them all, efficiently working together. Galaxy flourishes, because all these parts govern themselves in an efficient and productive collaboration.
-
+This simplifies the challenge of seeing it all at once a little, and allows the guide to be split into corresponding sections. "Details" below provide more information about each component in overview. This division does not change the fact that in practice, the project depends on them all working together for success. Galaxy flourishes, because all these components govern themselves, in an efficient and productive global collaboration.
  
 > <details-title>People working together make the project possible</details-title>
 > 
-> - Open source is a very productive way of delivering software. Shared values and participatory self-governance help people get things done.
+> Open source is a very productive way of delivering software. Shared values and participatory self-governance help people get things done. Galaxy participants must govern the collaboration for themselves, because there are many independent institutions and investigators, so no single institution has control
 > 
-> - Galaxy participants must govern the collaboration for themselves, because there are many independent institutions and investigators, so no single institution has control
-> 
-> - Individuals engage with the project according to their interestests, such as:
->     - Analysing and sharing experimental data
->     - Working as a member of the core professional team
->     - Contributing skills, support, code and ideas while working in a related field.
->     - Helping build best practice tool kits and workflows for specific fields
->     - Leading new activities in the collaboration by providing community and project leadership.
->     - Contributing to project governance
+> Individuals engage with the project according to their interestests, such as:
+>  - Analysing and sharing experimental data
+>  - Working as a member of the core professional team
+>  - Contributing skills, support, code and ideas while working in a related field.
+>  - Building best practice tool kits and workflows for specific fields
+>  - Leading new activities in the collaboration by providing community and project leadership.
+>  - Contributing to project governance
 > 
 > - A detailed module on [people and their interactions is available](../people/tutorial.html)
 {: .details}
@@ -130,14 +122,12 @@ This provides a logical division for the guide to simplify the task of seeing it
 
 > <details-title>Resources from grants sustain the communities, team, collaborations and services</details-title>
 > 
-> - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track. Professional, dedicated staff are needed for source code curation, user support, usegalaxy.* services, ToolShed maintenance, GTN material and training services, and many other related resources.
+> - Computational resource allocations used for free services are provided by collaborating institutions, adding substantial value to the source code in the form of computing power for free analysis and training services.
+> - Core "corporate" project services like outreach, communication and administration are needed to keep the project on track. Professional, dedicated staff are needed for source code curation, user and contributor support, usegalaxy.* services, ToolShed maintenance, GTN material and training services, and many other related resources. These also depend on community contributions, and there are many project management and administrative tasks in coordinating such a large and complicated global enterprise, that require dedicated effort. Professional staff are needed to support project related core functions:
+>   - outreach, communication, project management.
+>   - user support, system administration and software engineers.
 > 
-> - Computational resource allocations needed for free service provision are provided by collaborating institutions, adding substantial value to the source code in the form of free analysis and training services.
-> - Professional staff are needed to support project related core functions:
->     - outreach, communication, project management.
->     - user support, system administration and software engineers.
-> 
-> - Without these, the source code repository would still be a valuable resource. Value added by these services probably outweighs investment, because substantial skilled community effort adds greatly to total project impact and value, multiplying the benefit from that investment.
+> - Without these, the source code repository would still be a valuable resource. However, the open science value added by these services is likely to be a multiple of the total grant investment in terms of return. Substantial highly skilled community effort, adds greatly to total project impact and value, greatly exceeding the specifics of all the individual grants.
 > 
 > - A detailed guide to [Resources used in project activities is available.](../resources/tutorial.html)
 {: .details}
@@ -155,10 +145,7 @@ This provides a logical division for the guide to simplify the task of seeing it
 
 > <details-title>Project outputs: Project outputs for open science and scientists</details-title>
 > 
-> Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings.
-> The code is a core project deliverable, but it is used to support many other important project outputs.
-> 
-> Other project activities build on the source code, to provide a range of open science benefits such as:
+> Galaxy source code is the core project deliverable. It is widely deployed in public and many more private settings, but it is used to support many other important project outputs. Those other project activities build on the source code, to provide a range of open science benefits such as:
 > 
 > - The usegalaxy.* public deployments are large, free analysis services that support tens of thousands of researchers each day.
 > - The Galaxy Training Network supports training to improve researcher productivity, integrated into Galaxy's user interface.

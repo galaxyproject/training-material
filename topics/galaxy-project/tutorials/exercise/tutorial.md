@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 logo: "Galrollup"
-title: "0. An optional but recommended teaching and learning exercise"
+title: "0. Optional teaching and learning exercise for this topic"
 summary: "A structured knowledge review exercise, to help consolidate your learning and to help improve this training material. Work in progress. Please help make it better?"
 questions:
 objectives:
@@ -31,17 +31,27 @@ contributors:
 >
 {: .agenda}
 
+
+> <warning-title>Warning: Experimental educational activity</comment-title>
+We are not (yet) aware of evidence of benefit (or harm) arising from completing this exercise, but we hope you enjoy and gain something from it anyway. Feedback really is helpful for training modules.
+>
+{: .warning}
+
+
+
 # Preparation
 
 ## An exercise to consolidate the material and reinforce your learning.
 
-It is recommend that you take a few minutes to complete the first step of the following exercise *before* proceding with the lessons in training topic. For readers already engaged in the project, this exercise may not be very useful, but it may be more helpful for those relatively new to the project, because there is a lot to learn and Galaxy's scope, opportunities and impact on open science are not yet widely understood. The exercise is designed to help consolidate the content by structured review, shortly after you have completed it. It will also help clarify where this material succeeded in meeting your particular learning style.
+If possible, please take a few minutes to complete the first step of the following exercise *before* continuing with the lessons in this training topic. This exercise may be more helpful for those relatively new to the project, because much detail about Galaxy's scope, opportunities and impact on open science, are not yet widely understood, even among researchers who routinely use Galaxy. 
 
-There are some common assertions about the Galaxy project below containing a mix of truth and misunderstanding. The exercise involves summarising your response to each assertion briefly, before reading the material, indicating whether you think the assertion is mostly true or false. 
+The exercise is designed to help consolidate the contents in your memory, through a structured, immediate post-learning review, comparing your understanding before, and then shortly after you have completed it on a few of the core learning objectives. It may also help you to clarify how well this material succeeded in meeting your particular learning style and needs.
 
-After you have completed all the material you are interested in for this training topic, review each of your responses, to clarify how your views have changed. There are no "correct" answers, but the exercise helps focus on personal preferences for learning and will help consolidate and clarify the material.
+Below are some not uncommon assertions about the Galaxy project, containing a mix of truthiness and misunderstanding. Summarising your response to each assertion briefly *before* reading the training material can be used as a post-reading review. For each assertion, indicate, in a sentence or two, which aspects are mostly true and why other aspects are mostly false. 
 
-The final part of the exercise is more personal and internal, reflecting on the process of learning, and how well the material supported your needs. In particular, if you have ideas or suggestions, that would make the material better for future readers, please contribute them as feedback, to help us improve the training material and so make the project better.
+The exercise continues, only *after* you have completed reading all the parts of this material you are interested in. At that point, review each of the responses you prepared, to clarify how your views have changed. There are no "correct" answers, but the exercise may help you to review, consolidate and clarify the things you have learned. 
+
+The last and most optional part of the exercise is more personal and internal, involving reflecting on the process of learning, and how well the material supported your needs. If you have suggestions that would help make the material more useful for future readers, please contribute them as feedback, to help us improve the training material and so make the project better.
 
 ### Step 1
 
