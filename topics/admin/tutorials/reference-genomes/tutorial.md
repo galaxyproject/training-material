@@ -431,7 +431,7 @@ In order to accomplish this, you will need:
 >    > <code-in-title>input: bash</code-in-title>
 >    > Be sure to adjust the value of `-g` appropriately for your Galaxy server, and replace the value of `-a` with your API key.
 >    > ```console
->    > shed-tools install -g https://your-galaxy -a <api-key> --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam
+>    > shed-tools install -g https://galaxy.example.org -a <api-key> --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam
 >    > ```
 >    {: .code-in}
 >
@@ -496,7 +496,7 @@ In order to accomplish this, you will need:
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```console
->    > run-data-managers -g https://your-galaxy -a <api-key> --config fetch-sacCer3.yml
+>    > run-data-managers -g https://galaxy.example.org -a <api-key> --config fetch-sacCer3.yml
 >    > ```
 >    {: .code-in}
 >
@@ -582,7 +582,7 @@ In order to accomplish this, you will need:
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```console
->    > shed-tools install -g https://your-galaxy -a <api-key> --name data_manager_bwa_mem_index_builder --owner devteam
+>    > shed-tools install -g https://galaxy.example.org -a <api-key> --name data_manager_bwa_mem_index_builder --owner devteam
 >    > ```
 >    {: .code-in}
 >
@@ -626,7 +626,7 @@ In order to accomplish this, you will need:
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```console
->    > run-data-managers -g https://your-galaxy -a <api-key> --config build-sacCer3-bwa.yml
+>    > run-data-managers -g https://galaxy.example.org -a <api-key> --config build-sacCer3-bwa.yml
 >    > ```
 >    {: .code-in}
 >

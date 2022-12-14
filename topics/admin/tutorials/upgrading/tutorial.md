@@ -84,11 +84,11 @@ Once we know what our current version is, we can compare it with the latest avai
 >
 > **Method 2: Via the API**
 >
-> 1. In your browser - go to the following URL: `https://your-galaxy/api/version`. The version will be displayed as follows:
+> 1. In your browser - go to the following URL: `https://galaxy.example.org/api/version` (replacing `galaxy.example.org` with the hostname of your Galaxy server). The version will be displayed as follows:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```shell
->    > curl https://your-galaxy/api/version
+>    > curl https://galaxy.example.org/api/version
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}

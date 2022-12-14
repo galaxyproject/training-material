@@ -252,7 +252,7 @@ Let's try setting that up in our Galaxy!
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```bash
->    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
+>    > setup-data-libraries -g https://galaxy.example.org -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
