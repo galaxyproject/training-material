@@ -212,7 +212,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 > 4. Click **Local Data** to return to the previous page
 >
-> 5. Click {% tool [Create DBKey and Reference Genome - fetching]({{data_manager_fetch_genome_all_fasta_dbkey}}) %} under **Installed Data Managers**.
+> 5. Click {% tool [Create DBKey and Reference Genome - fetching](data_manager_fetch_genome_all_fasta_dbkey) %} under **Installed Data Managers**.
 >    - {% icon param-select %} *"Use existing dbkey or create a new one"*: `Existing`
 >    - {% icon param-select %} *"DBKEY to assign to data"*: `sacCer2`
 >    - {% icon param-text %} *"Name of sequence"*: `S. cerevisiae June 2008 (SGD/sacCer2)`
