@@ -24,6 +24,12 @@ contributors:
 {: .comment}
 
 
+> <comment-title>Note to readers</comment-title>
+> Most of the material in this exercise is covered in the quick 5' introductory video, so this exercise is not going to work as well if you start it after watching it. Best to start here, then work through the material, where the video will serve as an introduction to the entire Topic.
+>
+{: .comment}
+
+
 > <agenda-title>An exercise to consolidate learning</agenda-title>
 >
 > 1. TOC
