@@ -995,8 +995,10 @@ Hybrid assembly uses both short- and long-read sequencing data. Most assemblers 
 
 > <hands-on-title>Hybrid assembly with MetaSPAdes</hands-on-title>
 > 1. Create a new history with the name `CAMI 2 - Hybrid`
-> 2. Copy the collection with long read data into this new history
 > 2. Copy the collection with short read data into this new history
+> 2. Copy the short read pooled data into this new history
+> 2. Copy the collection with long read data into this new history
+> 2. Copy the long read pooled data into this new history
 > 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
 >       - {% icon param-collection %} *"FASTQ file(s): collection"*: Short read collection
@@ -1004,7 +1006,14 @@ Hybrid assembly uses both short- and long-read sequencing data. Most assemblers 
 >       - {% icon param-collection %} *"Nanopore reads"*: Long read collection
 >     - *"Select k-mer detection option"*: `User specific`
 >       - *"K-mer size values"*: `21,33,55,77`
-> 4. Rename output to `MetaSPAdes - hybrid`
+> 4. Rename output to `MetaSPAdes - hybrid - individual assembly`> 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+>     - *"Pair-end reads input format"*: `Paired-end: interlace reads`
+>       - {% icon param-file %} *"FASTQ file(s): interlaced"*: Short read data
+>     - In *"Additional read files"*
+>       - {% icon param-file %} *"Nanopore reads"*: Long read data
+>     - *"Select k-mer detection option"*: `User specific`
+>       - *"K-mer size values"*: `21,33,55,77`
+> 4. Rename output to `MetaSPAdes - hybrid - co-assembly`
 {: .hands_on}
 
 
