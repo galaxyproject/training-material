@@ -664,7 +664,7 @@ Finally, we will verify that the BWA tool can see the new genome indexes.
 >
 > 2. Click the "Home" icon at the top to return to the Galaxy analysis interface
 >
-> 3. Load the {% tool [Map with BWA](bwa) %} tool and verify that the sacCer2 genome (if you completed the "Galaxy UI" section) and/or sacCer3 genome (if you completed the "command line with Ephemeris" section)  appears in the {% icon param-select %} *"Using reference genome"* option.
+> 3. Load the {% tool [Map with BWA](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.5) %} tool and verify that the sacCer2 genome (if you completed the "Galaxy UI" section) and/or sacCer3 genome (if you completed the "command line with Ephemeris" section)  appears in the {% icon param-select %} *"Using reference genome"* option.
 {: .hands_on}
 
 How cool is that? No editing `.loc` files, no making sure you've got TABs instead of spaces. Fully auto!
