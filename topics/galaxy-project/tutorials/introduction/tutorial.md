@@ -180,7 +180,7 @@ In some highly specialised groups, such as the IUC, formal decision making on te
 
 Communities are a core element of the success of any large open project. They represent self-selected individuals, who choose to work on a project activity in which they have a particular interest. Communities are an important and pervasive idea in the main "People" part of the field guide.
 
-Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so does not fit the restrictive definition. That does not diminish their importance in demonstrating productivity for grant renewals, and serving as the major recruitment source of individuals choosing to engage in active project communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they appear in the "Products" part of this guide.
+Ironically, the largest "community" of all, comprising the tens of thousands of researchers who use Galaxy for open science analysis each day, does not organise its own activities, so fails the restrictive definition. That does not diminish their importance, such as demonstrating productivity for grant renewals, and serving as the major recruitment source of individuals choosing to engage in active project communities. The sharable, reproducible analysis results generated using Galaxy, are important downstream open science outputs, so they appear in the "Products" part of this guide.
 
 #### Shared values help communities flourish
 
