@@ -1,0 +1,744 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "format-version": "0.1",
+    "name": "Deconvolution: Benchmarking | 2 - Pseudobulks to Inferred Tables",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Subsample_B - matrix"
+                }
+            ],
+            "label": "Subsample_B - matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 79
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "da2aface-b62f-41e7-bdea-a0486d49005f",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Genes are rows, with one column of values from the pseudobulk\nHeader with 'name' of sample required",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genes are rows, with one column of values from the pseudobulk\nHeader with 'name' of sample required",
+                    "name": "Subsample_A - matrix"
+                }
+            ],
+            "label": "Subsample_A - matrix",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 201
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b42fd8de-1716-4f98-80ab-b66d3d6a6b4e",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "ESet Reference scRNA-seq"
+                }
+            ],
+            "label": "ESet Reference scRNA-seq",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 1390.0,
+                "top": 435
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e62e6953-b72a-4b13-9ca9-e4327334216d",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Tabular format\nRow &amp; Column Headers\nRows of cell types\nColumn header \"B_actual\" or similar",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Tabular format\nRow &amp; Column Headers\nRows of cell types\nColumn header \"B_actual\" or similar",
+                    "name": "B_actuals"
+                }
+            ],
+            "label": "B_actuals",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2502.0,
+                "top": 401
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cb2e7360-920c-4502-a3a2-d5f2f1a18d33",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "Tabular format\nRow &amp; Column Headers\nRows of cell types\nColumn header \"A_actual\" or similar",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Tabular format\nRow &amp; Column Headers\nRows of cell types\nColumn header \"A_actual\" or similar",
+                    "name": "A_actuals"
+                }
+            ],
+            "label": "A_actuals",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2502.0,
+                "top": 656
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d7225317-e0e5-4e1d-9597-be2fb8cadfd3",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "Separate singular matrices will break the MuSiC tool",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "files": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "first_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Combine matrices",
+            "name": "Multi-Join",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 309.0,
+                "top": 0
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"files\": {\"__class__\": \"ConnectedValue\"}, \"filler\": \"0\", \"first_file\": {\"__class__\": \"ConnectedValue\"}, \"ignore_dups\": \"false\", \"input_header\": \"false\", \"key_column\": \"1\", \"output_header\": \"false\", \"value_columns\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "899c0661-fe12-4d39-b09a-bb2bb6fcdd7d",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": "Make phenotype file",
+            "name": "Select first",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 462.0,
+                "top": 250
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"header\": \"false\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "ec601f39-d511-4deb-99d7-c5a088425a61",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "in_file": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Transpose phenotype",
+            "name": "Transpose",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 701.0,
+                "top": 251
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "ac092723240d",
+                "name": "datamash_transpose",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "9329d0fb-8a9b-4fff-9102-84e8084e78be",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "infile": {
+                    "id": 7,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": "Add Run to phenotype",
+            "name": "Add line to file",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 957.0,
+                "top": 255
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "8e251055b1a9",
+                "name": "add_line_to_file",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"options\": \"header\", \"text_input\": \"Run\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.0",
+            "type": "tool",
+            "uuid": "535193f4-1371-427b-8924-61f86615b115",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "exprs_file": {
+                    "id": 5,
+                    "output_name": "outfile"
+                },
+                "pdata_file": {
+                    "id": 8,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Construct Expression Set Object",
+            "outputs": [
+                {
+                    "name": "out_txt",
+                    "type": "txt"
+                },
+                {
+                    "name": "out_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1390.0,
+                "top": 72
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_txt": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_txt"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "282819d09a4f",
+                "name": "music_construct_eset",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation\": \"\", \"expdata\": {\"name\": \"\", \"lab\": \"\", \"contact\": \"\", \"title\": \"\", \"abstract\": \"\", \"url\": \"\", \"other\": [{\"__index__\": 0, \"field\": \"notes\", \"comment\": \"Created in Galaxy\"}]}, \"exprs_file\": {\"__class__\": \"ConnectedValue\"}, \"metadata\": [], \"pdata_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1+galaxy4",
+            "type": "tool",
+            "uuid": "5d0a4744-9fdb-448d-bd97-8846d6240515",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_rds",
+                    "uuid": "8b8441f6-f74d-45b8-baee-bd208146574f"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy4",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "bulk_eset": {
+                    "id": 9,
+                    "output_name": "out_rds"
+                },
+                "scrna_eset": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MuSiC Deconvolution",
+            "outputs": [
+                {
+                    "name": "props",
+                    "type": "input"
+                },
+                {
+                    "name": "out_pdf",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1668.0,
+                "top": 174
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "2ba99a52bd44",
+                "name": "music_deconvolution",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bulk_eset\": {\"__class__\": \"ConnectedValue\"}, \"do\": {\"method\": \"estimateprops\", \"__current_case__\": 0, \"est_methods\": [\"MuSiC\"], \"celltypes_label\": \"Inferred cell type - author labels\", \"samples_label\": \"Individual\", \"celltypes\": \"alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell\", \"phenotype_factors\": \"\", \"phenotype_factors_always_exclude\": \"sampleID,SubjectName\", \"disease_factor\": {\"use\": \"no\", \"__current_case__\": 0}, \"maxyscale\": null}, \"scrna_eset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1+galaxy4",
+            "type": "tool",
+            "uuid": "05131062-ae63-4fc4-bca2-46665afb6f9c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_pdf",
+                    "uuid": "5da57fd1-173e-4f21-ab0a-b8b98ec76208"
+                },
+                {
+                    "label": "MuSiC Deconvolution on input dataset(s): Proportion Matrices",
+                    "output_name": "props",
+                    "uuid": "45906467-baab-41d0-96b3-df1a18dc2a47"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "in_file": {
+                    "id": 10,
+                    "output_name": "props"
+                }
+            },
+            "inputs": [],
+            "label": "Transpose inferred cell proportions",
+            "name": "Transpose",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1946.0,
+                "top": 236
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "ac092723240d",
+                "name": "datamash_transpose",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"in_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0+galaxy2",
+            "type": "tool",
+            "uuid": "a66bd029-f61f-4894-9ca7-7efcc3a37122",
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "Needs to align exactly to the Actuals\nWell actually it doesn't anymore as we switched which tools we were using but here it is anyway",
+            "content_id": "sort1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "out_file"
+                }
+            },
+            "inputs": [],
+            "label": "Alphabetical cell proportions list",
+            "name": "Sort",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2224.0,
+                "top": 257
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "sort1",
+            "tool_state": "{\"column\": \"1\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"ASC\", \"style\": \"alpha\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "56cba80c-c6d0-4a55-9b48-b969eebdad64",
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "B_inferred",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2502.0,
+                "top": 247
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"2\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "8781f17e-e44e-4393-8fa4-7b31b0276083",
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "A_inferred",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2502.0,
+                "top": 502
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"3\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "2188feea-cf8c-47db-9585-6638a00eea4f",
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "files": {
+                    "id": 13,
+                    "output_name": "output"
+                },
+                "first_file": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Multi-Join",
+                    "name": "files"
+                },
+                {
+                    "description": "runtime parameter for tool Multi-Join",
+                    "name": "first_file"
+                }
+            ],
+            "label": "A_proportions_actual-infer",
+            "name": "Multi-Join",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2780.0,
+                "top": 316
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "#B"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "outfile"
+                },
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "A_proportions_actual-infer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"files\": {\"__class__\": \"RuntimeValue\"}, \"filler\": \"0\", \"first_file\": {\"__class__\": \"RuntimeValue\"}, \"ignore_dups\": \"false\", \"input_header\": \"false\", \"key_column\": \"1\", \"output_header\": \"false\", \"value_columns\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "147c4721-f651-4921-a3ae-9f8b5ec9435d",
+            "workflow_outputs": [
+                {
+                    "label": "A_proportions_actual-infer",
+                    "output_name": "outfile",
+                    "uuid": "ecf05401-f038-4688-bdf5-08cea2771435"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "files": {
+                    "id": 14,
+                    "output_name": "output"
+                },
+                "first_file": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Multi-Join",
+                    "name": "files"
+                },
+                {
+                    "description": "runtime parameter for tool Multi-Join",
+                    "name": "first_file"
+                }
+            ],
+            "label": "B_proportions_actual-infer",
+            "name": "Multi-Join",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2780.0,
+                "top": 522
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActionoutfile": {
+                    "action_arguments": {
+                        "tags": "#A"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "outfile"
+                },
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "B_proportions_actual-infer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"files\": {\"__class__\": \"RuntimeValue\"}, \"filler\": \"0\", \"first_file\": {\"__class__\": \"RuntimeValue\"}, \"ignore_dups\": \"false\", \"input_header\": \"false\", \"key_column\": \"1\", \"output_header\": \"false\", \"value_columns\": \"2\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "b6ade2b0-ad69-445a-8933-8083e5061ce5",
+            "workflow_outputs": [
+                {
+                    "label": "B_proportions_actual-infer",
+                    "output_name": "outfile",
+                    "uuid": "ff7cba1c-7b12-46e6-864d-c9acc6842c44"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "f130b923-b324-4c87-a3ab-1883b0ab80c2",
+    "version": 2
+}
