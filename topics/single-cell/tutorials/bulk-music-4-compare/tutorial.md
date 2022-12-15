@@ -32,14 +32,6 @@ requirements:
       - bulk-music-2-preparescref
       - bulk-music-3-preparebulk
 
-follow_up_training:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - bulk-music-5-benchmark
-
-gitter: Galaxy-Training-Network/galaxy-single-cell
 ---
 
 
