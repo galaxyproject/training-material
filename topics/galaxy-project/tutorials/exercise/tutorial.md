@@ -43,14 +43,13 @@ We are not (yet) aware of evidence of benefit (or harm) arising from completing 
 >
 {: .warning}
 
-
-
 # An exercise to consolidate the material and reinforce your learning.
 
 Please take a few minutes to complete the first step of the following exercise *before* continuing with the lessons in this training topic. This exercise may be more helpful for those relatively new to the project, because much detail about Galaxy's scope, opportunities and impact on open science, are not yet widely understood, even among researchers who routinely use Galaxy. 
 
 
-> <detail-title>Exercise explanation</detail-title>
+> <details-title>Exercise explanation</details-title>
+>
 > This exercise is designed to help consolidate the contents in your memory, through a structured, immediate post-learning review, comparing your understanding before, and then shortly after you have completed it on a few of the core learning objectives. It may also help you to clarify how well this material succeeded in meeting your particular learning style and needs.
 >
 > Below are some not uncommon assertions about the Galaxy project, containing a mix of truthiness and misunderstanding. Summarising your response to each assertion briefly *before* reading the training material can be used as a post-reading review. For each assertion, indicate, in a sentence or two, which aspects are mostly true and why other aspects are mostly false. 
@@ -59,7 +58,8 @@ Please take a few minutes to complete the first step of the following exercise *
 >
 > The last step is to reflect on the process of learning, and how well the material supported your needs. If you have suggestions to make the material more useful for future readers, please contribute them as feedback. That helps improve the training material, so is a useful contribution.
 >
-{: .detail}
+{: .details}
+
 
 ## Step 1
 
