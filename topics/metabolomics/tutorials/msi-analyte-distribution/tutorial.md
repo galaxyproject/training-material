@@ -247,11 +247,12 @@ We will rerun the MSI plot spectra tool and add annotation to the pixels that co
 > <hands-on-title>Mass spectra of different chilli compartments</hands-on-title>
 >
 > 1. Create a tabular file with the coordinates of interest and rename it to 'annotations':
+>
 >    ```
-x     y     compartment
-39    53    seeds
-50    44    placenta
-25    60    pericarp
+>    x     y     compartment
+>    39    53    seeds
+>    50    44    placenta
+>    25    60    pericarp
 >    ```
 >
 >    > <tip-title>Creating a new file</tip-title>

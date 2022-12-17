@@ -257,7 +257,7 @@ With ChiP sequencing, we obtain sequences corresponding to a portion of DNA link
 >    > > The overall alignment rate is 98.64%. This score is quite high. If you have less than 70-80%, you should investigate the cause: contamination, etc.
 >    > >
 >    > > 43719 (90.27%) reads have been aligned concordantly exactly 1 time and 3340 (6.90%) aligned concordantly >1 times. The latter ones correspond to multiple mapped reads. Allowing for multiple  mapped reads increases the number of usable reads and the sensitivity of peak detection;
-however, the number of false positives may also increase.
+>    > > however, the number of false positives may also increase.
 >    > {: .solution }
 >    {: .question}
 >

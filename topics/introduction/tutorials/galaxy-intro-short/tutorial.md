@@ -365,7 +365,7 @@ Now that we have built our workflow, let's use it to re-create our small analysi
 >    ![Run workflow form](../../images/intro_short_run_workflow.png)
 >
 > 3. Check that the *"FASTQ reads"* input is set to the FASTQ dataset we have copied to the new history.
-     - In this page we could change any parameter for the tools composing the workflow as we would do when running them one by one.
+>    - In this page we could change any parameter for the tools composing the workflow as we would do when running them one by one.
 >
 > 4. Click the **Run Workflow** button at the top-right of the screen.
 >

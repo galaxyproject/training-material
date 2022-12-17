@@ -18,9 +18,12 @@ key_points:
   - "De novo transcriptome reconstruction is the ideal approach for identifying differentially expressed known and novel transcripts."
   - "Differential gene expression testing is improved with the use of replicate experiments and deep sequence coverage."
   - "Visualizing data on a genome browser is a great way to display interesting patterns of differential expression."
-contributors:
+contributions:
+  authorship:
   - malloryfreeberg
   - moheydarian
+  editing:
+  - jxtx
 ---
 
 # Introduction

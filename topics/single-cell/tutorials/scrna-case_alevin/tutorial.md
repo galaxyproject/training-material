@@ -229,9 +229,9 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >     >   >    - *"Protocol"*: `DropSeq Single Cell protocol`
 >     >   >    - {% icon param-file %} *"Transcript to gene map file"*: `Map`
 >     >   >    - *"Retrieve all output files"*: `Yes`
->      - In *"Optional commands"*:
->          - *"dumpFeatures"*: `Yes`
->          - *"dumpMTX"*: `Yes`
+>     >   >    - In *"Optional commands"*:
+>     >   >        - *"dumpFeatures"*: `Yes`
+>     >   >        - *"dumpMTX"*: `Yes`
 >     >   {: .solution}
 >     {: .question}
 {: .hands_on}

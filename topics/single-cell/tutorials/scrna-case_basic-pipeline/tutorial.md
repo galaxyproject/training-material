@@ -935,12 +935,12 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > <details-title>Working in a group? The finale!</details-title>
 > Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was 'wrong' or 'ill-advised', and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation...
 > For those that did not take the 'control' options, please
-> > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
-> > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
-> >
-> >    {% snippet faqs/galaxy/histories_sharing.md %}
-> >
-> > 3. Feel free to explore any other similar histories
+> 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
+> 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
+> 
+>    {% snippet faqs/galaxy/histories_sharing.md %}
+> 
+> 3. Feel free to explore any other similar histories
 {: .details}
 
 {% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2) helpful to compare with, or this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data).

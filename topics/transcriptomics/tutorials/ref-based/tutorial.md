@@ -154,7 +154,7 @@ We will first need to transform our the list of pairs to a simple list.
 > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
 > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
 {: .details}
->
+
 > <hands-on-title>Quality control</hands-on-title>
 >
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
@@ -1433,7 +1433,6 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 
 We can now run DESeq2:
 
->
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
