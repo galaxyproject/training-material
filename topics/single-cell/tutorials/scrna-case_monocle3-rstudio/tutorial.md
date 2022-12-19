@@ -2,10 +2,14 @@
 layout: tutorial_hands_on
 
 title: 'Trajectory Analysis: Monocle3 in RStudio'
+subtopic: single-cell-CS
+priority: 6
 zenodo_link: 10.5281/zenodo.7455590
+
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?
+
 objectives:
 - The learning objectives are the goals of the tutorial
 - They will be informed by your audience and will communicate to them and to yourself
@@ -13,38 +17,49 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+
+time_estimation: 1H
+
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+
+requirements:
+-
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - scrna-case_alevin
+        - scrna-case_alevin-combine-datasets
+        - scrna-case_basic-pipeline
+        - scrna-case_JUPYTER-trajectories
+        - scrna-case_monocle3-trajectories
+        
+tags:
+- single-cell
+- trajectory-analysis
+- paper-replication
+- rstudio
+
+contributions:
+  authorship:
+    - wee-snufkin
+    
+notebook:
+  language: r
+  snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 
 ---
 
+```r
+cells_annotated <- file.choose() 
+genes_annotated <- file.choose() 
+expression_annotated <- file.choose() 
 
-# Introduction
-
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+genes_ano <- read.delim(genes_annotated, row.names=1)
+cells_ano <- read.delim(cells_annotated, row.names=1)
+expression_annotated_read <- read.delim(expression_annotated, row.names=1)
+```
 
 
 **Please follow our
