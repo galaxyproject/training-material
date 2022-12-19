@@ -1,7 +1,3 @@
----
-box_type: hands_on
----
-
 > <hands-on-title> Extract input files </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
