@@ -450,7 +450,7 @@ widely-used, well-tested tool here.
 >       - *"Do you want to set paired-end options?"*: `No`
 >
 >     - *"Will you select a reference genome from your history or use a built-in index?"*:
-        `Use a built-in genome index`
+>       `Use a built-in genome index`
 >       - *"Select reference genome"*: `Human (Homo sapiens): hg38 Full`
 >     - *"Set read groups information?"*: `Do not set`
 >     - *"Select analysis mode"*: `Default setting only`

@@ -480,6 +480,28 @@ module GtnLinter
     }
   end
 
+  def self.check_looks_like_heading(contents)
+    # TODO: we should remove this someday, but, we need to have a good solution
+    # and we're still a ways from that.
+    #
+    # There's no clear way to say "this subsection of the content has its own hierarchy"
+    if @path.match(/faq/)
+      return
+    end
+    self.find_matching_texts(contents, /^\*\*(.*)\*\*$/)
+    .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: "### #{selected[1]}",
+        message: "This looks like a heading, but isn't. Please use proper semantic headings where possible. You should check the heading level of this suggestion, rather than accepting the change as-is.",
+        code: "GTN:020",
+      )
+    }
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -496,6 +518,7 @@ module GtnLinter
       *new_more_accessible_boxes(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
+      *check_looks_like_heading(contents),
     ]
   end
 
