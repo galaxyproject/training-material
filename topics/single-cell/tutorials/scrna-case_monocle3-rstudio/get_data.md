@@ -1,9 +1,4 @@
----
-box_type: hands_on
----
-
-
-> <hands-on-title>Data upload </hands-on-title>
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
