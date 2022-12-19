@@ -46,7 +46,7 @@ contributions:
 
 notebook:
   language: r
-  snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
+  snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preambl.md
 
 ---
 
