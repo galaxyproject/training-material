@@ -22,7 +22,7 @@ Learning with RMarkdown is a bit different than you might be used to. Instead of
 
 You're now ready to view the RMarkdown notebook! Each notebook starts with a lot of metadata about how to build the notebook for viewing, but you can ignore this for now and **scroll down to the content of the tutorial**.
 
-You can switch to the visual mode which is way easier to read by clicking on the gear icon and selecting `Use Visual Editor`.
+You can switch to the visual mode which is way easier to read - just click on the gear icon and select `Use Visual Editor`.
 
 ![Screenshot of dropdown menu after clicking on the gear icon. The first option is `Use Visual Editor`.]({% link topics/data-science/images/rstudio/r-visual-mode.png %})
 
