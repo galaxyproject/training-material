@@ -46,8 +46,7 @@ contributions:
 
 notebook:
   language: r
-  snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preambl.md
-
+  snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
 ---
 
 ```r
@@ -55,12 +54,16 @@ cells_annotated <- file.choose()
 genes_annotated <- file.choose() 
 expression_annotated <- file.choose() 
 ```
+# Working in RStudio
 
-# Title for your first section
+## Uploading files
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+If you are working in RStudio Cloud, you have to download the generated files from your history first. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. Then, return to the RStudio and click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded files to upload. You should now see all three filed in this window. You might want to rename the files to make their names shorter.
+
+![Screenshot of Files tab in RStudio, highlighting 'Upload' and 'Rename' buttons and listing three uploaded and renamed files: 'cell_metadata', 'gene_metadata', 'expression_matrix'.](../../images/scrna-casestudy-monocle/r_files_tab.png "The view of the Files tab with uploaded files and highlighted relevant buttons")
+
+If you are 
+
 
 ## Title for a subsection
 Section and subsection titles will be displayed in the tutorial index on the left side of
