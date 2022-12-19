@@ -39,7 +39,6 @@ tags:
 - single-cell
 - trajectory-analysis
 - paper-replication
-- rstudio
 
 contributions:
   authorship:
@@ -55,16 +54,6 @@ cells_annotated <- file.choose()
 genes_annotated <- file.choose() 
 expression_annotated <- file.choose() 
 ```
-
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 # Title for your first section
 
@@ -106,4 +95,3 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
-
