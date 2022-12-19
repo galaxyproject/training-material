@@ -16,4 +16,7 @@ Thanks to available interactive tools, you can easily launch RStudio in Galaxy.
 
 {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
 
+
 From now on, you can either view this tutorial in the RMarkdown, which will allow you to read the material and simultaneously execute the code cells, or write/paste the lines of code in RStudio. 
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
