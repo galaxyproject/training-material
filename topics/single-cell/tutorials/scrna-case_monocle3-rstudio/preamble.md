@@ -6,8 +6,9 @@ This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link t
 ## Get data
 In the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}), we showed that Monocle3 works great with annotated data, but what if your data is not annotated yet? Is it still possible to use Monocle? The answer is yes, Monocle also allows annotating cells according to their type and it will be shown in this tutorial. First, we need to get appropriate data to work with. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). You can simply go to the history of this tutorial, find step 20: Filtered Object and download it. For ease of use, that was already done for you and you can import the file from Zenodo below. 
 
+{% include topics/single-cell/tutorials/scrna-case_monocle3-rstudio/get_data.md %} 
 
-><hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
