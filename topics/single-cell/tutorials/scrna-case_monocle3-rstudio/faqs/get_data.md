@@ -1,5 +1,6 @@
 ---
 box_type: hands_on
+title: Data upload
 ---
 >
 > <hands-on-title> Data upload </hands-on-title>
