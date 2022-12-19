@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: 'Trajectory Analysis: Monocle3 in RStudio'
 subtopic: single-cell-CS
 priority: 6
-zenodo_link: '10.5281/zenodo.7455590'
+zenodo_link: 'https://zenodo.org/record/7455590'
 
 questions:
 - Which biological questions are addressed by the tutorial?
@@ -48,7 +48,6 @@ contributions:
 notebook:
   language: r
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md
-
 ---
 
 ```r
