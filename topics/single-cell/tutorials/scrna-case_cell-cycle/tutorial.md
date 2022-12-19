@@ -34,8 +34,7 @@ the analysis. You want the results to reflect the interesting differences in exp
 
 One common biological confounder is the cell cycle {% cite Luecken2019 %}. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
 
-In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can regress out (or remove) their effects on the
-data. 
+In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data. 
 
 >    > ### {% icon comment %} Comment
 >    >
@@ -97,6 +96,7 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 >
 {: .hands_on}
 
+{% snippet  faqs/galaxy/tutorial_mode.md %}
 
 # Cell Cycle Scoring
 
@@ -134,7 +134,7 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 
 # Cell Cycle Regression
 
-The second step after scoring the cell cycle genes is to regress out their effects. Now that we know which genes are linked to the cell cycle and how they are affecting our cells, we can subtract their effects from the data so that they won't influence our later analyses. 
+The second step after scoring the cell cycle genes is to regress out their effects. Now that we know which genes are linked to the cell cycle and how they are affecting our cells, we can subtract their effects from the data so that they won't influence our later analyses. We will regress out the `phase` variable in this step, which is the column we have just created to assign each cell to a specific phase. You will need to type this variable in to the {% tool Scanpy RegressOut %} tool.  
 
 > ### {% icon details %} How does cell cycle regression work?
 > 
@@ -165,8 +165,9 @@ In order to see what is happening to the cell cycle genes, we need to label them
 You might find it easier to create this new column using a spreadsheet and then upload it as a tabular dataset, but it is possible to complete all the steps on Galaxy. 
 
 ## Prepare a table of cell cycle genes
-If we're going to mark all the cell cycle genes, we'll need a single list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. We'll 
-combine the two lists and then add another column that simply reads `TRUE`, which we'll use later to mark these as cell cycle genes in the main dataset. 
+If we're going to mark all the cell cycle genes, we'll need a single list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. 
+
+We'll combine the two lists into a single column with 97 entries. We'll then add a second column that simply reads `TRUE`, which we'll use later to mark these as cell cycle genes in the main dataset. 
 
 > ### {% icon hands_on %} Hands-on: Create a list of all cell cycle genes
 >
@@ -305,7 +306,7 @@ We now have a table with all the gene names in the same order as the main datase
 
 
 ## Add an annotation to the AnnData
-We will need to add the annotation to both the annotated dataset `CellCycle_Annotated` and to the one that we created by regressing out the cell cycle genes `CellCycle_Regressed`. This will allow us to plot the cell cycle genes before and after regression. 
+We will need to add the annotation to both the annotated dataset `CellCycle_Annotated` and to the one that we created by regressing out the cell cycle genes `CellCycle_Regressed`. This will allow us to plot the cell cycle genes before and after regression. We can do this using the {% tool Manipulate Anndata %} tool and selecting the correct function from the dropdown menu. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -364,7 +365,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore](h
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Make sure that you de-select the option to plot only the Highly Variable Genes - only some of the cell cycle genes are also HVGs, but we want our plots to include all of them. 
+>    > Make sure that you de-select the option for the {% tool Plot %} tool to use highly variable genes only - only some of the cell cycle genes are also HVGs, but we want our plots to include all of them. 
 >    {: .comment}
 >
 {: .hands_on}
