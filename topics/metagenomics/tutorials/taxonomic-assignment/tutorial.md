@@ -251,7 +251,7 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
 
 __Phinch__ offers the user to visualize large biological datasets like our taxonomic classification. Taxonomy Bar Charts, Bubble Charts, Sankey Diagrams, Donut Partitions and Attributes Column Chart can be generated using this tool. Additionally, several different samples can easily be compared.
 As a first step, we need to convert the Kraken output file into a kraken-biom file to make it accessible for Phinch. Fot this, we need to add a metadata file, provided here. xxx
-When generating a metadata file for your own data, you can take this as an example and find the general guidelines here. xxx
+When generating a metadata file for your own data, you can take this as an example and find the general guidelines [here](http://qiime.org/documentation/file_formats.html#mapping-file-overview) 
 
 > ### {% icon hands_on %} Hands-on: Phinch
 >1. Use {% tool [Kraken-biom] (toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1) %} to convert Kraken2 report into the correct format for phinch with the following parameters.
