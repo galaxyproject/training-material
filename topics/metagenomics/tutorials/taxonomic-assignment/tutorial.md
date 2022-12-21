@@ -247,7 +247,27 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
 > <center><iframe id="krona" src="krona.html" frameBorder="0" width="90%" height="600px"> ![Krona at bacteria level](../../images/metatranscriptomics/krona_bacteria.png) </iframe></center>
  
  
- 
+## Visualize the taxonomical classification with Phinch
+
+__Phinch__ offers the user to visualize large biological datasets like our taxonomic classification. Taxonomy Bar Charts, Bubble Charts, Sankey Diagrams, Donut Partitions and Attributes Column Chart can be generated using this tool. Additionally, several different samples can easily be compared.
+As a first step, we need to convert the Kraken output file into a kraken-biom file to make it accessible for Phinch. Fot this, we need to add a metadata file, provided here. xxx
+When generating a metadata file for your own data, you can take this as an example and find the general guidelines here. xxx
+
+> ### {% icon hands_on %} Hands-on: Phinch
+>1. Use {% tool [Kraken-biom] (toolshed.g2.bx.psu.edu/repos/iuc/kraken_biom/kraken_biom/1.2.0+galaxy1) %} to convert Kraken2 report into the correct format for phinch with the following parameters.
+>    - *"Input"*: `Kraken2 on dataset collection`
+>    - *"Sample Metadata file"*: `metadata.txt`
+>    - *"Output format"*: `JSON`
+>
+> 2. **View** the file in Phinch
+>   -  Use {% tool [Phinch Visualisation] (interactive_tool_phinch) %} with the following paramters:
+>    - *"Input"*: `Kraken-biom output file`
+
+Important note: don't wait for Galaxy to finish the job! Your results are available directly, as Phinch is an interactive tool. To see them, click on User in the blue part right at the top of the Galaxy page, there you can find "Active interactive tools". When you go there, you will find Phinch running and can visit the website with your results by following the link "Phinch Visualisation of Kraken-biom output file" which is provided as the name of the job. 
+
+{: .hands_on} 
+
+
 # Discussion: Choosing the right tool
 
 When it comes to taxonomic assignment while analyzing metagenomic data, in this tutorial presented Kraken2 is not the only tool available. Several papers do benchmarking of different tools ({% cite Meyer.2022 %},{% cite Sczyrba.2017 %},{% cite Ye.2019 %}) and their results are presented in the following section, with focus on tools that are available in Galaxy.
