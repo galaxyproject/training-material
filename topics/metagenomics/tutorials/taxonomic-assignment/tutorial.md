@@ -78,7 +78,7 @@ It is a collection of paired-end data with R1 being the forward reads and R2 bei
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library:
+> 2. Import the FASTQ file pairs from [Zenodo]({{ page.zenodo_link }}) or a data library: xxx
 >    - `JP4D_R1.fastq.gz`
 >    - `JP4D_R2.fastq.gz`
     -`JC1A_R1.fastq.gz`
@@ -129,7 +129,7 @@ Let's have a look at the classification file. It has 5 columns:
 2. Sequence ID
 3. Taxonomy ID
 4. Length of sequence (read1|read2 for paired reads)
-5. indicates LCA mapping of each k-mer in the sequence |:| indicates end of first read, start of second read for paired reads --> example: "n k-mers assigned to taxon xxx"
+5. indicates LCA mapping of each k-mer in the sequence |:| indicates end of first read, start of second read for paired reads
  
  
 ![Kraken2 Classification Output](../../taxonomic-assignment/images/Kraken2_classification_screenshot.png "Kraken2 Classification Output.")
@@ -180,7 +180,7 @@ As both files contain a lot of information, we will use __Krona__ {% cite Ondov.
  
 # Hands on: estimating species abundance
 
-A "simple and worthwile addition to Kraken for better abundance estimates" (xxx cite: benchmarking metagenomic tools for taxonomic classification; Ye et al) is called Bracken (Bayesian Reestimation of Abundance after Classification with Kraken). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species." (xxx cite Bracken paper)
+A "simple and worthwile addition to Kraken for better abundance estimates" {% cite Ye.2019 %} is called Bracken (Bayesian Reestimation of Abundance after Classification with Kraken). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species." {% cite Lu.2017 %}
 
 > ### {% icon hands_on %} Hands-on: estimate species abundance with Bracken xxx
 >
@@ -200,7 +200,7 @@ __Convert Kraken__ tool is designed to translate results of the Kraken metagenom
  
 > ### {% icon hands_on %} Hands-on: Convert Kraken2 Output
 >
-> 1. {% tool [Convert Kraken](xxx) %} with the following parameters:
+> 1. {% tool [Convert Kraken](toolshed.g2.bx.psu.edu/repos/devteam/kraken2tax/Kraken2Tax/1.1) %} with the following parameters:
 >    - *"Choose dataset to convert"*: Datset collection: Classification Output of Kraken2
 >    - *"Select a taxonomy database"*: `2022-03-08`
 >    - *"Read name"*: `column:2`
@@ -215,7 +215,7 @@ __Krona__ allows hierarchical data to be explored with zooming, multi-layered pi
  
 > ### {% icon hands_on %} Hands-on: Visualize data with Krona
 >
-> 1. {% tool [Krona pie chart](xxx) %} with the following parameters:
+> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
 >    - *"Type of input data"*: `taxonomy`
 >    - *"Input file"*: Dataset collection: Output file of Convert Kraken
 >    - *"Combine data from multiple data sets?"*: yes
@@ -301,7 +301,7 @@ abundance estimation at higher ranks was more problematic for the binners
  
 
 
-| Tool      | version              | available in Galaxy | In CAMI challenge, best method across metrics for\* : | additional features            | Ye et al. benchmarking                                                                                                                                     |
+| Tool      | version              | available in Galaxy | In CAMI challenge, best method across metrics for\* : | additional features            | {% cite Ye.2019 %} benchmarking                                                                                                                                     |
 | --------- | -------------------- | ------------------- | ----------------------------------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | mOTUs     |  1.1.1               | no                  | \-                                                    | most memory efficient          |                                                                                                                                                            |
 | mOTUs     |  2.5.1               | no                  | marine; plant-associated                              | \-                             |                                                                                                                                                            |
