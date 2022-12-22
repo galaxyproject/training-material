@@ -1,42 +1,45 @@
 ---
 layout: tutorial_hands_on
 
-title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+title: Detection of SARS-CoV-2 variants by genomic analysis of wastewater samples
 level: Intermediate
-zenodo_link: "https://zenodo.org/record/5036687"
+zenodo_link: "https://zenodo.org/record/7468942"
 questions:
-- How can we extract annotated allelic variants in SARS-Cov-2 sequences in Galaxy?
-- Which tools and workflows can we use to identify SARS-CoV-2 lineages in Galaxy?
+- How to detect SARS-CoV-2 lineages abundances in wastewater samples in Galaxy?
+- How to learn other species diversity in wastewater samples?
+- Which tools and workflows can we use to identify SARS-CoV-2 lineages in wastewater samples in Galaxy?
 objectives:
 - Repeat SARS-CoV-2 data preparation
-- Select and run workflow to extract annotated allelic variants from FASTQ files
+- Select and run workflow to define lineages abundances of SARS-CoV-2 in wastewater samples
 - Run workflow to summarize and generate report for previously called allelic variants
-- Interpret summaries for annotated allelic variants
-- Run workflow to extract consensus sequences
-- Select and run tools to assign clades/lineages
+- Interpret results
 time_estimation: 3H
 key_points:
-- 4 specialized, best-practice variant calling workflows are available for the identification of annotated allelic variants from raw sequencing data depending on the exact type of input
+- 2 specialized workflows are available for the identification of lineages abundances of SARS-CoV-2 from raw wastewater sequencing data depending on the exact type of input
 - Data from batches of samples can be processed in parallel using collections
-- Annotated allelic variants can be used to build consensus sequences for and assign each sample to known viral clades/lineages
 contributors:
-- wm75
+- plushz
 - bebatut
+- wm75
 tags:
 - covid19
+- wastewater
 ---
 
 
 # Introduction
 
+Millions of people have been affected by the COVID-19 pandemic after the first report of SARS-CoV-2 in Wuhan, China. During the COVID-19 pandemic, wastewater surveillance has received extensive public attention as a passive monitoring system that complements clinical and genomic surveillance. The detection and quantification of viral RNA in wastewater samples are already possible through several methods and protocols, and viral RNA concentrations in wastewater have been shown to correlate with reported cases. The wastewater surveillance methods are a good solution for enabling early, economical, and efficient detection so that public-health measures can be implemented as soon as they are necessary.
 
-Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
+![Upper branch shows a clinical surveillance of sars-cov-2, from the infection moment to bioinformatics data analysis; lower branch, in turn, represents wastewater surveillance.](./images/ww-process-ww.png "Schematic diagram shows the process of detecting viruses by wastewater surveillance against clinical surveillance.")
 
-Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed high-quality analysis workflows to support
+Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed workflows to perform bioinformatics analysis.
 
-- sensitive identification of SARS-CoV-2 allelic variants (AVs) starting with allele frequencies as low as 5% from deep sequencing reads
-- generation of user-friendly reports for batches of results
-- reliable and configurable consensus genome generation from called variants
+
+
+
+
+
 
 > <details-title>Further reading</details-title>
 > More information about the workflows, including benchmarking, can be found
