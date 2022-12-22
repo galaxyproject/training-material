@@ -184,72 +184,78 @@ We are now ready to process our data!
 >
 {: .warning}
 
-If you remember the very first tutorial, we were starting with gene IDs and later on adding gene symbols based on the Ensembl GTF file.  
-But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. 
+If you remember the very first tutorial, we were starting with gene IDs and adding gene symbols based on the Ensembl GTF file.  
+But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database, so keep that in mind. The code below will work for that dataset, but will produce ‘NA’ where the corresponding gene name couldn’t be found. 
 ```r
 cds_extra <- cds		# assign our CDS to a new object for the demonstration purpose 
+
+# get relevant gene names
 library("biomaRt")		# load the BioMart library
 ensembl.ids <- rownames(fData(cds_extra))		# fData() allows to access cds rowData table and the rownames are stored in ensembl.ids
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL") # connect to a specified BioMart database and dataset hosted by Ensembl
 ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", 
-                    host='https://nov2020.archive.ensembl.org')
-#ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl") # connect to a specified BioMart database and dataset within this database; in our case we choose the mus musculus database
+                    host='https://nov2020.archive.ensembl.org') 	# connect to a specified BioMart database and dataset within this database; in our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, we specify the host with this archive
+# ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl") # uncomment this if you want to use the most recent version of the used dataset
+
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id', 
                values = ensembl.ids, 
                mart = ensembl_m) # retrieve the specified attributes from the connected BioMart database; 'ensembl_gene_id' are genes IDs, 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’
 
-listDatasets(mart)
-
-gene_names <- rownames(fData(cds_a)) #genes IDs
-#replace IDs for gene names
-count = 1
+# replace IDs for gene names 
+gene_names <- ensembl.ids	 
+count = 1 	 
 for (geneID in gene_names)
 {
-  print(geneID)
-  index <- which(genes==geneID)
-  print(index)
-  gene_names[count] <- genes$external_gene_name[index]
-  count = count + 1
+ index <- which(genes==geneID)	# finds an index of geneID in the genes object created by getBM()
+ if (length(index)==0) 	# condition in case if there is no corresponding gene name in the chosen dataset
+  {
+    gene_names[count] <- 'NA'
+  }
+  else
+  {
+    gene_names[count] <- genes$external_gene_name[index] 	# replaces gene ID by the corresponding gene name based on the found geneID’s index 
+  }
+ count = count + 1		# increased count so that every element in gene_names is replaced
 }
 
-fData(cds_extra)$gene_short_name2 <- gene_names
+# store the gene names in our CDS object in a new column gene_short_name_extra
+fData(cds_extra)$gene_short_name_extra <- gene_names
 ```
 
+If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in useMart() function. 
+```r
+listDatasets(mart) 	# available datasets
+```
 
 
 # Monocle workflow
 Do you remember the Monocle workflow introduced in the previous tutorial? Here is a recap:
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
-Therefore, let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. The overall ‘shape’ of the plot changes slightly as the value of `num_dim` changes, but for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. 
+
+## Normalisation and pre-processing
+Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. 
 
 ```r
-cds <- preprocess_cds(cds, num_dim = 210)
-plot_pc_variance_explained(cds)
+cds_preprocessing <- preprocess_cds(cds, num_dim = 210) 	# PCA pre-processing with 210 principal components
+pca_plot <- plot_pc_variance_explained(cds)		# see the plot of variation in gene expression vs PCA components
 ```
 
-![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though](../../images/scrna-casestudy-monocle/num_dim.jpg "The ‘shape’ of the plot showing how the cells are clustered depending on the num_dim argument.")
+![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pcs_plot.jpg " Plot of variation in gene expression vs PCA components.")
+
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset.
+
+![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The ‘shape’ of the plot showing how the cells are clustered depending on the num_dim argument.")
 
 
+## Dimensionality reduction
+The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Let’s jus recall that UMAP gave the best results, so we will use UMAP now as well. 
+```r
+cds_red_dim <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP") # dimensionality reduction
+```
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-><hands-on-title> Data upload </hands-on-title>
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from
->
-{: .hands_on}
 
 
 ## Re-arrange
