@@ -53,6 +53,8 @@ notebook:
 
 ## Uploading files
 
+If you are using RStudio locally, then you don’t have to bother about uploading the files – just skip to ```file.choose()``` and navigate to your files using the pop-up window. 
+
 If you are working in RStudio Cloud, you have to download the generated files from your history first. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. Then, return to the RStudio and click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded files to upload. You should now see all three filed in this window. You might want to rename the files to make their names shorter.
 
 ![Screenshot of Files tab in RStudio, highlighting 'Upload' and 'Rename' buttons and listing three uploaded and renamed files: 'cell_metadata', 'gene_metadata', 'expression_matrix'.](../../images/scrna-casestudy-monocle/r_files_tab.png "The view of the Files tab with uploaded files and highlighted relevant buttons.")
@@ -137,7 +139,7 @@ It looks like our data fulfils the requirements to generate the cell_data_set fi
 First things first, we need to load Monocle3! Generally, it is a good practice to load all the packages at the very beginning of the script, but for the purpose of this tutorial, we will load the needed packages on the way, to make you aware of which library is needed and when. 
 Monocle 3 runs in the R statistical computing environment. You will need R version 4.1.0 or higher, Bioconductor version 3.14, and monocle3 1.2.7 or higher to have access to the latest features.
 ```r
-# Install Bioconductor and some of its dependencies
+# Install Bioconductor and some of required dependencies
 
 if (!requireNamespace("BiocManager", quietly = TRUE))
 install.packages("BiocManager")
@@ -181,6 +183,7 @@ We are now ready to process our data!
 >  This step is not necessary for the dataset we are working on but some users might find it helpful when analysing their own data.
 >
 {: .warning}
+
 If you remember the very first tutorial, we were starting with gene IDs and later on adding gene symbols based on the Ensembl GTF file.  
 But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. 
 ```r
@@ -188,29 +191,31 @@ cds_extra <- cds		# assign our CDS to a new object for the demonstration purpose
 library("biomaRt")		# load the BioMart library
 ensembl.ids <- rownames(fData(cds_extra))		# fData() allows to access cds rowData table and the rownames are stored in ensembl.ids
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL") # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl") # connect to a specified BioMart database and dataset within this database; in our case we choose the mus musculus database
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", 
+                    host='https://nov2020.archive.ensembl.org')
+#ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl") # connect to a specified BioMart database and dataset within this database; in our case we choose the mus musculus database
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id', 
                values = ensembl.ids, 
                mart = ensembl_m) # retrieve the specified attributes from the connected BioMart database; 'ensembl_gene_id' are genes IDs, 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’
 
-feats <- rownames(fData(cds_a)) #genes IDs
+listDatasets(mart)
+
+gene_names <- rownames(fData(cds_a)) #genes IDs
 #replace IDs for gene names
-for (i in feats)
+count = 1
+for (geneID in gene_names)
 {
-  index <- which(genes==i)
-  feats[genes$ensembl_gene_id==i] <- genes$external_gene_name[index]
+  print(geneID)
+  index <- which(genes==geneID)
+  print(index)
+  gene_names[count] <- genes$external_gene_name[index]
+  count = count + 1
 }
 
-
-fData(cds_a)$gene_short_name <- feats #assigning
-rownames(fData(cds_a)) <- feats #not working
-fData(cds_a) 
-
-#if the aove has 0 columns, run this:
-fData(cds_a)$gene_short_name <- feats
+fData(cds_extra)$gene_short_name2 <- gene_names
 ```
->
+
 
 
 # Monocle workflow
