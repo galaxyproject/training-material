@@ -33,26 +33,17 @@ Millions of people have been affected by the COVID-19 pandemic after the first r
 
 ![Upper branch shows a clinical surveillance of sars-cov-2, from the infection moment to bioinformatics data analysis; lower branch, in turn, represents wastewater surveillance.](./images/ww-process-ww.png "Schematic diagram shows the process of detecting viruses by wastewater surveillance against clinical surveillance.")
 
-Two sequencing platforms (Illumina and Oxford Nanopore) in combination with several established library preparation (Ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed workflows to perform bioinformatics analysis.
-
-
-
-
-
-
+Two sequencing platforms (e.g. Illumina and Oxford Nanopore) in combination with several established library preparation (e.g. ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed workflows to perform bioinformatics analysis.
 
 > <details-title>Further reading</details-title>
 > More information about the workflows, including benchmarking, can be found
-> - on the Galaxy Covid-19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
-> - as a BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
+> - on the Galaxy Covid-19 effort [website](https://galaxyproject.org/projects/covid19/)
 {: .details}
 
-This tutorial will teach you how to obtain, run and combine these workflows appropriately for different types of input data, be it:
+This tutorial will teach you how to obtain and run these workflows appropriately for different types of input data, be it:
 
-- Single-end data derived from Illumina-based RNAseq experiments
-- Paired-end data derived from Illumina-based RNAseq experiments
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or
-- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
+- Paired-end data derived from Illumina-based RNAseq experiments, or
+- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
 
 > <agenda-title></agenda-title>
 >
@@ -78,6 +69,20 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 {: .hands_on}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Get sequencing data
 
