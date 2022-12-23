@@ -42,8 +42,10 @@ Two sequencing platforms (e.g. Illumina and Oxford Nanopore) in combination with
 
 This tutorial will teach you how to obtain and run these workflows appropriately for different types of input data, be it:
 
-- Paired-end data derived from Illumina-based RNAseq experiments, or
+- Paired-end data derived from Illumina-based Metatranscriptomic experiments, or
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
+
+Both workflows are repurposed and improved Galaxy workflows for clinical data. To learn more about workflows for clinical data you can follow this [dedicated tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -299,83 +301,99 @@ Another three datasets are needed only for the analysis of ampliconic, e.g. ARTI
 {: .hands_on}
 
 
+# From FASTQ to SARS-CoV-2 lineages abundances
 
+Before identifying lineages aboundances, several steps have to be done to preprocess data.
 
+Quality control step is often used because there is no perfect sequencing technology, and each
+instrument will generate different types and amounts of errors, such as incorrect nucleotide calls.
+Each sequencing platform has technical limitations that result in these incorrectly called bases.
+Thus, it is important to identify and exclude error types that may affect downstream analysis
+interpretation. As a result, sequence quality control is an essential first step in the analysis
+process.
 
+Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol.
+The auxiliary file is used for this step - a BED file specifying the primers used during amplification
+and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in
+a BED file to soft clip primer sequences from an aligned and sorted BAM file. Following this,
+the reads are trimmed based on a quality threshold. More specifically, some primer trimmers,
+in order to do quality trimming, use a sliding window approach. The window slides from the
+5’ end to the 3’ end and if at any point the average base quality in the window falls below
+the threshold, the remaining read is softly clipped. If after trimming, the length of the read is
+greater than the minimum length specified, the read is written to the new trimmed BAM file. It
+should be noted, for datasets that were not generated with primer-based protocol like ARTIC,
+this primer-trimming step is not applicable.
 
+Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive
+raw reads with adapters at 3’ end. The adapters contain the sequencing primer binding sites,
+the index sequences, and the sites that allow library fragments to attach to the flow cell lawn.
+This might influence a downstream analysis, thus, adapter trimming is required.
 
+A decontamination step can then be included to remove reads from the human genome, since
+viral sequence data from clinical samples commonly contain human contamination. Prior to
+sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream
+analysis {% cite hunt2022 %}.
 
+The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database {% cite genome2020 %}. A mapping tool of choice can differ from one pipeline to another,
+depending on read length, sequencing technology, and other factors.
 
+Some pipeline steps are not always included in pipelines, such as removing duplicates. This step
+can be important for Illumina sequencing reads. During the sequencing process with Illumina
+sequencing technology, some duplicate reads/sequences can be produced, which can create bias
+in downstream analyses. It is, therefore, possible to remove duplicates or mark them without
+removing them. When removing duplicates, one should be certain that they are duplicates and
+not repeated regions. It can therefore be reasonable to keep duplicates marked rather than
+remove them, as this can be useful for downstream analysis.
 
+Another step, which is not present everywhere, is helpful due to potential ambiguity, while indels
+are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions
+and deletions must be homogenized with left realignment in order to gain a more homogeneous
+distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at
+the same position, provided that doing so does not introduce mismatches between the read and
+reference other than the indel {% cite garrison2012 %}. Basically, this step is considered to correct mapping errors
+and prepare reads for further variant calling.
 
+Additionally, realigned reads can be taken and checked for the quality of alignment using bioinformatics
+tools (e.g., Qualimap {% cite qualimap %}, {% cite qualimap2 %}). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases
+in sequencing and/or mapping of the data and ease decision-making for further analysis.
+After mapping and other additional preparation steps, variant calling should be run where variants
+from sequence data are identified.
 
+![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
+We offer two workflow with their tools and parameters optimized for different types of input data as outlined in the following table:
 
-
-
-
-
-
-
-
-
-# From FASTQ to annotated allelic variants
-
-To identify the SARS-CoV-2 allelic variants (AVs), a first workflow converts the FASTQ files to annotated AVs through a series of steps that include quality control, trimming, mapping, deduplication, AV calling, and filtering.
-
-Four versions of this workflow are available with their tools and parameters optimized for different types of input data as outlined in the following table:
-
-Workflow version 	| Input data | Read aligner | Variant caller
---- | --- | --- | ---
-Illumina RNAseq SE | Single-end data derived from RNAseq experiments | **bowtie2** {% cite langmead_2012 %} | **lofreq** {% cite wilm_2012 %}
-Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
-Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
-ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
+Workflow version 	| Input data | Read aligner | Variant caller | Delineation tool
+--- | --- | --- | --- | ---
+Illumina metatranscriptomic PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %} | Freyja {% cite karthikeyan2022 %}
+Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %} | Freyja {% cite karthikeyan2022 %}, COJAC {% cite cojac2022 %}
 
 > <details-title>About the workflows</details-title>
 >
-> - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
-> - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
-> - The workflow for ONT-sequenced ARTIC data (ONT ARTIC) is modeled after the alignment/AV-calling steps of the [ARTIC pipeline](https://artic.readthedocs.io/). It performs, essentially, the same steps as that pipeline’s minion command, i.e. read mapping with **minimap2** and AV calling with **medaka**. Like the Illumina ARTIC workflow it uses **ivar** for primer trimming. Since ONT-sequenced reads have a much higher error rate than Illumina-sequenced reads and are therefore plagued more by false-positive AV calls, this workflow makes no attempt to handle amplicons affected by potential primer-binding site mutations.
+> - The Illumina metatranscriptomic workflow (Illumina metatranscriptomic PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**. Computation of SARS-CoV-2 lineages abundances is performed with **Freyja**.
+> - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs. Computation of SARS-CoV-2 lineages abundances is performed with **Freyja** and **COJAC** in two different branches.
 >
-> All four workflows use **SnpEff**, specifically its 4.5covid19 version, for AV annotation.
->
-> Workflows default to requiring an AF ≥ 0.05 and AV-supporting reads of ≥ 10 (these and all other parameters can be easily changed by the user). For an AV to be listed in the reports, it must surpass these thresholds in at least one sample of the respective dataset. We estimate that for AV calls with an AF ≥ 0.05, our analyses have a false-positive rate of < 15% for both Illumina RNAseq and Illumina ARTIC data, while the true-positive rate of calling such low-frequency AVs is ~80% and approaches 100% for AVs with an AF ≥ 0.15. This estimate is based on an initial application of the Illumina RNAseq and Illumina ARTIC workflows to two samples for which data of both types had been obtained at the virology department of the University of Freiburg and the assumption that AVs supported by both sets of sequencing data are true AVs. The second threshold of 10 AV-supporting reads is applied to ensure that calculated AFs are sufficiently precise for all AVs.
->
-> More details about the workflows, including benchmarking of the tools, can be found on [covid19.galaxyproject.org](https://covid19.galaxyproject.org/genomics/global_platform/#methods)
 {: .details}
 
-> <hands-on-title>From FASTQ to annotated AVs</hands-on-title>
+> <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
 >
 > 1. **Get the workflow** for your data into Galaxy 
 >
 >    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
 >
->      Please note that this option currently works *only* with usegalaxy.eu!
->
 >      - Open the workflow page on the WorkflowHub
->        - [Illumina ARTIC PE](https://workflowhub.eu/workflows/110) - The one to use for example datasets
->        - [Illumina RNAseq SE](https://workflowhub.eu/workflows/112)
->        - [Illumina RNAseq PE](https://workflowhub.eu/workflows/113)
->        - [ONT ARTIC](https://workflowhub.eu/workflows/111)
+>        - [Illumina ampliconic PE](https://workflowhub.eu/workflows/)
+>        - [Illumina metatranscriptomic PE](https://workflowhub.eu/workflows/)
 >
 >      - Click on `Run on usegalaxy.eu` at the top right of the page
 >      
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
->    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
->
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' %}
->
->      For the example dataset: `sars-cov-2-pe-illumina-artic-variant-calling/COVID-19-PE-ARTIC-ILLUMINA`
->
->    - Option 3: Import the workflow via its github link
+>    - Option 2: Import the workflow via its github link
 >
 >      - Open the GitHub repository of your workflow
->        - [Illumina ARTIC PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-artic-variant-calling) - The one to use for example datasets
->        - [Illumina RNAseq SE](https://github.com/iwc-workflows/sars-cov-2-se-illumina-wgs-variant-calling)
->        - [Illumina RNAseq PE](https://github.com/iwc-workflows/sars-cov-2-pe-illumina-wgs-variant-calling)
->        - [ONT ARTIC](https://github.com/iwc-workflows/sars-cov-2-ont-artic-variant-calling)
+>        - [Illumina ampliconic PE](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-artic-variant-analysis)
+>        - [Illumina metatranscriptomic PE](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-metatranscriptomic-variant-analysis)
 >      - Open the `.ga` file
 >      - Click on `Raw` at the top right of the file view
 >      - Save the file or Copy the URL of the file
@@ -383,239 +401,125 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 >
 >        {% snippet faqs/galaxy/workflows_import.md %}
 >
-> 2. Run **COVID-19: variation analysis on ...** {% icon workflow %} using the following parameters:
+> 2. Run **SARS-CoV-2: lineages analysis on ...** {% icon workflow %} using the following parameters:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
 >    - *"Send results to a new history"*: `No`
 >
->    - For **Illumina ARTIC PE** workflow (named **COVID-19: variation analysis on ARTIC PE data**),  *to use for example datasets*
->      - {% icon param-file %} *"1: ARTIC primers to amplicon assignments"*: `ARTIC_amplicon_info_v3.tsv` or `ARTIC amplicon info v3`
->      - {% icon param-file %} *"2: ARTIC primer BED"*: `ARTIC_nCoV-2019_v3.bed` or `ARTIC nCoV-2019 v3`
->      - {% icon param-file %} *"3: FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->      - {% icon param-collection %} *"4: Paired Collection (fastqsanger) - A paired collection of fastq datasets to call variant from"*: paired collection created for the input datasets
+>    - For **Illumina ampliconic PE** workflow (named **WW-SARS-CoV-2: lineages analysis on ARTIC PE data**),  *to use for example datasets*
+>      - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
+>      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
+>      - {% icon param-file %} *"3: ARTIC primer BED"*: `ARTIC_primer_BED.bed`
+>      - {% icon param-file %} *"4: ARTIC primers to amplicon assignments"*: `ARTIC_primers_to_amplicon_assignments.bed`
+>      - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
 >
->    - For **Illumina RNAseq PE** workflow (named **COVID-19: variation analysis on WGS PE data**)
->      - {% icon param-collection %} *"1: Paired Collection (fastqsanger)"*: paired collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
+>    - For **Illumina metatranscriptomic PE** workflow (named **WW-SARS-CoV-2: lineages analysis on Metatranscriptomics PE data**)
+>      - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
+>      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
 >
->    - For **Illumina RNAseq SE** workflow (named **COVID-19: variation analysis on WGS SE data**)
->      - {% icon param-collection %} *"1: Input dataset collection"*: dataset collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->
->    - For **ONT ARTIC** workflow (named **COVID-19: variation analysis of ARTIC ONT data**)
->      - {% icon param-file %} *"1: ARTIC primer BED"*: `ARTIC_nCoV-2019_v3.bed` or `ARTIC nCoV-2019 v3`
->      - {% icon param-file %} *"2: FASTA sequence of SARS-CoV-2"*: `NC_045512.2_reference.fasta` or `NC_045512.2 reference sequence`
->      - {% icon param-collection %} *"3: Collection of ONT-sequenced reads"*: dataset collection created for the input datasets
 {: .hands_on}
 
 The execution of the workflow takes some time. It is possible to launch the next step even if it is not done, as long as all steps are successfully scheduled.
 
-# From annotated AVs per sample to AV summary
 
-Once the jobs of previous workflows are done, we identified AVs for each sample. We can run a "Reporting workflow" on them to generate a final AV summary.
+# Results interpretation
 
-This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.
+Once the jobs of previous workflows are done, we can look at the results.
 
-> <warning-title>Use the right collection of annotated variants!</warning-title>
-> The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
-> 
-> If you have analyzed ampliconic data with any of the **variation analysis of ARTIC** data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input to the next workflow.
->
-> If you are working with WGS data using either the **variation analysis on WGS PE data** or the **variation analysis on WGS SE data** workflow, then (and only then) you should continue with the `Final (SnpEff-) annotated variants with strand-bias soft filter applied` collection to eliminate some likely false-postive variant calls.
->
-{: .warning}
+**Freyja** produces the following reports
 
-> <hands-on-title>From annotated AVs per sample to AV summary</hands-on-title>
->
-> 1. **Get the workflow** into Galaxy
->    
->    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
->
->      Please note that this option currently works *only* with usegalaxy.eu!
->
->      - Open the [workflow page on WokflowHub](https://workflowhub.eu/workflows/109)
->      - Click on `Run on usegalaxy.eu` on the top right of the page
->      
->        The browser will open a new tab with Galaxy's workflow invocation interface.
->
->    - Option 2: Import the workflow from [Dockstore](https://dockstore.org/) using Galaxy's workflow search
->
->      {% snippet faqs/galaxy/workflows_import_search.md trs_server="Dockstore" search_query='organization:"iwc-workflows"' workflow_name="sars-cov-2-variation-reporting/COVID-19-VARIATION-REPORTING" %}
->
->    - Option 3: Import the workflow via its github repo link
->
->      - Open the [workflow GitHub repository](https://github.com/iwc-workflows/sars-cov-2-variation-reporting)
->      - Open the `.ga` file
->      - Click on `Raw` on the top right of the file
->      - Save the file or Copy the URL of the file
->      - Import the workflow to Galaxy
->
->        {% snippet faqs/galaxy/workflows_import.md %}
->
-> 2. Run **COVID-19: variation analysis reporting** {% icon workflow %} using the following parameters:
->
->    {% snippet faqs/galaxy/workflows_run.md %}
->
->    - *"Send results to a new history"*: `No`
->    - *"1: AF Filter - Allele Frequency Filter"*: `0.05`
-> 
->       This number is the minimum allele frequency required for variants to be included in the report.
->
->    - *"2: DP Filer"*: `1`
->
->       The minimum depth of all alignments required at a variant site;
->       the suggested value will, effectively, deactivate filtering on overall DP and will result in the DP_ALT Filter to be used as the only coverage-based filter.
->
->    - *"3: DP_ALT Filter"*: `10`
->
->       The minimum depth of alignments at a site that need to support the respective variant allele
->
->    - *"4: Variation data to report"*: `Final (SnpEff-) annotated variants`
->
->       The collection with variation data in VCF format: the output of the previous workflow
->
->
->    - *"4: gene products translations"*: `NC_045512.2_feature_mapping.tsv` or `NC_045512.2 feature mapping`
->
->       The custom tabular file mapping NCBI RefSeq Protein identifiers (as used by snpEff version 4.5covid19) to their commonly used names, part of the auxillary data; the names in the second column of this dataset are the ones that will appear in the reports generated by this workflow.
->
->    - *"5: Number of Clusters"*: `3`
->
->      The variant frequency plot generated by the workflow will separate the samples into this number of clusters.
->
-{: .hands_on}
-
-The three key results datasets produced by the Reporting workflow are:
-
-1. **Combined Variant Report by Sample**: This table combines the key statistics for each AV call in each sample. Each line in the dataset represents one AV detected in one specific sample
+1. **Aggregated data**: This table provides a aggregated information about lineages abundances for all samples. Each line in the table represents one sample.
 
    Column | Field | Meaning
    --- | --- | ---
-   1 | `Sample` | SRA run ID
-   2 | `POS` | Position in [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/1798174254)
-   3 | `FILTER` | `Filter` field from VCF
-   4 | `REF` |  Reference base
-   5 | `ALT` | Alternative base
-   6 | `DP` | Sequencing depth
-   7 | `AF` | Alternative allele frequency
-   8 | `SB` | Strand bias P-value from Fisher's exact test calculated by [`lofreq`](https://csb5.github.io/lofreq/)
-   9 |`DP4` | Depth for Forward Ref Counts, Reverse Ref Counts, Forward Alt Counts, Reverse Alt Counts
-   10 |`IMPACT` | Functional impact (from SNPEff)
-   11 |`FUNCLASS` | Funclass for change (from SNPEff)
-   12 |`EFFECT` | Effect of change (from SNPEff)
-   13 |`GENE` | Gene name
-   14 |`CODON` | Codon
-   15 |`AA` | Amino acid
-   16 |`TRID` | Short name for the gene
-   17 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change
-   18 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change
-   19 |`countunique(change)` | Number of distinct types of changes at this site across all samples
-   20 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples
-   21 |`change` | Change at this site in this sample
+   1 | `Sample` | sample name
+   2 | `summarized` | denotes a sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other"
+   3 | `lineages` | lists the identified lineages in descending order
+   4 | `abundances` |  contains the corresponding abundances estimates
+   5 | `resid` | corresponds to the residual of the weighted least absolute devation problem used to estimate lineage abundances
+   6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
 
    > <question-title></question-title>
    > 
-   > 1. How many AVs are found for all samples?
-   > 2. How many AVs are found for the first sample in the document?
-   > 3. How many AVs are found for each sample?
+   > 1. How many lineages were identified in sample SRR12596165 in metatranscriptomic-illumina dataset provided for this tutorial?
+   > 2. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 868 lines for the example datasets. The first line is the header of the table. Then 867 AVs.
+   > > 1. In the second line of the table we see 7 lineages listed in column "lineages": B.10 B.47 B.23 B.26 B.1.14 B.20 B
    > >
-   > > 2. We can filter the table to get only the AVs for the first sample {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Sample`
-   > >    - *"With following condition*": `c1=='ERR5931005'` (to adapt with the sample name)
-   > >    - *"Number of header lines to skip*": `1`
+   > > 2. In the 9th line of the table that corresponds to SRR12596170 sample, B.1.533 lineage is in the first position in the column "lineages". Then we look at the next column "abundances" and see in the first position is the proportion of B.1.533 which is 0.15773800.
    > >
-   > >    We got then only the AVs for the selected sample (48 for ERR5931005).
-   > >
-   > > 3. To get the number of AVs for each sample, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Sample`
-   > >    - *"Group by column"*: `Column: 1`
-   > >    - In *"Operation"*:
-   > >      - In *"1: Operation"*:
-   > >        - *"Type"*: `Count`
-   > >        - *"On column"*: `Column: 2`
-   > >    
-   > >    With our example datasets, it seems that samples have between 42 and 56 AVs. 
    > {: .solution}
    {: .question}
 
-2. **Combined Variant Report by Variant**: This table combines the information about each AV *across* samples.
+2. **Lineages abundances plot**: This plot provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
+
+   > <question-title></question-title>
+   > 
+   > 1. Which WHO designated variant is prevalent in sample1 from ampliconic-illumina dataset provided for this tutorial?
+   > 1. What other lineages are present in this sample?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Omicron
+   > >
+   > > 2. Delta and Other
+   > >
+   > {: .solution}
+   {: .question}
+
+**ojac** produces the following reports
+
+1. **Aggregated data**: This table provides a aggregated information about lineages abundances for all samples. Each line in the table represents one sample.
 
    Column | Field | Meaning
    --- | --- | ---
-   1 | `POS` | Position in [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/1798174254)
-   2 | `REF` | Reference base
-   3 | `ALT` | Alternative base
-   4 | `IMPACT` | Functional impact (from SnpEff) 
-   5 | `FUNCLASS` | Funclass for change (from SnpEff)
-   6 | `EFFECT` | Effect of change (from SnpEff)
-   7 | `GENE` | Gene 
-   8 | `CODON` | Codon 
-   9 | `AA` | Amino acid 
-   10 |`TRID` | Short name for the gene (from the feature mapping dataset)
-   11 |`countunique(Sample)` | Number of distinct samples containing this change 
-   12 |`min(AF)` | Minimum Alternative Allele Freq across all samples containing this change 
-   13 |`max(AF)` | Maximum Alternative Allele Freq across all samples containing this change 
-   14 |`SAMPLES(above-thresholds)` | List of distinct samples where this change has frequency abobe threshold (5%)
-   15 |`SAMPLES(all)` | List of distinct samples containing this change at any frequency (including below threshold) 
-   16 |`AFs(all)` | List of all allele frequencies across all samples 
-   17 |`change` |  Change 
+   1 | `Sample` | sample name
+   2 | `summarized` | denotes a sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other"
+   3 | `lineages` | lists the identified lineages in descending order
+   4 | `abundances` |  contains the corresponding abundances estimates
+   5 | `resid` | corresponds to the residual of the weighted least absolute devation problem used to estimate lineage abundances
+   6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
 
    > <question-title></question-title>
    > 
-   > 1. How many AVs are found?
-   > 1. What are the different impacts of the AVs?
-   > 2. How many variants are found for each impact?
-   > 3. What are the different effects of HIGH impact?
-   > 4. Are there any AVs impacting all samples?
+   > 1. How many lineages were identified in sample SRR12596165 in metatranscriptomic-illumina dataset provided for this tutorial?
+   > 2. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. By expanding the dataset in the history, we have the number of lines in the file. 184 lines for the example datasets. The first line is the header of the table. Then 183 AVs.
+   > > 1. In the second line of the table we see 7 lineages listed in column "lineages": B.10 B.47 B.23 B.26 B.1.14 B.20 B
    > >
-   > > 2. The different impacts of the AVs are HIGH, MODERATE and LOW.
+   > > 2. In the 9th line of the table that corresponds to SRR12596170 sample, B.1.533 lineage is in the first position in the column "lineages". Then we look at the next column "abundances" and see in the first position is the proportion of B.1.533 which is 0.15773800.
    > >
-   > > 2. To get the number of AVs for each impact levels, we can run {% tool [Group data](Grouping1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Select data"*: `Combined Variant Report by Variant`
-   > >    - *"Group by column"*: `Column: 4`
-   > >    - In *"Operation"*:
-   > >      - In *"1: Operation"*:
-   > >        - *"Type"*: `Count`
-   > >        - *"On column"*: `Column: 1`
-   > >    
-   > >    With our example datasets, we find:
-   > >    - 11 AVs with no predicted impact
-   > >    - 52 LOW AVs
-   > >    - 111 MODERATE AVs
-   > >    - 9 HIGH AVs
-   > >
-   > > 3. We can filter the table to get only the AVs with HIGH impact by running {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Variant`
-   > >    - *"With following condition*": `c4=='HIGH'`
-   > >    - *"Number of header lines to skip*": `1`
-   > >
-   > >    The different effects for the 9 HIGH AVs are STOP_GAINED and FRAME_SHIFT.
-   > >
-   > > 4. We can filter the table to get the AVs for which `countunique(Sample)` is equal the number of samples (18 in our example dataset): {% tool [Filter data on any column using simple expressions](Filter1) %} with the following parameters:
-   > >    - {% icon param-file %} *"Filter*": `Combined Variant Report by Variant`
-   > >    - *"With following condition*": `c11==18` (to adapt to the number of sample)
-   > >    - *"Number of header lines to skip*": `1`
-   > >
-   > >    For our example datasets, 4 AVs are found in all samples
    > {: .solution}
    {: .question}
 
-3. **Variant frequency plot**
+2. **Lineages abundances plot**: This plot provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
 
-   ![Variant frequency plot](../../images/sars-cov-2-variant-discovery/variant-frequency.svg)
+   > <question-title></question-title>
+   > 
+   > 1. Which WHO designated variant is prevalent in sample1 from ampliconic-illumina dataset provided for this tutorial?
+   > 1. What other lineages are present in this sample?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Omicron
+   > >
+   > > 2. Delta and Other
+   > >
+   > {: .solution}
+   {: .question}
 
-   This plot represents AFs (cell color) for the different AVs (columns) and the different samples (rows). The AVs are grouped by genes (different colors on the 1st row). Information about their effect is also represented on the 2nd row. The samples are clustered following the tree displayed on the left.
 
-   In the example datasets, the samples are clustered in 3 clusters (as we defined when running the workflow), that may represent different SARS-CoV-2 lineages as the AVs profiles are different.
+
+
+
+
+
+
 
 # From AVs to consensus sequences
 
