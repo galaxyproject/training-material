@@ -382,7 +382,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore](h
 >
 >    > ### {% icon comment %} Comment: Plot all the genes 
 >    >
->    > Make sure that you de-select the option for the {% tool Plot %} tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren't HVGs too.  
+>    > Make sure that you de-select the option for the {% tool Cluster, infer trajectories and embed %} tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren't HVGs too.  
 >    {: .comment}
 >
 {: .hands_on}
