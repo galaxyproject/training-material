@@ -240,7 +240,7 @@ cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 	# PCA p
 pca_plot <- plot_pc_variance_explained(cds)		# see the plot of variation in gene expression vs PCA components
 ```
 
-![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/num_dim.jpg " Plot of variation in gene expression vs PCA components.")
+![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
 The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset.
 
