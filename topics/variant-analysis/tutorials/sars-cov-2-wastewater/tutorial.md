@@ -436,7 +436,7 @@ Once the jobs of previous workflows are done, we can look at the results.
    1 | `Sample` | sample name
    2 | `summarized` | denotes a sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other"
    3 | `lineages` | lists the identified lineages in descending order
-   4 | `abundances` |  contains the corresponding abundances estimates
+   4 | `abundances` | contains the corresponding abundances estimates
    5 | `resid` | corresponds to the residual of the weighted least absolute devation problem used to estimate lineage abundances
    6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
 
@@ -470,45 +470,29 @@ Once the jobs of previous workflows are done, we can look at the results.
    > {: .solution}
    {: .question}
 
-**ojac** produces the following reports
+**COJAC** produces the following report
 
-1. **Aggregated data**: This table provides a aggregated information about lineages abundances for all samples. Each line in the table represents one sample.
+1. **Mutation cooccurrence**: This table provides a aggregated information about lineages abundances and mutations for all samples grouped by amplicons. Each line in the table represents one sample.
 
    Column | Field | Meaning
    --- | --- | ---
    1 | `Sample` | sample name
-   2 | `summarized` | denotes a sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other"
-   3 | `lineages` | lists the identified lineages in descending order
-   4 | `abundances` |  contains the corresponding abundances estimates
-   5 | `resid` | corresponds to the residual of the weighted least absolute devation problem used to estimate lineage abundances
-   6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
+   2 | `count` | total count of amplicons carrying the sites of interest
+   3 | `mut_all` | amplicons carrying mutations on all site of interest (e.g.: variant mutations observed on all sites)
+   4 | `mut_oneless` | amplicons where one mutation is missing (e.g.: only 2 out of 3 sites carried the variant mutation, 1 sites carries wild-type)
+   5 | `frac` | fraction (mut_all/count) or empty if no counts
+   6 | `cooc` | number of considered site (e.g.: 2 sites of interests) or empty if no counts
 
    > <question-title></question-title>
    > 
-   > 1. How many lineages were identified in sample SRR12596165 in metatranscriptomic-illumina dataset provided for this tutorial?
-   > 2. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
+   > 1. Which fraction of BA.1 lineage is identified on amplicon A72 in sample1 from ampliconic-illumina dataset provided for this tutorial?
+   > 2. How many amplicons carrying mutations on all site of interest are identified in sample 3?
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. In the second line of the table we see 7 lineages listed in column "lineages": B.10 B.47 B.23 B.26 B.1.14 B.20 B
+   > > 1. 0.8181818182
    > >
-   > > 2. In the 9th line of the table that corresponds to SRR12596170 sample, B.1.533 lineage is in the first position in the column "lineages". Then we look at the next column "abundances" and see in the first position is the proportion of B.1.533 which is 0.15773800.
-   > >
-   > {: .solution}
-   {: .question}
-
-2. **Lineages abundances plot**: This plot provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
-
-   > <question-title></question-title>
-   > 
-   > 1. Which WHO designated variant is prevalent in sample1 from ampliconic-illumina dataset provided for this tutorial?
-   > 1. What other lineages are present in this sample?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Omicron
-   > >
-   > > 2. Delta and Other
+   > > 2. 3
    > >
    > {: .solution}
    {: .question}
