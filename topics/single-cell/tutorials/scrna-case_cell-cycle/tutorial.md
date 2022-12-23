@@ -9,7 +9,7 @@ objectives:
 - Identify the cell cycle genes
 - Use the cell cycle genes to regress out the effects of the cell cycle
 - Create PCA plots to understand the impact of the regression
-- requirements:
+requirements:
 -
     type: "internal"
     topic_name: single-cell
