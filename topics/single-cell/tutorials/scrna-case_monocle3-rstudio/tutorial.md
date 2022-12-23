@@ -303,7 +303,7 @@ cds_clustered_new <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resol
 cluster_plot_new <- plot_cells(cds_clustered_new, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
 ```
 
-![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/ clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
+![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
 
 
 
