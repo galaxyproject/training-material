@@ -71,29 +71,14 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 {: .hands_on}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Get sequencing data
 
-Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced viral RNA from different patients infected with SARS-CoV-2. Several types of data are possible:
+Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced wastewater samples cantained SARS-CoV-2. Several types of data are possible:
 
-- Single-end data derived from Illumina-based RNAseq experiments
 - Paired-end data derived from Illumina-based RNAseq experiments
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
-- ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
-We encourage you to use your own data here (with at least 2 samples). If you do not have any datasets available, we provide some example datasets (paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols) from [COG-UK](https://www.cogconsortium.uk/), the COVID-19 Genomics UK Consortium.
+We encourage you to use your own data here (with at least 2 samples). If you do not have any datasets available, we provide some example datasets: 1) paired-end data generated with Illumina-based metatranscriptomic protocol from [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA661613), European Nucleotide Archive; 2) [paired-end data generated synthetically with Illumina-based Ampliconic (ARTIC) protocols](https://github.com/suskraem/ww_benchmark).
 
 There are several possibilities to upload the data depending on how many datasets you have and what their origin is:
 
@@ -131,67 +116,88 @@ There are several possibilities to upload the data depending on how many dataset
 >
 >      {% snippet faqs/galaxy/datasets_upload_ftp.md %}
 >
->    - Option 3: From the shared data library
->
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
->
->    - Option 4: From an external server via URL
+>    - Option 3: From an external server via URL
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URLs:
+>      For metatranscriptomic-illumina dataset:
 >
 >      ```
->      {{ page.zenodo_link }}/files/ERR5931005_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931005_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931006_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931006_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931007_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931007_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931008_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5931008_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949456_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949456_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949457_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949457_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949458_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949458_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949459_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949459_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949460_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949460_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949461_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949461_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949462_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949462_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949463_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949463_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949464_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949464_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949465_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949465_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949466_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949466_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949467_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949467_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949468_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949468_2.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949469_1.fastqsanger.gz
->      {{ page.zenodo_link }}/files/ERR5949469_2.fastqsanger.gz
+>      {{ page.zenodo_link }}/files/SRR12596165_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596165_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596166_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596166_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596167_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596167_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596168_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596168_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596169_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596169_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596170_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596170_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596171_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596171_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596172_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596172_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596173_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596173_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596174_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596174_2.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596175_1.fastq.gz
+>      {{ page.zenodo_link }}/files/SRR12596175_2.fastq.gz
+>      ```
+>      For ampliconic-illumina dataset:
+>
+>      ```
+>      https://zenodo.org/record/7469383/files/sample1_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample1_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample2_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample2_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample3_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample3_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample4_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample4_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample5_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample5_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample6_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample6_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample7_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample7_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample8_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample8_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample9_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample9_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample10_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample10_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample11_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample11_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample12_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample12_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample13_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample13_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample14_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample14_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample15_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample15_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample16_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample16_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample17_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample17_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample18_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample18_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample19_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample19_R2.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample20_R1.fastq.gz
+>      https://zenodo.org/record/7469383/files/sample20_R2.fastq.gz
 >      ```
 >
 > 2. Create a collection to organize the data
 >
->    - Option 1 [{% icon video %}](https://youtu.be/6ZU9hFjnRDo): Single-end data (Illumina or ONT data)
->
->      {% snippet faqs/galaxy/collections_build_list.md %}
->
->    - Option 2 [{% icon video %}](https://youtu.be/6toVj35q1r0): Paired-end data (Illumina data)
->
 >      {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 >      For the example datasets:
->      - Since the datasets carry `_1` and `_2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog.
+>      - Since the datasets carry `_1` and `_2` or `_R1` and `_R2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog.
 >
 >        You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
 >
@@ -199,8 +205,8 @@ There are several possibilities to upload the data depending on how many dataset
 >        - at the top of the *paired section*: click `Unpair all`
 >
 >          This will move all input datasets into the *unpaired section* in the upper half of the dialog.
->        - set the text of *unpaired forward* to: `_1.fastqsanger.gz`
->        - set the text of *unpaired reverse* to: `_2.fastqsanger.gz`
+>        - set the text of *unpaired forward* to: `_1.fastq.gz` or `_R1.fastq.gz`
+>        - set the text of *unpaired reverse* to: `_2.fastq.gz` or `_R2.fastq.gz`
 >        - click: `Auto-pair`
 >
 >        All datasets should be moved to the *paired section* again, but the middle column should now show that only the sample accession numbers will be used as the pair names.
@@ -224,61 +230,44 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 
 - a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the SnpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
 
-Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
+Another three datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
 
 - a BED file specifying the primers used during amplification and their binding sites on the viral genome
 - a custom tabular file describing the amplicon grouping of the primers
+- bedfile defining the amplicons that is used by Cojac: mutbamscan
 
 
 > <hands-on-title>Import auxiliary datasets</hands-on-title>
 >
 > 1. Import the auxiliary datasets:
 >    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
->    - gene product name aliases (`NC_045512.2_feature_mapping.tsv`)
->    - ARTIC v3 primer scheme (`ARTIC_nCoV-2019_v3.bed`)
->    - ARTIC v3 primer amplicon grouping info (`ARTIC_amplicon_info_v3.tsv`)
+>    - BED file containing ARTIC primer positions (`ARTIC_primer_BED.bed`)
+>    - ARTIC primer amplicon grouping info (`ARTIC_primers_to_amplicon_assignments.bed`)
+>    - bedfile defining the amplicons that is used by Cojac: mutbamscan (`BED_defining_amplicons_for_COJAC.bed`)
 >
->    > <details-title>Not using ARTIC v3 amplified sequencing data?</details-title>
+>    > <details-title>Not using ARTIC v4.1 amplified sequencing data?</details-title>
 >    >
 >    > The instructions here assume you will be analyzing the example samples
->    > suggested above, which have been amplified using version 3 of the ARTIC
+>    > suggested above, which have been amplified using version 4.1 of the ARTIC
 >    > network's SARS-CoV-2 primer set. If you have decided to work through
 >    > this tutorial using your own samples of interest, and if those samples
 >    > have been amplified with a different primer set, you will have to upload
 >    > your own datasets with primer and amplicon information at this point.
->    > If the primer set is from the ARTIC network, just not version 3, you
+>    > If the primer set is from the ARTIC network, just not version 4.1, you
 >    > should be able to obtain the primer BED file from
 >    > [their SARS-CoV-2 github repo](https://github.com/artic-network/artic-ncov2019/tree/master/primer_schemes/nCoV-2019).
->    > Look for a 6-column BED file structured like the version 3 one we suggest below.
->    > For the tabular amplicon info file, you only need to combine all primer names from
->    > the BED file that contribute to the same amplicon on a single tab-separated line.
->    > The result should look similar to the ARTIC v3 amplicon grouping info file we
->    >suggest to upload.
 >    {: .details}
 >
->    Several options exist to import these datasets:
->
->    - Option 1: From the shared data library
->
->      {% snippet faqs/galaxy/datasets_import_from_data_library.md path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" %}
->
->    - Option 2: From [Zenodo](https://zenodo.org/record/4555735)
+>    Import these datasets from [Zenodo](https://zenodo.org/record/7469383)
 >
 >      ```
->      https://zenodo.org/record/4555735/files/NC_045512.2_reference.fasta
->      https://zenodo.org/record/4555735/files/NC_045512.2_feature_mapping.tsv
->      https://zenodo.org/record/4555735/files/ARTIC_nCoV-2019_v3.bed
->      https://zenodo.org/record/4555735/files/ARTIC_amplicon_info_v3.tsv
+>      https://zenodo.org/record/7469383/files/NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta
+>      https://zenodo.org/record/7469383/files/ARTIC_primer_BED.bed
+>      https://zenodo.org/record/7469383/files/ARTIC_primers_to_amplicon_assignments.bed
+>      https://zenodo.org/record/7469383/files/BED_defining_amplicons_for_COJAC.bed
 >      ```
 >
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    - Option 3: From a shared history:
->      - On [usegalaxy.org](https://usegalaxy.org/u/aun1/h/artic-v3)
->      - On [usegalaxy.eu](https://usegalaxy.eu/u/nekrut/h/artic-v3)
->      - On [usegalaxy.org.au](https://usegalaxy.org.au/u/nekrut/h/artic-v3)
->
->      {% snippet faqs/galaxy/histories_import.md %}
 >
 >    For the example datasets, you will need to import all 4 auxiliary datasets.
 >
@@ -291,10 +280,10 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 >
 >    - Expand the view of each of the uploaded auxiliary datasets and see if
 >      Galaxy shows the following `format` values:
->      - for `NC_045512.2_reference.fasta`: `fasta`
->      - for `NC_045512.2_feature_mapping.tabular`: `tabular`
->      - for `ARTIC_nCoV-2019_v3.bed6`: `bed6` or `bed`
->      - for `ARTIC_amplicon_info_v3.tabular`: `tabular`
+>      - for `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`: `fasta`
+>      - for `ARTIC_primer_BED.bed`: `bed`
+>      - for `ARTIC_primers_to_amplicon_assignments.bed`: `bed` or `tabular`
+>      - for `BED_defining_amplicons_for_COJAC.bed`: `bed`
 >
 >    - If any of the above assignments are not what they should be, then change
 >      the datatype of the corresponding dataset now to the intended format.
@@ -308,6 +297,27 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 >    correctly already.
 >
 {: .hands_on}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # From FASTQ to annotated allelic variants
 
