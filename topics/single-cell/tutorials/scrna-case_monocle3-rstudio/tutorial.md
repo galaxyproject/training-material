@@ -233,34 +233,31 @@ listDatasets(mart) 	# available datasets
 Do you remember the Monocle workflow introduced in the previous tutorial? Here is a recap:
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
-
-## Normalisation and pre-processing
-Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. 
+Therefore, let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
 
 ```r
-cds_preprocessing <- preprocess_cds(cds, num_dim = 210) 	# PCA pre-processing with 210 principal components
+cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 	# PCA pre-processing with 210 principal components
 pca_plot <- plot_pc_variance_explained(cds)		# see the plot of variation in gene expression vs PCA components
 ```
 
-![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pcs_plot.jpg " Plot of variation in gene expression vs PCA components.")
+![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/num_dim.jpg " Plot of variation in gene expression vs PCA components.")
 
 The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset.
 
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The ‘shape’ of the plot showing how the cells are clustered depending on the num_dim argument.")
-
 
 ## Batch correction
 Our dataset actually comprises data from 7 samples, so there is a risk that the batch effects can be observed. Those are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
 First, let’s check how our dataset looks like in terms of batch effects. We can do that by colouring the cells by batch. This information is stored in our CDS object from cell_metadata file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column. In our case it’s indeed ‘batch’, but your data might have another name (eg. `plate`, etc.), so make sure you put the correct argument value.
 ```r
 colnames(colData(cds_preprocessing)) 	# check column names
-plot_cells(cds_preprocessing, color_cells_by="batch", label_cell_groups=FALSE)		# check for batch effects
+plot_before_batch_corr <- plot_cells(cds_preprocessing, color_cells_by="batch", label_cell_groups=FALSE)		# check for batch effects
 ```
 
 We can see that upper and lower right branches mostly consist of N705 and N706, so indeed batch correction might be helpful. Let’s run this. 
 ```r
 cds_batch <- align_cds(cds_preprocessing, preprocess_method = "PCA", alignment_group = "batch") 	# perform batch correction
-plot_cells(cds_batch, color_cells_by="batch", label_cell_groups=FALSE)		# see the batch correction
+plot_after_batch_corr <- plot_cells(cds_batch, color_cells_by="batch", label_cell_groups=FALSE)		# see the batch correction
 ```
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
@@ -269,12 +266,18 @@ Do you see this? That’s amazing! Batch correction did a great job here! Now th
 Now we can move to the next step and perform dimensionality reduction. 
 
 ## Dimensionality reduction
-The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Let’s just recall that UMAP gave the best results, so we will use UMAP now as well. Since we called `align_cds()` previously, we have to specify that `preprocess_method ` is now "Aligned" and not “PCA”. 
+The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well. Since we called `align_cds()` previously, we will specify that `preprocess_method ` is now "Aligned" and not “PCA”, however Monocle would do that automatically if no preprocess_method was specified.
 ```r
 cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP") 	# dimensionality reduction
 ```
 
-## Clustering 
+> <tip-title>Plotting: labels vs legend</tip-title>
+>
+>  When creating graphs, we sometimes use labels and sometimes just a legend. You can choose whichever you think makes the data clear and readable. If you want to use a legend, then specify an argument `label_cell_groups=FALSE` in the function `plot_cells()`. The labels are set automatically, but if you want to change their size (default labels are tiny), use the argument `group_label_size`.
+{: .tip}
+
+
+## Clustering - clusters
 We want to get some information about cell types, don’t we? In order to do so, we have to cluster our cells first. 
 Monocle uses a technique called "community detection" ({% cite Traag_2019 %}) to group cells. This approach was introduced by {% cite Levine_2015 %} as part of the phenoGraph algorithm.
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from {% cite Wolf_2019 %}, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
@@ -287,19 +290,38 @@ Monocle also divides the cells into larger, more well separated groups called pa
 >
 {: .details}
 
-Therefore, let’s perform clustering and visualise the resulting clusters and partitions.
+Therefore, let’s perform clustering and visualise the resulting clusters.
 ```r
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 	# clustering
-partition_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', group_label_size = 5) 	# see the partitions
 cluster_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the clusters
 ```
 
-When using standard igraph louvain clustering, the value of resolution parameter is by default set to NULL, which means that it is determined automatically. Although the resulting clusters are OK, it would be nice to get some more granularity. The higher the resolution value, the more clusters we get. We will set the resolution value to 0.0002, but you are very welcome to try different values to see the changes.
+When using standard igraph louvain clustering, the value of resolution parameter is by default set to NULL, which means that it is determined automatically. Although the resulting clusters are OK, it would be nice to get some more granularity to identify cell types more specifically. The higher the resolution value, the more clusters we get. We will set the resolution value to 0.0002, but you are very welcome to try different values to see the changes.
 
 ```r
 cds_clustered_new <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 	# clustering with changed resolution value
 cluster_plot_new <- plot_cells(cds_clustered_new, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
 ```
+
+![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/ clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
+
+
+
+## Clustering - partitions
+OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. Note that above we only changed the value of resolution which affects exclusively clusters, so `cds_clustered` and `cds_clustered_new` store the same partition information, so to visualise partitions you can call either of them.
+
+```r
+partition_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the partitions
+```
+
+With the default parameters almost all the cells were assigned to one partition. That’s good news – we can learn the trajectory graph now without the need for changing any arguments (we ignore those several cells assigned to partition 2). However, that’s not always the case. Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. In some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
+
+## Additional step: assigning cells to one partition
+> <warning-title>Additional step</warning-title>
+>  This step is not necessary for the dataset we are working on but some users might find it helpful when analysing their own data.
+>
+{: .warning}
+
 
 
 
