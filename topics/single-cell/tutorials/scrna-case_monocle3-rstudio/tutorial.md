@@ -292,23 +292,23 @@ Monocle also divides the cells into larger, more well separated groups called pa
 
 Therefore, let’s perform clustering and visualise the resulting clusters.
 ```r
-cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 	# clustering
-cluster_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the clusters
+cds_auto_cluster <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 	# clustering
+auto_cluster_plot <- plot_cells(cds_auto_cluster, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the clusters
 ```
 
 When using standard igraph louvain clustering, the value of resolution parameter is by default set to NULL, which means that it is determined automatically. Although the resulting clusters are OK, it would be nice to get some more granularity to identify cell types more specifically. The higher the resolution value, the more clusters we get. We will set the resolution value to 0.0002, but you are very welcome to try different values to see the changes.
 
 ```r
-cds_clustered_new <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 	# clustering with changed resolution value
-cluster_plot_new <- plot_cells(cds_clustered_new, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
+cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 	# clustering with changed resolution value
+cluster_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
 ```
 
-![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
+![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/ clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
 
 
 
 ## Clustering - partitions
-OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. Note that above we only changed the value of resolution which affects exclusively clusters, so `cds_clustered` and `cds_clustered_new` store the same partition information, so to visualise partitions you can call either of them.
+OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. Note that above we only changed the value of resolution which affects exclusively clusters, so `cds_auto_cluster` and `cds_clustered` store the same partition information, so to visualise partitions you can call either of them.
 
 ```r
 partition_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the partitions
@@ -321,6 +321,67 @@ With the default parameters almost all the cells were assigned to one partition.
 >  This step is not necessary for the dataset we are working on but some users might find it helpful when analysing their own data.
 >
 {: .warning}
+
+Let’s assume we have 4 partitions that cannot be extended to one big partition using `partition_qval` (it might sound unreasonable but it does happen!) and we are desperate to have all the cells in one partition to draw a trajectory through all of them. We can simulate the initial dataset by setting `partition_qval` value to 0.0001.
+```r
+cds_partitions_extra <- cluster_cells(cds_red_dim, reduction_method = "UMAP", partition_qval = 0.0001)		# simulate the dataset
+partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the partitions
+
+big_partition <- c(rep(1,length(cds_partitions_extra@colData@rownames))) 	# stores ‘1’ the number of times equal to the number of cells 
+names(big_partition) <- cds_partitions_extra@colData@rownames 	# takes the barcode of each cell and assigns ‘1’ to each of them (now the ‘ones’ are named) 
+big_partition <- as.factor(big_partition)		# converts from numeric to factor
+cds_partitions_extra@clusters$UMAP$partitions <- big_partition 	# assigns the created barcodes-partition list to the location where information about partitions is stored in CDS object
+
+partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the new partition assignment
+
+```
+
+![Left image showing the dataset divided into 4 partitions. Right image showing all cells assigned to one partition.](../../images/scrna-casestudy-monocle/ partitions_compare.png "The result of the manual assignment of all the cells to one partition.")
+
+
+> <details-title>@ and $ operators</details-title>
+>
+> As you saw above, we used `@` and `$` operators to navigate in CDS object. What is the difference between them? `$` operator is used to access one variable/column, while `@` extracts the contents of a slot in an object with a formal (S4) class structure. If you use `View()` function on our CDS object, you will see the elements of type ‘S4’ that you can access using `@` operator. The suggestion list of elements that can be accessed should also pop up as you type the name of the object followed by the corresponding operator. 
+>
+{: .details}
+
+# Assigning cell types
+There are two main approaches to assigning cell types to clusters that we’ve just identified – supervised and unsupervised, both based on gene expression in each cluster. 
+
+Supervised approach relies on the fact that having a reference, we know which cell types to expect and we can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}. 
+
+| Marker | Cell type |
+|--------------------|
+| Il2ra    | Double negative (early T-cell)    |
+| Cd8b1, Cd8a, Cd4    | Double positive (middle T-cell)|
+| Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
+| Itm2a    | Mature T-cell |
+| Aif1    | Macrophages    |
+| Hba-a1    | RBC    |
+
+To plot all those genes in one go, we will pass a vector with the names of those markers into a parameter `genes` in the `plot_cells` function.
+```r
+gene_plot <- plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'))
+```
+
+![Expression on the genes: 'Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'.](../../images/scrna-casestudy-monocle/genes.png "Expression of the reference marker genes across analysed sample")
+
+Let’s start with the unsupervised approach. We will check what are the marker genes for each cluster and why they are different form each one another. We will store the information about specifically expressed genes for each cluster in the data frame ‘marker_test’
+```r
+marker_test <- top_markers(cds_clustered, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
+```
+You can group the cells by any categorical variable in colData(cds_clustered). The parameter `reference_cells` is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.
+> <question-title></question-title>
+>
+> What are the variables stored in `marker_test` data frame?
+>
+> > <solution-title></solution-title>
+> >
+> > Those are 10 variables: `gene_id`, `gene_short_name`, `cell_group`, `marker_score`, `mean_expression`, `fraction_expressing`, `specificity`, `pseudo_R2`, `marker_test_p_value`, `marker_test_q_value`. You can check that easily either using colnames(marker_test_res) or `View(marker_test)` which will also display all the corresponding values. 
+> >
+> {: .solution}
+>
+{: .question}
 
 
 
