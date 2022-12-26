@@ -421,15 +421,26 @@ You can group the cells by any categorical variable in colData(cds_clustered). T
 
 > <question-title></question-title>
 >
-> What are the variables stored in `marker_test` data frame?
+> What are the variables stored in `marker_test` data frame and what do they mean?
 >
 > > <solution-title></solution-title>
 > >
-> > Those are 10 variables: `gene_id`, `gene_short_name`, `cell_group`, `marker_score`, `mean_expression`, `fraction_expressing`, `specificity`, `pseudo_R2`, `marker_test_p_value`, `marker_test_q_value`. You can check that easily either using colnames(marker_test_res) or `View(marker_test)` which will also display all the corresponding values. 
+> > Those are 10 variables that you can check easily either using colnames(marker_test_res) or `View(marker_test)` which will also display all the corresponding values. 
+> >- `gene_id` - Ensembl gene ID
+> >- `gene_short_name` - short name of the gene corresponding to its ID
+> >- `cell_group` - a group to which the cell belongs, specified in the `group_cells_by` argument
+> >- `marker_score` - numeric vector of marker scores as the fraction expressing scaled by the specificity. The value ranges from 0 to 1
+> >- `mean_expression` -  numeric vector of mean normalized expression of the gene in the cell group
+> >- `fraction_expressing` - numeric vector of fraction of cells expressing the gene within the cell group
+> >- `specificity` -  numeric vector of a measure of how specific the gene's expression is to the cell group based on the Jensen-Shannon divergence. The value ranges from 0 to 1.
+> >- `pseudo_R2` - numeric vector of pseudo R-squared values, a measure of how well the gene expression model fits the categorical data relative to the null model. The value ranges from 0 to 1.
+> >- `marker_test_p_value` - numeric vector of likelihood ratio p-values
+> >- `marker_test_q_value` -  numeric vector of likelihood ratio q-values
 > >
 > {: .solution}
 >
 {: .question}
+
 
 
 
