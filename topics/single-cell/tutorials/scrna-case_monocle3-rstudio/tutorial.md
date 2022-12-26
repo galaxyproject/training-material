@@ -359,18 +359,66 @@ Supervised approach relies on the fact that having a reference, we know which ce
 | Aif1    | Macrophages    |
 | Hba-a1    | RBC    |
 
-To plot all those genes in one go, we will pass a vector with the names of those markers into a parameter `genes` in the `plot_cells` function.
+To plot all those genes in one go, we will pass a vector with the names of those markers into a parameter `genes` in the `plot_cells` function. 
 ```r
-gene_plot <- plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'))
+gene_plot <- plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'), reduction_method = "UMAP")
 ```
 
-![Expression on the genes: 'Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'.](../../images/scrna-casestudy-monocle/genes.png "Expression of the reference marker genes across analysed sample")
+![7 graphs, each showing expression of one of the genes in the corresponding clusters: 'Il2ra' – cluster 4; 'Cd8b1' and 'Cd8a' – clusters 1,6,2; 'Cd4' – high expression in cluster 5; 'Itm2a' – cluster 3; 'Aif1' – barely anything, no specific cluster assigned; 'Hba-a1' - throughout the entire sample in low numbers.](../../images/scrna-casestudy-monocle/genes.png "Expression of the reference marker genes across analysed sample.")
 
-Let’s start with the unsupervised approach. We will check what are the marker genes for each cluster and why they are different form each one another. We will store the information about specifically expressed genes for each cluster in the data frame ‘marker_test’
+
+> <question-title>Genes, cell types and clusters</question-title>
+> Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorials, how would you assign the clusters?
+>
+> > <solution-title></solution-title>
+> > 
+> > - `Il2ra` (DN): mostly expressed in cluster 4
+> > - `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
+> > - `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5 
+> > - `Itm2a` (T-mat): expressed in cluster 3
+> > - `Aif1` (macrophages): barely anything here, minimal expression spread across the sample with some more cells in cluster 4 and 3 – not enough to form a distinct cluster though). In theory, we shouldn’t have any macrophages in our sample. If you remember from the previous tutorials, we actually filtered out macrophages from the sample during the processing step, because we worked on annotated data. When analysing unannotated data, only now we see where the macrophages are expressed – we could indeed assign them and then filter out, provided that Monocle clusters them into a separate group. As you can see, it’s not the case here, so we will just carry on with the analysis, keeping in mind this contamination. 
+> > - `Hba-a1` (RBC): well, appears throughout the entire sample in low numbers suggesting some background contamination of red blood cell debris in the cell samples during library generation, but also shows higher expression in a distinct tiny bit of cluster 3, at the border between clusters 1 and 5. However, it’s too small to be clustered into a separate group and filter out in this case. 
+If you remember, this gene was found to be expressed in the previous Scanpy tutorial also in low numbers across the sample, and in the other Monocle tutorial (using Galaxy tools and annotated data) algorithms allowed us to gather the cells expressing that gene into a distinct group. Our result now sits somewhere in between. 
+> > ![In Scanpy graph the marker gene appears throughout the entire sample in low numbers, in Monocle in Galaxy cells expressing hemoglobin gene were grouped into a small branch of DP-M4, allowing to group those cells. Monocle in RStudio graph is somewhere in between showing mostly low expression across the sample, but also having a tiny bit of grouped cells, less distinct than in Galaxy though.](../../images/scrna-casestudy-monocle/hb_all.png "Hemoglobin across clusters - comparison between Scanpy, Monocle using Galaxy tools and Monocle run in RStudio.")
+> >
+> {: .solution}
+{: .question}
+
+Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for clusters annotation.
+
 ```r
-marker_test <- top_markers(cds_clustered, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
+cds_annotated <- cds_clustered 	# just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis 
+
+# create a new column ‘cell_type’ and initialise it with clusters values
+colData(cds_annotated)$cell_type <- as.character(clusters(cds_annotated)) 	
+
+# install and load dplyr package
+install.packages("dplyr")	 
+library(dplyr)
+
+# annotate clusters
+colData(cds_annotated)$cell_type <- dplyr::recode(colData(cds_annotated)$cell_type,
+                                                       '1'=’DP-M1’, 	# double positive – middle T-cell (1st cluster)
+                                                       '2'='DP-M2',	# double positive – middle T-cell (2nd cluster)
+                                                       '3'='T-mat',	# mature T-cell
+                                                       '4'='DN',		# double negative – early T-cell
+                                                       '5'='DP-L',	# double positive – late middle T-cell
+                                                       '6'='DP-M3',	# double positive – middle T-cell (3rd cluster)
+                                                       '7'='Unknown')	# no info for now, so call it ‘Unknown’
+
+# check the annotation 
+annotated_plot <- plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)    
+```
+
+![A plot showing the identified clusters, now each coloured by the assigned cell type.](../../images/scrna-casestudy-monocle/annotated.png "Our annotated dataset.")
+
+But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cells the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results. 
+We will use Monocle’s function ` top_markers()` and store the information about specifically expressed genes for each cluster in the data frame ‘marker_test’.
+```r
+marker_test <- top_markers(cds_annotated, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
 ```
 You can group the cells by any categorical variable in colData(cds_clustered). The parameter `reference_cells` is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.
+
 > <question-title></question-title>
 >
 > What are the variables stored in `marker_test` data frame?
