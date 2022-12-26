@@ -303,7 +303,7 @@ cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolutio
 cluster_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
 ```
 
-![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/ clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
+![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
 
 
 
@@ -336,7 +336,7 @@ partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMA
 
 ```
 
-![Left image showing the dataset divided into 4 partitions. Right image showing all cells assigned to one partition.](../../images/scrna-casestudy-monocle/ partitions_compare.png "The result of the manual assignment of all the cells to one partition.")
+![Left image showing the dataset divided into 4 partitions. Right image showing all cells assigned to one partition.](../../images/scrna-casestudy-monocle/partitions_compare.png "The result of the manual assignment of all the cells to one partition.")
 
 
 > <details-title>@ and $ operators</details-title>
