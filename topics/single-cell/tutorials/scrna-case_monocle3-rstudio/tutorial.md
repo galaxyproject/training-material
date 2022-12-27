@@ -528,7 +528,7 @@ trajectory_plot <- plot_cells(cds_trajectory,
            label_branch_points=FALSE)
 ```
 
-![Learned trajectory graph connecting all the annotated clusters except the ‘Unknown’ group of cells.](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory graph.")
+![Learned trajectory graph connecting all the annotated clusters except the ‘Unknown’ group of cells.](../../images/scrna-casestudy-monocle/learned_trajectory_r.png "Learned trajectory graph.")
 
 We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster. 
 There are a couple of ways to specify the root cells:
