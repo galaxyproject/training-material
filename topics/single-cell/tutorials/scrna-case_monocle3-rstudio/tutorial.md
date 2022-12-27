@@ -512,6 +512,117 @@ cds_subset <- choose_cells(cds_clustered)
 Now the chosen cluster is stored as a separate CDS object and you can analyse it independently, using the methods described above.
 
 # Trajectory inference 
+It’s time to perform trajectory analysis! First, let’s learn the trajectory graph. With an argument `use_partition` we can specify if we want to learn a disjoint graph (value TRUE - default) in each partition, or to learn a single graph (value FALSE) across all partitions. The thing is, we can visualise the cells in pseudotime only if they belong to one partition. In other words, you cannot learn disjoint graph and plot all the cells the graph is going through in pseudotime. This is why it is important to make sure that all the cells that you want to analyse in pseudotime belong to one partition. 
+When we were checking the results of clustering, we got two partitions – one containing only the cells that we labeled as ‘Unknown’ and another including all other cells. That is a perfect assignment – we’d like to focus only on maturation of T-cells, so we don’t want to connect those two partitions (therefore we specify `use_partition=TRUE` to get a disjoint graph) and we will work downstream only on the graph going through annotated T-cells.
+
+```r
+# learn trajectory graph
+cds_trajectory <- learn_graph(cds_annotated, use_partition=TRUE)
+
+# visualise the learned trajectory
+trajectory_plot <- plot_cells(cds_trajectory,
+           color_cells_by = "cell_type",
+           label_cell_groups=FALSE,
+           label_groups_by_cluster=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE)
+```
+
+![Learned trajectory graph connecting all the annotated clusters except the ‘Unknown’ group of cells.](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory graph.")
+
+We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster. 
+There are a couple of ways to specify the root cells:
+1.	Use the pop-up window and simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.
+```r
+cds_order_1 <- order_cells(cds_trajectory)
+```
+
+2.	Use `root_pr_nodes` argument.
+To find the names of the principal points, you have to plot the learned trajectory again, specifying `label_principal_points = TRUE`
+```r
+pr_points_plot <- plot_cells(cds_trajectory,
+           color_cells_by = "cell_type",
+           label_cell_groups=FALSE,
+           label_groups_by_cluster=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE,
+           label_principal_points = TRUE,
+           graph_label_size=3)
+```
+You can see now the the principal points and their labels in the form `Y_number`. Pick the principal point in the cluster that you expect to be the beginning of the trajectory and type its name in the `root_pr_nodes` argument when calling `order_cells()` function.
+
+```r
+cds_order_2 <- order_cells(cds_trajectory, root_pr_nodes=”Y_14”)
+```
+
+There is also a helper function to identify the root principal points based on the annotated cell types. This function uses `pr_graph_cell_proj_closest_vertex` which is just a matrix with a single column that stores for each cell, the ID of the principal graph node it's closest to.
+```r
+# a helper function to identify the root principal points
+get_correct_root_state <- function(cds, cell_phenotype, root_type){
+  cell_ids <- which(pData(cds)[, cell_phenotype] == root_type)
+  
+  closest_vertex <-
+    cds@principal_graph_aux[["UMAP"]]$pr_graph_cell_proj_closest_vertex
+  closest_vertex <- as.matrix(closest_vertex[colnames(cds), ])
+  root_pr_nodes <-
+    igraph::V(principal_graph(cds)[["UMAP"]])$name[as.numeric(names
+                                                              (which.max(table(closest_vertex[cell_ids,]))))]
+  
+  root_pr_nodes
+}
+
+# call the function to automatically find the node in the principal graph where our DN cells reside
+DN_node_id = get_correct_root_state(cds_trajectory,
+                                      cell_phenotype =
+                                        'cell_type', "DN")
+
+# order cells using the helper function output
+cds_order_2_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
+```
+
+
+3.	Use `root_cells` argument. 
+Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type. 
+
+```r
+# find the names of all cells belonging to a certain type, identified as a beginning of a trajectory
+starting_cell_type <- 'DN'
+index <- which(cds_learn@colData$cell_type == starting_cell_type)
+DN_cells <- colnames(cds_learn)[index]
+
+# alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
+starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
+
+# order cells 
+cds_order_3 <- order_cells(cds_trajectory, root_cells = DN_cells)
+```
+
+You can use any `cds_order` object for the downstream analysis. Let’s pick one and assign it to an object with a shorter and more general name. 
+```r
+cds_order <- cds_order_2_helper
+```
+
+ The function `order_cells()` calculates pseudotime for each cell, so we can now visualise the T-cell maturation process in pseudotime! Additionally, we can access it and store in our CDS object for further analysis.
+
+```r
+# plot cells in pseudotime
+pseudotime_plot <- plot_cells(cds_order,
+           color_cells_by = "pseudotime",
+           label_cell_groups=FALSE,
+           label_leaves=FALSE,
+           label_branch_points=FALSE)
+
+# access pseudotime calculated for each cell and store it alongside cell metadata 
+pseudotime <- pseudotime(cds_order) 	
+cds_order@colData$pseudotime <- pseudotime 		 
+```
+
+![Plot of the cells ordered in pseudotime. The trajectory starts at double negative cells (ie. pseudotime = 0) which are coloured blue, then goes through double positive (middle T-cells), gradually changing colour from purple to pink, then double positive (late T-cells) are coloured orange and the trajectory ends at T-mature cells, which are coloured yellow.](../../images/scrna-casestudy-monocle/pseudotime_r.png "Cells ordered in pseudotime.")
+
+We can now see how our hard work has come together to give a final pseudotime trajectory analysis, which starts at double negative cells, then gently switches to double positives: from middle to late T-cells, and ends up on mature T-cells. 
+
+# Differential expression analysis
+
 
 
 
