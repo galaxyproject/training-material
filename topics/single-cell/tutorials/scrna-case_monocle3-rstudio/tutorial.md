@@ -412,10 +412,11 @@ annotated_plot <- plot_cells(cds_annotated, color_cells_by="cell_type", label_ce
 
 ![A plot showing the identified clusters, now each coloured by the assigned cell type.](../../images/scrna-casestudy-monocle/annotated.png "Our annotated dataset.")
 
+# Gene expression in clusters - identify cell types 
 But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cells the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results. 
 We will use Monocle’s function ` top_markers()` and store the information about specifically expressed genes for each cluster in the data frame ‘marker_test’.
 ```r
-marker_test <- top_markers(cds_annotated, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
+marker_test <- top_markers(cds_clustered, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
 ```
 You can group the cells by any categorical variable in colData(cds_clustered). The parameter `reference_cells` is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.
 
@@ -425,23 +426,92 @@ You can group the cells by any categorical variable in colData(cds_clustered). T
 >
 > > <solution-title></solution-title>
 > >
-> > Those are 10 variables that you can check easily either using colnames(marker_test_res) or `View(marker_test)` which will also display all the corresponding values. 
+> > Those are 10 variables that you can check easily either using colnames(marker_test) or `View(marker_test)` which will also display all the corresponding values. 
 > >- `gene_id` - Ensembl gene ID
 > >- `gene_short_name` - short name of the gene corresponding to its ID
 > >- `cell_group` - a group to which the cell belongs, specified in the `group_cells_by` argument
 > >- `marker_score` - numeric vector of marker scores as the fraction expressing scaled by the specificity. The value ranges from 0 to 1
 > >- `mean_expression` -  numeric vector of mean normalized expression of the gene in the cell group
 > >- `fraction_expressing` - numeric vector of fraction of cells expressing the gene within the cell group
-> >- `specificity` -  numeric vector of a measure of how specific the gene's expression is to the cell group based on the Jensen-Shannon divergence. The value ranges from 0 to 1.
+> >- `specificity` - numeric vector of a measure of how specific the gene's expression is to the cell group based on the Jensen-Shannon divergence. The value ranges from 0 to 1.
 > >- `pseudo_R2` - numeric vector of pseudo R-squared values, a measure of how well the gene expression model fits the categorical data relative to the null model. The value ranges from 0 to 1.
-> >- `marker_test_p_value` - numeric vector of likelihood ratio p-values
-> >- `marker_test_q_value` -  numeric vector of likelihood ratio q-values
+> >- `marker_test_p_value` - numeric vector of likelihood ratio p-values; p-value is an area in the tail of a distribution that tells you the odds of a result happening by chance
+> >- `marker_test_q_value` -  numeric vector of likelihood ratio q-values; q-value is a p-value that has been adjusted for the False Discovery Rate (FDR)
 > >
 > {: .solution}
 >
 {: .question}
 
+We can now use data in `marker_test` to rank the cells based on one of the specificity metrics and take the top gene for each cluster. We will filter the expressing cells that constitute more than 10% of the cell group and we will take 2 genes in each cluster with the highest `pseudo_R2` value (you can of course modify this value and choose more genes to be selected). 
 
+```r
+# filter the ‘marker_test’ data frame
+top_ markers <- marker_test %>%
+                            filter(fraction_expressing >= 0.10) %>%
+                            group_by(cell_group) %>%
+                            top_n(2, pseudo_R2)
+
+# store the names of the marker genes 
+top_ marker_names <- unique(top_specific_markers %>% pull(gene_short_name)) 	# you can also use IDs, the conversion to gene names should happen automatically when plotting 
+```
+
+Now we have all elements to plot the expression and fraction of cells that express found markers in each group. 
+
+```r
+genes_group_plot <- plot_genes_by_group(cds_clustered,	# our CDS object
+                    top_marker_names,		# a list of gene names to show in the plot
+                    group_cells_by="cluster",	# how to group cells when labeling 
+                    ordering_type="maximal_on_diag", 		# how to order the genes / groups on the dot plot; only accepts 'cluster_row_col', 'maximal_on_diag' and 'none'
+```
+
+![A dot plot showing the expression of genes and fraction of cells that express found markers in each group. On the diagonal there are two genes corresponding to each cluster with the highest pseudo_R2 score in their group.](../../images/scrna-casestudy-monocle/gene_group.png "A plot of the expression and fraction of cells that express found markers in each group.")
+
+Look at this – we identified some more marker genes specific to each cluster! However, sometimes it happens that the found genes are not as specific as one would expect, and they appear across the whole sample. Therefore, it is a good idea to plot all those marker genes and check how they appear in the bigger picture. 
+
+```r
+markers_plot <- plot_cells(cds_clustered, genes=c('Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'), reduction_method = "UMAP")
+```
+
+![Plots showing the expression of fourteen found marker genes across the whole sample. Those genes are 'Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'.](../../images/scrna-casestudy-monocle/markers_plot.png "Plots of the expression of marker genes across the sample.")
+
+Further steps from now would include reviewing literature and checking what cell types correspond to the genes expressed in each cluster. Then you can annotate your clusters in the same way as shown above. Once you have your clusters annotated, Monocle can generate a file of marker genes for the identified cell types. This file can be then used with [Garnett](https://cole-trapnell-lab.github.io/garnett/), a software toolkit for automatically annotating cells. We will not go through this in the current tutorial, but we will generate the file of marker genes.
+
+```r
+# use ‘top_markers()’ again, now grouping cells by the assigned cell type
+assigned_ marker_test <- top_markers(cds_annotated,
+                                             group_cells_by="cell_type",
+                                             reference_cells=1000,
+                                             cores=8)
+
+# filter these markers according to how stringent you want to be
+garnett_markers <- assigned_ marker_test %>%
+                        filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
+                        group_by(cell_group) %>%
+                        top_n(5, marker_score)
+
+# exclude genes that are good markers for more than one cell type:
+garnett_markers_filtered <- garnett_markers %>% 
+                        group_by(gene_short_name) %>%
+                        filter(n() == 1)
+
+# generate a file of marker genes
+generate_garnett_marker_file(garnett_markers_filtered, file="./marker_file.txt")
+```
+
+A new file should appear in the ‘Files’ window. If you click on it, you will see the cell types and their corresponding marker genes, satisfying your chosen conditions. 
+
+> <tip-title>Marker genes file</tip-title>
+>
+>  Note that you can use the above block of code to generate file with the marker genes for unannotated CDS object to help you identify and check specifically expressed genes – you’d only have to change `group_cells_by` parameter from "cell_type" to “cluster”. 
+{: .tip}
+
+You may also want to investigate certain clusters more in-depth. Then, you can make a subset of the CDS object containing only cells of interest. If you call `choose_cells()`, then a pop-up window will appear where you can choose cells to subset. 
+```r
+cds_subset <- choose_cells(cds_clustered)
+```
+Now the chosen cluster is stored as a separate CDS object and you can analyse it independently, using the methods described above.
+
+# Trajectory inference 
 
 
 
