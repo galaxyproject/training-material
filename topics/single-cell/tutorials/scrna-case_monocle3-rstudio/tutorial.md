@@ -622,6 +622,103 @@ cds_order@colData$pseudotime <- pseudotime
 We can now see how our hard work has come together to give a final pseudotime trajectory analysis, which starts at double negative cells, then gently switches to double positives: from middle to late T-cells, and ends up on mature T-cells. 
 
 # Differential expression analysis
+There are two approaches for differential analysis in Monocle:
+•	Regression analysis: using `fit_models()`, you can evaluate whether each gene depends on variables such as time, treatments, etc.
+•	Graph-autocorrelation analysis: using `graph_test()`, you can find genes that vary over a trajectory or between clusters.
+
+In this section, for some examples, we will work on the subset of our CDS object because the computation time for the whole dataset would take quite some time. Let’s make the subset CDS contain the information associated with the genes listed in the table in the previous section, so instead having 15395 elements, it will have only 7. 
+```r
+test_genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1')
+cds_subset <- cds_order[rowData(cds_order)$gene_short_name %in% test_genes,]
+```
+
+## Some more plotting
+Monocle also provides some easy ways to plot the expression of a small set of genes grouped by the factors you use during differential analysis.
+For example `plot_genes_violin()` allows us to create violin plots which are quite common in the field. Therefore let’s visualise how the gene expression changes between the cell types.
+```r
+violin_plot <- plot_genes_violin(cds_subset, group_cells_by="cell_type", ncol=2)
+```
+
+![ Violin plots of the expression of the specified genes in each assigned cell type. The trends are consistent with the previous biological interpretation and assignment.](../../images/scrna-casestudy-monocle/violin_plots.png " Violin plots of the expression of the specified genes in each assigned cell type.")
+
+Another great function `plot_genes_in_pseudotime()` takes a small set of genes and shows their dynamics as a function of pseudotime. 
+```r
+genes_in_pseudotime_plot <- plot_genes_in_pseudotime(cds_sub,
+                           color_cells_by="cell_type",
+                           min_expr=0.5)
+```
+
+![On the left hand side scatter plots of expression of the specified genes in pseudotime. On the right hand side also the expression of specified genes as a function of pseudotime but shown with the cell type data superimposed. Again the trends are consistent with the previous biological interpretation and assignment](../../images/scrna-casestudy-monocle/genes_in_pseudotime.png " A visualisation of how specified genes change in the pseudotime.")
+
+
+## Regression analysis - advanced
+We will use a function which fits a generalized linear model for each gene in a CDS object. We have to specify the model formula which is any term that exists as a column in `colData()`. We want to test genes that differ between cell types and batches, so we will use "~cell_type + batch" argument. Then, we extract a table of coefficients from each model. `coefficient_table()` tests whether each coefficient differs significantly from zero under the Wald test. 
+
+```r
+gene_fits <- fit_models(cds_subset, model_formula_str = "~ cell_type + batch") 		# fit a generalized linear model for each gene
+fit_coefs <- coefficient_table(gene_fits) 		#  extract a table of coefficients
+```
+If you inspect the `fit_coefs` object, you will notice that the table includes one row for each term of each gene's model. We generally don't care about the intercept term, so we can filter it out. In this way, we will be able to control for the chosen factors. To focus on only one variable, you have to check the `term` column in the `fit_coefs` and pass this as an argument for filtering. Then, you should also filter the results with q_value < 0.05 to control the false discovery rate. 
+
+```r
+no_intercept_coefs <- fit_coefs %>% filter(term != "(Intercept)") 	# filter out Intercept term
+DP-M1_coefs <- fit_coefs %>% filter(term == "cell_typeDP-M1") 	# extract results for DP-M1 cells only
+DP-M1_coefs_filtered <- clusters_only %>% filter (q_value < 0.05) %>%
+  select(gene_short_name, term, q_value, estimate)		# control the false discovery rate and choose only several variables to store
+```
+The resulting table shows the genes that differ depending on the chosen term. Maybe this function is not very helpful in the case of our dataset, but may be useful when analysing unannotated data or choosing another term from `colData()`.
+
+## Graph-autocorrelation analysis - advanced
+Alongside regression analysis, Monocle also provides another way of finding genes that vary between groups of cells. The function `graph_test()` uses a statistic from spatial autocorrelation analysis called [Moran's I](https://en.wikipedia.org/wiki/Moran%27s_I), which Cao & Spielmann et al showed to be effective in finding genes that vary in single-cell RNA-seq datasets. Let’s try to perform this step on our full dataset (be patient!).
+```r
+graph_test_res <- graph_test(cds_order, neighbor_graph="knn", cores=8)
+```
+
+The output data frame has a bunch of statistical values that you can use to rank the genes by. For example, `morans_I` column, which ranges from -1 to +1. A value of 0 indicates no effect, while +1 indicates perfect positive autocorrelation and suggests that nearby cells have very similar values of a gene's expression. 
+
+We will now try to associate genes with clusters by grouping genes into modules that have similar patterns of expression. You can call `find_gene_modules()`, which essentially runs UMAP on the genes (as opposed to the cells) and then groups them into modules using Louvain community analysis.
+
+```r
+pr_deg_ids <- row.names(subset(graph_test_res, q_value < 0.05)) 	# get gene IDs for which q-value < 0.05
+gene_module_df <- find_gene_modules(cds_order[pr_deg_ids,], resolution=1e-2) 	# group genes into modules
+```
+Now we can show the aggregate expression of all genes in each module across all the clusters. Monocle provides a simple utility function called `aggregate_gene_expression` for this purpose:
+
+```r
+cell_group_df <- tibble::tibble(cell=row.names(colData(cds_order)), 
+                                cell_group=clusters(cds_order)[colnames(cds_order)])
+agg_mat <- aggregate_gene_expression(cds_order, gene_module_df, cell_group_df)
+row.names(agg_mat) <- stringr::str_c("Module ", row.names(agg_mat))
+colnames(agg_mat) <- stringr::str_c("Cluster ", colnames(agg_mat))
+
+pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE,
+                   scale="column", clustering_method="ward.D2",
+                   fontsize=6)
+```
+![A heatmap showing modules of co-regulated genes across the clusters. Modules listed vertically while clusters horizontally. Some modules are highly specific to certain partitions of cells, while others are shared across multiple partitions.](../../images/scrna-casestudy-monocle/heatmap.png "Heatmap showing modules of co-regulated genes across the clusters.")
+
+You can also visualise the modules using `plot_cells()` function.
+```r
+modules_plot <- plot_cells(cds_order, 
+           genes=gene_module_df %>% filter(module %in% c(42, 41, 38, 19)),
+           group_cells_by="cluster",
+           color_cells_by="cluster",
+           show_trajectory_graph=FALSE)
+```
+![Plots showing expression of the genes belonging to specified modules across whole sample. Module 19 highly expressed in cluster 2 but also low expression thtoughout the sample, module 38 low expression but throughout the sample, module 41 highly expressed in cluster 5 only, module 42 almost no expression, except cluster 6.](../../images/scrna-casestudy-monocle/modules_plot.png "Plots of expression of the genes belonging to specified modules across whole sample.")
+
+With the visualisation methods above, you can now come back to the generated data frame `gene_module_df`, filter genes that belong to the module of interest, check their functions to get some more tips for biological interpretation. 
+
+
+# 3D plotting
+Let’s have some fun at the end! That was quite a long and insightful analysis – you definitely deserve to look at some nice, rotatable, cool plot now! 
+Essentially the workflow is the same as we followed in two dimensions. The crucial part is to specify the dimensionality of the reduced space with the `max_components` parameter in `reduce_dimension()` function. The default is 2, but if we want to see our data in 3D, we will change that value to 3. From there, you can just repeat the next steps in 3D… or just reward yourself by toggling the 3D plot for completing this tutorial!
+
+```r
+cds_3d <- reduce_dimension(cds_order, preprocess_method = 'Aligned', max_components = 3)
+3d_plot <- plot_cells_3d(cds_3d, color_cells_by="cell_type")
+```
+
 
 
 
