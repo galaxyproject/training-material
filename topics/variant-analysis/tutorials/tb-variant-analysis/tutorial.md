@@ -284,6 +284,7 @@ the PE/PPE gene family. Historically all of the genomic regions corresponding to
 > call insertions and deletions (indels) but more recent tools (e.g. GATK v4 and the variant caller used in Snippy, Freebayes) no longer have this weakness. One remaining reason to filter SNVs/SNPs near indels is that they might have a different
 evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
 {: .details}
+
 Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
 
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
@@ -446,7 +447,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >
 > 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.3+galaxy0) %} {% icon tool %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
-> 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy**.
+> 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
 >
 >    > <question-title></question-title>
 >    >
