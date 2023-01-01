@@ -244,9 +244,9 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
 > <hands-on-title>Run Snippy</hands-on-title>
-> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2) %}: {% icon tool %} with the following parameters
+> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
->   - *"Filters to apply"*: Select `Filter variants by region`, `Filter variants close to indels` and `Filter sites by read alignment depth`.
+>   - *"Filters to apply"*: Select `Filter variants by region` and `Filter sites by read alignment depth`.
 >
 > 2. Open the new VCF file.
 >
@@ -256,18 +256,40 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. `218` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
+>    > > 1. `159` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
 >    > >
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
 
+> <details-title>Which filters to apply?</details-title>
+> 
+> TB Variant Filter tries to provide reasonable defaults for filtering
+> variants predicted in the M. tuberculosis
+> genome, using multiple different strategies.
+> Firstly, certain regions of the Mtb genome
+contain repetitive sequences, e.g. from
+the PE/PPE gene family. Historically all of the genomic regions corresponding to
+> those genes were filtered out but 
+> the new default draws on work from
+> Maximillian Marin and others. This
+> list of "refined low confidence" (RLC)
+> regions is the current region filter in
+> TB Variant Filter for reads over 100 bp.
+> If you are using shorter reads (e.g. from Illumina iSeq) the "Refined Low Confidence and Low Mappability" region list should be used instead.
+>For more on how these regions were calculated read the [paper](https://academic.oup.com/bioinformatics/article-abstract/38/7/1781/6502279?login=false) or [preprint](https://www.biorxiv.org/content/10.1101/2021.04.08.438862v3.full).
+>
+> In addition to region filters, filters for variant type, allele frequency, coverage depth and distance from indels are provided.
+> Older variant callers struggled to accurately
+> call insertions and deletions (indels) but more recent tools (e.g. GATK v4 and the variant caller used in Snippy, Freebayes) no longer have this weakness. One remaining reason to filter SNVs/SNPs near indels is that they might have a different
+evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
+{: .details}
 Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
 
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
-> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.1.1+galaxy0) %}: {% icon tool %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.0+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
