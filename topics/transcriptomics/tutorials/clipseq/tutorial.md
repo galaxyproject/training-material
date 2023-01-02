@@ -415,8 +415,7 @@ Peak calling is one of the most important steps in the data analysis of CLIP-Seq
 
 ## Peak calling with **PEAKachu**
 
-> <hands-on-title>Peak</hands-on-title>
-calling
+> <hands-on-title>Peak calling</hands-on-title>
 >
 > 1. **PEAKachu** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Experiment Libraries"*: `bam RBFOX2` (output of **UMI-tools deduplicate** {% icon tool %})
@@ -448,14 +447,14 @@ calling
 >   > 2. Take a look into the peak output file of PEAKachu. Why aren't there any p-values?
 >   > 3. Is the log2 fold-change alone a good measurement to validate our peaks? Maybe the MA plot helps you to figure out this question?
 >   >
->   >   > <solution-title></solution-title>
->   >   >
->   >   > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.<br/>
-If we would **increase** the log2 fold-change threshold, then we would decrease the number of peaks and possible false positives. However, we would also increase the number of false negatives, i.e., we would lose potentially interesting binding sites.
->   >   > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
->   >   > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
+>   > > <solution-title></solution-title>
+>   > >
+>   > > 1. If we would **decrease** the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are **not** significantly enriched.<br/>
+>   > >    If we would **increase** the log2 fold-change threshold, then we would decrease the number of peaks and possible false positives. However, we would also increase the number of false negatives, i.e., we would lose potentially interesting binding sites.
+>   > > 2. PEAKachu works mainly with replicated data, because DESeq2 calculates only p-values for data sets where the experiment and control have at least two replicates. This feature makes statistically sense, because data sets without replicates are not representative enough to make general assumptions, but for the purpose of demonstration we are going to ignore this fact.
+>   > > 3. Yes and no. A significant fold-change with high read counts (read coverage) might be enough to validate a peak. However, some peaks can also be covered by very few reads and still have a high fold-change, e.g., log2(4/1). It is for you to decide if a fold-change like log2(4/1) is enough evidence that the binding region is significantly enriched.
 >   > {: .solution}
-> {: .question}
+>   {: .question}
 >
 {: .hands_on}
 

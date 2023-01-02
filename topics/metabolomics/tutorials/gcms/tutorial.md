@@ -103,7 +103,7 @@ Concerning the current GC-MS tutorial, you **just have to compute the following 
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 > 4. Import the following 2 files from Zenodo or from a shared data library (ask your instructor). 
-Beware: these files must not be in a collection. 
+> Beware: these files must not be in a collection. 
 >
 >    ```
 >    https://zenodo.org/record/3631074/files/sampleMetadata.tsv

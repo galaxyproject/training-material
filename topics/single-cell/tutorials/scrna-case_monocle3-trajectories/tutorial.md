@@ -573,7 +573,7 @@ If we compare the annotated cell types and the clusters that were just formed, w
 >
 > ![In Monocle graph, the cells expressing hemoglobin gene were grouped into a small branch of DP-M4, while in Scanpy the marker appears throughout the entire sample in low numbers, not allowing to group those cells.](../../images/scrna-casestudy-monocle/hb.png "Hemoglobin across clusters - comparision between Monocle and Scanpy")
 >
-{: .question}
+{: .tip}
 
 ## Top marker genes
 
@@ -646,7 +646,7 @@ As you can see, the learned trajectory path is just a line connecting the cluste
 >
 > As a reminder, here's the comparision between our trajectory and the one from the previous tutorial, where we used Scanpy for clustering, and then appplied Force-Directed + PAGA algorithms to infer trajectory. As you remember from those tutorials, the arrangement of the cell groups changed a bit during these steps. Indeed - by using the mentioned methods, we get different graphs for clusters and trajectory, while in Monocle the general 'shape' of the graph stays the same from the beginning. 'Leranig the trajectory' step in Monocle is about finding a path, along which the cells can be then ordered in pseudotime.
 > ![First graph shows the trajectory inferred by using Scanpy + Force-Directed + PAGA (DN connecting equally with DP-M2 and DP-M3, then going to DP-M1, and branching out to DP-M4, then going down to DP-L and finally turning into T-mat).  Second graph shows the trajectory inferred by using Monocle (DN connected to DP-M2 and DP-M3, then DP-M4 has DP-M1 on the right and DP-L on the left, and DP-L comes to T-mat).](../../images/scrna-casestudy-monocle/scanpy_monocle_trajectories.png "Comparison between the trajectory inferred in the previous 'case study' tutorials (Scanpy + Force-Directed + PAGA) and the trajectory obtained in Monocle.")
-{: .question}
+{: .tip}
 
 ## Pseudotime analysis
 

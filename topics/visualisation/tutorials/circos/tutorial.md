@@ -279,7 +279,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.txt`
 >    - In *"Ideogram"*:
-         - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
+>        - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
 >        - *"Thickness"*: `45`
 >        - In *"Labels"*:
@@ -357,7 +357,7 @@ We will use this as the basis for our plot, and add data tracks one at a time.
 > > {: .solution}
 > {: .question}
 >
-{: .tip}
+{: .comment}
 
 
 ## Structural Variations
@@ -1029,8 +1029,8 @@ Let's start by creating the ideogram for our plot:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
 >    - In *"Ideogram"*:
-         - *"Chromosome units"*: `bases`
-         - *"Spacing Between Ideograms (in chromosome units)"*: `20`
+>        - *"Chromosome units"*: `bases`
+>        - *"Spacing Between Ideograms (in chromosome units)"*: `20`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `40`
 >
