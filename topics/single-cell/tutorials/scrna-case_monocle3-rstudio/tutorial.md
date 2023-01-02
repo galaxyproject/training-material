@@ -55,12 +55,13 @@ notebook:
 
 If you are using RStudio locally, then you don’t have to bother about uploading the files – just skip to ```file.choose()``` and navigate to your files using the pop-up window. 
 
-If you are working in RStudio Cloud, you have to download the generated files from your history first. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. Then, return to the RStudio and click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded files to upload. You should now see all three filed in this window. You might want to rename the files to make their names shorter.
+If you are working in RStudio Cloud, you have to download the generated files from your history first. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. Then, return to the RStudio and click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded files to upload. You should now see all three files in this window. You might want to rename the files to make their names shorter.
 
 ![Screenshot of Files tab in RStudio, highlighting 'Upload' and 'Rename' buttons and listing three uploaded and renamed files: 'cell_metadata', 'gene_metadata', 'expression_matrix'.](../../images/scrna-casestudy-monocle/r_files_tab.png "The view of the Files tab with uploaded files and highlighted relevant buttons.")
 
 If you are using RStudio Galaxy tool, you can get data directly from your history by running:
 ```r
+# get the files from Galaxy history
 file.copy(gx_get(2), "cell_metadata")
 file.copy(gx_get(3), "gene_metadata")
 file.copy(gx_get(4), "expression_matrix")
@@ -81,6 +82,7 @@ The number in the brackets corresponds to the dataset number in your history, so
 
 Once we have our data loaded, let's specify paths to access the files. There is a strightforward way of getting the correct path without the concern of making typos or getting the path wrong. Just run `file.choose()` and choose the corresponding file which you want to get path to:
 ```r
+# get the file path
 cells_path <- file.choose() 
 genes_path <- file.choose() 
 expression_path <- file.choose() 
@@ -89,6 +91,7 @@ You should now see the new variables in the Environment tab window.
 
 As mentioned above, the datatype of our files is tabular, so we will use ```read.delim()``` function to read them in. The first argument is the file path and the second one, `row.names=1` takes the column number of the data file from which to take the row names. 
 ```r
+# read in the files
 cell_metadata <- read.delim(cells_path, row.names=1)
 gene_metadata <- read.delim(genes_path, row.names=1)
 expression_matrix <- read.delim(expression_path, row.names=1)
@@ -112,24 +115,24 @@ We have now three dataframes that we will use to generate cell_data_set object.
 
 According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
-View(expression_matrix)
+View(expression_matrix)     # preview the content of the expression matrix
+expression_matrix           # or just call the name of the file
 ```
 `View()` opens a new tab with a preview of the content of the file. We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
 ```r
-expression_matrix <- as.matrix(expression_matrix)
-expression_matrix <- t(expression_matrix)
+expression_matrix <- as.matrix(expression_matrix)   # change the type to matrix
+expression_matrix <- t(expression_matrix)           # transpose the matrix
 ```
 Another condition we have to satisfy if that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
 ```r
-View(gene_metadata)
+gene_metadata             # check the name of the column containing gene symbols
 ```
 
-The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. We can access the column names by `colnames()`
+The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. We can access the column names by `colnames()`.
 ```r
-colnames(gene_metadata)[2] <- 'gene_short_name'
+colnames(gene_metadata)[2] <- 'gene_short_name'     # change the column name
+colnames(gene_metadata)                             # see the changes
 ```
-
-You can now switch to the `gene_metadata` tab and check if the name has changed. 
 
 It looks like our data fulfils the requirements to generate the cell_data_set file, but before that…
 
@@ -140,7 +143,6 @@ First things first, we need to load Monocle3! Generally, it is a good practice t
 Monocle 3 runs in the R statistical computing environment. You will need R version 4.1.0 or higher, Bioconductor version 3.14, and monocle3 1.2.7 or higher to have access to the latest features.
 ```r
 # Install Bioconductor and some of required dependencies
-
 if (!requireNamespace("BiocManager", quietly = TRUE))
 install.packages("BiocManager")
 BiocManager::install(version = "3.14")
@@ -163,11 +165,13 @@ library(monocle3)
 ## Generating CDS object
 Now let’s store our files in one object – the cell_data_set. This is the main class used by Monocle to hold single cell expression data. The class is derived from the Bioconductor SingleCellExperiment class. It's similar to Python's AnnData storing a data matrix together with annotations of observations and variables. There are three ways of creating CDS object in monocle:
 -	Using ```new_cell_data_set() ``` function with three data frames as arguments (not their paths!): expression matrix (can also be a sparseMatrix), cell metadata and gene metadata
--	Using ```load_cellranger_data() ``` function and providing the path to the folder containing 10X Genomics Cell Ranger output files. This function takes an argument `umi_cutoff` that determines how many reads a cell must have to be included
--	Using ```load_mm_data() ``` function providing the paths to matrix file and two metadata files (features and cell information)
+-	Using ```load_cellranger_data() ``` function providing the path to the folder containing 10X Genomics Cell Ranger output files. This function takes an argument `umi_cutoff` that determines how many reads a cell must have to be included
+-	Using ```load_mm_data() ``` function providing the paths to matrix file and two metadata files (features and cell information).
+
 In this tutorial we will use the first option:
 ```r
-cds <- new_cell_data_set(expression_matrix, cells_metadata, genes_metadata)
+# create CDS object
+cds <- new_cell_data_set(expression_matrix, cell_metadata, gene_metadata)
 ```
 We are now ready to process our data!
 
@@ -185,30 +189,42 @@ We are now ready to process our data!
 {: .warning}
 
 If you remember the very first tutorial, we were starting with gene IDs and adding gene symbols based on the Ensembl GTF file.  
-But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database, so keep that in mind. The code below will work for that dataset, but will produce ‘NA’ where the corresponding gene name couldn’t be found. 
+But what if we didn’t have the genes symbols in our CDS object and wanted to add them now? Of course - it's possible! We will also base this annotation on Ensembl - the genome database – with the use of the library BioMart. We will use the same archive as in the Alevin tutorial (Genome assembly GRCm38) to get the gene names. Please note that the updated version (GRCm39) is available, but some of the gene IDs are not in that EnsEMBL database. The code below is written in a way that it will work for the updated dataset too, but will produce ‘NA’ where the corresponding gene name couldn’t be found.
 ```r
-cds_extra <- cds		# assign our CDS to a new object for the demonstration purpose 
+cds_extra <- cds                                        # assign our CDS to a new object for the demonstration purpose
+rownames(fData(cds_extra))                              # preview of the gene IDs as rownames
 
 # get relevant gene names
-library("biomaRt")		# load the BioMart library
-ensembl.ids <- rownames(fData(cds_extra))		# fData() allows to access cds rowData table and the rownames are stored in ensembl.ids
-mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL") # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", 
-                    host='https://nov2020.archive.ensembl.org') 	# connect to a specified BioMart database and dataset within this database; in our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, we specify the host with this archive
-# ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl") # uncomment this if you want to use the most recent version of the used dataset
+library("biomaRt")                                      # load the BioMart library
+ensembl.ids <- rownames(fData(cds_extra))               # fData() allows to access cds rowData table
+mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL"     # connect to a specified BioMart database and dataset hosted by Ensembl
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
+"""
+The line above connects to a specified BioMart database and dataset within this database.
+In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, 
+we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
+"""
 
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id', 
                values = ensembl.ids, 
-               mart = ensembl_m) # retrieve the specified attributes from the connected BioMart database; 'ensembl_gene_id' are genes IDs, 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’
+               mart = ensembl_m)
+"""
+The line above retrieves the specified attributes from the connected BioMart database; 
+'ensembl_gene_id' are genes IDs, 
+'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
+"""
+# see the resulting data
+genes                             
 
 # replace IDs for gene names 
 gene_names <- ensembl.ids	 
 count = 1 	 
 for (geneID in gene_names)
 {
- index <- which(genes==geneID)	# finds an index of geneID in the genes object created by getBM()
- if (length(index)==0) 	# condition in case if there is no corresponding gene name in the chosen dataset
+ index <- which(genes==geneID)    # finds an index of geneID in the genes object created by getBM()
+ if (length(index)==0)            # condition in case if there is no corresponding gene name in the chosen dataset
   {
     gene_names[count] <- 'NA'
   }
@@ -216,16 +232,19 @@ for (geneID in gene_names)
   {
     gene_names[count] <- genes$external_gene_name[index] 	# replaces gene ID by the corresponding gene name based on the found geneID’s index 
   }
- count = count + 1		# increased count so that every element in gene_names is replaced
+ count = count + 1                # increased count so that every element in gene_names is replaced
 }
 
 # store the gene names in our CDS object in a new column gene_short_name_extra
 fData(cds_extra)$gene_short_name_extra <- gene_names
+
+# see the changes
+fData(cds_extra)                    
 ```
 
-If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in useMart() function. 
+If you are working on your own data and it’s not mouse data, you can check available datasets for other species and just use relevant dataset in `useMart()` function. 
 ```r
-listDatasets(mart) 	# available datasets
+listDatasets(mart)                # available datasets
 ```
 
 
@@ -233,31 +252,53 @@ listDatasets(mart) 	# available datasets
 Do you remember the Monocle workflow introduced in the previous tutorial? Here is a recap:
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
+## Pre-processing
 Therefore, let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
 
 ```r
-cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 	# PCA pre-processing with 210 principal components
-pca_plot <- plot_pc_variance_explained(cds)		# see the plot of variation in gene expression vs PCA components
+# PCA pre-processing with 210 principal components
+cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 
+
+ # plot the variation in gene expression vs PCA components
+plot_pc_variance_explained(cds)                              		                            
 ```
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
-The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset.
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. However, it will take quite some time to run this, and this is why generally smaller PCs are preferable. 
 
-![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The ‘shape’ of the plot showing how the cells are clustered depending on the num_dim argument.")
+![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
-## Batch correction
+## Batch correction and Dimensionality reduction
 Our dataset actually comprises data from 7 samples, so there is a risk that the batch effects can be observed. Those are systematic differences in the transcriptome of cells measured in different experimental batches. However, we can use Monocle to deal with that!
-First, let’s check how our dataset looks like in terms of batch effects. We can do that by colouring the cells by batch. This information is stored in our CDS object from cell_metadata file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column. In our case it’s indeed ‘batch’, but your data might have another name (eg. `plate`, etc.), so make sure you put the correct argument value.
+First, let’s check how our dataset looks like in terms of batch effects. We can do that by colouring the cells by batch.  This information is stored in our CDS object from `cell_metadata` file. Before asking Monocle to plot anything, let’s check the exact column name of the batch information column. 
 ```r
-colnames(colData(cds_preprocessing)) 	# check column names
-plot_before_batch_corr <- plot_cells(cds_preprocessing, color_cells_by="batch", label_cell_groups=FALSE)		# check for batch effects
+colnames(colData(cds_preprocessing)) 	          # check column names
+```
+In our case it’s indeed ‘batch’, but your data might have another name (eg. "plate", etc.), so make sure you put the correct argument value. 
+
+Then, we have to reduce dimension before attempting to plot. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well. 
+```r
+# reduce dimension first
+cds_preprocessing_UMAP <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP", preprocess_method = 'PCA')
+
+# then produce a plot to check for batch effects
+plot_cells(cds_preprocessing_UMAP, color_cells_by="batch", label_cell_groups=FALSE)
 ```
 
 We can see that upper and lower right branches mostly consist of N705 and N706, so indeed batch correction might be helpful. Let’s run this. 
 ```r
-cds_batch <- align_cds(cds_preprocessing, preprocess_method = "PCA", alignment_group = "batch") 	# perform batch correction
-plot_after_batch_corr <- plot_cells(cds_batch, color_cells_by="batch", label_cell_groups=FALSE)		# see the batch correction
+# perform batch correction
+cds_batch <- align_cds(cds_preprocessing_UMAP, preprocess_method = "PCA", alignment_group = "batch")
+```
+
+To see the changes, we have to run UMAP again, but this time on the aligned dataset, so we will specify that `preprocess_method ` is now "Aligned" and not “PCA”, however after having used `align_cds()` Monocle would use "Aligned" argument automatically if no `preprocess_method` was specified.
+```r
+# dimensionality reduction after alignment
+cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP")  
+
+# see the batch correction effect on a plot
+plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)		
 ```
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
@@ -265,19 +306,18 @@ plot_after_batch_corr <- plot_cells(cds_batch, color_cells_by="batch", label_cel
 Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using [mutual nearest neighbor alignment](https://doi.org/10.1038/nbt.4091), a technique introduced by John Marioni's lab and supported by Aaron Lun's package [batchelor]( https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
 Now we can move to the next step and perform dimensionality reduction. 
 
-## Dimensionality reduction
-The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well. Since we called `align_cds()` previously, we will specify that `preprocess_method ` is now "Aligned" and not “PCA”, however Monocle would do that automatically if no preprocess_method was specified.
-```r
-cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP") 	# dimensionality reduction
-```
 
 > <tip-title>Plotting: labels vs legend</tip-title>
 >
->  When creating graphs, we sometimes use labels and sometimes just a legend. You can choose whichever you think makes the data clear and readable. If you want to use a legend, then specify an argument `label_cell_groups=FALSE` in the function `plot_cells()`. The labels are set automatically, but if you want to change their size (default labels are tiny), use the argument `group_label_size`.
+>  When creating graphs, we sometimes use labels and sometimes just a legend. You can choose whichever you think makes the data clear and readable. 
+>
+> If you want to use a legend, then specify an argument `label_cell_groups=FALSE` in the function `plot_cells()`. 
+> 
+> The labels are set automatically, but if you want to change their size (default labels are tiny), use the argument `group_label_size`.
 {: .tip}
 
 
-## Clustering - clusters
+## Clustering: clusters
 We want to get some information about cell types, don’t we? In order to do so, we have to cluster our cells first. 
 Monocle uses a technique called "community detection" ({% cite Traag_2019 %}) to group cells. This approach was introduced by {% cite Levine_2015 %} as part of the phenoGraph algorithm.
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from {% cite Wolf_2019 %}, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
@@ -292,29 +332,43 @@ Monocle also divides the cells into larger, more well separated groups called pa
 
 Therefore, let’s perform clustering and visualise the resulting clusters.
 ```r
-cds_auto_cluster <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 	# clustering
-auto_cluster_plot <- plot_cells(cds_auto_cluster, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the clusters
+# clustering 
+cds_auto_cluster <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 
+
+# see the clusters
+plot_cells(cds_auto_cluster, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5)     
 ```
 
 When using standard igraph louvain clustering, the value of resolution parameter is by default set to NULL, which means that it is determined automatically. Although the resulting clusters are OK, it would be nice to get some more granularity to identify cell types more specifically. The higher the resolution value, the more clusters we get. We will set the resolution value to 0.0002, but you are very welcome to try different values to see the changes.
 
 ```r
-cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 	# clustering with changed resolution value
-cluster_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	# see the new clusters
+# clustering with changed resolution value
+cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 
+
+# see the new clusters
+plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	
 ```
 
 ![Left image showing 6 clusters formed using automatic standard igraph louvain clustering. Right image showing the dataset with clusters formed using resolution argument set to 0.0002: now there are 7 clusters, as one automatically formed cluster could be divided into two smaller distinct clusters.](../../images/scrna-casestudy-monocle/clusters_compare.png "Comparison of the clusters formed using standard igraph louvain clustering and using resolution argument set to 0.0002.")
 
 
 
-## Clustering - partitions
-OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. Note that above we only changed the value of resolution which affects exclusively clusters, so `cds_auto_cluster` and `cds_clustered` store the same partition information, so to visualise partitions you can call either of them.
-
+## Clustering: partitions
+OK, what about partitions? They were also created during the clustering step and it’s important to check them before learning the trajectory because it is performed only within one partition, so it is essential that all the cells that we want to analyse in pseudotime belong to the same partition. 
 ```r
-partition_plot <- plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the partitions
+# see the partitions
+plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
 ```
 
-With the default parameters almost all the cells were assigned to one partition. That’s good news – we can learn the trajectory graph now without the need for changing any arguments (we ignore those several cells assigned to partition 2). However, that’s not always the case. Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. In some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
+We can see that there are 3 partitions identified in `cds_clustered` object. Ideally, we would like to combine partitions 1 and 2 to draw a trajectory through all those cells (we can ignore cells in partition 3). Sometimes using the default values might result in multiple partitions while you only need one. Then you would have to change the q-value cutoff in `partition_qval`. The default is 0.05 and by increasing this value you can increase the span of partitions, meaning that you would get fewer partitions. Let's try that on our dataset.
+```r
+# changing the partition q-value
+cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", partition_qval = 0.5) 
+
+# see the partitions with the changed q-value
+plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
+```
+Voila - it worked as expected! Now we have cells from partition 1 and 2 in one partition and we can learn the trajectory. However, in some cases even this method might not be enough. Then, there is a last resort… assigning cells to a partition manually.
 
 ## Additional step: assigning cells to one partition
 > <warning-title>Additional step</warning-title>
@@ -324,16 +378,26 @@ With the default parameters almost all the cells were assigned to one partition.
 
 Let’s assume we have 4 partitions that cannot be extended to one big partition using `partition_qval` (it might sound unreasonable but it does happen!) and we are desperate to have all the cells in one partition to draw a trajectory through all of them. We can simulate the initial dataset by setting `partition_qval` value to 0.0001.
 ```r
-cds_partitions_extra <- cluster_cells(cds_red_dim, reduction_method = "UMAP", partition_qval = 0.0001)		# simulate the dataset
-partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the partitions
+# simulate the dataset
+cds_partitions_extra <- cluster_cells(cds_red_dim, reduction_method = "UMAP", partition_qval = 0.0001)		
 
-big_partition <- c(rep(1,length(cds_partitions_extra@colData@rownames))) 	# stores ‘1’ the number of times equal to the number of cells 
-names(big_partition) <- cds_partitions_extra@colData@rownames 	# takes the barcode of each cell and assigns ‘1’ to each of them (now the ‘ones’ are named) 
-big_partition <- as.factor(big_partition)		# converts from numeric to factor
-cds_partitions_extra@clusters$UMAP$partitions <- big_partition 	# assigns the created barcodes-partition list to the location where information about partitions is stored in CDS object
+# see the simulated partitions
+plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
 
-partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	# see the new partition assignment
+# store ‘1’ the number of times equal to the number of cells
+big_partition <- c(rep(1,length(cds_partitions_extra@colData@rownames))) 	
 
+# take the barcode of each cell and assign ‘1’ to each of them (now the ‘ones’ are named) 
+names(big_partition) <- cds_partitions_extra@colData@rownames 	
+
+# convert from numeric to factor
+big_partition <- as.factor(big_partition)	
+
+# assign the created barcodes-partition list to the location where information about partitions is stored in CDS object
+cds_partitions_extra@clusters$UMAP$partitions <- big_partition 	
+
+# see the new partition assignment
+plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
 ```
 
 ![Left image showing the dataset divided into 4 partitions. Right image showing all cells assigned to one partition.](../../images/scrna-casestudy-monocle/partitions_compare.png "The result of the manual assignment of all the cells to one partition.")
@@ -341,14 +405,15 @@ partition_plot_extra <- plot_cells(cds_partitions_extra, reduction_method = "UMA
 
 > <details-title>@ and $ operators</details-title>
 >
-> As you saw above, we used `@` and `$` operators to navigate in CDS object. What is the difference between them? `$` operator is used to access one variable/column, while `@` extracts the contents of a slot in an object with a formal (S4) class structure. If you use `View()` function on our CDS object, you will see the elements of type ‘S4’ that you can access using `@` operator. The suggestion list of elements that can be accessed should also pop up as you type the name of the object followed by the corresponding operator. 
+> As you saw above, we used `@` and `$` operators to navigate in CDS object. What is the difference between them? `$` operator is used to access one variable/column, while `@` extracts the contents of a slot in an object with a formal (S4) class structure. If you use `View()` function on our CDS object, you will see the elements of type "S4" that you can access using `@` operator. The suggestion list of elements that can be accessed should also pop up as you type the name of the object followed by the corresponding operator. 
 >
 {: .details}
 
 # Assigning cell types
 There are two main approaches to assigning cell types to clusters that we’ve just identified – supervised and unsupervised, both based on gene expression in each cluster. 
 
-Supervised approach relies on the fact that having a reference, we know which cell types to expect and we can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}. 
+## Supervised approach
+Supervised approach relies on the fact that when having a reference, we know which cell types to expect and we can simply check the expression of marker genes specific to the expected cell types. Let’s then check the markers mentioned in the original paper {% cite Bacon2018 %}. 
 
 | Marker | Cell type |
 |--------------------|
@@ -359,9 +424,10 @@ Supervised approach relies on the fact that having a reference, we know which ce
 | Aif1    | Macrophages    |
 | Hba-a1    | RBC    |
 
-To plot all those genes in one go, we will pass a vector with the names of those markers into a parameter `genes` in the `plot_cells` function. 
+To plot the expression of all those genes across our dataset in one go, we will pass a vector with the names of those markers into a parameter `genes` in the `plot_cells` function. 
 ```r
-gene_plot <- plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'), reduction_method = "UMAP")
+# expression of marker genes across the sample
+plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1'), reduction_method = "UMAP")
 ```
 
 ![7 graphs, each showing expression of one of the genes in the corresponding clusters: 'Il2ra' – cluster 4; 'Cd8b1' and 'Cd8a' – clusters 1,6,2; 'Cd4' – high expression in cluster 5; 'Itm2a' – cluster 3; 'Aif1' – barely anything, no specific cluster assigned; 'Hba-a1' - throughout the entire sample in low numbers.](../../images/scrna-casestudy-monocle/genes.png "Expression of the reference marker genes across analysed sample.")
@@ -376,8 +442,8 @@ gene_plot <- plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm
 > > - `Cd8b1, Cd8a` (DP middle): expressed in clusters 1, 6, and highly in cluster 2
 > > - `Cd4` (DP late): average expression in clusters 1, 6, 2 and high expression in cluster 5 
 > > - `Itm2a` (T-mat): expressed in cluster 3
-> > - `Aif1` (macrophages): barely anything here, minimal expression spread across the sample with some more cells in cluster 4 and 3 – not enough to form a distinct cluster though). In theory, we shouldn’t have any macrophages in our sample. If you remember from the previous tutorials, we actually filtered out macrophages from the sample during the processing step, because we worked on annotated data. When analysing unannotated data, only now we see where the macrophages are expressed – we could indeed assign them and then filter out, provided that Monocle clusters them into a separate group. As you can see, it’s not the case here, so we will just carry on with the analysis, keeping in mind this contamination. 
-> > - `Hba-a1` (RBC): well, appears throughout the entire sample in low numbers suggesting some background contamination of red blood cell debris in the cell samples during library generation, but also shows higher expression in a distinct tiny bit of cluster 3, at the border between clusters 1 and 5. However, it’s too small to be clustered into a separate group and filter out in this case. 
+> > - `Aif1` (macrophages): barely anything here, minimal expression spread across the sample with some more cells in cluster 4 and 3 – not enough to form a distinct cluster though). In theory, we shouldn’t have any macrophages in our sample. If you remember from the previous tutorials, we actually filtered out macrophages from the sample during the processing step, because we worked on annotated data. When analysing unannotated data, we could only assign macrophages and then filter them out, provided that Monocle clusters them into a separate group. As you can see, it’s not the case here, so we will just carry on with the analysis, interpreting this as a contamination. 
+> > - `Hba-a1` (RBC): appears throughout the entire sample in low numbers suggesting some background contamination of red blood cell debris in the cell samples during library generation, but also shows higher expression in a distinct tiny bit of cluster 3, at the border between clusters 1 and 5. However, it’s too small to be clustered into a separate group and filtered out in this case. 
 If you remember, this gene was found to be expressed in the previous Scanpy tutorial also in low numbers across the sample, and in the other Monocle tutorial (using Galaxy tools and annotated data) algorithms allowed us to gather the cells expressing that gene into a distinct group. Our result now sits somewhere in between. 
 > > ![In Scanpy graph the marker gene appears throughout the entire sample in low numbers, in Monocle in Galaxy cells expressing hemoglobin gene were grouped into a small branch of DP-M4, allowing to group those cells. Monocle in RStudio graph is somewhere in between showing mostly low expression across the sample, but also having a tiny bit of grouped cells, less distinct than in Galaxy though.](../../images/scrna-casestudy-monocle/hb_all.png "Hemoglobin across clusters - comparison between Scanpy, Monocle using Galaxy tools and Monocle run in RStudio.")
 > >
@@ -387,7 +453,8 @@ If you remember, this gene was found to be expressed in the previous Scanpy tuto
 Having identified which cluster corresponds to a specific cell type, we can finally run some code to add the annotation to our CDS object. First, we will create a new column called `cell_type`  in `colData()` - this is where the information about the cells is stored (eg. batch, genotype, sex, etc) - and initialize it with the values of clusters. Then, we will get the `dplyr` package which will be used for clusters annotation.
 
 ```r
-cds_annotated <- cds_clustered 	# just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis 
+# just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis 
+cds_annotated <- cds_clustered 	
 
 # create a new column ‘cell_type’ and initialise it with clusters values
 colData(cds_annotated)$cell_type <- as.character(clusters(cds_annotated)) 	
@@ -398,27 +465,28 @@ library(dplyr)
 
 # annotate clusters
 colData(cds_annotated)$cell_type <- dplyr::recode(colData(cds_annotated)$cell_type,
-                                                       '1'=’DP-M1’, 	# double positive – middle T-cell (1st cluster)
-                                                       '2'='DP-M2',	# double positive – middle T-cell (2nd cluster)
-                                                       '3'='T-mat',	# mature T-cell
-                                                       '4'='DN',		# double negative – early T-cell
-                                                       '5'='DP-L',	# double positive – late middle T-cell
-                                                       '6'='DP-M3',	# double positive – middle T-cell (3rd cluster)
-                                                       '7'='Unknown')	# no info for now, so call it ‘Unknown’
+                                                       '1'='DP-M1',   # double positive – middle T-cell (1st cluster)
+                                                       '2'='DP-M2',	  # double positive – middle T-cell (2nd cluster)
+                                                       '3'='T-mat',	  # mature T-cell
+                                                       '4'='DN',		  # double negative – early T-cell
+                                                       '5'='DP-L',	  # double positive – late middle T-cell
+                                                       '6'='DP-M3',	  # double positive – middle T-cell (3rd cluster)
+                                                       '7'='Unknown') # no info for now, so call it ‘Unknown’
 
 # check the annotation 
-annotated_plot <- plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)    
+plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)    
 ```
 
 ![A plot showing the identified clusters, now each coloured by the assigned cell type.](../../images/scrna-casestudy-monocle/annotated.png "Our annotated dataset.")
 
-# Gene expression in clusters - identify cell types 
-But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cells the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results. 
-We will use Monocle’s function ` top_markers()` and store the information about specifically expressed genes for each cluster in the data frame ‘marker_test’.
+## Unsupervised approach
+But what if we don’t have any reference that we can use to assign our clusters? In that case, we will turn to the mentioned unsupervised approach - we will check what are the specifically expressed genes for each cluster. Then we can identify the cell types by looking up what cell types the found genes are markers for. That’s a more tedious process, but sometimes can lead to exciting and unexpected results. 
+We will use Monocle’s function `top_markers()` and store the information about specifically expressed genes for each cluster in the data frame `marker_test`.
 ```r
-marker_test <- top_markers(cds_clustered, group_cells_by="cluster", reduction_method = "UMAP”, reference_cells=1000, cores=8)
+# find top marker genes in each cluster
+marker_test <- top_markers(cds_clustered, group_cells_by="cluster", reduction_method = "UMAP", reference_cells=1000, cores=8)
 ```
-You can group the cells by any categorical variable in colData(cds_clustered). The parameter `reference_cells` is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.
+You can group the cells by any categorical variable in `colData(cds_clustered)`. The parameter `reference_cells` is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.
 
 > <question-title></question-title>
 >
@@ -442,34 +510,36 @@ You can group the cells by any categorical variable in colData(cds_clustered). T
 >
 {: .question}
 
-We can now use data in `marker_test` to rank the cells based on one of the specificity metrics and take the top gene for each cluster. We will filter the expressing cells that constitute more than 10% of the cell group and we will take 2 genes in each cluster with the highest `pseudo_R2` value (you can of course modify this value and choose more genes to be selected). 
+We can now use data in `marker_test` to rank the cells based on one of the specificity metrics and take the top gene(s) for each cluster. We will filter the expressing cells that constitute more than 10% of the cell group and we will take 2 genes in each cluster with the highest `pseudo_R2` value (you can of course modify this value and choose more genes to be selected). 
 
 ```r
 # filter the ‘marker_test’ data frame
-top_ markers <- marker_test %>%
+top_specific_markers <- marker_test %>%
                             filter(fraction_expressing >= 0.10) %>%
                             group_by(cell_group) %>%
                             top_n(2, pseudo_R2)
 
-# store the names of the marker genes 
-top_ marker_names <- unique(top_specific_markers %>% pull(gene_short_name)) 	# you can also use IDs, the conversion to gene names should happen automatically when plotting 
+# store the names of the marker genes
+# you can also use IDs, the conversion to gene names should happen automatically when plotting  
+top_marker_names <- unique(top_specific_markers %>% pull(gene_short_name)) 	
 ```
 
 Now we have all elements to plot the expression and fraction of cells that express found markers in each group. 
 
 ```r
-genes_group_plot <- plot_genes_by_group(cds_clustered,	# our CDS object
-                    top_marker_names,		# a list of gene names to show in the plot
-                    group_cells_by="cluster",	# how to group cells when labeling 
-                    ordering_type="maximal_on_diag", 		# how to order the genes / groups on the dot plot; only accepts 'cluster_row_col', 'maximal_on_diag' and 'none'
+plot_genes_by_group(cds_clustered,                    # our CDS object
+                    top_marker_names,                 # a list of gene names to show in the plot
+                    group_cells_by="cluster",         # how to group cells when labeling 
+                    ordering_type="maximal_on_diag")  # how to order the genes / groups on the dot plot
 ```
 
 ![A dot plot showing the expression of genes and fraction of cells that express found markers in each group. On the diagonal there are two genes corresponding to each cluster with the highest pseudo_R2 score in their group.](../../images/scrna-casestudy-monocle/gene_group.png "A plot of the expression and fraction of cells that express found markers in each group.")
 
-Look at this – we identified some more marker genes specific to each cluster! However, sometimes it happens that the found genes are not as specific as one would expect, and they appear across the whole sample. Therefore, it is a good idea to plot all those marker genes and check how they appear in the bigger picture. 
+Look at this – we have identified some more marker genes specific to each cluster! However, sometimes it happens that the found genes are not as specific as one would expect, and they appear across the whole sample. Therefore, it is a good idea to plot all those marker genes and check how they appear in the bigger picture. 
 
 ```r
-markers_plot <- plot_cells(cds_clustered, genes=c('Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'), reduction_method = "UMAP")
+# plot all the identified genes to check their expression
+plot_cells(cds_clustered, genes=c('Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'), reduction_method = "UMAP")
 ```
 
 ![Plots showing the expression of fourteen found marker genes across the whole sample. Those genes are 'Pcdhgc4','Pcdhga5','Gm5559','Gm10359','Ccr9','Cd8b1','Plac8', 'Il2ra', 'Cd52', 'Tmsb10', 'Mki67', 'Hmgb2', 'Pclaf', 'Npm1'.](../../images/scrna-casestudy-monocle/markers_plot.png "Plots of the expression of marker genes across the sample.")
@@ -478,7 +548,7 @@ Further steps from now would include reviewing literature and checking what cell
 
 ```r
 # use ‘top_markers()’ again, now grouping cells by the assigned cell type
-assigned_ marker_test <- top_markers(cds_annotated,
+assigned_marker_test <- top_markers(cds_annotated,
                                              group_cells_by="cell_type",
                                              reference_cells=1000,
                                              cores=8)
@@ -507,6 +577,7 @@ A new file should appear in the ‘Files’ window. If you click on it, you will
 
 You may also want to investigate certain clusters more in-depth. Then, you can make a subset of the CDS object containing only cells of interest. If you call `choose_cells()`, then a pop-up window will appear where you can choose cells to subset. 
 ```r
+# create a CDS subset
 cds_subset <- choose_cells(cds_clustered)
 ```
 Now the chosen cluster is stored as a separate CDS object and you can analyse it independently, using the methods described above.
@@ -719,18 +790,6 @@ cds_3d <- reduce_dimension(cds_order, preprocess_method = 'Aligned', max_compone
 3d_plot <- plot_cells_3d(cds_3d, color_cells_by="cell_type")
 ```
 
-
-
-
-
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
