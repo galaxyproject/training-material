@@ -154,7 +154,7 @@ If you select the *Stats* dataset, you'll find it contains four sets of data, `B
 
 Finally, if you select the *Tables* dataset, you'll find it contains three sets of data, `Data Table`, `Matrix of Cell Type Read Counts`, and `Matrix of Cell Type Sample Proportions`.
 
-Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred proportions and reads associated with each sample and cell type, alongwith its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.
+Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred proportions and reads associated with each sample and cell type, along with its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.
 
 ![Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads.](../../images/bulk-music/data_table.png "Altogether: Data table")
 
@@ -170,11 +170,11 @@ Examine {% icon galaxy-eye %} the file `Data Table`. This contains the inferred 
 >
 {: .question}
 
-Hopefully, this has been illumating! Now let's try two other ways of inferring from a reference and see if it makes a difference.
+Hopefully, this has been illuminating! Now let's try two other ways of inferring from a reference and see if it makes a difference.
 
 ## Like4like: Deconvolution of healthy samples with a healthy reference and diseased samples with a diseased reference
 
-> <hands-on-title> Like4like Inferrence </hands-on-title>
+> <hands-on-title> Like4like Inference </hands-on-title>
 >
 > 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
 >    - In *"New scRNA Group"*:
@@ -209,22 +209,22 @@ Hopefully, this has been illumating! Now let's try two other ways of inferring f
 
 > <question-title></question-title>
 >
-> 1. How have the cell inferrences changed, now that we have changed the scRNA references used?
+> 1. How have the cell inferences changed, now that we have changed the scRNA references used?
 >
 > > <solution-title></solution-title>
 > >
 > > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/plot_altogether.png "Altogether vs like4like")
-> > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inferrence of a beta cell and leading to a higher proportion of interred B-cells.
+> > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inference of a beta cell and leading to a higher proportion of interred B-cells.
 > >
 > {: .solution}
 >
 {: .question}
 
-Let's try one more inferrence - this time, we'll use only healthy cells as a reference, to (theoretically) make a more consistent analysis across the two phenotypes.
+Let's try one more inference - this time, we'll use only healthy cells as a reference, to (theoretically) make a more consistent analysis across the two phenotypes.
 
 ## healthyscref: Deconvolution using only healthy cells as a reference
 
-> <hands-on-title> Healthy sc reference only inferrence </hands-on-title>
+> <hands-on-title> Healthy sc reference only inference </hands-on-title>
 >
 > 1. {% tool [MuSiC Compare](toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4) %} with the following parameters:
 >    - In *"New scRNA Group"*:
@@ -251,23 +251,23 @@ Let's try one more inferrence - this time, we'll use only healthy cells as a ref
 
 > <question-title></question-title>
 >
-> 1. How have the cell inferrences changed this time?
+> 1. How have the cell inferences changed this time?
 >
 > > <solution-title></solution-title>
 > >
 > > > > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
 > >
-> > 1. If using a like4like inferrence reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
+> > 1. If using a like4like inference reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-Overall, it's important to remember how the inferrence changes depending on the reference used - for example, a combined reference might have majority healthy samples or diseased samples, so that would impact the inferred cellular compositions.
+Overall, it's important to remember how the inference changes depending on the reference used - for example, a combined reference might have majority healthy samples or diseased samples, so that would impact the inferred cellular compositions.
 
 # Conclusion
 
-Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferrences using multiple kinds of reference datasets. You can find the [workflow for this tutorial](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1) and an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final).
+Congrats! You've made it to the end of this suite of deconvolution tutorials! You've learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferences using multiple kinds of reference datasets. You can find the [workflow for this tutorial](https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1) and an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final).
 
  We hope this helps you in your research!
 
