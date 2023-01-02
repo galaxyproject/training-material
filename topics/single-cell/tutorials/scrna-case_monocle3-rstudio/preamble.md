@@ -13,7 +13,7 @@ In the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monoc
 
 
 ## Preparing the files
-Monocle uses cell_data_set class to hold expression data; it requires three input files: expression_matrix, cell_metadata and gene_metadata. We will extract that information from our AnnData object. 
+Monocle uses cell_data_set class to hold expression data; it requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. We will extract that information from our AnnData object. 
 
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/prepare_files.md %} 
 
