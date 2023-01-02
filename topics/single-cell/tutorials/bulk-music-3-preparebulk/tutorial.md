@@ -85,7 +85,7 @@ We explored the [expression atlas](https://www.ebi.ac.uk/gxa/experiments), brows
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-5 6. Add to `experiment-design` the following tags `#metadata #bulk #ebi`
+> 5. Add to `experiment-design` the following tags `#metadata #bulk #ebi`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -103,19 +103,7 @@ As before, the metadata object annoyingly has a bunch of unnecessary columns. Yo
 >    - {% icon param-file %} *"File to cut"*: `output` (Input dataset)
 >    - *"Operation"*: `Discard`
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `3
-5
-7
-8
-9
-10
-11
-12
-13
-15
-16
-17
-18`
+>        - *"List of Fields"*: `3 5 7 8 9 10 11 12 13 15 16 17 18`
 >
 >    > <comment-title></comment-title>
 >    >
