@@ -554,7 +554,7 @@ assigned_marker_test <- top_markers(cds_annotated,
                                              cores=8)
 
 # filter these markers according to how stringent you want to be
-garnett_markers <- assigned_ marker_test %>%
+garnett_markers <- assigned_marker_test %>%
                         filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
                         group_by(cell_group) %>%
                         top_n(5, marker_score)
