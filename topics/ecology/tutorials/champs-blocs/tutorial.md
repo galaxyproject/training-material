@@ -197,5 +197,5 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
 Here you have finished your study on your champs blocs biodiversity state.
+{:.no_toc}
