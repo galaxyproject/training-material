@@ -91,18 +91,18 @@ Now let's focus on our workflow on boulder field ecological state
 
 > <hands-on-title>Data upload</hands-on-title>
 > 1. Import the data into Galaxy
-> > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
-> > * Select **Choose local files**
-> > ![Choose local files](../../images/champbloc/upload.png "upload your data")
-> > * Browse in your computer and get your ESTAMP files (select all three of them : champbloc_ivr.csv, champbloc_qecb.csv and ficheterrain.csv)
-> >
-> > * Press **Start**
-> > ![Start charging your data](../../images/champbloc/start.png "Start")
-> > * Press **Close**
-> > ![Close upload your data](../../images/champbloc/close.png "Close")
-> > You need to wait for the data to become green on the right panel
-> > ![Data ready](../../images/champbloc/after_before.png "Data ready")
-> >
+>    * Open the Galaxy Upload Manager {% icon galaxy-upload %}
+>    * Select **Choose local files**
+>      ![Choose local files](../../images/champbloc/upload.png "upload your data")
+>    * Browse in your computer and get your ESTAMP files (select all three of them : champbloc_ivr.csv, champbloc_qecb.csv and ficheterrain.csv)
+>   
+>    * Press **Start**
+>      ![Start charging your data](../../images/champbloc/start.png "Start")
+>    * Press **Close**
+>      ![Close upload your data](../../images/champbloc/close.png "Close")
+>    You need to wait for the data to become green on the right panel
+>    ![Data ready](../../images/champbloc/after_before.png "Data ready")
+>   
 > > <tip-title>Tip: Create a new history</tip-title>
 > > Create a new history for this tutorial and give it a name (example: “Champs blocs indicators”) for you to find it again later if needed.
 > > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
