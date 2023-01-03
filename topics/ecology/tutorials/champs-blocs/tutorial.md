@@ -118,7 +118,7 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 > <tip-title>How to get your tool ?</tip-title>
 >
 > > <hands-on-title>Use a tool</hands-on-title>
-> > 1.  click on for example the {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr) %} tool or type **ivr** in the tools panel search box (top left)
+> > 1.  click on for example the {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} tool or type **ivr** in the tools panel search box (top left)
 > > The tool will be displayed in the central Galaxy panel.
 > {: .hands_on}
 {: .tip}
@@ -130,7 +130,7 @@ Go on the tool **IVR**
 
 > <hands-on-title>Calculating IVR</hands-on-title>
 >
-> 1. {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr) %} with the following parameters:
+> 1. {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
@@ -165,11 +165,11 @@ Go on the tool **IVR**
 
 ## **Dissimilarity**
 Cleaning out your data in order and then compute de dissimilarity coefficient.
-Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim) %} tool
+Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} tool
 
 > <hands-on-title>Calculate dissimilarity index</hands-on-title>
 >
-> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim) %} with the following parameters:
+> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input champbloc_qecb.csv"*: `input` (champbloc_qecb.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
