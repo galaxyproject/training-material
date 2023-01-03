@@ -5,7 +5,8 @@ require './_plugins/gtn/mod'
 module Jekyll
   module GtnFunctions
     def gtn_mod_date(path)
-      Gtn::ModificationTimes.obtain_time(path)
+      # Automatically strips any leading slashes.
+      Gtn::ModificationTimes.obtain_time(path.gsub(/^\//, ''))
     end
 
     def how_many_topic_feedbacks(feedback, name)
@@ -55,3 +56,8 @@ module Jekyll
 end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
+
+if $0 == __FILE__
+  result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(/^\//, ''))
+  puts "Modification time of #{ARGV[0].gsub(/^\//, '')} is #{result}"
+end
