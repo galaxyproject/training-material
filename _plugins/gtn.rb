@@ -7,6 +7,50 @@ module Jekyll
     def gtn_mod_date(path)
       Gtn::ModificationTimes.obtain_time(path)
     end
+
+    def how_many_topic_feedbacks(feedback, name)
+      feedback.select{|x| x["topic"] == name}.length
+    end
+
+    def how_many_tutorial_feedbacks(feedback, name)
+      feedback.select{|x| x["tutorial"] == name}.length
+    end
+
+    def filter_authors(contributors, contributions)
+      if not contributors.nil?
+        return contributors
+      else
+        return contributions["authorship"]
+      end
+    end
+
+    def get_default_link(material)
+      url = nil
+
+      if material['type'] == "introduction"
+        subfolder = 'slides'
+      else
+        subfolder = 'tutorials'
+      end
+
+      if material['slides']
+        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
+        if material['type'] != "introduction"
+          url += "/slides.html"
+        else
+          url += ".html"
+        end
+      end
+
+      if material['hands_on']
+        if material['hands_on'] != "external" && material['hands_on'] != ""
+          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
+        end
+      end
+
+      url
+    end
+
   end
 end
 
