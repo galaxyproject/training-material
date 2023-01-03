@@ -20,7 +20,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
 This tutorial will allow you to better apprehend the workflow for indicators on boulder fields. This will hepl you understand the effects of global and local changes on marine habitats, and the effectiveness of the management measures adopted, requires standardized monitoring and robust and sensitive indicators reflecting the state of the habitats.
 
 The "mediolittoral boulder fields" habitat harbors a high diversity of micro-habitats and species due to its high structural heterogeneity and its intermediate position on the foreshore, which makes it one of the most diversified mediolittoral habitats and of high ecological interest along the French Channel-Atlantic coast. It is also a very attractive habitat for recreational fishing, which, through the reworking of the blocks, can impact the communities.
@@ -198,4 +197,3 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 
 # Conclusion
 Here you have finished your study on your champs blocs biodiversity state.
-{:.no_toc}
