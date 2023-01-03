@@ -91,16 +91,17 @@ Now let's focus on our workflow on boulder field ecological state
 
 > <hands-on-title>Data upload</hands-on-title>
 > 1. Import the data into Galaxy
->    * Open the Galaxy Upload Manager {% icon galaxy-upload %}
->    * Select **Choose local files**
->      ![Choose local files](../../images/champbloc/upload.png "upload your data")
->    * Browse in your computer and get your ESTAMP files (select all three of them : champbloc_ivr.csv, champbloc_qecb.csv and ficheterrain.csv)
+>    
+>  * Open the Galaxy Upload Manager {% icon galaxy-upload %}
+>  * Select **Choose local files**
+>    ![Choose local files](../../images/champbloc/upload.png "upload your data")
+>  * Browse in your computer and get your ESTAMP files (select all three of them : champbloc_ivr.csv, champbloc_qecb.csv and ficheterrain.csv)
 >   
->    * Press **Start**
->      ![Start charging your data](../../images/champbloc/start.png "Start")
->    * Press **Close**
->      ![Close upload your data](../../images/champbloc/close.png "Close")
->    You need to wait for the data to become green on the right panel
+>  * Press **Start**
+>    ![Start charging your data](../../images/champbloc/start.png "Start")
+>  * Press **Close**
+>    ![Close upload your data](../../images/champbloc/close.png "Close")
+>  You need to wait for the data to become green on the right panel
 >    ![Data ready](../../images/champbloc/after_before.png "Data ready")
 >   
 > > <tip-title>Tip: Create a new history</tip-title>
@@ -190,8 +191,8 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim) 
 >
 > 3. Download your results
 > 
-> * Click on the output you are interested in
-> * Click on {% icon galaxy-save %} (download)
+>  * Click on the output you are interested in
+>  * Click on {% icon galaxy-save %} (download)
 >
 {: .hands_on}
 
