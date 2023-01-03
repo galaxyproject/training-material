@@ -23,7 +23,7 @@ layout: base
         {% if maybe_ga == ".ga" or maybe_gxwf == ".gxwf.yml" %}
         <tr>
             <td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
-            <td>{{ file.date | date: "%b %-d, %Y" }}</td>
+            <td>{{ file.url | gtn_mod_date | date: "%b %-d, %Y" }}</td>
         </tr>
         {% endif %}
     {% enddirectory %}
