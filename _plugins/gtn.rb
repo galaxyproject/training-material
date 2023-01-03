@@ -4,6 +4,12 @@ require './_plugins/gtn/mod'
 
 module Jekyll
   module GtnFunctions
+
+    # These two could be unified tbh
+    def last_modified_at(page)
+      Gtn::ModificationTimes.obtain_time(page['path'])
+    end
+
     def gtn_mod_date(path)
       # Automatically strips any leading slashes.
       Gtn::ModificationTimes.obtain_time(path.gsub(/^\//, ''))
