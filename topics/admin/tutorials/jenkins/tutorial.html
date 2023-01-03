@@ -1354,16 +1354,16 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 <span class="gp">APOLLO_VERSION=$</span><span class="o">(</span><span class="nb">cat </span>application.properties | <span class="nb">grep </span>app.version | <span class="nb">sed</span> <span class="s1">'s/.*=//g'</span><span class="o">)</span>
 <span class="go">
 </span><span class="gp">#</span><span class="w"> </span>Check <span class="k">if </span>this version needs to be built
-<span class="gp">curl --silent https://use<span class="notranslate">galaxy</span>.eu/static/vgcn/ | \
-	grep -F "apollo-$</span><span class="o">{</span>APOLLO_VERSION<span class="o">}</span><span class="s2">" &amp;&amp; echo "</span>Already built!<span class="s2">" &amp;&amp; exit 0;
+<span class="go">curl --silent https://use<span class="notranslate">galaxy</span>.eu/static/vgcn/ | \
+</span><span class="gp">	grep -F "apollo-$</span><span class="o">{</span>APOLLO_VERSION<span class="o">}</span><span class="s2">" &amp;&amp; echo "</span>Already built!<span class="s2">" &amp;&amp; exit 0;
 </span><span class="go">
 </span><span class="gp">#</span><span class="w"> </span>Build the thing
 <span class="go">./apollo deploy
 
 </span><span class="gp">#</span><span class="w"> </span>Deploy it to our server
 <span class="gp">scp -i $</span>PRIV_KEY <span class="se">\</span>
-	target/<span class="k">*</span>.war <span class="se">\</span>
-    user@server:/static/apollo-<span class="k">${</span><span class="nv">APOLLO_VERSION</span><span class="k">}</span>.war
+<span class="go">	target/*.war \
+</span><span class="gp">    user@server:/static/apollo-$</span><span class="o">{</span>APOLLO_VERSION<span class="o">}</span>.war
 </code></pre></div></div>
 
 <ul>

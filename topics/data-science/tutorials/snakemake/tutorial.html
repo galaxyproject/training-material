@@ -1711,8 +1711,8 @@ The first line shows the original file, and the second line shows the new file. 
 +		"envs/fastqc.yaml"
 </span> 	shell:
  		"fastqc {input} --outdir fastqc/"
-
-@@ -21,6 +23,8 @@ rule trimmomatic:
+<span class="err">
+</span><span class="p">@@ -21,6 +23,8 @@</span> rule trimmomatic:
  		o2="{sample}_2.trim.fq",
  		o1un="{sample}_1un.trim.fq",
  		o2un="{sample}_2un.trim.fq"
@@ -1729,8 +1729,8 @@ The first line shows the original file, and the second line shows the new file. 
 +		"envs/bwa.yaml"
 </span> 	shell:
  		"bwa index {input}"
-
-@@ -44,6 +50,8 @@ rule align:
+<span class="err">
+</span><span class="p">@@ -44,6 +50,8 @@</span> rule align:
  		index="{genome}.fna.gz.bwt"
  	output:
  		"{genome}/{sample}.bam"
@@ -1799,8 +1799,8 @@ The first line shows the original file, and the second line shows the new file. 
 </span> 	shell:
 <span class="gd">-		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output}"
 </span><span class="gi">+		"wget https://zenodo.org/record/5562251/files/{wildcards.sample}.fq.gz -O {output} &gt;{log.out} 2&gt;{log.err}"
-</span>
- rule download_genome:
+</span><span class="err">
+</span> rule download_genome:
  	output:
  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz"
 <span class="gi">+	log:
@@ -1809,8 +1809,8 @@ The first line shows the original file, and the second line shows the new file. 
 </span> 	shell:
 <span class="gd">-		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output}"
 </span><span class="gi">+		"wget https://zenodo.org/record/5562251/files/GCA_000017985.1_ASM1798v1_genomic.fna.gz -O {output} &gt;{log.out} 2&gt;{log.err}"
-</span>
- rule fastqc:
+</span><span class="err">
+</span> rule fastqc:
  	input:
 <span class="p">@@ -17,8 +23,11 @@</span> rule fastqc:
  		"{sample}_fastqc.html"
@@ -1822,8 +1822,8 @@ The first line shows the original file, and the second line shows the new file. 
 </span> 	shell:
 <span class="gd">-		"fastqc {input} --outdir fastqc/"
 </span><span class="gi">+		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
-</span>
- rule trimmomatic:
+</span><span class="err">
+</span> rule trimmomatic:
  	input:
 <span class="p">@@ -31,13 +40,16 @@</span> rule trimmomatic:
  		o2un="{sample}_2un.trim.fq"
@@ -1840,8 +1840,8 @@ The first line shows the original file, and the second line shows the new file. 
  		"SLIDINGWINDOW:4:20 MINLEN:25 "
 <span class="gd">-		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15"
 </span><span class="gi">+		"ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 &gt;{log.out} 2&gt;{log.err}"
-</span>
- rule indexgenome:
+</span><span class="err">
+</span> rule indexgenome:
  	input:
 <span class="p">@@ -46,8 +58,11 @@</span> rule indexgenome:
  		"GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt"
@@ -1853,8 +1853,8 @@ The first line shows the original file, and the second line shows the new file. 
 </span> 	shell:
 <span class="gd">-		"bwa index {input}"
 </span><span class="gi">+		"bwa index {input} &gt;{log.out} 2&gt;{log.err}"
-</span>
- rule align:
+</span><span class="err">
+</span> rule align:
  	input:
 <span class="p">@@ -58,6 +73,10 @@</span> rule align:
  		"{genome}/{sample}.bam"
@@ -1945,8 +1945,8 @@ index 59b983c..31ebdff 100644
  		out="logs/download.{sample}.out",
  		err="logs/download.{sample}.err"
 <span class="p">@@ -9,7 +9,7 @@</span> rule download:
-
- rule download_genome:
+<span class="err">
+</span> rule download_genome:
  	output:
 <span class="gd">-		"GCA_000017985.1_ASM1798v1_genomic.fa.gz"
 </span><span class="gi">+		"reference/GCA_000017985.1_ASM1798v1_genomic.fa.gz"
@@ -1954,8 +1954,8 @@ index 59b983c..31ebdff 100644
  		out="logs/download.{sample}.out",
  		err="logs/download.{sample}.err"
 <span class="p">@@ -18,9 +18,9 @@</span> rule download_genome:
-
- rule fastqc:
+<span class="err">
+</span> rule fastqc:
  	input:
 <span class="gd">-		"{sample}.fq"
 </span><span class="gi">+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
@@ -1966,8 +1966,8 @@ index 59b983c..31ebdff 100644
  		"envs/fastqc.yaml"
  	log:
 <span class="p">@@ -31,13 +31,13 @@</span> rule fastqc:
-
- rule trimmomatic:
+<span class="err">
+</span> rule trimmomatic:
  	input:
 <span class="gd">-		r1="{sample}_1.fq",
 -		r2="{sample}_2.fq"
@@ -1986,8 +1986,8 @@ index 59b983c..31ebdff 100644
  		"envs/trimmomatic.yaml"
  	log:
 <span class="p">@@ -53,9 +53,9 @@</span> rule trimmomatic:
-
- rule indexgenome:
+<span class="err">
+</span> rule indexgenome:
  	input:
 <span class="gd">-		"GCA_000017985.1_ASM1798v1_genomic.fna"
 </span><span class="gi">+		"reference/GCA_000017985.1_ASM1798v1_genomic.fa"
@@ -1998,8 +1998,8 @@ index 59b983c..31ebdff 100644
  		"envs/bwa.yaml"
  	log:
 <span class="p">@@ -66,11 +66,11 @@</span> rule indexgenome:
-
- rule align:
+<span class="err">
+</span> rule align:
  	input:
 <span class="gd">-		r1="{sample}_1.trim.fq",
 -		r2="{sample}_1.trim.fq",
@@ -2294,8 +2294,8 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
  	input:
 <span class="gd">-		"alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam"
 </span><span class="gi">+		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
-</span>
- rule download:
+</span><span class="err">
+</span> rule download:
  	output:
 </code></pre></div>    </div>
   </blockquote>
@@ -2320,14 +2320,14 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
 </span><span class="p">@@ -2,7 +2,8 @@</span> SAMPLES = ['SRR2584863', 'SRR2589044']
-
- rule all:
+<span class="err">
+</span> rule all:
  	input:
 <span class="gd">-		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES)
 </span><span class="gi">+		expand("alignments/GCA_000017985.1_ASM1798v1_genomic/{sample}.bam", sample=SAMPLES),
 +		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
-</span>
- rule download:
+</span><span class="err">
+</span> rule download:
  	output:
 </code></pre></div>    </div>
 
@@ -2401,15 +2401,15 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <span class="gd">-		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"])
 </span><span class="gi">+		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
 +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
-</span>
- rule download:
+</span><span class="err">
+</span> rule download:
  	output:
 <span class="p">@@ -36,6 +37,19 @@</span> rule fastqc:
  	shell:
  		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
-
-+rule fastqc_trim:
-<span class="gi">+	input:
+<span class="err">
+</span><span class="gi">+rule fastqc_trim:
++	input:
 +		"<span class="notranslate">reads</span>/{sample}.fq.gz"
 +	output:
 +		"fastqc/{sample}_fastqc.html"
@@ -2558,8 +2558,8 @@ Job id: 21 completed successfully, but some output files are missing. 21
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
 </span><span class="p">@@ -26,7 +26,7 @@</span> rule download_genome:
-
- rule fastqc:
+<span class="err">
+</span> rule fastqc:
  	input:
 <span class="gd">-		"<span class="notranslate">reads</span>/{sample}.fq.gz"
 </span><span class="gi">+		"trim/{sample}.fq.gz"
@@ -2592,8 +2592,8 @@ trim/SRR2584863_1.fq.gz
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
 </span><span class="p">@@ -26,7 +26,7 @@</span> rule download_genome:
-
- rule fastqc:
+<span class="err">
+</span> rule fastqc:
  	input:
 <span class="gd">-		"trim/{sample}.fq.gz"
 </span><span class="gi">+		"trim/{sample}.trim.fq"
@@ -2675,8 +2675,8 @@ SRR2589044_1un.trim_fastqc.zip   SRR2589044_2un.trim_fastqc.zip
  		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
 <span class="gd">-		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html", "_1un_fastqc.html", "_2un_fastqc.html"])
 </span><span class="gi">+		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
-</span>
- rule download:
+</span><span class="err">
+</span> rule download:
  	output:
 </code></pre></div>      </div>
     </li>
@@ -2718,8 +2718,8 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 <span class="gd">-		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.html", "_2_fastqc.html"]),
 -		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.html", "_2.trim_fastqc.html", "_1un.trim_fastqc.html", "_2un.trim_fastqc.html"])
 </span><span class="gi">+		"multiqc/multiqc_report.html"
-</span>
- rule download:
+</span><span class="err">
+</span> rule download:
  	output:
 <span class="p">@@ -28,7 +27,7 @@</span> rule fastqc:
  	input:
@@ -2742,9 +2742,9 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 <span class="p">@@ -50,6 +49,21 @@</span> rule fastqc_trim:
  	shell:
  		"fastqc {input} --outdir fastqc/ &gt;{log.out} 2&gt;{log.err}"
-
-+rule multiqc:
-<span class="gi">+	input:
+<span class="err">
+</span><span class="gi">+rule multiqc:
++	input:
 +		expand("fastqc/{sample}{ext}", sample=SAMPLES, ext=["_1_fastqc.zip", "_2_fastqc.zip"]),
 +		expand("fastqc-trim/{sample}{ext}", sample=SAMPLES, ext=["_1.trim_fastqc.zip", "_2.trim_fastqc.zip", "_1un.trim_fastqc.zip", "_2un.trim_fastqc.zip"])
 +	output:
