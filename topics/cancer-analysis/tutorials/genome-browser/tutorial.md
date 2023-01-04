@@ -21,6 +21,8 @@ contributions:
 <!-- TODO add contributors. From bioinf.ca: "This lab is based on the HTS IGV lab originally by
 Sorana Morrissy and was updated and modified by Heather Gibling for the Cancer Analysis workshop. " -->
 
+{% snippet topics/cancer-analysis/faqs/attribution.md %}
+
 # Introduction
 
 This tutorial will introduce you to the Genome browsers; powerful tools for viewing many kinds of
