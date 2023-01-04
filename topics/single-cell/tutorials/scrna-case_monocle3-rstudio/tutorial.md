@@ -648,7 +648,7 @@ There are a couple of ways to specify the root cells:
 
     - There is also a helper function to identify the root principal points based on the annotated cell types. This function uses `pr_graph_cell_proj_closest_vertex` which is just a matrix with a single column that stores for each cell, the ID of the principal graph node it's closest to.
 
-      ```r
+    ```r
       # a helper function to identify the root principal points
       get_correct_root_state <- function(cds, cell_phenotype, root_type){
         cell_ids <- which(pData(cds)[, cell_phenotype] == root_type)
@@ -669,7 +669,7 @@ There are a couple of ways to specify the root cells:
 
       # order cells using the helper function output
       cds_order_2_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
-      ```
+    ```
 
 
 -	Use `root_cells` argument in `order_cells()` function. 
