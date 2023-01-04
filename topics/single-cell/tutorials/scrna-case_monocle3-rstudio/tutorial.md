@@ -150,7 +150,7 @@ Monocle 3 runs in the R statistical computing environment. You will need R versi
 # Install Bioconductor and some of required dependencies
 if (!requireNamespace("BiocManager", quietly = TRUE))
 install.packages("BiocManager")
-BiocManager::install(version = "3.14")
+BiocManager::install(version = "3.16")
 BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
                        'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment',
                        'SummarizedExperiment', 'batchelor', 'HDF5Array',
@@ -202,7 +202,7 @@ rownames(fData(cds_extra))                              # preview of the gene ID
 # get relevant gene names
 library("biomaRt")                                      # load the BioMart library
 ensembl.ids <- rownames(fData(cds_extra))               # fData() allows to access cds rowData table
-mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL"     # connect to a specified BioMart database and dataset hosted by Ensembl
+mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
 ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
 """
 The line above connects to a specified BioMart database and dataset within this database.
@@ -252,6 +252,10 @@ If you are working on your own data and it’s not mouse data, you can check ava
 listDatasets(mart)                # available datasets
 ```
 
+> <warning-title>Ensembl connection problems</warning-title>
+> Sometimes you may encounter some connection issues with Ensembl. To improve performance Ensembl provides several mirrors of their site distributed around the globe. When you use the default settings for useEnsembl() your queries will be directed to your closest mirror geographically. In theory this should give you the best performance, however this is not always the case in practice. For example, if the nearest mirror is experiencing many queries from other users it may perform poorly for you. In such cases, the other mirrors should be chosen automatically. 
+>
+{: .warning}
 
 # Monocle workflow
 Do you remember the Monocle workflow introduced in the previous tutorial? Here is a recap:
@@ -265,7 +269,7 @@ Therefore, let’s start with normalisation and pre-processing that can be perfo
 cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 
 
  # plot the variation in gene expression vs PCA components
-plot_pc_variance_explained(cds)                              		                            
+plot_pc_variance_explained(cds_preprocessing)                              		                            
 ```
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
@@ -562,7 +566,7 @@ assigned_marker_test <- top_markers(cds_annotated,
                                              cores=8)
 
 # filter these markers according to how stringent you want to be
-garnett_markers <- assigned_ marker_test %>%
+garnett_markers <- assigned_marker_test %>%
                         filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
                         group_by(cell_group) %>%
                         top_n(5, marker_score)
