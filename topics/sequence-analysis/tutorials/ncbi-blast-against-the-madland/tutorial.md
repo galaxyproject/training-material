@@ -12,7 +12,7 @@ key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- pavanvidem
+- deeptivarshey
 
 ---
 
@@ -39,9 +39,9 @@ If you are a first-time user of Galaxy, follow the [tutorial](https://training.g
 
 ## Search for NCBI Blast+ on Galaxy ##
 
-After successfully logging in to the Galaxy server, go to the [Tools](https://usegalaxy.eu/) search bar at the top left corner and type in "BLASTP"; then, choose the NCBI BLAST+ blastp option as shown in the image below.
+After successfully logging in to the Galaxy server, go to the [Tools](https://usegalaxy.eu/) search bar at the top left corner and type in "BLASTP"; then, choose the NCBI BLAST+ blastp option as shown in the image below. for more details for BLAST analysis, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
 
-<img src="images/galaxy_searchbar-re.png" alt="Galaxy search bar interface " width="70%">
+<img src="../../images/ncbi-blast-against-the-madland/galaxy_searchbar.png" alt="Galaxy search bar interface " width="70%">
 
 
 ## Get data
@@ -51,7 +51,7 @@ After successfully logging in to the Galaxy server, go to the [Tools](https://us
 > 1. {% icon tool %} As input file, upload the protein sequence(s) or choose from the history
 > 2. Choose the protein BLAST database *MAdLandDB* 
 
-<img src="images/blastp-re.png" alt="blastp tool interface and parameters" width="70%">
+<img src="../../images/ncbi-blast-against-the-madland/blastp.png" alt="blastp tool interface and parameters" width="70%">
 
 
 ## Sub-step with **NCBI BLAST+ blastp **
