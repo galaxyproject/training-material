@@ -11,7 +11,7 @@ questions:
 - What to do when Galaxy's Monocle tools are not enough?
 - How to assign cell types to the clusters?
 - How can I infer lineage relationships between clusters, without a time series?
-- How to perform differential expression analysis in Monocle?
+- How to perform batch correction and differential expression analysis in Monocle?
 
 
 objectives:
@@ -25,8 +25,9 @@ objectives:
 time_estimation: 2 H
 
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Being able to switch between Galaxy and RStudio when using Monocle is very useful, particularly when you need to modify the CDS object manually. 
+- Monocle3 in R gives more flexibility when it comes to differential expression analysis and plotting, but Galaxy offers great reproducibility and ease of analysis.
+- Comparing the output of several different methods applied on the same dataset might be useful to confirm the results, to ensure that the findings are reliable and even sometimes to find a new piece of information.
 
 requirements:
 -
@@ -307,7 +308,7 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 
 ![Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset.](../../images/scrna-casestudy-monocle/batch_correction.png "Comparison of the dataset before and after batch correction.")
 
-Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using [mutual nearest neighbor alignment](https://doi.org/10.1038/nbt.4091), a technique introduced by John Marioni's lab and supported by Aaron Lun's package [batchelor]( https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
+Do you see this? That’s amazing! Batch correction did a great job here! Now the dataset is nicely aligned, and the cells from all the samples are evenly spread throughout the whole dataset. It is worth mentioning that removing batch effects was done using [mutual nearest neighbor alignment](https://doi.org/10.1038/nbt.4091), a technique introduced by John Marioni's lab ({% cite Haghverdi_2018 %}) and supported by Aaron Lun's package [batchelor](https://bioconductor.org/packages/release/bioc/html/batchelor.html). 
 Now we can move to the next step and perform dimensionality reduction. 
 
 
@@ -669,19 +670,20 @@ There are a couple of ways to specify the root cells:
 
 -	Use `root_cells` argument in `order_cells()` function. 
 
-  Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type. 
-  ```r
-  # find the names of all cells belonging to a certain type, identified as a beginning of a trajectory
-  starting_cell_type <- 'DN'
-  index <- which(cds_trajectory@colData$cell_type == starting_cell_type)
-  DN_cells <- colnames(cds_trajectory)[index]
+    Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type.
 
-  # alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
-  starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
+    ```r
+    # find the names of all cells belonging to a certain type, identified as a beginning of a trajectory
+    starting_cell_type <- 'DN'
+    index <- which(cds_trajectory@colData$cell_type == starting_cell_type)
+    DN_cells <- colnames(cds_trajectory)[index]
 
-  # order cells 
-  cds_order_3 <- order_cells(cds_trajectory, root_cells = DN_cells)
-  ```
+    # alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
+    starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
+
+    # order cells 
+    cds_order_3 <- order_cells(cds_trajectory, root_cells = DN_cells)
+    ```
 
 
 
@@ -775,7 +777,7 @@ DP_M1_coefs_filtered
 The resulting table shows the genes that differ depending on the chosen term. Maybe this function is not very helpful in the case of our dataset, but may be useful when analysing unannotated data or choosing another term from `colData()`.
 
 ## Graph-autocorrelation analysis - advanced
-Alongside regression analysis, Monocle also provides another way of finding genes that vary between groups of cells. The function `graph_test()` uses a statistic from spatial autocorrelation analysis called [Moran's I](https://en.wikipedia.org/wiki/Moran%27s_I), which Cao & Spielmann et al showed to be effective in finding genes that vary in single-cell RNA-seq datasets. Let’s try to perform this step on our full dataset (be patient!).
+Alongside regression analysis, Monocle also provides another way of finding genes that vary between groups of cells. The function `graph_test()` uses a statistic from spatial autocorrelation analysis called [Moran's I](https://en.wikipedia.org/wiki/Moran%27s_I), which [Cao & Spielmann et al]{cite Cao_2019} showed to be effective in finding genes that vary in single-cell RNA-seq datasets. Let’s try to perform this step on our full dataset (be patient!).
 ```r
 # run autocorrelation test
 graph_test_res <- graph_test(cds_order, neighbor_graph="knn", cores=8)
@@ -838,5 +840,4 @@ plot_cells_3d(cds_3d, color_cells_by="cell_type")
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+If you’re following the Case Study tutorials from the beginning, you have already experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. The [Monocle in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) was focused more on explaining each step of the trajectory analysis and interpreting the results in the biological context. The current tutorial aims at showing the variety of methods that can be used when Galaxy's Monocle tools are not enough. It shows the potential of batch correction, differential expression analysis and flexibility when using different functions. It's also a guide for those who would like to understand what is happening 'behind the scenes' when clicking on Galaxy buttons. 
