@@ -150,7 +150,7 @@ Monocle 3 runs in the R statistical computing environment. You will need R versi
 # Install Bioconductor and some of required dependencies
 if (!requireNamespace("BiocManager", quietly = TRUE))
 install.packages("BiocManager")
-BiocManager::install(version = "3.16")
+BiocManager::install(version = "3.14")
 BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
                        'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment',
                        'SummarizedExperiment', 'batchelor', 'HDF5Array',
