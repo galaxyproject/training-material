@@ -204,22 +204,22 @@ library("biomaRt")                                      # load the BioMart libra
 ensembl.ids <- rownames(fData(cds_extra))               # fData() allows to access cds rowData table
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
 ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://nov2020.archive.ensembl.org') 	
-"""
-The line above connects to a specified BioMart database and dataset within this database.
-In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, 
-we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
-ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
-"""
+
+# The line above connects to a specified BioMart database and dataset within this database.
+# In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, 
+# we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
+# ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
+
 
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id', 
                values = ensembl.ids, 
                mart = ensembl_m)
-"""
-The line above retrieves the specified attributes from the connected BioMart database; 
-'ensembl_gene_id' are genes IDs, 
-'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
-"""
+
+# The line above retrieves the specified attributes from the connected BioMart database; 
+# 'ensembl_gene_id' are genes IDs, 
+# 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
+
 # see the resulting data
 genes                             
 
