@@ -64,17 +64,16 @@ MAdLand is a collection of fully sequenced plant and algal genomes, with a focus
 > After successfully logging in to the Galaxy server, Go to the [NCBI-Blast+](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) tool.  
 > Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
 
->
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
-> 1. {% icon tool %} As input file, select the protein sequences 
-> 2. Choose the protein BLAST database *MAdLandDB* with the following parameters:
->    - In *"input Options"*:
->        - {% icon param-file %} *"Protein query sequence(s)"*: `output` (Input dataset)
->        - *"Subject database/sequences"*: `Locally installed BLAST database`
->        - *"Protein BLAST database"*: `MAdLandDB`
->    - In *"Output Options"*:
->       - *"Output format"*: `Tabular (extended 25 columns)` (optional)
+> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} with the following parameters:
+>    -  *"Protein query sequence(s)"*:  `Aminoacid input sequence`
+>    - *"Subject database/sequences"*:  `Locally installed BLAST database`
+>    - *"Protein BLAST database"*: `MadLandDB (Genome zoo) plant and algal genomes with a focus on non-seed plants and streptophyte algae (22 Dec 2022)`
+>    - *"Type of BLAST"*:  `blastp - Traditional BLASTP to compare a protein query to a protein database`
+>    - *"Set expectation value cutoff"*: `0.001`
+>    - *"Output format"*: 
+>    - In *"Output Options"*: `Tabular (extended 25 columns)` 
 
 > <img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
 
