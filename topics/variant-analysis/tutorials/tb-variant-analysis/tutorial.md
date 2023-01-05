@@ -331,8 +331,8 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn't really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.
 
 > <hands-on-title>Run JBrowse</hands-on-title>
->
-> 1. Use {% tool [seqret]({% raw %}{toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0}{% endraw %}) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
+> 
+> 1. Use {% tool [seqret]({{ "toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS: seqret84/5.0.0" | uri_escape }}) %} {% icon tool %} to convert the Genbank format reference (`Mycobacterium_tuberculosis_ancestral_reference.gbk`) to FASTA format. Use the following parameters:
 >    - *"Sequences"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >    - *"Use feature information"*: `No`
 >    - *"Read one sequence and stop"*: `Yes`
