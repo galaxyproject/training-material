@@ -331,7 +331,7 @@ parameters.
 >
 {: .hands_on}
 
-![Resultant plot of asymmetry against time for the Zeeman Example](../../images/hfine_example.png "The asymmetry oscillates above 0 over the time of the simulation")
+![Resultant plot of asymmetry against time for the Hyperfine Example](../../images/hfine_example.png "The asymmetry oscillates above 0 over the time of the simulation")
 
 Note that while the range of values asymmetry takes has changed, we can once
 again observe that that our period of $$0.1 \mu s$$ matches the input of
