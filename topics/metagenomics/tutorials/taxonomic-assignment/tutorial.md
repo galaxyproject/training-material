@@ -267,6 +267,20 @@ Important note: don't wait for Galaxy to finish the job! Your results are availa
 
 {: .hands_on} 
 
+When you follow the link to the Phinch webpage, you first see an overview of your samples. Here, you have the possibility to further filter your data, for example by date or location, depending on which information you provided in your metadata file. 
+Next, you click on ‘proceed to gallery’ to see an overview of all visualization options. 
+
+Let’s have a look at the **taxonomy bar chart**. Here, you can see the abundance of different taxa depicted in different colors in your samples. On top of the chart you can select which rank is supposed to be shown in the chart. You can also change the display options to for example switch between value und percentage. If you hover over a specific taxon, you get exact information of the taxon’s name and the taxonomy occurrence in the sample. Furthermore, there is a search bar that allows you to search for specific taxa (within the rank that you chose to depict) and gives you the option to hide specific taxons. 
+
+Next, lets go back to the gallery and choose the **bubble chart**. Here, you can find the distribution of taxa across the whole dataset at the rank that you can choose above the chart. When hovering over the bubbles, you get additional information concerning the taxon. Clicking on one bubble gives you the direct comparison of the distribution of this taxon in the different samples.  To oder the bubbles according to their size you can choose the ‘list’ option shown right next to the taxonomy level.
+
+Another displaying option is the **Sankey diagram**, that is depicting the abundance of taxonomies as a flow chart. Again, you can choose the taxonomy level that you want to show in your diagram. When clicking on one bar of the diagram, this part is enlarged for better view.
+
+The **donut partition** summarizes the microbial community according to non-numerical attributes. In the drop-down menu at the top right corner, you can switch between the different attributes provided in the metadata file. In our case, you can for example choose the ‘environmental medium’ to see the difference between sediment and water (It doesn’t really make a lot of sense in our very simple dataset, as this will show the same result as sorting them by sample 0 and 1, but if attributes change across different samples this might be an interesting visualization option). When clicking on one part of the donut you will also find the distribution of the taxon across the samples. On the right hand side you can additionally choose if you’d like to have dynamic y axis or prefer standard y axis to compare different donuts with each other. 
+
+The **attributes column chart** summarizes the microbial community according to numerical attributes. In the drop-down menu at the top right corner, you can switch between the different attributes provided in the metadata file. In our case, you can for example choose the ‘geographic location’ to (again, it doesn’t really make a lot of sense in our very simple dataset, as this will show the same result as sorting them by sample 0 and 1, but if attributes change across different samples this might be an interesting visualization option).
+
+
 
 ## Visualize the taxonomical classification with Pavian
 
