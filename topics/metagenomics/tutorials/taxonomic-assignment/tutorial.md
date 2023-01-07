@@ -268,6 +268,30 @@ Important note: don't wait for Galaxy to finish the job! Your results are availa
 {: .hands_on} 
 
 
+## Visualize the taxonomical classification with Pavian
+
+Pavian (pathogen visualization and more) is an interactive visualization tool for metagenomic data. It was developed for the clinical metagenomic problem to find a disease-causing pathogen in a patient sample, but it is useful to analyze and visualize any kind of metagenomics data. 
+
+> ### {% icon hands_on %} Hands-on: Pavian
+
+>   -  Use {% tool [Pavian] (interactive_tool_pavian) %} with the following paramters:
+>    - *"Kraken and MetaPhlAn-style reports"*: `Kraken report file`
+
+Important note: don't wait for Galaxy to finish the job! Your results are available directly, as Pavian is an interactive tool. To see them, click on User in the blue part right at the top of the Galaxy page, there you can find "Active interactive tools". When you go there, you will find Pavian running and can visit the website with your results by following the link "Pavian Visualisation" which is provided as the name of the job. 
+
+{: .hands_on} 
+
+
+ Following the provided link, you will find the Pavian webpage. When choosing ‘Use data on server’ as data source, you should find your selected report files from galaxy. If you wish you can choose several sample files at once to be able to compare them in Pavian. After selecting ‘Read selected directories’, Pavian will show you a classification summary of all samples. 
+
+Select ‘Comparison’ in the sidebar to find a table with taxa as rows and samples as columns. Above the table you can change several displaying options like which rank you would like to see or if you want the Z-scores to be displayed. Furthermore, the data can be filtered to exclude for example human reads as a host genome. 
+
+Select ‘Sample’ in the sidebar to zoom into one sample with a Sankey diagram, which shows different taxons as lines with their width based on the quantity of the taxon. The diagram is shown for one sample but when hovering over nodes, the abundance of that specific taxon compared in all samples shown in a bar plot will appear on the right-hand side. 
+One additional feature of Pavian is the ‘Alignment Viewer’ to investigate for example if reads of a taxon cover the genome. Genome coverage can provide an indication whether an assignment is artificial or not. 
+
+For further information on how to use Pavian please have a look into the [Pavian Walktrough](https://github.com/fbreitwieser/pavian/blob/master/vignettes/pavian-walkthrough.pdf) provided by F. Breitwieser.
+
+
 # Discussion: Choosing the right tool
 
 When it comes to taxonomic assignment while analyzing metagenomic data, in this tutorial presented Kraken2 is not the only tool available. Several papers do benchmarking of different tools ({% cite Meyer.2022 %},{% cite Sczyrba.2017 %},{% cite Ye.2019 %}) and their results are presented in the following section, with focus on tools that are available in Galaxy.
