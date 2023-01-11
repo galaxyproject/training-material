@@ -8,10 +8,12 @@ questions:
   - "How can we perform Blast analysis on Galaxy?"
 objectives:
   - "Load fasta sequence into Galaxy"
-  - "Perform NCBI-Blast+ analysis on Galaxy"
-time_estimation: "20m"
+  - "Perform NCBI-Blast+ analysis against MAdLandDB"
+time_estimation: "15m"
+enable: false
 key_points:
   - Blast tool searches a database of sequences for similar sequences to a query sequence.
+  - Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences     called a "database diamond".
   - MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.
 contributors:
   - Deeptivarshney
@@ -157,3 +159,12 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
 > {: .details}
+
+## More Similarity Search Tools on Galaxy
+
+* **Diamond**: [Diamond](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0) is a high-throughput program for alignment of  large-scale data sets. It aligns sequences to the reference database using a compressed version of the reference sequences called a "database diamond" which is faster to read and can save computational time (~20,000 times the speed of Blastx, with high sensitivity).
+
+> <details-title>Diamond in depth</details-title>
+>
+> [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
+{: .details}
