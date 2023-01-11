@@ -42,37 +42,24 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
->
-> 2. Import the file `query.faa` from [Zenodo](https://doi.org/10.5281/zenodo.7524427) 
->
->    ```
->    https://zenodo.org/api/files/40445ead-6429-463c-bfa5-e1fb92095af8/query.faa
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->   
->
-{: .hands_on}
 
-> We just imported a fasta file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
 
-## Perform NCBI Blast+ on Galaxy
+# Perform NCBI Blast+ on Galaxy 
 
->   Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
+> After successfully logging in to the Galaxy server, Go to the [NCBI-Blast+](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) tool.  
+> Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
 
+>
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
-> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} OR {% tool [NCBI BLAST+ blastx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} with the following parameters:
->    - _"Protein query sequence(s)"_: `Amino acid input sequence` (In case of BLASTp) *OR* 
->    - _"Translated nucleotide query sequence(s)"_: `Translated nucleotide input sequence` (In case of BLASTx) 
->    - _"Subject database/sequences"_: `Locally installed BLAST database`
->    - _"Protein BLAST database"_: `MadLandDB (Genome zoo) plant and algal genomes with a focus on non-seed plants and streptophyte algae (22 Dec 2022)`
->    - _"Set expectation value cutoff"_: `0.001`
->    - _"Output format"_:
->    - In _"Output Options"_: `Tabular (extended 25 columns)` 
-<img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
->
-{: .hands_on}
+> 1. {% icon tool %} As input file, select the protein sequences 
+> 2. Choose the protein BLAST database *MAdLandDB* with the following parameters:
+>    - In *"input Options"*:
+>        - {% icon param-file %} *"Protein query sequence(s)"*: `output` (Input dataset)
+>        - *"Subject database/sequences"*: `Locally installed BLAST database`
+>        - *"Protein BLAST database"*: `MAdLandDB`
+>    - In *"Output Options"*:
+>       - *"Output format"*: `Tabular (extended 25 columns)` (optional)
 
 ## Blast output
 
