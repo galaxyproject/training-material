@@ -265,10 +265,6 @@ module Jekyll
       Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
     end
 
-    def last_modified_at(page)
-      Gtn::ModificationTimes.obtain_time(page['path'])
-    end
-
     def recently_modified_tutorials(site)
       tutorials = site.pages.select{|page| page.data['layout'] == 'tutorial_hands_on' }
 

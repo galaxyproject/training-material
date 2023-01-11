@@ -45,7 +45,6 @@ module GTNNotebooks
     "fas fa-info-circle" => "details",
     "far fa-comments" => "feedback",
     "fas fa-pencil-alt" => "hands_on",
-    "fas fa-pencil-alt" => "hands_on",
     "far fa-question-circle" => "question",
     "far fa-eye" => "solution",
     "far fa-lightbulb" => "tip",
