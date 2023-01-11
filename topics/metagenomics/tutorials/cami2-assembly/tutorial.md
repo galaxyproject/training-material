@@ -401,11 +401,11 @@ We will start to upload the short-read data.
 
 > <hands-on-title>Upload short-read data into Galaxy with Rule Builder</hands-on-title>
 >
-> 1. Create a new history for this analysis
+> 1. Create a new history
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Rename the history
+> 2. Rename the history `CAMI 2 - Inputs`
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
@@ -523,6 +523,15 @@ We got the marine data for short-reads in our history. Let's do the same for lon
 >     > <comment-title></comment-title>
 >     > The process will take time.
 >     {: .comment}
+>
+> 12. Inspect the generated collection
+>
+{: .hands_on}
+
+The data has been simulated and we have the Gold Standard Assembly (GSA) for it, that we can use as reference genome for evaluation of assembly quality.
+
+> <hands-on-title>Upload the Gold Standard Assemblya into Galaxy with Rule Builder</hands-on-title>
+> 1. TODO
 >
 > 12. Inspect the generated collection
 >
@@ -798,7 +807,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >
 >    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
-> 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
+> 3. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
 >     - {% icon param-collection %} *"Input reads"*: the collection of long reads from all samples
 >     - *"Mode"*: `Nanopore raw (--nano-raw)`
 >
@@ -809,6 +818,7 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >
 >     - *"Perform metagenomic assembly"*: `True`
 >
+> 4. Rename output to `Long reads - Individual assembly - Flye`
 {: .hands_on}
 
 ### Co-assembly
@@ -819,10 +829,11 @@ A Galaxy history was created for each tool and type of assembly (single or co-as
 >
 > 2. Copy the pooled long read data into this new history
 >
-> 2. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
+> 3. Run {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/2.9+galaxy0) %} with parameters:
 >     - {% icon param-file %} *"Input reads"*: pooled long read data
 >     - *"Mode"*: `Nanopore raw (--nano-raw)`
 >     - *"Perform metagenomic assembly"*: `True`
+> 4. Rename output to `Long reads - Co-assembly - Flye`
 {: .hands_on}
 
 We just launched **Flye** for:
@@ -866,14 +877,14 @@ In ABySS, we need to define the $$k$$-mer size. And in CAMI 2, 2 values were tes
 >         - *"Type of paired-end datasets"*: `1 paired dataset collection`
 >           - {% icon param-collection %} *"Paired-end reads collection"*: Short read collection
 >     - *"K-mer length (in bp)"*: `41`
-> 2. Rename output to `ABySS - k41`
+> 2. Rename output to `Short reads - Individual assembly - ABySS - k41`
 > 3. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - In *"Paired-end library"*
 >       - {% icon param-repeat %} *"Insert Paired-end library"*
 >         - *"Type of paired-end datasets"*: `1 paired dataset collection`
 >           - {% icon param-collection %} *"Paired-end reads collection"*: Short read collection
 >     - *"K-mer length (in bp)"*: `96`
-> 4. Rename output to `ABySS - k96`
+> 4. Rename output to `Short reads - Individual assembly - ABySS - k96`
 {: .hands_on}
 
 
@@ -893,7 +904,7 @@ Let's reproduce that.
 >     - *"Select your input option"*: `Paired-end collection`
 >       - *"Run in batch mode?"*: `Run individually`
 >       - {% icon param-collection %} *"Select a paired collection"*: Short read collection
-> 2. Rename output to `MEGAHIT - Default`
+> 2. Rename output to `Short reads - Individual assembly - MEGAHIT - Default`
 > 3. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Select your input option"*: `Paired-end collection`
 >       - *"Run in batch mode?"*: `Run individually`
@@ -902,7 +913,7 @@ Let's reproduce that.
 >       - *"Minimum kmer size"*: `21`
 >       - *"Maximum kmer size"*: `91`
 >       - *"Increment of kmer size of each iteration"*: `12`
-> 4. Rename output to `MEGAHIT - k-min21 k-max91 k-step12`
+> 4. Rename output to `Short reads - Individual assembly - MEGAHIT - k-min21 k-max91 k-step12`
 > 5. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Select your input option"*: `Paired-end collection`
 >       - *"Run in batch mode?"*: `Run individually`
@@ -911,7 +922,7 @@ Let's reproduce that.
 >       - *"Minimum kmer size"*: `21`
 >       - *"Maximum kmer size"*: `91`
 >       - *"Increment of kmer size of each iteration"*: `10`
-> 4. Rename output to `MEGAHIT - k-min21 k-max91 k-step10`
+> 4. Rename output to `Short reads - Individual assembly - MEGAHIT - k-min21 k-max91 k-step10`
 {: .hands_on}
 
 #### MetaSPAdes
@@ -924,13 +935,12 @@ MetaSPAdes uses also a multiple $$k$$-mer strategie. In CAMI 2, they used $$[21,
 >       - {% icon param-collection %} *"FASTQ file(s): collection"*: Short read collection
 >     - *"Select k-mer detection option"*: `User specific`
 >       - *"K-mer size values"*: `21,33,55,77`
-> 2. Rename output to `MetaSPAdes - k21-33-55-77`
+> 2. Rename output to `Short reads - Individual assembly - MetaSPAdes - k21-33-55-77`
 {: .hands_on}
-
 
 > <comment-title></comment-title>
 >
-> We got an error `Out of memory` for the first launches of metaspades. The memory limit in Galaxy was set to 200 Gb on usegalaxy.eu.
+> We got an error `Out of memory` for the first launches of MetaSPAdes. The memory limit in Galaxy was set to 200 Gb on usegalaxy.eu.
 >
 > If such issue happens, you can contact Galaxy administrators to ask if it is possible to increase the available memory for the tool.
 >
@@ -952,18 +962,18 @@ MetaSPAdes uses also a multiple $$k$$-mer strategie. In CAMI 2, they used $$[21,
 >         - *"Type of paired-end datasets"*: `1 dataset of interleaved reads`
 >           - {% icon param-file %} *"Interleaved paired-end reads"*: Short read data
 >     - *"K-mer length (in bp)"*: `41`
-> 4. Rename output to `ABySS - k41`
+> 4. Rename output to `Short reads - Co-assembly - ABySS - k41`
 > 5. Run {% tool [ABySS](toolshed.g2.bx.psu.edu/repos/iuc/abyss/2.3.4+galaxy1) %} with parameters:
 >     - In *"Paired-end library"*
 >       - {% icon param-repeat %} *"Insert Paired-end library"*
 >         - *"Type of paired-end datasets"*: `1 dataset of interleaved reads`
 >           - {% icon param-file %} *"Interleaved paired-end reads"*: Short read data
 >     - *"K-mer length (in bp)"*: `96`
-> 6. Rename output to `ABySS - k96`
+> 6. Rename output to `Short reads - Co-assembly - ABySS - k96`
 > 7. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Select your input option"*: `Interleaved-paired-end`
 >       - *"Interleaved-paired-end file(s)"*: Short read data
-> 8. Rename output to `MEGAHIT - Default`
+> 8. Rename output to `Short reads - Co-assembly - MEGAHIT - Default`
 > 9. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Select your input option"*: `Interleaved-paired-end`
 >       - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Short read data
@@ -971,7 +981,7 @@ MetaSPAdes uses also a multiple $$k$$-mer strategie. In CAMI 2, they used $$[21,
 >       - *"Minimum kmer size"*: `21`
 >       - *"Maximum kmer size"*: `91`
 >       - *"Increment of kmer size of each iteration"*: `12`
-> 10. Rename output to `MEGAHIT - k-min21 k-max91 k-step12`
+> 10. Rename output to `Short reads - Co-assembly - MEGAHIT - k-min21 k-max91 k-step12`
 > 11. Run {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/1.2.9+galaxy0) %} with parameters:
 >     - *"Select your input option"*: `Interleaved-paired-end`
 >       - {% icon param-file %} *"Interleaved-paired-end file(s)"*: Short read data
@@ -979,13 +989,13 @@ MetaSPAdes uses also a multiple $$k$$-mer strategie. In CAMI 2, they used $$[21,
 >       - *"Minimum kmer size"*: `21`
 >       - *"Maximum kmer size"*: `91`
 >       - *"Increment of kmer size of each iteration"*: `10`
-> 12. Rename output to `MEGAHIT - k-min21 k-max91 k-step10`
+> 12. Rename output to `Short reads - Co-assembly - MEGAHIT - k-min21 k-max91 k-step10`
 > 13. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - *"Pair-end reads input format"*: `Paired-end: interlace reads`
 >       - {% icon param-file %} *"FASTQ file(s): interlaced"*: Short read data
 >     - *"Select k-mer detection option"*: `User specific`
 >       - *"K-mer size values"*: `21,33,55,77`
-> 14. Rename output to `MetaSPAdes - k21-33-55-77`
+> 14. Rename output to `Short reads - Co-assembly - MetaSPAdes - k21-33-55-77`
 {: .hands_on}
 
 
@@ -996,24 +1006,25 @@ Hybrid assembly uses both short- and long-read sequencing data. Most assemblers 
 > <hands-on-title>Hybrid assembly with MetaSPAdes</hands-on-title>
 > 1. Create a new history with the name `CAMI 2 - Hybrid`
 > 2. Copy the collection with short read data into this new history
-> 2. Copy the short read pooled data into this new history
-> 2. Copy the collection with long read data into this new history
-> 2. Copy the long read pooled data into this new history
-> 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 3. Copy the short read pooled data into this new history
+> 4. Copy the collection with long read data into this new history
+> 5. Copy the long read pooled data into this new history
+> 6. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - *"Pair-end reads input format"*: `Paired-end: list of dataset pairs`
 >       - {% icon param-collection %} *"FASTQ file(s): collection"*: Short read collection
 >     - In *"Additional read files"*
 >       - {% icon param-collection %} *"Nanopore reads"*: Long read collection
 >     - *"Select k-mer detection option"*: `User specific`
 >       - *"K-mer size values"*: `21,33,55,77`
-> 4. Rename output to `MetaSPAdes - hybrid - individual assembly`> 1. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
+> 7. Rename output to `Hybrid - Individual assembly - MetaSPAdes`
+> 8. Run {% tool [MetaSPAdes](toolshed.g2.bx.psu.edu/repos/nml/metaspades/3.15.4+galaxy0) %} with parameters:
 >     - *"Pair-end reads input format"*: `Paired-end: interlace reads`
 >       - {% icon param-file %} *"FASTQ file(s): interlaced"*: Short read data
 >     - In *"Additional read files"*
 >       - {% icon param-file %} *"Nanopore reads"*: Long read data
 >     - *"Select k-mer detection option"*: `User specific`
 >       - *"K-mer size values"*: `21,33,55,77`
-> 4. Rename output to `MetaSPAdes - hybrid - co-assembly`
+> 9. Rename output to `Hybrid - Co-assembly - MetaSPAdes`
 {: .hands_on}
 
 
@@ -1021,283 +1032,335 @@ Hybrid assembly uses both short- and long-read sequencing data. Most assemblers 
 
 Now we run the different assemblies, we need to assess their outputs. In CAMI2, different tools are used to evaluate the quality of the tools for the different challenges:
 
-**Tool name** | **Assessment of**
-[MetaQUAST](https://github.com/ablab/quast/) ({% cite Mikheenko2015 %}) |	Assembly challenge
-[AMBER](https://github.com/CAMI-challenge/AMBER) ({% cite Meyer2018 %})	| Genome binning challenge
-[OPAL](https://github.com/CAMI-challenge/OPAL) ({% cite Meyer2019 %})	| Taxonomic profiling challenge
+- For **assembly**: [MetaQUAST](https://github.com/ablab/quast/) ({% cite Mikheenko2015 %})
+- For **genome binning**: [AMBER](https://github.com/CAMI-challenge/AMBER) ({% cite Meyer2018 %})
+- For **taxonomic profiling**: [OPAL](https://github.com/CAMI-challenge/OPAL) ({% cite Meyer2019 %})
 
-In this tutorial, we focus on the assembly challenge and on some metrics used to assess the quality of the assemblies:
+As in this tutorial, we focus on the assembly challenge, we will use [MetaQUAST](https://github.com/ablab/quast/).
 
-* **Genome fraction (%)**: % of reference bases covered by assembled contigs obtained by similarity-based mapping.
-    * The total number of aligned bases in the reference, divided by the genome size. A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base. Contigs from repeat regions may map to multiple places, and thus may be counted multiple times in this quantity.
-* **Mismatches per 100 kbp**: number of mismatched bases in the contig-reference alignment (average per 100 kb).
-    * The average number of mismatches per 100 000 aligned bases. This metric does not distinguish between _single-nucleotide polymorphisms,_ which are true differences in the assembled genome versus the reference genome, and _single-nucleotide errors,_ which are due to errors in reads or errors in the assembly algorithm.
-    * **Duplication ratio**: total number of aligned bases / genome fraction * reference length.
-* **Number of misassemblies**: number of contigs which:
-* contain a gap of more than 1kb;
-* contain inserts of more than 1kb; or
-* align to different genomes
-* **The number of misassemblies**: number of positions in the assembled contigs where the left flanking sequence aligns over 1 kb away from the right flanking sequence on the reference, or they overlap by >1 kb, or the flanking sequences align on opposite strands or different chromosomes.
-* **NGA50**:  metric for measuring the contiguity of an assembly.
-    * For each reference genome, all contigs aligned to it are sorted by size and the NGA50 for that genome is defined as the length of the contig cumulatively surpassing 50% genome fraction. If a genome is not covered to 50%, NGA50 is undefined. Since we report the average NGA50 over all genomes, it was set to 0 for genomes with less than 50% genome fraction.
-    * There is a similar metric NG50 that defines the contig length such that using equal or longer length contigs produces 50% of the length of the reference genome. NGA50 is NG50 such that the lengths of aligned blocks are counted instead of contig lengths. It means that first we perform the sequence alignment of contigs to the reference genome. Next, contigs with misassemblies are split into aligned blocks and are aligned independently to distinct parts of the genome.
-* **Strain recall**: raction of high-quality (more than 90% genome fraction and less than 100 mismatches per 100 kb) genome assemblies recovered for all ground truth genomes. Strain recall measures how many genomes are recovered with high genome fraction and few mismatches (mm).
-* **Strain precision**: fraction of high-quality assemblies among all high genome fraction (more than 90%) assemblies.
-    * Strain precision assesses how accurately reference genomes are recovered, based on the fraction of correctly assembled high-quality, near-complete genomes (>90% genome fraction, &lt;0.1% mm) divided by the overall number of assembled, near-complete genomes (>90% genome fraction).
+The data used as input for the assembly has been simulated and we have the Gold Standard Assembly for it. We can use it as reference genome in MetaQUAST for evaluation of assembly quality.
 
-
-Before running Quast as in CAMI to extract general statistics, we want to know the percentage of reads that were used to build the assemblie
-
-
-## Extraction of % reads used in assemblies
-
-To extract this information, we map the input reads on the assemblies.
-
-
-### Short-reads
-
-We use Bowtie2 for mapping short-reads raw data to the assembly we got after usage of different short-reads assemblers (Megahit, MetaSPAdes, Abyss) in order to get the percentage of reads used for assembly.
-
-> <hands-on-title>Get percentage of reads used for co-assembly with Bowtie2</hands-on-title>
+> <hands-on-title>Assembly evaluation with MetaQUAST</hands-on-title>
 >
-> 1. Create a new history named "Short reads co-assemblies"
+> 1. Move to `CAMI 2 - Long reads - Individual assembly` history
+> 2. Copy the collection with Gold Standard Assembly into this history
+> 3. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-collection %} *"Contigs/scaffolds file"*: `Long reads - Individual assembly - Flye`
+>    - *"Reads options"*: `Nanopore reads`
+>      - {% icon param-collection %} *"FASTQ/FASTA files"*: collection of long reads
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
 >
->    {% snippet faqs/galaxy/histories_create_new.md %}
+>    > <comment-title></comment-title>
+>    >
+>    > Quast will take time to run. You should let it run and launch the other tools while it runs
+>    {: .comment}
 >
-> 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Is this single or paired library"*: paired_interleaved
->     - {% icon param-file %} *"Interleaved FASTQ file"*: raw dataset collection
->     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index"*: history
->     - {% icon param-file %} *"Select reference genome"*: Megahit/MetaSPAdes/Abyss output (If the assembler, like Abyss, has Contigs and Scaffolds as output, use Contigs preferably. Contigs do not contain gaps represented with multiple-X letters.)
->     - {% icon param-file %} *"Save the bowtie2 mapping statistics to the history"*: True
-> 4. Inspect the generated output
-{: .hands_on}
-
-
-> <hands-on-title>Get percentage of reads used for individual assembly with Bowtie2</hands-on-title>
->
-> 1. Create a new history named "Short reads co-assemblies"
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Drag and drop /results from the different reshistories with short read individual assemblies
-> 3. Run {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/2.4.5+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Is this single or paired library"*: paired_interleaved
->     - {% icon param-file %} *"Interleaved FASTQ file"*: raw dataset collection
->     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index"*: history
->     - {% icon param-file %} *"Select reference genome"*: Megahit/MetaSPAdes/Abyss output (If the assembler, like Abyss, has Contigs and Scaffolds as output, use Contigs preferably. Contigs do not contain gaps represented with multiple-X letters.)
->     - {% icon param-file %} *"Save the bowtie2 mapping statistics to the history"*: True
-> 4. Inspect the generated output
-{: .hands_on}
-
-
-### Long reads
-
-Bowtie2 should not be used to align long reads to resulting assemblies because, as it is stated in Bowtie2 documentation, “Bowtie2 is geared toward aligning relatively short sequencing reads to long genomes. That said, it handles arbitrarily small reference sequences (e.g. amplicons) and very long reads (i.e. upwards of 10s or 100s of kilobases), though it is slower in those settings. It is optimised for the read lengths and error modes yielded by typical Illumina sequencers”.
-
-For long-reads instead, _Minimap2_ aligner can be used for mapping the Nanopore-sequenced data.
-
-> <hands-on-title>Get percentage of reads used for co-assembly with Map with minimap2</hands-on-title>
->
-> 1. Create a new history named "Long reads co-assemblies"
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index?"*: Use a genome from history and build index
->     - {% icon param-file %} *"Use the following dataset as the reference sequence"*: output of Flye
->     - {% icon param-file %} *"Single or Paired-end reads"*: paired interleaved
->     - {% icon param-file %} *"Select fastq dataset"*: raw dataset collection
-> This tool run produces one collection with the actual mapped reads for each Nanopore-sequenced sample. Unlike Bowtie2 it does not have an option to output mapping statistics directly. However, we can generate that information through an extra step.
-> 4. Run {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
->     - {% icon param-file %} *"BAM file"*: the collection of mapped Nanopore-sequenced reads, output of Map with minimap2 tool
->     - {% icon param-file %} *"Output"*: One single summary file
-> 5. Inspect the generated output
-{: .hands_on}
-
-> <hands-on-title>Get percentage of reads used for individual assembly with Map with minimap2</hands-on-title>
->
-> 1. Create a new history named "Long reads individual assemblies"
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Drag and drop /results from the different reshistories with short read co-assemblies
-> 3. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/2.24+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Will you select a reference genome from your history or use a built-in index?"*: Use a genome from history and build index
->     - {% icon param-file %} *"Use the following dataset as the reference sequence"*: output of Flye
->     - {% icon param-file %} *"Single or Paired-end reads"*: paired interleaved
->     - {% icon param-file %} *"Select fastq dataset"*: raw dataset collection
-> 4. Run {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/2.0.3) %} with parameters:
->     - {% icon param-file %} *"BAM file"*: the collection of mapped Nanopore-sequenced reads, output of Map with minimap2 tool
->     - {% icon param-file %} *"Output"*: One single summary file
-> 5. Inspect the generated output
-{: .hands_on}
-
-
-## Extraction of general metrics
-
-Assemblies were evaluated with metaQUAST (metagenomics mode of QUAST) version 5.0.2.
-
-
-## Quast
-
-> <hands-on-title>Metaquast without provided reference genome</hands-on-title>
->
-> 1. Move to "Short reads co-assemblies" history
-> 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 3. Move to "Short reads individual assemblies" history
-> 4. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 5. Move to "Long reads co-assemblies" history
+> 4. Move to `CAMI 2 - Long reads - Co-assembly` history
+> 5. Copy the collection with Gold Standard Assembly into this history
 > 6. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 7. Move to "Long reads individual assemblies" history
-> 8. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 9. Inspect the generated output
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-file %} *"Contigs/scaffolds file"*: `Long reads - Co-assembly - Flye`
+>    - *"Reads options"*: `Nanopore reads`
+>      - {% icon param-file %} *"FASTQ/FASTA files"*: collection of long reads
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+>
+> 7. Move to `CAMI 2 - Short reads - Individual assembly` history
+> 8. Copy the collection with Gold Standard Assembly into this history
+> 9. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-collection %} *"Contigs/scaffolds file"*: `Short reads - Individual assembly - ABySS - k41`, `Short reads - Individual assembly - ABySS - k96`, `Short reads - Individual assembly - MEGAHIT - Default`, `Short reads - Individual assembly - MEGAHIT - k-min21 k-max91 k-step12`, `Short reads - Individual assembly - MEGAHIT - k-min21 k-max91 k-step10`, `Short reads - Individual assembly - MetaSPAdes - k21-33-55-77`
+>    - *"Reads options"*: `Illumina paired-end reads in paired collection`
+>      - {% icon param-collection %} *"FASTQ/FASTA files"*:  Short read collection
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+>
+> 10. Move to `CAMI 2 - Short reads - Co-assembly` history
+> 11. Copy the collection with Gold Standard Assembly into this history
+> 12. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-file %} *"Contigs/scaffolds file"*: `Short reads - Co-assembly - ABySS - k41`, `Short reads - Co-assembly - ABySS - k96`, `Short reads - Co-assembly - MEGAHIT - Default`, `Short reads - Co-assembly - MEGAHIT - k-min21 k-max91 k-step12`, `Short reads - Co-assembly - MEGAHIT - k-min21 k-max91 k-step10`, `Short reads - Co-assembly - MetaSPAdes - k21-33-55-77`
+>    - *"Reads options"*: `Illumina interlaced paired-end reads`
+>      - {% icon param-file %} *"FASTQ/FASTA files"*:  Short read data
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+>
+> 10. Move to `CAMI 2 - Hybrid` history
+> 11. Copy the collection with Gold Standard Assembly into this history
+> 12. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-collection %} *"Contigs/scaffolds file"*: `Hybrid - Individual assembly - MetaSPAdes`
+>    - *"Reads options"*: `Illumina interlaced paired-end reads`
+>      - {% icon param-collection %} *"FASTQ/FASTA files"*:  Short read data
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+> 12. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
+>    - *"Use customized names for the input files?"*: `No, use dataset names`
+>      - {% icon param-file %} *"Contigs/scaffolds file"*: `Hybrid - Co-assembly - MetaSPAdes`
+>    - *"Reads options"*: `Illumina interlaced paired-end reads`
+>      - {% icon param-file %} *"FASTQ/FASTA files"*:  Short read data
+>    - *"Use a reference genome?"*: `Yes`
+>      - {% icon param-collection %} *"Reference genome"*: Gold Standard Assembly
+>    - *"Type of assembly"*: `Metagenome`
+>    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
+>
 {: .hands_on}
 
-
-> <hands-on-title>Metaquast with provided reference genome</hands-on-title>
->
-> 1. Move to "Short reads co-assemblies" history
-> 2. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
->
-> > <comment-title></comment-title>
-> >
-> > Working on this tutorial we encountered some issues. For example, in CAMI2 Quast was launched with Gold Standard Assembly as a reference genome. In Galaxy it took a long time and the tool is still running. Withsout GSA as a reference genome we got QUAST results faster.
-> {: .comment}
->
-> 3. Move to "Short reads individual assemblies" history
-> 4. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 5. Move to "Long reads co-assemblies" history
-> 6. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 7. Move to "Long reads individual assemblies" history
-> 8. Run {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/5.0.2+galaxy5) %} with parameters:
->     - {% icon param-file %} *"Contigs/scaffolds file"*: outputs of the assemblies
->     - {% icon param-file %} *"Type of assembly"*: metagenome
->     - {% icon param-file %} *"Reference genome"*: GSA file from CAMI2 data
->     - {% icon param-file %} *"Output files"*: HTML reports, PDF reports, Tabular reports, Log file
-> 9. Inspect the generated output
-{: .hands_on}
-
-> <comment-title></comment-title>
->
-> While running Quast, some of the generated outputs (statistics and log files) were empty while the html report was not. After investigation, it seems that the outputs were not correctly retrieved in the Galaxy wrapper. We then fixed the tool.
-{: .comment}
-
-
-## Aggregate all metrics
-
-To generate a nice report with all metrics combined we use MultiQC. This tool is a good choice when you want to combine results and make them visually represented with different graphs. MultiQC generates a webpage combining reports.
-
+To generate a nice report with all metrics combined for all assemblies, we use **MultiQC**. This tool is a good choice when you want to combine results and make them visually represented with different graphs. MultiQC generates a webpage combining reports.
 
 > <hands-on-title>Aggregate all metrics with MultiQC</hands-on-title>
 >
-> 1. Create a new history named "Benchmarking analysis of reproduced CAMI2"
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
-> 2. Drag&drop Quast, bowtie2 and Samtools stat outputs from all histories for different assemblers
+> 1. Create a new history named `CAMI 2 - Assembly evaluation`
+> 2. Copy the Quast results from all histories for different assemblers
 > 3. Run {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/1.11+galaxy0) %} with parameters:
->     - {% icon param-file %} *"Which tool used to generate report"*: Quast
-> 3. (for long reads) **Add report**
->     - {% icon param-file %} *"Which tool used to generate report"*: samtools
->     - {% icon param-file %} *"Data"*: Output of Samtool stats>
-> 3. (for short reads) **Add report**
->     - {% icon param-file %} *"Which tool used to generate report"*: Bowtie 2
->     - {% icon param-file %} *"Data"*: all assemblers outputs of Bowtie2 (for short reads)
-> 9. Inspect the generated output
+>     - *"Which tool used to generate report"*: `QUAST`
+>       - {% icon param-files %} *"Output of Quast"*: output of QUAST
+> 4. Inspect the generated output
 {: .hands_on}
 
-## Extract computational metrics from Galaxy - memory used, runtime
+Quast computed different metrics:
+- **# contigs**: total number of contigs
 
-In CAMI2 there were compared computational characteristics of different tools such as runtime and memory usage. There were created the following plots:
+    > <question-title></question-title>
+    >
+    > 1. How many contigs are for ERR2231568? And for ERR2231572?
+    > 2. How many sequences are in the output of MEGAHIT for ERR2231568? And for ERR2231572?
+    > 3. Why are these numbers different from the number of sequences in the output of MEGAHIT?
+    > 4. Which statistics in the metaQUAST report corresponds to number of sequences in the output of MEGAHIT?
+    > 5. Which reference genomes have the most contigs ($$\geq$$ 500 bp) in ERR2231568? And in ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. 66,434 contigs for ERR2231568 and 36,112 for ERR2231572.
+    > > 2. In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.
+    > > 3. The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.
+    > > 4. The **# contigs (>= 0 bp)**
+    > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
+    > {: .solution}
+    >
+    {: .question}
+
+- **Largest contig**: length of the longest contig in the assembly
+
+    > <question-title></question-title>
+    >
+    > 1. What is the length of the longest contig in ERR2231568? And in ERR2231572?
+    > 2. Is the longest contig assigned to a reference genome in ERR2231568? And in ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. 63,871 bp in ERR2231568 and 65,608 for ERR2231572.
+    > > 2. It is assigned to *Leuconostoc pseudomesenteroides KCTC 3652* in ERR2231568 and not assigned in ERR2231572.
+    > {: .solution}
+    >
+    {: .question}
+
+- **N50**: length for which the collection of all contigs of that length or longer covers at least half an assembly
+
+    > <question-title></question-title>
+    >
+    > 1. What is N50 for ERR2231568? And for ERR2231572?
+    > 2. What is N90?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. 921 for ERR2231568 and 1,233 for ERR2231572.
+    > > 2. N90 is similar to the N50 metric but with 90% of of the sum of the lengths of all contigs
+    > {: .solution}
+    >
+    {: .question}
+
+- **L50**: number of contigs equal to or longer than N50
+
+    > <question-title></question-title>
+    >
+    > 1. What is the L50 for ERR2231568? And for ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. 17,280 for ERR2231568 and 7,496 for ERR2231572.
+    > {: .solution}
+    >
+    {: .question}
+
+- **Genome fraction (%)**: percentage of aligned bases in the reference genome
+
+    > <question-title></question-title>
+    >
+    > 1. What is the genome fraction for ?
+    > 2. Which reference genome has the highest genome fraction for ?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1.
+    > > 2.
+    > >
+    > {: .solution}
+    >
+    {: .question}
+
+- **Duplication ratio**: total number of aligned bases / genome fraction * reference length
+
+    > <question-title></question-title>
+    >
+    > 1. What is the duplication ratio for ERR2231568? And for ERR2231572?
+    > 2. Which reference genome has the highest duplication ratio for ERR2231568?And for ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. The duplication ratio is 1.061% for ERR2231568 and 1.1% for ERR2231572(column ERR2231572 in ERR2231572 report)
+    > > 2. The highest duplication ratio was found for *Gluconobacter kondonii* forERR2231568 (1.163%) and for *Lactobacillus brevis* for ERR2231572 (1.122%).
+    > >
+    > {: .solution}
+    >
+    {: .question}
+
+- **Read mapping**: results of the mapping of the raw reads on the different assemblies (only if the *"Reads options"* is not disabled)
+
+    > <question-title></question-title>
+    >
+    > 1. By opening the report for ERR2231568, to which raw reads are the different sample assemblies compared to to extract information like percentage of mapped reads?
+    > 2. To get good information for each sample, which report and information should we look at?
+    > 3. What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?
+    > 4. What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. To ERR2231568. That is a bug in the Galaxy tool. We are working on fix it so each sample assembly is compared to its corresponding raw reads.
+    > > 2. To get the good information for ERR2231568, we should open the ERR2231568  and look only at column ERR2231568.
+    > > 3. ...% of ERR2231568 raw reads were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw reads to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).
+    > > 4. ...% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.
+    > {: .solution}
+    >
+    {: .question}
+
+- **Misassemblies**: joining sequences that should not be adjacent.
+
+    1. **Relocation** occur based on signal from two mappings of the same contig against the same chromosome
+
+        > <question-title></question-title>
+        >
+        > 1. How many relocations has been found for ERR2231568? And for ERR2231572?
+        > 2. For which reference genomes are there the most relocation found for ERR2231568? And for ERR2231572?
+        >
+        > > <solution-title></solution-title>
+        > >
+        > > 1. 88 for ERR2231568 and 158 for ERR2231572
+        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus plantarum argentoratensis* for ERR2231572
+        > {: .solution}
+        >
+        {: .question}
+
+    2. **Translocation** occur when a contig has mapped on more than one reference chromosomes
+
+        > <question-title></question-title>
+        >
+        > 1. How many translocations has been found for ERR2231568? And for ERR2231572?
+        > 2. For which reference genomes are there the most translocations found for ERR2231568? And for ERR2231572?
+        > 3. What are the interspecies translocations?
+        > 4. How many interspecies translocations has been found for ERR2231568? And for ERR2231572?
+        >
+        > > <solution-title></solution-title>
+        > >
+        > > 1. 47 for ERR2231568 and 62 for ERR2231572.
+        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus vaccinostercus* for ERR2231572.
+        > > 3. Interspecies translocations are translocations where the a contif has mapped on different reference genomes.
+        > > 4. 160 for ERR2231568 and 203 for ERR2231572.
+        > {: .solution}
+        >
+        {: .question}
+
+    3. **Inversion** occurs when a contig has two consecutive mappings on the same chromosome but in different strands
+
+        > <question-title></question-title>
+        >
+        > 1. How many inversion has been found for ERR2231568? And for ERR2231572?
+        > 2. For which reference genomes are there the most inversions found for ERR2231568? And for ERR2231572?
+        >
+        > > <solution-title></solution-title>
+        > >
+        > > 1. 4 for ERR2231568 and 5 for ERR2231572.
+        > > 2. *Gluconobacter kondonii* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus hordei* for ERR2231572.
+        > {: .solution}
+        >
+        {: .question}
+
+4. **Mismatches** or mismatched bases in the contig-reference alignment
+
+    > <question-title></question-title>
+    >
+    > 1. How many mismatches have been identified for ERR2231568? And for ERR2231572?
+    > 2. For which reference genomes are there the most mismatches for ERR2231568? And for ERR2231572?
+    >
+    > > <solution-title></solution-title>
+    > >
+    > > 1. 764,853 for ERR2231568 and 414,142 for ERR2231572.
+    > > 2. *Pantoea SM3* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
+    > {: .solution}
+    >
+    {: .question}
+
+> <comment-title></comment-title>
+>
+> Our [metagenomic assembly tutorial]({% link topics/metagenomics/tutorials/metagenomics-assembly/tutorial.md %}) explains all metrics more in depth.
+{: .comment}
+
+# Extract computational metrics from Galaxy
+
+In CAMI 2, they compared computational characteristics of different tools such as runtime and memory usage:
 
 ![Job statistics from CAMI2](./images/tools-job-statistics.jpg){:width="70%"}
 
-To export job metrics (memory usage and runtime) from Galaxy in csv format use [Bioblend](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)
+To get the job metrics (memory usage and runtime) for the jobs in Galaxy, we can use  use [Bioblend](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)
 
+<!--# Reproduce the graphs as in th paper
 
 We launched a Jupyter notebook to analyse results we got and reproduce graphs from CAMI2 paper for 4 tools (Flye, Megahit, Abyss, MetaSPAdes) and additional GSA in order to compare our results with Gold Standard Assembly. Further steps for benchmarking analysis could be to plot both individual assembly quast results and co-assembly quast results.
 
+Get MultiQC aggregated data, run Jupyter notebook
+
+-->
+
 # Conclusion
 
-In this tutorial we analysed all CAMI2 challenges and reproduced the assembly challenge on a marine dataset to demonstrate that Galaxy is a viable solution for such challenges.
+In this tutorial we analysed all challenges offered in CAMI 2 and decided to reproduce the assembly challenge using Galaxy. We selected the marine dataset, which is the most suitable for our purposes.
 
-After reviewing all CAMI2 datasets, we selected the marine dataset, which is the most suitable for our purposes.
+Among the assembly tools used in CAMI 2, we selected Flye, Megahit, MetaSPAdes, and Abyss as being the most relevant for our needs. With these tools, you can perform short, long, or hybrid reads, which is ideal for this demonstration.
 
-In Galaxy, we used the dataset collection function and the FASTQ splitter tool to preprocess the data.
+The versions of tools used in CAMI2 were compared with those in Galaxy. We updated tools of outdated versions and with lack of some functions we needed to reproduce CAMI2. Different sets of parameters were used for each tool to analyse outputs and draw conclusions about the most appropriate parameters.
 
-The FASTQ splitter tool has been updated to improve its output names.
-
-Among the assembly tools used in CAMI2, we selected Flye, Megahit, MetaSPAdes, and Abyss as being the most relevant for our needs. With these tools, you can perform short, long, or hybrid reads, which is ideal for this demonstration.
-
-The versions of tools used in CAMI2 were compared with those in Galaxy.
-
-We updated tools of outdated versions and with lack of some functions we needed to reproduce CAMI2.
-
-Different sets of parameters were used for each tool to analyse outputs and draw conclusions about the most appropriate parameters.
-
-We analysed benchmarking statistics from CAMI2 and chose the most appropriate for our goal.
-
-Quast tool was used to analyse results from assembly tools. Additionally, we used bowtie2 tool and Map with minimap2 and Samtools Stat tool to obtain information about the percentage of reads mapped in assembly.
-
-MultiQC and Jupiter notebook were used to create final reports and visualise results.
-
-The datasets were uploaded to Galaxy using an FTP server.
-
-During the project, we created galaxy histories that are available to the public. They are slightly different from those we suggest in this tutorial. We created them according to the principle of one history per:
-* Long reads or short reads as input
-* Co-assembly or individual assembly
-* one unique tool version
-* one unique set of parameters
-
-**№** | **Galaxy history name** | **Link** | **Tool name** | **Version** | **Parameters (the rest is default)** | **Reads in marine dataset** | **interleaved / deinterleaved** | **collection / collapsed to one file** | **command line** | **CPU time** | **Max memory usage, Gb** | **Runtime (wallclock)** | **CAMI2 Runtime** | **CAMI2 max memory** | **tool version used in CAMI2**
-1 | CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection | https://usegalaxy.eu/u/polina/h/cami2-flye-v29-meta-nano-raw-pooled-interleaved-long-collection | Flye | 2.9 | Perform metagenomic assembly = True (-meta)  Mode = --nano-raw (-nano-raw) | long | interleaved | collection | ln -s '/data/dnb05/galaxy_db/files/1/5/7/dataset_1577bfa8-dc08-4fb1-a759-f4e993078522.dat' ./input_0.fastq && ln -s '/data/dnb05/galaxy_db/files/8/6/b/dataset_86b52299-c4c9-435a-a1b8-8aaa10887c51.dat' ./input_1.fastq && ln -s '/data/dnb05/galaxy_db/files/6/9/7/dataset_697ce059-8d27-4c2f-887f-72d1e9f31e5b.dat' ./input_2.fastq && ln -s '/data/dnb05/galaxy_db/files/d/e/0/dataset_de04fe80-a70d-4146-ab95-43092abfe2c1.dat' ./input_3.fastq && ln -s '/data/dnb05/galaxy_db/files/4/d/6/dataset_4d650a82-ea83-48e9-820b-60a07e196203.dat' ./input_4.fastq && ln -s '/data/dnb05/galaxy_db/files/6/5/b/dataset_65b6a461-db9a-4fa8-83ed-834081523ff8.dat' ./input_5.fastq && ln -s '/data/dnb05/galaxy_db/files/0/2/1/dataset_021336e2-8ec0-4867-b239-0b8d50b5cf8d.dat' ./input_6.fastq && ln -s '/data/dnb05/galaxy_db/files/f/2/2/dataset_f2234201-a81d-4671-ba6b-2681574b8d89.dat' ./input_7.fastq && ln -s '/data/dnb05/galaxy_db/files/e/b/f/dataset_ebf6def1-fb2d-4d28-9c6e-31d2b6e0b0ca.dat' ./input_8.fastq && ln -s '/data/dnb05/galaxy_db/files/b/0/c/dataset_b0c8b11b-d1b4-474e-93cf-1db2648868df.dat' ./input_9.fastq && flye --nano-raw ./input_0.fastq ./input_1.fastq ./input_2.fastq ./input_3.fastq ./input_4.fastq ./input_5.fastq ./input_6.fastq ./input_7.fastq ./input_8.fastq ./input_9.fastq -o out_dir -t ${GALAXY_SLOTS:-4} -i 1 --meta | 2377 hours and 33 minutes | 273.6 | 171 hours and 40 minutes |  |  |
-2 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed  | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') | short | interleaved | collapsed to one file | mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&      metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr     -k '21,33,55,77' |  |  |  |  |  |
-3 | CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed | https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed-additional-nanopore-long-collapsed  | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') Additional read files = Nanopore reads (--nanopore nanopore_reads/file1.fastq --nanopore nanopore_reads/file2.fastq) | hybrid | interleaved | collapsed to one file |          mkdir -p reads1 && ln -s '/data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat' 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' &&    mkdir -p nanopore_reads && ln -s '/data/dnb05/galaxy_db/files/2/7/a/dataset_27a1c510-2d09-40fe-9540-a9b5d7b6322c.dat' 'nanopore_reads/file1.fastq' &&    metaspades.py -o 'output'  -t ${GALAXY_SLOTS:-4} -m $((${GALAXY_MEMORY_MB:-8192}/1024))   --pe-12 1 'reads1/Collapse_Collection_on_data_1,_data_3,_and_others.fastq' --pe-or 1 fr   --nanopore nanopore_reads/file1.fastq   -k '21,33,55,77' |  |  |  |  |  |
-4 | CAMI2 Abyss v234 k41 pooled interleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k41-pooled-interleaved-short-collapsed | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 41 (k=41) | short | interleaved | collapsed to one file | ln -s /data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat lib_reads_il_0.fastqsanger &&     abyss-pe name=abyss j=${GALAXY_SLOTS:-1} B=${GALAXY_MEMORY_MB:-2048}M k=41  q=3 Q=0 p=0.9 a=2 s=200 n=10 d=6 lib='lib0' lib0='lib_reads_il_0.fastqsanger' | 127 hours and 58 minutes | 174.8 | 9 hours and 57 minutes |  |  |
-5 | CAMI2 Abyss v234 k96 pooled interleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k96-pooled-interleaved-short-collapsed | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 96 (k=96) | short | interleaved | collapsed to one file | ln -s /data/dnb05/galaxy_db/files/1/4/5/dataset_14571bc3-0366-4452-8edd-64d3f10e0757.dat lib_reads_il_0.fastqsanger &&     abyss-pe name=abyss j=${GALAXY_SLOTS:-1} B=${GALAXY_MEMORY_MB:-2048}M k=96  q=3 Q=0 p=0.9 a=2 s=200 n=10 d=6 lib='lib0' lib0='lib_reads_il_0.fastqsanger' | 80 hours and 47 minutes | 169.9 | 7 hours and 34 minutes | 63,98 hours | 979,27 | 2_1_5
-6 | CAMI2 MEGAHIT v129 pooled interleaved short collection | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-pooled-interleaved-short-collection | MEGAHIT | 1_2_9 | Select your input option = interleaved | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-list '21,29,39,59,79,99,119,141'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 190 hours and 26 minutes | 80.0 | 40 hours and 40 minutes |  |  |
-7 | CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 pooled deinterleaved short collapsed | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep12-pooled-deinterleaved-short-collapsed | MEGAHIT | 1_2_9 | Select your input option = paired K-mer specification method = klim_method Minimum kmer size = 21 Maximum kmer size = 91 Increment of kmer size of each iteration = 12 | short | deinterleaved | collapsed to one file | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} -1 '/data/dnb05/galaxy_db/files/d/d/2/dataset_dd22109e-f787-40f6-a527-b88142529691.dat' -2 '/data/dnb05/galaxy_db/files/0/6/8/dataset_06830009-b9fe-4329-9962-9ed563766101.dat' --min-count '2' --k-step '12' --k-min '21' --k-max '91'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 108 hours and 11 minutes | 80.0 | 26 hours and 7 minutes | 7,07 hours | 42,02 | 1_2_7
-8 | CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 pooled interleaved short collection | https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep10-pooled-interleaved-short-collection | MEGAHIT | 1_2_9 | Select your input option = interleaved K-mer specification method = klim_method
- Minimum kmer size = 21
- Maximum kmer size = 91
- Increment of kmer size of each iteration = 10 | short | interleaved | collection | megahit --num-cpu-threads ${GALAXY_SLOTS:-4} --12 '/data/dnb05/galaxy_db/files/b/3/8/dataset_b385290b-36d2-40ed-a169-729f8addf02b.dat,/data/dnb05/galaxy_db/files/0/9/c/dataset_09c4c04b-69f7-4c6f-8874-7c3faa793743.dat,/data/dnb05/galaxy_db/files/1/d/5/dataset_1d53f895-7202-4109-83a2-580a1df83fe4.dat,/data/dnb05/galaxy_db/files/7/4/a/dataset_74a08582-c03d-4dac-9f5c-aff317a601d3.dat,/data/dnb05/galaxy_db/files/f/0/2/dataset_f029a301-eeeb-4807-af48-74e26533c8bb.dat,/data/dnb05/galaxy_db/files/a/4/0/dataset_a404bda0-571c-413a-b009-500afffe69ef.dat,/data/dnb05/galaxy_db/files/b/2/a/dataset_b2ac6021-0cbd-4d1b-acef-ae4cfba2b886.dat,/data/dnb05/galaxy_db/files/4/4/a/dataset_44a6d842-5404-42f9-8b11-7e7d3e096f57.dat,/data/dnb05/galaxy_db/files/e/5/e/dataset_e5e1d326-3f2c-4434-94bb-657a373af816.dat,/data/dnb05/galaxy_db/files/c/6/1/dataset_c61069fd-488d-4495-9da4-ef32aa607b5d.dat' --min-count '2' --k-step '10' --k-min '21' --k-max '91'  --bubble-level '2' --merge-level '20,0.95' --prune-level '2' --prune-depth '2' --disconnect-ratio '0.1' --low-local-ratio '0.2' --cleaning-rounds '5'   --min-contig-len '200' && cat megahit_out/log | 193 hours and 34 minutes | 80.0 | 40 hours and 57 minutes |  |  |
+> <details-title>Shared Galaxy histories</details-title>
+>
+> We created Galaxy histories, that are slightly different from those we suggest in this tutorial. We created them according to the principle of one history per:
+> * Long reads or short reads as input
+> * Co-assembly or individual assembly
+> * one unique tool version
+> * one unique set of parameters
+>
+> **Galaxy history name** | **Tool name** | **Version** | **Parameters (the rest is default)** | **Reads in marine dataset** | **interleaved / deinterleaved** | **collection / collapsed to one file**
+> [CAMI2 Flye v29 -meta -nano-raw pooled interleaved long collection](https://usegalaxy.eu/u/polina/h/cami2-flye-v29-meta-nano-raw-pooled-interleaved-long-collection) | Flye | 2.9 | Perform metagenomic assembly = True (-meta)  Mode = --nano-raw (-nano-raw) | long | interleaved | collection
+> [CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed](https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed) | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') | short | interleaved | collapsed to one file
+> [CAMI2 MetaSPAdes v3_15_3 k21-33-55-77 pooled interleaved short collapsed additional nanopore long collapsed](https://usegalaxy.eu/u/polina/h/cami2-metaspades-v3153-k21-33-55-77-pooled-interleaved-short-collapsed-additional-nanopore-long-collapsed=) | metaSPAdes | 3.15.3 | Pair-end reads input format = paired_interlaced Select k-mer detection option = manual K-mer size values = 21,33,55,77 (-k '21,33,55,77') Additional read files = Nanopore reads (--nanopore nanopore_reads/file1.fastq --nanopore nanopore_reads/file2.fastq) | hybrid | interleaved | collapsed to one file
+> [CAMI2 Abyss v234 k41 pooled interleaved short collapsed](https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k41-pooled-interleaved-short-collapsed) | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 41 (k=41) | short | interleaved | collapsed to one file
+> [CAMI2 Abyss v234 k96 pooled interleaved short collapsed](https://usegalaxy.eu/u/polina/h/cami1-abyss-v234-k96-pooled-interleaved-short-collapsed) | ABySS | 2_3_4 | Type of paired-end datasets = paired_il Type of paired-end datasets = 1 dataset of interleaved reads K-mer length (in bp) = 96 (k=96) | short | interleaved | collapsed to one file
+> [CAMI2 MEGAHIT v129 pooled interleaved short collection](https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-pooled-interleaved-short-collection) | MEGAHIT | 1_2_9 | Select your input option = interleaved | short | interleaved | collection
+> [CAMI2 MEGAHIT v129 paired-end k-min21 k-max91 k-step12 pooled deinterleaved short collapsed](https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep12-pooled-deinterleaved-short-collapsed) | MEGAHIT | 1_2_9 | Select your input option = paired K-mer specification method = klim_method Minimum kmer size = 21 Maximum kmer size = 91 Increment of kmer size of each iteration = 12 | short | deinterleaved | collapsed to one file
+> [CAMI2 MEGAHIT v129 k-min21 k-max91 k-step10 pooled interleaved short collection]( https://usegalaxy.eu/u/polina/h/cami2-megahit-v129-paired-end-kmin21-kmax91-kstep10-pooled-interleaved-short-collection) | MEGAHIT | 1_2_9 | Select your input option = interleaved K-mer specification method = klim_method; Minimum kmer size = 21; Maximum kmer size = 91; Increment of kmer size of each iteration = 10 | short | interleaved | collection
+{: .details}
 
 Furthermore, we have created this tutorial for those who are interested in such a topic and would like to reproduce CAMI2 assembly challenge on marine datasets. This tutorial could be undoubtedly useful for further improvement.
 
-The further improvement of this tutorial could be:
+Ultimately, the project demonstrated that **Galaxy could be used for CAMI and similar challenges**. Aside from its impressive features, user-friendly interface, and ample resources, the platform has significant potential for future advancement.
 
-1. Galaxy workflows could be shared via IWC or Dockstore for the reproducibility
-2. Data could be formatted and submitted directly CAMI benchmarking portal via Galaxy
-3. Other CAMI datasets could be used similarly
-4. Other CAMI challenges could be run similarly
-
-Ultimately, the project demonstrated that Galaxy could be used for CAMI and similar challenges. Aside from its impressive features, user-friendly interface, and ample resources, the platform has significant potential for future advancement.
-
-Well done! {% icon trophy %}
