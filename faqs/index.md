@@ -25,7 +25,7 @@ Common questions about the Galaxy platform, or about the GTN itself, can be foun
 
 Each topic in the GTN also has a dedicated FAQ page:
 
-{% assign sorted_topics = site | list_topics: "all" %}
+{% assign sorted_topics = site | list_topics_by_category: "all" %}
 
 ### Galaxy for Scientists
 

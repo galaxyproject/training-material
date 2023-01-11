@@ -283,7 +283,7 @@ module Jekyll
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
-    def list_topics(site, category)
+    def list_topics_by_category(site, category)
       q = TopicFilter.list_topics(site).map{|k|
         [k, site.data[k]]
       }
