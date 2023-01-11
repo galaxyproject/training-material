@@ -2,54 +2,39 @@
 layout: tutorial_hands_on
 
 title: "NCBI BLAST+ against the MAdLand"
-zenodo_link: 'https://zenodo.org/record/4710649'
+zenodo_link: "https://doi.org/10.5281/zenodo.7524427"
 questions:
-- "How to access Galaxy server?"
-- "How can we perform Blast analysis on Galaxy?"
-- "What is MAdLand DB?"
-
+  - "What is MAdLand DB?"
+  - "How can we perform Blast analysis on Galaxy?"
 objectives:
-- "Load fasta sequence into Galaxy"
-- "Perform NCBI-Blast+ analysis on Galaxy"
-
+  - "Load fasta sequence into Galaxy"
+  - "Perform NCBI-Blast+ analysis on Galaxy"
 time_estimation: "20m"
 key_points:
-- Blast tool searches a database of sequences for similar sequences to a query sequence.
-- MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.
-
+  - Blast tool searches a database of sequences for similar sequences to a query sequence.
+  - MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.
 contributors:
-- deeptivarshney
+  - Deeptivarshney
 
 ---
 
-# Introduction
+## Introduction
 
 <!-- This is a comment. -->
 
-MAdLand is a collection of fully sequenced plant and algal genomes, with a focus on non-seed plants and streptophyte algae. For comparison, it includes genomes from fungi, animals, the SAR group, bacteria, and archaea. It is developed and maintained by the [Rensing lab](http://plantco.de). The species are abbreviated by a 5 letter code, which consists of the first three letters of the genus and the first two of the species name, e.g. CHABR for Chara braunii. We add the gene ID to that and additional shortcuts, like whether it is plastome encoded (pt) or transcriptome-based (tr, in cases when no genome is available yet).
+MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de), and employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for Chara braunii. Furthermore, the database provides gene identification through the addition of gene ID's and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.
+
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, we will cover:
+> In this tutorial, we will deal with:
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
-# Access the Galaxy server
-
-> <hands-on-title>Log in or register</hands-on-title>
->
-> 1. Open your favorite browser (Chrome/Chromium, Safari, or Firefox, but not Internet Explorer/Edge!)
-> 2. Browse to [Galaxy](https://usegalaxy.eu) 
-> 3. Choose *Login or Register* from the navigation bar at the top of the page
-> 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
->
->    If you need to create a new account, click on *Register here* instead.
->
-
-# Upload data on Galaxy
+## Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -57,30 +42,43 @@ MAdLand is a collection of fully sequenced plant and algal genomes, with a focus
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
-
-
-# Perform NCBI Blast+ on Galaxy 
-
-> After successfully logging in to the Galaxy server, Go to the [NCBI-Blast+](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) tool.  
-> Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
-
 >
+> 2. Import the file `query.faa` from [Zenodo](https://doi.org/10.5281/zenodo.7524427) 
+>
+>    ```
+>    https://zenodo.org/api/files/40445ead-6429-463c-bfa5-e1fb92095af8/query.faa
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>   
+>
+{: .hands_on}
+
+> We just imported a fasta file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
+
+## Perform NCBI Blast+ on Galaxy
+
+>   Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
+
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
-> 1. {% icon tool %} As input file, select the protein sequences 
-> 2. Choose the protein BLAST database *MAdLandDB* with the following parameters:
->    - In *"input Options"*:
->        - {% icon param-file %} *"Protein query sequence(s)"*: `output` (Input dataset)
->        - *"Subject database/sequences"*: `Locally installed BLAST database`
->        - *"Protein BLAST database"*: `MAdLandDB`
->    - In *"Output Options"*:
->       - *"Output format"*: `Tabular (extended 25 columns)` (optional)
+> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} OR {% tool [NCBI BLAST+ blastx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} with the following parameters:
+>    - _"Protein query sequence(s)"_: `Amino acid input sequence` (In case of BLASTp) *OR* 
+>    - _"Translated nucleotide query sequence(s)"_: `Translated nucleotide input sequence` (In case of BLASTx) 
+>    - _"Subject database/sequences"_: `Locally installed BLAST database`
+>    - _"Protein BLAST database"_: `MadLandDB (Genome zoo) plant and algal genomes with a focus on non-seed plants and streptophyte algae (22 Dec 2022)`
+>    - _"Set expectation value cutoff"_: `0.001`
+>    - _"Output format"_:
+>    - In _"Output Options"_: `Tabular (extended 25 columns)` 
+<img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
+>
+{: .hands_on}
 
-> <img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
+## Blast output
 
-# Blast output 
+> {% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
 
->{% icon tool %} The following 12 columns are predicted in the tabular formatted output file of the Blast result (you can select desired output format options):  
+>
 
 <table>
   <tr>
@@ -150,11 +148,12 @@ MAdLand is a collection of fully sequenced plant and algal genomes, with a focus
   </tr>
 </table>
 
-For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
+> The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
+>
 >
 > Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
-{: .details}
+> {: .details}
