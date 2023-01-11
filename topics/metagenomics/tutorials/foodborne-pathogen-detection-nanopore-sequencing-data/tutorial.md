@@ -106,7 +106,7 @@ In this section we will run a workflow that performs the following tasks:
 2. Filter reads by length and quality, quality improving using **Porechop** {% icon tool %} and **Fastp** {% icon tool %}
 3. Remove all possible host contamination sequences e.g. Chicken, Cow, etc **Kraken2** {% icon tool %} with Kalamri database, **Filter Tabular** {% icon tool %} and **Filter Sequence By ID** {% icon tool %}
 
-We will run all these steps using a single workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
+We will run all these steps using a single sub-workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
 
 > <hands-on-title>Pretreatments</hands-on-title>
 >
@@ -196,7 +196,7 @@ In this section we will run a sub-workflow that performs the following tasks:
 2. Generate a kraken-biom report needed for the interactive visualization using **Kraken-biom** {% icon tool %}
 3. Taxonomy visualization with one of the interactive tools in Galaxy, **Phinch Visualisation** {% icon tool %}, prefereably to use on Chrome
 
-We will run all these steps using a single workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
+We will run all these steps using a single sub-workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
 
 > <hands-on-title>Taxonomy Profiling</hands-on-title>
 >
@@ -273,14 +273,38 @@ Now lets try the **Phinch visulization** {% icon tool %} running for barcode 11 
 {: .question}
  
 # Gene based pathogenic identification
-In this sub-workflow we will analyse the sequences in our samples and identify genes that have a [virulence factor](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which will then define a pathogen and its severity level. We will also identify [antimicrobial resistance genes](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes), which their presence will destroy the antibiotic and do not alter the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [MLST](https://pubmlst.org/) database we will also determain with strain of the bacteria we are testing for pathogenitiy. Never the less, will be creating our Fasta and Tabular files that we will use to track and visualize our pathogenic identification thoughout all samples needed for the **Pathogen Tracking among all samples** sub-workflow
+In this sub-workflow we will analyse the sequences in our samples and identify genes that have a [Virulence Factor (VF)](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which will then define a pathogen and its severity level. We will also identify [Antimicrobial Resistance genes (AMR)](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes), which their presence will destroy the antibiotic that will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [MLST](https://pubmlst.org/) database we will also determain the strain of the bacteria we are testing for pathogenitiy. Never the less, we will be creating our Fasta and Tabular files that we will use to track and visualize our pathogenic identification thoughout all samples, which is done in the **Pathogen Tracking among all samples** sub-workflow coming later in this tutorial.
 
 In this section we will run a sub-workflow that performs the following tasks:
-1. Taxonomy profiling using **Kraken2** {% icon tool %} with **Standard PlusPF** database
-2. Generate a kraken-biom report needed for the interactive visualization using **Kraken-biom** {% icon tool %}
-3. Taxonomy visualization with one of the interactive tools in Galaxy, **Phinch Visualisation** {% icon tool %}, prefereably to use on Chrome
+1. Genome assembly or creating contigs from our sequences using **Flye** {% icon tool %} then assembly polishing using **medaka consensus pipeline** {% icon tool %} and visualizing the assembly graph using **Bandage Image** {% icon tool %}
+2. Generate an **MLST** report with **MLST** {% icon tool %} that scans genomes against PubMLST schemes
+3. Generate reports with **AMR** genes and genes with **VF** using **ABRicate** {% icon tool %}
+4. Manipulate tabular reports to prepare them for **Pathogen Tracking among all samples** sub-workflow using tools such as **Cut**{% icon tool %}, **Replace**{% icon tool %}, **Add line to file**{% icon tool %}, **Compose text parameter value**{% icon tool %}, **Tabular-to-FASTA**{% icon tool %} and **Concatenate datasets**{% icon tool %}
 
-We will run all these steps using a single workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
+We will run all these steps using a single sub-workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; Barcode 10 and Barcode 11.
+
+But before we run the sub-workflow we need to upload one more file needed to create a report for this sub-workflow **MLST** analysis.
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Import the files from Galaxy shared data libraries to both histories:
+>
+>    - Click on __Shared Data__ menu (top panel) then __Data libraries__
+>    - Navigate to folder __Biolytix__
+>    - Select the following file
+>     ```
+>     MLST Report with Header
+>     ```
+>    - Click on the __Export to History__ button near the top and select __as Datasets__ from the dropdown menu
+>    - In the pop-up window, select the first history you created to import the file to
+>    - Click on Import
+> 2. Repeat the first step again for the second history
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>
+{: .hands_on}
 
 > <hands-on-title>Taxonomy Profiling</hands-on-title>
 >
@@ -294,6 +318,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads` the output from **Filter Sequence By ID** {% icon tool %} from the **Pre-Processing** sub-workflow
 >    - {% icon param-file %} *"Sample ID"*: `Spike2Barcode10` or `Spike2bBarcode11` respectively to the history
+>    - {% icon param-file %} *"MLST Report Header"*: `MLST Report with Header` file you have just uploaded to your history 
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -323,6 +348,8 @@ this output can be used to have the full genome
 <div class="LongVersion" markdown="1">
 
 As you chose to use the long version 
+Detail boxes 
+More explaination in different choices
 
 </div>
 
