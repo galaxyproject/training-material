@@ -357,7 +357,7 @@ For visualizing the assembly graph output from **Flye**{% icon tool %} we have c
 > > 1. After **Flye**{% icon tool %} we have got 115 contigs and after **Medaka consensus pipeline**{% icon tool %} all 115 contigs were kept, the quality of the **Flye**{% icon tool %} run was high that the polishing didnot remove any of the contigs.
 > > > 2.
 > >
-> >    ![Bandage Image Barcode 10 Assembly Graph](../../images/bandage _image_flye_graph.png)
+> >    ![Bandage Image Barcode 10 Assembly Graph](../../images/bandage_image_flye_graph.png)
 > >
 > {: .solution}
 {: .question}
@@ -381,16 +381,44 @@ The output file of the **MLST** {% icon tool %} is a tab-seperated output file w
 {: .question}
 
 ## Antimicrobial Resistance Genes
+Now, we want to search our samples' contigs for **AMR** genes for that we run **ABRicate** {% icon tool %} and chose the **NCBI Bacterial Antimicrobial Resistance Gene Database** from the advanced options of the tool.
+
+The tool will identify if there is an AMR found or not, in which contig, in which location on the contig, what is the name of the exact product, what does it resist against and alot of other information regarding the found **AMR**
+
+> <question-title></question-title>
+>
+> Inspect **AMR Identified by NCBI** output file from barcode 10 and barcode 11 samples' histories
+>
+> 1. How many **AMR** genes found in barcode10 sample, what are they, give more details about them?
+> 2. How many **AMR** genes found in barcode10 sample, what are they, give more details about them?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Only one **AMR** gene is found and it is tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It's found in contig 109 from the position 1634 till 2809, with 100% coverage, so 100% of gene is covered in this contig.
+> > 2. No **AMR** genes are found by the database in barcode11. 
+> >
+> {: .solution}
+{: .question}
 
 ## Virulence Factor Database
-Reports to move forward
+In this step we return back to the main goal of the tutorial where we want to identify the pathogens. 
 
 
 # SNP based pathogenic identification
 this output can be used to have the full genome 
 
 # Pathogen Tracking among all samples
+# Create your histories and Get Data
 
+> <hands-on-title>Copy datasets from our two histories to a new history</hands-on-title>
+>
+> 1. Create a new history for for this part of the tutorial where we will create collections of the results of the samples' histories needed to track and visualize our found pathogens.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
+>
+>
+{: .hands_on}
 </div>
 
 
