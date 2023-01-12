@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to Transcriptomics</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+    <meta property="og:title" content="Galaxy Training: Introduction to Transcriptomics" />
+    <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-12 10:29:59 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to Transcriptomics",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Introduction to Transcriptomics' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html",
+  "keywords": "transcriptomics",
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mwolfien/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mwolfien/",
+      "name": "Markus Wolfien",
+      "image": "https://avatars.githubusercontent.com/mwolfien",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/",
+      "name": "Anika Erxleben",
+      "image": "https://avatars.githubusercontent.com/erxleben",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-7427-6478",
+      "orcid": "https://orcid.org/0000-0002-7427-6478"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mwolfien/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mwolfien/",
+      "name": "Markus Wolfien",
+      "image": "https://avatars.githubusercontent.com/mwolfien",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/transcriptomics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/introduction/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to Transcriptomics
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge contributor-erxleben"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/erxleben?s=27" alt="Avatar">Anika Erxleben</a><a href="/training-material/hall-of-fame/mwolfien/" class="contributor-badge contributor-mwolfien"><img src="https://avatars.githubusercontent.com/mwolfien?s=27" alt="Avatar">Markus Wolfien</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: </div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    - Mapping: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/mapping/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html)
+    
+
+
+
+
+
+
+---
+
+# What is RNA sequencing?
+
+---
+
+### RNA
+
+![The structure of a eukaryotic protein-coding gene](../../images/transcriptomics_images/Gene_structure_eukaryote_2_annotated.png)
+
+- Transcribed form of the DNA
+- Active state of the DNA
+
+.footnote[[Credit: Thomas Shafee](https://en.wikipedia.org/wiki/File:Gene_structure_eukaryote_2_annotated.svg)]
+
+---
+
+## RNA sequencing
+
+![Summary of RNA-Seq principle. In vivo transcription, pre-mRNA, intron splicing all rpoduce a mature mRNA. In vitro this is fragmented into RNA fragments, reverse transcribed into double stranded cDNA and then sequenced.](../../images/transcriptomics_images/Summary_of_RNA-Seq.png)
+
+- RNA quantification at single base resolution
+- Cost efficient analysis of the whole transcriptome in a high-throughput manner
+
+.footnote[[Credit: Thomas Shafee (adapted)](https://commons.wikimedia.org/wiki/File:Summary_of_RNA-Seq.svg)]
+
+---
+
+### Where does my data come from?
+
+![select a cell population and extract total RNA is shown at the top. Small RNA are size selected by PAGE or kit, an adapter ligated, and converted to cDNA. Or poly(a) selects ribosome minus, and those mRNA are fragmented, and converted to cDNA. In both cases the cDNA becomes a library for sequencing.](../../images/transcriptomics_images/RNA_seq_zang2016.png)
+
+.footnote[[*Zang and Mortazavi, Nature, 2012*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4138050/)]
+
+---
+
+### Principle of RNA sequencing
+
+![Cartoon showing a magazine stand labelled transcriptome, and a person saying &quot;I'll take all of them&quot;. These are run through a shredder, before hundreds of people attempt to re-assemble, and the person hands the professor a poorly assembled magazine.](../../images/transcriptomics_images/korf_2013.jpg)
+
+.footnote[[*Korf, Nat Met, 2013*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4461013/)]
+
+---
+
+### Challenges of RNA sequencing
+
+- Different origin for the sample RNA and the reference genome
+- Presence of incompletely processed RNAs or transcriptional background noise
+- Sequencing biases (*e.g.* PCR library preparation)
+
+---
+
+### Benefits of RNA sequencing
+
+![A word cloud highlighting words like benefits, novel, sensitivity. ](../../images/transcriptomics_images/wordcloud.png)
+
+---
+
+### 2 main research applications for RNA-Seq
+
+- Transcript discovery
+
+    &gt; *Which RNA molecules are in my sample?*
+
+    &gt; Novel isoforms and alternative splicing, Non-coding RNAs, Single nucleotide variations, Fusion genes
+
+- RNA quantification
+
+    &gt; *What is the concentration of RNAs?*
+
+    &gt; Absolute gene expression (within sample), Differential expression (between biological samples)
+
+---
+
+## How to analyze RNA seq data for RNA quantification?
+
+---
+
+### RNA quantification
+
+![Select RNA fraction of interest (polyA, ribo-minus, and others), these are fragmented and reverse transcribed before sequencing and mapping onto the genome and quantification.](../../images/transcriptomics_images/pepke_2009.jpg)
+
+.footnote[[*Pepke et al, Nat Met, 2009*](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4077321/)]
+
+---
+
+### Overview of the Data Processing
+
+![Control and treatment files goes through QC, annotation, and rad counting to produce sets of count tables. Then differential expression analysis is computed.](../../images/transcriptomics_images/rna_seq_workflow.png)
+
+- No available standardized workflow
+- Multiple possible best practices for every dataset
+
+---
+
+### Data Pre-processing
+
+1. Adapter clipping to trim the sequencing adapters
+2. Quality trimming to remove wrongly called and low quality bases
+
+.footnote[See [NGS Quality control](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html)]
+
+---
+
+### Annotation of RNA-Seq reads
+
+Simple mapping on a reference genome? More challenging
+
+![A cartoon of a pre-mRNA, intro and exons. These map to an mRNA and short reads are shown piled up against the mRNA. The short read is splity by intron when aligning to a reference genome.](../../images/transcriptomics_images/RNA-Seq-alignment.png)
+
+.footnote[[Credit: Rgocs](https://en.wikipedia.org/wiki/File:RNA-Seq-alignment.png)]
+
+---
+
+### Annotation of RNA-Seq reads
+
+3 main strategies for annotations
+
+- Transcriptome mapping
+- Genome mapping
+- *De novo* transcriptome assembly and annotation
+
+---
+
+### Transcriptome mapping
+
+![Cartoon of multiple exons collapsed, and paired end reads being shown as easy to align.](../../images/transcriptomics_images/transcriptome_alignment.png)
+
+*See [NGS Mapping](/training-material/topics/sequence-analysis/tutorials/mapping/slides.html)*
+
+- Need reliable gene models
+- No detection of novel genes
+
+.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]
+
+---
+
+### Genome mapping
+
+Splice-aware read alignment
+
+![The same cartoon again, but now it is shown split up by introns, and one of the paired end reads is split across three exons, so it is hard to align.](../../images/transcriptomics_images/genome_alignment.png)
+
+Detection of novel genes and isoforms
+
+.footnote[Figures by Ernest Turro, EMBO Practical Course on Analysis of HTS Data, 2012]
+
+---
+
+### Transcriptome and Genome mapping
+
+Needed
+
+- Reference genome/transcriptome in FASTA
+- Annotations of known genes, ... in GTF
+
+Where to find?
+
+- Joint projects to produce and maintain annotations on selected organisms: EMBL-EBI, UCSC, RefSeq, Ensembl, ...
+
+---
+
+### *De novo* transcriptome assembly
+
+No need for a reference genome ...
+
+1. Assembly into transcripts
+2. Map reads back
+
+---
+
+### Quantification
+
+*What is the expression level of the genomic features?*
+
+- Counting the number of reads per features: Easy!!
+- Challenges
+    - How to handle multi-mapped reads (*i.e.* reads with multiple alignments)?
+    - How to distinguish between different isoforms?
+        - At gene level?
+        - At transcript level?
+        - At exon level?
+
+---
+
+### Differential Expression Analysis
+
+.image-75[![Three conditions are created and multiple transcriptomics sequenced into reads and mapped and compared.](../../images/transcriptomics_images/RNA_seq_DEscheme.png)]
+
+Account for variability of expression across biological replicates&lt;br&gt;with the help of counts
+
+---
+
+### Differential Expression Analysis: Normalization
+
+*Make the expression levels comparable across*
+
+- By Features: genes, isoforms
+- By Samples
+- Methods
+    - [*FPKM/RPKM*](https://www.nature.com/nmeth/journal/v5/n7/abs/nmeth.1226.html) (Cufflinks/Cuffdiff)
+    - [*TMM*](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-3-r25) (edgeR)
+    - [*DESeq2*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-014-0550-8) (DESeq2)
+
+.footnote[*&quot;Only the DESeq and TMM normalization methods are robust to the presence of different library sizes and widely different library compositions...&quot;* - Dillies et al., Brief Bioinf, 2013]
+
+---
+
+### Impact of sequencing depth and number of replicates
+
+.image-75[![Image of a table from a paper. The recommendation is at least three biological replicates to accurately detect changes. 3 replicates will give you an 87% chance of detecting a 2-fold change, but only a 17% chance of detecting a 1.25 fold change.](../../images/transcriptomics_images/RNA_seq_numreplicates.png)]
+
+.footnote[[*Conesa et al, Genome Biol, 2016*](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-0881-8)]
+
+**Recommendation: At least 3 biological replicates**
+
+???
+
+- Number of replicates has greater effect on DE detection accuracy than sequencing depth (more replicates = increased statistical power)
+- DE detection of lowly expressed genes is very sensitive to number of reads and replication
+- DE detection of highly expressed genes possible already at low sequencing depth
+
+---
+
+### Visualization
+
+- Integrative Genomics Viewer ([*IGV*](https://bib.oxfordjournals.org/content/14/2/178.full?keytype=ref&amp;%2520ijkey=qTgjFwbRBAzRZWC)) or Trackster
+
+    Visualization of the aligned BAM files
+
+- [*Sashimi plots*](https://bioinformatics.oxfordjournals.org/content/early/2015/01/21/bioinformatics.btv034)
+
+    Quantitative visualization of read coverage along exons and splice junctions
+
+- [*CummeRbund*](http://compbio.mit.edu/cummeRbund/manual_2_0.html)
+
+    Visualization package for Cufflinks high-throughput sequencing data
+
+
+---
+
+
+
+
+## Related tutorials
+
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/erxleben/" class="contributor-badge contributor-erxleben"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/erxleben?s=27" alt="Avatar">Anika Erxleben</a><a href="/training-material/hall-of-fame/mwolfien/" class="contributor-badge contributor-mwolfien"><img src="https://avatars.githubusercontent.com/mwolfien?s=27" alt="Avatar">Markus Wolfien</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

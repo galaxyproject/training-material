@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to metagenomics</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Metagenomics is a discipline that enables the genomic stu..." />
+    <meta property="og:title" content="Galaxy Training: Introduction to metagenomics" />
+    <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/introduction/slides.html" />
+
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-12 11:49:58 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to metagenomics",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Metagenomics",
+    "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+    "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Introduction to metagenomics' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/introduction/slides.html",
+  "keywords": "metagenomics",
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Metagenomics",
+      "description": "Metagenomics is a discipline that enables the genomic study of uncultured microorganisms",
+      "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/metagenomics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/metagenomics/tutorials/introduction/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Introduction to metagenomics
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated: </div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+---
+
+## Metagenomics
+
+---
+
+## Overview
+
+- Why study the microbiome?
+- 2 different approaches
+  - Amplicon sequencing
+  - Shotgun sequencing
+- Analysis pipelines
+- Visualisation options
+
+---
+
+## Why study the microbiome?
+
+.pull-left[
+
+- Health care research
+ - Humans are full of microorganisms
+ - Skin, gut, oral cavity, nasal cavity, eyes, ..
+ - Affects health, drug efficacy, etc
+
+]
+.pull-right[
+
+.image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]
+
+]
+
+- Sometimes referred to as your **second genome**
+ - ~10 times more cells than you
+ - ~100 times more genes than you
+ - ~1000s different species
+
+
+---
+## Why study the microbiome?
+
+- Environmental studies
+  - Microbes in the soil affect plants and animals
+  - Improve agriculture
+
+.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudies.png) ]
+
+
+---
+
+## Shotgun vs Amplicon
+
+.pull-left[
+
+.image-75[ ![jigsaw puzzle image illustrating shotgun sequencing approach](../../images/puzzles-shotgun.png) ]
+
+**Shotgun Sequencing**
+- Sequence all DNA
+- More information
+- Higher complexity
+- Higher cost
+]
+
+.pull-right[
+
+
+.image-75[ ![jigsaw puzzle image illustrating amplicon sequencing approach](../../images/puzzles-amplicon.png) ]
+
+**Amplicon Sequencing**
+- Sequence only specific gene
+- No functional information
+- Less complex to analyse
+- Cheaper
+]
+
+???
+
+puzzle analogy: think of each organism as a jigsaw puzzle
+
+- shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.
+
+- amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).
+
+---
+
+## Amplicon
+
+
+- Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)
+- Amplify gene of specific taxonomic group, i.e. not host or environment
+
+![left is picture of e. coli ribosome with &quot;so much rna&quot; written, right is the RNA structure in a diagram](../../images/16S_gene.png)
+
+---
+
+## Amplicon
+
+- Highly conserved gene: easy to target across all bacteria
+- With variable regions: distinguish between genus
+
+![line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index.](../../images/16S_variableregions.jpg)
+
+???
+V1, V2 etc are the variable regions
+
+---
+
+## Amplicon
+
+- Pros
+  - Well-established
+  - Inexpensive ($50-$100/sample)
+- Cons
+ - V-region choice can bias results
+ - Is based on a very well conserved gene, making it hard to resolve species and strains
+
+
+???
+18S gene also amplifies archaea
+
+---
+
+## Shotgun metagenomics
+
+- Aims to sequence the &quot;whole&quot; metagenome
+
+- Pros:
+  - Not biased by amplicon primer set
+  - Not limited by conservation of the amplicon
+  - Can also provide functional information
+
+- Cons:
+  - Environmental contamination, including host
+  - More expensive ($1000+/sample)
+  - Complex data analysis
+    - Requires high performance computing, high memory, high compute capacity
+
+---
+
+
+## End-to-End
+
+![graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)](../../images/16S_end-to-end.png)
+
+Every step in this process can have serious impact on the results
+
+---
+
+## Bioinformatics
+
+![cartoon titled drowned in NGS data with a man covered in messy data.](../../images/so_much_data.png)
+
+```
+Roche 454 GS:    ~ 100.000 reads
+Illumina MiSeq:  ~ 25.000.000 reads
+Shotgun:             ~ ? reads
+```
+
+---
+
+## Analysis pipelines
+
+![comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment.](../../images/metagenomics_pipeline.png)
+
+Amplicon analysis variants:
+
+- OTU: operational taxonomic units
+- ASV: amplicon sequence variants
+
+---
+
+## Pre-processing
+
+![fastqc plot with regions labelled good, okay, and bad based on the plot's colour](../../images/preprocessing.png)
+
+- There are a lot of ways to filter and trim your data
+- Trade-off between quality and amount of information retained
+
+---
+
+## OTU Clustering / Denoising
+
+.pull-left[
+OTU clustering:
+
+- Cluster on 97% sequence similarity for genus-level differentiation
+- OTUs depend on the data set: no comparability of data sets
+
+.image-75[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold](../../images/otu.png) ]
+
+]
+
+.pull-right[
+ASV Denoising:
+
+- Discriminate sequence variations from sequencing errors
+- Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly
+
+.image-90[ ![DNA sequences with hierarchical clustering shown](../../images/clustering.png) ]
+
+]
+
+???
+ASV stands for &quot;Amplicon Sequence Variants&quot;
+
+TODO: expand on OTU vs ASV a bit more
+---
+
+## Chimera Removal
+
+- During PCR multiple sequences can combine to form a hybrid
+- Must be removed from your data for better results
+
+![aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera](../../images/chimeras.png)
+
+---
+
+## Search marker database and taxonomy assignment
+
+- Homology with reference databases
+  - Amplicon
+
+    ![graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)](../../images/silva-greengenes.png)
+
+  - Shotgun: MetaPhlAn2 database
+      - ~1M unique clade-specific marker genes
+      - ~17,000 reference genomes (bacterial and archaeal, viral and eukaryotic)
+
+- Accuracy depends on quality and completeness of database used
+- Databases are inevitable incomplete
+
+---
+
+## Search functional database
+
+- Databases to identify gene families
+    - UniRef50
+    - UniRef90
+- Grouping in other functional categories
+    - MetaCyc Reactions
+    - KEGG Orthogroups (KOs)
+    - Pfam domains
+    - Level-4 enzyme commission (EC) categories
+    - EggNOG (including COGs)
+    - Gene Ontology (GO)
+    - Informative GO
+- Pathway reconstruction
+
+---
+
+## Results: OTU table
+
+![screenshot of an excel table](../../images/otutable.png)
+
+
+---
+
+## Results: Visualizations
+
+- **Krona**
+  - interactive exploration of sample taxonomy
+
+![doughnut plot with bands for each kingdom, down to genus, species](../../images/krona_lacto.png)
+
+---
+
+## Results: Visualizations
+
+- **Phinch**
+  - BIOM file input
+  - various visualizations
+  - multi-sample data
+
+![screenshot of phinch website showing multiple plot types](../../../../shared/images/phinch_overviewpage.png)
+
+
+---
+
+
+
+
+## Related tutorials
+
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/bebatut?s=27" alt="Avatar">Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/shiltemann?s=27" alt="Avatar">Saskia Hiltemann</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
