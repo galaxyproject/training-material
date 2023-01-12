@@ -20,6 +20,10 @@ module Jekyll
 
           "<span id=\"#{anchor.strip}\"><i class=\"fas fa-link\" aria-hidden=\"true\"></i> #{anchor}</span>"
         }
+        if page2.data.has_key?('redirect_from')
+          page2.data['redirect_from'].map{|x| x.gsub!(/\/slides/, '/slides-plain') }
+        end
+
         site.pages << page2
       end
     end
