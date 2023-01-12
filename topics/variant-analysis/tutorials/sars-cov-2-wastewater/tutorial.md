@@ -18,34 +18,148 @@ key_points:
 - 2 specialized workflows are available for the identification of lineages abundances of SARS-CoV-2 from raw wastewater sequencing data depending on the exact type of input
 - Data from batches of samples can be processed in parallel using collections
 contributors:
-- plushz
-- bebatut
-- wm75
+   authorship:
+      - plushz
+      - bebatut
+      - wm75
 tags:
 - covid19
 - wastewater
 ---
 
-
 # Introduction
 
-Millions of people have been affected by the COVID-19 pandemic after the first report of SARS-CoV-2 in Wuhan, China. During the COVID-19 pandemic, wastewater surveillance has received extensive public attention as a passive monitoring system that complements clinical and genomic surveillance. The detection and quantification of viral RNA in wastewater samples are already possible through several methods and protocols, and viral RNA concentrations in wastewater have been shown to correlate with reported cases. The wastewater surveillance methods are a good solution for enabling early, economical, and efficient detection so that public-health measures can be implemented as soon as they are necessary.
+Millions of people have been affected by the COVID-19 pandemic after the first report of SARS-CoV-2 in Wuhan, China. During the COVID-19 pandemic, wastewater surveillance has received extensive public attention as passive monitoring system that complements clinical and genomic surveillance:
+
+1. The wastewater methods allow the **detection of outbreaks before the first positive clinical** tests are reported.
+
+   Based on the first cases of SARS-CoV-2 wastewater surveillance, it has been found ({% cite zhang2021molecular %}) that virus RNA is detected in sewage even when COVID-19 prevalence is low, and that the correlation between concentration in sewage and reported COVID-19 prevalence indicates that sewage surveillance can be used as a sensitive tool to monitor viral circulation in the population.
+
+2. Wastewater surveillance is **more economical** than clinical testing since it can screen large numbers of people with just a few samples and does not need clinician involvement.
+3. Using the wastewater surveillance of SARS-CoV-2 method, data can be collected from people who do not have access to healthcare or in places, so-called "sequencing deserts", around the world where sequencing capacity is limited.
+
+   Among such "sequencing deserts", new, potentially dangerous variants, like Omicron, are able to emerge and spread undetected. There is a risk that new variants or subvariants will emerge until representative samples are sufficiently sequenced. Wastewater surveillance is one of the opportunities for covering "sequencing deserts" for surveillance of variants of SARS-CoV-2. As a result, a very close to a real-time overview of disease prevalence could be provided since it was proved ({% cite zhang2021molecular %}) successful enough in revealing infection dynamics earlier than clinical testing.
+
+The wastewater surveillance methods are a good solution for enabling early, economical, and efficient detection so that public-health measures can be implemented as soon as they are necessary.
 
 ![Upper branch shows a clinical surveillance of sars-cov-2, from the infection moment to bioinformatics data analysis; lower branch, in turn, represents wastewater surveillance.](./images/ww-process-ww.png "Schematic diagram shows the process of detecting viruses by wastewater surveillance against clinical surveillance.")
 
-Two sequencing platforms (e.g. Illumina and Oxford Nanopore) in combination with several established library preparation (e.g. ampliconic and metatranscriptomic) strategies are predominantly used to generate SARS-CoV-2 sequence data. However, data alone do not equal knowledge: they need to be analyzed. The Galaxy community has developed workflows to perform bioinformatics analysis.
+Various wastewater tracking projects have been then implemented in countries like [Estonia](https://www.terviseamet.ee/et/reoveeseire-kaardirakendus), [Greece](http://trams.chem.uoa.gr/covid-19/), and [Canada](https://cwn-rce.ca/covid-19-wastewater-coalition/covid-19-wastewater-coalition-maps/). [COVIDPoops19](https://www.arcgis.com/apps/dashboards/c778145ea5bb4daeb58d31afee389082), a dashboard developed by Colleen Naughton and colleagues at the University of California (UC), Merced, shows monitoring projects for SARS-CoV-2 have sprung up in at least 70 countries since then ({% cite naughton2021show %}). By October 2021, the European Union recommended that all member countries establish monitoring systems for SARS-CoV-2. 26 of 27 countries have adopted this recommendation. In the United States, the National Wastewater Surveillance System includes 400 sites in 19 states. In the U.S., on 2 March 2022, President Joe Biden's administration said the monitoring system would be part of efforts to detect new variants as the Centers for Disease Control and Prevention added a national dashboard of wastewater data.
 
-> <details-title>Further reading</details-title>
-> More information about the workflows, including benchmarking, can be found
-> - on the Galaxy Covid-19 effort [website](https://galaxyproject.org/projects/covid19/)
+## Methods to detect SARS-CoV-2 in wastewater samples
+
+The tracking projects have been possible thanks to several methods and protocols, developed to detect SARS-CoV-2 in wastewater samples.
+
+> <details-title>SARS-CoV-2 library preparation approaches and sequencing techniques</details-title>
+>
+> Library preparation | Shotgun metatranscriptomics | Amplicon based | Hybrid capture-enrichment | Direct RNA sequencing
+> --- | --- | --- | --- | ---
+> Target | SARS-Cov-2, host microbiota, host reponse to infection | SARS-Cov-2 | SARS-Cov-2 SARS-Cov-2, host transcriptome, epitranscriptomics
+> Co-infection detection | Yes | No | No/Yes (depending on gene panel) | Yes
+> Accuracy in SNV identification | High | High | Moderate | Moderate
+> Sample type | Patient specimens, environmental samples | Patient speciments, environmental samples | Patient speciments | Viral cell cultures
+> Cost | High | Low | Moderate | High
+>
+>
+> Sequencing techniques | Nanopore | Illumina
+> --- | --- | ---
+> Accuracy | 92-97% | 99%
+> Read length | Long | Short
+> Time | Real time | 4-56h
+> Cost | $7-100 | $5-150
 {: .details}
 
-This tutorial will teach you how to obtain and run these workflows appropriately for different types of input data, be it:
+**Two sequencing platforms (Illumina and Oxford Nanopore)** in combination with **2 established library preparation (ampliconic and metatranscriptomic)** strategies are predominantly used to generate SARS-CoV-2 sequence data:
 
-- Paired-end data derived from Illumina-based Metatranscriptomic experiments, or
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
+![Heatmap showing in columns the library strategies (ampliconic, RNA-seq, targeted-capture, WGS) and in rows the sequencing platforms (BGISEQ, DNBSEQ, Illumina, Ion Torrent, Oxford Nanopore)](./images/ena_datasets.png "Number of samples available for each sequencing platform and library preparation strategy for SARS-CoV-2 in wastewater according to ENA archive as of May 2022.")
 
-Both workflows are repurposed and improved Galaxy workflows for clinical data. To learn more about workflows for clinical data you can follow this [dedicated tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md %}).
+## Bioinformatics pipelines for SARS-CoV-2 wastewater data
+
+However, data alone do not equal knowledge: they need to be analyzed, using bioinformatics pipelines. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same:
+
+1. **Quality control** of the sequencing data
+2. **Triming**: primer with ARTIC protocol, adapter with Illumina
+3. **Decontamination** to remove reads from the human genome
+4. **Mapping** to SARS-CoV-2 reference sequence
+5. **Mapping correction**
+6. **Variant calling**
+7. **Mutation annotation**
+
+![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
+
+Approaches specifically developed for wastewater are either individual tools that require data preprocessing and/or need to be plugged into pipelines before they can be used, or independent pipelines that do all the analysis from raw data to determining lineages and their abundances.
+
+> <details-title>Bioinformatics methods to detect SARS-CoV-2 in wastewater samples</details-title>
+>
+> #### Individual tools
+>
+> Name | Goal | Input | Output | Available in Galaxy
+> --- | --- | --- | --- | ---
+> Freyja ({% cite karthikeyan2022wastewater %}) | Recover relative lineage abundances from mixed SARS-CoV-2 samples from a sequencing dataset (BAM aligned to the Hu-1 reference) | Variant call and sequencing depth information | TSV file that includes the lineages present, their corresponding abundances, and summarization by constellation | Yes
+> COJAC ({% cite jahn2022early %}) | Analyzing co-occurrence of mutations on amplicons | BAM/CRAM/SAM and BED file describing the amplified regions | Total count of amplicons carrying the sites of interest, amplicons carrying mutations on all site of interest, amplicons where one mutation is missing, fraction (ratio of number of all amplicons carrying mutations on all sites of interest to total number of amplicons carrying cites of interest) | Yes
+> LCS ({% cite valieris2022mixture %}) | Lineage decomposition for SARS-CoV-2 pooled samples | Variant-groups definitions, raw-fastq files pooled samples, fasta file of the primers used | Lineage decomposition outputs for SARS-CoV-2 pooled samples, plots  | No
+> Kallisto ({% cite bray2016near %}) | Quantifying abundances of transcripts from RNA-Seq data, or more generally of target sequences using high-throughput sequencing reads | FASTQ (single-end paired-end reads) | Abundance estimates, bootstrap estimates, and transcript length information length | Yes
+> Alcov ({% cite ellmen2021alcov %}) | Abundance learning for SARS-CoV-2 variants. | BAM file of reads aligned to the SARS-CoV-2 reference genome | Number of reads with and without each mutation in each sample, heatmap showing the frequencies for all samples, mutations, read depth for each amplicon, plots of amplicon GC content against amplicon depth
+> SAM refiner ({% cite gregory2021monitoring %}) | Gathering variant information from a SAM formatted files | SAM formatted files generated from sequencing mapping programs such as Bowtie2 or MiniMap2, FASTA formatted file for a reference sequence | Unique sequences, statistics about removed chimera, covariant deconvolution output | No
+>
+> #### Standalone pipelines
+>
+> Name | Goal | External tools used | Input | Output
+> --- | --- | --- | --- | ---
+> {% cite pipes2022estimating %} | Estimating the relative proportions of SARS-CoV-2 strains from wastewater samples | Bowtie2 v2.4.5 | FASTA file; MSA FASTA of SARS-CoV-2 reference strains | Estimated proportion of candidate strains, barplot with only those strains with an estimated proportion larger than 1%
+> [Gromstole](https://github.com/PoonLab/gromstole) | To estimate the relative frequencies of different SARS-CoV-2 lineages | Minimap2 v2.24, Cutadapt v4.0 | Paired-end reads in separate FASTQ/FASTA files, NC043312.fa as a reference genome | Counts of each mutation of the lineages, coverage at every position on the reference genome, estimate of the proportion (including 95% confidence interval);
+> AG ({% cite n2022detection %}) | Analyzing the within-sample genetic diversity of SARS-CoV-2 in Wastewater samples | Trim Galore v0.6.7, Minimap2 v2.24, SAMtools v2.0.4, iVar v1.3.1, BEDTools v2.27, Picard v2.18, FreeBayes v1.1.0.46, SnpEff v4.3 | Paired-end .fastq files for each sample | Tabular files with scanned variants, common depth report
+> Lineagespot ({% cite pechlivanis2022detecting %}) | Identify SARS-CoV-2 related mutations based on a single (or a list) of variant(s) file(s) (i.e., variant calling format). | Trim Galore v0.6.7, FastQC v0.73, Minimap2 v2.24, SAMtools v2, BEDTools v2, Picard v2.18, FreeBayes v1.1, SnpEff v4.3 | Raw fastq FASTQ files, anf for further analysis - VCF and file containing all lineage-assignment rules, as retrieved from the pangolin tool repository | VCF, MAF files, report about lineage abundances
+> PiGx ({% cite schumann2022sars %}) | Analyzing data from sequenced wastewater samples and identifying given lineages of SARS-CoV-2 | iVar v1.3.1, Fastp v0.23.2, BWA v0.7.17.2, MultiQC v1.11, LoFreq v2.1.5, VEP, Kraken2 v2.1.1, Krona v2.7.1 | Raw reads and the additional information about used primers and adapters | VCF, visualization of the development of virus over time, variants report, taxonomic classification
+> Cowwid ({% cite jahn2022early %}) | Surveillance of SARS-CoV-2 genomic variants in wastewater | V-pipe v2.99.2, FastQC v0.73, PRINSEQ v0.20.4, VICUNA, BWA-MEM v0.7.17, ShoRAH, COJAC v0.2 | TSV table of the samples, YAML with definition of the variants, BED with amplicon positions for ARTIC, BED with amplicon description | YAML/CSV files with coocurrences, variant mutations table, plots to integrate to CoV-Spectrum
+> {% cite izquierdo2021monitoring %} | Monitoring SARS-CoV-2 Circulation and Diversity through Community Wastewater Sequencing, the Netherlands and Belgium | Porechop v0.2.4, Cutadapt v4.0, UGENE, Fastp v0.23.2, BWA-MEM v0.7.17, FreeBayes v1.1, iVar v1.3.1 | Raw reads and the additional information about used primers and adapters | VCF, MAF files, Trees visualization (Fig tree)
+>
+> ![](./images/lineagespot.png "Lineagespot ({% cite pechlivanis2022detecting %}) workflow ")
+> ![](./images/pigx.png "PiGx ({% cite schumann2022sars %}) workflow ")
+> ![](./images/cowwid.png "Cowwid ({% cite jahn2022early %}) workflow ")
+> ![](./images/Izquierdo-Lara.png "{% cite izquierdo2021monitoring %} workflow ")
+{: .details}
+
+## Galaxy effort to surveillance data processing
+
+In order to address global health emergencies in an accessible and transparent manner, there is a need for scientific computing infrastructure to help bridge these gaps. **Accessibility and transparency** in data analysis transparency are the primary focus of the Galaxy community.
+
+Since the beginning of the pandemy, the Galaxy community put effort to offer a [complete solution to the SARS-CoV-2 data analytics challenge](https://galaxyproject.org/projects/covid19/) ({% cite maier2021ready %}). In particular, four workflows were developed aimed at detecting and interpreting sequence
+variants in SARS-CoV-2 in clinical data:
+
+![](./images/maier2021.png "Analysis flow for calling SARS-CoV-2 variants using Galaxy (Source: {% cite maier2021ready %}")
+
+> <details-title>Galaxy workflows for SARS-CoV-2 clinical data surveillance</details-title>
+>
+> ![](./images/lineagespot.png "Illumina ARTIC Paired-End Galaxy workflow")
+> ![](./images/pigx.png "Illumina RNA-Seq/Metatranscriptomics Paired-End Galaxy workflow")
+{: .details}
+
+> <comment-title>Galaxy workflows for SARS-CoV-2 clinical data surveillance</comment-title>
+>
+>  To learn more about workflows for clinical data you can follow this [dedicated tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md %}).
+{: .comment}
+
+These pipelines perform decent data preprocessing steps and have shown promising results on clinical data, making them worthy of being repurposed for
+wastewater data. In addition, it is easier to adapt existing Galaxy workflows than integrating new standalone pipelines.
+
+We then adapted the Galaxy workflows by combining them with wastewater tools. We selected **Freyja** ({% cite karthikeyan2022wastewater %}) and **COJAC** ({% cite jahn2022early %}) tools because:
+1. Their use in various projects (such as wastewater monitoring of SARS-CoV-2 in the Center for Food Safety and Applied Nutrition in US, wastewater monitoring of SARS-CoV-2 variants in Switzerland and in England) has shown decent results
+2. Their ability to be integrated into existing Galaxy pipelines
+3. They target different user groups (e.g., politicians and researchers), which is interesting to cover
+
+   Freyja's output is easy to interpret without some specific knowledge, while COJAC requires more knowledge to be used. First of all, it demands some knowledge in programming as the output of COJAC is quite raw so far and has to be processed for downstream analysis like plotting and integrating to remote platforms such as CoV-Spectrum. Second of all, the usage of COJAC requires some knowledge of virology. Despite this, COJAC provides more detailed information and is able to detect unknown variants.
+
+**2 workflows** were then created for different types of input data:
+
+- Paired-end data derived from **Illumina-based Metatranscriptomic** experiments
+- Paired-end data generated with **Illumina-based Ampliconic (ARTIC)** protocols
+
+Therefore we offer a tutorial with different versions
+- for each workflow
+- for each workflow, a short version consisting in running workflows and a long version (step-by-step)
+
+{% include _includes/cyoa-choices.html option1="Amplicon-short" option2="Amplicon-long" option3="MT-short" option4="MT-long" default="Amplicon-short" %}
 
 > <agenda-title></agenda-title>
 >
@@ -110,7 +224,7 @@ There are several possibilities to upload the data depending on how many dataset
 >
 > 1. Import the datasets
 >
->    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): Your own local data using **Upload Data** (recommended for 1-10 datasets). 
+>    - Option 1 [{% icon video %}](https://youtu.be/FFCDx1rMGAQ): Your own local data using **Upload Data** (recommended for 1-10 datasets).
 >
 >      {% snippet faqs/galaxy/datasets_upload.md %}
 >
@@ -377,7 +491,7 @@ Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconi
 
 > <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
 >
-> 1. **Get the workflow** for your data into Galaxy 
+> 1. **Get the workflow** for your data into Galaxy
 >
 >    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
 >
@@ -386,7 +500,7 @@ Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconi
 >        - [Illumina metatranscriptomic PE](https://workflowhub.eu/workflows/)
 >
 >      - Click on `Run on usegalaxy.eu` at the top right of the page
->      
+>
 >        The browser will open a new tab with Galaxy's workflow invocation interface.
 >
 >    - Option 2: Import the workflow via its github link
@@ -441,7 +555,7 @@ Once the jobs of previous workflows are done, we can look at the results.
    6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
 
    > <question-title></question-title>
-   > 
+   >
    > 1. How many lineages were identified in sample SRR12596165 in metatranscriptomic-illumina dataset provided for this tutorial?
    > 2. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
    >
@@ -457,7 +571,7 @@ Once the jobs of previous workflows are done, we can look at the results.
 2. **Lineages abundances plot**: This plot provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
 
    > <question-title></question-title>
-   > 
+   >
    > 1. Which WHO designated variant is prevalent in sample1 from ampliconic-illumina dataset provided for this tutorial?
    > 1. What other lineages are present in this sample?
    >
@@ -484,7 +598,7 @@ Once the jobs of previous workflows are done, we can look at the results.
    6 | `cooc` | number of considered site (e.g.: 2 sites of interests) or empty if no counts
 
    > <question-title></question-title>
-   > 
+   >
    > 1. Which fraction of BA.1 lineage is identified on amplicon A72 in sample1 from ampliconic-illumina dataset provided for this tutorial?
    > 2. How many amplicons carrying mutations on all site of interest are identified in sample 3?
    >
@@ -504,6 +618,6 @@ Once the jobs of previous workflows are done, we can look at the results.
 
 In this tutorial, we used Galaxy workflows for the detection and interpretation of lineages abundances in SARS-CoV-2 wastewater samples.
 
-The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month. 
+The workflows can be freely used and immediately accessed from the three global Galaxy instances. Each is capable of supporting thousands of users running hundreds of thousands of analyses per month.
 
 It is also possible to automate the workflow runs using the command line as explained in [a dedicated tutorial]({% link topics/galaxy-interface/tutorials/workflow-automation/tutorial.md %}).
