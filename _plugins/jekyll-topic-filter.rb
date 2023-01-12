@@ -40,11 +40,7 @@ module TopicFilter
     out
   end
 
-  def self.run_topic_filter(pages, topic_name)
-    # Arrays that will store all introduction slides and tutorials we discover.
-    resource_intro = []
-    resource_pages = []
-
+  def self.discover_files(pages)
     # In order to speed up queries later, we'll store a set of "interesting"
     # pages (i.e. things that are under `topic_name`)
     interesting = {}
@@ -54,7 +50,7 @@ module TopicFilter
       if not page.url.include?('/topics/') then next end
       page.data['url'] = page.url
       # If the path is long enough and it is under the topic name
-      if page_parts.length > 3 and page_parts[2] == topic_name
+      if page_parts.length > 3
         # Automate the tutorial-name thing. This writes back to the shared
         # data structure.
         page.data['topic_name'] = page_parts[2]
@@ -68,9 +64,29 @@ module TopicFilter
 
         # And then store in our interesting stuff
         key = page.url.sub(/^\//, '') # strip leading slash since later queries don't have it.
-        interesting[key] = page
+        interesting[key] = {
+          "page" => page,
+          "topic" => page_parts[2],
+          "tutorial_name" => page.data['tutorial_name'],
+          "tags" => page.data.fetch('tags', []),
+        }
       end
     end
+
+    interesting
+  end
+
+  def self.run_topic_filter(pages, topic_name)
+    # Arrays that will store all introduction slides and tutorials we discover.
+    resource_intro = []
+    resource_pages = []
+
+    interesting = self.discover_files(pages)
+    puts "[GTN/TopicFilter] #{topic_name}"
+    require 'pp'
+    pp interesting
+
+    1/0
 
     # Theory is as follows:
     #
@@ -306,55 +322,6 @@ module Jekyll
       TopicFilter.topic_filter(site, topic_name)
     end
 
-    ELIXIR_NODES = {
-      "au" => "Australia",
-      "be" => "Belgium",
-      "ch" => "Switzerland",
-      "cz" => "Czechia",
-      "de" => "Germany",
-      "dk" => "Denmark",
-      "ee" => "Estonia",
-      "es" => "Spain",
-      "fi" => "Finland",
-      "fr" => "France",
-      "gr" => "Greece",
-      "hu" => "Hungary",
-      "ie" => "Ireland",
-      "il" => "Israel",
-      "it" => "Italy",
-      "lu" => "Luxembourg",
-      "nl" => "the Netherlands",
-      "no" => "Norway",
-      "pt" => "Portugal",
-      "se" => "Sweden",
-      "si" => "Slovenia",
-      "uk" => "United Kingdom",
-    }
-
-    def elixirnode2name(name)
-      ELIXIR_NODES[name]
-    end
-
-    def slugify_unsafe(text)
-      # Gets rid of *most* things without making it completely unusable?
-      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
-    end
-
-    def humanize_types(type)
-      data = {
-        "seq" => "List of Items",
-        "str" => "Free Text",
-        "map" => "A dictionary/map",
-        "float" => "Decimal Number",
-        "int" => "Integer Number",
-        "bool" => "Boolean"
-      }
-      data[type]
-    end
-
-    def replace_newline_doublespace(text)
-      text.gsub(/\n/, "\n  ")
-    end
   end
 end
 

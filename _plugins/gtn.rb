@@ -5,6 +5,60 @@ require './_plugins/gtn/mod'
 module Jekyll
   module GtnFunctions
 
+    def self.cache
+      @@cache ||= Jekyll::Cache.new("GtnFunctions")
+    end
+
+    ELIXIR_NODES = {
+      "au" => "Australia",
+      "be" => "Belgium",
+      "ch" => "Switzerland",
+      "cz" => "Czechia",
+      "de" => "Germany",
+      "dk" => "Denmark",
+      "ee" => "Estonia",
+      "es" => "Spain",
+      "fi" => "Finland",
+      "fr" => "France",
+      "gr" => "Greece",
+      "hu" => "Hungary",
+      "ie" => "Ireland",
+      "il" => "Israel",
+      "it" => "Italy",
+      "lu" => "Luxembourg",
+      "nl" => "the Netherlands",
+      "no" => "Norway",
+      "pt" => "Portugal",
+      "se" => "Sweden",
+      "si" => "Slovenia",
+      "uk" => "United Kingdom",
+    }
+
+    def elixirnode2name(name)
+      ELIXIR_NODES[name]
+    end
+
+    def slugify_unsafe(text)
+      # Gets rid of *most* things without making it completely unusable?
+      text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
+    end
+
+    def humanize_types(type)
+      data = {
+        "seq" => "List of Items",
+        "str" => "Free Text",
+        "map" => "A dictionary/map",
+        "float" => "Decimal Number",
+        "int" => "Integer Number",
+        "bool" => "Boolean"
+      }
+      data[type]
+    end
+
+    def replace_newline_doublespace(text)
+      text.gsub(/\n/, "\n  ")
+    end
+
     # These two could be unified tbh
     def last_modified_at(page)
       Gtn::ModificationTimes.obtain_time(page['path'])
