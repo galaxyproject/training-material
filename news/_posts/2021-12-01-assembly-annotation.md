@@ -13,7 +13,7 @@ Have a look at the following updated/new slides:
 
 - [Quality control of long reads sequencing data]({% link topics/sequence-analysis/tutorials/quality-control/slides.html %})
 - [Getting started in a new genome assembly and annotation project]({% link topics/assembly/tutorials/get-started-genome-assembly/slides.html %})
-- [Introduction to genome annotation]({% link topics/genome-annotation/slides/introduction.html %})
+- [Introduction to genome annotation]({% link topics/genome-annotation/tutorials/introduction/slides.html %})
 
 And check out these new tutorials:
 
