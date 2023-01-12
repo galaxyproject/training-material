@@ -70,6 +70,7 @@ module TopicFilter
           "tutorial_name" => page.data['tutorial_name'],
           "tags" => page.data.fetch('tags', []),
         }
+        interesting[key] = page
       end
     end
 
@@ -83,10 +84,10 @@ module TopicFilter
 
     interesting = self.discover_files(pages)
     puts "[GTN/TopicFilter] #{topic_name}"
-    require 'pp'
-    pp interesting
+    #require 'pp'
+    #pp interesting
 
-    1/0
+    #1/0
 
     # Theory is as follows:
     #
