@@ -47,7 +47,7 @@ GWS facilitates analysis repeatability, while minimizing the number of manual st
 # Getting Started on Galaxy
 
 This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
-- [Introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/slides/introduction.html)
+- [Introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/introduction/slides.html)
 - [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)
 - [Getting Data into Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html)
 - [Using Dataset Collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html)
