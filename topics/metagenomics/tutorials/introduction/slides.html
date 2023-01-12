@@ -1,9 +1,10 @@
 ---
 layout: introduction_slides
 logo: "GTN"
-
 title: "Introduction to metagenomics"
-type: "introduction"
+priority: 1
+redirect_from:
+- /topics/metagenomics/slides/introduction
 contributors:
   - bebatut
   - shiltemann
@@ -36,7 +37,7 @@ contributors:
 ]
 .pull-right[
 
-.image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../images/human_microbiome.png) ]
+.image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]
 
 ]
 
@@ -53,7 +54,7 @@ contributors:
   - Microbes in the soil affect plants and animals
   - Improve agriculture
 
-.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../images/environmentalstudies.png) ]
+.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudies.png) ]
 
 
 ---
@@ -62,7 +63,7 @@ contributors:
 
 .pull-left[
 
-.image-75[ ![jigsaw puzzle image illustrating shotgun sequencing approach](../images/puzzles-shotgun.png) ]
+.image-75[ ![jigsaw puzzle image illustrating shotgun sequencing approach](../../images/puzzles-shotgun.png) ]
 
 **Shotgun Sequencing**
 - Sequence all DNA
@@ -74,7 +75,7 @@ contributors:
 .pull-right[
 
 
-.image-75[ ![jigsaw puzzle image illustrating amplicon sequencing approach](../images/puzzles-amplicon.png) ]
+.image-75[ ![jigsaw puzzle image illustrating amplicon sequencing approach](../../images/puzzles-amplicon.png) ]
 
 **Amplicon Sequencing**
 - Sequence only specific gene
@@ -99,7 +100,7 @@ puzzle analogy: think of each organism as a jigsaw puzzle
 - Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)
 - Amplify gene of specific taxonomic group, i.e. not host or environment
 
-![left is picture of e. coli ribosome with "so much rna" written, right is the RNA structure in a diagram](../images/16S_gene.png)
+![left is picture of e. coli ribosome with "so much rna" written, right is the RNA structure in a diagram](../../images/16S_gene.png)
 
 ---
 
@@ -108,7 +109,7 @@ puzzle analogy: think of each organism as a jigsaw puzzle
 - Highly conserved gene: easy to target across all bacteria
 - With variable regions: distinguish between genus
 
-![line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index.](../images/16S_variableregions.jpg)
+![line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index.](../../images/16S_variableregions.jpg)
 
 ???
 V1, V2 etc are the variable regions
@@ -150,7 +151,7 @@ V1, V2 etc are the variable regions
 
 ## End-to-End
 
-![graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)](../images/16S_end-to-end.png)
+![graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)](../../images/16S_end-to-end.png)
 
 Every step in this process can have serious impact on the results
 
@@ -158,7 +159,7 @@ Every step in this process can have serious impact on the results
 
 ## Bioinformatics
 
-![cartoon titled drowned in NGS data with a man covered in messy data.](../images/so_much_data.png)
+![cartoon titled drowned in NGS data with a man covered in messy data.](../../images/so_much_data.png)
 
 ```
 Roche 454 GS:    ~ 100.000 reads
@@ -170,7 +171,7 @@ Shotgun:             ~ ? reads
 
 ## Analysis pipelines
 
-![comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment.](../images/metagenomics_pipeline.png)
+![comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment.](../../images/metagenomics_pipeline.png)
 
 Amplicon analysis variants:
 
@@ -181,7 +182,7 @@ Amplicon analysis variants:
 
 ## Pre-processing
 
-![fastqc plot with regions labelled good, okay, and bad based on the plot's colour](../images/preprocessing.png)
+![fastqc plot with regions labelled good, okay, and bad based on the plot's colour](../../images/preprocessing.png)
 
 - There are a lot of ways to filter and trim your data
 - Trade-off between quality and amount of information retained
@@ -196,7 +197,7 @@ OTU clustering:
 - Cluster on 97% sequence similarity for genus-level differentiation
 - OTUs depend on the data set: no comparability of data sets
 
-.image-75[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold](../images/otu.png) ]
+.image-75[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold](../../images/otu.png) ]
 
 ]
 
@@ -206,7 +207,7 @@ ASV Denoising:
 - Discriminate sequence variations from sequencing errors
 - Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly
 
-.image-90[ ![DNA sequences with hierarchical clustering shown](../images/clustering.png) ]
+.image-90[ ![DNA sequences with hierarchical clustering shown](../../images/clustering.png) ]
 
 ]
 
@@ -221,7 +222,7 @@ TODO: expand on OTU vs ASV a bit more
 - During PCR multiple sequences can combine to form a hybrid
 - Must be removed from your data for better results
 
-![aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera](../images/chimeras.png)
+![aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera](../../images/chimeras.png)
 
 ---
 
@@ -230,7 +231,7 @@ TODO: expand on OTU vs ASV a bit more
 - Homology with reference databases
   - Amplicon
 
-    ![graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)](../images/silva-greengenes.png)
+    ![graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)](../../images/silva-greengenes.png)
 
   - Shotgun: MetaPhlAn2 database
       - ~1M unique clade-specific marker genes
@@ -260,7 +261,7 @@ TODO: expand on OTU vs ASV a bit more
 
 ## Results: OTU table
 
-![screenshot of an excel table](../images/otutable.png)
+![screenshot of an excel table](../../images/otutable.png)
 
 
 ---
@@ -270,7 +271,7 @@ TODO: expand on OTU vs ASV a bit more
 - **Krona**
   - interactive exploration of sample taxonomy
 
-![doughnut plot with bands for each kingdom, down to genus, species](../images/krona_lacto.png)
+![doughnut plot with bands for each kingdom, down to genus, species](../../images/krona_lacto.png)
 
 ---
 
@@ -281,4 +282,4 @@ TODO: expand on OTU vs ASV a bit more
   - various visualizations
   - multi-sample data
 
-![screenshot of phinch website showing multiple plot types](../../../shared/images/phinch_overviewpage.png)
+![screenshot of phinch website showing multiple plot types](../../../../shared/images/phinch_overviewpage.png)
