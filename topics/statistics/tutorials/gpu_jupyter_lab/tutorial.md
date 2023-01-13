@@ -96,7 +96,7 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 > <hands-on-title>GPU enabled Interactive Jupyter Notebook for Machine Learning</hands-on-title>
 >
 > - {% tool [GPU enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
->    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
+>    - *"Do you already have a notebook?"*: `Start with default notebooks`
 >    - Click *"Execute"*
 >
 {: .hands_on}
@@ -104,7 +104,7 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 Now, we should wait for a few minutes until Galaxy creates the required compute environment for opening a new Jupyterlab. Usually, this task takes around 10-15 minutes. The progress can be checked by clicking on the "User>Active Interactive tools". On "Active Interactive Tools" page, there is a list of all open interactive tools. When the job info shows "running" on the "Active Interactive Tools" page, then the name of the interactive tool gets associated with a URL to the running Jupyterlab. On clicking this URL, the running Jupyterlab can be opened. Several features of Jupyterlab running in Galaxy can be learned by going through the "home_page.ipynb" notebook. The folder "notebooks" contain several notebooks that show multiple use-cases of features and packages. Now, let's download the necessary notebooks from Github for performing image segmentation and predicting 3D structure of protein sequences.
 
 ## Clone Github repository
-To use Git version control for cloning any codebase from GitHub, the following steps should be performed.
+To use Git version control for cloning any codebase from GitHub, the following steps should be performed. Alternatively, the notebooks that showcase different usecases are also available by default at `<<root>>/usecases/`.
 
 > <hands-on-title>Pull code</hands-on-title>
 >
@@ -197,6 +197,61 @@ Google Deepmind’s AlphaFold2 has made a breakthrough in predicting the 3D stru
 
 ## Docker's security
 For remote training, a dynamic Python script is sent to a Galaxy tool for execution on a Galaxy cluster that may pose security risks of containing malicious code. To minimize the security risks that come along with executing dynamic Python scripts, the Galaxy tool `run_jupyter_job` is executed inside a [Docker container](https://github.com/anuprulez/ml-jupyter-notebook). It is the same container inside which the Jupyterlab notebook runs. All the packages available inside the notebook are also available for the Galaxy tool. Programs run in isolated environments inside Docker containers and have their connections limited to necessary libraries, and network connections. Due to these restrictions, they have a reduced number of interactions with the host operating system.
+
+# GPU Juyterlab tool in a Galaxy workflow
+
+## Introduction
+
+## Features
+
+### Execute an existing notebook
+
+### Execute an existing notebook with datasets
+
+## Run as a tool in workflow
+
+### Get data
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Make sure you have an empty analysis history.
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. **Rename your history** to make it easy to recognize
+>
+>    > <tip-title>Rename a history</tip-title>
+>    >
+>    > * Click on the title of the history (by default the title is `Unnamed history`)
+>    >
+>    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >
+>    > * Type `Galaxy Introduction` as the name
+>    > * Press <kbd>Enter</kbd>
+>    >
+>    {: .tip}
+>
+>
+> 3. Import the files from [Zenodo](https://zenodo.org/record/7534061)
+>
+>    ```
+>    {{ https://zenodo.org/record/7534061 }}/files/sample_notebook.ipynb?download=1
+>    {{ https://zenodo.org/record/7534061 }}/files/test_rows.csv?download=1
+>    {{ https://zenodo.org/record/7534061 }}/files/train_rows.csv?download=1
+>    {{ https://zenodo.org/record/7534061 }}/files/test_rows_labels.csv?download=1
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 4. Rename the datasets as `test_rows`, `train_rows` and `test_rows_labels` respectively.
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
+> 5. Check that the datatype of all four datasets is `csv`.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+{: .hands_on}
 
 
 # Conclusion
