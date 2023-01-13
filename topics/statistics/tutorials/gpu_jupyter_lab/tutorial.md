@@ -202,24 +202,24 @@ For remote training, a dynamic Python script is sent to a Galaxy tool for execut
 
 ## Introduction
 
-In addition to an interactive mode that opens a Jupyterlab in Galaxy, GPU Jupyterlab tool can also be used as tool in a Galaxy workflow. In this mode it takes input datasets from a different tool along with an `ipynb` notebook file. It executes the `ipynb` file along with the input datasets and produce output datasets inside a datasets collection. This output dataset collection can then be used with other Galaxy tools. This feature enables it to be used in a Galaxy workflow like other Galaxy tools.
+In addition to an interactive mode that opens a Jupyterlab in Galaxy, the GPU Jupyterlab tool can also be used as a tool in a Galaxy workflow. In this mode, it takes input datasets from a different tool along with an `ipynb` notebook file. It executes the `ipynb` file along with the input datasets and produces output datasets inside a dataset collection. This output dataset collection can then be used with other Galaxy tools. This feature enables it to be used in a Galaxy workflow like other Galaxy tools.
 
-## Features
+## Feature
 
 ### Execute an existing notebook
-In this mode the GPU Jupyterlab tool executes the input `ipynb` file and produce output datasets if created in the notebook file. Input datasets can also be attached to the notebook which become available at `/galaxy_inputs/<<Name for parameter>>` folder. The parameter `Name for parameter` is set for each input dataset that is used as the folder name inside `/galaxy_inputs/`. More than one input datasets can be attached to the notebook. Another feature `Execute notebook and return a new one` controls whether webfrontend become available or a notebook is just executed. When this parameter is set to `yes`, then the attached notebook is exeucted and output datasets if any become available in an output dataset collection. When this parameter is set to `no` (by default), then Jupyterlab infrastructure as a webfrontend is opened along with the attached notebook and input datasets if attached.
+In this mode, the GPU Jupyterlab tool executes the input `ipynb` file and produces output datasets (in a collection) if created in the notebook file. Input datasets can also be attached to the notebook which become available at `/galaxy_inputs/<<Name for parameter>>` folder. The parameter `Name for parameter` is set for each input dataset that is used as the folder name inside `/galaxy_inputs/`. More than one input datasets can be attached to the notebook. Another feature `Execute notebook and return a new one` controls whether webfrontend becomes available showing Jupyterlab or a notebook is just executed. When this parameter is set to `yes`, then the attached notebook is executed and output datasets if any become available in an output dataset collection. When this parameter is set to `no` (by default), then Jupyterlab infrastructure as a webfrontend is opened along with the attached notebook and input datasets if attached.
 
 ## Run as a tool in workflow
-When the parameter `Execute notebook and return a new one` is set to `yes`, GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an `ipynb` file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purpose. In a similar way, high-quality workflows to analyses scientific datasets can be created. 
+When the parameter `Execute notebook and return a new one` is set to `yes`, the GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an `ipynb` file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purposes. Similarly, high-quality workflows to analyse scientific datasets can be created.
 
 
 > !["A sample Galaxy workflow that uses GPU Jupyterlab as a tool"](../../images/workflow_gpu_jupyterlab.png "A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.")
 
-Let's look at how can this workflow be created in a step wise manner.
+Let's look at how can this workflow be created in a step-wise manner. There are 3 steps - first, the training dataset is filtered using the `Filter` tool. The output of this tool along with 2 other datasets (`test_rows` and `test_rows_labels`), a sample IPython notebook is executed by the GPU Jupyterlab tool. The sample IPython notebook trains a simple machine learning model using the train dataset and creates a classification model using `RandomForestClassifier`. The trained model is then used to predict classes using the test dataset. The predicted classes is produced as a file in an output collection by the GPU Jupyterlab tool. As a last step, `Cut` tool is used to extract the first column of the output collection. Together, these steps showcase how the GPU Jupyterlab tool is used with other Galaxy tools in a workflow.
 
 ### Get data
 
-Datasets such as train, test and sample IPython (`ipynb`) notebook files are downloaded from [Zenodo](https://zenodo.org/record/7534061) to import them inside Galaxy. 
+Datasets such as train, test and sample IPython (`ipynb`) notebook files are downloaded from [Zenodo](https://zenodo.org/record/7534061) to import them into a Galaxy history. 
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -263,8 +263,8 @@ Datasets such as train, test and sample IPython (`ipynb`) notebook files are dow
 {: .hands_on}
 
 
-### **Filter training dataset**
-This tool showcases how a tool prior to GPU Jupyterlab tool can be used and how its output can be used as input to GPU Jupyterlab tool. 
+### Filter training dataset
+This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a workflow) can be used and how its output can be used as input to the GPU Jupyterlab tool. 
 
 > <hands-on-title>Filter</hands-on-title>
 >
@@ -276,10 +276,10 @@ This tool showcases how a tool prior to GPU Jupyterlab tool can be used and how 
 >
 {: .hands_on}
 
-Rename the filtered dataset as `new_train_rows` which will be used as one of the inputs to GPU Jupyterlab tool in the next step. The datatype should be `tabular`.
+Rename the filtered dataset as `new_train_rows` which will be used as one of the inputs to the GPU Jupyterlab tool in the next step. The datatype should be `tabular`.
 
-### **Execute IPython notebook using GPU Jupyterlab tool**
-This tool showcases GPU Jupyterlab tool executes a notebook using input datasets produced by different tools. 
+### Execute IPython notebook using GPU Jupyterlab tool
+This tool showcases GPU Jupyterlab tool that executes a notebook using input datasets produced by different tools. 
 
 > <hands-on-title>GPU Jupyterlab tool</hands-on-title>
 >
@@ -304,8 +304,8 @@ This tool showcases GPU Jupyterlab tool executes a notebook using input datasets
 {: .hands_on}
 
 
-### **Cut a column from the output collection**
-This tool showcases how the output dataset collection produced by GPU Jupyterlab tool can be used by a different Galaxy tool.
+### Cut a column from the output collection
+This tool showcases how the output dataset collection produced by the GPU Jupyterlab tool can be used by a different Galaxy tool.
 
 > <hands-on-title>Cut</hands-on-title>
 >
@@ -318,7 +318,7 @@ This tool showcases how the output dataset collection produced by GPU Jupyterlab
 {: .hands_on}
 
 
-The above tool extracts the first column from dataset residing in the output dataset collection. All the three steps explained above shows how GPU Jupyterlab tool can be used with other Galaxy tools to create a workflow.
+The above tool extracts the first column from dataset residing in the output dataset collection. All three steps explained above show how the GPU Jupyterlab tool can be used with other Galaxy tools to create a workflow.
 
 
 # Conclusion
