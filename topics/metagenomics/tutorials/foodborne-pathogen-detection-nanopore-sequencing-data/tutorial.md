@@ -451,12 +451,12 @@ To achieve that we first need to copy some of the output datasets from **Gene ba
 >
 > 1. Create a new history for for this part of the tutorial where we will create collections from the results of the two samples' histories we had that are needed to track and visualize our found pathogens.
 > 2. Copy the following datasets from barcode 10 history to the new created history, then copy the same files from barcode 11 history too.
->     ```
->     1. VFDB Accession
->     2. VFDB Accession Tabular with SampleID as a header
->     3. VFs ABRicate Sample Specific Formatted Tabular
->     4. Sample Specific Contigs FASTA file
->     ```
+>     
+>     a. VFDB Accession
+>     b. VFDB Accession Tabular with SampleID as a header
+>     c. VFs ABRicate Sample Specific Formatted Tabular
+>     d. Sample Specific Contigs FASTA file
+>     
 > 3. Now let's create collections of the copied datasets in the new history
 >    - In the new created history each two similar datasets are grouped in a collection. In a different example if you tested more samples so this collection will include all the same named files of all the testes different samples 
 >    - We will group both `VFDB Accession` files into a collection and name it `VFDB Accession Column`
@@ -491,7 +491,32 @@ Now after preparing our inputs to the sub-workflow let's run it.
 >
 {: .hands_on}
 
+In this sub-workflow we run the following tools:
+1. For heatmap **Heatmap w ggplot** {% icon tool %} is used along with other tabular manipulating tools, such as **Advanced Cut** {% icon tool %}, **Paste** {% icon tool %}, **Transpose** {% icon tool %}, **Replace** {% icon tool %}, **Multi-Join** {% icon tool %} and **Add line to file** {% icon tool %}. All these tools are used to adjust the two of the input tabular files we copied to out history which are `VFs ABRicate Sample Specific Formatted Tabular` and `Sample Specific Contigs FASTA file` from both samples.
+
+2. For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use **ClustalW** {% icon tool %} for [Multiple Sequence Alignment (MSA)](https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment) needed before constructing a phylogenetic tree, for the tree itself we use **FASTTREE** {% icon tool %} and **Newick Display** {% icon tool %} to visualize it. Also other table manipulation tools to adjust the other two input files to draw the trees such as, **Cut** {% icon tool %}, **Split by group** {% icon tool %}, **Filter sequence by ID** {% icon tool %}, **Remove beginning** {% icon tool %} and **bedtools getfasta** {% icon tool %}.
+
 ## Heatmap
+A heatmap is one of the visulaization techniques that can give you a complete overview of all the samples together and whether or not a certain value exsists. In this tutorial, we use the heatmap to visualize all samples aside and check which common bacteria pathogen genes are found in samples and which is only found in one of them. 
+
+> <question-title></question-title>
+>
+> Now let's see how your heatmap looks like, you can zoom-in and out in your Galaxy history.
+>
+> >    ![Heatmap](../../images/heatmap.png)
+>
+> 1. Mention three of the common bacteria pathogen genes found in both samples
+> 2. Mention one that is only found in Barcode 10 and one that is only found in Barcode 11
+> 3. How can the differences in the found VF bacteria pathogen genes between the two samples be interpreted?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
+> > 2. **AAF98391** is only found in Barcode 10 sample and **NP_460360** is only found in Barcode 11 sample
+> > 3. Both samples are spiked with the same spieces of the pathogen; Salmonella enterica, but not the same strain. Barcode 10 sample is spiked with Enterica strain and Barcode 11 with Houtenae strain. This can be the main cause of the most similaries and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputed for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> >
+> {: .solution}
+{: .question}
 
 ## Phylogenetic Trees
 
