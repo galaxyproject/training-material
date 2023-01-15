@@ -10,7 +10,7 @@ objectives:
   - "Load fasta sequence into Galaxy"
   - "Perform NCBI-Blast+ analysis against MAdLandDB"
 time_estimation: "15m"
-enable: false
+enable: true
 key_points:
   - Blast tool searches a database of sequences for similar sequences to a query sequence.
   - Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences     called a "database diamond".
