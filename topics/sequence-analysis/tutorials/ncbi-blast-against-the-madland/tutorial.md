@@ -7,10 +7,10 @@ questions:
   - "What is MAdLand DB?"
   - "How can we perform Blast analysis on Galaxy?"
 objectives:
-  - "Load fasta sequence into Galaxy"
+  - "Load FASTA sequence into Galaxy"
   - "Perform NCBI-Blast+ analysis against MAdLandDB"
 time_estimation: "15m"
-enable: true
+enable: false
 key_points:
   - Blast tool searches a database of sequences for similar sequences to a query sequence.
   - Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences     called a "database diamond".
@@ -56,15 +56,15 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 {: .hands_on}
 
-> We just imported a fasta file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
+> We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
 
 ## Perform NCBI Blast+ on Galaxy
 
->   Since MAdLandDB is the collection of protein sequences, You can perform [BLASTp](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) and [BLASTx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) tools.
+>   Since MAdLandDB is the collection of protein sequences, You can perform {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} and {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} tools.
 
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
-> 1. {% tool [NCBI BLAST+ blastp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} OR {% tool [NCBI BLAST+ blastx](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} with the following parameters:
+> 1. {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} OR {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} with the following parameters:
 >    - _"Protein query sequence(s)"_: `Amino acid input sequence` (In case of BLASTp) *OR* 
 >    - _"Translated nucleotide query sequence(s)"_: `Translated nucleotide input sequence` (In case of BLASTx) 
 >    - _"Subject database/sequences"_: `Locally installed BLAST database`
@@ -72,7 +72,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >    - _"Set expectation value cutoff"_: `0.001`
 >    - _"Output format"_:
 >    - In _"Output Options"_: `Tabular (extended 25 columns)` 
-<img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
+> <img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
 >
 {: .hands_on}
 
@@ -152,19 +152,21 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 > The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
 
+
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
 >
 >
 > Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
 >
 > Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
-> {: .details}
+{: .details}
 
 ## More Similarity Search Tools on Galaxy
 
-* **Diamond**: [Diamond](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0) is a high-throughput program for alignment of  large-scale data sets. It aligns sequences to the reference database using a compressed version of the reference sequences called a "database diamond" which is faster to read and can save computational time (~20,000 times the speed of Blastx, with high sensitivity).
+* **Diamond**: {% tool [Diamond](toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0) %} is a high-throughput program for alignment of  large-scale data sets. It aligns sequences to the reference database using a compressed version of the reference sequences called a "database diamond" which is faster to read and can save computational time (~20,000 times the speed of Blastx, with high sensitivity).
 
 > <details-title>Diamond in depth</details-title>
 >
 > [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
 {: .details}
+
