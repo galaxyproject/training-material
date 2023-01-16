@@ -26,7 +26,7 @@ contributors:
 <!-- This is a comment. -->
 
 
-MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de) and released in the [MAdLand](madland.science) setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for *Chara braunii*. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.
+MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de) and released in the [MAdLand](https://madland.science/) setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for *Chara braunii*. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.
 
 
 
@@ -85,73 +85,20 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 >
 
-<table>
-  <tr>
-    <th>Column</th>
-    <th>NCBI name</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>qseqid</td>
-    <td>Query Seq-id (ID of your sequence)</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>sseqid</td>
-    <td>Subject Seq-id (ID of the database hit)</td>
-  </tr>
-   <tr>
-    <td>3</td>
-    <td>pident</td>
-    <td>Percentage of identical matches</td>
-  </tr>
-   <tr>
-    <td>4</td>
-    <td>length</td>
-    <td>Alignment length</td>
-  </tr>
-   <tr>
-    <td>5</td>
-    <td>mismatch</td>
-    <td>Number of mismatches</td>
-  </tr>
-   <tr>
-    <td>6</td>
-    <td>gapopen</td>
-    <td>Number of gap openings</td>
-  </tr>
-   <tr>
-    <td>7</td>
-    <td>qstart</td>
-    <td>Start of alignment in query</td>
-  </tr>
-   <tr>
-    <td>8</td>
-    <td>qend</td>
-    <td>End of alignment in query</td>
-  </tr>
-   <tr>
-    <td>9</td>
-    <td>sstart</td>
-    <td>Start of alignment in subject (database hit)</td>
-  </tr>
-   <tr>
-    <td>10</td>
-    <td>send</td>
-    <td>End of alignment in subject (database hit)</td>
-  </tr>
-    <tr>
-    <td>11</td>
-    <td>evalue</td>
-    <td>Expectation value (E-value)</td>
-  </tr>
-    <tr>
-    <td>12</td>
-    <td>bitscore</td>
-    <td>Bit score</td>
-  </tr>
-</table>
+| Column | NCBI name | Description |
+|-------|------------|-------------|
+| 1 | qseqid | Query Seq-id (ID of your sequence) |
+| 2 | sseqid | Subject Seq-id (ID of the database hit) |
+| 3 | pident | Percentage of identical matches |
+| 4 | length | Alignment length |
+| 5 | mismatch | Number of mismatches |
+| 6 | gapopen | Number of gap openings |
+| 7 | qstart | Start of alignment in query |
+| 8 | qend | End of alignment in query |
+| 9 | sstart | Start of alignment in subject (database hit) |
+| 10 | send | End of alignment in subject (database hit) |
+| 11 | evalue | Expectation value (E-value) |
+| 12 | bitscore | Bit score |
 
 > The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
 
