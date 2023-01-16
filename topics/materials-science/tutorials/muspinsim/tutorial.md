@@ -346,7 +346,7 @@ parameters.
 >
 {: .hands_on}
 
-![Plot resembling a cosine wave](../../images/zeeman_example.png "Asymmetry against time for the Hyperfine Example. The asymmetry oscillates above 0 over the time of the simulation.")
+![Plot resembling a cosine wave](../../images/hfine_example.png "Asymmetry against time for the Hyperfine Example. The asymmetry oscillates above 0 over the time of the simulation.")
 
 Note that while the range of values asymmetry takes has changed, we can once
 again observe that that our period of 0.1 µs matches the input of 10 MHz.
