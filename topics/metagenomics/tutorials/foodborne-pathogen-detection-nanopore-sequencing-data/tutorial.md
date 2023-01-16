@@ -301,7 +301,7 @@ But before we run the sub-workflow we need to upload one more file needed to cre
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. Import the files from Galaxy shared data libraries to both histories:
+> 1. Import a file from Galaxy shared data libraries to both histories:
 >
 >    - Click on __Shared Data__ menu (top panel) then __Data libraries__
 >    - Navigate to folder __Biolytix__
@@ -440,6 +440,52 @@ For this step in the sub-workflow the tool **ABRicate** {% icon tool %} is chose
 # SNP based pathogenic identification
 In this section, we will run a sub-workflow that can run in parallel to **Taxonomy Profiling**, **Gene based pathogenic identification** and **Pathogen Tracking among all samples** sub-workflows, so feel free to run it in the time you are waiting for the other sub-workflows to finish running. 
 
+
+
+
+> <hands-on-title>Data upload</hands-on-title>
+>
+> 1. Import a reference genome fasta file from Galaxy shared data libraries to both histories:
+>
+>    - Click on __Shared Data__ menu (top panel) then __Data libraries__
+>    - Navigate to folder __Biolytix__
+>    - Select the following file
+>     ```
+>     Salmonella_Ref_genome.fna.gz
+>     ```
+>    - Click on the __Export to History__ button near the top and select __as Datasets__ from the dropdown menu
+>    - In the pop-up window, select the first history you created to import the file to
+>    - Click on Import
+> 2. Repeat the first step again for the second history
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+>
+{: .hands_on}
+
+> <hands-on-title>SNP based Pathogenic Identification</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_snp_based_pathogenetic_identification.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **Workflow 3: Nanopore Datasets - SNP based Pathogenic Identification** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads` the output from **Filter Sequence By ID** {% icon tool %} from the **Pre-Processing** sub-workflow
+>    - {% icon param-file %} *"Reference Genome of Tested Strain/Pathogen"*: `Salmonella_Ref_genome.fna.gz` file you have just uploaded to your history 
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
+
+
+
+
+
 this output can be used to have the full genome 
 
 # Pathogen Tracking among all samples
@@ -558,4 +604,8 @@ As you chose to use the long version
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+![Foodborne full workflow big picture](../../images/FoodBorne-Workflow-updated.png "The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training")
+
+
 
