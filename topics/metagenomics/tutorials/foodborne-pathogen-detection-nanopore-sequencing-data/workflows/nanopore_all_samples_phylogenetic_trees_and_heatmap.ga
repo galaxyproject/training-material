@@ -17,17 +17,17 @@
     ],
     "format-version": "0.1",
     "license": "MIT",
-    "name": "Nanopore Datasets - Reports of All Samples along with Full genomes and VF gens Phylogenetic trees",
+    "name": "Nanopore Datasets - Reports of All Samples along with Full genomes and VF genes Phylogenetic trees",
     "steps": {
         "0": {
-            "annotation": "",
+            "annotation": "All Samples Contigs Fasta files",
             "content_id": null,
             "errors": null,
             "id": 0,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "All Samples Contigs Fasta files",
                     "name": "All Samples Contigs Fasta files"
                 }
             ],
@@ -35,25 +35,25 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0,
-                "top": 24.649993896484375
+                "left": 278,
+                "top": 36
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "7e248b46-788c-46bb-81fe-585877fd1750",
+            "uuid": "dadd1318-a6eb-44bd-b551-29251c87465d",
             "workflow_outputs": []
         },
         "1": {
-            "annotation": "",
+            "annotation": "All Samples ABRicate Tabulars",
             "content_id": null,
             "errors": null,
             "id": 1,
             "input_connections": {},
             "inputs": [
                 {
-                    "description": "",
+                    "description": "All Samples ABRicate Tabulars",
                     "name": "All Samples ABRicate Tabulars"
                 }
             ],
@@ -61,47 +61,21 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 4.45001220703125,
-                "top": 143.64999389648438
+                "left": 0,
+                "top": 370
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "deff1b91-088c-44d6-b97f-9859057ecada",
+            "uuid": "3401fbe5-a452-4d41-b171-ca8e755ceba9",
             "workflow_outputs": []
         },
         "2": {
-            "annotation": "VFDB Accession Column with Sample ID Tabulars ",
-            "content_id": null,
-            "errors": null,
-            "id": 2,
-            "input_connections": {},
-            "inputs": [
-                {
-                    "description": "VFDB Accession Column with Sample ID Tabulars ",
-                    "name": "List of All Samples VFDB Accession Column with Sample ID Tabulars"
-                }
-            ],
-            "label": "List of All Samples VFDB Accession Column with Sample ID Tabulars",
-            "name": "Input dataset collection",
-            "outputs": [],
-            "position": {
-                "left": 36.20001220703125,
-                "top": 641.8166656494141
-            },
-            "tool_id": null,
-            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
-            "tool_version": null,
-            "type": "data_collection_input",
-            "uuid": "4a9dec78-8041-4f9f-a3b8-a1fdda6c09bc",
-            "workflow_outputs": []
-        },
-        "3": {
             "annotation": "VFDB Accession Column without Sample ID Tabulars ",
             "content_id": null,
             "errors": null,
-            "id": 3,
+            "id": 2,
             "input_connections": {},
             "inputs": [
                 {
@@ -113,14 +87,40 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 35.79998779296875,
-                "top": 782.7333374023438
+                "left": 0,
+                "top": 767
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "0b034ceb-77e7-40fa-bfc4-a8b787b3ba14",
+            "uuid": "71ad86e9-2848-45fc-85be-88218269aefb",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "VFDB Accession Column with Sample ID Tabulars ",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "VFDB Accession Column with Sample ID Tabulars ",
+                    "name": "List of All Samples VFDB Accession Column with Sample ID Tabulars"
+                }
+            ],
+            "label": "List of All Samples VFDB Accession Column with Sample ID Tabulars",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 556,
+                "top": 559
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "aaaae933-4ee4-44e0-9080-6546467cdd22",
             "workflow_outputs": []
         },
         "4": {
@@ -134,7 +134,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
             "label": null,
             "name": "Collapse Collection",
             "outputs": [
@@ -144,10 +149,18 @@
                 }
             ],
             "position": {
-                "left": 280,
+                "left": 556,
                 "top": 0
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "All Samples Contigs in one Fasta file"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "90981f86000f",
@@ -155,15 +168,15 @@
                 "owner": "nml",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "c7d0b648-c268-4a2f-99e0-64741f788fb9",
+            "uuid": "c275828f-b1eb-4409-9d2c-b623ecf2259b",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "All Samples Contigs in one Fasta file",
                     "output_name": "output",
-                    "uuid": "a5d035b4-79d4-4d84-b50b-e65fd8cbdc24"
+                    "uuid": "bc665725-a027-43cd-b4c8-220ff99a5a9e"
                 }
             ]
         },
@@ -178,7 +191,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
             "label": null,
             "name": "Collapse Collection",
             "outputs": [
@@ -188,10 +206,18 @@
                 }
             ],
             "position": {
-                "left": 274.13330078125,
-                "top": 154.89999389648438
+                "left": 278,
+                "top": 334
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "All Samples ABRicate in one Tabular"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "90981f86000f",
@@ -199,15 +225,15 @@
                 "owner": "nml",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "98f6b19d-fe31-4346-a522-6e327b53e7a6",
+            "uuid": "972a6cfe-4db4-4ef9-9679-d378006e6c1a",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "All Samples ABRicate in one Tabular",
                     "output_name": "output",
-                    "uuid": "ff84ca2f-1e8e-4333-9eef-f13e290891b5"
+                    "uuid": "98ef174f-1633-4ac2-a904-69d8acd12220"
                 }
             ]
         },
@@ -218,11 +244,16 @@
             "id": 6,
             "input_connections": {
                 "input_list": {
-                    "id": 3,
+                    "id": 2,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
             "label": null,
             "name": "Collapse Collection",
             "outputs": [
@@ -232,10 +263,18 @@
                 }
             ],
             "position": {
-                "left": 258.683349609375,
-                "top": 785.25
+                "left": 278,
+                "top": 720
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "VFDB Accession Column without Sample ID in one Tabular "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "90981f86000f",
@@ -243,15 +282,15 @@
                 "owner": "nml",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"filename\": {\"add_name\": \"false\", \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "367bd283-5293-4981-bcc1-8bf36c4914b1",
+            "uuid": "c4a38391-fc59-41ff-a26f-552942ebe704",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "VFDB Accession Column without Sample ID in one Tabular ",
                     "output_name": "output",
-                    "uuid": "2d909233-56ff-49b1-aeee-d07c018f9bb1"
+                    "uuid": "33f0dbce-c172-441e-8254-c7359a57cd58"
                 }
             ]
         },
@@ -276,8 +315,8 @@
                 }
             ],
             "position": {
-                "left": 528.8500061035156,
-                "top": 154.14999389648438
+                "left": 556,
+                "top": 192
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_on_column/tp_split_on_column/0.6",
@@ -290,12 +329,12 @@
             "tool_state": "{\"column\": \"13\", \"include_header\": \"true\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.6",
             "type": "tool",
-            "uuid": "f4a5224d-64fa-440c-9a2d-5f2f1ba23e44",
+            "uuid": "b26ccfcc-d79a-4806-8319-3cffffc34b50",
             "workflow_outputs": [
                 {
                     "label": "Split by group collection",
                     "output_name": "split_output",
-                    "uuid": "3a302163-612d-4c7b-873a-3d6782e9e966"
+                    "uuid": "bf44ca6a-7ff0-4b08-b10c-4e1eca9d60bc"
                 }
             ]
         },
@@ -310,7 +349,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Cut",
+                    "name": "input"
+                }
+            ],
             "label": null,
             "name": "Cut",
             "outputs": [
@@ -320,20 +364,28 @@
                 }
             ],
             "position": {
-                "left": 525.6666870117188,
-                "top": 313.48333740234375
+                "left": 556,
+                "top": 364
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Adjusted ABRicate VFs tabular part1"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Cut1",
-            "tool_state": "{\"columnList\": \"c2,c3,c4\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"columnList\": \"c2,c3,c4\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
-            "uuid": "0bceb2a4-2294-4749-82d3-fa88b13dc572",
+            "uuid": "34f51f99-aa28-4dca-899b-56276e1d4587",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Adjusted ABRicate VFs tabular part1",
                     "output_name": "out_file1",
-                    "uuid": "b07aae0d-c20c-4432-8746-fbf756476bf5"
+                    "uuid": "0eb61c94-6c1a-486e-8826-e59cea89974a"
                 }
             ]
         },
@@ -363,10 +415,18 @@
                 }
             ],
             "position": {
-                "left": 486.20001220703125,
-                "top": 794.1499938964844
+                "left": 556,
+                "top": 720
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "VFDB Accession Column without Sample ID in one Tabular with a header"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "8e251055b1a9",
@@ -377,12 +437,12 @@
             "tool_state": "{\"infile\": {\"__class__\": \"RuntimeValue\"}, \"options\": \"header\", \"text_input\": \"All_VFs\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.1.0",
             "type": "tool",
-            "uuid": "ae67cccc-9789-4340-b1c8-4d41a254fb33",
+            "uuid": "f55cd543-9c93-4750-b71c-7be8a4ddfdc2",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "VFDB Accession Column without Sample ID in one Tabular with a header",
                     "output_name": "outfile",
-                    "uuid": "5411c0cf-00cf-4328-96fe-1e8ef331b1d3"
+                    "uuid": "8cd0b52e-8876-4307-880c-3cc48466ae83"
                 }
             ]
         },
@@ -401,7 +461,16 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter sequences by ID",
+                    "name": "id_opts"
+                },
+                {
+                    "description": "runtime parameter for tool Filter sequences by ID",
+                    "name": "input_file"
+                }
+            ],
             "label": null,
             "name": "Filter sequences by ID",
             "outputs": [
@@ -411,10 +480,18 @@
                 }
             ],
             "position": {
-                "left": 807.7833404541016,
-                "top": 9.5
+                "left": 834,
+                "top": 147
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput_pos": {
+                    "action_arguments": {
+                        "newname": "Filtered Sequences with VFs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_pos"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7",
             "tool_shed_repository": {
                 "changeset_revision": "141612f8c3e3",
@@ -422,15 +499,15 @@
                 "owner": "peterjc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"strip_suffix\": \"false\"}, \"id_opts\": {\"id_opts_selector\": \"tabular\", \"__current_case__\": 0, \"input_tabular\": {\"__class__\": \"ConnectedValue\"}, \"columns\": \"2\"}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"output_choice_cond\": {\"output_choice\": \"pos\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"strip_suffix\": \"false\"}, \"id_opts\": {\"id_opts_selector\": \"tabular\", \"__current_case__\": 0, \"input_tabular\": {\"__class__\": \"RuntimeValue\"}, \"columns\": \"2\"}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"output_choice_cond\": {\"output_choice\": \"pos\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "0.2.7",
             "type": "tool",
-            "uuid": "d4c85fc5-f4ba-4e0b-9227-f9e3b4b3c550",
+            "uuid": "bca52007-59ef-41ce-a82b-97ba8d121af9",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Filtered Sequences with VFs",
                     "output_name": "output_pos",
-                    "uuid": "2acb0520-cff1-44eb-8eec-4a69e1ecfd1c"
+                    "uuid": "59230383-b152-4c32-83e7-93214860c1c3"
                 }
             ]
         },
@@ -445,7 +522,12 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove beginning",
+                    "name": "input"
+                }
+            ],
             "label": null,
             "name": "Remove beginning",
             "outputs": [
@@ -455,8 +537,8 @@
                 }
             ],
             "position": {
-                "left": 770.6499938964844,
-                "top": 383.23333740234375
+                "left": 834,
+                "top": 354
             },
             "post_job_actions": {
                 "ChangeDatatypeActionout_file1": {
@@ -465,18 +547,25 @@
                     },
                     "action_type": "ChangeDatatypeAction",
                     "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Adjusted ABRicate VFs tabular part2"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
                 }
             },
             "tool_id": "Remove beginning1",
-            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "923f481d-882e-4093-864a-c4d8dc8ba85e",
+            "uuid": "f341ad64-7b5a-4fba-91f4-fa4759640a00",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Adjusted ABRicate VFs tabular part2",
                     "output_name": "out_file1",
-                    "uuid": "2094c703-d43f-41f3-b93d-fee6f0113b72"
+                    "uuid": "b33b732d-e910-4f15-ba22-4a40b5a84fd5"
                 }
             ]
         },
@@ -487,7 +576,7 @@
             "id": 12,
             "input_connections": {
                 "files": {
-                    "id": 2,
+                    "id": 3,
                     "output_name": "output"
                 },
                 "first_file": {
@@ -514,10 +603,18 @@
                 }
             ],
             "position": {
-                "left": 696.6666870117188,
-                "top": 661.1666717529297
+                "left": 834,
+                "top": 696
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1",
             "tool_shed_repository": {
                 "changeset_revision": "ddf54b12c295",
@@ -528,12 +625,12 @@
             "tool_state": "{\"files\": {\"__class__\": \"RuntimeValue\"}, \"filler\": \"0\", \"first_file\": {\"__class__\": \"RuntimeValue\"}, \"ignore_dups\": \"true\", \"input_header\": \"true\", \"key_column\": \"1\", \"output_header\": \"true\", \"value_columns\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
-            "uuid": "46e16fff-5f98-4866-9325-999521690bab",
+            "uuid": "06b2dc8a-ff40-4633-b08d-c0f0f6895283",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples",
                     "output_name": "outfile",
-                    "uuid": "9ebc1660-58fe-4f86-945e-6de3be6fbb65"
+                    "uuid": "8c9c68b8-910e-4449-83a8-b10dca2bfa97"
                 }
             ]
         },
@@ -552,7 +649,16 @@
                     "output_name": "out_file1"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bedtools getfasta",
+                    "name": "fasta_source"
+                },
+                {
+                    "description": "runtime parameter for tool bedtools getfasta",
+                    "name": "input"
+                }
+            ],
             "label": null,
             "name": "bedtools getfasta",
             "outputs": [
@@ -562,10 +668,18 @@
                 }
             ],
             "position": {
-                "left": 1218.683334350586,
-                "top": 136.98333740234375
+                "left": 1112,
+                "top": 299
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Filtered Sequences with VFs FASTA"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_getfastabed/2.30.0+galaxy1",
             "tool_shed_repository": {
                 "changeset_revision": "07e8b80f278c",
@@ -573,15 +687,15 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"fasta_source\": {\"fasta_source_selector\": \"history\", \"__current_case__\": 0, \"fasta\": {\"__class__\": \"ConnectedValue\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"false\", \"nameOnly\": \"false\", \"split\": \"false\", \"strand\": \"false\", \"tab\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"fasta_source\": {\"fasta_source_selector\": \"history\", \"__current_case__\": 0, \"fasta\": {\"__class__\": \"RuntimeValue\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"name\": \"false\", \"nameOnly\": \"false\", \"split\": \"false\", \"strand\": \"false\", \"tab\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.30.0+galaxy1",
             "type": "tool",
-            "uuid": "b177531b-5c15-4fe3-990d-87b014310400",
+            "uuid": "7d516933-76fa-453a-9afe-e44a88add0be",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Filtered Sequences with VFs FASTA",
                     "output_name": "output",
-                    "uuid": "03218d76-8192-4b93-b9e7-6882200896c6"
+                    "uuid": "5ac54a18-6d0e-48b4-bd05-1572b9e3d11d"
                 }
             ]
         },
@@ -611,10 +725,18 @@
                 }
             ],
             "position": {
-                "left": 947.6499938964844,
-                "top": 646.9166717529297
+                "left": 1112,
+                "top": 711
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples prep 1 for heatmap"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
             "tool_shed_repository": {
                 "changeset_revision": "d698c222f354",
@@ -625,12 +747,12 @@
             "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"dataset_(.*?)_\", \"replace_pattern\": \"Sample_\", \"is_regex\": \"true\", \"global\": \"true\", \"caseinsensitive\": \"false\", \"wholewords\": \"false\", \"skip_first_line\": \"false\", \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}, {\"__index__\": 1, \"find_pattern\": \"(\\\\S+)\", \"replace_pattern\": \"Acc_$1\", \"is_regex\": \"true\", \"global\": \"true\", \"caseinsensitive\": \"true\", \"wholewords\": \"false\", \"skip_first_line\": \"true\", \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
-            "uuid": "67698ec2-de01-43aa-89ac-913b77a0cad0",
+            "uuid": "34da9485-99ee-4510-aa7e-4b330270eade",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples prep 1 for heatmap",
                     "output_name": "outfile",
-                    "uuid": "5d86e82b-3077-4f87-b74f-164a76523646"
+                    "uuid": "1a516db9-28e4-4f7b-97fb-f9bc6709182f"
                 }
             ]
         },
@@ -660,10 +782,18 @@
                 }
             ],
             "position": {
-                "left": 936.1166687011719,
-                "top": 800.25
+                "left": 1390,
+                "top": 883
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples first column"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "ddf54b12c295",
@@ -674,12 +804,12 @@
             "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.0",
             "type": "tool",
-            "uuid": "546afda5-254d-44a4-8cbc-84291dc3da9c",
+            "uuid": "da9fc45e-daf7-44fa-a6ea-9e00114dd0ad",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples first column",
                     "output_name": "output",
-                    "uuid": "73b65a91-4603-4c53-9435-42322689711a"
+                    "uuid": "67ae05c3-b40b-420a-8e27-498b46caa49b"
                 }
             ]
         },
@@ -708,8 +838,8 @@
                 }
             ],
             "position": {
-                "left": 1509.8500061035156,
-                "top": 118.48333740234375
+                "left": 1390,
+                "top": 322
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1+galaxy1",
@@ -722,17 +852,17 @@
             "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"out_order\": \"ALIGNED\", \"outcontrol\": {\"outform\": \"fasta\", \"__current_case__\": 0}, \"range\": {\"mode\": \"complete\", \"__current_case__\": 0}, \"tree_calculation\": {\"OUTPUTTREE\": \"PHYLIP\", \"KIMURA\": \"false\", \"TOSSGAPS\": \"false\"}, \"type_conditional\": {\"dnarna\": \"DNA\", \"__current_case__\": 0, \"algorithm_conditional\": {\"selector\": \"\", \"__current_case__\": 0, \"slow_pairwise_alignments\": {\"PWDNAMATRIX\": \"IUB\", \"PWGAPOPEN\": null, \"PWGAPEXT\": null}}, \"multiple_alignments\": {\"DNAMATRIX\": \"IUB\", \"GAPOPEN\": null, \"GAPEXT\": null, \"ENDGAPS\": \"false\", \"GAPDIST\": null, \"NOPGAP\": \"false\", \"NOHGAP\": \"false\", \"MAXDIV\": null, \"NEGATIVE\": \"false\", \"TRANSWEIGHT\": null}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.1+galaxy1",
             "type": "tool",
-            "uuid": "f7b92cd1-34be-4b55-97d4-8378b2eb6230",
+            "uuid": "0cfca450-c60e-46be-b962-585fc2837061",
             "workflow_outputs": [
-                {
-                    "label": "ClustalW on input dataset(s): dnd",
-                    "output_name": "dnd",
-                    "uuid": "d3fb85f8-22d6-40b3-9863-acac848e4149"
-                },
                 {
                     "label": "ClustalW on input dataset(s): clustal",
                     "output_name": "output",
-                    "uuid": "b4a60b52-2f29-48ce-b6b8-edc576fdfdfd"
+                    "uuid": "e6a3f950-0507-4a53-bdc7-91a43eea5f92"
+                },
+                {
+                    "label": "ClustalW on input dataset(s): dnd",
+                    "output_name": "dnd",
+                    "uuid": "f4ee6b2b-b4c9-481a-9b2b-03a1c9cfef4e"
                 }
             ]
         },
@@ -762,10 +892,18 @@
                 }
             ],
             "position": {
-                "left": 1169.6666717529297,
-                "top": 684.3333282470703
+                "left": 1390,
+                "top": 711
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples prep 2 for heatmap"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
             "tool_shed_repository": {
                 "changeset_revision": "d698c222f354",
@@ -776,12 +914,12 @@
             "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"Acc_0\", \"replace_pattern\": \"0\", \"is_regex\": \"false\", \"global\": \"true\", \"caseinsensitive\": \"true\", \"wholewords\": \"false\", \"skip_first_line\": \"true\", \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
-            "uuid": "4dce15eb-0cfe-44b9-bfa3-339535cff90d",
+            "uuid": "662777b8-b705-4769-955f-0f3d2e3f294f",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples prep 2 for heatmap",
                     "output_name": "outfile",
-                    "uuid": "6a99e676-fb0c-4021-b30a-3c46068f28c0"
+                    "uuid": "2bb84382-5aee-4275-897b-58769e2229fa"
                 }
             ]
         },
@@ -806,8 +944,8 @@
                 }
             ],
             "position": {
-                "left": 1796,
-                "top": 123.98333740234375
+                "left": 1668,
+                "top": 348
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/fasttree/fasttree/2.1.10+galaxy1",
@@ -820,12 +958,12 @@
             "tool_state": "{\"advanced_selector\": {\"maximize\": \"min\", \"__current_case__\": 0}, \"input_selector\": {\"select_format\": \"fasta\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"quote\": \"false\", \"intree_selector\": {\"intree_format\": \"none\", \"__current_case__\": 0}}, \"model_selector\": {\"format\": \"-nt\", \"__current_case__\": 0, \"model\": \"-gtr\"}, \"save_logfile\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.1.10+galaxy1",
             "type": "tool",
-            "uuid": "94f6496c-a758-4fea-9e5c-7560ff81baaa",
+            "uuid": "1271737d-7aa7-4284-8b95-589172d2285e",
             "workflow_outputs": [
                 {
                     "label": "FASTTREE on input dataset(s):tree.nhx",
                     "output_name": "output",
-                    "uuid": "e433d7dc-6ae3-4aa9-815c-9819cf48584e"
+                    "uuid": "c6887c28-6ba4-4a3a-8c4b-ef79da007c6e"
                 }
             ]
         },
@@ -855,10 +993,18 @@
                 }
             ],
             "position": {
-                "left": 1397.3333129882812,
-                "top": 725.316650390625
+                "left": 1668,
+                "top": 711
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutfile": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples prep 3 for heatmap"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "outfile"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
             "tool_shed_repository": {
                 "changeset_revision": "d698c222f354",
@@ -869,12 +1015,12 @@
             "tool_state": "{\"find_and_replace\": [{\"__index__\": 0, \"find_pattern\": \"Acc_\\\\S*\", \"replace_pattern\": \"1\", \"is_regex\": \"true\", \"global\": \"true\", \"caseinsensitive\": \"false\", \"wholewords\": \"false\", \"skip_first_line\": \"true\", \"searchwhere\": {\"searchwhere_select\": \"line\", \"__current_case__\": 0}}], \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.4",
             "type": "tool",
-            "uuid": "2340da28-5aa6-42a5-9bbf-60c25fff9a40",
+            "uuid": "b80bb068-8ed0-4511-ad28-e1826d7ae39b",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples prep 3 for heatmap",
                     "output_name": "outfile",
-                    "uuid": "a817e225-a956-45f0-bd98-7f3c630853ea"
+                    "uuid": "29bb8bdd-57f0-4459-83d7-c17526e84d64"
                 }
             ]
         },
@@ -889,7 +1035,12 @@
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Newick Display",
+                    "name": "fileNewick"
+                }
+            ],
             "label": null,
             "name": "Newick Display",
             "outputs": [
@@ -899,10 +1050,18 @@
                 }
             ],
             "position": {
-                "left": 2031.199951171875,
-                "top": 126.26666259765625
+                "left": 1946,
+                "top": 367
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Newick Genes: Tree Graphs Collection"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1",
             "tool_shed_repository": {
                 "changeset_revision": "b4163d2f64ab",
@@ -910,15 +1069,15 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"condbranchlength\": {\"branchlength\": \"false\", \"__current_case__\": 1}, \"condbranchsupport\": {\"branchsupport\": \"false\", \"__current_case__\": 1}, \"fileNewick\": {\"__class__\": \"ConnectedValue\"}, \"leafFont\": \"sans-serif\", \"leafSize\": \"10px\", \"legend\": \"\", \"outformat\": \"svg\", \"radial\": \"false\", \"scalebar\": \"true\", \"width\": \"2000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"condbranchlength\": {\"branchlength\": \"false\", \"__current_case__\": 1}, \"condbranchsupport\": {\"branchsupport\": \"false\", \"__current_case__\": 1}, \"fileNewick\": {\"__class__\": \"RuntimeValue\"}, \"leafFont\": \"sans-serif\", \"leafSize\": \"10px\", \"legend\": \"\", \"outformat\": \"svg\", \"radial\": \"false\", \"scalebar\": \"true\", \"width\": \"2000\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.6+galaxy1",
             "type": "tool",
-            "uuid": "eb4527e4-6bc2-40c7-8392-82bd08159d80",
+            "uuid": "b3163791-345c-4f9a-b306-28a1dc6b3381",
             "workflow_outputs": [
                 {
-                    "label": "Newick Display on input dataset(s): Tree Graph",
+                    "label": "Newick Genes: Tree Graphs Collection",
                     "output_name": "output",
-                    "uuid": "7440b977-b578-4aa8-9d7b-31641bc88e4d"
+                    "uuid": "46e4f8a2-9e48-4255-af14-9daba279ae01"
                 }
             ]
         },
@@ -948,10 +1107,18 @@
                 }
             ],
             "position": {
-                "left": 1619,
-                "top": 623
+                "left": 1946,
+                "top": 701
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples prep 4 for heatmap"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
             "tool_shed_repository": {
                 "changeset_revision": "ddf54b12c295",
@@ -962,12 +1129,12 @@
             "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"1-2\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.0",
             "type": "tool",
-            "uuid": "6776e565-edee-4554-b322-e1420938eb90",
+            "uuid": "92973bbb-e781-4e33-bb11-ce31b77bb9ae",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples prep 4 for heatmap",
                     "output_name": "output",
-                    "uuid": "a1a17fb7-f467-4195-89af-9d8cba13406a"
+                    "uuid": "a60693c0-5b8f-47c9-ba43-54a306f9ad07"
                 }
             ]
         },
@@ -1005,20 +1172,28 @@
                 }
             ],
             "position": {
-                "left": 1829.683349609375,
-                "top": 812.4833374023438
+                "left": 2224,
+                "top": 726
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "bacteria pathogen genes in all samples prep 5 for heatmap"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
             "tool_id": "Paste1",
             "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.0",
             "type": "tool",
-            "uuid": "e886a315-a861-49af-874a-8457fa7f2f9f",
+            "uuid": "330c3c8c-be90-4631-82b2-3f41dda5e9f0",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "bacteria pathogen genes in all samples prep 5 for heatmap",
                     "output_name": "out_file1",
-                    "uuid": "f7953047-23ec-4fad-af99-7fd516db17d6"
+                    "uuid": "c8885efa-cb0d-43eb-968e-8d304cc42fb0"
                 }
             ]
         },
@@ -1043,8 +1218,8 @@
                 }
             ],
             "position": {
-                "left": 2061.9833984375,
-                "top": 765.316650390625
+                "left": 2502,
+                "top": 741
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
@@ -1057,12 +1232,12 @@
             "tool_state": "{\"in_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.0+galaxy2",
             "type": "tool",
-            "uuid": "2609caec-055f-4f61-a862-a931c4779190",
+            "uuid": "665bb394-420a-4d71-af93-91c15cb5e25f",
             "workflow_outputs": [
                 {
                     "label": "Transpose on input dataset(s)",
                     "output_name": "out_file",
-                    "uuid": "ebe7035e-6112-45e8-9a05-348c814cadf1"
+                    "uuid": "35511497-189a-4202-88ed-456ec93bc22c"
                 }
             ]
         },
@@ -1092,8 +1267,8 @@
                 }
             ],
             "position": {
-                "left": 2286.9833984375,
-                "top": 762.9833374023438
+                "left": 2780,
+                "top": 766
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap/ggplot2_heatmap/3.3.5+galaxy1",
@@ -1106,12 +1281,12 @@
             "tool_state": "{\"adv\": {\"transform\": \"none\", \"cluster\": \"false\", \"colorscheme\": \"whrd\"}, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"inputdata\": {\"input_type\": \"with_header_rownames\", \"__current_case__\": 2, \"header\": \"TRUE\", \"row_names_index\": \"1\", \"sample_name_orientation\": \"TRUE\"}, \"out\": {\"unit_output_dim\": \"in\", \"width_output_dim\": \"15.0\", \"height_output_dim\": \"17.0\", \"dpi_output_dim\": \"300.0\", \"additional_output_format\": \"none\"}, \"title\": \"All Samples Common VFs Heatmap\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "3.3.5+galaxy1",
             "type": "tool",
-            "uuid": "896ed115-81ed-4ce3-8d07-5ba5557d2dc2",
+            "uuid": "655c7077-d51b-418a-86bd-fa925ff6d5a7",
             "workflow_outputs": [
                 {
                     "label": "Heatmap w ggplot on input dataset(s): png",
                     "output_name": "output1",
-                    "uuid": "e945c2e1-647f-4555-b6c0-55774b56195f"
+                    "uuid": "c9cec9fd-de9a-410e-bbe1-bea8a7fd18de"
                 }
             ]
         }
@@ -1120,6 +1295,6 @@
         "microbiome",
         "nanopore"
     ],
-    "uuid": "77cef107-ddf3-4633-b20f-218c9f2e9461",
-    "version": 67
+    "uuid": "f676b9b9-83a9-4993-8c77-922a1d70ff09",
+    "version": 81
 }
