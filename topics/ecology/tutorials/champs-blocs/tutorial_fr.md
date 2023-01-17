@@ -145,30 +145,30 @@ Rendez-vous sur le formulaire de l'outil **IVR**
 > 
 >   ![IVR](../../images/champbloc/ivr.png "IVR for Bilfot"){:width="620px"}
 >
-> > <tip-title>Search for your site results</tip-title>
+> > <tip-title>Rechercher les résultats de votre site</tip-title>
 > >
-> > 1. In the top of the History panel (on the right) go on the search box
-> > 2. Type the name of your site (for instance "Bilfot")
-> > 3. If nothing show up click on **show hidden** (just beneath the name of the history in the History panel)
+> > 1. En haut du panneau Historique (à droite) allez sur le champ de recherche
+> > 2. Tapez le nom de votre site (par exemple "Bilfot")
+> > 3. Si rien ne s'affiche, cliquez sur **show hidden** (juste sous le nom de l'historique dans le panneau Historique)
 > >
 > {: .tip}
-> **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
+> **Pour vos rapports, vous pouvez télécharger ceux que vous souhaitez. Vous ne pourrez pas les visualiser directement sur le panneau central Galaxy car le format docx n'est pas pris en charge !**
 >
-> 5. Download results
+> 5. Téléchargement des résultats
 > 
->  * Click on the output you are interested in for instance **Reports**
->  * Click on {% icon galaxy-save %} (download)
+> * Cliquez sur la sortie qui vous intéresse par exemple **Rapports**
+> * Cliquez sur {% icon galaxy-save %} (télécharger)
 {: .hands_on}
 
-# Computing dissimilarity coefficient for each site
+# Calcul du coefficient de dissimilarité pour chaque site
 
-## **Dissimilarity**
-Cleaning out your data in order and then compute de dissimilarity coefficient.
-Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} tool
+## **Dissimilarité**
+Nettoyez vos données, puis calculez le coefficient de dissimilarité.
+Utiliser l'outil {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %}
 
-> <hands-on-title>Calculate dissimilarity index</hands-on-title>
+> <hands-on-title>Calculer des index de dissimilarité</hands-on-title>
 >
-> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} with the following parameters:
+> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} avec les paramètres suivants:
 >    - {% icon param-file %} *"Input champbloc_qecb.csv"*: `input` (champbloc_qecb.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
@@ -176,24 +176,24 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 >    - {% icon param-text %} *"Until when do you have data (write only the YEAR) ?"*: `2021`
 >
 >
-> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+> 2. Cliquer sur **Execute** (cela peut prendre quelques minutes à traiter c'est normal si vous devez attendre un peu surtout si votre connexion internet est faible)
 >
-> 3. View graphs
->  * Once it's green, click on type of plot you want to see
->  * Then, click on the {% icon galaxy-eye %} (eye) icon of your output in the history panel.
+> 3. Visualisation des graphiques
+>  * Une fois que les jeux de données sont affichés en vert dans l'historique, choisissez les figures que vous souhaitez visualiser.
+>  * Puis, cliquer sur l'icone {% icon galaxy-eye %} (oeil) de votre fichier de sortie dans l'historique.
 > 
->  The information is displayed in the central panel
+>  Les informations sont affichées dans le panneau central
 >
 > ![Dissim fs fi](../../images/champbloc/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
 >
 > ![Dissim bf bm](../../images/champbloc/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
 >
-> 3. Download your results
+> 3. Téléchargez vos résultats
 > 
->  * Click on the output you are interested in
->  * Click on {% icon galaxy-save %} (download)
+> * Cliquez sur la sortie qui vous intéresse
+> * Cliquez sur {% icon galaxy-save %} (download)
 >
 {: .hands_on}
 
 # Conclusion
-Here you have finished your study on your champs blocs biodiversity state.
+Voilà, vous avez terminé votre étude sur l'état de la biodiversité de vos champs blocs.
