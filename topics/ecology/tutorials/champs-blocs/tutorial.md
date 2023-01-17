@@ -119,7 +119,7 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 >
 > > <hands-on-title>Use a tool</hands-on-title>
 > > 1.  click on for example the {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} tool or type **ivr** in the tools panel search box (top left)
-> > The tool will be displayed in the central Galaxy panel.
+> > The tool form will be displayed in the central Galaxy panel.
 > {: .hands_on}
 {: .tip}
 
