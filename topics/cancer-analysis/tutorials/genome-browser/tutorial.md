@@ -9,9 +9,9 @@ objectives:
   - Examine SNP calls and structural re-arrangements by eye
   - Tell the difference between germline and somatic variants
 key_points:
-time_estimation:
+time_estimation: 2h
 contributions:
-  authorship: [rdeborjas]
+  authorship: [soranamorrissey, rdeborjas]
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
@@ -28,7 +28,7 @@ Sorana Morrissy and was updated and modified by Heather Gibling for the Cancer A
 This tutorial will introduce you to the Genome browsers; powerful tools for viewing many kinds of
 genomic data, including data for DNA sequencing, RNA sequencing, microarrays, epigenetics, and
 copy number alteration. For this tutorial we will use JBrowse, since it has a nice integration
-with Galaxy, but many other Genome browsers exist. TODO: link some examples/comparisons
+with Galaxy, but many other Genome browsers exist, with [IGV](https://igv.org/app/) perhaps being the most widely used. TODO: link some examples/comparisons
 
 > <agenda-title></agenda-title>
 >
@@ -71,6 +71,144 @@ TODO: note about test data we are using, scaled down for tutorial reasons
 
 
 
-# The JBrowse interface
+# Getting familiar with JBrowse
 
-Let's start by loading the
+Let's start by launching JBrowse and loading our data so that we can get a feel for JBrowe and its interface.
+
+> <hands-on-title> Upload data </hands-on-title>
+>
+> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
+>    - *"Select a reference genome"*: `hg19`
+>    - {% icon param-repeat %} *"Insert Track Group"*
+>      - {% icon param-repeat %} *"Insert Annotation Track"*
+>      - {% icon param-select %} *"Track Type"*: `BAM Pileups`
+>      - {% icon param-files %} *"BAM Track Data"* (hold CTRL to select multiple)
+>        - `normal.bam`
+>        - `tumor.bam`
+{: .hands_on}
+
+
+## The JBrowse interface
+
+Click on the eye icon {% icon galaxy-eye %} to view the data in JBrowse. You should see something like this:
+
+![A screenshot of the JBrowse interface, described by caption](./images/jbrowse-screenshot.png "The JBrowse Interface. At the top is the navigation bar; here you can zoom in and out, and provide a location on the gennome to jump to. On the left is the list of available data tracks, these can be checked and unchecked to show and hide them from view. In the main panel the data is shown. By default this is the reference data track and the GCContent track. This panel can be dragged left and right to move along the genome.")
+
+
+> <hands-on-title> A first look at JBrowse </hands-on-title>
+>
+> 1. Click on the eye icon {% icon galaxy-eye %} to view the data in JBrowse
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. Which part of the genome are you currently viewing?
+>    >
+>    > > <solution-title></solution-title>
+>    > > Check the location bar at the top of the screen. You will see something like `chr1:10342..10677 (366b)`, This means you are currently viewing chromosome 1, from base 10342 to base 10677.
+>    > > By default, you will usually be viewing a part of chromosome 1, unless you specified a different region when starting JBrowse.
+>    > {: .solution}
+>    {: .question}
+>
+>
+> 2. Click on the "zoom in" button until you can see the individual bases in the reference genome track.
+>    ![](./images/refbases.png)
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. What are all the lettered rows you see?
+>    > 2. What do the colours mean?
+>    >
+>    > > <solution-title></solution-title>
+>    > > 1. The two center rows show the nucleotides of the forward and reverse strands. The three top rows show the potential amino acids, at different phasings. The bottom 3 rows show the same for the reverse strand.
+>    > >
+>    > > 2. Each nucleotide has a unique color. If you zoom out so far that you can not see the
+>    > >  individual nucleotide letters anymore, you can still tell their identity by the color.
+>    > >   Similarly, on the amino acid rows, stop codons are colored red and indicated with an asterisk (*). Start codons are coloured green.
+>    > {: .solution}
+>    {: .question}
+>
+> 3. What is the second track that is visible?
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. What is the second track that is visible here?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > This track contains the GC content for the reference genome
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+
+
+
+## Navigation
+
+There are various ways to navigate around the genome, you can:
+  - Zoom in or out of the current region
+  - Drag the main panel left and right to move to adjacent streches of the genome
+  - Jump to specific regions by entering a location in
+
+Later in this tutorial we will add a genes track, so that you may also enter gene names in the location bar to jump directly to your gene of interest.
+
+Let's get a feel for this
+
+
+> <hands-on-title> Navigating around the genome </hands-on-title>
+>
+> 1. If Jbrowse is no longer open, click on the eye icon {% icon galaxy-eye %} to open JBrowse again
+>
+> 2. **Navigate** around the genome by dragging the main panel left and right to move to adjacent regions. You can also zoom out if you want to view bigger regions at a time.
+>
+> 3. You can also specify a specific region to jump to. Paste `chr1:10200-10800` into the location bar and hit the "Go" button (or press Enter)
+>
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. What do you notice about the reference genome here?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > Because of the colour coding that JBrowse applies, it is easy to see the repeats that are present at the beginning of this region
+>    > >
+>    > > ![](./images/ref-repeats.png)
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+
+
+## Visualising read alignments
+
+Now that we have a feel for JBrowse, let's view some of our data!
+
+> <hands-on-title> Navigating around the genome </hands-on-title>
+>
+> 1. Check the box next to `normal.bam` {% icon param-check %} on the left-hand side
+>
+> 2. Navigate to `chr9:130,620,912-130,621,487`
+>
+{: .hands_on}
+
+
+
+
+## Adding reference tracks
+
+genes
+
+dbsnp
+
+
+# Inspecting small variants in the normal sample
+
+# Inspecting small somatic variants in the tumor sample
+
+# Inspecting structural variants in NA12878
+
