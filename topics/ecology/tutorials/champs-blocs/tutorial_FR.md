@@ -76,7 +76,7 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 
 # Centraliser les données
 
-{% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Are your ESTAMP data ready ?" %}
+{% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Are your ESTAMP data ready ?" %}
 
 <div class="No" markdown="1">
 > 1. Télécharger les données depuis la base ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/donnees). Vous obtenez une archive zip.
