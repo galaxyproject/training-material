@@ -47,13 +47,13 @@ GWS facilitates analysis repeatability, while minimizing the number of manual st
 # Getting Started on Galaxy
 
 This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
-- [Introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/slides/introduction.html)
-- [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)
-- [Getting Data into Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html)
-- [Using Dataset Collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html)
+- [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
+- [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
+- [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
+- [Using Dataset Collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %})
 - [Introduction to Galaxy Analyses](https://training.galaxyproject.org/training-material/topics/introduction)
-- [Understanding the Galaxy History System](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html)
-- [Downloading and Deleting Data in Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html)
+- [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
+- [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
 
 # VGP assembly workflow structure
