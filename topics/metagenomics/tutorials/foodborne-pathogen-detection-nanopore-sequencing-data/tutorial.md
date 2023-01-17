@@ -440,8 +440,9 @@ For this step in the sub-workflow the tool **ABRicate** {% icon tool %} is chose
 # SNP based pathogenic identification
 In this section, we will run a sub-workflow that can run in parallel to **Taxonomy Profiling**, **Gene based pathogenic identification** and **Pathogen Tracking among all samples** sub-workflows, so feel free to run it in the time you are waiting for the other sub-workflows to finish running. 
 
+Here, we will be identifing variants in our samples compared to a reference genome. For example, if we want to test our samples if they include [Campylobacter pathogen](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the Campylobacter speices, and when we find variants in specific positions on the genome we look these positions up and see if these real variations would indicate a pathogen or not. Nevertheless, novel alleles can be also identified here, we might be identifing a new variant of the pathogen while running such a workflow. What we are refering to here is [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf). In this workflow we also build our consensus genome of our samples, so we can later build a Phylogenetic tree of all samples and have an insight into events that occurred during same or different speices of our samples' evolution.
 
-
+In this training we are testing Salmonella enterica speices, which our samples are spiked with its different strains. So we will now upload to our histories the reference genome of [Salmonella enterica](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -472,7 +473,7 @@ In this section, we will run a sub-workflow that can run in parallel to **Taxono
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
-> 2. Run **Workflow 3: Nanopore Datasets - SNP based Pathogenic Identification** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow 4: Nanopore Datasets - SNP based Pathogenic Identification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"Nanopore Preprocessed reads"*: `Nanopore processed sequenced reads` the output from **Filter Sequence By ID** {% icon tool %} from the **Pre-Processing** sub-workflow
 >    - {% icon param-file %} *"Reference Genome of Tested Strain/Pathogen"*: `Salmonella_Ref_genome.fna.gz` file you have just uploaded to your history 
@@ -481,12 +482,47 @@ In this section, we will run a sub-workflow that can run in parallel to **Taxono
 >
 {: .hands_on}
 
+Please run the sub-workflow on both histories with Barcode 10 and Barcode 11.
 
+## Variant Calling or SNP Calling
 
+To identify variants, the following tools are used:
 
+1. First we map to a reference genome of the speices of the pathogen you want to test your samples against, we used **Minimap2** {% icon tool %} since our datasets are nanopore. 
+2. Then we indetify Variants and Single nucleotide variants using [Clair3](https://hpc.nih.gov/apps/Clair3.html) {% icon tool %}, which is designed specifically for nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date. **Medaka consensus tool** {% icon tool %} and **medaka variant tool** {% icon tool %} can be also used instead of **Clair3**{% icon tool %}, they give similar results but they are much slower then **Clair3**{% icon tool %} and with much fewer tools' options. So we recommend **Clair3**{% icon tool %} that we used in this sub-workflow.
+3. After that a normalization step to our variant calling output is needed, where we normalize indels; check if REF alleles in the output match the reference; split multiallelic sites into multiple rows; recover multiallelics from multiple rows using **bcftools norm**{% icon tool %}.
+4. Last but not least, we filter to keep only the pass and good quality variants, **SnpSift Filter**{% icon tool %} is used in our workflow where you can set any filtering expression to keep as per your experiment thresholds. **LoFreq filter**{% icon tool %} can be also used instead both tools performs equal and fast results.
+5. Finally, we will extract our tabular report where we keep specific fields in the output VCF, we used **SnpSift Extract Fields**{% icon tool %}
 
+> <question-title></question-title>
+>
+> Now let's inspect the sub-workflow outputs together for Barcode10 history
+>
+> 1. How many Variants found in barcode10 sample before and after quality filtering?
+> 2. What is the Strain identified by the NCBI of the sample?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Before filtering: 2,652 and After filtering 2,489
+> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), Known after we searched the Chroms. NCBI Reference Sequence: NC_003197.2
+> {: .solution}
+{: .question}
 
-this output can be used to have the full genome 
+## Consensus Genome Building
+For further anaylsis we have include one more step in this sub-workflow, where we build the full genome of our sample. That can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as Salmonella doesnot have such a speedy outbreak as SARS-COV2. However, we decided to include it in the workflow for any further analysis of the users if needed.
+
+For this step we run **bcftools consensus**{% icon tool %}.
+> <question-title></question-title>
+>
+> Inspect **bcftools consensus**{% icon tool %}  Barcode11 history
+>
+> 1. How many sequences we got for the sample, what are they and why?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. We got 2 sequences, the complete genome and the complete [plasmid](https://www.genome.gov/genetics-glossary/Plasmid) gemome. The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one, so the tool constructed both for us.
+> {: .solution}
+{: .question}
 
 # Pathogen Tracking among all samples
 In this section of the tutorial we will be grouping some outputs of all the samples together in one history, in order to track our identified pathogens, in the **Gene based pathogenic identification** sub-workflow, through out the samples. So the sub-workflow of this section can run directly after the **Gene based pathogenic identification** sub-workflow runs have been finished for all the tested samples. 
@@ -499,12 +535,12 @@ To achieve that we first need to copy some of the output datasets from **Gene ba
 >
 > 1. Create a new history for for this part of the tutorial where we will create collections from the results of the two samples' histories we had that are needed to track and visualize our found pathogens.
 > 2. Copy the following datasets from Barcode 10 history to the new created history, then copy the same files from Barcode 11 history too.
->     
+>
 >     a. VFDB Accession
 >     b. VFDB Accession Tabular with SampleID as a header
 >     c. VFs ABRicate Sample Specific Formatted Tabular
 >     d. Sample Specific Contigs FASTA file
->     
+>
 > 3. Now let's create collections of the copied datasets in the new history
 >    - In the new created history each two similar datasets are grouped in a collection. In a different example if you tested more samples so this collection will include all the same named files of all the testes different samples 
 >    - We will group both `VFDB Accession` files into a collection and name it `VFDB Accession Column`
@@ -595,15 +631,14 @@ Phylogenetic trees are nice ways to track all the bacteria pathogen genes one by
 
 <div class="LongVersion" markdown="1">
 
-As you chose to use the long version 
+As you chose to use the long version, it's still under construction ... 
 
 
 </div>
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial, we have tried the workflow designed to detect and track pathogens in our food and drinks. Through out the full workflow we used our nanopore sequenced datasets from Biolytix and analysed it, found the pathogens and tracked it. This approach can be summarized with the following scheme:
 
 ![Foodborne full workflow big picture](../../images/FoodBorne-Workflow-updated.png "The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training")
 
