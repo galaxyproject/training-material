@@ -67,16 +67,16 @@ module Gtn
       },
       "fr" => {
         "agenda" => "Agenda",
-        "code-in" => "Input",
-        "code-out" => "Output",
-        "comment" => "Comment",
-        "details" => "Details",
-        "hands-on" => "Hands-on",
-        "hands_on" => "Hands-on",
+        "code-in" => "Entrée",
+        "code-out" => "Sortie",
+        "comment" => "Commentaire",
+        "details" => "Détails",
+        "hands-on" => "En pratique",
+        "hands_on" => "En pratique",
         "question" => "Question",
         "solution" => "Solution",
-        "tip" => "Tip",
-        "warning" => "Warning",
+        "tip" => "Astuce",
+        "warning" => "Attention",
       }
     }
 
