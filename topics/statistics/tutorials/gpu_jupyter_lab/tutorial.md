@@ -204,8 +204,6 @@ For remote training, a dynamic Python script is sent to a Galaxy tool for execut
 
 In addition to an interactive mode that opens a Jupyterlab in Galaxy, the GPU Jupyterlab tool can also be used as a tool in a Galaxy workflow. In this mode, it takes input datasets from a different tool along with an `ipynb` notebook file. It executes the `ipynb` file along with the input datasets and produces output datasets inside a dataset collection. This output dataset collection can then be used with other Galaxy tools. This feature enables it to be used in a Galaxy workflow like other Galaxy tools.
 
-## Feature
-
 ### Execute an existing notebook
 In this mode, the GPU Jupyterlab tool executes the input `ipynb` file and produces output datasets (in a collection) if created in the notebook file. Input datasets can also be attached to the notebook which become available at `/galaxy_inputs/<<Name for parameter>>` folder. The parameter `Name for parameter` is set for each input dataset that is used as the folder name inside `/galaxy_inputs/`. More than one input datasets can be attached to the notebook. Another feature `Execute notebook and return a new one` controls whether webfrontend becomes available showing Jupyterlab or a notebook is just executed. When this parameter is set to `yes`, then the attached notebook is executed and output datasets if any become available in an output dataset collection. When this parameter is set to `no` (by default), then Jupyterlab infrastructure as a webfrontend is opened along with the attached notebook and input datasets if attached.
 
@@ -256,7 +254,7 @@ Datasets such as train, test and sample IPython (`ipynb`) notebook files are dow
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 5. Check that the datatype of all four datasets is `csv`.
+> 5. Check that the datatype of all three tabular datasets is `csv`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -279,7 +277,7 @@ This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a work
 Rename the filtered dataset as `new_train_rows` which will be used as one of the inputs to the GPU Jupyterlab tool in the next step. The datatype should be `tabular`.
 
 ### Execute IPython notebook using GPU Jupyterlab tool
-This tool showcases GPU Jupyterlab tool that executes a notebook using input datasets produced by different tools. 
+This tool showcases GPU Jupyterlab tool that executes a notebook using input datasets produced by different tools. Galaxy tool like features for this interactive tool has been adapted from another interactive Galaxy tool **Interactive JupyTool and notebook**.
 
 > <hands-on-title>GPU Jupyterlab tool</hands-on-title>
 >
