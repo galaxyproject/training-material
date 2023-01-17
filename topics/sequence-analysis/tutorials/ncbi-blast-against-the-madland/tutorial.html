@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="NCBI BLAST+ against the MAdLand" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-16 08:13:56 +0000" />
+<meta name="DC.date" content="2023-01-17 14:33:43 +0000" />
 <meta name="DC.creator" content="Deepti Varshney" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-16 08:13:56 +0000",
+  "dateModified": "2023-01-17 14:33:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "NCBI BLAST+ against the MAdLand",
   "interactivityType": "mixed",
@@ -550,7 +550,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 16, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -572,7 +572,7 @@
 
 <!-- This is a comment. -->
 
-<p>MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the <a href="http://plantco.de">Rensing lab</a>, and employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for Chara braunii. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.</p>
+<p>MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the <a href="http://plantco.de">Rensing lab</a> and released in the <a href="https://madland.science/">MAdLand</a> setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for <em>Chara braunii</em>. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.</p>
 
 <blockquote class="agenda">
   <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
@@ -657,71 +657,75 @@
 </blockquote>
 
 <table>
-  <tr>
-    <th>Column</th>
-    <th>NCBI name</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>1</td>
-    <td>qseqid</td>
-    <td>Query Seq-id (ID of your sequence)</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>sseqid</td>
-    <td>Subject Seq-id (ID of the database hit)</td>
-  </tr>
-   <tr>
-    <td>3</td>
-    <td>pident</td>
-    <td>Percentage of identical matches</td>
-  </tr>
-   <tr>
-    <td>4</td>
-    <td>length</td>
-    <td>Alignment length</td>
-  </tr>
-   <tr>
-    <td>5</td>
-    <td>mismatch</td>
-    <td>Number of mismatches</td>
-  </tr>
-   <tr>
-    <td>6</td>
-    <td>gapopen</td>
-    <td>Number of gap openings</td>
-  </tr>
-   <tr>
-    <td>7</td>
-    <td>qstart</td>
-    <td>Start of alignment in query</td>
-  </tr>
-   <tr>
-    <td>8</td>
-    <td>qend</td>
-    <td>End of alignment in query</td>
-  </tr>
-   <tr>
-    <td>9</td>
-    <td>sstart</td>
-    <td>Start of alignment in subject (database hit)</td>
-  </tr>
-   <tr>
-    <td>10</td>
-    <td>send</td>
-    <td>End of alignment in subject (database hit)</td>
-  </tr>
+  <thead>
     <tr>
-    <td>11</td>
-    <td>evalue</td>
-    <td>Expectation value (E-value)</td>
-  </tr>
+      <th>Column</th>
+      <th>NCBI name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
-    <td>12</td>
-    <td>bitscore</td>
-    <td>Bit score</td>
-  </tr>
+      <td>1</td>
+      <td>qseqid</td>
+      <td>Query Seq-id (ID of your sequence)</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>sseqid</td>
+      <td>Subject Seq-id (ID of the database hit)</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>pident</td>
+      <td>Percentage of identical matches</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>length</td>
+      <td>Alignment length</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>mismatch</td>
+      <td>Number of mismatches</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>gapopen</td>
+      <td>Number of gap openings</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>qstart</td>
+      <td>Start of alignment in query</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>qend</td>
+      <td>End of alignment in query</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>sstart</td>
+      <td>Start of alignment in subject (database hit)</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>send</td>
+      <td>End of alignment in subject (database hit)</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>evalue</td>
+      <td>Expectation value (E-value)</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>bitscore</td>
+      <td>Bit score</td>
+    </tr>
+  </tbody>
 </table>
 
 <blockquote>
@@ -731,9 +735,9 @@
 <blockquote class="details">
   <div id="details-further-reading-about-blast-tools-in-galaxy" class="box-title"><button type="button" aria-controls="details-further-reading-about-blast-tools-in-galaxy-contents" aria-expanded="true" aria-label="Toggle details box: Further Reading about BLAST Tools in Galaxy"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Further Reading about BLAST Tools in <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>Cock et al. (2015): <a href="http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html">NCBI BLAST+ integrated into <span class="notranslate">Galaxy</span></a></p>
+  <p>See <span class="citation"><a href="#Cock2015">Cock <i>et al.</i> 2015</a></span>
+<span class="citation"><a href="#Cock2013">Cock <i>et al.</i> 2013</a></span></p>
 
-  <p>Cock et al. (2013): <a href="https://peerj.com/articles/167/"><span class="notranslate">Galaxy</span> tools and workflows for sequence analysis with applications in molecular plant pathology</a></p>
 </blockquote>
 
 <h2 id="more-similarity-search-tools-on-galaxy">More Similarity Search Tools on <span class="notranslate">Galaxy</span></h2>
@@ -745,7 +749,7 @@
 <blockquote class="details">
   <div id="details-diamond-in-depth" class="box-title"><button type="button" aria-controls="details-diamond-in-depth-contents" aria-expanded="true" aria-label="Toggle details box: Diamond in depth"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Diamond in depth<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p><a href="https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html">Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.</a></p>
+  <p>See <span class="citation"><a href="#Buchfink2014">Buchfink <i>et al.</i> 2014</a></span> for more discussion.</p>
 </blockquote>
 
 
@@ -758,7 +762,7 @@
                         <li><p>Blast tool searches a database of sequences for similar sequences to a query sequence.</p>
 </li>
                         
-                        <li><p>Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences     called a “database diamond”.</p>
+                        <li><p>Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a “database diamond”.</p>
 </li>
                         
                         <li><p>MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.</p>
@@ -781,6 +785,11 @@
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Cock2013">Cock, P. J. A., B. A. Grüning, K. Paszkiewicz, and L. Pritchard, 2013 <b>Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology</b>. PeerJ 1: <a href="https://doi.org/10.7717/peerj.167">10.7717/peerj.167</a></li>
+<li id="Buchfink2014">Buchfink, B., C. Xie, and D. H. Huson, 2014 <b>Fast and sensitive protein alignment using DIAMOND</b>. Nature Methods 12: 59–60. <a href="https://doi.org/10.1038/nmeth.3176">10.1038/nmeth.3176</a></li>
+<li id="Cock2015">Cock, P. J. A., J. M. Chilton, B. Grüning, J. E. Johnson, and N. Soranzo, 2015 <b>NCBI BLAST+ integrated into Galaxy</b>. GigaScience 4: <a href="https://doi.org/10.1186/s13742-015-0080-7">10.1186/s13742-015-0080-7</a></li></ol>
                 
 
                 
