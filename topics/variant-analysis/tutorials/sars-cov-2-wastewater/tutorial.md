@@ -17,7 +17,7 @@ time_estimation: 3H
 key_points:
 - 2 specialized workflows are available for the identification of lineages abundances of SARS-CoV-2 from raw wastewater sequencing data depending on the exact type of input
 - Data from batches of samples can be processed in parallel using collections
-contributors:
+contributions:
    authorship:
       - plushz
       - bebatut
@@ -77,13 +77,13 @@ The tracking projects have been possible thanks to several methods and protocols
 
 However, data alone do not equal knowledge: they need to be analyzed, using bioinformatics pipelines. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same:
 
-1. **Quality control** of the sequencing data
-2. **Triming**: primer with ARTIC protocol, adapter with Illumina
-3. **Decontamination** to remove reads from the human genome
-4. **Mapping** to SARS-CoV-2 reference sequence
-5. **Mapping correction**
-6. **Variant calling**
-7. **Mutation annotation**
+1. **Pre-processing**, including
+   1. **Quality control** of the sequencing data
+   2. **Triming**: primer with ARTIC protocol, adapter with Illumina
+   3. **Decontamination** to remove reads from the human genome
+2. **Mapping** to SARS-CoV-2 reference sequence and **mapping processing** to clean mapping data
+3. **Variant calling** SARS-CoV-2 variants
+4. SARS-CoV-2 **lineage abundance computation**
 
 ![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
@@ -140,6 +140,8 @@ variants in SARS-CoV-2 in clinical data:
 >  To learn more about workflows for clinical data you can follow this [dedicated tutorial]({% link topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.md %}).
 {: .comment}
 
+## Galaxy workflows for wastewater surveillance
+
 These pipelines perform decent data preprocessing steps and have shown promising results on clinical data, making them worthy of being repurposed for
 wastewater data. In addition, it is easier to adapt existing Galaxy workflows than integrating new standalone pipelines.
 
@@ -159,7 +161,7 @@ Therefore we offer a tutorial with different versions
 - for each workflow
 - for each workflow, a short version consisting in running workflows and a long version (step-by-step)
 
-{% include _includes/cyoa-choices.html option1="Amplicon-short" option2="Amplicon-long" option3="MT-short" option4="MT-long" default="Amplicon-short" %}
+{% include _includes/cyoa-choices.html option1="Amplicon Short" option2="Amplicon Long" option3="Metatranscriptomic Short" option4="Metatranscriptomic Long" default="AmpliconShort" %}
 
 > <agenda-title></agenda-title>
 >
@@ -186,15 +188,15 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 >
 {: .hands_on}
 
+Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced wastewater samples. We encourage you to use your own data here (with at least 2 samples).
 
-## Get sequencing data
+<div class="Amplicon-Short Amplicon-Long" markdown="1">
+If you do not have any datasets available, we provide an example dataset: [paired-end data generated synthetically with Illumina-based Ampliconic (ARTIC) protocols](https://github.com/suskraem/ww_benchmark).
+</div>
 
-Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ files with the sequenced wastewater samples cantained SARS-CoV-2. Several types of data are possible:
-
-- Paired-end data derived from Illumina-based RNAseq experiments
-- Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols
-
-We encourage you to use your own data here (with at least 2 samples). If you do not have any datasets available, we provide some example datasets: 1) paired-end data generated with Illumina-based metatranscriptomic protocol from [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA661613), European Nucleotide Archive; 2) [paired-end data generated synthetically with Illumina-based Ampliconic (ARTIC) protocols](https://github.com/suskraem/ww_benchmark).
+<div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+If you do not have any datasets available, we provide an example dataset: paired-end Illumina-based metatranscriptomic extracted from 24-hour composite samples of municipal wastewater from around the San Francisco Bay Area, California, and enriched for respiratory viruses using the Illumina Respiratory Virus Panel ([PRJNA661613 on ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA661613)).
+</div>
 
 There are several possibilities to upload the data depending on how many datasets you have and what their origin is:
 
@@ -237,33 +239,8 @@ There are several possibilities to upload the data depending on how many dataset
 >      {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >      For our example datasets, the datasets are stored on [Zenodo]({{ page.zenodo_link }}) and can be retrieved using the following URLs:
->      For metatranscriptomic-illumina dataset:
 >
->      ```
->      {{ page.zenodo_link }}/files/SRR12596165_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596165_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596166_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596166_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596167_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596167_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596168_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596168_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596169_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596169_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596170_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596170_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596171_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596171_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596172_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596172_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596173_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596173_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596174_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596174_2.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596175_1.fastq.gz
->      {{ page.zenodo_link }}/files/SRR12596175_2.fastq.gz
->      ```
->      For ampliconic-illumina dataset:
+>      <div class="Amplicon-Short Amplicon-Long" markdown="1">
 >
 >      ```
 >      https://zenodo.org/record/7469383/files/sample1_R1.fastq.gz
@@ -308,27 +285,48 @@ There are several possibilities to upload the data depending on how many dataset
 >      https://zenodo.org/record/7469383/files/sample20_R2.fastq.gz
 >      ```
 >
+>      </div>
+>
+>      <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+>
+>      ```
+>      https://zenodo.org/record/7468942/files/SRR12596165_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596165_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596166_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596166_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596167_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596167_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596168_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596168_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596169_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596169_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596170_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596170_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596171_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596171_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596172_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596172_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596173_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596173_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596174_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596174_2.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596175_1.fastq.gz
+>      https://zenodo.org/record/7468942/files/SRR12596175_2.fastq.gz
+>      ```
+>
+>      </div>
+>
 > 2. Create a collection to organize the data
 >
->      {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
->      For the example datasets:
->      - Since the datasets carry `_1` and `_2` or `_R1` and `_R2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog.
->
->        You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
->
->        It is better to undo the default pairing and specify exactly what we want:
->        - at the top of the *paired section*: click `Unpair all`
->
->          This will move all input datasets into the *unpaired section* in the upper half of the dialog.
->        - set the text of *unpaired forward* to: `_1.fastq.gz` or `_R1.fastq.gz`
->        - set the text of *unpaired reverse* to: `_2.fastq.gz` or `_R2.fastq.gz`
->        - click: `Auto-pair`
->
->        All datasets should be moved to the *paired section* again, but the middle column should now show that only the sample accession numbers will be used as the pair names.
->
->      - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
->      - Click *Create Collection*
+>    > <comment-title></comment-title>
+>    >
+>    > For the example datasets, since the datasets carry `_R1` and `_R2` or `_1` and `_2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog. You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` or `fastq` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
+>    >
+>    > To remove the extra suffix, you can click on all names in the middle column and remove the extra suffix
+>    >
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -338,30 +336,39 @@ There are several possibilities to upload the data depending on how many dataset
 >
 {: .comment}
 
-## Import auxiliary datasets
-
-Besides the sequenced reads data, we need at least two additional datasets for calling variants and annotating them:
+Besides the sequenced reads data, we need additional datasets for calling variants and annotating them:
 
 - the SARS-CoV-2 reference sequence [NC_045512.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_045512.2?report=fasta) to align and compare our sequencing data against
 
 - a tabular dataset defining aliases for viral gene product names, which will let us translate NCBI RefSeq Protein identifiers (used by the SnpEff annotation tool) to the commonly used names of coronavirus proteins and cleavage products.
 
+<div class="Amplicon-Short Amplicon-Long" markdown="1">
+
 Another three datasets are needed only for the analysis of ampliconic, e.g. ARTIC-amplified, input data:
 
 - a BED file specifying the primers used during amplification and their binding sites on the viral genome
 - a custom tabular file describing the amplicon grouping of the primers
-- bedfile defining the amplicons that is used by Cojac: mutbamscan
+- BED file defining the amplicons that is used by **Cojac**
+
+</div>
 
 
 > <hands-on-title>Import auxiliary datasets</hands-on-title>
 >
-> 1. Import the auxiliary datasets:
->    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
->    - BED file containing ARTIC primer positions (`ARTIC_primer_BED.bed`)
->    - ARTIC primer amplicon grouping info (`ARTIC_primers_to_amplicon_assignments.bed`)
->    - bedfile defining the amplicons that is used by Cojac: mutbamscan (`BED_defining_amplicons_for_COJAC.bed`)
+> 1. Import the auxiliary dataset(s)
 >
->    > <details-title>Not using ARTIC v4.1 amplified sequencing data?</details-title>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    <div class="Amplicon-Short Amplicon-Long" markdown="1">
+>
+>    ```
+>    https://zenodo.org/record/7469383/files/NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta
+>    https://zenodo.org/record/7469383/files/ARTIC_primer_BED.bed
+>    https://zenodo.org/record/7469383/files/ARTIC_primers_to_amplicon_assignments.bed
+>    https://zenodo.org/record/7469383/files/BED_defining_amplicons_for_COJAC.bed
+>    ```
+>
+>    > <comment-title>Not using ARTIC v4.1 amplified sequencing data?</comment-title>
 >    >
 >    > The instructions here assume you will be analyzing the example samples
 >    > suggested above, which have been amplified using version 4.1 of the ARTIC
@@ -372,122 +379,100 @@ Another three datasets are needed only for the analysis of ampliconic, e.g. ARTI
 >    > If the primer set is from the ARTIC network, just not version 4.1, you
 >    > should be able to obtain the primer BED file from
 >    > [their SARS-CoV-2 github repo](https://github.com/artic-network/artic-ncov2019/tree/master/primer_schemes/nCoV-2019).
->    {: .details}
+>    {: .comment}
+>    </div>
 >
->    Import these datasets from [Zenodo](https://zenodo.org/record/7469383)
+>    <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
 >
->      ```
->      https://zenodo.org/record/7469383/files/NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta
->      https://zenodo.org/record/7469383/files/ARTIC_primer_BED.bed
->      https://zenodo.org/record/7469383/files/ARTIC_primers_to_amplicon_assignments.bed
->      https://zenodo.org/record/7469383/files/BED_defining_amplicons_for_COJAC.bed
->      ```
+>    ```
+>    https://zenodo.org/record/7469383/files/NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta
+>    ```
 >
->      {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    For the example datasets, you will need to import all 4 auxiliary datasets.
+>    </div>
 >
 > 2. Check and manually correct assigned datatypes
+>    - `fasta` for `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
 >
->    If you have imported the auxiliary datasets via their Zenodo links, Galaxy
->    will have tried to autodetect the format of each imported dataset, but
->    will not always be right with its guess. It's your task now to check and
->    possibly correct the format assignments for each of the datasets!
+>    <div class="Amplicon-Short Amplicon-Long" markdown="1">
+>    - `BED` for `ARTIC_primer_BED.bed`
+>    - `BED` or `tabular` for `ARTIC_primers_to_amplicon_assignments.bed`
+>    - `BED` for `BED_defining_amplicons_for_COJAC.bed`
+>    </div>
 >
->    - Expand the view of each of the uploaded auxiliary datasets and see if
->      Galaxy shows the following `format` values:
->      - for `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`: `fasta`
->      - for `ARTIC_primer_BED.bed`: `bed`
->      - for `ARTIC_primers_to_amplicon_assignments.bed`: `bed` or `tabular`
->      - for `BED_defining_amplicons_for_COJAC.bed`: `bed`
+>    > <comment-title></comment-title>
+>    > If you have imported the auxiliary datasets via their Zenodo links, Galaxy
+>    > will have tried to autodetect the format of each imported dataset, but
+>    > will not always be right with its guess. It's your task now to check and
+>    > possibly correct the format assignments for each of the datasets!
+>    {: .comment}
 >
->    - If any of the above assignments are not what they should be, then change
->      the datatype of the corresponding dataset now to the intended format.
->
->      {% snippet faqs/galaxy/datasets_change_datatype.md %}
->
->    If you have imported the auxiliary datasets into your history from a
->    shared data library or history, then the above steps are not necessary
->    (though checking the datatypes of imported data is good practice in
->    general) because the shared datasets have their format configured
->    correctly already.
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 {: .hands_on}
 
+<div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
 
 # From FASTQ to SARS-CoV-2 lineages abundances
 
-Before identifying lineages aboundances, several steps have to be done to preprocess data.
-
-Quality control step is often used because there is no perfect sequencing technology, and each
-instrument will generate different types and amounts of errors, such as incorrect nucleotide calls.
-Each sequencing platform has technical limitations that result in these incorrectly called bases.
-Thus, it is important to identify and exclude error types that may affect downstream analysis
-interpretation. As a result, sequence quality control is an essential first step in the analysis
-process.
-
-Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol.
-The auxiliary file is used for this step - a BED file specifying the primers used during amplification
-and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in
-a BED file to soft clip primer sequences from an aligned and sorted BAM file. Following this,
-the reads are trimmed based on a quality threshold. More specifically, some primer trimmers,
-in order to do quality trimming, use a sliding window approach. The window slides from the
-5’ end to the 3’ end and if at any point the average base quality in the window falls below
-the threshold, the remaining read is softly clipped. If after trimming, the length of the read is
-greater than the minimum length specified, the read is written to the new trimmed BAM file. It
-should be noted, for datasets that were not generated with primer-based protocol like ARTIC,
-this primer-trimming step is not applicable.
-
-Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive
-raw reads with adapters at 3’ end. The adapters contain the sequencing primer binding sites,
-the index sequences, and the sites that allow library fragments to attach to the flow cell lawn.
-This might influence a downstream analysis, thus, adapter trimming is required.
-
-A decontamination step can then be included to remove reads from the human genome, since
-viral sequence data from clinical samples commonly contain human contamination. Prior to
-sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream
-analysis {% cite hunt2022 %}.
-
-The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database {% cite genome2020 %}. A mapping tool of choice can differ from one pipeline to another,
-depending on read length, sequencing technology, and other factors.
-
-Some pipeline steps are not always included in pipelines, such as removing duplicates. This step
-can be important for Illumina sequencing reads. During the sequencing process with Illumina
-sequencing technology, some duplicate reads/sequences can be produced, which can create bias
-in downstream analyses. It is, therefore, possible to remove duplicates or mark them without
-removing them. When removing duplicates, one should be certain that they are duplicates and
-not repeated regions. It can therefore be reasonable to keep duplicates marked rather than
-remove them, as this can be useful for downstream analysis.
-
-Another step, which is not present everywhere, is helpful due to potential ambiguity, while indels
-are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions
-and deletions must be homogenized with left realignment in order to gain a more homogeneous
-distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at
-the same position, provided that doing so does not introduce mismatches between the read and
-reference other than the indel {% cite garrison2012 %}. Basically, this step is considered to correct mapping errors
-and prepare reads for further variant calling.
-
-Additionally, realigned reads can be taken and checked for the quality of alignment using bioinformatics
-tools (e.g., Qualimap {% cite qualimap %}, {% cite qualimap2 %}). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases
-in sequencing and/or mapping of the data and ease decision-making for further analysis.
-After mapping and other additional preparation steps, variant calling should be run where variants
-from sequence data are identified.
+To identify the lineages and their aboundances, several steps have to be done to process data.
 
 ![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
-We offer two workflow with their tools and parameters optimized for different types of input data as outlined in the following table:
+1. **Pre-processing**, including
 
-Workflow version 	| Input data | Read aligner | Variant caller | Delineation tool
---- | --- | --- | --- | ---
-Illumina metatranscriptomic PE | Paired-end data derived from RNAseq experiments | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %} | Freyja {% cite karthikeyan2022 %}
-Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %} | Freyja {% cite karthikeyan2022 %}, COJAC {% cite cojac2022 %}
+   1. **Quality control** of the sequencing data
 
-> <details-title>About the workflows</details-title>
->
-> - The Illumina metatranscriptomic workflow (Illumina metatranscriptomic PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**. Computation of SARS-CoV-2 lineages abundances is performed with **Freyja**.
-> - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs. Computation of SARS-CoV-2 lineages abundances is performed with **Freyja** and **COJAC** in two different branches.
->
-{: .details}
+      There is no perfect sequencing technology, and each instrument will generate different types and amounts of errors, such as incorrect nucleotide calls. Each sequencing platform has technical limitations that result in these incorrectly called bases. Thus, it is important to identify and exclude error types that may affect downstream analysis interpretation. As a result, sequence quality control is an essential first step in the analysis process.
+
+   2. **Triming**: quality and primer with ARTIC protocol and/or adapter with Illumina
+
+      Following this, the reads are trimmed based on a quality threshold.
+
+      <div class="Amplicon-Short" markdown="1">
+      Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol. The auxiliary file is used for this step - a BED file specifying the primers used during amplification and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file. More specifically, some primer trimmers, in order to do quality trimming, use a sliding window approach. The window slides from the 5’ end to the 3' end and if at any point the average base quality in the window falls below the threshold, the remaining read is softly clipped. If after trimming, the length of the read is greater than the minimum length specified, the read is written to the new trimmed BAM file. It should be noted, for datasets that were not generated with primer-based protocol like ARTIC, this primer-trimming step is not applicable.
+      </div>
+
+      Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive raw reads with adapters at 3' end. The adapters contain the sequencing primer binding sites, the index sequences, and the sites that allow library fragments to attach to the flow cell lawn. This might influence a downstream analysis, thus, adapter trimming is required.
+
+   3. **Decontamination** to remove reads from the human genome
+
+      A decontamination step can then be included to remove reads from the human genome, since viral sequence data from clinical samples commonly contain human contamination. Prior to sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** {% cite hunt2022readitandkeep %}.
+
+4. **Mapping** to SARS-CoV-2 reference sequence
+
+   The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database. A mapping tool of choice can differ from one pipeline to another, depending on read length, sequencing technology, and other factors. Here we use **bwa-mem** ({% cite li2009fast %})
+
+   Mapping results need afterward to be **processed**, steps that are not always included in pipelines
+
+   - **Removing duplicated reads**
+
+      This step can be important for Illumina sequencing reads. During the sequencing process with Illumina sequencing technology, some duplicate reads/sequences can be produced, which can create bias in downstream analyses. It is, therefore, possible to remove duplicates or mark them without removing them. When removing duplicates, one should be certain that they are duplicates and not repeated regions. It can therefore be reasonable to keep duplicates marked rather than remove them, as this can be useful for downstream analysis.
+
+   - **Read realignment**
+
+      Realigned reads can be taken and checked for the quality of alignment using bioinformatics tools (e.g., Qualimap ({% cite garcia2012qualimap %})). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases in sequencing and/or mapping of the data and ease decision-making for further analysis.
+
+   - **Indel quality insertion**
+
+      This step, which is not present everywhere, is helpful due to potential ambiguity, while indels are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions and deletions must be homogenized with left realignment in order to gain a more homogeneous distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at the same position, provided that doing so does not introduce mismatches between the read and reference other than the indel ({% cite garrison2012haplotype %}). Basically, this step is considered to correct mapping errors and prepare reads for further variant calling.
+
+6. **Variant calling** to identify SARS-CoV-2 variants
+
+   Sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq** ({% cite wilm2012lofreq %})
+
+   <div class="Amplicon-Short" markdown="1">
+   adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such "tainted" amplicons when calculating alternative allele frequences (AFs) of other AVs.
+   </div>
+
+7. SARS-CoV-2 **lineage abundance computation**
+
+   <div class="Amplicon-Short" markdown="1">
+   **Freyja** {% cite karthikeyan2022wastewater %} and **COJAC** {% cite jahn2022early %} in two different branches.
+   </div>
+
+   <div class="Metatranscriptomic-Short" markdown="1">
+   **Freyja** {% cite karthikeyan2022wastewater %}
+   </div>
 
 > <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
 >
@@ -495,9 +480,7 @@ Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconi
 >
 >    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
 >
->      - Open the workflow page on the WorkflowHub
->        - [Illumina ampliconic PE](https://workflowhub.eu/workflows/)
->        - [Illumina metatranscriptomic PE](https://workflowhub.eu/workflows/)
+>      - Open the [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Amplicon-Short} [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Metatranscriptomic-Short}
 >
 >      - Click on `Run on usegalaxy.eu` at the top right of the page
 >
@@ -505,43 +488,35 @@ Illumina ampliconic PE | Paired-end data generated with Illumina-based Ampliconi
 >
 >    - Option 2: Import the workflow via its github link
 >
->      - Open the GitHub repository of your workflow
->        - [Illumina ampliconic PE](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-artic-variant-analysis)
->        - [Illumina metatranscriptomic PE](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-metatranscriptomic-variant-analysis)
+>      - Open the [GitHub repository with your workflow](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-artic-variant-analysis){: .Amplicon-Short} [GitHub repository with your workflow](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-metatranscriptomic-variant-analysis){: .Metatranscriptomic-Short}
 >      - Open the `.ga` file
 >      - Click on `Raw` at the top right of the file view
 >      - Save the file or Copy the URL of the file
 >      - Import the workflow to Galaxy
 >
->        {% snippet faqs/galaxy/workflows_import.md %}
+>      {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **SARS-CoV-2: lineages analysis on ...** {% icon workflow %} using the following parameters:
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
 >    - *"Send results to a new history"*: `No`
->
->    - For **Illumina ampliconic PE** workflow (named **WW-SARS-CoV-2: lineages analysis on ARTIC PE data**),  *to use for example datasets*
->      - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
->      - {% icon param-file %} *"3: ARTIC primer BED"*: `ARTIC_primer_BED.bed`
->      - {% icon param-file %} *"4: ARTIC primers to amplicon assignments"*: `ARTIC_primers_to_amplicon_assignments.bed`
->      - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
->
->    - For **Illumina metatranscriptomic PE** workflow (named **WW-SARS-CoV-2: lineages analysis on Metatranscriptomics PE data**)
->      - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
->      - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
->
+>    - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
+>    - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
+>    <div class="Amplicon-Short" markdown="1">
+>    - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
+>    - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
+>    - {% icon param-file %} *"3: ARTIC primer BED"*: `ARTIC_primer_BED.bed`
+>    - {% icon param-file %} *"4: ARTIC primers to amplicon assignments"*: `ARTIC_primers_to_amplicon_assignments.bed`
+>    - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
+>    </div>
 {: .hands_on}
-
-The execution of the workflow takes some time. It is possible to launch the next step even if it is not done, as long as all steps are successfully scheduled.
-
 
 # Results interpretation
 
 Once the jobs of previous workflows are done, we can look at the results.
 
-**Freyja** produces the following reports
+**Freyja** produces the following reports:
 
 1. **Aggregated data**: This table provides a aggregated information about lineages abundances for all samples. Each line in the table represents one sample.
 
@@ -584,6 +559,8 @@ Once the jobs of previous workflows are done, we can look at the results.
    > {: .solution}
    {: .question}
 
+<div class="Amplicon-Short" markdown="1">
+
 **COJAC** produces the following report
 
 1. **Mutation cooccurrence**: This table provides a aggregated information about lineages abundances and mutations for all samples grouped by amplicons. Each line in the table represents one sample.
@@ -611,7 +588,27 @@ Once the jobs of previous workflows are done, we can look at the results.
    > {: .solution}
    {: .question}
 
+</div>
 
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+# Preprocessing
+
+## Quality control of the sequencing data
+
+## Triming
+
+## Decontamination to remove reads from the human genome
+
+# Mapping
+
+## Mapping processing
+
+# Variant calling
+
+# SARS-CoV-2 lineage abundance computation
+
+<div>
 
 # Conclusion
 
