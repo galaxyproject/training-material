@@ -105,10 +105,9 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
 >
->
-> Cock et al. (2015): [NCBI BLAST+ integrated into Galaxy](http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html)
->
-> Cock et al. (2013): [Galaxy tools and workflows for sequence analysis with applications in molecular plant pathology](https://peerj.com/articles/167/)
+> See {% cite Cock2015 %}
+> {% cite Cock2013 %}
+> 
 {: .details}
 
 ## More Similarity Search Tools on Galaxy
@@ -117,6 +116,7 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 
 > <details-title>Diamond in depth</details-title>
 >
-> [Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.](https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html)
+> See {% cite Buchfink2014 %} for more discussion.
 {: .details}
+
 
