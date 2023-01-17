@@ -16,7 +16,9 @@ key_points:
 contributors:
 - Marie59
 - yvanlebras
-
+lang: fr
+translations:
+    - en
 ---
 
 
