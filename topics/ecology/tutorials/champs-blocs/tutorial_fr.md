@@ -1,0 +1,199 @@
+---
+layout: tutorial_hands_on
+
+title: Production d'indicateurs champs de bloc
+questions:
+- Which biological questions are addressed by the tutorial?
+- Which bioinformatics techniques are important to know for this type of data?
+objectives:
+- Calcul de l'indice IVR (Visual Rollover Indicator)
+- Calcul de l'indice de dissimilarité
+- Visualisation de quelques indices de diversité
+time_estimation: 1H
+key_points:
+- Indicateurs de diversité
+- Champs de Blocs
+contributors:
+- Marie59
+- yvanlebras
+
+---
+
+
+# Introduction
+Ce tutoriel vous permettra de mieux appréhender le workflow des indicateurs "champs de blocs". Cela vous aidera à comprendre les effets des changements globaux et locaux sur les habitats marins, et l'efficacité des mesures de gestion adoptées, nécessite un suivi standardisé et des indicateurs robustes et sensibles reflétant l'état des habitats.
+
+L'habitat "champs de blocs médiolittoraux" abrite une grande diversité de micro-habitats et d'espèces en raison de sa forte hétérogénéité structurelle et de sa position intermédiaire sur l'estran, ce qui en fait l'un des habitats médiolittoraux les plus diversifiés et d'un grand intérêt écologique le long de la Manche. -Côte atlantique. C'est aussi un habitat très attractif pour la pêche récréative qui, par le remaniement des blocs, peut impacter les communautés.
+Ainsi, l'habitat « champs de blocs médiolittoraux » a fait l'objet de plusieurs initiatives nationales et locales (dont LIFE+ « Expérimentation pour une gestion durable et concertée de la pêche à pied de loisir en France » 2013-2017) pour mieux évaluer son état et le mettre en relation avec la pression de la pêche à pied en vue d'adapter la gestion locale, notamment à travers le réseau des Aires Marines Protégées (Natura 2000, PNM, PNR etc.).
+
+Ces projets ont notamment permis de développer un réseau d'acteurs et de gestionnaires de terrain impliqués et des outils d'évaluation de l'état écologique et de la pression de la pêche à pied :
+
+- le Visual Boulder Turning Indicator (VTI), qui s'apparente à un indicateur « paysage » pour évaluer la pression de pêche sur la base de critères architecturaux ;
+- le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation "boulder tournant".
+
+Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 indicateurs et plus encore.
+
+> ### Agenda
+>
+> Dans ce tutoriel, nous allons couverir:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+> <details-title>Rapide introduction sr le fonctionnement de Galaxy</details-title>
+>
+> Vous pouvez quitter le didacticiel et aller vous prélasser sur l'écran principal en cliquant en dehors de l'écran du didacticiel.
+> Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en cliquant sur {% icon level %}.
+>
+> > <hands-on-title>Log in to Galaxy</hands-on-title>
+> > 1. Ouvrez votre navigateur internet préféré (Chrome, Safari ou Firefox, s'il vous plaît, pas Edge ;) !!!)
+> > 2. Rendez-vous sur votre instance Galaxy
+> > 3. Se connecter ou s'enregistrer
+> >
+> > ![Capture d'écran de l'interface Galaxy avec le bouton d'enregistrement ou de connexion en surbrillance](../../images/champbloc/galaxy_homepage.png "Galaxy homepage")
+> >
+> > Cette capture d'écran présente l'instance Galaxy Ecology, accessible à l'adresse [usegalaxy.eu](https://ecology.usegalaxy.eu/)
+> >
+> {: .hands_on}
+>
+> La page d'acceuil de Galaxy est divisée en 3 parties:
+> * Les outils sur la gauche
+> * La panneau de visualisation au milieu
+> * L'historique des analyses et l'ensemble des fichiers utilisés et générés sur la droite
+>
+> ![Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite.](../../images/champbloc/galaxy_interface.png "Galaxy interface explanation")
+>
+> La première fois que vous utiliserez Galaxy, il n'y aura aucun fichier dans votre panneau d'historique.
+{: .details}
+
+Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologique de champ de blocs
+
+![workflows d'analyse sur l'état écologique du champ de blocs](../../images/champbloc/workflow.png "Workflow")
+
+# Centraliser les données
+
+{% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Are your ESTAMP data ready ?" %}
+
+<div class="No" markdown="1">
+> 1. Télécharger les données depuis la base ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/donnees). Vous obtenez une archive zip.
+>
+> 2. Dézipper le dossier. Dans le dossier, il y a 3 fichiers .csv qui vont nous intéresser :
+> - champbloc_ivr.csv
+> - champbloc_qecb.csv
+> - ficheterrain.csv
+</div>
+
+<div class="Yes" markdown="1">
+</div>
+
+> <hands-on-title>Télerversement des données dans Galaxy</hands-on-title>
+> 1. Importer les données dans Galaxy
+>    
+>  * Ouvrir l'outil Galaxy de téléversement de données {% icon galaxy-upload %}
+>  * Sélectionner **Choose local files**
+>    ![Choose local files](../../images/champbloc/upload.png "upload your data")
+>  * Naviguez dans votre ordinateur et récupérez vos fichiers ESTAMP (sélectionnez les trois fichiers mentionnés précédemment : champbloc_ivr.csv, champbloc_qecb.csv et ficheterrain.csv)
+>   
+>  * Cliquer sur **Start**
+>    ![Start charging your data](../../images/champbloc/start.png "Start")
+>  * Cliquer sur **Close**
+>    ![Close upload your data](../../images/champbloc/close.png "Close")
+>  Vous devez attendre que les données de votre historique s'affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
+>    ![Data ready](../../images/champbloc/after_before.png "Data ready")
+>   
+> > <tip-title>Tip: Création d'un nouvel historique analytique</tip-title>
+> > Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : "Indicateurs de blocs de champs") pour que vous puissiez le retrouver plus tard si besoin.
+> > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+> {: .tip}
+{: .hands_on}
+
+
+# Calcul de l'indicateur visuel de retournement de blocs pour chaque site
+
+Basé sur la proportion de blocs « tournés » et « non tournés », cet indicateur varie de 0 à 5 et peut être rapidement utilisé.
+
+> <tip-title>Comment accéder à l'outil ?</tip-title>
+>
+> > <hands-on-title>Utilisation 'un outil Galaxy</hands-on-title>
+> > 1.  cliquer sur le lien de l'outil {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} ou taper **ivr** dans le module de recherche du panneau d'outils (en haut à gauche)
+> > L'outil sera affiché dans le panneau central Galaxy.
+> {: .hands_on}
+{: .tip}
+
+
+## **IVR**
+
+Rendez-vous sur le formulaire de l'outil **IVR**
+
+> <hands-on-title>Calculer l'indice IVR</hands-on-title>
+>
+> 1. {% outil [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} avec ces paramètres :
+>    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
+>    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
+>
+> 2. Cliquer sur **Execute** (cela peut prendre quelques minutes à traiter c'est normal si vous devez attendre un peu surtout si votre connexion internet est faible)
+>
+> 3. Trois sorties apparaîtront dans votre panneau d'historique à droite.
+>
+> 4. Visualisation de graphiques
+>  * Une fois que les jeux de données sont affichés en vert dans l'historique, cliquer sur **IVR plot**
+>  * Puis, cliquer sur l'icone {% icon galaxy-eye %} (oeil) de votre fichier de sortie dans l'historique.
+> 
+>  L'inforamtion est affichée dans le panneau du milieu
+> 
+>   ![IVR](../../images/champbloc/ivr.png "IVR for Bilfot"){:width="620px"}
+>
+> > <tip-title>Search for your site results</tip-title>
+> >
+> > 1. In the top of the History panel (on the right) go on the search box
+> > 2. Type the name of your site (for instance "Bilfot")
+> > 3. If nothing show up click on **show hidden** (just beneath the name of the history in the History panel)
+> >
+> {: .tip}
+> **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
+>
+> 5. Download results
+> 
+>  * Click on the output you are interested in for instance **Reports**
+>  * Click on {% icon galaxy-save %} (download)
+{: .hands_on}
+
+# Computing dissimilarity coefficient for each site
+
+## **Dissimilarity**
+Cleaning out your data in order and then compute de dissimilarity coefficient.
+Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} tool
+
+> <hands-on-title>Calculate dissimilarity index</hands-on-title>
+>
+> 1. {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input champbloc_qecb.csv"*: `input` (champbloc_qecb.csv)
+>    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
+>
+>    - {% icon param-select %} *"Do you have data after the year 2021 ?"*: `No`
+>    - {% icon param-text %} *"Until when do you have data (write only the YEAR) ?"*: `2021`
+>
+>
+> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+>
+> 3. View graphs
+>  * Once it's green, click on type of plot you want to see
+>  * Then, click on the {% icon galaxy-eye %} (eye) icon of your output in the history panel.
+> 
+>  The information is displayed in the central panel
+>
+> ![Dissim fs fi](../../images/champbloc/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
+>
+> ![Dissim bf bm](../../images/champbloc/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
+>
+> 3. Download your results
+> 
+>  * Click on the output you are interested in
+>  * Click on {% icon galaxy-save %} (download)
+>
+{: .hands_on}
+
+# Conclusion
+Here you have finished your study on your champs blocs biodiversity state.
