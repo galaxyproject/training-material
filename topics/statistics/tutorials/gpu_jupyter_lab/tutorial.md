@@ -266,7 +266,7 @@ This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a work
 
 > <hands-on-title>Filter</hands-on-title>
 >
-> - {% tool [Filter](https://usegalaxy.eu/tool_runner?tool_id=Filter1) %}
+> - {% tool [Filter](Filter1) %}
 >    - *"Filter *"* : Select `train_rows`
 >    - *"With following condition"* :`c3==0`
 >    - *"Number of header lines to skip"*: `1`
@@ -281,7 +281,7 @@ This tool showcases GPU Jupyterlab tool that executes a notebook using input dat
 
 > <hands-on-title>GPU Jupyterlab tool</hands-on-title>
 >
-> - {% tool [GPU Jupyterlab tool](https://usegalaxy.eu/tool_runner?tool_id=interactive_tool_ml_jupyter_notebook) %}
+> - {% tool [GPU Jupyterlab tool](interactive_tool_ml_jupyter_notebook) %}
 >    - *"Do you already have a notebook?"* : Select `Load an existing notebook`
 >    - *"IPython Notebook"* : Select `sample_notebook.ipynb`
 >    - *"Execute notebook and return a new one"*: `Yes`
@@ -307,7 +307,7 @@ This tool showcases how the output dataset collection produced by the GPU Jupyte
 
 > <hands-on-title>Cut</hands-on-title>
 >
-> - {% tool [Cut](https://usegalaxy.eu/tool_runner?tool_id=Cut1) %}
+> - {% tool [Cut](Cut1) %}
 >    - *"Cut columns"* : `c1`
 >    - *"Delimited by"* : `Comma`
 >    - *"From"*: Choose dataset collection `GPU JupyterLab notebook output collection`
