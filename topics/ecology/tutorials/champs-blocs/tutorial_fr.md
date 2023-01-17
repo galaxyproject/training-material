@@ -129,7 +129,7 @@ Rendez-vous sur le formulaire de l'outil **IVR**
 
 > <hands-on-title>Calculer l'indice IVR</hands-on-title>
 >
-> 1. {% outil [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} avec ces paramètres :
+> 1. {% tool [IVR](toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0) %} avec ces paramètres :
 >    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
