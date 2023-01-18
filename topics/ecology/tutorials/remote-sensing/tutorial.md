@@ -22,9 +22,6 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
-
-<!-- This is a comment. -->
 
 This tutorial will guide you on getting Sentinel 2 data and processing them in order to calculate and visualize biodiversity indicators. This workflow made of 6 tools will allow you to explore Sentinel 2 data in the view of making biodiversity analyses.
 
@@ -344,7 +341,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 > 2. Do you need a shapefile for mapping the diversity ?
 > 3. Why do you need multiple locations for comparing biodiversity ? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution</solution-title>
 > >
 > > 1. This analisys is for data on forest, it's a canopy study.
 > > 2. No, only for the comparison with in situ data.
@@ -410,7 +407,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 > 1. What's the difference between biodiversity indicators and spectral indices ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution</solution-title>
 > >
 > > 1. Biodiversity indicators give us informations on the heterogeneity of the landscape whereas spectral indices inform us on the well being of the vegetation.
 > >
@@ -420,7 +417,6 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 
 
 # Conclusion
-{:.no_toc}
 
 You are now all set to use your remote sensing data in order to do a biodiversity analysis. Before you go on one last reflexion.
 
@@ -428,7 +424,7 @@ You are now all set to use your remote sensing data in order to do a biodiversit
 >
 > 1. Should remote sensing replace in-situ data ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution</solution-title>
 > >
 > > 1. NO ! remote sensing and in-situ data should come and complete one another to have the most complete view of the state of biodiversity.
 > >
