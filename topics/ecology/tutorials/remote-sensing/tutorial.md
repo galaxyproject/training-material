@@ -110,7 +110,7 @@ This first step consist of downloading and properly prepare the data to use it i
 
 # Preparing data
 
-Unzips, reads and preprocesses Sentinel 2 zip folder data.
+Using preprocS2 R package, this step provides a unique tool to read, crop, resample the original image directory, and write it as a raster stack
 
 ## **Preprocessing sentinel 2 data**
 
@@ -124,7 +124,7 @@ Unzips, reads and preprocesses Sentinel 2 zip folder data.
 >
 >    > <comment-title>Comment</comment-title>
 >    >
->    > The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a bil file without extension and the metadata are stored in the .hdr file. These data are in the output **Reflectance**. You can directly use the output **Reflectance** for the rest of the analysis.
+>    > The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a BIL file without extension and the metadata are stored in the .hdr file. These data are in the output **Reflectance**. You can directly use the output **Reflectance** for the rest of the analysis.
 >    {: .comment}
 >
 {: .hands_on}
