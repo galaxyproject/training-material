@@ -34,13 +34,13 @@ The tools explained here are useful for observing variations in spatial and temp
 
 So, we will compute biodiversity and spectral indices.
 
-> ### {% icon details %} Definition of reflectance
+> <details-title>Definition of reflectance</details-title>
 >
 > The reflectance is a porportion on reflected light on an area. It's the ration between the electromagnetic incident wave on the area and the reflected wave. It's often a percentage between reflected intensity and inicident intensity assumed as energy quantity.
 >
 {: .details}
 
-> ![Sentinel 2 toolsuite workflow](../../images/remote_sensing/sentinel_2.png "Sentinel 2 toolsuite workflow")
+![Sentinel 2 toolsuite workflow](../../images/remote_sensing/sentinel_2.png "Sentinel 2 toolsuite workflow")
 
 Each part of this workflow has elementary steps :
  - **A first step** to preprocess Sentinel 2 data:
@@ -52,7 +52,7 @@ Each part of this workflow has elementary steps :
    - Spectral indices 
    - EBV
 
-> ### {% icon details %} Details about spectral indices
+> <details-title>Details about spectral indices</details-title>
 >
 > Spectral indices are used to highlight particular features or properties of the earth's surface, e.g. vegetation, soil, water. They are developed on the basis of the spectral properties of the object of interest.
 >
@@ -64,7 +64,7 @@ Each part of this workflow has elementary steps :
 
 In this tutorial, we'll be working on Sentinel 2 data extracted from the Copernicus portal, Scihub.  First those data will be prepared. After pre-processing to fit the input format of the tools, we'll see how to calculate biodiversity metrics.
 
->
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -78,7 +78,7 @@ In this tutorial, we'll be working on Sentinel 2 data extracted from the Coperni
 
 This first step consist of downloading and properly prepare the data to use it in Sentinel 2 toolsuite.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Hands-on: Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.
 >
@@ -96,7 +96,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 > 3. Upload the zip folder
 >
->     > ### {% icon tip %} Tip: Importing data from your computer
+>     > <tip-title>Tip: Importing data from your computer</tip-title>
 >     >
 >     > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
 >     > * Select **Choose local files**
@@ -112,11 +112,11 @@ This first step consist of downloading and properly prepare the data to use it i
 
 # Preparing data
 
->   Unzips, reads and preprocesses Sentinel 2 zip folder data.
+Unzips, reads and preprocesses Sentinel 2 zip folder data.
 
 ## **Preprocessing sentinel 2 data**
 
-> ### {% icon hands_on %} Hands-on: Preprocess
+> <hands-on-title>Hands-on: Preprocess</hands-on-title>
 >
 > 1. {% tool [Preprocessing sentinel 2 data](toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
@@ -124,21 +124,21 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 > 2. Click on **Execute** 
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title>Comment</comment-title>
 >    >
 >    > The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a bil file without extension and the metadata are stored in the .hdr file. These data are in the output **Reflectance**. You can directly use the output **Reflectance** for the rest of the analysis.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ![Preprocessing outputs](../../images/remote_sensing/preproc.png "Preprocessing outputs")
+![Preprocessing outputs](../../images/remote_sensing/preproc.png "Preprocessing outputs")
 
 
-> ### {% icon question %} Question
+> <question-title>Question</question-title>
 >
 > 1. What are the files you are interested in for the folowing tools ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution</solution-title>
 > >
 > > 1. The 2 files in the **Refelectance** folder that finish by "_Refl" and "_Refl.hdr"
 > >
@@ -148,7 +148,7 @@ This first step consist of downloading and properly prepare the data to use it i
 
 # Producing biodiversity indicators
 
->   You can choose to compute spectral and biodiversity indicators either for global remote sensing data or for a canopy.
+You can choose to compute spectral and biodiversity indicators either for global remote sensing data or for a canopy.
 
 {% include _includes/cyoa-choices.html option1="Global" option2="Canopy" default="Global"
        text="Here you can choose which tutorial you want to folllow according to if your are more interested about studying canopy remote sensing data or more global ones" %}
@@ -156,7 +156,7 @@ This first step consist of downloading and properly prepare the data to use it i
 <div class="Global" markdown="1">
 ## **Compute a PCA**
 
-> ### {% icon hands_on %} Hands-on: Principal components analysis for remote sensing data
+> <hands-on-title>Hands-on: Principal components analysis for remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute a PCA](toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -164,7 +164,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    - {% icon param-select %} *"Do you want to do a PCA or a SPCA ?"*: 'PCA'
 >
 >
->    > ### {% icon tip %} Tip: If you want to use your own files ENVI BIL
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" is bil datatype and that "Input raster header" is a hdr datatype*
 >    >
@@ -175,19 +175,18 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Press **Save**
 >    >
 >    >
->    >    > ### {% icon comment %} Comment
+>    >    > <comment-title>Comment</comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
->    >
 >
 {: .hands_on}
 
 ## **Compute biodiversity indices**
 
-> ### {% icon hands_on %} Hands-on: Biodiversity indicators for global remote sensing data
+> <hands-on-title>Hands-on: Biodiversity indicators for global remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute biodiversity indices](toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -195,7 +194,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    - {% icon param-text %} *"Write a number of the value of alpha"*: '1'
 >
 >
->    > ### {% icon tip %} Tip: If you want to use your own files ENVI BIL
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" is bil datatype and that "Input raster header" is a hdr datatype*
 >    >
@@ -206,15 +205,15 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Press **Save**
 >    >
 >    >
->    >    > ### {% icon comment %} Comment
+>    >    > <comment-title>Comment</comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
->    >
 >
->    > ### {% icon tip %} Tip: You can use the output of **Compute a PCA**
+>
+>    > <tip-title>Tip: You can use the output of **Compute a PCA**</tip-title>
 >    >
 >    > - {% icon param-select %} *"In which format are your data ?"*: 'Your already have the files in ENVI BIL format'
 >    > - {% icon param-file %} *"Input raster"*: `PCA raster` (output of **Compute a PCA** {% icon tool %})
@@ -228,17 +227,17 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 {: .hands_on}
 
-> ![Global biodiveristy tabular](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular") 
-> ![Global biodiveristy graph](../../images/remote_sensing/rasterdiv.png "Global biodiveristy graph")
+![Global biodiveristy tabular](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular") 
+![Global biodiveristy graph](../../images/remote_sensing/rasterdiv.png "Global biodiveristy graph")
 
-> These 2 pictures are only exemple it is normal if you don't have exactly the same output.
+These 2 pictures are only exemple it is normal if you don't have exactly the same output.
 
 
-> ### {% icon question %} Question
+> <question-title>Question</question-title>
 >
 > 1. How many biodiversity indicators do you have ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title>Solution<solution-title>
 > >
 > > 1. You should have 7 of them (Shannon, Renyi, Prao, Pielou, Hill, CRE, Berger-Parker). If you have only 5 of them, no problem, it just means you data are too small to compute CRE and Pielou but you can still continue your analysis.
 > >
@@ -250,7 +249,7 @@ This first step consist of downloading and properly prepare the data to use it i
 <div class="Canopy" markdown="1">
 ## **Compute a PCA**
 
-> ### {% icon hands_on %} Hands-on: Principal components analysis for remote sensing data
+> <hands-on-title>Hands-on: Principal components analysis for remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute a PCA](toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -258,7 +257,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    - {% icon param-select %} *"Do you want to do a PCA or a SPCA ?"*: 'PCA'
 >
 >
->    > ### {% icon tip %} Tip: If you want to use your own files ENVI BIL
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL<h/tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" is bil datatype and that "Input raster header" is a hdr datatype*
 >    >
@@ -269,20 +268,19 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Press **Save**
 >    >
 >    >
->    >    > ### {% icon comment %} Comment
+>    >    > <comment-title>Comment</comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
->    >
 >
 >
 {: .hands_on}
 
 ## **Mapping diversity**
 
-> ### {% icon hands_on %} Hands-on: Biodiversity indicators for canopy remote sensing data
+> <hands-on-title>Hands-on: Biodiversity indicators for canopy remote sensing data</hands-on-title>
 >
 > 1. {% tool [Mapping diversity](toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -290,7 +288,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    - {% icon param-select %} *"Alpha, beta, functional diversity and comparison plot and map"*: 'All of the above'
 >
 >
->    > ### {% icon tip %} Tip: If you want to use your own files ENVI BIL
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" is bil datatype and that "Input raster header" is a hdr datatype*
 >    >
@@ -301,13 +299,12 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Press **Save**
 >    >
 >    >
->    >    > ### {% icon comment %} Comment
+>    >    > <comment-title>Comment</comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
->    >
 >
 {: .hands_on}
 
@@ -316,32 +313,32 @@ This first step consist of downloading and properly prepare the data to use it i
 
 ## **Processing remote sensing data**
 
-> ### {% icon hands_on %} Hands-on: Comparing biodiversity indicators for canopy
+> <hands-on-title>Hands-on: Comparing biodiversity indicators for canopy</hands-on-title>
 >
 > 1. {% tool [Comparing remote sensing data](toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
 >      - {% icon param-file %} *"Input data"*: `Reflectance` (output of **Preprocessing sentinel 2 data** {% icon tool %})
 >    - {% icon param-file %} *"Plots folder zip"*: `output` (Input dataset)
 >
->    > ### {% icon comment %} Shapefiles
+>    > <comment-title>Shapefiles</comment-title>
 >    >
 >    > Here you must provide your folder of shapefiles (at least 2 in oder to have the beta diversity).
 >    {: .comment}
 >    ***TODO***: *Check parameter descriptions*
 >
 >
->    > ### {% icon comment %} Check datatype if you use your own ENVI BIL files
+>    > <comment-title>Check datatype if you use your own ENVI BIL files</comment-title>
 >    >
 >    > Same as the compute spectral indices make sure you have the right datatypes bil and hdr.
 >    {: .comment}
 >
 {: .hands_on}
 
-> ![Biodiversity comparison graph](../../images/remote_sensing/comp_bdmr.png "Biodiversity comparison graph")
-> ![Bray curtis table](../../images/remote_sensing/braycu.png "Bray curtis table")
+![Biodiversity comparison graph](../../images/remote_sensing/comp_bdmr.png "Biodiversity comparison graph")
+![Bray curtis table](../../images/remote_sensing/braycu.png "Bray curtis table")
 
 
-> ### {% icon question %} Questions
+> <question-title>Questions</question-title>
 >
 > 1. What kind of data do you need to use these tools ?
 > 2. Do you need a shapefile for mapping the diversity ?
@@ -359,8 +356,7 @@ This first step consist of downloading and properly prepare the data to use it i
 </div>
 
 # Spectral indices
->
-> ### {% icon hands_on %} Hands-on: compute spectral indices
+> <hands-on-title>Hands-on: compute spectral indices</hands-on-title>
 >
 > 1. {% tool [Compute spectral indices](toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -371,7 +367,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    - {% icon param-select %} *"Do you want the raster layer of the indice as an output ?"*: 'No'
 >
 >
->    > ### {% icon tip %} Tip: If you want to use your own files ENVI BIL
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" is bil datatype and that "Input raster header" is a hdr datatype*
 >    >
@@ -382,35 +378,35 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Press **Save**
 >    >
 >    >
->    >    > ### {% icon comment %} Comment
+>    >    > <comment-title>Comment</comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
->    >
->    > ### {% icon comment %} Comment
+>
+>    > <comment-title>Comment</comment-title>
 >    >
 >    > You can choose whichever indice you want
 >    >
 >    {: .comment}
->    >
+>
 {: .hands_on}
 
 
-> ![ndvi](../../images/remote_sensing/ndvi.png "Normalized different vegetation index tabular")
+![ndvi](../../images/remote_sensing/ndvi.png "Normalized different vegetation index tabular")
 
 
-> ### {% icon details %} Spectral indices and Essential Biodiversity Variables 
+> <detail-title>Spectral indices and Essential Biodiversity Variables</detail-title>
 >
 > Remotely sensed diversity is consistent with most of the essential spatially constrained biodiversity variables proposed by Skidmore et al. (2015). This highlights the need for increased dialogue and collaboration between the biodiversity monitoring community and the remote sensing community to make satellite remote sensing a tool of choice for conservation. Increased dialogue is also essential within the biodiversity monitoring community to achieve this. From this point of view multiple Satellite Remote Sensing EBV (SRS EBV) were created.
 > Some of the indices proposed here will allow you to compute  SRS EBV.
 > For instance it allows you to compute one of GEO BON EBV [Canopy Chlorophyll Content]({{ https://portal.geobon.org/ebv-detail?id=13 }}). This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.
 {: .details}
->
-> ![ebv](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
 
-> ### {% icon question %} Questions
+![ebv](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
+
+> <question-title>Questions</question-title>
 >
 > 1. What's the difference between biodiversity indicators and spectral indices ?
 >
@@ -428,7 +424,7 @@ This first step consist of downloading and properly prepare the data to use it i
 
 You are now all set to use your remote sensing data in order to do a biodiversity analysis. Before you go on one last reflexion.
 
-> ### {% icon question %} Questions
+> <question-title>Questions</question-title>
 >
 > 1. Should remote sensing replace in-situ data ?
 >
