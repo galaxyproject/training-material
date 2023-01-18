@@ -34,7 +34,7 @@ So, we will compute biodiversity and spectral indices mainly using reflectance i
 
 > <details-title>Definition of reflectance</details-title>
 >
-> The reflectance is a porportion on reflected light on an area. It's the ration between the electromagnetic incident wave on the area and the reflected wave. It's often a percentage between reflected intensity and inicident intensity assumed as energy quantity.
+> The reflectance is a porportion on reflected light on an area. It's the ratio between the electromagnetic incident wave on the area and the reflected wave. It's often a percentage between reflected intensity and inicident intensity assumed as energy quantity.
 >
 {: .details}
 
