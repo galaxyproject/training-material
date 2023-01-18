@@ -249,7 +249,7 @@ Let's take a look at the [result](https://usegalaxy.eu/datasets/4838ba20a6d86765
  
 ## Visualize the taxonomical classification with Phinch
 
-__Phinch__ offers the user to visualize large biological datasets like our taxonomic classification. Taxonomy Bar Charts, Bubble Charts, Sankey Diagrams, Donut Partitions and Attributes Column Chart can be generated using this tool. Additionally, several different samples can easily be compared.
+__Phinch__ ({% cite Bik.2014 %})offers the user to visualize large biological datasets like our taxonomic classification. Taxonomy Bar Charts, Bubble Charts, Sankey Diagrams, Donut Partitions and Attributes Column Chart can be generated using this tool. Additionally, several different samples can easily be compared.
 As a first step, we need to convert the Kraken output file into a kraken-biom file to make it accessible for Phinch. Fot this, we need to add a metadata file, provided here. xxx
 When generating a metadata file for your own data, you can take this as an example and find the general guidelines [here](http://qiime.org/documentation/file_formats.html#mapping-file-overview) 
 
@@ -284,7 +284,7 @@ The **attributes column chart** summarizes the microbial community according to 
 
 ## Visualize the taxonomical classification with Pavian
 
-Pavian (pathogen visualization and more) is an interactive visualization tool for metagenomic data. It was developed for the clinical metagenomic problem to find a disease-causing pathogen in a patient sample, but it is useful to analyze and visualize any kind of metagenomics data. 
+__Pavian__ (pathogen visualization and more) ({% cite Breitwieser.2020 %}) is an interactive visualization tool for metagenomic data. It was developed for the clinical metagenomic problem to find a disease-causing pathogen in a patient sample, but it is useful to analyze and visualize any kind of metagenomics data. 
 
 > ### {% icon hands_on %} Hands-on: Pavian
 
