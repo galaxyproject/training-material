@@ -43,8 +43,6 @@ contributions:
     - mtekman
   editing:
     - hexylena
-
-  testing:
     - wee-snufkin
 
 notebook:
@@ -132,10 +130,12 @@ Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajec
 `sc.tl.louvain(adata, resolution=0.6)`
 However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 
-### FUN FACT
- - You can share the link to your JupyLab with anyone and they'll be able to access it
+> <comment-title> FUN FACT </comment-title>
+> You can share the link to your JupyLab with anyone and they'll be able to access it
+{: .comment}
 
-### Working in a group? Decision-time!
+
+## Working in a group? Decision-time!
 If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 - Control
    - Go straight to the PAGA section
@@ -209,7 +209,7 @@ First, let's name our 'root'.
 adata.uns['iroot'] = np.flatnonzero(adata.obs['cell_type']  == 'DN')[0]
 ```
 
-### ℹ️Working in a group? Decision-time!
+## Working in a group? Decision-time!
 If you called new clusters using louvain, you might want to choose one of those clusters to be your root cell instead, so change the `cell_type` above for `louvain` and then name the cluster number. Use the plots you created to help you pick the number!
 
 
@@ -228,10 +228,10 @@ Where might we go from here? We might consider playing with our louvain resoluti
 
 
 
-### ℹ️Working in a group? The finale!
+## Working in a group? The finale!
 Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the 'Filter, Plot and Explore Single-cell RNA-seq Data', the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cell, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
 
-# Export your data,figures, and notebook
+# Export your data, figures, and notebook
 
 It's not time to export your data! First, we need to get it Jupyter to see it as a file.
 
@@ -269,24 +269,20 @@ Please note, this is largely based on the trajectories tutorial found on the Sca
 
 # After Jupyter
 
-{% icon congratulations %} Congratulations! You've made it through Jupyter!
+Congratulations! You've made it through Jupyter!
 
 > <hands-on-title>Closing JupyterLab</hands-on-title>
->
 > 1. Click **User**: **Active Interactive Tools**
->
-> 2. Tick {% icon galaxy-selector %} the box of your Jupyter Interactive Tool, and click **Stop**
->
+> 2. Tick the box of your Jupyter Interactive Tool, and click **Stop**
 {: .hands_on}
 
 If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way as you downloaded the directions file and uploaded into the Jupyter environment.
 
+
 # Conclusion
 
-
-{% icon congratulations %} Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1).
+Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1).
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 
-To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
-[![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+To discuss with like-minded scientists, join our [Gitter](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) channel for all things Galaxy-single cell!
