@@ -87,9 +87,6 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 > - ficheterrain.csv
 </div>
 
-<div class="Yes" markdown="1">
-</div>
-
 > <hands-on-title>Télerversement des données dans Galaxy</hands-on-title>
 > 1. Importer les données dans Galaxy
 >    
