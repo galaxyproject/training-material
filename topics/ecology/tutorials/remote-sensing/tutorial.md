@@ -17,6 +17,7 @@ key_points:
 - Biodiversity indicators
 contributors:
 - Marie59
+- yvanlebras
 
 ---
 
