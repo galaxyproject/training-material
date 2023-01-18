@@ -68,9 +68,12 @@ After this theoretical introduction, let's now get hands on analyzing an actual 
  
 # Background on data
  
-The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas, that is studied because of its special environmental conditions {% cite Okie.2020 %}. The researchers collected samples directly from the pond (= control mesocosm, called JC1A in this tutorial) and fertilized some of the samples later on to receive nutrient enrichment (=Lagunita Fertilized Pond, called JP4D in this tutorial). In this way, they investigated the impact of nutrient enchriment on the microbial community.
+The dataset we will use for this tutorial comes from an oasis in the mexican desert called Cuatro Ciénegas {% cite Okie.2020 %}. The researchers were interested in genomic traits that affect the rates and costs of biochemical information processing within cells. They performed a whole-ecosystem experiment, thus fertilizing the pond to achieve nutrient enriched conditions. The microbe samples collected from the Lagunita Fertilized Pond is calles JP4D in this tutorial. As control they used samples from a control mesocosm, called JC1A in this tutorial. You will realize that the datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.  
+
 The datafiles are named according to the first four characters of the filenames.
 It is a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. Additionally, the reads have been trimmed using [__cutadapt__ ](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#trim-and-filter---short-reads)
+
+So let's get started with uploading the datasets!
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -83,9 +86,6 @@ It is a collection of paired-end data with R1 being the forward reads and R2 bei
 >    - `JP4D_R2.fastq.gz`
     -`JC1A_R1.fastq.gz`
     - `JC1A_R2.fastq.gz`
->    ``
->
->    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
