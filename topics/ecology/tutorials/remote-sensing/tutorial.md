@@ -103,7 +103,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >     > * Press **Start**
 >     {: .tip}
 >
-> 4. Rename the datasets “sentinel_2_data.zip" for example and preview your dataset
+> 4. You can rename the dataset, “sentinel_2_data.zip" for example, and to keep informations about the original name "S2A_MSIL2A.....zip", you can copy/paste it on the "Info" box.
 >
 >
 {: .hands_on}
