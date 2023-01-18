@@ -320,7 +320,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 >    > <comment-title>Shapefiles</comment-title>
 >    >
->    > Here you must provide your folder of shapefiles (at least 2 in oder to have the beta diversity).
+>    > Here you must provide your folder of shapefiles (at least 2 in order to have the beta diversity).
 >    {: .comment}
 >    ***TODO***: *Check parameter descriptions*
 >
