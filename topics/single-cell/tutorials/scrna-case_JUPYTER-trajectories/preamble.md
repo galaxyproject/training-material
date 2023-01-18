@@ -84,7 +84,7 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
 >
-> 1. You will need to download the tutorial notebook locally to your own computer. Do this by going here: [Download the notebook](https://zenodo.org/record/7054806/files/Trajectories_Instructions.ipynb?download=1)
+> 1. You will need to download the tutorial notebook locally to your own computer. Do this by clicking on {% icon notebook %}`Jupyter notebook` in the `Supporting Materials` section at the very beginning of the tutorial, in the Overview box.
 {: .hands_on}
 
 > <hands-on-title>Launching JupyterLab</hands-on-title>
@@ -122,7 +122,7 @@ Cool! Now you know how to create a file! Helpfully, however, we have created one
 
 > <hands-on-title>Uploading the tutorial notebook</hands-on-title>
 >
-> 1. In the folder window, {% icon galaxy-upload %} Upload the `Trajectories_Instructions.ipynb` from your computer. It should appear in the file window.
+> 1. In the folder window, {% icon galaxy-upload %} Upload the downloaded notebook from your computer. It should appear in the file window.
 >
 > 2. Open it by double clicking it in the file window.
 >
