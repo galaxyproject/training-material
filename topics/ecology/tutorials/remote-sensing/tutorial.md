@@ -30,7 +30,7 @@ Spatial diversity measurements should not replace in situ biodiversity data, but
 
 The tools explained here are useful for observing variations in spatial and temporal ecosystem properties given the intrinsic relationship between spatial variations in ecosystems and pixel values of spectral signals. A single measurement cannot provide a complete description of all the different aspects of ecosystem heterogeneity. Therefore, the combination of multiple tools in a Galaxy-Ecology workflow offers multiple approaches to unravel the complexity of ecosystem heterogeneity in space and time. 
 
-So, we will compute biodiversity and spectral indices.
+So, we will compute biodiversity and spectral indices mainly using reflectance information.
 
 > <details-title>Definition of reflectance</details-title>
 >
