@@ -9,8 +9,7 @@ questions:
 - How to articulate learning outcomes commensurate with the cognitive
   complexity of the target learning?
 - How to devise learning experiences and course content?
-- What are the steps that can help trainers devise and deploy effective
-  courses?
+- What are the steps that can help trainers devise and deploy effective courses?
 objectives:
 - List five key phases of curriculum & course development
 - Explain the primary role of learning outcomes
@@ -296,6 +295,11 @@ as a continuum or spectrum of cognitive levels, where each merges into the next,
 providing a structured tool to help express measurable, assessable LOs, in which
 the cognitive levels are made explicit.
 
+Ultimately, we can use Bloom's taxonomy to **align instruction with learners' levels of complexity of thinking** (and experience). In practice, you can use the Bloom’s levels of cognitive complexity (and the [accompanied actionable verbs in the previous link](https://tips.uark.edu/blooms-taxonomy-verb-chart/)) to:
+* write Learning Outcomes
+* design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
+* assess learning (taking place during curricula or course and after)
+
 The cognitive aspects embodied in LOs are important. Teaching should promote
 more complex behaviours than just recall or recognition (unless remembering is
 the intended LO), and push learners to achieve greater cognitive complexity
@@ -314,7 +318,7 @@ will guarantee failure and frustration for learners and instructors alike).
 The backdrop for our considerations of course design is Nicholls' paradigm for
 curriculum development, illustrated in:
 
-![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/nicholl_paradigme.png "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). Source: {% cite via2020course %}")
+![(in a clockwise direction) Phase 1: Learning Outcomes (Los) --> Simple, measurable, achievable, realistic, time-bound? --> Phase 2: Learning Experiences (LEs) --> LEs aligned with LOs? --> Phase 3: Content --> Support LEs? Promote LOs? --> Phase 4: Assessment --> Aligned with LEs? Support progress towards LOs? --> Phase 5: Evaluation --> LOs achievable by most learners? Content, LEs & assessments support LOs?](images/nicholl_paradigme.png "Nicholls’ phases of curriculum design & their dependencies. For each phase, key considerations are shown (diamonds). Where these are not satisfied, that or previous phases should be revisited (red arrows), otherwise it is safe to move to the next phase(s) (green arrows). When all considerations are satisfied, the curriculum or course can be characterised, with concrete evidence, as successful (star). By simplified we mean that here you only see the arrows going from one box to the following in line. However, usually we need to revise and go back one or several boxes if we have failed to specify or articulated Learning outcomes from the beginning. This is what we mean by Learning Outcomes drives the whole process. Source: {% cite via2020course %}")
 
 Its five-phase structure has been briefly summarised by
 {% cite tractenberg2020guidelines %}, as follows:
@@ -342,16 +346,7 @@ establishes a developmental trajectory, like that seen in Bloom's taxonomy. We
 reflect on this crucial point, and its relevance for course design, in the
 discussion of each of the five phases below.
 
-## Define intended LOs
-
-> <comment-title>What are Learning Outcomes (LOs)?</comment-title>
->
-> - Statements expressing which KSAs learners will be able to demonstrate upon
->   completion of a learning experience or a sequence of learning experiences
-> - What learners will be able to do for the end of a lesson and the teacher can
->   in principle evaluate
->
-{: .comment}
+## Define intended Learning Outcomes (LOs)
 
 Just as for curricula, Phase 1 of course design begins with stating the LOs. To
 help formulate LOs, it's important to take a step back and think about what you
@@ -371,6 +366,109 @@ tasks (to reveal the target KSAs) but also the rational development of
 **what to assess**. The questions can thus support all phases of course
 development, starting with the selection of intended KSAs stated in a set of
 LOs.
+
+The "Learning outcomes" (LOs) are essentially statements that tell what the learners will be to do at the end of the session. For this reason, every well-designed training should start with LOs.
+
+The first step of good instructional design consists is identifying the set of Knowledge, Skills, Abilities (KSAs) that learners are expected to acquire by the end of instruction.
+
+### Teaching objectives and Learning Outcomes
+
+**Objectives** are statements of what you are setting out to teach, although expressed as if the students were going to learn it. Despite Aims are usually intended to be more general and encompassing than Objectives, they are essential the same.
+
+**Outcomes** (more accurately "desired outcomes") are statements of what you might (in principle) assess. You may not end up assessing all of them, but they are statements of what a student will know or be able to do, if she or he has learned everything in the course or session.
+
+### Learning objectives and learning outcomes
+
+> <comment-title>Sources</comment-title>
+>
+> The following section is adapted from the webpage [http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes](http://provost.rpi.edu/learning-assessment/learning-outcomes/objectives-vs-outcomes) and the [Operational definitions:](https://irds.stanford.edu/sites/g/files/sbiybj10071/f/clo.pdf) document from the [Rensselaer Polytechnic Institute Office of the Provost](http://provost.rpi.edu/institutional-research).
+{: .comment}
+
+The terms Learning Objectives and Learning Outcomes are often used interchangeably by the community. Even worse, they are often abbreviated by the acronym (LO), thus introducing even more ambiguity. In our opinion there is no need. Objectives (aims or goals) and Outcomes (results) may overlap, but are not genuinely the same.
+
+Furthermore, American educational psychologists tend to use "Learning Objectives" to mean "Learning Outcomes" and "Teaching aims, goals or objectives" to mean "Learning Objectives".
+
+In the attempt of removing ambiguities we will use the term **Teaching Objectives** to mean:
+
+* Objectives describe the goals and intentions of the instructor.
+* Objectives, often termed the input in the course, state the purpose and goals of the course.
+* Objectives focus on content and skills important within the classroom or programme.
+* Objectives may describe what the instructors will do.
+* Objectives can often be numerous, specific, and detailed.
+
+And the term **Learning Outcomes** to mean:
+
+* Student Learning Outcomes catalog the overarching "products" of the course and are the evidence that the goals or objectives were achieved.
+* Learning Outcomes are statements that describe or list measurable and essential mastered content-knowledge—reflecting skills, competencies, and knowledge that students have achieved and can demonstrate upon successfully completing a course.
+* Outcomes express higher-level thinking skills that integrate course content and activities and can be observed as a behavior, skill, or discrete useable knowledge upon completing the
+course.
+* Outcomes are exactly what assessments are intended to show – specifically what the student will be able to do upon completing the course.
+* An assessable outcome can be displayed or observed and evaluated against criteria.
+* Outcomes are clear and measurable criteria for guiding the teaching, learning, and assessment process in the course.
+* Statements expressing which KSAs learners will be able to demonstrate upon completion of a learning experience or a sequence of learning experiences
+* What learners will be able to do for the end of instruction and the teacher / instructor can in principle evaluate
+
+Going beyond the definition however, a learning outcome needs to be also practical, i.e. there is a need to assign observable actions in order to let teacher assess them.
+
+#### How to write learning outcomes using OBSERVABLE verbs
+
+In order to write learning outcomes, you can use the following scheme:
+
+1. Think about what learners will be able to do by the end of instruction
+2. Use the sentences:
+
+    *By the end of the lesson (session/course/instruction) the learner will be able to.........*
+
+    OR
+
+    *The successful learner will be able to......*
+
+3. Replace dots with a verb that you can assess (name, explain, solve, distinguish, etc.).
+4. Avoid verbs that are open to many interpretations: appreciate, have faith in, know, learn, understand, believe
+5. Keep in mind that learning outcomes can be as specific as you want. You may even think about a different learning outcome for each task you assign to learners.
+
+Identify observable and non observable actions (verbs)
+
+<!--
+> <hands-on-title>Identify observable and non observable actions (verbs) - *⏰ 3 min*</hands-on-title>
+>
+> Here is a list of verbs: Compare, classify, distinguish, explain, believe, give examples of, define, learn, describe, list, recognize, know, connect, measure, identify, have faith in
+> * Write in the shared notes which ones describe observable actions
+> * Write in the shared notes which ones are instead open to multiple interpretation
+>
+>   > <tip-title>Requirements</tip-title>
+>   > In classifying verbs, it may help to focus on how you would assess the corresponding action / behaviour.
+>   > Example: "identify"
+>   > - Q: What would I do to assess whether a learner is able to identify something?
+>   > - A: Ask them to do this challenge.
+>   {: .tip}
+>
+> Good example of feedback: We will stress the importance of feedback on last day
+{: .hands_on}-->
+
+{% include _includes/quiz.html id="verbs.yaml" %}
+
+> <tip-title>Observable and non observable actions (verbs)</tip-title>
+>
+> In classifying verbs, it may help to focus on how you would assess the corresponding action / behaviour.
+> Example: "identify"
+> - Q: What would I do to assess whether a learner is able to identify something?
+> - A: Ask them to do this challenge.
+{: .tip}
+
+
+<!--
+> <comment-title>What are Learning Outcomes (LOs)?</comment-title>
+>
+> - Statements expressing which KSAs learners will be able to demonstrate upon
+>   completion of a learning experience or a sequence of learning experiences
+> - What learners will be able to do for the end of a lesson and the teacher can
+>   in principle evaluate
+>
+{: .comment}
+-->
+
+
 
 > <question-title>Evaluate LOs</question-title>
 >

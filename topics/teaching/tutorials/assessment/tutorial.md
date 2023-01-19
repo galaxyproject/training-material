@@ -233,6 +233,14 @@ Formative assessment should be frequent: ideally **every 5 min**, at least every
 
 Feedback is hard.
 
+> <hands-on-title>How to deal with feedback - discuss experiences  - *⏰ 15 min*</hands-on-title>
+>
+> - Split into groups of 4, depending on the number of participants.
+> - Share one or two experiences that you have had in either offering or receiving feedback.
+> - Share your strategy in dealing with this feedback. What were the challenges, and what worked?
+> - Write it in a notebook and discuss with the rest of the group.
+{: .hands_on}
+
 ![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/gettingFeedback.jpg "Getting feedback")
 
 Humans focus more on negative feedback than on positive (you are not alone). How to deal with (bad) feedback received from trainees:
@@ -250,6 +258,9 @@ Trainees feedback should be considered along other forms of quality evidence:
 * Look at the repetitive patterns (not at only one single answer)
 
 ![A humorous cartoon showing a parent teaching a child on how to provide constructive feedback when playing with other children.](images/givingGoodFeedback.jpg "Learn and teach others to give good feedback")
+
+
+
 
 # Conclusions
 
