@@ -86,7 +86,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 >
 >
-> 2. Download the files from [Scihub]({{ https://scihub.copernicus.eu/dhus/#/home }}) or from [PEPS]({{ https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1 }}) :
+> 2. Download the files from [Scihub](https://scihub.copernicus.eu/dhus/#/home) or from [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) :
 >
 >    You will have to to create an account for either of these platform. 
 >    Select Sentinel 2 and choose the Product type "S2MSI2A".
@@ -402,7 +402,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 > Remotely sensed diversity is consistent with most of the essential spatially constrained biodiversity variables proposed by Skidmore et al. (2015). This highlights the need for increased dialogue and collaboration between the biodiversity monitoring community and the remote sensing community to make satellite remote sensing a tool of choice for conservation. Increased dialogue is also essential within the biodiversity monitoring community to achieve this. From this point of view multiple Satellite Remote Sensing EBV (SRS EBV) were created.
 > Some of the indices proposed here will allow you to compute  SRS EBV.
-> For instance it allows you to compute one of GEO BON EBV [Canopy Chlorophyll Content]({{ https://portal.geobon.org/ebv-detail?id=13 }}). This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.
+> For instance it allows you to compute one of GEO BON EBV [Canopy Chlorophyll Content](https://portal.geobon.org/ebv-detail?id=13). This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.
 {: .details}
 
 ![ebv](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
