@@ -276,7 +276,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-## **Mapping diversity**
+## **Create Biodiversity maps**
 
 > <hands-on-title>Hands-on: Biodiversity indicators for canopy remote sensing data</hands-on-title>
 >
