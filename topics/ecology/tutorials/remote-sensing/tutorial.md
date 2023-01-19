@@ -15,6 +15,9 @@ time_estimation: 2H
 key_points:
 - Remote sensing data
 - Biodiversity indicators
+tags:
+- Ecology
+- Remote sensing
 contributors:
 - Marie59
 - yvanlebras
