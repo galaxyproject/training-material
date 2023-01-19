@@ -410,7 +410,7 @@ Another three datasets are needed only for the analysis of ampliconic, e.g. ARTI
 >
 {: .hands_on}
 
-<div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
+
 
 # From FASTQ to SARS-CoV-2 lineages abundances
 
@@ -418,61 +418,966 @@ To identify the lineages and their aboundances, several steps have to be done to
 
 ![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
-1. **Pre-processing**, including
+## Preprocessing
 
-   1. **Quality control** of the sequencing data
+To prepare the data, we first need to do:
 
-      There is no perfect sequencing technology, and each instrument will generate different types and amounts of errors, such as incorrect nucleotide calls. Each sequencing platform has technical limitations that result in these incorrectly called bases. Thus, it is important to identify and exclude error types that may affect downstream analysis interpretation. As a result, sequence quality control is an essential first step in the analysis process.
+1. **Quality control** of the sequencing data
 
-   2. **Triming**: quality and primer with ARTIC protocol and/or adapter with Illumina
+   There is no perfect sequencing technology, and each instrument will generate different types and amounts of errors, such as incorrect nucleotide calls. Each sequencing platform has technical limitations that result in these incorrectly called bases. Thus, it is important to identify and exclude error types that may affect downstream analysis interpretation. As a result, sequence quality control is an essential first step in the analysis process.
 
-      Following this, the reads are trimmed based on a quality threshold.
+   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
-      <div class="Amplicon-Short" markdown="1">
-      Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol. The auxiliary file is used for this step - a BED file specifying the primers used during amplification and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file. More specifically, some primer trimmers, in order to do quality trimming, use a sliding window approach. The window slides from the 5’ end to the 3' end and if at any point the average base quality in the window falls below the threshold, the remaining read is softly clipped. If after trimming, the length of the read is greater than the minimum length specified, the read is written to the new trimmed BAM file. It should be noted, for datasets that were not generated with primer-based protocol like ARTIC, this primer-trimming step is not applicable.
-      </div>
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
+   >    - *"Single-end or paired reads"*: `Paired Collection`
+   >        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
+   >    - In *"Output Options"*:
+   >        - *"Output JSON report"*: `Yes`
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
 
-      Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive raw reads with adapters at 3' end. The adapters contain the sequencing primer binding sites, the index sequences, and the sites that allow library fragments to attach to the flow cell lawn. This might influence a downstream analysis, thus, adapter trimming is required.
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
 
-   3. **Decontamination** to remove reads from the human genome
+   </div>
 
-      A decontamination step can then be included to remove reads from the human genome, since viral sequence data from clinical samples commonly contain human contamination. Prior to sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** {% cite hunt2022readitandkeep %}.
+2. **Triming**: quality and primer with ARTIC protocol and/or adapter with Illumina
 
-4. **Mapping** to SARS-CoV-2 reference sequence
-
-   The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database. A mapping tool of choice can differ from one pipeline to another, depending on read length, sequencing technology, and other factors. Here we use **bwa-mem** ({% cite li2009fast %})
-
-   Mapping results need afterward to be **processed**, steps that are not always included in pipelines
-
-   - **Removing duplicated reads**
-
-      This step can be important for Illumina sequencing reads. During the sequencing process with Illumina sequencing technology, some duplicate reads/sequences can be produced, which can create bias in downstream analyses. It is, therefore, possible to remove duplicates or mark them without removing them. When removing duplicates, one should be certain that they are duplicates and not repeated regions. It can therefore be reasonable to keep duplicates marked rather than remove them, as this can be useful for downstream analysis.
-
-   - **Read realignment**
-
-      Realigned reads can be taken and checked for the quality of alignment using bioinformatics tools (e.g., Qualimap ({% cite garcia2012qualimap %})). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases in sequencing and/or mapping of the data and ease decision-making for further analysis.
-
-   - **Indel quality insertion**
-
-      This step, which is not present everywhere, is helpful due to potential ambiguity, while indels are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions and deletions must be homogenized with left realignment in order to gain a more homogeneous distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at the same position, provided that doing so does not introduce mismatches between the read and reference other than the indel ({% cite garrison2012haplotype %}). Basically, this step is considered to correct mapping errors and prepare reads for further variant calling.
-
-6. **Variant calling** to identify SARS-CoV-2 variants
-
-   Sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq** ({% cite wilm2012lofreq %})
+   Following this, the reads are trimmed based on a quality threshold.
 
    <div class="Amplicon-Short" markdown="1">
-   adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such "tainted" amplicons when calculating alternative allele frequences (AFs) of other AVs.
+   Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol. The auxiliary file is used for this step - a BED file specifying the primers used during amplification and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file. More specifically, some primer trimmers, in order to do quality trimming, use a sliding window approach. The window slides from the 5’ end to the 3' end and if at any point the average base quality in the window falls below the threshold, the remaining read is softly clipped. If after trimming, the length of the read is greater than the minimum length specified, the read is written to the new trimmed BAM file. It should be noted, for datasets that were not generated with primer-based protocol like ARTIC, this primer-trimming step is not applicable.
    </div>
 
-7. SARS-CoV-2 **lineage abundance computation**
+   Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive raw reads with adapters at 3' end. The adapters contain the sequencing primer binding sites, the index sequences, and the sites that allow library fragments to attach to the flow cell lawn. This might influence a downstream analysis, thus, adapter trimming is required.
 
-   <div class="Amplicon-Short" markdown="1">
-   **Freyja** {% cite karthikeyan2022wastewater %} and **COJAC** {% cite jahn2022early %} in two different branches.
+   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
    </div>
 
-   <div class="Metatranscriptomic-Short" markdown="1">
-   **Freyja** {% cite karthikeyan2022wastewater %}
+3. **Decontamination** to remove reads from the human genome
+
+   A decontamination step can then be included to remove reads from the human genome, since viral sequence data from clinical samples commonly contain human contamination. Prior to sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** {% cite hunt2022readitandkeep %}.
+
+
+   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [Read It and Keep](toolshed.g2.bx.psu.edu/repos/iuc/read_it_and_keep/read_it_and_keep/0.2.2+galaxy0) %} with the following parameters:
+   >    - *"Read type"*: `Paired collection`
+   >        - {% icon param-file %} *"Reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
+   >    - *"Reference genome source"*: `History`
+   >        - {% icon param-file %} *"Reference genome"*: `output` (Input dataset)
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
+
+   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
+
    </div>
+
+## Diversity evaluation
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
+>    - *"Single or paired reads"*: `Paired Collection`
+>        - {% icon param-collection %} *"Collection of paired reads"*: `output` (Input dataset collection)
+>    - In *"Create Report"*:
+>        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
+>    - *"Select a Kraken2 database"*: `Viral genomes (2019)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Convert Kraken](toolshed.g2.bx.psu.edu/repos/devteam/kraken2tax/Kraken2Tax/1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Choose dataset to convert"*: `report_output` (output of **Kraken2** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
+>    - *"What is the type of your input data"*: `Taxonomy`
+>        - {% icon param-file %} *"Input file"*: `out_file` (output of **Convert Kraken** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+</div>
+
+## Mapping
+
+The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database. A mapping tool of choice can differ from one pipeline to another, depending on read length, sequencing technology, and other factors. Here we use **bwa-mem** ({% cite li2009fast %})
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
+>    - *"Single or Paired-end reads"*: `Paired Collection`
+>        - {% icon param-file %} *"Select a paired collection"*: `output_collection` (output of **Read It and Keep** {% icon tool %})
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"SAM/BAM/CRAM data set"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+>    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
+>        - In *"Configure filters"*:
+>            - *"Filter by regions"*: `No`
+>            - *"Filter by readgroup"*: `No`
+>            - *"Filter by quality"*: `20`
+>            - *"Require that these flags are set"*: ``
+>            - *"Exclude reads with any of the following flags set"*: ``
+>        - In *"Configure subsampling"*:
+>            - *"Subsample alignment"*: `Specify a downsampling factor`
+>        - *"What would you like to have reported?"*: `All reads retained after filtering and subsampling`
+>            - *"Output format"*: `BAM (-b)`
+>    - *"Reference data"*: `No, see help (-output-fmt-option no_ref)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"BAM file"*: `outputsam` (output of **Samtools view** {% icon tool %})
+>    - *"Set coverage distribution"*: `No`
+>    - *"Output"*: `One single summary file`
+>    - *"Filter by SAM flags"*: `Do not filter`
+>    - *"Use a reference sequence"*: `No`
+>    - *"Filter by regions"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+</div>
+
+Mapping results need afterward to be **processed**, steps that are not always included in pipelines
+
+- **Removing duplicated reads**
+
+   This step can be important for Illumina sequencing reads. During the sequencing process with Illumina sequencing technology, some duplicate reads/sequences can be produced, which can create bias in downstream analyses. It is, therefore, possible to remove duplicates or mark them without removing them. When removing duplicates, one should be certain that they are duplicates and not repeated regions. It can therefore be reasonable to keep duplicates marked rather than remove them, as this can be useful for downstream analysis.
+
+   <div class="Metatranscriptomic-Long" markdown="1">
+
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [Samtools depth](toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy0) %} with the following parameters:
+   >    - {% icon param-file %} *"BAM file(s)"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+   >    - *"Filter by regions"*: `No`
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
+
+   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
+
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
+   >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `outputsam` (output of **Samtools view** {% icon tool %})
+   >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
+
+   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
+
+
+   </div>
+
+- **Read realignment**
+
+   Realigned reads can be taken and checked for the quality of alignment using bioinformatics tools (e.g., Qualimap ({% cite garcia2012qualimap %})). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases in sequencing and/or mapping of the data and ease decision-making for further analysis.
+
+   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [Realign reads](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0) %} with the following parameters:
+   >
+   >    <div class="Amplicon-Long" markdown="1">
+   >    - {% icon param-file %} *"Reads to realign"*: `outputsam` (output of **Samtools view** {% icon tool %})
+   >    </div>
+   >    <div class="Metatranscriptomic-Long" markdown="1">
+   >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
+   >    </div>
+   >    - *"Choose the source for the reference genome"*: `History`
+   >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
+   >    - In *"Advanced options"*:
+   >        - *"How to handle base qualities of 2?"*: `Keep unchanged`
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
+
+   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
+
+   </div>
+
+- **Indel quality insertion**
+
+   This step, which is not present everywhere, is helpful due to potential ambiguity, while indels are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions and deletions must be homogenized with left realignment in order to gain a more homogeneous distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at the same position, provided that doing so does not introduce mismatches between the read and reference other than the indel ({% cite garrison2012haplotype %}). Basically, this step is considered to correct mapping errors and prepare reads for further variant calling.
+
+   <div class="Amplicon-Long Metatranscriptomic-long" markdown="1">
+
+   > <hands-on-title> Task description </hands-on-title>
+   >
+   > 1. {% tool [Insert indel qualities](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0) %} with the following parameters:
+   >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
+   >    - *"Indel calculation approach"*: `Dindel`
+   >        - *"Choose the source for the reference genome"*: `History`
+   >            - {% icon param-file %} *"Reference"*: `output` (Input dataset)
+   >
+   >    ***TODO***: *Check parameter descriptions*
+   >
+   >    ***TODO***: *Consider adding a comment or tip box*
+   >
+   >    > <comment-title> short description </comment-title>
+   >    >
+   >    > A comment about the tool or something else. This box can also be in the main text
+   >    {: .comment}
+   >
+   {: .hands_on}
+
+   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+   > <question-title></question-title>
+   >
+   > 1. Question1?
+   > 2. Question2?
+   >
+   > > <solution-title></solution-title>
+   > >
+   > > 1. Answer for question1
+   > > 2. Answer for question2
+   > >
+   > {: .solution}
+   >
+   {: .question}
+
+   </div>
+
+
+<div class="Metatranscriptomic-long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `fastp`
+>                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Samtools`
+>                - In *"Samtools output"*:
+>                    - {% icon param-repeat %} *"Insert Samtools output"*
+>                        - *"Type of Samtools output?"*: `stats`
+>                            - {% icon param-file %} *"Samtools stats output"*: `output` (output of **Samtools stats** {% icon tool %})
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Picard`
+>                - In *"Picard output"*:
+>                    - {% icon param-repeat %} *"Insert Picard output"*
+>                        - *"Type of Picard output?"*: `Markdups`
+>                        - {% icon param-file %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+</div>
+
+## Variant calling
+
+Sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq** ({% cite wilm2012lofreq %})
+
+<div class="Amplicon-Short Amplicon-Long" markdown="1">
+adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such "tainted" amplicons when calculating alternative allele frequences (AFs) of other AVs.
+
+<div class="Amplicon-long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [ivar trim](toolshed.g2.bx.psu.edu/repos/iuc/ivar_trim/ivar_trim/1.3.1+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Bam file"*: `output` (output of **Insert indel qualities** {% icon tool %})
+>    - *"Source of primer information"*: `History`
+>        - {% icon param-file %} *"BED file with primer sequences and positions"*: `output` (Input dataset)
+>    - *"Filter reads based on amplicon info"*: `Yes, drop reads that extend beyond amplicon boundaries and use my amplicon info file`
+>        - {% icon param-file %} *""*: `output` (Input dataset)
+>    - *"Include reads not ending in any primer binding sites?"*: `Yes`
+>    - *"Minimum length of read to retain after trimming"*: `1`
+>    - *"Minimum quality threshold for sliding window to pass"*: `0`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [QualiMap BamQC](toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"Mapped reads input dataset"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    - *"Reference genome regions to calculate mapping statistics for"*: `All (whole genome)`
+>    - *"Skip duplicate reads"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Samtools depth](toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"BAM file(s)"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    - *"Filter by regions"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `fastp`
+>                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Samtools`
+>                - In *"Samtools output"*:
+>                    - {% icon param-repeat %} *"Insert Samtools output"*
+>                        - *"Type of Samtools output?"*: `stats`
+>                            - {% icon param-file %} *"Samtools stats output"*: `output` (output of **Samtools stats** {% icon tool %})
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Qualimap (BamQC or RNASeq output)`
+>                - {% icon param-file %} *"Output of Qualimap BamQC"*: `output` (output of **Flatten collection** {% icon tool %})
+>    - *"Output the multiQC plots raw data?"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+</div>
+
+</div>
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy0) %} with the following parameters:
+>
+>    <div class="Amplicon-Long" markdown="1">
+>    - {% icon param-file %} *"Input reads in BAM format"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    </div>
+>    <div class="Metatranscriptomic-Long" markdown="1">
+>    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
+>    </div>
+>
+>    - *"Choose the source for the reference genome"*: `History`
+>        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
+>    - *"Call variants across"*: `Whole reference`
+>    - *"Types of variants to call"*: `SNVs and indels`
+>    - *"Variant calling parameters"*: `Configure settings`
+>        - In *"Coverage"*:
+>            - *"Minimal coverage"*: `5`
+>        - In *"Base-calling quality"*:
+>            - *"Minimum baseQ"*: `30`
+>            - *"Minimum baseQ for alternate bases"*: `30`
+>        - In *"Mapping quality"*:
+>            - *"Minimum mapping quality"*: `20`
+>    - *"Variant filter parameters"*: `Custom filter settings/combinations`
+>        - *"Significance threshold for calls"*: `0.0005`
+>        - *"Apply default coverage and strand-bias filter?"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+</div>
+
+
+<div class="Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Lofreq filter](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_filter/lofreq_filter/2.1.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"List of variants to filter"*: `variants` (output of **Call variants** {% icon tool %})
+>        - In *"Quality-based filter options"*:
+>            - *"Filter SNVs based on call quality?"*: `No, don't apply call quality filter`
+>            - *"Filter indels based on call quality?"*: `No, don't apply call quality filter`
+>    - In *"Coverage-based filter options"*:
+>        - *"Minimum coverage"*: `0`
+>    - In *"Strand bias filter options"*:
+>        - *"Filter variants based on supporting strand bias?"*: `Yes, filter on multiple testing corrected strand-bias p-value (lofreq default)`
+>    - *"Action to be taken for variants that do not pass the filters defined above"*: `Keep variants, but indicate failed filters in output FILTER column`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [SnpEff eff:](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+>    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `outvcf` (output of **Lofreq filter** {% icon tool %})
+>    - *"Output format"*: `VCF (only if input is VCF)`
+>    - *"Annotation options"*: ``
+>    - *"Filter output"*: ``
+>    - *"Filter out specific Effects"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+</div>
+
+## SARS-CoV-2 lineage abundance computation
+
+<div class="Amplicon-Short Amplicon-Long" markdown="1">
+**Freyja** {% cite karthikeyan2022wastewater %} and **COJAC** {% cite jahn2022early %} in two different branches.
+</div>
+
+<div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+**Freyja** {% cite karthikeyan2022wastewater %}
+</div>
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Freyja: Demix](toolshed.g2.bx.psu.edu/repos/iuc/freyja_demix/freyja_demix/1.3.8+galaxy0) %} with the following parameters:
+>
+>    <div class="Amplicon-Long" markdown="1">
+>    - {% icon param-file %} *"Dataset with input variant calls"*: `variants` (output of **Call variants** {% icon tool %})
+>    </div>
+>    <div class="Metatranscriptomic-Long" markdown="1">
+>    - {% icon param-file %} *"Dataset with input variant calls"*: `outvcf` (output of **Lofreq filter** {% icon tool %})
+>    </div>
+
+>    - *"Set sample name"*: `Autodetect sample name`
+>    - {% icon param-file %} *"Sequencing depth file"*: `output` (output of **Samtools depth** {% icon tool %})
+>    - *"Source of UShER barcodes data"*: `Use data shipped with the tool (can be outdated)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Freyja: Aggregate and visualize](toolshed.g2.bx.psu.edu/repos/iuc/freyja_aggregate_plot/freyja_aggregate_plot/1.3.8+galaxy0) %} with the following parameters:
+>    - *"Aggregate demixed data or provide aggregated data file?"*: `aggregate demixed data`
+>        - {% icon param-file %} *"Lineages abundances summary file(s)"*: `abundances` (output of **Freyja: Demix** {% icon tool %})
+>    - *"Report(s) to generate"*: `non-interactive plot`
+>        - *"Provide a sample metadata file for plotting data over time?"*: `No`
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+</div>
+
+<div class="Amplicon-Long" markdown="1">
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Cojac: mutbamscan](toolshed.g2.bx.psu.edu/repos/iuc/cooc_mutbamscan/cooc_mutbamscan/0.2+galaxy0) %} with the following parameters:
+>    - *"Source of YAML files with definition of the variant of concerns"*: `Definitions shipped with the tool (can be outdated)`
+>    - {% icon param-file %} *"BED file defining the amplicons"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Alignment BAM/CRAM/SAM file"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    - *"Source of amplicons YAML file"*: `Build from BED + set of YAMLs for variants of concern`
+>    - *"Output files"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `cooc_yaml` (output of **Cojac: mutbamscan** {% icon tool %})
+>    - *"Prepend File name"*: `Yes`
+>
+> 1. {% tool [Cojac: tabmut](toolshed.g2.bx.psu.edu/repos/iuc/cooc_tabmut/cooc_tabmut/0.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Results generated by mutbamscan"*: `output` (output of **Collapse Collection** {% icon tool %})
+>    - *"Output table orientation"*: `Column-oriented table (default)`
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+</div>
+
+<div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
 
 > <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
 >
@@ -511,6 +1416,8 @@ To identify the lineages and their aboundances, several steps have to be done to
 >    - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
 >    </div>
 {: .hands_on}
+
+</div>
 
 # Results interpretation
 
@@ -589,26 +1496,6 @@ Once the jobs of previous workflows are done, we can look at the results.
    {: .question}
 
 </div>
-
-<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
-
-# Preprocessing
-
-## Quality control of the sequencing data
-
-## Triming
-
-## Decontamination to remove reads from the human genome
-
-# Mapping
-
-## Mapping processing
-
-# Variant calling
-
-# SARS-CoV-2 lineage abundance computation
-
-<div>
 
 # Conclusion
 
