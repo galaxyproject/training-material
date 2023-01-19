@@ -309,8 +309,8 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-> ![Alpha diversity map](../../images/remote_sensing/alpha.png "Alpha diversity map")
-> ![Functionnal diversity tabular](../../images/remote_sensing/funct_tb.png "Functionnal diversity tabular")
+![Alpha diversity map](../../images/remote_sensing/alpha.png "Alpha diversity map")
+![Functionnal diversity tabular](../../images/remote_sensing/funct_tb.png "Functionnal diversity tabular")
 
 ## **Processing remote sensing data**
 
