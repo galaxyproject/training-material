@@ -62,7 +62,7 @@ formed a muonium pseudo-atom, ends up breaking a double or triple bond and
 attaching itself to the molecule by using one of the unpaired electrons. However
 in other, crystalline structures it can be a lot harder. While an atomistic
 simulation that accurately predicts the potential through which the atoms
-interact can be used identify possible sites, this approach is not fully
+interact can be used to identify possible sites, this approach is not fully
 reliable (for example when applied to fluorides) {% cite Liborio2018 %}. In
 order to avoid such limitations, one can use a brute force approach to explore
 all the possible positions in which the muon may end up. {AIRSS} is one such
@@ -104,7 +104,7 @@ need to create these yourself outside of Galaxy.
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/6344385/files/Si-out.cell
+>    https://zenodo.org/record/6344385/files/Si.cell
 >    https://zenodo.org/record/6344385/files/Si.castep
 >    https://zenodo.org/record/6344385/files/Si.den_fmt
 >    ```
