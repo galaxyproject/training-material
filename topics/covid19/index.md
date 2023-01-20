@@ -1,4 +1,4 @@
 ---
-layout: topic-tag
+layout: topic
 topic_name: covid19
 ---

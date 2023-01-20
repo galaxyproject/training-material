@@ -61,7 +61,37 @@ module TopicFilter
         "subtopic" => {"title" => "Other", "description" => "Assorted Tutorials", "id" => "other"},
         "materials" => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
       }
-      out
+    elsif site.data[topic_name]['tag_based'] and site.data[topic_name]['custom_ordering']
+      # TODO
+      puts "UNIMPLEMENTED"
+      out = Hash.new
+    elsif site.data[topic_name]['tag_based'] # Tag based Topic
+      # We'll construct a new hash of subtopic(parent topic) => tutorials
+      out = Hash.new
+      seen_ids = []
+
+      materials = self.filter_by_topic(site, topic_name)
+
+      # Which topics are represented in those materials?
+      seen_topics = materials.map{|x| x['topic_name']}.sort
+
+      # Treat them like subtopics, but fake subtopics.
+      seen_topics.each{|parent_topic, v|
+        specific_resources = materials.select{|x| x['topic_name'] == parent_topic}
+        out[parent_topic] = {
+          "subtopic" => {"id" => parent_topic, "title" => site.data[parent_topic]['title'], "description" => nil},
+          "materials" => specific_resources
+        }
+        seen_ids += specific_resources.map{|x| x['id'] }
+      }
+
+      # And we'll have this __OTHER__ subtopic for any tutorials that weren't
+      # in a subtopic.
+      all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
+      out["__OTHER__"] = {
+        "subtopic" => {"title" => "Other", "description" => "Assorted Tutorials", "id" => "other"},
+        "materials" => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+      }
     else
       # Or just the list (Jury is still out on this one, should it really be a
       # flat list? Or in this identical structure.)
@@ -71,8 +101,14 @@ module TopicFilter
           "materials" => self.filter_by_topic(site, topic_name)
         }
       }
-      out
     end
+
+    # Cleanup empty sections
+    if out.has_key?("__OTHER__") and out["__OTHER__"]["materials"].length == 0
+      out.delete("__OTHER__")
+    end
+
+    out
   end
 
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
