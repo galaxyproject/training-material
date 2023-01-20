@@ -117,7 +117,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 
 ## **Preprocessing sentinel 2 data**
 
-> <hands-on-title>Hands-on: Preprocess</hands-on-title>
+> <hands-on-title>Preprocess</hands-on-title>
 >
 > 1. {% tool [Preprocessing sentinel 2 data](toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
