@@ -398,7 +398,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 ![ndvi](../../images/remote_sensing/ndvi.png "Normalized different vegetation index tabular")
 
 
-> <detail-title>Spectral indices and Essential Biodiversity Variables</detail-title>
+> <details-title>Spectral indices and Essential Biodiversity Variables</details-title>
 >
 > Remotely sensed diversity is consistent with most of the essential spatially constrained biodiversity variables proposed by Skidmore et al. (2015). This highlights the need for increased dialogue and collaboration between the biodiversity monitoring community and the remote sensing community to make satellite remote sensing a tool of choice for conservation. Increased dialogue is also essential within the biodiversity monitoring community to achieve this. From this point of view multiple Satellite Remote Sensing EBV (SRS EBV) were created.
 > Some of the indices proposed here will allow you to compute  SRS EBV.
