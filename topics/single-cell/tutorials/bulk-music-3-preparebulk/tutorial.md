@@ -4,7 +4,7 @@ subtopic: deconvo
 priority: 3
 
 title: Creating the bulk RNA-seq dataset for deconvolution
-zenodo_link: ''
+zenodo_link: '7319173'
 questions:
 - Where can I find good quality RNA-seq datasets?
 - How can I reformat and manipulate these downloads to create the right format for MuSiC?
