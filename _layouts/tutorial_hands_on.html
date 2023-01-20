@@ -21,11 +21,6 @@ footer: no
                 {% assign associated_slides = true %}
             {% endif %}
         {% endif %}
-        {% if material.type == "introduction" %}
-            {% assign intro_link = true %}
-            {% assign intro_target = material.tutorial_name | append: '.html' %}
-
-        {% endif %}
     {% endif %}
 {% endfor %}
 
@@ -418,15 +413,11 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     <ol>
                     {% for material in topic_material %}
                         {% if material.enable != "false" or jekyll.environment != "production" %}
-                            {% if material.type == "introduction" %}
-                    <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-                            {% elsif material.type == "tutorial" %}
                                 {% if material.hands_on %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
                                 {% elsif material.slides %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
                                 {% endif %}
-                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     </ol>

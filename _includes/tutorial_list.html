@@ -47,11 +47,6 @@
           </div>
 
           <div class="duplicate">
-          {% if material.type == "introduction" %}
-            {% if material.slides %}
-              {% include _includes/resource-slides.html material=material topic=topic.name %}
-            {% endif %}
-          {% elsif material.type == "tutorial" %}
             <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
             {% include _includes/resource-slides.html material=material topic=topic.name %}
             {% include _includes/resource-handson.html material=material topic=topic.name %}
@@ -62,7 +57,6 @@
               {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
             {% endif %}
             </div>
-          {% endif %}
           </div>
 
           </td>

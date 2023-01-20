@@ -265,12 +265,7 @@ module Jekyll
 
       data['isPartOf'] = topic_desc
 
-      if material['type'] == 'introduction' then
-        data['learningResourceType'] = "slides"
-        data['name'] = "Introduction to '#{topic['title']}'"
-        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
-        description.push("Slides for #{topic['title']}")
-      elsif material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
+      if material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
         if material['name'] == 'tutorial.md' then
           data['learningResourceType'] = "hands-on tutorial"
           data['name'] = "Hands-on for '#{material['title']}' tutorial"
