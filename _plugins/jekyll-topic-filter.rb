@@ -10,20 +10,69 @@ module TopicFilter
 
   def self.fill_cache(site)
     if not site.data.has_key?('cache_topic_filter')
-      puts "[GTN/TopicFilter] Begin Cache"
+      puts "[GTN/TopicFilter] Begin Cache Prefill"
       site.data['cache_topic_filter'] = Hash.new
 
       # For each topic
       self.list_topics(site).each{|topic|
-        site.data['cache_topic_filter'][topic] = self.run_topic_filter(site, site.pages, topic)
+        site.data['cache_topic_filter'][topic] = self.filter_by_topic(site, topic)
       }
-      puts "[GTN/TopicFilter] End Cache"
+      puts "[GTN/TopicFilter] End Cache Prefill"
     end
   end
 
   def self.topic_filter(site, topic_name)
     self.fill_cache(site)
     site.data['cache_topic_filter'][topic_name]
+  end
+
+  def self.list_materials_structured(site, topic_name)
+    # This method is built with the idea to replace the "topic_filter" command,
+    # and instead of returning semi-structured data, we will immediately return
+    # fully structured data for a specific "topic_name" query, like, "admin"
+    #
+    # Instead of returning a flat list of tutorials, instead we'll structure
+    # them properly in subtopics (if they exist) or return the flat list
+    # otherwise.
+    #
+    # This will let us generate new "views" into the tutorial lists, having
+    # them arranged in new and exciting ways.
+
+    self.fill_cache(site)
+
+    # Here we want to either return data structured around subtopics
+    if site.data[topic_name].has_key?("subtopics")
+      # We'll construct a new hash of subtopic => tutorials
+      out = Hash.new
+      seen_ids = []
+      site.data[topic_name]['subtopics'].each{|subtopic, v|
+        specific_resources = self.filter_by_topic_subtopic(site, topic_name, subtopic['id'])
+        out[subtopic['id']] = {
+          "subtopic" => subtopic,
+          "materials" => specific_resources
+        }
+        seen_ids += specific_resources.map{|x| x['id'] }
+      }
+
+      # And we'll have this __OTHER__ subtopic for any tutorials that weren't
+      # in a subtopic.
+      all_topics_for_tutorial = self.filter_by_topic(site, topic_name)
+      out["__OTHER__"] = {
+        "subtopic" => {"title" => "Other", "description" => "Assorted Tutorials", "id" => "other"},
+        "materials" => all_topics_for_tutorial.select{|x| ! seen_ids.include?(x['id']) }
+      }
+      out
+    else
+      # Or just the list (Jury is still out on this one, should it really be a
+      # flat list? Or in this identical structure.)
+      out = {
+        "__FLAT__" => {
+          "subtopic" => nil,
+          "materials" => self.filter_by_topic(site, topic_name)
+        }
+      }
+      out
+    end
   end
 
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
@@ -170,6 +219,7 @@ module TopicFilter
 
     # Otherwise clone the metadata from it which works well enough.
     page_obj = page.data.dup
+    page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
@@ -259,6 +309,7 @@ module TopicFilter
   end
 
   def self.process_pages(site, pages)
+    # eww.
     if site.data.has_key?('cache_processed_pages') then 
       return site.data['cache_processed_pages']
     end
@@ -270,24 +321,61 @@ module TopicFilter
     materials
   end
 
-  def self.run_topic_filter(site, pages, topic_name)
+  def self.list_all_tags(site)
+    materials = self.process_pages(site, site.pages)
+    materials.map{|x| x.fetch('tags', [])}.flatten.sort.uniq
+  end
+
+  def self.filter_by_topic(site, topic_name)
     # Here we make a (cached) call to load materials into memory and sort them
     # properly.
-    materials = self.process_pages(site, pages)
+    materials = self.process_pages(site, site.pages)
 
     # Select out the materials by topic:
-    resource_pages = materials.select{|x| x['topic_name'] == topic_name || x.fetch('tags', []).include?(topic_name)}
+    resource_pages = materials.select{|x| x['topic_name'] == topic_name}
+
+    # If there is nothing with that topic name, try generating it by tags.
+    if resource_pages.length == 0
+      resource_pages = materials.select{|x| x.fetch('tags', []).include?(topic_name)}
+    end
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
     # and then the rest of the pages.
-    resource_pages = resource_pages.sort_by{ |k| k.fetch('title', '').downcase}
+    resource_pages = resource_pages.sort_by{ |k| k.fetch('priority', 1)}
 
     if resource_pages.length == 0 then
       puts "Error? Could not find any relevant pages for #{topic_name}"
     end
 
     resource_pages
+  end
+
+  def self.filter_by_topic_subtopic(site, topic_name, subtopic_id)
+    resource_pages = self.filter_by_topic(site, topic_name)
+
+    # Select out materials with the correct subtopic
+    resource_pages = resource_pages.select{|x| x['subtopic'] == subtopic_id }
+
+    if resource_pages.length == 0 then
+      puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}"
+    end
+
+    resource_pages
+  end
+
+  def self.get_contributors(material)
+    if material.has_key?("contributors")
+      material['contributors']
+    else
+      material['contributions'].map{|k, v| v}.flatten
+    end
+  end
+
+  def self.identify_contributors(materials)
+    materials
+      .map{|k, v| v['materials']}.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
+      .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
 end
 
@@ -344,8 +432,20 @@ module Jekyll
       q
     end
 
+    def list_materials_structured(site, topic_name)
+      TopicFilter.list_materials_structured(site, topic_name)
+    end
+
+    def list_all_tags(site)
+      TopicFilter.list_all_tags(site)
+    end
+
     def topic_filter(site, topic_name)
       TopicFilter.topic_filter(site, topic_name)
+    end
+
+    def identify_contributors(materials)
+      TopicFilter.identify_contributors(materials)
     end
 
   end
