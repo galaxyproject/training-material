@@ -258,7 +258,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >    - {% icon param-select %} *"Do you want to do a PCA or a SPCA ?"*: 'PCA'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL<h/tip-title>
+>    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
