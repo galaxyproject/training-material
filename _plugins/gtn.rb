@@ -88,19 +88,8 @@ module Jekyll
     def get_default_link(material)
       url = nil
 
-      if material['type'] == "introduction"
-        subfolder = 'slides'
-      else
-        subfolder = 'tutorials'
-      end
-
       if material['slides']
-        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
-        if material['type'] != "introduction"
-          url += "/slides.html"
-        else
-          url += ".html"
-        end
+        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}.html"
       end
 
       if material['hands_on']
