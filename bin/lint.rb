@@ -502,6 +502,40 @@ module GtnLinter
     }
   end
 
+  KNOWN_TAGS = [
+    # GTN
+    'cite',
+    'snippet',
+    'link',
+    'icon',
+    'tool',
+    'color',
+
+    'set', # This isn't strictly GTN, it's seen inside a raw in a tool tutorial.
+    # Jekyll
+    'if', 'else', 'elsif', 'endif',
+    'capture', 'assign', 'include',
+    'comment', 'endcomment',
+    'for', 'endfor',
+    'unless', 'endunless',
+    'raw', 'endraw',
+  ]
+
+  def self.check_bad_tag(contents)
+    self.find_matching_texts(contents, /{%\s*(?<tag>[a-z]+)/)
+    .select {|idx, text, selected| ! KNOWN_TAGS.include? selected[:tag]}
+    .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        message: "We're not sure this tag is correct (#{selected[:tag]}), it isn't one of the known tags.",
+        code: "GTN:021",
+      )
+    }
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -519,6 +553,7 @@ module GtnLinter
       *no_target_blank(contents),
       *check_bad_link(contents),
       *check_looks_like_heading(contents),
+      *check_bad_tag(contents),
     ]
   end
 
