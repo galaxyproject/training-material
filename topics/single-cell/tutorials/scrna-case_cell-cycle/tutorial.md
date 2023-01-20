@@ -169,7 +169,7 @@ The second step after scoring the cell cycle genes is to use these scores to reg
 
 # Plotting the Effects of Cell Cycle Regression
 
-Your data is now ready for further analysis, so you can return to the [Filter, Plot and Explore Single-cell RNA-seq Data]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial and move on to the Preparing coordinates step there. Make sure that you use the `CellCycle_Regressed` dataset (you may want to rename it as `Use_me_Scaled` as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first. 
+Your data is now ready for further analysis, so you can return to the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial and move on to the Preparing coordinates step there. Make sure that you use the `CellCycle_Regressed` dataset (you may want to rename it as `Use_me_Scaled` as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first. 
 
 In order to see what is happening to the cell cycle genes, we need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that reads `TRUE` for the 97 cell cycle genes and `FALSE` for all the other genes.
 
