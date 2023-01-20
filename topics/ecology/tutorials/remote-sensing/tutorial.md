@@ -137,7 +137,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 
 > <question-title>Question</question-title>
 >
-> 1. What are the files you are interested in for the folowing tools ?
+> 1. What are the files you are interested in for the following tools ?
 >
 > > <solution-title>Solution</solution-title>
 > >
