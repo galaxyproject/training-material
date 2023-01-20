@@ -79,7 +79,7 @@ In this tutorial, we'll be working on Sentinel 2 data extracted from the Coperni
 
 This first step consist of downloading and properly prepare the data to use it in Sentinel 2 toolsuite.
 
-> <hands-on-title>Hands-on: Data upload</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.
 >
@@ -135,7 +135,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 ![Preprocessing outputs](../../images/remote_sensing/preproc.png "Preprocessing outputs")
 
 
-> <question-title>Question</question-title>
+> <question-title></question-title>
 >
 > 1. What are the files you are interested in for the following tools ?
 >
@@ -157,7 +157,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 <div class="Global" markdown="1">
 ## **Compute a PCA**
 
-> <hands-on-title>Hands-on: Principal components analysis for remote sensing data</hands-on-title>
+> <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute a PCA](toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -187,7 +187,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 
 ## **Compute biodiversity indices**
 
-> <hands-on-title>Hands-on: Biodiversity indicators for global remote sensing data</hands-on-title>
+> <hands-on-title>Biodiversity indicators for global remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute biodiversity indices](toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -234,7 +234,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 These 2 pictures are only exemple it is normal if you don't have exactly the same output.
 
 
-> <question-title>Question</question-title>
+> <question-title></question-title>
 >
 > 1. How many biodiversity indicators do you have ?
 >
@@ -250,7 +250,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 <div class="Canopy" markdown="1">
 ## **Compute a PCA**
 
-> <hands-on-title>Hands-on: Principal components analysis for remote sensing data</hands-on-title>
+> <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
 >
 > 1. {% tool [Compute a PCA](toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -281,7 +281,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 
 ## **Create Biodiversity maps**
 
-> <hands-on-title>Hands-on: Biodiversity indicators for canopy remote sensing data</hands-on-title>
+> <hands-on-title>Biodiversity indicators for canopy remote sensing data</hands-on-title>
 >
 > 1. {% tool [Mapping diversity](toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -314,7 +314,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 
 ## **Processing remote sensing data**
 
-> <hands-on-title>Hands-on: Comparing biodiversity indicators for canopy</hands-on-title>
+> <hands-on-title>Comparing biodiversity indicators for canopy</hands-on-title>
 >
 > 1. {% tool [Comparing remote sensing data](toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -339,7 +339,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 ![Bray curtis table](../../images/remote_sensing/braycu.png "Bray curtis table")
 
 
-> <question-title>Questions</question-title>
+> <question-title></question-title>
 >
 > 1. What kind of data do you need to use these tools ?
 > 2. Do you need a shapefile for mapping the diversity ?
@@ -357,7 +357,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 </div>
 
 # Spectral indices
-> <hands-on-title>Hands-on: compute spectral indices</hands-on-title>
+> <hands-on-title>Compute spectral indices</hands-on-title>
 >
 > 1. {% tool [Compute spectral indices](toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
@@ -407,7 +407,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 
 ![ebv](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
 
-> <question-title>Questions</question-title>
+> <question-title></question-title>
 >
 > 1. What's the difference between biodiversity indicators and spectral indices ?
 >
@@ -424,7 +424,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 
 You are now all set to use your remote sensing data in order to do a biodiversity analysis. Before you go on one last reflexion.
 
-> <question-title>Questions</question-title>
+> <question-title></question-title>
 >
 > 1. Should remote sensing replace in-situ data ?
 >
