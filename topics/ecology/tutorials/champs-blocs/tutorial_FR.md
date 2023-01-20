@@ -89,22 +89,24 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 
 > <hands-on-title>Télerversement des données dans Galaxy</hands-on-title>
 > 1. Importer les données dans Galaxy
->    
+>
 >  * Ouvrir l'outil Galaxy de téléversement de données {% icon galaxy-upload %}
 >  * Sélectionner **Choose local files**
 >    ![Choose local files](../../images/champbloc/upload.png "upload your data")
 >  * Naviguez dans votre ordinateur et récupérez vos fichiers ESTAMP (sélectionnez les trois fichiers mentionnés précédemment : champbloc_ivr.csv, champbloc_qecb.csv et ficheterrain.csv)
->   
+>
 >  * Cliquer sur **Start**
 >    ![Start charging your data](../../images/champbloc/start.png "Start")
 >  * Cliquer sur **Close**
 >    ![Close upload your data](../../images/champbloc/close.png "Close")
 >  Vous devez attendre que les données de votre historique s'affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
 >    ![Data ready](../../images/champbloc/after_before.png "Data ready")
->   
+>
 > > <tip-title>Tip: Création d'un nouvel historique analytique</tip-title>
 > > Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : "Indicateurs de blocs de champs") pour que vous puissiez le retrouver plus tard si besoin.
+> >
 > > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+> >
 > {: .tip}
 {: .hands_on}
 
@@ -139,9 +141,9 @@ Rendez-vous sur le formulaire de l'outil **IVR**
 > 4. Visualisation de graphiques
 >  * Une fois que les jeux de données sont affichés en vert dans l'historique, cliquer sur **IVR plot**
 >  * Puis, cliquer sur l'icone {% icon galaxy-eye %} (oeil) de votre fichier de sortie dans l'historique.
-> 
+>
 >  L'inforamtion est affichée dans le panneau du milieu
-> 
+>
 >   ![IVR](../../images/champbloc/ivr.png "IVR for Bilfot"){:width="620px"}
 >
 > > <tip-title>Rechercher les résultats de votre site</tip-title>
@@ -154,7 +156,7 @@ Rendez-vous sur le formulaire de l'outil **IVR**
 > **Pour vos rapports, vous pouvez télécharger ceux que vous souhaitez. Vous ne pourrez pas les visualiser directement sur le panneau central Galaxy car le format docx n'est pas pris en charge !**
 >
 > 5. Téléchargement des résultats
-> 
+>
 > * Cliquez sur la sortie qui vous intéresse par exemple **Rapports**
 > * Cliquez sur {% icon galaxy-save %} (télécharger)
 {: .hands_on}
@@ -180,7 +182,7 @@ Utiliser l'outil {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb
 > 3. Visualisation des graphiques
 >  * Une fois que les jeux de données sont affichés en vert dans l'historique, choisissez les figures que vous souhaitez visualiser.
 >  * Puis, cliquer sur l'icone {% icon galaxy-eye %} (oeil) de votre fichier de sortie dans l'historique.
-> 
+>
 >  Les informations sont affichées dans le panneau central
 >
 > ![Dissim fs fi](../../images/champbloc/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
@@ -188,7 +190,7 @@ Utiliser l'outil {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb
 > ![Dissim bf bm](../../images/champbloc/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
 >
 > 3. Téléchargez vos résultats
-> 
+>
 > * Cliquez sur la sortie qui vous intéresse
 > * Cliquez sur {% icon galaxy-save %} (download)
 >
