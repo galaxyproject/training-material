@@ -36,7 +36,7 @@ layout: base
     </ul>
     {% endif %}
 
-    <h2 id="material">Material</h2>
+    <h2 id="material">Material{% if topic.enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</h2>
     {% for subtopic in topic_material %}
         <!-- subtopic = [{{subtopic[0]}}, {subtopic => {{ subtopic[1].subtopic }}, materials => [ ... ]} ] -->
 
