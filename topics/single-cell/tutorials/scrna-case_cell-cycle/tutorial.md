@@ -57,7 +57,7 @@ In this tutorial, we will identify the genes whose expression varies during the 
 
 The data used in this tutorial is from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. You can download the dataset below.
 
-If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle. 
+If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle. 
 
 > <hands-on-title>Hands-on: Data upload</hands-on-title)
 >
@@ -368,7 +368,7 @@ For both the newly annotated datasets, we can now filter out the cell cycle gene
 
 Now that we have a dataset that only includes the cell cycle genes, we can visualise their effects in a PCA plot. We first calculate the PCA coordinates, which are a measure of how similar each pair of cells is in terms of the expression of the 97 cell cycle genes we've included in the filtered dataset. We will then visualise the cells on a PCA plot where the axes represent the principal components, which reflect the genes (or groups of genes) that had the biggest impact in these calculations. 
 
-You will learn more about plotting your data in the [Filter, Plot and Explore]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
+You will learn more about plotting your data in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
 
 > <hands-on-title> Hands-on: Create a PCA Plot of cell cycle genes </hands-on-title>
 >
@@ -403,7 +403,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 
 > > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA1.png)"PCA Plot of Cell Cycle Genes before regression"
 
-> > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens. 
+> > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens. 
 > >
 > {: .solution}
 >
@@ -441,7 +441,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 
 > > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA2.png)"PCA Plot of Cell Cycle Genes after regression"
 
-> > 2. The cell cycle genes aren't having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset. 
+> > 2. The cell cycle genes aren't having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset. 
 > >
 > {: .solution}
 >
@@ -453,4 +453,4 @@ Comparing the before and after plots, we can clearly see that the effects of the
 
 In this tutorial, you have annotated and scored the cell cycle genes and regressed out the effects of the cell cycle. You have also created PCA plots of the data before and after regression to visualise the effects. 
 
-You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore]({% topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out. 
+You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out. 
