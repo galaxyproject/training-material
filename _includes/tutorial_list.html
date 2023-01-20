@@ -18,23 +18,10 @@
   </thead>
   <tbody class="list">
 
-  {% assign topic_material = topic_material | sort: 'priority' %}
-  {% for material in topic_material %}
-    {% if include.sub and include.sub.id == material.subtopic %}
-      {% assign show = true %}
-    {% elsif include.sub.id == "other" and material.subtopic == nil %}
-      {% assign show = true %}
-    {% else %}
-      {% assign show = false %}
-    {% endif %}
-
-    {% if include.sub == nil or show == true %}
+  {% assign subtopic_materials = include.sub[1].materials %}
+  {% for material in subtopic_materials %}
+        <!-- MAT: {{ material.id }} -->
       {% if material.enable != false or jekyll.environment != "production" %}
-        {% if material.type == 'introduction' %}
-          {% assign subfolder = 'slides' %}
-        {% else %}
-          {% assign subfolder = 'tutorials' %}
-        {% endif %}
 
         <tr>
           <td class="tutorial_title">
@@ -91,10 +78,10 @@
             <td> {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} </td>
           {% endif %}
          </tr>
-         {% endif %}
        {% endif %}
     {% endfor %}
   </tbody>
 </table>
+
 
 
