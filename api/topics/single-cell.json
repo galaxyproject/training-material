@@ -323,6 +323,15 @@
           "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
         }
       ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music-2-preparescref"
+          ]
+        }
+      ],
       "gitter": "Galaxy-Training-Network/galaxy-single-cell",
       "url": "/topics/single-cell/tutorials/bulk-music/tutorial.html",
       "topic_name": "single-cell",
@@ -624,6 +633,325 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "subtopic": "deconvo",
+      "priority": 4,
+      "title": "Comparing inferred cell compositions using MuSiC deconvolution",
+      "zenodo_link": "https://zenodo.org/record/7319925",
+      "tags": [
+        "single-cell",
+        "mouse",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
+      ],
+      "questions": [
+        "How do the cell type distributions vary in bulk RNA samples across my variable of interest?",
+        "For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?"
+      ],
+      "objectives": [
+        "Apply the MuSiC deconvolution to samples and compare the cell type distributions",
+        "Compare the results from analysing different types of input, for example, whether combining disease and healthy references or not yields better results"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets"
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music",
+            "bulk-music-2-preparescref",
+            "bulk-music-3-preparebulk"
+          ]
+        }
+      ],
+      "url": "/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "bulk-music-4-compare",
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "compare.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "subtopic": "deconvo",
+      "priority": 3,
+      "title": "Creating the bulk RNA-seq dataset for deconvolution",
+      "zenodo_link": "https://zenodo.org/record/7319173",
+      "questions": [
+        "Where can I find good quality RNA-seq datasets?",
+        "How can I reformat and manipulate these downloads to create the right format for MuSiC?"
+      ],
+      "objectives": [
+        "You will retrieve raw data from the EMBL-EBI Expression Atlas.",
+        "You will manipulate the metadata and matrix files.",
+        "You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.",
+        "You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset."
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "The EMBL-EBI Expression Atlas contains high quality datasets.",
+        "Metadata manipulation is key for generating the correctly formatted resource."
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music",
+            "bulk-music-2-preparescref"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music-4-compare"
+          ]
+        }
+      ],
+      "url": "/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "bulk-music-3-preparebulk",
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "bulk_ESet.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "subtopic": "deconvo",
+      "priority": 2,
+      "title": "Creating the single-cell RNA-seq reference dataset for deconvolution",
+      "questions": [
+        "Where can I find good quality scRNA-seq reference datasets?",
+        "How can I reformat and manipulate these downloads to create the right format for MuSiC?"
+      ],
+      "objectives": [
+        "You will retrieve raw data from the EMBL-EBI Single cell expression atlas.",
+        "You will manipulate the metadata and matrix files.",
+        "You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.",
+        "You will create multiple ESet objects - both combined and separated out by disease phenotype for your single cell reference."
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "The EMBL-EBI Single-cell expression atlas contains high quality datasets.",
+        "Metadata manipulation is key for generating the correctly formatted resource."
+      ],
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music-3-preparebulk"
+          ]
+        }
+      ],
+      "tags": [
+        "single-cell",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
+      ],
+      "url": "/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "bulk-music-2-preparescref",
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "sc_matrix.ga",
+          "tests": false
+        },
+        {
+          "workflow": "sc_metadata.ga",
+          "tests": false
+        }
+      ],
+      "tools": [
+        "Cut1",
+        "join1",
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-2-preparescref/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-2-preparescref/tutorial.json"
       }
     },
     {
@@ -1631,7 +1959,7 @@
       ],
       "tags": [
         "single-cell",
-        "trajectory-analysis",
+        "10x",
         "paper-replication",
         "transcriptomics"
       ],
