@@ -13,7 +13,7 @@ objectives:
 - You will manipulate the metadata and matrix files.
 - You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.
 - You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset.
-time_estimation: 3H
+time_estimation: 1H
 key_points:
 - The EMBL-EBI Expression Atlas contains high quality datasets.
 - Metadata manipulation is key for generating the correctly formatted resource.
