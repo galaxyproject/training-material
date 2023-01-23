@@ -553,17 +553,17 @@ module GtnLinter
   ]
 
   def self.check_useless_box_prefix(contents)
-    self.find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+)/)
+    self.find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+:?\s*)/)
     .select {|idx, text, selected|
-      BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].downcase
+      BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].gsub(/:\s*$/, '').downcase
     }
     .map { |idx, text, selected|
       ReviewDogEmitter.warning(
         path: @path,
         idx: idx,
-        match_start: selected.begin(1),
-        match_end: selected.end(1) + 1,
-        replacement: "<#{selected[:tag]}-title>",
+        match_start: selected.begin(2),
+        match_end: selected.end(2) + 1,
+        replacement: "",
         message: "It is no longer necessary to prefix your #{selected[:tag]} box titles with #{selected[:tag].capitalize}, this is done automatically.",
         code: "GTN:022",
       )
@@ -675,6 +675,11 @@ module GtnLinter
     @LIMIT_EMITTED_CODES = codes
   end
 
+  @AUTO_APPLY_FIXES = false
+  def self.enable_auto_fix
+    @AUTO_APPLY_FIXES = true
+  end
+
   def self.format_reviewdog_output(message)
     if ! @LIMIT_EMITTED_CODES.nil?
       if !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
@@ -697,6 +702,39 @@ module GtnLinter
         puts JSON.generate(message)
       end
     end
+
+    if @AUTO_APPLY_FIXES and message['suggestions'].length > 0
+      #{"message":"It is no longer necessary to prefix your hands-on box titles with Hands-on, this is done automatically.","location":{"path":"./topics/computational-chemistry/tutorials/zauberkugel/tutorial.md","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}},"severity":"WARNING","code":{"value":"GTN:022","url":"https://github.com/galaxyproject/training-material/wiki/Error-Codes#gtn022"},"suggestions":[{"text":"<hands-on-title>","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}}]}
+
+      start_line = message['location']['range']['start']['line']
+      start_coln = message['location']['range']['start']['column']
+      end_line = message['location']['range']['end']['line']
+      end_coln = message['location']['range']['end']['column']
+
+      if start_line != end_line
+        puts "Cannot apply this suggestion sorry"
+      else
+        # We only really support single-line changes. This will probs fuck up
+        lines = File.open(message['location']['path'], 'r').read.split("\n")
+        original = lines[start_line - 1].dup
+
+        repl = message['suggestions'][0]['text']
+
+        #puts "orig #{original}"
+        #puts "before #{original[0..start_coln - 2]}"
+        #puts "selected '#{original[start_coln-1..end_coln-2]}'"
+        #puts "after #{original[end_coln-2..-1]}"
+        #puts "replace: #{repl}"
+
+        #puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
+        fixed = original[0..start_coln - 2] + repl + original[end_coln-1..-1]
+        puts "Fixing #{original} to #{fixed}"
+        lines[start_line - 1] = fixed
+
+        # Save our changes
+        File.open(message['location']['path'], 'w').write(lines.join("\n"))
+      end
+    end
   end
 
   def self.emit_results(results)
@@ -717,7 +755,7 @@ module GtnLinter
     end
 
     if path.match(/md$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       contents = handle.read.split("\n")
       ignores = should_ignore(contents)
       results = fix_md(contents)
@@ -732,14 +770,14 @@ module GtnLinter
       end
       emit_results(results)
     elsif path.match(/.bib$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       contents = handle.read.split("\n")
 
       bib = BibTeX.open(path)
       results = fix_bib(contents, bib)
       emit_results(results)
     elsif path.match(/.ga$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       begin
         contents = handle.read
         data = JSON.parse(contents)
@@ -859,9 +897,13 @@ if $0 == __FILE__
     linter.set_code_limits(options.limit.split(','))
   end
 
+  if options.apply
+    linter.enable_auto_fix()
+  end
+
   if options.path.nil?
     linter.run_linter_global()
   else
-    linter.fix_file(ARGV[0])
+    linter.fix_file(options.path)
   end
 end
