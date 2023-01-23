@@ -666,9 +666,24 @@ module GtnLinter
     @PLAIN_OUTPUT = true
   end
 
+  def self.set_rdjson_output
+    @PLAIN_OUTPUT = false
+  end
+
+  @LIMIT_EMITTED_CODES = nil
+  def self.set_code_limits(codes)
+    @LIMIT_EMITTED_CODES = codes
+  end
+
   def self.format_reviewdog_output(message)
+    if ! @LIMIT_EMITTED_CODES.nil?
+      if !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
+        return
+      end
+    end
+
     if !message.nil? and message != []
-      if $stdout.tty? or @PLAIN_OUTPUT
+      if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
           message['location']['path'],
           message['location']['range']['start']['line'],
@@ -818,14 +833,34 @@ end
 if $0 == __FILE__
   linter = GtnLinter
 
-  if ARGV.length > 0
-    if ARGV[0] == '--plain'
-      linter.set_plain_output()
-      linter.run_linter_global()
-    else
-      linter.fix_file(ARGV[0])
-    end
+  require 'optparse'
+  require 'ostruct'
+
+  options = OpenStruct.new
+  OptionParser.new do |opt|
+    # Mutually exclusive
+    opt.on('-f', '--format [plain|rdjson]') { |o| options.format = o }
+    opt.on('-p', '--path file.md') { |o| options.path = o }
+    opt.on('-l', '--limit GTN001,...') { |o| options.limit = o }
+  end.parse!
+
+  if options.format.nil?
+    options.format = "plain"
+  end
+
+  if options.format == "plain"
+    linter.set_plain_output()
   else
+    linter.set_rdjson_output()
+  end
+
+  if options.limit
+    linter.set_code_limits(options.limit.split(','))
+  end
+
+  if options.path.nil?
     linter.run_linter_global()
+  else
+    linter.fix_file(ARGV[0])
   end
 end
