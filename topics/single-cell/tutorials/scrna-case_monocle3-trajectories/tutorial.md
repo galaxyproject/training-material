@@ -37,7 +37,7 @@ requirements:
         - scrna-case_JUPYTER-trajectories
 tags:
 - single-cell
-- trajectory-analysis
+- 10x
 - paper-replication
 - transcriptomics
 
