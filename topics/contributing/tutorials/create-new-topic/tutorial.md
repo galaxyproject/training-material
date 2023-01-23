@@ -154,20 +154,6 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 {% assign kid_val = site.data['schema-topic'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
 
-### Subtopics
-
-- `subtopics`: for large topics, we can define subtopics and create multiple tutorial lists:
-  ```
-  subtopics:
-    singlecell:
-      title: "Single Cell Analysis"
-      description: "These tutorials cover single cell analysis"
-    small:
-      title: "Small RNA"
-      description: "These Tutorial"
-  ```
-  tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
-
 > <hands-on-title>Update the new topic to the website</hands-on-title>
 >
 > 1. Open the `metadata.yaml` file in your topic folder
@@ -181,6 +167,38 @@ Several metadata are defined in `metadata.yaml` file in your topic folder to :
 > 4. Check how it changes the local website
 >
 {: .hands_on}
+
+### Subtopics
+
+For large topics, we can define subtopics and create multiple tutorial lists, within a topic's `metadata.yaml`
+
+```yaml
+name: transcriptomics
+type: use
+title: Transcriptomics
+summary: Training material for all kinds of transcriptomics analysis.
+docker_image: "quay.io/galaxy/transcriptomics-training"
+
+[...]
+
+subtopics:
+- id: introduction
+  title: "Introduction"
+  description: "Start here if you are new to RNA-Seq analysis in Galaxy"
+- id: end-to-end
+  title: "End-to-End Analysis"
+  description: "These tutorials take you from raw sequencing reads to pathway analysis"
+- id: visualisation
+  title: "Visualisation"
+  description: "Tutorials covering data visualisation"
+```
+
+Each subtopic has:
+- an ID, used as a reference in the tutorial
+- a short descriptive title
+- a longer description discussion what is contained in that subtopic
+
+Tutorials can be assigned to subtopics by adding e.g. `subtopic: singlecell` to the tutorial metadata. An example of this subtopic division can be found in the [admin section]({{site.baseurl}}/topics/admin/ )
 
 # Creating a tag based topic
 
