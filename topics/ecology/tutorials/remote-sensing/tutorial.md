@@ -10,7 +10,7 @@ objectives:
 - Getting Sentinel 2 data and reformating them in a generalize way
 - Computing spectral indices such as the NDVI
 - Calculating and vizualizing biodiversity indicators
-- Comparing with in-situ data 
+- Comparing with in-situ data
 time_estimation: 2H
 key_points:
 - Remote sensing data
@@ -31,7 +31,7 @@ This tutorial will guide you on getting Sentinel 2 data and processing them in o
 
 Spatial diversity measurements should not replace in situ biodiversity data, but rather complement existing data and approaches. Spatial diversity estimates are currently based on long time scales, allowing more general predictions about rates of change in diversity. In practice, spatial data incorporate information on surface properties, including functional aspects, taxonomy, phylogeny and genetic diversity. 
 
-The tools explained here are useful for observing variations in spatial and temporal ecosystem properties given the intrinsic relationship between spatial variations in ecosystems and pixel values of spectral signals. A single measurement cannot provide a complete description of all the different aspects of ecosystem heterogeneity. Therefore, the combination of multiple tools in a Galaxy-Ecology workflow offers multiple approaches to unravel the complexity of ecosystem heterogeneity in space and time. 
+The tools explained here are useful for observing variations in spatial and temporal ecosystem properties given the intrinsic relationship between spatial variations in ecosystems and pixel values of spectral signals. A single measurement cannot provide a complete description of all the different aspects of ecosystem heterogeneity. Therefore, the combination of multiple tools in a Galaxy-Ecology workflow offers multiple approaches to unravel the complexity of ecosystem heterogeneity in space and time.
 
 So, we will compute biodiversity and spectral indices mainly using reflectance information.
 
@@ -50,15 +50,15 @@ Each part of this workflow has elementary steps :
    - Global overview
    - For Canopy
  - **A third step** to compute spectral indices:
-   - Spectral indices 
+   - Spectral indices
    - EBV
 
 > <details-title>Details about spectral indices</details-title>
 >
 > Spectral indices are used to highlight particular features or properties of the earth's surface, e.g. vegetation, soil, water. They are developed on the basis of the spectral properties of the object of interest.
 >
-> Knowledge of the leaf cell, plant structure, state, condition and spectral properties is essential to perform vegetation analysis using remote sensing data.   
-> Spectral indices dedicated to vegetation analysis are developed on the basis that healthy vegetation reflects strongly in the near infrared (NIR) spectrum while absorbing strongly in the visible red.   
+> Knowledge of the leaf cell, plant structure, state, condition and spectral properties is essential to perform vegetation analysis using remote sensing data.  
+> Spectral indices dedicated to vegetation analysis are developed on the basis that healthy vegetation reflects strongly in the near infrared (NIR) spectrum while absorbing strongly in the visible red.  
 >
 {: .details}
 
@@ -83,31 +83,25 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 > 1. Create a new history for this tutorial and give it a name (example: “Sentinel 2 data for biodiversity tutorial”) for you to find it again later if needed.
 >
->    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 >
 > 2. Download the files from [Scihub](https://scihub.copernicus.eu/dhus/#/home) or from [PEPS](https://peps.cnes.fr/rocket/#/search?maxRecords=50&page=1) :
 >
->    You will have to to create an account for either of these platform. 
+>    You will have to to create an account for either of these platform.
 >    Select Sentinel 2 and choose the Product type "S2MSI2A".
 >
 >    ![Scihub portal](../../images/remote_sensing/scihub.png "Scihub portal")
 >
->    This an example of the Copernicus portal, Scihub. You need to download a zip folder. Keep it that way. 
+>    This an example of the Copernicus portal, Scihub. You need to download a zip folder. Keep it that way.
 >
 > 3. Upload the zip folder
 >
->     > <tip-title>Tip: Importing data from your computer</tip-title>
->     >
->     > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
->     > * Select **Choose local files**
->     > * Browse in your computer and get the downloaded zip folder
->     >
->     > * Press **Start**
->     {: .tip}
+>    {% snippet faqs/galaxy/datasets_upload.md %}
 >
-> 4. You can rename the dataset, “sentinel_2_data.zip" for example, and to keep informations about the original name "S2A_MSIL2A.....zip", you can copy/paste it on the "Info" box.
+> 4. You can **rename** {% icon galaxy-pencil %} the dataset, `sentinel_2_data.zip` for example, and to keep informations about the original name `S2A_MSIL2A.....zip`
 >
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -123,9 +117,9 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 >    - {% icon param-file %} *"Input data"*: `sentinel_2_data.zip` (Input dataset)
 >    - {% icon param-select %} *"Where does your data come from ?"*: 'From Scihub or Peps'
 >
-> 2. Click on **Execute** 
+> 2. Click on **Execute**
 >
->    > <comment-title>Comment</comment-title>
+>    > <comment-title></comment-title>
 >    >
 >    > The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a BIL file without extension and the metadata are stored in the .hdr file. These data are in the output **Reflectance**. You can directly use the output **Reflectance** for the rest of the analysis.
 >    {: .comment}
@@ -139,7 +133,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 >
 > 1. What are the files you are interested in for the following tools ?
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. The 2 files in the **Refelectance** folder that finish by "_Refl" and "_Refl.hdr"
 > >
@@ -154,7 +148,10 @@ You can choose to compute spectral and biodiversity indicators either for global
 {% include _includes/cyoa-choices.html option1="Global" option2="Canopy" default="Global"
        text="Here you can choose which tutorial you want to folllow according to if your are more interested about studying canopy remote sensing data or more global ones" %}
 
+
+<!-- Choose your own adventure path -->
 <div class="Global" markdown="1">
+
 ## **Compute a PCA**
 
 > <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
@@ -165,18 +162,18 @@ You can choose to compute spectral and biodiversity indicators either for global
 >    - {% icon param-select %} *"Do you want to do a PCA or a SPCA ?"*: 'PCA'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
+>    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
->    > * Go on your raster data 
+>    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
 >    > * Click on {% icon galaxy-chart-select-data %} Datatypes
->    > * On "New Type" **Select** bil 
+>    > * On "New Type" **Select** bil
 >    > * Press **Save**
 >    >
 >    >
->    >    > <comment-title>Comment</comment-title>
+>    >    > <comment-title></comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
@@ -195,18 +192,18 @@ You can choose to compute spectral and biodiversity indicators either for global
 >    - {% icon param-text %} *"Write a number of the value of alpha"*: '1'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
+>    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
->    > * Go on your raster data 
+>    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
 >    > * Click on {% icon galaxy-chart-select-data %} Datatypes
->    > * On "New Type" **Select** bil 
+>    > * On "New Type" **Select** bil
 >    > * Press **Save**
 >    >
 >    >
->    >    > <comment-title>Comment</comment-title>
+>    >    > <comment-title></comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
@@ -214,7 +211,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >    {: .tip}
 >
 >
->    > <tip-title>Tip: You can use the output of **Compute a PCA**</tip-title>
+>    > <tip-title>You can use the output of **Compute a PCA**</tip-title>
 >    >
 >    > - {% icon param-select %} *"In which format are your data ?"*: 'Your already have the files in ENVI BIL format'
 >    > - {% icon param-file %} *"Input raster"*: `PCA raster` (output of **Compute a PCA** {% icon tool %})
@@ -228,7 +225,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >
 {: .hands_on}
 
-![Global biodiveristy tabular](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular") 
+![Global biodiveristy tabular](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular")
 ![Global biodiveristy graph](../../images/remote_sensing/rasterdiv.png "Global biodiveristy graph")
 
 These 2 pictures are only exemple it is normal if you don't have exactly the same output.
@@ -238,16 +235,20 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 > 1. How many biodiversity indicators do you have ?
 >
-> > <solution-title>Solution<solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. You should have 7 of them (Shannon, Renyi, Prao, Pielou, Hill, CRE, Berger-Parker). If you have only 5 of them, no problem, it just means you data are too small to compute CRE and Pielou but you can still continue your analysis.
 > >
 > {: .solution}
 >
 {: .question}
-</div>
 
+</div> <!-- end CYOA path -->
+
+
+<!-- Choose your own adventure path -->
 <div class="Canopy" markdown="1">
+
 ## **Compute a PCA**
 
 > <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
@@ -258,18 +259,18 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >    - {% icon param-select %} *"Do you want to do a PCA or a SPCA ?"*: 'PCA'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
+>    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
->    > * Go on your raster data 
+>    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
 >    > * Click on {% icon galaxy-chart-select-data %} Datatypes
->    > * On "New Type" **Select** bil 
+>    > * On "New Type" **Select** bil
 >    > * Press **Save**
 >    >
 >    >
->    >    > <comment-title>Comment</comment-title>
+>    >    > <comment-title></comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
@@ -289,18 +290,18 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >    - {% icon param-select %} *"Alpha, beta, functional diversity and comparison plot and map"*: 'All of the above'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
+>    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
->    > * Go on your raster data 
+>    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
 >    > * Click on {% icon galaxy-chart-select-data %} Datatypes
->    > * On "New Type" **Select** bil 
+>    > * On "New Type" **Select** bil
 >    > * Press **Save**
 >    >
 >    >
->    >    > <comment-title>Comment</comment-title>
+>    >    > <comment-title></comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
@@ -343,9 +344,9 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 > 1. What kind of data do you need to use these tools ?
 > 2. Do you need a shapefile for mapping the diversity ?
-> 3. Why do you need multiple locations for comparing biodiversity ? 
+> 3. Why do you need multiple locations for comparing biodiversity ?
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. This analisys is for data on forest, it's a canopy study.
 > > 2. No, only for the comparison with in situ data.
@@ -354,9 +355,12 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 > {: .solution}
 >
 {: .question}
-</div>
+
+</div> <!-- end CYOA path -->
+
 
 # Spectral indices
+
 > <hands-on-title>Compute spectral indices</hands-on-title>
 >
 > 1. {% tool [Compute spectral indices](toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1) %} with the following parameters:
@@ -368,25 +372,25 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >    - {% icon param-select %} *"Do you want the raster layer of the indice as an output ?"*: 'No'
 >
 >
->    > <tip-title>Tip: If you want to use your own files ENVI BIL</tip-title>
+>    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
 >    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
 >    >
->    > * Go on your raster data 
+>    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
 >    > * Click on {% icon galaxy-chart-select-data %} Datatypes
->    > * On "New Type" **Select** bil 
+>    > * On "New Type" **Select** bil
 >    > * Press **Save**
 >    >
 >    >
->    >    > <comment-title>Comment</comment-title>
+>    >    > <comment-title></comment-title>
 >    >    >
 >    >    > Do the same for the raster header with the datatype hdr
 >    >    {: .comment}
 >    >
 >    {: .tip}
 >
->    > <comment-title>Comment</comment-title>
+>    > <comment-title></comment-title>
 >    >
 >    > You can choose whichever indice you want
 >    >
@@ -411,7 +415,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 > 1. What's the difference between biodiversity indicators and spectral indices ?
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Biodiversity indicators give us informations on the heterogeneity of the landscape whereas spectral indices inform us on the well being of the vegetation.
 > >
@@ -428,7 +432,7 @@ You are now all set to use your remote sensing data in order to do a biodiversit
 >
 > 1. Should remote sensing replace in-situ data ?
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. NO ! remote sensing and in-situ data should come and complete one another to have the most complete view of the state of biodiversity.
 > >
