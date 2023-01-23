@@ -326,7 +326,7 @@ Now run the tests for this module:
 > ```
 {: .code-in}
 
-> <warning-title>Warning</warning-title>
+> <warning-title></warning-title>
 > As a word of caution, mocking (or any kind of patching to accommodate testing) may lead to brittle tests: by relying too much on *how* the logic is implemented, we'll be forced to adjust the test each time that implementation changes. It's a tradeoff between having narrowly-scoped tests that will point to the exact location of the problem but may lock the code under test into a given state, and higher-level integration-type tests that test the end result without "looking under the hood", but may be less helpful when pinpointing the exact cause of a failed test. So, use sparingly and keep it simple.
 {: .warning}
 

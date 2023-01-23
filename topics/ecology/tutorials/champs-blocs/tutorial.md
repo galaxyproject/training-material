@@ -103,7 +103,7 @@ Now let's focus on our workflow on boulder field ecological state
 >  You need to wait for the data to become green on the right panel
 >    ![Data ready](../../images/champbloc/after_before.png "Data ready")
 >   
-> > <tip-title>Tip: Create a new history</tip-title>
+> > <tip-title>Create a new history</tip-title>
 > > Create a new history for this tutorial and give it a name (example: “Champs blocs indicators”) for you to find it again later if needed.
 > > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 > {: .tip}

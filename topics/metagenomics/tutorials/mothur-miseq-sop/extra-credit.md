@@ -279,7 +279,7 @@ F3D8     8
 F3D9     9
 ```
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension
@@ -452,4 +452,3 @@ Otu0042    0.07
 
 # Wrap-up
 {:.no_toc}
-

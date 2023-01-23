@@ -114,7 +114,7 @@ into Galaxy:
 >    Use a meaningful name, for example **MTB VCFs**.
 {: .hands_on}
 
-> <tip-title>Tip</tip-title>
+> <tip-title></tip-title>
 > To create a dataset collection:
 > - Click on the box under the history name (bottom right) that says "Operations on multiple datasets"
 > - Tick all 20 VCFs files that we just imported.

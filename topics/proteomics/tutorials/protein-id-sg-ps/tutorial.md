@@ -65,7 +65,7 @@ Depending on your machine settings, raw data will be generated either in profile
 Machine vendors offer algorithms to extract peaks from profile raw data. This is implemented in ***msconvert*** {% icon tool %} and can be run in parallel to the mzML conversion. However, the OpenMS tool ***PeakPickerHiRes*** {% icon tool %} is reported to generate slightly better results ([Lange et al., 2006, Pac Symp Biocomput](https://www.ncbi.nlm.nih.gov/pubmed/17094243)) and is therefore recommended for quantitative studies ([Vaudel et al., 2010, Proteomics](https://www.ncbi.nlm.nih.gov/pubmed/19953549)).
 If your data were generated on a low resolution mass spectrometer, use ***PeakPickerWavelet*** {% icon tool %} instead.
 
-> <hands-on-title>Hands-On: File Conversion and Peak Picking</hands-on-title>
+> <hands-on-title>File Conversion and Peak Picking</hands-on-title>
 >
 > We provide the [input data](https://zenodo.org/record/796184) in the original `raw` format and also already converted to `MGF` and `mzML` file formats. If ***msconvert*** {% icon tool %} does not run on your Galaxy instance, please download the preconverted `mzML` as an input.
 >
@@ -91,7 +91,7 @@ It is generally recommended to use more than one peptide search engine and use t
 
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant in most eukaryotic organisms. Thus, not every peptide can be assigned to only one protein. Luckily, the ***Peptide Shaker*** {% icon tool %} already takes care of protein inference and even gives us some information on validity of the protein identifications. We will discuss validation in a [later step](#evaluation-of-peptide-and-protein-ids) of this tutorial.
 
-> <hands-on-title>Hands-On: Peptide and Protein Identification</hands-on-title>
+> <hands-on-title>Peptide and Protein Identification</hands-on-title>
 >
 > 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. In the **`Search Engine Options`** select `X!Tandem` and `MS-GF+`. In the **`Protein Modification Options`** add the **`Fixed Modifications`**: `Carbamidomethylation of C` and the **`Variable Modifications`**: `Oxidation of M`.
@@ -126,7 +126,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 # Analysis of Contaminants
 The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid misidentification of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. **CAVE:** in human samples, many proteins that are common contaminants may also stem from the real sample. The real source of such human proteins might require advanced investigation.
 
-> <hands-on-title>Hands-On: Analysis of Contaminants</hands-on-title>
+> <hands-on-title>Analysis of Contaminants</hands-on-title>
 >
 > 1. Run ***Select*** {% icon tool %} on the Peptide Shaker Protein Report to select all lines that match the pattern "CONTAMINANT".
 > 2. Remove all contaminants from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "CONTAMINANT".
@@ -155,7 +155,7 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 - **Peptides** have a combined scoring of their PSMs. They are marked as "Doubtful", when the score is below a set threshold. The threshold is defined by the false discovery rate (FDR).
 - **Proteins** are marked as "Doubtful", when they were identified by only a single peptide or when they were identified solely by "Doubtful" peptides.
 
-> <hands-on-title>Hands-On: Evaluation of Peptide and Protein IDs</hands-on-title>
+> <hands-on-title>Evaluation of Peptide and Protein IDs</hands-on-title>
 >
 > 1. Remove all "Doubtful" proteins from your protein list by running ***Select*** {% icon tool %} on the Peptide Shaker Protein Report. Select only those lines that **do not** match the pattern "Doubtful".
 >

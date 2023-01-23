@@ -397,7 +397,7 @@ In this section we will perform the following tasks:
 along with the UniProt and cRAP databases.
 - The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
 >   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
@@ -586,7 +586,7 @@ Finally, we can create a database which can be used to search Mass spectrometry 
 
 To do so:
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
 >   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -656,5 +656,3 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
-
-

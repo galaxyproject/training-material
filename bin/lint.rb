@@ -732,7 +732,7 @@ module GtnLinter
         lines[start_line - 1] = fixed
 
         # Save our changes
-        File.open(message['location']['path'], 'w').write(lines.join("\n"))
+        File.open(message['location']['path'], 'w').write((lines + [""]).join("\n"))
       end
     end
   end

@@ -104,7 +104,7 @@ First let's try Red, a tool than can mask repeats *de novo*. For that, select th
 >
 {: .comment}
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Red](toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genome sequence to mask"*: `genome_raw.fasta` (Input dataset)
@@ -136,7 +136,7 @@ Red produces 2 output files :
 > >
 > > As you can see **Red** has no option to hard-mask your genome. However, one of the output is a `bed` file, so you can use {% tool bedtools MaskFastaBed %} to replace repeated regions with stretches of N:
 > >
-> > > <hands-on-title>Hands-on</hands-on-title>
+> > > <hands-on-title></hands-on-title>
 > > >
 > > > 1. {% tool [bedtools MaskFastaBed](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0) %} with the following parameters:
 > > >   - {% icon param-file %} *"BED/bedGraph/GFF/VCF/EncodePeak file"*: `Red on data` (`bed` file produced by red)
@@ -160,7 +160,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 >
 {: .comment}
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
@@ -199,7 +199,7 @@ To boost RepeatMasker performance, we need a tailored repeat library for *Mucor 
 - `Muco_library_EDTA.fasta` using [EDTA](https://doi.org/10.1186/s13059-019-1905-y)
 
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
