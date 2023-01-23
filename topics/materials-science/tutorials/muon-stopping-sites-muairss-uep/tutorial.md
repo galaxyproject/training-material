@@ -138,7 +138,7 @@ workflow can be run one by one, or included in other workflows. To aid
 understanding, the steps below describe each one in detail: what parameters they
 take and what exactly they do.
 
-## AIRSS Stage 1: Generate muonated structures
+## AIRSS Stage 1: Create configuration file
 
 The first tool in the workflow handles all the configuration of the subsequent
 tools in one go. When used outside a workflow, it provides a UI with default
@@ -209,11 +209,11 @@ using the {AIRSS} method using the following parameters.
 > <hands-on-title>Tool details</hands-on-title>
 >
 > 1. {% tool [PyMuonSuite AIRSS Generate](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_write/pm_muairss_write/0.2.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Structure file"*: `Si-out.cell` (Input dataset)
+>    - {% icon param-file %} *"Structure file"*: `Si.cell` (Input dataset)
 >    - {% icon param-file %} *"YAML parameter file"*: `Configuration for si` (Input dataset)
 >    - *"Does your configuration use the CASTEP calculator?"*: `No`
 > 2. Should generate the following output(s):
->    - {% icon param-file %} `Muonated Si-out.cell using Configuration for si` (Output dataset)
+>    - {% icon param-file %} `Muonated Si.cell using Configuration for si` (Output dataset)
 >
 >    > <comment-title>CASTEP calculator</comment-title>
 >    >
@@ -238,11 +238,11 @@ structure.
 > <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [PyMuonSuite AIRSS UEP Optimise](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_uep_opt/pm_uep_opt/0.2.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Muonated structures (.zip)"*: `Muonated Si-out.cell using Configuration for si` (output of **PyMuonSuite AIRSS Generate** {% icon tool %})
+>    - {% icon param-file %} *"Muonated structures (.zip)"*: `Muonated Si.cell using Configuration for si` (output of **PyMuonSuite AIRSS Generate** {% icon tool %})
 >    - {% icon param-file %} *"Charge density file (.den_fmt)"*: `Si.den_fmt` (Input dataset)
 >    - {% icon param-file %} *"CASTEP log (.castep)"*: `Si.castep` (Input dataset)
 > 2. Should generate the following output(s):
->    - {% icon param-file %} `UEP results for Muonated Si-out.cell using Configuration for si` (Output dataset)
+>    - {% icon param-file %} `UEP results for Muonated Si.cell using Configuration for si` (Output dataset)
 >
 {: .hands_on}
 
@@ -257,7 +257,7 @@ list of potential stopping sites.
 > <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [PyMuonSuite AIRSS Cluster](toolshed.g2.bx.psu.edu/repos/muon-spectroscopy-computational-project/pm_muairss_read/pm_muairss_read/0.2.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"optimised muonated structures (.zip)"*: `UEP results for Muonated Si-out.cell using Configuration for si` (output of **PyMuonSuite AIRSS UEP Optimise** {% icon tool %})
+>    - {% icon param-file %} *"optimised muonated structures (.zip)"*: `UEP results for Muonated Si.cell using Configuration for si` (output of **PyMuonSuite AIRSS UEP Optimise** {% icon tool %})
 > 2. Should generate the following output(s):
 >    - {% icon param-file %} `Cluster Report` (Output dataset)
 >    - {% icon param-file %} `Cluster Data` (Output dataset)
