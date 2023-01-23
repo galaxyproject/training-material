@@ -839,9 +839,10 @@ if $0 == __FILE__
   options = OpenStruct.new
   OptionParser.new do |opt|
     # Mutually exclusive
-    opt.on('-f', '--format [plain|rdjson]') { |o| options.format = o }
-    opt.on('-p', '--path file.md') { |o| options.path = o }
-    opt.on('-l', '--limit GTN001,...') { |o| options.limit = o }
+    opt.on('-f', '--format [plain|rdjson]', 'Preferred output format, defaults to plain') { |o| options.format = o }
+    opt.on('-p', '--path file.md', 'Specify a single file to check instead of the entire repository') { |o| options.path = o }
+    opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options.limit = o }
+    opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |o| options.apply = true }
   end.parse!
 
   if options.format.nil?
