@@ -60,7 +60,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-14 17:24:21 +0000",
+  "dateModified": "2023-01-23 01:25:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trajectory analysis",
   "interactivityType": "mixed",
@@ -347,7 +347,7 @@ Before diving into this slide deck, we recommend you to have a look at:
 
 
 ### What is trajectory analysis?
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.coisb.2021.05.005&quot;&gt;Deconinck &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;]
 
 --
 
@@ -358,7 +358,7 @@ cellular development    | differentiation      | immune responses
 .image-40[ ![Petri dish with a magnified scheme of embryonic development](../../images/scrna-casestudy-monocle/1_cell_delevopment.png) ] | .image-40[ ![Scheme of one cell differentiating into three different types](../../images/scrna-casestudy-monocle/2_differentiation.png) ] | .image-40[ ![Different types of immune cells taking part in inflammation](../../images/scrna-casestudy-monocle/3_immune.png) ]
 
 --
-TI allows studying how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
+TI allows us to study how cells evolve from one cell state to another, and subsequently when and how cell fate decisions are made.
 
 .image-40[ ![A cell changing its shape in three steps (showing the evolution from one state to another)](../../images/scrna-casestudy-monocle/4_process.png) ]
 
@@ -368,11 +368,11 @@ TI allows studying how cells evolve from one cell state to another, and subseque
 ---
 
 ### Clustering, trajectory and pseudotime
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.coisb.2021.05.005&quot;&gt;Deconinck &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;]
 --
 
 .pull-left[
-**Clustering** calculates cell similarities to identify group cell types, that can be identified based on the marker genes expressed in each cluster.
+**Clustering** calculates cell similarities to group specific cell types, that can be identified based on the marker genes expressed in each cluster.
 
 .image-75[ ![A graph with axis labels ‘t-SNE’, showing the cells being clustered into several groups – each group marked in a  different colour.](../../images/scrna-casestudy-monocle/5_clusters.png) ]
 
@@ -403,17 +403,17 @@ _______________________________________
 ### Assumptions
 
 ???
-- snapshot data with cells in different stages of differentiaiton
+- snapshot data with cells in different stages of differentiation
 - multiple methods and how they work in biological context
 --
 
 - It would be quite difficult to analyse a sample every few seconds to see how the cells are changing. Therefore, we assume that snapshot data encompass all naïve, intermediate, and mature cell states with sufficient sampling coverage to allow the reconstruction of differentiation trajectories.
-[Sagar and Grün, 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7115822/)
+&lt;br /&gt; &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1146/annurev-biodatasci-111419-091750&quot;&gt;Sagar and Grün 2020&lt;/a&gt;&lt;/span&gt;
 
 --
 
 - As different TI methods make different assumptions about the data, a first choice to make is based on which biological process is to be expected: **not all TI methods are designed to infer all kinds of biological processes.**
-[Deconinck et al., 2021](https://doi.org/10.1016/j.coisb.2021.05.005)
+&lt;br /&gt; &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.coisb.2021.05.005&quot;&gt;Deconinck &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;
 
 ---
 ### Why different TI methods are designed to infer different kinds of biological processes?
@@ -423,13 +423,13 @@ There are multiple algorithms used to analyse scRNA-seq data to make it more rea
 Note that this is a graph from 2016 - many new approaches has been developed since then, but this scheme shows how those methods are built.
 --
 
-Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlinelibrary.wiley.com/doi/10.1002/eji.201646347)
+Look at the pipeline presented by &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1002/eji.201646347&quot;&gt;Cannoodt &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;
 
 --
 
 .image-100[ ![A scheme showing a pipeline how single cell expression data is being processed: 1) similarity: cosine and Euclidean, 2) manifold learning:  t-SNE, diffusion maps, LLE, PCA, ICA, 3) clustering: Mclust, k-Means, Hierarchical, 4) graph: Bootstrap, KNN, MST, 5) pathfinding: principal curve, shortest path from origin, longest path, binary tree, 6) cell ordering: principal curve, average orderings, mutual disagreement, detect branches, OU process, project cells to path, optimize tree, 7) method: SCUBA pseudotime, Wanderlust, Wishbone, SLICER, SCOUP, Waterfall, Mpath, TSCAN, Monocle, SCUBA](../../images/scrna-casestudy-monocle/7_methods.jpg) ]
 --
-
+&lt;br /&gt;
 There are multiple methods using particular algorithms, or even their combinations, so you must consider which one would be best for analysing your sample.
 
 ???
@@ -461,7 +461,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 ---
 
-### Manifold learning / dimentionality reduction
+### Manifold learning / dimensionality reduction
 
 .pull-left[
 
@@ -474,17 +474,17 @@ We will consider some aspects shown here to better understand similarities and d
 .pull-right[
 
 - Making a manifold is like making a flat map of a sphere (the Earth)
-- We try to 'flatten' our data, changing it from high-dimensional to low-dimentional
-- UMAP (Uniform Manifold Approximation and Projection) is another often used dimentionality reduction method
+- We try to 'flatten' our data, changing it from high-dimensional to low-dimensional
+- UMAP (Uniform Manifold Approximation and Projection) is another often used dimensionality reduction method
 
-.image-100[ ![Four graphs showing the alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together.](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
+.image-100[ ![Four graphs showing the alignment of cell types depending on the algorithm of dimensionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together.](../../images/scrna-casestudy-monocle/dim_red_methods.png) ]
 
 ]
 
 ???
-- Assumes that data lays on a low-dimentional manifold embedded in a higher-dimentional space
+- Assumes that data lays on a low-dimensional manifold embedded in a higher-dimensional space
 - Uses principal curves and graphs to obtain smooth trajectories
-- figure shows how using different dimentionality reduction methods in Monocle3 affects the outcome
+- figure shows how using different dimensionality reduction methods in Monocle3 affects the outcome
 
 ---
 
@@ -545,7 +545,7 @@ We will consider some aspects shown here to better understand similarities and d
 ---
 
 ### Graph-based approach
-.footnote[[Haghverdi et al. Diffusion pseudotime robustly reconstructs lineage branching, 2016](https://doi.org/10.1101/041384)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/nmeth.3971&quot;&gt;Haghverdi &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;]
 
 .pull-left[
 
@@ -569,7 +569,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 
 ### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.coisb.2021.05.005&quot;&gt;Deconinck &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;]
 --
 
 - RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation.
@@ -581,7 +581,7 @@ We will consider some aspects shown here to better understand similarities and d
 ---
 
 ### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.coisb.2021.05.005&quot;&gt;Deconinck &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;]
 
 - scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method.
 
@@ -601,7 +601,7 @@ We will consider some aspects shown here to better understand similarities and d
 .pull-left[
 
 
-- Tissue from which the cells come from
+- Tissue from which the cells were analysed
 
 - Branching points
 
@@ -628,7 +628,7 @@ To help you evaluate which method would work best for your data, check out this 
 
 ---
 
-### When analysing your data, consider the following: **Tissue from which the cells come from**
+### When analysing your data, consider the following: **Tissue from which the cells were analysed**
 --
 
 .pull-left[
@@ -662,7 +662,7 @@ Cells can differentiate or develop in various way, so they may exhibit different
 
 --
 
-![A table showing trajectory topologies: cycle, linear, bifurcation, multifurcation, tree, connected graph, disconnected graph] (../../images/scrna-casestudy-monocle/table.jpg)
+![A table showing trajectory topologies: cycle, linear, bifurcation, multifurcation, tree, connected graph, disconnected graph](../../images/scrna-casestudy-monocle/table.jpg)
 
 ---
 
@@ -676,13 +676,15 @@ Cells can differentiate or develop in various way, so they may exhibit different
 - diffusion pseudotime (DPT) and branch points
  - DPT does not rely on dimension reduction and can thus detect subtle changes in high-dimensional gene expression patterns
  - DPT-based analysis proceeds by identifying branching points that occur after cells progress from a root cell through a common ‘trunk trajectory’
- &lt;sub&gt;[L. Haghverdi et al. (2016)](http://dx.doi.org/10.1038/nmeth.3971)&lt;/sub&gt;
+ &lt;br /&gt;
+ &lt;sub&gt;&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/nmeth.3971&quot;&gt;Haghverdi &lt;i&gt;et al.&lt;/i&gt; 2016&lt;/a&gt;&lt;/span&gt;&lt;/sub&gt;
 
 - binning and DNB (Dynamical Network Biomarker) theory
  - order cells, according to the pseudotime, evenly segmented into nonoverlap bins with each bin containing X cells
  - categorize DNB and non-DNB markers for each bin
  - one bin contains some unassigned cells - annotated as branch bin; of the remaining bins, there are bins on the trunk, and bins for each of the branch1 and branch2
- &lt;sub&gt;[Z. Chen et al. (2018)](https://ieeexplore.ieee.org/document/8386685) &lt;/sub&gt;
+ &lt;br /&gt;
+ &lt;sub&gt;&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1109/tcbb.2018.2847690&quot;&gt;Chen &lt;i&gt;et al.&lt;/i&gt; 2019&lt;/a&gt;&lt;/span&gt;&lt;/sub&gt;
 
 ]
 
@@ -725,7 +727,7 @@ Cells can differentiate or develop in various way, so they may exhibit different
 
 - However, many of them take the ‘starting cell’, or ‘end cell’ as information that helps to infer the trajectory which best represents the actual biological processes.
 
-- On the other hand, priors can bias the outcome of the method, but if chosen appropriately, they are really helpful.
+- Priors can bias the outcome of the method, but if chosen appropriately, they are really helpful.
 
 ]
 
@@ -763,7 +765,7 @@ Slingshot, SCORPIUS, Angle, MST, Waterfall, TSCAN, SLICE, pCreode, SCUBA, RaceID
 
 - Implementations
 
-.image-100[ ![A table showing implementations for different methods. R: Monocle, SLICE, TSCAN, Waterfall, SLICER, StemID, Slingshot, RNA velocity, FateID, DPT. Python: Wanderlust, Wishbone, PAGA, P-creode, RNA velocity, GPfates, DPT, Waddington-OT. Matlab: SCUBA, Wishbone, Pseudo-dynamics. Java: GRAND-SLAM.](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
+.image-120[ ![A table showing implementations for different methods. R: Monocle, SLICE, TSCAN, Waterfall, SLICER, StemID, Slingshot, RNA velocity, FateID, DPT. Python: Wanderlust, Wishbone, PAGA, P-creode, RNA velocity, GPfates, DPT, Waddington-OT. Matlab: SCUBA, Wishbone, Pseudo-dynamics. Java: GRAND-SLAM.](../../images/scrna-casestudy-monocle/implementation_1.jpg) ]
 
 ---
 ### When analysing your data, consider the following: **Number of cells and features**
@@ -804,19 +806,27 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 --
 
+- Monocle3 in RStudio (coming soon)
+
+&lt;!--- 
+([Trajectory Analysis: Monocle3 in RStudio](/training-material/topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html))
+--&gt;
+
+--
+
 - scVelo (coming soon)
 
 ---
 
 ### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
-.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1186/s13059-017-1382-0&quot;&gt;Wolf &lt;i&gt;et al.&lt;/i&gt; 2018&lt;/a&gt;&lt;/span&gt;]
 
 --
 
 .pull-left[
 
 - [PAGA](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html) is used to generalise relationships between groups (clusters)
--  Provides an interpretable graph-like map. The graph nodes correspond to cell groups and whose edge weights quantify the connectivity between groups
+-  Provides an interpretable graph-like map. The graph nodes correspond to cell groups and the edge weights quantify the connectivity between groups
 - Available within [Scanpy](https://scanpy.readthedocs.io/en/stable/generated/scanpy.tl.paga.html)
 
 ![Plots generated using PAGA based on cell types,  CD4 and Cd8a genes expression. Graph nodes connected to each other.](../../images/scrna-casestudy-monocle/paga_plot.png)
@@ -864,7 +874,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ---
 
 ### Trajectory analysis methods used in Galaxy: **RaceID**
-.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/nature14966&quot;&gt;Grün &lt;i&gt;et al.&lt;/i&gt; 2015&lt;/a&gt;&lt;/span&gt;]
 
 --
 .pull-left[
@@ -890,7 +900,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ---
 
 ### Trajectory analysis methods used in Galaxy: **RaceID**
-.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/nature14966&quot;&gt;Grün &lt;i&gt;et al.&lt;/i&gt; 2015&lt;/a&gt;&lt;/span&gt;]
 
 .pull-left[
 
@@ -918,7 +928,7 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
-.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+.footnote[C. Trapnell &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://cole-trapnell-lab.github.io/monocle3/&quot;&gt;cole-trapnell-lab&lt;/a&gt;&lt;/span&gt;]
 
 --
 .pull-left[
@@ -951,7 +961,7 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
-.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+.footnote[C. Trapnell &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://cole-trapnell-lab.github.io/monocle3/&quot;&gt;cole-trapnell-lab&lt;/a&gt;&lt;/span&gt;]
 
 .pull-left[
 
@@ -980,14 +990,14 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **scVelo**
-.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
+.footnote[&lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/s41587-020-0591-3&quot;&gt;Bergen &lt;i&gt;et al.&lt;/i&gt; 2020&lt;/a&gt;&lt;/span&gt;]
 
 --
 
 - scVelo infers gene-specific rates of transcription, splicing and degradation, and recovers the latent time of the underlying cellular processes
 - think of velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
 - Compatible with [scanpy](https://scvelo.readthedocs.io/) and hosts efficient implementations of all RNA velocity models
-The originally proposed framework obtains velocities as the deviation of the observed ratio of spliced and unspliced mRNA from an inferred steady state
+
 
 .image-25[ ![scVelo plot showing arrows going in ordered directions both within the cell types and between them](../../images/scrna-casestudy-monocle/scvelo.png) ]
 
