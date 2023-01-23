@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-17 11:14:43 +0000" />
+<meta name="DC.date" content="2023-01-23 15:32:16 +0000" />
 <meta name="DC.creator" content="Anup Kumar" />
 
         
@@ -277,7 +277,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-17 11:14:43 +0000",
+  "dateModified": "2023-01-23 15:32:16 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "interactivityType": "mixed",
@@ -826,6 +826,18 @@
         
     
         
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
             Galaxy Integrated Omics (GIO)
         </a>
@@ -834,6 +846,12 @@
         
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
         </a>
         
     
@@ -1079,7 +1097,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1130,7 +1148,7 @@
 </blockquote>
 
 <h1 id="introduction">Introduction</h1>
-<p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust <a href="https://usegalaxy.eu/tool_runner?tool_id=interactive_tool_ml_jupyter_notebook">Jupyterlab notebook application</a> has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, <a href="https://scikit-learn.org/">Scikit-learn</a>, <a href="https://www.tensorflow.org/">Tensorflow</a>, <a href="https://onnx.ai/">ONNX</a> to support modern data science projects. It has been developed as an interactive <span class="notranslate">Galaxy</span> tool that runs on an isolated <a href="https://github.com/anuprulez/ml-jupyter-notebook">docker container</a>. The docker container has been built using <a href="https://hub.docker.com/layers/nvidia/cuda/11.8.0-cudnn8-runtime-ubuntu22.04/images/sha256-08aed54a213b52e9cb658760b6d985db2f4c5f7e8f11ac45ec66b5c746237823?context=explore">nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04</a> as the base container. Moreover, a <span class="notranslate">Galaxy</span> <a href="https://github.com/bgruening/galaxytools/pull/1157">tool</a> ( <code class="language-plaintext highlighter-rouge">run_jupyter_job</code>) can be executed using <a href="https://bioblend.readthedocs.io/">Bioblend</a> which uses <span class="notranslate">Galaxy</span>’s remote job handling for long-running machine learning and deep learning training. The training happens remotely on a <span class="notranslate">Galaxy</span> cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a <span class="notranslate">Galaxy</span> history for further use.</p>
+<p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust <a href="https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook">Jupyterlab notebook application</a> has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, <a href="https://scikit-learn.org/">Scikit-learn</a>, <a href="https://www.tensorflow.org/">Tensorflow</a>, <a href="https://onnx.ai/">ONNX</a> to support modern data science projects. It has been developed as an interactive <span class="notranslate">Galaxy</span> tool that runs on an isolated <a href="https://github.com/anuprulez/ml-jupyter-notebook">docker container</a>. The docker container has been built using <a href="https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo">nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04</a> as the base container. Moreover, a <span class="notranslate">Galaxy</span> <a href="https://github.com/bgruening/galaxytools/pull/1157">tool</a> ( <code class="language-plaintext highlighter-rouge">run_jupyter_job</code>) can be executed using <a href="https://bioblend.readthedocs.io/">Bioblend</a> which uses <span class="notranslate">Galaxy</span>’s remote job handling for long-running machine learning and deep learning training. The training happens remotely on a <span class="notranslate">Galaxy</span> cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a <span class="notranslate">Galaxy</span> history for further use.</p>
 
 <h2 id="features-of-jupyterlab">Features of Jupyterlab</h2>
 <p><a href="https://jupyterlab.readthedocs.io/en/stable/">Jupyterlab</a> notebook has been augmented with several useful features and together they make it ready-to-use for quick prototyping and end-to-end artificial intelligence (AI) projects. Being able to <strong>serve online</strong> makes it convenient to share it with other researchers and users. Its features can be broadly classified into two categories - features that have been added solely as Python packages and those that have been added also as Python packages but have their respective user interfaces. We will briefly discuss these features and later, we will use some of those for building and using AI models.</p>
