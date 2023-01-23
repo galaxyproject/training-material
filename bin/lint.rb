@@ -530,8 +530,42 @@ module GtnLinter
         idx: idx,
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
+        replacement: nil,
         message: "We're not sure this tag is correct (#{selected[:tag]}), it isn't one of the known tags.",
         code: "GTN:021",
+      )
+    }
+  end
+
+  BOX_CLASSES = [
+      "agenda",
+      "code-in",
+      "code-out",
+      "comment",
+      "details",
+      "feedback",
+      "hands-on",
+      "hands_on",
+      "question",
+      "solution",
+      "tip",
+      "warning",
+  ]
+
+  def self.check_useless_box_prefix(contents)
+    self.find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+)/)
+    .select {|idx, text, selected|
+      BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].downcase
+    }
+    .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: "<#{selected[:tag]}-title>",
+        message: "It is no longer necessary to prefix your #{selected[:tag]} box titles with #{selected[:tag].capitalize}, this is done automatically.",
+        code: "GTN:022",
       )
     }
   end
@@ -554,6 +588,7 @@ module GtnLinter
       *check_bad_link(contents),
       *check_looks_like_heading(contents),
       *check_bad_tag(contents),
+      *check_useless_box_prefix(contents),
     ]
   end
 
