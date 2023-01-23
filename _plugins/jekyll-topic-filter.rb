@@ -442,7 +442,7 @@ module Jekyll
 
     def topic_count(resources)
       # Count lines in the table except introduction slides
-      resources.select{ |a| a['type'] != 'introduction' }.length
+      resources.length
     end
 
     def fetch_tutorial_material(site, topic_name, page_name)
@@ -461,9 +461,6 @@ module Jekyll
 
       # Sort alphabetically by titles
       q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
-
-      # But move introduction to the start
-      q = q.select{|k, v| k == "introduction"} + q.select{|k, v| k != "introduction"}
 
       q
     end

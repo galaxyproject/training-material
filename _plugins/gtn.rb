@@ -89,7 +89,7 @@ module Jekyll
       url = nil
 
       if material['slides']
-        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}.html"
+        url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/slides.html"
       end
 
       if material['hands_on']
