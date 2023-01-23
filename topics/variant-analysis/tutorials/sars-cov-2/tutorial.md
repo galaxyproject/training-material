@@ -100,7 +100,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 > <hands-on-title>Explore SRA Entrez</hands-on-title>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
-> 1. If your history is not already empty, than start a new history (see [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
+> 1. If your history is not already empty, than start a new history (see [here]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}) for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
 >    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.

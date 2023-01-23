@@ -222,7 +222,7 @@ Watch your new history item.  It will go through three statuses before it's done
 | **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Failed](../../images/status_failed.png) |
 | ---- | ---- | ---- |
 
-You can find more information in the [Undestanding Galaxy history system](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) training.
+You can find more information in the [Undestanding Galaxy history system]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}) training.
 
 ## Examine the data
 

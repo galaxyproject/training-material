@@ -252,7 +252,7 @@ However, sometimes you may wish to do more, like...
 
 # Manipulating the analysis
 
-Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html)) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
+Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters]({% link topics/galaxy-interface/tutorials/workflow-parameters/tutorial.md %})) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
 
 > <hands-on-title>Manipulate the analysis steps</hands-on-title>
 >

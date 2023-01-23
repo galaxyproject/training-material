@@ -42,7 +42,7 @@ The training dataset consists of a dataset from a [study](https://doi.org/10.118
 
 ## Get data
 
-The raw data is available via the PRIDE repository under the ID: [PXD014145](https://www.ebi.ac.uk/pride/archive/projects/PXD014145). The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html).
+The raw data is available via the PRIDE repository under the ID: [PXD014145](https://www.ebi.ac.uk/pride/archive/projects/PXD014145). The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at [Protein FASTA Database Handling tutorial]({% link topics/proteomics/tutorials/database-handling/tutorial.md %}).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -265,6 +265,3 @@ The volcano plot plots the negative log10 of the adjusted P Value derived from s
 Please bear in mind that TMT quantitation suffers from ratio compression. There are ways to calculate more accurate fold changes from measured data (or alternatively you can use MS3 quantitation on some machines). However, even with ratio compression, MS2 TMT is an excellent quantitation strategy to detect differentially regulated proteins. Just bear in mind that the reported fold chances of proteins are almost always smaller than the real fold changes between your conditions.
 
 ![Volcano plot](../../images/maxquant-msstats-tmt/volcano_plot.png "Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample")
-
-
-
