@@ -1,0 +1,40 @@
+name: Automated Tooting
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this daily at noon.
+    - cron:  '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+    steps:
+      # Shallow should be fine for video
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 5000
+
+      - name: Ensure directories
+        run: |
+          mkdir -p news/outbox/
+
+      # Send toot
+      - name: Send any unsent toots
+        uses: hexylena/tootit@v1.0.1
+        with:
+          server: mstdn.science
+          token: ${{ secrets.mstdn_science }}
+          inbox: news/inbox/
+          outbox: news/outbox/
+
+      # Commit the results
+      - name: Cleanup
+        run: |
+            git config user.email "gtn@mstdn.science"
+            git config user.name "The Galaxy Training Network"
+            git add news/outbox/
+            git commit -m 'Move sent toots'
+            git push
