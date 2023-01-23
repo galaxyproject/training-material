@@ -455,7 +455,9 @@ module Jekyll
       }
 
       # Alllow filtering by a category, or return "all" otherwise.
-      if category != "all"
+      if category == "non-tag" then
+        q = q.select{|k, v| v['tag_based'].nil? }
+      elsif category != "all" then
         q = q.select{|k, v| v['type'] == category }
       end
 
