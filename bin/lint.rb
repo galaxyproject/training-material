@@ -344,6 +344,7 @@ module GtnLinter
       'Convert characters1',
       'Count1',
       'Cut1',
+      'Extract_features1',
       'Filter1',
       'Grep1',
       'Grouping1',
