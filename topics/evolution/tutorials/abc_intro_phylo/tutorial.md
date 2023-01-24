@@ -4,7 +4,6 @@ title: Phylogenetics - Back to basics
 zenodo_link: 'https://zenodo.org/record/6010176'
 enable: false
 tags:
-  - prokaryotes
   - phylogenetics
   - evolution
 level: Introductory
@@ -14,7 +13,7 @@ questions:
 objectives:
 - Understand the basic concepts behind phylogenetic trees
 - Be able to read and interrogate a phylogeny encountered in the literature
-time_estimation: 1H
+time_estimation: 2.5H
 contributors:
 - mcharleston
 - adamtaranto
@@ -25,12 +24,12 @@ contributors:
 Intro text
 
 
-# Basic concepts: this is a major section
+# Basic Methodology
 This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
 > <comment-title>This is a comment section</i></comment-title>
 >
-> Phylogenetics with MTB has some particularities rarely encountered with other organisms.
+> This is a comment section
 >
 > 1. item 1
 >
@@ -38,13 +37,7 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 >
 {: .comment}
 
-
-## This is a subsection
-
-Here is an embedded image
-
-![Alignment](./images/MEGA_alignment.png){:width="500"}
-
+## Data upload
 
 ## "Hands on task section" Get the data
 > <hands-on-title>Obtain your data</hands-on-title>
@@ -53,17 +46,74 @@ Here is an embedded image
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following files from [Zenodo](https://zenodo.org/record/6010176) or from the shared data library
+> 2. Import the following files from [Zenodo](https://tinyurl.com/phylo-trees-1-data) or from the shared data library
+>     Note: Current link is to google drive. Update to Zenodo for final release.
 >
 >    ```
->    https://zenodo.org/record/6010176/files/SNP_alignment.fasta
+>    exon7-unaligned.fst
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
-# another section 
+
+# Sequence Alignment
+
+
+## Aligning sequences with MAFFT
+
+> <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
+>
+> 1. Step 1
+> 2. Step 2
+>
+{: .hands_on}
+
+Here is an embedded image
+
+![Alignment](./images/MEGA_alignment.png){:width="500"}
+
+
+# Distance-based phylogenetic inference
+
+## Building a Neighbor-Joining Tree 
+
+> <hands-on-title>Build a Neighbour-Joining Tree with Splitstree</hands-on-title>
+>
+> 1. Step 1
+> 2. Step 2
+>
+{: .hands_on}
+
+
+# Phylogenetic Networks
+
+
+## Building a Neighbor-Net phylogenetic network
+
+> <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
+>
+> 1. Step 1
+> 2. Step 2
+>
+{: .hands_on}
+
+
+# Basics of Maximum Likelihood
+
+##  Estimating a Maximum Likelihood tree 
+
+> <hands-on-title>Estimating a Maximum Likelihood tree with RaXML and IQTree</hands-on-title>
+>
+> 1. Step 1
+> 2. Step 2
+>
+{: .hands_on}
+
+
+
+# Markdown hints
 Internal link [Resources](#resources) 
 An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 
@@ -79,7 +129,6 @@ An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 > {: .solution}
 >
 {: .question}
-
 
 
 > <question-title>Exercise 2</question-title>
