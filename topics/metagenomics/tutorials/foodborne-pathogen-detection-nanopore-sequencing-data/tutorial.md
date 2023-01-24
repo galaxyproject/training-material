@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "(Foodborne) Pathogen Detection from (direct Nanopore) sequencing data using Galaxy"
+title: "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition"
 tags:
     - Nanopore data analysis
     - Pathogens detection
@@ -29,9 +29,9 @@ contributors:
 
 # Introduction
 
-Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany (BVL 2019). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to Salmonella spp. followed by Campylobacter spp. and Noroviruses.
+Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany (BVL 2019). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses.
 
-During the investigation of a foodborne outbreak, a microbiological analysis of the probable responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, to detect bacterial pathogens in food, the European Regulation (CE) follows ISO standards, but alternative methods with equivalent performance are possible. Usually, foodborne pathogens are detected and identified by stepwise cultures on selective media and/or targeting specific genes with real-time PCRs. To characterise the detected strains, the current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA). These techniques have some disadvantages. Whole Genome Sequencing (WGS) has been proposed as an alternative: detection of all genes with just one sequencing run, phylogenetic analysis to link cases, information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence. WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming, not always straightforward nor successful process. Sequencing methods without prior isolation could solve this issue.
+During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, to detect bacterial pathogens in food, the European Regulation (CE) follows ISO standards, but alternative methods with equivalent performance are possible. Usually, foodborne pathogens are detected and identified by stepwise cultures on selective media and/or targeting specific genes with real-time PCRs. To characterise the detected strains, the current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA). These techniques have some disadvantages. Whole Genome Sequencing (WGS) has been proposed as an alternative: detection of all genes with just one sequencing run, phylogenetic analysis to link cases, information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence. WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming, not always straightforward nor successful process. Sequencing methods without prior isolation could solve this issue.
 
 The evolution of sequencing techniques in the last decades has made possible the development of shotgun metagenomic sequencing, i.e. the direct sequencing of all DNA present in a sample. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community and any possible pathogens and their complete genetic information, without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterise pathogens and their functional characteristics (e.g. virulence genes) in naturally contaminated or spiked food samples. 
 
@@ -41,7 +41,7 @@ The currently available studies used Illumina sequencing, generating short reads
 
 The industry partner of the datasets used in this tutorial, [Biolytix](https://www.biolytix.ch/), developed a procedure to extract, sequence using MinION (ONT) sequencing and analyze a food sample for foodborne pathogen detection and contamination source tracking. However, the bioinformatics pipelines are not following the best practices for open data science, not straightforward and can only be manipulated by the original author, making it not scalable. Therefore, the aim of the Galaxy workflows (step by step) presented in this tutorial is to modernise, FAIRify and validate the bioinformatic pipeline using modern paradigms of data science to make it accessible and scalable.
 
-In this tutorial, we will be presenting a Galaxy workflow its main goal is to agnostically detect and track pathogens in any Nanopore samples, for example food like chicken, cow, etc., and identifying contamination, by identifying which samples are contaminated with a pathogen, what exactly is this pathogen and what is the degree of its severity (its Virulence Factor)
+In this tutorial, we will be presenting a Galaxy workflow its main goal is to agnostically detect and track pathogens in any Nanopore samples, for example food like chicken, cow, etc., and identifying contamination, by identifying which samples are contaminated with a pathogen, what exactly is this pathogen and what is the degree of its severity (its virulence factors).
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
@@ -53,7 +53,7 @@ In this tutorial, we will be presenting a Galaxy workflow its main goal is to ag
 
 # Dataset
 
-In this tutorial, the datasets are all generated by Biolytix. They are all chicken spiked with Salmonella's different stains. The two barcodes we are using are; Barcode 10 Spike 2, which is chicken spiked with Salmonella enterica subsp. Enterica this dataset was generated on the 14th of July 2022, and Barcode 11 Spike 2b, which is chicken spiked with Salmonella enterica subsp. Houtenae generated on 20th of July 2022.
+In this tutorial, the datasets are all generated by Biolytix. They are all chicken spiked with _Salmonella's_ different stains. The two barcodes we are using are; Barcode 10 Spike 2, which is chicken spiked with _Salmonella enterica subsp. enterica_ this dataset was generated on the 14th of July 2022, and Barcode 11 Spike 2b, which is chicken spiked with _Salmonella enterica subsp. houtenae_ generated on 20th of July 2022.
 
 ![Biolytix workflow for sequencing ONT datasets](./images/Biolytix_Workflow_Sequencing.png "The Biolytix workflow for spiking food e.g. chicken, meat, etc. with known pathogens e.g. Salmonella then preform Nanopore sequencing datasets with built-in base caller")
 
@@ -100,12 +100,12 @@ As you chose to follow the short version of the tutorial we will be running the 
 
 # Pre-Processing
 
-Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it where possible by trimming and filtering reads.
+Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it when possible by trimming and filtering reads.
 
 In this section we will run a sub-workflow that performs the following tasks with the following tools:
 1. Assess the reads quality before and after improving it using [__FastQC__](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [__NanoPlot__](https://github.com/wdecoster/NanoPlot) and  [__MultiQC__](https://multiqc.info/)
-2. Trimming and Filtering reads by length and quality, so quality improving using [__Porechop__](https://github.com/rrwick/Porechop) and [__Fastp__](https://academic.oup.com/bioinformatics/article/34/17/i884/5093234)
-3. Remove all possible hosts sequences e.g. Chicken, Cow, etc using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) with [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** and **Filter Sequence By ID**.
+2. Trimming and filtering reads by length and quality, so quality improving using [__Porechop__](https://github.com/rrwick/Porechop) and [__Fastp__](https://academic.oup.com/bioinformatics/article/34/17/i884/5093234)
+3. Remove all possible hosts sequences e.g. chicken, cow, etc. using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) with [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** and **Filter Sequence By ID**.
 
 We will run all these steps using a single sub-workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; `Barcode10`and `Barcode11`.
 
@@ -168,7 +168,7 @@ For more information about how to interpret the plots generated by **FastQC** an
 {: .question}
 
 ## Hosts Filtering
-Generally, we are not interested in the food (host) sequences that may or may not include the pathogen, rather we are interested only in the pathogen itself. That's why it's an important step to get rid of all hosts' sequences so we are only remained with sequences that might include a pathogen to start our analyses with. To use these workflows in real life you just run them on the samples you collected from a food factory, for example, at different time points and locations in the production process in order to spot when and where the pathogen entered the food and affect it. The workflow will filter out all possible hosts, e.g. meat, milk, chicken, etc., then remove all found hosts out, and keep the remaining sequences to test and track pathogens for. In this tutorial, we know in prior that the samples we have are __Chicken__ spiked with __Salmonella__ so we already know what will we get as a host and as a main pathogen. 
+Generally, we are not interested in the food (host) sequences that may or may not include the pathogen, rather we are interested only in the pathogen itself. That's why it's an important step to get rid of all hosts' sequences so we are only remained with sequences that might include a pathogen to start our analyses with. To use these workflows in real life you just run them on the samples you collected from a food factory, for example, at different time points and locations in the production process in order to spot when and where the pathogen entered the food and affect it. The workflow will filter out all possible hosts, e.g. meat, milk, chicken, etc., then remove all found hosts out, and keep the remaining sequences to test and track pathogens for. In this tutorial, we know in prior that the samples we have are __chicken__ spiked with **_Salmonella_** so we already know what will we get as a host and as a main pathogen.
 
 In this tutorial we use the following tools and database to remove all hosts' sequences:
 - **Kraken2** a taxonomic classification system, uses built-in and external libraries to classify the sequences into known taxon up to species level
@@ -185,7 +185,7 @@ In this tutorial we use the following tools and database to remove all hosts' se
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Gallus gallus (taxid 9031), which is Chicken
+> > 1. _Gallus gallus_ (taxid 9031), which is chicken
 > > 2. 836
 > >
 > {: .solution}
@@ -250,11 +250,11 @@ While the workflow is running you can move on to the next section **Gene based p
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Escherichia coli with 10,243 sequences
-> > 2. Salmonella enterica with 7,458 sequences
+> > 1. _Escherichia coli_ with 10,243 sequences
+> > 2. _Salmonella enterica_ with 7,458 sequences
 > > 3. 40,143 sequences are classified and 50,455 are unclassified
-> > 4. a. with **Kalamari** database the most found species is Escherichia coli with 12,577 sequences 
-> > >  b. with **Kalamari** database the second most found species is Salmonella enterica with 10,632 sequences
+> > 4. a. with **Kalamari** database the most found species is _Escherichia coli_ with 12,577 sequences 
+> > >  b. with **Kalamari** database the second most found species is _Salmonella enterica_ with 10,632 sequences
 > > > >  c. with **Kalamari** database the number of classified sequences are 32,020 sequences and the unclassified sequences are 59,414 
 > > > > > In conclusion, both databases are able to show the same results of the most common species. However, the number of the classified sequences with **Standard PlusPF** database is higher than **Kalamari** database and it would be even higher since all chicken sequences were removed before testing the **Standard PlusPF** database
 > {: .solution}
@@ -295,7 +295,7 @@ Now lets try the **Phinch visulization** tool running for `Barcode11` history
 {: .question}
  
 # Gene based pathogenic identification
-In this section we will analyze the sequences in our samples and identify genes that have a [Virulence Factor (VF)](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which will then define a pathogen and its severity level. We will also identify [Antimicrobial Resistance genes (AMR)](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes), which their presence will destroy the antibiotic that will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [Multilocus Sequence Typing (MLST)](https://pubmlst.org/) database we will also determine the strain of the bacteria we are testing for pathogenicity. Never the less, we will be creating our **FASTA** and **Tabular** files that we will used later on to track and visualize our pathogenic identification throughout all samples, which is done in the **Pathogen Tracking among all samples** section and sub-workflow coming later in this tutorial.
+In this section we will analyze the sequences in our samples and identify [Virulence Factor (VF)](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which are gene products, usually proteins, involved in pathogenicity by identifiying them we can call a pathogen and its severity level. We will also identify [Antimicrobial Resistance genes (AMR)](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes). These type of genes have three fundamental mechanisms of antimicrobial resistance that are enzymatic degradation of antibacterial drugs, alteration of bacterial proteins that are antimicrobial targets, and changes in membrane permeability to antibiotics, which will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [Multilocus Sequence Typing (MLST)](https://pubmlst.org/) database we will also determine the strain of the bacteria we are testing for pathogenicity. Never the less, we will be creating our **FASTA** and **Tabular** files that we will used later on to track and visualize our pathogenic identification throughout all samples, which is done in the **Pathogen Tracking among all samples** section and sub-workflow coming later in this tutorial.
 
 In this section, we will run a sub-workflow with the following tools that perform the following tasks:
 1. Genome assembly or creating contigs from our sequences using [__metaflye__](https://www.nature.com/articles/s41592-020-00971-x) then assembly polishing using [__medaka consensus pipeline__](https://github.com/nanoporetech/medaka) and visualizing the assembly graph using [__Bandage Image__](https://rrwick.github.io/Bandage/)
@@ -347,7 +347,7 @@ But before we run the sub-workflow we need to upload one more file needed to cre
 {: .hands_on}
 
 ## Assembly
-After improving the quality of the sequences in our samples and removing all the hosts' sequences, the next step is to analysis them and search for pathogens. To do so, we have to first assemble our reads and create our contigs file, which will then be used to search databases for the presence of any pathogenic gene.
+After improving the quality of the sequences in our samples and removing all the hosts' sequences, the next step is to analize them and search for pathogens. To do so, we have to first assemble our reads and create our contigs file, which will then be used to search databases for the presence of any pathogenic gene.
 
 Recent advances in the challenging area of metagenomic bacterial genome assembly in the form of the specialized long-read metagenomic assembly program **metaflye** or **Flye** and sequence polishing tools such as **medaka** have made the inclusion of these analyses relatively simple. **Metaflye** and **medaka** facilitate the rapid assembly and correction of the long, error-prone Nanopore reads obtained from the metagenomic sequencing in multiple earlier work.
 
@@ -447,9 +447,9 @@ For this step in the sub-workflow the tool **ABRicate** is chosen again but this
 
 # SNP based pathogenic identification
 
-Here, we will be identifing variants in our samples compared to a reference genome. For example, if we want to test our samples if they include [Campylobacter pathogen](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the Campylobacter speices, and when we find variants in specific positions on the genome we look these positions up and see if these real variations would indicate a pathogen or not. Nevertheless, novel alleles can be also identified here, we might be identifing a new variant of the pathogen while running such a workflow. What we are refering to here is [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf). In this section, we also build our consensus genome of our samples, so we can later build a Phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different speices of our samples' evolution.
+Here, we will be identifing variants in our samples compared to a reference genome. For example, if we want to test our samples if they include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species, and when we find variants in specific positions on the genome we look these positions up and see if these real variations would indicate a pathogen or not. Nevertheless, novel alleles can be also identified here, we might be identifing a new variant of the pathogen while running such a workflow. What we are refering to here is [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf). In this section, we also build our consensus genome of our samples, so we can later build a Phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different species of our samples' evolution.
 
-In this training, we are testing Salmonella enterica speices, which our samples are spiked with its different strains. So we will now upload to our histories the reference genome of [Salmonella enterica](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
+In this training, we are testing _Salmonella enterica_ , which our samples are spiked with its different strains. So we will now upload to our histories the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
 
 In this section, we will run a sub-workflow that can run in parallel to **Taxonomy Profiling**, **Gene based pathogenic identification** and **Pathogen Tracking among all samples** sub-workflows, so feel free to run it in the time you are waiting for the other sub-workflows to finish running. 
 
@@ -496,8 +496,8 @@ In this section, we will run a sub-workflow that can run in parallel to **Taxono
 
 To identify variants, the following tools are used:
 
-1. First we map to a reference genome of the speices of the pathogen you want to test your samples against, we used **Minimap2** since our datasets are Nanopore. 
-2. Then we indetify Variants and Single nucleotide variants using [__Clair3__](https://hpc.nih.gov/apps/Clair3.html), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date. [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and with much fewer tools' options. So we recommend **Clair3** that we used in this sub-workflow.
+1. First we map to a reference genome of the species of the pathogen you want to test your samples against, we used **Minimap2** since our datasets are Nanopore. 
+2. Then we indetify variants and single nucleotide variants using [__Clair3__](https://hpc.nih.gov/apps/Clair3.html), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date. [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and with much fewer tools' options. So we recommend **Clair3** that we used in this sub-workflow.
 3. After that a normalization step to our variant calling output is needed, where we normalize indels; check if REF alleles in the output match the reference; split multiallelic sites into multiple rows; recover multiallelics from multiple rows using [__bcftools norm__](https://samtools.github.io/bcftools/bcftools.html).
 4. Last but not least, we filter to keep only the pass and good quality variants, [__SnpSift Filter__](http://pcingola.github.io/SnpEff/) tool is used in our workflow where you can set any filtering expression to keep as per your experiment thresholds. [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
 5. Finally, we will extract our tabular report where we keep specific fields in the output VCF, we used [__SnpSift Extract Fields__](http://pcingola.github.io/SnpEff/)
@@ -506,7 +506,7 @@ To identify variants, the following tools are used:
 >
 > Now let's inspect the sub-workflow outputs together for `Barcode10` history
 >
-> 1. How many Variants found in `Barcode10_Spike2` sample before and after quality filtering?
+> 1. How many variants found in `Barcode10_Spike2` sample before and after quality filtering?
 > 2. What is the Strain identified by the NCBI for the sample?
 >
 > > <solution-title></solution-title>
@@ -517,7 +517,7 @@ To identify variants, the following tools are used:
 {: .question}
 
 ## Consensus Genome Building
-For further anaylsis we have included one more step in this section, where we build the full genome of our samples. That can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as Salmonella doesnot have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in the workflow for any further analysis of the users if needed.
+For further anaylsis we have included one more step in this section, where we build the full genome of our samples. That can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in the workflow for any further analysis of the users if needed.
 
 For this step we run [__bcftools consensus__](https://samtools.github.io/bcftools/bcftools.html).
 > <question-title></question-title>
@@ -612,7 +612,7 @@ A heatmap is one of the visualization techniques that can give you a complete ov
 > >
 > > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAF98391** is only found in Barcode 10 sample and **NP_460360** is only found in Barcode 11 sample
-> > 3. Both samples are spiked with the same species of the pathogen; Salmonella enterica, but not the same strain. `Barcode10_Spike2` sample is spiked with **Enterica** strain and `Barcode11_Spike2b` with Houtenae strain. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> > 3. Both samples are spiked with the same species of the pathogen; _S. enterica_, but not the same strain. `Barcode10_Spike2` sample is spiked with **_S. enterica_** strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_ strain. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
 > {: .solution}
 {: .question}
@@ -650,12 +650,12 @@ As you chose to follow the long version of the tutorial we will be running a too
 
 # Pre-Processing
 
-Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it where possible by trimming and filtering reads.
+Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it when possible by trimming and filtering reads.
 
 In this section we will run the following tools that performs the following tasks:
 1. Assess the reads quality before and after improving it using [__FastQC__](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/), [__NanoPlot__](https://github.com/wdecoster/NanoPlot) and  [__MultiQC__](https://multiqc.info/)
-2. Trimming and Filtering reads by length and quality, so quality improving using [__Porechop__](https://github.com/rrwick/Porechop) and [__Fastp__](https://academic.oup.com/bioinformatics/article/34/17/i884/5093234)
-3. Remove all possible hosts sequences e.g. Chicken, Cow, etc using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) with [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** and **Filter Sequence By ID** to separate the sequences into without hosts sequences and only host sequences, so we move one to the next section with the sequences without the host.
+2. Trimming and filtering reads by length and quality, so quality improving using [__Porechop__](https://github.com/rrwick/Porechop) and [__Fastp__](https://academic.oup.com/bioinformatics/article/34/17/i884/5093234)
+3. Remove all possible hosts sequences e.g. chicken, cow, etc. using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) with [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** and **Filter Sequence By ID** to separate the sequences into without hosts sequences and only host sequences, so we move one to the next section with the sequences without the host.
 
 We will run the following tools one by one, then discuss each step and the results in more detail. Please do the same steps for both histories; `Barcode10`and `Barcode11`.
 
@@ -760,7 +760,7 @@ For more information about how to interpret the plots generated by **FastQC** an
 {: .question}
 
 ## Hosts Filtering
-Generally, we are not interested in the food (host) sequences that may or may not include the pathogen, rather we are interested only in the pathogen itself. That's why it's an important step to get rid of all hosts' sequences so we are only remained with sequences that might include a pathogen to start our analyses with. To use all these tools represted in the whole tutorial in real life you just run them on the samples you collected from a food factory, for example, at different time points and locations in the production process in order to spot when and where the pathogen entered the food and affect it. In this section we will filter out all possible hosts, e.g. meat, milk, chicken, etc., then remove all found hosts out, and keep the remaining sequences to test and track pathogens for. In this tutorial, we know in prior that the samples we have are __Chicken__ spiked with __Salmonella__ so we already know what will we get as a host and as a main pathogen. 
+Generally, we are not interested in the food (host) sequences that may or may not include the pathogen, rather we are interested only in the pathogen itself. That's why it's an important step to get rid of all hosts' sequences so we are only remained with sequences that might include a pathogen to start our analyses with. To use all these tools represted in the whole tutorial in real life you just run them on the samples you collected from a food factory, for example, at different time points and locations in the production process in order to spot when and where the pathogen entered the food and affect it. In this section we will filter out all possible hosts, e.g. meat, milk, chicken, etc., then remove all found hosts out, and keep the remaining sequences to test and track pathogens for. In this tutorial, we know in prior that the samples we have are __chicken__ spiked with **_Salmonella_** so we already know what will we get as a host and as a main pathogen. 
 
 In this tutorial we use the following tools and database to remove all hosts' sequences:
 - **Kraken2** a taxonomic classification system, uses built-in and external libraries to classify the sequences into known taxon up to species level
@@ -777,7 +777,7 @@ In this tutorial we use the following tools and database to remove all hosts' se
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Gallus gallus (taxid 9031), which is Chicken
+> > 1. _Gallus gallus_ (taxid 9031), which is chicken
 > > 2. 836
 > >
 > {: .solution}
@@ -840,11 +840,11 @@ While the tools are running you can move on to the next section **Gene based pat
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Escherichia coli with 10,243 sequences
-> > 2. Salmonella enterica with 7,458 sequences
+> > 1. _Escherichia coli_ with 10,243 sequences
+> > 2. _Salmonella enterica_ with 7,458 sequences
 > > 3. 40,143 sequences are classified and 50,455 are unclassified
-> > 4. a. with **Kalamari** database the most found species is Escherichia coli with 12,577 sequences 
-> > >  b. with **Kalamari** database the second most found species is Salmonella enterica with 10,632 sequences
+> > 4. a. with **Kalamari** database the most found species is _Escherichia coli_ with 12,577 sequences 
+> > >  b. with **Kalamari** database the second most found species is _Salmonella enterica_ with 10,632 sequences
 > > > >  c. with **Kalamari** database the number of classified sequences are 32,020 sequences and the unclassified sequences are 59,414 
 > > > > > In conclusion, both databases are able to show the same results of the most common species. However, the number of the classified sequences with **Standard PlusPF** database is higher than **Kalamari** database and it would be even higher since all chicken sequences were removed before testing the **Standard PlusPF** database
 > {: .solution}
@@ -885,7 +885,7 @@ Now lets try the **Phinch visulization** tool running for `Barcode11` history
 {: .question}
  
 # Gene based pathogenic identification
-In this section we will analyze the sequences in our samples and identify genes that have a [Virulence Factor (VF)](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which will then define a pathogen and its severity level. We will also identify [Antimicrobial Resistance genes (AMR)](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes), which their presence will destroy the antibiotic that will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [Multilocus Sequence Typing (MLST)](https://pubmlst.org/) database we will also determine the strain of the bacteria we are testing for pathogenicity. Never the less, we will be creating our **FASTA** and **Tabular** files that we will used later on to track and visualize our pathogenic identification throughout all samples, which is done in the **Pathogen Tracking among all samples** section and tools coming later in this tutorial.
+In this section we will analyze the sequences in our samples and identify [Virulence Factor (VF)](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor), which are gene products, usually proteins, involved in pathogenicity by identifiying them we can call a pathogen and its severity level. We will also identify [Antimicrobial Resistance genes (AMR)](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes). These type of genes have three fundamental mechanisms of antimicrobial resistance that are enzymatic degradation of antibacterial drugs, alteration of bacterial proteins that are antimicrobial targets, and changes in membrane permeability to antibiotics, which will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host. Using [Multilocus Sequence Typing (MLST)](https://pubmlst.org/) database we will also determine the strain of the bacteria we are testing for pathogenicity. Never the less, we will be creating our **FASTA** and **Tabular** files that we will used later on to track and visualize our pathogenic identification throughout all samples, which is done in the **Pathogen Tracking among all samples** section and tools coming later in this tutorial.
 
 In this section, we will run the following tools that perform the following tasks:
 1. Genome assembly or creating contigs from our sequences using [__metaflye__](https://www.nature.com/articles/s41592-020-00971-x) then assembly polishing using [__medaka consensus pipeline__](https://github.com/nanoporetech/medaka) and visualizing the assembly graph using [__Bandage Image__](https://rrwick.github.io/Bandage/)
@@ -1041,7 +1041,7 @@ But before we run the following tool we need to upload one more file needed to c
 {: .hands_on}
 
 ## Assembly
-After improving the quality of the sequences in our samples and removing all the hosts' sequences, the next step is to analysis them and search for pathogens. To do so, we have to first assemble our reads and create our contigs file, which will then be used to search databases for the presence of any pathogenic gene.
+After improving the quality of the sequences in our samples and removing all the hosts' sequences, the next step is to analize them and search for pathogens. To do so, we have to first assemble our reads and create our contigs file, which will then be used to search databases for the presence of any pathogenic gene.
 
 Recent advances in the challenging area of metagenomic bacterial genome assembly in the form of the specialized long-read metagenomic assembly program **metaflye** or **Flye** and sequence polishing tools such as **medaka** have made the inclusion of these analyses relatively simple. **Metaflye** and **medaka** facilitate the rapid assembly and correction of the long, error-prone Nanopore reads obtained from the metagenomic sequencing in multiple earlier work.
 
@@ -1141,9 +1141,9 @@ For this step the tool **ABRicate** is chosen again but this time it's along wit
 
 # SNP based pathogenic identification
 
-Here, we will be identifing variants in our samples compared to a reference genome. For example, if we want to test our samples if they include [Campylobacter pathogen](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the Campylobacter speices, and when we find variants in specific positions on the genome we look these positions up and see if these real variations would indicate a pathogen or not. Nevertheless, novel alleles can be also identified here, we might be identifing a new variant of the pathogen while running such tools. What we are refering to here is [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf). In this section, we also build our consensus genome of our samples, so we can later build a Phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different speices of our samples' evolution.
+Here, we will be identifing variants in our samples compared to a reference genome. For example, if we want to test our samples if they include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species, and when we find variants in specific positions on the genome we look these positions up and see if these real variations would indicate a pathogen or not. Nevertheless, novel alleles can be also identified here, we might be identifing a new variant of the pathogen while running such a workflow. What we are refering to here is [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf). In this section, we also build our consensus genome of our samples, so we can later build a Phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different species of our samples' evolution.
 
-In this training, we are testing Salmonella enterica speices, which our samples are spiked with its different strains. So we will now upload to our histories the reference genome of [Salmonella enterica](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
+In this training, we are testing _Salmonella enterica_ , which our samples are spiked with its different strains. So we will now upload to our histories the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
 
 In this section, we will run tools that can run in parallel to **Taxonomy Profiling**, **Gene based pathogenic identification** and **Pathogen Tracking among all samples** sections' tools, so feel free to run it in the time you are waiting for the other tools to finish running. 
 
@@ -1214,8 +1214,8 @@ In this section, we will run tools that can run in parallel to **Taxonomy Profil
 
 To identify variants, the following tools are used:
 
-1. First we map to a reference genome of the speices of the pathogen you want to test your samples against, we used **Minimap2** since our datasets are Nanopore. 
-2. Then we indetify Variants and Single nucleotide variants using [__Clair3__](https://hpc.nih.gov/apps/Clair3.html), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date. [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and with much fewer tools' options. So we recommend **Clair3** that we used in this section.
+1. First we map to a reference genome of the species of the pathogen you want to test your samples against, we used **Minimap2** since our datasets are Nanopore. 
+2. Then we indetify variants and single nucleotide variants using [__Clair3__](https://hpc.nih.gov/apps/Clair3.html), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date. [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and with much fewer tools' options. So we recommend **Clair3** that we used in this section.
 3. After that a normalization step to our variant calling output is needed, where we normalize indels; check if REF alleles in the output match the reference; split multiallelic sites into multiple rows; recover multiallelics from multiple rows using [__bcftools norm__](https://samtools.github.io/bcftools/bcftools.html).
 4. Last but not least, we filter to keep only the pass and good quality variants, [__SnpSift Filter__](http://pcingola.github.io/SnpEff/) tool is used in this section where you can set any filtering expression to keep as per your experiment thresholds. [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
 5. Finally, we will extract our tabular report where we keep specific fields in the output VCF, we used [__SnpSift Extract Fields__](http://pcingola.github.io/SnpEff/)
@@ -1224,7 +1224,7 @@ To identify variants, the following tools are used:
 >
 > Now let's inspect some tools' outputs together for `Barcode10` history
 >
-> 1. How many Variants found in `Barcode10_Spike2` sample before and after quality filtering?
+> 1. How many variants found in `Barcode10_Spike2` sample before and after quality filtering?
 > 2. What is the Strain identified by the NCBI for the sample?
 >
 > > <solution-title></solution-title>
@@ -1235,7 +1235,7 @@ To identify variants, the following tools are used:
 {: .question}
 
 ## Consensus Genome Building
-For further anaylsis we have included one more step in this section, where we build the full genome of our samples. That can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as Salmonella doesnot have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in this tutorial for any further analysis of the users if needed.
+For further anaylsis we have included one more step in this section, where we build the full genome of our samples. That can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in this tutorial for any further analysis of the users if needed.
 
 For this step we run [__bcftools consensus__](https://samtools.github.io/bcftools/bcftools.html).
 > <question-title></question-title>
@@ -1451,7 +1451,7 @@ A heatmap is one of the visualization techniques that can give you a complete ov
 > >
 > > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAF98391** is only found in Barcode 10 sample and **NP_460360** is only found in Barcode 11 sample
-> > 3. Both samples are spiked with the same species of the pathogen; Salmonella enterica, but not the same strain. `Barcode10_Spike2` sample is spiked with **Enterica** strain and `Barcode11_Spike2b` with Houtenae strain. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the tools in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> > 3. Both samples are spiked with the same species of the pathogen; _S. enterica_, but not the same strain. `Barcode10_Spike2` sample is spiked with **_S. enterica_** strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_ strain. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the tools in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
 > {: .solution}
 {: .question}
