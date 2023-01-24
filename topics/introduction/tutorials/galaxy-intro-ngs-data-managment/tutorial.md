@@ -473,11 +473,11 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
 > 1. Click the `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
-> 1. Hit `Execute`
+> 1. Hit `Run Tool`
 > This will produce a text file with just two lines:
 > ```
 > SRR12733957
