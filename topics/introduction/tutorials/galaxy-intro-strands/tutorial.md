@@ -620,7 +620,6 @@ All steps in the history will be green when the workflow is done. Once that happ
 Probably.  Note that we can no longer say what percentage of *genes* overlap.  We *can* say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn't and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.
 
 # Conclusion
-{: .no_toc}
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy!
 

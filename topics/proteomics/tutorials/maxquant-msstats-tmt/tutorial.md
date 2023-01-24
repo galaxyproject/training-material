@@ -29,7 +29,7 @@ tags: [DDA, TMT]
 
 In this training we will cover the full analysis workflow from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT. 
 
-The training dataset consists of a dataset from a [study](https://doi.org/10.1186/s12935-020-1141-2) which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α expression in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.
+The training dataset consists of a dataset from {% cite Baumert_2020 %} which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α expression in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.
 
 > <agenda-title></agenda-title>
 >

@@ -479,7 +479,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 > > to misidentification of index cases. **Remember:** we cannot rule out the possibility
 > > that patients within the cluster were infected by an index case that was not sampled.
 > >
-> >  Read [Xu et al., 2019](https://doi.org/10.1371/journal.pmed.1002961) for more information on this topic.
+> >  Read {% cite Xu_2019 %} for more information on this topic.
 > {: .solution}
 {: .question}
 

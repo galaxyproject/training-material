@@ -75,7 +75,7 @@ Data will be submitted to ENA's test server and will not be public.
 
 # Adding ENA Webin credentials to your Galaxy user information
 
-In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [here](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the ENA Upload tool.
+In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [on ENA's Registration Page](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the ENA Upload tool.
 
 > <hands-on-title>Add Webin credentials to your Galaxy user information</hands-on-title>
 >

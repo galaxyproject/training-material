@@ -138,10 +138,10 @@ module Gtn
     end
 
     def self.generate_metrics(site)
-      generated_at = Time.now().to_i
+      generated_at = Time.now().to_i * 1000
       data =  self.collect_metrics(site)
       output = data.map{|k, v|
-        out = "# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]} #{generated_at}\n"
+        out = "# HELP #{k} #{v[:help]}\n# TYPE #{k} #{v[:type]}\n"
 
         if v[:value].is_a?(Array)
           v[:value].each{|val|

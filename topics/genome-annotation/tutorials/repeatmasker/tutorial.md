@@ -195,8 +195,8 @@ As we have used a generic species (Human), we only identified the most common an
 
 To boost RepeatMasker performance, we need a tailored repeat library for *Mucor mucedo*. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies :
 
-- `Muco_library_RM2.fasta` using [RepeatModeler](https://doi.org/10.1073/pnas.1921046117)
-- `Muco_library_EDTA.fasta` using [EDTA](https://doi.org/10.1186/s13059-019-1905-y)
+- `Muco_library_RM2.fasta` using RepeatModeler ({% cite Flynn_2020 %})
+- `Muco_library_EDTA.fasta` using EDTA ({% cite Ou_2019 %})
 
 
 > <hands-on-title></hands-on-title>

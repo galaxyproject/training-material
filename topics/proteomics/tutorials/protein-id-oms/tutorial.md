@@ -116,7 +116,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >           Peak picking will only be performed on MS2 level.
 >
 >   > <comment-title>Local Use of MSConvert</comment-title>
->   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a [detailed description of the necessary steps on this site](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
 >   {: .comment}
 >
 {: .hands_on}

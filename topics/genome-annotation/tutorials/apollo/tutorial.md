@@ -455,7 +455,7 @@ Once you have added some alterations, Apollo will automatically display the effe
 
 # Exporting and collaborating
 
-{% include {{ page.dir }}collab.md eukaryote=false %}
+{% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=false %}
 
 # Conclusion
 

@@ -32,7 +32,7 @@ In this section we will look at practical aspects of manipulation of next-genera
 
 ## FASTQ manipulation and quality control
 
-[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [on the Wikipedia article for FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
 
 The FASTQ format looks like this:
 
@@ -75,7 +75,7 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
 
 #### Two single files
 
-**File 1**
+File 1
 
 ```
  @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
@@ -88,7 +88,7 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
  ABC@CC77CFCEG;F9<F89<9--C,CE,--C-6C-,CE:++7:,CF
 ```
 
- **File 2**
+File 2
 
 ```
 @M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
@@ -424,7 +424,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+>    ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link directly to the data](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 4. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
@@ -532,7 +532,7 @@ In this part of the tutorial we will perform variant calling and basic analysis 
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
 
-This data is available from directly from GenBank using the following [link](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
+This data is [available from directly from GenBank](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
 
 > <hands-on-title>Get the reference genome data</hands-on-title>
 >
@@ -723,9 +723,7 @@ The above state allows us to judge the quality of the data. In this particular c
 
 ## Collapse data into a single dataset
 
-We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see [this video on collections](https://www.youtube.com/embed/ypuFZ1RKMIY).
 
 > <hands-on-title>Collapse a collection</hands-on-title>
 >
@@ -882,3 +880,5 @@ We can also import data directly into Google Colab:
 
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
+
+<!-- GTN:IGNORE:002 -->

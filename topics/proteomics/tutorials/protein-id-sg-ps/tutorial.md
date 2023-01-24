@@ -80,7 +80,7 @@ If your data were generated on a low resolution mass spectrometer, use ***PeakPi
 > 6. Run ***FileConverter*** {% icon tool %} on the picked mzML. In the **Advanced Options** set the **Output file type** to `MGF`.
 >
 >   > <comment-title>Local Use of MSConvert</comment-title>
->   > The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If ***msconvert*** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find [a detailed description of the necessary steps](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
 >  {: .comment}
 {: .hands_on}
 
@@ -93,7 +93,7 @@ In bottom-up proteomics, it is necessary to combine the identified peptides to p
 
 > <hands-on-title>Peptide and Protein Identification</hands-on-title>
 >
-> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the ready-made database from this [link](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
+> 1. Copy the prepared protein database from the tutorial [Database Handling](../database-handling/tutorial.html) into your current history by using the multiple history view or upload the [ready-made database from Zenodo](https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta).
 > 2. Open ***Search GUI*** {% icon tool %} to search the mgf file against the protein database. In the **`Search Engine Options`** select `X!Tandem` and `MS-GF+`. In the **`Protein Modification Options`** add the **`Fixed Modifications`**: `Carbamidomethylation of C` and the **`Variable Modifications`**: `Oxidation of M`.
 > 3. Run ***Peptide Shaker*** {% icon tool %} on the Search GUI output. Enable the following outputs: `Zip File for import to Desktop App`, `mzidentML File`, `PSM Report`, `Peptide Report`, `Protein Report`.
 >
@@ -173,7 +173,7 @@ The FASTA database used for the peptide to spectrum matching contained some entr
 # Premade Workflow
 
 
-A premade workflow for this tutorial can be found [here](workflows/wf_proteinID_SG_PS.ga)
+[A premade workflow for this tutorial is available](workflows/wf_proteinID_SG_PS.ga)
 
 # Further Reading
 

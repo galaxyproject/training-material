@@ -816,7 +816,7 @@ done
 
 it would work exactly the same way.
 
-**Don't do this.**
+# Don't do this.
 
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)

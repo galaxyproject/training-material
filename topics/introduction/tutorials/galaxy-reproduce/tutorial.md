@@ -68,7 +68,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history and load data into it
 
-Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [here]({{site.baseurl}}/topics/galaxy-interface/tutorials/get-data/slides.html#1). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
+Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
 
 
 > <hands-on-title>Create history</hands-on-title>
@@ -132,7 +132,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1).
+> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}).
 {: .details}
 
 

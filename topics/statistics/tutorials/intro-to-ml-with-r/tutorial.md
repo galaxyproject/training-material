@@ -98,7 +98,7 @@ The R programming language has gained considerable popularity among statistician
 
 ## Applications of ML in Bioinformatics
 
-There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from [Pedro Larrañaga et.al, Briefings in Bioinformatics 7:1, 2006](https://doi.org/10.1093/bib/bbk007)) shows a scheme of the main biological problems where computational methods are being applied.
+There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from {% cite Larra_aga_2006 %}) shows a scheme of the main biological problems where computational methods are being applied.
 
 ![A series of overlapping boxes showing intersections of different topics like text mining and proteomics and evolution and microarrays, with various topics listed in the intersections. Unfortunately the source image is too low resolution even for sighted users.](../../images/intro-to-ml-with-r/bioinformatics-ml.png "Classification of the topics where machine learning methods are applied (<a href="https://doi.org/10.1093/bib/bbk007">https://doi.org/10.1093/bib/bbk007</a>)")
 
@@ -1231,7 +1231,7 @@ Linear regression is to predict response with a linear function of predictors. T
 {: .hands_on}
 
 
-Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [here](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
+Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [on the Wikipedia page for CoD](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
 
 
 > <question-title></question-title>

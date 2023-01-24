@@ -52,7 +52,6 @@ Proteogenomics integrates **RNA-Seq** data for generating customized protein seq
 {: .agenda}
 
 # Overview
-{: .no_toc}
 
 This tutorial focuses on creating a **FASTA** database generated from RNA-seq data. There are two outputs from this workflow: (1) a **sequence database** consisting of variants and known reference sequences and (2) mapping files containing **genomic** and **variant** mapping data.
 
