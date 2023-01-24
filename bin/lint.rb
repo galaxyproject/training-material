@@ -8,29 +8,6 @@ require 'bibtex'
 require 'citeproc/ruby'
 require 'csl/styles'
 
-# Load our citation library
-CITATION_LIBRARY = BibTeX::Bibliography.new
-Find.find('./') do |path|
-  if FileTest.directory?(path)
-    if File.basename(path).start_with?('.')
-      Find.prune       # Don't look any further into this directory.
-    else
-      next
-    end
-  else
-    if path =~ /bib$/ then
-      b = BibTeX.open(path)
-      for x in b
-        # Record the bib path.
-        x._path = path
-        CITATION_LIBRARY << x
-      end
-    end
-  end
-end
-
-
-
 # This is our ONE central linting script that handles EVERYTHING.
 
 module ReviewDogEmitter
@@ -289,17 +266,38 @@ module GtnLinter
     a + b + c + d
   end
 
+  @CITATION_LIBRARY = nil
+
+  def self.get_citation_library
+    if @CITATION_LIBRARY.nil?
+      lib = BibTeX::Bibliography.new
+      puts "#{}"
+      (self.enumerate_type(/bib$/) + self.enumerate_type(/bib$/, root_dir: "faqs")).each{|path|
+        b = BibTeX.open(path)
+        for x in b
+          # Record the bib path.
+          x._path = path
+          lib << x
+        end
+      }
+      @CITATION_LIBRARY = lib
+    end
+
+    @CITATION_LIBRARY
+  end
+
   def self.check_bad_cite(contents)
     self.find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
     .map { |idx, text, selected|
-      if CITATION_LIBRARY[selected[1].strip].nil?
+      citation_key = selected[1].strip
+      if self.get_citation_library[citation_key].nil?
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
-          message: "The citation (`#{selected[1].strip}`) could not be found.",
+          message: "The citation (#{citation_key}) could not be found.",
           code: "GTN:007",
         )
       end
@@ -580,7 +578,7 @@ module GtnLinter
       *check_dois(contents),
       *check_bad_link_text(contents),
       *incorrect_calls(contents),
-      #*check_bad_cite(contents),
+      *check_bad_cite(contents),
       *non_existent_snippet(contents),
       *bad_tool_links(contents),
       *check_tool_link(contents),
