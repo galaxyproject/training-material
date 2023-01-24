@@ -39,12 +39,12 @@ One common biological confounder is the cell cycle {% cite Luecken2019 %}. Cells
 
 In this tutorial, we will identify the genes whose expression varies during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data. 
 
->    > <comment-title>Comment: Other Scanpy and Seurat tutorials</comment-title>
+>    > <comment-title>Other Scanpy and Seurat tutorials</comment-title>
 >    >
 >    > This tutorial is based on the Scanpy cell cycle regression tutorial {% cite ScanpyCC %}, which was itself based on the Seurat vignette addressing the same issue {% cite SeuratCC %}. However, we will be using a different dataset for this tutorial. 
 >    {: .comment}
 
-> <agenda-title>Agenda</agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -59,7 +59,7 @@ The data used in this tutorial is from a mouse dataset of fetal growth restricti
 
 If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle. 
 
-> <hands-on-title>Hands-on: Data upload</hands-on-title)
+> <hands-on-title>Data upload</hands-on-title)
 >
 > 1. Create a new history for this tutorial
 
@@ -82,9 +82,9 @@ If you've been working through the Single-cell RNA-seq: Case Study then you can 
 >
 {: .hands_on}
 
-In addition to the scRNA-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below {% cite tinyatlas %}. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history. 
+In addition to the scRNA-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below {% cite kirchner_hbc_2018 %}. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history. 
 
-> <hands-on-title>Hands-on: Data upload</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) 
 >
@@ -114,11 +114,11 @@ The easiest way to find the tools you will need during this tutorial is to use t
 
 The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean expression of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: `S_score`, `G2M_score` and `phase`. 
 
-> <comment-title>Comment: When should we regress out the effects of the cell cycle?</comment-title>
+> <comment-title>When should we regress out the effects of the cell cycle?</comment-title>
 >  Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle {% cite Luecken2019 %}. However, it isn't always appropriate to remove the effects of the cell cycle - sometimes they can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the effects of the cell cycle are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters to get an idea of how strong the effects are. 
 {: .comment}
 
-> <hands-on-title>Hands-on: Score the cell cycle genes</hands-on-title>
+> <hands-on-title>Score the cell cycle genes</hands-on-title>
 >
 > 1. {% tool [Inspect and manipulate](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Processed_Anndata` (Input dataset)
@@ -157,7 +157,7 @@ The second step after scoring the cell cycle genes is to use these scores to reg
 {: .details}
 
 
-> <hands-on-title> Hands-on: Regress out the effects of the cell cycle</hands-on-title>
+> <hands-on-title>Regress out the effects of the cell cycle</hands-on-title>
 >
 > 1. {% tool [Scanpy RegressOut](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `CellCycle_Annotated` (output of **Inspect and manipulate** {% icon tool %})
@@ -179,7 +179,7 @@ You might find it easier to create this new column using a spreadsheet and then 
 
 If we're going to mark all the cell cycle genes, we'll need a single list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. We'll combine the two lists into a single column with 97 entries. We'll then add a second column that simply reads `TRUE` in every row, which we'll use later to mark these as cell cycle genes in the main dataset. 
 
-> <hands-on-title> Hands-on: Create a list of all cell cycle genes</hands-on-title>
+> <hands-on-title>Create a list of all cell cycle genes</hands-on-title>
 >
 > 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `sPhase` (Input dataset)
@@ -198,7 +198,7 @@ If we're going to mark all the cell cycle genes, we'll need a single list of all
 
 Next, we'll need a list of all the genes in our dataset, so that we can mark the ones that are in our cell cycle list. We'll also add a column of numbers as this will help us keep the gene names in order.
 
-> <hands-on-title> Hands-on: Get the gene names from your dataset</hands-on-title>
+> <hands-on-title>Get the gene names from your dataset</hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Regressed` (Input dataset)
@@ -212,7 +212,7 @@ Next, we'll need a list of all the genes in our dataset, so that we can mark the
 >            - *"List of rows to select"*: `2:15396`
 >    - *"Output formatting options"*: ``
 >
->    > <comment-title> Comment: Selecting the right rows</comment-title)
+>    > <comment-title>Selecting the right rows</comment-title)
 >    >
 >    > Since we don't want to keep the header, we select the rows from `2` to the end of the dataset. If you were using a dataset of a different size, you would need to change this parameter to include all the genes. 
 >    {: .comment}
@@ -221,7 +221,7 @@ Next, we'll need a list of all the genes in our dataset, so that we can mark the
 >    - {% icon param-file %} *"to Dataset"*: `table` (output of **Table Compute** {% icon tool %})
 >    - *"Iterate?"*: `YES`
 >
->    > <comment-title>Comment: Keeping the genes in order</comment-title>
+>    > <comment-title>Keeping the genes in order</comment-title>
 >    >
 >    > Adding these numbers will enable us to keep the genes in their original order. This is essential for adding the cell cycle gene annotation back into the AnnData dataset. 
 
@@ -236,7 +236,7 @@ Next, we'll need a list of all the genes in our dataset, so that we can mark the
 
 We can now combine our table of cell cycle genes `CC_genes` with the table of gene names `Dataset_Genes`. 
 
-> <hands-on-title> Hands-on: Combine the two tables</hands-on-title>
+> <hands-on-title>Combine the two tables</hands-on-title>
 >
 > 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"1st file"*: `CC_Genes` (output of **Add column** {% icon tool %})
@@ -247,7 +247,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 >    - *"Value to put in unpaired (empty) fields"*: `FALSE`
 >
 >
->    > <comment-title> Comment: How the cell cycle genes are marked</comment-title>
+>    > <comment-title>How the cell cycle genes are marked</comment-title>
 >    >
 >    > When we join the two tables, we'll ask for any empty fields to be filled in with `FALSE`. The cell cycle gene table has an extra column where they are all marked as `TRUE` - they will retain these entries when we join the tables, but since there are no entries for the rest of the genes in this column, their rows will be filled in as `FALSE`. This will enable us to pick out the cell cycle genes later. 
 
@@ -259,7 +259,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 >    - *"everything in"*: `Ascending order`
 >
 >
->    > <comment-title> Comment: Putting the genes in order again</comment-title>
+>    > <comment-title>Putting the genes in order again</comment-title>
 >    >
 >    > Sorting the genes using the column of numbers we added earlier will put them back in their original order - make sure to sort them in ascending order, otherwise they'll end up the opposite way around. 
 >    {: .comment}
@@ -284,7 +284,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 
 We now have a table with all the gene names in the same order as the main dataset and a column indicating which ones are cell cycle genes. If we cut this column out of the table, then we can add it as a new annotation to the main dataset. We'll also need to add a column header, which will be used as the key for this annotation in the AnnData dataset. 
 
-> ### <hands-on-title> Hands-on: Create the cell cycle annotation column</hands-on-title>
+> ### <hands-on-title>Create the cell cycle annotation column</hands-on-title>
 >
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
@@ -295,7 +295,7 @@ We now have a table with all the gene names in the same order as the main datase
 >    - *"Output formatting options"*: ``
 >
 >
->    > <comment-title> Comment: Removing rows for missing genes </comment-title>
+>    > <comment-title>Removing rows for missing genes </comment-title>
 >    >
 >    > If there were any cell cycle genes that weren't present in the main dataset, we could remove them at this stage by excluding them from the List of rows to select. As before, if we were using a dataset of a different size, we would need to change this parameter to include all the rest of the rows. 
 >    {: .comment}
@@ -322,7 +322,7 @@ We now have a table with all the gene names in the same order as the main datase
 
 We will need to add the annotation to both the annotated dataset `CellCycle_Annotated` and to the one that we created by regressing out the cell cycle genes `CellCycle_Regressed`. This will allow us to plot the cell cycle genes before and after regression. We can do this using the {% tool Manipulate Anndata %} tool and selecting the correct function from the dropdown menu. 
 
-> <hands-on-title> Hands-on: Add the new annotations </hands-on-title>
+> <hands-on-title>Add the new annotations </hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Annotated` (output of **Inspect and manipulate** {% icon tool %})
@@ -342,7 +342,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 
 For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have `TRUE` in their new `CC_genes` annotation). The filtered datasets will only include expression data for these 97 genes, so we'll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.  
 
-> <hands-on-title> Hands-on: Filter the AnnData datasets </hands-on-title>
+> <hands-on-title>Filter the AnnData datasets </hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Annotated_CC` (output of **Manipulate AnnData** {% icon tool %})
@@ -370,7 +370,7 @@ Now that we have a dataset that only includes the cell cycle genes, we can visua
 
 You will learn more about plotting your data in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are. 
 
-> <hands-on-title> Hands-on: Create a PCA Plot of cell cycle genes </hands-on-title>
+> <hands-on-title>Create a PCA Plot of cell cycle genes </hands-on-title>
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Annotated_CC_Only` (output of **Manipulate AnnData** {% icon tool %})
@@ -385,7 +385,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 >            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
 >
->    > <comment-title> Comment: Plot all the genes </comment-title>
+>    > <comment-title>Plot all the genes </comment-title>
 >    >
 >    > Make sure that you de-select the option for the {% tool Cluster, infer trajectories and embed %} tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren't HVGs too.  
 >    {: .comment}
@@ -413,7 +413,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 
 We will now repeat the same steps to create a PCA plot of the filtered dataset after the effects of the cell cycle have been regressed out. 
 
-> <hands-on-title> Hands-on: Recreate the PCA plot of cell cycle genes after regression </hands-on-title>
+> <hands-on-title>Recreate the PCA plot of cell cycle genes after regression </hands-on-title>
 >
 > 1. {% tool [Cluster, infer trajectories and embed](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Regressed_CC_Only` (output of **Manipulate AnnData** {% icon tool %})
