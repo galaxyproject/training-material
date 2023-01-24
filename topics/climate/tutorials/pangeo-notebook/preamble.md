@@ -36,7 +36,7 @@
 >    >
 >    > 1. Open the {% tool [Pangeo Notebook](interactive_tool_pangeo_notebook) %} by clicking [here](https://usegalaxy.eu/?tool_id=interactive_tool_pangeo_notebook)
 >    > 2. *Include data into the environment*: `CAMS-PM2_5-20211222.netcdf`
->    > 3. Click on **Execute**: the tool will start running and will stay running
+>    > 3. Click on **Run Tool**: the tool will start running and will stay running
 >    > 4. Click on the **User** menu at the top and go to **Active Interactive Tools** and locate the Pangeo JupyterLab instance you started.
 >    > 5. Click on your Pangeo JupyterLab instance
 >    {: .hands_on}

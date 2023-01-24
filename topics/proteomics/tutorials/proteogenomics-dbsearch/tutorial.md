@@ -320,7 +320,7 @@ The next step is to remove known peptides from the list of PSM's that we acquire
 >
 >    - *"include query result column headers"*: `Yes`
 >
->  - Click **Execute** and inspect the query results file after it turned green.
+>  - Click **Run Tool** and inspect the query results file after it turned green.
 >
 {: .hands_on}
 
@@ -354,7 +354,7 @@ The output from this step is that the resultant peptides would be those which do
 >    ```
 >  - *"include query result column headers"*: `Yes`
 >
->  - Click **Execute** and inspect the query results file after it turned green.
+>  - Click **Run Tool** and inspect the query results file after it turned green.
 >
 > ![QT](../../images/QT_output.png)
 >

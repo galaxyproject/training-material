@@ -135,7 +135,7 @@ If you look at the picture above carefully, you will see that the **Select SAM/B
 
 ![cleanSam_closeup](https://galaxyproject.org/tutorials/collections/cleanSam_closeup.png)
 
-Click **Execute**. As an output this tool will produce a collection contained cleaned data.
+Click **Run Tool**. As an output this tool will produce a collection contained cleaned data.
 
 ## Retaining 'proper pairs'
 

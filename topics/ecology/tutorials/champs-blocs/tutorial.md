@@ -133,7 +133,7 @@ Go on the tool **IVR**
 >    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
-> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+> 2. Press **Run Tool** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
 >
 > 3. Three outputs will appear in your history panel on the right.
 >
@@ -176,7 +176,7 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 >    - {% icon param-text %} *"Until when do you have data (write only the YEAR) ?"*: `2021`
 >
 >
-> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+> 2. Press **Run Tool** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
 >
 > 3. View graphs
 >  * Once it's green, click on type of plot you want to see

@@ -128,7 +128,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -157,7 +157,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -181,7 +181,7 @@ We will now convert VCF datasets into tab delimited format as it will be easier 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -210,7 +210,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 

@@ -150,7 +150,7 @@ The mouse kidney dataset contains internal calibrants that were sprayed together
 >    - *"Plot fold change of two m/z"*: `Insert Plot fold change of two m/z`
 >    - *"M/z 1"*: `1224.63` (digested *Bombesin*)
 >    - *"M/z 2"*: `1619.89` (full length *Bombesin*)
->    - Press **Execute**
+>    - Press **Run Tool**
 {: .hands_on}
 
 

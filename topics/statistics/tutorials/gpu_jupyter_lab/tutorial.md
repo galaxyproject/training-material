@@ -97,7 +97,7 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 >
 > - {% tool [GPU enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
 >    - *"Do you already have a notebook?"*: `Start with default notebooks`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -270,7 +270,7 @@ This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a work
 >    - *"Filter *"* : Select `train_rows`
 >    - *"With following condition"* :`c3==0`
 >    - *"Number of header lines to skip"*: `1`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -311,7 +311,7 @@ This tool showcases how the output dataset collection produced by the GPU Jupyte
 >    - *"Cut columns"* : `c1`
 >    - *"Delimited by"* : `Comma`
 >    - *"From"*: Choose dataset collection `GPU JupyterLab notebook output collection`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

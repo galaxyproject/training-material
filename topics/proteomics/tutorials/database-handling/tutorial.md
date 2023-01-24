@@ -58,7 +58,7 @@ In this tutorial, we will explore **Protein Database Downloader** {% icon tool %
 >
 > 2. Open {% tool [Protein Database Downloader](toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1) %}
 > 3. Select in the drop-down menues  *"Taxonomy"*: `Homo sapiens (Human)` and `reviewed`: "UniprotKB/Swiss-Prot (reviewed only)".
-> 4. Click on `Execute`. There will be a new dataset named `Protein database` in your history, now.
+> 4. Click on `Run Tool`. There will be a new dataset named `Protein database` in your history, now.
 > 5. Rename the `Protein database` to `Main database`.
 >
 >  > <comment-title>Types of uniprot databases</comment-title>

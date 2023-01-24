@@ -365,14 +365,14 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
 > 1. Rerun {% tool [Filter](Filter1) %} but with
 >    - *"Condition"*:  `c6 == "-" `
-> 1. *Click* the **Execute** button.
+> 1. *Click* the **Run Tool** button.
 >
 > **Method 2**
 > 1. *Click* on {% tool [Filter](Filter1) %} in the tool panel to open the Filter tool in the central panel.
 > 1. *Fill* the form as before, *except*:
 >    * Make sure the **Dataset** pulldown is set to the `Genes chr22` dataset.
 >    * *Set* **Condition** to `c6 == "-"`.
-> 1. *Click* the **Execute** button.
+> 1. *Click* the **Run Tool** button.
 >
 > **Both Methods**
 > 1. *Rename* your new dataset to something like `Genes, reverse strand`
@@ -426,7 +426,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     - *"for at least"*: `1`
 >       
 >       This will return genes with even just one position overlapping.
->     - *Click* **Execute**.
+>     - *Click* **Run Tool**.
 >
 >     ![Run Intersect](../../images/genes_human_intersect_strands.png)
 >
@@ -464,7 +464,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >
 >      - In *"1: Dataset"*      
 >         - {% icon param-files %} *"Select"*: `Overlapping forward genes` as the second dataset.
-> 4. *Click* **Execute**
+> 4. *Click* **Run Tool**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}
 

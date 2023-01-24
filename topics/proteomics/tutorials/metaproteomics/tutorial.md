@@ -171,7 +171,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    - leave everything else as default
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -223,7 +223,7 @@ outputs.
 >       > Galaxy instance to your local computer in a text file if desired.
 >       {: .comment}
 >
-> 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
+> 2. Click **Run Tool** and inspect the resulting files after they turned green with the **View data** icon:
 >     ![View data button](../../images/view_data_icon.png)
 >
 {: .hands_on}
@@ -334,7 +334,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **include query result column headers**: `No`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+> 2. Click **Run Tool** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
 >     ![Query Tabular output showing the peptides](../../images/query_tabular_1.png "Query Tabular output")
 >
@@ -361,7 +361,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          ORDER BY sequence
 >
 >
-> 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
+> 2. Click **Run Tool**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >
 {: .hands_on}
 
@@ -381,7 +381,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular` and `JSON taxonomy tree`
 >
-> 2. Click **Execute**. The history should grow by two files. View each to see the difference.
+> 2. Click **Run Tool**. The history should grow by two files. View each to see the difference.
 >
 >       > <comment-title></comment-title>
 >       >
@@ -461,7 +461,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 >
 >
-> 2. Click **Execute** and inspect the query results file after it turned green:
+> 2. Click **Run Tool** and inspect the query results file after it turned green:
 >
 >     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
 >
@@ -552,7 +552,7 @@ for each protein.
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular`
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 > 3. inspect the result:
 >
@@ -690,7 +690,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >          ORDER BY sequence
 >
 >
-> 5. Click **Execute**.
+> 5. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -717,7 +717,7 @@ With this we have combined all the data into a single database which we can now 
 >
 >          ORDER BY  bering_peptides desc,bering_psms desc
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 > 3. Repeat these steps two times by replacing `molecular_function` in the fifth row of the SQL query by `biological_process` and `cellular_component`.
 >
 {: .hands_on}

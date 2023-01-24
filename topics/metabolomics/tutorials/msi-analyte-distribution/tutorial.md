@@ -130,7 +130,7 @@ Before starting any analysis it is important to check the characteristics and qu
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.2`
 >        - *"Unit of the mass accuracy"*: `mz`
 >    - *"PCA with 2 components"*: `Yes`
->    - Press **Execute**
+>    - Press **Run Tool**
 >
 >    > <comment-title>Properties of the imzML file</comment-title>
 >    > To set the parameters for the mass spectrometry imaging tools correctly the following three parameters should be known about the dataset: 1) is the imzML file type processed or continuous, 2) are the spectra in profile or centroided mode and 3) the accuracy of the mass spectrometer. For the chilli dataset the publication states that it is a processed imzML type in centroided mode. This information can also be extracted by opening the local imzML component of the file in a text editor or web browser. Line 10 and 11 state: 
