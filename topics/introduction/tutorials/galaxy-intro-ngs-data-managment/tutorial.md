@@ -493,7 +493,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 >
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
->        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
+>        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Advanced Cut**" from the previous step.
 >    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
@@ -562,11 +562,11 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 ## Alignment with  **Map with BWA-MEM**
 
-**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
+**Map with BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -660,13 +660,13 @@ We are now ready to call variants.
 
 The output of this step is a collection of VCF files that can be visualized in a genome browser.
 
-## Annotate variant effects with **SnpEff eff:**
+## Annotate variant effects with **SnpEff eff: annotate variants for SARS-CoV-2**
 
 We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
 > <hands-on-title>Annotate variant effects</hands-on-title>
 >
-> Run {% tool [SnpEff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+> Run {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
@@ -685,7 +685,7 @@ We will now select various effects from the VCF and create a tabular file that i
 > <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff: annotate variants for SARS-CoV-2** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
 >    - *"One effect per line"*: `Yes`
 >    - *"empty field text"*: `.`
