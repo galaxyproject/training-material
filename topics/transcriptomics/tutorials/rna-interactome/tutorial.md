@@ -184,7 +184,7 @@ First, we eliminate the duplicate sequences from the library to reduce the compu
 impact on the quantification of the loci because often these identical sequences might be PCR duplicates. There is also
 a 5' degenerate linker of length 5 nucleotides present in the reads. Hence we have to strip that too.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **ChiRA collapse** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTQ file"*: `Read 1 Output` (output of **cutadapt** {% icon tool %})

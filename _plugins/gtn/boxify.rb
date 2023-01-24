@@ -57,7 +57,7 @@ module Gtn
         "comment" => "Comentario",
         "details" => "Detalles",
         "solution" => "Solución",
-        "warning" => "Aviso",
+        "warning" => "¡Precaucion!",
 
         # The only ones we have translations for??
         "hands-on" => "Práctica",

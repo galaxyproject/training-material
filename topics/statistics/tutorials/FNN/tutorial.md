@@ -355,7 +355,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `1`
 >                - *"Activation function"*: `linear`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Input has 5 attributes: age, gender, average miles driven per day, personal debt, and monthly income. Our neural network has 3 layers. All
@@ -377,7 +377,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `150`
 >        - *"batch_size"*: `50`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is from the expected output. For regression problems, we use
@@ -401,7 +401,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
 >        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -421,7 +421,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -434,7 +434,7 @@ The prediction step generates 1 dataset. It's a file that has the predicted car 
 > - {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}
 >    - *"Select input data file"*: `y_test`
 >    - *"Select predicted data file"*": Select `Model Prediction` from the previous step
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

@@ -304,7 +304,7 @@ Este es el formato “matrix market” (MTX).
 >
 {: .question}
 
-> <warning-title>¡Precaucion!: De aquí en adelante selecciona la entrada apropiada.</warning-title>
+> <warning-title>De aquí en adelante selecciona la entrada apropiada.</warning-title>
 > Asegurate de usar el archivo **quants_mat.mtx.gz**, NO EL ARCHIVO *quants_tier.mtx.gz*.
 {: .warning}
 
@@ -393,7 +393,7 @@ Para poder utilizar emptyDrops de manera efectiva, necesitamos regresar y volver
 
 Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete dropletUtils y procesarse en emptyDrops. Desafortunadamente la matriz tiene una orientación equivocada. La matriz no puede ser procesada por herramientas cuya entrada son archivos como los que produce el software 10X. Necesitamos ‘transformar’ la matriz de tal forma que las células esten en columnas y los genes en filas.
 
-> <warning-title>¡Precaucion!</warning-title>
+> <warning-title></warning-title>
 > ¡No mezcles los archivos de distintas ejecuciones de Alevin! Utiliza la última ejecución, la cual tiene los números más altos en el historial.
 {: .warning}
 
