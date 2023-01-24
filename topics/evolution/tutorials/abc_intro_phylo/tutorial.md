@@ -23,6 +23,28 @@ contributors:
 # Introduction
 Intro text
 
+## Overview
+
+This tutorial has the following structure:
+
+- Introduction and motivation: why is phylogenetic inference important?
+- A general overview of phylogenetic inference: from sequence data onward.
+- Obtaining the data for this tutorial + exercise
+- Sequence alignment (including manual methods, automatic methods, complexity issues / heuristics) + exercise
+- Distances based on sequence alignment
+- The Neighbor-Joining method and others (BioNJ and the other one that's better) **needs an update**
+- Building the first tree (on Galaxy)
+- Models of sequence evolution: from the sublime to the ridiculous
+- Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
+- Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
+- Maximum Likelihood with IQTree
+
+
+## Motivation
+
+There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species:
+
+![IThink](./images/Darwin_tree.png){:width="400"}
 
 # Basic Methodology
 This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
