@@ -130,7 +130,7 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 >            
 > 2. Rename the output `CellCycle_Annotated`
 >
-> <question-title>Question</question-title?
+> <question-title></question-title?
 >
 > 1. Why don't we need a list of genes expressed in the G1 Phase?
 >
@@ -266,7 +266,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 >
 {: .hands_on}
 
-> <question-title> Questions</question-title>
+> <question-title></question-title>
 >
 > 1. What would happen if any of the cell cycle genes were not present in the dataset?
 > 2. How would we remove these genes from the table?
@@ -392,7 +392,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 >
 {: .hands_on}
 
-> <question-title> Questions </question-title>
+> <question-title></question-title>
 >
 > 1. Does the plot look as you expected?
 > 2. What would happen if we plotted all of the genes from the main dataset?
@@ -430,7 +430,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 >
 {: .hands_on}
 
-> <question-title> Questions </question-title>
+> <question-title></question-title>
 >
 > 1. Does the plot look as you expected?
 > 2. What impact do you think the cell cycle regression will have when you analyse the whole dataset? 
