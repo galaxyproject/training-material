@@ -73,9 +73,9 @@ TODO: note about test data we are using, scaled down for tutorial reasons
 
 # Getting familiar with JBrowse
 
-Let's start by launching JBrowse and loading our data so that we can get a feel for JBrowe and its interface.
+Let's start by launching JBrowse and loading our data so that we can get a feel for JBrowe and its interface. JBrowse works just like any other tool in Galaxy, you provide your data, configure some settings, en execute. The output will be a copy of the JBrowse genome browser with your data loaded.
 
-> <hands-on-title> Upload data </hands-on-title>
+> <hands-on-title> Build JBrowse </hands-on-title>
 >
 > 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Select a reference genome"*: `hg19`
@@ -90,27 +90,35 @@ Let's start by launching JBrowse and loading our data so that we can get a feel 
 
 ## The JBrowse interface
 
-Click on the eye icon {% icon galaxy-eye %} to view the data in JBrowse. You should see something like this:
-
-![A screenshot of the JBrowse interface, described by caption](./images/jbrowse-screenshot.png "The JBrowse Interface. At the top is the navigation bar; here you can zoom in and out, and provide a location on the gennome to jump to. On the left is the list of available data tracks, these can be checked and unchecked to show and hide them from view. In the main panel the data is shown. By default this is the reference data track and the GCContent track. This panel can be dragged left and right to move along the genome.")
-
+Let's start by opening JBrowse, just to get a feel for what it looks like.
 
 > <hands-on-title> A first look at JBrowse </hands-on-title>
 >
 > 1. Click on the eye icon {% icon galaxy-eye %} to view the data in JBrowse
 >
+>    ![A screenshot of the JBrowse interface, described by caption](./images/jbrowse-screenshot.png "The JBrowse Interface. At the top is the navigation bar; here you can zoom in and out, and provide a location on the gennome to jump to. On the left is the list of available data tracks, these can be checked and unchecked to show and hide them from view. In the main panel the data is shown. By default this is the reference data track and the GCContent track. This panel can be dragged left and right to move along the genome.")
+>
+> 2. If you need a bit more space on your screen, consider resizing Galaxy's side panels
+>
+>    {% snippet faqs/galaxy/interface_side_panels_resize.md %}
+>
+> 3. Play around in JBrowse
+>
 >    > <question-title> What do you see? </question-title>
 >    >
 >    > 1. Which part of the genome are you currently viewing?
+>    > 3. Which data tracks do you see in the main panel?
 >    >
 >    > > <solution-title></solution-title>
->    > > Check the location bar at the top of the screen. You will see something like `chr1:10342..10677 (366b)`, This means you are currently viewing chromosome 1, from base 10342 to base 10677.
->    > > By default, you will usually be viewing a part of chromosome 1, unless you specified a different region when starting JBrowse.
+>    > >
+>    > > 1. Check the location bar at the top of the screen. You will see something like `chr1:10342..10677 (366b)`, This means you are currently viewing chromosome 1, from base 10342 to base 10677.
+>    > >    By default, you will usually be viewing a part of chromosome 1, unless you specified a different region when starting JBrowse.
+>    > > 2. The name of each data track is shown in the upper left corner of the track. By default, you should see two tracks labelled "Reference Sequence" and "GCContentXY". Tracks can be shown and hidden using the checkboxes in the left-hand panel.
 >    > {: .solution}
 >    {: .question}
 >
 >
-> 2. Click on the "zoom in" button until you can see the individual bases in the reference genome track.
+> 4. Click on the **"Zoom in"** {% icon zoom-in %} button until you can see the individual bases in the reference genome track.
 >    ![](./images/refbases.png)
 >
 >    > <question-title> What do you see? </question-title>
@@ -127,7 +135,7 @@ Click on the eye icon {% icon galaxy-eye %} to view the data in JBrowse. You sho
 >    > {: .solution}
 >    {: .question}
 >
-> 3. What is the second track that is visible?
+> 5. What is the second track that is visible?
 >
 >    > <question-title> What do you see? </question-title>
 >    >
@@ -164,7 +172,7 @@ Let's get a feel for this
 >
 > 2. **Navigate** around the genome by dragging the main panel left and right to move to adjacent regions. You can also zoom out if you want to view bigger regions at a time.
 >
-> 3. You can also specify a specific region to jump to. Paste `chr1:10200-10800` into the location bar and hit the "Go" button (or press Enter)
+> 3. You can also specify a specific region to jump to. Paste `chr1:10200-10800` into the location bar and hit the "Go" button (or press <kbd>Enter</kbd>)
 >
 >
 >    > <question-title> What do you see? </question-title>
@@ -192,7 +200,7 @@ Now that we have a feel for JBrowse, let's view some of our data!
 >
 > 1. Check the box next to `normal.bam` {% icon param-check %} on the left-hand side
 >
-> 2. Navigate to `chr9:130,620,912-130,621,487`
+> 2. Navigate to `chr9:130,620,912-130,621,487` by copying the location into the location bar and hitting <kbd>Enter</kbd>
 >
 {: .hands_on}
 
