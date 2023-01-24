@@ -19,6 +19,10 @@ module Gtn
       end
     end
 
+    def self.time_cache
+      @@TIME_CACHE
+    end
+
     def self.obtain_time(f)
       self.init_cache
       if @@TIME_CACHE.has_key? f
@@ -34,4 +38,10 @@ module Gtn
       end
     end
   end
+end
+
+if $0 == __FILE__
+  Gtn::ModificationTimes.init_cache
+  require 'pp'
+  pp Gtn::ModificationTimes.time_cache
 end
