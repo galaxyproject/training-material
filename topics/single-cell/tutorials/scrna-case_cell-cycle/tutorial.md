@@ -130,11 +130,11 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 >            
 > 2. Rename the output `CellCycle_Annotated`
 >
-> <question-title> Question</question-title?
+> <question-title>Question</question-title?
 >
 > 1. Why don't we need a list of genes expressed in the G1 Phase?
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren't expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase. 
 > >
@@ -271,7 +271,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 > 1. What would happen if any of the cell cycle genes were not present in the dataset?
 > 2. How would we remove these genes from the table?
 >
-> > <solution-title> Solution</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Any cell cycle genes that weren't in the dataset would have an empty field in the numbered column, which would be filled in with `FALSE` when we created the table with the {% tool Join %} tool. These rows would appear at the top of the table after it was sorted. 
 > > 2. We should check the first rows of the table for any unnumbered genes and then cut these rows out in the next step. 
@@ -342,7 +342,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 
 For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have `TRUE` in their new `CC_genes` annotation). The filtered datasets will only include expression data for these 97 genes, so we'll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.  
 
-> <hands-on-title>Filter the AnnData datasets </hands-on-title>
+> <hands-on-title>Filter the AnnData datasets</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Annotated_CC` (output of **Manipulate AnnData** {% icon tool %})
@@ -397,7 +397,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 > 1. Does the plot look as you expected?
 > 2. What would happen if we plotted all of the genes from the main dataset?
 >
-> > <solution-title> Solutions </solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
 
@@ -435,7 +435,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > 1. Does the plot look as you expected?
 > 2. What impact do you think the cell cycle regression will have when you analyse the whole dataset? 
 >
-> > <solution-title> Solutions </solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the expression of the cell cycle genes.
 
