@@ -271,7 +271,6 @@ module GtnLinter
   def self.get_citation_library
     if @CITATION_LIBRARY.nil?
       lib = BibTeX::Bibliography.new
-      puts "#{}"
       (self.enumerate_type(/bib$/) + self.enumerate_type(/bib$/, root_dir: "faqs")).each{|path|
         b = BibTeX.open(path)
         for x in b
@@ -711,7 +710,7 @@ module GtnLinter
       end_coln = message['location']['range']['end']['column']
 
       if start_line != end_line
-        puts "Cannot apply this suggestion sorry"
+        STDERR.puts "Cannot apply this suggestion sorry"
       else
         # We only really support single-line changes. This will probs fuck up
         lines = File.open(message['location']['path'], 'r').read.split("\n")
@@ -727,7 +726,7 @@ module GtnLinter
 
         #puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
         fixed = original[0..start_coln - 2] + repl + original[end_coln-1..-1]
-        puts "Fixing #{original} to #{fixed}"
+        STDERR.puts "Fixing #{original} to #{fixed}"
         lines[start_line - 1] = fixed
 
         # Save our changes

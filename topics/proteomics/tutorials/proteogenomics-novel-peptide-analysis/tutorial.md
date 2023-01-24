@@ -32,7 +32,6 @@ tags: [proteogenomics]
 ---
 
 # Introduction
-{: .no_toc}
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 Please look at the following tutorials in this proteogenomics series before starting this tutorial:
@@ -50,8 +49,6 @@ Please look at the following tutorials in this proteogenomics series before star
 {: .agenda}
 
 # Pretreatments
-
-{: .no_toc}
 
 All the files to run this workflow can be obtained from the [second tutorial]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %}) output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.
 

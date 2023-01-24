@@ -36,7 +36,6 @@ tags: [proteogenomics]
 ---
 
 # Introduction
-{: .no_toc}
 
 In this tutorial, we perform proteogenomic database searching using the Mass Spectrometry data. The inputs for performing the proteogenomic database searching are the peaklist MGF files and the FASTA database file. The FASTA database is obtained by running the first workflow “Uniprot_cRAP_SAV_indel_translatedbed.FASTA”. The second workflow focuses on performing database search of the peak list files (MGFs).
 
@@ -54,8 +53,6 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 
 
 # Pretreatments
-
-{: .no_toc}
 
 > <hands-on-title>data upload and organization</hands-on-title>
 >

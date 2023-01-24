@@ -36,7 +36,7 @@ at a given point in time. It has the potential to unravel the mechanistic detail
 the host / environment by analyzing the functional dynamics of the microbiome.
 
 In this tutorial, we will analyze a sample of sea water that was collected in August of 2013 from the Bering
-Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in [May et al., 2016](https://www.ncbi.nlm.nih.gov/pubmed/27396978).
+Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in {% cite May_2016 %}.
 
 > <agenda-title></agenda-title>
 >
@@ -114,7 +114,7 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 ## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see {% cite May_2016 %}). The full original database [is available online](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
@@ -525,11 +525,11 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 
 > <details-title>Creating your own Gene Ontology list</details-title>
 >
-> The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
+> The latest Gene Ontology can be downloaded [the GO website](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
 >
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
-> one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
+> one of them being ONTO-PERL ({% cite Antezana_2008 %}).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 > You could also upload the Gene Ontology Terms by copying this link on to the Upload Data - Paste/Fetch data `https://zenodo.org/record/839701/files/Gene_Ontology_Terms_full_07.08.2017.tabular`
 >
