@@ -9,7 +9,7 @@ tags:
     - Heatmap
     - cyoa
 level: Introductory
-zenodo_link: "https://zenodo.org/record/7553948"
+zenodo_link: "https://zenodo.org/record/7564790"
 questions:
     - What are the steps to analyze Nanopore datasets?
     - How to identify pathogens?
@@ -213,6 +213,29 @@ In this section we will run a sub-workflow that performs the following tasks:
 >
 {: .details}
 
+We will need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start this workflow, the next hands-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
+
 We will run all these steps using a single sub-workflow, then discuss each step and the results in more detail. Please do the same steps for both histories; `Barcode10`and `Barcode11`.
 
 > <hands-on-title>Taxonomy Profiling</hands-on-title>
@@ -321,6 +344,28 @@ But before we run the sub-workflow we need to upload one more file needed to cre
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
+>
+{: .hands_on}
+
+We will also need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start this workflow, the next hand-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -470,6 +515,28 @@ In this section, we will run a sub-workflow that can run in parallel to **Taxono
 >
 {: .hands_on}
 
+We will also need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start this workflow, the next hand-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
 > <hands-on-title>SNP based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
@@ -566,6 +633,27 @@ To achieve that we first need to copy some of the output datasets from **Gene ba
 >    - We will group both `Sample Specific Contigs FASTA file` files into a collection and name it `All Samples Contigs Fasta files`
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .hands_on}
+
+Optional hands-on: if you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error with any, you can go on and upload them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import all tabular and FASTA files needed for this section via link from [Zenodo]({{ page.zenodo_link }}) to the new created history:
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode10_Spike2.fasta
+>    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode11_Spike2b.fasta
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
@@ -805,13 +893,35 @@ In this section we will run the following tools that performs the following task
 >
 {: .details}
 
+We will need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start directly the tools in this section, the next hands-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
 We will run the following tools one by one, then discuss each tool and the results in more detail. Please do the same steps for both histories; `Barcode10`and `Barcode11`.
 
 > <hands-on-title> Taxonomy Profiling </hands-on-title>
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
 >    - *"Single or paired reads"*: `Single`
->        - {% icon param-file %} *"Input sequences"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, Pre-Processing)
+>        - {% icon param-file %} *"Input sequences"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, **Pre-Processing**)
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
 >    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes:  PlusPF (Standard plus protozoa and fungi) (Version:  2022-06-07 - Downloaded: 2022-09-04T165121Z)`
@@ -914,10 +1024,32 @@ But before we run the following tool we need to upload one more file needed to c
 >
 {: .hands_on}
 
+We will also need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start directly the tools in this section, the next hand-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
 > <hands-on-title> Gene based Pathogenic Identification </hands-on-title>
 >
 > 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input reads"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, Pre-Processing)
+>    - {% icon param-file %} *"Input reads"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, **Pre-Processing**)
 >    - *"Mode"*: `Nanopore HQ (--nano-hq)`
 >    - *"Perform metagenomic assembly"*: `Yes`
 >    - *"Reduced contig assembly coverage"*: `Disable reduced coverage for initial disjointing assembly`
@@ -932,7 +1064,7 @@ But before we run the following tool we need to upload one more file needed to c
 >                - *"Enter text that should be part of the computed value"*: `_$1`
 >
 > 3. {% tool [medaka consensus pipeline](toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select basecalls"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, Pre-Processing)
+>    - {% icon param-file %} *"Select basecalls"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, **Pre-Processing**)
 >    - {% icon param-file %} *"Select assembly"*: `consensus` (output of **Flye** {% icon tool %})
 >    - *"Select model"*: `r941_min_hac_g507`
 >    - *"Select output file(s)"*: `select all`
@@ -1164,13 +1296,35 @@ In this section, we will run tools that can run in parallel to **Taxonomy Profil
 >
 {: .hands_on}
 
+We will also need one output from the **Pre-Processing** section, so if yours is still running or you get an error you can go on and upload it so you can start directly the tools in this section, the next hand-on is optional
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import the quality processed samples fastqsanger files via link from [Zenodo]({{ page.zenodo_link }}) to each history respectively:
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode10_Spike2`: to `Barcode10` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode10_Spike2.fastqsanger
+>    ```
+>
+>    - `Nanopore_processed_sequenced_reads_Barcode11_Spike2b`: to `Barcode11` history
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/Nanopore_processed_sequenced_reads_Barcode11_Spike2b.fastqsanger
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
 > <hands-on-title> SNP based Pathogenic Identification </hands-on-title>
 >
 > 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Salmonella_Ref_genome.fna.gz` (Input dataset imported from Zenodo)
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, Pre-Processing)
+>        - {% icon param-file %} *"Select fastq dataset"*: `negative matches (ID not on list)` (output of **Filter sequences by ID** {% icon tool %} last tool we ran in the first section, **Pre-Processing**)
 >    - In *"Alignment options"*:
 >        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
 >
@@ -1283,6 +1437,27 @@ To achieve that we first need to copy some of the output datasets from **Gene ba
 >    - We will group both `Sample Specific Contigs FASTA file` files into a collection and name it `All Samples Contigs Fasta files`
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+{: .hands_on}
+
+Optional hands-on: if you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error with any, you can go on and upload them all or the ones missing from Zenodo so you can start directly the tools in this section, please don't forget to create the collections for them as explained in the pervious hands-on.
+
+> <hands-on-title>Optional Data upload</hands-on-title>
+>
+> 1. Import all tabular and FASTA files needed for this section via link from [Zenodo]({{ page.zenodo_link }}) to the new created history:
+>
+>    ```text
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode10_Spike2.tabular
+>    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode11_Spike2b.tabular
+>    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode10_Spike2.fasta
+>    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode11_Spike2b.fasta
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 {: .hands_on}
 
