@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="NGS data logistics" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
+<meta name="DC.date" content="2023-01-24 14:21:57 +0000" />
 <meta name="DC.creator" content="Anton Nekrutenko" />
 <meta name="DC.creator" content="Marius van den Beek" />
 <meta name="DC.creator" content="Dave Clements" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-01-24 14:21:57 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "NGS data logistics",
   "interactivityType": "mixed",
@@ -705,6 +705,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -783,8 +785,22 @@
         
     
         
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -828,7 +844,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -852,7 +868,7 @@
 
 <h2 id="fastq-manipulation-and-quality-control">FASTQ manipulation and quality control</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">here</a> (below you will find an explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. <span class="notranslate">Galaxy</span> is using FASTQ Sanger as the only legitimate input for <span class="notranslate">downstream</span> processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>FASTQ Quality Control</strong> section of <span class="notranslate">Galaxy</span> tools).</p>
+<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">on the Wikipedia article for FASTQ</a> (below you will find an explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. <span class="notranslate">Galaxy</span> is using FASTQ Sanger as the only legitimate input for <span class="notranslate">downstream</span> processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>FASTQ Quality Control</strong> section of <span class="notranslate">Galaxy</span> tools).</p>
 
 <p>The FASTQ format looks like this:</p>
 
@@ -905,7 +921,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <h4 id="two-single-files">Two single files</h4>
 
-<p><strong>File 1</strong></p>
+<p>File 1</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
  CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
@@ -917,7 +933,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
  ABC@CC77CFCEG;F9&lt;F89&lt;9--C,CE,--C-6C-,CE:++7:,CF
 </code></pre></div></div>
 
-<p><strong>File 2</strong></p>
+<p>File 2</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
 CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
@@ -1403,7 +1419,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
     <li>In the search box enter <code class="language-plaintext highlighter-rouge">SARS-CoV-2 Patient Sequencing From Partners / MGH</code>:
-<img src="../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link</a>)</li>
+<img src="../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link directly to the data</a>)</li>
     <li>The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a <a href="https://science.sciencemag.org/content/early/2020/12/09/science.abe3261">study</a> describing analysis of SARS-CoV-2 in Boston area.</li>
     <li>Download metadata describing these datasets by:
       <ul>
@@ -1463,7 +1479,7 @@ Here is how it should look like:
     </li>
     <li>Make sure the <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> dataset we just uploaded is listed in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Select lines from</em>” field of the tool form.</li>
     <li>In “<em>the pattern</em>” field enter the following <span class="notranslate">expression</span> → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
-    <li>Click <code class="language-plaintext highlighter-rouge">Execute</code> button.</li>
+    <li>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button.</li>
     <li>This will generate a file containing two lines (well … one line is also used as the header, so it will appear the the file has three lines. It is OK.)</li>
     <li>Cut the first column from the file using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
     <li>Make sure the dataset produced by the previous step is selected in the “<em>File to cut</em>” field of the tool form.</li>
@@ -1493,7 +1509,7 @@ SRR11954102
             <li>The parameter <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sra accession list”</em> should point the output of the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Cut</strong>” from the previous step.</li>
           </ul>
         </li>
-        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Execute</code> button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the <code class="language-plaintext highlighter-rouge">SRA</code> dataset. It may take some time. So this may be a good time to take a break.</li>
+        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Run Tool</code> button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the <code class="language-plaintext highlighter-rouge">SRA</code> dataset. It may take some time. So this may be a good time to take a break.</li>
       </ul>
     </li>
     <li>Several entries are created in your history panel when you submit this job:
@@ -1507,7 +1523,7 @@ SRR11954102
   </ol>
 </blockquote>
 
-<p>The first three items are actually <em>collections</em> of datasets. <em>Collections</em> in <span class="notranslate">Galaxy</span> are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end <span class="notranslate">reads</span>, single <span class="notranslate">reads</span>, and <em>other</em>. See the <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Collections tutorial</a> and watch <a href="https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE">videos</a> (with names beginning with “Dataset Collections”) for more information.</p>
+<p>The first three items are actually <em>collections</em> of datasets. <em>Collections</em> in <span class="notranslate">Galaxy</span> are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end <span class="notranslate">reads</span>, single <span class="notranslate">reads</span>, and <em>other</em>. See the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Collections tutorial</a> and watch <a href="https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE">videos</a> (with names beginning with “Dataset Collections”) for more information.</p>
 
 <p>Explore the collections by first <strong>clicking</strong> on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.</p>
 
@@ -1536,7 +1552,7 @@ being updated continuously as new datasets are made public.</p>
 
 <p>The reference genome data for today is for SARS-CoV-2, “Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome”, having the accession ID of NC_045512.2.</p>
 
-<p>This data is available from directly from GenBank using the following <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz">link</a>.</p>
+<p>This data is <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz">available from directly from GenBank</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-get-the-reference-genome-data" class="box-title" aria-label="hands-on box: Get the reference genome data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the reference genome data</div>
@@ -1816,9 +1832,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 <h2 id="collapse-data-into-a-single-dataset">Collapse data into a single dataset</h2>
 
-<p>We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to <strong>collapse</strong> this collection into a single dataset. For more information about collapsing collections see this video:</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+<p>We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to <strong>collapse</strong> this collection into a single dataset. For more information about collapsing collections see <a href="https://www.youtube.com/embed/ypuFZ1RKMIY">this video on collections</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-collapse-a-collection" class="box-title" aria-label="hands-on box: Collapse a collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Collapse a collection</div>
@@ -1889,7 +1903,7 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Open <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> **Interactive Jupyter Notebook** from section **Interactive Tools**
 > 1. *"Do you already have a notebook?"*: `Start with a fresh notebook`
 > 1. *"Include data into the environment"*: Select history dataset containing the output of the collection collapse step
-> 1. Click `Execute`
+> 1. Click `Run Tool`
 > 1. It will create a dataset in the history that will be permanently yellow (running)
 > 1. You will see the following banner:
 >
@@ -1974,6 +1988,8 @@ We can also import data directly into Google Colab:
 <h1 id="conclusion">Conclusion</h1>
 
 <p>Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.</p>
+
+<!-- GTN:IGNORE:002 -->
 
 
                 

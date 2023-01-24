@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Peptide and Protein ID using OpenMS tools" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 10:24:24 +0000" />
+<meta name="DC.date" content="2023-01-24 13:14:34 +0000" />
 <meta name="DC.creator" content="Florian Christoph Sigloch" />
 <meta name="DC.creator" content="Björn Grüning" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 10:24:24 +0000",
+  "dateModified": "2023-01-24 13:14:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Peptide and Protein ID using OpenMS tools",
   "interactivityType": "mixed",
@@ -760,6 +760,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -836,6 +838,20 @@
         
     
         
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
     
         
         <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
@@ -867,7 +883,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -998,7 +1014,7 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
 
   <blockquote class="comment">
     <div id="comment-local-use-of-msconvert" class="box-title" aria-label="comment box: Local Use of MSConvert"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Local Use of MSConvert</div>
-    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in <span class="notranslate">Galaxy</span> instances. If <strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your <span class="notranslate">Galaxy</span> instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">here</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your <span class="notranslate">Galaxy</span> history.</p>
+    <p>The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in <span class="notranslate">Galaxy</span> instances. If <strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your <span class="notranslate">Galaxy</span> instance, please install the software on a Windows computer and run the conversion locally. You can find a <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">detailed description of the necessary steps on this site</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your <span class="notranslate">Galaxy</span> history.</p>
   </blockquote>
 
 </blockquote>
@@ -1016,7 +1032,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 <p>Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine <a href="https://www.ncbi.nlm.nih.gov/pubmed/14976030">X!Tandem</a>. OpenMS provides “adapters” (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-peptide-identification" class="box-title" aria-label="hands-on box: Hands-On: Peptide Identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide Identification</div>
+  <div id="hands-on-peptide-identification" class="box-title" aria-label="hands-on box: Peptide Identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peptide Identification</div>
 
   <ol>
     <li>Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view</li>
@@ -1071,7 +1087,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 <p>To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with <strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. and set the score back to PEP with <strong>IDScoreSwitcher</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-peptide-fdr-filtering" class="box-title" aria-label="hands-on box: Hands-On: Peptide FDR filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Peptide FDR filtering</div>
+  <div id="hands-on-peptide-fdr-filtering" class="box-title" aria-label="hands-on box: Peptide FDR filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peptide FDR filtering</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0"><strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_peptideindexer/PeptideIndexer/2.6+<span class="notranslate">galaxy</span>0</span></span>  with
@@ -1135,7 +1151,7 @@ Numbers may slightly vary depending on the versions of the tools and the used FA
 The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Fido</a> algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-protein-inference" class="box-title" aria-label="hands-on box: Hands-On: Protein inference"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Protein inference</div>
+  <div id="hands-on-protein-inference" class="box-title" aria-label="hands-on box: Protein inference"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Protein inference</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0"><strong>FidoAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fidoadapter/FidoAdapter/2.6+<span class="notranslate">galaxy</span>0</span></span>
@@ -1183,7 +1199,7 @@ It also enables you to check for contaminations in your samples.</p>
 <p><strong>CAVE:</strong> When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-analysis-of-contaminants" class="box-title" aria-label="hands-on box: Hands-On: Analysis of Contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Analysis of Contaminants</div>
+  <div id="hands-on-analysis-of-contaminants" class="box-title" aria-label="hands-on box: Analysis of Contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analysis of Contaminants</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0"><strong>TextExporter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_textexporter/TextExporter/2.6+<span class="notranslate">galaxy</span>0</span></span>  to convert the idXML output to a human-readable tabular file.
@@ -1235,7 +1251,7 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
 <p>Here, we will use the OpenMS tool <a href="https://abibuilder.informatik.uni-tuebingen.de/archive/openms/Documentation/release/latest/html/TOPP_ConsensusID.html">ConsensusID</a> to combine the search engine results.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hands-on-multiple-search-engines" class="box-title" aria-label="hands-on box: Hands-On: Multiple search engines"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-On: Multiple search engines</div>
+  <div id="hands-on-multiple-search-engines" class="box-title" aria-label="hands-on box: Multiple search engines"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Multiple search engines</div>
 
   <ol>
     <li>Run <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with

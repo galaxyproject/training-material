@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Submitting sequence data to ENA" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-01-24 13:14:34 +0000" />
 <meta name="DC.creator" content="Miguel Roncoroni" />
 <meta name="DC.creator" content="Bert Droesbeke" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-01-24 13:14:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Submitting sequence data to ENA",
   "interactivityType": "mixed",
@@ -766,6 +766,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -813,6 +815,8 @@
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
+        
+    
         
     
         
@@ -880,8 +884,20 @@
         
     
         
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -921,7 +937,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -946,7 +962,7 @@
 <p>Raw <span class="notranslate">reads</span> contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw <span class="notranslate">reads</span> to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic (<span class="citation"><a href="#Maier2021">Maier <i>et al.</i> 2021</a></span>).</p>
 
-<p>The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the Inte<span class="notranslate">rna</span>tional Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ <span class="citation"><a href="#Arita2020">Arita <i>et al.</i> 2020</a></span>. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this <a href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html">introductory slide deck</a> or directly from <a href="https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html">ENA</a>.</p>
+<p>The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the Inte<span class="notranslate">rna</span>tional Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ <span class="citation"><a href="#Arita2020">Arita <i>et al.</i> 2020</a></span>. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this <a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html">introductory slide deck</a> or directly from <a href="https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html">ENA</a>.</p>
 
 <p>In this tutorial we will show you how to use <span class="notranslate">Galaxy</span>’s ‘ENA Upload tool’ to submit raw sequencing <span class="notranslate">reads</span>, consensus sequences and their associated metadata to ENA <span class="citation"><a href="#Roncoroni2021">Roncoroni <i>et al.</i> 2021</a></span>. You will learn to add your ENA Webin credentials to <span class="notranslate">Galaxy</span>, input metadata interactively or via a metadata template and submit the <span class="notranslate">reads</span> to ENA (test) server using <span class="notranslate">Galaxy</span>’s ‘ENA upload tool’.
 Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina <span class="notranslate">reads</span> to demonstrate how to use the ENA metadata template. Finally, we will submit consensus sequences to ENA using ‘Submit consensus sequence to ENA’ tool.</p>
@@ -956,7 +972,7 @@ Specifically, we will use one ONT sequencing file to demonstrate interactive met
 <blockquote class="comment">
   <div id="comment-nature-of-the-input-data" class="box-title" aria-label="comment box: Nature of the input data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nature of the input data</div>
   <p>We will use data derived from sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
-Human traces have been removed in <a href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html"><span class="notranslate">Galaxy</span></a>.</p>
+Human traces have been removed in <a href="/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html"><span class="notranslate">Galaxy</span></a>.</p>
 
 </blockquote>
 
@@ -980,7 +996,7 @@ Human traces have been removed in <a href="https://training.galaxyproject.org/tr
 
 <h1 id="adding-ena-webin-credentials-to-your-galaxy-user-information">Adding ENA Webin credentials to your <span class="notranslate">Galaxy</span> user information</h1>
 
-<p>In order to submit data to ENA, you need to have a valid Webin account. If you don’t have one already you can register for one <a href="https://www.ebi.ac.uk/ena/submit/sra/#registration">here</a>. Webin credentials need to be included in your <span class="notranslate">Galaxy</span> user information before you can use the ENA Upload tool.</p>
+<p>In order to submit data to ENA, you need to have a valid Webin account. If you don’t have one already you can register for one <a href="https://www.ebi.ac.uk/ena/submit/sra/#registration">on ENA’s Registration Page</a>. Webin credentials need to be included in your <span class="notranslate">Galaxy</span> user information before you can use the ENA Upload tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-add-webin-credentials-to-your-galaxy-user-information" class="box-title" aria-label="hands-on box: Add Webin credentials to your Galaxy user information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add Webin credentials to your <span class="notranslate">Galaxy</span> user information</div>

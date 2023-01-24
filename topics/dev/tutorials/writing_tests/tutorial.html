@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Writing Automated Tests for Galaxy" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-09-28 13:13:58 +0000" />
+<meta name="DC.date" content="2023-01-23 14:30:52 +0000" />
 <meta name="DC.creator" content="John Davis" />
 <meta name="DC.creator" content="John Chilton" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 13:13:58 +0000",
+  "dateModified": "2023-01-23 14:30:52 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Writing Automated Tests for Galaxy",
   "interactivityType": "mixed",
@@ -669,7 +669,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -726,13 +726,13 @@
 
 <p>A good way to start learning about <span class="notranslate">Galaxy</span>’s testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see <a href="https://docs.galaxyproject.org/en/master/dev/writing_tests.html">Writing Tests for <span class="notranslate">Galaxy</span></a>).</p>
 
-<p>In addition to reading the documentation, it is essential to have a reasonable understanding of <span class="notranslate">Galaxy</span>’s code organization. The best documentation resource for that is the <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html#1"><span class="notranslate">Galaxy</span> Code Architecture slides</a>. In addition, we recommend the <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.</p>
+<p>In addition to reading the documentation, it is essential to have a reasonable understanding of <span class="notranslate">Galaxy</span>’s code organization. The best documentation resource for that is the <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><span class="notranslate">Galaxy</span> Code Architecture slides</a>. In addition, we recommend the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.</p>
 
 <p>The most detailed and up-to-date documentation on running <span class="notranslate">Galaxy</span> tests is located at the top of the <code class="language-plaintext highlighter-rouge">run_tests.sh</code> script in <span class="notranslate">Galaxy</span>’s root directory.</p>
 
 <p>To run <span class="notranslate">Galaxy</span> tests, you may also use the <code class="language-plaintext highlighter-rouge">pytest</code> command directly (except for client tests, which provide their own infrastructure and scripts described in <code class="language-plaintext highlighter-rouge">client/README.md</code>. Using pytest directly is most convenient for running individual tests (although you might have to manually set the required environment variables for all but unit tests, as per documentation in <code class="language-plaintext highlighter-rouge">run_tests.sh</code>). However, keep in mind that the <code class="language-plaintext highlighter-rouge">run_scripts.sh</code> script optimizes the tests by reusing the same <span class="notranslate">Galaxy</span> instance and database for API tests, so running API tests in batch with pytest would be very inefficient.</p>
 
-<p>Another useful resource is the <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.</p>
+<p>Another useful resource is the <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.</p>
 
 <p>Finally, nothing can substitute studying <span class="notranslate">Galaxy</span>’s test code - we encourage you to always look for examples of similar tests and testing scenarios before you write your own.</p>
 
@@ -815,7 +815,7 @@
 
 <p>In a way, these tests may be the simplest to write. While the required setup of an API test is, certainly, more involved than that of a basic unit test, <span class="notranslate">Galaxy</span>’s testing infrastructure takes care of all the heavy lifting, such as creating a test database, configuring and starting up a <span class="notranslate">Galaxy</span> instance, and tearing down the setup upon test completion. The testing infrastructure also provides a wealth of convenient abstractions that simplify pre-populating the database with the necessary state for each test, interacting with the API, as well as expressing expectations about the outcomes of a test. Thus, writing an API test boils down to calling the appropriate API endpoint and verifying the result.</p>
 
-<p>We are not developing any new features in this tutorial (check out the <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial). However, we need to exercise the API, so we will be using existing <span class="notranslate">Galaxy</span> functionality as our testing context. Much of that functionality is already covered by tests. Existing tests may include advanced concepts or details on <span class="notranslate">Galaxy</span>’s inte<span class="notranslate">rna</span>ls that are beyond the scope of a tutorial on testing, so they are not optimal as examples for training. Therefore, the approach we will use is as follows:</p>
+<p>We are not developing any new features in this tutorial (check out the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial). However, we need to exercise the API, so we will be using existing <span class="notranslate">Galaxy</span> functionality as our testing context. Much of that functionality is already covered by tests. Existing tests may include advanced concepts or details on <span class="notranslate">Galaxy</span>’s inte<span class="notranslate">rna</span>ls that are beyond the scope of a tutorial on testing, so they are not optimal as examples for training. Therefore, the approach we will use is as follows:</p>
 
 <ol>
   <li>Pick a controller <code class="language-plaintext highlighter-rouge">foo</code> in the <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api</code> directory.</li>
@@ -831,7 +831,7 @@
 
 <p>First, you need to create a new file at <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_mytutorial.py</code>. For simplicity, we’ll place all new tests in this module. Next, add a class definition for <code class="language-plaintext highlighter-rouge">MyTutorialApiTestCase</code> that should be a subclass of <code class="language-plaintext highlighter-rouge">ApiTestCase</code>. Then add a test method, <code class="language-plaintext highlighter-rouge">test_version_is_current</code>, where you will (1) call the API via the <code class="language-plaintext highlighter-rouge">_get</code> method that returns a response object; and (2) verify that the response contains the “22.09” version number (assuming you have cloned the “dev” branch; otherwise your version may be different).</p>
 
-<p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> for more details on using pdb to debug <span class="notranslate">Galaxy</span>).</p>
+<p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> for more details on using pdb to debug <span class="notranslate">Galaxy</span>).</p>
 
 <blockquote class="solution">
   <solution-title></solution-title>
@@ -1376,7 +1376,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-warning" class="box-title" aria-label="warning box: Warning"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Warning</div>
+  <div id="warning" class="box-title" aria-label="warning box: "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning</div>
   <p>As a word of caution, mocking (or any kind of patching to accommodate testing) may lead to brittle tests: by relying too much on <em>how</em> the logic is implemented, we’ll be forced to adjust the test each time that implementation changes. It’s a tradeoff between having narrowly-scoped tests that will point to the exact location of the problem but may lock the code under test into a given state, and higher-level integration-type tests that test the end result without “looking under the hood”, but may be less helpful when pinpointing the exact cause of a failed test. So, use sparingly and keep it simple.</p>
 </blockquote>
 

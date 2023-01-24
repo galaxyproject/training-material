@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Mass spectrometry imaging: Examining the spatial distribution of analytes" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
+<meta name="DC.date" content="2023-01-24 14:22:01 +0000" />
 <meta name="DC.creator" content="Melanie Föll" />
 <meta name="DC.creator" content="Maren Stillger" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-01-24 14:22:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry imaging: Examining the spatial distribution of analytes",
   "interactivityType": "mixed",
@@ -665,6 +665,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -743,8 +745,22 @@
         
     
         
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -784,7 +800,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -847,11 +863,11 @@
 
 <h1 id="chilli-dataset">Chilli dataset</h1>
 
-<p>In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at <a href="https://zenodo.org/record/484496">Zenodo</a>. The data was acquired to demonstrate their self-made low-cost ‘plug and play’ MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue (<a href="https://doi.org/10.1016/j.jprot.2014.03.003">Maldonado-Torres et al.</a> and <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>).</p>
+<p>In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at <a href="https://zenodo.org/record/484496">Zenodo</a>. The data was acquired to demonstrate their self-made low-cost ‘plug and play’ MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue (<span class="citation"><a href="#Maldonado_Torres_2014">Maldonado-Torres <i>et al.</i> 2014</a></span> and <span class="citation"><a href="#Gamboa_Becerra_2015">Gamboa-Becerra <i>et al.</i> 2015</a></span>).</p>
 
 <p>The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows measurement of semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks, have a look at their <a href="https://www.youtube.com/watch?v=NbZ1QqTZvXM">video</a> and <a href="http://lababi.bioprocess.org/">website</a>. The chilli (<em>Capsicum annuum</em>) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 m/z to measure semi-volatile and volatile organic compounds (VOCs).</p>
 
-<p>We will check the properties of the dataset and then perform a similar analysis to that described by <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>: plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes.</p>
+<p>We will check the properties of the dataset and then perform a similar analysis to that described by <span class="citation"><a href="#Gamboa_Becerra_2015">Gamboa-Becerra <i>et al.</i> 2015</a></span>: plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes.</p>
 
 <figure id="figure-2"><img src="../../images/msi_distribution_chilli.png" alt="Chilli. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra</figcaption></figure>
 
@@ -947,7 +963,7 @@
           </ul>
         </li>
         <li><em>“PCA with 2 components”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li>Press <strong>Execute</strong></li>
+        <li>Press <strong>Run Tool</strong></li>
       </ul>
 
       <blockquote class="comment">
@@ -1101,7 +1117,7 @@
 
 </blockquote>
 
-<p>In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a>, we will restrict further analysis to the m/z range between 15 and 1000.</p>
+<p>In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with <span class="citation"><a href="#Gamboa_Becerra_2015">Gamboa-Becerra <i>et al.</i> 2015</a></span>, we will restrict further analysis to the m/z range between 15 and 1000.</p>
 
 <figure id="figure-5"><img src="../../images/msi_distribution_average_spectra.png" alt="Average plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Complete and zoomed in average mass spectra</figcaption></figure>
 
@@ -1229,7 +1245,7 @@
 
 <h2 id="automatic-generation-of-analyte-images">Automatic generation of analyte images</h2>
 
-<p>The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z.</p>
+<p>The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. <span class="citation"><a href="#Gamboa_Becerra_2015">Gamboa-Becerra <i>et al.</i> 2015</a></span> scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z.</p>
 
 <p>This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 m/z (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 m/z has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.</p>
 
@@ -1288,9 +1304,9 @@
 
 <figure id="figure-7"><img src="../../images/msi_distribution_auto_images.png" alt="best images. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Distribution images for the analytes with the most localized distribution</figcaption></figure>
 
-<p>In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by <a href="https://doi.org/10.1093/bioinformatics/btt388">Alexandrov and Bartels</a> and <a href="https://doi.org/10.1093/bioinformatics/bty622">Ingelese et al.</a>.</p>
+<p>In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by <span class="citation"><a href="#Alexandrov_2013">Alexandrov and Bartels 2013</a></span> and <span class="citation"><a href="#Inglese_2018">Inglese <i>et al.</i> 2018</a></span></p>
 
-<p>After m/z features with a localized distribution have been found, it is interesting to identify them. <a href="https://doi.org/10.1007/s00216-015-8744-9">Gamboa-Becerra et al.</a> performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).</p>
+<p>After m/z features with a localized distribution have been found, it is interesting to identify them. <span class="citation"><a href="#Gamboa_Becerra_2015">Gamboa-Becerra <i>et al.</i> 2015</a></span> performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).</p>
 
 <blockquote class="comment">
   <div id="comment-identification-of-m-z-features" class="box-title" aria-label="comment box: Identification of m/z features"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Identification of m/z features</div>
@@ -1411,6 +1427,12 @@ Targeted analysis can be performed if the m/z of the molecule of interest is alr
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Alexandrov_2013">Alexandrov, T., and A. Bartels, 2013 <b>Testing for presence of known and unknown molecules in imaging mass spectrometry</b>. Bioinformatics 29: 2335–2342. <a href="https://doi.org/10.1093/bioinformatics/btt388">10.1093/bioinformatics/btt388</a></li>
+<li id="Maldonado_Torres_2014">Maldonado-Torres, M., J. F. López-Hernández, P. Jiménez-Sandoval, and R. Winkler, 2014 <b>‘Plug and Play’ assembly of a low-temperature plasma ionization mass spectrometry imaging (LTP-MSI) system</b>. Journal of Proteomics 102: 60–65. <a href="https://doi.org/10.1016/j.jprot.2014.03.003">10.1016/j.jprot.2014.03.003</a></li>
+<li id="Gamboa_Becerra_2015">Gamboa-Becerra, R., Ramı́rez-Chávez Enrique, J. Molina-Torres, and R. Winkler, 2015 <b>MSI.R scripts reveal volatile and semi-volatile features in low-temperature plasma mass spectrometry imaging (LTP-MSI) of chilli (Capsicum annuum)</b>. Anal Bioanal Chem 407: 5673–5684. <a href="https://doi.org/10.1007/s00216-015-8744-9">10.1007/s00216-015-8744-9</a></li>
+<li id="Inglese_2018">Inglese, P., G. Correia, Z. Takats, J. K. Nicholson, and R. C. Glen, 2018 <b>SPUTNIK: an R package for filtering of spatially related peaks in mass spectrometry imaging data</b> (R. Murphy, Ed.). Bioinformatics 35: 178–180. <a href="https://doi.org/10.1093/bioinformatics/bty622">10.1093/bioinformatics/bty622</a></li></ol>
                 
 
                 

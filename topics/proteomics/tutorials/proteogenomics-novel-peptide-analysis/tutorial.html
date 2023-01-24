@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Proteogenomics 3: Novel peptide analysis" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-09-28 13:13:58 +0000" />
+<meta name="DC.date" content="2023-01-24 14:22:01 +0000" />
 <meta name="DC.creator" content="Subina Mehta" />
 <meta name="DC.creator" content="Timothy J. Griffin" />
 <meta name="DC.creator" content="Pratik Jagtap" />
@@ -282,7 +282,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 13:13:58 +0000",
+  "dateModified": "2023-01-24 14:22:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Proteogenomics 3: Novel peptide analysis",
   "interactivityType": "mixed",
@@ -849,6 +849,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -927,8 +929,22 @@
         
     
         
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -968,7 +984,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -986,7 +1002,7 @@
             <div class="col-sm-10">
                  
 
-                <h1 class="no_toc" id="introduction">Introduction</h1>
+                <h1 id="introduction">Introduction</h1>
 
 <p>The third and the last <span class="notranslate">workflow</span> in the proteogenomics tutorial is to identifying the “<strong>Novel peptides</strong>” using BlastP and to localize the peptides to its genomic coordinates. Inputs from both <span class="notranslate">workflow</span> 1 and 2 will be used in this <span class="notranslate">workflow</span>.
 Please look at the following tutorials in this proteogenomics series before starting this tutorial:</p>
@@ -1002,6 +1018,7 @@ Please look at the following tutorials in this proteogenomics series before star
 
   <p>In this tutorial, we will deal with:</p>
 <ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a></li>
   <li><a href="#peptide-selection" id="markdown-toc-peptide-selection">Peptide Selection</a></li>
   <li><a href="#multiomics-visualization-platform-mvp" id="markdown-toc-multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</a></li>
@@ -1014,7 +1031,7 @@ Please look at the following tutorials in this proteogenomics series before star
 
 <h1 id="pretreatments">Pretreatments</h1>
 
-<p class="no_toc">All the files to run this <span class="notranslate">workflow</span> can be obtained from the <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">second tutorial</a> output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.</p>
+<p>All the files to run this <span class="notranslate">workflow</span> can be obtained from the <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">second tutorial</a> output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-data-organization" class="box-title" aria-label="hands-on box: data organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: data organization</div>
@@ -1081,7 +1098,7 @@ https://zenodo.org/record/1489208/files/genomic_<span class="notranslate">mappin
         </li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
+    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
   </ol>
 
 </blockquote>
@@ -1163,7 +1180,7 @@ ORDER BY psm.Sequence, psm.ID
         <li><em>“Include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
+    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
   </ol>
 
 </blockquote>
@@ -1205,7 +1222,7 @@ ORDER BY psm.Sequence, psm.ID
         <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
+    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
   </ol>
 
 </blockquote>
@@ -1316,7 +1333,7 @@ peptides provided as input. This outputs <span class="notranslate">bed</span> fi
         </li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the resulting files</li>
+    <li>Click <strong>Run Tool</strong> and inspect the resulting files</li>
   </ol>
 
 </blockquote>
@@ -1336,7 +1353,7 @@ peptides provided as input. This outputs <span class="notranslate">bed</span> fi
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> file with chromosomal coordinates of peptides”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Bed</span> file from Peptide genomic coordinate tool</code></li>
       </ul>
     </li>
-    <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
+    <li>Click <strong>Run Tool</strong> and inspect the query results file after it turned green.</li>
   </ol>
 
   <p>This tool provides a <span class="notranslate">bed</span> output with the classification of the genomic location of the peptides.The Mus-musculus GTF file will be in your history if you have completed the proteogenomics 1 tutorial.</p>
@@ -1409,7 +1426,7 @@ GROUP BY psm.Sequence
       </ul>
     </li>
     <li>
-      <p>Click <strong>Execute</strong> and inspect the query results file after it turned green. If everything went well, it should look similiar:</p>
+      <p>Click <strong>Run Tool</strong> and inspect the query results file after it turned green. If everything went well, it should look similiar:</p>
 
       <p><img src="../../images/final_summary.png" alt="Final Summary. " width="100%" loading="lazy" /></p>
     </li>

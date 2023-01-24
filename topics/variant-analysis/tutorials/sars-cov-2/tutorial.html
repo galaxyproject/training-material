@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-01-24 14:21:57 +0000" />
 <meta name="DC.creator" content="Marius van den Beek" />
 <meta name="DC.creator" content="Dave Clements" />
 <meta name="DC.creator" content="Daniel Blankenberg" />
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-01-24 14:21:57 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
   "interactivityType": "mixed",
@@ -846,6 +846,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -924,8 +926,22 @@
         
     
         
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -969,7 +985,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1038,8 +1054,8 @@ SRA, like many data sources is Galaxy aware.  It has support for sending informa
 
 We created twoi trajectories that you can follow through this tutorial.
 
-1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [here](#the-sequence-read-archive)
-2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [here](#back-in-galaxy)
+1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [in the SRA section](#the-sequence-read-archive)
+2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [in the Galaxy section](#back-in-galaxy)
 
 We recommend beginning with **Trajectory 2**.
 # The Sequence Read Archive
@@ -1068,7 +1084,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 > <div id="hands-on-explore-sra-entrez" class="box-title" aria-label="hands-on box: Explore SRA Entrez"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Explore SRA Entrez</div>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
-> 1. If your history is not already empty, than start a new history (see [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
+> 1. If your history is not already empty, than start a new history (see [galaxy interface tutorial](/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
 >    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
@@ -1207,7 +1223,7 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
     <li>In the search box enter <code class="language-plaintext highlighter-rouge">SARS-CoV-2 Patient Sequencing From Partners / MGH</code>:
-<img src="../../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link</a>)</li>
+<img src="../../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">simply access the data via link</a>)</li>
     <li>Note that some of the datasets found say “ARTICv3 amplicon sequencing”. This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called “metagenomic sequencing”.</li>
     <li>The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a <a href="https://science.sciencemag.org/content/early/2020/12/09/science.abe3261">study</a> describing analysis of SARS-CoV-2 in Boston area.</li>
     <li>Download metadata describing these datasets by:
@@ -1268,7 +1284,7 @@ Here is how it should look like:
     </li>
     <li>Make sure the <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> dataset we just uploaded is listed in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Select lines from</em>” field of the tool form.</li>
     <li>In “<em>the pattern</em>” field enter the following <span class="notranslate">expression</span> → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
-    <li>Click <code class="language-plaintext highlighter-rouge">Execute</code> button.</li>
+    <li>Click <code class="language-plaintext highlighter-rouge">Run Tool</code> button.</li>
     <li>This will generate a file containing two lines (well … one line is also used as the header, so it will appear the the file has three lines. It is OK.)</li>
     <li>Cut the first column from the file using <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Cut</strong>” tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
     <li>Make sure the dataset produced by the previous step is selected in the “<em>File to cut</em>” field of the tool form.</li>
@@ -1298,7 +1314,7 @@ SRR11954102
             <li>The parameter <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sra accession list”</em> should point the output of the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> “<strong>Cut</strong>” from the previous step.</li>
           </ul>
         </li>
-        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Execute</code> button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the <code class="language-plaintext highlighter-rouge">SRA</code> dataset. It may take some time. So this may be a good time to do get coffee.</li>
+        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Run Tool</code> button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the <code class="language-plaintext highlighter-rouge">SRA</code> dataset. It may take some time. So this may be a good time to do get coffee.</li>
       </ul>
     </li>
     <li>Several entries are created in your history panel when you submit this job:
@@ -1344,7 +1360,7 @@ being updated continuously as new datasets are made public.</p>
 
 <p>The reference genome data for today is for SARS-CoV-2, “Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome”, having the accession ID of NC_045512.2.</p>
 
-<p>This data is available from Zenodo using the following <a href="https://doi.org/10.5281/zenodo.3906454">link</a>.</p>
+<p>This <a href="https://doi.org/10.5281/zenodo.3906454">data is available from Zenodo</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-get-the-reference-genome-data" class="box-title" aria-label="hands-on box: Get the reference genome data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the reference genome data</div>

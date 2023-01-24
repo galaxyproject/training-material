@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="MaxQuant and MSstats for the analysis of TMT data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-01-24 13:14:34 +0000" />
 <meta name="DC.creator" content="Klemens Fröhlich" />
 <meta name="DC.creator" content="Melanie Föll" />
 <meta name="DC.creator" content="Matthias Fahrner" />
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-01-24 13:14:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "MaxQuant and MSstats for the analysis of TMT data",
   "interactivityType": "mixed",
@@ -694,6 +694,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -774,6 +776,20 @@
         
     
         
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
     
         
     
@@ -801,7 +817,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -823,7 +839,7 @@
 
 <p>In this training we will cover the full analysis <span class="notranslate">workflow</span> from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT.</p>
 
-<p>The training dataset consists of a dataset from a <a href="https://doi.org/10.1186/s12935-020-1141-2">study</a> which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α <span class="notranslate">expression</span> in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.</p>
+<p>The training dataset consists of a dataset from <span class="citation"><a href="#Baumert_2020">Baumert <i>et al.</i> 2020</a></span> which investigates the effects of a recently discovered histone methyltransferase, lysine methyl transferase 9 (KMT9α) in A549 cells. High KMT9α <span class="notranslate">expression</span> in lung cancer correlates with poor patient survival. Therefore,  KMT9α is a very interesting research target in light of the fact that lung cancer survival rates could not be improved over the last 15 years. The example dataset consists of 4 cell culture samples from KMT9α knock-down cells and 4 cell culture samples from control (Ctrl) cells. In order to increase the proteome coverage the TMT experiment was pre-fractionated using offline high pH reverse phase chromatography resulting in 12 MS runs.</p>
 
 <blockquote class="agenda">
   <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
@@ -844,7 +860,7 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>The raw data is available via the PRIDE repository under the ID: <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PXD014145</a>. The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>.</p>
+<p>The raw data is available via the PRIDE repository under the ID: <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD014145">PXD014145</a>. The MaxQuant experimental design template file, MSstatsTMT annotation file and FASTA file for this training are deposited at Zenodo(https://zenodo.org/record/5195800). It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible, we recommend using the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -1349,7 +1365,6 @@ Please bear in mind that TMT quantitation suffers from ratio compression. There 
 <figure id="figure-3"><img src="../../images/maxquant-msstats-tmt/volcano_plot.png" alt="Volcano plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Volcano plot QC report for all samples, each boxplot summarizes the protein abundances of one sample</figcaption></figure>
 
 
-
                 
                 <blockquote class="key_points">
                     <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
@@ -1375,6 +1390,9 @@ Please bear in mind that TMT quantitation suffers from ratio compression. There 
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Baumert_2020">Baumert, H. M., E. Metzger, M. Fahrner, J. George, R. K. Thomas <i>et al.</i>, 2020 <b>Depletion of histone methyltransferase KMT9 inhibits lung cancer cell proliferation by inducing non-apoptotic cell death</b>. Cancer Cell Int 20: <a href="https://doi.org/10.1186/s12935-020-1141-2">10.1186/s12935-020-1141-2</a></li></ol>
                 
 
                 

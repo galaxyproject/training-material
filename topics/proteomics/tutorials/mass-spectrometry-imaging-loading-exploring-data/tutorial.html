@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Mass spectrometry imaging: Loading and exploring MSI data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-01-24 14:22:01 +0000" />
 <meta name="DC.creator" content="Melanie Föll" />
 <meta name="DC.creator" content="Björn Grüning" />
 
@@ -278,7 +278,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-01-24 14:22:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry imaging: Loading and exploring MSI data",
   "interactivityType": "mixed",
@@ -666,6 +666,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -744,8 +746,22 @@
         
     
         
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
         </a>
         
     
@@ -785,7 +801,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -816,7 +832,7 @@
 <p>One common type of mass spectrometer for MSI is a MALDI Time-Of-Flight (MALDI-TOF) device. During MALDI ionization a laser shoots onto the sample that was covered with a special matrix which absorbs the laser energy and transfers it to the analytes. This process evaporizes and ionizes the analytes that due to their charge can then be accelerated in an electrical field towards the TOF tube. The time of flight through the tube to the detector is measured and as this correlates with the mass over charge (m/z) of the analyte, the flight time allows the calculation of m/z. During measurement complete mass spectra with hundreds of m/z - intensity pairs are acquired in thousands of sample plots leading to big and complex data. Each mass spectrum is annotated with coordinates (x,y) that define its location in the sample. This allows to visualize the intensity distribution of each m/z feature in the sample as a heatmap. Depending on the analyte of interest, the sample type and the mass spectrometer the sample preparation steps as well as the properties of the acquired data differ.</p>
 
 <p>This tutorial introduces the handling of the mass spectrometry imaging (MSI) file type imzML in <span class="notranslate">Galaxy</span> and some first steps to explore the data.
-The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software (<a href="https://doi.org/10.1016/j.jprot.2012.07.026">Schramm et al., Jou<span class="notranslate">rna</span>l of Proteomics, 2012</a>). More and more vendors provide an imzML export option and there are <a href="https://ms-imaging.org/wp/imzml/software-tools/">software solutions</a> to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it’s quality and usefulness.</p>
+The imzML file format was introduced to ease the exchange of MSI data between different instruments and data analysis software (<span class="citation"><a href="#Schramm_2012">Schramm <i>et al.</i> 2012</a></span>). More and more vendors provide an imzML export option and there are <a href="https://ms-imaging.org/wp/imzml/software-tools/">software solutions</a> to convert proprietary files into imzML files. Before starting any analysis it is recommended to visualize all features of the data in different ways to better understand the data and to obtain an idea about it’s quality and usefulness.</p>
 
 <blockquote class="agenda">
   <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
@@ -913,7 +929,7 @@ The imzML file consists of two files: The first file contains the metadata in an
 
 <p>Before starting any analysis, it is important to confirm that the quality of the acquired data is sufficient.
 Furthermore, knowing the data’s properties is important to choose the right preprocessing steps and parameters.
-The steps that most influence the spatial delocalization and preparation quality in an MALDI imaging experiment is the homogeneous matrix deposition and for peptide analysis in addition the trypsin deposition and digestion step as reported by <a href="https://doi.org/10.1002/prca.201800029">Ly et al.</a>. To monitor the digestion quality, three <em>Bombesin</em> peptide drops were spotted close to the tissue. Furthermore, the mouse kidney dataset contains inte<span class="notranslate">rna</span>l calibrants that were sprayed together with the matrix onto the tissue and can be used to monitor intensity gradients and mass accuracy. The used calibrants were <em>Angiotensin I</em>, <em>Substance P</em>, <em>Fibrinopeptide B</em> and <em>ACTH_18-39</em>.</p>
+The steps that most influence the spatial delocalization and preparation quality in an MALDI imaging experiment is the homogeneous matrix deposition and for peptide analysis in addition the trypsin deposition and digestion step as reported by <span class="citation"><a href="#Ly_2019">Ly <i>et al.</i> 2019</a></span>. To monitor the digestion quality, three <em>Bombesin</em> peptide drops were spotted close to the tissue. Furthermore, the mouse kidney dataset contains inte<span class="notranslate">rna</span>l calibrants that were sprayed together with the matrix onto the tissue and can be used to monitor intensity gradients and mass accuracy. The used calibrants were <em>Angiotensin I</em>, <em>Substance P</em>, <em>Fibrinopeptide B</em> and <em>ACTH_18-39</em>.</p>
 
 <p>The <em>*MSI Qualitycontrol</em> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> provides a fast way to obtain plenty of descriptive statistic plots for MSI datasets.
 Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous m/z features can be used to obtain further quality measures, such as m/z accuracies.</p>
@@ -951,7 +967,7 @@ Inte<span class="notranslate">rna</span>l calibrants or other known, ubiquitous 
         <li><em>“Plot fold change of two m/z”</em>: <code class="language-plaintext highlighter-rouge">Insert Plot fold change of two m/z</code></li>
         <li><em>“M/z 1”</em>: <code class="language-plaintext highlighter-rouge">1224.63</code> (digested <em>Bombesin</em>)</li>
         <li><em>“M/z 2”</em>: <code class="language-plaintext highlighter-rouge">1619.89</code> (full length <em>Bombesin</em>)</li>
-        <li>Press <strong>Execute</strong></li>
+        <li>Press <strong>Run Tool</strong></li>
       </ul>
     </li>
   </ol>
@@ -1132,6 +1148,10 @@ Exporting and filtering the spectra information for three pixel that have differ
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Schramm_2012">Schramm, T., Z. Hester, I. Klinkert, J.-P. Both, R. M. A. Heeren <i>et al.</i>, 2012 <b>imzML — A common data format for the flexible exchange and processing of mass spectrometry imaging data</b>. Journal of Proteomics 75: 5106–5110. <a href="https://doi.org/10.1016/j.jprot.2012.07.026">10.1016/j.jprot.2012.07.026</a></li>
+<li id="Ly_2019">Ly, A., R. Longuespée, R. Casadonte, P. Wandernoth, K. Schwamborn <i>et al.</i>, 2019 <b>Site-to-Site Reproducibility and Spatial Resolution in MALDI–MSI of Peptides from Formalin-Fixed Paraffin-Embedded Samples</b>. Prot. Clin. Appl. – Clinical Applications 13: 1800029. <a href="https://doi.org/10.1002/prca.201800029">10.1002/prca.201800029</a></li></ol>
                 
 
                 
