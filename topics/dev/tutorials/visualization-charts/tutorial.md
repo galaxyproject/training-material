@@ -81,7 +81,7 @@ continue by visiting the protein viewer developer site at
 [https://biasmv.github.io/pv/](https://biasmv.github.io/pv/) to get familiar
 with the plugin.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. View the plugin in action, rotate the molecule and change its style.
 >
@@ -110,7 +110,7 @@ instance. All development takes place within the *Galaxy* codebase. The first
 thing we are going to do is to clone a *Galaxy* instance and prepare the
 directory structure for the new visualization plugin.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Clone an instance of *Galaxy* in a path, further referred to as `$GALAXY_ROOT`:
 >    ```bash
@@ -152,7 +152,7 @@ Here's an example [logo](../../files/charts-plugins/pdb/logo.png):
 
 ![Logo](../../files/charts-plugins/pdb/logo.png)
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Find an arbitrary image in `PNG`-file format. Possibly using *Google*'s [image search](https://images.google.com).
 >
@@ -167,7 +167,7 @@ allows developers to specify a variety of attributes and input parameters for
 their visualization. Throughout this tutorial we are going to gradually augment
 this file but for now we keep it simple.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Rename the file to `config/myviz.xml`
 >
@@ -194,7 +194,7 @@ your plugin with its new logo in the list there.
 
 ### Assign a new datatype to your visualization
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Open the file named `config/myviz.xml` and find the `<data_source>` section.
 >
@@ -238,7 +238,7 @@ Let's take a look at the [documentation](https://pv.readthedocs.io/).
 
 Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  `script.js`.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Access your visualization's `myviz/src` directory.
 >    ```bash
@@ -291,7 +291,7 @@ After it has been built and staged the plugin will be accessible through
 *Galaxy*'s user interface. This process not require restarting your *Galaxy*
 instance, just make sure to properly refresh your browser.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Navigate to your visualization's root directory:
 >    ```bash
@@ -323,7 +323,7 @@ Lets test this.
 
 In this section we will select a `PDB`-file from the Protein Data Bank and visualize it with our new plugin.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Visit [https://www.rcsb.org ](http://www.rcsb.org) and select a protein structure e.g. [1ACB](http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb)
 >
@@ -362,7 +362,7 @@ latter is provided in *JavaScript* and not as XML.
 
 More information on parameters can be found in the [wiki](https://docs.galaxyproject.org/en/latest/dev/schema.html).
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Add the following block into the `myviz.xml` file:
 >    ```xml

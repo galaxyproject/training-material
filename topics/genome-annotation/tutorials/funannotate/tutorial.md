@@ -150,7 +150,7 @@ You would normally get the Fastq files directly from SRA and use them in the fol
 
 To make use of this RNASeq data, we need to map it on the genome. We will use **RNA star** {% icon tool %} and get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
@@ -194,7 +194,7 @@ There are other parameters to finely tune how Funannotate will run ab-initio pre
 
 Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
@@ -272,7 +272,7 @@ The next step will show you how Funannotate can use this `.sbt` file, and the `l
 
 Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
@@ -301,7 +301,7 @@ If you display the GFF3 output, you will notice that the functional information,
 
 We now have a complete annotation, including functional annotation, but it's time to evaluate the quality of this annotation. [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
@@ -332,7 +332,7 @@ We now have a complete annotation, including functional annotation, but it's tim
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -372,7 +372,7 @@ Earlier, we have seen how general statistics and BUSCO results can help to evalu
 
 Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [AEGeAn ParsEval](toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0) %} with the following parameters:
 >    - {% icon param-file %} *"Reference GFF3 file"*: `gff3` (output of **Funannotate functional** {% icon tool %})
@@ -385,7 +385,7 @@ Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
 The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the `(+)` links, or on the scaffold names, you can see the results more in detail, even at the gene level.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Display the report
 > 2. Click on `scaffold_11`
@@ -414,7 +414,7 @@ The output is a web page where you can see how many loci or genes are identical 
 
 **Funannotate compare** {% icon tool %} is another tool to compare several annotations. It uses genbank files, as generated by **Funannotate functional** {% icon tool %}.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-files %} *"Genome annotations in genbank format"*: `alternate_annotation.gbk` (Input dataset) and `gbk` (output of **Funannotate functional** {% icon tool %})

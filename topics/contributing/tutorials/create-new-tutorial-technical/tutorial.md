@@ -86,9 +86,9 @@ Given the workflow you created above and have included in the tutorial folder, y
 >      outputs:
 >        ffn:
 >          asserts:
->            has_text:
+>            - that: has_text
 >              text: ">A"
->            has_text:
+>            - that: has_text
 >              text: ">B"
 >    ```
 >

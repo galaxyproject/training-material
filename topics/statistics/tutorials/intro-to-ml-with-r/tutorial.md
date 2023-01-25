@@ -98,7 +98,7 @@ The R programming language has gained considerable popularity among statistician
 
 ## Applications of ML in Bioinformatics
 
-There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from [Pedro Larrañaga et.al, Briefings in Bioinformatics 7:1, 2006](https://doi.org/10.1093/bib/bbk007)) shows a scheme of the main biological problems where computational methods are being applied.
+There are several biological domains where machine learning techniques are applied for knowledge extraction from data. The following figure (retrieved from {% cite Larra_aga_2006 %}) shows a scheme of the main biological problems where computational methods are being applied.
 
 ![A series of overlapping boxes showing intersections of different topics like text mining and proteomics and evolution and microarrays, with various topics listed in the intersections. Unfortunately the source image is too low resolution even for sighted users.](../../images/intro-to-ml-with-r/bioinformatics-ml.png "Classification of the topics where machine learning methods are applied (<a href="https://doi.org/10.1093/bib/bbk007">https://doi.org/10.1093/bib/bbk007</a>)")
 
@@ -564,7 +564,7 @@ What we are going to do is group the tumor data points into two clusters using a
 >
 >    ![Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset](../../images/intro-to-ml-with-r/kmeans-pc12-Visualization.png "Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset")
 >
->    This is a rather complex plotting command that is based on the `ggplot` library. For an overview of how `ggplot` works, have a look at the [RNA Seq Counts to Viz in R](https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html) tutorial.
+>    This is a rather complex plotting command that is based on the `ggplot` library. For an overview of how `ggplot` works, have a look at the [RNA Seq Counts to Viz in R]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.md %}) tutorial.
 >
 > 4. Now that we have a cluster for each tumor (clusters 1 and 2), we can check how well they coincide with the labels that we know. To do this we will use a cool method called **cross-tabulation**: a cross-tab is a table that allows you to read off how many data points in clusters 1 and 2 were actually benign or malignant respectively.
 >
@@ -1231,7 +1231,7 @@ Linear regression is to predict response with a linear function of predictors. T
 {: .hands_on}
 
 
-Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [here](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
+Now let's use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (`R`), and that is why it is called "R Square" (more info [on the Wikipedia page for CoD](https://en.wikipedia.org/wiki/Coefficient_of_determination)).
 
 
 > <question-title></question-title>
@@ -1297,5 +1297,3 @@ This again confirms that our model is very good as the R_square value is very cl
 With the rise in high-throughput sequencing technologies, the volume of omics data has grown exponentially in recent times and a major issue is to mine useful knowledge from these data which are also heterogeneous in nature. Machine learning (ML) is a discipline in which computers perform automated learning without being programmed explicitly and assist humans to make sense of large and complex data sets. The analysis of complex high-volume data is not trivial and classical tools cannot be used to explore their full potential. Machine learning can thus be very useful in mining large omics datasets to uncover new insights that can advance the field of bioinformatics.
 
 This tutorial was only a first introductory step into the main concepts and approaches in machine learning. We looked at some of the common methods being used to analyse a representative dataset, by providing a practical context through the use of basic but widely used R libraries. Hopefully, at this point, you will have acquired a first understanding of the standard ML processes, as well as the practical skills in applying them on familiar problems and publicly available real-world data sets.
-
-

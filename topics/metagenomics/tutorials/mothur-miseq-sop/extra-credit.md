@@ -2,7 +2,7 @@
 
 Below are some more exercises for those who wish to go into more detail about statistical significance testing and population-level analysis.
 
-Or, click [here](#wrap-up) to jump to the end and skip this extra credit section.
+Or, [jump to the end](#wrap-up) and skip this extra credit section.
 
 
 # Extra Credit
@@ -279,7 +279,7 @@ F3D8     8
 F3D9     9
 ```
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > - **Corr.axes** {% icon tool %} with the following parameters
 >   - "axes" to axes output from Nmds in 3 dimension
@@ -451,5 +451,3 @@ Otu0042    0.07
 ```
 
 # Wrap-up
-{:.no_toc}
-

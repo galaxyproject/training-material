@@ -415,28 +415,26 @@ Repeat the filtering step on the imported DESeq2 result.
 > 2. Rename the output as `Differentially expressed miRNAs`
 > 3. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed miRNAs`
->    - *"With following condition"*: `c3<0`
+>    - *"With following condition"*: `c3>0`
 > 4. Rename the output as `Upregulated miRNAs`
 > 5. {% tool [Sort](sort1) %} data in ascending or descending order (Galaxy Version 1.1.0) with the following parameters:
 >    - {% icon param-file %} *"Sort Dataset"*: `Upregulated miRNAs`
 >    - *"on column"*: `Column: 3`
->    - *"everything in"*: `Ascending order`
+>    - *"everything in"*: `Descending order`
 {: .hands_on}
 
 > <question-title></question-title>
 >
 > 1. How many miRNAs are differentially expressed?
-> 2. How many miRNAs show statistically significant upregulation and what are the most upregulated miRNA?
+> 2. How many miRNAs show statistically significant upregulation and what is the most upregulated miRNA?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Out of 442 miRNAs, 39 show significant differential expression.
-> > 2. There are 23 upregulated miRNAs and the `Ath-miR169` family members are the most upregulated ones.
+> > 2. There are 16 upregulated miRNAs and `Ath-miR156g` is the most upregulated one.
 > {: .solution}
 >
 {: .question}
-
-Experimental results indicate that at least one member of the ath-miR-169 family is induced significantly by saline stress ({% cite Zhao2009 %}).
 
 # mRNA data analysis
 
@@ -625,12 +623,12 @@ Now we continue with the DE genes analysis.
 >
 > 3. {% tool [Filter](Filter1) %}data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed mRNAs`
->    - *"With following condition"*: `c3<-1`
+>    - *"With following condition"*: `c3>1`
 > 4. Rename it as `Upregulated mRNAs`
 >
 > 5. {% tool [Filter](Filter1) %} data on any column using simple expressions (Galaxy Version 1.1.1) with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `Differentially expressed mRNAs`
->    - *"With following condition"*: `c3>1`
+>    - *"With following condition"*: `c3<-1`
 > 6. Rename it as `Downregulated mRNAs`
 >
 {: .hands_on}
@@ -644,7 +642,7 @@ Now we continue with the DE genes analysis.
 > > <solution-title></solution-title>
 > >
 > > 1. The total number of genes whose expression differential between the two experimental conditions is 4176.
-> > 2. Of them, 328 are significantly upregulated by the BR treatment and 778 are downregulated.
+> > 2. Of them, 328 are significantly downregulated by the BR treatment and 778 are upregulated.
 > > 3. The most significantly DE gene is AT3G30180 (BR60X2). BR60X2 encodes a cytochrome p450 enzyme that catalyzes the last reaction in the production of brassinolide. It is capable of converting 6-deoxocastasterone into castasterone, a C-6 oxidation, as well as the further conversion of castasterone into brassinolide (source: [TAIR database](https://www.arabidopsis.org/servlets/TairObject?name=at3g30180&type=locus)).
 > {: .solution}
 >
@@ -711,25 +709,27 @@ We are now ready to launch the search for miRNA target genes. For this we will u
 > 1. {% tool [TargetFinder](toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input small RNA sequences file"*: `Upreguled miRNA sequences`
 >    - {% icon param-file %} *"Target sequence database file*": `Downregulated mRNA sequences`
->    - *"Prediction score cutoff value"*: `4.0`
+>    - *"Prediction score cutoff value"*: `5.0`
 >    - *"Output format"*: `Tab-delimited format`
 > 2. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **TargetFinder**.
 {: .hands_on}
 
-Congratulations! We have identified three gene-pairs potentially involved in the brassinosteroid-mediated regulatory network: AT4G14365/Ath-miR408, AT5G50570/Ath-miR156i and AT1G26890/Ath-miR156i.
+Congratulations! We have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network.
 
 ![fig15:TargetFinder results](../../images/transcriptomics_images/targetFinder_results.png "TargetFinder results.")
 
 Finally, we can access all the information available on the genes identified in the TAIR database:
 
-- [AT4G14365](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT4G14365): XB3 ORTHOLOG 4 IN ARABIDOPSIS THALIANA, XBAT34 (hypothetical protein)
-- [AT5G50570](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G50570): SPL13, SPL13A, SQUAMOSA PROMOTER-BINDING PROTEIN LIKE 13
-- [AT1G26890](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT1G26890): FBD, F-box and Leucine Rich Repeat domains containing protein
+- [AT5G10180](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G10180): ARABIDOPSIS SULFATE TRANSPORTER 68, AST6
+- [AT3G09220](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G09220): LAC7, LACCASE 7
+- [AT2G46850](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT2G46850): Protein kinase superfamily protein
+- [AT5G64260](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT5G64260): EXL2, EXORDIUM LIKE 2
+- [AT3G63200](https://www.arabidopsis.org/servlets/TairObject?type=locus&name=AT3G63200): PATATIN-LIKE PROTEIN 9, PLA IIIB
 
 Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT5G50570, experimental research have demonstrated that this gene is involved in  flooding tolerance in *Medicago sativa*, through a signaling path mediated by miR156 ({% cite Feyissa2021 %}). On the other hand, according to {% cite Gao2017 %}, SPL13 is likely a negative regulator of plant vegetative growth. The interaction between miR156 and SPL transcription factors has been suggested for diverse Poaceae family members ({% cite Yue2021 %}).
 
 > <comment-title>Hypothesis testing</comment-title>
-> One of the hypotheses that we could propose from our results is: the inhibition of the AT5G50570 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT5G50570 mutant seeds](https://abrc.osu.edu/stocks/482611) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
+> One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire [AT2G46850 mutant seeds](https://abrc.osu.edu/stocks/392113) and [wild type seeds](http://arabidopsis.info/StockInfo?NASC_id=N1093), grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).
 >
 > ![fig16:Plant growth](../../images/transcriptomics_images/arabidopis_growth_protocol.png "Arabidopsis growth conditions protocol ({% cite deOllas2019 %}).")
 >
@@ -768,4 +768,4 @@ Upregulated miRNA   https://zenodo.org/record/4710649/files/upregulated_miRNA_BR
 # Conclusion
 
 
-In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of three potential miRNA targets.
+In this tutorial, we have analyzed RNA sequencing data to extract information about potential genes regulated by brassinosteroids. For this purpose, the approach chosen was the identification of genes complementary to miRNAs upregulated in response by brassinosteroids. The final result has been the identification of five potential miRNA targets.

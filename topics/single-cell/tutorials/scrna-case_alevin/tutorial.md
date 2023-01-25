@@ -264,7 +264,7 @@ This is the matrix market (MTX) format.
 >
 {: .question}
 
-> <warning-title>Warning!: Choose the appropriate input going forward!</warning-title>
+> <warning-title>Choose the appropriate input going forward!</warning-title>
 > Make certain to use **quants_mat.mtx.gz**  and NOT **quants_tier.mtx.gz** going forward.
 {: .warning}
 
