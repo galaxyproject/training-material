@@ -41,7 +41,7 @@ So, we will compute biodiversity and spectral indices mainly using reflectance i
 >
 {: .details}
 
-![Sentinel 2 toolsuite workflow](../../images/remote_sensing/sentinel_2.png "Sentinel 2 toolsuite workflow")
+![Sentinel 2 toolsuite workflow: from the dowload of the data to the production of biodiversity indicators](../../images/remote_sensing/sentinel_2.png "Sentinel 2 toolsuite workflow")
 
 Each part of this workflow has elementary steps :
  - **A first step** to preprocess Sentinel 2 data:
@@ -91,7 +91,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    You will have to to create an account for either of these platform.
 >    Select Sentinel 2 and choose the Product type "S2MSI2A".
 >
->    ![Scihub portal](../../images/remote_sensing/scihub.png "Scihub portal")
+>    ![Scihub portal welcome page](../../images/remote_sensing/scihub.png "Scihub portal")
 >
 >    This an example of the Copernicus portal, Scihub. You need to download a zip folder. Keep it that way.
 >
@@ -126,7 +126,7 @@ Using preprocS2 R package, this step provides a unique tool to read, crop, resam
 >
 {: .hands_on}
 
-![Preprocessing outputs](../../images/remote_sensing/preproc.png "Preprocessing outputs")
+![Preprocessing outputs 3 of them : the cloud mask folder, the reflectance folder and a file with the mission source](../../images/remote_sensing/preproc.png "Preprocessing outputs")
 
 
 > <question-title></question-title>
@@ -225,8 +225,8 @@ You can choose to compute spectral and biodiversity indicators either for global
 >
 {: .hands_on}
 
-![Global biodiveristy tabular](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular")
-![Global biodiveristy graph](../../images/remote_sensing/rasterdiv.png "Global biodiveristy graph")
+![Global biodiveristy tabular : a table summary with a column for each indicators calculated, the longitude and the latitude](../../images/remote_sensing/rasterdivtab.png "Global biodiveristy tabular")
+![Global biodiveristy graph : angraph example for the shannon indice shown according to the longitude and latitude](../../images/remote_sensing/rasterdiv.png "Global biodiveristy graph")
 
 These 2 pictures are only exemple it is normal if you don't have exactly the same output.
 
@@ -310,8 +310,8 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-![Alpha diversity map](../../images/remote_sensing/alpha.png "Alpha diversity map")
-![Functionnal diversity tabular](../../images/remote_sensing/funct_tb.png "Functionnal diversity tabular")
+![A graph showing the alpha diversity according to the longitude and the latitude](../../images/remote_sensing/alpha.png "Alpha diversity map")
+![A tabular with a column for the functionnal diversity, the longitude and the latitude](../../images/remote_sensing/funct_tb.png "Functionnal diversity tabular")
 
 ## **Processing remote sensing data**
 
@@ -326,7 +326,6 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >    >
 >    > Here you must provide your folder of shapefiles (at least 2 in order to have the beta diversity).
 >    {: .comment}
->    ***TODO***: *Check parameter descriptions*
 >
 >
 >    > <comment-title>Check datatype if you use your own ENVI BIL files</comment-title>
@@ -336,8 +335,8 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-![Biodiversity comparison graph](../../images/remote_sensing/comp_bdmr.png "Biodiversity comparison graph")
-![Bray curtis table](../../images/remote_sensing/braycu.png "Bray curtis table")
+![Biodiversity comparison graph allowing to locate the different types of vegetation in the PCoA space](../../images/remote_sensing/comp_bdmr.png "Biodiversity comparison graph")
+![Bray curtis table for the types of vegetation](../../images/remote_sensing/braycu.png "Bray curtis table")
 
 
 > <question-title></question-title>
@@ -399,7 +398,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 {: .hands_on}
 
 
-![ndvi](../../images/remote_sensing/ndvi.png "Normalized different vegetation index tabular")
+![A tabular with columns for the NDVI index, the longitude and the latitude](../../images/remote_sensing/ndvi.png "Normalized different vegetation index")
 
 
 > <details-title>Spectral indices and Essential Biodiversity Variables</details-title>
@@ -409,7 +408,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 > For instance it allows you to compute one of GEO BON EBV [Canopy Chlorophyll Content](https://portal.geobon.org/ebv-detail?id=13). This EBV is computed by GEO BON on the Netherlands, here you can compute it on which ever Sentinel 2 data you want by chosing to calculate the indice CCCI.
 {: .details}
 
-![ebv](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
+![A graph showing the Canopy Chlorophyl Content index according to the longitude and latitude](../../images/remote_sensing/ccci.png "Canopy Chlorophyl Content index graph")
 
 > <question-title></question-title>
 >
