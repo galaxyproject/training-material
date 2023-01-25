@@ -117,12 +117,12 @@ function cyoaDefault(defaultOption){
         var withAnswers = (new URL(document.location)).searchParams.get("with-answers");
         if (withAnswers !== null) {
             // Same as above selector
-            $(".solution>h3,.details>h3").click();
+            $(".solution>.box-title button,.details>.box-title button").click();
         }
 
         var expandAll = (new URL(document.location)).searchParams.get("expand-all");
         if (expandAll !== null) {
-            $(".solution>.box-title,.details>.box-title,.tip>.box-title").click();
+            $(".solution>.box-title button,.details>.box-title button,.tip>.box-title button").click();
 
         }
         // collapse all boxes on the faq overview pages
