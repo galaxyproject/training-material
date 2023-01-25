@@ -70,7 +70,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 > 3. Upload obis data
 >
->     > <tip-title>Tip: Importing data from your computer</tip-title>
+>     > <tip-title>Importing data from your computer</tip-title>
 >     >
 >     > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
 >     > * Select **Choose local files**
@@ -175,13 +175,13 @@ Maxp is the maximum of the total number of records for the ith-species ni divide
 
 ## Hill
 
-**Hill 1**
+### **Hill 1**
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and Hill1 can be roughly interpreted as the number of species with “typical” abundances, and is a commonly used indicator for marine biodiversity richness. It is defined as:
 
 Warning: The Simpson index has the same assumptions as the Shannon index.
 
-**Hill 2**
+### **Hill 2**
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and discounts rare species, so Hill2 can be interpreted as the equivalent to the number of more dominant species and so is less sensitive to sample size than Hill1. The Hill index is a commonly used indicator for marine biodiversity richness. It is defined as:
 
