@@ -92,7 +92,9 @@ This first step consist of downloading and uploading obis data onto galaxy.
 
 > <hands-on-title>Convert your data</hands-on-title>
 >
-> 1. {% tool [csv-to-tabular](csv_to_tabular) %} with the following parameters:
+> 1. On your data in your history pannel click on {% icon param-text %}
+> 2. In the top click on {% icon galaxy-gear %} Convert
+> 3. Press {% icon exchange %} Create Dataset
 >
 >    
 {: .hands_on}
