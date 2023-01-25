@@ -216,7 +216,7 @@ module TopicFilter
     interesting
   end
 
-  def self.resolve_material(material)
+  def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
     # resources into a page_obj as well. Most variables are copied directly,
@@ -256,6 +256,15 @@ module TopicFilter
     # Otherwise clone the metadata from it which works well enough.
     page_obj = page.data.dup
     page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
+
+    id = page_obj['id']
+    page_obj['video_library'] = {
+      "tutorial" => site.data['video-library'][id + "/tutorial"],
+      "slides" => site.data['video-library'][id + "/slides"],
+      "demo" => site.data['video-library'][id + "/demo"],
+      "both" => site.data['video-library'][id],
+      "session" => site.data['session-library'][id]
+    }
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
@@ -350,7 +359,7 @@ module TopicFilter
       return site.data['cache_processed_pages']
     end
 
-    materials = self.collate_materials(pages).map{|k, v| self.resolve_material(v) }
+    materials = self.collate_materials(pages).map{|k, v| self.resolve_material(site, v) }
     puts "[GTN/TopicFilter] Filling Materials Cache"
     site.data['cache_processed_pages'] = materials
 
