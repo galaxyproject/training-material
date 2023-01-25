@@ -258,13 +258,18 @@ module TopicFilter
     page_obj['id'] = page['topic_name'] + '/' + page['tutorial_name']
 
     id = page_obj['id']
-    page_obj['video_library'] = {
-      "tutorial" => site.data['video-library'][id + "/tutorial"],
-      "slides" => site.data['video-library'][id + "/slides"],
-      "demo" => site.data['video-library'][id + "/demo"],
-      "both" => site.data['video-library'][id],
-      "session" => site.data['session-library'][id]
-    }
+    page_obj['video_library'] = Hash.new
+
+    if site.data.has_key?("video-library") then
+      page_obj['video_library']["tutorial"] = site.data['video-library'][id + "/tutorial"]
+      page_obj['video_library']["slides"] = site.data['video-library'][id + "/slides"]
+      page_obj['video_library']["demo"] = site.data['video-library'][id + "/demo"]
+      page_obj['video_library']["both"] = site.data['video-library'][id]
+    end
+
+    if site.data.has_key?("session-library") then
+      page_obj['video_library']["session"] = site.data['session-library'][id]
+    end
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
