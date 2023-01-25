@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Removing the effects of the cell cycle</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Removing the effects of the cell cycle" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="2023-01-24 18:28:37 +0000" />
+<meta name="DC.creator" content="Marisa Loach" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material and practicals for all kinds of single ..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Removing the effects of the cell cycle" />
+        <meta property="og:description" content="Training material and practicals for all kinds of single ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="progress" class="btn btn-secondary">
+                    <input type="radio" name="options" id="progress" autocomplete="off">🏳️‍🌈
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-01-01/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html" title="Version 2023-01-01">2023-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-12-01/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html" title="Version 2022-12-01">2022-12-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-11-01/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html" title="Version 2022-11-01">2022-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<script type="application/ld+json">
+    
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-01-24 18:28:37 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Removing the effects of the cell cycle",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Removing the effects of the cell cycle' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "single-cell",
+  "description": "The questions this  addresses are:\n - How can I reduce the effects of the cell cycle on my scRNA-seq data?\n\n\nThe objectives are:\n - Identify the cell cycle genes\n - Use the cell cycle genes to regress out the effects of the cell cycle\n - Create PCA plots to understand the impact of the regression\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html",
+      "name": "Generating a single cell matrix using Alevin",
+      "description": "Hands-on for 'Generating a single cell matrix using Alevin' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
+      "name": "Combining datasets after pre-processing",
+      "description": "Hands-on for 'Combining datasets after pre-processing' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html",
+      "name": "Filter, Plot and Explore Single-cell RNA-seq Data",
+      "description": "Hands-on for 'Filter, Plot and Explore Single-cell RNA-seq Data' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ]
+}
+</script>
+
+<section class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Removing the effects of the cell cycle</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/MarisaJL?s=27" alt="Avatar">Marisa Loach</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hrukkudyr/" class="contributor-badge contributor-hrukkudyr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hrukkudyr?s=27" alt="Avatar">Graeme Tyson</a></td>
+	</tr>
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Overview</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I reduce the effects of the cell cycle on my scRNA-seq data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Identify the cell cycle genes</p>
+</li>
+        
+        <li><p>Use the cell cycle genes to regress out the effects of the cell cycle</p>
+</li>
+        
+        <li><p>Create PCA plots to understand the impact of the regression</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Generating a single cell matrix using Alevin:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Combining datasets after pre-processing:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Filter, Plot and Explore Single-cell RNA-seq Data:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7311628/">
+    <i class="far fa-copy" aria-hidden="true"></i> Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/" title="Workflows" alt="Removing the effects of the cell cycle workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i> Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 id="introduction">Introduction</h1>
+
+<p><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span> sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in <span class="notranslate">expression</span> between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.</p>
+
+<p>One common biological confounder is the cell cycle <span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their <span class="notranslate">DNA</span> (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle.</p>
+
+<p>In this tutorial, we will identify the genes whose <span class="notranslate">expression</span> varies during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data.</p>
+
+<blockquote>
+  <blockquote class="comment">
+    <div id="comment-other-scanpy-and-seurat-tutorials" class="box-title" aria-label="comment box: Other Scanpy and Seurat tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Other Scanpy and Seurat tutorials</div>
+
+    <p>This tutorial is based on the Scanpy cell cycle regression tutorial <span class="citation"><a href="#ScanpyCC">Cittaro 2018</a></span>, which was itself based on the Seurat vignette addressing the same issue <span class="citation"><a href="#SeuratCC">Paul Hoffman 2022</a></span>. However, we will be using a different dataset for this tutorial.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="agenda">
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
+    </ol>
+  </li>
+  <li><a href="#cell-cycle-scoring" id="markdown-toc-cell-cycle-scoring">Cell Cycle Scoring</a></li>
+  <li><a href="#cell-cycle-regression" id="markdown-toc-cell-cycle-regression">Cell Cycle Regression</a></li>
+  <li><a href="#plotting-the-effects-of-cell-cycle-regression" id="markdown-toc-plotting-the-effects-of-cell-cycle-regression">Plotting the Effects of Cell Cycle Regression</a>    <ol>
+      <li><a href="#prepare-a-table-of-cell-cycle-genes" id="markdown-toc-prepare-a-table-of-cell-cycle-genes">Prepare a table of cell cycle genes</a></li>
+      <li><a href="#create-an-ordered-list-of-gene-names" id="markdown-toc-create-an-ordered-list-of-gene-names">Create an ordered list of gene names</a></li>
+      <li><a href="#mark-the-cell-cycle-genes" id="markdown-toc-mark-the-cell-cycle-genes">Mark the cell cycle genes</a></li>
+      <li><a href="#create-the-annotation-column" id="markdown-toc-create-the-annotation-column">Create the annotation column</a></li>
+      <li><a href="#add-an-annotation-to-the-anndata" id="markdown-toc-add-an-annotation-to-the-anndata">Add an annotation to the AnnData</a></li>
+      <li><a href="#filter-the-cell-cycle-genes" id="markdown-toc-filter-the-cell-cycle-genes">Filter the cell cycle genes</a></li>
+      <li><a href="#plot-the-cell-cycle-genes-before-regression" id="markdown-toc-plot-the-cell-cycle-genes-before-regression">Plot the cell cycle genes before regression</a></li>
+      <li><a href="#plot-the-cell-cycle-genes-after-regression" id="markdown-toc-plot-the-cell-cycle-genes-after-regression">Plot the cell cycle genes after regression</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="get-data">Get Data</h2>
+
+<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. You can download the dataset below.</p>
+
+<p>If you’ve been working through the <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq: Case Study then you can use your dataset from the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> in that tutorial. You should rename that dataset <code class="language-plaintext highlighter-rouge">Processed_Anndata</code> now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.</p>
+
+<blockquote>
+  <hands-on-title>Data upload&lt;/hands-on-title)
+
+1. Create a new history for this tutorial
+</hands-on-title>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <ol>
+    <li>
+      <p>Import the AnnData object from <a href="https://zenodo.org/record/7311628/">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7311628/files/Processed_AnnData.h5ad
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Rename the dataset <code class="language-plaintext highlighter-rouge">Processed_Anndata</code></p>
+    </li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+
+  <ol>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In addition to the sc<span class="notranslate">RNA</span>-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below <span class="citation"><a href="#kirchner_hbc_2018">Kirchner and HBC 2018</a></span>. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/7311628/">Zenodo</a></p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7311628//files/sPhase.tabular
+https://zenodo.org/record/7311628//files/g2mPhase.tabular
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-importing-via-links-1" class="box-title"><button type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Copy the link location</li>  <li>    <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>  </li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the link into the text field</p>  </li>  <li>    <p>Press <strong>Start</strong></p>  </li>  <li><strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li>
+      <p>Rename the datasets <code class="language-plaintext highlighter-rouge">sPhase</code> and <code class="language-plaintext highlighter-rouge">g2mPhase</code> respectively - be careful not to mix them up!</p>
+    </li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">  <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+
+  <ol>
+    <li>
+      <p>Check that the datatype for both is <code class="language-plaintext highlighter-rouge">tabular</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>  <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>    <ul>      <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>    </ul>  </li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The easiest way to find the tools you will need during this tutorial is to use tutorial mode or to run the analysis in the <a href="https://humancellatlas.usegalaxy.eu/">HCA <span class="notranslate">Galaxy</span></a>.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">  <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>  <ul>  <li>Open your <span class="notranslate">Galaxy</span> server</li>  <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>  <li>Navigate to your tutorial</li>  <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>  <li><strong>Note:</strong> this does not work for all tutorials (yet)  <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>  <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li></ul></blockquote>
+
+<h1 id="cell-cycle-scoring">Cell Cycle Scoring</h1>
+
+<p>The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean <span class="notranslate">expression</span> of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: <code class="language-plaintext highlighter-rouge">S_score</code>, <code class="language-plaintext highlighter-rouge">G2M_score</code> and <code class="language-plaintext highlighter-rouge">phase</code>.</p>
+
+<blockquote class="comment">
+  <div id="comment-when-should-we-regress-out-the-effects-of-the-cell-cycle" class="box-title" aria-label="comment box: When should we regress out the effects of the cell cycle?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: When should we regress out the effects of the cell cycle?</div>
+  <p>Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle <span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>. However, it isn’t always appropriate to remove the effects of the cell cycle - sometimes they can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the effects of the cell cycle are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters to get an idea of how strong the effects are.</p>
+</blockquote>
+
+<blockquote class="question">
+  <div id="hands-on-score-the-cell-cycle-genes" class="box-title" aria-label="hands-on box: Score the cell cycle genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Score the cell cycle genes</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Processed_Anndata</code> (Input dataset)</li>
+        <li><em>“Method used for inspecting”</em>: <code class="language-plaintext highlighter-rouge">Score cell cycle genes, using 'tl.score_genes_cell_cycle'</code>
+          <ul>
+            <li><em>“Format for the list of genes associated with S phase”</em>: <code class="language-plaintext highlighter-rouge">File</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with the list of genes associated with S phase”</em>: <code class="language-plaintext highlighter-rouge">sPhase</code> (Input dataset)</li>
+              </ul>
+            </li>
+            <li><em>“Format for the list of genes associated with G2M phase”</em>: <code class="language-plaintext highlighter-rouge">File</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with the list of genes associated with G2M phase”</em>: <code class="language-plaintext highlighter-rouge">g2mPhase</code> (Input dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code></li>
+  </ol>
+
+  <question-title>&lt;/question-title?
+
+1. Why don't we need a list of genes expressed in the G1 Phase?
+
+&gt; <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+&gt;
+&gt; 1. Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren't expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase. 
+&gt;
+{: .solution}
+
+</question-title>
+</blockquote>
+
+<h1 id="cell-cycle-regression">Cell Cycle Regression</h1>
+
+<p>The second step after scoring the cell cycle genes is to use these scores to regress out the effects of the cell cycle. Now that we know which phase each of our cells is in, we can work out how this is affecting gene <span class="notranslate">expression</span> in our cells. We can subtract these effects from our data so that they won’t influence our later analyses. You will need to type the <code class="language-plaintext highlighter-rouge">phase</code> variable in to the <span><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to enable it to regress out the cell cycle effects.</p>
+
+<blockquote class="details">
+  <div id="details-how-does-cell-cycle-regression-work" class="box-title"><button type="button" aria-controls="details-how-does-cell-cycle-regression-work-contents" aria-expanded="true" aria-label="Toggle details box: How does cell cycle regression work?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How does cell cycle regression work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The <span><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool will create a linear model of the relationship between gene <span class="notranslate">expression</span> and the cell cycle scores we assigned in the previous step. Basically, this model is a line that shows how gene <span class="notranslate">expression</span> changes as the S or G2M score changes. Each gene will have its own line, so for any S score or G2M score, we could look at the corresponding point on the line to see the expected <span class="notranslate">expression</span> level of that gene.</p>
+
+  <p><span><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  will then regress out or remove this expected effect for the genes expressed by each cell, according to the cell’s S and G2M scores. The expected effect is subtracted from the <span class="notranslate">expression</span> data, leaving behind the difference between the expected position on the line and the actual position of each data point. The data points won’t sit exactly on the line because their <span class="notranslate">expression</span> levels aren’t determined completely by the cell cycle - the linear model only tells us what we would expect based on the cell cycle scores alone.</p>
+
+  <p>Understanding how the regression works should help you to see why we’re not just deleting the cell cycle genes from the dataset. We are using these genes that are known to be expressed during different phases to calculate the cell cycle scores and determine the phase each cell is in. We then use this information to work out the effect of the cell cycle on all of the other genes expressed by the cells. Even if they are not cell cycle genes, their <span class="notranslate">expression</span> can still be affected by the cycle. Finally, we remove or regress out the effect of the cell cycle on all the genes, leaving behind the variation that we’re interested in.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-regress-out-the-effects-of-the-cell-cycle" class="box-title" aria-label="hands-on box: Regress out the effects of the cell cycle"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Regress out the effects of the cell cycle</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0"><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Variables to regress out”</em>: <code class="language-plaintext highlighter-rouge">phase</code></li>
+      </ul>
+    </li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code></li>
+  </ol>
+
+</blockquote>
+
+<h1 id="plotting-the-effects-of-cell-cycle-regression">Plotting the Effects of Cell Cycle Regression</h1>
+
+<p>Your data is now ready for further analysis, so you can return to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial and move on to the Preparing coordinates step there. Make sure that you use the <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset (you may want to rename it as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first.</p>
+
+<p>In order to see what is happening to the cell cycle genes, we need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">TRUE</code> for the 97 cell cycle genes and <code class="language-plaintext highlighter-rouge">FALSE</code> for all the other genes.</p>
+
+<p>You might find it easier to create this new column using a sp<span class="notranslate">reads</span>heet and then upload it as a tabular dataset, but it is possible to complete all the steps on <span class="notranslate">Galaxy</span>.</p>
+
+<h2 id="prepare-a-table-of-cell-cycle-genes">Prepare a table of cell cycle genes</h2>
+
+<p>If we’re going to mark all the cell cycle genes, we’ll need a single list of all 97 genes instead of the two separate lists for S Phase and G2/M Phase. We’ll combine the two lists into a single column with 97 entries. We’ll then add a second column that simply <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">TRUE</code> in every row, which we’ll use later to mark these as cell cycle genes in the main dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-create-a-list-of-all-cell-cycle-genes" class="box-title" aria-label="hands-on box: Create a list of all cell cycle genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a list of all cell cycle genes</div>
+
+  <ol>
+    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">sPhase</code> (Input dataset)</li>
+        <li>In <em>“Dataset”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">g2mPhase</code> (Input dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Add this value”</em>: <code class="language-plaintext highlighter-rouge">TRUE</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“to Dataset”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>Rename the dataset <code class="language-plaintext highlighter-rouge">CC_Genes</code></li>
+  </ol>
+</blockquote>
+
+<h2 id="create-an-ordered-list-of-gene-names">Create an ordered list of gene names</h2>
+
+<p>Next, we’ll need a list of all the genes in our dataset, so that we can mark the ones that are in our cell cycle list. We’ll also add a column of numbers as this will help us keep the gene names in order.</p>
+
+<blockquote>
+  <div id="hands-on-get-the-gene-names-from-your-dataset" class="box-title" aria-label="hands-on box: Get the gene names from your dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the gene names from your dataset</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> (Input dataset)</li>
+        <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"><strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">var</code> (output of <strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Drop, keep or duplicate rows and columns</code>
+              <ul>
+                <li><em>“List of columns to select”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                <li><em>“List of rows to select”</em>: <code class="language-plaintext highlighter-rouge">2:15396</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Output formatting options”</em>: ``</li>
+      </ul>
+
+      <blockquote class="comment">
+        <comment-title>Selecting the right rows&lt;/comment-title)
+
+Since we don't want to keep the header, we select the rows from `2` to the end of the dataset. If you were using a dataset of a different size, you would need to change this parameter to include all the genes. 
+</comment-title>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“to Dataset”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Iterate?”</em>: <code class="language-plaintext highlighter-rouge">YES</code></li>
+      </ul>
+
+      <blockquote>
+        <div id="comment-keeping-the-genes-in-order" class="box-title" aria-label="comment box: Keeping the genes in order"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Keeping the genes in order</div>
+
+        <p>Adding these numbers will enable us to keep the genes in their original order. This is essential for adding the cell cycle gene annotation back into the AnnData dataset.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+
+  <ol>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">Dataset_Genes</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="mark-the-cell-cycle-genes">Mark the cell cycle genes</h2>
+
+<p>We can now combine our table of cell cycle genes <code class="language-plaintext highlighter-rouge">CC_genes</code> with the table of gene names <code class="language-plaintext highlighter-rouge">Dataset_Genes</code>.</p>
+
+<blockquote>
+  <div id="hands-on-combine-the-two-tables" class="box-title" aria-label="hands-on box: Combine the two tables"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine the two tables</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">CC_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Dataset_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">All lines [-a 1 -a 2]</code></li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">FALSE</code></li>
+      </ul>
+
+      <blockquote>
+        <div id="comment-how-the-cell-cycle-genes-are-marked" class="box-title" aria-label="comment box: How the cell cycle genes are marked"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How the cell cycle genes are marked</div>
+
+        <p>When we join the two tables, we’ll ask for any empty fields to be filled in with <code class="language-plaintext highlighter-rouge">FALSE</code>. The cell cycle gene table has an extra column where they are all marked as <code class="language-plaintext highlighter-rouge">TRUE</code> - they will retain these entries when we join the tables, but since there are no entries for the rest of the genes in this column, their rows will be filled in as <code class="language-plaintext highlighter-rouge">FALSE</code>. This will enable us to pick out the cell cycle genes later.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+
+  <ol>
+    <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div id="comment-putting-the-genes-in-order-again" class="box-title" aria-label="comment box: Putting the genes in order again"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Putting the genes in order again</div>
+
+        <p>Sorting the genes using the column of numbers we added earlier will put them back in their original order - make sure to sort them in ascending order, otherwise they’ll end up the opposite way around.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <ol>
+    <li>What would happen if any of the cell cycle genes were not present in the dataset?</li>
+    <li>How would we remove these genes from the table?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Any cell cycle genes that weren’t in the dataset would have an empty field in the numbered column, which would be filled in with <code class="language-plaintext highlighter-rouge">FALSE</code> when we created the table with the <span><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool. These rows would appear at the top of the table after it was sorted.</li>
+      <li>We should check the first rows of the table for any unnumbered genes and then cut these rows out in the next step.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="create-the-annotation-column">Create the annotation column</h2>
+
+<p>We now have a table with all the gene names in the same order as the main dataset and a column indicating which ones are cell cycle genes. If we cut this column out of the table, then we can add it as a new annotation to the main dataset. We’ll also need to add a column header, which will be used as the key for this annotation in the AnnData dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="div-idhands-on-create-the-cell-cycle-annotation-column-classbox-title-aria-labelhands-on-box-create-the-cell-cycle-annotation-column-hands-on-create-the-cell-cycle-annotation-columndiv">&lt;div id="hands-on-create-the-cell-cycle-annotation-column" class="box-title" aria-label="hands-on box: Create the cell cycle annotation column"&gt;<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create the cell cycle annotation column&lt;/div&gt;</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"><strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Drop, keep or duplicate rows and columns</code>
+              <ul>
+                <li><em>“List of columns to select”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+                <li><em>“List of rows to select”</em>: <code class="language-plaintext highlighter-rouge">1:15395</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Output formatting options”</em>: ``</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div id="comment-removing-rows-for-missing-genes" class="box-title" aria-label="comment box: Removing rows for missing genes "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Removing rows for missing genes</div>
+
+        <p>If there were any cell cycle genes that weren’t present in the main dataset, we could remove them at this stage by excluding them from the List of rows to select. As before, if we were using a dataset of a different size, we would need to change this parameter to include all the rest of the rows.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create a new <strong>tabular</strong> file from the following</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> CC_genes
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-creating-a-new-file" class="box-title"><button type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>  <li>Select <strong>Paste/Fetch Data</strong></li>  <li>    <p>Paste the file contents into the text field</p>  </li>  <li>    <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>  </li>  <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li></ul></blockquote>
+    </li>
+    <li><span class="tool" data-tool="cat1" title="Tested with cat1"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Pasted Entry</code> dataset</li>
+        <li>In <em>“Dataset”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select”</em>: <code class="language-plaintext highlighter-rouge">table</code> (output of <strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="add-an-annotation-to-the-anndata">Add an annotation to the AnnData</h2>
+
+<p>We will need to add the annotation to both the annotated dataset <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code> and to the one that we created by regressing out the cell cycle genes <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code>. This will allow us to plot the cell cycle genes before and after regression. We can do this using the <span><strong>Manipulate Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool and selecting the correct function from the dropdown menu.</p>
+
+<blockquote>
+  <div id="hands-on-add-the-new-annotations" class="box-title" aria-label="hands-on box: Add the new annotations "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the new annotations</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code> (output of <strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations or variables</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table with new annotations”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Annotated_CC</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> (output of <strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Add new annotation(s) for observations or variables</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table with new annotations”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Regressed_CC</code></li>
+  </ol>
+
+  <h2 id="filter-the-cell-cycle-genes">Filter the cell cycle genes</h2>
+</blockquote>
+
+<p>For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have <code class="language-plaintext highlighter-rouge">TRUE</code> in their new <code class="language-plaintext highlighter-rouge">CC_genes</code> annotation). The filtered datasets will only include <span class="notranslate">expression</span> data for these 97 genes, so we’ll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-filter-the-anndata-datasets" class="box-title" aria-label="hands-on box: Filter the AnnData datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter the AnnData datasets</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Annotated_CC</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
+          <ul>
+            <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code>
+              <ul>
+                <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">CC_genes</code></li>
+                <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Boolean</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Annotated_CC_Only</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Regressed_CC</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code>
+          <ul>
+            <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code>
+              <ul>
+                <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">CC_genes</code></li>
+                <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Boolean</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Regressed_CC_Only</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="plot-the-cell-cycle-genes-before-regression">Plot the cell cycle genes before regression</h2>
+
+<p>Now that we have a dataset that only includes the cell cycle genes, we can visualise their effects in a PCA plot. We first calculate the PCA coordinates, which are a measure of how similar each pair of cells is in terms of the <span class="notranslate">expression</span> of the 97 cell cycle genes we’ve included in the filtered dataset. We will then visualise the cells on a PCA plot where the axes represent the principal components, which reflect the genes (or groups of genes) that had the biggest impact in these calculations.</p>
+
+<p>You will learn more about plotting your data in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial. For now, it is enough to know that each dot on the plot represents a cell and the closer two cells are together, the more similar they are.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-create-a-pca-plot-of-cell-cycle-genes" class="box-title" aria-label="hands-on box: Create a PCA Plot of cell cycle genes "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a PCA Plot of cell cycle genes</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Annotated_CC_Only</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'</code>
+          <ul>
+            <li><em>“Type of PCA?”</em>: <code class="language-plaintext highlighter-rouge">Full PCA</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1"><strong>Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">phase</code></li>
+            <li>In <em>“Plot attributes”</em>:
+              <ul>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div id="comment-plot-all-the-genes" class="box-title" aria-label="comment box: Plot all the genes "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Plot all the genes</div>
+
+        <p>Make sure that you de-select the option for the <span><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren’t HVGs too.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote>
+  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <ol>
+    <li>Does the plot look as you expected?</li>
+    <li>What would happen if we plotted all of the genes from the main dataset?</li>
+  </ol>
+
+  <blockquote>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p><img src="https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA1.png" alt="PCA plot showing three separate clusters of cells in the G1, S and G2M Phases. " loading="lazy" />“PCA Plot of Cell Cycle Genes before regression”</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <blockquote class="solution">
+    <ol>
+      <li>If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn’t expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn’t be as obvious when other genes were also being taken into account. If you continue analysing your data in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="plot-the-cell-cycle-genes-after-regression">Plot the cell cycle genes after regression</h2>
+
+<p>We will now repeat the same steps to create a PCA plot of the filtered dataset after the effects of the cell cycle have been regressed out.</p>
+
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-recreate-the-pca-plot-of-cell-cycle-genes-after-regression" class="box-title" aria-label="hands-on box: Recreate the PCA plot of cell cycle genes after regression "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Recreate the PCA plot of cell cycle genes after regression</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">CellCycle_Regressed_CC_Only</code> (output of <strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used”</em>: <code class="language-plaintext highlighter-rouge">Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'</code>
+          <ul>
+            <li><em>“Type of PCA?”</em>: <code class="language-plaintext highlighter-rouge">Full PCA</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1"><strong>Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">anndata_out</code> (output of <strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Plot PCA results, using 'pl.pca_overview'</code>
+          <ul>
+            <li><em>“Keys for annotations of observations/cells or variables/genes”</em>: <code class="language-plaintext highlighter-rouge">phase</code></li>
+            <li>In <em>“Plot attributes”</em>:
+              <ul>
+                <li><em>“Colors to use for plotting categorical annotation groups”</em>: <code class="language-plaintext highlighter-rouge">rainbow (Miscellaneous)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote>
+  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <ol>
+    <li>Does the plot look as you expected?</li>
+    <li>What impact do you think the cell cycle regression will have when you analyse the whole dataset?</li>
+  </ol>
+
+  <blockquote>
+    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don’t all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the <span class="notranslate">expression</span> of the cell cycle genes.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <p><img src="https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA2.png" alt="PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together. " loading="lazy" />“PCA Plot of Cell Cycle Genes after regression”</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="question">
+  <blockquote class="solution">
+    <ol>
+      <li>The cell cycle genes aren’t having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don’t separate according to phase in this PCA plot. When we analyse the whole <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset, this could allow other differences in gene <span class="notranslate">expression</span> to become more apparent. We can run the regressed dataset through the rest of the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Comparing the before and after plots, we can clearly see that the effects of the cell cycle have been removed. Although you wouldn’t usually need to filter out the cell cycle genes or create these plots when analysing your own data, hopefully you have found doing it now to be helpful for understanding the impact of cell cycle regression.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, you have annotated and scored the cell cycle genes and regressed out the effects of the cell cycle. You have also created PCA plots of the data before and after regression to visualise the effects.</p>
+
+<p>You can now continue to analyse this data by returning to the Preparing coordinates step in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial. If you use the <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset (which you may now want to rename as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Cell cycle genes can conceal what is happening in your data if cells are being grouped according to their stage in the cycle</p>
+</li>
+                        
+                        <li><p>Identifying the cell cycle genes and regressing out their effects can reveal underlying patterns in the data</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
+<li id="ScanpyCC">Cittaro, D., 2018 <b>Cell-Cycle Scoring and Regression</b>. <a href="https://nbviewer.org/github/scverse/scanpy_usage/blob/master/180209_cell_cycle/cell_cycle.ipynb">https://nbviewer.org/github/scverse/scanpy_usage/blob/master/180209_cell_cycle/cell_cycle.ipynb</a></li>
+<li id="kirchner_hbc_2018">Kirchner, R., and HBC, 2018 <b>Tinyatlas/mus_musculus.CSV at master · HBC/tinyatlas</b>. GitHub. <a href="https://github.com/hbc/tinyatlas/blob/master/cell_cycle/Mus_musculus.csv">https://github.com/hbc/tinyatlas/blob/master/cell_cycle/Mus_musculus.csv</a></li>
+<li id="Luecken2019">Luecken, M. D., and F. J. Theis, 2019 <b>Current best practices in single-cell RNA-seq analysis: a tutorial</b>. Molecular Systems Biology 15: <a href="https://doi.org/10.15252/msb.20188746">10.15252/msb.20188746</a></li>
+<li id="SeuratCC">Paul Hoffman, S. L., 2022 <b>Cell-Cycle Scoring and Regression</b>. <a href="https://satijalab.org/seurat/articles/cell_cycle_vignette.html#assign-cell-cycle-scores">https://satijalab.org/seurat/articles/cell_cycle_vignette.html#assign-cell-cycle-scores</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Removing the effects of the cell cycle (Single Cell)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marisa Loach,  <b>Removing the effects of the cell cycle (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scrna-case_cell-cycle,
+author = "Marisa Loach",
+title = "Removing the effects of the cell cycle (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+        <script type="text/javascript">
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>
