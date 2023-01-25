@@ -84,23 +84,51 @@
       "url": "/topics/assembly/tutorials/general-introduction/tutorial.html",
       "topic_name": "assembly",
       "tutorial_name": "general-introduction",
+      "id": "assembly/general-introduction",
+      "video_library": {
+        "tutorial": null,
+        "slides": {
+          "description": "This lecture walks you through the basic concepts involved in assembling a genome from short-read sequencing data.",
+          "materials": [
+            {
+              "link": "topics/assembly/tutorials/general-introduction/slides.html",
+              "title": "An Introduction to Genome Assembly",
+              "type": "Slides"
+            }
+          ],
+          "tags": [
+            "assembly"
+          ],
+          "type": "Lecture",
+          "versions": [
+            {
+              "captions": [
+                "shiltemann",
+                "hexylena"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "25M",
+              "link": "-EX_G1griZE",
+              "speakers": [
+                "slugger70"
+              ]
+            }
+          ],
+          "gtn_id": "assembly/general-introduction",
+          "title": "An Introduction to Genome Assembly",
+          "captioned": true
+        },
+        "demo": null,
+        "both": null,
+        "session": null
+      },
       "hands_on": true,
       "slides": true,
-      "workflows": [
-        {
-          "workflow": "assembly-general-introduction.ga",
-          "tests": true
-        }
-      ],
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/velvet/velvetg/1.2.10.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/velvet/velveth/1.2.10.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy0"
+
       ],
-      "tours": true,
+      "tours": false,
       "video": false,
       "translations": {
         "tutorial": [
@@ -118,433 +146,38 @@
       }
     },
     {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "An introduction to get started in genome assembly and annotation",
-      "questions": [
-        "Definitions of bioinformatics terms for assembly and annotation",
-        "What are the guidelines before starting a Genome Assembly and Annotation project?",
-        "What file formats are used for assembly and annotation?"
-      ],
-      "key_points": [
-        "We learned the definitions of bioinformatics terms used in genomes assembly and annotation",
-        "We have seen the bioinformatics file formats used for these analyses",
-        "We learned the importance of preparing the project to ensure its success",
-        "We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)"
-      ],
-      "contributions": {
-        "authorship": [
-          "alexcorm",
-          "lleroi"
-        ],
-        "editing": [
-          "abretaud",
-          "stephanierobin",
-          "r1corre"
-        ],
-        "funding": [
-          "erasmusplus"
-        ]
-      },
-      "level": "Introductory",
-      "time_estimation": "1h",
-      "url": "/topics/assembly/tutorials/get-started-genome-assembly/slides.html",
-      "topic_name": "assembly",
-      "tutorial_name": "get-started-genome-assembly",
-      "hands_on": false,
-      "slides": true,
-      "tools": [
-
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
+      "layout": "tutorial_hands_on",
+      "title": "Making sense of a newly assembled genome",
+      "zenodo_link": "https://zenodo.org/record/3382053",
+      "requirements": [
         {
-          "name": "Alexandre Cormier",
-          "email": "alexandre.cormier@ifremer.fr",
-          "twitter": "allanssx",
-          "orcid": "0000-0002-7775-8413",
-          "joined": "2021-11",
-          "id": "alexcorm",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json"
-        },
-        {
-          "name": "Laura Leroi",
-          "email": "laura.leroi@ifremer.fr",
-          "orcid": "0000-0003-3748-4179",
-          "joined": "2021-11",
-          "id": "lleroi",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json"
-        },
-        {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inra.fr",
-          "twitter": "abretau",
-          "gitter": "abretaud",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
-        },
-        {
-          "name": "Stéphanie Robin",
-          "email": "stephanie.robin@inrae.fr",
-          "twitter": "robinstphanie1",
-          "orcid": "0000-0001-7379-9173",
-          "joined": "2021-11",
-          "id": "stephanierobin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json"
-        },
-        {
-          "name": "Erwan Corre",
-          "email": "erwan.corre@sb-roscoff.fr",
-          "twitter": "r1corre",
-          "orcid": "0000-0001-6354-2278",
-          "joined": "2019-04",
-          "id": "r1corre",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json"
-        },
-        {
-          "name": "Erasmus+ Programme",
-          "joined": "2020-09",
-          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
-          "github": false,
-          "funder": true,
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
-          "id": "erasmusplus",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json"
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "unicycler-assembly"
+          ]
         }
       ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/get-started-genome-assembly/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/get-started-genome-assembly/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Assembly of metagenomic sequencing data",
-      "zenodo_link": "https://zenodo.org/record/6958893",
-      "level": "Introductory",
-      "questions": [
-        "Why metagenomic data should be assembled?",
-        "What is the difference between co-assembly and individual assembly?",
-        "What is the difference between reads, contigs and scaffolds?",
-        "How tools based on De Bruijn graph work?",
-        "How to assess the quality of metagenomic data assembly?"
-      ],
-      "objectives": [
-        "Describe what an assembly is",
-        "Describe what de-replication is",
-        "Explain the difference between co-assembly and individual assembly",
-        "Explain the difference between reads, contigs and scaffolds",
-        "Explain how tools based on De Bruijn graph work",
-        "Apply appropriate tools for analyzing the quality of metagenomic data",
-        "Construct and apply simple assembly pipelines on short read data",
-        "Apply appropriate tools for analyzing the quality of metagenomic assembly",
-        "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome"
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "Assembly groups reads into contigs and scafolds.",
-        "De Brujin Graphs use k-mers to assembly reads",
-        "MetaSPAdes and MEGAHIT are assemblers",
-        "Quast is the tool to assess the assembly quality"
-      ],
-      "contributions": {
-        "authorship": [
-          "plushz",
-          "bebatut"
-        ]
-      },
       "tags": [
-        "assembly",
-        "metagenomics"
-      ],
-      "url": "/topics/assembly/tutorials/metagenomics-assembly/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "metagenomics-assembly",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "workflow-generate-dataset-for-assembly-tutorial.ga",
-          "tests": false
-        },
-        {
-          "workflow": "metagenomics_assembly_tutorial_workflow.ga",
-          "tests": false
-        }
-      ],
-      "tools": [
-        "random_lines1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/unique/bg_uniq/0.3",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bamtools/bamtools/2.5.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/2.0.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ngsutils_bam_filter/ngsutils_bam_filter/0.5.9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Polina Polunina",
-          "gitter": "PlushZ",
-          "orcid": "0000-0002-0507-4602",
-          "joined": "2022-03",
-          "id": "plushz",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/plushz.json"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "gitter": "bebatut",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/metagenomics-assembly/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/metagenomics-assembly/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Chloroplast genome assembly",
-      "zenodo_link": "http://doi.org/10.5281/zenodo.3567224",
-      "tags": [
-        "plants",
-        "nanopore"
+        "prokaryote"
       ],
       "questions": [
-        "How can we assemble a chloroplast genome?"
+        "I just assembled a genome. How does it compare with already sequenced genomes?",
+        "How do I find rearranged, inserted, or deleted regions?"
       ],
       "objectives": [
-        "Assemble a chloroplast genome from long reads",
-        "Polish the assembly with short reads",
-        "Annotate the assembly and view",
-        "Map reads to the assembly and view"
+        "Identification of the most closely related genome to my new assembly",
+        "Perform sequence comparison to locate rearrangements",
+        "Identify genes located in deletions"
       ],
-      "time_estimation": "2h",
+      "time_estimation": "4h",
       "key_points": [
-        "A chloroplast genome can be assembled with long reads and polished with short reads",
-        "The assembly graph is useful to look at and think about genomic structure",
-        "We can map raw reads back to the assembly and investigate areas of high or low read coverage",
-        "We can view an assembly, its mapped reads, and its annotations in JBrowse"
+        "We learned how to download large sets of completed genomes from NCBI",
+        "We learned how to use Galaxy's rule-based collection builder",
+        "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons",
+        "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
       ],
       "contributors": [
-        {
-          "name": "Anna Syme",
-          "joined": "2017-09",
-          "id": "annasyme",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "chloroplast-assembly",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-Chloroplast-genome-assembly-and-annotation.ga",
-          "tests": false
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5",
-        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1",
-        "upload1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/chloroplast-assembly/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/chloroplast-assembly/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "De Bruijn Graph Assembly",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
-      "questions": [
-        "What are the factors that affect genome assembly?",
-        "How does Genome assembly work?"
-      ],
-      "objectives": [
-        "Perform an optimised Velvet assembly with the Velvet Optimiser",
-        "Compare this assembly with those we did in the basic tutorial",
-        "Perform an assembly using the SPAdes assembler."
-      ],
-      "time_estimation": "2h",
-      "level": "Introductory",
-      "key_points": [
-        "We learned about how the choice of k-mer size will affect assembly outcomes",
-        "We learned about the strategies that assemblers use to make reference genomes",
-        "We performed a number of assemblies with Velvet and SPAdes.",
-        "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
-      ],
-      "contributors": [
-        {
-          "name": "Simon Gladman",
-          "email": "simon.gladman@unimelb.edu.au",
-          "joined": "2017-09",
-          "elixir_node": "au",
-          "orcid": "0000-0002-6100-4385",
-          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
-          "id": "slugger70",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "helena.rasche@gmail.com",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "gitter": "hexylena",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "gitter": "shiltemann",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/debruijn-graph-assembly/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "debruijn-graph-assembly",
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "debruijn-graph.ga",
-          "tests": true
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/nml/spades/spades/3.12.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/simon-gladman/velvetoptimiser/velvetoptimiser/2.2.6"
-      ],
-      "tours": true,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/debruijn-graph-assembly/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/debruijn-graph-assembly/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Deeper look into Genome Assembly algorithms",
-      "questions": [
-        "What are the main types of assembly algorithms?",
-        "How do they perform with short and long reads?",
-        "How to improve assemblies using other technologies?"
-      ],
-      "contributors": [
-        {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inra.fr",
-          "twitter": "abretau",
-          "gitter": "abretaud",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
-        },
-        {
-          "name": "Simon Gladman",
-          "email": "simon.gladman@unimelb.edu.au",
-          "joined": "2017-09",
-          "elixir_node": "au",
-          "orcid": "0000-0002-6100-4385",
-          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
-          "id": "slugger70",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
-        },
         {
           "name": "Anton Nekrutenko",
           "email": "anton@nekrut.org",
@@ -558,13 +191,315 @@
           "joined": "2017-09",
           "id": "delphine-l",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
         }
       ],
-      "level": "Intermediate",
-      "url": "/topics/assembly/tutorials/algorithms-introduction/slides.html",
+      "url": "/topics/assembly/tutorials/ecoli_comparison/tutorial.html",
       "topic_name": "assembly",
-      "tutorial_name": "algorithms-introduction",
-      "hands_on": false,
+      "tutorial_name": "ecoli_comparison",
+      "id": "assembly/ecoli_comparison",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "Cut1",
+        "Filter1",
+        "Grep1",
+        "cat1",
+        "join1",
+        "random_lines1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7",
+        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
+        "upload1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/ecoli_comparison/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/ecoli_comparison/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "VGP assembly pipeline",
+      "zenodo_link": "https://zenodo.org/record/5887339",
+      "level": "Intermediate",
+      "tags": [
+        "pacbio",
+        "eukaryote",
+        "VGP"
+      ],
+      "questions": [
+        "what combination of tools can produce the highest quality assembly of vertebrate genomes?",
+        "How can we evaluate how good it is?"
+      ],
+      "objectives": [
+        "Learn the tools necessary to perform a de novo assembly of a vertebrate genome",
+        "Evaluate the quality of the assembly"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies",
+        "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
+      ],
+      "contributors": [
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
+        },
+        {
+          "name": "Cristóbal Gallardo",
+          "joined": "2020-11",
+          "elixir_node": "de",
+          "id": "gallardoalba",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
+        },
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
+        },
+        {
+          "name": "Linelle Abueg",
+          "joined": "2022-01",
+          "id": "abueg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abueg.json"
+        },
+        {
+          "name": "Brandon Pickett",
+          "joined": "2022-01",
+          "id": "pickettbd",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pickettbd.json"
+        },
+        {
+          "name": "Giulio Formenti",
+          "joined": "2022-01",
+          "id": "gf777",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gf777.json"
+        },
+        {
+          "name": "Marcella Sozzoni",
+          "joined": "2022-03",
+          "id": "msozzoni",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/msozzoni.json"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "vgp_genome_assembly",
+      "id": "assembly/vgp_genome_assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "Convert characters1",
+        "cat1",
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5",
+        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_genome_assembly/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_genome_assembly/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
+      "questions": [
+        "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
+        "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
+      ],
+      "objectives": [
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into collections and check its quality",
+        "Detect and remove human reads",
+        "Assemble retained reads and explore the results"
+      ],
+      "time_estimation": "4h",
+      "level": "Intermediate",
+      "key_points": [
+        "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
+        "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
+        "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "unicycler-assembly"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "assembly-with-preprocessing",
+      "id": "assembly/assembly-with-preprocessing",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "This tutorial guides you through the preprocessing of sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China. Since such samples are expected to be contaminated signficantly with human sequenced reads, the goal is to enrich the data for SARS-CoV-2 reads by identifying and discarding reads of human origin before trying to assemble the viral genome sequence.",
+          "materials": [
+            {
+              "link": "topics/assembly/tutorials/assembly-with-preprocessing/slides.html",
+              "type": "Slides"
+            },
+            {
+              "link": "topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "assembly"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "mtekman"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "25M",
+              "link": "jNFLYhjgJPs",
+              "speakers": [
+                "gallardoalba"
+              ]
+            }
+          ],
+          "gtn_id": "assembly/assembly-with-preprocessing",
+          "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
       "slides": true,
       "tools": [
 
@@ -582,331 +517,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/algorithms-introduction/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/algorithms-introduction/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
-      "zenodo_link": "https://zenodo.org/record/4534098",
-      "questions": [
-        "How to check the quality of the MiSeq data?",
-        "How to perform an assembly with MiSeq data?",
-        "What species do I have and what is its sequence type?",
-        "Which resistance genes are on my genome?",
-        "Where are the genes located on my genome?"
-      ],
-      "objectives": [
-        "Assess your data on quality and quantity",
-        "Assemble a genome",
-        "Assess your assembly quality",
-        "Assess presence of antimicrobial resistance genes",
-        "Perform a species identification and MLST typing",
-        "Search for resistance genes on the assembly",
-        "Find a gene on your genome using Prokka + JBrowse"
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "Illumina assemblies can be done with Shovill, but the assemblies are not completely resolved",
-        "Annotation with Prokka is very easy"
-      ],
-      "tags": [
-        "illumina",
-        "assembly",
-        "amr"
-      ],
-      "contributions": {
-        "authorship": [
-          "bazante1"
-        ],
-        "editing": [
-          "hexylena",
-          "bazante1",
-          "shiltemann",
-          "miaomiaozhou88"
-        ],
-        "funding": [
-          "avans-atgm"
-        ]
-      },
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "visualisation",
-          "tutorials": [
-            "jbrowse"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "history-to-workflow"
-          ]
-        }
-      ],
-      "url": "/topics/assembly/tutorials/mrsa-illumina/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "mrsa-illumina",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
-      "tools": [
-        "CONVERTER_bz2_to_uncompressed",
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
-        "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
-        "upload1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Bazante Sanders",
-          "joined": "2020-12",
-          "id": "bazante1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "helena.rasche@gmail.com",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "gitter": "hexylena",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-        },
-        {
-          "name": "Bazante Sanders",
-          "joined": "2020-12",
-          "id": "bazante1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "gitter": "shiltemann",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
-        },
-        {
-          "name": "Miaomiao Zhou",
-          "email": "m.zhou1@avans.nl",
-          "joined": "2020-12",
-          "orcid": "0000-0003-4426-1758",
-          "id": "miaomiaozhou88",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
-        },
-        {
-          "name": "Avans Hogeschool",
-          "joined": "2020-11",
-          "funder": true,
-          "funding_statement": "A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href=\"https://avans.nl/\">avans.nl</a>",
-          "id": "avans-atgm",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/avans-atgm.json"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-illumina/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-illumina/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data",
-      "zenodo_link": "https://zenodo.org/record/4534098",
-      "questions": [
-        "How to check the quality of the MinION data?",
-        "How to perform an assembly with MinION data?",
-        "What species do I have and what is its sequence type?",
-        "Which resistance genes are on my genome?",
-        "Where are the genes located on my genome?"
-      ],
-      "objectives": [
-        "Assess your data on quality and quantity",
-        "Assemble a genome",
-        "Assess your assembly quality",
-        "Assess presence of antimicrobial resistance genes",
-        "Perform a species identification and MLST typing",
-        "Search for resistance genes on the assembly",
-        "Find a gene on your genome using Prokka + JBrowse"
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "Nanopore produces fantastic assemblies but with low quality data",
-        "Annotation with Prokka is very easy"
-      ],
-      "tags": [
-        "nanopore",
-        "assembly",
-        "amr"
-      ],
-      "contributions": {
-        "authorship": [
-          "bazante1"
-        ],
-        "editing": [
-          "hexylena",
-          "bazante1",
-          "shiltemann",
-          "miaomiaozhou88"
-        ],
-        "funding": [
-          "avans-atgm"
-        ]
-      },
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "visualisation",
-          "tutorials": [
-            "jbrowse"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "history-to-workflow"
-          ]
-        }
-      ],
-      "abbreviations": {
-        "SVs": "Structural Variations"
-      },
-      "url": "/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "mrsa-nanopore",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
-      "tools": [
-        "CONVERTER_bz2_to_uncompressed",
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6",
-        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
-        "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
-        "upload1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Bazante Sanders",
-          "joined": "2020-12",
-          "id": "bazante1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "helena.rasche@gmail.com",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "gitter": "hexylena",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-        },
-        {
-          "name": "Bazante Sanders",
-          "joined": "2020-12",
-          "id": "bazante1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "gitter": "shiltemann",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
-        },
-        {
-          "name": "Miaomiao Zhou",
-          "email": "m.zhou1@avans.nl",
-          "joined": "2020-12",
-          "orcid": "0000-0003-4426-1758",
-          "id": "miaomiaozhou88",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
-        },
-        {
-          "name": "Avans Hogeschool",
-          "joined": "2020-11",
-          "funder": true,
-          "funding_statement": "A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href=\"https://avans.nl/\">avans.nl</a>",
-          "id": "avans-atgm",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/avans-atgm.json"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-nanopore/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-nanopore/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-with-preprocessing/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-with-preprocessing/tutorial.json"
       }
     },
     {
@@ -989,14 +601,16 @@
       "url": "/topics/assembly/tutorials/assembly-quality-control/tutorial.html",
       "topic_name": "assembly",
       "tutorial_name": "assembly-quality-control",
+      "id": "assembly/assembly-quality-control",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
       "hands_on": true,
       "slides": true,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1",
@@ -1019,6 +633,615 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-quality-control/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-quality-control/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+      "zenodo_link": "https://zenodo.org/record/4534098",
+      "questions": [
+        "How to check the quality of the MinION data?",
+        "How to perform an assembly with MinION data?",
+        "What species do I have and what is its sequence type?",
+        "Which resistance genes are on my genome?",
+        "Where are the genes located on my genome?"
+      ],
+      "objectives": [
+        "Assess your data on quality and quantity",
+        "Assemble a genome",
+        "Assess your assembly quality",
+        "Assess presence of antimicrobial resistance genes",
+        "Perform a species identification and MLST typing",
+        "Search for resistance genes on the assembly",
+        "Find a gene on your genome using Prokka + JBrowse"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Nanopore produces fantastic assemblies but with low quality data",
+        "Annotation with Prokka is very easy"
+      ],
+      "tags": [
+        "nanopore",
+        "assembly",
+        "amr"
+      ],
+      "contributions": {
+        "authorship": [
+          "bazante1"
+        ],
+        "editing": [
+          "hexylena",
+          "bazante1",
+          "shiltemann",
+          "miaomiaozhou88"
+        ],
+        "funding": [
+          "avans-atgm"
+        ]
+      },
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "visualisation",
+          "tutorials": [
+            "jbrowse"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "history-to-workflow"
+          ]
+        }
+      ],
+      "abbreviations": {
+        "SVs": "Structural Variations"
+      },
+      "url": "/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "mrsa-nanopore",
+      "id": "assembly/mrsa-nanopore",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6",
+        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+        "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
+        "upload1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        },
+        {
+          "name": "Miaomiao Zhou",
+          "email": "m.zhou1@avans.nl",
+          "joined": "2020-12",
+          "orcid": "0000-0003-4426-1758",
+          "id": "miaomiaozhou88",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
+        },
+        {
+          "name": "Avans Hogeschool",
+          "joined": "2020-11",
+          "funder": true,
+          "funding_statement": "A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href=\"https://avans.nl/\">avans.nl</a>",
+          "id": "avans-atgm",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/avans-atgm.json"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-nanopore/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-nanopore/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Unicycler Assembly",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.940733",
+      "level": "Introductory",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "I have short reads and long reads. How do I assemble a genome?"
+      ],
+      "objectives": [
+        "Perform Quality Control on your reads",
+        "Perform a Small genome Assembly with Unicycler",
+        "Evaluate the Quality of the Assembly with Quast",
+        "Annotate the assembly with Prokka"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "assembly",
+          "tutorials": [
+            "ecoli_comparison"
+          ]
+        }
+      ],
+      "time_estimation": "4h",
+      "key_points": [
+        "We learned about the strategies used by assemblers for hybrid assemblies",
+        "We performed an hybrid assembly of a bacterial genome and its annotation",
+        "Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes",
+        "Combination of short and long reads helped us produce an almost perfect assembly"
+      ],
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
+        },
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "elixir_node": "au",
+          "orcid": "0000-0002-6100-4385",
+          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/unicycler-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "unicycler-assembly",
+      "id": "assembly/unicycler-assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "tools": [
+
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/unicycler-assembly/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/unicycler-assembly/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "VGP assembly pipeline - short version",
+      "zenodo_link": "https://zenodo.org/record/5887339",
+      "level": "Intermediate",
+      "tags": [
+        "pacbio",
+        "eukaryote",
+        "VGP"
+      ],
+      "questions": [
+        "what combination of tools can produce the highest quality assembly of vertebrate genomes?",
+        "How can we evaluate how good it is?"
+      ],
+      "objectives": [
+        "Learn the tools necessary to perform a de novo assembly of a vertebrate genome",
+        "Evaluate the quality of the assembly"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies",
+        "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
+      ],
+      "contributors": [
+        {
+          "name": "Delphine Lariviere",
+          "email": "delphine.lariviere@galaxy.org",
+          "joined": "2017-09",
+          "id": "delphine-l",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
+        },
+        {
+          "name": "Cristóbal Gallardo",
+          "joined": "2020-11",
+          "elixir_node": "de",
+          "id": "gallardoalba",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
+        },
+        {
+          "name": "Brandon Pickett",
+          "joined": "2022-01",
+          "id": "pickettbd",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pickettbd.json"
+        },
+        {
+          "name": "Linelle Abueg",
+          "joined": "2022-01",
+          "id": "abueg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abueg.json"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/vgp_workflow_training/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "vgp_workflow_training",
+      "id": "assembly/vgp_workflow_training",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_workflow_training/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_workflow_training/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Assembly of metagenomic sequencing data",
+      "zenodo_link": "https://zenodo.org/record/6958893",
+      "level": "Introductory",
+      "questions": [
+        "Why metagenomic data should be assembled?",
+        "What is the difference between co-assembly and individual assembly?",
+        "What is the difference between reads, contigs and scaffolds?",
+        "How tools based on De Bruijn graph work?",
+        "How to assess the quality of metagenomic data assembly?"
+      ],
+      "objectives": [
+        "Describe what an assembly is",
+        "Describe what de-replication is",
+        "Explain the difference between co-assembly and individual assembly",
+        "Explain the difference between reads, contigs and scaffolds",
+        "Explain how tools based on De Bruijn graph work",
+        "Apply appropriate tools for analyzing the quality of metagenomic data",
+        "Construct and apply simple assembly pipelines on short read data",
+        "Apply appropriate tools for analyzing the quality of metagenomic assembly",
+        "Evaluate the Quality of the Assembly with Quast, Bowtie2, and CoverM-Genome"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Assembly groups reads into contigs and scafolds.",
+        "De Brujin Graphs use k-mers to assembly reads",
+        "MetaSPAdes and MEGAHIT are assemblers",
+        "Quast is the tool to assess the assembly quality"
+      ],
+      "contributions": {
+        "authorship": [
+          "plushz",
+          "bebatut"
+        ]
+      },
+      "tags": [
+        "assembly",
+        "metagenomics"
+      ],
+      "url": "/topics/assembly/tutorials/metagenomics-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "metagenomics-assembly",
+      "id": "assembly/metagenomics-assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10",
+        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Polina Polunina",
+          "gitter": "PlushZ",
+          "orcid": "0000-0002-0507-4602",
+          "joined": "2022-03",
+          "id": "plushz",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/plushz.json"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "gitter": "bebatut",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/metagenomics-assembly/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/metagenomics-assembly/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Genome Assembly of MRSA using Illumina MiSeq Data",
+      "zenodo_link": "https://zenodo.org/record/4534098",
+      "questions": [
+        "How to check the quality of the MiSeq data?",
+        "How to perform an assembly with MiSeq data?",
+        "What species do I have and what is its sequence type?",
+        "Which resistance genes are on my genome?",
+        "Where are the genes located on my genome?"
+      ],
+      "objectives": [
+        "Assess your data on quality and quantity",
+        "Assemble a genome",
+        "Assess your assembly quality",
+        "Assess presence of antimicrobial resistance genes",
+        "Perform a species identification and MLST typing",
+        "Search for resistance genes on the assembly",
+        "Find a gene on your genome using Prokka + JBrowse"
+      ],
+      "time_estimation": "2h",
+      "key_points": [
+        "Illumina assemblies can be done with Shovill, but the assemblies are not completely resolved",
+        "Annotation with Prokka is very easy"
+      ],
+      "tags": [
+        "illumina",
+        "assembly",
+        "amr"
+      ],
+      "contributions": {
+        "authorship": [
+          "bazante1"
+        ],
+        "editing": [
+          "hexylena",
+          "bazante1",
+          "shiltemann",
+          "miaomiaozhou88"
+        ],
+        "funding": [
+          "avans-atgm"
+        ]
+      },
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "visualisation",
+          "tutorials": [
+            "jbrowse"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "history-to-workflow"
+          ]
+        }
+      ],
+      "url": "/topics/assembly/tutorials/mrsa-illumina/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "mrsa-illumina",
+      "id": "assembly/mrsa-illumina",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+        "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1",
+        "upload1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "helena.rasche@gmail.com",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "gitter": "hexylena",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
+        },
+        {
+          "name": "Bazante Sanders",
+          "joined": "2020-12",
+          "id": "bazante1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
+        },
+        {
+          "name": "Miaomiao Zhou",
+          "email": "m.zhou1@avans.nl",
+          "joined": "2020-12",
+          "orcid": "0000-0003-4426-1758",
+          "id": "miaomiaozhou88",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json"
+        },
+        {
+          "name": "Avans Hogeschool",
+          "joined": "2020-11",
+          "funder": true,
+          "funding_statement": "A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href=\"https://avans.nl/\">avans.nl</a>",
+          "id": "avans-atgm",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/avans-atgm.json"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-illumina/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/mrsa-illumina/tutorial.json"
       }
     },
     {
@@ -1114,18 +1337,19 @@
       "url": "/topics/assembly/tutorials/flye-assembly/tutorial.html",
       "topic_name": "assembly",
       "tutorial_name": "flye-assembly",
+      "id": "assembly/flye-assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
       "hands_on": true,
       "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0",
         "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3"
       ],
@@ -1148,50 +1372,35 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Making sense of a newly assembled genome",
-      "zenodo_link": "https://zenodo.org/record/3382053",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "assembly",
-          "tutorials": [
-            "unicycler-assembly"
-          ]
-        }
-      ],
-      "tags": [
-        "prokaryote"
-      ],
+      "title": "De Bruijn Graph Assembly",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
       "questions": [
-        "I just assembled a genome. How does it compare with already sequenced genomes?",
-        "How do I find rearranged, inserted, or deleted regions?"
+        "What are the factors that affect genome assembly?",
+        "How does Genome assembly work?"
       ],
       "objectives": [
-        "Identification of the most closely related genome to my new assembly",
-        "Perform sequence comparison to locate rearrangements",
-        "Identify genes located in deletions"
+        "Perform an optimised Velvet assembly with the Velvet Optimiser",
+        "Compare this assembly with those we did in the basic tutorial",
+        "Perform an assembly using the SPAdes assembler."
       ],
-      "time_estimation": "4h",
+      "time_estimation": "2h",
+      "level": "Introductory",
       "key_points": [
-        "We learned how to download large sets of completed genomes from NCBI",
-        "We learned how to use Galaxy's rule-based collection builder",
-        "We learned how to use a combination of Galaxy tools to create complex views of genome comparisons",
-        "We learned about idiosyncrasies of data formats and how to deal with them using Galaxy tools"
+        "We learned about how the choice of k-mer size will affect assembly outcomes",
+        "We learned about the strategies that assemblers use to make reference genomes",
+        "We performed a number of assemblies with Velvet and SPAdes.",
+        "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
       ],
       "contributors": [
         {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
           "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json"
-        },
-        {
-          "name": "Delphine Lariviere",
-          "email": "delphine.lariviere@galaxy.org",
-          "joined": "2017-09",
-          "id": "delphine-l",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
+          "elixir_node": "au",
+          "orcid": "0000-0002-6100-4385",
+          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         },
         {
           "name": "Helena Rasche",
@@ -1203,51 +1412,39 @@
           "elixir_node": "nl",
           "id": "hexylena",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/ecoli_comparison/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "ecoli_comparison",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
+        },
         {
-          "workflow": "ecoli-comparison.ga",
-          "tests": false
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "gitter": "shiltemann",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json"
         }
       ],
+      "url": "/topics/assembly/tutorials/debruijn-graph-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "debruijn-graph-assembly",
+      "id": "assembly/debruijn-graph-assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
       "tools": [
-        "Cut1",
-        "Filter1",
-        "Grep1",
-        "cat1",
-        "join1",
-        "random_lines1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_compute_length/fasta_compute_length/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_complementbed/2.27.0.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_aln_to_links/0.69.8+galaxy7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tiles/0.69.8+galaxy7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
-        "upload1"
+
       ],
-      "tours": true,
+      "tours": false,
       "video": false,
       "translations": {
         "tutorial": [
@@ -1260,44 +1457,145 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/ecoli_comparison/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/ecoli_comparison/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/debruijn-graph-assembly/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/debruijn-graph-assembly/tutorial.json"
       }
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Unicycler Assembly",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.940733",
-      "level": "Introductory",
+      "title": "Chloroplast genome assembly",
+      "zenodo_link": "http://doi.org/10.5281/zenodo.3567224",
       "tags": [
-        "prokaryote"
+        "plants",
+        "nanopore"
       ],
       "questions": [
-        "I have short reads and long reads. How do I assemble a genome?"
+        "How can we assemble a chloroplast genome?"
       ],
       "objectives": [
-        "Perform Quality Control on your reads",
-        "Perform a Small genome Assembly with Unicycler",
-        "Evaluate the Quality of the Assembly with Quast",
-        "Annotate the assembly with Prokka"
+        "Assemble a chloroplast genome from long reads",
+        "Polish the assembly with short reads",
+        "Annotate the assembly and view",
+        "Map reads to the assembly and view"
       ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "assembly",
-          "tutorials": [
-            "ecoli_comparison"
-          ]
-        }
-      ],
-      "time_estimation": "4h",
+      "time_estimation": "2h",
       "key_points": [
-        "We learned about the strategies used by assemblers for hybrid assemblies",
-        "We performed an hybrid assembly of a bacterial genome and its annotation",
-        "Unicycler is a pipeline bases on Spades and Pilon dedicated to hybrid assembly of Small genomes",
-        "Combination of short and long reads helped us produce an almost perfect assembly"
+        "A chloroplast genome can be assembled with long reads and polished with short reads",
+        "The assembly graph is useful to look at and think about genomic structure",
+        "We can map raw reads back to the assembly and investigate areas of high or low read coverage",
+        "We can view an assembly, its mapped reads, and its annotations in JBrowse"
       ],
       "contributors": [
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
+        }
+      ],
+      "url": "/topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
+      "topic_name": "assembly",
+      "tutorial_name": "chloroplast-assembly",
+      "id": "assembly/chloroplast-assembly",
+      "video_library": {
+        "tutorial": {
+          "description": "In this tutorial, you will assemble a chloroplast genome using a combination of short and long read data.",
+          "materials": [
+            {
+              "link": "topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
+              "title": "Chloroplast genome assembly",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "assembly"
+          ],
+          "type": "Lecture & Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "annasyme"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "35M",
+              "link": "eyfCyINTD_E",
+              "speakers": [
+                "annasyme"
+              ]
+            }
+          ],
+          "gtn_id": "assembly/chloroplast-assembly",
+          "title": "Chloroplast genome assembly",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1",
+        "upload1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/chloroplast-assembly/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/chloroplast-assembly/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Deeper look into Genome Assembly algorithms",
+      "questions": [
+        "What are the main types of assembly algorithms?",
+        "How do they perform with short and long reads?",
+        "How to improve assemblies using other technologies?"
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "elixir_node": "au",
+          "orcid": "0000-0002-6100-4385",
+          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
+        },
         {
           "name": "Anton Nekrutenko",
           "email": "anton@nekrut.org",
@@ -1311,141 +1609,24 @@
           "joined": "2017-09",
           "id": "delphine-l",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
-        },
-        {
-          "name": "Simon Gladman",
-          "email": "simon.gladman@unimelb.edu.au",
-          "joined": "2017-09",
-          "elixir_node": "au",
-          "orcid": "0000-0002-6100-4385",
-          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
-          "id": "slugger70",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
         }
       ],
-      "url": "/topics/assembly/tutorials/unicycler-assembly/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "unicycler-assembly",
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "unicycler.ga",
-          "tests": true
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0"
-      ],
-      "tours": true,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/unicycler-assembly/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/unicycler-assembly/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
-      "questions": [
-        "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
-        "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
-      ],
-      "objectives": [
-        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
-        "Organize the data into collections and check its quality",
-        "Detect and remove human reads",
-        "Assemble retained reads and explore the results"
-      ],
-      "time_estimation": "4h",
       "level": "Intermediate",
-      "key_points": [
-        "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
-        "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
-        "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "assembly",
-          "tutorials": [
-            "unicycler-assembly"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "mapping"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+      "url": "/topics/assembly/tutorials/algorithms-introduction/slides.html",
       "topic_name": "assembly",
-      "tutorial_name": "assembly-with-preprocessing",
-      "hands_on": true,
+      "tutorial_name": "algorithms-introduction",
+      "id": "assembly/algorithms-introduction",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
       "slides": true,
-      "workflows": [
-        {
-          "workflow": "assembly_with_preprocessing.ga",
-          "tests": false
-        },
-        {
-          "workflow": "assembly_with_preprocessing_and_sra_download.ga",
-          "tests": false
-        }
-      ],
       "tools": [
-        "__ZIP_COLLECTION__",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.25.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_sample/1.3.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.4+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+
       ],
       "tours": false,
       "video": false,
@@ -1460,255 +1641,56 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-with-preprocessing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/assembly-with-preprocessing/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/algorithms-introduction/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/algorithms-introduction/slides.json"
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "VGP assembly pipeline",
-      "zenodo_link": "https://zenodo.org/record/5887339",
-      "level": "Intermediate",
-      "tags": [
-        "pacbio",
-        "eukaryote",
-        "VGP"
-      ],
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "An introduction to get started in genome assembly and annotation",
       "questions": [
-        "what combination of tools can produce the highest quality assembly of vertebrate genomes?",
-        "How can we evaluate how good it is?"
+        "Definitions of bioinformatics terms for assembly and annotation",
+        "What are the guidelines before starting a Genome Assembly and Annotation project?",
+        "What file formats are used for assembly and annotation?"
       ],
-      "objectives": [
-        "Learn the tools necessary to perform a de novo assembly of a vertebrate genome",
-        "Evaluate the quality of the assembly"
-      ],
-      "time_estimation": "3h",
       "key_points": [
-        "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies",
-        "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
+        "We learned the definitions of bioinformatics terms used in genomes assembly and annotation",
+        "We have seen the bioinformatics file formats used for these analyses",
+        "We learned the importance of preparing the project to ensure its success",
+        "We learned the importance of surrounding ourselves with all the people who have knowledge of the different parts of the project (wet lab, sequencing, bioinformatics,...)"
       ],
-      "contributors": [
-        {
-          "name": "Delphine Lariviere",
-          "email": "delphine.lariviere@galaxy.org",
-          "joined": "2017-09",
-          "id": "delphine-l",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
-        },
-        {
-          "name": "Alex Ostrovsky",
-          "email": "a.ostrovsky@mac.com",
-          "joined": "2019-06",
-          "id": "astrovsky01",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
-        },
-        {
-          "name": "Cristóbal Gallardo",
-          "joined": "2020-11",
-          "elixir_node": "de",
-          "id": "gallardoalba",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
-        },
-        {
-          "name": "Anna Syme",
-          "joined": "2017-09",
-          "id": "annasyme",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json"
-        },
-        {
-          "name": "Linelle Abueg",
-          "joined": "2022-01",
-          "id": "abueg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abueg.json"
-        },
-        {
-          "name": "Brandon Pickett",
-          "joined": "2022-01",
-          "id": "pickettbd",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pickettbd.json"
-        },
-        {
-          "name": "Giulio Formenti",
-          "joined": "2022-01",
-          "id": "gf777",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/gf777.json"
-        },
-        {
-          "name": "Marcella Sozzoni",
-          "joined": "2022-03",
-          "id": "msozzoni",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/msozzoni.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html",
-      "topic_name": "assembly",
-      "tutorial_name": "vgp_genome_assembly",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
-      "tools": [
-        "Convert characters1",
-        "cat1",
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy5",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
+      "contributions": {
+        "authorship": [
+          "alexcorm",
+          "lleroi"
         ],
-        "slides": [
-
+        "editing": [
+          "abretaud",
+          "stephanierobin",
+          "r1corre"
         ],
-        "video": false
+        "funding": [
+          "erasmusplus"
+        ]
       },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_genome_assembly/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_genome_assembly/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "VGP assembly pipeline - short version",
-      "zenodo_link": "https://zenodo.org/record/5887339",
-      "level": "Intermediate",
-      "tags": [
-        "pacbio",
-        "eukaryote",
-        "VGP"
-      ],
-      "questions": [
-        "what combination of tools can produce the highest quality assembly of vertebrate genomes?",
-        "How can we evaluate how good it is?"
-      ],
-      "objectives": [
-        "Learn the tools necessary to perform a de novo assembly of a vertebrate genome",
-        "Evaluate the quality of the assembly"
-      ],
+      "level": "Introductory",
       "time_estimation": "1h",
-      "key_points": [
-        "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies",
-        "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
-      ],
-      "contributors": [
-        {
-          "name": "Delphine Lariviere",
-          "email": "delphine.lariviere@galaxy.org",
-          "joined": "2017-09",
-          "id": "delphine-l",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/delphine-l.json"
-        },
-        {
-          "name": "Alex Ostrovsky",
-          "email": "a.ostrovsky@mac.com",
-          "joined": "2019-06",
-          "id": "astrovsky01",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json"
-        },
-        {
-          "name": "Cristóbal Gallardo",
-          "joined": "2020-11",
-          "elixir_node": "de",
-          "id": "gallardoalba",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json"
-        },
-        {
-          "name": "Brandon Pickett",
-          "joined": "2022-01",
-          "id": "pickettbd",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pickettbd.json"
-        },
-        {
-          "name": "Linelle Abueg",
-          "joined": "2022-01",
-          "id": "abueg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abueg.json"
-        }
-      ],
-      "url": "/topics/assembly/tutorials/vgp_workflow_training/tutorial.html",
+      "url": "/topics/assembly/tutorials/get-started-genome-assembly/slides.html",
       "topic_name": "assembly",
-      "tutorial_name": "vgp_workflow_training",
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false
-        }
-      ],
+      "tutorial_name": "get-started-genome-assembly",
+      "id": "assembly/get-started-genome-assembly",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
       "tools": [
-        "Convert characters1",
-        "cat1",
-        "param_value_from_file",
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.16.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/salsa/salsa/2.3+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+
       ],
       "tours": false,
       "video": false,
@@ -1722,9 +1704,68 @@
         "video": false
       },
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Alexandre Cormier",
+          "email": "alexandre.cormier@ifremer.fr",
+          "twitter": "allanssx",
+          "orcid": "0000-0002-7775-8413",
+          "joined": "2021-11",
+          "id": "alexcorm",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json"
+        },
+        {
+          "name": "Laura Leroi",
+          "email": "laura.leroi@ifremer.fr",
+          "orcid": "0000-0003-3748-4179",
+          "joined": "2021-11",
+          "id": "lleroi",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json"
+        },
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inra.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json"
+        },
+        {
+          "name": "Stéphanie Robin",
+          "email": "stephanie.robin@inrae.fr",
+          "twitter": "robinstphanie1",
+          "orcid": "0000-0001-7379-9173",
+          "joined": "2021-11",
+          "id": "stephanierobin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json"
+        },
+        {
+          "name": "Erwan Corre",
+          "email": "erwan.corre@sb-roscoff.fr",
+          "twitter": "r1corre",
+          "orcid": "0000-0001-6354-2278",
+          "joined": "2019-04",
+          "id": "r1corre",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json"
+        },
+        {
+          "name": "Erasmus+ Programme",
+          "joined": "2020-09",
+          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
+          "github": false,
+          "funder": true,
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
+          "id": "erasmusplus",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json"
+        }
+      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_workflow_training/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/vgp_workflow_training/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/get-started-genome-assembly/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//assembly/tutorials/get-started-genome-assembly/slides.json"
       }
     }
   ]

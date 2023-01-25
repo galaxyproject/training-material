@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Including a new topic" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:25:39 +0000" />
+<meta name="DC.date" content="2023-01-23 11:26:58 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 
         
@@ -112,9 +112,11 @@
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
+        
         <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
         </a>
+        
         
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
@@ -277,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:25:39 +0000",
+  "dateModified": "2023-01-23 11:26:58 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Including a new topic",
   "interactivityType": "mixed",
@@ -331,7 +333,7 @@
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html",
   "timeRequired": "PT30M",
   "keywords": "contributing",
-  "description": "The questions this  addresses are:\n - How to include a new topic?\n\n\nThe objectives are:\n - Create a new topic\n - Set up the metadata for a topic\n\n",
+  "description": "The questions this  addresses are:\n - How to include a new topic?\n - What kinds of Topics are possible?\n\n\nThe objectives are:\n - Create a new topic\n - Set up the metadata for a topic\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -399,6 +401,9 @@
         <ul>
         
         <li><p>How to include a new topic?</p>
+</li>
+        
+        <li><p>What kinds of Topics are possible?</p>
 </li>
         
         </ul>
@@ -493,7 +498,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -546,13 +551,9 @@
 
 <p>All images for the slides must be in <code class="language-plaintext highlighter-rouge">images</code> directory. The images must be in good quality. The sources (<code class="language-plaintext highlighter-rouge">svg</code> or other) of the images must also be added to the <code class="language-plaintext highlighter-rouge">images</code> directory. We encourage you to use <a href="https://www.yworks.com/products/yed">yEd</a> to easily generate diagrams and <a href="https://inkscape.org/en/">Inkscape</a> for any other images.</p>
 
-<h3 id="slides-directory"><code class="language-plaintext highlighter-rouge">slides</code> directory</h3>
-
-<p>This directory contains introduction slide deck. There could be several slide decks, to cover different aspect. The slides are rendered using <code class="language-plaintext highlighter-rouge">remark.js</code> but written in Markdown to facilitate collaboration.</p>
-
 <h3 id="tutorials-directory"><code class="language-plaintext highlighter-rouge">tutorials</code> directory</h3>
 
-<p>This directory collects the tutorials related to the topic, one per subdirectory.</p>
+<p>This directory collects the materials related to the topic, one material per subdirectory, though it may consist of slides, tutorials, or both.</p>
 
 <p>The tutorials are hands-on built for workshop and self-training, with description of the whole infrastructure needed to run the tutorial on any <span class="notranslate">Galaxy</span> instance (tools, data library, etc).</p>
 
@@ -565,7 +566,7 @@
   <p>Want to contribute to a tutorial? Check out <a href="/training-material/topics/contributing/index.html">our training materials about that</a>.</p>
 </blockquote>
 
-<p>Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better. The content must be then added in the <code class="language-plaintext highlighter-rouge">slides</code> directory.</p>
+<p>Sometimes, an hands-on tutorial is not the most appropriate format for a tutorial and slides are better.</p>
 
 <h3 id="docker-directory"><code class="language-plaintext highlighter-rouge">docker</code> directory</h3>
 
@@ -574,8 +575,6 @@ the tutorials. The corresponding image must be based on official <span class="no
 images.</p>
 
 <p>The <code class="language-plaintext highlighter-rouge">docker</code> image will also integrate the <span class="notranslate">Galaxy</span> tours available for each topics and the workflows.</p>
-
-<h1 id="creating-a-new-topic">Creating a new topic</h1>
 
 <blockquote class="agenda">
   <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
@@ -587,16 +586,26 @@ images.</p>
       <li><a href="#directory-structure" id="markdown-toc-directory-structure">Directory structure</a></li>
     </ol>
   </li>
-  <li><a href="#creating-a-new-topic" id="markdown-toc-creating-a-new-topic">Creating a new topic</a></li>
-  <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
-  <li><a href="#creating-the-skeleton-for-the-topic" id="markdown-toc-creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</a></li>
-  <li><a href="#adapt-the-metadata-for-your-topic" id="markdown-toc-adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</a></li>
+  <li><a href="#creating-a-new-topic-with-its-own-materials" id="markdown-toc-creating-a-new-topic-with-its-own-materials">Creating a new topic with it’s own materials</a>    <ol>
+      <li><a href="#defining-the-topic" id="markdown-toc-defining-the-topic">Defining the topic</a></li>
+      <li><a href="#creating-the-skeleton-for-the-topic" id="markdown-toc-creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</a></li>
+      <li><a href="#adapt-the-metadata-for-your-topic" id="markdown-toc-adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</a></li>
+    </ol>
+  </li>
+  <li><a href="#creating-a-tag-based-topic" id="markdown-toc-creating-a-tag-based-topic">Creating a tag based topic</a>    <ol>
+      <li><a href="#defining-the-topic-1" id="markdown-toc-defining-the-topic-1">Defining the topic</a></li>
+    </ol>
+  </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="defining-the-topic">Defining the topic</h1>
+<p>There are two kinds of topics we will cover: topics with their own materials, and synthetic topics that are based solely on a tag. For large collections of materials around a single central theme a topic with materials is a good choice. However, sometimes you will want to highlight materials spread across numerous or disparate topics like e.g. Cancer or SARS-CoV-2 tutorials where you might have individual tutorials on assembly or transcriptomics, but you’d like a single page listing all of them.</p>
+
+<h1 id="creating-a-new-topic-with-its-own-materials">Creating a new topic with it’s own materials</h1>
+
+<h2 id="defining-the-topic">Defining the topic</h2>
 
 <p>When we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a>. The <span class="notranslate">ToolShed</span> assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which <span class="notranslate">ToolShed</span>’s category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
 
@@ -626,7 +635,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 <p>In this tutorial, we want to add a new topic called about “my-favorite-topic”.</p>
 
-<h1 id="creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</h1>
+<h2 id="creating-the-skeleton-for-the-topic">Creating the skeleton for the topic</h2>
 
 <p>Once the topic name has been chosen, we can create it.</p>
 
@@ -660,7 +669,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 </blockquote>
 
-<h1 id="adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</h1>
+<h2 id="adapt-the-metadata-for-your-topic">Adapt the metadata for your topic</h2>
 
 <p>Several metadata are defined in <code class="language-plaintext highlighter-rouge">metadata.yaml</code> file in your topic folder to :</p>
 
@@ -1024,6 +1033,8 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 </blockquote>
 
+		
+	
 		
 	
 		
@@ -2125,25 +2136,58 @@ We decided to put it in “Sequence analysis” because this is the most general
 		
 	
 		
+			
+			
+			
+
+			<blockquote class="tip">
+
+	<div class="box-title">
+		
+		<button type="button" aria-expanded="true" aria-label="Toggle tip box: tag_based">
+			<i class="far fa-lightbulb" aria-hidden="true"></i>
+			
+				<code>tag_based</code>
+			
+			<span role="button" class="fold-unfold fa fa-plus-square"></span>
+		</button>
+		
+	</div>
+
+<b>Boolean</b>
+
+<p>
+<p>If this is a synthetic tag based topic (no tutorials of it’s own)
+then you must set this flag to indicate it as such, otherwise you
+will find yourself with an empty topic page.</p>
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
+	
+		
 	
 		
 	
 
 </blockquote>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">subtopics</code>: for large topics, we can define subtopics and create multiple tutorial lists:
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subtopics:
-  singlecell:
-    title: "<span class="notranslate">Single Cell</span> Analysis"
-    description: "These tutorials cover <span class="notranslate">single cell</span> analysis"
-  small:
-    title: "Small <span class="notranslate">RNA</span>"
-    description: "These Tutorial"
-</code></pre></div>    </div>
-    <p>tutorials can be assigned to subtopics by adding e.g. <code class="language-plaintext highlighter-rouge">subtopic: singlecell</code> to the tutorial metadata. An example of this subtopic division can be found in the <a href="/training-material/topics/admin/">admin section</a></p>
-  </li>
-</ul>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-update-the-new-topic-to-the-website" class="box-title" aria-label="hands-on box: Update the new topic to the website"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Update the new topic to the website</div>
@@ -2163,6 +2207,70 @@ We decided to put it in “Sequence analysis” because this is the most general
   </ol>
 
 </blockquote>
+
+<h3 id="subtopics">Subtopics</h3>
+
+<p>For large topics, we can define subtopics and create multiple tutorial lists, within a topic’s <code class="language-plaintext highlighter-rouge">metadata.yaml</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">transcriptomics</span>
+<span class="na">type</span><span class="pi">:</span> <span class="s">use</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Transcriptomics</span>
+<span class="na">summary</span><span class="pi">:</span> <span class="s">Training material for all kinds of transcriptomics analysis.</span>
+<span class="na">docker_image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/<span class="notranslate">galaxy</span>/transcriptomics-training"</span>
+
+<span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
+
+<span class="na">subtopics</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">introduction</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Introduction"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Start</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s"><span class="notranslate">RNA</span>-Seq</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">end-to-end</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">End-to-End</span><span class="nv"> </span><span class="s">Analysis"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">These</span><span class="nv"> </span><span class="s">tutorials</span><span class="nv"> </span><span class="s">take</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">sequencing</span><span class="nv"> </span><span class="s"><span class="notranslate">reads</span></span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">pathway</span><span class="nv"> </span><span class="s">analysis"</span>
+<span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">visualisation</span>
+  <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Visualisation"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">covering</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">visualisation"</span>
+</code></pre></div></div>
+
+<p>Each subtopic has:</p>
+<ul>
+  <li>an ID, used as a reference in the tutorial</li>
+  <li>a short descriptive title</li>
+  <li>a longer description discussion what is contained in that subtopic</li>
+</ul>
+
+<p>Tutorials can be assigned to subtopics by adding e.g. <code class="language-plaintext highlighter-rouge">subtopic: singlecell</code> to the tutorial metadata. An example of this subtopic division can be found in the <a href="/training-material/topics/admin/">admin section</a></p>
+
+<h1 id="creating-a-tag-based-topic">Creating a tag based topic</h1>
+
+<p>For tag based topics, first ensure that all of the relevant tutorials share a single tag, across all materials that should be included in this view.</p>
+
+<h2 id="defining-the-topic-1">Defining the topic</h2>
+
+<p>Compare with other topic level metadata files in the <code class="language-plaintext highlighter-rouge">metadata/</code> directory of the training material. Then create a file of your own naming the topic and providing maintainers and so on. We will use the Covid-19 synthetic topic as an example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+name: "covid19"
+type: "use"
+title: "SARS-CoV-2"
+summary: "Tutorials covering analysis of SARS-CoV-2 (COVID 19)"
+tag_based: true
+
+maintainers:
+  - wm75
+
+gitter: <span class="notranslate">galaxy</span>project/sars-cov-2
+</code></pre></div></div>
+
+<p>As you can see it is very short, and there are only a handful of important points:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">tag_based</code> must be set to <code class="language-plaintext highlighter-rouge">true</code></li>
+  <li><code class="language-plaintext highlighter-rouge">name</code> must be equal to the tag name, that’s being used across tutorials.</li>
+  <li><code class="language-plaintext highlighter-rouge">subtopics</code> must not be set.</li>
+</ul>
+
+<p>With this done, all materials tagged <code class="language-plaintext highlighter-rouge">covid19</code> will be aggregated and available under this synthetic topic. They are organised by the “parent” topic, so e.g. assembly tutorials are collected together and transcriptomics tutorials are also in a section together, similar to how other tutorials define subtopics.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2305,155 +2413,117 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     <ol>
                     
                         
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
                                 
-                            
                         
                     
                         
-                            
                                 
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
                                 
-                            
                         
                     
                         
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
-                                
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
-                                
-                            
-                        
-                    
-                        
-                            
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/introduction/slides.html">Overview of the Galaxy Training Material</a></li>
                                 
-                            
                         
                     
                         
-                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
+                                
+                        
+                    
+                        
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
                                 
-                            
                         
                     
                         
-                            
                                 
-                    <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
+                    <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
                                 
-                            
                         
                     
                         
-                            
                                 
-                    <li><a href="/training-material/topics/contributing/tutorials/gitpod/tutorial.html">Running the GTN website online using GitPod</a></li>
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
                                 
-                            
                         
                     
                         
-                            
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+                                
+                        
+                    
+                        
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/python/tutorial.html">Teaching Python</a></li>
                                 
-                            
                         
                     
                         
-                            
                                 
-                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
                                 
-                            
                         
                     
                         
-                            
                                 
                     <li><a href="/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">Updating diffs in admin training</a></li>
                                 
-                            
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/gitpod/tutorial.html">Running the GTN website online using GitPod</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                
                         
                     
                     </ol>
