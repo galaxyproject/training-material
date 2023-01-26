@@ -53,7 +53,7 @@ Before we view our data in the Genome browser, let's upload it to Galaxy
 > 2. Import data from Zenodo
 >
 >    ```
->     TODO: tumor.bam, normal.bam
+>     TODO: tumor.bam, normal.bam, genes.bed, dpsnp.bed
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -67,7 +67,7 @@ These files are *alignment* files. This means the raw sequence reads have been m
 To view alignment files in a genome browser, you usually provide the BAM file, along with an *index* file, which allows the tools to quickly navigate the usually very large alignment files.
 However, in our case, Galaxy automatically creates the index file whenever you upload a BAM file, and will supply it to the tools that need it behind the scenes.
 
-TODO: note about test data we are using, scaled down for tutorial reasons
+TODO: note about test data we are using, scaled down for tutorial reasons, fact that it's paired-end data
 
 
 
@@ -85,6 +85,8 @@ Let's start by launching JBrowse and loading our data so that we can get a feel 
 >      - {% icon param-files %} *"BAM Track Data"* (hold CTRL to select multiple)
 >        - `normal.bam`
 >        - `tumor.bam`
+>    - {% icon param-toggle %} Autogenerate SNP Track: `Yes`
+>
 {: .hands_on}
 
 
@@ -196,11 +198,117 @@ Let's get a feel for this
 
 Now that we have a feel for JBrowse, let's view some of our data!
 
-> <hands-on-title> Navigating around the genome </hands-on-title>
+> <hands-on-title> Viewing Read Alignments </hands-on-title>
 >
 > 1. Check the box next to `normal.bam` {% icon param-check %} on the left-hand side
 >
 > 2. Navigate to `chr9:130,620,912-130,621,487` by copying the location into the location bar and hitting <kbd>Enter</kbd>
+>
+>    ![Screenshot of the JBrowse interface with the data track loaded](./images/jbrowse-data-track.png)
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. What do you see in the data track?
+>    > 2. What do the red and blue colours mean? (Hint: you can click on the reads to get more information about the read)
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. The `normal.bam` tracks shows the reads at the location they mapped to. Each horizontal bar signifies one read.
+>    > > 2. The red reads mapped to the `+` strand, the blue reads to the `-` strand. By clicking on a read you can get more information,
+>    > >    including sequence, strand, mapping score, and more.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>    > <details-title>Read colours</details-title>
+>    >
+>    > You may have seen some reads not coloured red or blue, these all have special meanings:
+>    >
+>    > | colour | meaning|
+>    > |--------|--------|
+>    > | standard red | forward strand |
+>    > | standard blue | reverse strand |
+>    > | hard red | forward strand, missing mate |
+>    > | hard blue | reverse strand, missing mate |
+>    > | light red | forward strand, not proper |
+>    > | light blue | reverse strand, not proper |
+>    > | black | forward strand, different chr |
+>    > | gray | reverse strand, different chr |
+>    >
+>    > More information about alignment tracks can be found in the [JBrowse documentation](https://jbrowse.org/docs/alignments.html)
+>    {: .details}
+>
+> 3. **Zoom in** {% icon zoom-in %} a bit until you can see individual mismatches on the reads
+>
+>    ![](./images/snvs.png)
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. What do these mismatches mean?
+>    > 2. Can you find a Single Nucleotide Variant (SNV)? Is it homozygous or heterozygous?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. Any time a nucleotide in the read does not match the reference base it is mapped to, it is signified by a coloured block (colour depends on the nucleotide).
+>    > >    This could signify a read error, a variant, or a mistake in the reference genome.
+>    > > 2. Whenever a mismatch occurs in all reads overlapping the position, it is most likely a variant. If it occurs in roughly 50% of reads, it is a heterozygous SNV, if it occurs in roughly 100%
+>    > >    it is a homosyzous SNV. In the screenshot above, the red line of `T` nucleotides represents an homozygous SNV at that location. The other mismatches are likely sequencing artifacts
+>    > >    because they only occur in a single read.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 4. **Click on a read** to get more detailed information
+>
+>    ![](./images/read-info.png)
+>
+>    > <question-title> What do you see? </question-title>
+>    >
+>    > 1. How long is the read?
+>    > 2. What can you say about the base quality?
+>    > 3. How about the mapping quality?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. This information can be found in the `Length` field. For the example in the screenshot the length is 101 base pairs
+>    > > 2. The `Sequence and Quality` field shows the basecalling quality for each nucleotide in the read.
+>    > > 3. The `CIGAR` string says something about how well the read mapped. In the screenshot this is `101M`, meaning "101 (mis)matches", so this read mapped without any insertions or deletions. And because we can tell from the colouring of the read there were no mismatches, we know these were all matches, so this read aligned perfectly.
+>    > >
+>    > >    {% snippet topics/sequence-analysis/faqs/cigar.md %}
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+Depending on what we might like to do (e.g. quality control, SNP calling, CNV finding), or the type of data we have (RNASeq, paird/unpaired, etc) we might like
+to customize how JBrowse displays our data. There are many options to control how alignment data is shown to us. Let's play around with some of those settings:
+
+> <hands-on-title>Customizing Alignment display</hands-on-title>
+>
+> 1. You can customize the way alignments are displayed in JBrowse
+>    - Hover over the `normal.bam` track name in the top-left of the track
+>    - Click on the dropdown button to the right of the track name to access the track settings
+>
+>    ![screenshot of the track settings menu accessed by clicking on the track label](./images/track-settings.png){: width="50%"}
+>
+>
+> 2. **Experiment** with the various settings. Think about which would be best for specific tasks (e.g. quality control, SNP calling, CNV finding).
+>
+>    - You can change how many reads are visible under `Display mode`
+>      - try out the `normal`, `collapsed` and `compact` modes
+>
+>      ![](./images/jbrowse-display-mode.png){: width="75%"}
+>
+>    - Try the different settings for `Track visualisation types`
+>
+>      ![](./images/track-visualisation-types.png){: width="75%"}
+>
+>    - Try different settings for  `Colouring options`
+>
+>      ![](./images/jbrowse-colouring-options.png){: width="75%"}
+>
 >
 {: .hands_on}
 
@@ -209,14 +317,112 @@ Now that we have a feel for JBrowse, let's view some of our data!
 
 ## Adding reference tracks
 
-genes
+When we are viewing our data in a genome browser, it is often useful to include knowledge about the area we are viewing, such as genes or other features overlapping the position, or known variants or polymorphisms. To do this, we can load additional tracks into JBrowse that contain this data.
 
-dbsnp
+
+> <hands-on-title>Customizing Alignment display</hands-on-title>
+>
+> 1. Hit the **Re-run** {% icon galaxy-refresh %} button on the previous JBrowse output
+>    - Scroll down past where we configured the BAM/Pileup tracks
+>    - {% icon param-repeat %} Insert Annotation Track
+>      - *"Track Type"*: `GFF/GFF3/BED Features`
+>      - *"GFF/GFF3/BED Track Data"*: Select the following files (hold <kbd>CTRL</kbd> to select multiple files):
+>           - `genes.bed`
+>           - `dpsnp.bed`
+>
+> 2. View {% icon galaxy-eye %} the new JBrowse instance
+>    - Enable the `normal.bam`, `genes.bed` and `dpSNP.bed` tracks
+>    - Navigate to `chr9:130630233` <!-- chr9:130610720-130610929 -->
+>
+>      ![](./images/reftracks.png){: width="75%"}
+>
+>      > <question-title> What do you see? </question-title>
+>      >
+>      > 1. Is this a SNP or an SNV? Is it homozygous or heterozygous?
+>      > 2. Does it impact a gene?
+>      >
+>      > > <solution-title></solution-title>
+>      > >
+>      > > 1. It is present in dbSNP (`rs4226`), so it is a common polymorphism in the human popluation. It is present in 100% of our reads, so it is homozygous.
+>      > > 2. In the genes track you can see the `AK1` gene overlaps this region
+>      > >
+>      > {: .solution}
+>      {: .question}
+>
+>
+{: .hands-on}
+
 
 
 # Inspecting small variants in the normal sample
 
+## Heterozygous and Homozygous SNPs
+
+> <hands-on-title></hands-on-title>
+>
+> 1. Navigate to `chr9:130607258-130607619`
+>    - You should see two potential SNPs
+>
+>    ![](./images/two-snps.png)
+>
+> 2. Enable the track {% icon param-check %} `normal.bam - SNPs/Coverage` in the left-hand panel. Also enable the `dbSNP` track.
+>    - make sure you can see both the SNPs/Coverage track as well as the alignment track. If your screen is too small to see both at once, set the alignment track (`normal.bam`) display to `compact`
+>
+>    ![](./images/two-snps-with-coverage.png)
+>
+>    > <question-title></question-title>
+>    >
+>    > 1. Which variant is heterozygous and which is homozygous?
+>    > 2. What are the variant allele frequencies for each SNP? To find out, hover over the SNP in the `SNPs/Coverage` track.
+>    >
+>    > > <solution-title></solution-title>
+>    > > 1. Left is heterozygous (~half the reads are marked as mismatches at this location) and right is homoszygous (all are marked as mismatches)
+>    > > 2. 46% (left) and 100% (right)
+>    > {: .solution}
+>    {: .question}
+>
+> 2. Make sure the reads are coloured by read strand (default colouring option). So that red reads are in the forward orientation, and blue reads are in the reverse orientation.
+>
+>    > <question-title></question-title>
+>    > Do these look like true SNPs? What evidence is there for this?
+>    >
+>    > > <solution-title></solution-title>
+>    > > Yes, the allele frequencies are close to what we would expect to see for heterozygous and homozygous SNPS, and all of the mismatched bases are of high quality, and there is no strand bias. Additionally, they both line up with known SNPs in the dbSNP track.
+>    > {: .solution}
+>    {: .question}
+>
+> 2. Look at the other mismatched bases in the region between the two SNPs.
+>
+>    > <question-title></question-title>
+>    >  1. Are these sequencing errors, SNPs, or SNVs?
+>    >  2. Can a normal sample have somatice SNVs?
+>    >
+>    > > <solution-title></solution-title>
+>    > > 1. Sequencing errors and SNVs. The low quality mismatches are most likely sequencing errors. The higher quality mismatches that only occur in one or two reads are most likely somatic SNVs. They are not SNPs because they are not known germline mutations
+>    > > 2. Yes! There is always a chance there will be a mutation or error during genome replication.
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
+
+
+
+## Homozygous deletion
+
+## GC coverage
+
+
+
+
 # Inspecting small somatic variants in the tumor sample
+
+## Somatic SNV
+
+## Somatic SNP with change in heterozygosity
+
+## Somatic indel next to SNP with change in heterozygosity
+
 
 # Inspecting structural variants in NA12878
 
