@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Removing the effects of the cell cycle" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-24 18:28:37 +0000" />
+<meta name="DC.date" content="2023-01-26 12:05:14 +0000" />
 <meta name="DC.creator" content="Marisa Loach" />
 
         
@@ -279,7 +279,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-24 18:28:37 +0000",
+  "dateModified": "2023-01-26 12:05:14 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Removing the effects of the cell cycle",
   "interactivityType": "mixed",
@@ -865,7 +865,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 24, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 26, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -887,16 +887,14 @@
 
 <p><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span> sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in <span class="notranslate">expression</span> between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.</p>
 
-<p>One common biological confounder is the cell cycle <span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their <span class="notranslate">DNA</span> (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle.</p>
+<p>One common biological confounder is the cell cycle (<span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>). Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their <span class="notranslate">DNA</span> (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle.</p>
 
-<p>In this tutorial, we will identify the genes whose <span class="notranslate">expression</span> varies during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data.</p>
+<p>In this tutorial, we will identify the genes whose <span class="notranslate">expression</span> is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data.</p>
 
-<blockquote>
-  <blockquote class="comment">
-    <div id="comment-other-scanpy-and-seurat-tutorials" class="box-title" aria-label="comment box: Other Scanpy and Seurat tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Other Scanpy and Seurat tutorials</div>
+<blockquote class="comment">
+  <div id="comment-other-scanpy-and-seurat-tutorials" class="box-title" aria-label="comment box: Other Scanpy and Seurat tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Other Scanpy and Seurat tutorials</div>
 
-    <p>This tutorial is based on the Scanpy cell cycle regression tutorial <span class="citation"><a href="#ScanpyCC">Cittaro 2018</a></span>, which was itself based on the Seurat vignette addressing the same issue <span class="citation"><a href="#SeuratCC">Paul Hoffman 2022</a></span>. However, we will be using a different dataset for this tutorial.</p>
-  </blockquote>
+  <p>This tutorial is based on the Scanpy cell cycle regression tutorial (<span class="citation"><a href="#ScanpyCC">Cittaro 2018</a></span>), which was itself based on the Seurat vignette addressing the same issue (<span class="citation"><a href="#SeuratCC">Paul Hoffman 2022</a></span>). However, we will be using a different dataset for this tutorial.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -929,19 +927,17 @@
 
 <h2 id="get-data">Get Data</h2>
 
-<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. You can download the dataset below.</p>
+<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction (<span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>). You can download the dataset below.</p>
 
 <p>If you’ve been working through the <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq: Case Study then you can use your dataset from the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> in that tutorial. You should rename that dataset <code class="language-plaintext highlighter-rouge">Processed_Anndata</code> now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.</p>
 
-<blockquote>
-  <hands-on-title>Data upload&lt;/hands-on-title)
-
-1. Create a new history for this tutorial
-</hands-on-title>
-</blockquote>
-
 <blockquote class="notranslate hands_on">
+  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+
   <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+    </li>
     <li>
       <p>Import the AnnData object from <a href="https://zenodo.org/record/7311628/">Zenodo</a></p>
 
@@ -953,13 +949,10 @@
     </li>
     <li>
       <p>Rename the dataset <code class="language-plaintext highlighter-rouge">Processed_Anndata</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
-  </ol>
-
-  <!--SNIPPET-->
-  <blockquote class="tip">  <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
-
-  <ol>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
 
@@ -970,10 +963,10 @@
 
 </blockquote>
 
-<p>In addition to the sc<span class="notranslate">RNA</span>-seq dataset, we will also need lists of the genes that are expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below <span class="citation"><a href="#kirchner_hbc_2018">Kirchner and HBC 2018</a></span>. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.</p>
+<p>In addition to the sc<span class="notranslate">RNA</span>-seq dataset, we will also need lists of the genes that are known to be expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below <span class="citation"><a href="#kirchner_hbc_2018">Kirchner and HBC 2018</a></span>. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -988,13 +981,10 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
     </li>
     <li>
       <p>Rename the datasets <code class="language-plaintext highlighter-rouge">sPhase</code> and <code class="language-plaintext highlighter-rouge">g2mPhase</code> respectively - be careful not to mix them up!</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">  <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
     </li>
-  </ol>
-
-  <!--SNIPPET-->
-  <blockquote class="tip">  <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>  <ul>  <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>  <li>In the central panel, change the <strong>Name</strong> field</li>  <li>Click the <strong>Save</strong> button</li></ul></blockquote>
-
-  <ol>
     <li>
       <p>Check that the datatype for both is <code class="language-plaintext highlighter-rouge">tabular</code></p>
 
@@ -1019,7 +1009,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
   <p>Cell cycle regression can be particularly important if we are planning to do trajectory analysis down the line or if we have a dataset that is very strongly influenced by the cell cycle <span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>. However, it isn’t always appropriate to remove the effects of the cell cycle - sometimes they can be useful for distinguishing between dividing and non-dividing cell types. When you are analysing your own data, you might need to try it both ways to determine if the effects of the cell cycle are helpful or not. You could also check whether the cell cycle genes are among the top scoring genes expressed by your cell clusters to get an idea of how strong the effects are.</p>
 </blockquote>
 
-<blockquote class="question">
+<blockquote class="notranslate hands_on">
   <div id="hands-on-score-the-cell-cycle-genes" class="box-title" aria-label="hands-on box: Score the cell cycle genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Score the cell cycle genes</div>
 
   <ol>
@@ -1045,17 +1035,22 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
     <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code></li>
   </ol>
 
-  <question-title>&lt;/question-title?
+  <blockquote class="question">
+    <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-1. Why don't we need a list of genes expressed in the G1 Phase?
+    <ol>
+      <li>Why don’t we need a list of genes expressed in the G1 Phase?</li>
+    </ol>
 
-&gt; <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-&gt;
-&gt; 1. Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren't expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase. 
-&gt;
-{: .solution}
+    <blockquote class="solution">
+      <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-</question-title>
+      <ol>
+        <li>Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren’t expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase.</li>
+      </ol>
+
+    </blockquote>
+  </blockquote>
 </blockquote>
 
 <h1 id="cell-cycle-regression">Cell Cycle Regression</h1>
@@ -1092,7 +1087,9 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
 <p>Your data is now ready for further analysis, so you can return to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial and move on to the Preparing coordinates step there. Make sure that you use the <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset (you may want to rename it as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first.</p>
 
-<p>In order to see what is happening to the cell cycle genes, we need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">TRUE</code> for the 97 cell cycle genes and <code class="language-plaintext highlighter-rouge">FALSE</code> for all the other genes.</p>
+<p>The easiest way to see what is happening is to focus on the cell cycle genes as these will be the ones most affected by the regression. A large part of their <span class="notranslate">expression</span> depends on the cell cycle, which is why we have chosen them to help us work out the phase of each cell.</p>
+
+<p>In order to look at the cell cycle genes, we first need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">TRUE</code> for the 97 cell cycle genes and <code class="language-plaintext highlighter-rouge">FALSE</code> for all the other genes.</p>
 
 <p>You might find it easier to create this new column using a sp<span class="notranslate">reads</span>heet and then upload it as a tabular dataset, but it is possible to complete all the steps on <span class="notranslate">Galaxy</span>.</p>
 
@@ -1132,7 +1129,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
 <p>Next, we’ll need a list of all the genes in our dataset, so that we can mark the ones that are in our cell cycle list. We’ll also add a column of numbers as this will help us keep the gene names in order.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div id="hands-on-get-the-gene-names-from-your-dataset" class="box-title" aria-label="hands-on box: Get the gene names from your dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the gene names from your dataset</div>
 
   <ol>
@@ -1159,10 +1156,9 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
       </ul>
 
       <blockquote class="comment">
-        <comment-title>Selecting the right rows&lt;/comment-title)
+        <div id="comment-selecting-the-right-rows" class="box-title" aria-label="comment box: Selecting the right rows"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Selecting the right rows</div>
 
-Since we don't want to keep the header, we select the rows from `2` to the end of the dataset. If you were using a dataset of a different size, you would need to change this parameter to include all the genes. 
-</comment-title>
+        <p>Since we don’t want to keep the header, we select the rows from <code class="language-plaintext highlighter-rouge">2</code> to the end of the dataset. If you were using a dataset of a different size, you would need to change this parameter to include all the genes.</p>
       </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>  with the following parameters:
@@ -1171,28 +1167,21 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
         <li><em>“Iterate?”</em>: <code class="language-plaintext highlighter-rouge">YES</code></li>
       </ul>
 
-      <blockquote>
+      <blockquote class="comment">
         <div id="comment-keeping-the-genes-in-order" class="box-title" aria-label="comment box: Keeping the genes in order"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Keeping the genes in order</div>
 
         <p>Adding these numbers will enable us to keep the genes in their original order. This is essential for adding the cell cycle gene annotation back into the AnnData dataset.</p>
       </blockquote>
     </li>
-  </ol>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-
-  <ol>
     <li>Rename the output <code class="language-plaintext highlighter-rouge">Dataset_Genes</code></li>
   </ol>
-
 </blockquote>
 
 <h2 id="mark-the-cell-cycle-genes">Mark the cell cycle genes</h2>
 
 <p>We can now combine our table of cell cycle genes <code class="language-plaintext highlighter-rouge">CC_genes</code> with the table of gene names <code class="language-plaintext highlighter-rouge">Dataset_Genes</code>.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div id="hands-on-combine-the-two-tables" class="box-title" aria-label="hands-on box: Combine the two tables"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine the two tables</div>
 
   <ol>
@@ -1206,18 +1195,12 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
         <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">FALSE</code></li>
       </ul>
 
-      <blockquote>
+      <blockquote class="comment">
         <div id="comment-how-the-cell-cycle-genes-are-marked" class="box-title" aria-label="comment box: How the cell cycle genes are marked"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How the cell cycle genes are marked</div>
 
         <p>When we join the two tables, we’ll ask for any empty fields to be filled in with <code class="language-plaintext highlighter-rouge">FALSE</code>. The cell cycle gene table has an extra column where they are all marked as <code class="language-plaintext highlighter-rouge">TRUE</code> - they will retain these entries when we join the tables, but since there are no entries for the rest of the genes in this column, their rows will be filled in as <code class="language-plaintext highlighter-rouge">FALSE</code>. This will enable us to pick out the cell cycle genes later.</p>
       </blockquote>
     </li>
-  </ol>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-
-  <ol>
     <li><span class="tool" data-tool="sort1" title="Tested with sort1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1236,7 +1219,7 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What would happen if any of the cell cycle genes were not present in the dataset?</li>
@@ -1252,7 +1235,6 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
     </ol>
 
   </blockquote>
-
 </blockquote>
 
 <h2 id="create-the-annotation-column">Create the annotation column</h2>
@@ -1260,7 +1242,7 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
 <p>We now have a table with all the gene names in the same order as the main dataset and a column indicating which ones are cell cycle genes. If we cut this column out of the table, then we can add it as a new annotation to the main dataset. We’ll also need to add a column header, which will be used as the key for this annotation in the AnnData dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="div-idhands-on-create-the-cell-cycle-annotation-column-classbox-title-aria-labelhands-on-box-create-the-cell-cycle-annotation-column-hands-on-create-the-cell-cycle-annotation-columndiv">&lt;div id="hands-on-create-the-cell-cycle-annotation-column" class="box-title" aria-label="hands-on box: Create the cell cycle annotation column"&gt;<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create the cell cycle annotation column&lt;/div&gt;</h3>
+  <div id="hands-on-create-the-cell-cycle-annotation-column" class="box-title" aria-label="hands-on box: Create the cell cycle annotation column"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create the cell cycle annotation column</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"><strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1316,8 +1298,8 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
 
 <p>We will need to add the annotation to both the annotated dataset <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code> and to the one that we created by regressing out the cell cycle genes <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code>. This will allow us to plot the cell cycle genes before and after regression. We can do this using the <span><strong>Manipulate Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool and selecting the correct function from the dropdown menu.</p>
 
-<blockquote>
-  <div id="hands-on-add-the-new-annotations" class="box-title" aria-label="hands-on box: Add the new annotations "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the new annotations</div>
+<blockquote class="notranslate hands_on">
+  <div id="hands-on-add-the-new-annotations" class="box-title" aria-label="hands-on box: Add the new annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the new annotations</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1346,8 +1328,9 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
     <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Regressed_CC</code></li>
   </ol>
 
-  <h2 id="filter-the-cell-cycle-genes">Filter the cell cycle genes</h2>
 </blockquote>
+
+<h2 id="filter-the-cell-cycle-genes">Filter the cell cycle genes</h2>
 
 <p>For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have <code class="language-plaintext highlighter-rouge">TRUE</code> in their new <code class="language-plaintext highlighter-rouge">CC_genes</code> annotation). The filtered datasets will only include <span class="notranslate">expression</span> data for these 97 genes, so we’ll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.</p>
 
@@ -1438,37 +1421,28 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
 
 </blockquote>
 
-<blockquote>
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+<blockquote class="question">
+  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Does the plot look as you expected?</li>
     <li>What would happen if we plotted all of the genes from the main dataset?</li>
   </ol>
 
-  <blockquote>
+  <blockquote class="solution">
     <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.</li>
     </ol>
-  </blockquote>
-</blockquote>
 
-<blockquote>
-  <blockquote>
-    <p><img src="https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA1.png" alt="PCA plot showing three separate clusters of cells in the G1, S and G2M Phases. " loading="lazy" />“PCA Plot of Cell Cycle Genes before regression”</p>
-  </blockquote>
-</blockquote>
+    <figure id="figure-1"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA1.png" alt="PCA plot showing three separate clusters of cells in the G1, S and G2M Phases. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> PCA Plot of Cell Cycle Genes before regression</figcaption></figure>
 
-<blockquote class="question">
-  <blockquote class="solution">
     <ol>
       <li>If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn’t expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn’t be as obvious when other genes were also being taken into account. If you continue analysing your data in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens.</li>
     </ol>
 
   </blockquote>
-
 </blockquote>
 
 <h2 id="plot-the-cell-cycle-genes-after-regression">Plot the cell cycle genes after regression</h2>
@@ -1508,37 +1482,28 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
 
 </blockquote>
 
-<blockquote>
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+<blockquote class="question">
+  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Does the plot look as you expected?</li>
     <li>What impact do you think the cell cycle regression will have when you analyse the whole dataset?</li>
   </ol>
 
-  <blockquote>
+  <blockquote class="solution">
     <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don’t all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the <span class="notranslate">expression</span> of the cell cycle genes.</li>
     </ol>
-  </blockquote>
-</blockquote>
 
-<blockquote>
-  <blockquote>
-    <p><img src="https://github.com/MarisaJL/training-material/blob/1dd00ab33e98165d44e7275d38dd25f01e59021a/topics/single-cell/images/scrna-case_cell-cycle/CellCycle_PCA2.png" alt="PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together. " loading="lazy" />“PCA Plot of Cell Cycle Genes after regression”</p>
-  </blockquote>
-</blockquote>
+    <figure id="figure-2"><img src="../../images/scrna-case_cell-cycle/CellCycle_PCA2.png" alt="PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> PCA Plot of Cell Cycle Genes after regression</figcaption></figure>
 
-<blockquote class="question">
-  <blockquote class="solution">
     <ol>
       <li>The cell cycle genes aren’t having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don’t separate according to phase in this PCA plot. When we analyse the whole <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset, this could allow other differences in gene <span class="notranslate">expression</span> to become more apparent. We can run the regressed dataset through the rest of the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset.</li>
     </ol>
 
   </blockquote>
-
 </blockquote>
 
 <p>Comparing the before and after plots, we can clearly see that the effects of the cell cycle have been removed. Although you wouldn’t usually need to filter out the cell cycle genes or create these plots when analysing your own data, hopefully you have found doing it now to be helpful for understanding the impact of cell cycle regression.</p>
@@ -1555,10 +1520,10 @@ Since we don't want to keep the header, we select the rows from `2` to the end o
                     <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>Cell cycle genes can conceal what is happening in your data if cells are being grouped according to their stage in the cycle</p>
+                        <li><p>Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle</p>
 </li>
                         
-                        <li><p>Identifying the cell cycle genes and regressing out their effects can reveal underlying patterns in the data</p>
+                        <li><p>Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data</p>
 </li>
                         
                     </ul>
