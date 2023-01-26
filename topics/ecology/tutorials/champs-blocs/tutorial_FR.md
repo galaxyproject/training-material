@@ -102,7 +102,7 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 >  Vous devez attendre que les données de votre historique s'affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
 >    ![Data ready](../../images/champbloc/after_before.png "Data ready")
 >
-> > <tip-title>Tip: Création d'un nouvel historique analytique</tip-title>
+> > <tip-title>Création d'un nouvel historique analytique</tip-title>
 > > Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : "Indicateurs de blocs de champs") pour que vous puissiez le retrouver plus tard si besoin.
 > >
 > > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
