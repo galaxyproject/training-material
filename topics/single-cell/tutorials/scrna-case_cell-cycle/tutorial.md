@@ -421,7 +421,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 > >
 > > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
 > >
-> > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](../../images/scrna-case_cell-cycle/CellCycle_PCA1.png)"PCA Plot of Cell Cycle Genes before regression"
+> > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](../../images/scrna-case_cell-cycle/CellCycle_PCA1.png "PCA Plot of Cell Cycle Genes before regression")
 > >
 > > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens. 
 > >
