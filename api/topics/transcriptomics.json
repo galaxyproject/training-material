@@ -234,14 +234,32 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "qc_report.ga",
+          "tests": false
+        },
+        {
+          "workflow": "rna-seq-reads-to-counts.ga",
+          "tests": false
+        }
+      ],
       "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
         "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
         "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.2",
         "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
         "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.3",
         "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3",
         "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
         "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3",
         "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1",
@@ -376,8 +394,18 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-counts-to-genes.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.5.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/limma_voom/limma_voom/3.34.9.9"
       ],
       "tours": false,
       "video": false,
@@ -437,8 +465,21 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-rna-interactome-data-analysis-chira.ga",
+          "tests": true
+        }
+      ],
       "tools": [
-
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chira_collapse/chira_collapse/1.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chira_extract/chira_extract/1.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chira_map/chira_map/1.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chira_merge/chira_merge/1.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chira_quantify/chira_quantify/1.4.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5"
       ],
       "tours": false,
       "video": false,
@@ -526,8 +567,28 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69",
+        "toolshed.g2.bx.psu.edu/repos/iuc/describe_samples/describe_samples/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.2.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/transdecoder/transdecoder/3.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity/trinity/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_abundance_estimates_to_matrix/trinity_abundance_estimates_to_matrix/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_align_and_estimate_abundance/trinity_align_and_estimate_abundance/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_analyze_diff_expr/trinity_analyze_diff_expr/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_contig_exn50_statistic/trinity_contig_exn50_statistic/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_define_clusters_by_cutting_tree/trinity_define_clusters_by_cutting_tree/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_filter_low_expr_transcripts/trinity_filter_low_expr_transcripts/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_run_de_analysis/trinity_run_de_analysis/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinity_samples_qccheck/trinity_samples_qccheck/2.8.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/trinotate/trinotate/3.1.1",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.32.3"
       ],
       "tours": false,
       "video": false,
@@ -589,8 +650,26 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "sRNA_seq_Step_2_Salmon_and_DESeq2.ga",
+          "tests": false
+        },
+        {
+          "workflow": "sRNA_seq_Step_1_Read_preprocessing_and_removal_of_artifacts.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.8.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_manipulation/fastq_manipulation/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.65",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtofastq/2.24.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.39",
+        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.0.3"
       ],
       "tours": false,
       "video": false,
@@ -645,8 +724,17 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-viz-with-heatmap2.ga",
+          "tests": true
+        }
+      ],
       "tools": [
-
+        "Cut1",
+        "join1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1"
       ],
       "tours": false,
       "video": false,
@@ -803,6 +891,12 @@
       },
       "hands_on": true,
       "slides": true,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false
+        }
+      ],
       "tools": [
         "Cut1",
         "Filter1",
@@ -814,6 +908,7 @@
         "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1",
         "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5",
         "toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0",
@@ -885,8 +980,21 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-genes-to-pathways.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "Cut1",
+        "join1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.20.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.8.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0"
       ],
       "tours": false,
       "video": false,
@@ -945,8 +1053,17 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "blockclust_clustering.ga",
+          "tests": true
+        }
+      ],
       "tools": [
-
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/blockbuster/blockbuster/0.1.2",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/blockclust/blockclust/1.1.0"
       ],
       "tours": false,
       "video": false,
@@ -1009,8 +1126,16 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "goenrichment-workflow.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goslimmer/goslimmer/1.0.1"
       ],
       "tours": false,
       "video": false,
@@ -1115,6 +1240,12 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-viz-with-volcanoplot.ga",
+          "tests": true
+        }
+      ],
       "tools": [
         "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"
       ],
@@ -1199,8 +1330,33 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "init_workflow.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "__MERGE_COLLECTION__",
+        "__SORTLIST__",
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.5.1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.5.1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bctools_extract_alignment_ends/bctools_extract_alignment_ends/0.2.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_genomecoveragebed_bedgraph/2.19.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_slopbed/2.30.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/extract_genomic_dna/Extract genomic DNA 1/3.0.3+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_dedup/umi_tools_dedup/1.1.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/1.1.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/peakachu/peakachu/0.1.0.2",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/rcas/rcas/1.5.4",
+        "wig_to_bigWig"
       ],
       "tours": false,
       "video": false,
@@ -1264,8 +1420,19 @@
       },
       "hands_on": true,
       "slides": true,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-Heinz.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "Cut1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_bum/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_scoring/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_visualization/0.1.0"
       ],
       "tours": false,
       "video": false,
@@ -2061,6 +2228,20 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "deg-analysis.ga",
+          "tests": true
+        },
+        {
+          "workflow": "qc-mapping-counting.ga",
+          "tests": true
+        },
+        {
+          "workflow": "qc-mapping-counting-paired-and-single.ga",
+          "tests": false
+        }
+      ],
       "tools": [
         "ChangeCase",
         "Cut1",
@@ -2068,9 +2249,11 @@
         "Grouping1",
         "__EXTRACT_DATASET__",
         "__FLATTEN__",
+        "__MERGE_COLLECTION__",
         "__TAG_FROM_FILE__",
         "cat1",
         "join1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
         "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
         "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
         "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
@@ -2090,6 +2273,7 @@
         "toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2",
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pathview/pathview/1.24.0+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a",
         "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.13+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
@@ -2199,8 +2383,23 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "transcriptomics-denovo-workflow.ga",
+          "tests": false
+        }
+      ],
       "tools": [
-
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.3.0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.4+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.11.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy5",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/1.3.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/1.3.6",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"
       ],
       "tours": false,
       "video": false,

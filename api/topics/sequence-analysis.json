@@ -433,12 +433,20 @@
       },
       "hands_on": true,
       "slides": true,
+      "workflows": [
+        {
+          "workflow": "quality_control.ga",
+          "tests": true
+        }
+      ],
       "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2",
         "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
         "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2"
       ],
       "tours": false,
@@ -540,6 +548,12 @@
       },
       "hands_on": true,
       "slides": false,
+      "workflows": [
+        {
+          "workflow": "human-reads-removal.ga",
+          "tests": false
+        }
+      ],
       "tools": [
         "Grep1",
         "__UNZIP_COLLECTION__",
@@ -548,7 +562,8 @@
         "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
         "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
         "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
       ],
       "tours": false,
       "video": false,
@@ -724,10 +739,27 @@
       },
       "hands_on": true,
       "slides": true,
+      "workflows": [
+        {
+          "workflow": "mapping.ga",
+          "tests": true
+        },
+        {
+          "workflow": "mapping-jbrowse.ga",
+          "tests": false
+        }
+      ],
       "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
         "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1",
         "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0"
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"
       ],
       "tours": false,
       "video": false,
