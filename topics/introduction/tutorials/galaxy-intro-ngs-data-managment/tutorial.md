@@ -473,11 +473,11 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
 > 1. Click the `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
-> 1. Hit `Execute`
+> 1. Hit `Run Tool`
 > This will produce a text file with just two lines:
 > ```
 > SRR12733957
@@ -493,7 +493,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 >
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
->        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
+>        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Advanced Cut**" from the previous step.
 >    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
@@ -562,11 +562,11 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 ## Alignment with  **Map with BWA-MEM**
 
-**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
+**Map with BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -660,13 +660,13 @@ We are now ready to call variants.
 
 The output of this step is a collection of VCF files that can be visualized in a genome browser.
 
-## Annotate variant effects with **SnpEff eff:**
+## Annotate variant effects with **SnpEff eff: annotate variants for SARS-CoV-2**
 
 We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
 > <hands-on-title>Annotate variant effects</hands-on-title>
 >
-> Run {% tool [SnpEff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+> Run {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
@@ -685,7 +685,7 @@ We will now select various effects from the VCF and create a tabular file that i
 > <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff: annotate variants for SARS-CoV-2** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
 >    - *"One effect per line"*: `Yes`
 >    - *"empty field text"*: `.`
