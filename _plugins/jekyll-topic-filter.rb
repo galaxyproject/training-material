@@ -305,7 +305,7 @@ module TopicFilter
     end
 
     # Similar as above.
-    workflows = Dir.glob("#{folder}/workflwos/*.ga") # TODO: support gxformat2
+    workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
       workflow_names = workflows.map{ |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map{|wf|
