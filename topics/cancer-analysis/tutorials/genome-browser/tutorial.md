@@ -28,7 +28,7 @@ Sorana Morrissy and was updated and modified by Heather Gibling for the Cancer A
 
 This tutorial will introduce you to the Genome browsers; powerful tools for viewing many kinds of
 genomic data, including data for DNA sequencing, RNA sequencing, microarrays, epigenetics, and
-copy number alteration. For this tutorial we will use JBrowse, since it has a nice integration
+copy number alteration. For this tutorial we will use [JBrowse](https://jbrowse.org/jb2/) ({% cite jbrowse %}), since it has a nice integration
 with Galaxy, but many other Genome browsers exist, with [IGV](https://igv.org/app/) perhaps being the most widely used. TODO: link some examples/comparisons
 
 > <agenda-title></agenda-title>
