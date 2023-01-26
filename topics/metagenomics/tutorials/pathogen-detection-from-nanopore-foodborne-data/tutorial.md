@@ -1271,15 +1271,15 @@ We can now run multiple sequence alignment, build the trees for each VF and disp
 > Now let's see how your trees for the bacteria pathogen gene with accession IDs: **AAF98391**, **NP_249099** and **NP_460111** look like. To access that go to the output of Newick
 >
 >
-> 1. In which samples and contigs **AAF98391** gene is found?
+> 1. In which samples and contigs **BAA94855** gene is found?
 > 2. In which samples and contigs **NP_249099** gene is found?
-> 3. In which samples and contigs **NP_460111** gene is found?
+> 3. In which samples and contigs **NP_461819** gene is found?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Only in `Barcode10` sample only in Contig 23
 > >
-> >    ![AAF98391_Part_of_tree](./images/AAF98391_Part_of_tree.png)
+> >    ![BAA94855_Part_of_tree](./images/BAA94855_Part_of_tree.png)
 > >
 > > 2. Only in `Barcode11` sample only in Contig 2
 > >
@@ -1287,7 +1287,7 @@ We can now run multiple sequence alignment, build the trees for each VF and disp
 > >
 > > 3. In both samples; `Barcode10` Contig 95 and `Barcode11` Contig 1
 > >
-> >    ![NP_460111_Part_of_tree](./images/NP_460111_Part_of_tree.png)
+> >    ![NP_NP_461819_Part_of_tree](./images/NP_461819_Part_of_tree.png)
 > >
 > {: .solution}
 {: .question}
