@@ -418,69 +418,171 @@ To identify the lineages and their aboundances, several steps have to be done to
 
 ![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
+<div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
+
+> <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
+>
+> 1. **Get the workflow** for your data into Galaxy
+>
+>    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
+>
+>      - Open the [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Amplicon-Short} [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Metatranscriptomic-Short}
+>
+>      - Click on `Run on usegalaxy.eu` at the top right of the page
+>
+>        The browser will open a new tab with Galaxy's workflow invocation interface.
+>
+>    - Option 2: Import the workflow from the training material
+>
+>      - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/amplicon.ga){: .Amplicon-Short} [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/metatranscriptomics.ga){: .Metatranscriptomic-Short} or download it to your computer
+>      - Import the workflow into Galaxy
+>
+>      {% snippet faqs/galaxy/workflows_import.md %}
+>
+> 2. Run **SARS-CoV-2: lineages analysis on ...** {% icon workflow %} using the following parameters:
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+>    - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
+>    - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
+>    <div class="Amplicon-Short" markdown="1">
+>    - {% icon param-file %} *"3: ARTIC primer BED"*: `ARTIC_primer_BED.bed`
+>    - {% icon param-file %} *"4: ARTIC primers to amplicon assignments"*: `ARTIC_primers_to_amplicon_assignments.bed`
+>    - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
+>    </div>
+{: .hands_on}
+
+</div>
+
 ## Preprocessing
 
 To prepare the data, we first need to do:
 
 1. **Quality control** of the sequencing data
 
-   There is no perfect sequencing technology, and each instrument will generate different types and amounts of errors, such as incorrect nucleotide calls. Each sequencing platform has technical limitations that result in these incorrectly called bases. Thus, it is important to identify and exclude error types that may affect downstream analysis interpretation. As a result, sequence quality control is an essential first step in the analysis process.
+   There is no perfect sequencing technology, and each instrument will generate different types and amounts of errors, such as incorrect nucleotide calls. Each sequencing platform has technical limitations that result in these incorrectly called bases. Thus, it is important to identify and exclude error types that may affect downstream analysis interpretation. As a result, **sequence quality control is an essential first step** in the analysis process.
+
+   > <comment-title></comment-title>
+   > For more information about quality control, please see our dedicated ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) Tutorial.
+   {: .comment}
+
+   Here we use **fastp** ({% cite chen2018fastp %}) which:
+
+   1. Filter out bad reads (too low quality, too short, or too many N...)
+   2. Cut low quality bases for per read in its 5' and 3' by evaluating the mean quality from a sliding window (like Trimmomatic but faster)
+   3. Trim all reads in front and tail
+   4. Cut adapters
+
+      Adapter sequences can be automatically detected, which means you don't have to input the adapter sequences to trim them.
+
+      With Illumina sequencing, we often get raw reads with adapters at 3' end. The adapters contain the sequencing primer binding sites, the index sequences, and the sites that allow library fragments to attach to the flow cell lawn. This might influence a downstream analysis, thus, adapter trimming is required.
+
+   5. Correct mismatched base pairs in overlapped regions of paired end reads, if one base is with high quality while the other is with ultra-low quality
+
+   **fastp** is run on each sample individually and the report are then aggregated using **MultiQC** ({% cite ewels2016multiqc %})
 
    <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
-   > <hands-on-title> Task description </hands-on-title>
+   > <hands-on-title> Quality control </hands-on-title>
    >
    > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
    >    - *"Single-end or paired reads"*: `Paired Collection`
-   >        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
+   >        - {% icon param-collection %} *"Select paired collection(s)"*: Input dataset collection
    >    - In *"Output Options"*:
    >        - *"Output JSON report"*: `Yes`
-   >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
-   >
+   > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+   >    - In *"Results"*:
+   >        - {% icon param-repeat %} *"Insert Results"*
+   >            - *"Which tool was used generate logs?"*: `fastp`
+   >              - {% icon param-collection %} *"Select paired collection(s)"*: output collection of **fastp**
    {: .hands_on}
+
+   </div>
 
    > <question-title></question-title>
    >
-   > 1. Question1?
-   > 2. Question2?
+   > 1. Inspect the **fastp** HTML report for sample 1{: .Amplicon-Short} 1{: .Amplicon-Long} SRR12596165{: .Metatranscriptomic-Short} SRR12596165{: .Metatranscriptomic-Long}
    >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
-   > >
-   > {: .solution}
+   >    1. How many reads are in the sample before filtering?
+   >    2. Which percentage of reads passed filters?
+   >    3. How many bases have been filtered out?
+   >    4. What is the mean length before and after filtering?
+   >    5. How many read pairs do contain adapters?
    >
+   >    <div class="Amplicon-Long Amplicon-Short" markdown="1">
+   >
+   >    > <solution-title></solution-title>
+   >    >
+   >    > 1. 8,000 so 4,000 pairs
+   >    > 2. 100% of reads
+   >    > 3. Before filtering, there was 2,008,000 bases, and 1,800,478 after filering.
+   >    > 4. 251bp before and 225bp after
+   >    > 5. 2,000 adapter sequences on read1 and same on read 2, for 50% of the pairs
+   >    >
+   >    {: .solution}
+   >
+   >    </div>
+   >
+   >    <div class="Metatranscriptomic-Long Metatranscriptomic-Short" markdown="1">
+   >
+   >    > <solution-title></solution-title>
+   >    >
+   >    > 1. 939,218 reads
+   >    > 2. 93.4% of reads
+   >    > 3. Before filtering, there was 67,305,956 bases, and 62,656,345 after filering.
+   >    > 4. 71bp
+   >    > 5. More than 4,000
+   >    >
+   >    {: .solution}
+   >
+   >    </div>
+   >
+   > 2. Inspect the fastp section with all sample information in **MultiQC** HTML report
+   >
+   >    1. Which percentage of reads passed filters on all samples?
+   >    2. How much read pairs do contain adapters?
+   >    3. How is the sequence quality over reads on forward and reverse reads before filtering?
+   >
+   >    <div class="Amplicon-Long Amplicon-Short" markdown="1">
+   >
+   >    > <solution-title></solution-title>
+   >    >
+   >    > 1. 100% of reads for all samples
+   >    > 2. Around 50% of the pairs contain adapters in all samples
+   >    > 3. For forward reads (read 1), the sequence quality in all samples is quite good, dropping a bit at the end:
+   >    >
+   >    >    ![Graph with on X-axis the read position and Y-axis the sequence quality between 0 and 0. Each sample is represented by a line in the graph. Samples seem to group into 2 groups making like there are only 2 lines in the graph. For the first group, the line goes from 0 to 240pb with values above 35 except at the end. For the second group, the line goes from 0 to 150bp with values above 35 until 80bp](images/amplicon-fastp-seq-quality-plot-1.png)
+   >    >
+   >    >    For the reverse reads (read 2), there is more variability over the whole read length but looks globally better
+   >    >
+   >    >    ![Graph with on X-axis the read position and Y-axis the sequence quality between 0 and 0. Each sample is represented by a line in the graph. Samples seem to group into 2 groups making like there are only 2 lines in the graph that stay aboove 35. For the first group, the line goes from 0 to 240pb. For the second group, the line goes from 0 to 150bp](images/amplicon-fastp-seq-quality-plot-2.png)
+   >    {: .solution}
+   >
+   >    </div>
+   >
+   >    <div class="Metatranscriptomic-Long Metatranscriptomic-Short" markdown="1">
+   >
+   >    > <solution-title></solution-title>
+   >    >
+   >    > 1. Between 88% and 94%
+   >    > 2. Between 0.4% and 2.7%
+   >    > 3. For forward reads (read 1) and reverse reads (read 2), the quality increases after the 6bp (excepted behavior for RNA data sequenced with Illumina) and drop slightly at the end
+   >    >
+   >    >    ![Graph with on X-axis the read position and Y-axis the sequence quality between 0 and 0. Each sample is represented by a line in the graph. Samples seem to group into 2 groups making like there are only 2 lines in the graph. For the first group, the line goes from 0 to 240pb with values above 35 except at the end. For the second group, the line goes from 0 to 150bp with values above 35 until 80bp](images/mt-fastp-seq-quality-plot-1.png "Forward reads")
+   >    >
+   >    >    ![Graph with on X-axis the read position and Y-axis the sequence quality between 0 and 0. Each sample is represented by a line in the graph. Samples seem to group into 2 groups making like there are only 2 lines in the graph that stay aboove 35. For the first group, the line goes from 0 to 240pb. For the second group, the line goes from 0 to 150bp](images/mt-fastp-seq-quality-plot-2.png "Reverse reads")
+   >    {: .solution}
+   >
+   >    </div>
    {: .question}
 
-   </div>
-
-2. **Triming**: quality and primer with ARTIC protocol and/or adapter with Illumina
-
-   Following this, the reads are trimmed based on a quality threshold.
-
    <div class="Amplicon-Short" markdown="1">
-   Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol. The auxiliary file is used for this step - a BED file specifying the primers used during amplification and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file. More specifically, some primer trimmers, in order to do quality trimming, use a sliding window approach. The window slides from the 5’ end to the 3' end and if at any point the average base quality in the window falls below the threshold, the remaining read is softly clipped. If after trimming, the length of the read is greater than the minimum length specified, the read is written to the new trimmed BAM file. It should be noted, for datasets that were not generated with primer-based protocol like ARTIC, this primer-trimming step is not applicable.
+   Another step, primer trimming, is a specific step for datasets generated with ARTIC protocol. The auxiliary file is used for this step - a BED file specifying the primers used during amplification and their binding sites on the viral genome. Primer trimmer uses primer positions supplied in a BED file to soft clip primer sequences from an aligned and sorted BAM file. More specifically, some primer trimmers, in order to do quality trimming, use a sliding window approach. The window slides from the 5' end to the 3' end and if at any point the average base quality in the window falls below the threshold, the remaining read is softly clipped. If after trimming, the length of the read is greater than the minimum length specified, the read is written to the new trimmed BAM file. It should be noted, for datasets that were not generated with primer-based protocol like ARTIC, this primer-trimming step is not applicable.
    </div>
 
-   Moreover, adapter trimming step is processed. For instance, upon Illumina sequencing we receive raw reads with adapters at 3' end. The adapters contain the sequencing primer binding sites, the index sequences, and the sites that allow library fragments to attach to the flow cell lawn. This might influence a downstream analysis, thus, adapter trimming is required.
+2. **Decontamination** to remove reads from the human genome
 
-   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
-
-   </div>
-
-3. **Decontamination** to remove reads from the human genome
-
-   A decontamination step can then be included to remove reads from the human genome, since viral sequence data from clinical samples commonly contain human contamination. Prior to sharing, it needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** {% cite hunt2022readitandkeep %}.
-
+   Sequences extracted from wastewater commonly contain human reads. These reads needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** ({% cite hunt2022readitandkeep %}).
 
    <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
@@ -488,40 +590,23 @@ To prepare the data, we first need to do:
    >
    > 1. {% tool [Read It and Keep](toolshed.g2.bx.psu.edu/repos/iuc/read_it_and_keep/read_it_and_keep/0.2.2+galaxy0) %} with the following parameters:
    >    - *"Read type"*: `Paired collection`
-   >        - {% icon param-file %} *"Reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
+   >        - {% icon param-file %} *"Reads"*: output of **fastp** {% icon tool %}
    >    - *"Reference genome source"*: `History`
-   >        - {% icon param-file %} *"Reference genome"*: `output` (Input dataset)
-   >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
+   >        - {% icon param-file %} *"Reference genome"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`, reference genome for SARS-CoV-2
    >
    {: .hands_on}
-
-   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-   > <question-title></question-title>
-   >
-   > 1. Question1?
-   > 2. Question2?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
-   > >
-   > {: .solution}
-   >
-   {: .question}
 
    </div>
 
 ## Diversity evaluation
+
+In wastewater, we can find not only SARS-CoV-2 sequences but also sequences of the DNA of other organisms. We can evaluate the diversity of organism sequence using tools classifying reads to taxons by comparing them to reference databases.
+
+{% snippet topics/metagenomics/faqs/taxon.md %}
+
+To assign reads to taxons, we use **Kraken2** {% cite Wood2014 %} with a database of viruses. If we would be more interested in bacteria or eukaryotes, we could use a different database.
+
+{% snippet topics/metagenomics/faqs/kraken2.md %}
 
 <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
@@ -529,230 +614,138 @@ To prepare the data, we first need to do:
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) %} with the following parameters:
 >    - *"Single or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Collection of paired reads"*: `output` (Input dataset collection)
+>        - {% icon param-collection %} *"Collection of paired reads"*: Output of **Read It and Keep** {% icon tool %}
 >    - In *"Create Report"*:
 >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
->    - *"Select a Kraken2 database"*: `Viral genomes (2019)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Select a Kraken2 database"*: `Prebuilt Refseq indexes: Viral (Version: 2022-06-07...)`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> Inspect the **Kraken2** report for sample 1
+>
+> 1. Which virus species have been identified?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Only SARS-CoV-2
 > >
 > {: .solution}
 >
 {: .question}
 
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert Kraken](toolshed.g2.bx.psu.edu/repos/devteam/kraken2tax/Kraken2Tax/1.1) %} with the following parameters:
->    - {% icon param-file %} *"Choose dataset to convert"*: `report_output` (output of **Kraken2** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
+**Kraken2** can be visualized, after a convertion step, using **Krona**, a zoomable pie chart
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
+> <hands-on-title> Diversity visualization </hands-on-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [Krakentools: Convert kraken report file](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_kreport2krona/krakentools_kreport2krona/1.2+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Kraken report file"*: Report outputs of **Kraken2** {% icon tool %}
 >
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
+> 2. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
 >    - *"What is the type of your input data"*: `Taxonomy`
->        - {% icon param-file %} *"Input file"*: `out_file` (output of **Convert Kraken** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - {% icon param-collection %} *"Input file"*: Outputs of **Krakentools** {% icon tool %}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 </div>
 
+> <question-title></question-title>
+>
+> Inspect the **Krona** pie chart
+>
+> 1. Which virus have been identified for the 1st sample?
+> 2. Are the results similar for the other samples?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Only SARS-CoV-2
+> > 2. Yes
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Mapping
 
-The crucial step is mapping with reference SARS-CoV-2 sequence NC_045512.2 that is publicly available in NCBI database. A mapping tool of choice can differ from one pipeline to another, depending on read length, sequencing technology, and other factors. Here we use **bwa-mem** ({% cite li2009fast %})
+To identify SARS-CoV-2 variants in the sample, we first map the reads to the reference SARS-CoV-2 sequence, named `NC_045512.2`and publicly available in NCBI database.
+
+> <comment-title></comment-title>
+> For more information about mapping, please see our dedicated ["Mapping"]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}) Tutorial.
+{: .comment}
+
+The mapping tool can differ from one pipeline to another, depending on read length, sequencing technology, and other factors. Here we use **bwa-mem** ({% cite li2009fast %})
 
 <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Mapping to reference genome </hands-on-title>
 >
 > 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`, reference genome for SARS-CoV-2
 >    - *"Single or Paired-end reads"*: `Paired Collection`
->        - {% icon param-file %} *"Select a paired collection"*: `output_collection` (output of **Read It and Keep** {% icon tool %})
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1.Simple Illumina mode`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>        - {% icon param-collection %} *"Select a paired collection"*: Output of **Read It and Keep** {% icon tool %}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+</div>
+
+The output of **bwa-mem** is a BAM file: a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.
+
+It can not be easily parsed. We can use a tool from **Samtools** suite to collects statistics from BAM files and then display them with **MulitQC**.
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Extraction of mapping statistics </hands-on-title>
+>
+> 1. {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4) %} with the following parameters:
+>    - {% icon param-collection %} *"BAM file"*: Output of **Map with BWA-MEM** {% icon tool %}
+>    - *"Output"*: `One single summary file`
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `Samtools`
+>                - In *"Samtools output"*:
+>                    - {% icon param-repeat %} *"Insert Samtools output"*
+>                        - *"Type of Samtools output?"*: `stats`
+>                            - {% icon param-collection %} *"Samtools stats output"*: output of **Samtools stats** {% icon tool %}
+>
+{: .hands_on}
+
+</div>
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> Inspect the Samtools section with all sample information in **MultiQC** HTML report
+>
+> 1. How much reads have been mapped?
+> 2. What is the error rate?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Almost 100% for all samples
+> > 2. Below 0.8%
 > >
 > {: .solution}
 >
 {: .question}
 
-> <hands-on-title> Task description </hands-on-title>
+Some mapping tools generate 2 BAM files: one with mapped reads and one with either all reads or just the unmapped ones. Here **bwa-mem** generates only one BAM file with all reads. So to get information about only the mapped reads with a good mapping quality, we need to filter the BAM file using **Samtools**.
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title> Filtering of mapping </hands-on-title>
 >
-> 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"SAM/BAM/CRAM data set"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
+> 1. {% tool [Samtools view](toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"SAM/BAM/CRAM data set"*: Output of **Map with BWA-MEM** {% icon tool %}
 >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >        - In *"Configure filters"*:
->            - *"Filter by regions"*: `No`
->            - *"Filter by readgroup"*: `No`
 >            - *"Filter by quality"*: `20`
->            - *"Require that these flags are set"*: ``
->            - *"Exclude reads with any of the following flags set"*: ``
->        - In *"Configure subsampling"*:
->            - *"Subsample alignment"*: `Specify a downsampling factor`
 >        - *"What would you like to have reported?"*: `All reads retained after filtering and subsampling`
 >            - *"Output format"*: `BAM (-b)`
 >    - *"Reference data"*: `No, see help (-output-fmt-option no_ref)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"BAM file"*: `outputsam` (output of **Samtools view** {% icon tool %})
->    - *"Set coverage distribution"*: `No`
->    - *"Output"*: `One single summary file`
->    - *"Filter by SAM flags"*: `Do not filter`
->    - *"Use a reference sequence"*: `No`
->    - *"Filter by regions"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 </div>
 
@@ -762,61 +755,37 @@ Mapping results need afterward to be **processed**, steps that are not always in
 
    This step can be important for Illumina sequencing reads. During the sequencing process with Illumina sequencing technology, some duplicate reads/sequences can be produced, which can create bias in downstream analyses. It is, therefore, possible to remove duplicates or mark them without removing them. When removing duplicates, one should be certain that they are duplicates and not repeated regions. It can therefore be reasonable to keep duplicates marked rather than remove them, as this can be useful for downstream analysis.
 
+   <div class="Amplicon-Long" markdown="1">
+   Not needed for Amplicon data?
+   </div>
+
+   <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+
+   We use here **MarkDuplicates** tool from the [Picard suite](http://broadinstitute.github.io/picard/).
+
    <div class="Metatranscriptomic-Long" markdown="1">
 
-   > <hands-on-title> Task description </hands-on-title>
+   > <hands-on-title> Mark duplicated reads </hands-on-title>
    >
-   > 1. {% tool [Samtools depth](toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy0) %} with the following parameters:
-   >    - {% icon param-file %} *"BAM file(s)"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
-   >    - *"Filter by regions"*: `No`
-   >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
-   >
-   {: .hands_on}
-
-   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-   > <question-title></question-title>
-   >
-   > 1. Question1?
-   > 2. Question2?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
-   > >
-   > {: .solution}
-   >
-   {: .question}
-
-   > <hands-on-title> Task description </hands-on-title>
-   >
-   > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2) %} with the following parameters:
-   >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `outputsam` (output of **Samtools view** {% icon tool %})
+   > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
+   >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: output of **Samtools view** {% icon tool %}
    >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
    >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
-   >
+   > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
+   >    - In *"Results"*:
+   >        - {% icon param-repeat %} *"Insert Results"*
+   >            - *"Which tool was used generate logs?"*: `Picard`
+   >                - In *"Picard output"*:
+   >                    - {% icon param-repeat %} *"Insert Picard output"*
+   >                        - *"Type of Picard output?"*: `Markdups`
+   >                        - {% icon param-collection %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
    {: .hands_on}
 
-   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+   </div>
 
    > <question-title></question-title>
+   >
+   > Inspect the Samtools section with all sample information in **MultiQC** HTML report
    >
    > 1. Question1?
    > 2. Question2?
@@ -829,13 +798,12 @@ Mapping results need afterward to be **processed**, steps that are not always in
    > {: .solution}
    >
    {: .question}
-
 
    </div>
 
 - **Read realignment**
 
-   Realigned reads can be taken and checked for the quality of alignment using bioinformatics tools (e.g., Qualimap ({% cite garcia2012qualimap %})). Based on the features of the mapped reads, it analyzes SAM/BAM alignment data and provides a global picture of the data that can help detect biases in sequencing and/or mapping of the data and ease decision-making for further analysis.
+   To correct mapping errors, it is good after filtering and other steps to realign the reads using probabilistic approaches, e.g. the **Realign reads** from LoFreq ({% cite wilm2012lofreq %}).
 
    <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
@@ -844,30 +812,19 @@ Mapping results need afterward to be **processed**, steps that are not always in
    > 1. {% tool [Realign reads](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0) %} with the following parameters:
    >
    >    <div class="Amplicon-Long" markdown="1">
-   >    - {% icon param-file %} *"Reads to realign"*: `outputsam` (output of **Samtools view** {% icon tool %})
+   >    - {% icon param-collection %} *"Reads to realign"*: Output of **Samtools view** {% icon tool %}
    >    </div>
    >    <div class="Metatranscriptomic-Long" markdown="1">
-   >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
+   >    - {% icon param-collection %} *"Reads to realign"*: Output of **MarkDuplicates** {% icon tool %}
    >    </div>
    >    - *"Choose the source for the reference genome"*: `History`
-   >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
-   >    - In *"Advanced options"*:
-   >        - *"How to handle base qualities of 2?"*: `Keep unchanged`
-   >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
+   >        - {% icon param-file %} *"Reference"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`, reference genome for SARS-CoV-2
    >
    {: .hands_on}
 
-   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
    > <question-title></question-title>
+   >
+   > Inspect the Picard section with all sample information in **MultiQC** HTML report
    >
    > 1. Question1?
    > 2. Question2?
@@ -931,23 +888,7 @@ Mapping results need afterward to be **processed**, steps that are not always in
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `Samtools`
->                - In *"Samtools output"*:
->                    - {% icon param-repeat %} *"Insert Samtools output"*
->                        - *"Type of Samtools output?"*: `stats`
->                            - {% icon param-file %} *"Samtools stats output"*: `output` (output of **Samtools stats** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `Picard`
->                - In *"Picard output"*:
->                    - {% icon param-repeat %} *"Insert Picard output"*
->                        - *"Type of Picard output?"*: `Markdups`
->                        - {% icon param-file %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
+>
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1377,47 +1318,7 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 
 </div>
 
-<div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
 
-> <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
->
-> 1. **Get the workflow** for your data into Galaxy
->
->    - Option 1: Find workflows on the [WorkflowHub](https://workflowhub.eu) and run them directly on [usegalaxy.eu](https://usegalaxy.eu/)
->
->      - Open the [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Amplicon-Short} [workflow page on the WorkflowHub](https://workflowhub.eu/workflows/){: .Metatranscriptomic-Short}
->
->      - Click on `Run on usegalaxy.eu` at the top right of the page
->
->        The browser will open a new tab with Galaxy's workflow invocation interface.
->
->    - Option 2: Import the workflow via its github link
->
->      - Open the [GitHub repository with your workflow](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-artic-variant-analysis){: .Amplicon-Short} [GitHub repository with your workflow](https://github.com/iwc-workflows/sars-cov-2-wastewater-pe-illumina-metatranscriptomic-variant-analysis){: .Metatranscriptomic-Short}
->      - Open the `.ga` file
->      - Click on `Raw` at the top right of the file view
->      - Save the file or Copy the URL of the file
->      - Import the workflow to Galaxy
->
->      {% snippet faqs/galaxy/workflows_import.md %}
->
-> 2. Run **SARS-CoV-2: lineages analysis on ...** {% icon workflow %} using the following parameters:
->
->    {% snippet faqs/galaxy/workflows_run.md %}
->
->    - *"Send results to a new history"*: `No`
->    - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
->    - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
->    <div class="Amplicon-Short" markdown="1">
->    - {% icon param-collection %} *"1: Paired Collection"*: paired collection created for the input datasets
->    - {% icon param-file %} *"2: NC_045512.2 FASTA sequence of SARS-CoV-2"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`
->    - {% icon param-file %} *"3: ARTIC primer BED"*: `ARTIC_primer_BED.bed`
->    - {% icon param-file %} *"4: ARTIC primers to amplicon assignments"*: `ARTIC_primers_to_amplicon_assignments.bed`
->    - {% icon param-file %} *"5: BED defining amplicons for COJAC"*: `BED_defining_amplicons_for_COJAC.bed`
->    </div>
-{: .hands_on}
-
-</div>
 
 # Results interpretation
 
