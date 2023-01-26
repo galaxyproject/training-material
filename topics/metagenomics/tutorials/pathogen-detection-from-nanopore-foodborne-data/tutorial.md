@@ -1287,7 +1287,7 @@ We can now run multiple sequence alignment, build the trees for each VF and disp
 > >
 > > 3. In both samples; `Barcode10` Contig 95 and `Barcode11` Contig 1
 > >
-> >    ![NP_NP_461819_Part_of_tree](./images/NP_461819_Part_of_tree.png)
+> >    ![NP_461819_Part_of_tree](./images/NP_461819_Part_of_tree.png)
 > >
 > {: .solution}
 {: .question}
