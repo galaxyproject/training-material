@@ -458,7 +458,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the expression of the cell cycle genes.
 > >
-> > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](../../images/scrna-case_cell-cycle/CellCycle_PCA2.png)"PCA Plot of Cell Cycle Genes after regression"
+> > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](../../images/scrna-case_cell-cycle/CellCycle_PCA2.png "PCA Plot of Cell Cycle Genes after regression")
 > >
 > > 2. The cell cycle genes aren't having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset. 
 > >
