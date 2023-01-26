@@ -83,7 +83,7 @@ Let's start by launching JBrowse and loading our data so that we can get a feel 
 > <hands-on-title> Build JBrowse </hands-on-title>
 >
 > 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
->    - *"Select a reference genome"*: `hg19`
+>    - *"Select a reference genome"*: `Human Feb. 2009 (GRCh37/hg19) (hg19)`
 >    - {% icon param-repeat %} *"Insert Track Group"*
 >      - {% icon param-repeat %} *"Insert Annotation Track"*
 >      - {% icon param-select %} *"Track Type"*: `BAM Pileups`
@@ -359,6 +359,7 @@ When we are viewing our data in a genome browser, it is often useful to include 
 >      > {: .solution}
 >      {: .question}
 >
+> 3. Note that you can rearrange the order of tracks by clicking and dragging them by their name labels (top left of the track)
 >
 {: .hands-on}
 
@@ -469,12 +470,103 @@ When we are viewing our data in a genome browser, it is often useful to include 
 
 # Inspecting small somatic variants in the tumor sample
 
+Now that we have a feel for the genome browser and how to identify variants, let's have a look at
+our tumour sample.
+
+
 ## Somatic SNV
+
+> <hands-on-title></hands-on-title>
+>
+> 1. Enable the {% icon param-check %} `tumor.bam` track on the left-hand side
+>    - Make sure you can see both the `normal.bam` and `tumor.bam` tracks. You might want to set the display mode to `compact`
+>
+> 2. Navigate to `chr9:130633300-130633965`
+>
+>    ![](./images/somatic-snv.png)
+>
+> > <question-title></question-title>
+> >
+> > 1. How many SNVs are in this region for each sample? (Hint: change the colouring settings if the red and blue of the reads are distracting you from noticing the SNVs)
+> > 2. What is the variant allele frequency for the extra SNV in the tumor sample? How did it get this high?
+> >
+> > > <solution-title></solution-title>
+> > > 1. Normal: 3, Tumor: 4.
+> > >
+> > >    If you had trouble seeing this, choose a different colour setting, for example colouring by mapping quality:
+> > >
+> > >    ![](./images/somatic-snv-color-by-qual.png)
+> > >
+> > > 2. 37% (this can be determined from the `tumor.bam - SNPs/Coverage` track).  A mutation might have occurred in a cell that had a growth advantage that led to a clone (group of related cells) making up a large proportion of the tumor sample.
+> > >
+> > {: .solution}
+> {: .question}
+{: .hands_on}
+
+
+
 
 ## Somatic SNP with change in heterozygosity
 
+> <hands-on-title></hands-on-title>
+>
+> 1. Navigate to `chr9:130515234-130515399`
+>
+>    ![](./images/somatic-snv-heterozygosity.png)
+>
+> > <question-title></question-title>
+> >
+> > 1. What are the variant allele frequencies for each sample?
+> > 2. Why are these frequencies different?
+> >
+> > > <solution-title></solution-title>
+> > > 1. Normal: 46%, Tumor: 80% (this can be determined by hovering over the variant in the `SNPs/Coverage` track for each sample
+> > > 2. Some cells experienced a loss of heterozygosity at this locus, leading to the variant being more frequent in the tumor population overall
+> > {: .solution}
+> {: .question}
+{: .hands_on}
+
+
 ## Somatic indel next to SNP with change in heterozygosity
+
+> <hands-on-title></hands-on-title>
+>
+> 1. Navigate to `chr9:130337806`
+>
+> 2. Set a **highlight** at the location by going to the `View -> Set highlight` menu at the top of JBrowse. Set the highlight to `chr9:130337806`
+>
+>    ![](./images/del-and-snp.png)
+>
+> > <question-title></question-title>
+> >
+> > 1. What type of variant is in the centre (highlighted area)?
+> > 2. In the normal sample there is a SNP to the right. What do you notice about this variant in the tumor sample?
+> > 3. What might be an explanation for what happened?
+> >
+> > > <solution-title></solution-title>
+> > > 1. Small deletion (1bp)
+> > > 2. The variant allele is less frequent in the tumor sample and the reads with the deletion do not have the variant allele
+> > > 3. Some cells experienced a loss of heterozygosity at this site, leading to the reference allele being more frequent in the tumor population overall. This LOH event might have also been associated with the occurance of a deletion nearby.
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
 
 # Inspecting structural variants in NA12878
 
+Cancers often have large structural variants, like inversions, duplications, and translocations. We will examine some structural variants in a well-studied individual (NA12878) from
+the [Platinum Genomes Project](https://www.illumina.com/platinumgenomes.html). Note that this is a normal sample, but think about how these variants might look in a tumor sample.
+
+To examine these structural variants in JBrowse, we start a new JBrowse, and load the `NA12878.bam` file
+
+> <hands-on-title> Build JBrowse </hands-on-title>
+>
+> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
+>    - *"Select a reference genome"*: `Human Feb. 2009 (GRCh37/hg19) (hg19)`
+>    - {% icon param-repeat %} *"Insert Track Group"*
+>      - {% icon param-repeat %} *"Insert Annotation Track"*
+>      - {% icon param-select %} *"Track Type"*: `BAM Pileups`
+>      - {% icon param-files %} *"BAM Track Data"*
+>        - `NA12878.bam`
+>
+{: .hands_on}
