@@ -35,14 +35,14 @@ contributions:
 
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on. 
 
-One common biological confounder is the cell cycle {% cite Luecken2019 %}. Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
+One common biological confounder is the cell cycle ({% cite Luecken2019 %}). Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle. 
 
 In this tutorial, we will identify the genes whose expression is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data. 
 
->    > <comment-title>Other Scanpy and Seurat tutorials</comment-title>
->    >
->    > This tutorial is based on the Scanpy cell cycle regression tutorial {% cite ScanpyCC %}, which was itself based on the Seurat vignette addressing the same issue {% cite SeuratCC %}. However, we will be using a different dataset for this tutorial. 
->    {: .comment}
+> <comment-title>Other Scanpy and Seurat tutorials</comment-title>
+>
+> This tutorial is based on the Scanpy cell cycle regression tutorial ({% cite ScanpyCC %}), which was itself based on the Seurat vignette addressing the same issue ({% cite SeuratCC %}). However, we will be using a different dataset for this tutorial. 
+{: .comment}
 
 > <agenda-title></agenda-title>
 >
@@ -55,14 +55,14 @@ In this tutorial, we will identify the genes whose expression is known to vary d
 
 ## Get Data
 
-The data used in this tutorial is from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. You can download the dataset below.
+The data used in this tutorial is from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). You can download the dataset below.
 
 If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle. 
 
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-
+>
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
@@ -71,12 +71,10 @@ If you've been working through the Single-cell RNA-seq: Case Study then you can 
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->
 > 3. Rename the dataset `Processed_Anndata`
-> 
-> {% snippet  faqs/galaxy/datasets_rename.md %}
-> 
-> 
+>
+>    {% snippet  faqs/galaxy/datasets_rename.md %}
+>
 > 4. Check that the datatype is `h5ad`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
@@ -98,10 +96,9 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 >
 >
 > 2. Rename the datasets `sPhase` and `g2mPhase` respectively - be careful not to mix them up!
-> 
-> {% snippet  faqs/galaxy/datasets_rename.md %}
-> 
-> 
+>
+>    {% snippet  faqs/galaxy/datasets_rename.md %}
+>
 > 3. Check that the datatype for both is `tabular`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
@@ -129,21 +126,20 @@ The first step towards reducing the effects of the cell cycle on our dataset is 
 >            - {% icon param-file %} *"File with the list of genes associated with S phase"*: `sPhase` (Input dataset)
 >        - *"Format for the list of genes associated with G2M phase"*: `File`
 >            - {% icon param-file %} *"File with the list of genes associated with G2M phase"*: `g2mPhase` (Input dataset)
->            
-> 
+>
 > 2. Rename the output `CellCycle_Annotated`
 >
-> 
-<question-title></question-title>
->
-> 1. Why don't we need a list of genes expressed in the G1 Phase?
->
-> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > <question-title></question-title>
 > >
-> > 1. Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren't expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase. 
+> > 1. Why don't we need a list of genes expressed in the G1 Phase?
 > >
-> {: .solution}
-{: .question}
+> > > <solution-title></solution-title>
+> > >
+> > > 1. Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren't expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase. 
+> > >
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
 # Cell Cycle Regression
 
@@ -282,7 +278,7 @@ We can now combine our table of cell cycle genes `CC_genes` with the table of ge
 > 1. What would happen if any of the cell cycle genes were not present in the dataset?
 > 2. How would we remove these genes from the table?
 >
-> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > <solution-title></solution-title>
 > >
 > > 1. Any cell cycle genes that weren't in the dataset would have an empty field in the numbered column, which would be filled in with `FALSE` when we created the table with the {% tool Join %} tool. These rows would appear at the top of the table after it was sorted. 
 > > 2. We should check the first rows of the table for any unnumbered genes and then cut these rows out in the next step. 
@@ -417,7 +413,7 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 > 1. Does the plot look as you expected?
 > 2. What would happen if we plotted all of the genes from the main dataset?
 >
-> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > <solution-title></solution-title>
 > >
 > > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
 > >
@@ -454,7 +450,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > 1. Does the plot look as you expected?
 > 2. What impact do you think the cell cycle regression will have when you analyse the whole dataset? 
 >
-> > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+> > <solution-title></solution-title>
 > >
 > > 1. The cells in different phases are now all mixed up together. This makes sense because we are only plotting the cell cycle genes, but the previously strong effects of the cell cycle on these genes have now been regressed out. There are still some differences between the cells (they don't all end up at the same point on the PCA chart) because the regression only removes the expected effects of the cell cycle, leaving behind any individual variation in the expression of the cell cycle genes.
 > >
