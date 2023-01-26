@@ -71,7 +71,7 @@ The tracking projects have been possible thanks to several methods and protocols
 
 **Two sequencing platforms (Illumina and Oxford Nanopore)** in combination with **2 established library preparation (ampliconic and metatranscriptomic)** strategies are predominantly used to generate SARS-CoV-2 sequence data:
 
-![Heatmap showing in columns the library strategies (ampliconic, RNA-seq, targeted-capture, WGS) and in rows the sequencing platforms (BGISEQ, DNBSEQ, Illumina, Ion Torrent, Oxford Nanopore)](./images/ena_datasets.png "Number of samples available for each sequencing platform and library preparation strategy for SARS-CoV-2 in wastewater according to ENA archive as of May 2022.")
+![Heatmap showing in columns the library strategies (ampliconic, RNA-seq, targeted-capture, WGS) and in rows the sequencing platforms (BGISEQ, DNBSEQ, Illumina, Ion Torrent, Oxford Nanopore. The vast majority of those datasets, by 1-2 orders of magnitude, are Illumina Ampliconic and WGS datasets.)](./images/ena_datasets.png "Number of samples available for each sequencing platform and library preparation strategy for SARS-CoV-2 in wastewater according to ENA archive as of May 2022.")
 
 ## Bioinformatics pipelines for SARS-CoV-2 wastewater data
 
