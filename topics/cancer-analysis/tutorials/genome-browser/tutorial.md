@@ -570,3 +570,99 @@ To examine these structural variants in JBrowse, we start a new JBrowse, and loa
 >        - `NA12878.bam`
 >
 {: .hands_on}
+
+
+## Inversion
+
+> <hands-on-title>Viewing an inversion in JBrowse</hands-on-title>
+>
+>
+> 1. Navigate to `chrX:14728136-14732366`
+>
+> 2. Make the following viewing adjustments:
+>    - Display mode: `compact`
+>    - Track visualisation types: `View as pairs`
+>    - Coloring options: `By orientation`
+>
+>    ![](./images/inversion.png)
+>
+>
+> > <question-title></question-title>
+> >
+> > 1. What do you notice about the blue and green reads at the bottom?
+> > 2. How does `View as pairs` help understand that this is an inversion?
+> > 3. Is this inversion heterozygous or homozygous?
+> >
+> > > <solution-title></solution-title>
+> > > 1. The blue read pairs are both reverse facing, whereas the green read pairs are both forward facing
+> > > 2. It shows us that not all read pairs in this region are forward-reverse as expected
+> > > 3. Heterozygous, as there are lots of properly oriented read pairs as well
+> > {: .solution}
+> {: .question}
+>
+{: .hands_on}
+
+
+
+## Duplication
+
+> <hands-on-title>Viewing a duplication in JBrowse</hands-on-title>
+>
+>
+> 1. Navigate to `chr17:55080031-55081661`
+>
+> 2. Keep the same visualisation settings as in the previous step:
+>    - Display mode: `compact`
+>    - Track visualisation types: `View as pairs`
+>    - Coloring options: `By orientation`
+>
+>    ![](./images/duplication.png)
+>
+>
+> > <question-title></question-title>
+> >
+> > 1. What do you notice about the teal reads at the bottom?
+> >
+> >    **Note:** Teal reads when colored by read orientation can indicate a translocation as well as a duplication. If you activate the `SNPs/Coverage` track for the sample and zoom out,
+> >    you can see there is a rise in the coverage track above the green reads, suggesting this is a duplication of the sequence at this location.
+> >
+> > > <solution-title></solution-title>
+> > > 1. The read pairs are in the opposite orientation as expected (reverse-forward instead of forward-reverse)
+> > {: .solution}
+> {: .question}
+>
+{: .hands_on}
+
+
+## Large Deletion
+
+> <hands-on-title>Viewing a duplication in JBrowse</hands-on-title>
+>
+>
+> 1. Navigate to `chr7:39811931-39833535`
+>
+> 2. Color alignments by insert size. keep the same visualisation settings as in the previous step:
+>    - Display mode: `compact`
+>    - Track visualisation types: `View as pairs`
+>    - Coloring options: `By insert size`
+>
+>    ![](./images/large-deletion.png)
+>
+>
+> > <question-title></question-title>
+> >
+> > 1. What do the red read pairs indicate?
+> > 2. What other track can we look at to see that this is a deletion?
+> >
+> > > <solution-title></solution-title>
+> > > 1. Read pairs with a larger insert size than expected. Since the senquence in between is missing in the sample, the read pairs came from an appropriately sized fragment, but when mapped to the reference genome they are much further apart than expected if the reference sequence was present
+> > > 2. There is a dip in the coverage track indicating fewer reads mapped here
+> > {: .solution}
+> {: .question}
+>
+{: .hands_on}
+
+
+## Conclusion
+
+You’re done! We hope that you enjoyed the tutorial and that you continue to enjoy JBrowse.
