@@ -10,6 +10,7 @@ objectives:
   - Tell the difference between germline and somatic variants
 key_points:
 time_estimation: 2h
+zenodo_url: "https://zenodo.org/record/7573435"
 contributions:
   authorship: [soranamorrissey, rdeborjas]
   editing: [shiltemann]
@@ -53,7 +54,11 @@ Before we view our data in the Genome browser, let's upload it to Galaxy
 > 2. Import data from Zenodo
 >
 >    ```
->     TODO: tumor.bam, normal.bam, genes.bed, dpsnp.bed
+>    https://zenodo.org/record/7573435/files/normal.bam
+>    https://zenodo.org/record/7573435/files/tumor.bam
+>    https://zenodo.org/record/7573435/files/genes.bed
+>    https://zenodo.org/record/7573435/files/dbsnp151.bed
+>    https://zenodo.org/record/7573435/files/NA12878.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -245,15 +250,20 @@ Now that we have a feel for JBrowse, let's view some of our data!
 >    > <question-title> What do you see? </question-title>
 >    >
 >    > 1. What do these mismatches mean?
->    > 2. Can you find a Single Nucleotide Variant (SNV)? Is it homozygous or heterozygous?
+>    > 2. Can you find a single-nucleotide change? Is it homozygous or heterozygous? Is it an SNV or a SNP?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
 >    > > 1. Any time a nucleotide in the read does not match the reference base it is mapped to, it is signified by a coloured block (colour depends on the nucleotide).
 >    > >    This could signify a read error, a variant, or a mistake in the reference genome.
->    > > 2. Whenever a mismatch occurs in all reads overlapping the position, it is most likely a variant. If it occurs in roughly 50% of reads, it is a heterozygous SNV, if it occurs in roughly 100%
->    > >    it is a homosyzous SNV. In the screenshot above, the red line of `T` nucleotides represents an homozygous SNV at that location. The other mismatches are likely sequencing artifacts
->    > >    because they only occur in a single read.
+>    > >
+>    > > 2. Whenever a mismatch occurs in many reads overlapping a position, it is most likely a true variant (rather than e.g. a sequencing error).
+>    > >
+>    > >    If it occurs in roughly 50% of reads, it is a heterozygous SNV/SNP, if it occurs in roughly 100% it is a homozygous SNV/SNP. In the screenshot above, the red line of `T` nucleotides represents an homozygous SNV at that location.
+>    > >
+>    > >    To determine if it is a polymorphism (common variant in the population, SNP) we'd need more information, e.g. from a SNP database such as dpSNP.
+>    > >
+>    > >    The other mismatches that only occur in a single read are most likely sequencing errors. Mismatches that occur in a handful of reads may be somatic variants, or other sequencing artefacts.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -320,7 +330,7 @@ to customize how JBrowse displays our data. There are many options to control ho
 When we are viewing our data in a genome browser, it is often useful to include knowledge about the area we are viewing, such as genes or other features overlapping the position, or known variants or polymorphisms. To do this, we can load additional tracks into JBrowse that contain this data.
 
 
-> <hands-on-title>Customizing Alignment display</hands-on-title>
+> <hands-on-title>Adding dpSNP and genes BED tracks</hands-on-title>
 >
 > 1. Hit the **Re-run** {% icon galaxy-refresh %} button on the previous JBrowse output
 >    - Scroll down past where we configured the BAM/Pileup tracks
@@ -328,7 +338,7 @@ When we are viewing our data in a genome browser, it is often useful to include 
 >      - *"Track Type"*: `GFF/GFF3/BED Features`
 >      - *"GFF/GFF3/BED Track Data"*: Select the following files (hold <kbd>CTRL</kbd> to select multiple files):
 >           - `genes.bed`
->           - `dpsnp.bed`
+>           - `dpsnp151.bed`
 >
 > 2. View {% icon galaxy-eye %} the new JBrowse instance
 >    - Enable the `normal.bam`, `genes.bed` and `dpSNP.bed` tracks
@@ -365,8 +375,8 @@ When we are viewing our data in a genome browser, it is often useful to include 
 >
 >    ![](./images/two-snps.png)
 >
-> 2. Enable the track {% icon param-check %} `normal.bam - SNPs/Coverage` in the left-hand panel. Also enable the `dbSNP` track.
->    - make sure you can see both the SNPs/Coverage track as well as the alignment track. If your screen is too small to see both at once, set the alignment track (`normal.bam`) display to `compact`
+> 2. Enable the track {% icon param-check %} `normal.bam - SNPs/Coverage` and the {% icon param-check %} `dbSNP` tracks in the left-hand panel..
+>    - make sure you can see both the SNPs/Coverage track as well as the alignment track. If your screen is too small to see both at once, set the alignment track (`normal.bam`) display mode to `compact`
 >
 >    ![](./images/two-snps-with-coverage.png)
 >
@@ -395,7 +405,7 @@ When we are viewing our data in a genome browser, it is often useful to include 
 >
 >    > <question-title></question-title>
 >    >  1. Are these sequencing errors, SNPs, or SNVs?
->    >  2. Can a normal sample have somatice SNVs?
+>    >  2. Can a normal sample have somatic SNVs?
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. Sequencing errors and SNVs. The low quality mismatches are most likely sequencing errors. The higher quality mismatches that only occur in one or two reads are most likely somatic SNVs. They are not SNPs because they are not known germline mutations
@@ -410,7 +420,49 @@ When we are viewing our data in a genome browser, it is often useful to include 
 
 ## Homozygous deletion
 
+> <hands-on-title>Deletions</hands-on-title>
+>
+> 1. Navigate to `chr9:130555407-130556072`
+>
+>    ![](./images/deletion.png)
+>
+> > <question-title></question-title>
+> >
+> > 1. How large is this deletion?
+> > 2. Is it homozygous or heterozygous?
+> >
+> > > <solution-title></solution-title>
+> > > 1. 24 basepairs. If you click on one of the reads displaying a gap across the deletion, the `CIGAR` string will show something like `38M24D61M` meaning 38 matches, 24 Deletions, 61 matches.
+> > > 2. Homozygous. No reads span this region and there is a clear sharp drop in the coverage track. Hovering over the coverage track shows the deletion is present in 18 of 18 reads.
+> > {: .solution}
+> {: .question}
+{: .hands_on}
+
+
 ## GC coverage
+
+> <hands-on-title>GC Coverage</hands-on-title>
+>
+> 1. Navigate to `chr9:130284240-130286902`
+>    - Make sure the {% icon param-check %} `GCContentXY` and {% icon param-check %} `SNPs/Coverage` tracks are enabled
+>    - If your screen is too small to view all 3 tracks at the same time, set the display mode for the `normal.bam` track to `compact`
+>
+>    ![](./images/cgcontent.png)
+>
+> > <question-title></question-title>
+> >
+> > 1. What do you notice about the coverage track and GC Content track?
+> > 2. What does coloring alignments by read strand (default colouring setting) tell you?
+> > 3. Do you think this is a deletion? Compare this region to the previous region.
+> >
+> > > <solution-title></solution-title>
+> > > 1. The coverage track slowly dips down to 0 and then back up, and the GC Content track has a clear drop to 0%
+> > > 2. No forward reads are to the left of this dip and no reverse reads are to the right.
+> > > 3. This is a loss in coverage due to no GC content, not a deletion. Regions of the genome with a low GC% are notoriously difficult to sequence. The lack of reads spanning this region indicates these fragments were not able to be sequenced at all.
+> > >
+> > {: .solution}
+> {: .question}
+{: .hands_on}
 
 
 
