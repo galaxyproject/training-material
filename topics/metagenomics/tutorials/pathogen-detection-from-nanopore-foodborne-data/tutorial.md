@@ -35,7 +35,7 @@ Food contamination with pathogens are a major burden on our society. In the year
 During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the European Regulation (CE) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
 
 **Whole Genome Sequencing** (WGS) has been proposed as an alternative. With just one sequencing run, we can:
-- detect of all genes
+- detect all genes
 - run phylogenetic analysis to link cases
 - get information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence.
 
@@ -257,7 +257,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Before trimming the file has 114,986 sequences and After trimming the file has 91,34 sequences
+> > 1. Before trimming the file has 114,986 sequences and After trimming the file has 91,434 sequences
 > > 2. The "Per base sequence quality" is globally medium: the quality score stays between 20 and 25 over the reads after trimming, however, bad quality of reads is seen below 20 before trimming specially at the beginning and the end of the reads.
 > >
 > >    ![Sequence Quality](./images/fastqc_per_base_sequence_quality_plot_barcode10.png)
@@ -341,7 +341,7 @@ In this tutorial we use:
     >                - *"action for regex match"*: `include line if pattern found`
     >
     > 2. {% tool [Filter sequences by ID](toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7) %} with the following parameters:
-    >    - {% icon param-files %} *"Sequence file to be filtered"*: outputs of **fastp** {% icon tool %})
+    >    - {% icon param-files %} *"Sequence file to be filtered"*: outputs of **fastp** {% icon tool %}
     >    - *"Filter using the ID list from"*: `tabular file`
     >        - {% icon param-files %} *"Tabular file containing sequence identifiers"*: outputs of **Filter Tabular** {% icon tool %}
     >        - *"Column(s) containing sequence identifiers"*: `c2`
@@ -593,13 +593,13 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
     </div>
 
-- Visualization of the assembly graph output from **Flye** we have chosen **Bandage Image**.
+- For the visualization of the assembly graph output from **Flye** we have chosen **Bandage Image**.
 
     <div class="Long-Version" markdown="1">
 
     > <hands-on-title> Visualization of the assembly grap </hands-on-title>
     > 4. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters:
-    >    - {% icon param-file %} *"Graphical Fragment Assembly"*: Assembly graph outputs of **Flye** {% icon tool %}
+    >    - {% icon param-files %} *"Graphical Fragment Assembly"*: Assembly graph outputs of **Flye** {% icon tool %}
     {: .hands-on}
 
     </div>
@@ -612,7 +612,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >
     > 3. {% tool [medaka consensus pipeline](toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0) %} with the following parameters:
     >    - {% icon param-files %} *"Select basecalls"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %}
-    >    - {% icon param-file %} *"Select assembly"*: Output of **Flye** {% icon tool %})
+    >    - {% icon param-files %} *"Select assembly"*: Output of **Flye** {% icon tool %}
     >    - *"Select model"*: `r941_min_hac_g507`
     >    - *"Select output file(s)"*: `select all`
     {: .hands-on}
@@ -624,11 +624,11 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >    - {% icon param-files %} *"Convert these sequences"*: output of **medaka consensus pipeline** {% icon tool %}
     >
     > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
-    >    - {% icon param-files %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode10`
+    >    - {% icon param-file %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode10`
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
     >            - *"Find pattern"*: `^(.+)$`
-    >            - {% icon param-files %} *"Replace with"*: `Barcode10_$1`
+    >            - *"Replace with"*: `Barcode10_$1`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Find and Replace text in"*: `specific column`
@@ -639,11 +639,11 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >    {% snippet faqs/galaxy/datasets_rename.md %}
     >
     > 4. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
-    >    - {% icon param-files %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode11`
+    >    - {% icon param-file %} *"File to process"*: output of **FASTA-to-Tabular** {% icon tool %} for `Barcode11`
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
     >            - *"Find pattern"*: `^(.+)$`
-    >            - {% icon param-files %} *"Replace with"*: `Barcode11_$1`
+    >            - *"Replace with"*: `Barcode11_$1`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Find and Replace text in"*: `specific column`
@@ -742,8 +742,8 @@ The outputs of **ABRicate** is a tabular file with different columns:
 2. `SEQUENCE`: The sequence in the filename
 3. `START`: Start coordinate in the sequence
 4. `END`: End coordinate
-5. `STRAND`: ABR gene
-6. `GENE`: ABR gene
+5. `STRAND`: AMR gene
+6. `GENE`: AMR gene
 7. `COVERAGE`: What proportion of the gene is in our sequence
 8. `COVERAGE_MA`: A visual represenation
 9. `GAPS`: Was there any gaps in the alignment - possible pseudogene?
@@ -807,7 +807,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > <hands-on-title> Virulence Factor identification </hands-on-title>
 >
 > 1. {% tool [ABRicate](toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Input file (Fasta, Genbank or EMBL file)"*:  `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*:  `Sample Specific Contigs FASTA file` files
 >    - In *"Advanced options"*:
 >        - *"Database to use - default is 'resfinder'"*: `VFDB`
 > 2. Rename the generated files `VFs - Barcode10` and `VFs - Barcode11`
@@ -836,7 +836,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > <hands-on-title> Formatting </hands-on-title>
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c13`
->    - {% icon param-file %} *"From"*: outputs of **ABRicate** {% icon tool %}
+>    - {% icon param-files %} *"From"*: outputs of **ABRicate** {% icon tool %}
 > 2. Rename the outputs `VFs accessions - Barcode10` and `VFs accessions - Barcode11`
 >
 > 2. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
@@ -910,7 +910,7 @@ To identify variants, we
     >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
     >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Salmonella_Ref_genome.fna.gz`
     >    - *"Single or Paired-end reads"*: `Single`
-    >        - {% icon param-files %} *"Select fastq dataset"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode10`
+    >        - {% icon param-files %} *"Select fastq dataset"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode10` and `Barcode11`
     {: .hands-on}
 
     </div>
@@ -947,7 +947,7 @@ To identify variants, we
 
     > <hands-on-title>Left-align and normalize indels</hands-on-title>
     > 1. {% tool [bcftools norm](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1) %} with the following parameters:
-    >    - {% icon param-file %} *"VCF/BCF Data"*: Outputs of **Clair3** {% icon tool %}
+    >    - {% icon param-files %} *"VCF/BCF Data"*: Outputs of **Clair3** {% icon tool %}
     >    - *"Choose the source for the reference genome"*: `Use a genome from the history`
     >        - {% icon param-file %} *"Reference genome"*: `Salmonella_Ref_genome.fna.gz`
     >    - *"output_type"*: `uncompressed VCF`
@@ -965,7 +965,7 @@ To identify variants, we
 
     > <hands-on-title>Filter variants</hands-on-title>
     > 1. {% tool [SnpSift Filter](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1) %} with the following parameters:
-    >    - {% icon param-file %} *"Input variant list in VCF format"*: Outputs of **bcftools norm** {% icon tool %}
+    >    - {% icon param-files %} *"Input variant list in VCF format"*: Outputs of **bcftools norm** {% icon tool %}
     >    - *"Type of filter expression"*: `Simple expression`
     >        - *"Filter criteria"*: `(QUAL > 2)`
     >    - *"Filter mode"*: `Retain selected variants, remove others`
@@ -991,7 +991,7 @@ To identify variants, we
 
     > <hands-on-title>Extract a tabular report</hands-on-title>
     > 1. {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
-    >    - {% icon param-file %} *"Variant input file in VCF format"*: Outputs of **SnpSift Filter**
+    >    - {% icon param-files %} *"Variant input file in VCF format"*: Outputs of **SnpSift Filter**
     >    - *"Fields to extract"*: `CHROM POS ID REF ALT FILTER`
     {: .hands-on}
 
@@ -1027,7 +1027,7 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <hands-on-title> Consensus Genome Building </hands-on-title>
 > 1. {% tool [bcftools consensus](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.15.1+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"VCF/BCF Data"*: Outputs of **SnpSift Filter** {% icon tool %}
+>    - {% icon param-files %} *"VCF/BCF Data"*: Outputs of **SnpSift Filter** {% icon tool %}
 >    - *"Choose the source for the reference genome"*: `Use a genome from the history`
 >        - {% icon param-file %} *"Reference genome"*: `Salmonella_Ref_genome.fna.gz`
 {: .hands-on}
@@ -1090,7 +1090,7 @@ With these two types of visualizations we can have an overview of all samples an
 >
 > 2. Create a collection named `VFs accessions` with `VFs accessions` files for both tags
 >
-> 3. Create a collection named with `VFs accessions with SampleID` with `VFs accessions with SampleID` files
+> 3. Create a collection named `VFs accessions with SampleID` with `VFs accessions with SampleID` files
 >
 > 4. Create a collection named `Contigs` with `Contigs` files
 >
