@@ -96,7 +96,7 @@ module Jekyll
 
           '<!--SNIPPET-->' + markdownify(box_start+z+box_end)
             .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m){|m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
-            .gsub(/\R+/, '') # Strip out spaces or the boxes break
+            .gsub(/\R+/, ' ') # Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don't merge words together that shouldn't be merged.
             .gsub('<h3','<h3 data-toc-skip')
         end
       end
