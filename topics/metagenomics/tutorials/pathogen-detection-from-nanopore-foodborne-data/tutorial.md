@@ -955,7 +955,7 @@ To identify variants, we
 
 4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %}) 
 
-    > <comment-title></comment-title>
+     > <comment-title></comment-title>
     > [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
     {: .comment-on}
 
