@@ -26,6 +26,9 @@ contributions:
    authorship:
     - bebatut
     - EngyNasr
+   editing:
+    - hrhotz
+    - wm75
 ---
 
 # Introduction
