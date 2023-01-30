@@ -23,6 +23,12 @@ contributors:
 # Introduction
 Intro text
 
+
+> <details-title>Further reading</details-title>
+> Here is a link to the PLoS article on Galaxy tutorials:
+> - [Galaxy Training: A powerful framework for teaching!](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752)
+{: .details}
+
 ## Overview
 
 This tutorial has the following structure:
