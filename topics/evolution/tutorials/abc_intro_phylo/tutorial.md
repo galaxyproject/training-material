@@ -116,6 +116,27 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 > 
 {: .comment}
 
+## Terminology
+
+We need to define some terms, which may be new to you.
+
+* Tree, Phylogeny
+* Taxon
+* Tip, Leaf
+* Branch
+* Edge, Node (a.k.a. Vertex)
+* Clade, Monophyly
+
+## Building a Tree
+
+The basic method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
+Distances have very desirable properties, that can be summarised as follows, for any objects *x*, *y*, *z*:
+ * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
+ * *symmetry* -- the distance from *x* to *y* is the same as the distance from *y* to *x*.
+ * the *triangle inequality* -- there are no short-cuts!  The distance from *x* to *y* is always at most the distance from *x* to *z* plus that from *z* to *y*.
+
+ In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches.
+
 ## Challenges
 
 
