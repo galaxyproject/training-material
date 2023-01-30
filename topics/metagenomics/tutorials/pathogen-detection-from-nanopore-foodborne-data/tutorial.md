@@ -26,6 +26,9 @@ contributions:
    authorship:
     - bebatut
     - EngyNasr
+   editing:
+    - hrhotz
+    - wm75
 ---
 
 # Introduction
@@ -102,7 +105,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. Add a tag to each dataset (one with `Barcode10` and the other `Barcode11`)
+> 2. Add a tag to each dataset (one with `#Barcode10` and the other `#Barcode11`)
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
@@ -274,8 +277,6 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 ## Host read filtering
 
 Generally, we are not interested in the food (host) sequences, rather only in the pathogen itself. It is an important step to get rid of all host sequences and to only retain sequences that might include a pathogen both in order to speed up further analysis and to avoid host sequences compromising the analysis.
-
-To use these workflows in real life you just run them on the samples you collected from a food factory, for example, at different time points and locations in the production process in order to spot when and where the pathogen entered the food and affect it. The workflow will filter out sequences assigned to different possible hosts (here beef or chicken meat, cow milk), and keep the remaining sequences to test and track pathogens for.
 
 In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as a host and as a main pathogen.
 
@@ -613,7 +614,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >
     > 3. {% tool [medaka consensus pipeline](toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0) %} with the following parameters:
     >    - {% icon param-files %} *"Select basecalls"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %}
-    >    - {% icon param-files %} *"Select assembly"*: Output of **Flye** {% icon tool %})
+    >    - {% icon param-files %} *"Select assembly"*: Output of **Flye** {% icon tool %}
     >    - *"Select model"*: `r941_min_hac_g507`
     >    - *"Select output file(s)"*: `select all`
     {: .hands-on}
