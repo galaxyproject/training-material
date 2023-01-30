@@ -32,7 +32,7 @@ This tutorial has the following structure:
 - Obtaining the data for this tutorial + exercise
 - Sequence alignment (including manual methods, automatic methods, complexity issues / heuristics) + exercise
 - Distances based on sequence alignment
-- The Neighbor-Joining method and others (BioNJ and the other one that's better) **needs an update**
+- The Neighbor-Joining method & FastME2.0 (https://doi.org/10.1093/molbev/msv150) **needs an update** **not sure that there is a FastME implementation in Galaxy; there is an R package though**
 - Building the first tree (on Galaxy)
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
@@ -42,14 +42,84 @@ This tutorial has the following structure:
 
 ## Motivation
 
-There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species:
+There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species
 
 ![IThink](./images/Darwin_tree.png){:width="400"}
 
+**needs a reference**
+
+all birds
+![AllBirds](./images/nature11631-f2.jpg){:width="400"}
+(from from Jetz *et al.* 2012, Nature (491):444–448)
+
+and much bigger projects across all of life:
+
+![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:width="500"}
+
+(from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
+
+Aside from fundamental understanding, there are other strong motivators for inferring phylogenetic relationships:
+
+- Designing vaccines, for example for SARS-CoV2 and influenza;
+- Measuring phylogenetic diversity for guiding conservation efforts;
+- Understanding coevolution: around 70% of emergent human diseases have come from other species;
+- Dating major evolutionary events, to study the effects of environmental change on different species.
+
+> <comment-title>Gene trees, species trees</comment-title>
+> 
+> It's worth noting that getting the phylogeny from a set of genes -- what we often call a *gene tree* -- might *not* > give us the phylogeny of the species that house those genes, *even if we get everything right!*
+>
+> This happens because there are other processes that can lead to the so-called gene tree not being the same as the species tree:
+>	- lateral gene transfer events
+>	- gene duplication
+>	- gene loss and incomplete lineage sorting
+>	- recombination
+>
+> This could send us off down a very deep and difficult rabbit-hole: that of the gene-tree / species tree problem: but today we will work under the assumption (which is reasonable in this case) that the gene tree will reflect the species relationships.
+>
+> **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem", and while it is very interesting and important, it is beyond the scope of this tutorial.  The interested reader is directed to...**
+>
+{: .comment}
+
 # Basic Methodology
+
+First and foremost, **phylogenetic inferences is a statistic estimation process.**
+
+It is not generally possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
+One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
+Finding an optimal tree is hard!
+
+So, how do we do it?
+
+There are several ways to estimate a tree, such as:
+
+1. Go with what we think is the case already (not recommended!)
+2. Attempt to build a tree based on similarity and dissimilarity, with such tools as Neighbor-Joining (NJ) or FastME;
+3. Choose some kind of score function such as Parsimony, or Maximum Likelihood to potential trees and find the best one
+4. Something else entirely (networks? inference based on their parasites)
+
+
 This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
-> <comment-title>This is a comment section</i></comment-title>
+> <comment-title>Common Evolutionary Assumptions used in Phylogenetic Estimation</comment-title>
+> 
+>  These may help your understanding of why things are done this way:
+>
+> 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes);
+> 
+> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't always assumed, but it is very common.)
+> 3. The *Molecular clock* assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested);
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other.
+>
+> We do know that these assumptions do not always hold!  For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
+> We also know that biological lineages *do* interact with each other
+> 
+{: .comment}
+
+## Challenges
+
+
+> <comment-title>This is a comment section</comment-title>
 >
 > This is a comment section
 >
