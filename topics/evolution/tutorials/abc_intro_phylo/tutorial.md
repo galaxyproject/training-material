@@ -126,11 +126,22 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 
 We need to define some terms, which may be new to you.
 
-* Tree, Phylogeny
-* Taxon
-* Tip, Leaf
-* Branch
-* Edge, Node (a.k.a. Vertex)
+Mathematically a *Tree* is a kind of *graph*, which has objects called *nodes* or *vertices*, connected in pairs by things called *edges*.  
+Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to *taxa*, and the edges, also called *branches*, show the relationships between them. 
+Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
+Nodes that only have one edge attached to them are called *leaves* (or *tips*), and these correspond to taxa with no descendant taxa in the tree. 
+These taxa might be from fossils, or be currently living, referred to as *extant*.
+
+It's common to call *phylogenetic tree* just a *phylogeny*.
+
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the *root*.
+If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
+Such trees and phylogenies are called *rooted*; if there is no such root then they are called *unrooted*. 
+
+In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade*. Monophyletic means "one tribe origin"
+
+Phylogeny estimation can be thought of as inferring 
+
 * Clade, Monophyly
 
 ## Building a Tree
