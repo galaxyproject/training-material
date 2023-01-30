@@ -57,27 +57,27 @@ Through a series of examples, this tutorial aims to familiarize the reader with 
 This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the [European Nucleotide Archive](https://www.ebi.ac.uk/ena). We will be using the data from a study of [16s ribosomal RNA](https://www.ebi.ac.uk/ena/data/view/PRJDA60709).
 
 > <hands-on-title>Downloading Data from ENA</hands-on-title>
-> To start, navigate to the above study and click the option to "Select columns". Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.
+> To start, navigate to the above study and click the option to "Show Column Selection". Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.
 >
 > Select only:
 >
-> - Study accession
-> - Experiment accession
-> - FASTQ files (FTP)
-> - Sample accession
+> - `study_accession`
+> - `experiment_accession`
+> - `fastq_ftp`
+> - `sample_accession`
 >
 > The table should look like:
 >
 > Study accession | Sample accession | Experiment accession | FASTQ files (FTP)
 > --------------- | ---------------- | -------------------- | -----------------
-> PRJDA60709      | SAMD00016379     | DRX000475            | File 1
-> PRJDA60709      | SAMD00016383     | DRX000476            | File 1
-> PRJDA60709      | SAMD00016380     | DRX000477            | File 1
-> PRJDA60709      | SAMD00016378     | DRX000478            | File 1
-> PRJDA60709      | SAMD00016381     | DRX000479            | File 1
-> PRJDA60709      | SAMD00016382     | DRX000480            | File 1
+> PRJDA60709      | SAMD00016379     | DRX000475            | DRX000475.fastq.gz
+> PRJDA60709      | SAMD00016383     | DRX000476            | DRX000476.fastq.gz
+> PRJDA60709      | SAMD00016380     | DRX000477            | DRX000477.fastq.gz
+> PRJDA60709      | SAMD00016378     | DRX000478            | DRX000478.fastq.gz
+> PRJDA60709      | SAMD00016381     | DRX000479            | DRX000479.fastq.gz
+> PRJDA60709      | SAMD00016382     | DRX000480            | DRX000480.fastq.gz
 >
-> Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=true). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
+> Download the resulting tabular data describing the files by clicking the "Download report: TSV" link above the table. Alternatively, the [resulting sample sheet can be downloaded directly](https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&format=tsv&download=true&limit=0). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
 {: .hands_on}
 
 Unfortunately the ENA ftp server is not operational at this moment,
