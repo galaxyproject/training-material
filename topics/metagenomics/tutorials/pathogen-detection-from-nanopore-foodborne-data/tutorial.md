@@ -1199,7 +1199,7 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
+> > 1. A lot of bacteria pathogen **VF** gene products identified by the **VFDB** are common in both samples, three of them are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAG03023** is only found in `Barcode10` sample and **NP_460360** is only found in `Barcode11` sample
 > > 3. Both samples are spiked with the same pathogen species, _S. enterica_, but not the same strain. `Barcode10_Spike2` sample is spiked with _S. enterica subsp. enterica_ strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
