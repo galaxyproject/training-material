@@ -138,11 +138,10 @@ Many phylogenies have a special node assigned as the common ancestor of all the 
 If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
 Such trees and phylogenies are called *rooted*; if there is no such root then they are called *unrooted*. 
 
-In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade*. Monophyletic means "one tribe origin"
+In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade*. 
+(Monophyletic means "one tribe origin" from the Greek.)
 
-Phylogeny estimation can be thought of as inferring 
-
-* Clade, Monophyly
+Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
 ## Building a Tree
 
