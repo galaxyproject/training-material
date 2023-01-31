@@ -35,7 +35,7 @@ Ces projets ont notamment permis de développer un réseau d'acteurs et de gesti
 
 Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 indicateurs et plus encore.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > Dans ce tutoriel, nous allons couverir:
 >
