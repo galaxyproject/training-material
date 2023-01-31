@@ -692,7 +692,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 > <hands-on-title> Multilocus Sequence Typing </hands-on-title>
 >
 > 1. {% tool [MLST](toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0) %} with the following parameters:
->    - {% icon param-files %} *""*: `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"input_files"*:  Sample Specific `Contigs-BarcodeXX` FASTA files with contigs
 >    - *"Specify advanced parameters"*: `Yes, see full parameter list`
 >        - *"Output novel alleles"*: `Yes`
 >        - *"Automatically set MLST scheme"*: `Automatic MLST scheme detection`
@@ -730,7 +730,7 @@ Now, to search **AMR** genes among our samples' contigs, we run **ABRicate** and
 > <hands-on-title> Antimicrobial Resistance Genes Identification </hands-on-title>
 >
 > 1. {% tool [ABRicate](toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*: `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*: Sample Specific `Contigs-BarcodeXX` FASTA files with contigs
 >    - In *"Advanced options"*:
 >        - *"Database to use - default is 'resfinder'"*: `NCBI Bacterial Antimicrobial Resistance Reference Gene Database`
 > 2. Rename the generated files `AMR - Barcode10` and `AMR - Barcode11`
@@ -808,7 +808,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > <hands-on-title> Virulence Factor identification </hands-on-title>
 >
 > 1. {% tool [ABRicate](toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1) %} with the following parameters:
->    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*:  `Sample Specific Contigs FASTA file` files
+>    - {% icon param-files %} *"Input file (Fasta, Genbank or EMBL file)"*:   Sample Specific `Contigs-BarcodeXX` FASTA files with contigs
 >    - In *"Advanced options"*:
 >        - *"Database to use - default is 'resfinder'"*: `VFDB`
 > 2. Rename the generated files `VFs - Barcode10` and `VFs - Barcode11`
