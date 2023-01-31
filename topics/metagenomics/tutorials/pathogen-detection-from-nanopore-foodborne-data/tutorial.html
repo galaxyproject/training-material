@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-30 09:14:05 +0000" />
+<meta name="DC.date" content="2023-01-31 14:18:13 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 <meta name="DC.creator" content="Engy Nasr" />
 
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-30 09:14:05 +0000",
+  "dateModified": "2023-01-31 14:18:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition",
   "interactivityType": "mixed",
@@ -602,8 +602,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -613,6 +611,8 @@
         <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
             Galaxy India
         </a>
+        
+    
         
     
         
@@ -715,7 +715,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 30, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -735,9 +735,9 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany <a href="https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&amp;v=4">(BVL 2019)</a>. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses.</p>
+<p>Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany <a href="https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&amp;v=4">(BVL 2019)</a>. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses, as studied by the <a href="https://www.who.int/publications/i/item/9789241565165"><strong>Food safety - World Health Organization (WHO)</strong></a>.</p>
 
-<p>During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the European Regulation (CE) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by <strong>stepwise cultures</strong> on selective media and/or <strong>targeting specific genes with real-time PCRs</strong>. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.</p>
+<p>During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the <a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF"><strong>European Regulation (EC)</strong></a> follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by <strong>stepwise cultures</strong> on selective media and/or <strong>targeting specific genes with real-time PCRs</strong>. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.</p>
 
 <p><strong>Whole Genome Sequencing</strong> (WGS) has been proposed as an alte<span class="notranslate">rna</span>tive. With just one sequencing run, we can:</p>
 <ul>
@@ -753,7 +753,7 @@
 <p>The currently available studies used Illumina sequencing, generating short <span class="notranslate">reads</span>. Longer read lengths, generated by third-generation sequencing platforms such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), make it <strong>easier and more practical to identify strains with fewer <span class="notranslate">reads</span></strong>. MinION (from Oxford Nanopore) is a portable, real-time device for ONT sequencing. Several proof-of-principle studies have shown the <strong>utility of ONT long-read sequencing from metagenomic samples for pathogen identification</strong> (<span class="citation"><a href="#CIUFFREDA20211497">Ciuffreda <i>et al.</i> 2021</a></span>).</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div id="comment-nanopore-sequencing" class="box-title" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand will be basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in a fastq file.</p> </blockquote>
+<blockquote class="comment">   <div id="comment-nanopore-sequencing" class="box-title" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand will be basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in a fastq file.</p> </blockquote>
 
 <p>To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, <span class="notranslate">DNA</span> is extracted and sequenced using MinION (ONT). The generated sequencing data need then to be processed using bioinformatics tools.</p>
 
@@ -1128,7 +1128,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
 <blockquote class="question">
   <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>Inspect the webpage output of <strong>MultiQC</strong> for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
+  <p>Inspect the HTML output of <strong>MultiQC</strong> for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
   <ol>
     <li>How many sequences does <code class="language-plaintext highlighter-rouge">Barcode10</code> contain before and after trimming?</li>
@@ -2528,9 +2528,23 @@ https://zenodo.org/record/7567733/files/Sample_Specific_Contigs_FASTA_file_Barco
     <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Three of the bacteria pathogen genes with a <strong>VF</strong> identified by the <strong>VFDB</strong> that are common in both samples are with the following accession number: <strong>NP_461810</strong>, <strong>NP_461809</strong> and <strong>NP_459541</strong></li>
+      <li>A lot of bacteria pathogen <strong>VF</strong> gene products identified by the <strong>VFDB</strong> are common in both samples, three of them are with the following accession number: <strong>NP_461810</strong>, <strong>NP_461809</strong> and <strong>NP_459541</strong></li>
       <li><strong>AAG03023</strong> is only found in <code class="language-plaintext highlighter-rouge">Barcode10</code> sample and <strong>NP_460360</strong> is only found in <code class="language-plaintext highlighter-rouge">Barcode11</code> sample</li>
-      <li>Both samples are spiked with the same pathogen species, <em>S. enterica</em>, but not the same strain. <code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample is spiked with <em>S. enterica subsp. enterica</em> strain and <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> with <em>S. enterica subsp. houtenae</em>. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that</li>
+      <li>Both samples are spiked with the same pathogen species, <em>S. enterica</em>, but not the same strain.
+        <blockquote>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample is spiked with <em>S. enterica subsp. enterica</em> strain</li>
+            <li><code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample is spiked with <em>S. enterica subsp. houtenae</em> strain.
+              <blockquote>
+                <p>This can be the main cause of the big similarities and the few difference of the bacteria pathogen <strong>VF</strong> gene products found between both of the two samples.</p>
+                <blockquote>
+                  <p>Other factors such as the <strong>time</strong> and <strong>location</strong> of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that</p>
+                </blockquote>
+              </blockquote>
+            </li>
+          </ul>
+        </blockquote>
+      </li>
     </ol>
 
   </blockquote>
