@@ -33,28 +33,28 @@ contributions:
 
 # Introduction
 
-Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses.
+Food contamination with pathogens is a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses.
 
-During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the European Regulation (CE) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
+During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and identify the contamination source. By default, the European Regulation (CE) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
 
 **Whole Genome Sequencing** (WGS) has been proposed as an alternative. With just one sequencing run, we can:
 - detect all genes
 - run phylogenetic analysis to link cases
 - get information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence.
 
-WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming, not always straightforward, or successful process. **Sequencing methods without prior isolation could solve this issue**.
+WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming process, the execution is not always straightforward, nor the success is guaranteed. **Sequencing methods without prior isolation could solve this issue**.
 
-The evolution of sequencing techniques in the last decades has made possible the development of shotgun metagenomic sequencing, *i.e.* the **direct sequencing of all DNA present in a sample**. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information, without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (*e.g.* virulence genes) in naturally contaminated or spiked food samples.
+The evolution of sequencing techniques in the last decades has made the development of shotgun metagenomic sequencing possible, *i.e.* the **direct sequencing of all DNA present in a sample**. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (*e.g.* virulence genes) in naturally contaminated or purposefully spiked food samples.
 
 The currently available studies used Illumina sequencing, generating short reads. Longer read lengths, generated by third-generation sequencing platforms such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), make it **easier and more practical to identify strains with fewer reads**. MinION (from Oxford Nanopore) is a portable, real-time device for ONT sequencing. Several proof-of-principle studies have shown the **utility of ONT long-read sequencing from metagenomic samples for pathogen identification** ({% cite CIUFFREDA20211497 %}).
 
 {% snippet faqs/galaxy/sequencing_nanopore.md %}
 
-To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, DNA is extracted and sequenced using MinION (ONT). The generated sequencing data need then to be processed using bioinformatics tools.
+To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, DNA is extracted and sequenced using MinION (ONT). The generated sequencing data then need to be processed using bioinformatics tools.
 
-In this tutorial, we will be presenting a series of Galaxy workflows whose main goals are to
-1. **agnostically detect pathogens** (what exactly is this pathogen and what virulence factors does it carry) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, cow, etc.,) and sequenced using Nanopore
-2. **compare different samples to track** the possible source of contamination
+In this tutorial, we will be presenting a series of Galaxy workflows whose main goals are to:
+1. **agnostically detect pathogens** (What exactly is this pathogen and what virulence factors does it carry?) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, beef, etc.) and sequenced using Nanopore
+2. **compare different samples to trace** the possible source of contamination
 
 To illustrate how to process such data, we will use datasets generated by [Biolytix](https://www.biolytix.ch/) with the following approach:
 
@@ -199,7 +199,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     </div>
 
 
-- Read trimming and filtering with **Porechop** [__Porechop__](https://github.com/rrwick/Porechop) and **Fastp** ({% cite Chen2018 %})
+- Read trimming and filtering with [__Porechop__](https://github.com/rrwick/Porechop) and **Fastp** ({% cite Chen2018 %})
 
     <div class="Long-Version" markdown="1">
 
@@ -233,7 +233,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     > 2. {% tool [NanoPlot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters:
     >    - *"Select multifile mode"*: `batch`
     >        - *"Type of the file(s) to work on"*: `fastq`
-    >            - {% icon param-file %} *"Data input files"*: `out1` (output of **fastp** {% icon tool %}, Multiple Input dataset the files from each tag)
+    >            - {% icon param-files %} *"files"*: outputs of **fastp** {% icon tool %}
     >
     > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
     >    - In *"Results"*:
@@ -275,12 +275,12 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 ## Host read filtering
 
-Generally, we are not interested in the food (host) sequences, rather only in the pathogen itself. It is an important step to get rid of all host sequences and to only retain sequences that might include a pathogen both in order to speed up further analysis and to avoid host sequences compromising the analysis.
+Generally, we are not interested in the food (host) sequences, rather only those originating from the pathogen itself. It is an important to get rid of all host sequences and to only retain sequences that might include a pathogen, both in order to speed up further steps and to avoid host sequences compromising the analysis.
 
-In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as a host and as a main pathogen.
+In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen.
 
 In this tutorial we use:
-1. Assign reads to taxon using **Kraken2** ({% cite Wood2014 %}) and **Kalamari**, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering
+1. Assign reads to taxa using **Kraken2** ({% cite Wood2014 %}) and **Kalamari**, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering
 
     <div class="Long-Version" markdown="1">
 
@@ -307,7 +307,7 @@ In this tutorial we use:
     > Inspect the report of **Kraken2** for `Barcode10`
     >
     > 1. What is the species of the host?
-    > 2. How many sequences of this host is found?
+    > 2. How many sequences of this host was found?
     >
     > > <solution-title></solution-title>
     > >
@@ -317,9 +317,9 @@ In this tutorial we use:
     > {: .solution}
     {: .question}
 
-2. Filter host assigned reads based on **Kraken2** assignations
+2. Filter host assigned reads based on **Kraken2** assignments
     1. Manipulate **Kraken2** classification to extract the sequence ids of all hosts sequences identified with **Kraken2**
-    2. Filter the FASTQ files to get 1 ouput with the host assigned sequences and 1 output without the host assigned reads
+    2. Filter the FASTQ files to get 1 ouput with the host-assigned sequences and 1 output without the host-assigned reads
 
     <div class="Long-Version" markdown="1">
 
@@ -337,7 +337,7 @@ In this tutorial we use:
     >                  - Chicken (`Gallus`)
     >                  - Beef (`Bos`)
     >
-    >                  If the contiminated food come from and may include other animals, you can change the value here.
+    >                  If the contiminated food comes from and may include other animals, you can change the value here.
     >
     >                - *"action for regex match"*: `include line if pattern found`
     >
@@ -345,7 +345,7 @@ In this tutorial we use:
     >    - {% icon param-files %} *"Sequence file to be filtered"*: outputs of **fastp** {% icon tool %}
     >    - *"Filter using the ID list from"*: `tabular file`
     >        - {% icon param-files %} *"Tabular file containing sequence identifiers"*: outputs of **Filter Tabular** {% icon tool %}
-    >        - *"Column(s) containing sequence identifiers"*: `c2`
+    >        - *"Column(s) containing sequence identifiers"*: `Column: 2`
     >    - *"Output positive matches, negative matches, or both?"*: `Both positive matches (ID on list) and negative matches (ID not on list), as two files`
     >
     {: .hands_on}
@@ -355,7 +355,7 @@ In this tutorial we use:
 
 > <comment-title></comment-title>
 >
-> We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next workflow, the next hands-on is optional
+> We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next workflow, the next hands-on is optional.
 >
 > > <hands-on-title>Optional Data upload</hands-on-title>
 > >
@@ -378,7 +378,7 @@ In this section we would like to identify the different organisms found in our s
 
 {% snippet topics/metagenomics/faqs/taxon.md %}
 
-In the previous section we ran **Kraken2** along with the **Kalamari** database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run **Kraken2** again but this time with one of its built-in databases **Standard PlusPF**, which can give us more insight into pathogen candidate species than **Kalamari**. You can test this yourself by comparing reports of both **Kraken2** runs.
+In the previous section we ran **Kraken2** along with the **Kalamari** database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run **Kraken2** again; but this time with one of its built-in databases, **Standard PlusPF**, which can give us more insight into pathogen candidate species than **Kalamari**. You can test this yourself by comparing reports of both **Kraken2** runs.
 
 > <details-title>Kraken2 and the k-mer approach for taxonomy classification</details-title>
 >
@@ -429,10 +429,10 @@ To assign reads to taxons, we use **Kraken2** with **Standard PlusPF** database.
 >
 > Inspect the **Kraken2** report for `Barcode10` tag
 >
-> 1. What is the most found species?
-> 2. What is the second most found species?
-> 3. How many sequences are classified and How many are unclassified?
-> 4. What are the difference between **Kraken2** tool's report with **Kalamari** database and **Kraken2** tool's report with **Standard PlusPF** database with regards to the previous 3 questions
+> 1. What is the most commonly found species?
+> 2. What is the second most commonly found species?
+> 3. How many sequences are classified and how many are unclassified?
+> 4. What are the differences between **Kraken2** tool's report with **Kalamari** database and **Kraken2** tool's report with **Standard PlusPF** database regarding the previous 3 questions?
 >
 > > <solution-title></solution-title>
 > >
@@ -443,9 +443,9 @@ To assign reads to taxons, we use **Kraken2** with **Standard PlusPF** database.
 > {: .solution}
 {: .question}
 
-In order to view the taxonomy profiling produced by **Kraken2** tool there are a lot of tools to be used afterwards such as **Krona pie chart**, however the species classified are a lot to be shown by this tool. For that reason, we have chosen the **Phinch visualization** interactive tool as it contains multiple visualization plots, it's interactive you can choose between different parameters, you can visualize each taxonomic level on its own, you can have your metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out [__Pavian__](https://academic.oup.com/bioinformatics/article/36/4/1303/5573755) tool as well it can replace **Phinch visualization** with similar outputs.
+In order to view the taxonomy profiling produced by **Kraken2** tool, there are a lot of tools to be used afterwards such as **Krona pie chart**, however too many species were detected to be shown by this tool. For that reason, we have chosen the **Phinch visualization** interactive tool as it contains multiple visualization plots, it is interactive alowing you to choose between different parameters, you can visualize each taxonomic level on its own, you can have the metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out [__Pavian__](https://academic.oup.com/bioinformatics/article/36/4/1303/5573755) tool as well it can replace **Phinch visualization** with similar outputs.
 
-**Phinch visualization** needs a **BIOM** file format as an input for that we needed the [__Kraken-Biom__](https://github.com/smdabdoub/kraken-biom)  tool to convert the **Kraken2** tabular output into a Biom file.
+**Phinch visualization** needs a **BIOM** file format as an input, and for that we need the [__Kraken-Biom__](https://github.com/smdabdoub/kraken-biom)  tool to convert the **Kraken2** tabular output into a Biom file.
 
 <div class="Long-Version" markdown="1">
 
@@ -461,7 +461,7 @@ In order to view the taxonomy profiling produced by **Kraken2** tool there are a
 
 </div>
 
-Once the BIOM file has been generated, the visualisation interactive tool called [__Phinch visualization__](https://www.phinch.org/) is launched
+Once the BIOM file has been generated, we launch the interactive visualisation tool called [__Phinch visualization__](https://www.phinch.org/):
 
 <div class="Long-Version" markdown="1">
 
@@ -488,15 +488,15 @@ Now let's now explore the **Phinch visulization** tool running for `Barcode11` t
 
 > <question-title></question-title>
 >
-> 1. What is the most found species?
-> 2. What is the second most found species?
+> 1. What is the most commonly found species?
+> 2. What is the second most commonly found species?
 > 3. What's your favorite visualization plot?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. *Salmonella enterica* with 17,309 sequences
 > > 2. *Pseudomonas lundensis* with 13,227 sequences
-> > 3. All of them are good visualization to the data but for us to answer these questions, we used **Taxonomy Bar chart**
+> > 3. All of them are good visualization of the data but for us to answer these questions, we used the **Taxonomy Bar Chart**
 > >
 > >    ![Taxonomy Bar Chart](./images/phinch_taxonomy_bar_chart.png)
 > >
@@ -504,14 +504,14 @@ Now let's now explore the **Phinch visulization** tool running for `Barcode11` t
 {: .question}
 
 > <comment-title></comment-title>
-> While the steps is running you can move on to the next section **Gene based pathogenic identification** and run the steps there as well, both analyses can work in parallel.
+> While these steps are running, you can move on to the next section **Gene based pathogenic identification** and run the steps there, as well. Both analyses can execute in parallel.
 {: .comment}
 
 # Gene based pathogenic identification
 
 With taxonomy profiling, we identified some bacterial species. But we want to be sure they are pathogenic, by **looking for genes known to be linked to pathogenicity or to the pathogenecity character** of the organim:
 
-- [**Virulence Factor (VF)**](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor): gene products, usually proteins, involved in pathogenicity by identifiying them we can call a pathogen and its severity level
+- [**Virulence Factor (VF)**](https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor): gene products, usually proteins, involved in pathogenicity. By identifiying them we can call a pathogen and its severity level
 - [**Antimicrobial Resistance genes (AMR)**](https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes).
 
     These type of genes have three fundamental mechanisms of antimicrobial resistance that are enzymatic degradation of antibacterial drugs, alteration of bacterial proteins that are antimicrobial targets, and changes in membrane permeability to antibiotics, which will lead to not altering the target site and spread throughput the pathogenic bacteria decreasing the overall fitness of the host.
@@ -522,7 +522,7 @@ To look for these genes and determine the strain of the bacteria we are testing 
 2. Generate an **MLST** report with **MLST** tool that scans genomes against PubMLST schemes
 3. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate) 
 
-As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. For that we will one more file needed to create a report and we can upload it directly:
+As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. For that we will need one more file to create a report and we can upload it directly:
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -572,7 +572,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
     <div class="Long-Version" markdown="1">
 
-    > <hands-on-title> Assembly with metaFlye </hands-on-title>
+    > <hands-on-title> Assembly with Flye </hands-on-title>
     >
     > 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0) %} with the following parameters:
     >    - {% icon param-file %} *"Input reads"*: Outputs without matched ID of **Filter sequences by ID** {% icon tool %} for `Barcode10`
@@ -668,14 +668,14 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 >
 > Inspect **Flye** and **Medaka consensus pipeline** output results for `Barcode10`
 >
-> 1. How many different contigs you got after **Flye**
-> 2. How many are left after **Medaka consensus pipeline**, and what does that mean?
-> 2. What is your result of the **Bandage Image**?
+> 1. How many different contigs did you get after **Flye**?
+> 2. How many were left after **Medaka consensus pipeline**, and what does that mean?
+> 2. What is the result of your **Bandage Image**?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. After **Flye** we have got 137 contigs
-> > 2. After **Medaka consensus pipeline** all 137 contigs were kept, which means that the quality of the **Flye** run was high that the polishing did not remove any of the contigs.
+> > 2. After **Medaka consensus pipeline** all 137 contigs were kept, which means that the quality of the **Flye** run was high, and as a result the polishing did not remove any of the contigs.
 > > 3. The graph looks like:
 > >
 > >    ![Bandage Image Barcode 10 Assembly Graph](./images/bandage_image_flye_graph.png)
@@ -685,7 +685,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
 ## Multilocus Sequence Typing
 
-**MLST** tool is used to scan the [pubMLST](https://pubmlst.org/) database against PubMLST typing schemes. It's one of the analysis that you can perform on your dataset to determine the allele IDs you can also detect novel alleles. For the further analysis of this tutorial, this step is not important to identify pathogens and track them, however we wanted to show some of the analysis that one can use Galaxy in to understand more about the dataset as well as identifying the strain that might be a pathogen or not.
+**MLST** tool is used to scan the [pubMLST](https://pubmlst.org/) database against PubMLST typing schemes. It's one of the analyses that you can perform on your dataset to determine the allele IDs, you can also detect novel alleles. This step is not essential to identify pathogens and track them in the remainder of this tutorial, however we wanted to show some of the analysis that one can use Galaxy in to understand more about the dataset, as well as identifying the strain that might be a pathogen or not.
 
 <div class="Long-Version" markdown="1">
 
@@ -723,7 +723,7 @@ The output file of the **MLST** tool is a tab-separated output file which contai
 
 ## Antimicrobial Resistance Genes
 
-Now, to search our samples' contigs for **AMR** genes, we run **ABRicate** and choose the [__NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/) from the advanced options of the tool. The tool identifies if there is an AMR found or not, if found then in which contig, in which location on the contig, what is the name of the exact product, what does it resist against and a lot of other information regarding the found **AMR**.
+Now, to search **AMR** genes among our samples' contigs, we run **ABRicate** and choose the [__NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)__](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/) from the advanced options of the tool. The tool checks if there is an AMR found or not, if found then in which contig it is, its location on the contig, what the name of the exact product is, what substance it provides resistance against and a lot of other information regarding the found **AMR**.
 
 <div class="Long-Version" markdown="1">
 
@@ -773,29 +773,29 @@ The outputs of **ABRicate** is a tabular file with different columns:
 >
 > Inspect **ABRicate** output files from `Barcode10`and `Barcode11` tags
 >
-> 1. How many **AMR** genes found in `Barcode10` sample, what are they, give more details about them?
-> 2. How many **AMR** genes found in `Barcode11` sample, what are they, give more details about them?
+> 1. How many **AMR** genes found in `Barcode10` sample, what are they? Give more details about them.
+> 2. How many **AMR** genes found in `Barcode11` sample, what are they? Give more details about them.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 5 **AMR** genes are found:
-> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It's found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
+> > 1. 5 **AMR** genes were found:
+> >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It was found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
 > >    2. 2 genes with sulfonamide-resistant dihydropteroate synthase Sul1 products
 > >    3. 2 genes with oxacillin-hydrolyzing class D beta-lactamase OXA-2 products
-> > 2. No **AMR** genes are found by the database in `Barcode11_Spike2b` sample.
+> > 2. No **AMR** genes were found by the database in `Barcode11_Spike2b` sample.
 > >
 > {: .solution}
 {: .question}
 
 ## Virulence Factor identification
 
-In this step we return back to the main goal of the tutorial where we want to identify the pathogens: **identify if the found bacteria in our samples is a bacteria pathogen or not**. One of the ways to do that is to identify if the sequences include genes with a [Virulence Facor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/) or not, such that if the samples include genes with a Virulence Factor then its for sure a pathogen.
+In this step we return back to the main goal of the tutorial where we want to identify the pathogens: **identify if the bacteria found in our samples are pathogenic bacteria or not**. One of the ways to do that is to identify if the sequences include genes with a [Virulence Facor](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/) or not, such that if the samples include gene(s) with a Virulence Factor then it for sure is a pathogen.
 
 > <comment-title>Definitions</comment-title>
 >
-> **Bacteria Pathogen**: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.
+> **Bacterial Pathogen**: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.
 >
-> **Virulence**: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing disease.
+> **Virulence**: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing a disease.
 >
 > **Virulence Factors**: Virulence factors refer to the properties (i.e., gene products) that enable a microorganism to establish itself on or within a host of a particular species and enhance its potential to cause disease. Virulence factors include bacterial toxins, cell surface proteins that mediate bacterial attachment, cell surface carbohydrates and proteins that protect a bacterium, and hydrolytic enzymes that may contribute to the pathogenicity of the bacterium.
 >
@@ -820,8 +820,8 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 >
 > Inspect **VFs of genes Identified by VFDB** output file from`Barcode10`and `Barcode11` tags
 >
-> 1. How many different **VFs** gene products found in `Barcode10_Spike2` sample?
-> 2. How many different **VFs** gene products found in `Barcode11_Spike2b` sample?
+> 1. How many different **VFs** gene products were found in `Barcode10_Spike2` sample?
+> 2. How many different **VFs** gene products were found in `Barcode11_Spike2b` sample?
 >
 > > <solution-title></solution-title>
 > >
@@ -858,15 +858,15 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 
 # SNP based pathogenic identification
 
-Now we would like to identify pathogen with a third approach based on variant and [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf): comparison of sequences to a targeted reference genones, and call for differences between sample reads and reference genomes to identify variants.
+Now we would like to identify pathogens with a third approach based on variant and [single nucleotide polymorphisms (SNPs) calling](https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf): comparison of reads to a targeted reference genome, and call the differences between sample reads and reference genomes to identify variants.
 
-For example, if we want to test our samples if they include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species. Variants in specific positions on the genome are looked to see if these variations would indicate a pathogen or not.
+For example, if we want to check whether our samples include [_Campylobacter_ pathogenic strains](https://www.cdc.gov/campylobacter/index.html) or not, we will map our samples against the reference genome of the _Campylobacter_ species. Variants in specific positions on the genome are queried to judge if these variations would indicate a pathogen or not.
 
-This approach allows also identification of novel alleles and so possible **new variant of the pathogen**.
+This approach also allows identification of novel alleles and possible **new variants of the pathogen**.
 
-Using this approach, we also build the consensus genome of each samples, so we can later build a phylogenetic tree of all samples' full genomes and have an insight into events that occurred during same or different species of our samples' evolution.
+Using this approach, we also build the consensus genome of each sample, so we can later build a phylogenetic tree of all samples' full genomes and have an insight into events that occurred during the evolution of same or different species in the samples.
 
-In this training, we are testing _Salmonella enterica_ , which our samples are spiked with its different strains. So we will now upload to our history the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we got in prior from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
+In this training, we are testing _Salmonella enterica_, with different strains of which our samples were spiked. So we will now upload to our history the reference genome of [_S. enterica_](https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]) we originally obtained from the [National Center for Biotechnology Information (NCBI) database](https://www.ncbi.nlm.nih.gov/).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -902,7 +902,7 @@ In this training, we are testing _Salmonella enterica_ , which our samples are s
 
 To identify variants, we
 
-1. **Map reads to the reference genome** of the species of the pathogen we want to test our samples against using **Minimap2**({% cite Li2017Minimap2 %}) as our datasets are Nanopore
+1. **Map reads to the reference genome** of the species of the pathogen we want to test our samples against using **Minimap2** ({% cite Li2017Minimap2 %}) as our datasets are from a Nanopore:
 
     <div class="Long-Version" markdown="1">
 
@@ -916,7 +916,7 @@ To identify variants, we
 
     </div>
 
-2. **Identify variants and single nucleotide variants** using **Clair3** ({% cite Zheng2021 %}), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date.
+2. **Identify variants and single nucleotide variants** using **Clair3** ({% cite Zheng2021 %}), which is designed specifically for Nanopore datasets and giving better results than other variant calling tools, as well as being new and up-to-date.
 
     > <comment-title></comment-title>
     > [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and offer fewer options.
@@ -984,7 +984,7 @@ To identify variants, we
     - `FILTER`: Pass/fail - If it passed quality filters.
     - `INFO`: Further information - Allows you to provide further information on the variants. Keys in the INFO field can be defined in header lines above thetable.
     - `FORMAT`: Information about the following columns - The GT in the FORMAT column tells us to expect genotypes in the following columns.
-    - Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form 0|1, where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe | indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash / rather than a vertical pipe, it means we don’t know which chromosome they are on.
+    - Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form "0|1", where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe "|" indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash (/) rather than a vertical pipe, it means we don’t know which chromosome they are on.
 
 5. **Extract a tabular report** with Chromosome, Position, Identifier, Reference allele, Alternative allele and Filter from the VCF files using [__SnpSift Extract Fields__](http://pcingola.github.io/SnpEff/)
 
@@ -1001,17 +1001,17 @@ To identify variants, we
 
 > <question-title></question-title>
 >
-> Now let's inspect the outputs for `Barcode10` tag
+> Now let's inspect the outputs for `Barcode10` tag:
 >
-> 1. How many variants are found by **Clair3**?
-> 2. How many variants are found after quality filtering?
+> 1. How many variants were found by **Clair3**?
+> 2. How many variants were found after quality filtering?
 > 2. What is the Strain identified by the NCBI for the sample?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Before filtering: 2,652
 > > 2. After filtering 2,489
-> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), Known after we searched the Chroms. NCBI Reference Sequence: NC_003197.2
+> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), can be inferred searching the Chroms. NCBI Reference Sequence: NC_003197.2
 > {: .solution}
 {: .question}
 
@@ -1020,7 +1020,7 @@ To identify variants, we
 
 For further anaylsis we have included one more step in this section, where we build the full genome of our samples.
 
-This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in the workflow for any further analysis of the users if needed.
+This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-CoV2, it is important to do so in order to discover new outbreaks. In this example of the training, it is not really important to draw a tree of the full genomes of the samples as _Salmonella_ does not have such a speedy outbreak as SARS-CoV2 does. However, we decided to include it in the workflow for any further analysis of the users, if needed.
 
 For this step we run [__bcftools consensus__](https://samtools.github.io/bcftools/bcftools.html) ({% cite Li20092 %}).
 
@@ -1040,13 +1040,13 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 >
 > Inspect the **bcftools consensus** output for `Barcode11` tag
 >
-> 1. How many sequences we got for the sample? What are they
+> 1. How many sequences did we get for the sample? What are they?
 > 2. Why?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. We got 2 sequences: the complete genome and the complete [plasmid](https://www.genome.gov/genetics-glossary/Plasmid) gemome.
-> > 2. The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one, so the tool constructed both sequences for us to choose from based on our further analysis.
+> > 1. We got 2 sequences: the complete genome and the complete [plasmid](https://www.genome.gov/genetics-glossary/Plasmid) genome.
+> > 2. The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one. So the tool constructed both sequences for us to choose from, based on our further analysis.
 > {: .solution}
 {: .question}
 
@@ -1054,7 +1054,7 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 
 > <comment-title></comment-title>
 >
-> If you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error with any, you can go on and upload them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
+> If you did not get your **Gene based pathogenic identification** section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this workflow, please don't forget to create the collections for them as explained in the pervious hands-on.
 >
 > > <hands-on-title>Optional Data upload</hands-on-title>
 > >
@@ -1081,7 +1081,7 @@ In this last section, we would like to show how to aggregate results and use the
 1. Drawing a presence-absence heatmap of the identified **VF** genes within all samples to visualize in which samples these genes can be found.
 2. Drawing a [phylogenetic tree](https://www.sciencedirect.com/topics/medicine-and-dentistry/phylogenetic-tree) for each pathogenic gene detected, where we will relate the contigs of the samples together where this gene is found.
 
-With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easy identify using these graphes where and when the contamination has occurred among the different samples.
+With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.
 
 > <hands-on-title>Organize data</hands-on-title>
 >
@@ -1192,22 +1192,22 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 >
 > ![Heatmap](./images/heatmap.png)
 >
-> 1. Mention three of the common bacteria pathogen genes found in both samples
-> 2. Mention one that is only found in `Barcode10_Spike2` sample and one that is only found in `Barcode11_Spike2b`
+> 1. Mention three of the common bacterial pathogen genes found in both samples.
+> 2. Mention one that is only found in `Barcode10_Spike2` sample and one that is only found in `Barcode11_Spike2b`.
 > 3. How can the differences in the found **VF** bacteria pathogen genes between the two samples be interpreted?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
+> > 1. Three of the bacterial pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAG03023** is only found in `Barcode10` sample and **NP_460360** is only found in `Barcode11` sample
-> > 3. Both samples are spiked with the same pathogen species, _S. enterica_, but not the same strain. `Barcode10_Spike2` sample is spiked with _S. enterica subsp. enterica_ strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> > 3. Both samples were spiked with the same pathogen species, _S. enterica_, but not the same strain. `Barcode10_Spike2` sample was spiked with _S. enterica subsp. enterica_ strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_. This can be the main cause of the most similarities and the few differences found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that.
 > >
 > {: .solution}
 {: .question}
 
 ## Phylogenetic Tree building
 
-Phylogenetic trees are nice ways to track all the bacteria pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences sample genome the pathogentic gene is found and is it the same or different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.
+Phylogenetic trees are nice ways to track all the bacterial pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences from the sample genome the pathogentic gene is found and whether it is at the same or a different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.
 
 For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use **ClustalW** ({% cite Larkin2007 %}) for [Multiple Sequence Alignment (MSA)](https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment) needed before constructing a phylogenetic tree, for the tree itself we use **FASTTREE** and **Newick Display** ({% cite Dress2008 %}) to visualize it.
 
