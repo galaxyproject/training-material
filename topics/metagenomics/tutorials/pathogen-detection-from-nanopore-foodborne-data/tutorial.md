@@ -33,9 +33,9 @@ contributions:
 
 # Introduction
 
-Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 diseases in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses.
+Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany [(BVL 2019)](https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&v=4). Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to _Salmonella spp._ followed by _Campylobacter spp._ and Noroviruses, as studied by the [__Food safety - World Health Organization (WHO)__](https://www.who.int/publications/i/item/9789241565165).
 
-During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the European Regulation (CE) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
+During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the [__European Regulation (EC)__](https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF) follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by **stepwise cultures** on selective media and/or **targeting specific genes with real-time PCRs**. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.
 
 **Whole Genome Sequencing** (WGS) has been proposed as an alternative. With just one sequencing run, we can:
 - detect all genes
@@ -130,7 +130,6 @@ In this section we will run a Galaxy workflow that performs the following tasks 
 3. Remove all possible hosts sequences e.g. chicken, cow, etc. using [__Kraken2__](https://ccb.jhu.edu/software/kraken2/) ({% cite Wood2014 %}) with the [__Kalamari__](https://github.com/lskatz/Kalamari) database, and table manipulation tools, which are **Filter Tabular** ({% cite Johnson2018 %}) and **Filter Sequence By ID** ({% cite Cock2013 %}) to separate the sequences into host and non-host sequences before moving on, in the next section, with the non-host sequences.
 
 We will run all these steps using a single workflow, then discuss each step and the results in more detail.
-
 
 > <hands-on-title>Pre-Processing</hands-on-title>
 >
@@ -252,7 +251,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 > <question-title></question-title>
 >
-> Inspect the webpage output of **MultiQC** for `Barcode10`
+> Inspect the HTML output of **MultiQC** for `Barcode10`
 >
 > 1. How many sequences does `Barcode10` contain before and after trimming?
 > 2. What is the quality score over the reads before and after trimming? And the mean score?
@@ -958,7 +957,7 @@ To identify variants, we
 
 4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %}) 
 
-     > <comment-title></comment-title>
+    > <comment-title></comment-title>
     > [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
     {: .comment-on}
 
@@ -1198,9 +1197,13 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Three of the bacteria pathogen genes with a **VF** identified by the **VFDB** that are common in both samples are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
+> > 1. A lot of bacteria pathogen **VF** gene products identified by the **VFDB** are common in both samples, three of them are with the following accession number: **NP_461810**, **NP_461809** and **NP_459541**
 > > 2. **AAG03023** is only found in `Barcode10` sample and **NP_460360** is only found in `Barcode11` sample
-> > 3. Both samples are spiked with the same pathogen species, _S. enterica_, but not the same strain. `Barcode10_Spike2` sample is spiked with _S. enterica subsp. enterica_ strain and `Barcode11_Spike2b` with _S. enterica subsp. houtenae_. This can be the main cause of the most similarities and the few difference found bacteria pathogen genes between both of the samples. Other factors such as the time and location of the sampling may cause other differences. By knowing the metadata of the samples inputted for the sub-workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
+> > 3. Both samples are spiked with the same pathogen species, _S. enterica_, but not the same strain. 
+> > > - `Barcode10_Spike2` sample is spiked with _S. enterica subsp. enterica_ strain
+> > > - `Barcode11_Spike2b` sample is spiked with _S. enterica subsp. houtenae_ strain. 
+> > > > This can be the main cause of the big similarities and the few difference of the bacteria pathogen **VF** gene products found between both of the two samples. 
+> > > > > Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
 > {: .solution}
 {: .question}
@@ -1298,6 +1301,5 @@ We can now run multiple sequence alignment, build the trees for each VF and disp
 In this tutorial, we have tried the workflow designed to detect and track pathogens in our food and drinks. Through out the full workflow we used our Nanopore sequenced datasets from Biolytix and analyzed it, found the pathogens and tracked it. This approach can be summarized with the following scheme:
 
 ![Foodborne full workflow big picture](./images/FoodBorne-Workflow-updated.png "The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training")
-
 
 
