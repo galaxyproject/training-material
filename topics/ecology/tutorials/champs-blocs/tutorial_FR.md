@@ -49,7 +49,7 @@ Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 i
 > Vous pouvez quitter le didacticiel et aller vous prélasser sur l'écran principal en cliquant en dehors de l'écran du didacticiel.
 > Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en cliquant sur {% icon level %}.
 >
-> > <hands-on-title>Log in to Galaxy</hands-on-title>
+> > <hands-on-title>Se connecter à Galaxy</hands-on-title>
 > > 1. Ouvrez votre navigateur internet préféré (Chrome, Safari ou Firefox, s'il vous plaît, pas Edge ;) !!!)
 > > 2. Rendez-vous sur votre instance Galaxy
 > > 3. Se connecter ou s'enregistrer
