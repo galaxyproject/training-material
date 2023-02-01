@@ -230,13 +230,11 @@ For more information on name tags, a [dedicated nametag tutorial is available]({
 
 You can also hide, delete, and purge multiple datasets at once by **multi-selecting datasets**:
 
-1. Click the multi-select button containing the checkbox to the right of the history size.
+1. {% icon galaxy-selector %} Click the multi-select button containing the checkbox to the right of the history size.
 2. Checkboxes will appear inside each dataset in the history.
-3. Scroll and click the checkboxes next to the datasets you want to manage. You can also 'shift+click' to select a
-  range of datasets.
-4. Click the 'All' button to select all datasets. Click the 'None' button to clear/remove all selections.
-5. Click the 'For all selected...' to choose the action. The action will be performed on all selected datasets, except for the ones that don't support the action. That is, if an action doesn't apply to a selected dataset - like deleting a deleted dataset - nothing will happen to that dataset, while all other selected datasets will be deleted.
-6. You can click the multi-select button again to hide the checkboxes again.
+3. Scroll and click the checkboxes next to the datasets you want to manage.
+4. Click the 'For all selected...' to choose the action. The action will be performed on all selected datasets, except for the ones that don't support the action. That is, if an action doesn't apply to a selected dataset - like deleting a deleted dataset - nothing will happen to that dataset, while all other selected datasets will be deleted.
+5. You can click the multi-select button again to hide the checkboxes again.
 
 ![Multiselecting datasets](../../images/multiselect.png "Operating on multiple datasets can be enabled by clicking on the checkbox icon {% icon galaxy-selector %}")
 
@@ -249,29 +247,10 @@ If you have not purged a history and have only deleted it, it is possible to 'un
 Since one of the purposes of deleting histories is to remove them from view, we'll use the interface to specifically
 search for deleted histories and then to undelete the one we're interested in.
 
-There are two ways to do this currently: via the multi-history panel and through the saved histories page. The multi-
-history method is presented here:
+There is one way to do this currently: via the saved histories page.
 
-Click the multi-history icon at the top right of the 'Analyze Data' (home) page. Note: you must be logged in to
-see the icon and use the multi-history page. You should see all the (non-deleted) histories that you've created.
-
-![Multi-history button](../../images/undelete.multihistory-button.png "Multi-history button")
-
-Click the '...' icon button in the grey header at the top of the page. You should see a dialog that presents some options for viewing the histories. Click the 'include deleted histories' option.
-
-![Multihistory options](../../images/undelete.multihistory-options.png "Multi-history options")
-
-The page should reload and now both non-deleted and deleted histories will be displayed. Deleted histories will
-have a small message under their titles stating 'This history has been deleted'.
-
-![Deleted and non-deleted histories](../../images/undelete.thishasbeendeleted.png "Deleted and non-deleted histories")
-
-Now click the small button with the down arrow just above the deleted history you want to undelete. Then click
-the 'Undelete' option there. Your history should now be undeleted.
-
-![Undelete button](../../images/undelete.undelete-button.png "Undelete button")
-
-Click the 'Switch to' button at the top of that history and then click 'done' at the very top left to return to
-the 'Analyze Data' page.
-
-![Switch to history](../../images/undelete.switchto.png "Switching histories")
+1. Go to the "User" menu at the top
+2. Select "Histories"
+3. Click "Advanced Search" below the search box.
+4. Click "Deleted"
+5. Click on the title of the history you want to un-delete, and un-delete it.
