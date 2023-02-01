@@ -9,7 +9,7 @@ tags:
     - Heatmap
     - cyoa
 level: Introductory
-zenodo_link: "https://zenodo.org/record/7567733"
+zenodo_link: "https://zenodo.org/record/7593928"
 questions:
     - What are the preprocessing steps to prepare ONT sequencing data for further analysis?
     - How to identify pathogens using sequencing data?
@@ -1057,14 +1057,14 @@ For this step we run [__bcftools consensus__](https://samtools.github.io/bcftool
 > > 1. Import all tabular and FASTA files needed for this section via link from [Zenodo]({{ page.zenodo_link }}) to the new created history:
 > >
 > >    ```text
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFDB_Accession_Tabular_with_SampleID_as_a_header_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode10_Spike2.tabular
-> >    {{ page.zenodo_link }}/files/VFs_ABRicate_Sample_Specific_Formated_Tabular_Barcode11_Spike2b.tabular
-> >    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode10_Spike2.fasta
-> >    {{ page.zenodo_link }}/files/Sample_Specific_Contigs_FASTA_file_Barcode11_Spike2b.fasta
+> >    {{ page.zenodo_link }}/files/VFs_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_with_SampleID_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_with_SampleID_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_Barcode10.tabular
+> >    {{ page.zenodo_link }}/files/VFs_accessions_Barcode11.tabular
+> >    {{ page.zenodo_link }}/files/Contigs_Barcode10.fasta
+> >    {{ page.zenodo_link }}/files/Contigs_Barcode11.fasta
 > >    ```
 > >
 > >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
